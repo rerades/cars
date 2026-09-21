@@ -1,0 +1,75 @@
+# Presupuesto y permisos por agente. Ver docs/architecture/adr/0002-presupuesto-control-observabilidad.md
+# Fase 1: suscripción Claude. Los importes son USD-EQUIVALENTES (coste estimado que
+# informa Claude Code), no gasto real. En fase 2 (API) pasan a ser gasto real.
+# Se ajusta con los datos de ops/runs/. null = el orquestador no lanza ese agente.
+
+billing:
+  mode: subscription         # subscription (fase 1) | api (fase 2)
+  plan: pro                  # Claude Pro: ventanas de 5 h y tope semanal compartidos con el uso personal
+
+global:
+  max_concurrent_runs: 1     # fase 1: sin paralelismo
+  max_runs_per_day: 6        # plan Pro: ajustar con los datos del ledger
+  on_rate_limit: pause_until_next_window   # no reintentar en bucle
+  allowed_hours: "01:00-07:00"   # solo de noche, para no competir con el uso interactivo
+  timezone: Europe/Madrid        # una tarea en curso a las 07:00 termina; no se lanzan nuevas
+  default_model: sonnet
+  period: monthly            # daily | weekly | monthly
+  max_usd_per_period: 20     # techo total de la factoría (USD-equivalentes)
+  stop_file: factory/STOP    # si existe, no se lanzan tareas nuevas
+
+agents:
+  # suma asignada: 19 USD · 1 USD de margen
+  researcher:
+    max_runs_per_day: 2
+    max_usd_per_period: 10
+    max_usd_per_run: 1.00
+    max_turns_per_run: 25
+    api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
+    write_paths: [data/]
+    network: true
+
+  product:
+    max_runs_per_day: 1
+    max_usd_per_period: 2
+    max_usd_per_run: 0.50
+    max_turns_per_run: 15
+    api_key_env: PRODUCT_API_KEY
+    write_paths: [docs/product/]
+    network: false
+
+  planner:
+    max_runs_per_day: 1
+    max_usd_per_period: 1
+    max_usd_per_run: 0.30
+    max_turns_per_run: 15
+    api_key_env: PLANNER_API_KEY
+    write_paths: []          # solo GitHub Issues
+    network: false
+
+  architect:
+    max_runs_per_day: 1
+    max_usd_per_period: 2
+    max_usd_per_run: 0.50
+    max_turns_per_run: 15
+    api_key_env: ARCHITECT_API_KEY
+    write_paths: [docs/architecture/]
+    network: false
+
+  developer:
+    max_runs_per_day: 2
+    max_usd_per_period: 3
+    max_usd_per_run: 1.00
+    max_turns_per_run: 30
+    api_key_env: DEVELOPER_API_KEY
+    write_paths: [src/, tests/]
+    network: false
+
+  reviewer:
+    max_runs_per_day: 2
+    max_usd_per_period: 1
+    max_usd_per_run: 0.30
+    max_turns_per_run: 15
+    api_key_env: REVIEWER_API_KEY
+    write_paths: []          # solo comentarios en PR
+    network: false

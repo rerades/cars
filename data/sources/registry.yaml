@@ -1,0 +1,19 @@
+# Registro de fuentes de datos — lo mantiene el agente Researcher.
+# Ver docs/architecture/adr/0001-fuentes-de-datos.md
+#
+# Esquema de cada entrada:
+# - id: tesla-es                 # único, kebab-case: <marca>-<país|press|eu>
+#   brand: Tesla
+#   tier: T1                     # T1 | T2 | T3
+#   market: ES                   # ES | EU | FR | DE ... | global
+#   kind: [prices, specs, images, announcements]
+#   urls:
+#     models: https://...
+#     prices: https://...        # lista de precios / configurador
+#     press: https://...         # sala de prensa (imágenes)
+#   image_license: ""            # términos de uso de imágenes y atribución exigida
+#   notes: ""
+#   last_verified: YYYY-MM-DD
+#   status: active               # active | broken | deprecated
+
+sources: []
