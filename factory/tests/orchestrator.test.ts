@@ -153,9 +153,15 @@ describe("comando", () => {
     assert.equal(after("--max-budget-usd"), "1.00");
     assert.equal(after("--agent"), "researcher");
     assert.equal(after("--model"), "sonnet");
+    assert.match(after("-p"), /^tarea\n\n.*RESULTADO: ok/s);
   });
   test("clasifica resultados", () => {
-    assert.equal(orq.classify(0, { is_error: false }, ""), "success");
+    assert.equal(orq.classify(0, { is_error: false, result: "Hecho.\nRESULTADO: ok" }, ""), "success");
+    assert.equal(orq.classify(0, { is_error: false, result: "No pude.\nRESULTADO: fallido" }, ""), "failed");
+    assert.equal(orq.classify(0, { is_error: false, result: "sin marca" }, ""), "failed");
+    const conFuentes = "Hecho.\n\nRESULTADO: ok\n\nSources:\n- [CUPRA](https://www.cupra.com/es-es/)";
+    assert.equal(orq.classify(0, { is_error: false, result: conFuentes }, ""), "success");
+    assert.equal(orq.classify(0, { is_error: false, result: "RESULTADO: ok\nal final no\nRESULTADO: fallido" }, ""), "failed");
     assert.equal(orq.classify(1, { is_error: true }, ""), "failed");
     assert.equal(orq.classify(1, {}, "Claude usage limit reached"), "rate_limited");
     assert.equal(orq.classify(1, { result: "Budget limit reached" }, ""), "budget_exceeded");

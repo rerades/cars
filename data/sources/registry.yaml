@@ -16,4 +16,37 @@
 #   last_verified: YYYY-MM-DD
 #   status: active               # active | broken | deprecated
 
-sources: []
+sources:
+  - id: cupra-es
+    brand: Cupra
+    tier: T1
+    market: ES
+    kind: [prices, specs, announcements]
+    urls:
+      home: https://www.cupra.com/es-es/   # cupraofficial.es redirige (301) aquí
+      models: https://www.cupra.com/es-es/coches/born   # también /tavascan y /raval
+      prices: https://www.cupra.com/es-es/carshop/w/model?wf=cupra-es-es   # configurador
+      news: https://www.cupra.com/es-es/universo-cupra/noticias
+    image_license: ""   # sin licencia clara registrada: no publicar imágenes de esta web
+    notes: >
+      robots.txt (cupra.com) solo bloquea /*/mycupra/, /*/private-area/ y login; modelos
+      y precios permitidos. BEV vistos en la home: Born, Tavascan, Raval. Pendiente
+      comprobar que el configurador muestra PVP sin ayudas (regla de precio ADR-0001).
+    last_verified: 2026-09-21
+    status: active
+
+  - id: cupra-press
+    brand: Cupra
+    tier: T1
+    market: global
+    kind: [images, announcements]
+    urls:
+      press: https://www.seat-cupra-mediacenter.com/CUPRA-Brand   # SEAT S.A. Media Center
+      legal: https://www.seat-cupra-mediacenter.com/legal/legal-note
+    image_license: ""   # pendiente: la nota legal solo regula contenido enviado por usuarios; no define licencia de las imágenes de prensa
+    notes: >
+      Un resultado de búsqueda (T3) afirma "libre de derechos para uso editorial", pero no
+      está confirmado en la web oficial: no se registra como licencia. Home del media center
+      verificada; no se ha verificado la sección CUPRA-Brand ni su robots.txt.
+    last_verified: 2026-09-21
+    status: active

@@ -27,6 +27,7 @@ agents:
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
     write_paths: [data/]
+    allowed_tools: [WebSearch, WebFetch]   # en -p no hay quien apruebe permisos: sin esto se deniegan
     network: true
 
   product:
