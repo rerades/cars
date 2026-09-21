@@ -3,6 +3,10 @@
 Factoría de agentes autónomos que construye y mantiene una web de coches eléctricos
 (Europa, foco España). El visitante solo lee; no se guardan datos personales.
 
+## Entorno
+Node >= 24 (ejecuta TypeScript directamente, sin compilar). Sin Python. `npm install` una vez;
+`npm test` y `npm run typecheck` antes de abrir un PR.
+
 ## Lee esto antes de trabajar
 1. `docs/README.md` — mapa de la documentación.
 2. `docs/bitacora/` — qué se ha hecho y **por qué**. Empieza por el mes actual.
@@ -22,9 +26,9 @@ Factoría de agentes autónomos que construye y mantiene una web de coches eléc
 Al terminar cualquier tarea que deje cambios, **actualiza la bitácora en el mismo commit**:
 
 ```bash
-python3 factory/bitacora.py add --tipo decision --texto "qué se decidió y por qué" --refs ADR-0002
-python3 factory/bitacora.py from-git     # importa los commits nuevos
-python3 factory/bitacora.py from-runs    # importa las ejecuciones de agentes
+node factory/bitacora.ts add --tipo decision --texto "qué se decidió y por qué" --refs ADR-0002
+node factory/bitacora.ts from-git     # importa los commits nuevos
+node factory/bitacora.ts from-runs    # importa las ejecuciones de agentes
 ```
 
 Usa `decision` cuando haya un porqué que recordar y alternativas descartadas; `hito` para algo
@@ -32,15 +36,15 @@ terminado; `nota` para el resto. Los commits y las ejecuciones se importan, no s
 
 ## Factoría
 ```bash
-python3 factory/run.py --status                      # presupuesto y ejecuciones
-python3 factory/run.py <agente> "tarea" --dry-run    # ver el comando
-python3 -m unittest discover -s factory/tests -v     # pruebas
-touch factory/STOP                                   # parar la factoría
+node factory/run.ts --status                    # presupuesto y ejecuciones
+node factory/run.ts <agente> "tarea" --dry-run  # ver el comando
+npm test && npm run typecheck                   # pruebas y tipos
+touch factory/STOP                              # parar la factoría
 ```
 Los límites están en `factory/budgets.yaml`. Los hooks de `.claude/hooks/` bloquean escrituras
 fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT`.
 
 ## Estado actual
 - Hecho: documentación, ADR-0001 y 0002, agente Researcher, orquestador, hooks, bitácora.
-- Pendiente: cola de tareas (`run.py --next`), primera ejecución real del Researcher,
+- Pendiente: cola de tareas (`run.ts --next`), primera ejecución real del Researcher,
   ADR-0003 (stack de la web), licencia de las imágenes.

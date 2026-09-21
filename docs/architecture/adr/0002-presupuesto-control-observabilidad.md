@@ -67,7 +67,7 @@ El cambio es solo de configuración: `billing.mode` en `factory/budgets.yaml` y 
 ## Consecuencias
 - Fase 1 no tiene coste adicional, pero comparte cuota con el uso personal y depende de una política que Anthropic puede cambiar.
 - Los USD del ledger en fase 1 son equivalentes. Sirven para comparar agentes y estimar lo que costaría la fase 2.
-- El orquestador vive en `factory/run.py` y `factory/orchestrator.py`; los hooks en `.claude/hooks/`. La cola de tareas (`--next`) está pendiente: por ahora cada tarea se lanza a mano.
+- El orquestador vive en `factory/run.ts` y `factory/orchestrator.ts`; los hooks en `.claude/hooks/`. La cola de tareas (`--next`) está pendiente: por ahora cada tarea se lanza a mano.
 - Los límites iniciales son conservadores y se ajustarán con los datos del ledger.
 
 ## Decisiones tomadas (2026-09-19)

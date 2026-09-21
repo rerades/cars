@@ -2,5 +2,5 @@
 ops/actions/
 factory/.run.lock
 factory/STOP
-__pycache__/
+node_modules/
 ops/*.log

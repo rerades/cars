@@ -11,9 +11,9 @@ ejecuciones de agentes. Un fichero por mes (`YYYY-MM.md`), versionado con git.
 ## Cómo se actualiza
 
 ```bash
-python3 factory/bitacora.py add --tipo decision --texto "..." --refs PR#2 ADR-0002
-python3 factory/bitacora.py from-git     # añade los commits aún no registrados
-python3 factory/bitacora.py from-runs    # añade las ejecuciones aún no registradas
+node factory/bitacora.ts add --tipo decision --texto "..." --refs PR#2 ADR-0002
+node factory/bitacora.ts from-git     # añade los commits aún no registrados
+node factory/bitacora.ts from-runs    # añade las ejecuciones aún no registradas
 ```
 
 `from-git` y `from-runs` son idempotentes: cada entrada lleva una marca oculta con el hash del
