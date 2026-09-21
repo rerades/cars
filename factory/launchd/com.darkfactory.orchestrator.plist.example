@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copiar a ~/Library/LaunchAgents/com.darkfactory.orchestrator.plist, ajustar RUTA y cargar:
      launchctl load ~/Library/LaunchAgents/com.darkfactory.orchestrator.plist
-     Lanza el orquestador cada hora dentro de la ventana nocturna; run.py descarta
-     las horas fuera de allowed_hours, así que basta con dejarlo correr. -->
+     Lanza el orquestador cada hora dentro de la ventana nocturna; run.ts descarta
+     las horas fuera de allowed_hours, así que basta con dejarlo correr.
+     PATH debe incluir node (lo usan los hooks: si no arrancan, no bloquean) y claude;
+     ajustarlo con `dirname $(which node)` y `dirname $(which claude)`. -->
 <plist version="1.0">
 <dict>
   <key>Label</key><string>com.darkfactory.orchestrator</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/usr/bin/python3</string>
-    <string>/Users/USUARIO/_DEV/cars/factory/run.py</string>
+    <string>/opt/homebrew/bin/node</string>
+    <string>/Users/USUARIO/_DEV/cars/factory/run.ts</string>
     <string>--next</string>
   </array>
+  <key>EnvironmentVariables</key>
+  <dict><key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string></dict>
   <key>WorkingDirectory</key><string>/Users/USUARIO/_DEV/cars</string>
   <key>StartCalendarInterval</key>
   <array>

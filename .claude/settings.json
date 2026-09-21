@@ -4,8 +4,8 @@
       {
         "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash",
         "hooks": [
-          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/guard_paths.py" },
-          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/log_action.py" }
+          { "type": "command", "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/guard_paths.ts\"" },
+          { "type": "command", "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/log_action.ts\"" }
         ]
       }
     ],
@@ -13,7 +13,7 @@
       {
         "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|WebFetch|WebSearch",
         "hooks": [
-          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/log_action.py" }
+          { "type": "command", "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/log_action.ts\"" }
         ]
       }
     ]

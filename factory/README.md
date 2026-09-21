@@ -4,11 +4,13 @@ Orquestador de la factoría. Aplica lo definido en `docs/architecture/adr/0002-p
 
 ## Uso
 
+Requiere Node >= 24 y `npm install` (dependencia: `yaml`). Los `.ts` se ejecutan con `node` sin compilar.
+
 ```bash
-python3 factory/run.py --status                      # gasto y ejecuciones del periodo
-python3 factory/run.py researcher "tarea" --dry-run  # muestra el comando, no ejecuta
-python3 factory/run.py researcher "tarea"            # ejecuta (solo dentro del horario)
-python3 factory/run.py researcher "tarea" --ignore-window   # pruebas supervisadas de día
+node factory/run.ts --status                      # gasto y ejecuciones del periodo
+node factory/run.ts researcher "tarea" --dry-run  # muestra el comando, no ejecuta
+node factory/run.ts researcher "tarea"            # ejecuta (solo dentro del horario)
+node factory/run.ts researcher "tarea" --ignore-window   # pruebas supervisadas de día
 ```
 
 Códigos de salida: `0` correcto · `1` la ejecución falló · `3` bloqueado por una guarda.
@@ -29,10 +31,11 @@ Después lanza `claude -p` con `--agent`, `--model`, `--max-turns`, `--max-budge
 
 `.claude/settings.json` engancha dos hooks en cada Write/Edit/Bash:
 
-- `guard_paths.py`: bloquea escrituras fuera de las `write_paths` del agente, rutas protegidas
+- `guard_paths.ts`: bloquea escrituras fuera de las `write_paths` del agente, rutas protegidas
   (`factory/`, `.claude/`, `.git/`, `.secrets/`, `ops/runs/`), escrituras fuera del repositorio
-  y comandos peligrosos (`git push`, `rm -rf`, `sudo`, acceso a secretos).
-- `log_action.py`: registra cada acción en `ops/actions/<run_id>.jsonl`.
+  y comandos peligrosos (`git push`, `rm -rf`, `sudo`, acceso a secretos). Falla cerrado: si hay un
+  error interno durante una ejecución de la factoría, bloquea (exit 2).
+- `log_action.ts`: registra cada acción en `ops/actions/<run_id>.jsonl`.
 
 Los hooks solo actúan cuando existe `FACTORY_AGENT`, es decir, en ejecuciones de la factoría.
 En uso interactivo no molestan.
@@ -47,7 +50,8 @@ rm factory/STOP        # reanuda
 ## Pruebas
 
 ```bash
-python3 -m unittest discover -s factory/tests -v
+npm test            # node:test
+npm run typecheck   # tsc --noEmit
 ```
 
 ## Programación nocturna (macOS)
