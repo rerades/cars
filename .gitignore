@@ -1,0 +1,6 @@
+.secrets/
+ops/actions/
+factory/.run.lock
+factory/STOP
+__pycache__/
+ops/*.log
