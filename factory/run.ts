@@ -58,7 +58,8 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
   }
 
   appendLedger(record, month);
-  console.log(`[${record.outcome}] ${record.run_id} · ${record.cost_usd} USD · ${record.turns} turnos`);
+  console.log(`[${record.outcome}] ${record.run_id} · ${record.cost_usd} USD · ${record.turns} turnos` +
+    (record.branch ? ` · rama ${record.branch}` : " · sin cambios"));
   return record.outcome === "success" ? 0 : 1;
 }
 

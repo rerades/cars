@@ -1,6 +1,6 @@
 /** Pruebas del orquestador y del hook guardián. Ejecutar: npm test */
-import { spawnSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { execFileSync, spawnSync } from "node:child_process";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, test } from "node:test";
@@ -172,6 +172,57 @@ describe("comando", () => {
     assert.equal(r.outcome, "dry_run");
     assert.match(String(r.run_id), /^20260921-020000-[0-9a-f]{6}$/);
     assert.equal(r.started, "2026-09-21T02:00:00+02:00");
+  });
+});
+
+describe("espacio de trabajo", () => {
+  /** Repo de mentira: el agente nunca debe tocar la copia de trabajo de la persona. */
+  function repoDeMentira(): string {
+    const dir = mkdtempSync(join(tmpdir(), "repo-"));
+    const git = (...args: string[]) => execFileSync("git", args, { cwd: dir, encoding: "utf8" });
+    git("init", "-q", "-b", "base");   // no "main": el hook global de git prohíbe commitear ahí
+    git("config", "user.email", "test@example.com");
+    git("config", "user.name", "test");
+    writeFileSync(join(dir, "data.txt"), "original\n", "utf8");
+    git("add", "-A");
+    git("commit", "-q", "-m", "inicial");
+    return dir;
+  }
+
+  const enRepo = (dir: string, ...args: string[]) =>
+    execFileSync("git", args, { cwd: dir, encoding: "utf8" }).trim();
+
+  test("la rama guarda lo escrito y main no se toca", () => {
+    const repo = repoDeMentira();
+    const ws = orq.openWorkspace("20260922-000000-abcdef", "researcher", repo);
+    assert.equal(ws.branch, "agent/researcher/20260922-000000-abcdef");
+
+    writeFileSync(join(ws.dir, "data.txt"), "lo que escribe el agente\n", "utf8");
+    assert.equal(orq.closeWorkspace(ws, "researcher: tarea", repo), true);
+
+    assert.equal(readFileSync(join(repo, "data.txt"), "utf8"), "original\n");
+    assert.equal(enRepo(repo, "show", `${ws.branch}:data.txt`), "lo que escribe el agente");
+    assert.equal(enRepo(repo, "status", "--porcelain"), "");
+    assert.ok(!existsSync(ws.dir));
+    rmSync(repo, { recursive: true, force: true });
+  });
+
+  test("sin cambios no deja rama", () => {
+    const repo = repoDeMentira();
+    const ws = orq.openWorkspace("20260922-000000-999999", "researcher", repo);
+    assert.equal(orq.closeWorkspace(ws, "researcher: tarea", repo), false);
+    assert.equal(enRepo(repo, "branch", "--list", ws.branch), "");
+    rmSync(repo, { recursive: true, force: true });
+  });
+
+  test("la persona puede tener cambios a medias sin que le afecten", () => {
+    const repo = repoDeMentira();
+    writeFileSync(join(repo, "data.txt"), "lo que estoy escribiendo yo\n", "utf8");
+    const ws = orq.openWorkspace("20260922-000000-777777", "researcher", repo);
+    writeFileSync(join(ws.dir, "otro.txt"), "del agente\n", "utf8");
+    orq.closeWorkspace(ws, "researcher: tarea", repo);
+    assert.equal(readFileSync(join(repo, "data.txt"), "utf8"), "lo que estoy escribiendo yo\n");
+    rmSync(repo, { recursive: true, force: true });
   });
 });
 

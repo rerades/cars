@@ -49,6 +49,17 @@ Códigos de salida: `0` correcto · `1` la ejecución falló · `3` bloqueado po
 Después lanza `claude -p` con `--agent`, `--model`, `--max-turns`, `--max-budget-usd` y
 `--permission-mode`, y escribe una línea en `ops/runs/YYYY-MM.jsonl`.
 
+## Rama por ejecución
+
+Cada ejecución abre un `git worktree` en `ops/worktrees/<run_id>` sobre la rama
+`agent/<agente>/<run_id>`, y el agente trabaja ahí: nunca escribe en la copia de trabajo
+de la persona, ni aunque tenga cambios a medias. Al terminar se commitea lo que haya
+escrito, se retira el worktree y la rama se queda. Si no escribió nada, la rama se borra.
+
+La rama es local: nadie la sube ni abre la PR. Se revisa con `git show <rama>` y se
+fusiona a mano. Las ramas no se borran solas: `git branch -d agent/...` cuando sobren.
+El ledger y la bitácora sí se escriben en el repo principal, que es donde vive el gasto.
+
 ## Control de acciones
 
 `.claude/settings.json` engancha dos hooks en cada Write/Edit/Bash:

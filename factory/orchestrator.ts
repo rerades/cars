@@ -5,7 +5,7 @@
  * interruptor de parada, horario, concurrencia, límites diarios y presupuesto del periodo.
  * El CLI está en factory/run.ts.
  */
-import { spawnSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
@@ -89,6 +89,42 @@ export function clock(date: Date, tz: string): Clock {
 
 export function nowInTz(cfg: Config): Clock {
   return clock(new Date(), cfg.global?.timezone || "UTC");
+}
+
+// --------------------------------------------------------------------------- espacio de trabajo
+
+export interface Workspace {
+  dir: string;
+  branch: string;
+}
+
+const git = (args: string[], cwd = REPO) => execFileSync("git", args, { cwd, encoding: "utf8" }).trim();
+
+/**
+ * Cada ejecución trabaja en su propia rama, dentro de un worktree aparte: así el agente no
+ * escribe nunca en la copia de trabajo de la persona, ni siquiera con cambios a medias.
+ */
+export function openWorkspace(runId: string, agent: string, repo = REPO): Workspace {
+  const branch = `agent/${agent}/${runId}`;
+  const dir = join(repo, "ops", "worktrees", runId);
+  mkdirSync(join(repo, "ops", "worktrees"), { recursive: true });
+  git(["worktree", "add", "-q", "-b", branch, dir, "HEAD"], repo);
+  return { dir, branch };
+}
+
+/**
+ * Commitea lo que haya escrito el agente y retira el worktree; la rama se queda.
+ * Devuelve false si no escribió nada, en cuyo caso también borra la rama vacía.
+ */
+export function closeWorkspace(ws: Workspace, message: string, repo = REPO): boolean {
+  const changed = git(["status", "--porcelain"], ws.dir) !== "";
+  if (changed) {
+    git(["add", "-A"], ws.dir);
+    git(["commit", "-q", "-m", message], ws.dir);
+  }
+  git(["worktree", "remove", "--force", ws.dir], repo);
+  if (!changed) git(["branch", "-q", "-D", ws.branch], repo);
+  return changed;
 }
 
 // --------------------------------------------------------------------------- cola
@@ -282,18 +318,21 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
   };
   if (dryRun) return { ...record, command: cmd };
 
+  const ws = openWorkspace(runId, agent);
+  record.branch = ws.branch;
+
   const env = {
     ...process.env,
     FACTORY_AGENT: agent,
     FACTORY_RUN_ID: runId,
-    FACTORY_REPO: REPO,
+    FACTORY_REPO: ws.dir,
     FACTORY_WRITE_PATHS: JSON.stringify(a.write_paths ?? []),
   };
 
   writeFileSync(LOCK, `${runId}\n${agent}\n`, "utf8");
   try {
     const [bin, ...args] = cmd;
-    const proc = spawnSync(bin, args, { cwd: REPO, env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    const proc = spawnSync(bin, args, { cwd: ws.dir, env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
     if (proc.error) throw proc.error;
     let payload: Record<string, unknown>;
     try {
@@ -309,6 +348,8 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
   } finally {
     rmSync(LOCK, { force: true });
     record.ended = clock(new Date(), now.tz).iso;
+    const message = `${agent}: ${task.split("\n")[0].slice(0, 60)}\n\nRun: ${runId} (${record.outcome})`;
+    if (!closeWorkspace(ws, message)) record.branch = null; // no escribió nada: no deja rama
   }
   return record;
 }

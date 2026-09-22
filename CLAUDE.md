@@ -46,7 +46,8 @@ node factory/run.ts --next                      # primera tarea de factory/queue
 npm test && npm run typecheck                   # pruebas y tipos
 touch factory/STOP                              # parar la factoría
 ```
-Los límites están en `factory/budgets.yaml`. Los hooks de `.claude/hooks/` bloquean escrituras
+Los límites están en `factory/budgets.yaml`. Cada ejecución trabaja en su propia rama
+`agent/<agente>/<run_id>` dentro de un worktree, así que nunca toca tu copia de trabajo. Los hooks de `.claude/hooks/` bloquean escrituras
 fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT`.
 
 ## Estado actual

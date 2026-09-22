@@ -4,3 +4,4 @@ factory/.run.lock
 factory/STOP
 node_modules/
 ops/*.log
+ops/worktrees/
