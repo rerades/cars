@@ -17,6 +17,7 @@ global:
   period: monthly            # daily | weekly | monthly
   max_usd_per_period: 20     # techo total de la factoría (USD-equivalentes)
   stop_file: factory/STOP    # si existe, no se lanzan tareas nuevas
+  auto_pr: true              # al terminar bien, sube la rama y abre la PR (nadie la ha revisado)
 
 agents:
   # suma asignada: 19 USD · 1 USD de margen

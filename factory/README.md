@@ -56,9 +56,18 @@ Cada ejecución abre un `git worktree` en `ops/worktrees/<run_id>` sobre la rama
 de la persona, ni aunque tenga cambios a medias. Al terminar se commitea lo que haya
 escrito, se retira el worktree y la rama se queda. Si no escribió nada, la rama se borra.
 
-La rama es local: nadie la sube ni abre la PR. Se revisa con `git show <rama>` y se
-fusiona a mano. Las ramas no se borran solas: `git branch -d agent/...` cuando sobren.
-El ledger y la bitácora sí se escriben en el repo principal, que es donde vive el gasto.
+El worktree parte de `origin/main`, no de `HEAD`: si tienes una rama a medias, su trabajo
+no se cuela en lo que escribe el agente.
+
+Si la ejecución termina en `success`, la rama se sube y se abre la PR sola, con la tarea, el
+coste, los turnos y lo que dijo el agente, avisando de que nadie la ha revisado. Una ejecución
+fallida deja la rama en local y no publica nada. Se apaga con `auto_pr: false` en
+`factory/budgets.yaml`.
+
+Antes de cada ejecución se borran las ramas `agent/*` ya fusionadas y se podan los worktrees
+sueltos. Las ramas sin fusionar y las tuyas no se tocan.
+
+El ledger y la bitácora se escriben en el repo principal, que es donde vive el gasto.
 
 ## Control de acciones
 

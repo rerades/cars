@@ -226,6 +226,43 @@ describe("espacio de trabajo", () => {
   });
 });
 
+describe("limpieza de ramas", () => {
+  test("borra las fusionadas y deja las que no lo están", () => {
+    const repo = mkdtempSync(join(tmpdir(), "repo-"));
+    const git = (...args: string[]) => execFileSync("git", args, { cwd: repo, encoding: "utf8" }).trim();
+    git("init", "-q", "-b", "base");
+    git("config", "user.email", "test@example.com");
+    git("config", "user.name", "test");
+    writeFileSync(join(repo, "data.txt"), "original\n", "utf8");
+    git("add", "-A");
+    git("commit", "-q", "-m", "inicial");
+
+    // fusionada: apunta al mismo commit que base
+    git("branch", "agent/researcher/ya-fusionada");
+    // sin fusionar: tiene un commit propio
+    git("checkout", "-q", "-b", "agent/researcher/pendiente");
+    writeFileSync(join(repo, "data.txt"), "cambio\n", "utf8");
+    git("commit", "-qam", "del agente");
+    git("checkout", "-q", "base");
+    // de una persona, no de un agente: no se toca aunque esté fusionada
+    git("branch", "fix/mia");
+
+    assert.deepEqual(orq.pruneMergedBranches(repo, "base"), ["agent/researcher/ya-fusionada"]);
+    const quedan = git("branch", "--format=%(refname:short)").split("\n");
+    assert.ok(quedan.includes("agent/researcher/pendiente"));
+    assert.ok(quedan.includes("fix/mia"));
+    assert.ok(!quedan.includes("agent/researcher/ya-fusionada"));
+    rmSync(repo, { recursive: true, force: true });
+  });
+
+  test("un repo sin nada que limpiar no rompe", () => {
+    const repo = mkdtempSync(join(tmpdir(), "repo-"));
+    execFileSync("git", ["init", "-q", "-b", "base"], { cwd: repo });
+    assert.deepEqual(orq.pruneMergedBranches(repo, "base"), []);
+    rmSync(repo, { recursive: true, force: true });
+  });
+});
+
 describe("cola", () => {
   const tmp = () => join(mkdtempSync(join(tmpdir(), "cola-")), "queue.yaml");
 

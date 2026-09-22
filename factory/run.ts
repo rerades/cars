@@ -10,7 +10,7 @@
  */
 import { parseArgs } from "node:util";
 import {
-  appendLedger, checkCanRun, execute, loadConfig, nowInTz, readLedger, readQueue, runsToday,
+  appendLedger, checkCanRun, execute, loadConfig, nowInTz, pruneMergedBranches, readLedger, readQueue, runsToday,
   spentInPeriod, writeQueue,
   type Config,
 } from "./orchestrator.ts";
@@ -44,6 +44,10 @@ function cmdStatus(cfg: Config): number {
 /** Lanza la tarea de un agente y la anota en el ledger. Devuelve el código de salida. */
 function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean, dryRun: boolean): number {
   const now = nowInTz(cfg);
+  if (!dryRun) {
+    const borradas = pruneMergedBranches();
+    if (borradas.length) console.log(`ramas ya fusionadas borradas: ${borradas.join(", ")}`);
+  }
   const month = now.day.slice(0, 7);
   const decision = checkCanRun(cfg, agent, now, readLedger(month), ignoreWindow);
   if (!decision.allowed) {
@@ -59,7 +63,8 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
 
   appendLedger(record, month);
   console.log(`[${record.outcome}] ${record.run_id} · ${record.cost_usd} USD · ${record.turns} turnos` +
-    (record.branch ? ` · rama ${record.branch}` : " · sin cambios"));
+    (record.branch ? ` · rama ${record.branch}` : " · sin cambios") +
+    (record.pr ? ` · ${record.pr}` : ""));
   return record.outcome === "success" ? 0 : 1;
 }
 

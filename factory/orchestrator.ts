@@ -40,6 +40,7 @@ export interface Config {
     default_model?: string;
     max_usd_per_period?: number | null;
     stop_file?: string;
+    auto_pr?: boolean;
     [key: string]: unknown;
   };
   agents?: Record<string, AgentConfig | null>;
@@ -108,7 +109,10 @@ export function openWorkspace(runId: string, agent: string, repo = REPO): Worksp
   const branch = `agent/${agent}/${runId}`;
   const dir = join(repo, "ops", "worktrees", runId);
   mkdirSync(join(repo, "ops", "worktrees"), { recursive: true });
-  git(["worktree", "add", "-q", "-b", branch, dir, "HEAD"], repo);
+  // Desde origin/main, no desde HEAD: si hay una rama a medias, su trabajo no se cuela
+  // en lo que escribe el agente ni en su PR.
+  const base = git(["branch", "-r", "--list", "origin/main"], repo) ? "origin/main" : "HEAD";
+  git(["worktree", "add", "-q", "-b", branch, dir, base], repo);
   return { dir, branch };
 }
 
@@ -125,6 +129,46 @@ export function closeWorkspace(ws: Workspace, message: string, repo = REPO): boo
   git(["worktree", "remove", "--force", ws.dir], repo);
   if (!changed) git(["branch", "-q", "-D", ws.branch], repo);
   return changed;
+}
+
+/**
+ * Borra las ramas de agente ya fusionadas y los worktrees que quedaron sueltos.
+ * Devuelve las ramas borradas. Nunca tumba una ejecución: si algo falla, se ignora.
+ */
+export function pruneMergedBranches(repo = REPO, base?: string): string[] {
+  try {
+    git(["worktree", "prune"], repo);
+    try {
+      git(["fetch", "-q", "--prune", "origin"], repo);
+    } catch {
+      // sin red: se limpia con lo que haya en local
+    }
+    const ref = base ?? (git(["branch", "-r", "--list", "origin/main"], repo) ? "origin/main" : "main");
+    const merged = git(["branch", "--merged", ref, "--list", "agent/*", "--format=%(refname:short)"], repo)
+      .split("\n").filter(Boolean);
+    return merged.filter((branch) => {
+      try {
+        git(["branch", "-q", "-D", branch], repo);
+        return true;
+      } catch {
+        return false; // está en uso por un worktree
+      }
+    });
+  } catch {
+    return [];
+  }
+}
+
+/** Sube la rama y abre la PR. Devuelve su URL, o null si no se pudo. */
+export function openPullRequest(ws: Workspace, title: string, body: string, repo = REPO): string | null {
+  try {
+    git(["push", "-q", "-u", "origin", ws.branch], repo);
+    const out = execFileSync("gh", ["pr", "create", "--base", "main", "--head", ws.branch,
+      "--title", title, "--body", body], { cwd: repo, encoding: "utf8" });
+    return out.trim().split("\n").at(-1) ?? null;
+  } catch {
+    return null;
+  }
 }
 
 // --------------------------------------------------------------------------- cola
@@ -348,8 +392,27 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
   } finally {
     rmSync(LOCK, { force: true });
     record.ended = clock(new Date(), now.tz).iso;
-    const message = `${agent}: ${task.split("\n")[0].slice(0, 60)}\n\nRun: ${runId} (${record.outcome})`;
+    const title = `${agent}: ${task.split("\n")[0].slice(0, 60)}`;
+    const message = `${title}\n\nRun: ${runId} (${record.outcome})`;
     if (!closeWorkspace(ws, message)) record.branch = null; // no escribió nada: no deja rama
+
+    // Solo se publica lo que salió bien: una tarea fallida deja la rama en local y ya.
+    if (record.branch && record.outcome === "success" && cfg.global?.auto_pr) {
+      const body = [
+        `Opened automatically by the factory. **Nobody has reviewed this yet.**`,
+        ``,
+        `- Task: ${task}`,
+        `- Run: \`${runId}\` · ${record.cost_usd} USD (${record.cost_kind}) · ${record.turns} turns`,
+        `- Agent: \`${agent}\` · model \`${record.model}\` · may only write to ${JSON.stringify(a.write_paths ?? [])}`,
+        ``,
+        `What the agent says:`,
+        ``,
+        "```",
+        String(record.result ?? "").slice(-1500),
+        "```",
+      ].join("\n");
+      record.pr = openPullRequest(ws, title, body);
+    }
   }
   return record;
 }
