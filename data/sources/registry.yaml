@@ -50,3 +50,37 @@ sources:
       verificada; no se ha verificado la sección CUPRA-Brand ni su robots.txt.
     last_verified: 2026-09-21
     status: active
+
+  - id: polestar-es
+    brand: Polestar
+    tier: T1
+    market: ES
+    kind: [prices, specs, announcements]
+    urls:
+      home: https://www.polestar.com/es/
+      models: https://www.polestar.com/es/polestar-2/   # también /polestar-3, /polestar-4, /polestar-5 (announced)
+      prices: https://www.polestar.com/es/configure/polestar-2/   # configurador; también existe /es/stock-cars/polestar-2/
+    image_license: ""   # sin licencia clara registrada: no publicar imágenes de esta web
+    notes: >
+      robots.txt (polestar.com) solo bloquea /*/sign-up-newsletter/; el resto permitido.
+      BEV vistos en la home ES: Polestar 2 (PVP 41.900 €, confirmado sin ayudas en la
+      ficha del modelo), Polestar 3, Polestar 4 (Coupé desde 49.900 €, SUV desde 54.390 €)
+      y Polestar 5 (aún sin PVP visible, posible "announced").
+    last_verified: 2026-09-22
+    status: active
+
+  - id: polestar-press
+    brand: Polestar
+    tier: T1
+    market: global
+    kind: [images, announcements]
+    urls:
+      press: https://media.polestar.com/global/en/media/photos/list
+      legal: https://media.polestar.com/global/en/about/copyright
+    image_license: ""   # página de copyright es JS-rendered; no se ha podido leer el texto de licencia, pendiente verificación manual
+    notes: >
+      No se ha encontrado una versión en español del media newsroom (solo /global/en y /us/en).
+      robots.txt de media.polestar.com no se ha podido recuperar (fetch vacío); no confirmado.
+      No registrar imágenes hasta verificar el texto de /about/copyright.
+    last_verified: 2026-09-22
+    status: active
