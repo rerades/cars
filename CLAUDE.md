@@ -20,7 +20,11 @@ Node >= 24 (ejecuta TypeScript directamente, sin compilar). Sin Python. `npm ins
 - **Todo entra por PR**, nunca commit directo a `main`.
 - **Nada se inventa**: los datos de coches llevan fuente, URL y fecha (ADR-0001).
 - **Secretos**: `.secrets/` está en `.gitignore` y no se lee ni se commitea nunca.
-- Idioma de la documentación y de los commits: español. Formato de commit: `tipo(ámbito): asunto`.
+- **Idiomas**: la documentación (`docs/`, bitácora, README) y la conversación con el agente, en
+  español. El código, los mensajes de commit y el título y cuerpo de las PR, en inglés. Formato de
+  commit: `tipo(ámbito): asunto`. El código escrito hasta ahora tiene los comentarios en español:
+  se pasa a inglés cuando se toque, no en una pasada aparte. Los textos que la CLI muestra al
+  usuario (`run.ts`, `bitacora.ts`) siguen en español.
 
 ## Bitácora (obligatorio)
 Al terminar cualquier tarea que deje cambios, **actualiza la bitácora en el mismo commit**:
