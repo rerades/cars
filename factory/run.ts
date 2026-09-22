@@ -6,14 +6,16 @@
  *   node factory/run.ts <agente> "<tarea>" --dry-run        # muestra el comando, no ejecuta
  *   node factory/run.ts <agente> "<tarea>" --ignore-window  # ignora el horario nocturno
  *   node factory/run.ts --status                            # gasto y ejecuciones del periodo
+ *   node factory/run.ts --next                              # primera tarea de factory/queue.yaml
  */
 import { parseArgs } from "node:util";
 import {
-  appendLedger, checkCanRun, execute, loadConfig, nowInTz, readLedger, runsToday, spentInPeriod,
+  appendLedger, checkCanRun, execute, loadConfig, nowInTz, readLedger, readQueue, runsToday,
+  spentInPeriod, writeQueue,
   type Config,
 } from "./orchestrator.ts";
 
-const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [agente] [tarea]
+const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [agente] [tarea]
 
 Orquestador de la factoría
 
@@ -21,7 +23,8 @@ Orquestador de la factoría
   tarea            tarea a ejecutar
   --dry-run        no ejecuta; muestra el comando
   --ignore-window  ignora el horario permitido
-  --status         muestra el estado del presupuesto`;
+  --status         muestra el estado del presupuesto
+  --next           lanza la primera tarea de factory/queue.yaml`;
 
 function cmdStatus(cfg: Config): number {
   const now = nowInTz(cfg);
@@ -38,6 +41,46 @@ function cmdStatus(cfg: Config): number {
   return 0;
 }
 
+/** Lanza la tarea de un agente y la anota en el ledger. Devuelve el código de salida. */
+function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean, dryRun: boolean): number {
+  const now = nowInTz(cfg);
+  const month = now.day.slice(0, 7);
+  const decision = checkCanRun(cfg, agent, now, readLedger(month), ignoreWindow);
+  if (!decision.allowed) {
+    console.error(`[bloqueado] ${decision.reason}`);
+    return 3;
+  }
+
+  const record = execute(cfg, agent, task, now, dryRun);
+  if (dryRun) {
+    console.log(JSON.stringify(record, null, 2));
+    return 0;
+  }
+
+  appendLedger(record, month);
+  console.log(`[${record.outcome}] ${record.run_id} · ${record.cost_usd} USD · ${record.turns} turnos`);
+  return record.outcome === "success" ? 0 : 1;
+}
+
+/**
+ * Coge la primera tarea de la cola y la lanza. Solo la saca de la cola si llega a
+ * ejecutarse: si una guarda la bloquea, se queda para el siguiente intento.
+ */
+function cmdNext(cfg: Config, ignoreWindow: boolean, dryRun: boolean): number {
+  const queue = readQueue();
+  const item = queue[0];
+  if (!item) {
+    console.log("cola vacía");
+    return 0;
+  }
+
+  const code = runTask(cfg, item.agent, item.task, ignoreWindow, dryRun);
+  if (code === 3 || dryRun) return code;
+  writeQueue(queue.slice(1));
+  console.log(`quedan ${queue.length - 1} tareas en la cola`);
+  return code;
+}
+
 function main(argv: string[]): number {
   let parsed;
   try {
@@ -48,6 +91,7 @@ function main(argv: string[]): number {
         "dry-run": { type: "boolean" },
         "ignore-window": { type: "boolean" },
         status: { type: "boolean" },
+        next: { type: "boolean" },
         help: { type: "boolean", short: "h" },
       },
     });
@@ -64,29 +108,13 @@ function main(argv: string[]): number {
 
   const cfg = loadConfig();
   if (values.status) return cmdStatus(cfg);
+  if (values.next) return cmdNext(cfg, !!values["ignore-window"], !!values["dry-run"]);
   if (!agent || !task || positionals.length > 2) {
     console.error(`${USAGE}\nerror: hacen falta <agente> y "<tarea>"`);
     return 2;
   }
 
-  const now = nowInTz(cfg);
-  const month = now.day.slice(0, 7);
-  const rows = readLedger(month);
-  const decision = checkCanRun(cfg, agent, now, rows, values["ignore-window"]);
-  if (!decision.allowed) {
-    console.error(`[bloqueado] ${decision.reason}`);
-    return 3;
-  }
-
-  const record = execute(cfg, agent, task, now, values["dry-run"]);
-  if (values["dry-run"]) {
-    console.log(JSON.stringify(record, null, 2));
-    return 0;
-  }
-
-  appendLedger(record, month);
-  console.log(`[${record.outcome}] ${record.run_id} · ${record.cost_usd} USD · ${record.turns} turnos`);
-  return record.outcome === "success" ? 0 : 1;
+  return runTask(cfg, agent, task, !!values["ignore-window"], !!values["dry-run"]);
 }
 
 process.exitCode = main(process.argv.slice(2));

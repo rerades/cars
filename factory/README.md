@@ -13,6 +13,28 @@ node factory/run.ts researcher "tarea"            # ejecuta (solo dentro del hor
 node factory/run.ts researcher "tarea" --ignore-window   # pruebas supervisadas de día
 ```
 
+## Cola de tareas
+
+`factory/queue.yaml` es una lista de tareas pendientes, en orden de prioridad, que se
+añaden a mano:
+
+```yaml
+- agent: researcher
+  task: >-
+    Lo que tiene que hacer el agente.
+```
+
+```bash
+node factory/run.ts --next             # coge la primera tarea y la lanza
+node factory/run.ts --next --dry-run   # muestra el comando y no toca la cola
+```
+
+La tarea solo sale de la cola si llega a ejecutarse. Si una guarda la bloquea (horario,
+`STOP`, presupuesto, ejecución en curso), se queda para el siguiente intento y `--next`
+sale con `3`: es lo que permite que launchd lo llame cada pocas horas sin perder nada.
+Con la cola vacía no hace nada y sale con `0`. El resultado de la ejecución va al ledger,
+no a la cola.
+
 Códigos de salida: `0` correcto · `1` la ejecución falló · `3` bloqueado por una guarda.
 
 ## Qué comprueba antes de lanzar

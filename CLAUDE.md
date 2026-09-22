@@ -42,6 +42,7 @@ terminado; `nota` para el resto. Los commits y las ejecuciones se importan, no s
 ```bash
 node factory/run.ts --status                    # presupuesto y ejecuciones
 node factory/run.ts <agente> "tarea" --dry-run  # ver el comando
+node factory/run.ts --next                      # primera tarea de factory/queue.yaml
 npm test && npm run typecheck                   # pruebas y tipos
 touch factory/STOP                              # parar la factoría
 ```
@@ -49,6 +50,8 @@ Los límites están en `factory/budgets.yaml`. Los hooks de `.claude/hooks/` blo
 fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT`.
 
 ## Estado actual
-- Hecho: documentación, ADR-0001 y 0002, agente Researcher, orquestador, hooks, bitácora.
-- Pendiente: cola de tareas (`run.ts --next`), primera ejecución real del Researcher,
-  ADR-0003 (stack de la web), licencia de las imágenes.
+- Hecho: documentación, ADR-0001 y 0002, agente Researcher, orquestador, hooks, bitácora,
+  migración a TypeScript, CI, primera ejecución real del Researcher, cola de tareas
+  (`factory/queue.yaml` + `run.ts --next`).
+- Pendiente: ADR-0003 (stack de la web), licencia de las imágenes de Cupra, verificar que el
+  configurador de Cupra da el PVP sin ayudas (primera tarea de la cola).
