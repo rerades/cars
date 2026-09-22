@@ -204,7 +204,7 @@ export function checkCanRun(
 export function buildCommand(cfg: Config, agent: string, task: string): string[] {
   const a = agentConfig(cfg, agent);
   const cmd = [
-    "claude", "-p", task,
+    "claude", "-p", task + RESULT_INSTRUCTION,
     "--agent", agent,
     "--output-format", "json",
     "--model", a.model || cfg.global?.default_model || "sonnet",
@@ -217,6 +217,14 @@ export function buildCommand(cfg: Config, agent: string, task: string): string[]
   return cmd;
 }
 
+// El código de salida no dice si la tarea se hizo: el agente lo declara en su última línea.
+const RESULT_INSTRUCTION =
+  "\n\nTermina tu respuesta con una última línea exacta: `RESULTADO: ok` si completaste la tarea, " +
+  "o `RESULTADO: fallido` si no.";
+// Se toma la última línea RESULTADO, no la última línea: WebSearch añade "Sources:" detrás.
+const RESULT_LINE = /^\s*RESULTADO:\s*`?(ok|fallido)`?\s*$/gim;
+const resultOk = (text: string) => [...text.matchAll(RESULT_LINE)].at(-1)?.[1].toLowerCase() === "ok";
+
 const RATE_LIMIT_MARKERS = ["usage limit", "rate limit", "límite de uso", "try again later"];
 
 export function classify(status: number | null, payload: Record<string, unknown>, stderr: string): string {
@@ -225,7 +233,7 @@ export function classify(status: number | null, payload: Record<string, unknown>
   if (blob.includes("budget limit reached") || (blob.includes("budget") && blob.includes("reached"))) {
     return "budget_exceeded";
   }
-  if (status === 0 && !payload.is_error) return "success";
+  if (status === 0 && !payload.is_error && resultOk(String(payload.result ?? ""))) return "success";
   return "failed";
 }
 
@@ -272,7 +280,7 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
     record.cost_usd = Math.round(Number(payload.total_cost_usd || 0) * 1e4) / 1e4;
     record.turns = Math.trunc(Number(payload.num_turns || 0));
     record.outcome = classify(proc.status, payload, proc.stderr);
-    record.result = String(payload.result || "").slice(0, 500);
+    record.result = String(payload.result || "").slice(-500); // el final: conclusión y RESULTADO
     if (proc.stderr) record.stderr = proc.stderr.slice(-500);
   } finally {
     rmSync(LOCK, { force: true });
