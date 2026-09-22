@@ -9,12 +9,14 @@ import { spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
-import { parse } from "yaml";
+import { parse, stringify } from "yaml";
 
 export const REPO = join(import.meta.dirname, "..");
 export const BUDGETS = join(REPO, "factory", "budgets.yaml");
 export const LEDGER_DIR = join(REPO, "ops", "runs");
 export const LOCK = join(REPO, "factory", ".run.lock");
+/** FACTORY_QUEUE existe para las pruebas; en uso normal la cola es factory/queue.yaml. */
+export const QUEUE = process.env.FACTORY_QUEUE || join(REPO, "factory", "queue.yaml");
 
 export interface AgentConfig {
   max_runs_per_day?: number | null;
@@ -87,6 +89,28 @@ export function clock(date: Date, tz: string): Clock {
 
 export function nowInTz(cfg: Config): Clock {
   return clock(new Date(), cfg.global?.timezone || "UTC");
+}
+
+// --------------------------------------------------------------------------- cola
+
+export interface QueueItem {
+  agent: string;
+  task: string;
+}
+
+/** Lista de tareas pendientes, en orden. Una cola vacía o inexistente devuelve []. */
+export function readQueue(path = QUEUE): QueueItem[] {
+  if (!existsSync(path)) return [];
+  const items = parse(readFileSync(path, "utf8")) ?? [];
+  if (!Array.isArray(items)) throw new Error(`${path}: se esperaba una lista de tareas`);
+  items.forEach((item, i) => {
+    if (!item?.agent || !item?.task) throw new Error(`${path}: la tarea ${i + 1} necesita agent y task`);
+  });
+  return items;
+}
+
+export function writeQueue(items: QueueItem[], path = QUEUE): void {
+  writeFileSync(path, items.length ? stringify(items) : "[]\n", "utf8");
 }
 
 // --------------------------------------------------------------------------- ledger

@@ -1,6 +1,7 @@
 /** Pruebas del orquestador y del hook guardián. Ejecutar: npm test */
 import { spawnSync } from "node:child_process";
-import { mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
@@ -171,6 +172,71 @@ describe("comando", () => {
     assert.equal(r.outcome, "dry_run");
     assert.match(String(r.run_id), /^20260921-020000-[0-9a-f]{6}$/);
     assert.equal(r.started, "2026-09-21T02:00:00+02:00");
+  });
+});
+
+describe("cola", () => {
+  const tmp = () => join(mkdtempSync(join(tmpdir(), "cola-")), "queue.yaml");
+
+  test("cola inexistente o vacía", () => {
+    assert.deepEqual(orq.readQueue(join(tmpdir(), "no-existe-cola.yaml")), []);
+    const path = tmp();
+    writeFileSync(path, "[]\n", "utf8");
+    assert.deepEqual(orq.readQueue(path), []);
+  });
+
+  test("lee las tareas en orden", () => {
+    const path = tmp();
+    writeFileSync(path, "- agent: researcher\n  task: una\n- agent: developer\n  task: otra\n", "utf8");
+    assert.deepEqual(orq.readQueue(path), [
+      { agent: "researcher", task: "una" },
+      { agent: "developer", task: "otra" },
+    ]);
+  });
+
+  test("rechaza una tarea incompleta", () => {
+    const path = tmp();
+    writeFileSync(path, "- agent: researcher\n", "utf8");
+    assert.throws(() => orq.readQueue(path), /la tarea 1 necesita agent y task/);
+  });
+
+  test("escribir y volver a leer", () => {
+    const path = tmp();
+    const items = [{ agent: "researcher", task: "con: dos puntos y #almohadilla" }];
+    orq.writeQueue(items, path);
+    assert.deepEqual(orq.readQueue(path), items);
+    orq.writeQueue([], path);
+    assert.deepEqual(orq.readQueue(path), []);
+  });
+
+  test("una tarea bloqueada no se pierde", () => {
+    const path = tmp();
+    const cola = "- agent: researcher\n  task: no debe ejecutarse\n";
+    writeFileSync(path, cola, "utf8");
+    const stop = join(orq.REPO, "factory", "STOP");
+    writeFileSync(stop, "test", "utf8");
+    try {
+      const r = spawnSync(process.execPath, [join(orq.REPO, "factory", "run.ts"), "--next"], {
+        encoding: "utf8",
+        env: { ...process.env, FACTORY_QUEUE: path },
+      });
+      assert.equal(r.status, 3);
+      assert.match(r.stderr, /parada/);
+      assert.equal(readFileSync(path, "utf8"), cola);
+    } finally {
+      rmSync(stop);
+    }
+  });
+
+  test("cola vacía no ejecuta nada", () => {
+    const path = tmp();
+    writeFileSync(path, "[]\n", "utf8");
+    const r = spawnSync(process.execPath, [join(orq.REPO, "factory", "run.ts"), "--next"], {
+      encoding: "utf8",
+      env: { ...process.env, FACTORY_QUEUE: path },
+    });
+    assert.equal(r.status, 0);
+    assert.match(r.stdout, /cola vacía/);
   });
 });
 

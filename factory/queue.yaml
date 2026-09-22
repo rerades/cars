@@ -1,0 +1,8 @@
+# Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
+# la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
+# intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
+- agent: researcher
+  task: >-
+    Verifica en el configurador de Cupra (fuente cupra-es de data/sources/registry.yaml)
+    que el precio mostrado es el PVP en España sin ayudas, según ADR-0001. Anota el
+    resultado en las notas de la fuente y actualiza last_verified.
