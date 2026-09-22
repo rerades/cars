@@ -5,7 +5,7 @@
  * interruptor de parada, horario, concurrencia, límites diarios y presupuesto del periodo.
  * El CLI está en factory/run.ts.
  */
-import { spawnSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
@@ -40,6 +40,7 @@ export interface Config {
     default_model?: string;
     max_usd_per_period?: number | null;
     stop_file?: string;
+    auto_pr?: boolean;
     [key: string]: unknown;
   };
   agents?: Record<string, AgentConfig | null>;
@@ -89,6 +90,85 @@ export function clock(date: Date, tz: string): Clock {
 
 export function nowInTz(cfg: Config): Clock {
   return clock(new Date(), cfg.global?.timezone || "UTC");
+}
+
+// --------------------------------------------------------------------------- espacio de trabajo
+
+export interface Workspace {
+  dir: string;
+  branch: string;
+}
+
+const git = (args: string[], cwd = REPO) => execFileSync("git", args, { cwd, encoding: "utf8" }).trim();
+
+/**
+ * Cada ejecución trabaja en su propia rama, dentro de un worktree aparte: así el agente no
+ * escribe nunca en la copia de trabajo de la persona, ni siquiera con cambios a medias.
+ */
+export function openWorkspace(runId: string, agent: string, repo = REPO): Workspace {
+  const branch = `agent/${agent}/${runId}`;
+  const dir = join(repo, "ops", "worktrees", runId);
+  mkdirSync(join(repo, "ops", "worktrees"), { recursive: true });
+  // Desde origin/main, no desde HEAD: si hay una rama a medias, su trabajo no se cuela
+  // en lo que escribe el agente ni en su PR.
+  const base = git(["branch", "-r", "--list", "origin/main"], repo) ? "origin/main" : "HEAD";
+  git(["worktree", "add", "-q", "-b", branch, dir, base], repo);
+  return { dir, branch };
+}
+
+/**
+ * Commitea lo que haya escrito el agente y retira el worktree; la rama se queda.
+ * Devuelve false si no escribió nada, en cuyo caso también borra la rama vacía.
+ */
+export function closeWorkspace(ws: Workspace, message: string, repo = REPO): boolean {
+  const changed = git(["status", "--porcelain"], ws.dir) !== "";
+  if (changed) {
+    git(["add", "-A"], ws.dir);
+    git(["commit", "-q", "-m", message], ws.dir);
+  }
+  git(["worktree", "remove", "--force", ws.dir], repo);
+  if (!changed) git(["branch", "-q", "-D", ws.branch], repo);
+  return changed;
+}
+
+/**
+ * Borra las ramas de agente ya fusionadas y los worktrees que quedaron sueltos.
+ * Devuelve las ramas borradas. Nunca tumba una ejecución: si algo falla, se ignora.
+ */
+export function pruneMergedBranches(repo = REPO, base?: string): string[] {
+  try {
+    git(["worktree", "prune"], repo);
+    try {
+      git(["fetch", "-q", "--prune", "origin"], repo);
+    } catch {
+      // sin red: se limpia con lo que haya en local
+    }
+    const ref = base ?? (git(["branch", "-r", "--list", "origin/main"], repo) ? "origin/main" : "main");
+    const merged = git(["branch", "--merged", ref, "--list", "agent/*", "--format=%(refname:short)"], repo)
+      .split("\n").filter(Boolean);
+    return merged.filter((branch) => {
+      try {
+        git(["branch", "-q", "-D", branch], repo);
+        return true;
+      } catch {
+        return false; // está en uso por un worktree
+      }
+    });
+  } catch {
+    return [];
+  }
+}
+
+/** Sube la rama y abre la PR. Devuelve su URL, o null si no se pudo. */
+export function openPullRequest(ws: Workspace, title: string, body: string, repo = REPO): string | null {
+  try {
+    git(["push", "-q", "-u", "origin", ws.branch], repo);
+    const out = execFileSync("gh", ["pr", "create", "--base", "main", "--head", ws.branch,
+      "--title", title, "--body", body], { cwd: repo, encoding: "utf8" });
+    return out.trim().split("\n").at(-1) ?? null;
+  } catch {
+    return null;
+  }
 }
 
 // --------------------------------------------------------------------------- cola
@@ -282,18 +362,21 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
   };
   if (dryRun) return { ...record, command: cmd };
 
+  const ws = openWorkspace(runId, agent);
+  record.branch = ws.branch;
+
   const env = {
     ...process.env,
     FACTORY_AGENT: agent,
     FACTORY_RUN_ID: runId,
-    FACTORY_REPO: REPO,
+    FACTORY_REPO: ws.dir,
     FACTORY_WRITE_PATHS: JSON.stringify(a.write_paths ?? []),
   };
 
   writeFileSync(LOCK, `${runId}\n${agent}\n`, "utf8");
   try {
     const [bin, ...args] = cmd;
-    const proc = spawnSync(bin, args, { cwd: REPO, env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    const proc = spawnSync(bin, args, { cwd: ws.dir, env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
     if (proc.error) throw proc.error;
     let payload: Record<string, unknown>;
     try {
@@ -309,6 +392,27 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
   } finally {
     rmSync(LOCK, { force: true });
     record.ended = clock(new Date(), now.tz).iso;
+    const title = `${agent}: ${task.split("\n")[0].slice(0, 60)}`;
+    const message = `${title}\n\nRun: ${runId} (${record.outcome})`;
+    if (!closeWorkspace(ws, message)) record.branch = null; // no escribió nada: no deja rama
+
+    // Solo se publica lo que salió bien: una tarea fallida deja la rama en local y ya.
+    if (record.branch && record.outcome === "success" && cfg.global?.auto_pr) {
+      const body = [
+        `Opened automatically by the factory. **Nobody has reviewed this yet.**`,
+        ``,
+        `- Task: ${task}`,
+        `- Run: \`${runId}\` · ${record.cost_usd} USD (${record.cost_kind}) · ${record.turns} turns`,
+        `- Agent: \`${agent}\` · model \`${record.model}\` · may only write to ${JSON.stringify(a.write_paths ?? [])}`,
+        ``,
+        `What the agent says:`,
+        ``,
+        "```",
+        String(record.result ?? "").slice(-1500),
+        "```",
+      ].join("\n");
+      record.pr = openPullRequest(ws, title, body);
+    }
   }
   return record;
 }
