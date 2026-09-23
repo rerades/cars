@@ -1,0 +1,33 @@
+# Researcher — Cupra Born. Fuente: cupra-es (T1). Consultado 2026-09-24.
+brand: cupra
+model: Born
+status: {value: on_sale, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+needs_review: true   # texto de price_terms incompleto (ver open_questions)
+versions:
+  - name: Born+ (190 CV)
+    battery_kwh: {value: 59, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+    power_cv: {value: 190, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+    price:
+      value: 35655.59
+      unit: EUR
+      price_kind: financed
+      price_terms: >-
+        Oferta para un Cupra Born + (190CV) 59kWh con un PVP recomendado financiando en Península y Baleares de 35.655,59€ (IVA, transporte, impuesto de matriculación, descuento de marca y concesionario y bonificación Volkswagen Bank GmbH S.E. incluidos). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 10.000,00€ con una permanencia mínima de la financiación de 48 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 47 cuotas de 210,00€ y 1 cuota en el plazo 12 de 4.500€
+      price_terms_url: "https://www.cupra.com/es-es/coches/born"
+      source_id: cupra-es
+      url: "https://www.cupra.com/es-es/coches/born"
+      retrieved: 2026-09-24
+      tier: T1
+  - name: Born VZ
+    power_cv: {value: 326, note: "'hasta 326 CV'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+    dc_kw: {value: 183, note: "dato de la ficha del modelo Born; no se atribuye por versión", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+    price: null   # sin PVP ni precio financiado visible
+model_level:
+  battery_options_kwh: {value: [59, 79], source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+  wltp_max_km: {value: 631, note: "'hasta 631 km', máximo de la gama", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+  dc_max_kw: {value: 183, note: "10-80 % desde 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+images: []   # sin licencia registrada
+open_questions:
+  - "price_terms truncado: la lectura de la página elide el resto de la nota (cuota final, TIN 7,45 %, TAE 9,27 %, coste total; precio al contado 36.505,59 € según lectura parcial). Releer la nota completa en el navegador."
+  - "Sin PVP limpio: la web solo muestra precio con oferta."
+  - "Batería, WLTP y potencia por versión (VZ 79 kWh) no confirmadas por versión; carga AC no publicada en la ficha."
