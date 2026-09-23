@@ -189,8 +189,14 @@ export function readQueue(path = QUEUE): QueueItem[] {
   return items;
 }
 
+/** Reescribir el YAML se come los comentarios, así que la cabecera se vuelve a poner. */
+export const QUEUE_HEADER = `# Cola de tareas de la factoría. \`node factory/run.ts --next\` coge la primera,
+# la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
+# intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
+`;
+
 export function writeQueue(items: QueueItem[], path = QUEUE): void {
-  writeFileSync(path, items.length ? stringify(items) : "[]\n", "utf8");
+  writeFileSync(path, QUEUE_HEADER + (items.length ? stringify(items) : "[]\n"), "utf8");
 }
 
 // --------------------------------------------------------------------------- ledger
