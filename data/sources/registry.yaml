@@ -30,9 +30,18 @@ sources:
     image_license: ""   # sin licencia clara registrada: no publicar imágenes de esta web
     notes: >
       robots.txt (cupra.com) solo bloquea /*/mycupra/, /*/private-area/ y login; modelos
-      y precios permitidos. BEV vistos en la home: Born, Tavascan, Raval. Pendiente
-      comprobar que el configurador muestra PVP sin ayudas (regla de precio ADR-0001).
-    last_verified: 2026-09-21
+      y precios permitidos. BEV vistos en la home: Born, Tavascan, Raval.
+      Verificado (2026-09-23): el configurador y las fichas de modelo (p.ej. /coches/born)
+      NO muestran un PVP limpio. El único precio visible es un "PVP recomendado
+      financiando" ligado a una oferta de financiación, con nota a pie de página que dice
+      literalmente "descuento de marca y concesionario y bonificación Volkswagen Bank GmbH
+      S.E. incluidos" y una cuota final condicionada a "la ayuda del Plan Auto +". Es decir,
+      el PVP mostrado incluye descuentos de marca/concesionario y una bonificación
+      financiera, por lo que NO cumple la regla de ADR-0001 (PVP sin ayudas ni incentivos).
+      No usar este precio como fuente de precio hasta localizar un PVP oficial sin
+      descuentos ni condiciones de financiación. Pendiente: buscar una lista de precios o
+      ficha técnica sin oferta de financiación asociada.
+    last_verified: 2026-09-23
     status: active
 
   - id: cupra-press
