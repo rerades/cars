@@ -10,10 +10,14 @@ import { randomUUID } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { parse, stringify } from "yaml";
+import { changedFiles, runEvals } from "./evals.ts";
 
 export const REPO = join(import.meta.dirname, "..");
 export const BUDGETS = join(REPO, "factory", "budgets.yaml");
 export const LEDGER_DIR = join(REPO, "ops", "runs");
+/** Full stream-json output of each run; not versioned (see ADR-0004). */
+export const TRACE_DIR = join(REPO, "ops", "traces");
+export const ACTIONS_DIR = join(REPO, "ops", "actions");
 export const LOCK = join(REPO, "factory", ".run.lock");
 /** FACTORY_QUEUE existe para las pruebas; en uso normal la cola es factory/queue.yaml. */
 export const QUEUE = process.env.FACTORY_QUEUE || join(REPO, "factory", "queue.yaml");
@@ -316,7 +320,7 @@ export function buildCommand(cfg: Config, agent: string, task: string): string[]
   const cmd = [
     "claude", "-p", task + RESULT_INSTRUCTION,
     "--agent", agent,
-    "--output-format", "json",
+    "--output-format", "stream-json", "--verbose", // one event per line: the full trace
     "--model", a.model || cfg.global?.default_model || "sonnet",
     "--max-turns", String(a.max_turns_per_run),
     "--max-budget-usd", Number(a.max_usd_per_run).toFixed(2),
@@ -345,6 +349,44 @@ export function classify(status: number | null, payload: Record<string, unknown>
   }
   if (status === 0 && !payload.is_error && resultOk(String(payload.result ?? ""))) return "success";
   return "failed";
+}
+
+// --------------------------------------------------------------------------- traces
+
+type Event = Record<string, any>;
+
+const events = (stdout: string): Event[] =>
+  stdout.split("\n").flatMap((line) => {
+    try {
+      return [JSON.parse(line)];
+    } catch {
+      return [];
+    }
+  });
+
+/** The last `result` event carries cost, turns and the conclusion. Without one, the tail of stdout. */
+export function resultEvent(stdout: string): Event {
+  return events(stdout).findLast((e) => e.type === "result") ?? { raw: stdout.slice(-2000) };
+}
+
+const short = (v: unknown, n = 120) => (typeof v === "string" ? v : JSON.stringify(v)).replaceAll("\n", " ").slice(0, n);
+
+/** One line per tool call, plus agent text, tool errors and the final tally. */
+export function formatTrace(stdout: string): string {
+  const out: string[] = [];
+  let step = 0;
+  for (const e of events(stdout)) {
+    const content: Event[] = Array.isArray(e.message?.content) ? e.message.content : [];
+    for (const c of content) {
+      if (e.type === "assistant" && c.type === "tool_use") out.push(`#${++step} ${c.name} → ${short(c.input)}`);
+      if (e.type === "assistant" && c.type === "text" && c.text.trim()) out.push(`   texto: ${short(c.text.trim())}`);
+      if (e.type === "user" && c.type === "tool_result" && c.is_error) out.push(`   ✗ error: ${short(c.content)}`);
+    }
+    if (e.type === "result") {
+      out.push(`= ${e.subtype} · ${e.num_turns} turnos · ${e.total_cost_usd} USD · ${Math.round(e.duration_ms / 1000)} s`);
+    }
+  }
+  return out.join("\n");
 }
 
 export function execute(cfg: Config, agent: string, task: string, now: Clock, dryRun = false): Row {
@@ -376,6 +418,7 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
     FACTORY_AGENT: agent,
     FACTORY_RUN_ID: runId,
     FACTORY_REPO: ws.dir,
+    FACTORY_LOG_DIR: ACTIONS_DIR, // outside the worktree, which is deleted at the end
     FACTORY_WRITE_PATHS: JSON.stringify(a.write_paths ?? []),
   };
 
@@ -384,17 +427,23 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
     const [bin, ...args] = cmd;
     const proc = spawnSync(bin, args, { cwd: ws.dir, env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
     if (proc.error) throw proc.error;
-    let payload: Record<string, unknown>;
-    try {
-      payload = JSON.parse(proc.stdout || "{}");
-    } catch {
-      payload = { raw: (proc.stdout || "").slice(-2000) };
-    }
+    mkdirSync(TRACE_DIR, { recursive: true });
+    writeFileSync(join(TRACE_DIR, `${runId}.jsonl`), proc.stdout || "", "utf8");
+    const payload = resultEvent(proc.stdout || "");
+    const usage = payload.usage ?? {};
+    record.session_id = payload.session_id ?? null;
+    record.tokens_in = (usage.input_tokens || 0) + (usage.cache_creation_input_tokens || 0) +
+      (usage.cache_read_input_tokens || 0);
+    record.tokens_out = usage.output_tokens || 0;
     record.cost_usd = Math.round(Number(payload.total_cost_usd || 0) * 1e4) / 1e4;
     record.turns = Math.trunc(Number(payload.num_turns || 0));
     record.outcome = classify(proc.status, payload, proc.stderr);
     record.result = String(payload.result || "").slice(-500); // el final: conclusión y RESULTADO
     if (proc.stderr) record.stderr = proc.stderr.slice(-500);
+    // Evals run on what the agent left in the worktree, before it is committed and removed.
+    const evals = runEvals(agent, ws.dir, changedFiles(ws.dir), a.write_paths ?? [], now.day);
+    record.evals = evals;
+    if (record.outcome === "success" && evals.failed.length) record.outcome = "eval_failed";
   } finally {
     rmSync(LOCK, { force: true });
     record.ended = clock(new Date(), now.tz).iso;
@@ -410,6 +459,7 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
         `- Task: ${task}`,
         `- Run: \`${runId}\` · ${record.cost_usd} USD (${record.cost_kind}) · ${record.turns} turns`,
         `- Agent: \`${agent}\` · model \`${record.model}\` · may only write to ${JSON.stringify(a.write_paths ?? [])}`,
+        `- Evals: ${(record.evals as { passed?: number } | undefined)?.passed ?? 0} checks passed`,
         ``,
         `What the agent says:`,
         ``,

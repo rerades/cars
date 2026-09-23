@@ -32,6 +32,7 @@ Este directorio es la **fuente de verdad** del producto. Lo leen y lo escriben t
 - Definiciones en `.claude/agents/`. Roles en `process/agents.md`.
 - `researcher`: fuentes y datos (ADR-0001).
 - Presupuesto, permisos y observabilidad: ADR-0002, `factory/budgets.yaml`, `ops/`.
+- Trazas y autoevaluaciones de los agentes: ADR-0004, `factory/evals.ts`, `ops/traces/`.
 
 ## Convenciones
 

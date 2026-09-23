@@ -7,15 +7,18 @@
  *   node factory/run.ts <agente> "<tarea>" --ignore-window  # ignora el horario nocturno
  *   node factory/run.ts --status                            # gasto y ejecuciones del periodo
  *   node factory/run.ts --next                              # primera tarea de factory/queue.yaml
+ *   node factory/run.ts --trace <run_id>                    # pasos de una ejecución
  */
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { parseArgs } from "node:util";
 import {
-  appendLedger, checkCanRun, execute, loadConfig, nowInTz, pruneMergedBranches, readLedger, readQueue, runsToday,
-  spentInPeriod, writeQueue,
+  appendLedger, checkCanRun, execute, formatTrace, loadConfig, nowInTz, pruneMergedBranches, readLedger, readQueue, runsToday,
+  spentInPeriod, TRACE_DIR, writeQueue,
   type Config,
 } from "./orchestrator.ts";
 
-const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [agente] [tarea]
+const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [--trace <run_id>] [agente] [tarea]
 
 Orquestador de la factoría
 
@@ -24,7 +27,8 @@ Orquestador de la factoría
   --dry-run        no ejecuta; muestra el comando
   --ignore-window  ignora el horario permitido
   --status         muestra el estado del presupuesto
-  --next           lanza la primera tarea de factory/queue.yaml`;
+  --next           lanza la primera tarea de factory/queue.yaml
+  --trace <run_id> muestra los pasos de una ejecución (ops/traces/)`;
 
 function cmdStatus(cfg: Config): number {
   const now = nowInTz(cfg);
@@ -35,8 +39,11 @@ function cmdStatus(cfg: Config): number {
   console.log(`  ejecuciones hoy: ${runsToday(rows, now.day)} / ${g.max_runs_per_day}`);
   console.log(`  horario: ${g.allowed_hours || "sin restricción"}`);
   for (const [agent, a] of Object.entries(cfg.agents ?? {})) {
+    const evaluated = rows.filter((r) => r.agent === agent && r.evals) as { evals: { failed: string[] } }[];
+    const passed = evaluated.filter((r) => !r.evals.failed.length).length;
     console.log(`  - ${agent}: ${spentInPeriod(rows, agent)}/${a?.max_usd_per_period} USD · ` +
-      `${runsToday(rows, now.day, agent)}/${a?.max_runs_per_day} ejecuciones hoy`);
+      `${runsToday(rows, now.day, agent)}/${a?.max_runs_per_day} ejecuciones hoy` +
+      (evaluated.length ? ` · evals ${passed}/${evaluated.length}` : ""));
   }
   return 0;
 }
@@ -87,6 +94,16 @@ function cmdNext(cfg: Config, ignoreWindow: boolean, dryRun: boolean): number {
   return code;
 }
 
+function cmdTrace(runId: string): number {
+  const path = join(TRACE_DIR, `${runId}.jsonl`);
+  if (!existsSync(path)) {
+    console.error(`no hay traza para ${runId} en ops/traces/`);
+    return 2;
+  }
+  console.log(formatTrace(readFileSync(path, "utf8")));
+  return 0;
+}
+
 function main(argv: string[]): number {
   let parsed;
   try {
@@ -98,6 +115,7 @@ function main(argv: string[]): number {
         "ignore-window": { type: "boolean" },
         status: { type: "boolean" },
         next: { type: "boolean" },
+        trace: { type: "string" },
         help: { type: "boolean", short: "h" },
       },
     });
@@ -113,6 +131,7 @@ function main(argv: string[]): number {
   const [agent, task] = positionals;
 
   const cfg = loadConfig();
+  if (values.trace) return cmdTrace(values.trace);
   if (values.status) return cmdStatus(cfg);
   if (values.next) return cmdNext(cfg, !!values["ignore-window"], !!values["dry-run"]);
   if (!agent || !task || positionals.length > 2) {

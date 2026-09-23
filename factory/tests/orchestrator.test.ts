@@ -175,6 +175,43 @@ describe("comando", () => {
   });
 });
 
+describe("traza", () => {
+  const stream = [
+    JSON.stringify({ type: "system", subtype: "init" }),
+    JSON.stringify({ type: "assistant", message: { content: [
+      { type: "text", text: "Miro la web.\nSegunda línea" },
+      { type: "tool_use", name: "WebFetch", input: { url: "https://www.cupra.com/es-es/" } },
+    ] } }),
+    JSON.stringify({ type: "user", message: { content: [{ type: "tool_result", is_error: true, content: "403" }] } }),
+    JSON.stringify({ type: "result", subtype: "success", num_turns: 2, total_cost_usd: 0.1, duration_ms: 4000,
+      result: "RESULTADO: ok", session_id: "s1" }),
+    "",
+  ].join("\n");
+
+  test("el payload es el último evento result", () => {
+    assert.equal(orq.resultEvent(stream).session_id, "s1");
+    assert.equal(orq.classify(0, orq.resultEvent(stream), ""), "success");
+  });
+  test("sin evento result queda la cola de stdout y clasifica como fallo", () => {
+    const r = orq.resultEvent("no es json");
+    assert.equal(r.raw, "no es json");
+    assert.equal(orq.classify(1, r, ""), "failed");
+  });
+  test("formatTrace resume pasos, errores y total", () => {
+    assert.equal(orq.formatTrace(stream), [
+      "   texto: Miro la web. Segunda línea",
+      "#1 WebFetch → {\"url\":\"https://www.cupra.com/es-es/\"}",
+      "   ✗ error: 403",
+      "= success · 2 turnos · 0.1 USD · 4 s",
+    ].join("\n"));
+  });
+  test("el comando pide la traza completa", () => {
+    const cmd = orq.buildCommand(cfg(), "researcher", "tarea");
+    assert.equal(cmd[cmd.indexOf("--output-format") + 1], "stream-json");
+    assert.ok(cmd.includes("--verbose"));
+  });
+});
+
 describe("espacio de trabajo", () => {
   /** Repo de mentira: el agente nunca debe tocar la copia de trabajo de la persona. */
   function repoDeMentira(): string {

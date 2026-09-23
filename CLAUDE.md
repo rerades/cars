@@ -11,7 +11,7 @@ Node >= 24 (ejecuta TypeScript directamente, sin compilar). Sin Python. `npm ins
 1. `docs/README.md` — mapa de la documentación.
 2. `docs/bitacora/` — qué se ha hecho y **por qué**. Empieza por el mes actual.
 3. `docs/product/vision.md` y el PRD que toque.
-4. `docs/architecture/adr/` — decisiones vigentes (ADR-0001 fuentes, ADR-0002 presupuesto).
+4. `docs/architecture/adr/` — decisiones vigentes (ADR-0001 fuentes, ADR-0002 presupuesto, ADR-0004 trazas y evals).
 5. `docs/process/workflow.md` y `definition-of-done.md`.
 
 ## Reglas del repositorio
@@ -54,6 +54,6 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
 ## Estado actual
 - Hecho: documentación, ADR-0001 y 0002, agente Researcher, orquestador, hooks, bitácora,
   migración a TypeScript, CI, primera ejecución real del Researcher, cola de tareas
-  (`factory/queue.yaml` + `run.ts --next`).
+  (`factory/queue.yaml` + `run.ts --next`), trazas y evals deterministas (ADR-0004, `run.ts --trace`).
 - Pendiente: ADR-0003 (stack de la web), licencia de las imágenes de Cupra, verificar que el
   configurador de Cupra da el PVP sin ayudas (primera tarea de la cola).
