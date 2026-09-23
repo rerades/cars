@@ -1,4 +1,15 @@
 # Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
 # la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
-[]
+- agent: researcher
+  task: >-
+    ADR-0001 acepta ahora el precio con oferta cuando la marca no publica un PVP limpio.
+    Vuelve a la fuente cupra-es y registra en data/raw/cupra/ los BEV a la venta (Born,
+    Tavascan, Raval si tiene precio) con price_kind, price_terms (texto literal de las
+    condiciones) y price_terms_url, además de las specs que encuentres en la ficha.
+    Actualiza las notas de la fuente: ya no es "no usable para precio".
+- agent: researcher
+  task: >-
+    Registra en data/raw/polestar/ los BEV a la venta en España de la fuente polestar-es
+    (Polestar 2, 3 y 4) con precio, price_kind y specs. Si el precio lleva oferta,
+    guarda price_terms y price_terms_url según ADR-0001.
