@@ -12,6 +12,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
+import { exportRun } from "./langfuse.ts";
 import {
   appendLedger, checkCanRun, execute, formatTrace, loadConfig, nowInTz, pruneMergedBranches, readLedger, readQueue, runsToday,
   spentInPeriod, TRACE_DIR, writeQueue,
@@ -69,6 +70,8 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
   }
 
   appendLedger(record, month);
+  // Not awaited: node waits for it before exiting, and it never throws.
+  void exportRun(record).then((line) => line && console.log(line));
   console.log(`[${record.outcome}] ${record.run_id} · ${record.cost_usd} USD · ${record.turns} turnos` +
     (record.branch ? ` · rama ${record.branch}` : " · sin cambios") +
     (record.pr ? ` · ${record.pr}` : ""));
