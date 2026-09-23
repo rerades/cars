@@ -15,6 +15,7 @@ import { loadConfig, nowInTz, readLedger, REPO, TRACE_DIR, type Row } from "./or
 
 export const KEYS_FILE = join(REPO, ".secrets", "langfuse.env");
 const EU = "https://cloud.langfuse.com";
+const ENVIRONMENT = "factory";
 const MAX = 4000; // chars per input/output: enough to read, small enough to stay in the free tier
 
 export interface Keys {
@@ -162,7 +163,7 @@ export function toOtlp(record: Row, stdout: string) {
     "langfuse.trace.name": record.agent,
     "langfuse.trace.tags": [record.agent, record.outcome],
     "langfuse.trace.metadata.run_id": runId,
-    "langfuse.environment": "factory",
+    "langfuse.environment": ENVIRONMENT,
   };
   const spans = toSpans(record, stdout).map((s) => ({
     traceId: traceId(runId),
@@ -191,6 +192,7 @@ export function evalScore(record: Row) {
     id: `${record.run_id}-evals`,
     traceId: traceId(String(record.run_id)),
     name: "evals",
+    environment: ENVIRONMENT,
     value: evals.failed.length ? 0 : 1,
     dataType: "BOOLEAN",
     comment: evals.failed.length ? evals.failed.join("\n").slice(0, 2000) : `${evals.passed} checks passed`,
