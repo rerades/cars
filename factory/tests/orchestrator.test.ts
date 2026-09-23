@@ -293,8 +293,10 @@ describe("cola", () => {
     const items = [{ agent: "researcher", task: "con: dos puntos y #almohadilla" }];
     orq.writeQueue(items, path);
     assert.deepEqual(orq.readQueue(path), items);
+    assert.ok(readFileSync(path, "utf8").startsWith("# Cola de tareas"));
     orq.writeQueue([], path);
     assert.deepEqual(orq.readQueue(path), []);
+    assert.ok(readFileSync(path, "utf8").startsWith("# Cola de tareas"));   // la cabecera sobrevive a vaciarla
   });
 
   test("una tarea bloqueada no se pierde", () => {
