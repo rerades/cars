@@ -38,6 +38,26 @@ no a la cola.
 
 Códigos de salida: `0` correcto · `1` la ejecución falló · `3` bloqueado por una guarda.
 
+## Langfuse (opcional)
+
+Si existe `.secrets/langfuse.env`, cada ejecución se manda también a Langfuse Cloud: la traza
+con sus llamadas al modelo y a herramientas, y los evals como score. Ver ADR-0004.
+
+1. Crea una cuenta gratuita en https://cloud.langfuse.com (región UE) y un proyecto.
+2. En *Settings → API Keys*, crea un par de claves y guárdalas así:
+
+   ```bash
+   # .secrets/langfuse.env (no se commitea; los agentes no lo ven)
+   LANGFUSE_PUBLIC_KEY=pk-lf-...
+   LANGFUSE_SECRET_KEY=sk-lf-...
+   # LANGFUSE_BASE_URL=https://us.cloud.langfuse.com   # solo si el proyecto está en EE. UU.
+   ```
+
+3. Para mandar las ejecuciones que ya hay: `node factory/langfuse.ts` (mes actual) o
+   `node factory/langfuse.ts 2026-09`.
+
+Si falla el envío, la ejecución no se ve afectada: sale una línea `langfuse: ... no se pudo enviar`.
+
 ## Qué comprueba antes de lanzar
 
 1. `factory/STOP` existe → no lanza nada (interruptor de parada).

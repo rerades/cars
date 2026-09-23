@@ -62,5 +62,36 @@ que escriban texto libre (Product, Reviewer).
   pierden las trazas, pero no el ledger.
 - Los evals solo validan la forma de los datos y que tengan fuente. No comprueban que el dato sea
   cierto: para eso sigue haciendo falta revisar la PR.
-- **Paso 2:** un script que mande `ops/traces/*.jsonl` y los evals a la API de ingesta de Langfuse
-  Cloud, con la clave guardada en `.secrets/`. No hay que tocar el orquestador.
+- **Paso 2:** hecho el 2026-09-23. Ver la sección *Langfuse Cloud* más abajo.
+
+## Langfuse Cloud (paso 2, 2026-09-23)
+Cada ejecución se manda también a **Langfuse Cloud**, con el plan Hobby gratuito: 50 000 unidades
+al mes y 30 días de datos. Una ejecución genera unas decenas de unidades, así que queda muy por
+debajo del límite. La región es la UE (`cloud.langfuse.com`).
+
+- **Por qué OpenTelemetry y no la API de ingesta:** la API de ingesta clásica
+  (`/api/public/ingestion`) está obsoleta y deja de funcionar en Langfuse Cloud el
+  **2026-11-16**. `factory/langfuse.ts` construye el cuerpo OTLP/HTTP en JSON a mano y lo manda
+  con `fetch` a `/api/public/otel/v1/traces`, con la cabecera `x-langfuse-ingestion-version: 4`.
+  No usa ni el SDK ni dependencias nuevas.
+- **Forma de la traza:** un span raíz `agent` (tarea, resultado, outcome, coste, rama, PR), una
+  `generation` por llamada al modelo (modelo y tokens) y un span `tool` por herramienta (entrada,
+  salida y error). Las horas salen de los `timestamp` de `stream-json`. Los atributos de la traza
+  (nombre, etiquetas `[agente, outcome]`, `run_id`) se repiten en todos los spans, como pide
+  Langfuse v4.
+- **Evals:** se mandan como un score booleano `evals` a `/api/public/scores`, con los fallos en el
+  comentario.
+- **Idempotencia:** los ids de traza, span y score se derivan del `run_id`, así que reenviar una
+  ejecución no la duplica.
+- **Claves:** se guardan en `.secrets/langfuse.env` (`LANGFUSE_PUBLIC_KEY`,
+  `LANGFUSE_SECRET_KEY` y, si hace falta, `LANGFUSE_BASE_URL`). Se leen en un objeto local y
+  **no se meten en `process.env`**, así que los agentes no las heredan. Sin ese fichero no se
+  envía nada.
+- **Nunca rompe una ejecución:** si el envío falla, se escribe una línea en la salida y ya está. El
+  ledger y `ops/traces/` siguen siendo la fuente de verdad. Langfuse es una vista, y en el plan
+  gratuito solo guarda 30 días.
+- **Qué sale de la máquina:** las tareas, los resultados y las entradas y salidas de las
+  herramientas, recortadas a 4000 caracteres. Es contenido de webs públicas de marcas: no hay datos
+  personales.
+- **Reenvío:** `node factory/langfuse.ts [YYYY-MM]` manda todas las ejecuciones del mes. Las
+  ejecuciones anteriores a ADR-0004 no tienen traza local y solo mandan el span raíz.
