@@ -18,6 +18,9 @@ Un agente **Researcher** mantiene un **registro de fuentes** (`data/sources/regi
 
 ### Reglas
 1. **Precio:** PVP oficial de la marca en España, **sin ayudas** (sin Plan MOVES ni otros incentivos). Solo desde T1.
+   - Si la marca **no publica un PVP limpio** y el único precio visible va ligado a una oferta (descuento de marca o concesionario, bonificación por financiar, condiciones de permanencia), ese precio **sí se guarda**, marcado como `price_kind: financed`, junto con el **texto literal de las condiciones** (`price_terms`) y la URL donde aparecen (`price_terms_url`). La web muestra ese texto: es lo que permite al visitante entender por qué el precio es más bajo de lo que pagaría.
+   - Un precio financiado **nunca se guarda como si fuera PVP**. `price_kind` es obligatorio siempre: `pvp` o `financed`.
+   - Si no hay ni PVP ni precio financiado de una T1, el campo queda vacío.
 2. Cada valor guarda: `source_id`, URL exacta, fecha de consulta y nivel.
 3. Si dos fuentes discrepan, prevalece el nivel más alto. Si discrepan dos del mismo nivel, se marca `needs_review` y no se publica.
 4. Los **modelos anunciados** se registran con estado `announced` y, si existe, la fecha prevista de lanzamiento.

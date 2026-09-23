@@ -41,6 +41,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - **RF-6:** Si ningún modelo cumple los filtros, se muestra un estado vacío con la opción de limpiar los filtros.
 - **RF-7:** Se incluyen modelos **anunciados pero no comercializados**, con la etiqueta "Próximamente" y la fecha prevista si se conoce. Se pueden filtrar por estado (a la venta / próximamente).
 - **RF-8:** Cada tarjeta muestra una imagen del modelo procedente de una fuente registrada, con su atribución si la licencia lo exige.
+- **RF-9:** Un precio que no es PVP se muestra etiquetado como **"precio con oferta"**, y la ficha del modelo muestra el texto literal de sus condiciones. Estos precios entran en los filtros y en el orden por precio como cualquier otro, siempre con su etiqueta.
 
 ## 5. Requisitos no funcionales
 - **RNF-1:** Renderizado en servidor o estático para SEO.
@@ -52,7 +53,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 ## 6. Datos
 - Entidades: `Marca`, `Modelo`, `Versión`, `Mercado`, `Precio` (ver `architecture/data-model.md`).
 - "Precio desde" y "autonomía máxima" se derivan de las versiones disponibles en el mercado España.
-- **Precio = PVP oficial de la marca en España, sin ayudas** (sin Plan MOVES ni otros incentivos).
+- **Precio = PVP oficial de la marca en España, sin ayudas** (sin Plan MOVES ni otros incentivos). Si la marca no publica un PVP limpio, se guarda el precio de la oferta marcado como `financed`, con el texto literal de sus condiciones (ver ADR-0001).
 - Los datos los obtiene el agente **Researcher** siguiendo `docs/architecture/adr/0001-fuentes-de-datos.md` y el registro `data/sources/registry.yaml`.
 - Un modelo "próximamente" puede no tener precio. Entonces se muestra "Precio por confirmar" y queda al final al ordenar por precio.
 - Cada dato de especificación guarda su fuente y su fecha de actualización.
@@ -67,6 +68,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - [ ] **CA-8** (→ RF-7): Dado un modelo con estado "anunciado", cuando abro `/coches`, entonces aparece con la etiqueta "Próximamente". Con el filtro "a la venta" no aparece.
 - [ ] **CA-9** (→ RF-7): Dado un modelo sin precio, cuando ordeno por precio ascendente, entonces aparece al final con "Precio por confirmar".
 - [ ] **CA-10** (→ RF-8): Toda imagen mostrada tiene en la base de datos una fuente y una licencia registradas.
+- [ ] **CA-11** (→ RF-9): Dado un modelo cuyo precio es `financed`, cuando abro su tarjeta, entonces veo la etiqueta "precio con oferta", y en su ficha veo el texto literal de las condiciones.
 - [ ] **CA-7** (→ RNF-5): Al cargar cualquier página del catálogo no se crea ninguna cookie ni se escribe nada en localStorage.
 
 ## 8. Decisiones y preguntas abiertas
@@ -76,6 +78,9 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - **Imágenes:** sí se incluyen (RF-8).
 - **Precio:** PVP oficial sin ayudas (sin Plan MOVES).
 
+### Resueltas (2026-09-23)
+- **Marcas que solo publican precio financiado:** se acepta ese precio marcado como tal, con sus condiciones literales a la vista (RF-9, CA-11, ADR-0001). Alternativa descartada: dejar el modelo sin precio, porque el Researcher comprobó que Cupra no publica ningún PVP limpio y el catálogo se quedaría con huecos en marcas que sí se venden.
+
 ### Abiertas
 - Licencia de las imágenes: ¿se usan las de las salas de prensa de las marcas (uso editorial) o hace falta otra fuente? Hay que revisar los términos de cada marca.
 
@@ -84,3 +89,4 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 |---|---|---|
 | 2026-09-19 | Borrador inicial | Claude |
 | 2026-09-19 | Resueltas las preguntas de fuentes, anunciados, imágenes y precio. Añadidos RF-7, RF-8, CA-8 a CA-10 | Rod / Claude |
+| 2026-09-23 | Se acepta el precio financiado marcado como tal, con sus condiciones. Añadidos RF-9 y CA-11 | Rod / Claude |

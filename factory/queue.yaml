@@ -3,6 +3,13 @@
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
 - agent: researcher
   task: >-
-    Verifica en el configurador de Cupra (fuente cupra-es de data/sources/registry.yaml)
-    que el precio mostrado es el PVP en España sin ayudas, según ADR-0001. Anota el
-    resultado en las notas de la fuente y actualiza last_verified.
+    ADR-0001 acepta ahora el precio con oferta cuando la marca no publica un PVP limpio.
+    Vuelve a la fuente cupra-es y registra en data/raw/cupra/ los BEV a la venta (Born,
+    Tavascan, Raval si tiene precio) con price_kind, price_terms (texto literal de las
+    condiciones) y price_terms_url, además de las specs que encuentres en la ficha.
+    Actualiza las notas de la fuente: ya no es "no usable para precio".
+- agent: researcher
+  task: >-
+    Registra en data/raw/polestar/ los BEV a la venta en España de la fuente polestar-es
+    (Polestar 2, 3 y 4) con precio, price_kind y specs. Si el precio lleva oferta,
+    guarda price_terms y price_terms_url según ADR-0001.

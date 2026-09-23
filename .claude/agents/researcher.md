@@ -33,7 +33,8 @@ tier: T1
 ```
 
 ## Reglas innegociables
-- **Precio = PVP oficial en España, sin ayudas** (sin Plan MOVES ni otros incentivos). Solo desde fuentes T1. Si la web muestra el precio con ayudas, busca el precio sin ayudas o deja el campo vacío.
+- **Precio = PVP oficial en España, sin ayudas** (sin Plan MOVES ni otros incentivos). Solo desde fuentes T1. Guárdalo con `price_kind: pvp`.
+- Si la marca **no publica un PVP limpio** y el único precio es el de una oferta (descuento de marca o concesionario, bonificación por financiar, permanencia), guarda ese precio con `price_kind: financed`, el **texto literal** de las condiciones en `price_terms` y su URL en `price_terms_url`. Busca antes un PVP sin oferta; si no existe, esto es lo que se guarda. Nunca lo guardes como `pvp`. Sin ninguno de los dos, campo vacío.
 - **Nunca inventes ni estimes** un dato. Si no lo encuentras en una fuente registrada, déjalo vacío y anótalo en `open_questions`.
 - Si dos fuentes discrepan: prevalece el nivel más alto. Si son del mismo nivel, marca `needs_review: true`.
 - **Imágenes:** solo con licencia o términos de uso registrados. Guarda la URL original y la atribución exigida. Si no hay licencia clara, no la registres.
