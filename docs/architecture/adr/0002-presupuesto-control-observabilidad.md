@@ -61,7 +61,7 @@ El cambio es solo de configuración: `billing.mode` en `factory/budgets.yaml` y 
    "outcome":"success|failed|budget_exceeded|rate_limited|blocked","pr":"#21"}
   ```
 - **Log de acciones:** hooks `PreToolUse` y `PostToolUse` registran cada herramienta usada, con sus argumentos resumidos y si se permitió o se bloqueó.
-- **Trazas detalladas:** telemetría OpenTelemetry de Claude Code (coste, tokens, uso de herramientas) enviada a **Langfuse** (open source, se puede autoalojar gratis) u otro backend OTel.
+- **Trazas detalladas y autoevaluaciones:** ver ADR-0004 (trazas `stream-json` en `ops/traces/` y evals deterministas; Langfuse Cloud queda como paso 2).
 - **Trazabilidad de punta a punta:** `run_id` ↔ issue ↔ PR ↔ commits (el `run_id` va en el mensaje de commit).
 
 ## Consecuencias
@@ -79,7 +79,6 @@ El cambio es solo de configuración: `billing.mode` en `factory/budgets.yaml` y 
 
 ## Pendiente
 - Validar los límites de Pro con datos reales del ledger tras la primera semana.
-- Langfuse en la nube (plan gratuito) o autoalojado.
 
 ## Referencias
 - [Use the Claude Agent SDK with your Claude plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan): la situación a 2026-09-19 es que el Agent SDK y `claude -p` consumen de la suscripción, y los cambios planeados están pausados desde el 2026-06-15.

@@ -11,6 +11,7 @@ node factory/run.ts --status                      # gasto y ejecuciones del peri
 node factory/run.ts researcher "tarea" --dry-run  # muestra el comando, no ejecuta
 node factory/run.ts researcher "tarea"            # ejecuta (solo dentro del horario)
 node factory/run.ts researcher "tarea" --ignore-window   # pruebas supervisadas de día
+node factory/run.ts --trace <run_id>              # pasos de una ejecución (ops/traces/)
 ```
 
 ## Cola de tareas
@@ -47,7 +48,9 @@ Códigos de salida: `0` correcto · `1` la ejecución falló · `3` bloqueado po
 6. El agente tiene límites por ejecución definidos.
 
 Después lanza `claude -p` con `--agent`, `--model`, `--max-turns`, `--max-budget-usd` y
-`--permission-mode`, y escribe una línea en `ops/runs/YYYY-MM.jsonl`.
+`--permission-mode`, guarda la traza en `ops/traces/<run_id>.jsonl`, pasa los evals de `factory/evals.ts` sobre lo
+que escribió el agente (si fallan, `eval_failed` y no hay PR; ver ADR-0004) y escribe una línea
+en `ops/runs/YYYY-MM.jsonl`.
 
 ## Rama por ejecución
 

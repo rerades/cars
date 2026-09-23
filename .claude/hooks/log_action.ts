@@ -14,7 +14,7 @@ function main(): void {
     return;
   }
 
-  const outDir = join(process.env.FACTORY_REPO || ".", "ops", "actions");
+  const outDir = process.env.FACTORY_LOG_DIR || join(process.env.FACTORY_REPO || ".", "ops", "actions");
   mkdirSync(outDir, { recursive: true });
   const record = {
     ts: new Date().toISOString().slice(0, 19) + "+00:00",
