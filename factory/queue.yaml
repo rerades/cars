@@ -1,4 +1,46 @@
 # Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
 # la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
-[]
+- agent: researcher
+  task: >-
+    Reconocimiento de marcas. Averigua qué marcas venden coches 100% eléctricos en España
+    hoy y cuáles faltan en data/sources/registry.yaml (ya están Cupra y Polestar). Escribe
+    data/sources/candidatas.yaml con una entrada por marca: nombre, web oficial española,
+    si tiene sala de prensa, cuántos BEV vende aproximadamente y de dónde sacas el dato
+    (source_id o url y retrieved). No hace falta registrar las fuentes todavía ni entrar
+    modelo por modelo: esto es el mapa para las tareas siguientes. Ordénalas por número de
+    modelos, de más a menos.
+- agent: researcher
+  task: >-
+    Marca Tesla. Añade sus fuentes a data/sources/registry.yaml (web oficial española y
+    sala de prensa) y registra en data/raw/tesla/ sus modelos a la venta en España con
+    versiones, specs, precio y price_kind, siguiendo ADR-0001. Si el precio lleva oferta,
+    guarda price_terms y price_terms_url.
+- agent: researcher
+  task: >-
+    Marca Renault. Mismo trabajo que con Tesla: fuentes en el registro y modelos en
+    data/raw/renault/ con versiones, specs, precio y price_kind según ADR-0001.
+- agent: researcher
+  task: >-
+    Marca Kia. Mismo trabajo: fuentes en el registro y modelos en data/raw/kia/ con
+    versiones, specs, precio y price_kind según ADR-0001.
+- agent: researcher
+  task: >-
+    Marca Hyundai. Mismo trabajo: fuentes en el registro y modelos en data/raw/hyundai/
+    con versiones, specs, precio y price_kind según ADR-0001.
+- agent: researcher
+  task: >-
+    Marca BYD. Mismo trabajo: fuentes en el registro y modelos en data/raw/byd/ con
+    versiones, specs, precio y price_kind según ADR-0001.
+- agent: researcher
+  task: >-
+    Marca Volkswagen. Mismo trabajo: fuentes en el registro y modelos en data/raw/volkswagen/
+    con versiones, specs, precio y price_kind según ADR-0001.
+- agent: researcher
+  task: >-
+    Marca MG. Mismo trabajo: fuentes en el registro y modelos en data/raw/mg/ con versiones,
+    specs, precio y price_kind según ADR-0001.
+- agent: researcher
+  task: >-
+    Marca Peugeot. Mismo trabajo: fuentes en el registro y modelos en data/raw/peugeot/ con
+    versiones, specs, precio y price_kind según ADR-0001.
