@@ -6,6 +6,7 @@ import { dirname, join } from "node:path";
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
 import { changedFiles, runEvals } from "../evals.ts";
+import { clock } from "../orchestrator.ts";
 
 const TODAY = "2026-09-23";
 const REGISTRY = `sources:
@@ -30,7 +31,7 @@ function evalFiles(files: Record<string, string>, paths = ["data/"]) {
 }
 
 const value = (extra: object) => JSON.stringify({ battery_kwh: {
-  value: 77, source_id: "cupra-es", url: "https://www.cupra.com/es-es/coches/born", date: TODAY, tier: "T1", ...extra,
+  value: 77, source_id: "cupra-es", url: "https://www.cupra.com/es-es/coches/born", retrieved: TODAY, tier: "T1", ...extra,
 } });
 
 describe("evals del researcher", () => {
@@ -40,7 +41,9 @@ describe("evals del researcher", () => {
   });
   test("el registro actual del repo pasa", () => {
     const repo = join(import.meta.dirname, "..", "..");
-    assert.deepEqual(runEvals("researcher", repo, ["data/sources/registry.yaml"], ["data/"], TODAY).failed, []);
+    // Hoy de verdad, no TODAY: el registro lo actualizan los agentes y sus fechas avanzan.
+    const hoy = clock(new Date(), "Europe/Madrid").day;
+    assert.deepEqual(runEvals("researcher", repo, ["data/sources/registry.yaml"], ["data/"], hoy).failed, []);
   });
   test("registro inválido", () => {
     const bad = REGISTRY.replace("T1", "T9").replace("2026-09-23", "2027-01-01");
