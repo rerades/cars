@@ -1,0 +1,37 @@
+# Researcher — Cupra Tavascan. Fuente: cupra-es (T1). Consultado 2026-09-24.
+brand: cupra
+model: Tavascan
+status: {value: on_sale, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+needs_review: false
+versions:
+  - name: Tavascan (58 kWh, 140 kW)
+    battery_kwh: {value: 58, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    power_kw: {value: 140, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    wltp_km: {value: 441, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    drive: {value: FWD, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    price:
+      value: 36272.53
+      unit: EUR
+      price_kind: financed
+      price_terms: >-
+        Oferta para un Cupra Tavascan 58kWh 140kW (190CV) con un PVP recomendado financiando en Península y Baleares de 36.272,53€ (IVA, transporte, impuesto de matriculación, descuento de marca y concesionario y bonificación Volkswagen Bank GmbH S.E. incluidos). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 10.000,00€ con una permanencia mínima de la financiación de 48 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 47 cuotas de 260,00€ y 1 cuota en el plazo 12 de 3.375€. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto +. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 4 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 20.123,57€ en el mes 48 (calculada con 10.000 km anuales). Entrada: 7.665,50€. TIN: 7,45%. TAE: 9,21%. Importe total financiado: 28.607,03€. Comisión de apertura al contado: 3,95% (1.129,98€). Importe de los intereses: 7.111,44€. Coste total del crédito: 8.241,42€. Importe total adeudado: 36.848,46€. Precio total a plazos: 44.513,96€. Precio al contado: 37.122,53€.
+      price_terms_url: "https://www.cupra.com/es-es/coches/tavascan"
+      source_id: cupra-es
+      url: "https://www.cupra.com/es-es/coches/tavascan"
+      retrieved: 2026-09-24
+      tier: T1
+  - name: Tavascan Endurance
+    power_kw: {value: 210, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    wltp_km: {value: 557, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    price: null
+  - name: Tavascan VZ
+    power_kw: {value: 250, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    wltp_km: {value: 533, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    drive: {value: AWD, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    price: null
+model_level:
+  dc_max_kw: {value: 135, note: "10-80 % en 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+images: []
+open_questions:
+  - "Sin PVP limpio: la web solo muestra precio con oferta, y solo para la versión de acceso."
+  - "Batería de Endurance y VZ, y carga AC, no publicadas en la ficha."
