@@ -30,7 +30,7 @@ function evalFiles(files: Record<string, string>, paths = ["data/"]) {
 }
 
 const value = (extra: object) => JSON.stringify({ battery_kwh: {
-  value: 77, source_id: "cupra-es", url: "https://www.cupra.com/es-es/coches/born", date: TODAY, tier: "T1", ...extra,
+  value: 77, source_id: "cupra-es", url: "https://www.cupra.com/es-es/coches/born", retrieved: TODAY, tier: "T1", ...extra,
 } });
 
 describe("evals del researcher", () => {

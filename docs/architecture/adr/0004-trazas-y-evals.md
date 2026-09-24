@@ -45,7 +45,7 @@ La condición es empezar por algo sencillo y **sin coste**.
 - Para el Researcher se comprueba ADR-0001:
   - El registro de fuentes tiene `id`, `tier` T1/T2/T3, `urls` y un `last_verified` con una fecha
     que no es futura.
-  - En `data/raw/`, todo valor lleva `source_id` (que existe en el registro), `url`, `date` y `tier`.
+  - En `data/raw/`, todo valor lleva `source_id` (que existe en el registro), `url`, `retrieved` y `tier`.
 - El resultado va al ledger (`evals: {passed, failed}`). Si falla alguna comprobación, `outcome`
   pasa a `eval_failed` y **no se abre la PR**: la rama se queda en local, igual que cuando la
   ejecución falla.
