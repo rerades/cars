@@ -1,0 +1,37 @@
+brand: Polestar
+model: Polestar 2
+status: on_sale
+needs_review: false
+versions:
+  - name: Standard Range Single Motor (con Climate Pack)
+    price:
+      value: 41900
+      unit: EUR
+      price_kind: financed
+      price_terms: "Oferta para clientes particulares, autónomos o empresas para pedidos de un Polestar 2 Standard range Single motor con Climate Pack. Península y Baleares: PVP recomendado de 41.900€ (IVA incluido). Incluye descuento exclusivo de marca, transporte al punto de entrega, gastos de matriculación y legalización. Oferta válida hasta el 30/09/2026 o hasta fin de existencias."
+      price_terms_url: https://www.polestar.com/es/polestar-2/
+      source_id: polestar-es
+      url: https://www.polestar.com/es/polestar-2/
+      retrieved: 2026-09-24
+      tier: T1
+specs:
+  wltp_range_max:
+    value: 659
+    unit: km
+    note: "hasta 659 km, Long Range Single Motor; no se detalla el resto de versiones"
+    source_id: polestar-es
+    url: https://www.polestar.com/es/polestar-2/
+    retrieved: 2026-09-24
+    tier: T1
+  power_max:
+    value: 350
+    unit: kW
+    note: "Dual Motor con Performance Pack"
+    source_id: polestar-es
+    url: https://www.polestar.com/es/polestar-2/
+    retrieved: 2026-09-24
+    tier: T1
+open_questions:
+  - "PVP sin oferta no publicado en la ficha; el 41.900 € incluye descuento exclusivo de marca (price_kind: financed)."
+  - "Batería útil, potencia y WLTP por versión, y carga AC/DC no figuran en la ficha; buscar en configurador/ficha técnica."
+  - "Imágenes: sin licencia registrada, no se guardan."

@@ -75,7 +75,11 @@ sources:
       BEV vistos en la home ES: Polestar 2 (PVP 41.900 €, confirmado sin ayudas en la
       ficha del modelo), Polestar 3, Polestar 4 (Coupé desde 49.900 €, SUV desde 54.390 €)
       y Polestar 5 (aún sin PVP visible, posible "announced").
-    last_verified: 2026-09-22
+      Verificado (2026-09-24): los precios de P2 (41.900 €), P3 (81.900 €) y P4 Coupé
+      (49.900 €) llevan nota a pie "descuento exclusivo de marca" y validez hasta 30/09/2026:
+      no son PVP limpio, se guardan como price_kind financed. (Corrige la nota anterior
+      que daba 41.900 € como "sin ayudas".)
+    last_verified: 2026-09-24
     status: active
 
   - id: polestar-press
