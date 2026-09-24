@@ -1,0 +1,49 @@
+brand: Polestar
+model: Polestar 3
+status: on_sale
+needs_review: false
+versions:
+  - name: Long Range Dual Motor MY2025 km0 (Pilot Pack y Plus Pack)
+    price:
+      value: 81900
+      unit: EUR
+      price_kind: financed
+      price_terms: "Oferta válida para clientes particulares, autónomos o empresas para pedidos de un Polestar 3 Long Range Dual Motor km0, año modelo 2025. El PVP se ha calculado sobre un vehículo Polestar 3 Long Range Dual Motor, año modelo 2025, con Pilot Pack y Plus Pack, pintura exterior (excepto color Snow) y faros HD LED de 1,3 megapíxeles incluidos sin coste adicional. La oferta incluye IVA, descuento exclusivo de marca, transporte al punto de entrega elegido en Península y Baleares y gastos de matriculación y legalización. Oferta válida hasta el 30/09/2026 para pedidos realizados en cualquiera de nuestros Polestar Spaces en Península y Baleares o a través de http://www.polestar.com/es. Sujeta a disponibilidad de stock."
+      price_terms_url: https://www.polestar.com/es/polestar-3/
+      source_id: polestar-es
+      url: https://www.polestar.com/es/polestar-3/
+      retrieved: 2026-09-24
+      tier: T1
+specs:
+  wltp_range_max:
+    value: 647
+    unit: km
+    source_id: polestar-es
+    url: https://www.polestar.com/es/polestar-3/
+    retrieved: 2026-09-24
+    tier: T1
+  power_max:
+    value: 500
+    unit: kW
+    note: "Dual Motor"
+    source_id: polestar-es
+    url: https://www.polestar.com/es/polestar-3/
+    retrieved: 2026-09-24
+    tier: T1
+  drivetrain:
+    value: AWD (Dual Motor)
+    source_id: polestar-es
+    url: https://www.polestar.com/es/polestar-3/
+    retrieved: 2026-09-24
+    tier: T1
+  dc_charge_max:
+    value: 350
+    unit: kW
+    source_id: polestar-es
+    url: https://www.polestar.com/es/polestar-3/
+    retrieved: 2026-09-24
+    tier: T1
+open_questions:
+  - "El 81.900 € es una oferta sobre unidad km0 MY2025 con descuento de marca; no hay PVP limpio visible."
+  - "Batería útil y carga AC no figuran en la ficha."
+  - "Imágenes: sin licencia registrada, no se guardan."

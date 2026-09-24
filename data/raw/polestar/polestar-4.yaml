@@ -1,0 +1,46 @@
+brand: Polestar
+model: Polestar 4
+status: on_sale
+needs_review: false
+versions:
+  - name: Long Range Single Motor (Rear Motor) Coupé
+    price:
+      value: 49900
+      unit: EUR
+      price_kind: financed
+      price_terms: "Oferta para particulares, autónomos o empresas para pedidos de un Polestar 4 Long range Single motor. Península y Baleares: PVP recomendado de 49.900€ (IVA incluido). Incluye descuento exclusivo de marca, transporte al punto de entrega, gastos de matriculación y legalización. Oferta válida hasta el 30/09/2026 o hasta fin de existencias."
+      price_terms_url: https://www.polestar.com/es/polestar-4/
+      source_id: polestar-es
+      url: https://www.polestar.com/es/polestar-4/
+      retrieved: 2026-09-24
+      tier: T1
+    specs:
+      wltp_range:
+        value: 620
+        unit: km
+        source_id: polestar-es
+        url: https://www.polestar.com/es/polestar-4/
+        retrieved: 2026-09-24
+        tier: T1
+  - name: Dual Motor
+    specs:
+      power:
+        value: 400
+        unit: kW
+        source_id: polestar-es
+        url: https://www.polestar.com/es/polestar-4/
+        retrieved: 2026-09-24
+        tier: T1
+specs:
+  dc_charge_max:
+    value: 200
+    unit: kW
+    note: "10-80 % en 30 min; arquitectura 400 V"
+    source_id: polestar-es
+    url: https://www.polestar.com/es/polestar-4/
+    retrieved: 2026-09-24
+    tier: T1
+open_questions:
+  - "49.900 € incluye descuento exclusivo de marca (financed). El SUV 'desde 54.390 €' anotado en el registro (2026-09-22) no se ha reverificado hoy ni guardado."
+  - "Batería útil, WLTP de Dual Motor y carga AC no figuran en la ficha."
+  - "Imágenes: sin licencia registrada, no se guardan."
