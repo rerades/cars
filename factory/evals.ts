@@ -64,7 +64,7 @@ const registry: Check = (ctx) => {
   });
 };
 
-/** ADR-0001 rule 2: every value carries source_id (from the registry), url, date and tier. */
+/** ADR-0001 rule 2: every value carries source_id (from the registry), url, retrieved and tier. */
 const rawData: Check = (ctx) => {
   const files = ctx.files.filter((f) => f.startsWith("data/raw/") && /\.ya?ml$/.test(f));
   if (!files.length) return [];
@@ -82,9 +82,9 @@ const rawData: Check = (ctx) => {
       const o = node as Record<string, unknown>;
       if ("value" in o) {
         const at = `${file}: ${path || "."}`;
-        for (const k of ["source_id", "url", "date", "tier"]) if (!o[k]) out.push(`${at}: missing ${k}`);
+        for (const k of ["source_id", "url", "retrieved", "tier"]) if (!o[k]) out.push(`${at}: missing ${k}`);
         if (o.source_id && !ids.has(o.source_id)) out.push(`${at}: source_id ${o.source_id} is not in the registry`);
-        if (o.date && !isDay(o.date, ctx.today)) out.push(`${at}: date must be a past date`);
+        if (o.retrieved && !isDay(o.retrieved, ctx.today)) out.push(`${at}: retrieved must be a past date`);
       }
       for (const [k, v] of Object.entries(o)) walk(v, path ? `${path}.${k}` : k);
     };
