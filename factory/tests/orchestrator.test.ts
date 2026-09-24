@@ -156,6 +156,13 @@ describe("comando", () => {
     assert.equal(after("--model"), "sonnet");
     assert.match(after("-p"), /^tarea\n\n.*RESULTADO: ok/s);
   });
+  // En -p no hay quien apruebe permisos: sin allowed_tools el agente no puede hacer nada.
+  test("todo agente con presupuesto declara sus herramientas", () => {
+    for (const [name, a] of Object.entries(orq.loadConfig().agents ?? {})) {
+      if (a?.max_usd_per_period == null) continue;   // null = el orquestador no lo lanza
+      assert.ok(a.allowed_tools?.length, `${name}: sin allowed_tools en budgets.yaml`);
+    }
+  });
   test("clasifica resultados", () => {
     assert.equal(orq.classify(0, { is_error: false, result: "Hecho.\nRESULTADO: ok" }, ""), "success");
     assert.equal(orq.classify(0, { is_error: false, result: "No pude.\nRESULTADO: fallido" }, ""), "failed");
