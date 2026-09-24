@@ -1,14 +1,19 @@
-# Roles de agentes (borrador)
+# Roles de agentes
 
-> Por definir al diseñar el harness de la factoría.
+| Rol | Responsabilidad | Puede escribir en | Estado |
+|---|---|---|---|
+| Producto (`product`) | Redactar y mantener PRD | `docs/product/` | presupuesto y permisos; sin definición |
+| Planificador (`planner`) | Trocear PRD `ready` en épica e historias | GitHub Issues | presupuesto y permisos; sin definición |
+| Researcher (`researcher`) | Mantener el registro de fuentes y obtener datos de modelos, precios e imágenes | `data/` | **activo** |
+| Arquitecto (`architect`) | Proponer ADR y el modelo de datos | `docs/architecture/` | presupuesto y permisos; sin definición |
+| Desarrollador (`developer`) | Implementar historias | `src/`, `tests/` | presupuesto y permisos; sin definición |
+| Revisor / QA (`reviewer`) | Verificar la DoD y los CA | comentarios en PR | presupuesto y permisos; sin definición |
 
-| Rol | Responsabilidad | Puede escribir en |
-|---|---|---|
-| Producto | Redactar y mantener PRD | `docs/product/` |
-| Planificador | Trocear PRD `ready` en épica e historias | GitHub Issues |
-| Researcher | Mantener el registro de fuentes y obtener datos de modelos, precios e imágenes | `data/`, `data/sources/` |
-| Arquitecto | Proponer ADR y el modelo de datos | `docs/architecture/` |
-| Desarrollador | Implementar historias | código, tests |
-| Revisor / QA | Verificar la DoD y los CA | comentarios en PR |
+Definiciones ejecutables de los agentes: `.claude/agents/`. Sin su fichero ahí, el orquestador
+no puede lanzarlos (`--agent <nombre>`). Se crean de uno en uno, cuando toca su primera tarea,
+en este orden: `architect` (ADR-0003, el stack de la web) → `planner` → `developer` → `reviewer`.
 
-Definiciones ejecutables de los agentes: `.claude/agents/`.
+Presupuesto, permisos (`allowed_tools`) y rutas de escritura: `factory/budgets.yaml`. Los
+permisos son explícitos y mínimos porque en modo `-p` no hay quien apruebe nada: lo que no esté
+declarado se deniega. La barrera real sigue siendo `.claude/hooks/guard_paths.ts`, que bloquea
+`git push` y las rutas protegidas aunque el agente tenga Write.
