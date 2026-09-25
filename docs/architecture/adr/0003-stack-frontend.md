@@ -87,6 +87,8 @@ Detalles:
 - Versión concreta de Astro y del resto de dependencias: la fija el desarrollador al instalarlas.
 
 **Preguntas abiertas**
-- ¿Qué combinaciones de filtros son «principales» y deben tener URL indexable propia (PRD-001,
-  sección 2)?
-- ¿Se filtra en cliente, se pregenera, o ambas cosas? Requiere aclarar el PRD.
+- ~~¿Qué combinaciones de filtros son «principales» y deben tener URL indexable propia?~~ y
+  ~~¿se filtra en cliente, se pregenera, o ambas cosas?~~ Resueltas en PRD-001 (2026-09-25):
+  enfoque híbrido. Se pregenera una lista corta y explícita de páginas (marca, segmento, tramos
+  de precio y de autonomía, RF-10) y el resto de combinaciones se filtran en el navegador con su
+  estado en la query string (RF-5), sin ser indexables. Quedan por confirmar los tramos.
