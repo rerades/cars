@@ -44,7 +44,7 @@ agents:
   planner:
     max_runs_per_day: 1
     max_usd_per_period: 1
-    max_usd_per_run: 0.30
+    max_usd_per_run: 0.60   # 0.30 cortó el troceo de PRD-001 al final, con las historias ya abiertas
     max_turns_per_run: 15
     api_key_env: PLANNER_API_KEY
     write_paths: [docs/bitacora/]   # issues, y su entrada en la bitácora

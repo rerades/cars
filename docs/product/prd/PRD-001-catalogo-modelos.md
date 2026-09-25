@@ -1,10 +1,10 @@
 ---
 id: PRD-001
 title: Catálogo de modelos
-status: draft
+status: ready
 priority: P0
 depends_on: []
-epic: ""
+epic: "#32"
 updated: 2026-09-25
 ---
 
