@@ -1,0 +1,98 @@
+# Mapa de marcas BEV que venden (o dicen vender) en España. Lo escribe el Researcher.
+# NO es el registro de fuentes: nada de aquí es T1 hasta que se registre en registry.yaml.
+#
+# Cómo leerlo:
+# - bev_models: nº aproximado de modelos BEV según UNA fuente T3 (source_id `autonomia-marcas`). Cuenta
+#   modelos/variantes de la ficha de ese sitio, sin contrastar con la marca. Solo orientativo.
+# - web_es: web oficial española de memoria del Researcher, SIN verificar (no se ha hecho fetch).
+#   null = no se conoce con seguridad. Verificar (respuesta + dominio + robots.txt) al registrar.
+# - press_room: SIN verificar en todas ("unknown"); se comprobará al registrar cada marca.
+# - Ya registradas (fuera de esta lista): Cupra, Polestar.
+# - Orden: bev_models de más a menos; empates por orden alfabético; sin dato al final.
+# - Sospechosas de no vender realmente en España: marcadas con doubt (la fuente T3 pone "sí" a todas,
+#   no es fiable en eso).
+
+sources_used:
+  - id: autonomia-marcas
+    tier: T3
+    url: https://autonomiacocheselectricos.es/marcas
+    retrieved: 2026-09-25
+    note: >
+      Directorio de "66 fabricantes". La lectura de la página fue parcial (Tesla, Zeekr y Yudo
+      aparecen sin detalle). Se usa para el nº de modelos y para descubrir marcas.
+  - id: carwow-ventas-2026
+    tier: T3
+    url: https://www.carwow.es/coches-electricos/ventas-espana-2026
+    retrieved: 2026-09-25
+    note: Confirma que Tesla, BYD, Kia, MG, Leapmotor, Dongfeng, Xpeng, Changan, Geely y Voyah venden BEV en España en 2026.
+  - id: anfac-agosto-2026
+    tier: T3
+    url: https://www.coches.net/noticias/noticias/matriculaciones-turismos-agosto-2026
+    retrieved: 2026-09-25
+    note: Contexto de mercado (9.562 BEV en agosto de 2026); no da desglose por marca.
+
+candidates:
+  - {brand: Mercedes-Benz, web_es: "https://www.mercedes-benz.es", press_room: unknown, bev_models: 17, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Peugeot, web_es: "https://www.peugeot.es", press_room: unknown, bev_models: 11, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Citroën, web_es: "https://www.citroen.es", press_room: unknown, bev_models: 10, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Opel, web_es: "https://www.opel.es", press_room: unknown, bev_models: 10, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: BMW, web_es: "https://www.bmw.es", press_room: unknown, bev_models: 9, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: BYD, web_es: "https://www.byd.com/es", press_room: unknown, bev_models: 9, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Kia, web_es: "https://www.kia.com/es", press_room: unknown, bev_models: 9, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Audi, web_es: "https://www.audi.es", press_room: unknown, bev_models: 7, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Renault, web_es: "https://www.renault.es", press_room: unknown, bev_models: 7, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Fiat, web_es: "https://www.fiat.es", press_room: unknown, bev_models: 6, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Porsche, web_es: "https://www.porsche.com/spain/", press_room: unknown, bev_models: 6, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Hyundai, web_es: "https://www.hyundai.com/es", press_room: unknown, bev_models: 5, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Leapmotor, web_es: null, press_room: unknown, bev_models: 5, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: MG, web_es: "https://www.mgmotor.eu/es-es", press_room: unknown, bev_models: 5, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Nissan, web_es: "https://www.nissan.es", press_room: unknown, bev_models: 5, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: DS, web_es: "https://www.dsautomobiles.es", press_room: unknown, bev_models: 4, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Ford, web_es: "https://www.ford.es", press_room: unknown, bev_models: 4, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Abarth, web_es: "https://www.abarth.es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Cadillac, web_es: null, press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Genesis, web_es: "https://www.genesis.com/es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Hispano Suiza, web_es: null, press_room: unknown, bev_models: 3, doubt: "coches de muy baja tirada; comprobar si hay venta real", source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: KG Mobility, web_es: null, press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Lotus, web_es: "https://www.lotuscars.com/es-es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Maserati, web_es: "https://www.maserati.com/es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: MINI, web_es: "https://www.mini.es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Rivian, web_es: null, press_room: unknown, bev_models: 3, doubt: "probablemente no vende en España ni en Europa; comprobar", source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: AION, web_es: null, press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Aiways, web_es: null, press_room: unknown, bev_models: 2, doubt: "posible marca inactiva en Europa", source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Alpine, web_es: "https://www.alpinecars.com/es-es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Deepal, web_es: null, press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Dongfeng, web_es: null, press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Geely, web_es: null, press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Jeep, web_es: "https://www.jeep-official.es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Lancia, web_es: null, press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Lexus, web_es: "https://www.lexus.es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Lucid, web_es: null, press_room: unknown, bev_models: 2, doubt: "comprobar si vende en España", source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Mazda, web_es: "https://www.mazda.es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Rimac, web_es: null, press_room: unknown, bev_models: 2, doubt: "hipercoche de tirada mínima; comprobar venta real", source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Alfa Romeo, web_es: "https://www.alfaromeo.es", press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Dacia, web_es: "https://www.dacia.es", press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Denza, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Ferrari, web_es: null, press_room: unknown, bev_models: 1, doubt: "primer BEV; comprobar si ya está a la venta o solo anunciado", source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: GWM, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Honda, web_es: "https://www.honda.es", press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Jaecoo, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Lynk & Co, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Mitsubishi Motors, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Mobilize, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Omoda, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Range Rover, web_es: null, press_room: unknown, bev_models: 1, doubt: "es submarca de Land Rover; comprobar si hay BEV a la venta", source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Rolls-Royce, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  # Sin nº de modelos fiable de la fuente. Tesla: 2 modelos en el ranking de ventas 2026 (Model 3 y Model Y).
+  - {brand: Tesla, web_es: "https://www.tesla.com/es_es", press_room: unknown, bev_models: 2, note: "solo Model 3 y Model Y vistos en el ranking; puede haber más", source_id: carwow-ventas-2026, retrieved: 2026-09-25}
+  - {brand: Zeekr, web_es: null, press_room: unknown, bev_models: null, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Yudo, web_es: null, press_room: unknown, bev_models: null, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  # Citadas en carwow como con ventas en 2026, sin recuento de modelos:
+  - {brand: Xpeng, web_es: null, press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
+  - {brand: Changan, web_es: null, press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
+  - {brand: Voyah, web_es: null, press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
+
+open_questions:
+  - "Ninguna web_es ni sala de prensa está verificada; se hará al registrar cada marca."
+  - "Falta Smart, Volkswagen, Volvo, Skoda, Toyota, Subaru, Suzuki, Seat, Land Rover, Jaguar, Xiaomi... : no salen en la lectura parcial de la fuente T3; confirmar si venden BEV (VW, Skoda, Volvo, Smart, Toyota casi seguro) con otra fuente."
+  - "El recuento de modelos de autonomia-marcas mezcla modelos y variantes; no usar como cifra publicable."
