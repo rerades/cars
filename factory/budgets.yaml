@@ -64,8 +64,8 @@ agents:
   developer:
     max_runs_per_day: 2
     max_usd_per_period: 3
-    max_usd_per_run: 1.00
-    max_turns_per_run: 30
+    max_usd_per_run: 1.50   # la #33 levanta el proyecto entero; 1.00 se queda corto
+    max_turns_per_run: 40
     api_key_env: DEVELOPER_API_KEY
     write_paths: [web/, docs/bitacora/]   # la web entera en web/; la factoría es de la raíz y no se toca
     allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(npm:*)", "Bash(node:*)", "Bash(git:*)"]

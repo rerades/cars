@@ -25,6 +25,26 @@
     docs/architecture/adr/0006-accesibilidad-en-ci.md siguiendo _template.md, estado propuesta, y
     actualiza docs/architecture/overview.md. No toques todavía .github/workflows: esto es la
     decisión, no la implementación.
+- agent: developer
+  task: >-
+    Implementa la historia #33 de GitHub (léela con `gh issue view 33`, y su épica #32): levantar
+    el proyecto Astro y la lectura de los YAML de data/. Lee también sus dos comentarios, que
+    traen datos verificados que necesitas. Puntos fijos, que no decides tú: el proyecto vive en
+    web/ con su propio package.json y su tsconfig, y la raíz es de la factoría y no se toca
+    (ADR-0003); Tailwind es la 4 (tailwindcss ^4.3.3 con @tailwindcss/vite, configuración
+    CSS-first, sin tailwind.config.js); no se instala ningún plugin de Tailwind que no necesites
+    ya. Recuerda que `npm install <paquete>`, `npx` y `npm create` están bloqueados: declara lo
+    que necesites en web/package.json y ejecuta `npm install` a secas. El módulo de lectura tiene
+    que exponer los datos tipados a las páginas conservando la fuente y la fecha de cada valor
+    (ADR-0001), y los YAML que ya hay en data/raw/ (cupra, polestar) son tu fixture real: si su
+    forma no encaja con docs/architecture/data-model.md, documenta la discrepancia en tu resumen
+    y no la inventes. Una página mínima que pinte esos datos basta para demostrar que funciona:
+    no implementes el catálogo, los filtros ni las páginas pregeneradas, que son otras historias.
+    Añade pruebas del módulo de lectura que fallen si deja de leer o de tipar, ejecútalas y cuenta
+    el resultado real. Añade también a web/ el script de build y di en tu resumen qué hay que
+    tocar en .github/workflows/ci.yml para que la CI construya web/, pero no edites ese fichero:
+    está fuera de tus rutas. Por último, comprueba y anota en tu resumen el estado del soporte de
+    i18n (RNF-4) y de imágenes de Astro, que ADR-0003 dejó como pendiente de confirmar.
 - agent: researcher
   task: >-
     Completa data/sources/candidatas.yaml. La lectura de la fuente T3 fue parcial y faltan
