@@ -339,7 +339,9 @@ const RESULT_INSTRUCTION =
   "[--refs ADR-0001 RF-3]`. Usa `decision` si hay un porqué que recordar, `hito` si terminas algo, " +
   "`nota` para el resto. Los commits y las ejecuciones se importan solos: no los escribas." +
   "\n\nTermina tu respuesta con una última línea exacta: `RESULTADO: ok` si completaste la tarea, " +
-  "o `RESULTADO: fallido` si no.";
+  "o `RESULTADO: fallido` si no. Hiciste lo que se pedía y algo quedó pendiente, dudoso o sin " +
+  "verificar: eso es `ok`, y lo pendiente va en tu resumen. `fallido` es solo si la tarea no " +
+  "está hecha. Quien revise la PR decide si vale; tú informas.";
 // Se toma la última línea RESULTADO, no la última línea: WebSearch añade "Sources:" detrás.
 const RESULT_LINE = /^\s*RESULTADO:\s*`?(ok|fallido)`?\s*$/gim;
 const resultOk = (text: string) => [...text.matchAll(RESULT_LINE)].at(-1)?.[1].toLowerCase() === "ok";
