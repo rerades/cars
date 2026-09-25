@@ -1,26 +1,53 @@
 # Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
 # la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
+#
+# Orden: número de modelos BEV según data/sources/candidatas.yaml, de más a menos.
+# Es la única fuente que tenemos para priorizar y es T3 sin contrastar: sirve para
+# decidir por dónde empezar, no para publicar. Las marcas sin dato en el mapa van
+# después de las que sí lo tienen.
 - agent: researcher
-  task: "Marca Renault. Mismo trabajo que con Tesla: fuentes en el registro y
-    modelos en data/raw/renault/ con versiones, specs, precio y price_kind según
-    ADR-0001."
+  task: >-
+    Completa data/sources/candidatas.yaml. La lectura de la fuente T3 fue parcial y faltan
+    marcas que casi seguro venden BEV en España: Volkswagen, Volvo, Skoda, Smart, Toyota,
+    Seat, Jaguar, Land Rover y Xiaomi, además de las que encuentres. Añádelas con el mismo
+    formato (brand, web_es, press_room, bev_models, source_id, retrieved) y revisa las
+    marcadas con `doubt`: si compruebas que no venden en España, déjalo escrito en su entrada.
+    Mantén el orden por bev_models y no toques registry.yaml.
 - agent: researcher
-  task: "Marca Kia. Mismo trabajo: fuentes en el registro y modelos en
-    data/raw/kia/ con versiones, specs, precio y price_kind según ADR-0001."
+  task: "Marca Mercedes-Benz. Fuentes en el registro y modelos en
+    data/raw/mercedes-benz/ con versiones, specs, precio y price_kind según ADR-0001."
 - agent: researcher
-  task: "Marca Hyundai. Mismo trabajo: fuentes en el registro y modelos en
-    data/raw/hyundai/ con versiones, specs, precio y price_kind según ADR-0001."
+  task: "Marca Peugeot. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/peugeot/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Citroën. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/citroen/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Opel. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/opel/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca BMW. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/bmw/ con versiones, specs, precio y price_kind según ADR-0001."
 - agent: researcher
   task: "Marca BYD. Mismo trabajo: fuentes en el registro y modelos en
     data/raw/byd/ con versiones, specs, precio y price_kind según ADR-0001."
 - agent: researcher
-  task: "Marca Volkswagen. Mismo trabajo: fuentes en el registro y modelos en
-    data/raw/volkswagen/ con versiones, specs, precio y price_kind según
-    ADR-0001."
+  task: "Marca Kia. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/kia/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Audi. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/audi/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Renault. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/renault/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Volkswagen. Sin dato en el mapa por la lectura parcial de la fuente.
+    Mismo trabajo: fuentes en el registro y modelos en data/raw/volkswagen/ con
+    versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Hyundai. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/hyundai/ con versiones, specs, precio y price_kind según ADR-0001."
 - agent: researcher
   task: "Marca MG. Mismo trabajo: fuentes en el registro y modelos en data/raw/mg/
     con versiones, specs, precio y price_kind según ADR-0001."
-- agent: researcher
-  task: "Marca Peugeot. Mismo trabajo: fuentes en el registro y modelos en
-    data/raw/peugeot/ con versiones, specs, precio y price_kind según ADR-0001."
