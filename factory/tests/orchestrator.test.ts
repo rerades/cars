@@ -163,6 +163,15 @@ describe("comando", () => {
       assert.ok(a.allowed_tools?.length, `${name}: sin allowed_tools en budgets.yaml`);
       // Todo agente registra lo que hace: la bitácora es obligatoria (CLAUDE.md).
       assert.ok(a.write_paths?.includes("docs/bitacora/"), `${name}: sin docs/bitacora/ en write_paths`);
+      // Las herramientas se declaran en dos sitios y tienen que cuadrar: el permiso de
+      // budgets.yaml no sirve de nada si el `tools:` de la definición no la incluye.
+      const def = join(orq.REPO, ".claude", "agents", `${name}.md`);
+      if (!existsSync(def)) continue; // agente con presupuesto pero todavía sin definición
+      const tools = readFileSync(def, "utf8").match(/^tools:\s*(.+)$/m)?.[1].split(",").map((t) => t.trim());
+      for (const permiso of a.allowed_tools ?? []) {
+        const tool = permiso.split("(")[0];   // "Bash(gh issue:*)" → "Bash"
+        assert.ok(tools?.includes(tool), `${name}: ${tool} está en budgets.yaml pero no en ${name}.md`);
+      }
     }
   });
   test("clasifica resultados", () => {

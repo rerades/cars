@@ -52,7 +52,7 @@ agents:
     network: false
 
   architect:
-    max_runs_per_day: 1
+    max_runs_per_day: 2
     max_usd_per_period: 2
     max_usd_per_run: 0.75   # investigar y escribir la ADR en la misma ejecución
     max_turns_per_run: 20
