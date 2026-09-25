@@ -43,6 +43,10 @@ Requisitos que obligan a decidir:
 **El frontend será un sitio estático generado en el build con Astro, sin servidor de aplicación.**
 
 Detalles:
+- **La web vive en `web/`**, con su propio `package.json` y su propio `tsconfig.json`, separada de
+  la factoría, que es quien ocupa la raíz. Decidido el 2026-09-25: compartir esos ficheros
+  significaría que el agente desarrollador edita aquello de lo que depende la factoría para
+  arrancar.
 - Astro lee los YAML de `data/` en tiempo de build y genera las páginas: `/coches`, una página por
   marca (`/marcas/{marca}`) y las que definan los PRD posteriores.
 - Cada cambio de datos (una ejecución del Researcher que llega a `main`) implica un nuevo build.

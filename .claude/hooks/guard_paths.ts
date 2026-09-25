@@ -22,6 +22,12 @@ const BANNED_BASH: [RegExp, string][] = [
   [/\bsudo\b/, "sudo no permitido"],
   [/\.secrets\b/, "acceso a secretos no permitido"],
   [/\bcurl\b[^|]*\|\s*(ba)?sh\b/, "descargar y ejecutar no permitido"],
+  // Una dependencia nueva se declara en package.json y se revisa en la PR; `npm install` a
+  // secas (sin paquete) sí se permite, es el que instala lo ya declarado.
+  // Los flags se saltan: lo que se busca es un paquete suelto detrás del subcomando.
+  [/\bnpm\s+(?:i|install|add)\b(?:\s+-{1,2}[\w-]+)*\s+(?!-)\S/,
+    "declara la dependencia en package.json y usa `npm install` sin argumentos"],
+  [/\bnpx\b|\bnpm\s+(?:create|init|exec)\b/, "ejecutar un paquete que no está en package.json no está permitido"],
 ];
 
 function deny(reason: string): never {
