@@ -9,6 +9,10 @@
 | Desarrollador (`developer`) | Implementar historias | `src/`, `tests/` | presupuesto y permisos; sin definición |
 | Revisor / QA (`reviewer`) | Verificar la DoD y los CA | comentarios en PR | presupuesto y permisos; sin definición |
 
+Además de su columna, **todos** pueden escribir en `docs/bitacora/`: la regla de CLAUDE.md de
+registrar lo hecho en el mismo commit también les toca a ellos. No editan el fichero a mano, lo
+hacen con `node factory/bitacora.ts add`, y el orquestador se lo recuerda en cada tarea.
+
 Definiciones ejecutables de los agentes: `.claude/agents/`. Sin su fichero ahí, el orquestador
 no puede lanzarlos (`--agent <nombre>`). Se crean de uno en uno, cuando toca su primera tarea,
 en este orden: `architect` (hecho) → `planner` → `developer` → `reviewer`.

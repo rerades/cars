@@ -332,7 +332,12 @@ export function buildCommand(cfg: Config, agent: string, task: string): string[]
 }
 
 // El código de salida no dice si la tarea se hizo: el agente lo declara en su última línea.
+// La bitácora se pide aquí y no en cada definición de agente: vale para los que haya mañana.
 const RESULT_INSTRUCTION =
+  "\n\nSi dejas cambios en el repositorio, antes de terminar registra una entrada en la bitácora " +
+  'con `node factory/bitacora.ts add --tipo <decision|hito|nota> --texto "qué has hecho y por qué" ' +
+  "[--refs ADR-0001 RF-3]`. Usa `decision` si hay un porqué que recordar, `hito` si terminas algo, " +
+  "`nota` para el resto. Los commits y las ejecuciones se importan solos: no los escribas." +
   "\n\nTermina tu respuesta con una última línea exacta: `RESULTADO: ok` si completaste la tarea, " +
   "o `RESULTADO: fallido` si no.";
 // Se toma la última línea RESULTADO, no la última línea: WebSearch añade "Sources:" detrás.

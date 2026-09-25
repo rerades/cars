@@ -161,6 +161,8 @@ describe("comando", () => {
     for (const [name, a] of Object.entries(orq.loadConfig().agents ?? {})) {
       if (a?.max_usd_per_period == null) continue;   // null = el orquestador no lo lanza
       assert.ok(a.allowed_tools?.length, `${name}: sin allowed_tools en budgets.yaml`);
+      // Todo agente registra lo que hace: la bitácora es obligatoria (CLAUDE.md).
+      assert.ok(a.write_paths?.includes("docs/bitacora/"), `${name}: sin docs/bitacora/ en write_paths`);
     }
   });
   test("clasifica resultados", () => {

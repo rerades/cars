@@ -27,8 +27,8 @@ agents:
     max_usd_per_run: 1.00
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
-    write_paths: [data/]
-    allowed_tools: [WebSearch, WebFetch]   # en -p no hay quien apruebe permisos: sin esto se deniegan
+    write_paths: [data/, docs/bitacora/]
+    allowed_tools: [WebSearch, WebFetch, "Bash(node factory/bitacora.ts:*)"]   # en -p no hay quien apruebe permisos: sin esto se deniegan
     network: true
 
   product:
@@ -37,8 +37,8 @@ agents:
     max_usd_per_run: 0.50
     max_turns_per_run: 15
     api_key_env: PRODUCT_API_KEY
-    write_paths: [docs/product/]
-    allowed_tools: [Read, Glob, Grep, Write, Edit]
+    write_paths: [docs/product/, docs/bitacora/]
+    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(node factory/bitacora.ts:*)"]
     network: false
 
   planner:
@@ -47,8 +47,8 @@ agents:
     max_usd_per_run: 0.30
     max_turns_per_run: 15
     api_key_env: PLANNER_API_KEY
-    write_paths: []          # solo GitHub Issues
-    allowed_tools: [Read, Glob, Grep, "Bash(gh issue:*)"]
+    write_paths: [docs/bitacora/]   # issues, y su entrada en la bitácora
+    allowed_tools: [Read, Glob, Grep, "Bash(gh issue:*)", "Bash(node factory/bitacora.ts:*)"]
     network: false
 
   architect:
@@ -57,8 +57,8 @@ agents:
     max_usd_per_run: 0.50
     max_turns_per_run: 15
     api_key_env: ARCHITECT_API_KEY
-    write_paths: [docs/architecture/]
-    allowed_tools: [Read, Glob, Grep, Write, Edit]
+    write_paths: [docs/architecture/, docs/bitacora/]
+    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(node factory/bitacora.ts:*)"]
     network: false
 
   developer:
@@ -67,7 +67,7 @@ agents:
     max_usd_per_run: 1.00
     max_turns_per_run: 30
     api_key_env: DEVELOPER_API_KEY
-    write_paths: [src/, tests/]
+    write_paths: [src/, tests/, docs/bitacora/]
     allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(npm:*)", "Bash(node:*)", "Bash(git:*)"]
     network: false
 
@@ -77,6 +77,6 @@ agents:
     max_usd_per_run: 0.30
     max_turns_per_run: 15
     api_key_env: REVIEWER_API_KEY
-    write_paths: []          # solo comentarios en PR
+    write_paths: [docs/bitacora/]   # comentarios en PR, y su entrada en la bitácora
     allowed_tools: [Read, Glob, Grep, "Bash(npm:*)", "Bash(node:*)", "Bash(gh pr:*)"]
     network: false
