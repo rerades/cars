@@ -13,7 +13,7 @@ updated: 2026-09-19
 - SEO importante: renderizado en servidor o estático.
 
 ## Decisiones pendientes (→ ADR)
-- Stack de frontend y framework.
+- ~~Stack de frontend y framework.~~ → [ADR-0003](adr/0003-stack-frontend.md) (propuesta: Astro, sitio estático).
 - Base de datos y hosting.
 - Pipeline de ingesta de datos de modelos (fuentes, frecuencia, validación).
 - Cómo publican los agentes (CI/CD, entornos, merge automático o no).
