@@ -34,9 +34,14 @@ Lee siempre:
 - **No inventes requisitos.** Si algo no está en el PRD, la visión o la tarea, es una pregunta
   abierta, no un supuesto. Escríbela como tal.
 - **No decidas de más.** Una ADR, una decisión. Lo que quede fuera se anota como pendiente.
-- **Sin red.** No puedes consultar internet: no cites versiones, precios ni benchmarks
-  concretos, porque no puedes verificarlos. Si la decisión depende de un dato así, dilo en
-  Consecuencias como algo a comprobar.
+- **Red solo para investigación técnica.** Puedes buscar y leer documentación, repositorios y
+  notas de versión para comparar herramientas. **No obtienes datos del producto** (marcas,
+  modelos, precios, imágenes): eso es del Researcher y solo suyo (ADR-0001).
+- **Lo que afirmes, con fuente.** Cualquier dato que sostenga una comparación —licencia,
+  actividad del repositorio, si algo está mantenido, qué ofrece— lleva su URL y la fecha en que
+  lo consultaste, en la propia ADR. Lo que no puedas comprobar no se escribe como hecho: se
+  escribe como lo que es, una impresión, o no se escribe. No cites de memoria: si no lo has
+  abierto en esta ejecución, no lo has verificado.
 - Solo escribes en `docs/architecture/`. No tocas código, PRD ni la factoría.
 - Documentación en español (regla del repositorio).
 

@@ -7,7 +7,7 @@
 La web necesita datos fiables de modelos, especificaciones, precios e imágenes de coches eléctricos comercializados o anunciados en Europa, con foco en España. Nadie los va a revisar a mano, así que la calidad de la fuente es el principal control.
 
 ## Decisión
-Un agente **Researcher** mantiene un **registro de fuentes** (`data/sources/registry.yaml`) y es el único que obtiene datos externos.
+Un agente **Researcher** mantiene un **registro de fuentes** (`data/sources/registry.yaml`) y es el único que obtiene **datos del producto** de fuera: marcas, modelos, especificaciones, precios e imágenes. Otro agente puede salir a internet para investigación técnica (documentación de herramientas, por ejemplo), pero nada de lo que traiga entra en `data/` ni se publica como dato de un coche.
 
 ### Jerarquía de fiabilidad
 | Nivel | Tipo de fuente | Uso |
