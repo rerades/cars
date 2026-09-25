@@ -425,6 +425,16 @@ describe("hook guardián", () => {
   test("bloquea acceso a secretos", () => {
     assert.equal(runHook({ tool_name: "Bash", tool_input: { command: "cat .secrets/gh_token" } }).status, 2);
   });
+  test("bloquea instalar una dependencia sin declararla", () => {
+    for (const cmd of ["npm install astro", "npm i -D vitest", "npm add tailwindcss", "npx astro add", "npm create astro@latest"]) {
+      assert.equal(runHook({ tool_name: "Bash", tool_input: { command: cmd } }).status, 2, cmd);
+    }
+  });
+  test("permite instalar lo ya declarado en package.json", () => {
+    for (const cmd of ["npm install", "npm install --no-audit", "npm ci", "npm test", "npm run build"]) {
+      assert.equal(runHook({ tool_name: "Bash", tool_input: { command: cmd } }).status, 0, cmd);
+    }
+  });
   test("permite bash normal", () => {
     assert.equal(runHook({ tool_name: "Bash", tool_input: { command: "ls data/" } }).status, 0);
   });
