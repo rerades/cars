@@ -6,6 +6,25 @@
 # Es la única fuente que tenemos para priorizar y es T3 sin contrastar: sirve para
 # decidir por dónde empezar, no para publicar. Las marcas sin dato en el mapa van
 # después de las que sí lo tienen.
+- agent: architect
+  task: >-
+    ADR-0006: comprobación de accesibilidad en la integración continua. La herramienta ya está
+    decidida por el responsable del producto y no se discute: axe-core ejecutado con Playwright
+    (@axe-core/playwright) sobre el sitio ya construido, no sobre el código fuente. El umbral
+    también: las violaciones critical y serious bloquean la CI, las moderate y minor se imprimen
+    y no bloquean. Tu trabajo es documentarlo: qué páginas se comprueban (una por plantilla de
+    PRD-001: listado, marca, segmento, tramo y el estado vacío de RF-6), en qué momento de la CI
+    entra, y qué se hace cuando una violación aparece en una página que aún no existe. Escribe
+    también, en Consecuencias y sin suavizarlo, que esto NO demuestra conformidad con WCAG 2.1
+    AA (RNF-3): las pruebas automáticas cubren una parte de los criterios y el teclado, el orden
+    de foco y los textos alternativos con sentido siguen necesitando revisión humana. Alternativas
+    que hay que dejar descartadas con su motivo: pa11y-ci, Lighthouse CI y el análisis estático
+    con eslint-plugin-astro. Ten en cuenta que la misma instalación de Playwright sirve para
+    CA-12c, que exige comprobar el HTML sin ejecutar JavaScript. Comprueba con WebFetch la
+    licencia y la última publicación de lo que propongas instalar, y cítalas con fecha. Escribe
+    docs/architecture/adr/0006-accesibilidad-en-ci.md siguiendo _template.md, estado propuesta, y
+    actualiza docs/architecture/overview.md. No toques todavía .github/workflows: esto es la
+    decisión, no la implementación.
 - agent: researcher
   task: >-
     Completa data/sources/candidatas.yaml. La lectura de la fuente T3 fue parcial y faltan

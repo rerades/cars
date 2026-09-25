@@ -97,7 +97,8 @@ Detalles:
 - **Copiar es una bifurcación.** Sin actualizaciones automáticas, una mejora upstream hay que llevarla a mano.
 - **Los filtros no vienen hechos.** Ninguna librería trae un panel de filtros que lea y escriba la query string (RF-5, ADR-0003): eso es código propio compuesto con Checkbox, Select y Slider, y necesita JS en cliente que pesa en RNF-2.
 - **Las páginas pregeneradas (RF-10) y el estado vacío** deben funcionar con el HTML sin JS (CA-12c); los componentes elegidos han de degradar sin JS. Está por comprobar.
-- **No verificado:** versión de Tailwind requerida, compatibilidad del JS de cada componente con el CSP que se decida, y si el adaptador de Starwind depende de React (dato que solo afectaría a la alternativa de reserva).
+- **Tailwind 4, verificado el 2026-09-25** en <https://raw.githubusercontent.com/michael-andreuzza/bearnie/main/package.json>: Bearnie declara `tailwindcss ^4.3.3` con `@tailwindcss/vite` (4.3.3 es la última publicada, 2026-07-16) y `astro ^7.1.6`. Es configuración CSS-first: no hay `tailwind.config.js`. Arrastra además `@tailwindcss/forms`, `tailwind-merge`, `tailwind-scrollbar-hide` y `tailwindcss-scroll-mask`; cada componente que se copie dirá cuáles necesita de verdad, y no se instala ninguno «por si acaso».
+- **No verificado:** compatibilidad del JS de cada componente con el CSP que se decida, y si el adaptador de Starwind depende de React (dato que solo afectaría a la alternativa de reserva).
 
 **Sigue pendiente (fuera de esta ADR)**
 - Tipografía, paleta y tokens del diseño visual.
