@@ -103,6 +103,12 @@ Detalles:
 - Tipografía, paleta y tokens del diseño visual.
 - Iconografía.
 
+**Resuelta (2026-09-25)**
+- **Tema oscuro: no, de momento.** No está en ningún PRD y recordar la preferencia del visitante
+  chocaría con RNF-5 (ni cookies ni `localStorage`). Se podrá proponer más adelante, y entonces
+  habrá que decidir cómo se recuerda la elección, o si se sigue solo a `prefers-color-scheme`.
+  Mientras tanto: de los componentes que se copien se quita lo que traigan de tema oscuro, y los
+  tokens de color se definen para un único tema.
+
 **Preguntas abiertas**
-- ¿Se admite tema oscuro? Si se quiere con preferencia guardada, choca con RNF-5; no está en el PRD.
 - ¿Qué herramienta y qué umbral de comprobación de accesibilidad se usan en CI? Es una decisión aparte.
