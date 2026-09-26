@@ -20,7 +20,7 @@ global:
   auto_pr: true              # al terminar bien, sube la rama y abre la PR (nadie la ha revisado)
 
 agents:
-  # suma asignada: 19 USD · 1 USD de margen
+  # suma asignada: 20 USD, el tope global entero: ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 2
     max_usd_per_period: 10
@@ -69,6 +69,18 @@ agents:
     api_key_env: DEVELOPER_API_KEY
     write_paths: [web/, docs/bitacora/]   # la web entera en web/; la factoría es de la raíz y no se toca
     allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(npm:*)", "Bash(node:*)", "Bash(git:*)"]
+    network: false
+
+  devops:
+    max_runs_per_day: 1
+    max_usd_per_period: 1
+    max_usd_per_run: 0.40
+    max_turns_per_run: 15
+    api_key_env: DEVOPS_API_KEY
+    # Solo los workflows. Es el agente que puede tocar la guarda que revisa a los demás:
+    # su PR se lee siempre entera (ver .claude/agents/devops.md).
+    write_paths: [.github/workflows/, docs/bitacora/]
+    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(gh run:*)", "Bash(node factory/bitacora.ts:*)"]
     network: false
 
   reviewer:
