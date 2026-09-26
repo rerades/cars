@@ -1,0 +1,42 @@
+# Tareas en pausa: el orquestador no lee este fichero. Se reactivan moviéndolas a queue.yaml.
+# Motivo (2026-09-26): esperan a que el architect fije el esquema de data/raw/, para que cada
+# marca no invente el suyo.
+- agent: researcher
+  task: Marca Mercedes-Benz. Fuentes en el registro y modelos en
+    data/raw/mercedes-benz/ con versiones, specs, precio y price_kind según
+    ADR-0001.
+- agent: researcher
+  task: "Marca Peugeot. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/peugeot/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Citroën. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/citroen/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Opel. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/opel/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca BMW. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/bmw/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca BYD. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/byd/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Kia. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/kia/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Audi. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/audi/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Renault. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/renault/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca Volkswagen. Sin dato en el mapa por la lectura parcial de la
+    fuente. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/volkswagen/ con versiones, specs, precio y price_kind según
+    ADR-0001."
+- agent: researcher
+  task: "Marca Hyundai. Mismo trabajo: fuentes en el registro y modelos en
+    data/raw/hyundai/ con versiones, specs, precio y price_kind según ADR-0001."
+- agent: researcher
+  task: "Marca MG. Mismo trabajo: fuentes en el registro y modelos en data/raw/mg/
+    con versiones, specs, precio y price_kind según ADR-0001."
