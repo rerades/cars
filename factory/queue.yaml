@@ -1,6 +1,20 @@
 # Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
 # la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
+- agent: designer
+  task: >-
+    Especifica en docs/design/ la tarjeta de modelo y los filtros del catálogo de PRD-001
+    (docs/product/prd/PRD-001-catalogo-modelos.md). Empieza por docs/design/tokens.md con los
+    colores, la tipografía y el espaciado que usen los dos. La tarjeta (RF-1, RF-8, RF-9, CA-1,
+    CA-10, CA-11): los seis campos de RF-1, la imagen con su atribución si la licencia la exige, y
+    los estados "Próximamente" con fecha (RF-7, CA-8), "precio con oferta" (RF-9) y "Precio por
+    confirmar" (CA-9), más los de dato ausente o texto muy largo; mira los YAML reales de data/raw/
+    para ver qué falta de verdad. Los filtros (RF-2, RF-3, RF-6, RF-7, CA-2, CA-6): marca,
+    segmento, rango de precio, autonomía mínima, tracción y estado, el orden, el estado vacío con
+    su botón de limpiar y cómo se ven en móvil y en escritorio. Ten en cuenta que las páginas de
+    RF-10 tienen que funcionar sin JavaScript. Calcula el contraste de cada par de colores (WCAG
+    2.1 AA, RNF-3) y deja el orden de foco. No escribas código ni la página de ficha, y deja como
+    pregunta abierta lo que el PRD no diga.
 - agent: developer
   task: >-
     Implementa la historia #53 de GitHub (`gh issue view 53`), salvo su punto 1, que ya está

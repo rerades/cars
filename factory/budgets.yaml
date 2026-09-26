@@ -23,7 +23,7 @@ agents:
   # suma asignada: 20 USD, el tope global entero: ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 2
-    max_usd_per_period: 10
+    max_usd_per_period: 9    # 1 USD cedido al designer (2026-09-26)
     max_usd_per_run: 1.00
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
@@ -81,6 +81,16 @@ agents:
     # su PR se lee siempre entera (ver .claude/agents/devops.md).
     write_paths: [.github/workflows/, docs/bitacora/]
     allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(gh run:*)", "Bash(node factory/bitacora.ts:*)"]
+    network: false
+
+  designer:
+    max_runs_per_day: 1
+    max_usd_per_period: 1
+    max_usd_per_run: 0.50   # leer PRD, ADR y datos y escribir la especificación
+    max_turns_per_run: 20
+    api_key_env: DESIGNER_API_KEY
+    write_paths: [docs/design/, docs/bitacora/]   # especifica; el código lo escribe el developer
+    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(node factory/bitacora.ts:*)"]
     network: false
 
   reviewer:
