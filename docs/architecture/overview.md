@@ -15,6 +15,7 @@ updated: 2026-09-19
 ## Decisiones pendientes (→ ADR)
 - ~~Stack de frontend y framework.~~ → [ADR-0003](adr/0003-stack-frontend.md) (propuesta: Astro, sitio estático).
 - ~~Sistema de diseño y librería de componentes.~~ → [ADR-0005](adr/0005-sistema-de-diseno.md) (propuesta: componentes `.astro` copiados de Bearnie, con Tailwind).
+- ~~Comprobación de accesibilidad en la CI.~~ → [ADR-0006](adr/0006-accesibilidad-en-ci.md) (propuesta: axe-core con Playwright sobre el build; bloquean critical y serious. No demuestra WCAG 2.1 AA).
 - Base de datos y hosting.
 - Pipeline de ingesta de datos de modelos (fuentes, frecuencia, validación).
 - Cómo publican los agentes (CI/CD, entornos, merge automático o no).
