@@ -25,6 +25,11 @@ sources_used:
     url: https://www.carwow.es/coches-electricos/ventas-espana-2026
     retrieved: 2026-09-25
     note: Confirma que Tesla, BYD, Kia, MG, Leapmotor, Dongfeng, Xpeng, Changan, Geely y Voyah venden BEV en España en 2026.
+  - id: busqueda-gama-2026
+    tier: T3
+    url: https://movilidadelectrica.com/coches-electricos-skoda-2026/
+    retrieved: 2026-09-26
+    note: Búsquedas web (Skoda Elroq/Epiq, VW ID., Rivian). Solo confirma Skoda y Volkswagen; el resto de marcas añadidas el 2026-09-26 queda sin confirmar.
   - id: anfac-agosto-2026
     tier: T3
     url: https://www.coches.net/noticias/noticias/matriculaciones-turismos-agosto-2026
@@ -57,7 +62,7 @@ candidates:
   - {brand: Lotus, web_es: "https://www.lotuscars.com/es-es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Maserati, web_es: "https://www.maserati.com/es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: MINI, web_es: "https://www.mini.es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
-  - {brand: Rivian, web_es: null, press_room: unknown, bev_models: 3, doubt: "probablemente no vende en España ni en Europa; comprobar", source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Rivian, web_es: null, press_room: unknown, bev_models: 3, doubt: "NO vende aún en España (2026-09-26): autonomia-marcas lista 3 modelos, pero movilidadelectrica.com y flexicar hablan de llegada prevista en 2026; tratar como anunciado, sin verificar con la marca", source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: AION, web_es: null, press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Aiways, web_es: null, press_room: unknown, bev_models: 2, doubt: "posible marca inactiva en Europa", source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Alpine, web_es: "https://www.alpinecars.com/es-es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
@@ -91,8 +96,19 @@ candidates:
   - {brand: Xpeng, web_es: null, press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
   - {brand: Changan, web_es: null, press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
   - {brand: Voyah, web_es: null, press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
+  # Añadidas 2026-09-26. No salen en la lectura de autonomia-marcas; nº de modelos sin contar. web_es de memoria, sin verificar.
+  - {brand: Volkswagen, web_es: "https://www.volkswagen.es", press_room: unknown, bev_models: null, note: "vende BEV en España (volkswagen.es/es/electricos-hibridos/electricos.html en resultados de búsqueda); ID. Polo e ID. Cross anunciados para otoño 2026", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
+  - {brand: Skoda, web_es: "https://www.skoda.es", press_room: unknown, bev_models: null, note: "vende Elroq en España; Epiq anunciado (T3)", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
+  - {brand: Volvo, web_es: "https://www.volvocars.com/es", press_room: unknown, bev_models: null, note: "sin confirmar con fuente en esta pasada", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
+  - {brand: Smart, web_es: "https://www.smart.com/es/es", press_room: unknown, bev_models: null, note: "sin confirmar con fuente en esta pasada", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
+  - {brand: Toyota, web_es: "https://www.toyota.es", press_room: unknown, bev_models: null, note: "sin confirmar con fuente en esta pasada", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
+  - {brand: Seat, web_es: "https://www.seat.es", press_room: unknown, bev_models: null, doubt: "no confirmado BEV propio a la venta; la gama BEV del grupo en España es Cupra (ya registrada)", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
+  - {brand: Jaguar, web_es: "https://www.jaguar.es", press_room: unknown, bev_models: null, doubt: "no comprobado; marca en transición, sin BEV a la venta conocido", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
+  - {brand: Land Rover, web_es: "https://www.landrover.es", press_room: unknown, bev_models: null, doubt: "no comprobado si hay BEV a la venta", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
+  - {brand: Xiaomi, web_es: null, press_room: unknown, bev_models: null, doubt: "no comprobado que venda coches en España; sin fuente", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
 
 open_questions:
   - "Ninguna web_es ni sala de prensa está verificada; se hará al registrar cada marca."
-  - "Falta Smart, Volkswagen, Volvo, Skoda, Toyota, Subaru, Suzuki, Seat, Land Rover, Jaguar, Xiaomi... : no salen en la lectura parcial de la fuente T3; confirmar si venden BEV (VW, Skoda, Volvo, Smart, Toyota casi seguro) con otra fuente."
+  - "Añadidas el 2026-09-26 sin nº de modelos: Volkswagen, Skoda, Volvo, Smart, Toyota, Seat, Jaguar, Land Rover, Xiaomi. Solo VW y Skoda confirmados por búsqueda; el resto, verificar con su web oficial. Subaru y Suzuki no se han añadido (sin datos)."
+  - "Dudas revisadas: solo Rivian resuelta (no vende aún en España, llegada prevista). Lucid, Rimac, Aiways, Hispano Suiza, Ferrari y Range Rover siguen sin confirmar: las búsquedas no dieron datos concluyentes."
   - "El recuento de modelos de autonomia-marcas mezcla modelos y variantes; no usar como cifra publicable."
