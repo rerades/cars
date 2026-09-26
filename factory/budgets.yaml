@@ -9,7 +9,7 @@ billing:
 
 global:
   max_concurrent_runs: 1     # fase 1: sin paralelismo
-  max_runs_per_day: 6        # plan Pro: ajustar con los datos del ledger
+  max_runs_per_day: 15       # 6 en el arranque; subido el 2026-09-26: 17 ejecuciones sin ningún rate_limited
   on_rate_limit: pause_until_next_window   # no reintentar en bucle
   allowed_hours: "01:00-07:00"   # solo de noche, para no competir con el uso interactivo
   timezone: Europe/Madrid        # una tarea en curso a las 07:00 termina; no se lanzan nuevas
@@ -22,7 +22,7 @@ global:
 agents:
   # suma asignada: 20 USD, el tope global entero: ningún agente puede agotarlo solo
   researcher:
-    max_runs_per_day: 2
+    max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
     max_usd_per_period: 9    # 1 USD cedido al designer (2026-09-26)
     max_usd_per_run: 1.00
     max_turns_per_run: 25
@@ -62,7 +62,7 @@ agents:
     network: true          # solo para investigación técnica; los datos de coches son del Researcher (ADR-0001)
 
   developer:
-    max_runs_per_day: 2
+    max_runs_per_day: 4
     max_usd_per_period: 3
     max_usd_per_run: 1.50   # la #33 levanta el proyecto entero; 1.00 se queda corto
     max_turns_per_run: 40
