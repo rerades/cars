@@ -19,6 +19,7 @@ Este directorio es la **fuente de verdad** del producto. Lo leen y lo escriben t
 | `product/glossary.md` | Términos del dominio |
 | `product/prd/` | Un PRD por funcionalidad (`PRD-NNN-slug.md`) |
 | `architecture/` | Visión técnica, modelo de datos, ADR |
+| `design/` | Especificaciones de UX/UI: tokens, pantallas y componentes (agente `designer`) |
 | `process/` | Flujo de trabajo, definición de terminado, roles de agentes |
 
 ## Índice de PRD
