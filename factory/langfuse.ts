@@ -5,8 +5,13 @@
  * LANGFUSE_BASE_URL). They are parsed into a local object, never into process.env, so agents
  * never inherit them. Without the file, nothing is sent.
  *
+ * Each agent definition (.claude/agents/<agent>.md) is mirrored as a Langfuse prompt, and every
+ * run links to the version it used. Git stays the source of truth: prompts are edited through a
+ * PR, never in Langfuse, and a new version is only created when the file content changes.
+ *
  * Backfill: node factory/langfuse.ts [YYYY-MM]   # every run of that month (default: current)
  */
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -156,8 +161,13 @@ export function toSpans(record: Row, stdout: string): Span[] {
   return spans.map((s) => ({ ...s, key: spanId(s.key), parent: s.parent && spanId(s.parent) }));
 }
 
+export interface PromptRef {
+  name: string;
+  version: number;
+}
+
 /** OTLP/HTTP JSON body. Trace-level attributes go on every span so Langfuse v4 can filter by them. */
-export function toOtlp(record: Row, stdout: string) {
+export function toOtlp(record: Row, stdout: string, prompt?: PromptRef) {
   const runId = String(record.run_id);
   const traceAttrs = {
     "langfuse.trace.name": record.agent,
@@ -168,6 +178,11 @@ export function toOtlp(record: Row, stdout: string) {
     "langfuse.trace.metadata.run_id": runId,
     "langfuse.environment": ENVIRONMENT,
   };
+  // Langfuse links prompts to generations, so the prompt goes on each model call
+  const promptAttrs = prompt && {
+    "langfuse.observation.prompt.name": prompt.name,
+    "langfuse.observation.prompt.version": prompt.version,
+  };
   const spans = toSpans(record, stdout).map((s) => ({
     traceId: traceId(runId),
     spanId: s.key,
@@ -176,7 +191,11 @@ export function toOtlp(record: Row, stdout: string) {
     kind: 1,
     startTimeUnixNano: nanos(s.start),
     endTimeUnixNano: nanos(s.end),
-    attributes: attrs({ ...traceAttrs, ...s.attributes }),
+    attributes: attrs({
+      ...traceAttrs,
+      ...s.attributes,
+      ...(s.attributes["langfuse.observation.type"] === "generation" ? promptAttrs : {}),
+    }),
     status: { code: s.error ? 2 : 1 },
   }));
   return {
@@ -204,18 +223,57 @@ export function evalScore(record: Row) {
 
 // --------------------------------------------------------------------------- envío
 
-async function post(keys: Keys, path: string, body: unknown): Promise<void> {
+/** GET without a body, POST with one. Returns the parsed JSON response, if any. */
+async function api(keys: Keys, path: string, body?: unknown): Promise<any> {
   const res = await fetch(keys.baseUrl + path, {
-    method: "POST",
+    method: body === undefined ? "GET" : "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Basic " + Buffer.from(`${keys.publicKey}:${keys.secretKey}`).toString("base64"),
       "x-langfuse-ingestion-version": "4",
     },
-    body: JSON.stringify(body),
+    body: body === undefined ? undefined : JSON.stringify(body),
     signal: AbortSignal.timeout(30_000),
   });
-  if (!res.ok) throw new Error(`${path}: HTTP ${res.status} ${(await res.text()).slice(0, 200)}`);
+  const out = await res.text();
+  if (!res.ok) throw new Error(`${path}: HTTP ${res.status} ${out.slice(0, 200)}`);
+  return out ? JSON.parse(out) : null;
+}
+
+/** The agent definition as it was on main when the run started, i.e. the prompt that run used. */
+export function agentPrompt(agent: string, started: string): { text: string; commit: string } | null {
+  const path = `.claude/agents/${agent}.md`;
+  const git = (...args: string[]) => execFileSync("git", ["-C", REPO, ...args], { encoding: "utf8" });
+  try {
+    const commit = git("rev-list", "-1", "--first-parent", `--before=${started}`, "main", "--", path).trim();
+    return commit ? { text: git("show", `${commit}:${path}`), commit: commit.slice(0, 7) } : null;
+  } catch {
+    return null;
+  }
+}
+
+const known = new Map<string, Map<string, number>>(); // prompt name -> text -> version, per process
+
+/** Langfuse version holding this exact text; creates it only if none does. */
+async function promptVersion(keys: Keys, name: string, prompt: { text: string; commit: string }): Promise<number> {
+  let versions = known.get(name);
+  if (!versions) {
+    versions = new Map();
+    known.set(name, versions);
+    const list = await api(keys, `/api/public/v2/prompts?name=${encodeURIComponent(name)}`);
+    const numbers: number[] = list?.data?.find((d: any) => d.name === name)?.versions ?? [];
+    for (const v of numbers) {
+      const p = await api(keys, `/api/public/v2/prompts/${encodeURIComponent(name)}?version=${v}`);
+      versions.set(p.prompt, v);
+    }
+  }
+  const existing = versions.get(prompt.text);
+  if (existing !== undefined) return existing;
+  const created = await api(keys, "/api/public/v2/prompts", {
+    name, type: "text", prompt: prompt.text, commitMessage: prompt.commit, labels: [],
+  });
+  versions.set(prompt.text, created.version);
+  return created.version;
 }
 
 /**
@@ -227,9 +285,14 @@ export async function exportRun(record: Row, keys = loadKeys()): Promise<string 
   const tracePath = join(TRACE_DIR, `${record.run_id}.jsonl`);
   const stdout = existsSync(tracePath) ? readFileSync(tracePath, "utf8") : "";
   try {
-    await post(keys, "/api/public/otel/v1/traces", toOtlp(record, stdout));
+    const agent = String(record.agent);
+    const def = agentPrompt(agent, String(record.started));
+    // A failed prompt sync must not cost the trace: it is sent unlinked instead
+    const version = def && (await promptVersion(keys, agent, def).catch(() => null));
+    const prompt = version ? { name: agent, version } : undefined;
+    await api(keys, "/api/public/otel/v1/traces", toOtlp(record, stdout, prompt));
     const score = evalScore(record);
-    if (score) await post(keys, "/api/public/scores", score);
+    if (score) await api(keys, "/api/public/scores", score);
     return `langfuse: ${record.run_id} enviado`;
   } catch (e) {
     return `langfuse: ${record.run_id} no se pudo enviar (${(e as Error).message})`;
