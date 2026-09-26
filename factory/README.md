@@ -58,6 +58,11 @@ con sus llamadas al modelo y a herramientas, y los evals como score. Ver ADR-000
 
 Si falla el envío, la ejecución no se ve afectada: sale una línea `langfuse: ... no se pudo enviar`.
 
+En Langfuse, cada agente es un *user*, cada día una *session*, y cada fichero `.claude/agents/<agente>.md`
+un *prompt*. Del prompt se crea una versión nueva solo cuando cambia su contenido en `main`, y cada
+llamada al modelo queda enlazada a la versión que usó la ejecución. Así se comparan coste y evals
+entre versiones. **Los prompts no se editan en Langfuse**: se cambian por PR y Langfuse solo los refleja.
+
 ## Qué comprueba antes de lanzar
 
 1. `factory/STOP` existe → no lanza nada (interruptor de parada).

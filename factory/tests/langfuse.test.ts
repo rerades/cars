@@ -56,6 +56,16 @@ describe("langfuse", () => {
     assert.ok(span.attributes.some((a) => a.key === "langfuse.session.id" && a.value.stringValue === "2026-09-23"));
   });
 
+  test("links the prompt version to model calls only", () => {
+    const spans = toOtlp(record, stream, { name: "researcher", version: 3 }).resourceSpans[0].scopeSpans[0].spans;
+    const has = (s: (typeof spans)[number]) =>
+      s.attributes.some((a) => a.key === "langfuse.observation.prompt.version" && a.value.stringValue === "3");
+    const gens = spans.filter((s) => s.attributes.some((a) => a.value.stringValue === "generation"));
+    assert.ok(gens.length > 0 && gens.every(has));
+    assert.ok(!has(spans[0]));
+    assert.ok(!toOtlp(record, stream).resourceSpans[0].scopeSpans[0].spans.some(has));
+  });
+
   test("sin traza local se envía solo la raíz", () => {
     assert.equal(toSpans(record, "").length, 1);
   });
