@@ -1,54 +1,71 @@
 # Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
 # la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
-- agent: designer
-  task: >-
-    Especifica en docs/design/ la tarjeta de modelo y los filtros del catálogo de PRD-001
-    (docs/product/prd/PRD-001-catalogo-modelos.md). Empieza por docs/design/tokens.md con los
-    colores, la tipografía y el espaciado que usen los dos. La tarjeta (RF-1, RF-8, RF-9, CA-1,
-    CA-10, CA-11): los seis campos de RF-1, la imagen con su atribución si la licencia la exige, y
-    los estados "Próximamente" con fecha (RF-7, CA-8), "precio con oferta" (RF-9) y "Precio por
-    confirmar" (CA-9), más los de dato ausente o texto muy largo; mira los YAML reales de data/raw/
-    para ver qué falta de verdad. Los filtros (RF-2, RF-3, RF-6, RF-7, CA-2, CA-6): marca,
-    segmento, rango de precio, autonomía mínima, tracción y estado, el orden, el estado vacío con
-    su botón de limpiar y cómo se ven en móvil y en escritorio. Ten en cuenta que las páginas de
-    RF-10 tienen que funcionar sin JavaScript. Calcula el contraste de cada par de colores (WCAG
-    2.1 AA, RNF-3) y deja el orden de foco. No escribas código ni la página de ficha, y deja como
-    pregunta abierta lo que el PRD no diga.
-- agent: developer
-  task: >-
-    Implementa la historia #53 de GitHub (`gh issue view 53`), salvo su punto 1, que ya está
-    hecho: la CI ya ejecuta web/ desde la PR #56, así que el criterio CA-33e está cubierto y no
-    tienes que tocar nada de .github/, que además está fuera de tus rutas. Te quedan los puntos
-    2, 3 y 4, todos en web/src/lib/data.ts y sus pruebas. El 2 es el importante: hoy isSourced
-    solo comprueba value y source_id, así que un valor sin url o sin retrieved entra tipado como
-    Sourced y el tipo miente; y price se castea con `as Price` sin comprobar price_kind ni que
-    value sea un número. ADR-0001 dice que un dato sin fuente y fecha no se publica: exige
-    source_id, url y retrieved en normalize, y si faltan descarta el valor o llévalo a la lista
-    de avisos, sin tiparlo como válido. Distingue un price inválido de un modelo sin precio: hoy
-    los dos acaban en null y la página dice lo mismo. El 3: DEFAULT_DATA_DIR usa process.cwd(),
-    así que solo funciona ejecutando desde web/; resuélvelo con import.meta.dirname, como ya hace
-    la prueba, y mete readdirSync dentro del try, porque si data/raw no existe el build revienta
-    pese a que el módulo dice no lanzar nunca. El 4: quita de las pruebas el recuento de modelos
-    y los nombres cableados, que fallarán en cuanto el Researcher añada una marca, y añade los
-    casos que faltan: price sin retrieved, versions como texto, YAML vacío y directorio
-    inexistente. Cada criterio de aceptación de la historia (CA-33a a CA-33d y CA-33f) tiene que
-    quedar cubierto por una prueba que falle de verdad si el criterio se rompe. Ejecuta pnpm test
-    y pnpm run typecheck dentro de web/ y cuenta el resultado real. No te adelantes al catálogo ni
-    a los filtros, y no toques los YAML de data/, que son del Researcher.
 - agent: architect
-  task: >-
-    Fija en docs/architecture/data-model.md el esquema concreto de los YAML de data/raw/<marca>/<modelo>.yaml,
-    que hoy es un borrador sin nombres de campo. Cada marca se ha inventado el suyo: Cupra usa model_level,
-    wltp_max_km y power_cv (en CV) y Polestar usa specs, wltp_range_max y power_max, y status va con fuente
-    en una y como texto suelto en otra. web/src/lib/data.ts ya tiene parches para aguantar las dos formas.
-    Hay 12 marcas esperando a que esto esté fijado. Define: qué va a nivel de modelo y qué a nivel de versión,
-    el nombre exacto y la unidad de cada campo (kW, km, kWh, sin CV), los valores permitidos de tracción,
-    segmento y estado, cuáles son obligatorios y cuáles opcionales, y la forma de un valor con fuente
-    (value, source_id, url, retrieved, tier) y de un precio (price_kind, price_terms, price_terms_url), según
-    ADR-0001. Ten en cuenta que PRD-001 necesita el segmento en la tarjeta (RF-1) y hoy ninguna marca lo
-    registra, y que los filtros de RF-2 necesitan autonomía, precio, tracción y estado comparables entre
-    marcas. Incluye un YAML de ejemplo completo y válido. Si la decisión lo merece, escríbela como ADR-0008
-    y deja data-model.md como referencia. No toques data/ ni web/: la migración de Cupra y Polestar y la
-    comprobación automática del esquema vienen después.
-
+  task: "Fija en docs/architecture/data-model.md el esquema concreto de los YAML
+    de data/raw/<marca>/<modelo>.yaml, que hoy es un borrador sin nombres de
+    campo. Cada marca se ha inventado el suyo: Cupra usa model_level,
+    wltp_max_km y power_cv (en CV) y Polestar usa specs, wltp_range_max y
+    power_max, y status va con fuente en una y como texto suelto en otra.
+    web/src/lib/data.ts ya tiene parches para aguantar las dos formas. Hay 12
+    marcas esperando a que esto esté fijado. Define: qué va a nivel de modelo y
+    qué a nivel de versión, el nombre exacto y la unidad de cada campo (kW, km,
+    kWh, sin CV), los valores permitidos de tracción, segmento y estado, cuáles
+    son obligatorios y cuáles opcionales, y la forma de un valor con fuente
+    (value, source_id, url, retrieved, tier) y de un precio (price_kind,
+    price_terms, price_terms_url), según ADR-0001. Ten en cuenta que PRD-001
+    necesita el segmento en la tarjeta (RF-1) y hoy ninguna marca lo registra, y
+    que los filtros de RF-2 necesitan autonomía, precio, tracción y estado
+    comparables entre marcas. Incluye un YAML de ejemplo completo y válido.
+    Escribe la decisión como ADR-0008 y deja data-model.md como referencia. En
+    la ADR compara dos opciones: un esquema único validado al escribir (el
+    Researcher escribe siempre en ese formato y una comprobación rechaza lo que
+    no encaje) y el patrón de puertos y adaptadores (cada marca conserva su
+    formato y un adaptador por fuente lo traduce al esquema común). Ten en
+    cuenta que hoy los YAML no vienen en el formato de las marcas, los escribe
+    el Researcher, que un adaptador no puede perder la fuente ni la fecha de
+    cada valor (ADR-0001), y que en el futuro podría haber lectores automáticos
+    por marca. Deja escrita la alternativa descartada y por qué. No toques data/
+    ni web/: la migración de Cupra y Polestar y la comprobación automática del
+    esquema vienen después."
+- agent: designer
+  task: 'Especifica en docs/design/ la tarjeta de modelo y los filtros del
+    catálogo de PRD-001 (docs/product/prd/PRD-001-catalogo-modelos.md). Empieza
+    por docs/design/tokens.md con los colores, la tipografía y el espaciado que
+    usen los dos. La tarjeta (RF-1, RF-8, RF-9, CA-1, CA-10, CA-11): los seis
+    campos de RF-1, la imagen con su atribución si la licencia la exige, y los
+    estados "Próximamente" con fecha (RF-7, CA-8), "precio con oferta" (RF-9) y
+    "Precio por confirmar" (CA-9), más los de dato ausente o texto muy largo;
+    mira los YAML reales de data/raw/ para ver qué falta de verdad. Los filtros
+    (RF-2, RF-3, RF-6, RF-7, CA-2, CA-6): marca, segmento, rango de precio,
+    autonomía mínima, tracción y estado, el orden, el estado vacío con su botón
+    de limpiar y cómo se ven en móvil y en escritorio. Ten en cuenta que las
+    páginas de RF-10 tienen que funcionar sin JavaScript. Calcula el contraste
+    de cada par de colores (WCAG 2.1 AA, RNF-3) y deja el orden de foco. No
+    escribas código ni la página de ficha, y deja como pregunta abierta lo que
+    el PRD no diga.'
+- agent: developer
+  task: "Implementa la historia #53 de GitHub (`gh issue view 53`), salvo su punto
+    1, que ya está hecho: la CI ya ejecuta web/ desde la PR #56, así que el
+    criterio CA-33e está cubierto y no tienes que tocar nada de .github/, que
+    además está fuera de tus rutas. Te quedan los puntos 2, 3 y 4, todos en
+    web/src/lib/data.ts y sus pruebas. El 2 es el importante: hoy isSourced solo
+    comprueba value y source_id, así que un valor sin url o sin retrieved entra
+    tipado como Sourced y el tipo miente; y price se castea con `as Price` sin
+    comprobar price_kind ni que value sea un número. ADR-0001 dice que un dato
+    sin fuente y fecha no se publica: exige source_id, url y retrieved en
+    normalize, y si faltan descarta el valor o llévalo a la lista de avisos, sin
+    tiparlo como válido. Distingue un price inválido de un modelo sin precio:
+    hoy los dos acaban en null y la página dice lo mismo. El 3: DEFAULT_DATA_DIR
+    usa process.cwd(), así que solo funciona ejecutando desde web/; resuélvelo
+    con import.meta.dirname, como ya hace la prueba, y mete readdirSync dentro
+    del try, porque si data/raw no existe el build revienta pese a que el módulo
+    dice no lanzar nunca. El 4: quita de las pruebas el recuento de modelos y
+    los nombres cableados, que fallarán en cuanto el Researcher añada una marca,
+    y añade los casos que faltan: price sin retrieved, versions como texto, YAML
+    vacío y directorio inexistente. Cada criterio de aceptación de la historia
+    (CA-33a a CA-33d y CA-33f) tiene que quedar cubierto por una prueba que
+    falle de verdad si el criterio se rompe. Ejecuta pnpm test y pnpm run
+    typecheck dentro de web/ y cuenta el resultado real. No te adelantes al
+    catálogo ni a los filtros, y no toques los YAML de data/, que son del
+    Researcher."
