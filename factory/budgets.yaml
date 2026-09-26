@@ -68,7 +68,7 @@ agents:
     max_turns_per_run: 40
     api_key_env: DEVELOPER_API_KEY
     write_paths: [web/, docs/bitacora/]   # la web entera en web/; la factoría es de la raíz y no se toca
-    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(npm:*)", "Bash(node:*)", "Bash(git:*)"]
+    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(pnpm:*)", "Bash(node:*)", "Bash(git:*)"]
     network: false
 
   devops:

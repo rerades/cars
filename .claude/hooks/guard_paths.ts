@@ -22,12 +22,16 @@ const BANNED_BASH: [RegExp, string][] = [
   [/\bsudo\b/, "sudo no permitido"],
   [/\.secrets\b/, "acceso a secretos no permitido"],
   [/\bcurl\b[^|]*\|\s*(ba)?sh\b/, "descargar y ejecutar no permitido"],
-  // Una dependencia nueva se declara en package.json y se revisa en la PR; `npm install` a
-  // secas (sin paquete) sí se permite, es el que instala lo ya declarado.
+  // Una dependencia nueva se declara en package.json y se revisa en la PR; `pnpm install` a
+  // secas (sin paquete) sí se permite, es el que instala lo ya declarado. Las reglas de npm se
+  // conservan aunque el gestor sea pnpm (ADR-0007): si no, `npm install x` reintroduce un
+  // package-lock.json por la puerta de atrás.
   // Los flags se saltan: lo que se busca es un paquete suelto detrás del subcomando.
-  [/\bnpm\s+(?:i|install|add)\b(?:\s+-{1,2}[\w-]+)*\s+(?!-)\S/,
-    "declara la dependencia en package.json y usa `npm install` sin argumentos"],
-  [/\bnpx\b|\bnpm\s+(?:create|init|exec)\b/, "ejecutar un paquete que no está en package.json no está permitido"],
+  [/\b(?:npm|pnpm|yarn|bun)\s+(?:i|in|install|add)\b(?:\s+-{1,2}[\w-]+)*\s+(?!-)\S/,
+    "declara la dependencia en package.json y usa `pnpm install` sin argumentos"],
+  // Al principio del comando o tras un separador: `grep npx` no es ejecutar nada.
+  [/(?:^|[;&|]\s*)(?:npx|pnpx|pnx|bunx)\b|\b(?:npm|pnpm|bun)\s+(?:create|init|exec|dlx)\b|\byarn\s+dlx\b/,
+    "ejecutar un paquete que no está en package.json no está permitido"],
   // Revisar es informar: quien decide si una PR entra es una persona.
   [/\bgh\s+pr\s+(?:merge|review|close|ready)\b/, "aprobar, cerrar o fusionar una PR no es de un agente"],
 ];

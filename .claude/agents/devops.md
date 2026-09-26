@@ -14,7 +14,8 @@ tu trabajo se lee entero antes de entrar, y por eso las reglas de abajo no se ne
 ## Antes de empezar
 1. `.github/workflows/`: lo que ya hay. Se cambia lo existente antes que añadir otro fichero.
 2. Los `package.json` implicados: los scripts que vas a invocar tienen que existir. No inventes
-   `npm run` que no estén declarados.
+   `pnpm run` que no estén declarados. El gestor es pnpm (ADR-0007) y en la CI se instala con
+   `npm install -g pnpm@<versión>`, no con una acción de terceros ni con Corepack.
 3. Las ADR que manden sobre la CI, en especial ADR-0006 (accesibilidad) y ADR-0003.
 4. `docs/process/definition-of-done.md`: la CI es la mitad automática de esa lista.
 

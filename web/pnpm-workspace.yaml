@@ -1,0 +1,5 @@
+# Los postinstall están desactivados por defecto (ADR-0007). Aquí solo los que hacen falta:
+# esbuild y fsevents los necesita Astro; fsevents es opcional y solo se instala en macOS.
+allowBuilds:
+  esbuild: true
+  fsevents: true

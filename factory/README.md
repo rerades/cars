@@ -4,7 +4,7 @@ Orquestador de la factoría. Aplica lo definido en `docs/architecture/adr/0002-p
 
 ## Uso
 
-Requiere Node >= 24 y `npm install` (dependencia: `yaml`). Los `.ts` se ejecutan con `node` sin compilar.
+Requiere Node >= 24 y `pnpm install` (dependencia: `yaml`; gestor fijado en `packageManager`, ADR-0007). Los `.ts` se ejecutan con `node` sin compilar.
 
 ```bash
 node factory/run.ts --status                      # gasto y ejecuciones del periodo
@@ -115,8 +115,8 @@ rm factory/STOP        # reanuda
 ## Pruebas
 
 ```bash
-npm test            # node:test
-npm run typecheck   # tsc --noEmit
+pnpm test            # node:test
+pnpm run typecheck   # tsc --noEmit
 ```
 
 ## Programación nocturna (macOS)

@@ -71,7 +71,7 @@ Detalles:
 - **JavaScript activado en las comprobaciones de axe**, porque el estado vacío existe solo tras
   filtrar en cliente y porque el visitante real ejecuta JS.
 - **Momento en la CI.** Un job propio, **después del build de `web/` y de que pasen `npm test` y
-  `npm run typecheck`**, en cada PR que toque `web/` o `data/`. Se ejecuta antes del merge y su
+  `pnpm run typecheck`** (el gestor pasó a ser pnpm en ADR-0007, posterior a esta ADR), en cada PR que toque `web/` o `data/`. Se ejecuta antes del merge y su
   fallo bloquea el merge. La forma exacta del workflow, y si es requisito de rama protegida, la
   fija la ADR de CI/CD (pendiente).
 - **Misma instalación para CA-12c.** Playwright también se usará, en tests separados, con un

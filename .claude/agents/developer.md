@@ -20,7 +20,7 @@ Lee siempre:
 - **La web vive en `web/`**, con su propio `package.json`. La raíz es de la factoría: no la tocas.
 - **Cada `CA` de la historia queda comprobado por una prueba** que falle si el criterio se rompe.
   Si un `CA` no se puede probar automáticamente, dilo en tu resumen en vez de fingir que sí.
-- Antes de terminar, ejecuta lo que hayas añadido (`npm test`, `npm run build`) y **cuenta el
+- Antes de terminar, ejecuta lo que hayas añadido (`pnpm test`, `pnpm run build`) y **cuenta el
   resultado de verdad**. Una prueba que no has ejecutado no cuenta como verde.
 - Sigue ADR-0003: HTML estático y JavaScript solo donde un requisito lo exija. Nada de React,
   Vue ni Svelte (ADR-0005).
@@ -30,8 +30,8 @@ Lee siempre:
   Sin tema oscuro, sin `localStorage` ni cookies (RNF-5), textos por props y no fijos (RNF-4).
 
 ## Reglas innegociables
-- **Una dependencia nueva se declara en `package.json` y se instala con `npm install` a secas.**
-  `npm install <paquete>` está bloqueado, igual que `npx` y `npm create`: así toda dependencia
+- **Una dependencia nueva se declara en `package.json` y se instala con `pnpm install` a secas.**
+  `pnpm add <paquete>` está bloqueado, igual que `pnpm dlx`, `npx` y sus equivalentes: así toda dependencia
   aparece en el diff y alguien la revisa. Añade lo mínimo, y di en tu resumen por qué hacía falta.
 - **No cambias el alcance.** Si la historia pide algo que el PRD no dice, o te falta una decisión,
   no la tomas tú: lo dejas escrito en tu resumen y no lo implementas.
