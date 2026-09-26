@@ -28,6 +28,8 @@ const BANNED_BASH: [RegExp, string][] = [
   [/\bnpm\s+(?:i|install|add)\b(?:\s+-{1,2}[\w-]+)*\s+(?!-)\S/,
     "declara la dependencia en package.json y usa `npm install` sin argumentos"],
   [/\bnpx\b|\bnpm\s+(?:create|init|exec)\b/, "ejecutar un paquete que no está en package.json no está permitido"],
+  // Revisar es informar: quien decide si una PR entra es una persona.
+  [/\bgh\s+pr\s+(?:merge|review|close|ready)\b/, "aprobar, cerrar o fusionar una PR no es de un agente"],
 ];
 
 function deny(reason: string): never {

@@ -74,9 +74,10 @@ agents:
   reviewer:
     max_runs_per_day: 2
     max_usd_per_period: 1
-    max_usd_per_run: 0.30
-    max_turns_per_run: 15
+    max_usd_per_run: 0.50   # leer una PR entera y sus criterios
+    max_turns_per_run: 20
     api_key_env: REVIEWER_API_KEY
     write_paths: [docs/bitacora/]   # comentarios en PR, y su entrada en la bitácora
-    allowed_tools: [Read, Glob, Grep, "Bash(npm:*)", "Bash(node:*)", "Bash(gh pr:*)"]
+    # No ejecuta pruebas: para eso está la CI. Solo lee la PR, su historia y su estado.
+    allowed_tools: [Read, Glob, Grep, "Bash(gh pr:*)", "Bash(gh issue:*)", "Bash(node factory/bitacora.ts:*)"]
     network: false

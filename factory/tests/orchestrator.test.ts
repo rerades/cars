@@ -435,6 +435,12 @@ describe("hook guardián", () => {
       assert.equal(runHook({ tool_name: "Bash", tool_input: { command: cmd } }).status, 0, cmd);
     }
   });
+  test("bloquea decidir sobre una PR, permite comentarla", () => {
+    for (const cmd of ["gh pr merge 50", "gh pr review 50 --approve", "gh pr close 50"]) {
+      assert.equal(runHook({ tool_name: "Bash", tool_input: { command: cmd } }).status, 2, cmd);
+    }
+    assert.equal(runHook({ tool_name: "Bash", tool_input: { command: "gh pr comment 50 --body x" } }).status, 0);
+  });
   test("permite bash normal", () => {
     assert.equal(runHook({ tool_name: "Bash", tool_input: { command: "ls data/" } }).status, 0);
   });
