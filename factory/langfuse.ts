@@ -161,6 +161,7 @@ export function toOtlp(record: Row, stdout: string) {
   const runId = String(record.run_id);
   const traceAttrs = {
     "langfuse.trace.name": record.agent,
+    "langfuse.user.id": record.agent,   // one Langfuse user per agent: the Users page splits cost and runs by agent
     "langfuse.trace.tags": [record.agent, record.outcome],
     "langfuse.trace.metadata.run_id": runId,
     "langfuse.environment": ENVIRONMENT,

@@ -52,6 +52,7 @@ describe("langfuse", () => {
     assert.match(span.spanId, /^[0-9a-f]{16}$/);
     assert.equal(span.startTimeUnixNano, String(Date.parse(record.started) * 1e6));
     assert.ok(span.attributes.some((a) => a.key === "langfuse.trace.name"));
+    assert.ok(span.attributes.some((a) => a.key === "langfuse.user.id" && a.value.stringValue === record.agent));
   });
 
   test("sin traza local se envía solo la raíz", () => {
