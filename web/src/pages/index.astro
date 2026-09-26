@@ -1,0 +1,38 @@
+---
+import "../styles/global.css";
+import { loadModels } from "../lib/data.ts";
+
+const { models, errors } = loadModels();
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coches eléctricos</title>
+  </head>
+  <body class="mx-auto max-w-3xl p-6">
+    <h1 class="text-2xl font-bold">Coches eléctricos</h1>
+    <ul class="mt-4 space-y-4">
+      {models.map((m) => (
+        <li>
+          <h2 class="font-semibold">{m.brand} {m.model} <small>({m.status.value})</small></h2>
+          <ul class="text-sm">
+            {m.versions.map((v) => (
+              <li>
+                {v.name}:
+                {v.price
+                  ? <>
+                      {v.price.value} {v.price.unit} ({v.price.price_kind}) —
+                      <a class="underline" href={v.price.url}>{v.price.source_id}</a>, {v.price.retrieved}
+                    </>
+                  : " sin precio"}
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+    {errors.length > 0 && <p class="mt-4 text-sm">No se pudieron leer {errors.length} ficheros.</p>}
+  </body>
+</html>
