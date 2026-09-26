@@ -4,8 +4,9 @@ Factoría de agentes autónomos que construye y mantiene una web de coches eléc
 (Europa, foco España). El visitante solo lee; no se guardan datos personales.
 
 ## Entorno
-Node >= 24 (ejecuta TypeScript directamente, sin compilar). Sin Python. `npm install` una vez;
-`npm test` y `npm run typecheck` antes de abrir un PR.
+Node >= 24 (ejecuta TypeScript directamente, sin compilar). Sin Python. El gestor de paquetes es
+**pnpm** (ADR-0007), fijado en `packageManager`: `pnpm install` una vez; `pnpm test` y
+`pnpm run typecheck` antes de abrir un PR. La web vive en `web/`, con su propio `package.json`.
 
 ## Lee esto antes de trabajar
 1. `docs/README.md` — mapa de la documentación.
@@ -43,7 +44,7 @@ terminado; `nota` para el resto. Los commits y las ejecuciones se importan, no s
 node factory/run.ts --status                    # presupuesto y ejecuciones
 node factory/run.ts <agente> "tarea" --dry-run  # ver el comando
 node factory/run.ts --next                      # primera tarea de factory/queue.yaml
-npm test && npm run typecheck                   # pruebas y tipos
+pnpm test && pnpm run typecheck                 # pruebas y tipos
 touch factory/STOP                              # parar la factoría
 ```
 Los límites están en `factory/budgets.yaml`. Cada ejecución trabaja en su propia rama

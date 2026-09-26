@@ -19,8 +19,8 @@
     y los nombres cableados, que fallarán en cuanto el Researcher añada una marca, y añade los
     casos que faltan: price sin retrieved, versions como texto, YAML vacío y directorio
     inexistente. Cada criterio de aceptación de la historia (CA-33a a CA-33d y CA-33f) tiene que
-    quedar cubierto por una prueba que falle de verdad si el criterio se rompe. Ejecuta npm test
-    y npm run typecheck dentro de web/ y cuenta el resultado real. No te adelantes al catálogo ni
+    quedar cubierto por una prueba que falle de verdad si el criterio se rompe. Ejecuta pnpm test
+    y pnpm run typecheck dentro de web/ y cuenta el resultado real. No te adelantes al catálogo ni
     a los filtros, y no toques los YAML de data/, que son del Researcher.
 - agent: researcher
   task: Marca Mercedes-Benz. Fuentes en el registro y modelos en

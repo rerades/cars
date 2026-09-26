@@ -2,6 +2,7 @@
   "name": "dark-factory-cars",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@11.19.0",
   "engines": {
     "node": ">=24"
   },

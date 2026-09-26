@@ -426,12 +426,23 @@ describe("hook guardián", () => {
     assert.equal(runHook({ tool_name: "Bash", tool_input: { command: "cat .secrets/gh_token" } }).status, 2);
   });
   test("bloquea instalar una dependencia sin declararla", () => {
-    for (const cmd of ["npm install astro", "npm i -D vitest", "npm add tailwindcss", "npx astro add", "npm create astro@latest"]) {
+    const bloqueados = [
+      "npm install astro", "npm i -D vitest", "npm add tailwindcss", "npx astro add",
+      "npm create astro@latest", "pnpm add tailwindcss", "pnpm i -D vitest", "pnpm dlx astro",
+      "pnpx astro", "pnx astro", "yarn add astro", "bun add astro", "bunx astro",
+      "echo hola; npx astro",   // también detrás de un separador
+    ];
+    for (const cmd of bloqueados) {
       assert.equal(runHook({ tool_name: "Bash", tool_input: { command: cmd } }).status, 2, cmd);
     }
   });
   test("permite instalar lo ya declarado en package.json", () => {
-    for (const cmd of ["npm install", "npm install --no-audit", "npm ci", "npm test", "npm run build"]) {
+    const permitidos = [
+      "pnpm install", "pnpm install --frozen-lockfile", "pnpm test", "pnpm run build",
+      "npm install", "npm ci", "npm test", "npm run build",
+      "grep -rn npx .github/",   // hablar de npx no es ejecutarlo
+    ];
+    for (const cmd of permitidos) {
       assert.equal(runHook({ tool_name: "Bash", tool_input: { command: cmd } }).status, 0, cmd);
     }
   });

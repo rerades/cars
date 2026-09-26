@@ -121,15 +121,29 @@ Introduciría un segundo runtime junto a Node >= 24, que es lo que ejecuta la fa
 
 ## Decisión
 
-**Se mantiene npm como único gestor de paquetes, con un lock por proyecto (raíz y `web/`) y sin workspaces.**
+**Se adopta pnpm como único gestor de paquetes, con un lock por proyecto (raíz y `web/`) y sin
+workspaces.**
+
+Esta ADR recomendaba seguir con npm (opción A). El responsable del producto decidió lo contrario
+el 2026-09-26 y la recomendación se deja escrita arriba tal como se hizo: pesa más trabajar con el
+mismo gestor en su máquina y en el repositorio que ahorrarse el coste del cambio. El análisis no se
+reescribe para que la decisión parezca obvia, porque no lo era.
 
 Detalles:
-- No se toca ni la CI, ni `guard_paths.ts`, ni `budgets.yaml`.
-- pnpm es una preferencia local del responsable del producto. Si lo usa en su máquina, **no debe
-  commitear `pnpm-lock.yaml`**: dos locks en el mismo proyecto acaban desalineados. Es una regla
-  de proceso, hoy no hay nada que la haga cumplir (ver Consecuencias).
-- Se reabre esta decisión con una de estas señales: tiempo de `npm ci` medido en la CI que moleste,
-  un fallo real por una dependencia no declarada, o que Node distribuya un gestor alternativo.
+- Versión fijada en `packageManager`: **pnpm 11.19.0**, la que usa el responsable, para que su
+  máquina y la CI generen el mismo lock. La 12.6.0 es la última publicada (2026-09-22, consultado
+  ese día en el registro de npm); subir a la 12 es una decisión aparte.
+- **En la CI, pnpm se instala con `npm install -g pnpm@11.19.0`**, un paso `run:` corriente. No se
+  usa `pnpm/action-setup` ni `pnpm/setup`, que son de terceros y `devops.md` los prohíbe, ni
+  Corepack, que es experimental y ya no viene con Node 26 (la máquina de desarrollo va con v26.5.0).
+  npm sigue viniendo con Node, así que sirve de instalador.
+- `engines.node >= 24` se queda como está: sin Corepack, nada obliga a acotarlo.
+- Las reglas del guardián para npm **se conservan** además de las nuevas de pnpm, para que un
+  `npm install <paquete>` no reintroduzca un `package-lock.json` por la puerta de atrás.
+- Los `postinstall` de las dependencias quedan **desactivados salvo aprobación explícita** en
+  `allowScripts`, que es como pnpm los trata. Hoy son `esbuild` y `fsevents`, que necesita Astro.
+  Esto cierra en parte un agujero conocido: hasta ahora una dependencia nueva del agente
+  desarrollador ejecutaba sus scripts antes de que nadie revisara la PR.
 
 ## Consecuencias
 
