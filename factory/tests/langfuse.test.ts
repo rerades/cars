@@ -53,6 +53,7 @@ describe("langfuse", () => {
     assert.equal(span.startTimeUnixNano, String(Date.parse(record.started) * 1e6));
     assert.ok(span.attributes.some((a) => a.key === "langfuse.trace.name"));
     assert.ok(span.attributes.some((a) => a.key === "langfuse.user.id" && a.value.stringValue === record.agent));
+    assert.ok(span.attributes.some((a) => a.key === "langfuse.session.id" && a.value.stringValue === "2026-09-23"));
   });
 
   test("sin traza local se envía solo la raíz", () => {

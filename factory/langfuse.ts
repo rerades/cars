@@ -162,6 +162,8 @@ export function toOtlp(record: Row, stdout: string) {
   const traceAttrs = {
     "langfuse.trace.name": record.agent,
     "langfuse.user.id": record.agent,   // one Langfuse user per agent: the Users page splits cost and runs by agent
+    // One session per local day ("started" keeps its offset), i.e. one per factory night
+    "langfuse.session.id": String(record.started).slice(0, 10),
     "langfuse.trace.tags": [record.agent, record.outcome],
     "langfuse.trace.metadata.run_id": runId,
     "langfuse.environment": ENVIRONMENT,
