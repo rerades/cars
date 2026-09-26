@@ -7,6 +7,7 @@
 | Researcher (`researcher`) | Mantener el registro de fuentes y obtener datos de modelos, precios e imágenes | `data/` | **activo** |
 | Arquitecto (`architect`) | Proponer ADR y el modelo de datos | `docs/architecture/` | **activo** |
 | Desarrollador (`developer`) | Implementar historias | `web/` | **activo** |
+| DevOps (`devops`) | Mantener los workflows de GitHub Actions: qué se ejecuta, qué bloquea | `.github/workflows/` | **activo** |
 | Revisor / QA (`reviewer`) | Verificar la DoD y los CA | comentarios en PR | **activo** |
 
 Además de su columna, **todos** pueden escribir en `docs/bitacora/`: la regla de CLAUDE.md de
@@ -15,7 +16,9 @@ hacen con `node factory/bitacora.ts add`, y el orquestador se lo recuerda en cad
 
 Definiciones ejecutables de los agentes: `.claude/agents/`. Sin su fichero ahí, el orquestador
 no puede lanzarlos (`--agent <nombre>`). Se crean de uno en uno, cuando toca su primera tarea,
-en este orden: `architect`, `product`, `planner`, `developer` y `reviewer`: los seis están hechos.
+en este orden: `architect`, `product`, `planner`, `developer` y `reviewer`. A los seis roles
+previstos se añadió `devops` (2026-09-26), para que quien mantiene las comprobaciones automáticas
+no sea el mismo que escribe el código que comprueban.
 
 Presupuesto, permisos (`allowed_tools`) y rutas de escritura: `factory/budgets.yaml`. Los
 permisos son explícitos y mínimos porque en modo `-p` no hay quien apruebe nada: lo que no esté
