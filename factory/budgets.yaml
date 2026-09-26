@@ -23,7 +23,7 @@ agents:
   # suma asignada: 20 USD, el tope global entero: ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
-    max_usd_per_period: 9    # 1 USD cedido al designer (2026-09-26)
+    max_usd_per_period: 8    # 2026-09-26: 1 USD al designer y 1 al architect
     max_usd_per_run: 1.00
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
@@ -53,7 +53,7 @@ agents:
 
   architect:
     max_runs_per_day: 2
-    max_usd_per_period: 2
+    max_usd_per_period: 3   # 2 se agotó en septiembre: 1,79 gastados a ~0,36 por ejecución
     max_usd_per_run: 0.75   # investigar y escribir la ADR en la misma ejecución
     max_turns_per_run: 20
     api_key_env: ARCHITECT_API_KEY
