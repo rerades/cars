@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copiar a ~/Library/LaunchAgents/com.darkfactory.orchestrator.plist, ajustar RUTA y cargar:
      launchctl load ~/Library/LaunchAgents/com.darkfactory.orchestrator.plist
-     Lanza el orquestador cada hora dentro de la ventana nocturna; run.ts descarta
+     Lanza el orquestador cuatro veces por noche (01:00, 02:30, 04:00 y 05:30); run.ts descarta
      las horas fuera de allowed_hours, así que basta con dejarlo correr.
      PATH debe incluir node (lo usan los hooks: si no arrancan, no bloquean) y claude;
      ajustarlo con `dirname $(which node)` y `dirname $(which claude)`. -->
@@ -20,8 +20,9 @@
   <key>StartCalendarInterval</key>
   <array>
     <dict><key>Hour</key><integer>1</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Hour</key><integer>3</integer><key>Minute</key><integer>0</integer></dict>
-    <dict><key>Hour</key><integer>5</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>2</integer><key>Minute</key><integer>30</integer></dict>
+    <dict><key>Hour</key><integer>4</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>5</integer><key>Minute</key><integer>30</integer></dict>
   </array>
   <key>StandardOutPath</key><string>/Users/USUARIO/_DEV/cars/ops/launchd.out.log</string>
   <key>StandardErrorPath</key><string>/Users/USUARIO/_DEV/cars/ops/launchd.err.log</string>
