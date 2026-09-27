@@ -36,6 +36,11 @@ sale con `3`: es lo que permite que launchd lo llame cada pocas horas sin perder
 Con la cola vacía no hace nada y sale con `0`. El resultado de la ejecución va al ledger,
 no a la cola.
 
+Si la ejecución falla (cualquier resultado distinto de `success`), la tarea pasa al final de
+`factory/queue.paused.yaml`, que el orquestador no lee: no se pierde ni se reintenta en
+bucle. Para reintentarla, se revisa el fallo (el issue de la alerta de Langfuse y la traza)
+y se mueve a mano de vuelta a `queue.yaml`.
+
 Códigos de salida: `0` correcto · `1` la ejecución falló · `3` bloqueado por una guarda.
 
 ## Langfuse (opcional)

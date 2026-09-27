@@ -378,6 +378,17 @@ describe("cola", () => {
     }
   });
 
+  test("a failed task is parked, not lost", () => {
+    const path = tmp();
+    orq.pauseTask({ agent: "researcher", task: "una" }, path);   // file does not exist yet
+    orq.pauseTask({ agent: "designer", task: "otra" }, path);
+    assert.deepEqual(orq.readQueue(path), [
+      { agent: "researcher", task: "una" },
+      { agent: "designer", task: "otra" },
+    ]);
+    assert.ok(readFileSync(path, "utf8").startsWith("# Tareas en pausa"));
+  });
+
   test("cola vacía no ejecuta nada", () => {
     const path = tmp();
     writeFileSync(path, "[]\n", "utf8");

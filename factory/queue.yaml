@@ -229,6 +229,14 @@
     (inicio de venta en España) con su fuente si la hay, y busca imágenes
     primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
     solo con licencia que permita el uso comercial, con license y attribution."
+- agent: researcher
+  task: "Marca Tesla. Fuentes en el registro y modelos en data/raw/tesla/.
+    Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista
+    de RF-11) y launch (inicio de venta en España) con su fuente si la hay, y
+    busca imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya
+    en el registro), solo con licencia que permita el uso comercial, con
+    license y attribution."
 - agent: reviewer
   task: "Revisa una PR abierta de una rama agent/* que aún no tenga tu
     revisión (ningún comentario que empiece por «Veredicto»). Búscala con

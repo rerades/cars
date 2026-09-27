@@ -14,7 +14,7 @@ import { join } from "node:path";
 import { parseArgs } from "node:util";
 import { exportRun } from "./langfuse.ts";
 import {
-  appendLedger, checkCanRun, execute, formatTrace, loadConfig, nowInTz, pruneMergedBranches, readLedger, readQueue, runsToday,
+  appendLedger, checkCanRun, execute, formatTrace, loadConfig, nowInTz, pauseTask, pruneMergedBranches, readLedger, readQueue, runsToday,
   spentInPeriod, TRACE_DIR, writeQueue,
   type Config,
 } from "./orchestrator.ts";
@@ -79,8 +79,9 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
 }
 
 /**
- * Coge la primera tarea de la cola y la lanza. Solo la saca de la cola si llega a
- * ejecutarse: si una guarda la bloquea, se queda para el siguiente intento.
+ * Takes the first queued task and runs it. It only leaves the queue once it runs: if a
+ * guard blocks it, it stays for the next attempt. If the run fails, it moves to the paused
+ * list, so it is neither lost nor retried in a loop.
  */
 function cmdNext(cfg: Config, ignoreWindow: boolean, dryRun: boolean): number {
   const queue = readQueue();
@@ -93,6 +94,10 @@ function cmdNext(cfg: Config, ignoreWindow: boolean, dryRun: boolean): number {
   const code = runTask(cfg, item.agent, item.task, ignoreWindow, dryRun);
   if (code === 3 || dryRun) return code;
   writeQueue(queue.slice(1));
+  if (code !== 0) {
+    pauseTask(item);
+    console.log("la tarea ha fallado: movida a factory/queue.paused.yaml");
+  }
   console.log(`quedan ${queue.length - 1} tareas en la cola`);
   return code;
 }
