@@ -23,6 +23,19 @@
     Cupra y Polestar está cambiando en otra PR. Cada regla de la sección 5 queda
     cubierta por una prueba que falle si se rompe. No toques data/ ni las
     páginas."
+- agent: architect
+  task: "Redacta ADR-0009 (usa ese número): base de datos y hosting, una de las
+    decisiones pendientes de docs/architecture/overview.md. Parte de lo que ya
+    está decidido: sitio estático con Astro (ADR-0003), los YAML de data/raw/
+    como esquema único (ADR-0008), sin cookies ni datos personales (RNF-5), LCP
+    < 2,5 s en móvil 4G (RNF-2). Decide si esos YAML bastan como base de datos
+    por ahora o qué haría falta, y dónde se publica el sitio estático: compara
+    al menos tres opciones de hosting por coste, CDN en Europa, dominio propio,
+    si ponen cookies o analítica por defecto y cómo se despliega desde GitHub.
+    Cada dato de precio o de límites, con su URL y la fecha de consulta. Estado
+    propuesta. De paso, actualiza overview.md: tacha esta decisión con el enlace
+    a ADR-0009, y corrige la línea del gestor de paquetes, que aún dice npm
+    cuando ADR-0007 adoptó pnpm."
 - agent: researcher
   task: "Marca Mercedes-Benz. Fuentes en el registro y modelos en
     data/raw/mercedes-benz/. Escribe exactamente el esquema de
@@ -31,6 +44,29 @@
     España) con su fuente si la hay, y busca imágenes primero en Wikimedia
     Commons (fuente wikimedia-commons, ya en el registro), solo con licencia que
     permita el uso comercial, con license y attribution."
+- agent: designer
+  task: "Especifica en docs/design/paginas-catalogo.md la estructura de las
+    páginas de PRD-001: /coches y las pregeneradas de RF-10 (/marcas/{marca},
+    segmento, tramo de precio y tramo de autonomía; historias #35, #38 y #39).
+    Cubre lo que tarjeta-modelo.md y filtros-catalogo.md no dicen: título (h1)
+    y texto de entrada de cada tipo de página, contador de resultados, dónde van
+    la rejilla de tarjetas, el panel de filtros y la franja «Explorar», el
+    estado vacío, el orden de lectura y el de foco, y cómo se ve en móvil y en
+    escritorio. No repitas lo que ya especifican esas dos; enlázalas. Solo
+    tokens de tokens.md; si falta uno, añádelo allí con su uso. Cita el RF o el
+    CA que justifica cada decisión y no añadas nada que PRD-001 no pida."
+- agent: product
+  task: "Redacta PRD-002, Ficha de modelo, en
+    docs/product/prd/PRD-002-ficha-modelo.md a partir de _template.md, con
+    status draft. La visión la tiene pendiente y tarjeta-modelo.md la deja
+    fuera. Qué ve el comprador en la página de un modelo: versiones, precio,
+    autonomía, especificaciones, imágenes, fuente y fecha de cada dato, estado
+    (Próximamente, Descatalogado). Usa solo campos del esquema de
+    docs/architecture/data-model.md (ADR-0008); lo que no exista ahí va a
+    preguntas abiertas, no se inventa. Requisitos con id (RF-, RNF-) y
+    criterios de aceptación verificables. Deja las decisiones de alcance como
+    preguntas abiertas con alternativas, para que las decida el responsable del
+    producto. Enlaza PRD-002 en la tabla de docs/product/vision.md."
 - agent: researcher
   task: "Marca Peugeot. Fuentes en el registro y modelos en data/raw/peugeot/.
     Escribe exactamente el esquema de docs/architecture/data-model.md
@@ -39,6 +75,16 @@
     imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
     registro), solo con licencia que permita el uso comercial, con license y
     attribution."
+- agent: planner
+  task: "Revisa si las historias abiertas de la épica #32 (#33 a #41 y #53)
+    siguen cubriendo PRD-001 tal como está hoy. Desde que se trocearon se
+    añadieron RF-11 y RF-12, CA-13 a CA-17 y ADR-0008 (esquema único de
+    data/raw), y el punto 1 de #53 (CI sobre web/) ya está hecho en
+    .github/workflows/ci.yml. Por cada RF y CA sin historia, o historia que ya
+    no encaja, deja un comentario en la historia afectada, o abre una nueva con
+    las etiquetas story y agente enlazada a #32. No cierres ninguna issue:
+    propón el cierre en un comentario. Termina con un comentario en #32 que
+    resuma qué cambió."
 - agent: researcher
   task: "Marca Citroën. Fuentes en el registro y modelos en data/raw/citroen/.
     Escribe exactamente el esquema de docs/architecture/data-model.md
@@ -54,6 +100,25 @@
     (inicio de venta en España) con su fuente si la hay, y busca imágenes
     primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
     solo con licencia que permita el uso comercial, con license y attribution."
+- agent: architect
+  task: "Redacta ADR-0010 (usa ese número): pipeline de ingesta de datos, otra
+    decisión pendiente de docs/architecture/overview.md. Hoy el esquema de
+    ADR-0008 solo lo comprueba el eval de la factoría (factory/evals.ts) sobre
+    los ficheros que cambia el Researcher. Decide dónde y cuándo se valida todo
+    data/raw (CI en cada PR, al construir la web, o las dos), qué bloquea y qué
+    solo avisa, cada cuánto se refrescan los datos de cada marca y qué pasa
+    cuando una fuente se rompe o un precio caduca. Reutiliza el validador que ya
+    existe en vez de proponer otro. Estado propuesta; tacha la línea en
+    overview.md con el enlace a ADR-0010."
+- agent: designer
+  task: "Revisa tokens.md, tarjeta-modelo.md y filtros-catalogo.md contra
+    WCAG 2.1 AA (RNF-3 de PRD-001). Calcula el contraste de cada par de texto y
+    fondo que usan las especificaciones y anota la ratio junto al token; mira
+    también el foco visible, el tamaño de los objetivos táctiles, que nada
+    dependa solo del color (etiquetas de estado, precio financiado) y los
+    nombres accesibles de los controles. Corrige en las especificaciones lo que
+    no cumpla, citando el criterio WCAG. Lo que no se pueda decidir en diseño
+    va a una lista de pendientes al final de cada documento."
 - agent: researcher
   task: "Marca BMW. Fuentes en el registro y modelos en data/raw/bmw/. Escribe
     exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
@@ -61,6 +126,16 @@
     (inicio de venta en España) con su fuente si la hay, y busca imágenes
     primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
     solo con licencia que permita el uso comercial, con license y attribution."
+- agent: architect
+  task: "Redacta ADR-0011 (usa ese número): cómo publican los agentes, la
+    última decisión pendiente de docs/architecture/overview.md. Hoy cada
+    ejecución abre su PR (auto_pr en factory/budgets.yaml), el agente Revisor
+    comenta y una persona fusiona. Decide qué pasa después de fusionar
+    (despliegue automático o manual, entornos de vista previa por PR), si algún
+    tipo de PR podría fusionarse sin persona y con qué guardas, y cómo se
+    vuelve atrás. Apóyate en ADR-0002 (control) y en ADR-0009 (hosting) si ya
+    está en main; si no, deja el despliegue como pregunta abierta. Estado
+    propuesta; tacha la línea en overview.md con el enlace a ADR-0011."
 - agent: researcher
   task: "Marca BYD. Fuentes en el registro y modelos en data/raw/byd/. Escribe
     exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
