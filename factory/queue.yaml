@@ -34,8 +34,7 @@
     si ponen cookies o analítica por defecto y cómo se despliega desde GitHub.
     Cada dato de precio o de límites, con su URL y la fecha de consulta. Estado
     propuesta. De paso, actualiza overview.md: tacha esta decisión con el enlace
-    a ADR-0009, y corrige la línea del gestor de paquetes, que aún dice npm
-    cuando ADR-0007 adoptó pnpm."
+    a ADR-0009."
 - agent: researcher
   task: "Marca Mercedes-Benz. Fuentes en el registro y modelos en
     data/raw/mercedes-benz/. Escribe exactamente el esquema de

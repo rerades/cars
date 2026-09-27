@@ -1,6 +1,6 @@
 # ADR-0003 — Stack de frontend de la web
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-09-27)
 - **Fecha:** 2026-09-24
 
 ## Contexto

@@ -1,6 +1,6 @@
 # ADR-0007 — Gestor de paquetes del repositorio
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-09-27)
 - **Fecha:** 2026-09-26
 
 Todas las fuentes externas de esta ADR se abrieron el 2026-09-26. Lo que no aparece con URL es
@@ -185,6 +185,6 @@ Detalles:
    como módulo o acotar `engines`.
 
 **Preguntas abiertas**
-- ¿Qué peso tiene la comodidad del responsable frente a la homogeneidad del repo? La ADR recomienda seguir con npm; decide él.
+- ~~¿Qué peso tiene la comodidad del responsable frente a la homogeneidad del repo?~~ Resuelta en «Decisión»: pnpm (2026-09-26).
 - ¿Se cierra el hueco del guardián (pnpm/yarn/bun) ahora, aparte de esta ADR?
 - ¿Conviene medir el `npm ci` de la CI antes de reabrir?
