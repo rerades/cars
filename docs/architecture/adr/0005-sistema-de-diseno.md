@@ -112,4 +112,4 @@ Detalles:
   tokens de color se definen para un único tema.
 
 **Preguntas abiertas**
-- ~~¿Qué herramienta y qué umbral de comprobación de accesibilidad se usan en CI?~~ Resuelta en [ADR-0006](0006-accesibilidad-en-ci.md): axe-core con Playwright; bloquean critical y serious.
+- ~~¿Qué herramienta y qué umbral de comprobación de accesibilidad se usan en CI?~~ Resuelta en [ADR-0006](0006-accesibilidad-en-ci.md): axe-core con Playwright; critical y serious ponen la CI en rojo, sin impedir el merge.
