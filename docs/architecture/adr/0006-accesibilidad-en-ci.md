@@ -1,6 +1,6 @@
 # ADR-0006 — Comprobación de accesibilidad en la integración continua
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-09-27)
 - **Fecha:** 2026-09-26
 
 ## Contexto
