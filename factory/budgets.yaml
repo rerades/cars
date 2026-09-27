@@ -86,7 +86,7 @@ agents:
   designer:
     max_runs_per_day: 1
     max_usd_per_period: 1
-    max_usd_per_run: 0.50   # leer PRD, ADR y datos y escribir la especificación
+    max_usd_per_run: 0.75   # 0.50 cortó la primera (tarjeta y filtros) a 0,52, con los ficheros ya escritos
     max_turns_per_run: 20
     api_key_env: DESIGNER_API_KEY
     write_paths: [docs/design/, docs/bitacora/]   # especifica; el código lo escribe el developer

@@ -1,4 +1,126 @@
 # Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
 # la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
-[]
+- agent: researcher
+  task: "Migra los seis ficheros de data/raw/cupra/ y data/raw/polestar/ al
+    esquema de docs/architecture/data-model.md (ADR-0008). Hoy no lo cumplen:
+    Cupra usa model_level y power_cv, Polestar usa specs con otros nombres y
+    status sin fuente, y a todos les faltan brand_name, segment y launch.
+    Conserva cada valor con su fuente, url y retrieved tal como están; solo
+    cambia su sitio y su nombre. Pasa los CV a kW con la regla de data-model.md
+    y deja el valor publicado en note. Lo nuevo (segment, launch, imágenes de
+    Wikimedia Commons) necesita fuente como cualquier otro dato; si no la
+    encuentras, déjalo fuera y anótalo en open_questions. Un eval comprobará la
+    forma: si un fichero no encaja, la ejecución entera falla."
+- agent: designer
+  task: 'Rehaz docs/design/tokens.md, tarjeta-modelo.md y filtros-catalogo.md. Son
+    tu borrador de la noche del 27, cortado por presupuesto y escrito antes de
+    ADR-0008: parte de él, no empieces de cero. Cambia lo que depende de los
+    datos al esquema de docs/architecture/data-model.md y a lo que ya decidió
+    PRD-001: segmentos de RF-11, orden por novedad (RF-3, CA-16), etiqueta
+    Descatalogado y tercer valor del filtro de estado (RF-7, CA-14), "por
+    confirmar" y salida del filtro cuando falta un dato (RF-12, CA-15), e imagen
+    con atribución o silueta del segmento (RF-8, CA-17). Quita de las preguntas
+    abiertas las que PRD-001 ya ha resuelto y la cabecera de borrador. No
+    diseñes aún las siluetas: solo di dónde van y qué tamaño tienen.'
+- agent: developer
+  task: "Adapta web/src/lib/data.ts al esquema de docs/architecture/data-model.md
+    (ADR-0008) y quita los parches que aceptan dos formas (model_level y specs,
+    status con o sin fuente). Deriva lo que dice la sección 5: precio desde,
+    autonomía máxima (versiones y, si no hay, specs.wltp_max_km) y tracción del
+    modelo. Añade segment, launch y brand_name al modelo normalizado, e images
+    con license y attribution. Las pruebas usan fixtures con la forma del
+    ejemplo de data-model.md, no los YAML reales de data/, que la migración de
+    Cupra y Polestar está cambiando en otra PR. Cada regla de la sección 5 queda
+    cubierta por una prueba que falle si se rompe. No toques data/ ni las
+    páginas."
+- agent: researcher
+  task: "Marca Mercedes-Benz. Fuentes en el registro y modelos en
+    data/raw/mercedes-benz/. Escribe exactamente el esquema de
+    docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo
+    completo. Rellena segment (lista de RF-11) y launch (inicio de venta en
+    España) con su fuente si la hay, y busca imágenes primero en Wikimedia
+    Commons (fuente wikimedia-commons, ya en el registro), solo con licencia que
+    permita el uso comercial, con license y attribution."
+- agent: researcher
+  task: "Marca Peugeot. Fuentes en el registro y modelos en data/raw/peugeot/.
+    Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de
+    RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
+    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
+    registro), solo con licencia que permita el uso comercial, con license y
+    attribution."
+- agent: researcher
+  task: "Marca Citroën. Fuentes en el registro y modelos en data/raw/citroen/.
+    Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de
+    RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
+    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
+    registro), solo con licencia que permita el uso comercial, con license y
+    attribution."
+- agent: researcher
+  task: "Marca Opel. Fuentes en el registro y modelos en data/raw/opel/. Escribe
+    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
+    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
+    (inicio de venta en España) con su fuente si la hay, y busca imágenes
+    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
+    solo con licencia que permita el uso comercial, con license y attribution."
+- agent: researcher
+  task: "Marca BMW. Fuentes en el registro y modelos en data/raw/bmw/. Escribe
+    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
+    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
+    (inicio de venta en España) con su fuente si la hay, y busca imágenes
+    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
+    solo con licencia que permita el uso comercial, con license y attribution."
+- agent: researcher
+  task: "Marca BYD. Fuentes en el registro y modelos en data/raw/byd/. Escribe
+    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
+    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
+    (inicio de venta en España) con su fuente si la hay, y busca imágenes
+    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
+    solo con licencia que permita el uso comercial, con license y attribution."
+- agent: researcher
+  task: "Marca Kia. Fuentes en el registro y modelos en data/raw/kia/. Escribe
+    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
+    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
+    (inicio de venta en España) con su fuente si la hay, y busca imágenes
+    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
+    solo con licencia que permita el uso comercial, con license y attribution."
+- agent: researcher
+  task: "Marca Audi. Fuentes en el registro y modelos en data/raw/audi/. Escribe
+    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
+    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
+    (inicio de venta en España) con su fuente si la hay, y busca imágenes
+    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
+    solo con licencia que permita el uso comercial, con license y attribution."
+- agent: researcher
+  task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/.
+    Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de
+    RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
+    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
+    registro), solo con licencia que permita el uso comercial, con license y
+    attribution."
+- agent: researcher
+  task: "Marca Volkswagen. Sin dato en el mapa por la lectura parcial de la
+    fuente. Fuentes en el registro y modelos en data/raw/volkswagen/. Escribe
+    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
+    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
+    (inicio de venta en España) con su fuente si la hay, y busca imágenes
+    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
+    solo con licencia que permita el uso comercial, con license y attribution."
+- agent: researcher
+  task: "Marca Hyundai. Fuentes en el registro y modelos en data/raw/hyundai/.
+    Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de
+    RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
+    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
+    registro), solo con licencia que permita el uso comercial, con license y
+    attribution."
+- agent: researcher
+  task: "Marca MG. Fuentes en el registro y modelos en data/raw/mg/. Escribe
+    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
+    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
+    (inicio de venta en España) con su fuente si la hay, y busca imágenes
+    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
+    solo con licencia que permita el uso comercial, con license y attribution."

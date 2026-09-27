@@ -96,3 +96,23 @@ sources:
       No registrar imágenes hasta verificar el texto de /about/copyright.
     last_verified: 2026-09-22
     status: active
+
+  - id: wikimedia-commons
+    brand: (varias; solo imágenes)
+    tier: T3
+    market: global
+    kind: [images]
+    urls:
+      home: https://commons.wikimedia.org/
+      api: https://commons.wikimedia.org/w/api.php   # búsqueda y licencia de cada fichero (extmetadata)
+      terms: https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia
+    image_license: >
+      La licencia es de cada fichero, no del sitio: se lee en su página o en el campo extmetadata
+      (LicenseShortName, Artist) del API. Solo valen las que permiten el uso comercial: CC0, CC BY,
+      CC BY-SA o dominio público (PRD-001, RF-8). La atribución es la que pide cada fichero.
+    notes: >
+      Fuente de imágenes por defecto (PRD-001, RF-8). Sirve solo para imágenes, nunca para datos del
+      coche. robots.txt bloquea /wiki/Special:, no las páginas de fichero ni el API. Registrada a mano
+      al cerrar la licencia de las imágenes; home, términos y API responden (2026-09-27).
+    last_verified: 2026-09-27
+    status: active
