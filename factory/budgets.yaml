@@ -23,7 +23,7 @@ agents:
   # suma asignada: 20 USD, el tope global entero: ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
-    max_usd_per_period: 8    # 2026-09-26: 1 USD al designer y 1 al architect
+    max_usd_per_period: 7    # 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer
     max_usd_per_run: 1.00
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
@@ -84,8 +84,8 @@ agents:
     network: false
 
   designer:
-    max_runs_per_day: 1
-    max_usd_per_period: 1
+    max_runs_per_day: 2   # 2026-09-27: second run to test the isolated launch
+    max_usd_per_period: 2   # 0.52 spent + up to 0.75 per run no longer fit in 1
     max_usd_per_run: 0.75   # 0.50 cortó la primera (tarjeta y filtros) a 0,52, con los ficheros ya escritos
     max_turns_per_run: 20
     api_key_env: DESIGNER_API_KEY
