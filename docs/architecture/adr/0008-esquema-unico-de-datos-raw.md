@@ -96,7 +96,7 @@ Detalle (la referencia completa, con el ejemplo válido, está en `data-model.md
 - **CV a kW:** se acepta. `power_kw` = CV × 0,7355, redondeado a entero, con la fuente del dato en
   CV y `note: "publicado: 204 CV"`. Es un cambio de unidad exacto, no una estimación (ADR-0001, regla 7).
 - **`images`:** la forma queda fijada (`url`, `source_id`, `retrieved`, `license`, `attribution`),
-  pero el Researcher deja `images: []` hasta que PRD-001 resuelva la licencia de las imágenes.
+  y se rellena según el orden de fuentes de PRD-001, RF-8 (Commons, prensa con términos escritos).
 - **Fuera de esta decisión:** la comprobación automática, la migración de Cupra y Polestar, la
   retirada de los parches de `web/src/lib/data.ts`, el cambio de `.claude/agents/researcher.md` y
   el mercado (solo España).
@@ -140,5 +140,6 @@ Las decidió el responsable del producto. Las que tocan el alcance están en PRD
    (RF-12, CA-15).
 5. **Nombre de marca:** `brand_name` en cada fichero, igual en toda la carpeta. Descartado un fichero
    de marcas aparte: un fichero más que cruzar para un solo campo.
-6. **Imágenes:** forma fijada en `data-model.md`; `images: []` hasta resolver la licencia en PRD-001.
+6. **Imágenes:** forma fijada en `data-model.md`. La licencia se resolvió en PRD-001 (RF-8): Commons
+   primero, sala de prensa solo con términos escritos, silueta del segmento si no hay ninguna.
 7. **CV a kW:** se acepta la conversión, con la nota del valor publicado.

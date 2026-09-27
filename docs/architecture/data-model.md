@@ -62,7 +62,7 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
 | `needs_review` | booleano | sí | ADR-0001, regla 3 |
 | `specs` | mapa de valores agregados del modelo (abajo) | no | RF-1, RF-2 |
 | `versions` | lista de versiones (sección 4); puede ir vacía si `announced` | sí | todo |
-| `images` | lista de imágenes (forma abajo); **`[]` hasta que PRD-001 resuelva la licencia** | sí | RF-8, CA-10 |
+| `images` | lista de imágenes (forma abajo); `[]` si no hay ninguna con licencia válida | sí | RF-8, CA-10, CA-17 |
 | `open_questions` | lista de textos | no | — |
 
 - `launch` es la fecha prevista si el estado es `announced` (ADR-0001, regla 4) y la de inicio de
@@ -74,8 +74,11 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
   crossover va a `suv_pequeno`, `suv_compacto` o `suv_grande` según cómo lo presente. Sin segmento, la
   tarjeta dice "por confirmar" y el modelo no sale en ese filtro (RF-12).
 - `status: discontinued` también se publica, con la etiqueta "Descatalogado" (RF-7).
-- **Imagen** (cuando haya licencia): `url`, `source_id`, `retrieved`, `license` (texto o URL de los
-  términos) y `attribution` (texto que exige la licencia, o `null`). Sin `license` no se publica (CA-10).
+- **Imagen:** `url`, `source_id`, `retrieved`, `license` (identificador, p. ej. `CC-BY-SA-4.0`, o URL
+  de los términos) y `attribution` (texto que exige la licencia, o `null`). Sin `license` no se publica
+  (CA-10). Orden de fuentes de PRD-001, RF-8: Wikimedia Commons con licencia que permita uso comercial;
+  sala de prensa solo con términos escritos que lo permitan. Sin imagen, la web muestra la silueta del
+  segmento (CA-17).
 - `specs` solo recoge lo que la fuente publica **para el modelo entero** y no por versión. Campos
   permitidos: `wltp_max_km`, `power_max_kw`, `dc_max_kw`, `ac_max_kw`, `battery_kwh_options`
   (lista de números) y `drivetrains` (lista de valores de tracción). `specs` no lleva `unit`.
