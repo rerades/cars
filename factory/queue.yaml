@@ -150,6 +150,20 @@
     (inicio de venta en España) con su fuente si la hay, y busca imágenes
     primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
     solo con licencia que permita el uso comercial, con license y attribution."
+- agent: designer
+  task: "Especifica en docs/design/siluetas-segmento.md las siluetas que la
+    tarjeta muestra cuando un modelo no tiene imagen con licencia (RF-8,
+    CA-17). tarjeta-modelo.md y tokens.md («Silueta de segmento») dicen dónde
+    y a qué tamaño van, pero no su dibujo. Una por cada segmento de RF-11
+    (urbano, compacto, berlina, familiar, SUV pequeño, SUV compacto, SUV
+    grande, monovolumen, furgoneta y deportivo) y una genérica para cuando
+    falta el segmento: 11 en total. Para cada una, qué rasgos la distinguen de
+    las demás (altura, largo, caída del techo, portón) y su dibujo de
+    referencia como SVG dentro del documento, todas con el mismo viewBox, el
+    mismo grosor de trazo y el color con currentColor, para que se lean al
+    tamaño de --size-segment-icon. Son decorativas (aria-hidden), sin texto ni
+    marca reconocible. Si hace falta un token nuevo, añádelo en tokens.md con
+    su uso, y enlaza el documento nuevo desde tarjeta-modelo.md."
 - agent: researcher
   task: "Marca Audi. Fuentes en el registro y modelos en data/raw/audi/. Escribe
     exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
