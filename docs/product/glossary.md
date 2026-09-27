@@ -10,5 +10,5 @@
 | **Autonomía WLTP** | Autonomía homologada según el ciclo WLTP europeo, en km. |
 | **Capacidad útil** | kWh de batería realmente utilizables. |
 | **Carga AC / DC** | Potencia máxima de carga en corriente alterna / continua, en kW. |
-| **Segmento** | Clasificación por tamaño (A, B, C, D, E, SUV…). |
+| **Segmento** | Clasificación de mercado de un modelo: urbano, compacto, berlina, familiar, SUV pequeño, SUV compacto, SUV grande, monovolumen, furgoneta o deportivo (PRD-001, RF-11). |
 | **Mercado** | País o región donde una versión se comercializa. |

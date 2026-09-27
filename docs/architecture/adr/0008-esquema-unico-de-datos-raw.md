@@ -1,6 +1,6 @@
 # ADR-0008 — Esquema único para los YAML de `data/raw/`
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-09-27)
 - **Fecha:** 2026-09-27
 
 ## Contexto
@@ -77,8 +77,8 @@ Detalle (la referencia completa, con el ejemplo válido, está en `data-model.md
 - **Unidades:** la unidad va en el nombre (`_kw`, `_km`, `_kwh`) y no se escribe `unit`, salvo en
   `price` (`EUR`). Sin CV: si solo hay CV, se convierte a kW y la nota conserva el dato publicado.
 - **Valores permitidos:** `status`: `on_sale | announced | discontinued`. `drivetrain`:
-  `fwd | rwd | awd`. `segment`: `a | b | c | d | e | suv` (lista del glosario de producto; se amplía
-  cambiando `data-model.md`). Minúsculas y `snake_case`.
+  `fwd | rwd | awd`. `segment`: `urbano | compacto | berlina | familiar | suv_pequeno | suv_compacto | suv_grande |
+  monovolumen | furgoneta | deportivo` (PRD-001, RF-11; se amplía cambiando el PRD y `data-model.md`). Minúsculas y `snake_case`.
 - **Valor con fuente:** `value`, `source_id`, `url`, `retrieved`, `tier`, más `note` opcional.
   **Precio:** ese formato más `unit`, `price_kind` (siempre), y `price_terms` y `price_terms_url`
   obligatorias si `financed` y prohibidas si `pvp`. Ambos son ADR-0001 tal cual.
@@ -90,9 +90,16 @@ Detalle (la referencia completa, con el ejemplo válido, está en `data-model.md
   (RF-2) tienen un solo nombre y una sola unidad.
 - **Autonomía y tracción del modelo** se derivan de las versiones; `specs.wltp_max_km` y
   `specs.drivetrains` solo cuando la fuente no da versión por versión (caso Polestar).
+- **`launch`:** fecha de inicio de venta en España (`YYYY-MM`), con fuente. Ordena por novedad
+  (RF-3) y da la fecha prevista de un modelo `announced` (RF-7).
+- **`brand_name`** va en cada fichero y la comprobación exige que sea igual en toda la carpeta.
+- **CV a kW:** se acepta. `power_kw` = CV × 0,7355, redondeado a entero, con la fuente del dato en
+  CV y `note: "publicado: 204 CV"`. Es un cambio de unidad exacto, no una estimación (ADR-0001, regla 7).
+- **`images`:** la forma queda fijada (`url`, `source_id`, `retrieved`, `license`, `attribution`),
+  y se rellena según el orden de fuentes de PRD-001, RF-8 (Commons, prensa con términos escritos).
 - **Fuera de esta decisión:** la comprobación automática, la migración de Cupra y Polestar, la
-  retirada de los parches de `web/src/lib/data.ts`, el cambio de `.claude/agents/researcher.md`, la
-  forma de `images` y el mercado (solo España).
+  retirada de los parches de `web/src/lib/data.ts`, el cambio de `.claude/agents/researcher.md` y
+  el mercado (solo España).
 
 ## Consecuencias
 **Buenas**
@@ -112,26 +119,27 @@ Detalle (la referencia completa, con el ejemplo válido, está en `data-model.md
 - **Rigidez:** una clave nueva o un valor nuevo de `segment` obliga a cambiar `data-model.md`, la
   comprobación y los ficheros existentes. Es el precio de tener un solo formato.
 - **`segment` es una clasificación, no un dato medido.** Ninguna marca lo da de forma explícita, y
-  ADR-0001 habla de "no estimar". La regla provisoria (fuente que lo clasifique, T3 admitido, si no
-  `null`) puede dejar muchos modelos sin segmento y, por tanto, sin tarjeta completa (RF-1) ni
-  páginas de segmento (RF-10). Ver preguntas abiertas.
-- **`power_kw` desde CV es una conversión**, no un dato publicado. Se permite con nota; si se
-  considera una estimación (ADR-0001, regla 7), habría que dejar el campo vacío en marcas que solo
-  dan CV.
-- **`brand_name` se repite en cada fichero de una marca** y puede divergir entre ellos.
+  ADR-0001 habla de "no estimar". La regla (fuente que lo clasifique, T3 admitido, si no `null`)
+  puede dejar modelos sin segmento: se muestran con "por confirmar" y no salen en su filtro ni en
+  las páginas de segmento (PRD-001, RF-12).
+- **`power_kw` desde CV es una conversión**, no un dato publicado. Se acepta con la nota del valor
+  original, para que se pueda comprobar contra la fuente.
+- **`brand_name` se repite en cada fichero de una marca.** La comprobación impide que diverja.
 - **B no queda muerta:** si aparecen lectores automáticos por marca, cada uno debe emitir este
   esquema y pasar la misma comprobación. Si el volumen de marcas crece y el esquema se queda
   pequeño, esta ADR se revisa, no se rodea con adaptadores.
 
-## Preguntas abiertas (no decididas aquí)
-1. **Segmento:** ¿`suv` es un segmento más o una carrocería? El glosario lo lista junto a A–E y una
-   sola lista obliga a elegir entre "C" y "SUV" para un Tavascan. ¿Y furgonetas y deportivos? ¿Vale
-   una fuente T3 para clasificar? Decide Producto.
-2. **Novedad (RF-3):** ¿qué es "novedad" para un modelo a la venta? Se ha dejado `launch` opcional,
-   pero nadie lo rellena hoy.
-3. **`discontinued`:** ¿se muestra en el catálogo? PRD-001 solo filtra "a la venta" y "próximamente".
-4. **Modelos sin segmento, autonomía o tracción:** ¿se muestran, se excluyen de los filtros o se
-   ocultan? El PRD solo cubre el precio ausente.
-5. **Nombre de marca:** ¿`brand_name` en cada fichero o un fichero de marcas aparte?
-6. **Imágenes:** la forma de `images` depende de la licencia (pregunta abierta de PRD-001).
-7. **Conversión de CV a kW:** ¿se acepta como dato derivado?
+## Preguntas resueltas (2026-09-27)
+Las decidió el responsable del producto. Las que tocan el alcance están en PRD-001 (sección 8).
+1. **Segmento:** una sola lista de mercado, con SUV pequeño, compacto y grande como segmentos
+   (PRD-001, RF-11). Vale una fuente T3. Descartados dos campos (tamaño y carrocería) y A–E solo.
+2. **Novedad:** `launch`, la fecha de inicio de venta en España (RF-3, CA-16).
+3. **`discontinued`:** se muestra con la etiqueta "Descatalogado" y es un valor más del filtro de
+   estado (RF-7, CA-14).
+4. **Datos ausentes:** el modelo se muestra con "por confirmar" y no sale al filtrar por ese campo
+   (RF-12, CA-15).
+5. **Nombre de marca:** `brand_name` en cada fichero, igual en toda la carpeta. Descartado un fichero
+   de marcas aparte: un fichero más que cruzar para un solo campo.
+6. **Imágenes:** forma fijada en `data-model.md`. La licencia se resolvió en PRD-001 (RF-8): Commons
+   primero, sala de prensa solo con términos escritos, silueta del segmento si no hay ninguna.
+7. **CV a kW:** se acepta la conversión, con la nota del valor publicado.

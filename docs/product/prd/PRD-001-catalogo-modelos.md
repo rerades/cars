@@ -38,16 +38,18 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 ## 4. Requisitos funcionales
 - **RF-1:** El catálogo muestra una tarjeta por modelo con: marca, modelo, imagen, precio desde (España), autonomía WLTP máxima, segmento.
 - **RF-2:** El visitante puede filtrar por marca, segmento, rango de precio, autonomía WLTP mínima y tracción. Cualquier combinación de filtros es posible, tenga o no página pregenerada (RF-10); las que no la tienen se resuelven en el navegador.
-- **RF-3:** El visitante puede ordenar por precio, autonomía y novedad.
+- **RF-3:** El visitante puede ordenar por precio, autonomía y novedad. La novedad es la fecha de inicio de venta en España (mes y año, con fuente); los modelos sin esa fecha quedan al final.
 - **RF-4:** Existe una página por marca (`/marcas/{marca}`) con sus modelos.
 - **RF-5:** El estado de filtros y orden se refleja en la URL (query string) y se puede compartir. Para las combinaciones sin página pregenerada, el filtrado ocurre en el navegador a partir de esa URL; abrirla reproduce los mismos resultados, aunque no sea indexable.
 - **RF-6:** Si ningún modelo cumple los filtros, se muestra un estado vacío con la opción de limpiar los filtros.
-- **RF-7:** Se incluyen modelos **anunciados pero no comercializados**, con la etiqueta "Próximamente" y la fecha prevista si se conoce. Se pueden filtrar por estado (a la venta / próximamente).
-- **RF-8:** Cada tarjeta muestra una imagen del modelo procedente de una fuente registrada, con su atribución si la licencia lo exige.
+- **RF-7:** Se incluyen modelos **anunciados pero no comercializados**, con la etiqueta "Próximamente" y la fecha prevista si se conoce. Se pueden filtrar por estado (a la venta / próximamente / descatalogado). Los modelos **descatalogados** también aparecen, con la etiqueta "Descatalogado".
+- **RF-8:** Cada tarjeta muestra una imagen del modelo procedente de una fuente registrada, con su atribución si la licencia lo exige. Por orden: (1) Wikimedia Commons, con licencia explícita que permita el uso comercial (CC0, CC BY, CC BY-SA o dominio público); (2) la sala de prensa de la marca, solo si sus términos escritos permiten este uso; (3) si no hay ninguna, una silueta genérica del segmento.
 - **RF-9:** Un precio que no es PVP se muestra etiquetado como **"precio con oferta"**, y la ficha del modelo muestra el texto literal de sus condiciones. Estos precios entran en los filtros y en el orden por precio como cualquier otro, siempre con su etiqueta.
 - **RF-10:** Existe una lista corta y explícita de páginas indexables pregeneradas, cada una con su propio título y su propio texto introductorio (no repetido entre páginas): una por marca (la de RF-4), una por segmento, y una por cada tramo sencillo de precio y de autonomía. Cada página muestra solo los modelos que cumplen su criterio, con el HTML completo sin depender de JavaScript. Las URL son estables y amigables; la de marca es `/marcas/{marca}`. Los tramos, sobre el "precio desde" (que incluye el precio con oferta de RF-9) y la autonomía WLTP máxima, son:
   - Precio: «hasta 30.000 €», «de 30.000 a 45.000 €», «más de 45.000 €».
   - Autonomía: «más de 400 km», «más de 500 km».
+- **RF-11:** El segmento es uno de esta lista, la que usa quien compra: urbano, compacto, berlina, familiar, SUV pequeño, SUV compacto, SUV grande, monovolumen, furgoneta y deportivo. Cada modelo tiene uno solo.
+- **RF-12:** Un modelo sin segmento, autonomía o tracción se muestra igual, con "por confirmar" en el campo que falta. Si el visitante filtra por ese campo, el modelo no aparece, porque no se puede afirmar que cumpla el filtro.
 
 ## 5. Requisitos no funcionales
 - **RNF-1:** Renderizado en servidor o estático para SEO.
@@ -77,6 +79,10 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - [ ] **CA-11** (→ RF-9): Dado un modelo cuyo precio es `financed`, cuando abro su tarjeta, entonces veo la etiqueta "precio con oferta", y en su ficha veo el texto literal de las condiciones.
 - [ ] **CA-12** (→ RF-10): Dado el sitio construido, cuando reviso las páginas pregeneradas de marca, segmento, precio y autonomía, entonces (a) hay exactamente una por cada marca y segmento con modelos y una por cada tramo de RF-10; (b) cada una tiene título y texto introductorio distintos de los de las demás; (c) su HTML servido ya contiene las tarjetas de los modelos que cumplen su criterio, sin ejecutar JavaScript; y (d) no existe página pregenerada para ninguna otra combinación de filtros, por ejemplo marca + segmento.
 - [ ] **CA-13** (→ RF-5, RF-10): Dada una combinación sin página pregenerada (por ejemplo, segmento SUV + autonomía ≥ 400 km + tracción total), cuando abro su URL con query string en una sesión nueva, entonces veo los mismos resultados que quien la compartió y la página no figura entre las indexables de RF-10.
+- [ ] **CA-14** (→ RF-7): Dado un modelo descatalogado, cuando abro `/coches`, entonces aparece con la etiqueta "Descatalogado". Con el filtro "a la venta" no aparece.
+- [ ] **CA-15** (→ RF-12): Dado un modelo sin dato de autonomía, cuando abro `/coches`, entonces veo su tarjeta con "Autonomía por confirmar"; cuando aplico "autonomía ≥ 400 km", entonces no aparece.
+- [ ] **CA-16** (→ RF-3): Dados dos modelos con fecha de inicio de venta y uno sin ella, cuando ordeno por novedad, entonces el más reciente va primero y el que no tiene fecha, al final.
+- [ ] **CA-17** (→ RF-8): Dado un modelo sin imagen con licencia registrada, cuando abro `/coches`, entonces su tarjeta muestra la silueta genérica de su segmento, sin imagen de la marca.
 - [ ] **CA-7** (→ RNF-5): Al cargar cualquier página del catálogo no se crea ninguna cookie ni se escribe nada en localStorage.
 
 ## 8. Decisiones y preguntas abiertas
@@ -93,8 +99,17 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - **Tramos de precio y autonomía (RF-10):** confirmados los que propuso el agente de Producto, cinco páginas en total. Son los cortes que usa quien compra: por debajo de 30.000 € está el coche urbano, por encima de 45.000 € el premium, y los 400 y los 500 km son las cifras con las que se habla de autonomía. Alternativa descartada: esperar a tener el catálogo para elegir los cortes con los datos delante, porque bloqueaba RF-10 y los tramos se pueden ajustar sin tocar nada más. Con esto CA-12 queda verificable entero.
 - **Filtros del catálogo e indexación:** enfoque híbrido, decidido por el responsable del producto. (a) Se pregenera una lista corta y explícita de páginas indexables (marca, segmento, tramos de precio y de autonomía; RF-10). (b) Cualquier otra combinación se resuelve en el navegador con su estado en la query string (RF-5, CA-5, CA-13), sin ser indexable. Motivo: ADR-0003 fija un sitio estático, donde una combinación arbitraria no se puede resolver en servidor. Alternativa descartada: pregenerar una página por cada combinación de filtros, porque daría miles de páginas casi idénticas. Tampoco se filtra solo en cliente, porque dejaría sin URL indexable a marcas, segmentos y tramos que interesa posicionar.
 
+### Resueltas (2026-09-27)
+Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsable del producto:
+- **Segmento (RF-11):** una sola lista con los nombres del mercado, donde SUV pequeño, compacto y grande son segmentos. Encaja con cómo busca el comprador y con el ejemplo de CA-13. Vale una fuente de tier 3 (prensa) si la marca no lo publica. Alternativas descartadas: separar tamaño (A–E) y carrocería en dos campos, porque añade un filtro que nadie ha pedido, y usar solo A–E, porque el comprador no busca así.
+- **Novedad (RF-3):** la fecha de inicio de venta en España, que también da la fecha prevista de "Próximamente". Alternativas descartadas: la fecha en que se dio de alta en el catálogo, que mide el trabajo del Researcher y no la novedad del coche, y quitar la novedad del orden.
+- **Descatalogados (RF-7, CA-14):** se muestran con la etiqueta "Descatalogado" y un tercer valor en el filtro de estado. Alternativa descartada: guardarlos solo como histórico.
+- **Datos ausentes (RF-12, CA-15):** el modelo se muestra con "por confirmar" y sale de los resultados cuando se filtra por ese campo, igual que el precio ausente de CA-9. Alternativas descartadas: ocultarlo, que deja huecos en marcas que sí se venden, e incluirlo al filtrar, que da resultados engañosos.
+
+- **Licencia de las imágenes (RF-8, CA-17):** primero Wikimedia Commons, donde cada foto trae su licencia explícita y su atribución, que es lo que pide CA-10; la sala de prensa de la marca solo si sus términos escritos permiten este uso, y si no, una silueta genérica del segmento. Se exige una licencia que permita el uso comercial porque la visión aún no ha decidido si la web se monetiza, y así no hay que volver a revisar las imágenes si lo hace. Alternativas descartadas: las salas de prensa como fuente principal, porque ni Cupra ni Polestar tienen términos confirmados y el «uso editorial» suele excluir el comercial; ir sin imágenes, que resta atractivo al catálogo; y pedir permiso a cada marca, que es lento y no lo puede hacer un agente.
+
 ### Abiertas
-- Licencia de las imágenes: ¿se usan las de las salas de prensa de las marcas (uso editorial) o hace falta otra fuente? Hay que revisar los términos de cada marca.
+- Ninguna.
 
 ## 9. Historial de cambios
 | Fecha | Cambio | Autor |
@@ -104,3 +119,5 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 | 2026-09-23 | Se acepta el precio financiado marcado como tal, con sus condiciones. Añadidos RF-9 y CA-11 | Rod / Claude |
 | 2026-09-25 | Resuelta la pregunta de filtros e indexación (enfoque híbrido). Aclarada la sección 2; ajustados RF-2 y RF-5; añadidos RF-10, CA-12 y CA-13. Abierta la confirmación de los tramos de precio y autonomía | Rod / Claude |
 | 2026-09-25 | Confirmados los tramos de precio y autonomía de RF-10; pasan al propio RF-10 y CA-12 queda verificable | Rod / Claude |
+| 2026-09-27 | Resueltas las preguntas de alcance de ADR-0008: segmento, novedad, descatalogados y datos ausentes. Ajustados RF-3 y RF-7; añadidos RF-11, RF-12 y CA-14 a CA-16 | Rod / Claude |
+| 2026-09-27 | Resuelta la licencia de las imágenes: Commons primero, prensa solo con términos escritos, silueta si no hay ninguna. Ajustado RF-8; añadido CA-17. Sin preguntas abiertas | Rod / Claude |

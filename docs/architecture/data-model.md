@@ -1,5 +1,5 @@
 ---
-status: draft
+status: accepted
 updated: 2026-09-27
 ---
 
@@ -54,15 +54,15 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
 | Campo | Tipo / valores | Obligatorio | Necesario para |
 |---|---|---|---|
 | `brand` | slug (`cupra`); igual al nombre de la carpeta | sí | RF-2, RF-4 |
-| `brand_name` | texto de presentación (`Cupra`) | sí | RF-1 |
+| `brand_name` | texto de presentación (`Cupra`); igual en todos los ficheros de la carpeta | sí | RF-1 |
 | `model` | texto de presentación (`Born`). El fichero es `<slug de model>.yaml` | sí | RF-1 |
 | `status` | `Sourced`; `value`: `on_sale` \| `announced` \| `discontinued` | sí | RF-2, RF-7 |
-| `launch` | `Sourced`; `value`: texto `"YYYY"`, `"YYYY-MM"` o `"YYYY-MM-DD"` | no | RF-3 (novedad), RF-7 |
-| `segment` | `Sourced`; `value`: `a` \| `b` \| `c` \| `d` \| `e` \| `suv` | no (ver nota) | RF-1, RF-2, RF-10 |
+| `launch` | `Sourced`; `value`: texto `"YYYY-MM"` o `"YYYY-MM-DD"` (inicio de venta en España) | no | RF-3 (novedad), RF-7 |
+| `segment` | `Sourced`; `value`: `urbano` \| `compacto` \| `berlina` \| `familiar` \| `suv_pequeno` \| `suv_compacto` \| `suv_grande` \| `monovolumen` \| `furgoneta` \| `deportivo` | no (ver nota) | RF-1, RF-2, RF-10, RF-11 |
 | `needs_review` | booleano | sí | ADR-0001, regla 3 |
 | `specs` | mapa de valores agregados del modelo (abajo) | no | RF-1, RF-2 |
 | `versions` | lista de versiones (sección 4); puede ir vacía si `announced` | sí | todo |
-| `images` | lista; **solo `[]` por ahora** | sí | RF-8 (pendiente) |
+| `images` | lista de imágenes (forma abajo); `[]` si no hay ninguna con licencia válida | sí | RF-8, CA-10, CA-17 |
 | `open_questions` | lista de textos | no | — |
 
 - `launch` es la fecha prevista si el estado es `announced` (ADR-0001, regla 4) y la de inicio de
@@ -70,9 +70,15 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
 - **`segment` es obligatorio para publicar la tarjeta (RF-1), pero un fichero sin él es válido**:
   ninguna fuente de marca lo da de forma explícita. El Researcher lo rellena con la fuente que lo
   clasifique (puede ser T3, que ADR-0001 admite para confirmar datos) y, si no la hay, lo deja
-  `null` y lo anota. Regla de asignación: `suv` si la fuente lo presenta como SUV o crossover; si
-  no, la letra del segmento europeo (A a E). Un modelo que no encaje (furgoneta, deportivo) queda
-  `null` hasta que el producto amplíe la lista.
+  `null` y lo anota. Regla de asignación: el valor de la lista de RF-11 que use la fuente; un SUV o
+  crossover va a `suv_pequeno`, `suv_compacto` o `suv_grande` según cómo lo presente. Sin segmento, la
+  tarjeta dice "por confirmar" y el modelo no sale en ese filtro (RF-12).
+- `status: discontinued` también se publica, con la etiqueta "Descatalogado" (RF-7).
+- **Imagen:** `url`, `source_id`, `retrieved`, `license` (identificador, p. ej. `CC-BY-SA-4.0`, o URL
+  de los términos) y `attribution` (texto que exige la licencia, o `null`). Sin `license` no se publica
+  (CA-10). Orden de fuentes de PRD-001, RF-8: Wikimedia Commons con licencia que permita uso comercial;
+  sala de prensa solo con términos escritos que lo permitan. Sin imagen, la web muestra la silueta del
+  segmento (CA-17).
 - `specs` solo recoge lo que la fuente publica **para el modelo entero** y no por versión. Campos
   permitidos: `wltp_max_km`, `power_max_kw`, `dc_max_kw`, `ac_max_kw`, `battery_kwh_options`
   (lista de números) y `drivetrains` (lista de valores de tracción). `specs` no lleva `unit`.
@@ -129,8 +135,9 @@ Lo que una comprobación automática tendrá que rechazar (la comprobación es t
 5. `price`: `price_kind` presente; `financed` con `price_terms` y `price_terms_url`; `pvp` sin ellos;
    `unit: EUR`; `tier: T1`.
 6. Los `name` de versión no se repiten. `status: on_sale` exige al menos una versión.
-7. `specs.wltp_max_km` coincide con el máximo de las versiones cuando las dos existen.
-8. `unit` aparece solo en `price`; `basis` solo en `battery_kwh`.
+7. `brand_name` es igual en todos los ficheros de la misma carpeta.
+8. `specs.wltp_max_km` coincide con el máximo de las versiones cuando las dos existen.
+9. `unit` aparece solo en `price`; `basis` solo en `battery_kwh`.
 
 ## 7. Ejemplo completo
 
@@ -144,7 +151,7 @@ brand_name: Acme
 model: Volta
 status: {value: on_sale, source_id: acme-es, url: "https://www.acme.example/es/volta", retrieved: 2026-09-20, tier: T1}
 launch: {value: "2025-03", note: "inicio de venta en España", source_id: acme-es, url: "https://www.acme.example/es/prensa/volta", retrieved: 2026-09-20, tier: T1}
-segment: {value: suv, note: "la web lo presenta como SUV compacto", source_id: acme-es, url: "https://www.acme.example/es/volta", retrieved: 2026-09-20, tier: T1}
+segment: {value: suv_compacto, note: "la web lo presenta como SUV compacto", source_id: acme-es, url: "https://www.acme.example/es/volta", retrieved: 2026-09-20, tier: T1}
 needs_review: false
 specs:
   wltp_max_km: {value: 520, note: "hasta 520 km", source_id: acme-es, url: "https://www.acme.example/es/volta", retrieved: 2026-09-20, tier: T1}
