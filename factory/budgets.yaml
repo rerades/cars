@@ -15,12 +15,12 @@ global:
   timezone: Europe/Madrid        # una tarea en curso a las 07:00 termina; no se lanzan nuevas
   default_model: sonnet
   period: monthly            # daily | weekly | monthly
-  max_usd_per_period: 20     # techo total de la factoría (USD-equivalentes)
+  max_usd_per_period: 30     # techo total de la factoría (USD-equivalentes); 20 -> 30 on 2026-09-27 for the Opus trial
   stop_file: factory/STOP    # si existe, no se lanzan tareas nuevas
   auto_pr: true              # al terminar bien, sube la rama y abre la PR (nadie la ha revisado)
 
 agents:
-  # suma asignada: 20 USD, el tope global entero: ningún agente puede agotarlo solo
+  # suma asignada: 30 USD, el tope global entero: ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
     max_usd_per_period: 7    # 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer
@@ -54,8 +54,8 @@ agents:
   architect:
     model: claude-opus-5-5   # 2026-09-27 trial: 2x Sonnet 5 per token; judged on cost per finished task
     max_runs_per_day: 2
-    max_usd_per_period: 3   # 2 se agotó en septiembre: 1,79 gastados a ~0,36 por ejecución
-    max_usd_per_run: 0.75   # investigar y escribir la ADR en la misma ejecución
+    max_usd_per_period: 8   # 3 -> 8 on 2026-09-27: room for ~10 Opus runs to compare against Sonnet (#80)
+    max_usd_per_run: 1.50   # 0.75 -> 1.50 on 2026-09-27: Opus is 2x per token; a cut run would skew the trial
     max_turns_per_run: 20
     api_key_env: ARCHITECT_API_KEY
     write_paths: [docs/architecture/, docs/bitacora/]
@@ -87,8 +87,8 @@ agents:
   designer:
     model: claude-opus-5-5   # 2026-09-27 trial: 2x Sonnet 5 per token; judged on cost per finished task
     max_runs_per_day: 2   # 2026-09-27: second run to test the isolated launch
-    max_usd_per_period: 2   # 0.52 spent + up to 0.75 per run no longer fit in 1
-    max_usd_per_run: 1.00   # 0.75 cut the 2026-09-27 rework at 0.77 on its last turn: 3 specs to rewrite, 36k output tokens
+    max_usd_per_period: 7   # 2 -> 7 on 2026-09-27: room for ~5 Opus runs to compare against Sonnet (#80)
+    max_usd_per_run: 2.00   # 1.00 -> 2.00 on 2026-09-27: Opus is 2x per token; the Sonnet rework already reached 0.77
     max_turns_per_run: 20
     api_key_env: DESIGNER_API_KEY
     write_paths: [docs/design/, docs/bitacora/]   # especifica; el código lo escribe el developer
