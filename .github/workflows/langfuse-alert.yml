@@ -20,5 +20,10 @@ jobs:
           # Through env, never interpolated into the script: the payload is external input.
           PAYLOAD: ${{ toJSON(github.event.client_payload) }}
         run: |
+          # Langfuse also notifies on recovery (ALERT -> OK); that one needs no issue.
+          # Documented shape nests fields under .payload; the fallback covers a flattened one.
+          severity=$(jq -r '.payload.severity // .severity // ""' <<< "$PAYLOAD")
+          if [ "$severity" = "OK" ]; then echo "Recovery, no issue."; exit 0; fi
+          title=$(jq -r '.payload.message.title // .message.title // "Langfuse alert"' <<< "$PAYLOAD")
           printf 'Alert received from Langfuse.\n\n```json\n%s\n```\n' "$PAYLOAD" > body.md
-          gh issue create --title "Langfuse alert $(date -u +%F)" --body-file body.md
+          gh issue create --title "$title ($(date -u +%F))" --body-file body.md
