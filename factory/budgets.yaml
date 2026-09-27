@@ -86,7 +86,7 @@ agents:
   designer:
     max_runs_per_day: 2   # 2026-09-27: second run to test the isolated launch
     max_usd_per_period: 2   # 0.52 spent + up to 0.75 per run no longer fit in 1
-    max_usd_per_run: 0.75   # 0.50 cortó la primera (tarjeta y filtros) a 0,52, con los ficheros ya escritos
+    max_usd_per_run: 1.00   # 0.75 cut the 2026-09-27 rework at 0.77 on its last turn: 3 specs to rewrite, 36k output tokens
     max_turns_per_run: 20
     api_key_env: DESIGNER_API_KEY
     write_paths: [docs/design/, docs/bitacora/]   # especifica; el código lo escribe el developer
