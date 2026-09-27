@@ -47,8 +47,8 @@ Datos consultados el 2026-09-26 (ver «Fuentes»).
 
 ## Decisión
 **La CI ejecutará axe-core con Playwright (`@axe-core/playwright`) sobre el sitio ya construido, y
-bloqueará la PR si encuentra violaciones `critical` o `serious`; las `moderate` y `minor` se
-imprimen y no bloquean.**
+pondrá el job en rojo si encuentra violaciones `critical` o `serious`; las `moderate` y `minor` se
+imprimen y lo dejan en verde. El job informa: no es requisito para fusionar (2026-09-27).**
 
 Detalles:
 - **Sobre el build, no sobre el código.** Se construye `web/` y se sirve el resultado estático; los
@@ -58,8 +58,8 @@ Detalles:
   |---|---|---|
   | Listado | RF-1, `/coches` | `/coches` |
   | Marca | RF-4, RF-10 | `/marcas/{marca}` con una marca cualquiera con modelos |
-  | Segmento | RF-10 | una página de segmento con modelos |
-  | Tramo | RF-10 | una página de tramo (precio o autonomía) |
+  | Segmento | RF-10 | `/segmentos/{segmento}` con un segmento con modelos |
+  | Tramo | RF-10 | una de `/precio/…` o `/autonomia/…` (lista en PRD-001, RF-10) |
   | Estado vacío | RF-6, CA-6 | `/coches` con una query string que no da ningún resultado |
   Se comprueba una página por plantilla, no todas las páginas: las de una misma plantilla
   comparten estructura, y el contenido variable es dato, no marcado.
@@ -72,8 +72,8 @@ Detalles:
   filtrar en cliente y porque el visitante real ejecuta JS.
 - **Momento en la CI.** Un job propio, **después del build de `web/` y de que pasen `npm test` y
   `pnpm run typecheck`** (el gestor pasó a ser pnpm en ADR-0007, posterior a esta ADR), en cada PR que toque `web/` o `data/`. Se ejecuta antes del merge y su
-  fallo bloquea el merge. La forma exacta del workflow, y si es requisito de rama protegida, la
-  fija la ADR de CI/CD (pendiente).
+  fallo lo pone en rojo, pero no impide fusionar: no es un check requerido de la rama protegida
+  (decidido el 2026-09-27). La forma exacta del workflow la fija la ADR de CI/CD (pendiente).
 - **Misma instalación para CA-12c.** Playwright también se usará, en tests separados, con un
   contexto con JavaScript desactivado para comprobar que el HTML servido de las páginas de RF-10
   ya trae las tarjetas. Esta ADR **solo** decide que se reutiliza la instalación; los tests de
@@ -82,9 +82,12 @@ Detalles:
   construido, y no se debe bloquear el trabajo de otros PRD por ello:
   - La lista de páginas comprobadas contiene **solo las plantillas ya implementadas**. La PR que
     implementa una plantilla **añade su entrada a la lista en la misma PR**; es parte de terminarla.
-  - Si la PR introduce una plantilla con una violación `critical` o `serious`, esa PR se bloquea:
-    se corrige allí. **No hay línea base ni lista de excepciones que deje pasar violaciones
-    existentes.**
+  - Si la PR introduce una plantilla con una violación `critical` o `serious`, su CI se pone en
+    rojo: se corrige allí o, si es un falso positivo, se documenta como excepción. **No hay línea
+    base que deje pasar violaciones sin documentar.**
+  - **Excepciones documentadas.** Un falso positivo se puede excluir, pero solo documentado junto
+    a la exclusión en el test: la regla de axe, la URL, el motivo y la fecha. La excepción se
+    revisa en la PR que la añade.
   - Una entrada de la lista cuya URL no responde (404 o no se genera) **hace fallar el test**; no
     se omite en silencio, porque una página que desaparece del build no debe quedar sin
     comprobar.
@@ -106,9 +109,9 @@ Detalles:
   puede decidir con una regla. **Siguen necesitando revisión humana**: la navegación completa
   con teclado, el orden y la visibilidad del foco, que los textos alternativos de las imágenes
   (RF-8) tengan sentido y no solo existan, y la coherencia de los mensajes y del estado vacío para
-  un lector de pantalla. Nadie debe citar esta CI como prueba de cumplimiento de RNF-3. **Hoy no
-  hay ningún proceso de revisión humana definido**; sin él, RNF-3 queda cubierto solo en parte. Es
-  una pregunta abierta.
+  un lector de pantalla. Nadie debe citar esta CI como prueba de cumplimiento de RNF-3. La revisión
+  humana la hace el responsable del producto, sin bloquear las PR (2026-09-27); hasta que la haga,
+  RNF-3 queda cubierto solo en parte.
 - **Cobertura limitada de páginas.** Una página por plantilla no verá un problema que dependa de un
   dato concreto (una imagen sin alt solo en un modelo, un contraste roto por una etiqueta
   «Próximamente» que aparece solo en algunos). Se podría ampliar con más páginas a costa de
@@ -117,7 +120,7 @@ Detalles:
   que las lea, son ruido que se ignora.
 - **Falsos positivos y `impact` de axe.** El bloqueo depende de la gravedad que asigne axe-core; si
   una versión nueva reclasifica una regla, la CI puede ponerse roja sin cambios en la web. No hay
-  excepciones automáticas: habrá que decidir cómo se tratan (pregunta abierta).
+  excepciones automáticas: se tratan con una excepción documentada (ver «Decisión»).
 - **El estado vacío necesita un dato que no dé resultados.** La query string de la comprobación
   debe seguir dando cero modelos mientras el catálogo cambie; hay que elegirla con cuidado, o
   el test verá otra vista sin avisar.
@@ -136,12 +139,13 @@ Detalles:
 - Rendimiento (RNF-2) en la CI.
 - Diseño de los tests de CA-12.
 
-**Preguntas abiertas**
-- ¿Quién y cuándo hace la revisión humana de teclado, foco y textos alternativos (RNF-3)?
-- ¿Cuáles son las URL de las plantillas de segmento y tramo? PRD-001 fija solo `/coches` y
-  `/marcas/{marca}` (RF-4, RF-10); el resto no está definido y no lo invento.
-- ¿Se admite alguna excepción documentada a una regla de axe (falso positivo), o nunca?
-- ¿Es este job requisito para poder hacer merge (rama protegida)? Depende de la ADR de CI/CD.
+**Preguntas resueltas (2026-09-27, responsable del producto)**
+- **Revisión humana de teclado, foco y textos alternativos (RNF-3):** la hace el responsable del
+  producto. No bloquea ninguna PR.
+- **URL de las plantillas de segmento y tramo:** fijadas en PRD-001, RF-10: `/segmentos/{segmento}`,
+  `/precio/…` y `/autonomia/…`.
+- **Excepciones a una regla de axe:** sí, documentadas (ver «Decisión»).
+- **¿Es el job requisito para fusionar?** No: informa. En rojo avisa, pero la PR se puede fusionar.
 
 ## Fuentes
 Consultadas con WebFetch el 2026-09-26.
