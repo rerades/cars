@@ -21,6 +21,8 @@ export const ACTIONS_DIR = join(REPO, "ops", "actions");
 export const LOCK = join(REPO, "factory", ".run.lock");
 /** FACTORY_QUEUE existe para las pruebas; en uso normal la cola es factory/queue.yaml. */
 export const QUEUE = process.env.FACTORY_QUEUE || join(REPO, "factory", "queue.yaml");
+/** Where --next parks a task whose run failed. FACTORY_PAUSED exists for the tests. */
+export const PAUSED = process.env.FACTORY_PAUSED || join(REPO, "factory", "queue.paused.yaml");
 
 export interface AgentConfig {
   max_runs_per_day?: number | null;
@@ -199,8 +201,17 @@ export const QUEUE_HEADER = `# Cola de tareas de la factoría. \`node factory/ru
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
 `;
 
-export function writeQueue(items: QueueItem[], path = QUEUE): void {
-  writeFileSync(path, QUEUE_HEADER + (items.length ? stringify(items) : "[]\n"), "utf8");
+export function writeQueue(items: QueueItem[], path = QUEUE, header = QUEUE_HEADER): void {
+  writeFileSync(path, header + (items.length ? stringify(items) : "[]\n"), "utf8");
+}
+
+export const PAUSED_HEADER = `# Tareas en pausa: el orquestador no lee este fichero. Se reactivan moviéndolas a queue.yaml.
+# Una tarea que falla en --next llega aquí sola: ni se pierde ni se reintenta en bucle.
+`;
+
+/** Parks a failed task at the end of the paused list, so it waits for a person. */
+export function pauseTask(item: QueueItem, path = PAUSED): void {
+  writeQueue([...readQueue(path), item], path, PAUSED_HEADER);
 }
 
 // --------------------------------------------------------------------------- ledger
