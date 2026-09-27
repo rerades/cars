@@ -1,0 +1,24 @@
+name: Langfuse alert
+
+# Langfuse fires a repository_dispatch when an alert triggers (failed evals or a run that did not
+# end ok). The factory runs at night, so this turns the alert into an issue waiting in the morning.
+# The payload shape is Langfuse's, so it goes into the issue as-is instead of being parsed.
+on:
+  repository_dispatch:
+    types: [langfuse-alert]
+
+permissions:
+  issues: write
+
+jobs:
+  issue:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          # Through env, never interpolated into the script: the payload is external input.
+          PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+        run: |
+          printf 'Alert received from Langfuse.\n\n```json\n%s\n```\n' "$PAYLOAD" > body.md
+          gh issue create --title "Langfuse alert $(date -u +%F)" --body-file body.md
