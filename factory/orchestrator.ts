@@ -325,6 +325,10 @@ export function buildCommand(cfg: Config, agent: string, task: string): string[]
     "--max-turns", String(a.max_turns_per_run),
     "--max-budget-usd", Number(a.max_usd_per_run).toFixed(2),
     "--permission-mode", a.permission_mode || "acceptEdits",
+    // Only the repo's settings: the person's plugins, MCP servers (Gmail, Drive…) and
+    // claude.ai connectors never reach an agent. Project hooks still load.
+    "--setting-sources", "project",
+    "--strict-mcp-config",
   ];
   if (a.allowed_tools?.length) cmd.push("--allowedTools", ...a.allowed_tools);
   if (a.denied_tools?.length) cmd.push("--disallowedTools", ...a.denied_tools);
@@ -427,6 +431,8 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
     FACTORY_REPO: ws.dir,
     FACTORY_LOG_DIR: ACTIONS_DIR, // outside the worktree, which is deleted at the end
     FACTORY_WRITE_PATHS: JSON.stringify(a.write_paths ?? []),
+    // The Bash tool sources the person's ~/.zshrc (aliases like ls → eza broke designer runs).
+    CLAUDE_CODE_SHELL: "/bin/bash",
   };
 
   writeFileSync(LOCK, `${runId}\n${agent}\n`, "utf8");

@@ -156,6 +156,11 @@ describe("comando", () => {
     assert.equal(after("--model"), "sonnet");
     assert.match(after("-p"), /^tarea\n\n.*RESULTADO: ok/s);
   });
+  test("aísla al agente de la configuración de la persona", () => {
+    const cmd = orq.buildCommand(cfg(), "researcher", "tarea");
+    assert.equal(cmd[cmd.indexOf("--setting-sources") + 1], "project");
+    assert.ok(cmd.includes("--strict-mcp-config"));
+  });
   // En -p no hay quien apruebe permisos: sin allowed_tools el agente no puede hacer nada.
   test("todo agente con presupuesto declara sus herramientas", () => {
     for (const [name, a] of Object.entries(orq.loadConfig().agents ?? {})) {
