@@ -35,6 +35,13 @@
     Cada dato de precio o de límites, con su URL y la fecha de consulta. Estado
     propuesta. De paso, actualiza overview.md: tacha esta decisión con el enlace
     a ADR-0009."
+- agent: reviewer
+  task: "Revisa una PR abierta de una rama agent/* que aún no tenga tu
+    revisión (ningún comentario que empiece por «Veredicto»). Búscala con
+    gh pr list. Si hay varias, elige por este orden: developer, architect,
+    designer, product, researcher; y dentro de cada agente, la más antigua.
+    Revísala entera según tus instrucciones y publica el comentario. Si no hay
+    ninguna pendiente, no revises nada y dilo en el resultado."
 - agent: researcher
   task: "Marca Mercedes-Benz. Fuentes en el registro y modelos en
     data/raw/mercedes-benz/. Escribe exactamente el esquema de
@@ -92,6 +99,13 @@
     imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
     registro), solo con licencia que permita el uso comercial, con license y
     attribution."
+- agent: reviewer
+  task: "Revisa una PR abierta de una rama agent/* que aún no tenga tu
+    revisión (ningún comentario que empiece por «Veredicto»). Búscala con
+    gh pr list. Si hay varias, elige por este orden: developer, architect,
+    designer, product, researcher; y dentro de cada agente, la más antigua.
+    Revísala entera según tus instrucciones y publica el comentario. Si no hay
+    ninguna pendiente, no revises nada y dilo en el resultado."
 - agent: researcher
   task: "Marca Opel. Fuentes en el registro y modelos en data/raw/opel/. Escribe
     exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
@@ -135,6 +149,13 @@
     vuelve atrás. Apóyate en ADR-0002 (control) y en ADR-0009 (hosting) si ya
     está en main; si no, deja el despliegue como pregunta abierta. Estado
     propuesta; tacha la línea en overview.md con el enlace a ADR-0011."
+- agent: reviewer
+  task: "Revisa una PR abierta de una rama agent/* que aún no tenga tu
+    revisión (ningún comentario que empiece por «Veredicto»). Búscala con
+    gh pr list. Si hay varias, elige por este orden: developer, architect,
+    designer, product, researcher; y dentro de cada agente, la más antigua.
+    Revísala entera según tus instrucciones y publica el comentario. Si no hay
+    ninguna pendiente, no revises nada y dilo en el resultado."
 - agent: researcher
   task: "Marca BYD. Fuentes en el registro y modelos en data/raw/byd/. Escribe
     exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
@@ -170,6 +191,13 @@
     (inicio de venta en España) con su fuente si la hay, y busca imágenes
     primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
     solo con licencia que permita el uso comercial, con license y attribution."
+- agent: reviewer
+  task: "Revisa una PR abierta de una rama agent/* que aún no tenga tu
+    revisión (ningún comentario que empiece por «Veredicto»). Búscala con
+    gh pr list. Si hay varias, elige por este orden: developer, architect,
+    designer, product, researcher; y dentro de cada agente, la más antigua.
+    Revísala entera según tus instrucciones y publica el comentario. Si no hay
+    ninguna pendiente, no revises nada y dilo en el resultado."
 - agent: researcher
   task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/.
     Escribe exactamente el esquema de docs/architecture/data-model.md
@@ -201,3 +229,10 @@
     (inicio de venta en España) con su fuente si la hay, y busca imágenes
     primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
     solo con licencia que permita el uso comercial, con license y attribution."
+- agent: reviewer
+  task: "Revisa una PR abierta de una rama agent/* que aún no tenga tu
+    revisión (ningún comentario que empiece por «Veredicto»). Búscala con
+    gh pr list. Si hay varias, elige por este orden: developer, architect,
+    designer, product, researcher; y dentro de cada agente, la más antigua.
+    Revísala entera según tus instrucciones y publica el comentario. Si no hay
+    ninguna pendiente, no revises nada y dilo en el resultado."

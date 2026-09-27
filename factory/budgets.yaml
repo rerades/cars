@@ -23,7 +23,7 @@ agents:
   # suma asignada: 30 USD, el tope global entero: ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
-    max_usd_per_period: 7    # 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer
+    max_usd_per_period: 5    # 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer
     max_usd_per_run: 1.00
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
@@ -97,7 +97,7 @@ agents:
 
   reviewer:
     max_runs_per_day: 2
-    max_usd_per_period: 1
+    max_usd_per_period: 3   # 1 -> 3 on 2026-09-27: 5 queued reviews, one PR per run at ~0.25
     max_usd_per_run: 0.50   # leer una PR entera y sus criterios
     max_turns_per_run: 20
     api_key_env: REVIEWER_API_KEY
