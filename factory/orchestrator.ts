@@ -342,6 +342,9 @@ const RESULT_INSTRUCTION =
   'con `node factory/bitacora.ts add --tipo <decision|hito|nota> --texto "qué has hecho y por qué" ' +
   "[--refs ADR-0001 RF-3]`. Usa `decision` si hay un porqué que recordar, `hito` si terminas algo, " +
   "`nota` para el resto. Los commits y las ejecuciones se importan solos: no los escribas." +
+  "\n\nYa estás en la raíz del repositorio: lanza cada comando desde ahí, sin `cd`, sin encadenar " +
+  "con `&&` o `;` y sin redirecciones (`>`, `<<`). Esos comandos piden una aprobación que aquí nadie " +
+  "da y se rechazan. Para leer ficheros usa Read; para escribirlos, Write o Edit. No hay Python." +
   "\n\nTermina tu respuesta con una última línea exacta: `RESULTADO: ok` si completaste la tarea, " +
   "o `RESULTADO: fallido` si no. Hiciste lo que se pedía y algo quedó pendiente, dudoso o sin " +
   "verificar: eso es `ok`, y lo pendiente va en tu resumen. `fallido` es solo si la tarea no " +
