@@ -52,6 +52,7 @@ agents:
     network: false
 
   architect:
+    model: claude-opus-5-5   # 2026-09-27 trial: 2x Sonnet 5 per token; judged on cost per finished task
     max_runs_per_day: 2
     max_usd_per_period: 3   # 2 se agotó en septiembre: 1,79 gastados a ~0,36 por ejecución
     max_usd_per_run: 0.75   # investigar y escribir la ADR en la misma ejecución
@@ -84,6 +85,7 @@ agents:
     network: false
 
   designer:
+    model: claude-opus-5-5   # 2026-09-27 trial: 2x Sonnet 5 per token; judged on cost per finished task
     max_runs_per_day: 2   # 2026-09-27: second run to test the isolated launch
     max_usd_per_period: 2   # 0.52 spent + up to 0.75 per run no longer fit in 1
     max_usd_per_run: 1.00   # 0.75 cut the 2026-09-27 rework at 0.77 on its last turn: 3 specs to rewrite, 36k output tokens
