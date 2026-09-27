@@ -20,7 +20,7 @@ Lee siempre:
 - **La web vive en `web/`**, con su propio `package.json`. La raíz es de la factoría: no la tocas.
 - **Cada `CA` de la historia queda comprobado por una prueba** que falle si el criterio se rompe.
   Si un `CA` no se puede probar automáticamente, dilo en tu resumen en vez de fingir que sí.
-- Antes de terminar, ejecuta lo que hayas añadido (`pnpm test`, `pnpm run build`) y **cuenta el
+- Antes de terminar, ejecuta lo que hayas añadido (`pnpm -C web test`, `pnpm -C web run build`: `-C web` en vez de `cd web`) y **cuenta el
   resultado de verdad**. Una prueba que no has ejecutado no cuenta como verde.
 - Sigue ADR-0003: HTML estático y JavaScript solo donde un requisito lo exija. Nada de React,
   Vue ni Svelte (ADR-0005).
