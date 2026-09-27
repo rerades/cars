@@ -26,4 +26,6 @@ jobs:
           if [ "$severity" = "OK" ]; then echo "Recovery, no issue."; exit 0; fi
           title=$(jq -r '.payload.message.title // .message.title // "Langfuse alert"' <<< "$PAYLOAD")
           printf 'Alert received from Langfuse.\n\n```json\n%s\n```\n' "$PAYLOAD" > body.md
-          gh issue create --title "$title ($(date -u +%F))" --body-file body.md
+          # --label fails if the label is missing; --force creates it or leaves it as is.
+          gh label create langfuse --force --color 5319e7 --description "Alert from Langfuse"
+          gh issue create --title "$title ($(date -u +%F))" --body-file body.md --label langfuse
