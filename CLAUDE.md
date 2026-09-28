@@ -56,6 +56,8 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
 - Hecho: documentación, ADR-0001 y 0002, agente Researcher, orquestador, hooks, bitácora,
   migración a TypeScript, CI, primera ejecución real del Researcher, cola de tareas
   (`factory/queue.yaml` + `run.ts --next`), trazas y evals deterministas (ADR-0004, `run.ts --trace`), envío a Langfuse Cloud,
-  ADR-0003 a 0008 aceptadas, Wikimedia Commons en el registro de fuentes.
-- Pendiente: ADR-0009 a 0011 (hosting, ingesta, publicación de los agentes; en la cola),
+  ADR-0003 a 0009 aceptadas (hosting: static site de Render en `siete3.com`), Wikimedia Commons
+  en el registro de fuentes.
+- Pendiente: ADR-0010 y 0011 (ingesta, publicación de los agentes; en la cola), migrar
+  `siete3.com` a Render (#98),
   verificar que el configurador de Cupra da el PVP sin ayudas.

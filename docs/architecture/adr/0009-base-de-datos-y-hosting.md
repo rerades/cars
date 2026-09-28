@@ -1,6 +1,6 @@
 # ADR-0009 — Base de datos y hosting del sitio estático
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-09-28)
 - **Fecha:** 2026-09-28
 
 ## Contexto
@@ -98,8 +98,9 @@ Detalles:
   No se toca ni se reutiliza el web service `erades.com`.
 - **Dominio:** se añade `siete3.com` como dominio propio del static site. Render añade solo
   `www.siete3.com` y lo redirige a la raíz ([12]). Con `erades.com` son los 2 dominios incluidos
-  en Hobby; si `www` cuenta aparte, el extra cuesta 0,25 $/mes ([12]). Los registros DNS los
-  configura un humano en el registrador de `siete3.com`.
+  en Hobby; si `www` cuenta aparte, el extra cuesta 0,25 $/mes ([12]). El dominio aún no apunta a
+  Render: la migración (crear el static site, DNS en el registrador, verificación y comprobación
+  de CA-7) la hace un humano y está en la issue #98.
 - **Node:** se fija la versión mayor con `NODE_VERSION` o `.node-version` ([16]), acotada a 24,
   para que no salte de versión sola (Render avisa de que un rango sin tope resuelve a la última).
 - **Sin extras que toquen RNF-5:** no se añade analítica ni nada que inyecte scripts o cookies. El
@@ -122,9 +123,8 @@ Detalles:
 **Malas o a vigilar**
 - **Ancho de banda: 5 GB/mes para todo el workspace** ([13]), compartidos con `erades.com`. Es el
   límite más estrecho de esta decisión. Una página con imágenes (RF-8) puede pesar cientos de KB,
-  así que unos miles de visitas al mes bastan para pasarlo. El workspace ya paga una instancia, así
-  que es probable que tenga método de pago: entonces el exceso se **cobra por GB**; sin método de
-  pago, Render **apaga todos los servicios del workspace**, `erades.com` incluido ([13]). Hay que
+  así que unos miles de visitas al mes bastan para pasarlo. El workspace tiene método de pago, así
+  que el exceso se **cobra por GB** y no se apaga nada ([13]). Hay que
   vigilar el uso en el panel de facturación desde el primer mes. Si el coste crece, las opciones
   son servir las imágenes desde otro sitio o mover el estático a Cloudflare Pages, que no cambia
   nada del resto de esta ADR.
@@ -147,8 +147,6 @@ Detalles:
   miles o a varios escritores, habrá que revisar esta ADR.
 
 **Preguntas abiertas**
-- ¿El workspace de Render tiene método de pago? Decide si pasar de 5 GB cobra o apaga los
-  servicios ([13]). Lo comprueba el responsable en el panel de facturación.
 - ¿`www.siete3.com` cuenta como un dominio aparte en el límite de Hobby? No comprobado.
 - ¿Autodeploy de Render o despliegue desde Actions? Se decide en la ADR de publicación de los
   agentes.
@@ -157,6 +155,8 @@ Detalles:
 **Resueltas en esta revisión**
 - Dominio: `siete3.com`, ya comprado por el responsable del proyecto.
 - Proveedor: Render, por decisión del responsable (ver condicionante).
+- Método de pago: el workspace lo tiene (confirmado por el responsable); pasar de 5 GB se cobra,
+  no apaga los servicios.
 
 **Fuentes (consultadas el 2026-09-28)**
 - [1] https://developers.cloudflare.com/pages/functions/pricing/
