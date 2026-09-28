@@ -1,12 +1,18 @@
-# Researcher — Cupra Born. Fuente: cupra-es (T1). Consultado 2026-09-24.
+# Researcher — Cupra Born. Fuente: cupra-es (T1). Consultado 2026-09-24; segment e imagen 2026-09-28.
 brand: cupra
+brand_name: Cupra
 model: Born
 status: {value: on_sale, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+segment: {value: compacto, note: "la web lo presenta como 'compacto 100 % eléctrico'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-28, tier: T1}
 needs_review: true   # texto de price_terms incompleto (ver open_questions)
+specs:
+  battery_kwh_options: {value: [59, 79], source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+  wltp_max_km: {value: 631, note: "'hasta 631 km', máximo de la gama", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+  dc_max_kw: {value: 183, note: "10-80 % desde 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
 versions:
   - name: Born+ (190 CV)
-    battery_kwh: {value: 59, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
-    power_cv: {value: 190, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+    battery_kwh: {value: 59, basis: unknown, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+    power_kw: {value: 140, note: "publicado: 190 CV", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
     price:
       value: 35655.59
       unit: EUR
@@ -19,15 +25,17 @@ versions:
       retrieved: 2026-09-24
       tier: T1
   - name: Born VZ
-    power_cv: {value: 326, note: "'hasta 326 CV'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
-    dc_kw: {value: 183, note: "dato de la ficha del modelo Born; no se atribuye por versión", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+    power_kw: {value: 240, note: "publicado: hasta 326 CV", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+    dc_max_kw: {value: 183, note: "dato de la ficha del modelo Born; no se atribuye por versión", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
     price: null   # sin PVP ni precio financiado visible
-model_level:
-  battery_options_kwh: {value: [59, 79], source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
-  wltp_max_km: {value: 631, note: "'hasta 631 km', máximo de la gama", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
-  dc_max_kw: {value: 183, note: "10-80 % desde 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
-images: []   # sin licencia registrada
+images:
+  - url: "https://commons.wikimedia.org/wiki/File:Cupra_Born_1X7A6953.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-09-28
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "price_terms truncado: la lectura de la página elide el resto de la nota (cuota final, TIN 7,45 %, TAE 9,27 %, coste total; precio al contado 36.505,59 € según lectura parcial). Releer la nota completa en el navegador."
   - "Sin PVP limpio: la web solo muestra precio con oferta."
   - "Batería, WLTP y potencia por versión (VZ 79 kWh) no confirmadas por versión; carga AC no publicada en la ficha."
+  - "launch: fecha de inicio de comercialización en España no publicada en la ficha del modelo (verificado 2026-09-28)."
