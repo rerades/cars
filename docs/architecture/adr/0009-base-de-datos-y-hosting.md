@@ -1,6 +1,6 @@
 # ADR-0009 — Base de datos y hosting del sitio estático
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-09-28)
 - **Fecha:** 2026-09-28
 
 ## Contexto
@@ -22,6 +22,8 @@ Es la decisión pendiente «Base de datos y hosting» de `overview.md`. Parte de
   de algunos hostings.
 - **ADR-0002:** hay presupuesto controlado para la factoría. Ningún documento fija un presupuesto
   para el hosting; se busca coste cero mientras no haya motivo para otra cosa.
+- **Condicionante del responsable del proyecto:** el hosting es Render, en el workspace Hobby que
+  ya usa, y el dominio es `siete3.com` (ver «2. Hosting»).
 
 Son dos preguntas: (1) ¿bastan los YAML como base de datos? y (2) ¿dónde se publica el `dist/`
 que genera Astro?
@@ -46,100 +48,128 @@ que genera Astro?
 
 ### 2. Hosting
 
-Datos consultados el **2026-09-28** en las URL indicadas. Lo que no pude abrir figura como «no
-comprobado».
+**Condicionante del responsable del proyecto (2026-09-28).** La primera versión de esta ADR
+recomendaba Cloudflare Pages. El responsable la rechaza por un dato que el arquitecto no tenía: ya
+usa **Render** como proveedor, con un workspace en el **plan Hobby**, una máquina (el web service
+`erades.com`, instancia Starter en Frankfurt) y un dominio, y quiere publicar la web ahí. El
+dominio de la web será **`siete3.com`**, que ya tiene comprado. La pregunta deja de ser «qué
+proveedor» y pasa a ser «cómo se publica en Render».
 
-| | Cloudflare Pages (plan Free) | GitHub Pages | Netlify (plan Free) |
+Datos consultados el **2026-09-28** en las URL indicadas y, para el estado de la cuenta, con el MCP
+de Render. Lo que no pude comprobar figura como «no comprobado».
+
+| | Static site de Render (elegida) | Reutilizar el web service existente | Cloudflare Pages (plan Free) |
 |---|---|---|---|
-| **Coste** | 0 €. «On both free and paid plans, requests to static assets are free and unlimited» ([1]) | 0 € ([4]) | 0 €, con un límite duro de 300 créditos al mes ([6], [7]) |
-| **Límites** | 500 builds/mes; hasta 20.000 ficheros por sitio; 25 MiB por fichero ([2]) | Sitio publicado ≤ 1 GB; ancho de banda *soft* de 100 GB/mes; 10 builds/hora *soft*, que no aplica si se publica con un workflow propio de Actions ([4]) | 20 créditos por GB servido, 15 por despliegue a producción, 2 por cada 10.000 peticiones; al agotarse, «all of your web projects … are paused» y no se pueden comprar más en Free ([7]) |
-| **CDN en Europa** | 57 ciudades en Europa, Madrid y Barcelona entre ellas ([3]) | No comprobado: la documentación abierta no dice dónde se sirve | No comprobado |
-| **Dominio propio** | Hasta 100 dominios propios por proyecto ([2]) | Sí ([5]); el detalle del HTTPS con dominio propio no lo pude abrir (la URL daba 404) | «Add Custom domains with SSL» ([6]) |
-| **Cookies y analítica por defecto** | Las páginas estáticas no llevan analítica si no se activa. `__cf_bm` se pone solo si se activa Bot Fight Mode o Bot Management, y se puede desactivar por API ([8]). Si Web Analytics usa cookies: no comprobado ([9] no lo dice) | No comprobado; no he encontrado mención a cookies en las páginas abiertas | No comprobado |
-| **Despliegue desde GitHub** | Integración con Git: despliega en cada push y crea una URL de vista previa por PR, salvo PR desde forks ([10]) | Workflow de Actions con `actions/upload-pages-artifact` y `actions/deploy-pages`, en push a la rama por defecto o manual ([5]) | No comprobado en esta ejecución (la página de precios habla de «unlimited deploy previews», [6]) |
-| **Otras restricciones** | — | «not intended for or allowed to be used as a free web-hosting service to run your online business, e-commerce site…» ([4]). Con repo privado, depende del plan ([5]); la visibilidad del repo no la he podido comprobar | La cuenta Free está orientada a «Individual» ([6]) |
+| **Coste** | «Static sites are fast and free to deploy» ([11]) | 0 € extra, pero la instancia ya se paga y la comparte `erades.com` | 0 € ([1]) |
+| **Límites** | Cuenta contra el ancho de banda y los minutos de build **del workspace** ([11]): en Hobby, 5 GB/mes de salida ([13]) y 500 minutos de build ([14]) | Los mismos, más CPU y memoria de una sola instancia | 500 builds/mes; 20.000 ficheros ([2]) |
+| **Al pasar el límite** | Con método de pago, se cobra cada GB extra; sin él, Render «spins down your workspace's services» hasta el mes siguiente ([13]) | Igual | Estáticos ilimitados ([1]) |
+| **CDN** | «global CDN» ([11]); Cloudflare es su proveedor anti-DDoS ([12]). Nodos en España: no comprobado | Ninguno: se sirve desde Frankfurt | 57 ciudades en Europa, Madrid y Barcelona ([3]) |
+| **Dominio propio** | 2 incluidos en Hobby; 0,25 $/mes cada uno más ([12]). TLS automático y HTTP→HTTPS ([12]) | Igual | Hasta 100 por proyecto ([2]) |
+| **Vistas previas por PR** | Sí; si el sitio base es gratis, sus previews también ([15]) | Se cobran como el servicio base ([15]) | Sí ([10]) |
+| **Node y pnpm** | Node por defecto 24.21.0 para servicios creados desde el 2026-09-17; se fija con `NODE_VERSION`, `.node-version` o `engines` ([16]). Detección de pnpm: no comprobado | Ya construye con `pnpm install --frozen-lockfile` (MCP de Render) | No comprobado ([2]) |
 
 **Por qué se descartan:**
 
-- **GitHub Pages:** descartada. Es la más simple (ya vivimos en GitHub y se publica con Actions),
-  pero (a) sus términos excluyen usarlo para un negocio en línea, y la monetización está abierta en la
-  visión: si se decide monetizar, habría que mudarse; (b) el ancho de banda es un límite *soft* de
-  100 GB/mes sin precio por encima; (c) no he podido comprobar la presencia de su CDN en Europa, que
-  pesa en RNF-2; (d) si el repositorio es privado, depende del plan de GitHub.
-- **Netlify (Free):** descartada. El modelo de créditos castiga justo nuestro patrón de uso: cada
-  despliegue a producción cuesta 15 de 300 créditos, así que unas 20 publicaciones al mes agotan el
-  plan sin servir un solo byte ([6], [7]). Cada ejecución del Researcher que llega a `main` es un
-  build (ADR-0003). Al agotarse, **el sitio entero se pausa** y en Free no se pueden comprar más
-  créditos. Pasar a un plan de pago es posible, pero no hay motivo para pagar por lo que las otras
-  dan gratis.
-- **Vercel u otros:** no evaluados en esta ADR. Con tres opciones comparadas y una que cumple todo lo
-  pedido, no he gastado más consulta; si la revisión lo pide, se añade.
+- **Reutilizar el web service `erades.com`:** descartada. ADR-0003 pide un sitio estático sin
+  servidor de aplicación; meterlo en un servicio Node obliga a escribir un servidor, sirve desde
+  una sola región sin CDN (peor para RNF-2) y mezcla dos webs en un despliegue: un fallo de una
+  tumba la otra.
+- **Cloudflare Pages:** descartada por el condicionante. Técnicamente cumplía (y tiene mejores
+  límites de ancho de banda y más nodos en España), pero añade un proveedor y una cuenta más
+  cuando ya hay uno que cubre lo pedido. Queda como plan B si el ancho de banda de Render se queda
+  corto (ver «Consecuencias»).
+- **GitHub Pages y Netlify (Free):** descartadas en la primera versión de esta ADR y siguen
+  descartadas. GitHub Pages excluye en sus términos el uso para un negocio en línea ([4]) y la
+  monetización está abierta; en Netlify Free cada despliegue a producción cuesta 15 de 300
+  créditos y, al agotarse, el sitio se pausa ([6], [7]).
 
 ## Decisión
 **No hay base de datos aparte: los YAML de `data/raw/` (ADR-0008) son la base de datos, y el sitio
-estático se publica en Cloudflare Pages (plan Free), con dominio propio.**
+estático se publica como un *static site* de Render, en el workspace Hobby existente, con el
+dominio `siete3.com`.**
 
 Detalles:
 - **Datos:** Astro lee los YAML en el build. Lo que el cliente necesita para filtrar y ordenar
   (RF-2, RF-3, RF-5) se genera en el build como un fichero estático más, no como una API. Se
   revisa esta parte si ocurre alguna de estas cosas: el build tarda demasiado (umbral por fijar al
   medir), hace falta una consulta por visita o aparece un escritor que no sea el Researcher por PR.
-- **Hosting:** un proyecto de Cloudflare Pages cuyo directorio raíz es `web/` y cuya salida es el
-  `dist/` de Astro. Producción = `main`.
-- **Sin extras que toquen RNF-5:** no se activan Cloudflare Web Analytics, Bot Fight Mode ni ningún
-  producto que inyecte scripts o cookies. Si el dominio se gestiona en Cloudflare, se comprueba que
-  `__cf_bm` está desactivado ([8]). CA-7 se verifica contra la URL publicada, no solo en local.
-- **Cómo llega el build a Pages** (integración con Git de Cloudflare o workflow de Actions que sube
-  el `dist/`), quién dispara el despliegue y si hay merge automático son parte de la decisión
+- **Hosting:** un servicio nuevo de tipo *static site* en el workspace de Render, enlazado al repo
+  de GitHub, rama `main`, directorio raíz `web/` y directorio de publicación el `dist/` de Astro.
+  No se toca ni se reutiliza el web service `erades.com`.
+- **Dominio:** se añade `siete3.com` como dominio propio del static site. Render añade solo
+  `www.siete3.com` y lo redirige a la raíz ([12]). Con `erades.com` son los 2 dominios incluidos
+  en Hobby; si `www` cuenta aparte, el extra cuesta 0,25 $/mes ([12]). El dominio aún no apunta a
+  Render: la migración (crear el static site, DNS en el registrador, verificación y comprobación
+  de CA-7) la hace un humano y está en la issue #98.
+- **Node:** se fija la versión mayor con `NODE_VERSION` o `.node-version` ([16]), acotada a 24,
+  para que no salte de versión sola (Render avisa de que un rango sin tope resuelve a la última).
+- **Sin extras que toquen RNF-5:** no se añade analítica ni nada que inyecte scripts o cookies. El
+  CDN de Render usa Cloudflare ([12]); si pone alguna cookie (`__cf_bm` u otra) está **no
+  comprobado**, así que CA-7 se verifica contra la URL publicada, no solo en local.
+- **Cómo llega el build a Render** (autodeploy de Render en cada push a `main` o despliegue
+  disparado desde Actions), quién lo dispara y si hay merge automático son parte de la decisión
   pendiente «Cómo publican los agentes»; esta ADR no la toma.
 
 ## Consecuencias
 **Buenas**
-- Coste cero y sin límite de peticiones a estáticos ([1]); el límite de 500 builds al mes ([2]) deja
-  margen amplio para las ejecuciones del Researcher.
-- Nodos en Madrid y Barcelona ([3]): buena base para RNF-2, aunque no lo demuestra.
-- Vistas previas por PR ([10]): quien revisa una PR del Researcher o del desarrollador puede ver la
-  web con esos datos antes del merge.
+- Un solo proveedor, ya en uso y con cuenta creada: no hay alta nueva que hacer.
+- El static site es gratis ([11]) y no consume la máquina de pago ni afecta a `erades.com`.
+- Vistas previas por PR gratis ([15]): quien revisa una PR del Researcher o del desarrollador puede
+  ver la web con esos datos antes del merge.
+- TLS gestionado y redirección a HTTPS automáticos ([12]).
 - Sin base de datos no hay credenciales, ni servicio que mantener, ni datos fuera de la revisión por
   PR. Todo lo publicado se puede reconstruir desde un commit.
-- Los términos consultados de Cloudflare Pages no excluyen el uso comercial; no he encontrado
-  cláusula en contra, pero no he leído sus condiciones generales.
 
 **Malas o a vigilar**
-- **Dependencia de un proveedor externo** fuera de GitHub: una cuenta más, con su acceso, que un
-  humano tiene que crear. Los agentes no pueden hacerlo.
-- **Riesgo de cookies de terceros (RNF-5):** Cloudflare tiene productos que ponen cookies
-  (`__cf_bm`, `cf_clearance`, [8]). Activar uno por descuido en el panel rompe CA-7 sin tocar el
-  repositorio. La única defensa es comprobar CA-7 contra producción de forma periódica.
-- **Límite de 20.000 ficheros** ([2]). Con imágenes optimizadas en varios tamaños (RF-8) y una página
-  por marca, segmento y tramo, hoy no se acerca; hay que vigilarlo cuando crezca el catálogo.
-- **LCP no demostrado.** Un CDN cercano no garantiza RNF-2: pesan más el tamaño del fichero de datos
-  del cliente y las imágenes (ADR-0003 ya lo advierte). Hay que medir en producción.
-- **Datos no comprobados** en esta ADR: CDN europeo de GitHub Pages y de Netlify, si Cloudflare Web
-  Analytics usa cookies, y el despliegue desde GitHub en Netlify. El descarte no depende de ellos.
-- **Integración con pnpm (ADR-0007) y con `web/` como raíz:** no he comprobado cómo detecta
-  Cloudflare Pages la versión de pnpm y de Node (el repo pide Node ≥ 24). Lo comprueba el
-  desarrollador al configurar el proyecto; si no encaja, el workflow de Actions lo resuelve.
+- **Ancho de banda: 5 GB/mes para todo el workspace** ([13]), compartidos con `erades.com`. Es el
+  límite más estrecho de esta decisión. Una página con imágenes (RF-8) puede pesar cientos de KB,
+  así que unos miles de visitas al mes bastan para pasarlo. El workspace tiene método de pago, así
+  que el exceso se **cobra por GB** y no se apaga nada ([13]). Hay que
+  vigilar el uso en el panel de facturación desde el primer mes. Si el coste crece, las opciones
+  son servir las imágenes desde otro sitio o mover el estático a Cloudflare Pages, que no cambia
+  nada del resto de esta ADR.
+- **Minutos de build: 500/mes para todo el workspace** ([14]), compartidos con `erades.com` y con
+  las vistas previas. Cada ejecución del Researcher que llega a `main` es un build (ADR-0003). Con
+  builds de pocos minutos hay margen, pero no se ha medido cuánto tarda el de Astro.
+- **Dos dominios incluidos** ([12]): con `erades.com` y `siete3.com` se agotan. Un tercer dominio
+  (o `www` si cuenta aparte) cuesta 0,25 $/mes.
+- **Riesgo de cookies de terceros (RNF-5):** no he comprobado si el CDN de Render pone cookies.
+  Hay que comprobar CA-7 contra producción al publicar y de forma periódica.
+- **LCP no demostrado.** Render no publica dónde tiene nodos; no sé si sirve desde España. Pesan más
+  el tamaño del fichero de datos del cliente y las imágenes (ADR-0003 ya lo advierte). Hay que
+  medir en producción.
+- **Integración con pnpm (ADR-0007) y con `web/` como raíz:** no he comprobado cómo detecta Render
+  pnpm en un static site. El web service `erades.com` ya construye con pnpm, lo que indica que
+  funciona; si no, se desactiva la instalación automática con `SKIP_INSTALL_DEPS` y se instala en
+  el comando de build ([11]).
 - **Los YAML no escalan sin límite como base de datos:** no hay consultas, índices ni integridad
   entre ficheros salvo lo que valide ADR-0008. Con cientos de modelos es suficiente; si se pasa a
   miles o a varios escritores, habrá que revisar esta ADR.
 
 **Preguntas abiertas**
-- ¿Qué dominio y quién lo registra? No está en ningún documento del producto.
-- ¿El repositorio es público o privado? No lo he podido comprobar; no cambia la decisión, pero sí la
-  alternativa de GitHub Pages.
-- ¿Integración con Git de Cloudflare o workflow de Actions? Se decide en la ADR de publicación de
-  los agentes.
+- ¿`www.siete3.com` cuenta como un dominio aparte en el límite de Hobby? No comprobado.
+- ¿Autodeploy de Render o despliegue desde Actions? Se decide en la ADR de publicación de los
+  agentes.
 - ¿Umbral de tiempo de build a partir del cual se reconsidera la base de datos? Por fijar al medir.
+
+**Resueltas en esta revisión**
+- Dominio: `siete3.com`, ya comprado por el responsable del proyecto.
+- Proveedor: Render, por decisión del responsable (ver condicionante).
+- Método de pago: el workspace lo tiene (confirmado por el responsable); pasar de 5 GB se cobra,
+  no apaga los servicios.
 
 **Fuentes (consultadas el 2026-09-28)**
 - [1] https://developers.cloudflare.com/pages/functions/pricing/
 - [2] https://developers.cloudflare.com/pages/platform/limits/
 - [3] https://www.cloudflare.com/network/
 - [4] https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
-- [5] https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 - [6] https://www.netlify.com/pricing/
 - [7] https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/
-- [8] https://developers.cloudflare.com/fundamentals/reference/policies-compliances/cloudflare-cookies/
-- [9] https://developers.cloudflare.com/web-analytics/about/
 - [10] https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/
+- [11] https://render.com/docs/static-sites
+- [12] https://render.com/docs/custom-domains
+- [13] https://render.com/docs/outbound-bandwidth
+- [14] https://render.com/docs/build-pipeline
+- [15] https://render.com/docs/service-previews
+- [16] https://render.com/docs/node-version
+- Estado de la cuenta (workspace, servicio `erades.com`, plan y región): MCP de Render, 2026-09-28.
