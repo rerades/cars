@@ -4,7 +4,7 @@ brand_name: Peugeot
 model: E-2008
 status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
 launch: null
-segment: {value: suv_compacto, note: "el título de la web lo presenta como 'SUV Compacto 100% Eléctrico'", source_id: peugeot-es, url: "https://www.peugeot.es/gama/peugeot-2008/electrico.html", retrieved: 2026-09-29, tier: T1}
+segment: null
 needs_review: false
 specs:
   wltp_max_km: {value: 406, note: "hasta 406 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
@@ -28,6 +28,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, Wikimedia Commons"
 open_questions:
+  - "segment: el buscador titula la página de www.peugeot.es como 'SUV Compacto 100% Eléctrico', pero la página devuelve 403 y no se ha leído: sin fuente leída, queda null (revisión 2026-09-29)."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
   - "Versión concreta del precio de contado no identificada; sin PVP sin oferta; sin batería ni carga."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."

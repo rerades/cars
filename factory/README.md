@@ -133,3 +133,5 @@ pnpm run typecheck   # tsc --noEmit
 
 `factory/launchd/com.darkfactory.orchestrator.plist.example` es la plantilla. Copiar a
 `~/Library/LaunchAgents/`, ajustar rutas y cargar con `launchctl load`.
+`com.darkfactory.reviewer.plist.example` se instala igual y lanza el Revisor a las 06:30, fuera
+de la cola: revisa las PR que abrió la noche.
