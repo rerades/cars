@@ -1,0 +1,17 @@
+# Researcher — Mercedes-Benz G 580 con tecnología EQ. Fuente: mercedes-es (T1, solo existencia de la ficha). Consultado 2026-09-30.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: G 580
+status: {value: on_sale, note: "ficha 'Clase G eléctrico | Precios & Especificaciones' publicada en mercedes-benz.es (visto en índice de buscador; página no leída por timeout)", source_id: mercedes-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/g-class-electric/overview.html", retrieved: 2026-09-30, tier: T1}
+needs_review: false
+versions:
+  - name: G 580 con tecnología EQ
+    price: null   # no se pudo leer ninguna T1 con precio
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/d/df/Mercedes-Benz_G_580_with_EQ_Technology_DSC_0669.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-09-30
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "launch, segment, precio y specs no obtenidos: la web oficial agotó el tiempo de lectura."

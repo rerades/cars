@@ -118,6 +118,27 @@ sources:
     last_verified: 2026-09-29
     status: active
 
+  - id: mercedes-es
+    brand: Mercedes-Benz
+    tier: T1
+    market: ES
+    kind: [prices, specs, announcements]
+    urls:
+      home: https://www.mercedes-benz.es/
+      models: https://www.mercedes-benz.es/passengercars/models/electric.html   # también /models/saloon/cla-electric/overview.html, /models/suv/glc-electric/overview.html, /models/suv/g-class-electric/overview.html, /models/suv/eqs/overview.html
+      prices: https://www.mercedes-benz.es/passengercars/configurator.html
+    image_license: ""   # sin licencia clara registrada: no publicar imágenes de esta web
+    notes: >
+      Pendiente de verificación (2026-09-30): las URL salen del buscador (aparecen indexadas con dominio
+      oficial mercedes-benz.es), pero la lectura directa agotó el tiempo (timeout) en home, robots.txt y
+      fichas, y no se pudo ejecutar curl. No se ha leído ningún precio ni ficha en la web oficial, así que
+      los ficheros de data/raw/mercedes-benz/ llevan price: null. Un resumen de buscador daba "desde"
+      GLC eléctrico 77.167,35 €, EQE SUV 83.244,25 €, EQS SUV 139.937,49 €: sin leer la web no se sabe si
+      es PVP limpio u oferta, no se usa. Gama BEV vista en el índice: CLA, GLC, G 580, EQS SUV, EQE/EQE SUV.
+      Reintentar la lectura de fichas y del configurador, y robots.txt.
+    last_verified: 2026-09-30
+    status: active
+
   - id: wikimedia-commons
     brand: (varias; solo imágenes)
     tier: T3

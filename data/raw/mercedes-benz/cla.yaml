@@ -1,0 +1,18 @@
+# Researcher — Mercedes-Benz CLA eléctrico. Fuente: mercedes-es (T1, solo existencia de la ficha). Consultado 2026-09-30.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: CLA
+status: {value: on_sale, note: "ficha 'CLA Eléctrico | Precios y Especificaciones' publicada en mercedes-benz.es (visto en índice de buscador; página no leída por timeout)", source_id: mercedes-es, url: "https://www.mercedes-benz.es/passengercars/models/saloon/cla-electric/overview.html", retrieved: 2026-09-30, tier: T1}
+needs_review: false
+versions:
+  - name: CLA Eléctrico
+    price: null   # no se pudo leer ninguna T1 con precio
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Mercedes-Benz_Electric_CLA_001.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-09-30
+    license: CC0-1.0
+    attribution: "JustAnotherCarDesigner, Wikimedia Commons (CC0)"
+open_questions:
+  - "launch, segment, versiones, precio y specs no obtenidos: la web oficial agotó el tiempo de lectura."
+  - "Confirmar que la imagen de Commons corresponde al CLA eléctrico de serie (título 'Electric CLA')."
