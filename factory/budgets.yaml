@@ -20,7 +20,7 @@ global:
   auto_pr: true              # al terminar bien, sube la rama y abre la PR (nadie la ha revisado)
 
 agents:
-  # suma asignada: 37 USD de los 50 del tope global (13 sin asignar): ningún agente puede agotarlo solo
+  # suma asignada: 40 USD de los 50 del tope global (10 sin asignar): ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
     max_usd_per_period: 7    # 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
@@ -64,7 +64,7 @@ agents:
 
   developer:
     max_runs_per_day: 4
-    max_usd_per_period: 3
+    max_usd_per_period: 6   # 3 -> 6 on 2026-09-29: stories #34, #35 and #38 queued at up to 1.50 each
     max_usd_per_run: 1.50   # la #33 levanta el proyecto entero; 1.00 se queda corto
     max_turns_per_run: 40
     api_key_env: DEVELOPER_API_KEY
