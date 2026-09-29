@@ -61,7 +61,9 @@ para que respeten el ajuste del navegador (WCAG 1.4.4); nada de `px` fijos en te
 | Token | Tamaño / interlínea | Peso | Uso |
 |---|---|---|---|
 | `--text-title` | 1.5rem / 2rem | 700 | Título de página (`h1`) |
-| `--text-card-title` | 1.125rem / 1.5rem | 600 | Modelo en la tarjeta (`h2`/`h3` según página) |
+| `--text-section` | 1.125rem / 1.5rem | 700 | Encabezados de sección (`h2`: «Explorar», «Filtros», «Modelos»; `paginas-catalogo.md`) |
+| `--text-card-title` | 1.125rem / 1.5rem | 600 | Modelo en la tarjeta (`h3` en todas las páginas del catálogo, `paginas-catalogo.md`) |
+| `--text-group` | 1rem / 1.5rem | 600 | Título de grupo de la franja «Explorar» (`h3`) |
 | `--text-price` | 1.25rem / 1.75rem | 700 | Precio desde |
 | `--text-body` | 1rem / 1.5rem | 400 | Texto general, controles, botones |
 | `--text-small` | 0.875rem / 1.25rem | 400 | Marca, datos, ayudas, atribución |
@@ -76,6 +78,20 @@ Escala de 4 px (la de Tailwind, `--spacing: 0.25rem`); solo se usan estos pasos:
 - Relleno interior de tarjeta: `4`. Separación entre elementos dentro de la tarjeta: `2`. Entre imagen y texto: `3`.
 - Separación entre tarjetas: `4` en móvil, `6` en escritorio.
 - Relleno del panel de filtros: `4`. Separación entre grupos de filtros: `6`; dentro de un grupo, `2`.
+
+## Anchos de página (`paginas-catalogo.md`)
+
+Van en `@theme` como `--container-*` si el Desarrollador prefiere las utilidades `max-w-*` de Tailwind 4; el
+nombre de diseño es este.
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--width-page` | `80rem` | Ancho máximo del contenido de la página, centrado |
+| `--width-prose` | `40rem` | Ancho máximo del texto de entrada, para que la línea se lea bien |
+| `--width-filters` | `16rem` | Columna del panel de filtros en `lg` (el valor que ya fijaba `filtros-catalogo.md`) |
+| `--width-explore-label` | `8rem` | Columna del título de cada grupo de «Explorar» desde `md` |
+
+Márgenes laterales de página: paso `4` en móvil, `6` en `md`, `8` en `lg`. Entre bloques de página: `8`.
 
 ## Tamaño táctil y foco
 
