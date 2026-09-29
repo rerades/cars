@@ -38,7 +38,10 @@ Móvil (< 768 px)                       Escritorio (≥ 1024 px)
 └───────────────────────┘
 ```
 
-- **Escritorio (`lg`)**: panel fijo a la izquierda, 16 rem, con desplazamiento propio; el orden arriba a la derecha.
+La colocación en la página (contador bajo el texto de entrada, fila «Modelos» + orden) la precisa
+`paginas-catalogo.md`, que manda sobre este wireframe.
+
+- **Escritorio (`lg`)**: panel fijo a la izquierda, `--width-filters`, con desplazamiento propio; el orden arriba a la derecha.
   Los filtros se aplican al momento (no hay botón «Aplicar»).
 - **Móvil / `md`**: el botón «Filtros (n)», con el nº de filtros activos, abre el panel a pantalla completa; dentro
   el botón principal «Ver {n} modelos» lo cierra y «Limpiar filtros» queda a su lado. Los resultados se actualizan

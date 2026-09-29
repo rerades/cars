@@ -1,7 +1,7 @@
 ---
 id: VISION
 status: draft
-updated: 2026-09-19
+updated: 2026-09-29
 ---
 
 # Visión del producto
@@ -32,7 +32,7 @@ Personas en Europa, con foco inicial en **España**, que están informándose so
 | Área | PRD |
 |---|---|
 | Catálogo de modelos | PRD-001 |
-| Ficha de modelo | _pendiente_ |
+| Ficha de modelo | PRD-002 |
 | Comparador | _pendiente_ |
 | Rankings | _pendiente_ |
 | Reviews | _pendiente_ |
