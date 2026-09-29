@@ -15,12 +15,12 @@ global:
   timezone: Europe/Madrid        # una tarea en curso a las 07:00 termina; no se lanzan nuevas
   default_model: sonnet
   period: monthly            # daily | weekly | monthly
-  max_usd_per_period: 30     # techo total de la factoría (USD-equivalentes); 20 -> 30 on 2026-09-27 for the Opus trial
+  max_usd_per_period: 50     # techo total de la factoría (USD-equivalentes); 20 -> 30 on 2026-09-27 for the Opus trial; 30 -> 50 on 2026-09-29
   stop_file: factory/STOP    # si existe, no se lanzan tareas nuevas
   auto_pr: true              # al terminar bien, sube la rama y abre la PR (nadie la ha revisado)
 
 agents:
-  # suma asignada: 30 USD, el tope global entero: ningún agente puede agotarlo solo
+  # suma asignada: 37 USD de los 50 del tope global (13 sin asignar): ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
     max_usd_per_period: 7    # 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
@@ -97,7 +97,7 @@ agents:
 
   reviewer:
     max_runs_per_day: 2
-    max_usd_per_period: 3   # 1 -> 3 on 2026-09-27: 5 queued reviews, one PR per run at ~0.25
+    max_usd_per_period: 10   # 1 -> 3 on 2026-09-27; 3 -> 10 on 2026-09-29: every open PR each night, ~0.25-0.30 per PR
     max_usd_per_run: 1.50   # 0.50 -> 1.50 on 2026-09-29: one run reviews every open agent/* PR (~0.25-0.30 each)
     max_turns_per_run: 60   # 20 -> 60 on 2026-09-29: several PRs per run
     api_key_env: REVIEWER_API_KEY
