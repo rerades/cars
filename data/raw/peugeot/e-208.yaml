@@ -1,0 +1,32 @@
+# Researcher — Peugeot E-208. Fuente: peugeot-es (T1), wikimedia-commons. Consultado 2026-09-29.
+brand: peugeot
+brand_name: Peugeot
+model: E-208
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+launch: null
+segment: {value: urbano, note: "el título de la web lo presenta como 'Coche urbano 100% eléctrico'", source_id: peugeot-es, url: "https://www.peugeot.es/gama/peugeot-208/electrico.html", retrieved: 2026-09-29, tier: T1}
+needs_review: false
+specs:
+  wltp_max_km: {value: 433, note: "hasta 433 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+versions:
+  - name: E-208 (versión no especificada en la oferta)
+    price:
+      value: 29070
+      unit: EUR
+      price_kind: financed
+      price_terms: "Precio contado 29.070 €. Incluidos impuestos, transporte, descuentos. Sujeto a aprobación financiera. Validez hasta 30/09/2026."
+      price_terms_url: "https://ofertas.peugeot.es/particulares"
+      source_id: peugeot-es
+      url: "https://ofertas.peugeot.es/particulares"
+      retrieved: 2026-09-29
+      tier: T1
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/4/45/Peugeot_e-208_facelift_1X7A2502.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-09-29
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, Wikimedia Commons"
+open_questions:
+  - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
+  - "Versión concreta del precio de contado no identificada; sin PVP sin oferta; sin batería, potencia ni carga por versión."
+  - "www.peugeot.es devuelve 403: fichas técnicas no leídas."

@@ -1,0 +1,31 @@
+# Researcher — Peugeot E-5008. Fuente: peugeot-es (T1), wikimedia-commons. Consultado 2026-09-29.
+brand: peugeot
+brand_name: Peugeot
+model: E-5008
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+launch: null
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 504, note: "hasta 504 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+versions:
+  - name: E-5008 (versión no especificada en la oferta)
+    price:
+      value: 44500
+      unit: EUR
+      price_kind: financed
+      price_terms: "Precio contado 44.500 €. Incluidos impuestos, transporte, descuentos. Sujeto a aprobación financiera. Validez hasta 30/09/2026."
+      price_terms_url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
+      source_id: peugeot-es
+      url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
+      retrieved: 2026-09-29
+      tier: T1
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/1/14/Peugeot_e-5008_Automesse_Ludwigsburg_2025_DSC_2651.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-09-29
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, Wikimedia Commons"
+open_questions:
+  - "segment y launch: sin fuente."
+  - "Versión concreta del precio no identificada; sin PVP sin oferta; sin batería, potencia ni carga."
