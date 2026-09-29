@@ -23,8 +23,8 @@ agents:
   # suma asignada: 30 USD, el tope global entero: ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
-    max_usd_per_period: 5    # 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer
-    max_usd_per_run: 1.00
+    max_usd_per_period: 7    # 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
+    max_usd_per_run: 1.50   # 1.00 -> 1.50 on 2026-09-29: Mercedes-Benz (8 models) was cut at 1.02
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
     write_paths: [data/, docs/bitacora/]
@@ -54,7 +54,7 @@ agents:
   architect:
     model: claude-opus-5-5   # 2026-09-27 trial: 2x Sonnet 5 per token; judged on cost per finished task
     max_runs_per_day: 2
-    max_usd_per_period: 8   # 3 -> 8 on 2026-09-27: room for ~10 Opus runs to compare against Sonnet (#80)
+    max_usd_per_period: 6   # 3 -> 8 on 2026-09-27: room for ~10 Opus runs to compare against Sonnet (#80); 8 -> 6 on 2026-09-29, 2 to researcher
     max_usd_per_run: 1.50   # 0.75 -> 1.50 on 2026-09-27: Opus is 2x per token; a cut run would skew the trial
     max_turns_per_run: 20
     api_key_env: ARCHITECT_API_KEY

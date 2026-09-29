@@ -9,37 +9,6 @@
     España) con su fuente si la hay, y busca imágenes primero en Wikimedia
     Commons (fuente wikimedia-commons, ya en el registro), solo con licencia que
     permita el uso comercial, con license y attribution."
-- agent: designer
-  task: "Especifica en docs/design/paginas-catalogo.md la estructura de las
-    páginas de PRD-001: /coches y las pregeneradas de RF-10 (/marcas/{marca},
-    segmento, tramo de precio y tramo de autonomía; historias #35, #38 y #39).
-    Cubre lo que tarjeta-modelo.md y filtros-catalogo.md no dicen: título (h1) y
-    texto de entrada de cada tipo de página, contador de resultados, dónde van
-    la rejilla de tarjetas, el panel de filtros y la franja «Explorar», el
-    estado vacío, el orden de lectura y el de foco, y cómo se ve en móvil y en
-    escritorio. No repitas lo que ya especifican esas dos; enlázalas. Solo
-    tokens de tokens.md; si falta uno, añádelo allí con su uso. Cita el RF o el
-    CA que justifica cada decisión y no añadas nada que PRD-001 no pida."
-- agent: product
-  task: "Redacta PRD-002, Ficha de modelo, en
-    docs/product/prd/PRD-002-ficha-modelo.md a partir de _template.md, con
-    status draft. La visión la tiene pendiente y tarjeta-modelo.md la deja
-    fuera. Qué ve el comprador en la página de un modelo: versiones, precio,
-    autonomía, especificaciones, imágenes, fuente y fecha de cada dato, estado
-    (Próximamente, Descatalogado). Usa solo campos del esquema de
-    docs/architecture/data-model.md (ADR-0008); lo que no exista ahí va a
-    preguntas abiertas, no se inventa. Requisitos con id (RF-, RNF-) y criterios
-    de aceptación verificables. Deja las decisiones de alcance como preguntas
-    abiertas con alternativas, para que las decida el responsable del producto.
-    Enlaza PRD-002 en la tabla de docs/product/vision.md."
-- agent: researcher
-  task: "Marca Peugeot. Fuentes en el registro y modelos en data/raw/peugeot/.
-    Escribe exactamente el esquema de docs/architecture/data-model.md
-    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de
-    RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
-    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
-    registro), solo con licencia que permita el uso comercial, con license y
-    attribution."
 - agent: planner
   task: "Revisa si las historias abiertas de la épica #32 (#33 a #41 y #53) siguen
     cubriendo PRD-001 tal como está hoy. Desde que se trocearon se añadieron
