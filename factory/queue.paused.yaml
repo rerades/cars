@@ -1,2 +1,3 @@
 # Tareas en pausa: el orquestador no lee este fichero. Se reactivan moviéndolas a queue.yaml.
+# Una tarea que falla en --next llega aquí sola: ni se pierde ni se reintenta en bucle.
 []
