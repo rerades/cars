@@ -1,0 +1,26 @@
+# Researcher — Peugeot E-408. Fuente: peugeot-es (T1). Consultado 2026-09-29.
+brand: peugeot
+brand_name: Peugeot
+model: E-408
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+launch: null
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 456, note: "hasta 456 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+versions:
+  - name: E-408 (versión no especificada en la oferta)
+    price:
+      value: 41290
+      unit: EUR
+      price_kind: financed
+      price_terms: "Precio contado 41.290 €. Incluidos impuestos, transporte, descuentos. Sujeto a aprobación financiera. Validez hasta 30/09/2026."
+      price_terms_url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
+      source_id: peugeot-es
+      url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
+      retrieved: 2026-09-29
+      tier: T1
+images: []
+open_questions:
+  - "segment y launch: sin fuente. Imagen: los ficheros de Commons hallados son del 408 sin confirmar que sean eléctricos; no se registran."
+  - "Versión concreta del precio no identificada; sin PVP sin oferta; sin batería, potencia ni carga."

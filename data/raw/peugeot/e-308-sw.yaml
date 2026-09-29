@@ -1,0 +1,27 @@
+# Researcher — Peugeot E-308 SW. Fuente: peugeot-es (T1). Consultado 2026-09-29.
+brand: peugeot
+brand_name: Peugeot
+model: E-308 SW
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+launch: null
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 444, note: "hasta 444 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+versions:
+  - name: E-308 SW (versión no especificada en la oferta)
+    price:
+      value: 37940
+      unit: EUR
+      price_kind: financed
+      price_terms: "Precio contado 37.940 €. Incluidos impuestos, transporte, descuentos. Sujeto a aprobación financiera. Validez hasta 30/09/2026."
+      price_terms_url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
+      source_id: peugeot-es
+      url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
+      retrieved: 2026-09-29
+      tier: T1
+images: []
+open_questions:
+  - "segment: ninguna fuente leída lo clasifica (probable familiar, sin fuente); launch: sin fecha en fuente registrada."
+  - "Imagen: no se buscó un fichero de e-308 SW en Commons con garantía de que sea el SW."
+  - "Versión concreta del precio no identificada; sin PVP sin oferta; sin batería, potencia ni carga."
