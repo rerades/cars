@@ -2,7 +2,7 @@
 <!-- Copiar a ~/Library/LaunchAgents/com.darkfactory.reviewer.plist, ajustar RUTA y cargar:
      launchctl load ~/Library/LaunchAgents/com.darkfactory.reviewer.plist
      Lanza el Revisor a las 06:30, después de las cuatro franjas de la cola, para que revise
-     las PR que la factoría abrió esa noche. No pasa por queue.yaml: en la cola competía con
+     todas las PR que la factoría abrió esa noche. No pasa por queue.yaml: en la cola competía con
      el resto y casi nunca le llegaba el turno. Las guardas (horario, STOP, presupuesto,
      ejecución en curso) son las mismas que con --next. PATH como en el del orquestador. -->
 <plist version="1.0">
@@ -13,7 +13,7 @@
     <string>/opt/homebrew/bin/node</string>
     <string>/Users/USUARIO/_DEV/cars/factory/run.ts</string>
     <string>reviewer</string>
-    <string>Revisa una PR abierta de una rama agent/* que aún no tenga tu revisión (ningún comentario que empiece por «Veredicto»). Búscala con gh pr list. Si hay varias, elige por este orden: developer, architect, designer, product, researcher; y dentro de cada agente, la más antigua. Revísala entera según tus instrucciones y publica el comentario. Si no hay ninguna pendiente, no revises nada y dilo en el resultado.</string>
+    <string>Revisa todas las PR abiertas de ramas agent/* que aún no tengan tu revisión (ningún comentario que empiece por «Veredicto»). Búscalas con gh pr list y revísalas por este orden: developer, architect, designer, product, researcher; y dentro de cada agente, de la más antigua a la más nueva. Revisa cada una entera según tus instrucciones y publica su comentario antes de pasar a la siguiente. Si se te acaba el presupuesto, las que queden se revisan la noche siguiente. Si no hay ninguna pendiente, no revises nada y dilo en el resultado.</string>
   </array>
   <key>EnvironmentVariables</key>
   <dict><key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string></dict>

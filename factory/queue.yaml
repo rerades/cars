@@ -9,6 +9,24 @@
     España) con su fuente si la hay, y busca imágenes primero en Wikimedia
     Commons (fuente wikimedia-commons, ya en el registro), solo con licencia que
     permita el uso comercial, con license y attribution."
+- agent: architect
+  task: "Redacta ADR-0011 (usa ese número): cómo publican los agentes, la última
+    decisión pendiente de docs/architecture/overview.md. Hoy cada ejecución abre
+    su PR (auto_pr en factory/budgets.yaml), el Revisor comenta cada noche a las
+    06:30 (factory/launchd/com.darkfactory.reviewer.plist.example) y una persona
+    fusiona. El responsable quiere que las PR que salgan bien entren sin persona y
+    que las demás le avisen. Propuesta de partida, que debes evaluar y puedes
+    corregir: el Revisor no fusiona nunca (ADR-0002; los datos del Researcher
+    vienen de webs de terceros y pueden llevar instrucciones inyectadas), solo
+    pone una etiqueta review:ok o review:needs-human además de su comentario; la
+    fusión la hace el orquestador, código sin modelo, solo si la PR tiene
+    review:ok, la CI en verde, ningún conflicto y toca únicamente rutas de una
+    lista permitida (por ejemplo docs/ y data/raw/, nunca factory/, .claude/,
+    .github/ ni web/). Decide también cómo se avisa de las review:needs-human,
+    cómo queda registrada cada fusión automática y cómo se vuelve atrás (git
+    revert del merge), y qué pasa después de fusionar (despliegue en Render según
+    ADR-0009, vistas previas por PR). Estado propuesta; tacha la línea en
+    overview.md con el enlace a ADR-0011."
 - agent: planner
   task: "Revisa si las historias abiertas de la épica #32 (#33 a #41 y #53) siguen
     cubriendo PRD-001 tal como está hoy. Desde que se trocearon se añadieron
@@ -59,16 +77,6 @@
     (inicio de venta en España) con su fuente si la hay, y busca imágenes
     primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
     solo con licencia que permita el uso comercial, con license y attribution."
-- agent: architect
-  task: "Redacta ADR-0011 (usa ese número): cómo publican los agentes, la última
-    decisión pendiente de docs/architecture/overview.md. Hoy cada ejecución abre
-    su PR (auto_pr en factory/budgets.yaml), el agente Revisor comenta y una
-    persona fusiona. Decide qué pasa después de fusionar (despliegue automático
-    o manual, entornos de vista previa por PR), si algún tipo de PR podría
-    fusionarse sin persona y con qué guardas, y cómo se vuelve atrás. Apóyate en
-    ADR-0002 (control) y en ADR-0009 (hosting) si ya está en main; si no, deja
-    el despliegue como pregunta abierta. Estado propuesta; tacha la línea en
-    overview.md con el enlace a ADR-0011."
 - agent: researcher
   task: "Marca BYD. Fuentes en el registro y modelos en data/raw/byd/. Escribe
     exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
