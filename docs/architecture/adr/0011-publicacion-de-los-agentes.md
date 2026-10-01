@@ -1,6 +1,6 @@
 # ADR-0011 — Cómo publican los agentes: fusión automática por reglas, sin modelo
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-01)
 - **Fecha:** 2026-09-30
 
 ## Contexto
