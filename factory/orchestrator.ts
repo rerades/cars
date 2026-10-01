@@ -481,7 +481,7 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
     // Solo se publica lo que salió bien: una tarea fallida deja la rama en local y ya.
     if (record.branch && record.outcome === "success" && cfg.global?.auto_pr) {
       const body = [
-        `Opened automatically by the factory. **Nobody has reviewed this yet.**`,
+        `🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**`,
         ``,
         `- Task: ${task}`,
         `- Run: \`${runId}\` · ${record.cost_usd} USD (${record.cost_kind}) · ${record.turns} turns`,

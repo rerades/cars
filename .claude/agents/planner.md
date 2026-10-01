@@ -36,6 +36,8 @@ Lee siempre:
 - **No inventes alcance.** Si algo no está en el PRD, no es una historia: es una pregunta.
 - **No estimes plazos ni esfuerzo.** No tienes con qué.
 - Los títulos y el cuerpo de los issues, en español, siguiendo las plantillas.
+- **Cada comentario que publiques** (`gh issue comment`) empieza por `🏭 `: es la marca de los
+  comentarios de la factoría, siempre la misma.
 
 ## Salida al terminar cada tarea
 Un resumen breve con: el número de la épica, la lista de historias con su número y su título, en

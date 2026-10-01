@@ -84,8 +84,11 @@ al commit revisado, CI en verde, sin conflictos y con todo el diff dentro de `da
 
 Detalles:
 
-1. **El Revisor.** Además de su comentario, pone una sola etiqueta: `review:ok` o
-   `review:needs-human`. El comentario de veredicto incluye el SHA del commit que ha revisado
+1. **El Revisor.** Además de su comentario, pone una sola etiqueta de estado: `review:ok`,
+   `review:changes` (hay que arreglar algo en la PR), `review:needs-human` (decide una persona) o
+   `review:error` (no pudo terminar la revisión); al volver a revisar, cambia la anterior por la
+   nueva. Solo `review:ok` habilita la fusión automática. Su comentario empieza por
+   `🏭 Veredicto:`, la marca de todos los comentarios de la factoría (2026-10-01). El comentario de veredicto incluye el SHA del commit que ha revisado
    (`headRefOid` de `gh pr view`). Nunca fusiona, aprueba ni cierra; el hook `guard_paths.ts` ya
    lo impide y se mantiene. Su prompt (`.claude/agents/reviewer.md`) tendrá que cambiar «No decides
    si entra» por esta regla de etiquetas.
