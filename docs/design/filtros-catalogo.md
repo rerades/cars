@@ -122,7 +122,8 @@ El botón está deshabilitado/oculto si no hay filtros activos.
 ## URL (RF-5, CA-5, CA-13)
 Cada cambio actualiza la query string sin recargar y sin crear una entrada de historial por cada casilla
 (sustituye la actual). Abrir la URL reproduce el estado: controles marcados, chips y resultados. Los nombres de
-parámetro los fija el Desarrollador; se pide que sean legibles en español. Esas URL llevan `noindex` (CA-13).
+parámetro los fija el Desarrollador; se pide que sean legibles en español. Esas URL no son indexables (CA-13): `/coches` lleva en el HTML servido `<link rel="canonical">` a
+`/coches` sin query string, y no se añade `noindex` por JS (decisión en PRD-001, sección 8).
 
 ## Orden de foco
 1. Enlace «Saltar a los resultados» (primer elemento de la página, visible al recibir foco).

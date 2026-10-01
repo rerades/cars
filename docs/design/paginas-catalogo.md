@@ -334,7 +334,8 @@ No hay pares de color nuevos: todos los usados ya están calculados allí.
    en las dos? Y en autonomía, RF-10 dice «más de 400 km» y CA-2 «≥ 400 km»: ¿un modelo de 400 km exactos entra en
    `/autonomia/mas-de-400-km`? Aquí los textos dicen «supera» y «no pasa de», que es lo literal de RF-10; si se
    decide otra cosa, cambian las claves.
-2. **`/coches` sin query string**, ¿es indexable? No está en la lista de RF-10 y CA-12d solo excluye las
+2. ~~**`/coches` sin query string**, ¿es indexable?~~ Resuelta el 2026-10-01 en PRD-001, sección 8: sí, y cada
+   página de catálogo lleva canonical a su URL sin query string. Texto original: ¿es indexable? No está en la lista de RF-10 y CA-12d solo excluye las
    combinaciones de filtros. No se especifica aquí `noindex` para ella.
 3. **Nombre del sitio** para el `<title>`: no está en la visión ni en el PRD.
 4. **Meta descripción** de cada página: RF-10 pide título y texto propios, no una meta descripción. ¿Se reutiliza
