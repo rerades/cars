@@ -33,6 +33,13 @@ test("the example of data-model.md loads with no errors and no warnings", () => 
   assert.equal(r.models[0].file, "acme/volta.yaml");
 });
 
+test("CA-18: a model with needs_review: true is not loaded, so no page shows or counts it", () => {
+  const held = ACME_YAML.replace("needs_review: false", "needs_review: true");
+  const r = loadFiles({ "acme/volta.yaml": ACME_YAML, "acme/held.yaml": held.replace("model: Volta", "model: Held") });
+  assert.deepEqual(r.models.map((m) => m.model), ["Volta"]);
+  assert.deepEqual(r.errors, []);
+});
+
 test("missing directory does not throw and is reported", () => {
   const r = loadModels(join(tmpdir(), "does-not-exist-" + Date.now()));
   assert.deepEqual(r.models, []);

@@ -5,7 +5,7 @@ status: ready
 priority: P0
 depends_on: []
 epic: "#32"
-updated: 2026-09-25
+updated: 2026-10-01
 ---
 
 # PRD-001 — Catálogo de modelos
@@ -50,6 +50,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
   - Autonomía: «más de 400 km» (`/autonomia/mas-de-400-km`), «más de 500 km» (`/autonomia/mas-de-500-km`).
 - **RF-11:** El segmento es uno de esta lista, la que usa quien compra: urbano, compacto, berlina, familiar, SUV pequeño, SUV compacto, SUV grande, monovolumen, furgoneta y deportivo. Cada modelo tiene uno solo.
 - **RF-12:** Un modelo sin segmento, autonomía o tracción se muestra igual, con "por confirmar" en el campo que falta. Si el visitante filtra por ese campo, el modelo no aparece, porque no se puede afirmar que cumpla el filtro.
+- **RF-13:** Un modelo marcado `needs_review: true` no se publica: no tiene tarjeta, no cuenta en los contadores ni aparece en ninguna página pregenerada hasta que una persona lo revise y quite la marca (ADR-0001, regla 3).
 
 ## 5. Requisitos no funcionales
 - **RNF-1:** Renderizado en servidor o estático para SEO.
@@ -83,6 +84,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - [ ] **CA-15** (→ RF-12): Dado un modelo sin dato de autonomía, cuando abro `/coches`, entonces veo su tarjeta con "Autonomía por confirmar"; cuando aplico "autonomía ≥ 400 km", entonces no aparece.
 - [ ] **CA-16** (→ RF-3): Dados dos modelos con fecha de inicio de venta y uno sin ella, cuando ordeno por novedad, entonces el más reciente va primero y el que no tiene fecha, al final.
 - [ ] **CA-17** (→ RF-8): Dado un modelo sin imagen con licencia registrada, cuando abro `/coches`, entonces su tarjeta muestra la silueta genérica de su segmento, sin imagen de la marca.
+- [ ] **CA-18** (→ RF-13): Dado un modelo con `needs_review: true`, cuando construyo el sitio, entonces no aparece en `/coches` ni en ninguna otra página, y el contador no lo incluye.
 - [ ] **CA-7** (→ RNF-5): Al cargar cualquier página del catálogo no se crea ninguna cookie ni se escribe nada en localStorage.
 
 ## 8. Decisiones y preguntas abiertas
@@ -108,6 +110,9 @@ Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsa
 
 - **Licencia de las imágenes (RF-8, CA-17):** primero Wikimedia Commons, donde cada foto trae su licencia explícita y su atribución, que es lo que pide CA-10; la sala de prensa de la marca solo si sus términos escritos permiten este uso, y si no, una silueta genérica del segmento. Se exige una licencia que permita el uso comercial porque la visión aún no ha decidido si la web se monetiza, y así no hay que volver a revisar las imágenes si lo hace. Alternativas descartadas: las salas de prensa como fuente principal, porque ni Cupra ni Polestar tienen términos confirmados y el «uso editorial» suele excluir el comercial; ir sin imágenes, que resta atractivo al catálogo; y pedir permiso a cada marca, que es lento y no lo puede hacer un agente.
 
+### Resueltas (2026-10-01)
+- **Modelos en revisión (RF-13, CA-18):** un modelo con `needs_review: true` no se publica entero, decidido por el responsable del producto. Es la opción (a) de la pregunta abierta 5 de PRD-002. Motivo: ADR-0001 dice que lo que está en revisión no se publica, y los agentes marcan así los datos que no han podido leer de una fuente oficial. Alternativas descartadas: publicarlo sin los datos en discrepancia, porque el esquema no dice qué campo es el dudoso; o con un aviso «datos en revisión», porque publica igualmente un dato que no está verificado.
+
 ### Abiertas
 - Ninguna.
 
@@ -122,3 +127,4 @@ Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsa
 | 2026-09-27 | Resueltas las preguntas de alcance de ADR-0008: segmento, novedad, descatalogados y datos ausentes. Ajustados RF-3 y RF-7; añadidos RF-11, RF-12 y CA-14 a CA-16 | Rod / Claude |
 | 2026-09-27 | Resuelta la licencia de las imágenes: Commons primero, prensa solo con términos escritos, silueta si no hay ninguna. Ajustado RF-8; añadido CA-17. Sin preguntas abiertas | Rod / Claude |
 | 2026-09-27 | Fijadas en RF-10 las URL de las páginas de segmento y de tramo (pregunta abierta de ADR-0006) | Rod / Claude |
+| 2026-10-01 | Los modelos con `needs_review: true` no se publican. Añadidos RF-13 y CA-18 | Rod / Claude |
