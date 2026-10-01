@@ -9,9 +9,10 @@
     reutilizable para #39. La franja Explorar puede quedar para #39 si no cabe;
     dilo en la PR. Una prueba por CA (CA-4 y CA-12 a, b y c para marcas),
     comprobando en el build que hay exactamente una página por marca con modelos
-    y que los h1 y los textos no se repiten. La PR referencia #38 y enumera los
-    RF y CA cubiertos. Si #35 aún no está en main, no empieces y dilo en el
-    resultado."
+    y que los h1 y los textos no se repiten. Las marcas salen de los modelos que
+    devuelve loadModels() de web/src/lib/data.ts, que ya excluye needs_review
+    (RF-13): una marca sin modelos publicados (hoy Cupra) no tiene página. La PR
+    referencia #38 y enumera los RF y CA cubiertos."
 - agent: researcher
   task: "Revisa los dos modelos de Cupra marcados needs_review: true, que desde
     PRD-001 RF-13 no se publican. data/raw/cupra/born.yaml: relee en cupra-es la
