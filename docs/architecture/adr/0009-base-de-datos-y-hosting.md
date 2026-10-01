@@ -98,7 +98,7 @@ Detalles:
   No se toca ni se reutiliza el web service `erades.com`.
 - **Dominio:** se añade `siete3.com` como dominio propio del static site. Render añade solo
   `www.siete3.com` y lo redirige a la raíz ([12]). Con `erades.com` son los 2 dominios incluidos
-  en Hobby; si `www` cuenta aparte, el extra cuesta 0,25 $/mes ([12]). La migración se hizo el
+  en Hobby; `www` cuenta como dominio aparte (Billing, 2026-10-01): cada uno por encima de los 2 incluidos cuesta 0,25 $/mes ([12]). La migración se hizo el
   2026-10-01 (#98; ver «Migración hecha» en Consecuencias).
 - **Node:** se fija la versión mayor con `NODE_VERSION` o `.node-version` ([16]), acotada a 24,
   para que no salte de versión sola (Render avisa de que un rango sin tope resuelve a la última).
@@ -131,7 +131,7 @@ Detalles:
   las vistas previas. Cada ejecución del Researcher que llega a `main` es un build (ADR-0003). Con
   builds de pocos minutos hay margen, pero no se ha medido cuánto tarda el de Astro.
 - **Dos dominios incluidos** ([12]): con `erades.com` y `siete3.com` se agotan. Un tercer dominio
-  (o `www` si cuenta aparte) cuesta 0,25 $/mes.
+  cuesta 0,25 $/mes, y `www` cuenta como dominio aparte (Billing, 2026-10-01).
 - **Riesgo de cookies de terceros (RNF-5):** no he comprobado si el CDN de Render pone cookies.
   Hay que comprobar CA-7 contra producción al publicar y de forma periódica.
 - **LCP no demostrado.** Render no publica dónde tiene nodos; no sé si sirve desde España. Pesan más
@@ -165,12 +165,12 @@ Detalles:
   propio certificado y redirige con 301 a `https://siete3.com/`; `http://` redirige a `https://`.
 
 **Preguntas abiertas**
-- ¿`www.siete3.com` cuenta como un dominio aparte en el límite de Hobby? No comprobado.
 - ¿Autodeploy de Render o despliegue desde Actions? Se decide en la ADR de publicación de los
   agentes.
 - ¿Umbral de tiempo de build a partir del cual se reconsidera la base de datos? Por fijar al medir.
 
 **Resueltas en esta revisión**
+- `www.siete3.com` cuenta como un dominio aparte en el límite de Hobby (Billing, 2026-10-01).
 - Dominio: `siete3.com`, ya comprado por el responsable del proyecto.
 - Proveedor: Render, por decisión del responsable (ver condicionante).
 - Método de pago: el workspace lo tiene (confirmado por el responsable); pasar de 5 GB se cobra,
