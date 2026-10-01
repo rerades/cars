@@ -30,3 +30,16 @@
     de /coches es /coches sin query string. Lee los comentarios de revisión de
     la issue #40. La PR referencia #40 y enumera los RF y CA cubiertos. Si #36,
     #38 o #39 aún no están en main, no empieces y dilo en el resultado."
+- agent: developer
+  task: "Historia #41 (épica #32): test de que ninguna página del catálogo crea
+    cookies ni escribe en localStorage (RNF-5, CA-7). Usa Playwright, el que
+    fija ADR-0006, sobre el sitio construido; no añadas otro controlador de
+    navegador. Carga /coches con filtros y orden aplicados desde la query
+    string, una página de marca, una de segmento, una de tramo y una página con
+    al menos una tarjeta con imagen. En cada una comprueba que el contexto del
+    navegador no tiene ninguna cookie (de ningún dominio, también de terceros)
+    y que localStorage y sessionStorage están vacíos. Lista en la PR los
+    dominios a los que pide algo la página: según ADR-0012 debe ser solo el
+    nuestro. Lee los comentarios de revisión de la issue #41. La PR referencia
+    #41 y enumera los RF y CA cubiertos. Si #36, #37, #38, #39 o #112 aún no
+    están en main, no empieces y dilo en el resultado."
