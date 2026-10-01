@@ -13,6 +13,23 @@
     devuelve loadModels() de web/src/lib/data.ts, que ya excluye needs_review
     (RF-13): una marca sin modelos publicados (hoy Cupra) no tiene página. La PR
     referencia #38 y enumera los RF y CA cubiertos."
+- agent: architect
+  task: "Redacta ADR-0012 (usa ese número; la 0010 está reservada para la
+    ingesta): dónde se sirven las imágenes de los modelos. Bloquea la historia
+    #112 y el test de la #41. Hechos comprobados el 2026-10-01: una imagen
+    enlazada desde upload.wikimedia.org responde con Set-Cookie WMF-Uniq, y las
+    páginas de commons.wikimedia.org ponen cuatro cookies, así que cargar la
+    imagen desde Wikimedia en la tarjeta incumple PRD-001 RNF-5 y CA-7. Además,
+    en data/raw 6 de las 11 url de imagen son páginas File: de Commons (HTML) y
+    5 son ficheros de upload.wikimedia.org: el esquema no dice cuál va en url.
+    Decide: (1) que el visitante no haga ninguna petición a terceros para ver una
+    imagen, y cómo (copiarlas en el build, en el repo o en la ingesta), con su
+    coste en tamaño de repo, en tiempo de build en Render (ADR-0009) y qué pasa
+    si la descarga falla; (2) qué guarda el esquema de ADR-0008: el fichero, la
+    página de la licencia o los dos, en campos distintos, para mostrar la
+    atribución que exige la licencia; (3) tamaño y formato que se sirven (RNF-2).
+    Estado propuesta. Actualiza docs/architecture/data-model.md y enlaza la ADR
+    desde overview.md. No toques data/raw ni web/."
 - agent: researcher
   task: "Revisa los dos modelos de Cupra marcados needs_review: true, que desde
     PRD-001 RF-13 no se publican. data/raw/cupra/born.yaml: relee en cupra-es la
