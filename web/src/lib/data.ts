@@ -112,7 +112,8 @@ export interface LoadResult {
   errors: { file: string; message: string }[];
 }
 
-export const DEFAULT_DATA_DIR = resolve(import.meta.dirname, "../../../data/raw");
+/** CARS_DATA_DIR wins: astro.config.mjs sets it for the build, where this module is bundled. */
+export const DEFAULT_DATA_DIR = process.env.CARS_DATA_DIR || resolve(import.meta.dirname, "../../../data/raw");
 
 const STATUSES: readonly Status[] = ["on_sale", "announced", "discontinued"];
 const SEGMENTS: readonly Segment[] = [
