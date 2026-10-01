@@ -54,7 +54,12 @@
     plantilla de página pregenerada que dejó #38; si no existe en main, no
     empieces y dilo en el resultado. Solo se genera la página de un segmento con
     modelos; las de tramo se generan siempre, aunque salgan vacías (con su
-    estado vacío). Incluye la franja Explorar si #38 la dejó pendiente. Una
+    estado vacío). Bordes de los tramos, fijados en RF-10: precio ≤ 30.000, > 30.000
+    y ≤ 45.000, > 45.000; autonomía con alguna versión ≥ 400 y ≥ 500 km (la regla
+    de CA-2), y los dos tramos de autonomía se solapan. Un modelo sin segmento,
+    precio o autonomía no entra en la página de ese criterio (RF-12) y uno
+    needs_review no entra en ninguna (RF-13). Prueba los bordes exactos (30.000,
+    45.000, 400 y 500). Incluye la franja Explorar si #38 la dejó pendiente. Una
     prueba por CA (CA-12 a, b y c para estas páginas), comprobando en el build
     cuántas páginas salen y que los h1 y los textos no se repiten. La PR
     referencia #39 y enumera los RF y CA cubiertos."
