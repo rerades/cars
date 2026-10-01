@@ -98,9 +98,8 @@ Detalles:
   No se toca ni se reutiliza el web service `erades.com`.
 - **Dominio:** se añade `siete3.com` como dominio propio del static site. Render añade solo
   `www.siete3.com` y lo redirige a la raíz ([12]). Con `erades.com` son los 2 dominios incluidos
-  en Hobby; si `www` cuenta aparte, el extra cuesta 0,25 $/mes ([12]). El dominio aún no apunta a
-  Render: la migración (crear el static site, DNS en el registrador, verificación y comprobación
-  de CA-7) la hace un humano y está en la issue #98.
+  en Hobby; si `www` cuenta aparte, el extra cuesta 0,25 $/mes ([12]). La migración se hizo el
+  2026-10-01 (#98; ver «Migración hecha» en Consecuencias).
 - **Node:** se fija la versión mayor con `NODE_VERSION` o `.node-version` ([16]), acotada a 24,
   para que no salte de versión sola (Render avisa de que un rango sin tope resuelve a la última).
 - **Sin extras que toquen RNF-5:** no se añade analítica ni nada que inyecte scripts o cookies. El
@@ -145,6 +144,23 @@ Detalles:
 - **Los YAML no escalan sin límite como base de datos:** no hay consultas, índices ni integridad
   entre ficheros salvo lo que valide ADR-0008. Con cientos de modelos es suficiente; si se pasa a
   miles o a varios escritores, habrá que revisar esta ADR.
+
+**Migración hecha (2026-10-01, #98)**
+- Static site `siete3` (`srv-dav550s1nsns738m9sf0`) en el workspace de Render, rama `main`, sin
+  directorio raíz: build `cd web && pnpm install --frozen-lockfile && pnpm build` y publicación
+  `web/dist`. Sin directorio raíz, un cambio solo en `data/raw/` también despliega; con `web/`
+  como raíz, Render solo despliega cuando cambia `web/`.
+- pnpm: Render lo instala solo según `packageManager` (11.19.0) y ejecuta `pnpm install` en la
+  raíz del repo antes del build. `corepack enable` en el comando de build falla (`EROFS` en
+  `/usr/bin`): no se usa.
+- `NODE_VERSION=24` da Node 24.21.0. El build tarda unos 16 s.
+- DNS en Piensa Solutions (registrador Nicline): `A @ 216.24.57.1` y `CNAME www siete3.onrender.com`,
+  los valores de la documentación de Render ([12]). Los `MX` y el SPF de Google Workspace no se tocan.
+- La GitHub App de Render se instaló en la cuenta `rerades` con acceso a `cars`: autorizarla para
+  iniciar sesión en Render no basta para el despliegue automático.
+- CA-7 contra producción, en HTTP: `https://siete3.com/` y `/coches/` responden sin `Set-Cookie`
+  (servidor `cloudflare`), y ni el HTML ni sus recursos usan `document.cookie`, `localStorage` ni
+  `sessionStorage`. El test en navegador es la #41.
 
 **Preguntas abiertas**
 - ¿`www.siete3.com` cuenta como un dominio aparte en el límite de Hobby? No comprobado.

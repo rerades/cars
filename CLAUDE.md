@@ -58,7 +58,7 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
   (`factory/queue.yaml` + `run.ts --next`), trazas y evals deterministas (ADR-0004, `run.ts --trace`), envío a Langfuse Cloud,
   ADR-0003 a 0009 y 0011 aceptadas (hosting: static site de Render en `siete3.com`), Wikimedia Commons
   en el registro de fuentes.
-- Pendiente: ADR-0010 (ingesta; en la cola), el paso `run.ts --merge` de ADR-0011 (fusión
-  automática, apagada hasta cumplir sus condiciones), migrar
-  `siete3.com` a Render (#98),
+- Hecho también: `siete3.com` servido por el static site de Render (#98, 2026-10-01).
+- Pendiente: ADR-0010 (ingesta; en la cola), ADR-0012 (imágenes; en la cola), el paso
+  `run.ts --merge` de ADR-0011 (fusión automática, apagada hasta cumplir sus condiciones),
   verificar que el configurador de Cupra da el PVP sin ayudas.
