@@ -1,0 +1,28 @@
+# Researcher — Citroën ë-C3. Fuentes: motor-es (T3, solo estado), wikimedia-commons. citroen-es (T1) devuelve 403. Consultado 2026-10-01.
+brand: citroen
+brand_name: Citroën
+model: ë-C3
+status: {value: on_sale, note: "T3: ë-C3 Electric 200 a la venta en España vía configurador (2025-09-02); sin confirmar en T1", source_id: motor-es, url: "https://www.motor.es/noticias/citroen-e-c3-electric-200-version-barata-bateria-30-kwh-2025109882.html", retrieved: 2026-10-01, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: ë-C3 (versiones no leídas en fuente oficial)
+    price: null
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/7/76/Citro%C3%ABn_%C3%AB-C3.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-01
+    license: CC-BY-SA-4.0
+    attribution: "Y.Leclercq, CC BY-SA 4.0, Wikimedia Commons"
+  - url: "https://upload.wikimedia.org/wikipedia/commons/6/60/Citro%C3%ABn_%C3%AB-C3_DSC_8023.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-01
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, Wikimedia Commons"
+open_questions:
+  - "citroen-es devuelve 403 y ofertas.citroen.es falla por certificado: no se ha leído ninguna página T1; sin PVP, versiones, batería, autonomía ni potencia."
+  - "launch: sin fecha de inicio de venta en España en fuente registrada."
+  - "segment: sin fuente leída que lo clasifique."
+  - "status viene de una fuente T3 (motor-es); confirmar en T1."
+  - "Otros BEV de Citroën (ë-C4, ë-C5 Aircross, ë-Berlingo, ë-Jumpy, ë-SpaceTourer, Ami) no tienen fichero: sin fuente T1 legible."

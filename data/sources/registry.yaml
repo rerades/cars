@@ -118,6 +118,40 @@ sources:
     last_verified: 2026-09-29
     status: active
 
+  - id: citroen-es
+    brand: Citroën
+    tier: T1
+    market: ES
+    kind: [prices, specs, announcements]
+    urls:
+      home: https://www.citroen.es/
+      models: https://www.citroen.es/coches-nuevos/nuevo-e-c3.html   # sin leer (403); URL de patrón, no confirmada
+      prices: https://ofertas.citroen.es/   # subdominio de ofertas (patrón de Peugeot); no responde a la lectura
+    image_license: ""   # sin licencia clara registrada: no publicar imágenes de esta web
+    notes: >
+      Verificado (2026-10-01): www.citroen.es y su robots.txt devuelven 403 a la lectura automática
+      (protección de acceso, no se evita); ofertas.citroen.es falla con "unable to verify the first
+      certificate". Ninguna página T1 de Citroën se ha podido leer: no hay PVP, fichas ni segmento
+      de fuente oficial. Las URL de modelos y ofertas son tentativas. Sala de prensa oficial sin
+      localizar. Pendiente: revisión manual o fuente alternativa T1/T2.
+    last_verified: 2026-10-01
+    status: broken
+
+  - id: motor-es
+    brand: (varias; solo confirmación)
+    tier: T3
+    market: ES
+    kind: [announcements]
+    urls:
+      home: https://www.motor.es/
+      models: https://www.motor.es/citroen/e-c3/
+    image_license: ""   # no usar imágenes
+    notes: >
+      Medio. Solo para confirmar estado de venta y descubrir modelos; nunca como fuente de precio
+      (ADR-0001). Artículo leído (2026-10-01) sobre ë-C3 Electric 200 a la venta en España (2 sep 2025).
+    last_verified: 2026-10-01
+    status: active
+
   - id: wikimedia-commons
     brand: (varias; solo imágenes)
     tier: T3
