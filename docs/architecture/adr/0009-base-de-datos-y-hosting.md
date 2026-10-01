@@ -161,6 +161,8 @@ Detalles:
 - CA-7 contra producción, en HTTP: `https://siete3.com/` y `/coches/` responden sin `Set-Cookie`
   (servidor `cloudflare`), y ni el HTML ni sus recursos usan `document.cookie`, `localStorage` ni
   `sessionStorage`. El test en navegador es la #41.
+- Auto-deploy «After CI Checks Pass» (ADR-0011) y vistas previas manuales. `www.siete3.com` tiene su
+  propio certificado y redirige con 301 a `https://siete3.com/`; `http://` redirige a `https://`.
 
 **Preguntas abiertas**
 - ¿`www.siete3.com` cuenta como un dominio aparte en el límite de Hobby? No comprobado.
