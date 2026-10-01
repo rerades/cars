@@ -30,6 +30,17 @@
     atribución que exige la licencia; (3) tamaño y formato que se sirven (RNF-2).
     Estado propuesta. Actualiza docs/architecture/data-model.md y enlaza la ADR
     desde overview.md. No toques data/raw ni web/."
+- agent: designer
+  task: "Dibuja las siluetas de segmento que docs/design/tokens.md («Silueta de
+    segmento») deja para una tarea aparte: una por cada segmento de PRD-001 RF-11
+    (los diez valores de segment en docs/architecture/data-model.md) y una
+    genérica de coche para cuando falta el segmento. Un SVG por silueta en
+    docs/design/siluetas/{valor}.svg y generica.svg: dibujo propio, de línea,
+    sin copiar la forma de ningún modelo ni logotipo de marca (RF-8), viewBox
+    cuadrado, trazo con currentColor para que la web aplique --color-line, sin
+    texto ni title (el icono es aria-hidden). Que se distingan entre sí a 48 px
+    (--size-segment-icon). Enlaza la carpeta desde tokens.md y tarjeta-modelo.md,
+    con la lista de ficheros. Es para la historia #112."
 - agent: researcher
   task: "Revisa los dos modelos de Cupra marcados needs_review: true, que desde
     PRD-001 RF-13 no se publican. data/raw/cupra/born.yaml: relee en cupra-es la
