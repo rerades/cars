@@ -323,7 +323,7 @@ export function normalize(raw: unknown, file: string): ModelRecord {
   };
 }
 
-/** Reads every `<dir>/<brand>/*.yaml`, sorted by brand then model. Never throws on bad files. */
+/** Reads every `<dir>/<brand>/*.yaml`, skips models under review, sorts by brand then model. Never throws on bad files. */
 export function loadModels(dir: string = DEFAULT_DATA_DIR): LoadResult {
   const models: ModelRecord[] = [];
   const errors: LoadResult["errors"] = [];
@@ -333,7 +333,9 @@ export function loadModels(dir: string = DEFAULT_DATA_DIR): LoadResult {
       for (const f of readdirSync(join(dir, brandDir.name)).filter((n) => n.endsWith(".yaml")).sort()) {
         const file = `${brandDir.name}/${f}`;
         try {
-          models.push(normalize(parse(readFileSync(join(dir, file), "utf8")), file));
+          const model = normalize(parse(readFileSync(join(dir, file), "utf8")), file);
+          // PRD-001 RF-13: a model under review is not published anywhere.
+          if (!model.needs_review) models.push(model);
         } catch (e) {
           errors.push({ file, message: (e as Error).message });
         }
