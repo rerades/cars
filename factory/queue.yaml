@@ -1,80 +1,17 @@
 # Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
 # la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
-- agent: researcher
-  task: "Marca Mercedes-Benz. Fuentes en el registro y modelos en
-    data/raw/mercedes-benz/. Escribe exactamente el esquema de
-    docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo
-    completo. Rellena segment (lista de RF-11) y launch (inicio de venta en
-    España) con su fuente si la hay, y busca imágenes primero en Wikimedia
-    Commons (fuente wikimedia-commons, ya en el registro), solo con licencia que
-    permita el uso comercial, con license y attribution."
-- agent: architect
-  task: "Redacta ADR-0011 (usa ese número): cómo publican los agentes, la última
-    decisión pendiente de docs/architecture/overview.md. Hoy cada ejecución abre
-    su PR (auto_pr en factory/budgets.yaml), el Revisor comenta cada noche a las
-    06:30 (factory/launchd/com.darkfactory.reviewer.plist.example) y una persona
-    fusiona. El responsable quiere que las PR que salgan bien entren sin persona y
-    que las demás le avisen. Propuesta de partida, que debes evaluar y puedes
-    corregir: el Revisor no fusiona nunca (ADR-0002; los datos del Researcher
-    vienen de webs de terceros y pueden llevar instrucciones inyectadas), solo
-    pone una etiqueta review:ok o review:needs-human además de su comentario; la
-    fusión la hace el orquestador, código sin modelo, solo si la PR tiene
-    review:ok, la CI en verde, ningún conflicto y toca únicamente rutas de una
-    lista permitida (por ejemplo docs/ y data/raw/, nunca factory/, .claude/,
-    .github/ ni web/). Decide también cómo se avisa de las review:needs-human,
-    cómo queda registrada cada fusión automática y cómo se vuelve atrás (git
-    revert del merge), y qué pasa después de fusionar (despliegue en Render según
-    ADR-0009, vistas previas por PR). Estado propuesta; tacha la línea en
-    overview.md con el enlace a ADR-0011."
-- agent: planner
-  task: "Revisa si las historias abiertas de la épica #32 (#33 a #41 y #53) siguen
-    cubriendo PRD-001 tal como está hoy. Desde que se trocearon se añadieron
-    RF-11 y RF-12, CA-13 a CA-17 y ADR-0008 (esquema único de data/raw), y el
-    punto 1 de #53 (CI sobre web/) ya está hecho en .github/workflows/ci.yml.
-    Por cada RF y CA sin historia, o historia que ya no encaja, deja un
-    comentario en la historia afectada, o abre una nueva con las etiquetas story
-    y agente enlazada a #32. No cierres ninguna issue: propón el cierre en un
-    comentario. Termina con un comentario en #32 que resuma qué cambió."
-- agent: developer
-  task: "Historia #34 (épica #32): modelo derivado del catálogo. Buena parte ya
-    está en web/src/lib/data.ts (PR #96): precio desde, autonomía máxima y
-    tracción según la sección 5 de docs/architecture/data-model.md. Contrasta
-    cada criterio de aceptación de #34 con el código y sus pruebas, y completa
-    solo lo que falte (por ejemplo, que el modelo derivado diga si el precio
-    desde es financed y cuál es su estado y su launch). Una prueba por criterio,
-    con fixtures, no con los YAML reales. La PR referencia #34 y enumera los
-    RF y CA cubiertos. Si ya está todo, no cambies código y dilo en el
-    resultado con la lista de criterios y la prueba que cubre cada uno."
-- agent: developer
-  task: "Historia #35 (épica #32): página estática /coches con una tarjeta por
-    modelo, sin la imagen. Estructura de página en docs/design/paginas-catalogo.md
-    y tarjeta en docs/design/tarjeta-modelo.md, con los tokens de
-    docs/design/tokens.md; los filtros, el orden y la franja Explorar no entran
-    (son #36, #37 y #38/#39). Usa el modelo derivado de web/src/lib/data.ts, no
-    derives nada en el componente. HTML completo sin JavaScript (RNF-1), textos
-    con claves para i18n (RNF-4) y accesibilidad AA (RNF-3). Una prueba por cada
-    CA de #35 (CA-1 sin imagen, CA-8 y CA-11 en su primera parte). La PR
-    referencia #35 y enumera los RF y CA cubiertos. Si #34 aún no está en main,
-    no empieces y dilo en el resultado."
 - agent: developer
   task: "Historia #38 (épica #32): una página /marcas/{marca} por cada marca con
-    modelos, con el título y el texto de entrada de docs/design/paginas-catalogo.md
-    (claves pagina.marca.*), el contador y las tarjetas de #35 en el HTML
-    servido. Deja la plantilla de página pregenerada reutilizable para #39. La
-    franja Explorar puede quedar para #39 si no cabe; dilo en la PR. Una prueba
-    por CA (CA-4 y CA-12 a, b y c para marcas), comprobando en el build que hay
-    exactamente una página por marca con modelos y que los h1 y los textos no
-    se repiten. La PR referencia #38 y enumera los RF y CA cubiertos. Si #35 aún
-    no está en main, no empieces y dilo en el resultado."
-- agent: researcher
-  task: "Marca Citroën. Fuentes en el registro y modelos en data/raw/citroen/.
-    Escribe exactamente el esquema de docs/architecture/data-model.md
-    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de
-    RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
-    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
-    registro), solo con licencia que permita el uso comercial, con license y
-    attribution."
+    modelos, con el título y el texto de entrada de
+    docs/design/paginas-catalogo.md (claves pagina.marca.*), el contador y las
+    tarjetas de #35 en el HTML servido. Deja la plantilla de página pregenerada
+    reutilizable para #39. La franja Explorar puede quedar para #39 si no cabe;
+    dilo en la PR. Una prueba por CA (CA-4 y CA-12 a, b y c para marcas),
+    comprobando en el build que hay exactamente una página por marca con modelos
+    y que los h1 y los textos no se repiten. La PR referencia #38 y enumera los
+    RF y CA cubiertos. Si #35 aún no está en main, no empieces y dilo en el
+    resultado."
 - agent: researcher
   task: "Marca Opel. Fuentes en el registro y modelos en data/raw/opel/. Escribe
     exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
