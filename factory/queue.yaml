@@ -52,6 +52,35 @@
     prueba por CA (CA-12 a, b y c para estas páginas), comprobando en el build
     cuántas páginas salen y que los h1 y los textos no se repiten. La PR
     referencia #39 y enumera los RF y CA cubiertos."
+- agent: designer
+  task: "Especifica en docs/design/ficha-modelo.md la ficha de modelo de PRD-002
+    (docs/product/prd/PRD-002-ficha-modelo.md, ready, sin preguntas abiertas).
+    Usa los tokens de tokens.md y reutiliza la tarjeta de tarjeta-modelo.md para
+    los modelos relacionados (RF-15), y paginas-catalogo.md para la cabecera y
+    los enlaces de vuelta (RF-13). Cubre: cabecera con estado y segmento (RF-2,
+    RF-10); versiones como tabla comparativa en pantallas anchas y como bloques
+    apilados en móvil, por precio ascendente, sin scroll horizontal a 320 px
+    (RF-3 a RF-6, RNF-3); bloque «del modelo» (RF-7) y las note (RF-8); la
+    fuente junto al precio y las notas numeradas del bloque «Fuentes», con la
+    marca «fuente no oficial» (RF-9); «Último precio publicado» (RF-4); la
+    galería de hasta 6 imágenes sin JavaScript y la silueta (RF-12); el enlace
+    «Ver en la web de la marca» con aspecto de enlace (RF-14); los estados
+    vacíos (RF-11); y el orden de lectura y de foco. Textos con claves para
+    i18n. Si hace falta un token nuevo, añádelo en tokens.md con su uso."
+- agent: planner
+  task: "Trocea PRD-002 (docs/product/prd/PRD-002-ficha-modelo.md, ready y P0,
+    sin preguntas abiertas) en una épica y sus historias, como issues de GitHub
+    con las plantillas de .github/ISSUE_TEMPLATE. La ficha vive en
+    /marcas/{marca}/{modelo}/ y la tarjeta de /coches ya enlaza ahí
+    (web/src/lib/card.ts), así que hoy esos enlaces dan 404: la primera historia
+    es una ficha mínima que los resuelva. Reutiliza lo que ya existe en
+    web/src/lib/data.ts (modelo derivado), card.ts y la plantilla de páginas de
+    #38, y dilo en las notas técnicas. La imagen de la ficha depende de #112
+    (licencia y silueta) y los modelos relacionados de RF-15 reutilizan la
+    tarjeta. La especificación visual llegará en docs/design/ficha-modelo.md:
+    cítala en las historias aunque aún no esté en main. Cubre RF-1 a RF-15 y
+    CA-1 a CA-18, y termina comprobando tu cobertura. Cada comentario que
+    publiques empieza por 🏭."
 - agent: architect
   task: "Redacta ADR-0010 (usa ese número): pipeline de ingesta de datos, otra
     decisión pendiente de docs/architecture/overview.md. Hoy el esquema de
