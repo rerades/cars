@@ -1,0 +1,66 @@
+---
+import type { CardView } from "../lib/card.ts";
+
+/**
+ * Model card (docs/design/tarjeta-modelo.md), no image (RF-8 is blocked). Static HTML, no JS.
+ * Every string arrives in `card`; the component only lays it out. One link per card: the model
+ * name, stretched over the whole card with a pseudo-element.
+ */
+interface Props {
+  card: CardView;
+  href: string;
+}
+const { card, href } = Astro.props;
+---
+
+<li
+  class="relative flex flex-col gap-2 rounded-card border border-line-soft bg-surface p-4 hover:border-brand-600"
+>
+  <p class="text-small text-ink-600 [overflow-wrap:anywhere]">{card.brand}</p>
+  <h3 class="text-card-title [overflow-wrap:anywhere]">
+    <a
+      href={href}
+      class="text-ink-900 hover:underline after:absolute after:inset-0 after:content-['']"
+    >{card.model}</a>
+  </h3>
+  {
+    card.statusLabel && (
+      <p>
+        <span
+          class:list={[
+            "inline-block rounded-full px-3 py-1 text-badge",
+            card.statusKind === "soon"
+              ? "bg-soon-bg text-soon-fg"
+              : "bg-discontinued-bg text-discontinued-fg",
+          ]}
+          data-status={card.statusKind}>{card.statusLabel}</span
+        >
+      </p>
+    )
+  }
+  <dl class="mt-auto flex flex-col gap-2">
+    <div class="flex flex-wrap items-center gap-2">
+      <dt class="sr-only">{card.labels.price}</dt>
+      <dd class:list={["text-price", card.hasPrice ? "text-ink-900" : "text-ink-600"]} data-field="price">
+        {card.priceLabel}
+      </dd>
+      {
+        card.dealLabel && (
+          <dd class="inline-block rounded-full bg-deal-bg px-3 py-1 text-badge text-deal-fg" data-badge="deal">
+            {card.dealLabel}
+          </dd>
+        )
+      }
+    </div>
+    <div>
+      <dt class="sr-only">{card.labels.range}</dt>
+      <dd class:list={["text-body", !card.hasRange && "text-ink-600"]} data-field="range">{card.rangeLabel}</dd>
+    </div>
+    <div>
+      <dt class="sr-only">{card.labels.segment}</dt>
+      <dd class:list={["text-body", !card.hasSegment && "text-ink-600"]} data-field="segment">
+        {card.segmentLabel}
+      </dd>
+    </div>
+  </dl>
+</li>

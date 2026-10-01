@@ -1,1 +1,61 @@
 @import "tailwindcss";
+
+/* Design tokens: docs/design/tokens.md. One light theme only (ADR-0005). */
+@theme {
+  --color-surface: #ffffff;
+  --color-surface-muted: #f3f4f6;
+  --color-ink-900: #111827;
+  --color-ink-600: #4b5563;
+  --color-line: #6b7280;
+  --color-line-soft: #d1d5db;
+  --color-brand-600: #0b5cad;
+  --color-brand-800: #084785;
+  --color-on-brand: #ffffff;
+  --color-soon-bg: #111827;
+  --color-soon-fg: #ffffff;
+  --color-deal-bg: #fef3c7;
+  --color-deal-fg: #78350f;
+  --color-discontinued-bg: #e5e7eb;
+  --color-discontinued-fg: #374151;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --text-title: 1.5rem;
+  --text-title--line-height: 2rem;
+  --text-title--font-weight: 700;
+  --text-section: 1.125rem;
+  --text-section--line-height: 1.5rem;
+  --text-section--font-weight: 700;
+  --text-card-title: 1.125rem;
+  --text-card-title--line-height: 1.5rem;
+  --text-card-title--font-weight: 600;
+  --text-price: 1.25rem;
+  --text-price--line-height: 1.75rem;
+  --text-price--font-weight: 700;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5rem;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.25rem;
+  --text-badge: 0.875rem;
+  --text-badge--line-height: 1.25rem;
+  --text-badge--font-weight: 600;
+
+  --container-page: 80rem;
+  --container-prose: 40rem;
+
+  --radius-card: 0.5rem;
+}
+
+@layer base {
+  body {
+    background: var(--color-surface);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+  }
+
+  /* Focus ring of tokens.md: outline, so it survives high-contrast mode. */
+  :focus-visible {
+    outline: 3px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+}
