@@ -127,14 +127,14 @@ Coletilla común `pagina.precio.coletilla`: «Si el precio es de una oferta de l
 ### Tramos de autonomía (RF-10)
 | URL | `titulo` | `entrada` |
 |---|---|---|
-| `/autonomia/mas-de-400-km` (`pagina.autonomia.masDe400.*`) | Coches eléctricos con más de 400 km de autonomía | Modelos eléctricos con al menos una versión que supera los 400 km de autonomía WLTP. |
-| `/autonomia/mas-de-500-km` (`pagina.autonomia.masDe500.*`) | Coches eléctricos con más de 500 km de autonomía | Modelos eléctricos con al menos una versión que supera los 500 km de autonomía WLTP. |
+| `/autonomia/mas-de-400-km` (`pagina.autonomia.masDe400.*`) | Coches eléctricos con más de 400 km de autonomía | Modelos eléctricos con al menos una versión que llega a 400 km de autonomía WLTP o más. |
+| `/autonomia/mas-de-500-km` (`pagina.autonomia.masDe500.*`) | Coches eléctricos con más de 500 km de autonomía | Modelos eléctricos con al menos una versión que llega a 500 km de autonomía WLTP o más. |
 
 Coletilla común `pagina.autonomia.coletilla`: «Es la cifra homologada WLTP, no la de uso real. Los modelos sin
 autonomía confirmada no aparecen aquí.» (RF-12, CA-15).
 
-«Al menos una versión» sigue la regla de CA-2 (`filtros-catalogo.md`). Los límites exactos de cada tramo son la
-Pregunta 1.
+«Al menos una versión» sigue la regla de CA-2 (`filtros-catalogo.md`): ≥ 400 km y ≥ 500 km. Los bordes de precio
+(≤ 30.000 · > 30.000 y ≤ 45.000 · > 45.000) están en RF-10 (resuelta la pregunta 1 el 2026-10-01).
 
 ### Texto muy largo
 - `h1` con una marca de nombre largo: parte línea (`overflow-wrap: anywhere`), nunca se recorta ni se reduce el
@@ -329,7 +329,8 @@ No hay pares de color nuevos: todos los usados ya están calculados allí.
 
 ## Preguntas abiertas para Producto
 
-1. **Límites de los tramos.** Un modelo de 30.000 € exactos, ¿va en «hasta 30.000 €», en «de 30.000 a 45.000 €» o
+1. ~~**Límites de los tramos.**~~ Resuelta el 2026-10-01 en RF-10: precio con el borde en el tramo inferior,
+   autonomía ≥ como el filtro. Texto original: un modelo de 30.000 € exactos, ¿va en «hasta 30.000 €», en «de 30.000 a 45.000 €» o
    en las dos? Y en autonomía, RF-10 dice «más de 400 km» y CA-2 «≥ 400 km»: ¿un modelo de 400 km exactos entra en
    `/autonomia/mas-de-400-km`? Aquí los textos dicen «supera» y «no pasa de», que es lo literal de RF-10; si se
    decide otra cosa, cambian las claves.
