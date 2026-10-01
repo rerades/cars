@@ -7,7 +7,5 @@ import { resolve } from "node:path";
 process.env.CARS_DATA_DIR ||= resolve(import.meta.dirname, "../data/raw");
 
 export default defineConfig({
-  // CARS_OUT_DIR lets the build tests write somewhere other than dist/.
-  outDir: process.env.CARS_OUT_DIR || "dist",
   vite: { plugins: [tailwindcss()] },
 });

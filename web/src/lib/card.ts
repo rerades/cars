@@ -6,6 +6,7 @@ import { t, type MessageKey } from "./i18n.ts";
  * (price_from, max_range_km, status, launch); it computes nothing from the versions.
  */
 export interface CardView {
+  /** "{brand}/{model}" from the data file name; the model page lives at /marcas/{key}/ (PRD-002, RF-1). */
   key: string;
   brand: string;
   model: string;
@@ -50,7 +51,7 @@ export function cardView(m: ModelRecord): CardView {
   }
   const price = m.price_from;
   return {
-    key: `${m.brand}/${m.model}`,
+    key: m.file.replace(/\.yaml$/, ""),
     brand: m.brand_name,
     model: m.model,
     statusLabel,

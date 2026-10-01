@@ -120,9 +120,9 @@ describe("/coches built page", () => {
     root = mkdtempSync(join(tmpdir(), "cars-web-"));
     const data = join(root, "data");
     fixtures(data);
-    execFileSync(join(WEB, "node_modules/.bin/astro"), ["build"], {
+    execFileSync(join(WEB, "node_modules/.bin/astro"), ["build", "--outDir", join(root, "out")], {
       cwd: WEB,
-      env: { ...process.env, CARS_DATA_DIR: data, CARS_OUT_DIR: join(root, "out") },
+      env: { ...process.env, CARS_DATA_DIR: data },
       stdio: "pipe",
     });
     html = readFileSync(join(root, "out/coches/index.html"), "utf8");
@@ -166,6 +166,11 @@ describe("/coches built page", () => {
     // The cheapest Volta version is a PVP, so no label; and no label on a missing price.
     assert.doesNotMatch(text(card("Volta")), /Precio con oferta/);
     assert.doesNotMatch(text(card("Soon")), /Precio con oferta/);
+  });
+
+  test("each card links to /marcas/{brand}/{file name}/ (PRD-002, RF-1), all distinct", () => {
+    const hrefs = ["Volta", "Soon", "Deal"].map((name) => /href="([^"]*)"/.exec(card(name))![1]);
+    assert.deepEqual(hrefs, ["/marcas/acme/Volta/", "/marcas/acme/Soon/", "/marcas/acme/Deal/"]);
   });
 
   test("RNF-3: structure for assistive tech (one h1, results list named by its h2, one link per card)", () => {

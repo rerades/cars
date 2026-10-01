@@ -5,8 +5,7 @@ import { cardView } from "../lib/card.ts";
 import { loadModels } from "../lib/data.ts";
 import { t } from "../lib/i18n.ts";
 
-// CARS_DATA_DIR lets the build tests point at fixtures; unset, the real data/raw is read.
-const { models } = loadModels(process.env.CARS_DATA_DIR || undefined);
+const { models } = loadModels();
 const cards = models.map(cardView);
 
 const title = t("pagina.coches.titulo");
@@ -42,7 +41,7 @@ const count =
               class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3"
             >
               {cards.map((card) => (
-                <ModelCard card={card} href={`/coches/${card.key}/`} />
+                <ModelCard card={card} href={`/marcas/${card.key}/`} />
               ))}
             </ul>
           ) : (
