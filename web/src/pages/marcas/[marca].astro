@@ -1,0 +1,24 @@
+---
+import CatalogPage from "../../components/CatalogPage.astro";
+import { cardView } from "../../lib/card.ts";
+import { brandPages, countLabel, type BrandPage } from "../../lib/catalog.ts";
+import { loadModels } from "../../lib/data.ts";
+import { t } from "../../lib/i18n.ts";
+
+export function getStaticPaths() {
+  return brandPages(loadModels().models).map((brand) => ({
+    params: { marca: brand.slug },
+    props: { brand },
+  }));
+}
+
+const { brand } = Astro.props as { brand: BrandPage };
+---
+
+<CatalogPage
+  title={t("pagina.marca.titulo", { marca: brand.name })}
+  intro={t("pagina.marca.entrada", { marca: brand.name })}
+  count={countLabel(brand.models.length)}
+  cards={brand.models.map(cardView)}
+  emptyText={t("vacio.pagina.texto")}
+/>

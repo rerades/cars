@@ -9,6 +9,10 @@ export const es = {
   "pagina.coches.titulo": "Coches eléctricos",
   "pagina.coches.entrada":
     "Todos los modelos eléctricos del mercado español: los que están a la venta, los anunciados y los descatalogados. Precio de la marca en España sin ayudas y autonomía WLTP.",
+  "pagina.marca.titulo": "Coches eléctricos {marca}",
+  "pagina.marca.entrada":
+    "Los modelos eléctricos de {marca} en España, a la venta, anunciados y descatalogados, con su precio desde sin ayudas y su autonomía WLTP.",
+  "vacio.pagina.texto": "Ahora mismo no hay ningún modelo en este tramo.",
   "resumen.cero": "Ningún modelo",
   "resumen.uno": "1 modelo",
   "resumen.n": "{n} modelos",
