@@ -155,10 +155,34 @@ centrado en ambos ejes del hueco.
 | `--size-segment-icon` | `3rem` (48 px) | Lado del icono de silueta dentro del hueco 16:9, en cualquier anchura de tarjeta |
 | `--size-segment-icon-lg` | `6rem` (96 px) | Lado de la silueta en el hueco de la imagen principal de la ficha (`ficha-modelo.md`, RF-12 de PRD-002) |
 
-El dibujo de cada silueta —una por cada uno de los diez segmentos de RF-11, más una genérica de coche
-para cuando tampoco hay segmento— **no se especifica en este documento**: queda para una tarea de diseño
-aparte. El icono es decorativo (`aria-hidden`, sin `alt`): su trazo puede usar `--color-line`, sin
-necesidad de contraste mínimo.
+El icono es decorativo (`aria-hidden`, sin `alt`): su trazo usa `--color-line`, sin necesidad de
+contraste mínimo.
+
+### Dibujos: [`siluetas/`](siluetas/)
+Un SVG por segmento de RF-11 (el nombre del fichero es el `segment.value` de `data-model.md`) y uno
+genérico para cuando falta el segmento:
+
+| Fichero | Segmento | Rasgo que lo distingue a 48 px |
+|---|---|---|
+| [`urbano.svg`](siluetas/urbano.svg) | Urbano | El más corto; un solo volumen redondeado, ruedas pequeñas |
+| [`compacto.svg`](siluetas/compacto.svg) | Compacto | Medio largo; portón trasero vertical, capó corto |
+| [`berlina.svg`](siluetas/berlina.svg) | Berlina | Largo y bajo; tres volúmenes, con maletero escalonado |
+| [`familiar.svg`](siluetas/familiar.svg) | Familiar | Largo; techo recto hasta la trasera vertical |
+| [`suv_pequeno.svg`](siluetas/suv_pequeno.svg) | SUV pequeño | Corto y alto; carrocería elevada, ruedas grandes |
+| [`suv_compacto.svg`](siluetas/suv_compacto.svg) | SUV compacto | Como el anterior, más largo |
+| [`suv_grande.svg`](siluetas/suv_grande.svg) | SUV grande | El SUV más largo y alto, techo plano a todo lo ancho |
+| [`monovolumen.svg`](siluetas/monovolumen.svg) | Monovolumen | Alto; parabrisas largo que baja del techo al morro sin capó marcado |
+| [`furgoneta.svg`](siluetas/furgoneta.svg) | Furgoneta | Caja alta (el techo más alto), morro mínimo, línea de puerta lateral |
+| [`deportivo.svg`](siluetas/deportivo.svg) | Deportivo | El más bajo; caída continua del techo a la trasera |
+| [`generica.svg`](siluetas/generica.svg) | Sin segmento | **Vista frontal** (no de perfil), para que no se confunda con ningún segmento |
+
+Reglas comunes, que el Desarrollador no debe cambiar al incorporarlos:
+- `viewBox="0 0 48 48"`, `fill="none"`, `stroke="currentColor"`, `stroke-width="2"`, extremos y uniones
+  redondeados. El color lo pone la web con `color: var(--color-line)` en el contenedor del icono.
+- Perfiles mirando a la derecha, suelo común (las ruedas tocan y = 37,5) para que al comparar tarjetas
+  solo cambie la forma.
+- Sin texto, sin `<title>` ni `<desc>`: el SVG lleva `aria-hidden="true"` y `focusable="false"`.
+- Dibujo propio y genérico: no reproduce la forma de ningún modelo ni ningún logotipo (RF-8).
 
 ## Breakpoints
 Los de Tailwind: móvil por defecto; `md` = 768 px; `lg` = 1024 px. Diseño móvil primero.
