@@ -1,0 +1,270 @@
+---
+import type { FilterPanelView } from "../lib/filter-view.ts";
+
+/**
+ * Filter panel of /coches (docs/design/filtros-catalogo.md). Progressive enhancement: the markup
+ * is `hidden` and the script below shows it, so without JavaScript the page is the full list
+ * (RNF-1) and no control that does nothing is offered (RNF-3). Filtering happens in the browser
+ * over the data attributes of the cards; the state lives in the query string (RF-5).
+ * Every text arrives in `view` (RNF-4).
+ */
+interface Props {
+  view: FilterPanelView;
+}
+const { view } = Astro.props;
+const L = view.labels;
+const box = "h-6 w-6 shrink-0 accent-brand-600";
+const legend = "text-section";
+const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900";
+---
+
+<div data-filters-root data-messages={JSON.stringify(view.messages)} hidden class="lg:sticky lg:top-4 lg:self-start">
+  <h2 id="filtros" tabindex="-1" class="sr-only lg:not-sr-only text-section">{view.title}</h2>
+  <button
+    type="button"
+    data-filters-toggle
+    aria-expanded="false"
+    aria-controls="filtros-cuerpo"
+    class="mt-2 min-h-11 rounded-card border border-line bg-surface px-4 text-body text-ink-900 lg:hidden"
+    >{L.open.replace("{n}", "0")}</button
+  >
+  <form id="filtros-cuerpo" data-filters-form class="mt-4 hidden flex-col gap-6 lg:flex">
+    <fieldset class="flex flex-col gap-2">
+      <legend class={legend}>{L.brand}</legend>
+      {
+        view.brands.map((o) => (
+          <label class="flex min-h-11 items-start gap-2 text-body">
+            <input type="checkbox" name="marca" value={o.value} data-chip={o.chip} class={box} />
+            <span class="[overflow-wrap:anywhere]">{o.label} ({o.count})</span>
+          </label>
+        ))
+      }
+    </fieldset>
+    {
+      view.segments.length > 0 && (
+        <fieldset class="flex flex-col gap-2">
+          <legend class={legend}>{L.segment}</legend>
+          {view.segments.map((o) => (
+            <label class="flex min-h-11 items-start gap-2 text-body">
+              <input type="checkbox" name="segmento" value={o.value} data-chip={o.chip} class={box} />
+              <span>{o.label} ({o.count})</span>
+            </label>
+          ))}
+        </fieldset>
+      )
+    }
+    <fieldset class="flex flex-col gap-2">
+      <legend class={legend}>{L.price}</legend>
+      <label class="flex flex-col gap-1 text-body">
+        {L.priceFrom}
+        <input type="text" inputmode="numeric" name="precio_min" autocomplete="off" aria-describedby="filtros-error-rango" class={field} />
+      </label>
+      <label class="flex flex-col gap-1 text-body">
+        {L.priceTo}
+        <input type="text" inputmode="numeric" name="precio_max" autocomplete="off" aria-describedby="filtros-error-rango" class={field} />
+      </label>
+      <p id="filtros-error-rango" data-range-error hidden class="text-small text-ink-900">{L.rangeError}</p>
+    </fieldset>
+    <fieldset class="flex flex-col gap-2">
+      <legend class={legend}>{L.range}</legend>
+      <select name="autonomia" aria-label={L.range} class={field}>
+        <option value="">{L.anyRange}</option>
+        {view.ranges.map((r) => <option value={r.value} data-chip={r.chip}>{r.label}</option>)}
+      </select>
+    </fieldset>
+    <fieldset class="flex flex-col gap-2">
+      <legend class={legend}>{L.drivetrain}</legend>
+      <p class="text-small text-ink-600">{L.drivetrainHelp}</p>
+      {
+        view.drivetrains.map((o) => (
+          <label class="flex min-h-11 items-start gap-2 text-body">
+            <input type="checkbox" name="traccion" value={o.value} data-chip={o.chip} class={box} />
+            <span>{o.label}</span>
+          </label>
+        ))
+      }
+    </fieldset>
+    <fieldset class="flex flex-col gap-2">
+      <legend class={legend}>{L.status}</legend>
+      <label class="flex min-h-11 items-start gap-2 text-body">
+        <input type="radio" name="estado" value="todos" checked class={box} />
+        <span>{L.all}</span>
+      </label>
+      {
+        view.statuses.map((o) => (
+          <label class="flex min-h-11 items-start gap-2 text-body">
+            <input type="radio" name="estado" value={o.value} data-chip={o.chip} class={box} />
+            <span>{o.label}</span>
+          </label>
+        ))
+      }
+    </fieldset>
+    <div class="flex flex-wrap gap-2">
+      <button
+        type="button"
+        data-filters-close
+        class="min-h-11 rounded-card bg-brand-600 px-4 text-body text-on-brand hover:bg-brand-800 lg:hidden"
+      ></button>
+      <button
+        type="button"
+        data-filters-clear
+        hidden
+        class="min-h-11 rounded-card border border-line bg-surface px-4 text-body text-ink-900"
+        >{L.clear}</button
+      >
+    </div>
+  </form>
+</div>
+
+<script>
+  import {
+    NO_FILTERS,
+    STATUS_PARAM,
+    DRIVETRAIN_PARAM,
+    activeCount,
+    hasRangeError,
+    matches,
+    parseFilters,
+    readFacts,
+    toSearch,
+    type Filters,
+  } from "../lib/filter.ts";
+
+  const root = document.querySelector<HTMLElement>("[data-filters-root]");
+  if (root) init(root);
+
+  function init(root: HTMLElement) {
+    const msg: Record<string, string> = JSON.parse(root.dataset.messages ?? "{}");
+    const fill = (tpl: string | undefined, vars: Record<string, string | number>) =>
+      (tpl ?? "").replace(/\{(\w+)\}/g, (_, k: string) => String(vars[k] ?? ""));
+    const form = root.querySelector<HTMLFormElement>("[data-filters-form]")!;
+    const toggle = root.querySelector<HTMLButtonElement>("[data-filters-toggle]")!;
+    const closeBtn = root.querySelector<HTMLButtonElement>("[data-filters-close]")!;
+    const clearBtn = root.querySelector<HTMLButtonElement>("[data-filters-clear]")!;
+    const title = root.querySelector<HTMLElement>("#filtros")!;
+    const rangeError = root.querySelector<HTMLElement>("[data-range-error]")!;
+    const chips = document.querySelector<HTMLElement>("[data-chips]");
+    const empty = document.querySelector<HTMLElement>("[data-empty]");
+    const list = document.querySelector<HTMLElement>("[data-results]");
+    const counter = document.querySelector<HTMLElement>("[data-count]");
+    const heading = document.querySelector<HTMLElement>("#resultados");
+    const items = [...document.querySelectorAll<HTMLElement>("[data-model]")].map((el) => ({
+      el,
+      facts: readFacts((n) => el.getAttribute(n)),
+    }));
+    const inputs = (name: string) => [...form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`)];
+    const select = form.elements.namedItem("autonomia") as HTMLSelectElement;
+    const priceMin = form.elements.namedItem("precio_min") as HTMLInputElement;
+    const priceMax = form.elements.namedItem("precio_max") as HTMLInputElement;
+
+    root.hidden = false;
+    document.querySelector<HTMLElement>("[data-no-js]")?.setAttribute("hidden", "");
+    if (chips) chips.hidden = false;
+
+    /** Filters as the controls show them: the query string is built from them and parsed back. */
+    function readForm(): Filters {
+      const q = new URLSearchParams();
+      for (const name of ["marca", "segmento", "traccion"]) {
+        const v = inputs(name).filter((i) => i.checked).map((i) => i.value);
+        if (v.length) q.set(name, v.join(","));
+      }
+      q.set("estado", inputs("estado").find((i) => i.checked)?.value ?? "");
+      q.set("autonomia", select.value);
+      q.set("precio_min", priceMin.value.trim());
+      q.set("precio_max", priceMax.value.trim());
+      return parseFilters(q.toString());
+    }
+
+    function writeForm(f: Filters) {
+      const values: Record<string, string[]> = {
+        marca: f.brands,
+        segmento: f.segments,
+        traccion: f.drivetrains.map((d) => DRIVETRAIN_PARAM[d]),
+      };
+      for (const [name, v] of Object.entries(values)) for (const i of inputs(name)) i.checked = v.includes(i.value);
+      for (const i of inputs("estado")) i.checked = i.value === (f.status ? STATUS_PARAM[f.status] : "todos");
+      select.value = f.minRangeKm === null ? "" : String(f.minRangeKm);
+      priceMin.value = f.priceMin === null ? "" : String(f.priceMin);
+      priceMax.value = f.priceMax === null ? "" : String(f.priceMax);
+    }
+
+    function renderChips(f: Filters) {
+      if (!chips) return;
+      chips.replaceChildren();
+      const add = (label: string, undo: () => void) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "min-h-11 rounded-full border border-line bg-surface px-4 text-body text-ink-900";
+        b.textContent = `${label} ×`;
+        b.setAttribute("aria-label", fill(msg.remove, { filtro: label }));
+        b.addEventListener("click", () => {
+          undo();
+          update();
+        });
+        chips.append(b);
+      };
+      for (const name of ["marca", "segmento", "traccion"]) {
+        for (const i of inputs(name).filter((x) => x.checked)) add(i.dataset.chip ?? i.value, () => (i.checked = false));
+      }
+      const picked = inputs("estado").find((i) => i.checked && i.value !== "todos");
+      if (picked) add(picked.dataset.chip ?? picked.value, () => (inputs("estado")[0]!.checked = true));
+      if (f.minRangeKm !== null) {
+        add(select.selectedOptions[0]?.dataset.chip ?? String(f.minRangeKm), () => (select.value = ""));
+      }
+      if (f.priceMin !== null) add(fill(msg.chipFrom, { precio: f.priceMin }), () => (priceMin.value = ""));
+      if (f.priceMax !== null) add(fill(msg.chipTo, { precio: f.priceMax }), () => (priceMax.value = ""));
+    }
+
+    function update(updateUrl = true) {
+      const f = readForm();
+      const shown = items.filter(({ el, facts }) => {
+        const ok = matches(facts, f);
+        el.hidden = !ok;
+        return ok;
+      });
+      const n = shown.length;
+      if (counter) counter.textContent = n === 0 ? msg.zero! : n === 1 ? msg.one! : fill(msg.many, { n });
+      if (list) list.hidden = n === 0;
+      if (empty) empty.hidden = n !== 0;
+      const active = activeCount(f);
+      toggle.textContent = fill(msg.open, { n: active });
+      closeBtn.textContent = fill(msg.show, { n });
+      clearBtn.hidden = active === 0;
+      const bad = hasRangeError(f);
+      rangeError.hidden = !bad;
+      for (const i of [priceMin, priceMax]) {
+        if (bad) i.setAttribute("aria-invalid", "true");
+        else i.removeAttribute("aria-invalid");
+      }
+      renderChips(f);
+      // Replace, not push: one history entry per page, not one per checkbox.
+      if (updateUrl) history.replaceState(null, "", location.pathname + toSearch(f));
+    }
+
+    function clearAll() {
+      writeForm(NO_FILTERS);
+      update();
+      heading?.focus();
+    }
+
+    function setOpen(open: boolean) {
+      toggle.setAttribute("aria-expanded", String(open));
+      form.classList.toggle("hidden", !open);
+      if (open) title.focus();
+      else toggle.focus();
+    }
+
+    form.addEventListener("input", () => update());
+    form.addEventListener("change", () => update());
+    clearBtn.addEventListener("click", clearAll);
+    document.querySelector("[data-empty-clear]")?.addEventListener("click", clearAll);
+    toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+    closeBtn.addEventListener("click", () => setOpen(false));
+    root.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") setOpen(false);
+    });
+
+    writeForm(parseFilters(location.search));
+    update(false);
+  }
+</script>

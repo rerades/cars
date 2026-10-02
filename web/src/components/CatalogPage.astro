@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
 import ModelCard from "./ModelCard.astro";
+import CatalogFilters from "./CatalogFilters.astro";
 import type { CardView } from "../lib/card.ts";
+import type { FilterPanelView } from "../lib/filter-view.ts";
 import { t } from "../lib/i18n.ts";
 
 /**
@@ -9,6 +11,9 @@ import { t } from "../lib/i18n.ts";
  * intro, counter and results list (or the empty state). Reused by /coches, /marcas/{marca} and the
  * other pregenerated pages (#39). Every text arrives composed in props (RNF-4). The "Explorar"
  * strip is not here yet: it must only link pages that exist (CA-12a) and those arrive with #39.
+ *
+ * With `filters` (only /coches) the page gets the browser-side filter panel as a progressive
+ * enhancement: the HTML still carries every card (RNF-1) and the panel stays hidden without JS.
  */
 interface Props {
   title: string;
@@ -17,8 +22,15 @@ interface Props {
   cards: CardView[];
   /** Text of the empty state; the page shows it instead of the list when there are no cards. */
   emptyText: string;
+  filters?: {
+    view: FilterPanelView;
+    /** Data attributes of each card, same order as `cards` (filter.ts, factAttrs). */
+    facts: Record<string, string>[];
+    /** Canonical path, without query string (CA-13). */
+    canonical: string;
+  };
 }
-const { title, intro, count, cards, emptyText } = Astro.props;
+const { title, intro, count, cards, emptyText, filters } = Astro.props;
 
 const site = t("sitio.nombre");
 const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio: site }) : title;
@@ -29,6 +41,7 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{documentTitle}</title>
+    {filters && <link rel="canonical" href={filters.canonical} />}
   </head>
   <body>
     <a
@@ -39,25 +52,49 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
     <main class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8">
       <h1 class="text-title [overflow-wrap:anywhere]">{title}</h1>
       <p class="mt-2 max-w-prose text-body text-ink-900" data-intro>{intro}</p>
-      <p class="mt-3 text-body text-ink-600" data-count>{count}</p>
+      <p
+        class="mt-3 text-body text-ink-600"
+        data-count
+        role={filters ? "status" : undefined}
+        aria-live={filters ? "polite" : undefined}
+      >{count}</p>
+      {filters && <p class="mt-2 max-w-prose text-body text-ink-600" data-no-js>{t("filtros.sinJs")}</p>}
 
-      <section class="mt-8" aria-labelledby="resultados">
-        <h2 id="resultados" tabindex="-1" class="text-section">{t("resultados.titulo")}</h2>
-        {
-          cards.length > 0 ? (
-            <ul
-              aria-labelledby="resultados"
-              class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3"
-            >
-              {cards.map((card) => (
-                <ModelCard card={card} href={`/marcas/${card.key}/`} />
-              ))}
-            </ul>
-          ) : (
-            <p class="mt-4 text-body text-ink-900">{emptyText}</p>
-          )
-        }
-      </section>
+      <div class:list={["mt-8", filters && "lg:grid lg:grid-cols-[18rem_1fr] lg:gap-8"]}>
+        {filters && <CatalogFilters view={filters.view} />}
+        <section aria-labelledby="resultados" class="mt-8 lg:mt-0">
+          <h2 id="resultados" tabindex="-1" class="text-section">{t("resultados.titulo")}</h2>
+          {filters && <div data-chips hidden class="mt-2 flex flex-wrap gap-2" role="group" aria-label={filters.view.labels.active}></div>}
+          {
+            cards.length > 0 ? (
+              <ul
+                data-results
+                aria-labelledby="resultados"
+                class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3"
+              >
+                {cards.map((card, i) => (
+                  <ModelCard card={card} href={`/marcas/${card.key}/`} facts={filters?.facts[i]} />
+                ))}
+              </ul>
+            ) : (
+              <p class="mt-4 text-body text-ink-900">{emptyText}</p>
+            )
+          }
+          {
+            filters && cards.length > 0 && (
+              <div data-empty hidden role="status" class="mt-4 flex flex-col items-start gap-2">
+                <h2 class="text-section">{filters.view.labels.emptyTitle}</h2>
+                <p class="text-body text-ink-900">{filters.view.labels.emptyText}</p>
+                <button
+                  type="button"
+                  data-empty-clear
+                  class="min-h-11 rounded-card bg-brand-600 px-4 text-body text-on-brand hover:bg-brand-800"
+                >{filters.view.labels.clear}</button>
+              </div>
+            )
+          }
+        </section>
+      </div>
     </main>
   </body>
 </html>
