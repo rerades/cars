@@ -1,6 +1,6 @@
 ---
 status: accepted
-updated: 2026-09-27
+updated: 2026-10-02
 ---
 
 # Modelo de datos
@@ -74,11 +74,25 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
   crossover va a `suv_pequeno`, `suv_compacto` o `suv_grande` según cómo lo presente. Sin segmento, la
   tarjeta dice "por confirmar" y el modelo no sale en ese filtro (RF-12).
 - `status: discontinued` también se publica, con la etiqueta "Descatalogado" (RF-7).
-- **Imagen:** `url`, `source_id`, `retrieved`, `license` (identificador, p. ej. `CC-BY-SA-4.0`, o URL
-  de los términos) y `attribution` (texto que exige la licencia, o `null`). Sin `license` no se publica
-  (CA-10). Orden de fuentes de PRD-001, RF-8: Wikimedia Commons con licencia que permita uso comercial;
-  sala de prensa solo con términos escritos que lo permitan. Sin imagen, la web muestra la silueta del
-  segmento (CA-17).
+- **Imagen** (forma de [ADR-0012](adr/0012-imagenes-de-los-modelos.md), propuesta; sustituye a la
+  de ADR-0008, que tenía un solo `url`). Todas las claves son obligatorias:
+
+  | Clave | Tipo | Nota |
+  |---|---|---|
+  | `file` | ruta relativa a la raíz del repo | `data/images/<brand>/<slug del modelo>/<nombre>.<ext>`; `<nombre>` en `[a-z0-9-]`. El fichero debe existir. Es lo único que lee el build |
+  | `source_url` | URL | URL exacta del fichero descargado (en Commons, `https://upload.wikimedia.org/...`). Nunca se enlaza desde la web |
+  | `page_url` | URL | Página que acredita autor y licencia (en Commons, `https://commons.wikimedia.org/wiki/File:...`; en prensa, la página de términos). Es el enlace de la atribución |
+  | `source_id` | texto | Debe existir en el registro |
+  | `retrieved` | `YYYY-MM-DD` | Fecha de descarga; no futura |
+  | `license` | texto | Identificador (`CC-BY-SA-4.0`) o URL de los términos. Sin él no se publica (CA-10) |
+  | `attribution` | texto o `null` | Texto que exige la licencia; se muestra con enlace a `page_url` |
+
+  Se guarda una copia de 1280 px de ancho como máximo (en Commons, la miniatura estándar de 1280 px),
+  en el formato en que llega; la web sirve variantes WebP generadas en el build. El visitante no pide
+  nada a terceros (RNF-5). Si la descarga falla, no se escribe la entrada: se anota en
+  `open_questions` y la tarjeta muestra la silueta. Orden de fuentes de PRD-001, RF-8: Wikimedia
+  Commons con licencia que permita uso comercial; sala de prensa solo con términos escritos que lo
+  permitan. Sin imagen, la web muestra la silueta del segmento (CA-17).
 - `specs` solo recoge lo que la fuente publica **para el modelo entero** y no por versión. Campos
   permitidos: `wltp_max_km`, `power_max_kw`, `dc_max_kw`, `ac_max_kw`, `battery_kwh_options`
   (lista de números) y `drivetrains` (lista de valores de tracción). `specs` no lleva `unit`.
@@ -138,6 +152,9 @@ Lo que una comprobación automática tendrá que rechazar (la comprobación es t
 7. `brand_name` es igual en todos los ficheros de la misma carpeta.
 8. `specs.wltp_max_km` coincide con el máximo de las versiones cuando las dos existen.
 9. `unit` aparece solo en `price`; `basis` solo en `battery_kwh`.
+10. Cada entrada de `images` tiene `file`, `source_url`, `page_url`, `source_id`, `retrieved`,
+    `license` y `attribution`; no tiene `url`; `file` existe, está bajo
+    `data/images/<brand>/<slug>/` y es una imagen (ADR-0012).
 
 ## 7. Ejemplo completo
 
