@@ -130,7 +130,8 @@ describe("/coches built page", () => {
   after(() => rmSync(root, { recursive: true, force: true }));
 
   test("RNF-1: complete HTML without JavaScript", () => {
-    assert.doesNotMatch(html, /<script\b/i);
+    // The only script is the filter enhancement (#36); the content itself needs none.
+    assert.doesNotMatch(html, /<script\b(?![^>]*type="module")/i);
     assert.match(html, /<h1[^>]*>Coches eléctricos<\/h1>/);
     assert.match(html, /<title>Coches eléctricos<\/title>/);
   });

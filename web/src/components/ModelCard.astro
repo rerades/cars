@@ -9,11 +9,15 @@ import type { CardView } from "../lib/card.ts";
 interface Props {
   card: CardView;
   href: string;
+  /** Data attributes the /coches filters read (filter.ts, factAttrs); absent on pages without filters. */
+  facts?: Record<string, string>;
 }
-const { card, href } = Astro.props;
+const { card, href, facts } = Astro.props;
 ---
 
 <li
+  data-model={facts ? "" : undefined}
+  {...facts}
   class="relative flex flex-col gap-2 rounded-card border border-line-soft bg-surface p-4 hover:border-brand-600"
 >
   <p class="text-small text-ink-600 [overflow-wrap:anywhere]">{card.brand}</p>
