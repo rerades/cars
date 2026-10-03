@@ -53,7 +53,7 @@ describe("/marcas/{marca} built pages", () => {
       .sort();
   const h1 = (html: string) => text(/<h1[^>]*>([\s\S]*?)<\/h1>/.exec(html)![1]);
   const intro = (html: string) => text(/<p[^>]*data-intro[^>]*>([\s\S]*?)<\/p>/.exec(html)![1]);
-  const cards = (html: string) => [...html.matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]);
+  const cards = (html: string) => [...html.slice(html.indexOf('id="resultados"')).matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]);
 
   before(() => {
     root = mkdtempSync(join(tmpdir(), "cars-brands-"));
@@ -80,7 +80,7 @@ describe("/marcas/{marca} built pages", () => {
     const list = cards(html);
     assert.equal(list.length, 2);
     for (const li of list) assert.match(text(li), /^Acme /);
-    assert.doesNotMatch(html, /Solo|Beta/);
+    assert.doesNotMatch(list.join(""), /Solo|Beta/);
     assert.deepEqual(
       list.map((li) => /href="([^"]*)"/.exec(li)![1]).sort(),
       ["/marcas/acme/Soon/", "/marcas/acme/Volta/"],

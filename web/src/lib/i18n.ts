@@ -12,7 +12,63 @@ export const es = {
   "pagina.marca.titulo": "Coches eléctricos {marca}",
   "pagina.marca.entrada":
     "Los modelos eléctricos de {marca} en España, a la venta, anunciados y descatalogados, con su precio desde sin ayudas y su autonomía WLTP.",
+  "pagina.segmento.urbano.titulo": "Coches eléctricos urbanos",
+  "pagina.segmento.urbano.entrada": "Eléctricos pequeños, pensados sobre todo para moverse por ciudad.",
+  "pagina.segmento.compacto.titulo": "Compactos eléctricos",
+  "pagina.segmento.compacto.entrada": "Eléctricos de tamaño medio con carrocería de turismo, para ciudad y carretera.",
+  "pagina.segmento.berlina.titulo": "Berlinas eléctricas",
+  "pagina.segmento.berlina.entrada": "Eléctricos con carrocería de berlina, de tres volúmenes o de maletero largo.",
+  "pagina.segmento.familiar.titulo": "Familiares eléctricos",
+  "pagina.segmento.familiar.entrada":
+    "Eléctricos con carrocería familiar, con más espacio de carga detrás de los asientos.",
+  "pagina.segmento.suv_pequeno.titulo": "SUV pequeños eléctricos",
+  "pagina.segmento.suv_pequeno.entrada":
+    "SUV eléctricos de tamaño reducido, con la altura de un SUV y medidas de urbano.",
+  "pagina.segmento.suv_compacto.titulo": "SUV compactos eléctricos",
+  "pagina.segmento.suv_compacto.entrada": "SUV eléctricos de tamaño medio, entre el SUV pequeño y el grande.",
+  "pagina.segmento.suv_grande.titulo": "SUV grandes eléctricos",
+  "pagina.segmento.suv_grande.entrada":
+    "SUV eléctricos de gran tamaño, con más espacio para pasajeros y equipaje.",
+  "pagina.segmento.monovolumen.titulo": "Monovolúmenes eléctricos",
+  "pagina.segmento.monovolumen.entrada":
+    "Eléctricos con carrocería de monovolumen, pensados para aprovechar el espacio interior.",
+  "pagina.segmento.furgoneta.titulo": "Furgonetas eléctricas",
+  "pagina.segmento.furgoneta.entrada": "Furgonetas y combis eléctricas para pasajeros.",
+  "pagina.segmento.deportivo.titulo": "Deportivos eléctricos",
+  "pagina.segmento.deportivo.entrada": "Eléctricos de carácter deportivo, donde prima la prestación.",
+  "pagina.segmento.coletilla": "Solo aparecen los modelos cuyo segmento está confirmado.",
+  "pagina.precio.hasta30000.titulo": "Coches eléctricos hasta 30.000 €",
+  "pagina.precio.hasta30000.entrada":
+    "Modelos eléctricos cuyo precio desde en España no pasa de 30.000 €, sin descontar ayudas.",
+  "pagina.precio.de30000a45000.titulo": "Coches eléctricos de 30.000 a 45.000 €",
+  "pagina.precio.de30000a45000.entrada":
+    "Modelos eléctricos cuyo precio desde en España está entre 30.000 y 45.000 €, sin descontar ayudas.",
+  "pagina.precio.masDe45000.titulo": "Coches eléctricos de más de 45.000 €",
+  "pagina.precio.masDe45000.entrada":
+    "Modelos eléctricos cuyo precio desde en España supera los 45.000 €, sin descontar ayudas.",
+  "pagina.precio.coletilla":
+    "Si el precio es de una oferta de la marca, lo verás marcado como «Precio con oferta». Los modelos sin precio confirmado no aparecen aquí.",
+  "pagina.autonomia.masDe400.titulo": "Coches eléctricos con más de 400 km de autonomía",
+  "pagina.autonomia.masDe400.entrada":
+    "Modelos eléctricos con al menos una versión que llega a 400 km de autonomía WLTP o más.",
+  "pagina.autonomia.masDe500.titulo": "Coches eléctricos con más de 500 km de autonomía",
+  "pagina.autonomia.masDe500.entrada":
+    "Modelos eléctricos con al menos una versión que llega a 500 km de autonomía WLTP o más.",
+  "pagina.autonomia.coletilla":
+    "Es la cifra homologada WLTP, no la de uso real. Los modelos sin autonomía confirmada no aparecen aquí.",
+  "explorar.titulo": "Explorar",
+  "explorar.marcas": "Marcas",
+  "explorar.segmentos": "Segmentos",
+  "explorar.precio": "Precio",
+  "explorar.autonomia": "Autonomía",
+  "explorar.precio.hasta30000": "Hasta 30.000 €",
+  "explorar.precio.de30000a45000": "De 30.000 a 45.000 €",
+  "explorar.precio.masDe45000": "Más de 45.000 €",
+  "explorar.autonomia.masDe400": "Más de 400 km",
+  "explorar.autonomia.masDe500": "Más de 500 km",
+  "explorar.todos": "Todos los coches",
   "vacio.pagina.texto": "Ahora mismo no hay ningún modelo en este tramo.",
+  "vacio.pagina.enlace": "Ver todos los coches",
   "resumen.cero": "Ningún modelo",
   "resumen.uno": "1 modelo",
   "resumen.n": "{n} modelos",

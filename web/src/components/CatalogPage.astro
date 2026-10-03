@@ -2,13 +2,14 @@
 import "../styles/global.css";
 import ModelCard from "./ModelCard.astro";
 import type { CardView } from "../lib/card.ts";
+import type { ExploreGroup } from "../lib/catalog.ts";
 import { t } from "../lib/i18n.ts";
 
 /**
  * Pregenerated catalog page (docs/design/paginas-catalogo.md, "Estructura común"): skip link, h1,
  * intro, counter and results list (or the empty state). Reused by /coches, /marcas/{marca} and the
  * other pregenerated pages (#39). Every text arrives composed in props (RNF-4). The "Explorar"
- * strip is not here yet: it must only link pages that exist (CA-12a) and those arrive with #39.
+ * strip only links pages that exist (CA-12a): `explore` comes from `exploreGroups`.
  */
 interface Props {
   title: string;
@@ -17,8 +18,14 @@ interface Props {
   cards: CardView[];
   /** Text of the empty state; the page shows it instead of the list when there are no cards. */
   emptyText: string;
+  /** Groups of the "Explorar" strip, already composed by `exploreGroups` (links to existing pages only). */
+  explore: ExploreGroup[];
+  /** URL of this page, to hide "Todos los coches" on /coches itself. */
+  currentHref: string;
+  /** Show the way out to /coches in the empty state (tramo pages, paginas-catalogo.md "Estado vacío"). */
+  emptyLink?: boolean;
 }
-const { title, intro, count, cards, emptyText } = Astro.props;
+const { title, intro, count, cards, emptyText, explore, currentHref, emptyLink = false } = Astro.props;
 
 const site = t("sitio.nombre");
 const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio: site }) : title;
@@ -41,6 +48,47 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
       <p class="mt-2 max-w-prose text-body text-ink-900" data-intro>{intro}</p>
       <p class="mt-3 text-body text-ink-600" data-count>{count}</p>
 
+      <nav class="mt-8" aria-labelledby="explorar" data-explore>
+        <h2 id="explorar" class="text-section">{t("explorar.titulo")}</h2>
+        {
+          explore.map((group) => (
+            <div class="mt-4 md:mt-2 md:flex md:items-baseline">
+              <h3 class="text-group md:w-explore-label md:shrink-0">{group.label}</h3>
+              <ul class="flex flex-wrap gap-x-2 gap-y-1">
+                {group.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      aria-current={link.current ? "page" : undefined}
+                      class:list={[
+                        "inline-flex min-h-touch items-center text-body",
+                        link.current
+                          ? "font-semibold text-ink-900 no-underline"
+                          : "text-brand-600 underline hover:text-brand-800",
+                      ]}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+        {
+          currentHref !== "/coches/" && (
+            <p class="mt-4 md:mt-2">
+              <a
+                href="/coches/"
+                class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+              >
+                {t("explorar.todos")}
+              </a>
+            </p>
+          )
+        }
+      </nav>
+
       <section class="mt-8" aria-labelledby="resultados">
         <h2 id="resultados" tabindex="-1" class="text-section">{t("resultados.titulo")}</h2>
         {
@@ -54,7 +102,17 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
               ))}
             </ul>
           ) : (
-            <p class="mt-4 text-body text-ink-900">{emptyText}</p>
+            <div class="mt-4">
+              <p class="text-body text-ink-900">{emptyText}</p>
+              {emptyLink && (
+                <a
+                  href="/coches/"
+                  class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+                >
+                  {t("vacio.pagina.enlace")}
+                </a>
+              )}
+            </div>
           )
         }
       </section>

@@ -1,7 +1,7 @@
 ---
 import CatalogPage from "../components/CatalogPage.astro";
 import { cardView } from "../lib/card.ts";
-import { countLabel } from "../lib/catalog.ts";
+import { countLabel, exploreGroups } from "../lib/catalog.ts";
 import { loadModels } from "../lib/data.ts";
 import { t } from "../lib/i18n.ts";
 
@@ -14,4 +14,6 @@ const { models } = loadModels();
   count={countLabel(models.length)}
   cards={models.map(cardView)}
   emptyText={t("vacio.catalogo.texto")}
+  explore={exploreGroups(models, "/coches/")}
+  currentHref="/coches/"
 />
