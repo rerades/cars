@@ -3,7 +3,7 @@
 Un solo tema, claro (ADR-0005: sin tema oscuro). Los nombres son variables de tema de Tailwind 4
 (`@theme` en `web/src/styles/global.css`): `--color-ink-900` da `text-ink-900`, `bg-ink-900`, etc.
 Los componentes citan el token, nunca el valor. Ámbito: tarjeta y filtros de PRD-001 (`tarjeta-modelo.md`,
-`filtros-catalogo.md`), con los nombres de campo del esquema único de `docs/architecture/data-model.md`
+`filtros-catalogo.md`), páginas del catálogo y ficha de modelo de PRD-002 (`ficha-modelo.md`), con los nombres de campo del esquema único de `docs/architecture/data-model.md`
 (ADR-0008); se amplía cuando otra pantalla lo pida.
 
 ## Color
@@ -90,6 +90,9 @@ nombre de diseño es este.
 | `--width-prose` | `40rem` | Ancho máximo del texto de entrada, para que la línea se lea bien |
 | `--width-filters` | `16rem` | Columna del panel de filtros en `lg` (el valor que ya fijaba `filtros-catalogo.md`) |
 | `--width-explore-label` | `8rem` | Columna del título de cada grupo de «Explorar» desde `md` |
+| `--width-version-label` | `11rem` | Columna de rótulos de la tabla de versiones de la ficha en `lg` (`ficha-modelo.md`, RF-3 de PRD-002) |
+| `--width-version-col` | `9rem` | Ancho mínimo de cada columna de versión en esa tabla: 11 + 5 × 9 = 56 rem (896 px) caben en los 960 px útiles de 1024 px sin scroll |
+| `--width-version-col-max` | `20rem` | Ancho máximo de cada columna de versión, para que con 1 o 2 versiones la tabla no se estire |
 
 Márgenes laterales de página: paso `4` en móvil, `6` en `md`, `8` en `lg`. Entre bloques de página: `8`.
 
@@ -111,6 +114,7 @@ centrado en ambos ejes del hueco.
 | Token | Valor | Uso |
 |---|---|---|
 | `--size-segment-icon` | `3rem` (48 px) | Lado del icono de silueta dentro del hueco 16:9, en cualquier anchura de tarjeta |
+| `--size-segment-icon-lg` | `6rem` (96 px) | Lado de la silueta en el hueco de la imagen principal de la ficha (`ficha-modelo.md`, RF-12 de PRD-002) |
 
 El dibujo de cada silueta —una por cada uno de los diez segmentos de RF-11, más una genérica de coche
 para cuando tampoco hay segmento— **no se especifica en este documento**: queda para una tarea de diseño
