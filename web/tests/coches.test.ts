@@ -105,12 +105,15 @@ describe("cardView (formatting of the derived model)", () => {
   });
 });
 
+/** The part of the page after the "Modelos" heading: the results, not the Explorar strip. */
+const resultsOf = (html: string) => html.slice(html.indexOf('id="resultados"'));
+
 describe("/coches built page", () => {
   let root: string;
   let html: string;
   /** The `<li>` of the card whose model is `name`. */
   const card = (name: string) => {
-    const li = [...html.matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]).find((s) => s.includes(`>${name}</a>`));
+    const li = [...resultsOf(html).matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]).find((s) => s.includes(`>${name}</a>`));
     assert.ok(li, `no card for ${name}`);
     return li;
   };
@@ -136,7 +139,7 @@ describe("/coches built page", () => {
   });
 
   test("CA-1: one card per model with brand, model, price, range and segment, and no image", () => {
-    assert.equal([...html.matchAll(/<li\b/g)].length, 3);
+    assert.equal([...resultsOf(html).matchAll(/<li\b/g)].length, 3);
     const t = text(card("Volta"));
     assert.match(t, /Acme/);
     assert.match(t, /Volta/);

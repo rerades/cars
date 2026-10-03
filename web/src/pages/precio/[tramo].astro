@@ -1,0 +1,29 @@
+---
+import CatalogPage from "../../components/CatalogPage.astro";
+import { cardView } from "../../lib/card.ts";
+import { countLabel, criterionTexts, exploreGroups, pricePages, type CriterionPage } from "../../lib/catalog.ts";
+import { loadModels } from "../../lib/data.ts";
+import { t } from "../../lib/i18n.ts";
+
+export function getStaticPaths() {
+  return pricePages(loadModels().models).map((page) => ({
+    params: { tramo: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props as { page: CriterionPage };
+const href = `/precio/${page.slug}/`;
+const { title, intro } = criterionTexts("precio", page.key);
+---
+
+<CatalogPage
+  title={title}
+  intro={intro}
+  count={countLabel(page.models.length)}
+  cards={page.models.map(cardView)}
+  emptyText={t("vacio.pagina.texto")}
+  explore={exploreGroups(loadModels().models, href)}
+  currentHref={href}
+  emptyLink
+/>

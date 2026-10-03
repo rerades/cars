@@ -32,6 +32,9 @@
   --text-price: 1.25rem;
   --text-price--line-height: 1.75rem;
   --text-price--font-weight: 700;
+  --text-group: 1rem;
+  --text-group--line-height: 1.5rem;
+  --text-group--font-weight: 600;
   --text-body: 1rem;
   --text-body--line-height: 1.5rem;
   --text-small: 0.875rem;
@@ -42,6 +45,9 @@
 
   --container-page: 80rem;
   --container-prose: 40rem;
+
+  --width-explore-label: 8rem;
+  --spacing-touch: 2.75rem;
 
   --radius-card: 0.5rem;
 }
