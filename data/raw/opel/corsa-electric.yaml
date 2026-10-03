@@ -1,0 +1,23 @@
+# Researcher — Opel Corsa Electric. Fuentes: opel-es (T1), wikimedia-commons. Consultado 2026-10-03.
+brand: opel
+brand_name: Opel
+model: Corsa Electric
+status: {value: on_sale, note: "ofertas.opel.es: Corsa 'Disponible en Gasolina, Híbrido o Eléctrico'; versión eléctrica 50kWh Edition", source_id: opel-es, url: "https://ofertas.opel.es/particulares?model=corsa", retrieved: 2026-10-03, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Corsa Electric 50kWh Edition
+    price: null   # ofertas.opel.es no muestra precio de la versión eléctrica
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/5/51/2023_Opel_Corsa-e_1X7A2474.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-03
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:2023 Opel Corsa-e 1X7A2474.jpg)"
+open_questions:
+  - "launch: inicio de venta en España del Corsa Electric no leído en ninguna fuente T1 (www.opel.es devuelve 403)."
+  - "segment: ninguna fuente leída lo clasifica; queda vacío."
+  - "price: sin PVP ni precio financiado de la versión eléctrica en página T1 legible; un T3 (coches.com) da cifras pero no valen."
+  - "Batería, autonomía WLTP, potencia y carga: fichas de www.opel.es no accesibles."
+  - "Imagen: es el Corsa-e con el restyling de 2023 (mismo modelo que Corsa Electric actual)."
