@@ -1,0 +1,44 @@
+# Researcher — BMW iX3 (Neue Klasse, NA5). Fuentes: bmw-press (T1), bmw-es (T1), wikimedia-commons. Consultado 2026-10-04.
+brand: bmw
+brand_name: BMW
+model: iX3
+status: {value: on_sale, note: "la ficha bmw.es del iX3 (NA5) aparece con configurador y precios en buscador, pero no se pudo abrir (timeout); el comunicado de 2025-11-25 fijaba el lanzamiento en marzo", source_id: bmw-es, url: "https://www.bmw.es/es/coches-bmw/x/ix3/bmw-ix3.html", retrieved: 2026-10-04, tier: T1}
+launch: {value: "2026-03", note: "comunicado del 2025-11-25: \"El lanzamiento al mercado será el próximo mes de marzo en toda la red de concesionarios\" (año deducido de la fecha del comunicado) para el iX3 50 xDrive; el iX3 40 se anuncia para verano de 2026", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es", retrieved: 2026-10-04, tier: T1}
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 805, note: "hasta 805 km (iX3 50 xDrive)", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es", retrieved: 2026-10-04, tier: T1}
+  dc_max_kw: {value: 400, note: "hasta 400 kW (iX3 50 xDrive)", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es", retrieved: 2026-10-04, tier: T1}
+versions:
+  - name: iX3 50 xDrive
+    wltp_km: {value: 805, note: "hasta 805 km", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es", retrieved: 2026-10-04, tier: T1}
+    power_kw: {value: 345, note: "publicado: 345 kW (469 CV)", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es", retrieved: 2026-10-04, tier: T1}
+    drivetrain: {value: awd, note: "dos motores, uno por eje (xDrive)", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es", retrieved: 2026-10-04, tier: T1}
+    dc_max_kw: {value: 400, source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es", retrieved: 2026-10-04, tier: T1}
+    price:
+      value: 69900
+      unit: EUR
+      price_kind: pvp
+      note: "\"El nuevo BMW iX3 parte de 69.900 € para el mercado español.\" Comunicado de 2025-11-25 sin mención a ofertas ni ayudas; precio de lanzamiento, no reverificado en el configurador"
+      source_id: bmw-press
+      url: "https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es"
+      retrieved: 2026-10-04
+      tier: T1
+  - name: iX3 40
+    battery_kwh: {value: 82.6, basis: usable, note: "82,6 kWh netos", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0459447ES/precios-para-espa%20a-nuevo-bmw-ix3-40", retrieved: 2026-10-04, tier: T1}
+    wltp_km: {value: 637, note: "hasta 637 km", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0459447ES/precios-para-espa%20a-nuevo-bmw-ix3-40", retrieved: 2026-10-04, tier: T1}
+    power_kw: {value: 235, note: "publicado: 235 kW (320 CV)", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0459447ES/precios-para-espa%20a-nuevo-bmw-ix3-40", retrieved: 2026-10-04, tier: T1}
+    drivetrain: {value: rwd, source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0459447ES/precios-para-espa%20a-nuevo-bmw-ix3-40", retrieved: 2026-10-04, tier: T1}
+    dc_max_kw: {value: 300, note: "hasta 300 kW", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0459447ES/precios-para-espa%20a-nuevo-bmw-ix3-40", retrieved: 2026-10-04, tier: T1}
+    price: null   # el comunicado de 2026-07-20 solo da "aproximadamente 63.650 €", no un PVP definitivo
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/8/8e/BMW_iX3_NA5_IAA_2025_DSC_1684.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-04
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:BMW_iX3_NA5_IAA_2025_DSC_1684.jpg)"
+open_questions:
+  - "Segmento sin fuente: la ficha bmw.es no se pudo abrir y el comunicado no lo clasifica (el iX3 se aloja en /coches-bmw/x/, familia X)."
+  - "iX3 40: el comunicado de 2026-07-20 da \"aproximadamente 63.650 €\"; falta PVP definitivo y confirmar si ya se vende (anunciado para verano de 2026)."
+  - "iX3 50 xDrive: capacidad de batería y carga AC no publicadas en el comunicado; precio sin reverificar en el configurador (bmw.es dio timeout)."
+  - "Resto de la gama BMW (iX1, iX2, i4, i5, i7, iX): sin fichero porque bmw.es no se pudo leer y los comunicados de precio hallados son antiguos (iX1: 2023)."
