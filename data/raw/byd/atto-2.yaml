@@ -1,0 +1,48 @@
+# Researcher — BYD Atto 2. Fuente: byd-es (T1). Consultado 2026-10-05.
+brand: byd
+brand_name: BYD
+model: Atto 2
+status: {value: on_sale, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+launch: {value: "2025-02", note: "mes de la noticia de llegada a España; no es una fecha de inicio de venta explícita", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/atto-2--el-suv-electrico-urbano-de-byd-llega-a-espana-desde-28-7", retrieved: 2026-10-05, tier: T1}
+segment: {value: suv_pequeno, note: "la noticia lo presenta como SUV urbano (segmento B); la ficha dice también SUV compacto", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/atto-2--el-suv-electrico-urbano-de-byd-llega-a-espana-desde-28-7", retrieved: 2026-10-05, tier: T1}
+needs_review: true
+versions:
+  - name: Atto 2 Active
+    battery_kwh: {value: 45.1, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+    wltp_km: {value: 312, note: "ciclo combinado; la web destaca 403 km en ciclo urbano", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+    power_kw: {value: 130, note: "publicado: 177 CV", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+    dc_max_kw: {value: 65, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+    ac_max_kw: {value: 11, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+    price:
+      value: 24796
+      unit: EUR
+      price_kind: financed
+      price_terms: "Precio Recomendado Financiando: 24.796,00 €. Válida hasta 31/10/2026. CA Auto Bank, SpA Sucursal en España. Península y Baleares. Importe mínimo a financiar 15.000 €, plazo mínimo 72 meses, permanencia mínima 36 meses. Incluye adelanto de 3.375 € del Plan Auto+, incentivo de 950 € por CAE y descuentos de concesionario y fabricante."
+      price_terms_url: "https://www.byd.com/es-es/promociones/atto-2-promocion"
+      source_id: byd-es
+      url: "https://www.byd.com/es-es/promociones/atto-2-promocion"
+      retrieved: 2026-10-05
+      tier: T1
+  - name: Atto 2 Boost
+    price: null   # sin precio propio leído en fuente T1
+  - name: Atto 2 Comfort
+    battery_kwh: {value: 64.8, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
+    wltp_km: {value: 430, source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
+    power_kw: {value: 150, note: "publicado: 204 CV", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
+    dc_max_kw: {value: 155, source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
+    ac_max_kw: {value: 11, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+    price: null   # la web solo da el precio con ayudas/financiación para esta versión
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/5/56/BYD_Atto_2_DSC_8763.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-05
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:BYD Atto 2 DSC 8763.jpg)"
+open_questions:
+  - "Boost: batería, autonomía, potencia y precio no confirmados por versión."
+  - "Hay un 'Precio Recomendado Contado' de 31.921 € en la letra pequeña de la promoción, sin versión clara; no se registra como pvp."
+  - "Tracción no publicada de forma explícita (monomotor); no se registra drivetrain."
+  - "Launch: fecha exacta de inicio de venta no confirmada; se usa el mes de la noticia."
+  - "Segmento: la web mezcla 'SUV urbano' y 'SUV compacto'."
+  - "Batería: la web no indica si es útil o bruta."
+  - "Resto de la gama BEV (Dolphin Surf, Atto 3 EVO, Seal, Dolphin, Seal U, Sealion 7, Tang) sin leer en esta pasada."
