@@ -74,7 +74,7 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
   crossover va a `suv_pequeno`, `suv_compacto` o `suv_grande` según cómo lo presente. Sin segmento, la
   tarjeta dice "por confirmar" y el modelo no sale en ese filtro (RF-12).
 - `status: discontinued` también se publica, con la etiqueta "Descatalogado" (RF-7).
-- **Imagen** (forma de [ADR-0012](adr/0012-imagenes-de-los-modelos.md), propuesta; sustituye a la
+- **Imagen** (forma de [ADR-0012](adr/0012-imagenes-de-los-modelos.md), aceptada; sustituye a la
   de ADR-0008, que tenía un solo `url`). Todas las claves son obligatorias:
 
   | Clave | Tipo | Nota |

@@ -1,6 +1,6 @@
 # ADR-0012 — Dónde se sirven las imágenes de los modelos
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-05)
 - **Fecha:** 2026-10-02
 
 ## Contexto
@@ -40,18 +40,18 @@ imagen; (2) qué guarda el esquema para la atribución; (3) qué tamaño y forma
   330, 500, 960, 1280, 1920, 3840) ([1]), lo que ataría el diseño de la tarjeta a esa lista.
 - **Descargar en cada build con las imágenes remotas de Astro (`image.domains`):** descartada. Astro
   descarga y optimiza las imágenes remotas en el build estático y las cachea en `.astro` según
-  `Cache-Control` ([3]), así que el visitante no pide nada a Wikimedia. Pero: (a) cada build en
+  `Cache-Control` ([2]), así que el visitante no pide nada a Wikimedia. Pero: (a) cada build en
   Render depende de que Wikimedia responda; la documentación de Astro no dice qué pasa si la
-  descarga falla ([3]), así que el resultado (build roto o tarjeta sin imagen) no está definido;
+  descarga falla ([2]), así que el resultado (build roto o tarjeta sin imagen) no está definido;
   (b) si la caché `.astro` se conserva entre builds de Render **no lo he comprobado**: si no, cada
   build vuelve a descargarlo todo y gasta minutos del workspace; (c) Wikimedia exige a los scripts
-  un `User-Agent` propio con contacto y responde 403 a los que no lo traen ([4]); **no he comprobado**
+  un `User-Agent` propio con contacto y responde 403 a los que no lo traen ([3]); **no he comprobado**
   que Astro permita fijarlo; (d) rompe la promesa de ADR-0009: el mismo commit puede publicar cosas
   distintas si la imagen cambia en Commons; (e) quien descargaría datos de producto sería el build,
   no el Researcher (ADR-0001).
 - **Descargar en la ingesta y guardar en el repositorio con Git LFS:** descartada por ahora. No hay
   ficheros que lo justifiquen: GitHub recomienda LFS para ficheros grandes y pone el aviso en 1 MB
-  por fichero y 10 GB por repositorio ([5]), y una miniatura de 1280 px queda, por lo que se ve en
+  por fichero y 10 GB por repositorio ([4]), y una miniatura de 1280 px queda, por lo que se ve en
   Commons, por debajo de 1 MB (impresión, no medido). Añadiría que Render tenga que bajar los
   objetos LFS en el build, cosa que **no he comprobado**.
 - **Servir las imágenes desde un almacenamiento o CDN propio aparte (R2, S3, Cloudflare Images):**
@@ -65,7 +65,7 @@ imagen; (2) qué guarda el esquema para la atribución; (3) qué tamaño y forma
 
 - **Solo la URL del fichero:** descartada. CC BY y CC BY-SA 4.0 piden un enlace al material «en la
   medida razonablemente posible» y permiten cumplir la atribución con un enlace a un recurso que
-  contenga la información exigida ([6], sección 3(a)); ese recurso es la página `File:` de Commons,
+  contenga la información exigida ([5], sección 3(a)); ese recurso es la página `File:` de Commons,
   no el JPEG.
 - **Solo la página `File:`:** descartada. No dice qué fichero exacto se descargó (Commons guarda
   versiones), y el build no puede pintar HTML.
@@ -80,10 +80,10 @@ imagen; (2) qué guarda el esquema para la atribución; (3) qué tamaño y forma
   (impresión, no medido): demasiado para una tarjeta en 4G (RNF-2).
 - **Guardar ya convertido a WebP en la ingesta y servirlo tal cual:** descartada. Fija un único
   tamaño para todas las pantallas y convierte dos veces si cambia el diseño.
-- **AVIF además de WebP con `<Picture />`:** descartada por ahora. Astro lo admite ([7]), pero
+- **AVIF además de WebP con `<Picture />`:** descartada por ahora. Astro lo admite ([6]), pero
   multiplica las variantes que se generan en cada build sin una medida que diga que hace falta.
 - **Guardar una copia de 1280 px de ancho y generar en el build las variantes WebP con `<Image />`
-  (elegida).** WebP es la salida por defecto de `<Image />` y Sharp el servicio por defecto ([7]).
+  (elegida).** WebP es la salida por defecto de `<Image />` y Sharp el servicio por defecto ([6]).
 
 ## Decisión
 **El visitante no hace ninguna petición a terceros para ver una imagen: el fichero se descarga una
@@ -97,7 +97,7 @@ Detalles:
    repo.
 2. **Qué se descarga.** De Commons, la miniatura de **1280 px de ancho** (uno de los anchos estándar,
    [1]), o el original si es más estrecho. Se pide con un `User-Agent` propio con contacto, como
-   exige Wikimedia ([4]). De una sala de prensa, el fichero que ofrezca, reducido a 1280 px de ancho
+   exige Wikimedia ([3]). De una sala de prensa, el fichero que ofrezca, reducido a 1280 px de ancho
    si es mayor. Sin recodificar a otro formato al guardar: se guarda el JPEG o PNG tal como llega.
 3. **Quién lo descarga y cuándo.** En la ingesta, en la misma ejecución que escribe el YAML, y nunca
    en el build. El cómo (paso del Researcher o script determinista que lanza) es de ADR-0010, que
@@ -118,7 +118,7 @@ Detalles:
      descargado. La migración es trabajo de la ingesta (ADR-0010), no de esta ADR.
 6. **Atribución en la web.** Si `attribution` no es `null`, se muestra junto a la imagen con un
    enlace a `page_url`. Reducir y cambiar de formato son «modificaciones técnicas» que CC 4.0 permite
-   y que no crean material adaptado ([6], sección 2(a)(4)). Cómo y dónde se ve el texto en la
+   y que no crean material adaptado ([5], sección 2(a)(4)). Cómo y dónde se ve el texto en la
    tarjeta es del diseño, no de esta ADR.
 7. **Lo que se sirve.** `<Image />` de Astro (`astro:assets`) sobre el fichero local, salida **WebP**,
    con `width` y `height` explícitos para no mover el diseño y un `srcset` de anchos que fija el
@@ -143,7 +143,7 @@ Detalles:
   (Cloudflare Pages) o un almacenamiento aparte, que habría que decidir.
 - **Tamaño del repositorio.** Cada imagen ocupa en el historial para siempre, también las
   sustituidas. Con cientos de modelos y una o dos imágenes de unos cientos de KB cada una (estimación
-  sin medir) son decenas de MB, lejos de los 10 GB que GitHub recomienda ([5]). Si se pasa a varias
+  sin medir) son decenas de MB, lejos de los 10 GB que GitHub recomienda ([4]). Si se pasa a varias
   imágenes por modelo (galería de la ficha, PRD-002), hay que volver a mirarlo; LFS es la salida.
 - **Tiempo de build en Render.** Sharp genera las variantes en cada build. Con 11 imágenes es poco;
   con cientos, y si Render no conserva la caché `.astro` (no comprobado), puede pasar de segundos a
@@ -172,12 +172,12 @@ Detalles:
 
 **Fuentes (consultadas el 2026-10-02)**
 - [1] https://www.mediawiki.org/wiki/Common_thumbnail_sizes
-- [3] https://docs.astro.build/en/guides/images/
-- [4] https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy
-- [5] https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits
-- [6] https://creativecommons.org/licenses/by-sa/4.0/legalcode.en
-- [7] https://docs.astro.build/en/reference/modules/astro-assets/
-- [8] https://www.mediawiki.org/wiki/API:Imageinfo (`iiprop=url` da la URL del fichero y la de su
+- [2] https://docs.astro.build/en/guides/images/
+- [3] https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy
+- [4] https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits
+- [5] https://creativecommons.org/licenses/by-sa/4.0/legalcode.en
+- [6] https://docs.astro.build/en/reference/modules/astro-assets/
+- [7] https://www.mediawiki.org/wiki/API:Imageinfo (`iiprop=url` da la URL del fichero y la de su
   página; `iiurlwidth` da una miniatura escalada: vía posible para obtener `source_url` y
   `page_url` juntas)
 - Hechos de cookies de Wikimedia: comprobados el 2026-10-01, según la tarea.
