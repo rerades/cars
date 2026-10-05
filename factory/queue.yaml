@@ -19,6 +19,22 @@
     ops/runs/ deben entrar en su lista de rutas). Elige una y di qué cambia en
     run.ts y orchestrator.ts, sin escribir el código. Estado propuesta. Enlázala
     desde docs/architecture/overview.md. No toques factory/ ni la cola."
+- agent: architect
+  task: "Issue #164: el registro de fuentes pasa a un fichero por fuente,
+    data/sources/<id>.yaml, para que dos PR del Researcher que dan de alta
+    fuentes distintas no choquen al fusionarse (hoy todas añaden su entrada al
+    final de data/sources/registry.yaml). Léela entera, con su lista de lo que
+    hay que cambiar y su criterio de hecho. Decide la pregunta que deja abierta:
+    si basta con cambiar docs/architecture/data-model.md o hace falta enmendar
+    ADR-0001 o ADR-0008; si hace falta una ADR nueva, usa ADR-0014 (la 0010, la
+    0012 y la 0013 están tomadas). Fija en data-model.md la forma de cada
+    fichero (la de una entrada de hoy, con el nombre del fichero igual a su id)
+    y adónde va el esquema que hoy está en la cabecera del registro. Di si la
+    regla de fusión automática de ADR-0011 cambia con la ruta nueva. Deja
+    escrito qué tiene que cambiar el Desarrollador (factory/evals.ts y sus
+    pruebas) y quién parte el registro en ficheros, sin hacerlo tú. Actualiza
+    las menciones a data/sources/registry.yaml en docs/architecture/. No toques
+    data/, factory/ ni .claude/."
 - agent: researcher
   task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/.
     Escribe exactamente el esquema de docs/architecture/data-model.md
