@@ -10,7 +10,9 @@ Node >= 24 (ejecuta TypeScript directamente, sin compilar). Sin Python. El gesto
 
 ## Lee esto antes de trabajar
 1. `docs/README.md` — mapa de la documentación.
-2. `docs/bitacora/` — qué se ha hecho y **por qué**. Empieza por el mes actual.
+2. `docs/bitacora/` — qué se ha hecho y **por qué**. Empieza por el mes actual: un fichero por
+   entrada en `docs/bitacora/YYYY-MM/`, en orden por nombre (`cat docs/bitacora/2026-10/*.md`). Lo
+   anterior al 2026-10-05 está en `docs/bitacora/YYYY-MM.md`.
 3. `docs/product/vision.md` y el PRD que toque.
 4. `docs/architecture/adr/` — decisiones vigentes (ADR-0001 fuentes, ADR-0002 presupuesto, ADR-0004 trazas y evals).
 5. `docs/process/workflow.md` y `definition-of-done.md`.

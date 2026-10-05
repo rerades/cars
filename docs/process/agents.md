@@ -12,8 +12,8 @@
 | Revisor / QA (`reviewer`) | Verificar la DoD y los CA | comentarios en PR | **activo** |
 
 Además de su columna, **todos** pueden escribir en `docs/bitacora/`: la regla de CLAUDE.md de
-registrar lo hecho en el mismo commit también les toca a ellos. No editan el fichero a mano, lo
-hacen con `node factory/bitacora.ts add`, y el orquestador se lo recuerda en cada tarea.
+registrar lo hecho en el mismo commit también les toca a ellos. No escriben las entradas a mano, las
+añaden con `node factory/bitacora.ts add`, que crea un fichero por entrada para que dos PR no choquen, y el orquestador se lo recuerda en cada tarea.
 
 Definiciones ejecutables de los agentes: `.claude/agents/`. Sin su fichero ahí, el orquestador
 no puede lanzarlos (`--agent <nombre>`). Se crean de uno en uno, cuando toca su primera tarea,
