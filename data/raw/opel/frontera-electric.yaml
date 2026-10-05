@@ -1,0 +1,21 @@
+# Researcher — Opel Frontera Electric. Fuentes: opel-es (T1), wikimedia-commons. Consultado 2026-10-03.
+brand: opel
+brand_name: Opel
+model: Frontera Electric
+status: {value: on_sale, note: "ofertas.opel.es: Frontera 'Disponible en Gasolina, Híbrido o Eléctrico'", source_id: opel-es, url: "https://ofertas.opel.es/particulares?model=frontera", retrieved: 2026-10-03, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Frontera Electric
+    price: null   # el precio al contado de ofertas.opel.es (23.800 €) es de la versión térmica/híbrida
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Opel_Frontera_C_Electric_DSC_9331.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-03
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:Opel Frontera C Electric DSC 9331.jpg)"
+open_questions:
+  - "launch y segment: sin fuente leída."
+  - "price: sin precio de la versión eléctrica en página T1 legible."
+  - "Versiones, batería, autonomía WLTP, potencia y carga: fichas de www.opel.es no accesibles (403)."
