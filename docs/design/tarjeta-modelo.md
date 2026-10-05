@@ -91,8 +91,8 @@ da el mínimo: si es oferta, lleva la etiqueta (RF-9: «siempre con su etiqueta�
   lector lo repita.
 - **Sin imagen con licencia**, el hueco 16:9 `surface-muted` lleva el icono de silueta del segmento del
   modelo, centrado, del tamaño `--size-segment-icon` (`tokens.md`). Si además falta el segmento, lleva una
-  silueta genérica de coche, en el mismo sitio y del mismo tamaño. El dibujo de cada silueta no se
-  especifica en este documento (`tokens.md`, «Silueta de segmento»). El icono es decorativo (`aria-hidden`),
+  silueta genérica de coche, en el mismo sitio y del mismo tamaño. El dibujo de las 11 siluetas está en
+  [`siluetas-segmento.md`](siluetas-segmento.md); el tamaño, en `tokens.md` («Silueta de segmento»). El icono es decorativo (`aria-hidden`),
   sin atribución ni texto dentro del hueco.
 - Ancho y alto del hueco declarados igual que los de una imagen real, para no mover el resto de la tarjeta.
 
