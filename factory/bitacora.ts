@@ -1,7 +1,11 @@
 /**
  * Bitácora del proyecto: registro cronológico de decisiones, hitos y ejecuciones.
  *
- * Las entradas viven en docs/bitacora/YYYY-MM.md y se versionan con git.
+ * One file per entry: docs/bitacora/YYYY-MM/<YYYY-MM-DDTHHMM>-<id>.md. Two branches that each add
+ * an entry create different files, so they never conflict on rebase or merge. Filenames start
+ * with the date, so `cat docs/bitacora/YYYY-MM/*.md` prints the month in order. The older
+ * docs/bitacora/YYYY-MM.md files (up to 2026-10-05) are no longer written to, but their marks
+ * still count.
  *
  * Uso:
  *   node factory/bitacora.ts add --tipo decision --texto "..." [--refs PR#2 ADR-0002]
@@ -12,8 +16,9 @@
  * run_id) y no se duplica al volver a ejecutarlas.
  */
 import { execFileSync } from "node:child_process";
-import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { randomBytes } from "node:crypto";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { clock, REPO } from "./orchestrator.ts";
 
 /** Rutas mutables para que las pruebas usen un directorio temporal. */
@@ -30,43 +35,25 @@ export const TIPOS: Record<string, string> = {
   nota: "📝 Nota",
 };
 
-/** `when` es una marca ISO con desfase; la entrada se fecha con su hora de pared. */
-const monthFile = (when: string) => join(paths.diary, `${when.slice(0, 7)}.md`);
-
-function ensureFile(path: string, when: string): void {
-  if (existsSync(path)) return;
-  mkdirSync(paths.diary, { recursive: true });
-  writeFileSync(
-    path,
-    `# Bitácora ${when.slice(0, 7)}\n\n` +
-      "Entradas en orden cronológico. La genera y actualiza `factory/bitacora.ts`.\n\n",
-    "utf8",
-  );
+/**
+ * `when` is an ISO timestamp with offset; the entry is dated by its wall-clock time. An entry with
+ * a mark gets a name derived from it, so the same import on two branches writes the same file with
+ * the same content (git merges that cleanly). Without a mark, a random suffix keeps names unique.
+ */
+function entryFile(when: string, mark?: string): string {
+  const id = mark ? mark.replace(/[^\w.-]+/g, "-") : randomBytes(4).toString("hex");
+  return join(paths.diary, when.slice(0, 7), `${when.slice(0, 10)}T${when.slice(11, 13)}${when.slice(14, 16)}-${id}.md`);
 }
 
-function existingMarks(path: string): Set<string> {
-  if (!existsSync(path)) return new Set();
-  return new Set([...readFileSync(path, "utf8").matchAll(/<!--\s*id:([^\s>]+)\s*-->/g)].map((m) => m[1]));
-}
-
+/** Marks in every .md under the diary, in the old monthly files and in the per-entry folders. */
 function allMarks(): Set<string> {
   if (!existsSync(paths.diary)) return new Set();
+  const files = readdirSync(paths.diary, { recursive: true, encoding: "utf8" }).filter((f) => f.endsWith(".md"));
   return new Set(
-    readdirSync(paths.diary)
-      .filter((f) => f.endsWith(".md"))
-      .flatMap((f) => [...existingMarks(join(paths.diary, f))]),
+    files.flatMap((f) =>
+      [...readFileSync(join(paths.diary, f), "utf8").matchAll(/<!--\s*id:([^\s>]+)\s*-->/g)].map((m) => m[1])
+    ),
   );
-}
-
-/** Reordena las entradas del fichero por fecha, manteniendo la cabecera. */
-function sortFile(path: string): void {
-  const lines = readFileSync(path, "utf8").split("\n");
-  const isEntry = (l: string) => l.startsWith("- **");
-  const head = lines.filter((l) => !isEntry(l));
-  const key = (l: string) => l.slice(4, 20);
-  const entries = lines.filter(isEntry).sort((a, b) => (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0));
-  while (head.length && head.at(-1) === "") head.pop();
-  writeFileSync(path, head.join("\n") + "\n\n" + entries.join("\n") + "\n", "utf8");
 }
 
 const localNow = () => clock(new Date(), Intl.DateTimeFormat().resolvedOptions().timeZone).iso;
@@ -78,13 +65,12 @@ export function addEntry(
   { refs = [], mark, when = localNow() }: { refs?: string[]; mark?: string; when?: string } = {},
 ): boolean {
   if (mark && allMarks().has(mark)) return false;
-  const path = monthFile(when);
-  ensureFile(path, when);
+  const path = entryFile(when, mark);
+  mkdirSync(dirname(path), { recursive: true });
   let linea = `- **${when.slice(0, 10)} ${when.slice(11, 16)}** · ${TIPOS[tipo] ?? TIPOS.nota} — ${texto}`;
   if (refs.length) linea += ` (${refs.join(", ")})`;
   if (mark) linea += ` <!-- id:${mark} -->`;
-  appendFileSync(path, linea + "\n", "utf8");
-  sortFile(path);
+  writeFileSync(path, linea + "\n", "utf8");
   return true;
 }
 
