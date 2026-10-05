@@ -133,7 +133,10 @@ describe("/coches built page", () => {
   after(() => rmSync(root, { recursive: true, force: true }));
 
   test("RNF-1: complete HTML without JavaScript", () => {
-    assert.doesNotMatch(html, /<script\b/i);
+    // The only script is the filter enhancement (#36), one module from our own /_astro/; the content needs none.
+    const scripts = html.match(/<script\b[^>]*>/gi) ?? [];
+    assert.equal(scripts.length, 1);
+    assert.match(scripts[0], /^<script type="module" src="\/_astro\/CatalogFilters[^"]*\.js">$/);
     assert.match(html, /<h1[^>]*>Coches eléctricos<\/h1>/);
     assert.match(html, /<title>Coches eléctricos<\/title>/);
   });
