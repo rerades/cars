@@ -156,8 +156,8 @@ centrado en ambos ejes del hueco.
 | `--size-segment-icon-lg` | `6rem` (96 px) | Lado de la silueta en el hueco de la imagen principal de la ficha (`ficha-modelo.md`, RF-12 de PRD-002) |
 
 El dibujo de cada silueta —una por cada uno de los diez segmentos de RF-11, más una genérica de coche
-para cuando tampoco hay segmento— **no se especifica en este documento**: queda para una tarea de diseño
-aparte. El icono es decorativo (`aria-hidden`, sin `alt`): su trazo puede usar `--color-line`, sin
+para cuando tampoco hay segmento— está en `siluetas-segmento.md` (`viewBox` 48 × 48, trazo de 2 en
+`currentColor`). No añade tokens: el color sale de `--color-line`. El icono es decorativo (`aria-hidden`, sin `alt`): su trazo puede usar `--color-line`, sin
 necesidad de contraste mínimo.
 
 ## Breakpoints
