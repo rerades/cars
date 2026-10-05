@@ -1,6 +1,24 @@
 # Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
 # la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
+- agent: architect
+  task: "Redacta ADR-0013 (usa ese número; la 0010 y la 0012 están en PR
+    abiertas): cómo hace commit la factoría del estado que hoy deja sin
+    versionar en la copia de trabajo de la persona, que es la cola
+    (factory/queue.yaml), las tareas en pausa (factory/queue.paused.yaml) y el
+    registro de ejecuciones (ops/runs/YYYY-MM.jsonl). Es la issue #166: léela
+    entera, con sus restricciones, las tres opciones y el criterio de hecho. El
+    responsable ya decidió que ese estado se versiona y que no pasa a ser estado
+    local fuera de git; no lo replantees. Lee cómo funciona hoy en
+    factory/run.ts (cmdNext) y factory/orchestrator.ts (openWorkspace,
+    closeWorkspace, writeQueue, pauseTask, appendLedger) y en factory/launchd/.
+    Valora cada opción contra estas restricciones: todo entra por PR y nunca
+    commit directo a main; la copia de trabajo de la persona no se toca; una
+    tarea no se ejecuta dos veces aunque su PR de estado no esté fusionada; y
+    encaja con la fusión automática de ADR-0011 (di si factory/queue*.yaml y
+    ops/runs/ deben entrar en su lista de rutas). Elige una y di qué cambia en
+    run.ts y orchestrator.ts, sin escribir el código. Estado propuesta. Enlázala
+    desde docs/architecture/overview.md. No toques factory/ ni la cola."
 - agent: researcher
   task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/.
     Escribe exactamente el esquema de docs/architecture/data-model.md
