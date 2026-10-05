@@ -1,0 +1,33 @@
+# Researcher — Kia EV4 (hatchback y Fastback). Fuente: kia-es (T1), wikimedia-commons. Consultado 2026-10-05.
+brand: kia
+brand_name: Kia
+model: EV4
+status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev4/descubrelo/", retrieved: 2026-10-05, tier: T1}
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 633, note: "hasta 633 km (Fastback); 625 km el hatchback", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev4/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  dc_max_kw: {value: 150, note: "\"carga rápida de 150 kW\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev4/descubrelo/", retrieved: 2026-10-05, tier: T1}
+versions:
+  - name: EV4 Air
+    price: null
+  - name: EV4 Earth Launch Edition
+    price: null
+  - name: EV4 GT-Line
+    price: null
+  - name: EV4 Fastback GLS-Earth
+    price: null
+  - name: EV4 Fastback GT-Line
+    price: null
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/e/e1/Kia_EV4_GT-Line_Automesse_Ludwigsburg_2025_DSC_2534.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-05
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador sin leer. Los 'Desde' de concesionario no se usan."
+  - "launch: sin fecha de inicio de venta en España en fuente T1."
+  - "segment: la ficha habla de 'proporciones del segmento C' pero no da una categoría de RF-11; queda vacío."
+  - "Batería, potencia y tracción por versión no publicadas en la ficha estática."
+  - "Hatchback y Fastback se publican como modelos separados en la gama de Kia España; aquí van juntos como versiones de EV4 (decisión pendiente)."

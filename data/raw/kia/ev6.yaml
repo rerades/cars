@@ -1,0 +1,29 @@
+# Researcher — Kia EV6. Fuente: kia-es (T1), wikimedia-commons. Consultado 2026-10-05.
+brand: kia
+brand_name: Kia
+model: EV6
+status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-05, tier: T1}
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 582, note: "hasta 582 km", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  battery_kwh_options: {value: [62.9, 84.0], note: "SR 62,9 kWh y LR 84,0 kWh; la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  drivetrains: {value: [rwd, awd], source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-05, tier: T1}
+versions:
+  - name: EV6 Air
+    price: null
+  - name: EV6 GT-Line
+    price: null
+  - name: EV6 GT
+    price: null
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/8/82/Kia_EV6_Automesse_Ludwigsburg_2022_1X7A5931.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-05
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador sin leer. Los 'Desde' de concesionario no se usan."
+  - "launch: sin fecha de inicio de venta en España en fuente T1."
+  - "segment: la ficha dice 'crossover' sin tamaño; queda vacío."
+  - "Potencia, carga DC en kW y correspondencia versión-batería-tracción no publicadas en la ficha estática."

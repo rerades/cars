@@ -1,0 +1,28 @@
+# Researcher — Kia EV2. Fuente: kia-es (T1), wikimedia-commons. Consultado 2026-10-05.
+brand: kia
+brand_name: Kia
+model: EV2
+status: {value: on_sale, note: "la web dice que \"ya esta disponible oficialmente en los canales de Kia España\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev2/descubrelo/", retrieved: 2026-10-05, tier: T1}
+segment: {value: suv_compacto, note: "la web lo presenta como \"SUV eléctrico compacto\" para conducción urbana", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev2/descubrelo/", retrieved: 2026-10-05, tier: T1}
+needs_review: false
+specs:
+  wltp_max_km: {value: 453, note: "hasta 453 km con batería de 61,0 kWh; 317 km con la de 42,2 kWh", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev2/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  battery_kwh_options: {value: [42.2, 61.0], note: "la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev2/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  drivetrains: {value: [fwd], source_id: kia-es, url: "https://www.kia.com/es/modelos/ev2/descubrelo/", retrieved: 2026-10-05, tier: T1}
+versions:
+  - name: EV2 Air
+    price: null
+  - name: EV2 Earth
+    price: null
+  - name: EV2 GT-Line
+    price: null
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/9/97/Kia_EV2_GT-Line_IMG_7780.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-05
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador sin leer. Los 'Desde' de concesionario (19.360 €) no se usan."
+  - "launch: sin fecha de inicio de venta en una fuente T1."
+  - "Potencia por versión (la ficha da 108 kW / 147 PS solo para la versión base sin nombrarla) y carga DC máxima en kW no publicadas."
