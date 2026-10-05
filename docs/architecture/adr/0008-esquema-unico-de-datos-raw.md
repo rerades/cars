@@ -1,6 +1,6 @@
 # ADR-0008 — Esquema único para los YAML de `data/raw/`
 
-- **Estado:** aceptada (2026-09-27)
+- **Estado:** aceptada (2026-09-27); la forma de `images` la sustituye [ADR-0012](0012-imagenes-de-los-modelos.md) (2026-10-05)
 - **Fecha:** 2026-09-27
 
 ## Contexto
