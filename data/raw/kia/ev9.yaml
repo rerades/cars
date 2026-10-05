@@ -1,0 +1,26 @@
+# Researcher — Kia EV9. Fuente: kia-es (T1), wikimedia-commons. Consultado 2026-10-05.
+brand: kia
+brand_name: Kia
+model: EV9
+status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 505, note: "hasta 505 km", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  power_max_kw: {value: 282.6, note: "publicado: 141,3 + 141,3 kW / 384 cv", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  battery_kwh_options: {value: [99.8], note: "la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  drivetrains: {value: [awd], note: "\"AWD, tracción integral\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
+versions:
+  - name: EV9 GT-Line
+    price: null
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Kia_EV9_1X7A2472.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-05
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador sin leer. Los 'Desde' de concesionario (63.340 €) no se usan."
+  - "launch: sin fecha de inicio de venta en España en fuente T1."
+  - "segment: la ficha dice 'SUV de tres filas, hasta 7 asientos' sin categoría de tamaño explícita; queda vacío."
+  - "Lista completa de versiones no leída (solo consta GT-line por su 0-100 km/h)."

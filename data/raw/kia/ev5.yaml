@@ -1,0 +1,30 @@
+# Researcher — Kia EV5. Fuente: kia-es (T1), wikimedia-commons. Consultado 2026-10-05.
+brand: kia
+brand_name: Kia
+model: EV5
+status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 530, note: "hasta 530 km (llantas de 18\"); 520 km FWD Earth 19\"; 505 km FWD GT-Line 19\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  battery_kwh_options: {value: [81.4], note: "la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  dc_max_kw: {value: 150, note: "\"carga rápida de 150 kW\", 10-80 % en 30 minutos", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  drivetrains: {value: [fwd], source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
+versions:
+  - name: EV5 Air
+    price: null
+  - name: EV5 Earth
+    price: null
+  - name: EV5 GT-Line
+    price: null
+images:
+  - url: "https://upload.wikimedia.org/wikipedia/commons/0/02/Kia_EV5_002.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-05
+    license: CC0-1.0
+    attribution: null
+open_questions:
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador sin leer. Los 'Desde' de concesionario no se usan."
+  - "launch: sin fecha de inicio de venta en España en fuente T1."
+  - "segment: la ficha dice 'SUV EV' sin tamaño; queda vacío."
+  - "Potencia por versión no publicada en la ficha estática."
