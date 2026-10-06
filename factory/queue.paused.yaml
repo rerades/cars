@@ -45,3 +45,19 @@
     oferta caducaba el 2026-09-30. Quita needs_review solo si ya no queda ningún
     dato en conflicto ni truncado; si queda alguno, deja la marca y di cuál en
     open_questions. No toques otras marcas."
+- agent: researcher
+  task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/.
+    Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de
+    RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
+    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
+    registro), solo con licencia que permita el uso comercial, con license y
+    attribution."
+- agent: researcher
+  task: "Marca Volkswagen. Sin dato en el mapa por la lectura parcial de la
+    fuente. Fuentes en el registro y modelos en data/raw/volkswagen/. Escribe
+    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
+    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
+    (inicio de venta en España) con su fuente si la hay, y busca imágenes
+    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
+    solo con licencia que permita el uso comercial, con license y attribution."

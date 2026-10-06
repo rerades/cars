@@ -2,55 +2,23 @@
 # la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
 # intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
 - agent: architect
-  task: "Redacta ADR-0013 (usa ese número; la 0010 y la 0012 están en PR
-    abiertas): cómo hace commit la factoría del estado que hoy deja sin
-    versionar en la copia de trabajo de la persona, que es la cola
-    (factory/queue.yaml), las tareas en pausa (factory/queue.paused.yaml) y el
-    registro de ejecuciones (ops/runs/YYYY-MM.jsonl). Es la issue #166: léela
-    entera, con sus restricciones, las tres opciones y el criterio de hecho. El
-    responsable ya decidió que ese estado se versiona y que no pasa a ser estado
-    local fuera de git; no lo replantees. Lee cómo funciona hoy en
-    factory/run.ts (cmdNext) y factory/orchestrator.ts (openWorkspace,
-    closeWorkspace, writeQueue, pauseTask, appendLedger) y en factory/launchd/.
-    Valora cada opción contra estas restricciones: todo entra por PR y nunca
-    commit directo a main; la copia de trabajo de la persona no se toca; una
-    tarea no se ejecuta dos veces aunque su PR de estado no esté fusionada; y
-    encaja con la fusión automática de ADR-0011 (di si factory/queue*.yaml y
-    ops/runs/ deben entrar en su lista de rutas). Elige una y di qué cambia en
-    run.ts y orchestrator.ts, sin escribir el código. Estado propuesta. Enlázala
-    desde docs/architecture/overview.md. No toques factory/ ni la cola."
-- agent: architect
-  task: "Issue #164: el registro de fuentes pasa a un fichero por fuente,
-    data/sources/<id>.yaml, para que dos PR del Researcher que dan de alta
-    fuentes distintas no choquen al fusionarse (hoy todas añaden su entrada al
-    final de data/sources/registry.yaml). Léela entera, con su lista de lo que
-    hay que cambiar y su criterio de hecho. Decide la pregunta que deja abierta:
-    si basta con cambiar docs/architecture/data-model.md o hace falta enmendar
-    ADR-0001 o ADR-0008; si hace falta una ADR nueva, usa ADR-0014 (la 0010, la
-    0012 y la 0013 están tomadas). Fija en data-model.md la forma de cada
-    fichero (la de una entrada de hoy, con el nombre del fichero igual a su id)
-    y adónde va el esquema que hoy está en la cabecera del registro. Di si la
-    regla de fusión automática de ADR-0011 cambia con la ruta nueva. Deja
-    escrito qué tiene que cambiar el Desarrollador (factory/evals.ts y sus
-    pruebas) y quién parte el registro en ficheros, sin hacerlo tú. Actualiza
-    las menciones a data/sources/registry.yaml en docs/architecture/. No toques
-    data/, factory/ ni .claude/."
-- agent: researcher
-  task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/.
-    Escribe exactamente el esquema de docs/architecture/data-model.md
-    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de
-    RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
-    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
-    registro), solo con licencia que permita el uso comercial, con license y
-    attribution."
-- agent: researcher
-  task: "Marca Volkswagen. Sin dato en el mapa por la lectura parcial de la
-    fuente. Fuentes en el registro y modelos en data/raw/volkswagen/. Escribe
-    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
-    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
-    (inicio de venta en España) con su fuente si la hay, y busca imágenes
-    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
-    solo con licencia que permita el uso comercial, con license y attribution."
+  task: "Enmienda ADR-0010 (aceptada el 2026-10-06), sin crear una ADR nueva:
+    añade cómo se descargan las imágenes que pide ADR-0012 (aceptada), que
+    delega en ADR-0010 el «cómo». Decide: (1) quién descarga el fichero a
+    data/images/<brand>/<slug>/ y en qué paso de la ingesta, sabiendo que el
+    Researcher solo tiene WebFetch, que devuelve texto y no binarios: por
+    ejemplo, un script determinista sin modelo que el Researcher lanza o que
+    lanza el orquestador tras su ejecución, con el User-Agent con contacto que
+    exige Wikimedia; (2) cómo se comprueba que el fichero es una imagen y que no
+    pasa de 1280 px de ancho; (3) qué pasa si la descarga falla (ADR-0012, punto
+    4); (4) cómo se migran las 11 imágenes actuales, que tienen url (6 páginas
+    File: y 5 ficheros), a file, source_url y page_url, y quién lo hace; (5) qué
+    cambia en el validador de factory/evals.ts para la forma nueva de images (la
+    regla 10 de data-model.md) y en qué orden se activa, para que la CI de main
+    no se ponga en rojo antes de la migración. Añádelo a ADR-0010 como sección
+    «Imágenes» o en su sección de Decisión, sin tocar lo ya aceptado, y anótalo
+    en su historial. Actualiza data-model.md si cambia algo. No toques factory/,
+    data/ ni web/."
 - agent: researcher
   task: "Marca Hyundai. Fuentes en el registro y modelos en data/raw/hyundai/.
     Escribe exactamente el esquema de docs/architecture/data-model.md
