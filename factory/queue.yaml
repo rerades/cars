@@ -94,6 +94,23 @@
     silueta), más una que compruebe que ningún src del HTML construido apunta a otro dominio. Mira
     las 11 siluetas a 48 px en el build, como pide siluetas-segmento.md, y dilo en la PR. Lee los
     comentarios de la issue #112. La PR referencia #112 y enumera los RF y CA cubiertos."
+- id: issue-180-web
+  agent: developer
+  task: 'Issue #180, parte del Desarrollador: implementa en web/ las pruebas de accesibilidad de
+    ADR-0006 (léela entera, sección Decisión). Añade con pnpm, como devDependencies de
+    web/package.json, @playwright/test y @axe-core/playwright, y un web/playwright.config.ts cuyo
+    webServer construya el sitio y lo sirva con astro preview (ya está en los scripts). Las pruebas
+    de navegador van en web/e2e/, fuera de web/tests/, para que pnpm test (node --test) no las coja,
+    y se lanzan con un script nuevo "test:a11y": "playwright test". Una prueba por plantilla de la
+    tabla de ADR-0006: /coches, una /marcas/{marca} y una /segmentos/{segmento} con modelos, una de
+    tramo y el estado vacío (/coches con una query string sin resultados), elegidas a partir de los
+    datos, no fijas. axe con las etiquetas wcag2a, wcag2aa, wcag21a y wcag21aa y JavaScript
+    activado. Falla con violaciones de impact critical o serious e imprime (regla, elemento, URL)
+    las moderate y minor sin fallar. Una URL de la lista que no responda hace fallar la prueba. Si
+    hay un falso positivo, exclúyelo documentado junto a la exclusión (regla, URL, motivo, fecha).
+    Ejecútala en local (npx playwright install chromium) y di en la PR qué violaciones salen y
+    cuáles has corregido en web/. No toques .github/workflows/: el job de la CI es la parte de
+    DevOps, en un comentario de la #180. La PR referencia #180 y ADR-0006.'
 - id: marca-renault-2
   agent: researcher
   task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/. Escribe exactamente el
