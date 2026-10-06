@@ -1,6 +1,6 @@
 # ADR-0010 — Pipeline de ingesta: validación de todo `data/raw/` en la CI y refresco mensual por marca
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-06). Falta una enmienda sobre la descarga de imágenes de [ADR-0012](0012-imagenes-de-los-modelos.md), en la cola del Arquitecto
 - **Fecha:** 2026-10-04
 
 ## Contexto
@@ -201,7 +201,9 @@ Detalles:
 - **Una fuente marcada `broken` no se arregla sola**: depende del siguiente refresco del
   Researcher, y mientras tanto sus valores siguen publicados con su fecha y su aviso.
 
-**Preguntas abiertas**
+**Preguntas abiertas** (al aceptarla, el 2026-10-06, el responsable deja las tres primeras como están:
+los precios viejos siguen publicados con su fecha, no se añade fecha de fin de oferta y los refrescos
+los encola una persona)
 - **Producto:** ¿se deja de mostrar un precio pasado un plazo (por ejemplo «Precio por confirmar»
   si `retrieved` tiene más de N días)? ¿Debe la tarjeta mostrar la fecha del precio? Hoy ningún
   PRD lo dice; esta ADR solo avisa.
@@ -212,8 +214,12 @@ Detalles:
 - ¿Es el mes la frecuencia adecuada para marcas que cambian ofertas cada pocas semanas? Revisar con
   el historial de cambios de precio de los primeros refrescos.
 - ¿Cuánto cuesta de verdad un refresco frente a un alta de marca? Sin medir.
-- ¿Pasan hoy todos los ficheros de `data/raw/` las tres comprobaciones? Sin comprobar en esta
-  ejecución.
+- ~~¿Pasan hoy todos los ficheros de `data/raw/` las tres comprobaciones?~~ Sí: el 2026-10-06, los 25
+  ficheros (24 de `data/raw/` y el registro) pasan sin fallos. Ojo: el validador aún comprueba la forma antigua de
+  `images`; al adaptarlo a ADR-0012, las 11 imágenes con `url` fallarán hasta que se migren.
+- **Descarga de imágenes (ADR-0012):** esta ADR no dice cómo se descargan los ficheros a
+  `data/images/` ni cómo se migran las 11 imágenes actuales. ADR-0012 delega ese «cómo» aquí; queda
+  para una enmienda.
 
 **Fuentes**
 - [1] https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands
