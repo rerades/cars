@@ -1,6 +1,6 @@
 # ADR-0013 — Cómo hace commit la factoría de la cola y del registro de ejecuciones
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-06)
 - **Fecha:** 2026-10-06
 
 ## Contexto
@@ -204,8 +204,9 @@ Detalles:
   activar el cambio.
 
 **Preguntas abiertas**
-- ¿Basta que `queue.yaml` en `main` sea «cola menos registro», o el responsable quiere que el
-  fichero muestre solo lo pendiente? En ese caso hay que decidir quién y cuándo limpia las
+- ~~¿Basta que `queue.yaml` en `main` sea «cola menos registro», o el responsable quiere que el
+  fichero muestre solo lo pendiente?~~ Resuelta al aceptarla (2026-10-06): basta. Las tareas consumidas
+  se quitan de `queue.yaml` a mano, con una PR, cuando se quiera; ya no choca con la factoría. En ese caso hay que decidir quién y cuándo limpia las
   consumidas sin chocar con las PR que encolan.
 - ¿Quién escribe el `id` y con qué forma (libre, o derivado de la issue como `issue-166`)? Esta
   ADR solo exige que exista y sea único.
