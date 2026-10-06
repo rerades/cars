@@ -138,7 +138,7 @@ describe("/coches built page", () => {
     assert.equal(scripts.length, 1);
     assert.match(scripts[0], /^<script type="module" src="\/_astro\/CatalogFilters[^"]*\.js">$/);
     assert.match(html, /<h1[^>]*>Coches eléctricos<\/h1>/);
-    assert.match(html, /<title>Coches eléctricos<\/title>/);
+    assert.match(html, /<title>Coches eléctricos · siete3<\/title>/);
   });
 
   test("CA-1: one card per model with brand, model, price, range and segment, and no image", () => {
