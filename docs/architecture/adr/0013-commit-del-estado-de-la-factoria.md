@@ -208,8 +208,9 @@ Detalles:
   fichero muestre solo lo pendiente?~~ Resuelta al aceptarla (2026-10-06): basta. Las tareas consumidas
   se quitan de `queue.yaml` a mano, con una PR, cuando se quiera; ya no choca con la factoría. En ese caso hay que decidir quién y cuándo limpia las
   consumidas sin chocar con las PR que encolan.
-- ¿Quién escribe el `id` y con qué forma (libre, o derivado de la issue como `issue-166`)? Esta
-  ADR solo exige que exista y sea único.
+- ~~¿Quién escribe el `id` y con qué forma?~~ Resuelta el 2026-10-06, por delegación: lo escribe quien encola, en
+  kebab-case, con la convención de la cola: `issue-N` para una historia, `marca-X` para una marca,
+  `adr-N-tema` para una ADR, y un sufijo `-2`, `-3`… al reintentar una tarea fallida.
 - ¿Tiene `bitacora.ts from-runs` que leer también la rama de estado para no esperar a la fusión?
   No lo pide la issue.
 - ¿Debe la regla de fusión de la PR de estado (punto 6) activarse con el mismo interruptor

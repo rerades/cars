@@ -3,7 +3,7 @@
  * docs/design/tarjeta-modelo.md. Components receive already-composed strings, never fixed text.
  */
 export const es = {
-  "sitio.nombre": "", // not decided yet (paginas-catalogo.md, open question 3)
+  "sitio.nombre": "siete3", // decided by the owner on 2026-10-06 (paginas-catalogo.md, question 3)
   "pagina.tituloDocumento": "{titulo} · {sitio}",
   "pagina.saltar": "Saltar a los resultados",
   "pagina.coches.titulo": "Coches eléctricos",

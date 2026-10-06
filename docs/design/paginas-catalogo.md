@@ -337,9 +337,9 @@ No hay pares de color nuevos: todos los usados ya están calculados allí.
 2. ~~**`/coches` sin query string**, ¿es indexable?~~ Resuelta el 2026-10-01 en PRD-001, sección 8: sí, y cada
    página de catálogo lleva canonical a su URL sin query string. Texto original: ¿es indexable? No está en la lista de RF-10 y CA-12d solo excluye las
    combinaciones de filtros. No se especifica aquí `noindex` para ella.
-3. **Nombre del sitio** para el `<title>`: no está en la visión ni en el PRD.
-4. **Meta descripción** de cada página: RF-10 pide título y texto propios, no una meta descripción. ¿Se reutiliza
+3. ~~**Nombre del sitio** para el `<title>`~~: «siete3», decidido por el responsable el 2026-10-06 (`sitio.nombre`). Texto original: no está en la visión ni en el PRD.
+4. ~~**Meta descripción** de cada página~~: no por ahora, por delegación del responsable (2026-10-06); ningún PRD la pide, y vale también para la ficha (`ficha-modelo.md`). Texto original: RF-10 pide título y texto propios, no una meta descripción. ¿Se reutiliza
    el texto de entrada? No se especifica sin confirmarlo.
-5. **Marca y segmento** llevan texto con variable (marca) o escrito uno a uno (segmento). ¿Basta para «texto
+5. ~~**Marca y segmento** llevan texto con variable~~: basta (2026-10-06, por delegación). El texto es distinto en cada página porque la variable lo es, y la prueba de CA-12b de #38 lo comprueba en el build. Texto original: llevan texto con variable (marca) o escrito uno a uno (segmento). ¿Basta para «texto
    introductorio no repetido» de CA-12b, o se quiere un texto escrito a mano para cada marca? Esto último pediría
    un dato nuevo por marca que el esquema no tiene.
