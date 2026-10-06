@@ -74,14 +74,10 @@ describe("ledger", () => {
     assert.equal(orq.spentInPeriod([row(undefined, undefined, 0.5), row(undefined, undefined, 0.25)]), 0.75);
   });
   test("línea corrupta no rompe", () => {
-    const path = orq.ledgerPath("2026-01");
-    mkdirSync(orq.LEDGER_DIR, { recursive: true });
-    writeFileSync(path, '{"agent":"x","cost_usd":1}\nno-es-json\n', "utf8");
-    try {
-      assert.equal(orq.readLedger("2026-01").length, 1);
-    } finally {
-      rmSync(path);
-    }
+    const dir = mkdtempSync(join(tmpdir(), "ledger-"));
+    writeFileSync(orq.ledgerPath("2026-01", dir), '{"agent":"x","cost_usd":1}\nno-es-json\n', "utf8");
+    assert.equal(orq.readLedger("2026-01", dir).length, 1);
+    rmSync(dir, { recursive: true, force: true });
   });
 });
 
@@ -323,8 +319,20 @@ describe("limpieza de ramas", () => {
   });
 });
 
-describe("cola", () => {
+describe("cola (ADR-0013)", () => {
   const tmp = () => join(mkdtempSync(join(tmpdir(), "cola-")), "queue.yaml");
+  /** A state folder for run.ts: FACTORY_STATE_DIR also turns off its git handling. */
+  function stateDir(queue: string, rows: orq.Row[] = []) {
+    const dir = mkdtempSync(join(tmpdir(), "estado-"));
+    mkdirSync(join(dir, "factory"));
+    writeFileSync(join(dir, "factory", "queue.yaml"), queue, "utf8");
+    for (const row of rows) orq.appendLedger(row, "2026-10", join(dir, "ops", "runs"));
+    return dir;
+  }
+  const runNext = (dir: string) =>
+    spawnSync(process.execPath, [join(orq.REPO, "factory", "run.ts"), "--next"], {
+      encoding: "utf8", env: { ...process.env, FACTORY_STATE_DIR: dir },
+    });
 
   test("cola inexistente o vacía", () => {
     assert.deepEqual(orq.readQueue(join(tmpdir(), "no-existe-cola.yaml")), []);
@@ -335,69 +343,124 @@ describe("cola", () => {
 
   test("lee las tareas en orden", () => {
     const path = tmp();
-    writeFileSync(path, "- agent: researcher\n  task: una\n- agent: developer\n  task: otra\n", "utf8");
+    writeFileSync(path, "- id: a\n  agent: researcher\n  task: una\n- id: b\n  agent: developer\n  task: otra\n", "utf8");
     assert.deepEqual(orq.readQueue(path), [
-      { agent: "researcher", task: "una" },
-      { agent: "developer", task: "otra" },
+      { id: "a", agent: "researcher", task: "una" },
+      { id: "b", agent: "developer", task: "otra" },
     ]);
   });
 
-  test("rechaza una tarea incompleta", () => {
+  test("rechaza una tarea sin id, agent o task", () => {
     const path = tmp();
-    writeFileSync(path, "- agent: researcher\n", "utf8");
-    assert.throws(() => orq.readQueue(path), /la tarea 1 necesita agent y task/);
+    writeFileSync(path, "- agent: researcher\n  task: una\n", "utf8");
+    assert.throws(() => orq.readQueue(path), /la tarea 1 necesita id, agent y task/);
   });
 
-  test("escribir y volver a leer", () => {
+  test("rechaza un id repetido", () => {
     const path = tmp();
-    const items = [{ agent: "researcher", task: "con: dos puntos y #almohadilla" }];
-    orq.writeQueue(items, path);
-    assert.deepEqual(orq.readQueue(path), items);
-    assert.ok(readFileSync(path, "utf8").startsWith("# Cola de tareas"));
-    orq.writeQueue([], path);
-    assert.deepEqual(orq.readQueue(path), []);
-    assert.ok(readFileSync(path, "utf8").startsWith("# Cola de tareas"));   // la cabecera sobrevive a vaciarla
+    writeFileSync(path, "- id: a\n  agent: researcher\n  task: una\n- id: a\n  agent: developer\n  task: otra\n", "utf8");
+    assert.throws(() => orq.readQueue(path), /el id a está repetido/);
   });
 
-  test("una tarea bloqueada no se pierde", () => {
-    const path = tmp();
-    const cola = "- agent: researcher\n  task: no debe ejecutarse\n";
-    writeFileSync(path, cola, "utf8");
+  test("pendientes y fallidas salen del registro, no de reescribir la cola", () => {
+    const queue = [
+      { id: "hecha", agent: "researcher", task: "1" },
+      { id: "fallida", agent: "researcher", task: "2" },
+      { id: "nueva", agent: "developer", task: "3" },
+    ];
+    const rows = [
+      { task_id: "hecha", outcome: "success" },
+      { task_id: "fallida", outcome: "eval_failed", run_id: "r2" },
+      { task_id: null, outcome: "failed" }, // manual run: not a queued task
+    ];
+    const { pending, failed } = orq.queueState(queue, rows);
+    assert.deepEqual(pending.map((t) => t.id), ["nueva"]);
+    assert.deepEqual(failed.map((r) => r.task_id), ["fallida"]);
+  });
+
+  test("a consumed task is not run again, even if it failed and its state PR is not merged", () => {
+    const dir = stateDir("- id: ya\n  agent: researcher\n  task: no debe ejecutarse\n",
+      [{ task_id: "ya", outcome: "failed", started: "2026-10-01T01:00:00+02:00" }]);
+    const r = runNext(dir);
+    assert.equal(r.status, 0);
+    assert.match(r.stdout, /cola vacía/);
+    rmSync(dir, { recursive: true, force: true });
+  });
+
+  test("a blocked task stays pending and nothing is written to the person's checkout", () => {
+    const cola = "- id: bloqueada\n  agent: researcher\n  task: no debe ejecutarse\n";
+    const dir = stateDir(cola);
     const stop = join(orq.REPO, "factory", "STOP");
+    const before = execFileSync("git", ["status", "--porcelain", "factory", "ops/runs"], { cwd: orq.REPO, encoding: "utf8" });
     writeFileSync(stop, "test", "utf8");
     try {
-      const r = spawnSync(process.execPath, [join(orq.REPO, "factory", "run.ts"), "--next"], {
-        encoding: "utf8",
-        env: { ...process.env, FACTORY_QUEUE: path },
-      });
+      const r = runNext(dir);
       assert.equal(r.status, 3);
       assert.match(r.stderr, /parada/);
-      assert.equal(readFileSync(path, "utf8"), cola);
+      assert.equal(readFileSync(join(dir, "factory", "queue.yaml"), "utf8"), cola);
+      assert.ok(!existsSync(join(dir, "ops", "runs")));
     } finally {
       rmSync(stop);
+      rmSync(dir, { recursive: true, force: true });
     }
-  });
-
-  test("a failed task is parked, not lost", () => {
-    const path = tmp();
-    orq.pauseTask({ agent: "researcher", task: "una" }, path);   // file does not exist yet
-    orq.pauseTask({ agent: "designer", task: "otra" }, path);
-    assert.deepEqual(orq.readQueue(path), [
-      { agent: "researcher", task: "una" },
-      { agent: "designer", task: "otra" },
-    ]);
-    assert.ok(readFileSync(path, "utf8").startsWith("# Tareas en pausa"));
+    const after = execFileSync("git", ["status", "--porcelain", "factory", "ops/runs"], { cwd: orq.REPO, encoding: "utf8" });
+    assert.equal(after, before);
   });
 
   test("cola vacía no ejecuta nada", () => {
-    const path = tmp();
-    writeFileSync(path, "[]\n", "utf8");
-    const r = spawnSync(process.execPath, [join(orq.REPO, "factory", "run.ts"), "--next"], {
-      encoding: "utf8",
-      env: { ...process.env, FACTORY_QUEUE: path },
-    });
+    const dir = stateDir("[]\n");
+    const r = runNext(dir);
     assert.equal(r.status, 0);
     assert.match(r.stdout, /cola vacía/);
+    rmSync(dir, { recursive: true, force: true });
+  });
+});
+
+describe("rama de estado (ADR-0013)", () => {
+  const g = (cwd: string, ...args: string[]) =>
+    execFileSync("git", ["-c", "user.name=t", "-c", "user.email=t@t", "-c", "core.hooksPath=/dev/null",
+      "-c", "commit.gpgsign=false", ...args], { cwd, encoding: "utf8" }).trim();
+
+  test("keeps unmerged rows, restarts from main once they are merged, and pushes", () => {
+    const root = mkdtempSync(join(tmpdir(), "estado-git-"));
+    const origin = join(root, "origin.git"), repo = join(root, "repo"), dir = join(repo, "ops", "worktrees", "factory-state");
+    g(root, "init", "-q", "--bare", "-b", "main", origin);
+    g(root, "clone", "-q", origin, repo);
+    writeFileSync(join(repo, "README"), "x\n");
+    g(repo, "add", "-A");
+    g(repo, "commit", "-qm", "base");
+    g(repo, "push", "-q", "origin", "HEAD:main");
+    process.env.GIT_CONFIG_COUNT = "3";
+    process.env.GIT_CONFIG_KEY_0 = "user.name"; process.env.GIT_CONFIG_VALUE_0 = "t";
+    process.env.GIT_CONFIG_KEY_1 = "user.email"; process.env.GIT_CONFIG_VALUE_1 = "t@t";
+    process.env.GIT_CONFIG_KEY_2 = "core.hooksPath"; process.env.GIT_CONFIG_VALUE_2 = "/dev/null";
+    try {
+      assert.equal(orq.syncState(repo, dir), null);
+      orq.appendLedger({ run_id: "r1", task_id: "a" }, "2026-10", join(dir, "ops", "runs"));
+      orq.commitState("r1", repo, dir); // no gh here: the PR step fails quietly, the push does not
+      assert.match(g(repo, "ls-remote", "--heads", "origin", orq.STATE_BRANCH), /factory-state/);
+
+      // main moves on without our row: the row survives the sync
+      writeFileSync(join(repo, "OTRO"), "y\n");
+      g(repo, "add", "OTRO");
+      g(repo, "commit", "-qm", "otro");
+      g(repo, "push", "-q", "origin", "HEAD:main");
+      assert.equal(orq.syncState(repo, dir), null);
+      assert.equal(orq.readAllLedger(join(dir, "ops", "runs")).length, 1);
+      assert.ok(existsSync(join(dir, "OTRO")));
+
+      // the state PR is merged (merge commit): the branch restarts from main, row included
+      g(repo, "fetch", "-q", "origin");
+      g(repo, "merge", "-q", "--no-ff", "--no-edit", `origin/${orq.STATE_BRANCH}`);
+      g(repo, "push", "-q", "origin", "HEAD:main");
+      assert.equal(orq.syncState(repo, dir), null);
+      assert.equal(g(dir, "rev-parse", "HEAD"), g(repo, "rev-parse", "origin/main"));
+      assert.equal(orq.readAllLedger(join(dir, "ops", "runs")).length, 1);
+    } finally {
+      for (const k of ["GIT_CONFIG_COUNT", "GIT_CONFIG_KEY_0", "GIT_CONFIG_VALUE_0", "GIT_CONFIG_KEY_1",
+        "GIT_CONFIG_VALUE_1", "GIT_CONFIG_KEY_2", "GIT_CONFIG_VALUE_2"]) delete process.env[k];
+      rmSync(root, { recursive: true, force: true });
+    }
   });
 });
 

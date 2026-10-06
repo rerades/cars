@@ -1,73 +1,87 @@
-# Cola de tareas de la factoría. `node factory/run.ts --next` coge la primera,
-# la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
-# intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
-- agent: architect
-  task: "Enmienda ADR-0010 (aceptada el 2026-10-06), sin crear una ADR nueva:
-    añade cómo se descargan las imágenes que pide ADR-0012 (aceptada), que
-    delega en ADR-0010 el «cómo». Decide: (1) quién descarga el fichero a
-    data/images/<brand>/<slug>/ y en qué paso de la ingesta, sabiendo que el
-    Researcher solo tiene WebFetch, que devuelve texto y no binarios: por
-    ejemplo, un script determinista sin modelo que el Researcher lanza o que
-    lanza el orquestador tras su ejecución, con el User-Agent con contacto que
-    exige Wikimedia; (2) cómo se comprueba que el fichero es una imagen y que no
-    pasa de 1280 px de ancho; (3) qué pasa si la descarga falla (ADR-0012, punto
-    4); (4) cómo se migran las 11 imágenes actuales, que tienen url (6 páginas
-    File: y 5 ficheros), a file, source_url y page_url, y quién lo hace; (5) qué
-    cambia en el validador de factory/evals.ts para la forma nueva de images (la
-    regla 10 de data-model.md) y en qué orden se activa, para que la CI de main
-    no se ponga en rojo antes de la migración. Añádelo a ADR-0010 como sección
-    «Imágenes» o en su sección de Decisión, sin tocar lo ya aceptado, y anótalo
-    en su historial. Actualiza data-model.md si cambia algo. No toques factory/,
-    data/ ni web/."
-- agent: researcher
-  task: "Marca Hyundai. Fuentes en el registro y modelos en data/raw/hyundai/.
-    Escribe exactamente el esquema de docs/architecture/data-model.md
-    (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de
-    RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
-    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el
-    registro), solo con licencia que permita el uso comercial, con license y
-    attribution."
-- agent: researcher
-  task: "Marca MG. Fuentes en el registro y modelos en data/raw/mg/. Escribe
-    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
-    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
-    (inicio de venta en España) con su fuente si la hay, y busca imágenes
-    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
-    solo con licencia que permita el uso comercial, con license y attribution."
-- agent: researcher
-  task: "Marca Tesla. Fuentes en el registro y modelos en data/raw/tesla/. Escribe
-    exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia
-    la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch
-    (inicio de venta en España) con su fuente si la hay, y busca imágenes
-    primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro),
-    solo con licencia que permita el uso comercial, con license y attribution."
-- agent: developer
-  task: "Historia #37 (épica #32): ordenación en el navegador en /coches por
-    novedad, precio y autonomía, con el orden en la query string junto a los
-    filtros de #36 (RF-3, RF-5, RF-7, RF-9). Sigue
-    docs/design/filtros-catalogo.md (selector «Orden», claves orden.*) con los
-    tokens de tokens.md. Novedad es el orden por defecto y usa launch del modelo
-    derivado de web/src/lib/data.ts, de más a menos reciente; un modelo
-    announced usa su fecha prevista y los que no tienen launch van al final
-    (CA-16). Al ordenar por precio, un modelo sin precio va al final con «Precio
-    por confirmar» (CA-9); el precio con oferta ordena como los demás y conserva
-    su etiqueta (RF-9). Lee los comentarios de revisión de la issue #37: su nota
-    técnica sobre el año de lanzamiento ya no vale. Una prueba por CA: CA-3,
-    CA-9 y CA-16. La PR referencia #37 y enumera los RF y CA cubiertos. Si el
-    filtrado de #36 aún no está en main, no empieces y dilo en el resultado."
-- agent: developer
-  task: 'Historia #40 (épica #32): verificación de las páginas de RF-10 sobre el
-    sitio construido (CA-12 d y la parte de indexación de CA-13). Primero, cada
-    página de catálogo (/coches y las pregeneradas de marca, segmento y tramo)
-    lleva en el HTML servido <link rel="canonical"> a su propia URL absoluta sin
-    query string; fija site en web/astro.config.mjs con el dominio de ADR-0009.
-    No añadas noindex por JS (decisión en PRD-001, sección 8). Después, una
-    prueba sobre el build: las rutas de catálogo son exactamente /coches, una
-    /marcas/{marca} por marca y una /segmentos/{segmento} por segmento con
-    modelos publicados, y las cinco de tramo de RF-10; ninguna otra (ni marca +
-    segmento). Marcas y segmentos esperados se derivan de loadModels() de
-    web/src/lib/data.ts, que ya excluye needs_review, nunca de listas fijas; un
-    modelo sin segmento no crea página. Otra prueba comprueba que el canonical
-    de /coches es /coches sin query string. Lee los comentarios de revisión de
-    la issue #40. La PR referencia #40 y enumera los RF y CA cubiertos. Si #36,
-    #38 o #39 aún no están en main, no empieces y dilo en el resultado.'
+# Cola de tareas de la factoría (ADR-0013). La escribe una persona, por PR; la factoría no la
+# reescribe nunca. Cada tarea lleva un id único: `node factory/run.ts --next` lanza la primera
+# cuyo id no tiene aún fila en ops/runs/, sea cual sea su resultado. Una tarea fallida no se
+# reintenta: para repetirla, se encola otra vez con un id nuevo. `run.ts --status` lista las
+# pendientes y las fallidas. Las ya consumidas se pueden borrar de aquí cuando se quiera.
+- id: adr-0010-imagenes
+  agent: architect
+  task: "Enmienda ADR-0010 (aceptada el 2026-10-06), sin crear una ADR nueva: añade cómo se descargan
+    las imágenes que pide ADR-0012 (aceptada), que delega en ADR-0010 el «cómo». Decide: (1) quién
+    descarga el fichero a data/images/<brand>/<slug>/ y en qué paso de la ingesta, sabiendo que el
+    Researcher solo tiene WebFetch, que devuelve texto y no binarios: por ejemplo, un script
+    determinista sin modelo que el Researcher lanza o que lanza el orquestador tras su ejecución,
+    con el User-Agent con contacto que exige Wikimedia; (2) cómo se comprueba que el fichero es una
+    imagen y que no pasa de 1280 px de ancho; (3) qué pasa si la descarga falla (ADR-0012, punto 4);
+    (4) cómo se migran las 11 imágenes actuales, que tienen url (6 páginas File: y 5 ficheros), a
+    file, source_url y page_url, y quién lo hace; (5) qué cambia en el validador de factory/evals.ts
+    para la forma nueva de images (la regla 10 de data-model.md) y en qué orden se activa, para que
+    la CI de main no se ponga en rojo antes de la migración. Añádelo a ADR-0010 como sección
+    «Imágenes» o en su sección de Decisión, sin tocar lo ya aceptado, y anótalo en su historial.
+    Actualiza data-model.md si cambia algo. No toques factory/, data/ ni web/."
+- id: marca-hyundai
+  agent: researcher
+  task: "Marca Hyundai. Fuentes en el registro y modelos en data/raw/hyundai/. Escribe exactamente el
+    esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo.
+    Rellena segment (lista de RF-11) y launch (inicio de venta en España) con su fuente si la hay, y
+    busca imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro), solo
+    con licencia que permita el uso comercial, con license y attribution."
+- id: marca-mg
+  agent: researcher
+  task: "Marca MG. Fuentes en el registro y modelos en data/raw/mg/. Escribe exactamente el esquema de
+    docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo. Rellena
+    segment (lista de RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
+    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro), solo con
+    licencia que permita el uso comercial, con license y attribution."
+- id: marca-tesla
+  agent: researcher
+  task: "Marca Tesla. Fuentes en el registro y modelos en data/raw/tesla/. Escribe exactamente el
+    esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo.
+    Rellena segment (lista de RF-11) y launch (inicio de venta en España) con su fuente si la hay, y
+    busca imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro), solo
+    con licencia que permita el uso comercial, con license y attribution."
+- id: issue-37
+  agent: developer
+  task: "Historia #37 (épica #32): ordenación en el navegador en /coches por novedad, precio y
+    autonomía, con el orden en la query string junto a los filtros de #36 (RF-3, RF-5, RF-7, RF-9).
+    Sigue docs/design/filtros-catalogo.md (selector «Orden», claves orden.*) con los tokens de
+    tokens.md. Novedad es el orden por defecto y usa launch del modelo derivado de
+    web/src/lib/data.ts, de más a menos reciente; un modelo announced usa su fecha prevista y los
+    que no tienen launch van al final (CA-16). Al ordenar por precio, un modelo sin precio va al
+    final con «Precio por confirmar» (CA-9); el precio con oferta ordena como los demás y conserva
+    su etiqueta (RF-9). Lee los comentarios de revisión de la issue #37: su nota técnica sobre el
+    año de lanzamiento ya no vale. Una prueba por CA: CA-3, CA-9 y CA-16. La PR referencia #37 y
+    enumera los RF y CA cubiertos. Si el filtrado de #36 aún no está en main, no empieces y dilo en
+    el resultado."
+- id: issue-40
+  agent: developer
+  task: 'Historia #40 (épica #32): verificación de las páginas de RF-10 sobre el sitio construido
+    (CA-12 d y la parte de indexación de CA-13). Primero, cada página de catálogo (/coches y las
+    pregeneradas de marca, segmento y tramo) lleva en el HTML servido <link rel="canonical"> a su
+    propia URL absoluta sin query string; fija site en web/astro.config.mjs con el dominio de
+    ADR-0009. No añadas noindex por JS (decisión en PRD-001, sección 8). Después, una prueba sobre
+    el build: las rutas de catálogo son exactamente /coches, una /marcas/{marca} por marca y una
+    /segmentos/{segmento} por segmento con modelos publicados, y las cinco de tramo de RF-10;
+    ninguna otra (ni marca + segmento). Marcas y segmentos esperados se derivan de loadModels() de
+    web/src/lib/data.ts, que ya excluye needs_review, nunca de listas fijas; un modelo sin segmento
+    no crea página. Otra prueba comprueba que el canonical de /coches es /coches sin query string.
+    Lee los comentarios de revisión de la issue #40. La PR referencia #40 y enumera los RF y CA
+    cubiertos. Si #36, #38 o #39 aún no están en main, no empieces y dilo en el resultado.'
+- id: issue-112
+  agent: developer
+  task: "Historia #112 (épica #32): imagen en la tarjeta de #35 con licencia registrada, o silueta del
+    segmento (RF-8, RF-1; CA-10, CA-17 y el campo imagen de CA-1). Sigue
+    docs/design/tarjeta-modelo.md («Imagen y silueta»), tokens.md y
+    docs/design/siluetas-segmento.md, que es la especificación elegida (#161): un único componente
+    que recibe el segmento, o ninguno, y pinta en línea uno de sus 11 SVG (currentColor,
+    aria-hidden, sin texto), y la genérica si falta el segmento. La imagen sigue ADR-0012, aceptada:
+    el campo file del YAML (fichero en data/images/), servido con <Image /> de astro:assets en WebP
+    y con width y height, sin ninguna petición a otro dominio (RNF-5, CA-7). Su attribution va
+    debajo y enlaza a page_url. Adapta readImages() de web/src/lib/data.ts a la forma file,
+    source_url y page_url de data-model.md, descartando las que no tengan license, source_id o un
+    file que exista. Hoy ningún YAML tiene file (la migración es de ADR-0010), así que todas las
+    tarjetas salen con silueta: prueba la imagen con datos de prueba. Una prueba por CA: CA-10
+    (ninguna imagen sin license ni source_id en el HTML construido), CA-17 (un modelo sin imagen
+    lleva la silueta de su segmento y ninguna imagen de marca) y CA-1 (la tarjeta tiene imagen o
+    silueta), más una que compruebe que ningún src del HTML construido apunta a otro dominio. Mira
+    las 11 siluetas a 48 px en el build, como pide siluetas-segmento.md, y dilo en la PR. Lee los
+    comentarios de la issue #112. La PR referencia #112 y enumera los RF y CA cubiertos."

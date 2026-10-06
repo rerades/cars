@@ -16,30 +16,38 @@ node factory/run.ts --trace <run_id>              # pasos de una ejecución (ops
 
 ## Cola de tareas
 
-`factory/queue.yaml` es una lista de tareas pendientes, en orden de prioridad, que se
-añaden a mano:
+`factory/queue.yaml` es la lista de tareas, en orden de prioridad. La escribe una persona, por PR;
+la factoría no la reescribe nunca (ADR-0013). Cada tarea lleva un `id` único:
 
 ```yaml
-- agent: researcher
+- id: marca-renault
+  agent: researcher
   task: >-
     Lo que tiene que hacer el agente.
 ```
 
 ```bash
-node factory/run.ts --next             # coge la primera tarea y la lanza
-node factory/run.ts --next --dry-run   # muestra el comando y no toca la cola
+node factory/run.ts --next             # lanza la primera tarea pendiente
+node factory/run.ts --next --dry-run   # muestra el comando y no lanza nada
+node factory/run.ts --status           # pendientes, fallidas y presupuesto
 ```
 
-La tarea solo sale de la cola si llega a ejecutarse. Si una guarda la bloquea (horario,
-`STOP`, presupuesto, ejecución en curso), se queda para el siguiente intento y `--next`
-sale con `3`: es lo que permite que launchd lo llame cada pocas horas sin perder nada.
-Con la cola vacía no hace nada y sale con `0`. El resultado de la ejecución va al ledger,
-no a la cola.
+Una tarea está **pendiente** mientras su `id` no tiene fila en el registro de ejecuciones
+(`ops/runs/`). Si una guarda la bloquea (horario, `STOP`, presupuesto, ejecución en curso), no
+se escribe fila y sigue pendiente; `--next` sale con `3`, lo que permite que launchd lo llame
+cada pocas horas sin perder nada. Cuando se ejecuta, la fila la consume sea cual sea su
+resultado: una tarea fallida no se reintenta en bucle, y `--status` la lista entre las fallidas.
+Para reintentarla, se revisa el fallo (el issue de la alerta de Langfuse y la traza) y se encola
+otra vez con un `id` nuevo. Las consumidas se pueden borrar de `queue.yaml` cuando se quiera.
 
-Si la ejecución falla (cualquier resultado distinto de `success`), la tarea pasa al final de
-`factory/queue.paused.yaml`, que el orquestador no lee: no se pierde ni se reintenta en
-bucle. Para reintentarla, se revisa el fallo (el issue de la alerta de Langfuse y la traza)
-y se mueve a mano de vuelta a `queue.yaml`.
+**Dónde vive el estado.** La factoría no escribe en la copia de trabajo de la persona. Lee la
+cola y escribe el registro en el worktree `ops/worktrees/factory-state`, rama
+`chore/factory-state`: antes de cada ejecución lo pone al día con `origin/main`, y después hace
+commit de la fila, `push` y abre la PR de estado si no hay una abierta. Esa PR se fusiona **con
+commit de merge, nunca squash**. Mientras no se fusiona, `main` va por detrás, pero la factoría
+no repite tareas porque lee de la rama. Si la rama choca con `main`, la ejecución se bloquea
+(`3`) hasta que una persona lo arregle. `FACTORY_STATE_DIR` apunta el estado a otra carpeta,
+sin git; lo usan las pruebas.
 
 Códigos de salida: `0` correcto · `1` la ejecución falló · `3` bloqueado por una guarda.
 
