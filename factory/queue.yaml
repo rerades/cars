@@ -50,8 +50,11 @@
     final con «Precio por confirmar» (CA-9); el precio con oferta ordena como los demás y conserva
     su etiqueta (RF-9). Lee los comentarios de revisión de la issue #37: su nota técnica sobre el
     año de lanzamiento ya no vale. Una prueba por CA: CA-3, CA-9 y CA-16. La PR referencia #37 y
-    enumera los RF y CA cubiertos. Si el filtrado de #36 aún no está en main, no empieces y dilo en
-    el resultado."
+    enumera los RF y CA cubiertos. La ordenación por novedad ya existe: sortByNovelty de
+    web/src/lib/catalog.ts, que usan las páginas pregeneradas (paginas-catalogo.md). Reutilízala, o
+    lleva su lógica a un módulo que compartan el build y el navegador, como hizo #36 con filter.ts,
+    para que el orden del HTML servido y el del navegador no diverjan. El HTML servido de /coches
+    también sale ordenado por novedad."
 - id: issue-40
   agent: developer
   task: 'Historia #40 (épica #32): verificación de las páginas de RF-10 sobre el sitio construido
