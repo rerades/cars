@@ -4,7 +4,7 @@ brand_name: Cupra
 model: Born
 status: {value: on_sale, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
 segment: {value: compacto, note: "la web lo presenta como 'compacto 100 % eléctrico'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-28, tier: T1}
-needs_review: true   # revisado por el Researcher el 2026-10-02 (price_terms completo); la marca la quita una persona (RF-13)
+needs_review: false   # revisado por el responsable el 2026-10-06 (RF-13)
 specs:
   battery_kwh_options: {value: [59, 79], source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
   wltp_max_km: {value: 631, note: "'hasta 631 km', máximo de la gama", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
