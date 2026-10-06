@@ -494,6 +494,18 @@ Color: `surface`, `surface-muted`, `ink-900`, `ink-600`, `line-soft`, `brand-600
 
 ## Preguntas abiertas para Producto
 
+Respondidas el 2026-10-06 por delegación del responsable (se dejan las preguntas originales debajo):
+1. ~~Nombre de la fuente~~: basta el dominio de la `url`, que sale del dato y no se inventa; no se añade campo al
+   registro (ningún PRD lo pide).
+2. ~~Enlace de cada imagen a su página de origen~~: sí, y ya lo fija ADR-0012 (aceptada, punto 6): la atribución
+   enlaza a `page_url`.
+3. ~~Enlace a la página del segmento~~: no. RF-15 no lo pide; añadirlo sería un cambio de alcance y pasaría
+   primero por el PRD.
+4. ~~Meta descripción~~: no por ahora. Ni PRD-001 ni PRD-002 la piden, y se decidirá una vez para todas las
+   páginas (la misma pregunta sigue abierta en `paginas-catalogo.md`).
+
+Preguntas originales:
+
 1. **Nombre de la fuente.** El registro no tiene nombre de presentación; aquí se usa el dominio de la `url`.
    ¿Basta, o se añade un campo de nombre al registro (cambio fuera del alcance de diseño)?
 2. **Enlace de cada imagen a su página de origen** (`images[].url`, p. ej. la ficha de Commons). RF-12 solo pide
