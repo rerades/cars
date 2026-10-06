@@ -89,7 +89,8 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
 
   Se guarda una copia de 1280 px de ancho como máximo (en Commons, la miniatura estándar de 1280 px),
   en el formato en que llega; la web sirve variantes WebP generadas en el build. El visitante no pide
-  nada a terceros (RNF-5). Si la descarga falla, no se escribe la entrada: se anota en
+  nada a terceros (RNF-5). La descarga la hace un script determinista que lanza el Researcher
+  (ADR-0010, enmienda «Imágenes»); solo se guarda JPEG o PNG. Si la descarga falla, no se escribe la entrada: se anota en
   `open_questions` y la tarjeta muestra la silueta. Orden de fuentes de PRD-001, RF-8: Wikimedia
   Commons con licencia que permita uso comercial; sala de prensa solo con términos escritos que lo
   permitan. Sin imagen, la web muestra la silueta del segmento (CA-17).
@@ -154,7 +155,14 @@ Lo que una comprobación automática tendrá que rechazar (la comprobación es t
 9. `unit` aparece solo en `price`; `basis` solo en `battery_kwh`.
 10. Cada entrada de `images` tiene `file`, `source_url`, `page_url`, `source_id`, `retrieved`,
     `license` y `attribution`; no tiene `url`; `file` existe, está bajo
-    `data/images/<brand>/<slug>/` y es una imagen (ADR-0012).
+    `data/images/<brand>/<slug>/` y es una imagen (ADR-0012): JPEG o PNG por la firma de sus
+    primeros bytes, con la extensión que corresponde (`.jpg`/`.jpeg` o `.png`) y de 1280 px de
+    ancho como máximo, leído de su cabecera (ADR-0010, enmienda «Imágenes», punto 11).
+    **Transición** (ADR-0010, punto 14): hasta que se migren las imágenes actuales, una entrada con
+    solo la forma antigua (`url`, sin `file`, `source_url` ni `page_url`) es aviso en la validación
+    de todo `data/raw/` y fallo en el eval de la factoría sobre los ficheros que toca la ejecución;
+    mezclar `url` con las claves nuevas es siempre fallo. Tras la migración, `url` es clave
+    desconocida (regla 2). Un fichero de `data/images/` que ningún YAML cita es aviso, no fallo.
 
 ## 7. Ejemplo completo
 

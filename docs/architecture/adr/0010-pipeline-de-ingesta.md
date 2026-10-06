@@ -1,7 +1,10 @@
 # ADR-0010 — Pipeline de ingesta: validación de todo `data/raw/` en la CI y refresco mensual por marca
 
-- **Estado:** aceptada (2026-10-06). Falta una enmienda sobre la descarga de imágenes de [ADR-0012](0012-imagenes-de-los-modelos.md), en la cola del Arquitecto
+- **Estado:** aceptada (2026-10-06). Enmienda «Imágenes» (descarga de [ADR-0012](0012-imagenes-de-los-modelos.md)): propuesta (2026-10-07)
 - **Fecha:** 2026-10-04
+- **Historial:** 2026-10-04 propuesta · 2026-10-06 aceptada · 2026-10-07 enmienda propuesta: se
+  añaden la opción 6, la subsección «Imágenes» de la Decisión, sus consecuencias y las fuentes [2] y
+  [3]. Lo aceptado el 2026-10-06 no cambia.
 
 ## Contexto
 Es la decisión pendiente de `overview.md`: «Pipeline de ingesta de datos de modelos (fuentes,
@@ -111,6 +114,32 @@ frecuencia, validación)». Lo que hay hoy (repositorio leído el 2026-10-04) y 
 - **Elegida:** el precio sigue publicado con su fecha `retrieved` (PRD-002, RF-4 y CA-9 ya la
   muestran en la ficha), la CI avisa cuando pasa el plazo y el refresco mensual lo relee.
 
+**6. Quién descarga las imágenes de ADR-0012 (enmienda del 2026-10-07)**
+
+Contexto propio de la enmienda: ADR-0012 (aceptada), puntos 2 a 5, fija que el fichero se descarga
+en la ingesta, en la misma ejecución que escribe el YAML, nunca en el build; que se pide con un
+`User-Agent` con contacto; que una descarga fallida no deja entrada en `images`, y delega aquí el
+«cómo» y la migración. Hechos del repositorio (leído el 2026-10-07): el Researcher solo tiene en
+`factory/budgets.yaml` `WebSearch`, `WebFetch` y `Bash(node factory/bitacora.ts:*)`, y `WebFetch`
+devuelve texto; su `write_paths` es `[data/, docs/bitacora/]`; el orquestador
+(`factory/orchestrator.ts`, `execute`) ejecuta los evals sobre el worktree **después** del agente y
+**antes** del commit y de la PR; la CI aún no tiene el paso de validación del punto 2 de la Decisión.
+
+- **Que el Researcher descargue con `WebFetch`:** imposible: devuelve texto, no el binario.
+- **Darle al Researcher `Bash` genérico (`curl`, `node -e`):** descartada. Abre la red y el disco a
+  cualquier orden, el `User-Agent` depende de que el modelo lo recuerde en cada llamada y nada
+  comprueba que lo guardado sea una imagen de ≤ 1280 px.
+- **Que lo descargue el orquestador después de la ejecución, a partir de lo que el Researcher deja
+  en el YAML:** descartada. (a) Si la descarga falla, un programa sin modelo tendría que reescribir
+  el YAML del agente (quitar la entrada, añadir `open_questions`), perdiendo comentarios y formato;
+  (b) el Researcher no se entera del fallo y no puede buscar otra imagen en la misma ejecución, que
+  es lo que pide PRD-001, RF-8 (Commons, después prensa, después silueta); (c) entre el agente y el
+  eval habría una entrada de `images` sin fichero, justo lo que ADR-0012 (punto 4) prohíbe.
+- **Descargar en la CI o en el build:** descartada ya por ADR-0012 (opción 1).
+- **Elegida:** un script determinista, sin modelo, que el Researcher lanza con un permiso `Bash`
+  limitado a ese script; el script descarga, comprueba y guarda, y devuelve los campos que el
+  Researcher copia al YAML.
+
 ## Decisión
 **Todo `data/raw/` y el registro se validan en la CI de cada PR y de `main` con las comprobaciones
 que ya existen en `factory/evals.ts`; los fallos de forma y procedencia ponen la CI en rojo, la
@@ -167,6 +196,93 @@ Detalles:
    web, la automatización de la cola y la migración de ficheros (que va con la PR que active el
    paso, ver Consecuencias).
 
+### Imágenes (enmienda del 2026-10-07, propuesta)
+
+**Las imágenes de ADR-0012 las descarga un script determinista que el Researcher lanza durante su
+ejecución; el script solo guarda en `data/images/` un JPEG o PNG de 1280 px de ancho como máximo, y
+el validador acepta la forma antigua de `images` solo como aviso hasta que el Researcher migre las
+imágenes actuales.**
+
+10. **Quién y cuándo.** Un script sin modelo en `factory/` (nombre de trabajo:
+    `factory/fetch-image.ts`) que el Researcher ejecuta con un permiso nuevo y estrecho,
+    `Bash(node factory/fetch-image.ts:*)`, en `allowed_tools` de `factory/budgets.yaml` y en el
+    `tools:` y las instrucciones de `.claude/agents/researcher.md`. Ocurre **dentro de la ejecución
+    del Researcher, después de elegir la imagen y antes de escribir su entrada en `images`**: así
+    el fichero y el YAML entran en el mismo commit (ADR-0012, punto 3) y el Researcher ve el
+    resultado y puede probar otra fuente (PRD-001, RF-8). El script:
+    - recibe la marca, el slug del modelo, el `<nombre>` y la `page_url` (la página `File:` en
+      Commons; en una sala de prensa, además la URL del fichero, porque no hay API);
+    - en Commons, pide a la API `action=query&prop=imageinfo&iiprop=url|mime|size&iiurlwidth=1280`
+      sobre la página `File:` [2] y descarga la URL de la miniatura que devuelve, o la del original
+      si es más estrecho; esa URL es el `source_url`;
+    - hace las peticiones de una en una, con un `User-Agent` fijo en una constante del script con
+      nombre, versión y contacto, en el formato `<cliente>/<versión> (<contacto>) <librería>` que
+      pide Wikimedia [3]. Qué contacto se pone (URL del sitio o correo) lo decide el responsable;
+      no se fija aquí;
+    - escribe en `data/images/<brand>/<slug>/<nombre>.<ext>` solo si pasa las comprobaciones del
+      punto 11 (descarga a un temporal y lo mueve al final), y saca por la salida estándar una línea
+      JSON con `file`, `source_url`, `page_url`, `width`, `height` y `bytes`. El Researcher copia
+      `file`, `source_url` y `page_url` al YAML, y pone `retrieved`, `license`, `attribution` y
+      `source_id` leyendo la página de licencia, como hasta ahora (ADR-0001). El script no lee
+      licencias ni escribe YAML.
+11. **Cómo se comprueba que es una imagen de ≤ 1280 px.** Sin dependencias nuevas (la raíz solo
+    tiene `yaml`; Sharp está en `web/`), leyendo la cabecera del fichero:
+    - formato por la firma de los primeros bytes: JPEG (`FF D8 FF`) o PNG (`89 50 4E 47 0D 0A 1A
+      0A`); la extensión tiene que coincidir (`.jpg`/`.jpeg` o `.png`). Cualquier otra cosa (HTML de
+      una página de error, WebP, SVG, GIF) se rechaza; ADR-0012 guarda el JPEG o PNG tal como llega;
+    - ancho y alto del bloque `IHDR` del PNG o del marcador `SOF` del JPEG; ancho > 1280 se rechaza.
+      La API puede devolver una miniatura mayor que la pedida [2], así que el ancho se comprueba
+      siempre, no se supone;
+    - la **misma función** la usa `factory/evals.ts` (regla 10 de `data-model.md`) sobre el
+      fichero ya guardado, para que la CI compruebe lo que hay en el repositorio y no solo lo que el
+      script dijo.
+    El script **no reduce** imágenes: no hay con qué sin añadir Sharp a la raíz. En Commons no hace
+    falta (se pide la miniatura de 1280). Una imagen de sala de prensa de más de 1280 px se rechaza
+    como descarga fallida (punto 12) hasta que se decida cómo reducirla (pregunta abierta).
+12. **Si la descarga falla** (ADR-0012, punto 4): error de red, 403, 404, 429, respuesta que no es
+    JPEG o PNG, o ancho > 1280. El script sale con código distinto de 0, una línea con la causa y
+    **sin dejar ningún fichero** en `data/images/`. No reintenta solo. El Researcher no escribe la
+    entrada en `images`; anota en `open_questions` la `page_url` y la causa; puede probar otra
+    imagen de la misma fuente o la siguiente de RF-8, y si no hay, deja `images: []` y la web
+    muestra la silueta (CA-17). Si el modelo ya tenía una imagen válida, se queda la anterior. El
+    siguiente refresco mensual (punto 6) vuelve a intentarlo, como con una fuente que no carga
+    (punto 7). Si a pesar de todo el YAML cita un `file` que no existe, el eval de la factoría lo
+    rechaza (`eval_failed`, sin PR) y, si llegara por otra vía, la CI también.
+13. **Migración de las imágenes actuales** (las 11 de ADR-0012: 6 con `url` de página `File:` y 5
+    con `url` de `upload.wikimedia.org`). **La hace el Researcher**, porque releer la licencia es
+    obtener datos de producto (ADR-0001), en una tarea de la cola que una persona añade cuando el
+    script y el paso 1 del punto 14 están en `main`. Por cada entrada:
+    - si `url` es una página `File:`, pasa a `page_url`;
+    - si `url` es un fichero de `upload.wikimedia.org`, la página `File:` se obtiene del nombre del
+      fichero en la ruta y se confirma con la API (`iiprop=url` da la URL de la página de
+      descripción [2]); pasa a `page_url`;
+    - el script descarga la miniatura de 1280 px y da `file` y `source_url`. El `source_url` es el
+      de lo descargado ahora, no el `url` antiguo (que puede ser el original, más ancho);
+    - el Researcher relee en `page_url` licencia y autor, actualiza `retrieved` a la fecha de la
+      descarga y borra `url`. Si la licencia ha cambiado o ya no permite el uso (PRD-001, RF-8), la
+      entrada se quita y se anota en `open_questions`; si la descarga falla, punto 12.
+    Una PR, todas las marcas afectadas. No se migra a mano ni con un script que escriba los YAML:
+    sería obtener y escribir datos de producto fuera del Researcher.
+14. **Validador y orden de activación**, para que `main` no se ponga en rojo:
+    1. **PR 1 (desarrollador, toca `factory/`; la fusiona una persona):** el script; el permiso
+       del Researcher; la regla 10 de `data-model.md` en `rawShape` para la forma nueva (claves
+       `file`, `source_url`, `page_url`, `source_id`, `retrieved`, `license`, `attribution`; `file`
+       existe, bajo `data/images/<brand>/<slug>/` del propio YAML, y pasa el punto 11); `url`
+       pasa a ser una clave **transitoria**: una entrada con solo la forma antigua (`url`, sin
+       `file`, `source_url` ni `page_url`) da **aviso** en la validación de todo `data/raw/`
+       (CI), y **fallo** en el eval de la factoría (ADR-0004), que solo mira lo que la ejecución ha
+       tocado: el Researcher que toque un fichero sin migrar tiene que migrarlo. Una entrada que
+       mezcle `url` con las claves nuevas es fallo siempre. Con esto la CI sigue en verde con las
+       11 imágenes sin migrar, esté ya o no el paso de CI del punto 2.
+    2. **PR 2 (Researcher, solo `data/`):** la migración del punto 13. Su CI tiene que salir sin
+       avisos de forma antigua.
+    3. **PR 3 (desarrollador, `factory/`):** quita `url` de las claves admitidas; desde ahí es
+       clave desconocida y fallo (regla 2 de `data-model.md`). Como la CI valida todo `data/raw/`,
+       si quedara alguna entrada sin migrar la que se pone en rojo es esta PR, no `main`.
+    Mientras tanto, el build (#112) muestra la silueta para toda entrada sin `file` válido
+    (ADR-0012, Consecuencias). Ficheros de `data/images/` que ningún YAML cita: solo **aviso**, no
+    fallo, porque el Researcher no puede borrar ficheros (no tiene `rm`; ver Consecuencias).
+
 ## Consecuencias
 **Buenas**
 - Un solo validador para la factoría y para la CI: el esquema de ADR-0008 y la procedencia de
@@ -202,6 +318,37 @@ Detalles:
 - **Una fuente marcada `broken` no se arregla sola**: depende del siguiente refresco del
   Researcher, y mientras tanto sus valores siguen publicados con su fecha y su aviso.
 
+**Imágenes (enmienda del 2026-10-07)**
+- Buena: el fichero, su comprobación y el YAML que lo cita entran juntos en la PR; el `User-Agent`
+  y la comprobación de formato y ancho no dependen de que el modelo los recuerde.
+- Buena: la CI comprueba el fichero guardado con la misma función que el script, sin red.
+- Mala: **el Researcher gana un permiso `Bash`**, aunque limitado a un script. Ese script tiene red
+  y escribe en `data/`; un fallo en él (por ejemplo, en cómo arma la ruta con el `<nombre>` que le
+  pasa el modelo) escribiría donde no debe. Tiene que validar `brand`, `slug` y `<nombre>` con
+  `[a-z0-9-]` y negarse a escribir fuera de `data/images/`, y llevar pruebas. Además el hook de
+  escritura (`FACTORY_WRITE_PATHS`) vigila las herramientas del agente; **no he comprobado** si
+  también cubre lo que escribe un proceso lanzado con `Bash`.
+- Mala: **nada impide que el modelo escriba a mano** `file`, `source_url` o `page_url` sin lanzar
+  el script; lo que lo frena es que `file` tiene que existir y ser una imagen válida. Un
+  `source_url` inventado que no corresponde al fichero no lo detecta nadie.
+- Mala: **ficheros huérfanos.** El Researcher no puede borrar: una imagen sustituida o cuya
+  entrada se quita se queda en `data/images/` (y en el historial, ADR-0012) hasta que una persona
+  la borre. Solo hay aviso.
+- Mala: **imágenes de prensa de más de 1280 px no se pueden guardar** hasta decidir cómo reducirlas;
+  hoy cuentan como descarga fallida y la tarjeta muestra la silueta.
+- Mala: **tres PR en orden y dos de ellas en `factory/`**, que hace el desarrollador y fusiona una
+  persona. Hasta la PR 1 no se puede añadir ninguna imagen que cumpla ADR-0012; hasta la PR 2 no se
+  publica ninguna (ADR-0012, Consecuencias). Si la PR 3 se olvida, la clave `url` queda admitida
+  con aviso indefinidamente.
+- Mala: **las PR con imágenes no entran en la fusión automática de ADR-0011**, que solo admite PR
+  que toquen `data/raw/` o `docs/bitacora/`; una PR con ficheros en `data/images/` (la migración
+  incluida) la fusiona una persona. Ampliar esa lista es cambiar ADR-0011; no se decide aquí.
+- Mala: la lectura de cabeceras JPEG y PNG es código propio, no una librería; un JPEG raro (varios
+  marcadores antes del `SOF`) puede rechazarse por error. Se nota como descarga fallida, no como
+  imagen mala publicada.
+- Mala: el número de imágenes a migrar es el de ADR-0012 y la tarea (11); **no lo he recontado**
+  en esta ejecución, y la tarea de migración debe partir de lo que haya en `data/raw/` ese día.
+
 **Preguntas abiertas** (al aceptarla, el 2026-10-06, el responsable deja las tres primeras como están:
 los precios viejos siguen publicados con su fecha, no se añade fecha de fin de oferta y los refrescos
 los encola una persona)
@@ -218,15 +365,36 @@ los encola una persona)
 - ~~¿Pasan hoy todos los ficheros de `data/raw/` las tres comprobaciones?~~ Sí: el 2026-10-06, los 25
   ficheros (24 de `data/raw/` y el registro) pasan sin fallos. Ojo: el validador aún comprueba la forma antigua de
   `images`; al adaptarlo a ADR-0012, las 11 imágenes con `url` fallarán hasta que se migren.
-- **Descarga de imágenes (ADR-0012):** esta ADR no dice cómo se descargan los ficheros a
-  `data/images/` ni cómo se migran las 11 imágenes actuales. ADR-0012 delega ese «cómo» aquí; queda
-  para una enmienda.
+- ~~**Descarga de imágenes (ADR-0012):** esta ADR no dice cómo se descargan los ficheros a
+  `data/images/` ni cómo se migran las 11 imágenes actuales.~~ Respondida en la enmienda del
+  2026-10-07 (puntos 10 a 14). Quedan abiertas:
+  - ¿Qué contacto lleva el `User-Agent` (URL de `siete3.com`, correo)? Lo decide el responsable.
+  - ¿Cómo se reduce una imagen de sala de prensa de más de 1280 px (Sharp en la raíz, u otra vía)?
+    Hoy se rechaza.
+  - ¿Cubre el hook de escritura lo que escribe un proceso lanzado por `Bash`? No comprobado.
+  - ¿Cuántas peticiones por segundo admite Wikimedia para este uso? La política de `User-Agent` no
+    lo dice [3] y remite a sus pautas de uso de la API, que no he leído; el script va de una en una.
+  - ¿Quién borra las imágenes huérfanas, y cada cuánto?
 
 **Fuentes**
 - [1] https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands
   (consultada el 2026-10-04): sintaxis de `::warning` y `::error` con `file` y `line`; el resumen
   de `GITHUB_STEP_SUMMARY` en Markdown, hasta 1 MiB por paso. La página no dice si hay un límite
   de anotaciones por paso.
+- [2] https://www.mediawiki.org/wiki/API:Imageinfo (consultada el 2026-10-07): `iiprop=url` «da la
+  URL del fichero y de la página de descripción»; con `iiurlwidth` devuelve la URL de una imagen
+  escalada a ese ancho, pero «ya no se garantiza» que coincida con el ancho pedido: puede devolver
+  una miniatura pregenerada mayor. `iiprop=mime` y `iiprop=size` dan tipo MIME, bytes, ancho y alto.
+  La página no lista todos los nombres de campo de la respuesta ni dice qué devuelve si el original
+  es más estrecho que `iiurlwidth`: hay que comprobarlo al implementar.
+- [3] https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy
+  (consultada el 2026-10-07): formato `<cliente>/<versión> (<contacto>) <librería>/<versión>`, con
+  contacto por correo, URL o usuario de la wiki; los scripts sin `User-Agent` informativo «pueden
+  ser bloqueados sin aviso». No trata de límites de peticiones ni de `Retry-After`.
+- Repositorio (2026-10-07): `factory/budgets.yaml` (`allowed_tools` y `write_paths` del
+  Researcher), `factory/orchestrator.ts` (`execute`: evals antes del commit y la PR),
+  `factory/evals.ts` (`IMAGE` y la comprobación de `images`), `.github/workflows/ci.yml` (sin paso
+  de validación de datos), `.claude/agents/researcher.md` (`tools:`).
 - Repositorio (2026-10-04): `factory/evals.ts`, `.github/workflows/ci.yml`, `web/src/lib/data.ts`,
   `factory/budgets.yaml`, `factory/queue.yaml`, `data/sources/registry.yaml`,
   `data/raw/cupra/raval.yaml`.
