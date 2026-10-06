@@ -250,10 +250,11 @@ cabecera desaparece con él.
   `id` en kebab-case, `[a-z0-9-]`, con la forma `<marca>-<país|press|eu>` que ya se usaba.
 - **Contenido:** un mapa YAML con **una sola fuente**, con las mismas claves que tenía cada entrada
   de la lista. Sin envoltorio `sources:` y sin guion de lista.
-- **Qué no es una fuente:** `data/sources/candidatas.yaml` (mapa de marcas por registrar, ver su
-  cabecera) sigue en la carpeta y **no** es una fuente. Quien lea el registro lee
-  `data/sources/*.yaml` **excepto** `candidatas.yaml`. Cualquier otro fichero que no sea una fuente
-  irá fuera de `data/sources/` o se añadirá aquí a esa excepción antes de crearse.
+- **Solo fuentes en la carpeta:** `data/sources/` contiene únicamente ficheros de fuente. El mapa de
+  marcas por registrar sale a `data/candidatas.yaml` y pierde la lista «Ya registradas» de su
+  cabecera: las registradas son los ficheros de `data/sources/` (decidido el 2026-10-06, ver 8.7).
+  Así un alta no toca ningún fichero compartido. Quien lea el registro lee todos los
+  `data/sources/*.yaml`.
 
 | Clave | Tipo / valores | Obligatoria | Nota |
 |---|---|---|---|
@@ -293,7 +294,7 @@ status: active
 
 ### 8.3 Reglas comprobables del registro
 
-1. Cada `data/sources/*.yaml` salvo `candidatas.yaml` es YAML válido y es un mapa (no una lista).
+1. Cada `data/sources/*.yaml` es YAML válido y es un mapa (no una lista).
 2. `id` existe y es igual al nombre del fichero sin `.yaml`. Como el sistema de ficheros no admite
    dos ficheros con el mismo nombre, esto garantiza que no hay `id` repetidos.
 3. `tier` es `T1`, `T2` o `T3`; `urls` tiene al menos una entrada; `last_verified` es una fecha no
@@ -307,18 +308,22 @@ status: active
 - `factory/evals.ts`:
   - Quitar la constante `REGISTRY` (`data/sources/registry.yaml`).
   - El check `registry` deja de mirar si cambió `registry.yaml` y comprueba cada fichero cambiado
-    que cumpla `data/sources/*.yaml` salvo `candidatas.yaml`, con las reglas 1-3 de 8.3. Los mensajes
+    que cumpla `data/sources/*.yaml`, con las reglas 1-3 de 8.3. Los mensajes
     citan la ruta del fichero (`data/sources/cupra-es.yaml: tier must be T1, T2 or T3`).
   - `rawData` y `rawShape` (hoy cada uno lee el registro por su cuenta, líneas 72 y 119) construyen,
     con una sola función compartida, el conjunto de `id` leyendo **todos** los `data/sources/*.yaml`
-    del worktree (no solo los cambiados), salvo `candidatas.yaml`. Un fichero de fuente que no se
+    del worktree (no solo los cambiados). Un fichero de fuente que no se
     pueda leer no aporta `id` y no rompe la lectura de los demás (su error ya lo da el check
     `registry` si cambió).
 - `factory/tests/evals.test.ts`: pasar los casos que hoy usan `data/sources/registry.yaml` a ficheros
   por fuente, y añadir al menos: un `id` que no coincide con el nombre del fichero (falla); un fichero
-  con una lista en vez de un mapa (falla); `candidatas.yaml` cambiado no se valida como fuente;
-  un `source_id` de `data/raw/` sin fichero en `data/sources/` falla (criterio de hecho de #164); y un
-  `source_id` cuyo fichero existe pero no ha cambiado en la rama pasa.
+  con una lista en vez de un mapa (falla); un `source_id` de `data/raw/` sin fichero en
+  `data/sources/` falla (criterio de hecho de #164); y un `source_id` cuyo fichero existe pero no ha
+  cambiado en la rama pasa. Y la prueba del criterio de hecho de #164: en un repo git de verdad, dos
+  ramas que dan de alta fuentes distintas se rebasan una sobre otra sin conflicto (como la de
+  `factory/tests/bitacora.test.ts`).
+- **Mover `data/sources/candidatas.yaml` a `data/candidatas.yaml`** y quitar de su cabecera la lista
+  «Ya registradas», en la misma PR.
 - **Partir `data/sources/registry.yaml`** en un fichero por entrada, copiando el contenido tal cual
   (sin cambiar ningún valor), y borrar `registry.yaml`. Lo hace quien cambia `evals.ts` y en la
   **misma PR**: si el registro se parte antes que el eval, `rawData` no encuentra ningún `id` y todo
@@ -339,8 +344,8 @@ tocan `registry.yaml` (#142, #160); si no, al rebasar tendrán que mover su entr
 - `.claude/agents/researcher.md`: los pasos que leen y escriben `data/sources/registry.yaml` pasan a
   «leer `data/sources/*.yaml`» y «crear o editar `data/sources/<id>.yaml`». Es `.claude/`: lo cambia
   una persona.
-- `data/README.md` y la cabecera de `data/sources/candidatas.yaml` («nada de aquí es T1 hasta que se
-  registre en `registry.yaml`»): la ruta nueva.
+- `data/README.md` y la cabecera de `data/candidatas.yaml` («nada de aquí es T1 hasta que se
+  registre en `registry.yaml`»): las rutas nuevas.
 - `docs/product/prd/PRD-001-catalogo-modelos.md` y `PRD-002-ficha-modelo.md`: la ruta nueva (Producto).
 - `docs/design/ficha-modelo.md`: cita `registry.yaml` al hablar del nombre de presentación de la
   fuente (Diseño).
@@ -351,16 +356,14 @@ tocan `registry.yaml` (#142, #160); si no, al rebasar tendrán que mover su entr
 y `docs/bitacora/`. `data/sources/registry.yaml` ya estaba fuera de esa lista y `data/sources/<id>.yaml`
 también lo está: una PR que da de alta o modifica una fuente sigue esperando a una persona, y con ella
 toda la PR, aunque traiga también ficheros de `data/raw/`. Lo que cambia es que esas PR ya no chocan
-entre sí al fusionarse. Si `data/sources/` debe entrar en la lista (dar de alta una fuente T1 es una
-decisión de confianza), es una revisión de ADR-0011, no de este documento: queda como pregunta abierta.
+entre sí al fusionarse. El responsable decidió que no entra (2026-10-06): dar de alta una fuente T1 es una
+decisión de confianza.
 
 ### 8.6 Consecuencias
 
-- Dos PR que dan de alta fuentes distintas no chocan en el registro. **Pueden seguir chocando en
-  otros ficheros compartidos**: si el Researcher actualiza `data/sources/candidatas.yaml` al registrar
-  una marca (su cabecera lleva la lista «Ya registradas: Cupra, Polestar»), ese fichero pasa a ser el
-  nuevo punto de choque. El criterio de hecho de #164 solo se cumple si las altas no lo tocan, o lo
-  tocan en líneas distintas.
+- Dos PR que dan de alta fuentes distintas no chocan en el registro. `candidatas.yaml`, que habría
+  sido el nuevo punto de choque por su lista «Ya registradas», sale de la carpeta y pierde esa lista,
+  así que un alta no lo toca.
 - El esquema del registro deja de verse al abrir el fichero; cada fichero puede llevar un comentario
   en la primera línea que remita aquí (como en el ejemplo), pero no se valida.
 - **Borrar una fuente no lo detecta el eval.** `changedFiles` ignora los borrados, y la regla 4 de 8.3
@@ -368,17 +371,19 @@ decisión de confianza), es una revisión de ADR-0011, no de este documento: que
   `data/sources/x.yaml` mientras un dato sin tocar sigue citando `x` pasa el eval. Lo cubrirá la
   validación completa de `data/raw/` en la CI (ADR-0010, pendiente); hasta entonces, un borrado en
   `data/sources/` lo revisa una persona (ya lo hace: está fuera de la lista de ADR-0011).
-- `candidatas.yaml` queda como excepción por nombre dentro de la carpeta de fuentes; si aparecen más
-  ficheros que no son fuentes, la excepción crece o hay que moverlos.
 
 ### 8.7 Preguntas abiertas
 
-- ¿Se endurece el esquema del registro («claves desconocidas = error», `brand`, `market`, `kind` y
-  `status` obligatorias, lista cerrada de nombres en `urls`)? Hoy no se exige; no lo pide #164.
-- ¿Sale `candidatas.yaml` de `data/sources/` (por ejemplo a `data/candidatas.yaml`) para que la
-  carpeta solo tenga fuentes? Evitaría la excepción por nombre; cambia el prompt del Researcher.
+Resueltas por el responsable al aceptar este diseño (2026-10-06, #171):
+- ~~¿Se endurece el esquema del registro?~~ No por ahora: se valida lo de hoy.
+- ~~¿Sale `candidatas.yaml` de `data/sources/`?~~ Sí, a `data/candidatas.yaml`, y sin la lista «Ya
+  registradas» (ver 8.2 y 8.4).
+- ~~¿Entra `data/sources/` en la lista de rutas de fusión automática de ADR-0011?~~ No: una fuente
+  nueva la revisa una persona (8.5).
+- `autonomia-marcas`: se deja como está; `candidatas.yaml` no se valida como dato.
+
+Pregunta original sobre `autonomia-marcas`:
 - `candidatas.yaml` cita un `source_id` `autonomia-marcas` (T3) que no tiene entrada en
   `registry.yaml` (comprobado el 2026-10-06; hay 13 entradas, de `cupra-es` a `wikimedia-commons`).
   No rompe nada porque `candidatas.yaml` no se valida como dato, pero al partir el registro no habrá
   `data/sources/autonomia-marcas.yaml`. ¿Se registra como fuente T3 o se deja como está?
-- ¿Entra `data/sources/` en la lista de rutas de fusión automática de ADR-0011?
