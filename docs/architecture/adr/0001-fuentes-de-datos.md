@@ -7,7 +7,7 @@
 La web necesita datos fiables de modelos, especificaciones, precios e imágenes de coches eléctricos comercializados o anunciados en Europa, con foco en España. Nadie los va a revisar a mano, así que la calidad de la fuente es el principal control.
 
 ## Decisión
-Un agente **Researcher** mantiene un **registro de fuentes** (`data/sources/registry.yaml`) y es el único que obtiene **datos del producto** de fuera: marcas, modelos, especificaciones, precios e imágenes. Otro agente puede salir a internet para investigación técnica (documentación de herramientas, por ejemplo), pero nada de lo que traiga entra en `data/` ni se publica como dato de un coche.
+Un agente **Researcher** mantiene un **registro de fuentes** (un fichero por fuente, `data/sources/<id>.yaml`; forma en [data-model.md, sección 8](../data-model.md)) y es el único que obtiene **datos del producto** de fuera: marcas, modelos, especificaciones, precios e imágenes. Otro agente puede salir a internet para investigación técnica (documentación de herramientas, por ejemplo), pero nada de lo que traiga entra en `data/` ni se publica como dato de un coche.
 
 ### Jerarquía de fiabilidad
 | Nivel | Tipo de fuente | Uso |
@@ -32,3 +32,7 @@ Un agente **Researcher** mantiene un **registro de fuentes** (`data/sources/regi
 - La cobertura inicial puede ser menor, a cambio de datos trazables.
 - El registro de fuentes es un artefacto versionado que crece con el tiempo.
 - Hará falta revisar periódicamente precios y URLs rotas (frecuencia por decidir).
+- **Enmienda 2026-10-06 (#164):** el registro pasa de una lista única (`data/sources/registry.yaml`) a un
+  fichero por fuente (`data/sources/<id>.yaml`) para que dos PR que dan de alta fuentes distintas no
+  choquen al fusionarse. Solo cambia la ruta; la decisión es la misma. Motivo, alternativas y forma
+  de cada fichero en [data-model.md, sección 8](../data-model.md).
