@@ -85,3 +85,32 @@
     silueta), más una que compruebe que ningún src del HTML construido apunta a otro dominio. Mira
     las 11 siluetas a 48 px en el build, como pide siluetas-segmento.md, y dilo en la PR. Lee los
     comentarios de la issue #112. La PR referencia #112 y enumera los RF y CA cubiertos."
+- id: marca-renault-2
+  agent: researcher
+  task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/. Escribe exactamente el
+    esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo.
+    Rellena segment (lista de RF-11) y launch (inicio de venta en España) con su fuente si la hay, y
+    busca imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro), solo
+    con licencia que permita el uso comercial, con license y attribution. Repetición (la primera
+    ejecución falló en los evals por la regla 8 de data-model.md): pon wltp_km en todas las
+    versiones o en ninguna. Si solo puedes leer la autonomía de algunas, no la pongas en ninguna
+    versión y deja solo specs.wltp_max_km con el máximo de la gama; nunca una mezcla, porque la web
+    publicaría como autonomía máxima la de la versión que sí leíste. Si el precio de alguna versión
+    sigue en discrepancia entre la web y la nota de prensa, mantén needs_review: true y explica la
+    discrepancia en open_questions. Crea la fuente como fichero data/sources/<id>.yaml
+    (data-model.md, sección 8); no toques data/candidatas.yaml."
+- id: marca-volkswagen-2
+  agent: researcher
+  task: "Marca Volkswagen. Sin dato en el mapa por la lectura parcial de la fuente. Fuentes en el
+    registro y modelos en data/raw/volkswagen/. Escribe exactamente el esquema de
+    docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo. Rellena
+    segment (lista de RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca
+    imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro), solo con
+    licencia que permita el uso comercial, con license y attribution. Repetición (la primera
+    ejecución falló en los evals por la regla 6 de data-model.md: status on_sale exige al menos una
+    versión): las fichas de modelo de VW no desglosan versiones; léelas del configurador o de la
+    lista de precios oficial de volkswagen.es (T1). Si para un modelo no hay ninguna fuente T1 con
+    sus versiones, no escribas ese modelo y anótalo en open_questions de otro modelo o en la
+    bitácora. Crea las fuentes como ficheros data/sources/<id>.yaml (data-model.md, sección 8); no
+    toques data/candidatas.yaml. No descargues imágenes: deja images: [] hasta la enmienda de
+    ADR-0010."
