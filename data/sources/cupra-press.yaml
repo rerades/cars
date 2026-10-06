@@ -1,0 +1,14 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: cupra-press
+brand: Cupra
+tier: T1
+market: global
+kind: [ images, announcements ]
+urls:
+  press: https://www.seat-cupra-mediacenter.com/CUPRA-Brand # SEAT S.A. Media Center
+  legal: https://www.seat-cupra-mediacenter.com/legal/legal-note
+image_license: "" # pendiente: la nota legal solo regula contenido enviado por usuarios; no define licencia de las imágenes de prensa
+notes: >
+  Un resultado de búsqueda (T3) afirma "libre de derechos para uso editorial", pero no está confirmado en la web oficial: no se registra como licencia. Home del media center verificada; no se ha verificado la sección CUPRA-Brand ni su robots.txt.
+last_verified: 2026-09-21
+status: active

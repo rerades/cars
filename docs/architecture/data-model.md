@@ -303,6 +303,9 @@ status: active
 
 ### 8.4 Qué cambia y quién lo hace
 
+**Hecho el 2026-10-06** (#164), en una sola PR, tal como se describe aquí, incluida la prueba de dos
+ramas rebasadas sin conflicto (`factory/tests/evals.test.ts`).
+
 **El Desarrollador, en una sola PR** (cambio de la factoría, junto con la partición del registro):
 
 - `factory/evals.ts`:

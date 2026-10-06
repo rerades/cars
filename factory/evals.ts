@@ -21,7 +21,23 @@ interface Ctx {
 
 type Check = (ctx: Ctx) => string[];
 
-const REGISTRY = "data/sources/registry.yaml";
+/** One file per source, data/sources/<id>.yaml (data-model.md, section 8). */
+const SOURCES = "data/sources";
+const isSource = (f: string) => /^data\/sources\/[^/]+\.ya?ml$/.test(f);
+
+/** Every source id in the worktree, changed or not. A file that cannot be read adds none. */
+function sourceIds(ctx: Ctx): Set<string> {
+  const dir = join(ctx.dir, SOURCES);
+  if (!existsSync(dir)) return new Set();
+  const ids = readdirSync(dir).filter((f) => /\.ya?ml$/.test(f)).map((f) => {
+    try {
+      return parse(readFileSync(join(dir, f), "utf8"))?.id;
+    } catch {
+      return undefined; // the registry check reports it if the file changed
+    }
+  });
+  return new Set(ids.filter((id): id is string => typeof id === "string"));
+}
 
 /** Modified and new files in the worktree (deletions need no eval). */
 export function changedFiles(dir: string): string[] {
@@ -46,32 +62,26 @@ const writePaths: Check = (ctx) =>
     .filter((f) => !ctx.writePaths.some((p) => f.startsWith(p)))
     .map((f) => `write_paths: ${f} is outside ${JSON.stringify(ctx.writePaths)}`);
 
-/** ADR-0001: every source has an id, a tier, its URLs and a real verification date. */
-const registry: Check = (ctx) => {
-  if (!ctx.files.includes(REGISTRY)) return [];
-  const { data, error } = readYaml(ctx, REGISTRY);
-  if (error) return [error];
-  const sources = data?.sources;
-  if (!Array.isArray(sources)) return [`${REGISTRY}: missing sources list`];
-  return sources.flatMap((s: any, i: number) => {
-    const at = `${REGISTRY}: ${s?.id || `source ${i + 1}`}`;
+/** ADR-0001: every changed source is one map whose id is its file name, with a tier, URLs and a real date. */
+const registry: Check = (ctx) =>
+  ctx.files.filter(isSource).flatMap((file) => {
+    const { data: s, error } = readYaml(ctx, file);
+    if (error) return [error];
+    if (!s || typeof s !== "object" || Array.isArray(s)) return [`${file}: must be a map with one source`];
     const out: string[] = [];
-    if (!s?.id) out.push(`${at}: missing id`);
-    if (!["T1", "T2", "T3"].includes(s?.tier)) out.push(`${at}: tier must be T1, T2 or T3`);
-    if (!s?.urls || !Object.keys(s.urls).length) out.push(`${at}: missing urls`);
-    if (!isDay(s?.last_verified, ctx.today)) out.push(`${at}: last_verified must be a past date`);
+    const name = file.slice(SOURCES.length + 1).replace(/\.ya?ml$/, "");
+    if (s.id !== name) out.push(`${file}: id must be "${name}", the file name`);
+    if (!["T1", "T2", "T3"].includes(s.tier)) out.push(`${file}: tier must be T1, T2 or T3`);
+    if (!s.urls || !Object.keys(s.urls).length) out.push(`${file}: missing urls`);
+    if (!isDay(s.last_verified, ctx.today)) out.push(`${file}: last_verified must be a past date`);
     return out;
   });
-};
 
 /** ADR-0001 rule 2: every value carries source_id (from the registry), url, retrieved and tier. */
 const rawData: Check = (ctx) => {
   const files = ctx.files.filter((f) => f.startsWith("data/raw/") && /\.ya?ml$/.test(f));
   if (!files.length) return [];
-  const regPath = join(ctx.dir, REGISTRY);
-  const ids = new Set(
-    existsSync(regPath) ? (parse(readFileSync(regPath, "utf8"))?.sources ?? []).map((s: any) => s?.id) : [],
-  );
+  const ids = sourceIds(ctx);
   return files.flatMap((file) => {
     const { data, error } = readYaml(ctx, file);
     if (error) return [error];
@@ -83,7 +93,7 @@ const rawData: Check = (ctx) => {
       if ("value" in o) {
         const at = `${file}: ${path || "."}`;
         for (const k of ["source_id", "url", "retrieved", "tier"]) if (!o[k]) out.push(`${at}: missing ${k}`);
-        if (o.source_id && !ids.has(o.source_id)) out.push(`${at}: source_id ${o.source_id} is not in the registry`);
+        if (o.source_id && !ids.has(String(o.source_id))) out.push(`${at}: source_id ${o.source_id} is not in the registry`);
         if (o.retrieved && !isDay(o.retrieved, ctx.today)) out.push(`${at}: retrieved must be a past date`);
       }
       for (const [k, v] of Object.entries(o)) walk(v, path ? `${path}.${k}` : k);
@@ -115,10 +125,7 @@ const listOf = (ok: (v: unknown) => boolean) => (v: unknown) => Array.isArray(v)
 const rawShape: Check = (ctx) => {
   const files = ctx.files.filter((f) => f.startsWith("data/raw/") && /\.ya?ml$/.test(f));
   if (!files.length) return [];
-  const regPath = join(ctx.dir, REGISTRY);
-  const ids = new Set(
-    existsSync(regPath) ? (parse(readFileSync(regPath, "utf8"))?.sources ?? []).map((s: any) => s?.id) : [],
-  );
+  const ids = sourceIds(ctx);
   return files.flatMap((file) => {
     const { data, error } = readYaml(ctx, file);
     if (error) return [];  // rawData already reports it

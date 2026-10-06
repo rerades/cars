@@ -1,0 +1,15 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: peugeot-es
+brand: Peugeot
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.peugeot.es/
+  models: https://www.peugeot.es/gama/categoria/nuestros-electricos.html # también /gama/peugeot-208/electrico.html, /gama/peugeot-2008/electrico.html, /gama/peugeot-3008/electrico.html
+  prices: https://ofertas.peugeot.es/coches-electricos-hibridos # subdominio oficial de ofertas; también /particulares
+image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-09-29): www.peugeot.es devuelve 403 a la lectura automática (protección de acceso, no se evita); las URL de www solo constan por aparecer en buscador. Los datos salen de ofertas.peugeot.es, que sí responde. Allí no hay PVP sin oferta: el "precio contado" de cada BEV lleva la letra pequeña "Incluidos impuestos, transporte, descuentos. Sujeto a aprobación financiera." y validez hasta 30/09/2026; se guarda como price_kind financed. No se ha podido leer robots.txt. Gama vista: e-208, e-2008, e-308, e-308 SW, e-3008, e-408, e-5008. No verificadas: furgonetas (e-Partner, e-Expert, e-Traveller, e-Rifter) y e-208 GTi.
+last_verified: 2026-09-29
+status: active

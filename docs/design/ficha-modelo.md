@@ -365,7 +365,7 @@ llevan nota.)
   `specs`), el bloque no se pinta.
 
 ### Nombre de la fuente
-`data/sources/registry.yaml` no tiene un nombre de presentación por fuente, y `source_id` («cupra-es») no está
+El registro de fuentes (`data/sources/<id>.yaml`) no tiene un nombre de presentación por fuente, y `source_id` («cupra-es») no está
 escrito para el visitante. La ficha usa como `{fuente}` el **dominio de la `url` del dato**, sin `www.`
 («cupra.com», «commons.wikimedia.org»): sale del dato y no se inventa. Pregunta 1.
 

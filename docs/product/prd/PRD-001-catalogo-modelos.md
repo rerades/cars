@@ -64,7 +64,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - Entidades: `Marca`, `Modelo`, `Versión`, `Mercado`, `Precio` (ver `architecture/data-model.md`).
 - "Precio desde" y "autonomía máxima" se derivan de las versiones disponibles en el mercado España.
 - **Precio = PVP oficial de la marca en España, sin ayudas** (sin Plan MOVES ni otros incentivos). Si la marca no publica un PVP limpio, se guarda el precio de la oferta marcado como `financed`, con el texto literal de sus condiciones (ver ADR-0001).
-- Los datos los obtiene el agente **Researcher** siguiendo `docs/architecture/adr/0001-fuentes-de-datos.md` y el registro `data/sources/registry.yaml`.
+- Los datos los obtiene el agente **Researcher** siguiendo `docs/architecture/adr/0001-fuentes-de-datos.md` y el registro de fuentes `data/sources/<id>.yaml` (un fichero por fuente).
 - Un modelo "próximamente" puede no tener precio. Entonces se muestra "Precio por confirmar" y queda al final al ordenar por precio.
 - Cada dato de especificación guarda su fuente y su fecha de actualización.
 

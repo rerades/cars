@@ -1,0 +1,14 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: opel-press
+brand: Opel
+tier: T1
+market: ES
+kind: [ images, announcements ]
+urls:
+  press: https://www.media.stellantis.com/es-es/opel/press # Stellantis Media, sección Opel España
+  article_corsa_electric: https://www.media.stellantis.com/es-es/opel/press/ya-disponible-para-pedidos-opel-corsa-electric-con-aun-mas-autonomia # solo consta por buscador (403)
+image_license: "" # términos de uso no leídos: no registrar imágenes de prensa
+notes: >
+  Verificado (2026-10-03): los artículos devuelven 403 a la lectura automática. robots.txt de media.stellantis.com bloquea /press-images, /rss y /login. Sin términos escritos de licencia de imágenes leídos: usar Wikimedia Commons.
+last_verified: 2026-10-03
+status: active
