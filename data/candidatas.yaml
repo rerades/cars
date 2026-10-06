@@ -1,5 +1,5 @@
 # Mapa de marcas BEV que venden (o dicen vender) en España. Lo escribe el Researcher.
-# NO es el registro de fuentes: nada de aquí es T1 hasta que se registre en registry.yaml.
+# NO es el registro de fuentes: nada de aquí es T1 hasta que tenga su fichero data/sources/<id>.yaml.
 #
 # Cómo leerlo:
 # - bev_models: nº aproximado de modelos BEV según UNA fuente T3 (source_id `autonomia-marcas`). Cuenta
@@ -7,7 +7,8 @@
 # - web_es: web oficial española de memoria del Researcher, SIN verificar (no se ha hecho fetch).
 #   null = no se conoce con seguridad. Verificar (respuesta + dominio + robots.txt) al registrar.
 # - press_room: SIN verificar en todas ("unknown"); se comprobará al registrar cada marca.
-# - Ya registradas (fuera de esta lista): Cupra, Polestar.
+# - Las ya registradas son las que tienen fichero en data/sources/: no se listan aquí, para que dar
+#   de alta una marca no toque este fichero (data-model.md, sección 8).
 # - Orden: bev_models de más a menos; empates por orden alfabético; sin dato al final.
 # - Sospechosas de no vender realmente en España: marcadas con doubt (la fuente T3 pone "sí" a todas,
 #   no es fiable en eso).

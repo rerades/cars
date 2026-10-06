@@ -1,0 +1,16 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: byd-es
+brand: BYD
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.byd.com/es-es
+  models: https://www.byd.com/es-es/coches-electricos # también /coches-electricos/atto-2
+  prices: https://www.byd.com/es-es/promociones/atto-2-promocion # promociones por modelo; no hay lista de PVP sin oferta
+  news: https://www.byd.com/es-es/news-list
+image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-05): byd.com/es-es responde; byd.com/es, byd.es y /robots.txt dan 404 o contenido vacío (robots.txt no leído). Gama BEV vista en /coches-electricos: Atto 2, Dolphin Surf, Atto 3 EVO, Seal, Dolphin, Seal U, Sealion 7, Tang. Las fichas dan "desde" con financiación (CA Auto Bank, permanencia, adelanto Plan Auto+): se guarda como price_kind financed. Solo se ha leído Atto 2 en esta pasada; el resto, pendiente.
+last_verified: 2026-10-05
+status: active

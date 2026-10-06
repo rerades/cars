@@ -1,0 +1,13 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: audi-es
+brand: Audi
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.audi.es/es/ # audi.com/es redirige (302) aquí
+image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-05): www.audi.es (home, fichas de modelo y robots.txt) y www.audi.ie devuelven 403 a la lectura automática (protección de acceso, no se evita). Solo se ha confirmado que el dominio es oficial: audi.com/es y audi-mediacenter.com/es redirigen a audi.es. No se han podido leer modelos, precios ni robots.txt, así que no hay URL de ficha ni de precios registradas y no se ha creado data/raw/audi/. Pistas T3 sin verificar (no usables como dato): gama BEV Q4 e-tron, Q6 e-tron, A6 e-tron (Sportback y Avant); Q8 e-tron descatalogado. Pendiente: reintentar o buscar otra vía oficial.
+last_verified: 2026-10-05
+status: active

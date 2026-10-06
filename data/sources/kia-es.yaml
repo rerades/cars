@@ -1,0 +1,16 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: kia-es
+brand: Kia
+tier: T1
+market: ES
+kind: [ specs, announcements ]
+urls:
+  home: https://www.kia.com/es/
+  models: https://www.kia.com/es/modelos/ev3/descubrelo/ # también /ev2, /ev4, /ev5, /ev6, /ev9 (misma ruta /descubrelo/)
+  prices: https://www.kia.com/es/quiero-un-kia/configurador/ # configurador (interactivo, no leído)
+  offers: https://www.kia.com/es/quiero-un-kia/oferta-comercial/ # solo formulario de oferta personalizada
+image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-05): home y fichas /descubrelo/ de EV2, EV3, EV4, EV5, EV6 y EV9 responden. robots.txt (kia.com) solo bloquea */search/ y rutas de Francia: modelos permitidos. BEV de turismo en la home: EV2, EV3, EV4 (hatchback y Fastback), EV5, EV6, EV9 (además PV5 comercial, no registrado). Las fichas NO publican PVP: remiten al configurador o a pedir oferta. Las páginas de concesionarios (kia.com/es/concesionarios/<id>/...gama-electrico-ev/) muestran un "Desde" que varía según el concesionario (p. ej. EV3 23.570 € frente a 24.530 €), sin condiciones legibles: no se usa como precio. /modelos/ev3/precios/ y /sala-de-prensa/ dan 404; prensa.kia.es no resuelve. Sin sala de prensa oficial española localizada. Pendiente: leer el configurador para un PVP sin ayudas y localizar la prensa.
+last_verified: 2026-10-05
+status: active

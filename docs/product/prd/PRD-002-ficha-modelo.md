@@ -71,7 +71,7 @@ Entidades de `architecture/data-model.md` (ADR-0008); la ficha no usa ningún ca
 | Imagen | `images[]` (`url`, `source_id`, `retrieved`, `license`, `attribution`) |
 | Fuente y fecha | `source_id`, `url`, `retrieved`, `tier` de cada valor `Sourced`; `note` |
 
-- Los datos los obtiene el Researcher siguiendo ADR-0001 y el registro `data/sources/registry.yaml`.
+- Los datos los obtiene el Researcher siguiendo ADR-0001 y el registro de fuentes `data/sources/<id>.yaml` (un fichero por fuente).
 - Autonomía del modelo y tracción del modelo se derivan como en la sección 5 de `data-model.md`.
 - **Campos que no se muestran al visitante:** `open_questions`, que son notas internas del Researcher (lo que falta ya se ve como «por confirmar»), y `needs_review` (un modelo marcado no se publica, PRD-001, RF-13). `tier` solo se ve como «fuente no oficial» (RF-9).
 

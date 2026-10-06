@@ -119,7 +119,8 @@ antigüedad y las fuentes rotas solo avisan, y el Researcher refresca cada marca
 Detalles:
 
 1. **Un solo validador.** `factory/evals.ts` expone una función que ejecuta `registry`, `rawData` y
-   `rawShape` con `files` = todos los `data/raw/**/*.yaml` más `data/sources/registry.yaml`, y un
+   `rawShape` con `files` = todos los `data/raw/**/*.yaml` más todos los `data/sources/*.yaml` (un fichero por fuente desde
+   #164; antes, `data/sources/registry.yaml`), y un
    punto de entrada de línea de órdenes (por ejemplo `node factory/validate-data.ts`) que la llama y
    sale con código 1 si hay fallos. El eval de la factoría (ADR-0004) sigue igual: rechaza antes de
    abrir PR; la CI es la segunda barrera, para todo lo que no viene del Researcher. Las reglas no se

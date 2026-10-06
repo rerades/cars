@@ -1,0 +1,15 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: bmw-es
+brand: BMW
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.bmw.es/es/home.html
+  models: https://www.bmw.es/es/coches-bmw/x/ix3/bmw-ix3.html # también /coches-bmw/bmw-i/ix1/bmw-ix1.html, /bmw-i/ix2/, /bmw-i/i4/, y /coches-bmw/x/ix3/bmw-ix3-datos-tecnicos.html
+  prices: https://www.bmw.es/es/configurador.html # configurador
+image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
+notes: >
+  Verificación incompleta (2026-10-04): las URL salen de resultados de búsqueda y pertenecen al dominio oficial bmw.es, pero las lecturas automáticas de www.bmw.es dieron timeout (no se evita ninguna protección); no se han podido leer precios ni letra pequeña ni robots.txt. Por eso ningún precio de data/raw/bmw/ sale de esta fuente. Un resultado de búsqueda cita precios actuales para iX1 xDrive30 (50.300 €), iX2 xDrive30 (51.800 €), i4 eDrive40 (66.200 €) e i5 eDrive40 (77.850 €) y existe una campaña de ayudas (/campanas/paquete-ayudas-bmw-electricos.html): sin confirmar si son PVP sin ayudas. Pendiente de reintentar.
+last_verified: 2026-10-04
+status: active

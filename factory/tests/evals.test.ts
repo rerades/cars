@@ -1,6 +1,6 @@
 /** Tests for the deterministic evals. Run: npm test */
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { describe, test } from "node:test";
@@ -9,16 +9,12 @@ import { changedFiles, runEvals } from "../evals.ts";
 import { clock } from "../orchestrator.ts";
 
 const TODAY = "2026-09-23";
-const REGISTRY = `sources:
-  - id: cupra-es
-    tier: T1
-    urls: { home: https://www.cupra.com/es-es/ }
-    last_verified: 2026-09-23
-  - id: acme-es
-    tier: T1
-    urls: { home: https://www.acme.example/es/ }
-    last_verified: 2026-09-20
-`;
+/** The test registry: one file per source (data-model.md, section 8). */
+const CUPRA = "data/sources/cupra-es.yaml";
+const SOURCES = {
+  [CUPRA]: "id: cupra-es\ntier: T1\nurls: { home: https://www.cupra.com/es-es/ }\nlast_verified: 2026-09-23\n",
+  "data/sources/acme-es.yaml": "id: acme-es\ntier: T1\nurls: { home: https://www.acme.example/es/ }\nlast_verified: 2026-09-20\n",
+};
 
 /** The full example of data-model.md: the schema check must accept the document it enforces. */
 const EXAMPLE = /## 7\. Ejemplo completo[\s\S]*?```yaml\n([\s\S]*?)```/.exec(
@@ -46,29 +42,49 @@ const value = (extra: object) => JSON.stringify({ battery_kwh: {
 
 describe("evals del researcher", () => {
   test("el registro y el ejemplo de data-model.md pasan", () => {
-    const r = evalFiles({ "data/sources/registry.yaml": REGISTRY, [VOLTA]: EXAMPLE });
+    const r = evalFiles({ ...SOURCES, [VOLTA]: EXAMPLE });
     assert.deepEqual(r, { passed: 4, failed: [] });
   });
   test("el registro actual del repo pasa", () => {
     const repo = join(import.meta.dirname, "..", "..");
     // Hoy de verdad, no TODAY: el registro lo actualizan los agentes y sus fechas avanzan.
     const hoy = clock(new Date(), "Europe/Madrid").day;
-    assert.deepEqual(runEvals("researcher", repo, ["data/sources/registry.yaml"], ["data/"], hoy).failed, []);
+    const files = readdirSync(join(repo, "data", "sources")).map((f) => `data/sources/${f}`);
+    assert.ok(files.length > 0);
+    assert.deepEqual(runEvals("researcher", repo, files, ["data/"], hoy).failed, []);
   });
   test("registro inválido", () => {
-    const bad = REGISTRY.replace("T1", "T9").replace("2026-09-23", "2027-01-01");
-    const { failed } = evalFiles({ "data/sources/registry.yaml": bad });
+    const bad = SOURCES[CUPRA].replace("T1", "T9").replace("2026-09-23", "2027-01-01");
+    const { failed } = evalFiles({ [CUPRA]: bad });
     assert.deepEqual(failed, [
-      "data/sources/registry.yaml: cupra-es: tier must be T1, T2 or T3",
-      "data/sources/registry.yaml: cupra-es: last_verified must be a past date",
+      "data/sources/cupra-es.yaml: tier must be T1, T2 or T3",
+      "data/sources/cupra-es.yaml: last_verified must be a past date",
     ]);
   });
   test("YAML roto", () => {
-    assert.match(evalFiles({ "data/sources/registry.yaml": "sources: [" }).failed[0], /invalid YAML/);
+    assert.match(evalFiles({ [CUPRA]: "id: [" }).failed[0], /invalid YAML/);
+  });
+  test("el id de una fuente es el nombre de su fichero", () => {
+    assert.deepEqual(evalFiles({ "data/sources/cupra-es.yaml": SOURCES["data/sources/acme-es.yaml"] }).failed,
+      ['data/sources/cupra-es.yaml: id must be "cupra-es", the file name']);
+  });
+  test("una fuente es un mapa, no una lista", () => {
+    assert.deepEqual(evalFiles({ [CUPRA]: `- ${SOURCES[CUPRA].replaceAll("\n", "\n  ")}` }).failed,
+      ["data/sources/cupra-es.yaml: must be a map with one source"]);
+  });
+  test("un source_id vale aunque su fichero no haya cambiado", () => {
+    const dir = mkdtempSync(join(tmpdir(), "evals-"));
+    for (const [f, body] of Object.entries({ ...SOURCES, "data/raw/cupra/born.yaml": value({}) })) {
+      mkdirSync(dirname(join(dir, f)), { recursive: true });
+      writeFileSync(join(dir, f), body, "utf8");
+    }
+    const { failed } = runEvals("researcher", dir, ["data/raw/cupra/born.yaml"], ["data/"], TODAY);
+    rmSync(dir, { recursive: true, force: true });
+    assert.deepEqual(failed.filter((f) => /source_id/.test(f)), []);
   });
   test("un valor sin url ni fuente registrada", () => {
     const { failed } = evalFiles({
-      "data/sources/registry.yaml": REGISTRY,
+      ...SOURCES,
       "data/raw/cupra/born.yaml": value({ url: "", source_id: "inventada" }),
     });
     assert.deepEqual(failed.filter((f) => /battery_kwh: (missing|source_id)/.test(f)), [
@@ -80,7 +96,7 @@ describe("evals del researcher", () => {
     const bad = (from: string, to: string) => {
       const body = EXAMPLE.replace(from, to);
       assert.notEqual(body, EXAMPLE, `fixture did not change: ${from}`);
-      return evalFiles({ "data/sources/registry.yaml": REGISTRY, [VOLTA]: body }).failed;
+      return evalFiles({ ...SOURCES, [VOLTA]: body }).failed;
     };
     const cases: [string, string, RegExp][] = [
       ["brand: acme", "brand: acme\nmodel_level: {}", /model_level: unknown key/],
@@ -106,7 +122,7 @@ describe("evals del researcher", () => {
   });
   test("brand_name igual en toda la carpeta", () => {
     const { failed } = evalFiles({
-      "data/sources/registry.yaml": REGISTRY,
+      ...SOURCES,
       [VOLTA]: EXAMPLE,
       "data/raw/acme/volta-2.yaml": EXAMPLE.replace("brand_name: Acme", "brand_name: ACME"),
     });
@@ -131,5 +147,31 @@ test("changedFiles ve modificados y nuevos", () => {
   mkdirSync(join(dir, "data"));
   writeFileSync(join(dir, "data", "c.yaml"), "", "utf8");
   assert.deepEqual(changedFiles(dir).sort(), ["a.txt", "data/c.yaml"]);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test("dos ramas que dan de alta fuentes distintas se rebasan sin conflicto (#164)", () => {
+  const dir = mkdtempSync(join(tmpdir(), "evals-rebase-"));
+  const git = (...args: string[]) => execFileSync("git", ["-c", "user.name=t", "-c", "user.email=t@t",
+    "-c", "core.hooksPath=/dev/null", "-c", "commit.gpgsign=false", ...args], { cwd: dir, encoding: "utf8" });
+  const add = (f: string, body: string) => {
+    mkdirSync(dirname(join(dir, f)), { recursive: true });
+    writeFileSync(join(dir, f), body, "utf8");
+  };
+  git("init", "-q", "-b", "trunk");
+  add(CUPRA, SOURCES[CUPRA]);
+  git("add", "-A");
+  git("commit", "-qm", "base");
+  git("checkout", "-qb", "a");
+  add("data/sources/acme-es.yaml", SOURCES["data/sources/acme-es.yaml"]);
+  git("add", "-A");
+  git("commit", "-qm", "alta acme");
+  git("checkout", "-q", "trunk");
+  git("checkout", "-qb", "b");
+  add("data/sources/zeta-es.yaml", SOURCES[CUPRA].replaceAll("cupra", "zeta"));
+  git("add", "-A");
+  git("commit", "-qm", "alta zeta");
+  git("rebase", "-q", "a"); // throws on a conflict
+  assert.deepEqual(readdirSync(join(dir, "data", "sources")).sort(), ["acme-es.yaml", "cupra-es.yaml", "zeta-es.yaml"]);
   rmSync(dir, { recursive: true, force: true });
 });
