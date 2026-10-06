@@ -4,7 +4,7 @@ brand_name: Cupra
 model: Born
 status: {value: on_sale, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
 segment: {value: compacto, note: "la web lo presenta como 'compacto 100 % eléctrico'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-28, tier: T1}
-needs_review: true   # texto de price_terms incompleto (ver open_questions)
+needs_review: true   # revisado por el Researcher el 2026-10-02 (price_terms completo); la marca la quita una persona (RF-13)
 specs:
   battery_kwh_options: {value: [59, 79], source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
   wltp_max_km: {value: 631, note: "'hasta 631 km', máximo de la gama", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
@@ -18,11 +18,11 @@ versions:
       unit: EUR
       price_kind: financed
       price_terms: >-
-        Oferta para un Cupra Born + (190CV) 59kWh con un PVP recomendado financiando en Península y Baleares de 35.655,59€ (IVA, transporte, impuesto de matriculación, descuento de marca y concesionario y bonificación Volkswagen Bank GmbH S.E. incluidos). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 10.000,00€ con una permanencia mínima de la financiación de 48 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 47 cuotas de 210,00€ y 1 cuota en el plazo 12 de 4.500€
+        Oferta para un Cupra Born + (190CV) 59kWh con un PVP recomendado financiando en Península y Baleares de 35.655,59€ (IVA, transporte, impuesto de matriculación, descuento de marca y concesionario y bonificación Volkswagen Bank GmbH S.E. incluidos). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 10.000,00€ con una permanencia mínima de la financiación de 48 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 47 cuotas de 210,00€ y 1 cuota en el plazo 12 de 4.500€. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto +. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 4 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 17.060,00€ en el mes 48 (calculada con 10.000 km anuales). Entrada: 10.303,50€. TIN: 7,45%. TAE: 9,27%. Importe total financiado: 25.352,09€. Comisión de apertura al contado: 3,95% (1.001,41€). Importe de los intereses: 6.078,12€. Coste total del crédito: 7.079,53€. Importe total adeudado: 32.431,62€. Precio total a plazos: 42.735,12€. Precio al contado: 36.505,59€.
       price_terms_url: "https://www.cupra.com/es-es/coches/born"
       source_id: cupra-es
       url: "https://www.cupra.com/es-es/coches/born"
-      retrieved: 2026-09-24
+      retrieved: 2026-10-02
       tier: T1
   - name: Born VZ
     power_kw: {value: 240, note: "publicado: hasta 326 CV", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
@@ -35,7 +35,7 @@ images:
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "price_terms truncado: la lectura de la página elide el resto de la nota (cuota final, TIN 7,45 %, TAE 9,27 %, coste total; precio al contado 36.505,59 € según lectura parcial). Releer la nota completa en el navegador."
-  - "Sin PVP limpio: la web solo muestra precio con oferta."
+  - "price_terms completado el 2026-10-02 con la nota entera de cupra-es. Sin fecha de validez en la nota (a diferencia de Raval): comprobar si la oferta sigue vigente."
+  - "Sin PVP limpio: el 'Precio al contado: 36.505,59 €' de la nota pertenece a la misma oferta (la nota sobre el PVP financiando incluye 'descuento de marca y concesionario'), así que no es PVP oficial y no se guarda como pvp."
   - "Batería, WLTP y potencia por versión (VZ 79 kWh) no confirmadas por versión; carga AC no publicada en la ficha."
   - "launch: fecha de inicio de comercialización en España no publicada en la ficha del modelo (verificado 2026-09-28)."
