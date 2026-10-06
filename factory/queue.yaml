@@ -111,6 +111,26 @@
     Ejecútala en local (npx playwright install chromium) y di en la PR qué violaciones salen y
     cuáles has corregido en web/. No toques .github/workflows/: el job de la CI es la parte de
     DevOps, en un comentario de la #180. La PR referencia #180 y ADR-0006.'
+- id: issue-146
+  agent: developer
+  task: "Historia #146 (épica #145, PRD-002): ficha mínima de cada modelo publicado en
+    /marcas/{marca}/{modelo}/ (ruta de data/raw/), con título y cabecera (RF-1, RF-2, RF-10; CA-1,
+    CA-2, CA-10). Sigue docs/design/ficha-modelo.md, secciones «URL y título» y «Cabecera de la
+    ficha», con los tokens de tokens.md: h1 «{marca} {modelo}» (ficha.titulo), <title> con
+    pagina.tituloDocumento, y estado y segmento como dl, con una sola etiqueta de estado:
+    «Próximamente · oct 2026» o «Próximamente», «Descatalogado» y ninguna en on_sale; el segmento
+    con su etiqueta española o «Segmento por confirmar». En esta historia no entran la ruta de
+    navegación ni el enlace a la web de la marca (#147), la imagen principal (#152), las versiones
+    (#148 a #150), el bloque del modelo (#151), los relacionados (#153) ni las notas y fuentes
+    (#154): deja la página lista para que las siguientes historias añadan bloques sin rehacerla.
+    Reutiliza loadModels() de web/src/lib/data.ts (ya excluye needs_review) y cardView() de
+    web/src/lib/card.ts (key, statusLabel, statusKind, segmentLabel, formatLaunch); si falta algo,
+    extiéndelo ahí, no lo dupliques. Ruta nueva web/src/pages/marcas/[marca]/[modelo].astro con
+    getStaticPaths, que conviva con /marcas/[marca].astro. Textos por web/src/lib/i18n.ts (RNF-4).
+    Sin JavaScript, sin cookies ni localStorage. Una prueba por CA sobre el build, más una que
+    compruebe sobre los datos reales que las URL de las fichas son únicas y que cada tarjeta de
+    /coches enlaza a una ficha que existe (ya no hay 404). La PR referencia #146 y enumera los RF y
+    CA cubiertos."
 - id: marca-renault-2
   agent: researcher
   task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/. Escribe exactamente el
