@@ -58,17 +58,23 @@
 - id: issue-40
   agent: developer
   task: 'Historia #40 (épica #32): verificación de las páginas de RF-10 sobre el sitio construido
-    (CA-12 d y la parte de indexación de CA-13). Primero, cada página de catálogo (/coches y las
-    pregeneradas de marca, segmento y tramo) lleva en el HTML servido <link rel="canonical"> a su
-    propia URL absoluta sin query string; fija site en web/astro.config.mjs con el dominio de
-    ADR-0009. No añadas noindex por JS (decisión en PRD-001, sección 8). Después, una prueba sobre
-    el build: las rutas de catálogo son exactamente /coches, una /marcas/{marca} por marca y una
-    /segmentos/{segmento} por segmento con modelos publicados, y las cinco de tramo de RF-10;
-    ninguna otra (ni marca + segmento). Marcas y segmentos esperados se derivan de loadModels() de
-    web/src/lib/data.ts, que ya excluye needs_review, nunca de listas fijas; un modelo sin segmento
-    no crea página. Otra prueba comprueba que el canonical de /coches es /coches sin query string.
-    Lee los comentarios de revisión de la issue #40. La PR referencia #40 y enumera los RF y CA
-    cubiertos. Si #36, #38 o #39 aún no están en main, no empieces y dilo en el resultado.'
+    (CA-12 d y la parte de indexación de CA-13). Lee los comentarios de revisión de la issue #40.
+    (1) Canonical: hoy solo /coches lo lleva, relativo ("/coches", de #141) y sin la barra final con
+    la que Astro sirve la página. Fija site en web/astro.config.mjs con el dominio de ADR-0009
+    (https://siete3.com) y haz que cada página de catálogo (/coches y las pregeneradas de marca,
+    segmento y tramo, que comparten CatalogPage.astro) lleve en el HTML servido <link
+    rel="canonical"> a su propia URL absoluta, sin query string y con la misma forma que la URL
+    servida (https://siete3.com/coches/). Ajusta la prueba de CA-13 de web/tests/filters.test.ts. No
+    añadas noindex por JS (decisión en PRD-001, sección 8). (2) CA-12 d: las pruebas de CA-12 a por
+    tipo de página ya existen en web/tests/marcas.test.ts y paginas.test.ts; añade la que falta: el
+    conjunto de páginas de catálogo del build es exactamente /coches, una /marcas/{marca} por marca
+    y una /segmentos/{segmento} por segmento con modelos publicados, y las cinco de tramo de RF-10,
+    y ninguna otra combinación de filtros (ni marca + segmento). Marcas y segmentos esperados se
+    derivan de loadModels() de web/src/lib/data.ts (ya excluye needs_review), nunca de listas fijas;
+    un modelo sin segmento no crea página. La prueba mira solo páginas de catálogo: la portada /,
+    /_astro/ y las fichas de modelo /marcas/{marca}/{modelo}/ de PRD-002 (épica #145) no son páginas
+    de catálogo y no deben romperla. (3) Una prueba de que cada página de catálogo lleva su
+    canonical. La PR referencia #40 y enumera los RF y CA cubiertos.'
 - id: issue-112
   agent: developer
   task: "Historia #112 (épica #32): imagen en la tarjeta de #35 con licencia registrada, o silueta del
