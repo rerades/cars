@@ -52,7 +52,7 @@ agents:
     network: false
 
   architect:
-    model: claude-opus-5-5   # 2026-09-27 trial: 2x Sonnet 5 per token; judged on cost per finished task
+    model: claude-opus-5-5   # kept after the #80 trial (2026-10-06): every run finished, ~0.89 USD per finished task
     max_runs_per_day: 2
     max_usd_per_period: 6   # 3 -> 8 on 2026-09-27: room for ~10 Opus runs to compare against Sonnet (#80); 8 -> 6 on 2026-09-29, 2 to researcher
     max_usd_per_run: 1.50   # 0.75 -> 1.50 on 2026-09-27: Opus is 2x per token; a cut run would skew the trial
@@ -85,7 +85,7 @@ agents:
     network: false
 
   designer:
-    model: claude-opus-5-5   # 2026-09-27 trial: 2x Sonnet 5 per token; judged on cost per finished task
+    model: claude-opus-5-5   # kept after the #80 trial (2026-10-06): every run finished, ~0.89 USD per finished task
     max_runs_per_day: 2   # 2026-09-27: second run to test the isolated launch
     max_usd_per_period: 7   # 2 -> 7 on 2026-09-27: room for ~5 Opus runs to compare against Sonnet (#80)
     max_usd_per_run: 2.00   # 1.00 -> 2.00 on 2026-09-27: Opus is 2x per token; the Sonnet rework already reached 0.77
