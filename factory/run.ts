@@ -6,7 +6,7 @@
  *   node factory/run.ts <agente> "<tarea>" --dry-run        # muestra el comando, no ejecuta
  *   node factory/run.ts <agente> "<tarea>" --ignore-window  # ignora el horario nocturno
  *   node factory/run.ts --status                            # gasto y ejecuciones del periodo
- *   node factory/run.ts --next                              # primera tarea de factory/queue.yaml
+ *   node factory/run.ts --next                              # primera tarea pendiente de la cola
  *   node factory/run.ts --trace <run_id>                    # pasos de una ejecución
  */
 import { existsSync, readFileSync } from "node:fs";
@@ -14,8 +14,8 @@ import { join } from "node:path";
 import { parseArgs } from "node:util";
 import { exportRun } from "./langfuse.ts";
 import {
-  appendLedger, checkCanRun, execute, formatTrace, loadConfig, nowInTz, pauseTask, pruneMergedBranches, readLedger, readQueue, runsToday,
-  spentInPeriod, TRACE_DIR, writeQueue,
+  appendLedger, checkCanRun, commitState, execute, formatTrace, loadConfig, nowInTz, pruneMergedBranches, queueState, readAllLedger,
+  readLedger, readQueue, runsToday, spentInPeriod, STATE_BRANCH, syncState, TRACE_DIR,
   type Config,
 } from "./orchestrator.ts";
 
@@ -28,10 +28,12 @@ Orquestador de la factoría
   --dry-run        no ejecuta; muestra el comando
   --ignore-window  ignora el horario permitido
   --status         muestra el estado del presupuesto
-  --next           lanza la primera tarea de factory/queue.yaml
+  --next           lanza la primera tarea pendiente de factory/queue.yaml
   --trace <run_id> muestra los pasos de una ejecución (ops/traces/)`;
 
 function cmdStatus(cfg: Config): number {
+  const blocked = syncState();
+  if (blocked) console.error(`[aviso] ${blocked}`);
   const now = nowInTz(cfg);
   const rows = readLedger(now.day.slice(0, 7));
   const g = cfg.global ?? {};
@@ -46,15 +48,29 @@ function cmdStatus(cfg: Config): number {
       `${runsToday(rows, now.day, agent)}/${a?.max_runs_per_day} ejecuciones hoy` +
       (evaluated.length ? ` · evals ${passed}/${evaluated.length}` : ""));
   }
+  const { pending, failed } = queueState(readQueue(), readAllLedger());
+  console.log(`  cola: ${pending.length} pendientes`);
+  for (const t of pending) console.log(`    - ${t.id} (${t.agent})`);
+  if (failed.length) {
+    console.log(`  fallidas (no se reintentan; para repetir, encolar con un id nuevo):`);
+    for (const r of failed) console.log(`    - ${r.task_id} · ${r.outcome} · ${r.run_id}`);
+  }
+  console.log(`  estado: rama ${STATE_BRANCH} (ADR-0013)`);
   return 0;
 }
 
 /** Lanza la tarea de un agente y la anota en el ledger. Devuelve el código de salida. */
-function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean, dryRun: boolean): number {
+function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean, dryRun: boolean,
+  taskId: string | null = null): number {
   const now = nowInTz(cfg);
   if (!dryRun) {
     const borradas = pruneMergedBranches();
     if (borradas.length) console.log(`ramas ya fusionadas borradas: ${borradas.join(", ")}`);
+  }
+  const blocked = syncState();
+  if (blocked) {
+    console.error(`[bloqueado] ${blocked}`);
+    return 3;
   }
   const month = now.day.slice(0, 7);
   const decision = checkCanRun(cfg, agent, now, readLedger(month), ignoreWindow);
@@ -69,7 +85,12 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
     return 0;
   }
 
+  record.task_id = taskId;
   appendLedger(record, month);
+  // ponytail: outside the lock (ADR-0013 asks for it under the lock); fine while launchd runs one
+  // --next at a time, take the lock here if two runs can ever overlap.
+  const statePr = commitState(record.run_id as string);
+  if (statePr) console.log(`estado: ${statePr}`);
   // Not awaited: node waits for it before exiting, and it never throws.
   void exportRun(record).then((line) => line && console.log(line));
   console.log(`[${record.outcome}] ${record.run_id} · ${record.cost_usd} USD · ${record.turns} turnos` +
@@ -79,26 +100,27 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
 }
 
 /**
- * Takes the first queued task and runs it. It only leaves the queue once it runs: if a
- * guard blocks it, it stays for the next attempt. If the run fails, it moves to the paused
- * list, so it is neither lost nor retried in a loop.
+ * Runs the first pending task: the first one in the queue without a ledger row (ADR-0013).
+ * A blocked run writes no row, so the task stays pending; a failed one is consumed and listed
+ * by --status, so it is neither lost nor retried in a loop.
  */
 function cmdNext(cfg: Config, ignoreWindow: boolean, dryRun: boolean): number {
-  const queue = readQueue();
-  const item = queue[0];
+  const blocked = syncState();
+  if (blocked) {
+    console.error(`[bloqueado] ${blocked}`);
+    return 3;
+  }
+  const { pending } = queueState(readQueue(), readAllLedger());
+  const item = pending[0];
   if (!item) {
     console.log("cola vacía");
     return 0;
   }
 
-  const code = runTask(cfg, item.agent, item.task, ignoreWindow, dryRun);
+  const code = runTask(cfg, item.agent, item.task, ignoreWindow, dryRun, item.id);
   if (code === 3 || dryRun) return code;
-  writeQueue(queue.slice(1));
-  if (code !== 0) {
-    pauseTask(item);
-    console.log("la tarea ha fallado: movida a factory/queue.paused.yaml");
-  }
-  console.log(`quedan ${queue.length - 1} tareas en la cola`);
+  if (code !== 0) console.log(`la tarea ${item.id} ha fallado: no se reintenta (ver --status)`);
+  console.log(`quedan ${pending.length - 1} tareas pendientes`);
   return code;
 }
 

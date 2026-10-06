@@ -7,22 +7,27 @@
  */
 import { execFileSync, spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
-import { appendFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
-import { parse, stringify } from "yaml";
+import { parse } from "yaml";
 import { changedFiles, runEvals } from "./evals.ts";
 
 export const REPO = join(import.meta.dirname, "..");
 export const BUDGETS = join(REPO, "factory", "budgets.yaml");
-export const LEDGER_DIR = join(REPO, "ops", "runs");
+/**
+ * Factory state (ADR-0013): the queue is read and the ledger written in a worktree of the
+ * chore/factory-state branch, never in the person's checkout. FACTORY_STATE_DIR points the state
+ * at a plain folder and turns off its git handling; the tests use it.
+ */
+export const STATE_BRANCH = "chore/factory-state";
+export const STATE_DIR = process.env.FACTORY_STATE_DIR || join(REPO, "ops", "worktrees", "factory-state");
+const STATE_IN_GIT = !process.env.FACTORY_STATE_DIR;
+export const LEDGER_DIR = join(STATE_DIR, "ops", "runs");
+export const QUEUE = join(STATE_DIR, "factory", "queue.yaml");
 /** Full stream-json output of each run; not versioned (see ADR-0004). */
 export const TRACE_DIR = join(REPO, "ops", "traces");
 export const ACTIONS_DIR = join(REPO, "ops", "actions");
 export const LOCK = join(REPO, "factory", ".run.lock");
-/** FACTORY_QUEUE existe para las pruebas; en uso normal la cola es factory/queue.yaml. */
-export const QUEUE = process.env.FACTORY_QUEUE || join(REPO, "factory", "queue.yaml");
-/** Where --next parks a task whose run failed. FACTORY_PAUSED exists for the tests. */
-export const PAUSED = process.env.FACTORY_PAUSED || join(REPO, "factory", "queue.paused.yaml");
 
 export interface AgentConfig {
   max_runs_per_day?: number | null;
@@ -177,52 +182,114 @@ export function openPullRequest(ws: Workspace, title: string, body: string, repo
   }
 }
 
+// --------------------------------------------------------------------------- estado (ADR-0013)
+
+/**
+ * Brings the state worktree up to date before a run. If no commit of the state branch is missing
+ * from origin/main (its PR was merged, or it never had anything), it restarts from origin/main;
+ * otherwise origin/main is merged into it. Returns an error message when the state cannot be
+ * trusted (merge conflict), so the run is blocked; null when it is ready.
+ * Without network it carries on with the local copy, which is right while only this machine writes.
+ */
+export function syncState(repo = REPO, dir = STATE_DIR): string | null {
+  if (!STATE_IN_GIT) return null;
+  try {
+    git(["fetch", "-q", "origin"], repo);
+  } catch {
+    // sin red: se sigue con lo que hay en local
+  }
+  const base = git(["branch", "-r", "--list", "origin/main"], repo) ? "origin/main" : "main";
+  const registered = git(["worktree", "list", "--porcelain"], repo).split("\n").includes(`worktree ${dir}`);
+  if (!registered) {
+    rmSync(dir, { recursive: true, force: true });
+    git(["worktree", "prune"], repo);
+    const hasBranch = git(["branch", "--list", STATE_BRANCH], repo) !== "";
+    git(["worktree", "add", "-q", ...(hasBranch ? [dir, STATE_BRANCH] : ["-b", STATE_BRANCH, dir, base])], repo);
+  }
+  // Merge commits from earlier syncs do not count: only commits carrying rows do.
+  if (!git(["rev-list", "--no-merges", `${base}..HEAD`], dir)) {
+    git(["reset", "-q", "--hard", base], dir); // every row of ours is already in main
+    return null;
+  }
+  try {
+    git(["merge", "-q", "--no-edit", base], dir);
+    return null;
+  } catch {
+    try {
+      git(["merge", "--abort"], dir);
+    } catch {
+      // nothing to abort
+    }
+    return `la rama de estado ${STATE_BRANCH} choca con ${base}: arréglala a mano (ADR-0013)`;
+  }
+}
+
+/**
+ * Commits the ledger in the state worktree, pushes it and opens the state PR if none is open.
+ * Never throws: a failed push leaves the commit on the local branch and the next run pushes it.
+ */
+export function commitState(runId: string, repo = REPO, dir = STATE_DIR): string | null {
+  if (!STATE_IN_GIT) return null;
+  try {
+    git(["add", "ops/runs"], dir);
+    git(["commit", "-q", "-m", `chore(factory): record run ${runId}`], dir);
+    git(["push", "-q", "-u", "origin", STATE_BRANCH], dir);
+    const open = execFileSync("gh", ["pr", "list", "--head", STATE_BRANCH, "--state", "open", "--json", "url",
+      "--jq", ".[0].url"], { cwd: repo, encoding: "utf8" }).trim();
+    if (open) return open;
+    const out = execFileSync("gh", ["pr", "create", "--base", "main", "--head", STATE_BRANCH,
+      "--title", "chore(factory): record factory runs",
+      "--body", "🏭 Factory state (ADR-0013): ledger rows of the runs since the last merge. " +
+        "Merge with a merge commit, never squash."], { cwd: repo, encoding: "utf8" });
+    return out.trim().split("\n").at(-1) ?? null;
+  } catch {
+    return null;
+  }
+}
+
 // --------------------------------------------------------------------------- cola
 
 export interface QueueItem {
+  id: string;
   agent: string;
   task: string;
 }
 
-/** Lista de tareas pendientes, en orden. Una cola vacía o inexistente devuelve []. */
+/** Every task of the queue, in order. A person writes it; the factory never rewrites it. */
 export function readQueue(path = QUEUE): QueueItem[] {
   if (!existsSync(path)) return [];
   const items = parse(readFileSync(path, "utf8")) ?? [];
   if (!Array.isArray(items)) throw new Error(`${path}: se esperaba una lista de tareas`);
+  const seen = new Set<string>();
   items.forEach((item, i) => {
-    if (!item?.agent || !item?.task) throw new Error(`${path}: la tarea ${i + 1} necesita agent y task`);
+    if (!item?.id || !item?.agent || !item?.task) throw new Error(`${path}: la tarea ${i + 1} necesita id, agent y task`);
+    if (seen.has(item.id)) throw new Error(`${path}: el id ${item.id} está repetido`);
+    seen.add(item.id);
   });
   return items;
 }
 
-/** Reescribir el YAML se come los comentarios, así que la cabecera se vuelve a poner. */
-export const QUEUE_HEADER = `# Cola de tareas de la factoría. \`node factory/run.ts --next\` coge la primera,
-# la lanza y la saca de aquí; si una guarda la bloquea, se queda para el siguiente
-# intento. Las tareas se añaden a mano, en orden de prioridad. Ver factory/README.md.
-`;
-
-export function writeQueue(items: QueueItem[], path = QUEUE, header = QUEUE_HEADER): void {
-  writeFileSync(path, header + (items.length ? stringify(items) : "[]\n"), "utf8");
-}
-
-export const PAUSED_HEADER = `# Tareas en pausa: el orquestador no lee este fichero. Se reactivan moviéndolas a queue.yaml.
-# Una tarea que falla en --next llega aquí sola: ni se pierde ni se reintenta en bucle.
-`;
-
-/** Parks a failed task at the end of the paused list, so it waits for a person. */
-export function pauseTask(item: QueueItem, path = PAUSED): void {
-  writeQueue([...readQueue(path), item], path, PAUSED_HEADER);
+/**
+ * A queued task is consumed once the ledger has a row with its id, whatever the outcome: a
+ * failed one is not retried in a loop. To retry it, queue it again with a new id.
+ */
+export function queueState(queue: QueueItem[], rows: Row[]): { pending: QueueItem[]; failed: Row[] } {
+  const consumed = new Set(rows.map((r) => r.task_id).filter(Boolean));
+  return {
+    pending: queue.filter((t) => !consumed.has(t.id)),
+    failed: rows.filter((r) => r.task_id && r.outcome !== "success"),
+  };
 }
 
 // --------------------------------------------------------------------------- ledger
 
 /** `month` en formato YYYY-MM. */
-export function ledgerPath(month: string): string {
-  return join(LEDGER_DIR, `${month}.jsonl`);
+export function ledgerPath(month: string, dir = LEDGER_DIR): string {
+  return join(dir, `${month}.jsonl`);
 }
 
-export function readLedger(month: string): Row[] {
-  const path = ledgerPath(month);
+export function readLedger(month: string, dir = LEDGER_DIR): Row[] {
+  const path = ledgerPath(month, dir);
   if (!existsSync(path)) return [];
   const rows: Row[] = [];
   for (const line of readFileSync(path, "utf8").split("\n")) {
@@ -236,9 +303,16 @@ export function readLedger(month: string): Row[] {
   return rows;
 }
 
-export function appendLedger(record: Row, month: string): void {
-  mkdirSync(LEDGER_DIR, { recursive: true });
-  appendFileSync(ledgerPath(month), JSON.stringify(record) + "\n", "utf8");
+/** Every month of the ledger: a task consumed last month is still consumed. */
+export function readAllLedger(dir = LEDGER_DIR): Row[] {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir).filter((f) => f.endsWith(".jsonl")).sort()
+    .flatMap((f) => readLedger(f.slice(0, -".jsonl".length), dir));
+}
+
+export function appendLedger(record: Row, month: string, dir = LEDGER_DIR): void {
+  mkdirSync(dir, { recursive: true });
+  appendFileSync(ledgerPath(month, dir), JSON.stringify(record) + "\n", "utf8");
 }
 
 const runDay = (row: Row) => String(row.started ?? "").slice(0, 10);
