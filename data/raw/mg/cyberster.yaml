@@ -1,0 +1,21 @@
+# Researcher — MG Cyberster. Fuente: mg-es (T1). Consultado 2026-10-07.
+brand: mg
+brand_name: MG
+model: Cyberster
+status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
+segment: {value: deportivo, note: "la web lo presenta como 'Deportivo eléctrico'", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
+needs_review: false
+specs:
+  wltp_max_km: {value: 507, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
+  power_max_kw: {value: 375, note: "publicado: 375 kW (510 CV)", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
+versions:
+  - name: Cyberster
+    wltp_km: {value: 507, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
+    power_kw: {value: 375, note: "publicado: 375 kW (510 CV)", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "launch: la web no publica fecha de inicio de venta en España."
+  - "Precio: la ficha no lo publica; el configurador no se leyó."
+  - "Versiones, batería y tracción: no publicadas en la ficha; se registra una sola versión genérica."
+  - "Imagen: Commons tiene File:MG Cyberster IAA 2023 1X7A0184.jpg (CC BY-SA 4.0, Alexander-93), pero no pude descargarla en esta ejecución (el comando de descarga requiere aprobación); sin copia local no se registra."

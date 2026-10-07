@@ -1,0 +1,27 @@
+# Researcher — MG MGS6 EV. Fuente: mg-es (T1). Consultado 2026-10-07.
+brand: mg
+brand_name: MG
+model: MGS6 EV
+status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/mgs6", retrieved: 2026-10-07, tier: T1}
+needs_review: false
+versions:
+  - name: MGS6 EV Luxury AWD 77kW
+    drivetrain: {value: awd, note: "por el nombre de la versión en la ficha", source_id: mg-es, url: "https://www.mgmotor.es/model/mgs6", retrieved: 2026-10-07, tier: T1}
+    price:
+      value: 41980
+      unit: EUR
+      price_kind: financed
+      price_terms: "*PVP válido para particulares para Península y Baleares válido hasta el 31/10/2026 para la versión MGS6 EV Luxury 77kw con pintura Blue. Modelo visualizado MGS6 Luxury AWD 77kW con pintura Golden por 41.980€. Los precios incluyen impuestos, transporte, promociones de la marca, descuento ligado a financiación, sujeto a aprobación por Santander Consumer Finance (SCF). El precio incluye CAE estimado de 800€ de descuento y el Plan Auto+. No incluye gastos de matriculación, gastos de pre-entrega y cable de carga tipo 2 ni ningún otro tipo accesorio."
+      price_terms_url: "https://www.mgmotor.es/model/mgs6"
+      source_id: mg-es
+      url: "https://www.mgmotor.es/model/mgs6"
+      retrieved: 2026-10-07
+      tier: T1
+images: []
+open_questions:
+  - "launch: la web no publica fecha de inicio de venta en España (figura como NUEVO)."
+  - "segment: la web lo presenta como SUV eléctrico sin indicar tamaño; sin fuente, queda vacío."
+  - "Batería, autonomía WLTP y carga DC: la ficha no los publica; vacíos. La potencia '77kW' no se guarda por ambigüedad (batería o potencia)."
+  - "El pie legal cita 'Luxury 77kw' como versión del precio y muestra 'Luxury AWD 77kW'; falta aclarar si el precio corresponde a la AWD."
+  - "Precio: solo hay PVP con descuento ligado a financiación; falta un PVP limpio (configurador no leído)."
+  - "Imagen: no encontré foto del MGS6 en Commons en esta búsqueda."
