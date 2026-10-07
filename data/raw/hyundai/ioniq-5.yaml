@@ -1,0 +1,44 @@
+# Researcher — Hyundai IONIQ 5. Fuente: hyundai-es (T1). Consultado 2026-10-07.
+brand: hyundai
+brand_name: Hyundai
+model: IONIQ 5
+status: {value: on_sale, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 540, note: "hasta 540 km WLTP combinada", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+  dc_max_kw: {value: 350, note: "carga rápida de 350 kW", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+  battery_kwh_options: {value: [63, 84], source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+versions:
+  - name: 170 CV 63 kWh RWD LIGHT
+    battery_kwh: {value: 63, basis: unknown, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+    power_kw: {value: 125, note: "publicado: 170 CV", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+    drivetrain: {value: rwd, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+    price:
+      value: 44790
+      unit: EUR
+      price_kind: pvp
+      note: "la ficha muestra «PVP: 44.790 €» para esta versión"
+      source_id: hyundai-es
+      url: "https://www.hyundai.com/es/es/modelos/ioniq5.html"
+      retrieved: 2026-10-07
+      tier: T1
+  - name: 228 CV 84 kWh RWD
+    battery_kwh: {value: 84, basis: unknown, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+    power_kw: {value: 168, note: "publicado: 228 CV", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+    drivetrain: {value: rwd, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+    price: null
+  - name: 325 CV 84 kWh 4x4
+    battery_kwh: {value: 84, basis: unknown, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+    power_kw: {value: 239, note: "publicado: 325 CV", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+    drivetrain: {value: awd, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "segment: la ficha no clasifica el modelo; sin fuente, queda vacío."
+  - "launch: la ficha no da fecha de inicio de venta en España."
+  - "Precio solo de la versión LIGHT (la ficha muestra el PVP de una versión); el resto, sin precio T1 localizado. Falta leer el configurador."
+  - "No se ha confirmado si el PVP de la ficha incluye descuento de marca; la ficha lo etiqueta como PVP."
+  - "WLTP por versión no leído por separado (la ficha da 'hasta 540 km' para el modelo)."
+  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución (sin acceso de descarga); la web mostrará la silueta."
+  - "Las fichas se leyeron con extracción automática de texto; conviene contrastar cifras con la página."

@@ -1,0 +1,41 @@
+# Researcher — Hyundai IONIQ 6. Fuente: hyundai-es (T1). Consultado 2026-10-07.
+brand: hyundai
+brand_name: Hyundai
+model: IONIQ 6
+status: {value: on_sale, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+segment: {value: berlina, note: "la ficha lo presenta como berlina eléctrica", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+needs_review: false
+specs:
+  dc_max_kw: {value: 350, note: "compatible con carga de 350 kW", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+versions:
+  - name: 63 kWh RWD LIGHT
+    battery_kwh: {value: 63, basis: unknown, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+    drivetrain: {value: rwd, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+    price:
+      value: 44770
+      unit: EUR
+      price_kind: pvp
+      note: "la ficha muestra «IONIQ 6 151CV 63kWh RWD LIGHT PVP: 44.770 €»"
+      source_id: hyundai-es
+      url: "https://www.hyundai.com/es/es/modelos/ioniq6.html"
+      retrieved: 2026-10-07
+      tier: T1
+  - name: 84 kWh RWD
+    battery_kwh: {value: 84, basis: unknown, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+    power_kw: {value: 168, note: "ficha: 168 kW (229 CV)", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+    drivetrain: {value: rwd, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+    price: null
+  - name: 84 kWh AWD
+    battery_kwh: {value: 84, basis: unknown, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+    power_kw: {value: 239, note: "ficha: 239 kW (325 CV)", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+    drivetrain: {value: awd, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-07, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "launch: la ficha no da fecha de inicio de venta en España."
+  - "Precio solo de la versión LIGHT de 63 kWh; el resto, sin precio T1 localizado. Falta leer el configurador."
+  - "Potencia de la versión LIGHT (151 CV): no se registra por incoherencia en la lectura; WLTP no registrado por versión."
+  - "No se ha confirmado si el PVP de la ficha incluye descuento de marca."
+  - "IONIQ 6 N existe en la web (ioniq6-n.html) y no se ha registrado en esta ejecución."
+  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución; la web mostrará la silueta."
+  - "Las fichas se leyeron con extracción automática de texto; conviene contrastar cifras con la página."

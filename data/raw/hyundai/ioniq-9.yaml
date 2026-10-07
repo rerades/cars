@@ -1,0 +1,31 @@
+# Researcher — Hyundai IONIQ 9. Fuente: hyundai-es (T1). Consultado 2026-10-07.
+brand: hyundai
+brand_name: Hyundai
+model: IONIQ 9
+status: {value: on_sale, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq9.html", retrieved: 2026-10-07, tier: T1}
+segment: {value: suv_grande, note: "la ficha lo presenta como SUV eléctrico de 7 plazas", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq9.html", retrieved: 2026-10-07, tier: T1}
+needs_review: false
+specs:
+  wltp_max_km: {value: 620, note: "hasta 620 km", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq9.html", retrieved: 2026-10-07, tier: T1}
+  dc_max_kw: {value: 350, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq9.html", retrieved: 2026-10-07, tier: T1}
+versions:
+  - name: 218 CV 110 kWh RWD STAR
+    battery_kwh: {value: 110.3, basis: unknown, note: "la ficha da 110,3 kWh", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq9.html", retrieved: 2026-10-07, tier: T1}
+    power_kw: {value: 160, note: "ficha: 160 kW (218 CV)", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq9.html", retrieved: 2026-10-07, tier: T1}
+    drivetrain: {value: rwd, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq9.html", retrieved: 2026-10-07, tier: T1}
+    price:
+      value: 70080
+      unit: EUR
+      price_kind: pvp
+      note: "la ficha muestra «Nuevo Hyundai IONIQ 9: 218CV 110kWh RWD STAR PVP: 70.080 €»"
+      source_id: hyundai-es
+      url: "https://www.hyundai.com/es/es/modelos/ioniq9.html"
+      retrieved: 2026-10-07
+      tier: T1
+images: []
+open_questions:
+  - "launch: la ficha no da fecha de inicio de venta en España."
+  - "Versiones AWD y AWD Performance (acabados ENERGY, CALLIGRAPHY, BLACK INK): sin datos ni precio leídos; falta el configurador."
+  - "No se ha confirmado si el PVP de la ficha incluye descuento de marca."
+  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución; la web mostrará la silueta."
+  - "Las fichas se leyeron con extracción automática de texto; conviene contrastar cifras con la página."

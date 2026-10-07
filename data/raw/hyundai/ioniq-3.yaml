@@ -1,0 +1,18 @@
+# Researcher — Hyundai IONIQ 3. Fuente: hyundai-es (T1). Consultado 2026-10-07.
+brand: hyundai
+brand_name: Hyundai
+model: IONIQ 3
+status: {value: announced, note: "la ficha dice que el precio se comunicará más adelante; el sitemap incluye una página de preventa", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
+segment: {value: compacto, note: "la ficha lo presenta como hatchback eléctrico compacto", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
+needs_review: true
+specs:
+  battery_kwh_options: {value: [42.2, 61], source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
+  power_max_kw: {value: 107.8, note: "ficha: 107,8 kW (147 CV)", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
+  wltp_max_km: {value: 497, note: "ficha: «más de 497 km» (Long Range)", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
+versions: []
+images: []
+open_questions:
+  - "Estado: la home muestra el IONIQ 3 con una cuota de financiación del acabado N Line, lo que indica que ya podría venderse; la ficha leída dice que el precio se comunicará más adelante. Se marca needs_review para que una persona confirme si es on_sale."
+  - "launch: sin fecha en la ficha. Existe /modelos/ioniq3/ioniq-3-condiciones-unicas.html, no leída."
+  - "Sin versiones ni precio: ninguna página T1 leída da PVP."
+  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución; la web mostrará la silueta."

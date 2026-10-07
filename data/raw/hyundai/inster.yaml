@@ -1,0 +1,20 @@
+# Researcher — Hyundai INSTER. Fuente: hyundai-es (T1). Consultado 2026-10-07.
+brand: hyundai
+brand_name: Hyundai
+model: INSTER
+status: {value: on_sale, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/inster.html", retrieved: 2026-10-07, tier: T1}
+segment: {value: suv_pequeno, note: "la ficha lo presenta como SUV eléctrico urbano compacto", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/inster.html", retrieved: 2026-10-07, tier: T1}
+needs_review: false
+specs:
+  wltp_max_km: {value: 370, note: "hasta 370 km (49 kWh, llantas de 15\")", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/inster.html", retrieved: 2026-10-07, tier: T1}
+  battery_kwh_options: {value: [42, 49], source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/inster.html", retrieved: 2026-10-07, tier: T1}
+versions:
+  - name: INSTER
+    price: null
+images: []
+open_questions:
+  - "launch: la ficha no da fecha de inicio de venta en España."
+  - "Precio: la ficha muestra «Desde 15.555 €» sin etiquetarlo como PVP ni dar condiciones; no se guarda como pvp. Falta leer el configurador o la lista de precios."
+  - "Versiones y acabados (Entry/L, TOP, Lounge, Cross) con su batería y potencia: no leídos por versión."
+  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución; la web mostrará la silueta."
+  - "Las fichas se leyeron con extracción automática de texto; conviene contrastar cifras con la página."

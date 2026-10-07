@@ -1,0 +1,17 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: hyundai-es
+brand: Hyundai
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.hyundai.com/es/es/
+  models: https://www.hyundai.com/es/es/modelos/ioniq5.html # también ioniq3, ioniq6, ioniq9, kona-electrico, inster (.html); N: ioniq-5-n, ioniq6-n
+  prices: https://www.hyundai.com/es/es/configurador-de-modelos.html # configurador (interactivo, no leído); las fichas de modelo muestran "PVP" de una versión
+  offers: https://www.hyundai.com/es/es/compra/servicios-compra/promociones.html
+  sitemap: https://www.hyundai.com/es/es/sitemap.xml
+image_license: "" # sin términos escritos de uso de imágenes localizados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-07): home, sitemap y fichas de IONIQ 3, 5, 6, 9, KONA Eléctrico e INSTER responden. robots.txt de hyundai.com no bloquea /es/. Las fichas muestran el "PVP" de una sola versión (p. ej. IONIQ 5 170CV 63kWh RWD LIGHT, 44.790 €) junto a una cuota de financiación; la de KONA añade "no incluye descuentos". No se ha localizado lista de precios por versión ni sala de prensa oficial en España. Pendiente: leer el configurador y localizar la prensa.
+last_verified: 2026-10-07
+status: active
