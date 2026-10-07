@@ -1,0 +1,33 @@
+# Researcher — Hyundai KONA Eléctrico. Fuente: hyundai-es (T1). Consultado 2026-10-07.
+brand: hyundai
+brand_name: Hyundai
+model: KONA Eléctrico
+status: {value: on_sale, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html", retrieved: 2026-10-07, tier: T1}
+segment: {value: suv_pequeno, note: "la ficha lo presenta como SUV subcompacto", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html", retrieved: 2026-10-07, tier: T1}
+needs_review: false
+specs:
+  wltp_max_km: {value: 510, note: "hasta 510 km (65 kWh, 17\")", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html", retrieved: 2026-10-07, tier: T1}
+  battery_kwh_options: {value: [48, 65], source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html", retrieved: 2026-10-07, tier: T1}
+  drivetrains: {value: [fwd], source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html", retrieved: 2026-10-07, tier: T1}
+versions:
+  - name: 204 CV 65 kWh BLACK LINE
+    battery_kwh: {value: 65, basis: unknown, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html", retrieved: 2026-10-07, tier: T1}
+    power_kw: {value: 150, note: "publicado: 204 CV", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html", retrieved: 2026-10-07, tier: T1}
+    price:
+      value: 42510
+      unit: EUR
+      price_kind: pvp
+      note: "la ficha muestra «PVP: 42.510 € (no incluye descuentos)» para KONA EV 204CV 65kWh BLACK LINE"
+      source_id: hyundai-es
+      url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html"
+      retrieved: 2026-10-07
+      tier: T1
+  - name: 48 kWh
+    battery_kwh: {value: 48, basis: unknown, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html", retrieved: 2026-10-07, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "launch: la ficha no da fecha de inicio de venta en España (solo menciona 2024)."
+  - "Precio solo de la versión BLACK LINE de 65 kWh; la versión de 48 kWh y el resto de acabados, sin precio T1 localizado. Falta leer el configurador."
+  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución; la web mostrará la silueta."
+  - "Las fichas se leyeron con extracción automática de texto; conviene contrastar cifras con la página."
