@@ -2,17 +2,29 @@
 brand: hyundai
 brand_name: Hyundai
 model: IONIQ 3
-status: {value: announced, note: "la ficha dice que el precio se comunicará más adelante; el sitemap incluye una página de preventa", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
+status: {value: on_sale, note: "la página de condiciones de lanzamiento abre la reserva («Reserva ya») y da PVP", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3/ioniq-3-condiciones-unicas.html", retrieved: 2026-10-07, tier: T1}
 segment: {value: compacto, note: "la ficha lo presenta como hatchback eléctrico compacto", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
-needs_review: true
+needs_review: false
 specs:
   battery_kwh_options: {value: [42.2, 61], source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
   power_max_kw: {value: 107.8, note: "ficha: 107,8 kW (147 CV)", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
   wltp_max_km: {value: 497, note: "ficha: «más de 497 km» (Long Range)", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3.html", retrieved: 2026-10-07, tier: T1}
-versions: []
+versions:
+  - name: 135 CV 61 kWh N LINE
+    battery_kwh: {value: 61, basis: unknown, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3/ioniq-3-condiciones-unicas.html", retrieved: 2026-10-07, tier: T1}
+    power_kw: {value: 99, note: "publicado: 135 CV", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq3/ioniq-3-condiciones-unicas.html", retrieved: 2026-10-07, tier: T1}
+    price:
+      value: 39995
+      unit: EUR
+      price_kind: pvp
+      note: "la página de condiciones muestra «IONIQ 3 135CV 61kWh N LINE PVP: 39.995 € (no incluye descuentos)» en su ejemplo de financiación"
+      source_id: hyundai-es
+      url: "https://www.hyundai.com/es/es/modelos/ioniq3/ioniq-3-condiciones-unicas.html"
+      retrieved: 2026-10-07
+      tier: T1
 images: []
 open_questions:
-  - "Estado: la home muestra el IONIQ 3 con una cuota de financiación del acabado N Line, lo que indica que ya podría venderse; la ficha leída dice que el precio se comunicará más adelante. Se marca needs_review para que una persona confirme si es on_sale."
-  - "launch: sin fecha en la ficha. Existe /modelos/ioniq3/ioniq-3-condiciones-unicas.html, no leída."
-  - "Sin versiones ni precio: ninguna página T1 leída da PVP."
+  - "Estado: needs_review lo quitó una persona el 2026-10-07 tras leer la página de condiciones (reserva abierta y PVP del N Line 61 kWh). El ejemplo de financiación dice «hasta el 30/09/2026»; el PVP sin descuentos se toma como vigente."
+  - "launch: sin fecha en la ficha ni en la página de condiciones."
+  - "Solo una versión con precio (N Line 61 kWh); la de 42,2 kWh y el resto de acabados, sin PVP T1 localizado. Falta leer el configurador."
   - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución; la web mostrará la silueta."
