@@ -1,0 +1,36 @@
+# Researcher — MG MG4 (Urban y 64kW Premium). Fuente: mg-es (T1). Consultado 2026-10-07.
+brand: mg
+brand_name: MG
+model: MG4
+status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/mg4", retrieved: 2026-10-07, tier: T1}
+needs_review: false
+versions:
+  - name: MG4 Urban 54kW Premium
+    price:
+      value: 18490
+      unit: EUR
+      price_kind: financed
+      price_terms: "PVP recomendado para particulares para Península y Baleares válido hasta el 31/10/2026. Modelo visualizado MG4 Urban 54kW Premium con Stone Green por 18.490€. Los precios incluyen impuestos, transporte, promociones de la marca y descuento ligado a financiación, sujeto a aprobación por Open Bank, S.A. El precio incluye CAE estimado de 750€ de descuento y el Plan Auto+. No incluye gastos de matriculación ni gastos de pre-entrega. Equipamiento y colores sujetos a disponibilidad."
+      price_terms_url: "https://www.mgmotor.es/model/mg4-urban"
+      source_id: mg-es
+      url: "https://www.mgmotor.es/model/mg4-urban"
+      retrieved: 2026-10-07
+      tier: T1
+  - name: MG4 64kW Premium
+    price:
+      value: 27795
+      unit: EUR
+      price_kind: financed
+      price_terms: "PVP recomendado para particulares para Península y Baleares válido hasta el 31/10/2026. Modelo visualizado MG4 64kW Premium con pintura Ealing Green por 27.795€.Los precios incluyen impuestos, transporte, promociones de la marca y descuento ligado a financiación, sujeto a aprobación por Santander Consumer Finance (SCF). El precio incluye CAE estimado de 750€ de descuento y el Plan Auto+. No incluye gastos de matriculación ni gastos de pre-entrega. Equipamiento y colores sujetos a disponibilidad."
+      price_terms_url: "https://www.mgmotor.es/model/mg4"
+      source_id: mg-es
+      url: "https://www.mgmotor.es/model/mg4"
+      retrieved: 2026-10-07
+      tier: T1
+images: []
+open_questions:
+  - "launch: la web no publica fecha de inicio de venta en España (MG4 Urban figura como NUEVO)."
+  - "segment: la web no lo clasifica de forma explícita; sin fuente, queda vacío."
+  - "Versiones: la ficha no trae tabla de batería, autonomía WLTP ni potencia por versión; quedan vacías. Solo se leyó el precio visualizado de cada ficha; faltan el resto de acabados (p. ej. 77kW, XPower)."
+  - "Precio: solo hay PVP con descuento ligado a financiación; falta un PVP limpio (configurador no leído)."
+  - "Imagen: Commons tiene File:MG MG4.jpg (CC BY 4.0, Soggietoes), pero no pude descargarla en esta ejecución (el comando de descarga requiere aprobación); sin copia local no se registra."

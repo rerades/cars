@@ -1,0 +1,17 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: mg-es
+brand: MG
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.mgmotor.es/
+  models: https://www.mgmotor.es/model/mg4 # también /model/mg4-urban, /model/mgs5, /model/mgs6, /model/cyberster
+  prices: https://www.mgmotor.es/configurator/mg4 # configurador (interactivo, no leído); también /configurator/<modelo>
+  press: https://news.mgmotor.eu/es/
+  legal: https://www.mgmotor.es/privacy-notice
+image_license: "" # sin términos de uso de imágenes registrados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-07): https://www.mgmotor.eu/es-es redirige (302) a mgmotor.es/es-es, que da 404; la home real es https://www.mgmotor.es/. robots.txt (mgmotor.es) solo bloquea /cpresources/, /vendor/, /.env y /cache/. BEV en la home: MG4 (y MG4 Urban), MGS5, MGS6 y Cyberster. Las fichas no publican PVP limpio: el precio visible es el "PVP recomendado" con descuento ligado a financiación (pie legal de cada ficha, válido hasta 31/10/2026); se guarda como financed. Las fichas no dan tabla de especificaciones completa. Sala de prensa oficial: news.mgmotor.eu/es (responde; sin términos de uso de imágenes visibles, por eso image_license vacío). Pendiente: leer el configurador para un PVP sin ofertas.
+last_verified: 2026-10-07
+status: active

@@ -1,0 +1,30 @@
+# Researcher — MG MGS5 EV. Fuente: mg-es (T1). Consultado 2026-10-07.
+brand: mg
+brand_name: MG
+model: MGS5 EV
+status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/mgs5", retrieved: 2026-10-07, tier: T1}
+needs_review: false
+specs:
+  wltp_max_km: {value: 682, note: "hasta 682 km", source_id: mg-es, url: "https://www.mgmotor.es/model/mgs5", retrieved: 2026-10-07, tier: T1}
+versions:
+  - name: MGS5 EV Comfort 49kW
+    price: null
+  - name: MGS5 EV Luxury 64kW
+    price:
+      value: 28840
+      unit: EUR
+      price_kind: financed
+      price_terms: "PVP válido para particulares para Península y Baleares válido hasta el 31/10/2026 para la versión MGS5 EV Comfort 49kw con pintura Piccadilly Blue. Modelo visualizado MGS5 Luxury 64kW con pintura Andes Grey por 28.840€. Los precios incluyen impuestos, transporte, promociones de la marca, descuento ligado a financiación, sujeto a aprobación por Santander Consumer Finance (SCF). El precio incluye CAE estimado de 750€ de descuento. No incluye gastos de matriculación, gastos de pre-entrega y cable de carga tipo 2 ni ningún otro tipo accesorio. Equipamiento y colores sujetos a disponibilidad. Promoción válida para pedidos aprobados y matriculados durante el mes de octubre de 2026. Dos primeros mantenimientos hasta 48.000kms o 2 años. Primera cuota en enero de 2027. Promoción sujeta a financiación lineal y a la aprobación de la entidad financiera. Consulta condiciones en tu Concesionario Oficial MG."
+      price_terms_url: "https://www.mgmotor.es/model/mgs5"
+      source_id: mg-es
+      url: "https://www.mgmotor.es/model/mgs5"
+      retrieved: 2026-10-07
+      tier: T1
+images: []
+open_questions:
+  - "launch: la web no publica fecha de inicio de venta en España (figura como NUEVO)."
+  - "segment: la web lo presenta como SUV eléctrico sin indicar tamaño; no se asigna suv_pequeno/compacto/grande sin fuente."
+  - "MGS5 EV Comfort 49kW: el pie legal lo cita pero no da su precio; price null."
+  - "Batería y potencia: las fichas rotulan '49kW'/'64kW' sin aclarar si es batería (kWh) o potencia; no se guardan."
+  - "Precio: solo hay PVP con descuento ligado a financiación; falta un PVP limpio (configurador no leído)."
+  - "Imagen: Commons tiene File:2025 MG S5 EV V.jpg (CC BY-SA 4.0, Chanokchon), pero no pude descargarla en esta ejecución (el comando de descarga requiere aprobación); sin copia local no se registra."

@@ -1,0 +1,13 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: mg-press
+brand: MG
+tier: T1
+market: ES
+kind: [ announcements, images ]
+urls:
+  home: https://news.mgmotor.eu/es/
+image_license: "" # sin términos escritos de uso de imágenes en la página: no publicar
+notes: >
+  Verificado (2026-10-07): sala de prensa oficial "Media & MG Life" (news.mgmotor.eu/es), responde. El pie enlaza solo a privacidad, cookies, impressum y accesibilidad; no hay términos de uso de imágenes visibles. Contacto de prensa en la página para consultar licencias.
+last_verified: 2026-10-07
+status: active
