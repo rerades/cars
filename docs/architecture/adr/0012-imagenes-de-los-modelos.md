@@ -1,6 +1,7 @@
 # ADR-0012 — Dónde se sirven las imágenes de los modelos
 
-- **Estado:** aceptada (2026-10-05)
+- **Estado:** aceptada (2026-10-05). El «cómo» de la descarga y la migración está en la enmienda
+  «Imágenes» de [ADR-0010](0010-pipeline-de-ingesta.md) (aceptada el 2026-10-07)
 - **Fecha:** 2026-10-02
 
 ## Contexto

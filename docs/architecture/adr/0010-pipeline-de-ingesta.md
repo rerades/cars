@@ -1,8 +1,8 @@
 # ADR-0010 — Pipeline de ingesta: validación de todo `data/raw/` en la CI y refresco mensual por marca
 
-- **Estado:** aceptada (2026-10-06). Enmienda «Imágenes» (descarga de [ADR-0012](0012-imagenes-de-los-modelos.md)): propuesta (2026-10-07)
+- **Estado:** aceptada (2026-10-06). Enmienda «Imágenes» (descarga de [ADR-0012](0012-imagenes-de-los-modelos.md)): aceptada (2026-10-07)
 - **Fecha:** 2026-10-04
-- **Historial:** 2026-10-04 propuesta · 2026-10-06 aceptada · 2026-10-07 enmienda propuesta: se
+- **Historial:** 2026-10-04 propuesta · 2026-10-06 aceptada · 2026-10-07 enmienda propuesta y aceptada: se
   añaden la opción 6, la subsección «Imágenes» de la Decisión, sus consecuencias y las fuentes [2] y
   [3]. Lo aceptado el 2026-10-06 no cambia.
 
@@ -196,7 +196,7 @@ Detalles:
    web, la automatización de la cola y la migración de ficheros (que va con la PR que active el
    paso, ver Consecuencias).
 
-### Imágenes (enmienda del 2026-10-07, propuesta)
+### Imágenes (enmienda del 2026-10-07, aceptada)
 
 **Las imágenes de ADR-0012 las descarga un script determinista que el Researcher lanza durante su
 ejecución; el script solo guarda en `data/images/` un JPEG o PNG de 1280 px de ancho como máximo, y
@@ -217,8 +217,8 @@ imágenes actuales.**
       si es más estrecho; esa URL es el `source_url`;
     - hace las peticiones de una en una, con un `User-Agent` fijo en una constante del script con
       nombre, versión y contacto, en el formato `<cliente>/<versión> (<contacto>) <librería>` que
-      pide Wikimedia [3]. Qué contacto se pone (URL del sitio o correo) lo decide el responsable;
-      no se fija aquí;
+      pide Wikimedia [3]. El contacto es la URL `https://siete3.com` (decidido el 2026-10-07: no
+      expone ningún correo en el repositorio);
     - escribe en `data/images/<brand>/<slug>/<nombre>.<ext>` solo si pasa las comprobaciones del
       punto 11 (descarga a un temporal y lo mueve al final), y saca por la salida estándar una línea
       JSON con `file`, `source_url`, `page_url`, `width`, `height` y `bytes`. El Researcher copia
@@ -327,7 +327,8 @@ imágenes actuales.**
   pasa el modelo) escribiría donde no debe. Tiene que validar `brand`, `slug` y `<nombre>` con
   `[a-z0-9-]` y negarse a escribir fuera de `data/images/`, y llevar pruebas. Además el hook de
   escritura (`FACTORY_WRITE_PATHS`) vigila las herramientas del agente; **no he comprobado** si
-  también cubre lo que escribe un proceso lanzado con `Bash`.
+  también cubre lo que escribe un proceso lanzado con `Bash`. Comprobado al aceptar (2026-10-07):
+  **no lo cubre**; la barrera es solo el script.
 - Mala: **nada impide que el modelo escriba a mano** `file`, `source_url` o `page_url` sin lanzar
   el script; lo que lo frena es que `file` tiene que existir y ser una imagen válida. Un
   `source_url` inventado que no corresponde al fichero no lo detecta nadie.
@@ -348,6 +349,8 @@ imágenes actuales.**
   imagen mala publicada.
 - Mala: el número de imágenes a migrar es el de ADR-0012 y la tarea (11); **no lo he recontado**
   en esta ejecución, y la tarea de migración debe partir de lo que haya en `data/raw/` ese día.
+  Recuento al aceptar (2026-10-07): **22** (6 con página `File:` y 16 con fichero de
+  `upload.wikimedia.org`), más las que traigan las marcas nuevas.
 
 **Preguntas abiertas** (al aceptarla, el 2026-10-06, el responsable deja las tres primeras como están:
 los precios viejos siguen publicados con su fecha, no se añade fecha de fin de oferta y los refrescos
@@ -368,10 +371,15 @@ los encola una persona)
 - ~~**Descarga de imágenes (ADR-0012):** esta ADR no dice cómo se descargan los ficheros a
   `data/images/` ni cómo se migran las 11 imágenes actuales.~~ Respondida en la enmienda del
   2026-10-07 (puntos 10 a 14). Quedan abiertas:
-  - ¿Qué contacto lleva el `User-Agent` (URL de `siete3.com`, correo)? Lo decide el responsable.
+  - ~~¿Qué contacto lleva el `User-Agent` (URL de `siete3.com`, correo)?~~ La URL
+    `https://siete3.com` (2026-10-07), para no publicar un correo en el repositorio.
   - ¿Cómo se reduce una imagen de sala de prensa de más de 1280 px (Sharp en la raíz, u otra vía)?
     Hoy se rechaza.
-  - ¿Cubre el hook de escritura lo que escribe un proceso lanzado por `Bash`? No comprobado.
+  - ~~¿Cubre el hook de escritura lo que escribe un proceso lanzado por `Bash`?~~ **No**
+    (comprobado el 2026-10-07): `.claude/hooks/guard_paths.ts` solo compara el texto de la orden
+    `Bash` con `BANNED_BASH`; `FACTORY_WRITE_PATHS` se aplica a `Write`, `Edit`, `MultiEdit` y
+    `NotebookEdit`. La única barrera es el propio script (validar `[a-z0-9-]` y negarse a escribir
+    fuera de `data/images/`), con sus pruebas.
   - ¿Cuántas peticiones por segundo admite Wikimedia para este uso? La política de `User-Agent` no
     lo dice [3] y remite a sus pautas de uso de la API, que no he leído; el script va de una en una.
   - ¿Quién borra las imágenes huérfanas, y cada cuánto?
