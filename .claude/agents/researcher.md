@@ -42,7 +42,13 @@ redondeado y `note: "publicado: 204 CV"`.
 - Si la marca **no publica un PVP limpio** y el único precio es el de una oferta (descuento de marca o concesionario, bonificación por financiar, permanencia), guarda ese precio con `price_kind: financed`, el **texto literal** de las condiciones en `price_terms` y su URL en `price_terms_url`. Busca antes un PVP sin oferta; si no existe, esto es lo que se guarda. Nunca lo guardes como `pvp`. Sin ninguno de los dos, campo vacío.
 - **Nunca inventes ni estimes** un dato. Si no lo encuentras en una fuente registrada, déjalo vacío y anótalo en `open_questions`.
 - Si dos fuentes discrepan: prevalece el nivel más alto. Si son del mismo nivel, marca `needs_review: true`.
-- **Imágenes:** primero Wikimedia Commons, solo con licencia que permita el uso comercial (CC0, CC BY, CC BY-SA o dominio público); la sala de prensa, solo si sus términos escritos permiten este uso. Guarda `url`, `source_id`, `retrieved`, `license` y `attribution`. Si no hay licencia clara, no la registres: la web pondrá una silueta.
+- **Imágenes:** primero Wikimedia Commons, solo con licencia que permita el uso comercial (CC0, CC BY, CC BY-SA o dominio público); la sala de prensa, solo si sus términos escritos permiten este uso. Si no hay licencia clara, no la registres: la web pondrá una silueta.
+  - Descárgala siempre con el script, nunca de otra forma (ADR-0010, «Imágenes»):
+    `node factory/fetch-image.ts <marca> <slug-del-modelo> <nombre> <page_url> [url-del-fichero]`.
+    `<nombre>` en `[a-z0-9-]` (por ejemplo `frontal`). En Commons, `page_url` es la página `File:`; en una sala de prensa, la página de términos, y añade la URL del fichero.
+  - Si sale bien, imprime una línea JSON: copia tal cual `file`, `source_url` y `page_url` a la entrada de `images`, y añade `source_id`, `retrieved` (hoy), `license` y `attribution` (o `null`) leyendo la página de licencia. No escribas `url`: es la forma antigua y la comprobación la rechaza.
+  - Si falla (sale con error y no guarda nada), no escribas la entrada: anota en `open_questions` la `page_url` y la causa, y prueba otra imagen o la siguiente fuente. Sin ninguna, `images: []`.
+  - Si tocas un fichero que aún tiene imágenes con `url`, migra esas entradas así antes de terminar: la página `File:` sale del nombre del fichero en la URL antigua; relee la licencia y descarga con el script.
 - Respeta `robots.txt` y los términos de cada web. No evites protecciones de acceso, paywalls ni captchas.
 - Las fuentes T3 (medios, agregadores) sirven para descubrir modelos anunciados o confirmar datos, nunca como única fuente de precio.
 - Solo escribes en `data/`. No modificas código ni PRD.
