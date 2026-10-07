@@ -1,20 +1,22 @@
 import type { ModelRecord, Segment } from "./data.ts";
+import { summarize } from "./derived.ts";
 import { t, type MessageKey } from "./i18n.ts";
+import { sortModels } from "./sort.ts";
 
 /** "Ningún modelo" / "1 modelo" / "{n} modelos" (resumen.*). */
 export function countLabel(n: number): string {
   return n === 0 ? t("resumen.cero") : n === 1 ? t("resumen.uno") : t("resumen.n", { n });
 }
 
-/** "2026-10-15" -> 202610; models without a launch date sort last (RF-3). */
-function launchKey(m: ModelRecord): number {
-  const match = m.launch ? /^(\d{4})-(\d{2})/.exec(m.launch.value) : null;
-  return match ? Number(match[1]) * 100 + Number(match[2]) : -1;
-}
-
-/** Default order of the pregenerated pages ("Novedad", RF-3): newest launch first, no date last, then by name. */
+/**
+ * Default order of the pregenerated pages and of the served /coches ("Novedad", RF-3, CA-16): newest
+ * launch first, no date last, then by name. The rule lives in sort.ts, shared with the browser.
+ */
 export function sortByNovelty(models: ModelRecord[]): ModelRecord[] {
-  return [...models].sort((a, b) => launchKey(b) - launchKey(a) || a.model.localeCompare(b.model));
+  return sortModels(
+    models.map((m) => ({ m, ...summarize(m) })),
+    "novedad",
+  ).map(({ m }) => m);
 }
 
 export interface BrandPage {

@@ -20,8 +20,10 @@ export interface FilterPanelView {
   drivetrains: Option[];
   statuses: Option[];
   ranges: { value: string; label: string; chip: string }[];
+  /** Options of the order selector; `value` is the `orden` query value (sort.ts). */
+  sorts: { value: string; label: string }[];
   labels: Record<
-    "brand" | "segment" | "price" | "range" | "drivetrain" | "status" | "priceFrom" | "priceTo" | "clear" |
+    "sort" | "brand" | "segment" | "price" | "range" | "drivetrain" | "status" | "priceFrom" | "priceTo" | "clear" |
     "open" | "drivetrainHelp" | "rangeError" | "active" | "all" | "anyRange" | "emptyTitle" | "emptyText",
     string
   >;
@@ -60,7 +62,14 @@ export function filterPanelView(models: ModelRecord[]): FilterPanelView {
       label: t("filtros.autonomiaMin", { km }),
       chip: t("filtros.chipAutonomia", { km }),
     })),
+    sorts: [
+      { value: "novedad", label: t("orden.novedad") },
+      { value: "precio-asc", label: t("orden.precioAsc") },
+      { value: "precio-desc", label: t("orden.precioDesc") },
+      { value: "autonomia-desc", label: t("orden.autonomiaDesc") },
+    ],
     labels: {
+      sort: t("orden.etiqueta"),
       brand: t("filtros.marca"),
       segment: t("filtros.segmento"),
       price: t("filtros.precio"),
