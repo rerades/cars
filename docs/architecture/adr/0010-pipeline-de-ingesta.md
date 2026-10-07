@@ -261,7 +261,9 @@ imágenes actuales.**
     - el Researcher relee en `page_url` licencia y autor, actualiza `retrieved` a la fecha de la
       descarga y borra `url`. Si la licencia ha cambiado o ya no permite el uso (PRD-001, RF-8), la
       entrada se quita y se anota en `open_questions`; si la descarga falla, punto 12.
-    Una PR, todas las marcas afectadas. No se migra a mano ni con un script que escriba los YAML:
+    ~~Una PR, todas las marcas afectadas.~~ Una tarea y una PR por marca (cambio del 2026-10-07: con
+    22 imágenes, una sola ejecución no cabe en los 25 turnos del Researcher; ver `factory/queue.yaml`,
+    `imagenes-<marca>`). La PR 3 espera a que estén todas fusionadas. No se migra a mano ni con un script que escriba los YAML:
     sería obtener y escribir datos de producto fuera del Researcher.
 14. **Validador y orden de activación**, para que `main` no se ponga en rojo:
     1. **PR 1 (desarrollador, toca `factory/`; la fusiona una persona):** el script; el permiso

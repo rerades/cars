@@ -158,5 +158,102 @@
     lista de precios oficial de volkswagen.es (T1). Si para un modelo no hay ninguna fuente T1 con
     sus versiones, no escribas ese modelo y anótalo en open_questions de otro modelo o en la
     bitácora. Crea las fuentes como ficheros data/sources/<id>.yaml (data-model.md, sección 8); no
-    toques data/candidatas.yaml. No descargues imágenes: deja images: [] hasta la enmienda de
-    ADR-0010."
+    toques data/candidatas.yaml. Descarga las imágenes con node factory/fetch-image.ts, como dicen
+    tus instrucciones (ADR-0010, «Imágenes»)."
+- id: imagenes-cupra
+  agent: researcher
+  task: "Migra a la forma de ADR-0012 las imágenes de data/raw/cupra/ (3 hoy con la clave url, forma
+    antigua). Por cada entrada: page_url es la página File: de Commons (si url es un fichero de
+    upload.wikimedia.org, la página sale del nombre del fichero); relee en ella licencia y autor;
+    descarga con node factory/fetch-image.ts cupra <slug> <nombre> <page_url> y copia file,
+    source_url y page_url; pon retrieved a hoy y borra url. Si la licencia ya no permite el uso
+    comercial o la descarga falla, quita la entrada y anótalo en open_questions. Sigue tus
+    instrucciones de imágenes (.claude/agents/researcher.md) y ADR-0010, sección «Imágenes», puntos
+    12 y 13. No cambies ningún otro dato del fichero salvo retrieved de las imágenes; no toques
+    versiones, precios ni specs."
+- id: imagenes-kia
+  agent: researcher
+  task: "Migra a la forma de ADR-0012 las imágenes de data/raw/kia/ (6 hoy con la clave url, forma
+    antigua). Por cada entrada: page_url es la página File: de Commons (si url es un fichero de
+    upload.wikimedia.org, la página sale del nombre del fichero); relee en ella licencia y autor;
+    descarga con node factory/fetch-image.ts kia <slug> <nombre> <page_url> y copia file, source_url
+    y page_url; pon retrieved a hoy y borra url. Si la licencia ya no permite el uso comercial o la
+    descarga falla, quita la entrada y anótalo en open_questions. Sigue tus instrucciones de
+    imágenes (.claude/agents/researcher.md) y ADR-0010, sección «Imágenes», puntos 12 y 13. No
+    cambies ningún otro dato del fichero salvo retrieved de las imágenes; no toques versiones,
+    precios ni specs."
+- id: imagenes-opel
+  agent: researcher
+  task: "Migra a la forma de ADR-0012 las imágenes de data/raw/opel/ (3 hoy con la clave url, forma
+    antigua). Por cada entrada: page_url es la página File: de Commons (si url es un fichero de
+    upload.wikimedia.org, la página sale del nombre del fichero); relee en ella licencia y autor;
+    descarga con node factory/fetch-image.ts opel <slug> <nombre> <page_url> y copia file,
+    source_url y page_url; pon retrieved a hoy y borra url. Si la licencia ya no permite el uso
+    comercial o la descarga falla, quita la entrada y anótalo en open_questions. Sigue tus
+    instrucciones de imágenes (.claude/agents/researcher.md) y ADR-0010, sección «Imágenes», puntos
+    12 y 13. No cambies ningún otro dato del fichero salvo retrieved de las imágenes; no toques
+    versiones, precios ni specs."
+- id: imagenes-peugeot
+  agent: researcher
+  task: "Migra a la forma de ADR-0012 las imágenes de data/raw/peugeot/ (5 hoy con la clave url, forma
+    antigua). Por cada entrada: page_url es la página File: de Commons (si url es un fichero de
+    upload.wikimedia.org, la página sale del nombre del fichero); relee en ella licencia y autor;
+    descarga con node factory/fetch-image.ts peugeot <slug> <nombre> <page_url> y copia file,
+    source_url y page_url; pon retrieved a hoy y borra url. Si la licencia ya no permite el uso
+    comercial o la descarga falla, quita la entrada y anótalo en open_questions. Sigue tus
+    instrucciones de imágenes (.claude/agents/researcher.md) y ADR-0010, sección «Imágenes», puntos
+    12 y 13. No cambies ningún otro dato del fichero salvo retrieved de las imágenes; no toques
+    versiones, precios ni specs."
+- id: imagenes-polestar
+  agent: researcher
+  task: "Migra a la forma de ADR-0012 las imágenes de data/raw/polestar/ (3 hoy con la clave url,
+    forma antigua). Por cada entrada: page_url es la página File: de Commons (si url es un fichero
+    de upload.wikimedia.org, la página sale del nombre del fichero); relee en ella licencia y autor;
+    descarga con node factory/fetch-image.ts polestar <slug> <nombre> <page_url> y copia file,
+    source_url y page_url; pon retrieved a hoy y borra url. Si la licencia ya no permite el uso
+    comercial o la descarga falla, quita la entrada y anótalo en open_questions. Sigue tus
+    instrucciones de imágenes (.claude/agents/researcher.md) y ADR-0010, sección «Imágenes», puntos
+    12 y 13. No cambies ningún otro dato del fichero salvo retrieved de las imágenes; no toques
+    versiones, precios ni specs."
+- id: imagenes-bmw
+  agent: researcher
+  task: "Migra a la forma de ADR-0012 las imágenes de data/raw/bmw/ (1 hoy con la clave url, forma
+    antigua). Por cada entrada: page_url es la página File: de Commons (si url es un fichero de
+    upload.wikimedia.org, la página sale del nombre del fichero); relee en ella licencia y autor;
+    descarga con node factory/fetch-image.ts bmw <slug> <nombre> <page_url> y copia file, source_url
+    y page_url; pon retrieved a hoy y borra url. Si la licencia ya no permite el uso comercial o la
+    descarga falla, quita la entrada y anótalo en open_questions. Sigue tus instrucciones de
+    imágenes (.claude/agents/researcher.md) y ADR-0010, sección «Imágenes», puntos 12 y 13. No
+    cambies ningún otro dato del fichero salvo retrieved de las imágenes; no toques versiones,
+    precios ni specs."
+- id: imagenes-byd
+  agent: researcher
+  task: "Migra a la forma de ADR-0012 las imágenes de data/raw/byd/ (1 hoy con la clave url, forma
+    antigua). Por cada entrada: page_url es la página File: de Commons (si url es un fichero de
+    upload.wikimedia.org, la página sale del nombre del fichero); relee en ella licencia y autor;
+    descarga con node factory/fetch-image.ts byd <slug> <nombre> <page_url> y copia file, source_url
+    y page_url; pon retrieved a hoy y borra url. Si la licencia ya no permite el uso comercial o la
+    descarga falla, quita la entrada y anótalo en open_questions. Sigue tus instrucciones de
+    imágenes (.claude/agents/researcher.md) y ADR-0010, sección «Imágenes», puntos 12 y 13. No
+    cambies ningún otro dato del fichero salvo retrieved de las imágenes; no toques versiones,
+    precios ni specs."
+- id: imagenes-mg
+  agent: researcher
+  task: "Añade imágenes a los modelos de data/raw/mg/, que hoy tienen images: []. En open_questions ya
+    están localizadas en Commons: File:MG MG4.jpg (CC BY 4.0), File:2025 MG S5 EV V.jpg (CC BY-SA
+    4.0) y File:MG Cyberster IAA 2023 1X7A0184.jpg (CC BY-SA 4.0); compruébalas y busca una para el
+    MGS6. Primero Wikimedia Commons (fuente wikimedia-commons), solo con licencia que permita el uso
+    comercial; descarga con node factory/fetch-image.ts y escribe la entrada con file, source_url,
+    page_url, source_id, retrieved, license y attribution. Quita de open_questions las notas de
+    imagen que queden resueltas. Sigue tus instrucciones de imágenes (.claude/agents/researcher.md)
+    y ADR-0010, sección «Imágenes», puntos 12 y 13. No cambies ningún otro dato del fichero salvo
+    retrieved de las imágenes; no toques versiones, precios ni specs."
+- id: imagenes-hyundai
+  agent: researcher
+  task: "Añade imágenes a los modelos de data/raw/hyundai/, que hoy tienen images: []. Primero
+    Wikimedia Commons (fuente wikimedia-commons), solo con licencia que permita el uso comercial;
+    descarga con node factory/fetch-image.ts y escribe la entrada con file, source_url, page_url,
+    source_id, retrieved, license y attribution. Quita de open_questions las notas de imagen que
+    queden resueltas. Sigue tus instrucciones de imágenes (.claude/agents/researcher.md) y ADR-0010,
+    sección «Imágenes», puntos 12 y 13. No cambies ningún otro dato del fichero salvo retrieved de
+    las imágenes; no toques versiones, precios ni specs."
