@@ -6,6 +6,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
+import { imageProblem } from "./fetch-image.ts";
 
 export interface EvalResult {
   passed: number;
@@ -114,7 +115,9 @@ const MODEL = ["brand", "brand_name", "model", "status", "launch", "segment", "n
 const MODEL_REQUIRED = ["brand", "brand_name", "model", "status", "needs_review", "versions", "images"];
 const VERSION = ["name", "battery_kwh", "wltp_km", "power_kw", "drivetrain", "dc_max_kw", "ac_max_kw", "price"];
 const SPECS = ["wltp_max_km", "power_max_kw", "dc_max_kw", "ac_max_kw", "battery_kwh_options", "drivetrains"];
-const IMAGE = ["url", "source_id", "retrieved", "license", "attribution"];
+const IMAGE = ["file", "source_url", "page_url", "source_id", "retrieved", "license", "attribution"];
+/** ADR-0010, point 14: the pre-ADR-0012 key, accepted only until the migration; it fails here, in the factory eval. */
+const OLD_IMAGE_KEY = "url";
 
 const positive = (v: unknown) => typeof v === "number" && v > 0;
 const positiveInt = (v: unknown) => Number.isInteger(v) && (v as number) > 0;
@@ -205,8 +208,24 @@ const rawShape: Check = (ctx) => {
     else data.images.forEach((img: unknown, i: number) => {
       const at = `images[${i}]`;
       if (!obj(img)) return fail(`${at}: must be a map`);
-      keys(img, IMAGE, `${at}.`);
-      for (const k of ["url", "source_id", "retrieved", "license"]) if (!img[k]) fail(`${at}.${k}: missing`);
+      keys(img, [...IMAGE, OLD_IMAGE_KEY], `${at}.`);
+      if (OLD_IMAGE_KEY in img) {
+        if (["file", "source_url", "page_url"].some((k) => k in img)) return fail(`${at}: url cannot be mixed with file, source_url and page_url`);
+        return fail(`${at}: old shape (url); download it with factory/fetch-image.ts and write file, source_url and page_url (ADR-0010, point 13)`);
+      }
+      for (const k of ["file", "source_url", "page_url", "source_id", "retrieved", "license"]) if (!img[k]) fail(`${at}.${k}: missing`);
+      if (!("attribution" in img)) fail(`${at}.attribution: missing (write null if the license asks for none)`);
+      if (img.file) {
+        const dir = `data/images/${parts[2]}/${parts[3]?.replace(/\.ya?ml$/, "")}/`;
+        const path = join(ctx.dir, String(img.file));
+        if (!String(img.file).startsWith(dir) || !/^[a-z0-9-]+\.(jpe?g|png)$/.test(String(img.file).slice(dir.length))) {
+          fail(`${at}.file: must be ${dir}<name>.jpg|png, name in [a-z0-9-]`);
+        } else if (!existsSync(path)) fail(`${at}.file: ${img.file} does not exist`);
+        else {
+          const problem = imageProblem(readFileSync(path), String(img.file));
+          if (problem) fail(`${at}.file: ${problem}`);
+        }
+      }
       if (img.source_id && !ids.has(img.source_id)) fail(`${at}: source_id ${img.source_id} is not in the registry`);
       if (img.retrieved && !isDay(img.retrieved, ctx.today)) fail(`${at}.retrieved: must be a past date`);
     });

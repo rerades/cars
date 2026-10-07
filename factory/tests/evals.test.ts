@@ -23,11 +23,11 @@ const EXAMPLE = /## 7\. Ejemplo completo[\s\S]*?```yaml\n([\s\S]*?)```/.exec(
 const VOLTA = "data/raw/acme/volta.yaml";
 
 /** Writes files into a temp dir and runs the researcher evals on them. */
-function evalFiles(files: Record<string, string>, paths = ["data/"]) {
+function evalFiles(files: Record<string, string | Buffer>, paths = ["data/"]) {
   const dir = mkdtempSync(join(tmpdir(), "evals-"));
   for (const [f, body] of Object.entries(files)) {
     mkdirSync(dirname(join(dir, f)), { recursive: true });
-    writeFileSync(join(dir, f), body, "utf8");
+    writeFileSync(join(dir, f), body);
   }
   try {
     return runEvals("researcher", dir, Object.keys(files), paths, TODAY);
@@ -112,7 +112,8 @@ describe("evals del researcher", () => {
       ["    price: null   #", "    #", /versions\[2\]\.price: missing/],
       ["name: Volta 80 AWD", "name: Volta 60", /repeated \(Volta 60\)/],
       ["wltp_max_km: {value: 520", "wltp_max_km: {value: 530", /must match the versions. maximum/],
-      ["images: []", "images: [{url: x, source_id: acme-es, retrieved: 2026-09-20}]", /images\[0\]\.license: missing/],
+      ["images: []", "images: [{file: x, source_url: x, page_url: x, source_id: acme-es, retrieved: 2026-09-20, attribution: null}]",
+        /images\[0\]\.license: missing/],
     ];
     for (const [from, to, error] of cases) {
       const failed = bad(from, to);
@@ -127,6 +128,30 @@ describe("evals del researcher", () => {
       "data/raw/acme/volta-2.yaml": EXAMPLE.replace("brand_name: Acme", "brand_name: ACME"),
     });
     assert.ok(failed.some((f) => /brand_name "ACME" differs from volta\.yaml/.test(f)), JSON.stringify(failed));
+  });
+  test("imágenes (ADR-0012; ADR-0010, puntos 11 y 14)", () => {
+    const png = (width: number) => {
+      const size = Buffer.alloc(8);
+      size.writeUInt32BE(width, 0);
+      size.writeUInt32BE(720, 4);
+      return Buffer.concat([Buffer.from("89504e470d0a1a0a0000000d", "hex"), Buffer.from("IHDR"), size, Buffer.alloc(5)]);
+    };
+    const FILE = "data/images/acme/volta/frontal.png";
+    const image = (extra: string) => EXAMPLE.replace("images: []", "images:\n  - {file: " + FILE + ", "
+      + "source_url: https://upload.wikimedia.org/x.png, page_url: https://commons.wikimedia.org/wiki/File:X.png, "
+      + "source_id: acme-es, retrieved: 2026-09-20, license: CC-BY-4.0, attribution: null" + extra + "}");
+    const images = (body: string, files: Record<string, string | Buffer> = { [FILE]: png(1280) }) =>
+      evalFiles({ ...SOURCES, [VOLTA]: body, ...files }).failed.filter((f) => /images/.test(f));
+
+    assert.deepEqual(images(image("")), []);
+    assert.match(images(image(", url: x")).join(), /url cannot be mixed/);
+    const old = EXAMPLE.replace("images: []", "images: [{url: x, source_id: acme-es, retrieved: 2026-09-20, license: CC0, attribution: null}]");
+    assert.match(images(old, {}).join(), /old shape \(url\)/);
+    assert.match(images(image(""), {}).join(), /does not exist/);
+    assert.match(images(image(""), { [FILE]: png(1920) }).join(), /1920 px wide/);
+    assert.match(images(image(""), { [FILE]: "<html>" }).join(), /not a JPEG or PNG/);
+    assert.match(images(image("").replace(FILE, "data/images/acme/otro/frontal.png")).join(), /must be data\/images\/acme\/volta\//);
+    assert.match(images(image("").replace(", attribution: null", "")).join(), /attribution: missing/);
   });
   test("escribir fuera de write_paths", () => {
     assert.deepEqual(evalFiles({ "src/x.ts": "" }).failed, ['write_paths: src/x.ts is outside ["data/"]']);
