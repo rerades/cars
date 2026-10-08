@@ -271,6 +271,16 @@ describe("espacio de trabajo", () => {
     rmSync(repo, { recursive: true, force: true });
   });
 
+  test("keeps the branch when the agent committed by itself", () => {
+    const repo = repoDeMentira();
+    const ws = orq.openWorkspace("20260922-000000-555555", "developer", repo);
+    writeFileSync(join(ws.dir, "data.txt"), "committed by the agent\n", "utf8");
+    enRepo(ws.dir, "commit", "-q", "-am", "agent commit");
+    assert.equal(orq.closeWorkspace(ws, "developer: tarea", repo), true);
+    assert.equal(enRepo(repo, "show", `${ws.branch}:data.txt`), "committed by the agent");
+    rmSync(repo, { recursive: true, force: true });
+  });
+
   test("la persona puede tener cambios a medias sin que le afecten", () => {
     const repo = repoDeMentira();
     writeFileSync(join(repo, "data.txt"), "lo que estoy escribiendo yo\n", "utf8");
