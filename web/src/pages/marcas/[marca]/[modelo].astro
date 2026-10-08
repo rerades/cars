@@ -1,0 +1,65 @@
+---
+import "../../../styles/global.css";
+import { cardView, type CardView } from "../../../lib/card.ts";
+import { loadModels } from "../../../lib/data.ts";
+import { t } from "../../../lib/i18n.ts";
+
+/**
+ * Model page (PRD-002, docs/design/ficha-modelo.md). This story: URL, title and header (RF-1, RF-2,
+ * RF-10). Later stories add their blocks as sibling <section>s after the header inside <main>.
+ */
+export function getStaticPaths() {
+  return loadModels().models.map((model) => {
+    const [marca, file] = model.file.replace(/\.yaml$/, "").split("/");
+    return { params: { marca, modelo: file }, props: { card: cardView(model) } };
+  });
+}
+
+const { card } = Astro.props as { card: CardView };
+const heading = t("ficha.titulo", { marca: card.brand, modelo: card.model });
+const site = t("sitio.nombre");
+const documentTitle = site ? t("pagina.tituloDocumento", { titulo: heading, sitio: site }) : heading;
+const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{documentTitle}</title>
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <main class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8">
+      <header data-ficha-header>
+        <h1 class="text-title text-ink-900 [overflow-wrap:anywhere]">{heading}</h1>
+        <dl class="mt-3 flex flex-col gap-2">
+          {
+            card.statusLabel && (
+              <div>
+                <dt class="sr-only">{t("ficha.estado.rotulo")}</dt>
+                <dd>
+                  <span
+                    class:list={[
+                      "inline-block rounded-full px-3 py-1 text-badge",
+                      card.statusKind === "soon"
+                        ? "bg-soon-bg text-soon-fg"
+                        : "bg-discontinued-bg text-discontinued-fg",
+                    ]}
+                    data-status={card.statusKind}>{card.statusLabel}</span
+                  >
+                </dd>
+              </div>
+            )
+          }
+          <div class="flex flex-wrap gap-x-2">
+            <dt class:list={["text-body text-ink-600", !card.hasSegment && "sr-only"]}>{t("ficha.segmento.rotulo")}</dt>
+            <dd class:list={["text-body", card.hasSegment ? "text-ink-900" : "text-ink-600"]} data-field="segment">
+              {card.segmentLabel}
+            </dd>
+          </div>
+        </dl>
+      </header>
+    </main>
+  </body>
+</html>
