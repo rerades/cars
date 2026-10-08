@@ -22,6 +22,10 @@ export interface CardView {
   segmentLabel: string;
   hasSegment: boolean;
   labels: { price: string; range: string; segment: string };
+  /** `segment.value`, or null: picks the silhouette when there is no image (RF-8, CA-17). */
+  segment: string | null;
+  /** First image with license (RF-8); null gives the silhouette. */
+  image: { file: string; attribution: string | null; pageUrl: string } | null;
 }
 
 const eur = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0, useGrouping: "always" });
@@ -69,6 +73,10 @@ export function cardView(m: ModelRecord): CardView {
     segmentLabel: m.segment
       ? t(`segmento.${m.segment.value}` as MessageKey)
       : t("tarjeta.segmentoPendiente"),
+    segment: m.segment?.value ?? null,
+    image: m.images[0]
+      ? { file: m.images[0].file, attribution: m.images[0].attribution, pageUrl: m.images[0].page_url }
+      : null,
     labels: {
       price: t("tarjeta.etiqueta.precio"),
       range: t("tarjeta.etiqueta.autonomia"),

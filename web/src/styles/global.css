@@ -52,6 +52,11 @@
   --radius-card: 0.5rem;
 }
 
+/* Plain custom property, not in @theme: Tailwind would drop an unused theme variable. */
+:root {
+  --size-segment-icon: 3rem;
+}
+
 @layer base {
   body {
     background: var(--color-surface);

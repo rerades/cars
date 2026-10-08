@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { parse } from "yaml";
 
@@ -69,9 +69,15 @@ export interface Specs {
   drivetrains?: Sourced<Drivetrain[]>;
 }
 
-/** Only images with a license are kept (CA-10). */
+/**
+ * Only images with a license, a source and an existing local file are kept (CA-10, ADR-0012).
+ * `file` is the repo-relative path `data/images/<brand>/<model>/<name>.<ext>`; the web never links
+ * `source_url` (third-party host, cookies) and links `page_url` from the attribution.
+ */
 export interface ModelImage {
-  url: string;
+  file: string;
+  source_url: string;
+  page_url: string;
   source_id: string;
   retrieved: string;
   license: string;
@@ -115,7 +121,10 @@ export interface LoadResult {
 /** CARS_DATA_DIR wins: astro.config.mjs sets it for the build, where this module is bundled. */
 export const DEFAULT_DATA_DIR = process.env.CARS_DATA_DIR || resolve(import.meta.dirname, "../../../data/raw");
 
-const STATUSES: readonly Status[] = ["on_sale", "announced", "discontinued"];
+/** Where `data/images/` lives; CARS_IMAGES_DIR wins, as with the data dir (astro.config.mjs). */
+export const DEFAULT_IMAGES_DIR = process.env.CARS_IMAGES_DIR || resolve(import.meta.dirname, "../../../data/images");
+
+const STATUSES:readonly Status[] = ["on_sale", "announced", "discontinued"];
 const SEGMENTS: readonly Segment[] = [
   "urbano", "compacto", "berlina", "familiar", "suv_pequeno",
   "suv_compacto", "suv_grande", "monovolumen", "furgoneta", "deportivo",
@@ -241,7 +250,24 @@ function readSpecs(block: unknown, warnings: string[]): Specs {
   return s;
 }
 
-function readImages(raw: unknown, warnings: string[]): ModelImage[] {
+const IMAGES_PREFIX = "data/images/";
+
+/** Path of `file` (`data/images/<rest>`) inside the images dir, or null if it is not a plain file under it. */
+export function imageRelPath(file: string): string | null {
+  if (!file.startsWith(IMAGES_PREFIX)) return null;
+  const rest = file.slice(IMAGES_PREFIX.length);
+  return rest === "" || rest.split("/").some((p) => p === ".." || p === "." || p === "") ? null : rest;
+}
+
+function fileExists(path: string): boolean {
+  try {
+    return statSync(path).isFile();
+  } catch {
+    return false;
+  }
+}
+
+function readImages(raw: unknown, warnings: string[], imagesDir: string): ModelImage[] {
   if (raw == null) return [];
   if (!Array.isArray(raw)) {
     warnings.push("images: not a list");
@@ -249,13 +275,19 @@ function readImages(raw: unknown, warnings: string[]): ModelImage[] {
   }
   const out: ModelImage[] = [];
   raw.forEach((img, i) => {
-    if (!isObj(img) || !isStr(img.url) || !isStr(img.source_id) || typeof img.retrieved !== "string") {
-      warnings.push(`images[${i}]: dropped, needs url, source_id and retrieved`);
+    if (!isObj(img) || !isStr(img.file) || !isStr(img.source_url) || !isStr(img.page_url) || !isStr(img.source_id)) {
+      warnings.push(`images[${i}]: dropped, needs file, source_url, page_url and source_id`);
     } else if (!isStr(img.license)) {
       warnings.push(`images[${i}]: dropped, no license (CA-10)`); // no license, no publication
+    } else if (typeof img.retrieved !== "string") {
+      warnings.push(`images[${i}]: dropped, needs retrieved`);
+    } else if (imageRelPath(img.file) === null || !fileExists(join(imagesDir, imageRelPath(img.file)!))) {
+      warnings.push(`images[${i}]: dropped, file does not exist under data/images/`);
     } else {
       out.push({
-        url: img.url,
+        file: img.file,
+        source_url: img.source_url,
+        page_url: img.page_url,
         source_id: img.source_id,
         retrieved: img.retrieved,
         license: img.license,
@@ -291,7 +323,7 @@ function deriveDrivetrains(versions: Version[], specs: Specs): Drivetrain[] {
   return DRIVETRAINS.filter((d) => set.has(d));
 }
 
-export function normalize(raw: unknown, file: string): ModelRecord {
+export function normalize(raw: unknown, file: string, imagesDir: string = DEFAULT_IMAGES_DIR): ModelRecord {
   if (!isObj(raw)) throw new Error("not a YAML mapping");
   if (!isStr(raw.brand) || !isStr(raw.model)) throw new Error("missing brand or model");
   if (!isStr(raw.brand_name)) throw new Error("missing brand_name");
@@ -313,7 +345,7 @@ export function normalize(raw: unknown, file: string): ModelRecord {
     needs_review: raw.needs_review === true,
     versions,
     specs,
-    images: readImages(raw.images, warnings),
+    images: readImages(raw.images, warnings, imagesDir),
     open_questions: Array.isArray(raw.open_questions) ? raw.open_questions.map(String) : [],
     price_from: derivePriceFrom(versions),
     max_range_km: deriveMaxRange(versions, specs),

@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { DEFAULT_DATA_DIR, loadModels, normalize } from "../src/lib/data.ts";
-import { ACME_YAML, acme, sourced } from "./fixtures.ts";
+import { ACME_YAML, acme, imageEntry, pngBytes, sourced } from "./fixtures.ts";
 
 // Fixtures follow the example in docs/architecture/data-model.md; the real YAML in data/ is not used.
 
@@ -139,19 +139,17 @@ test("segment is optional: absent is null without warning; invalid is dropped wi
 
 // --- images -------------------------------------------------------------------------------------
 
-const image = (extra: Record<string, unknown> = {}) => ({
-  url: "https://commons.example/volta.jpg",
-  source_id: "wikimedia-commons",
-  retrieved: "2026-09-20",
-  license: "CC-BY-SA-4.0",
-  attribution: "Photo: A. Author",
-  ...extra,
-});
+// A temp images dir with the one file the entries cite (data/images/acme/volta/front.png).
+const imagesDir = mkdtempSync(join(tmpdir(), "images-"));
+mkdirSync(join(imagesDir, "acme/volta"), { recursive: true });
+writeFileSync(join(imagesDir, "acme/volta/front.png"), pngBytes());
+const image = imageEntry;
+const normImg = (raw: unknown) => normalize(raw, "acme/volta.yaml", imagesDir);
 
-test("images keep license and attribution", () => {
+test("images keep file, page_url, license and attribution", () => {
   const raw = acme();
   raw.images = [image()];
-  const m = norm(raw);
+  const m = normImg(raw);
   assert.deepEqual(m.images, [image()]);
   assert.deepEqual(m.warnings, []);
 });
@@ -159,17 +157,40 @@ test("images keep license and attribution", () => {
 test("an image without attribution gets attribution null", () => {
   const raw = acme();
   raw.images = [image({ attribution: null }), (() => { const i = image(); delete (i as any).attribution; return i; })()];
-  assert.deepEqual(norm(raw).images.map((i) => i.attribution), [null, null]);
+  assert.deepEqual(normImg(raw).images.map((i) => i.attribution), [null, null]);
 });
 
-test("an image without license is not published (CA-10)", () => {
+test("an image without license or source_id is not published (CA-10)", () => {
   const raw = acme();
   const noLicense = image();
   delete (noLicense as any).license;
-  raw.images = [noLicense, image({ license: "  " }), image({ url: "https://commons.example/ok.jpg" })];
-  const m = norm(raw);
-  assert.deepEqual(m.images.map((i) => i.url), ["https://commons.example/ok.jpg"]);
-  assert.equal(m.warnings.length, 2);
+  const noSource = image();
+  delete (noSource as any).source_id;
+  raw.images = [noLicense, image({ license: "  " }), noSource, image({ attribution: "ok" })];
+  const m = normImg(raw);
+  assert.deepEqual(m.images.map((i) => i.attribution), ["ok"]);
+  assert.equal(m.warnings.length, 3);
+});
+
+test("an image whose file does not exist, or lies outside data/images/, is not published", () => {
+  const raw = acme();
+  raw.images = [
+    image({ file: "data/images/acme/volta/missing.png" }),
+    image({ file: "data/images/../raw/acme/volta.yaml" }),
+    image({ file: "/etc/passwd" }),
+    image({ file: "data/images/acme/volta" }),
+  ];
+  const m = normImg(raw);
+  assert.deepEqual(m.images, []);
+  assert.equal(m.warnings.length, 4);
+});
+
+test("the old shape (url, no file) is dropped: ADR-0012 migration pending", () => {
+  const raw = acme();
+  raw.images = [{ url: "https://upload.wikimedia.org/x.jpg", source_id: "wikimedia-commons", retrieved: "2026-09-20", license: "CC0", attribution: null }];
+  const m = normImg(raw);
+  assert.deepEqual(m.images, []);
+  assert.equal(m.warnings.length, 1);
 });
 
 test("images: [] and a missing images key both give no images", () => {

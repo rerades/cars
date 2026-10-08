@@ -139,7 +139,7 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
                 class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3"
               >
                 {cards.map((card, i) => (
-                  <ModelCard card={card} href={`/marcas/${card.key}/`} facts={filters?.facts[i]} />
+                  <ModelCard card={card} href={`/marcas/${card.key}/`} facts={filters?.facts[i]} eager={i < 3} />
                 ))}
               </ul>
             ) : (
