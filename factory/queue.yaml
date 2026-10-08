@@ -184,6 +184,17 @@
     comparaciones se indexan). No decidas cómo se implementa: eso es de una ADR. Cambia la fila
     «Comparador» de «Funcionalidades previstas» de vision.md a PRD-003. No toques web/, docs/design/
     ni factory/."
+- id: adr-0010-ci
+  agent: devops
+  task: "ADR-0010, punto 2: añade al job test de .github/workflows/ci.yml un paso que ejecute node
+    factory/validate-data.ts después de pnpm install (lee ADR-0010, sección Decisión, puntos 2 a 5).
+    El job ya corre en pull_request y en push a main; no cambies eso. El script valida todo data/raw/
+    y data/sources/: los errores salen como anotaciones ::error y ponen la CI en rojo (salida 1); los
+    avisos salen como ::warning y como resumen por marca en GITHUB_STEP_SUMMARY, sin poner nada en
+    rojo. No toques factory/ ni data/. Explica en la PR cómo has comprobado que un error pone el paso
+    en rojo (por ejemplo, ejecutando el script en local sobre una copia con un source_id inventado) y
+    que con los datos actuales sale en verde con avisos. La PR referencia ADR-0010 y dice que cumple
+    la condición (b) del punto 7 de ADR-0011."
 - id: marca-renault-2
   agent: researcher
   task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/. Escribe exactamente el
