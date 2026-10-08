@@ -131,6 +131,59 @@
     compruebe sobre los datos reales que las URL de las fichas son únicas y que cada tarjeta de
     /coches enlaza a una ficha que existe (ya no hay 404). La PR referencia #146 y enumera los RF y
     CA cubiertos."
+- id: issue-180-ci
+  agent: devops
+  task: "Issue #180, parte de DevOps: añade a .github/workflows/ci.yml el job de accesibilidad de ADR-0006
+    (léela, sección Decisión), usando lo que dejó la parte del Desarrollador en web/ (script
+    test:a11y, web/playwright.config.ts y web/e2e/). Un job propio que dependa (needs) del job web,
+    que solo se ejecute en PR que toquen web/ o data/, y que instale dependencias con pnpm, instale
+    Chromium con npx playwright install --with-deps chromium (con caché de los navegadores de
+    Playwright) y ejecute pnpm run test:a11y en web/. Si falla, la CI sale en rojo, pero no se añade
+    como check requerido de la rama protegida: el job informa, no bloquea. No toques web/. La PR
+    referencia #180 y ADR-0006 y explica cómo se comprobó que una violación serious pone el job en
+    rojo."
+- id: issue-41
+  agent: developer
+  task: "Historia #41 (épica #32): test de que ninguna página del catálogo crea cookies ni escribe en
+    localStorage (RNF-5, CA-7). Usa la instalación de Playwright de ADR-0006, sobre el sitio
+    construido; no añadas otro controlador de navegador. Carga /coches con filtros y orden aplicados
+    desde la query string, una página de marca, una de segmento, una de tramo y una página con al
+    menos una tarjeta con imagen. Para la tarjeta con imagen usa datos de prueba (CARS_DATA_DIR, como
+    el resto de web/tests), porque ningún dato real tiene todavía el campo file de ADR-0012. En cada
+    una comprueba que el contexto del navegador no tiene ninguna cookie (de ningún dominio, también de
+    terceros) y que localStorage y sessionStorage están vacíos. Lista en la PR los dominios a los que
+    pide algo la página: según ADR-0012 debe ser solo el nuestro. Lee los comentarios de revisión de
+    la issue #41. La PR referencia #41 y enumera los RF y CA cubiertos."
+- id: prd-004-portada
+  agent: product
+  task: "PRD-004, portada (/). Redacta docs/product/prd/PRD-004-portada.md en status draft, con la
+    estructura de PRD-001 y PRD-002. Hoy / es el borrador de la historia #33
+    (web/src/pages/index.astro): lista todos los modelos con el precio en bruto y el source_id.
+    PRD-001 y PRD-002 miden «≤ 3 interacciones desde la portada», pero ningún PRD dice qué es la
+    portada. Define qué necesita el visitante al llegar a siete3.com: cómo llega en ≤ 3 interacciones
+    al catálogo (/coches y las páginas de marca, segmento y tramo de RF-10 de PRD-001) y a un modelo
+    concreto (ficha de PRD-002), qué cifras o novedades se muestran, si alguna, siempre con su fuente
+    y fecha (ADR-0001), y qué no hace (visión: sin cuentas, sin datos personales, solo lectura).
+    Reutiliza y cita lo que ya definen PRD-001 y PRD-002 (tarjeta, franja «Explorar», orden «Novedad»)
+    en lugar de inventar bloques nuevos. Cada RF con su CA verificable sobre el HTML construido. Lo
+    que no se deduzca de la visión, de los PRD o de las ADR va a Preguntas abiertas, sin suponerlo.
+    Añade la fila «Portada | PRD-004» a «Funcionalidades previstas» de docs/product/vision.md. No
+    toques web/, docs/design/ ni factory/."
+- id: prd-003-comparador
+  agent: product
+  task: "PRD-003, comparador. Redacta docs/product/prd/PRD-003-comparador.md en status draft, con la
+    estructura de PRD-001 y PRD-002; docs/product/vision.md lo lista como pendiente. Define qué
+    necesita el visitante para comparar coches eléctricos con las cifras que ya tenemos con fuente y
+    fecha (docs/architecture/data-model.md: precio, autonomía WLTP, batería, potencia, tracción,
+    carga): qué se compara (modelos o versiones) y cuántos a la vez, cómo elige qué comparar desde el
+    catálogo (PRD-001) y la ficha (PRD-002), cómo se muestra un dato ausente (como ausente, nunca
+    estimado, ADR-0001) y cómo se comparte una comparación sin guardar nada del visitante (visión: sin
+    cuentas ni datos personales; los filtros de PRD-001 guardan el estado en la URL, RF-5). Cada RF
+    con su CA verificable. Lo que no se deduzca de la visión, de los PRD o de las ADR va a Preguntas
+    abiertas, sin suponerlo (por ejemplo: el máximo de elementos, modelos frente a versiones, si las
+    comparaciones se indexan). No decidas cómo se implementa: eso es de una ADR. Cambia la fila
+    «Comparador» de «Funcionalidades previstas» de vision.md a PRD-003. No toques web/, docs/design/
+    ni factory/."
 - id: marca-renault-2
   agent: researcher
   task: "Marca Renault. Fuentes en el registro y modelos en data/raw/renault/. Escribe exactamente el
