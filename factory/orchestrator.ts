@@ -108,6 +108,8 @@ export function nowInTz(cfg: Config): Clock {
 export interface Workspace {
   dir: string;
   branch: string;
+  /** Commit the branch starts from: if HEAD moved, the agent committed by itself. */
+  base: string;
 }
 
 const git = (args: string[], cwd = REPO) => execFileSync("git", args, { cwd, encoding: "utf8" }).trim();
@@ -124,19 +126,21 @@ export function openWorkspace(runId: string, agent: string, repo = REPO): Worksp
   // en lo que escribe el agente ni en su PR.
   const base = git(["branch", "-r", "--list", "origin/main"], repo) ? "origin/main" : "HEAD";
   git(["worktree", "add", "-q", "-b", branch, dir, base], repo);
-  return { dir, branch };
+  return { dir, branch, base: git(["rev-parse", base], repo) };
 }
 
 /**
- * Commitea lo que haya escrito el agente y retira el worktree; la rama se queda.
- * Devuelve false si no escribió nada, en cuyo caso también borra la rama vacía.
+ * Commits whatever the agent left uncommitted and removes the worktree; the branch stays.
+ * Returns false if the agent wrote nothing, and then also deletes the empty branch. Commits the
+ * agent made by itself count as written: a clean status alone used to delete them (run of #112).
  */
 export function closeWorkspace(ws: Workspace, message: string, repo = REPO): boolean {
-  const changed = git(["status", "--porcelain"], ws.dir) !== "";
-  if (changed) {
+  const dirty = git(["status", "--porcelain"], ws.dir) !== "";
+  if (dirty) {
     git(["add", "-A"], ws.dir);
     git(["commit", "-q", "-m", message], ws.dir);
   }
+  const changed = git(["rev-parse", "HEAD"], ws.dir) !== ws.base;
   git(["worktree", "remove", "--force", ws.dir], repo);
   if (!changed) git(["branch", "-q", "-D", ws.branch], repo);
   return changed;
