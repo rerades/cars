@@ -1,3 +1,4 @@
+import { crc32, deflateSync } from "node:zlib";
 import { parse } from "yaml";
 
 /**
@@ -53,6 +54,45 @@ images: []   # sin licencia registrada
 open_questions:
   - "Volta GT: potencia y batería no publicadas en la ficha."
 `;
+
+/** A valid 32x18 grey PNG (no dependency: zlib builds the chunks). */
+export function pngBytes(): Buffer {
+  const w = 32;
+  const h = 18;
+  const chunk = (type: string, data: Buffer) => {
+    const len = Buffer.alloc(4);
+    len.writeUInt32BE(data.length);
+    const body = Buffer.concat([Buffer.from(type), data]);
+    const crc = Buffer.alloc(4);
+    crc.writeUInt32BE(crc32(body));
+    return Buffer.concat([len, body, crc]);
+  };
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(w, 0);
+  ihdr.writeUInt32BE(h, 4);
+  ihdr[8] = 8; // bit depth
+  ihdr[9] = 2; // RGB
+  const row = Buffer.concat([Buffer.from([0]), Buffer.alloc(w * 3, 128)]);
+  const raw = Buffer.concat(Array.from({ length: h }, () => row));
+  return Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    chunk("IHDR", ihdr),
+    chunk("IDAT", deflateSync(raw)),
+    chunk("IEND", Buffer.alloc(0)),
+  ]);
+}
+
+/** An `images` entry in the shape of data-model.md; override or delete keys per test. */
+export const imageEntry = (extra: Record<string, unknown> = {}) => ({
+  file: "data/images/acme/volta/front.png",
+  source_url: "https://upload.wikimedia.org/acme/front.png",
+  page_url: "https://commons.wikimedia.org/wiki/File:Acme_Volta.png",
+  source_id: "wikimedia-commons",
+  retrieved: "2026-09-20",
+  license: "CC-BY-SA-4.0",
+  attribution: "Foto: A. Author, CC BY-SA 4.0",
+  ...extra,
+});
 
 /** A fresh, mutable parse of the example. */
 export const acme = (): Record<string, any> => parse(ACME_YAML);

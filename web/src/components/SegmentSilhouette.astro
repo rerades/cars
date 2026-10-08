@@ -1,0 +1,48 @@
+---
+/**
+ * Segment silhouette (docs/design/siluetas-segmento.md): inline SVG, `currentColor`, decorative.
+ * Takes the segment value or nothing; an unknown value falls back to the generic car, never to an
+ * empty slot. No text inside, so no copy keys (RNF-4). Size comes from `--size-segment-icon`.
+ */
+interface Props {
+  segment?: string | null;
+}
+const { segment } = Astro.props;
+
+const wheels = (xs: [number, number], r: number) => xs.map((cx) => ({ cx, r }));
+const car = (d: string, xs: [number, number], r: number) => ({ d, wheels: wheels(xs, r) });
+
+const SILHOUETTES: Record<string, { d: string; wheels: { cx: number; r: number }[] }> = {
+  urbano: car("M9 34V20L10 18H27L34 25L39 27V34H38A5 5 0 0 0 28 34H20A5 5 0 0 0 10 34Z", [15, 33], 3.5),
+  compacto: car("M6 34V25L9 19H28L35 25L42 27V34H40A5 5 0 0 0 30 34H18A5 5 0 0 0 8 34Z", [13, 35], 3.5),
+  berlina: car("M2 34V27L10 26L15 21H28L35 26L46 28V34H42A5 5 0 0 0 32 34H16A5 5 0 0 0 6 34Z", [11, 37], 3.5),
+  familiar: car("M2 34V24L4 20H29L36 26L46 28V34H42A5 5 0 0 0 32 34H16A5 5 0 0 0 6 34Z", [11, 37], 3.5),
+  suv_pequeno: car("M7 34V20L9 15H28L34 22L41 24V34H39.5A5.5 5.5 0 0 0 28.5 34H19.5A5.5 5.5 0 0 0 8.5 34Z", [14, 34], 4),
+  suv_compacto: car("M4 34V19L7 14H31L37 21L44 23V34H41.5A5.5 5.5 0 0 0 30.5 34H17.5A5.5 5.5 0 0 0 6.5 34Z", [12, 36], 4),
+  suv_grande: car("M2 34V14L4 12H32L38 20L46 22V34H42.5A5.5 5.5 0 0 0 31.5 34H15.5A5.5 5.5 0 0 0 4.5 34Z", [10, 37], 4),
+  monovolumen: car("M4 34V16L6 13H26L42 25L44 27V34H41A5 5 0 0 0 31 34H16A5 5 0 0 0 6 34Z", [11, 36], 3.5),
+  furgoneta: car("M2 34V8H34L40 18L46 22V34H42.5A5.5 5.5 0 0 0 31.5 34H15.5A5.5 5.5 0 0 0 4.5 34Z", [10, 37], 4),
+  deportivo: car("M2 34V29L6 28L16 23H24L31 27L46 30V34H42A5 5 0 0 0 32 34H16A5 5 0 0 0 6 34Z", [11, 37], 3.5),
+};
+const GENERIC = car("M6 34V26L12 25L18 18H30L36 25L42 26V34H40A5 5 0 0 0 30 34H18A5 5 0 0 0 8 34Z", [13, 35], 3.5);
+
+const key = segment && Object.hasOwn(SILHOUETTES, segment) ? segment : "generica";
+const shape = key === "generica" ? GENERIC : SILHOUETTES[key];
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 48 48"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linejoin="round"
+  stroke-linecap="round"
+  aria-hidden="true"
+  focusable="false"
+  data-silhouette={key}
+  style="width: var(--size-segment-icon); height: var(--size-segment-icon)"
+>
+  <path d={shape.d}></path>
+  {shape.wheels.map((w) => <circle cx={w.cx} cy="34" r={w.r}></circle>)}
+</svg>

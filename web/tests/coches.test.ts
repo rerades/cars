@@ -141,7 +141,7 @@ describe("/coches built page", () => {
     assert.match(html, /<title>Coches eléctricos · siete3<\/title>/);
   });
 
-  test("CA-1: one card per model with brand, model, price, range and segment, and no image", () => {
+  test("CA-1: one card per model with brand, model, price, range, segment and a silhouette", () => {
     assert.equal([...resultsOf(html).matchAll(/<li\b/g)].length, 3);
     const t = text(card("Volta"));
     assert.match(t, /Acme/);
@@ -149,8 +149,9 @@ describe("/coches built page", () => {
     assert.match(t, /Desde 39\.990\s€/);
     assert.match(t, /Hasta 520 km WLTP/);
     assert.match(t, /SUV compacto/);
-    // RF-8 is blocked: no image and no empty image slot.
-    assert.doesNotMatch(html, /<img\b|<picture\b|<svg\b|<video\b|background-image/i);
+    // No YAML has an image yet (ADR-0010): the silhouette fills the slot (imagen.test.ts has the image case).
+    assert.doesNotMatch(html, /<img\b|<picture\b|<video\b|background-image/i);
+    assert.match(card("Volta"), /<svg\b[^>]*data-silhouette="suv_compacto"/);
   });
 
   test("CA-1: a card with missing data still renders with 'por confirmar'", () => {

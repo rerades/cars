@@ -173,11 +173,12 @@ ausente (RF-12), no un caso especial de diseño.
 | Reflujo y texto ampliado | 1.4.10, 1.4.4, 1.4.12 | Cumple: sin alto fijo, sin scroll a 320 px |
 
 ## Pendientes (no se deciden en diseño)
-1. **Atribución con enlace.** Si alguna licencia exige enlazar al autor o a la licencia (habitual en
+1. ~~**Atribución con enlace.** Si alguna licencia exige enlazar al autor o a la licencia (habitual en
    Commons), ese enlace quedaría tapado por el pseudo-elemento del enlace de la tarjeta y sería un segundo
    tabulador. Hay que decidir —cuando ADR-0012 (imágenes) fije el formato de `attribution`— si la atribución
    lleva enlace; si lo lleva, va por encima del pseudo-elemento, subrayado, en `brand-600` (6,67) y con zona de
-   `--size-touch`.
+   `--size-touch`.~~ → Resuelto (2026-10-08): ADR-0012, punto 6, enlaza la atribución a `page_url`. Va como dice
+   este punto, implementado en #112.
 2. **Comprobación con lector real** (VoiceOver y NVDA) de cómo se anuncia el `h3 > a` con la marca en un
    bloque: algunos lectores lo leen en dos trozos. No se puede verificar en papel.
 3. **Marca en mayúsculas.** Si Producto quiere «CUPRA» como en el logotipo, tiene que venir así en
