@@ -114,12 +114,6 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
       >
     </div>
   </form>
-  <div class="mt-4 flex flex-col gap-1">
-    <label for="orden" class="text-body">{L.sort}</label>
-    <select id="orden" name="orden" data-sort class={field}>
-      {view.sorts.map((o) => <option value={o.value}>{o.label}</option>)}
-    </select>
-  </div>
 </div>
 
 <script>
@@ -135,7 +129,7 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
     toSearch,
     type Filters,
   } from "../lib/filter.ts";
-  import { comparator, readSortable } from "../lib/sort.ts";
+  import { readSortable, sortModels } from "../lib/sort.ts";
 
   const root = document.querySelector<HTMLElement>("[data-filters-root]");
   if (root) init(root);
@@ -158,15 +152,18 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
     const items = [...document.querySelectorAll<HTMLElement>("[data-model]")].map((el) => ({
       el,
       facts: readFacts((n) => el.getAttribute(n)),
-      sortable: readSortable((n) => el.getAttribute(n)),
+      ...readSortable((n) => el.getAttribute(n)),
     }));
-    const sortSelect = root.querySelector<HTMLSelectElement>("[data-sort]")!;
+    // The order selector lives in the results row (paginas-catalogo.md), outside this panel.
+    const sortRow = document.querySelector<HTMLElement>("[data-sort-row]");
+    const sortSelect = document.querySelector<HTMLSelectElement>("[data-sort]")!;
     const inputs = (name: string) => [...form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`)];
     const select = form.elements.namedItem("autonomia") as HTMLSelectElement;
     const priceMin = form.elements.namedItem("precio_min") as HTMLInputElement;
     const priceMax = form.elements.namedItem("precio_max") as HTMLInputElement;
 
     root.hidden = false;
+    if (sortRow) sortRow.hidden = false;
     document.querySelector<HTMLElement>("[data-no-js]")?.setAttribute("hidden", "");
     if (chips) chips.hidden = false;
 
@@ -228,9 +225,8 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
 
     function update(updateUrl = true) {
       const f = readForm();
-      // Same comparator as the build (sort.ts); appending moves the nodes, hidden ones included.
-      const cmp = comparator(f.sort);
-      list?.append(...[...items].sort((a, b) => cmp(a.sortable, b.sortable)).map(({ el }) => el));
+      // Same sortModels as the build (sort.ts); appending moves the nodes, hidden ones included.
+      list?.append(...sortModels(items, f.sort).map(({ el }) => el));
       const shown = items.filter(({ el, facts }) => {
         const ok = matches(facts, f);
         el.hidden = !ok;

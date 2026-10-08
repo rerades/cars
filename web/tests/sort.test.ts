@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
@@ -95,7 +95,6 @@ describe("sort (sort.ts)", () => {
 describe("/coches built page: order", () => {
   let root: string;
   let html: string;
-  let js: string;
 
   before(() => {
     root = mkdtempSync(join(tmpdir(), "cars-web-sort-"));
@@ -110,8 +109,6 @@ describe("/coches built page: order", () => {
       stdio: "pipe",
     });
     html = readFileSync(join(root, "out/coches/index.html"), "utf8");
-    const dir = join(root, "out/_astro");
-    js = readdirSync(dir).filter((f) => f.endsWith(".js")).map((f) => readFileSync(join(dir, f), "utf8")).join("\n");
   });
   after(() => rmSync(root, { recursive: true, force: true }));
 
@@ -139,9 +136,12 @@ describe("/coches built page: order", () => {
     assert.doesNotMatch(zzz ?? "", /data-price="/);
   });
 
-  test("the shipped script reorders the cards and writes the order to the URL", () => {
-    assert.match(js, /orden/);
-    assert.match(js, /append/);
-    assert.match(js, /replaceState/);
+  // The browser reorders with sortModels over readSortable, already covered by "the data attributes of
+  // the cards read back to the same order". Only the list.append() wiring in CatalogFilters is untested.
+  test("the order selector sits in the results row, after the h2 'Modelos', hidden without JS", () => {
+    const h2 = html.indexOf('<h2 id="resultados"');
+    assert.ok(h2 > html.indexOf("data-filters-root"), "the results come after the filter panel");
+    assert.ok(html.indexOf('id="orden"') > h2, "the selector follows the h2, outside the filter panel");
+    assert.match(html, /<div[^>]*data-sort-row[^>]*hidden/);
   });
 });
