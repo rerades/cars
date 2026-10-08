@@ -129,6 +129,7 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
     toSearch,
     type Filters,
   } from "../lib/filter.ts";
+  import { readSortable, sortModels } from "../lib/sort.ts";
 
   const root = document.querySelector<HTMLElement>("[data-filters-root]");
   if (root) init(root);
@@ -151,13 +152,18 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
     const items = [...document.querySelectorAll<HTMLElement>("[data-model]")].map((el) => ({
       el,
       facts: readFacts((n) => el.getAttribute(n)),
+      ...readSortable((n) => el.getAttribute(n)),
     }));
+    // The order selector lives in the results row (paginas-catalogo.md), outside this panel.
+    const sortRow = document.querySelector<HTMLElement>("[data-sort-row]");
+    const sortSelect = document.querySelector<HTMLSelectElement>("[data-sort]")!;
     const inputs = (name: string) => [...form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`)];
     const select = form.elements.namedItem("autonomia") as HTMLSelectElement;
     const priceMin = form.elements.namedItem("precio_min") as HTMLInputElement;
     const priceMax = form.elements.namedItem("precio_max") as HTMLInputElement;
 
     root.hidden = false;
+    if (sortRow) sortRow.hidden = false;
     document.querySelector<HTMLElement>("[data-no-js]")?.setAttribute("hidden", "");
     if (chips) chips.hidden = false;
 
@@ -172,6 +178,7 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
       q.set("autonomia", select.value);
       q.set("precio_min", priceMin.value.trim());
       q.set("precio_max", priceMax.value.trim());
+      q.set("orden", sortSelect.value);
       return parseFilters(q.toString());
     }
 
@@ -186,6 +193,7 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
       select.value = f.minRangeKm === null ? "" : String(f.minRangeKm);
       priceMin.value = f.priceMin === null ? "" : String(f.priceMin);
       priceMax.value = f.priceMax === null ? "" : String(f.priceMax);
+      sortSelect.value = f.sort;
     }
 
     function renderChips(f: Filters) {
@@ -217,6 +225,8 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
 
     function update(updateUrl = true) {
       const f = readForm();
+      // Same sortModels as the build (sort.ts); appending moves the nodes, hidden ones included.
+      list?.append(...sortModels(items, f.sort).map(({ el }) => el));
       const shown = items.filter(({ el, facts }) => {
         const ok = matches(facts, f);
         el.hidden = !ok;
@@ -256,6 +266,7 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
 
     form.addEventListener("input", () => update());
     form.addEventListener("change", () => update());
+    sortSelect.addEventListener("change", () => update());
     clearBtn.addEventListener("click", clearAll);
     document.querySelector("[data-empty-clear]")?.addEventListener("click", clearAll);
     toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));

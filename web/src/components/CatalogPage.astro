@@ -112,7 +112,24 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
       <div class:list={["mt-8", filters && "lg:grid lg:grid-cols-[18rem_1fr] lg:gap-8"]}>
         {filters && <CatalogFilters view={filters.view} />}
         <section aria-labelledby="resultados" class="mt-8 lg:mt-0">
-          <h2 id="resultados" tabindex="-1" class="text-section">{t("resultados.titulo")}</h2>
+          <div class="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
+            <h2 id="resultados" tabindex="-1" class="text-section">{t("resultados.titulo")}</h2>
+            {
+              filters && (
+                <div data-sort-row hidden class="flex flex-col gap-1 lg:flex-row lg:items-center lg:gap-2">
+                  <label for="orden" class="text-body">{filters.view.labels.sort}</label>
+                  <select
+                    id="orden"
+                    name="orden"
+                    data-sort
+                    class="min-h-11 w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900 lg:w-auto"
+                  >
+                    {filters.view.sorts.map((o) => <option value={o.value}>{o.label}</option>)}
+                  </select>
+                </div>
+              )
+            }
+          </div>
           {filters && <div data-chips hidden class="mt-2 flex flex-wrap gap-2" role="group" aria-label={filters.view.labels.active}></div>}
           {
             cards.length > 0 ? (

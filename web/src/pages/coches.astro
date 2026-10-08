@@ -1,14 +1,16 @@
 ---
 import CatalogPage from "../components/CatalogPage.astro";
 import { cardView } from "../lib/card.ts";
-import { countLabel, exploreGroups } from "../lib/catalog.ts";
+import { countLabel, exploreGroups, sortByNovelty } from "../lib/catalog.ts";
+import { sortAttrs } from "../lib/sort.ts";
 import { loadModels } from "../lib/data.ts";
 import { summarize } from "../lib/derived.ts";
 import { factAttrs } from "../lib/filter.ts";
 import { filterPanelView } from "../lib/filter-view.ts";
 import { t } from "../lib/i18n.ts";
 
-const { models } = loadModels();
+// The served HTML is already in the default order ("Novedad", RF-3, CA-16); the browser reorders from there.
+const models = sortByNovelty(loadModels().models);
 ---
 
 <CatalogPage
@@ -21,6 +23,6 @@ const { models } = loadModels();
   currentHref="/coches/"
   filters={{
     view: filterPanelView(models),
-    facts: models.map((m) => factAttrs(summarize(m))),
+    facts: models.map((m) => ({ ...factAttrs(summarize(m)), ...sortAttrs(summarize(m)) })),
   }}
 />

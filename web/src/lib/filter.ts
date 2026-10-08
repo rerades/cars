@@ -1,5 +1,6 @@
 import type { Drivetrain, Segment, Status } from "./data.ts";
 import type { ModelSummary } from "./derived.ts";
+import { DEFAULT_SORT, parseSort, type SortKey } from "./sort.ts";
 
 /**
  * Catalog filters of /coches (docs/design/filtros-catalogo.md). Pure: no DOM, no texts. The same
@@ -23,6 +24,8 @@ export interface Filters {
   drivetrains: Drivetrain[];
   /** null = "Todos". */
   status: Status | null;
+  /** Order of the results (RF-3). Not a filter: it does not count as active. */
+  sort: SortKey;
 }
 
 export const SEGMENTS: readonly Segment[] = [
@@ -49,6 +52,7 @@ export const NO_FILTERS: Filters = {
   minRangeKm: null,
   drivetrains: [],
   status: null,
+  sort: DEFAULT_SORT,
 };
 
 const list = (v: string | null): string[] => (v ? v.split(",").map((s) => s.trim()).filter(Boolean) : []);
@@ -70,6 +74,7 @@ export function parseFilters(search: string): Filters {
       list(q.get("traccion")).flatMap((p) => DRIVETRAINS.filter((d) => DRIVETRAIN_PARAM[d] === p)),
     ),
     status: status ?? null,
+    sort: parseSort(q.get("orden")),
   };
 }
 
@@ -83,6 +88,7 @@ export function toSearch(f: Filters): string {
   if (f.minRangeKm !== null) q.set("autonomia", String(f.minRangeKm));
   if (f.drivetrains.length) q.set("traccion", f.drivetrains.map((d) => DRIVETRAIN_PARAM[d]).join(","));
   if (f.status) q.set("estado", STATUS_PARAM[f.status]);
+  if (f.sort !== DEFAULT_SORT) q.set("orden", f.sort);
   const s = q.toString().replace(/%2C/g, ",");
   return s ? `?${s}` : "";
 }
