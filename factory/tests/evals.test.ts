@@ -5,7 +5,8 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
-import { changedFiles, runEvals } from "../evals.ts";
+import { changedFiles, runEvals, validateData } from "../evals.ts";
+import { madridToday, summary } from "../validate-data.ts";
 import { clock } from "../orchestrator.ts";
 
 const TODAY = "2026-09-23";
@@ -199,4 +200,89 @@ test("dos ramas que dan de alta fuentes distintas se rebasan sin conflicto (#164
   git("rebase", "-q", "a"); // throws on a conflict
   assert.deepEqual(readdirSync(join(dir, "data", "sources")).sort(), ["acme-es.yaml", "cupra-es.yaml", "zeta-es.yaml"]);
   rmSync(dir, { recursive: true, force: true });
+});
+
+describe("validateData (ADR-0010)", () => {
+  /** Writes a whole data/ tree and validates all of it, as the CI does. */
+  function validate(files: Record<string, string | Buffer>, today = TODAY) {
+    const dir = mkdtempSync(join(tmpdir(), "validate-"));
+    for (const [f, body] of Object.entries(files)) {
+      mkdirSync(dirname(join(dir, f)), { recursive: true });
+      writeFileSync(join(dir, f), body);
+    }
+    try {
+      return validateData(dir, today);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  }
+  const messages = (r: { warnings: { message: string }[] }) => r.warnings.map((w) => w.message);
+
+  test("the data-model example and its registry pass with nothing to say", () => {
+    assert.deepEqual(validate({ ...SOURCES, [VOLTA]: EXAMPLE }), { checked: 3, errors: [], warnings: [] });
+  });
+
+  test("it checks every file, not just changed ones: a file citing a missing source fails", () => {
+    const r = validate({ [CUPRA]: SOURCES[CUPRA], [VOLTA]: EXAMPLE });
+    assert.ok(r.errors.some((e) => /source_id acme-es is not in the registry/.test(e)));
+  });
+
+  test("the old image shape only warns; mixing it with the new keys still fails", () => {
+    const old = EXAMPLE.replace("images: []", "images: [{url: x, source_id: acme-es, retrieved: 2026-09-20, license: CC0, attribution: null}]");
+    const r = validate({ ...SOURCES, [VOLTA]: old });
+    assert.deepEqual(r.errors, []);
+    assert.match(messages(r).join(), /images\[0\]: old shape \(url\)/);
+    const mixed = old.replace("{url: x,", "{url: x, file: x, source_url: x, page_url: x,");
+    assert.match(validate({ ...SOURCES, [VOLTA]: mixed }).errors.join(), /url cannot be mixed/);
+  });
+
+  test("point 5 warnings: stale price and source, unusable source, needs_review, orphan image", () => {
+    const broken = SOURCES["data/sources/acme-es.yaml"] + "status: broken\n";
+    const r = validate({
+      ...SOURCES,
+      "data/sources/acme-es.yaml": broken,
+      [VOLTA]: EXAMPLE.replace("needs_review: false", "needs_review: true"),
+      "data/images/acme/volta/old.png": "x",
+      "data/images/.gitkeep": "",
+    }, "2026-11-10");
+    assert.deepEqual(r.errors, []);
+    const all = messages(r).join("\n");
+    assert.match(all, /versions\[0\]\.price\.retrieved 2026-09-20 is older than 45 days/);
+    assert.match(all, /data\/sources\/acme-es\.yaml: last_verified 2026-09-20 is older than 45 days/);
+    assert.match(all, /status: source acme-es is broken in the registry/);
+    assert.match(all, /needs_review is true/);
+    assert.match(all, /data\/images\/acme\/volta\/old\.png: not cited/);
+    assert.doesNotMatch(all, /gitkeep/);
+    assert.ok(r.warnings.filter((w) => w.stale).every((w) => /older than/.test(w.message)));
+  });
+
+  test("45 days is still fresh, 46 is stale", () => {
+    const stale = (today: string) => validate({ ...SOURCES, [VOLTA]: EXAMPLE }, today).warnings.some((w) => w.file === VOLTA && w.stale);
+    assert.equal(stale("2026-11-04"), false);
+    assert.equal(stale("2026-11-05"), true);
+  });
+
+  test("today is Madrid's date: at 00:30 in Spain, UTC is still yesterday", () => {
+    assert.equal(madridToday(new Date("2026-10-07T22:30:00Z")), "2026-10-08");
+    assert.equal(madridToday(new Date("2026-01-15T23:30:00Z")), "2026-01-16");
+  });
+
+  test("the summary lists overdue brands and groups warnings by brand", () => {
+    const md = summary({
+      checked: 3,
+      errors: [],
+      warnings: [
+        { file: VOLTA, message: `${VOLTA}: versions[0].price.retrieved 2026-09-20 is older than 45 days`, stale: true },
+        { file: "data/sources/acme-es.yaml", message: "data/sources/acme-es.yaml: x", stale: false },
+      ],
+    });
+    assert.match(md, /\*\*Marcas vencidas\*\* \(refresco mensual\): acme/);
+    assert.match(md, /### acme\n- data\/raw\/acme\/volta\.yaml/);
+    assert.match(md, /### registro\n- data\/sources\/acme-es\.yaml: x/);
+  });
+
+  test("the repo's real data/ has no errors", () => {
+    const repo = join(import.meta.dirname, "..", "..");
+    assert.deepEqual(validateData(repo, clock(new Date(), "Europe/Madrid").day).errors, []);
+  });
 });

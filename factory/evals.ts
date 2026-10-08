@@ -1,10 +1,11 @@
 /**
  * Deterministic evals run on what an agent wrote, before its branch is committed.
  * See docs/architecture/adr/0004-trazas-y-evals.md. Each check returns its failures.
+ * validateData runs the same checks over all of data/ for the CI (ADR-0010).
  */
 import { execFileSync } from "node:child_process";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { join, sep } from "node:path";
 import { parse } from "yaml";
 import { imageProblem } from "./fetch-image.ts";
 
@@ -118,6 +119,8 @@ const SPECS = ["wltp_max_km", "power_max_kw", "dc_max_kw", "ac_max_kw", "battery
 const IMAGE = ["file", "source_url", "page_url", "source_id", "retrieved", "license", "attribution"];
 /** ADR-0010, point 14: the pre-ADR-0012 key, accepted only until the migration; it fails here, in the factory eval. */
 const OLD_IMAGE_KEY = "url";
+/** Marks the old-shape failure, which validateData turns into a warning (ADR-0010, point 14.1). */
+const OLD_SHAPE = "old shape (url)";
 
 const positive = (v: unknown) => typeof v === "number" && v > 0;
 const positiveInt = (v: unknown) => Number.isInteger(v) && (v as number) > 0;
@@ -211,7 +214,7 @@ const rawShape: Check = (ctx) => {
       keys(img, [...IMAGE, OLD_IMAGE_KEY], `${at}.`);
       if (OLD_IMAGE_KEY in img) {
         if (["file", "source_url", "page_url"].some((k) => k in img)) return fail(`${at}: url cannot be mixed with file, source_url and page_url`);
-        return fail(`${at}: old shape (url); download it with factory/fetch-image.ts and write file, source_url and page_url (ADR-0010, point 13)`);
+        return fail(`${at}: ${OLD_SHAPE}; download it with factory/fetch-image.ts and write file, source_url and page_url (ADR-0010, point 13)`);
       }
       for (const k of ["file", "source_url", "page_url", "source_id", "retrieved", "license"]) if (!img[k]) fail(`${at}.${k}: missing`);
       if (!("attribution" in img)) fail(`${at}.attribution: missing (write null if the license asks for none)`);
@@ -253,4 +256,99 @@ export function runEvals(agent: string, dir: string, files: string[], paths: str
   const ctx = { dir, files, writePaths: paths, today };
   const results = [writePaths, ...(CHECKS[agent] ?? [])].map((check) => check(ctx));
   return { passed: results.filter((r) => !r.length).length, failed: results.flat() };
+}
+
+// --------------------------------------------------------------------------- whole-data validation
+
+/** ADR-0010, point 5: a price or a source not re-read for longer than this only warns. */
+export const STALE_DAYS = 45;
+const DAY_MS = 86_400_000;
+
+export interface DataWarning {
+  file: string;
+  message: string;
+  /** Age warning: its brand is "overdue" for the monthly refresh. */
+  stale: boolean;
+}
+
+export interface DataReport {
+  checked: number;
+  errors: string[];
+  warnings: DataWarning[];
+}
+
+/** Repo-relative YAML files under `sub`, at any depth (rawShape reports a wrong depth). */
+function yamlFiles(dir: string, sub: string): string[] {
+  const root = join(dir, sub);
+  if (!existsSync(root)) return [];
+  return (readdirSync(root, { recursive: true }) as string[])
+    .filter((f) => /\.ya?ml$/.test(f))
+    .map((f) => `${sub}/${f.split(sep).join("/")}`)
+    .sort();
+}
+
+/** ADR-0010, point 5 (plus 14): what only warns. Never used by the factory eval to reject. */
+function dataWarnings(ctx: Ctx): DataWarning[] {
+  const out: DataWarning[] = [];
+  const days = (d: unknown) =>
+    typeof d === "string" && !isNaN(Date.parse(d)) ? (Date.parse(ctx.today) - Date.parse(d)) / DAY_MS : 0;
+  const unusable = new Map<string, string>();
+  for (const file of ctx.files.filter(isSource)) {
+    const s = readYaml(ctx, file).data;
+    if (!s || typeof s !== "object") continue;
+    if (s.status === "broken" || s.status === "deprecated") unusable.set(s.id, s.status);
+    if (days(s.last_verified) > STALE_DAYS) {
+      out.push({ file, message: `${file}: last_verified ${s.last_verified} is older than ${STALE_DAYS} days`, stale: true });
+    }
+  }
+
+  const cited = new Set<string>();
+  for (const file of ctx.files.filter((f) => f.startsWith("data/raw/"))) {
+    const data = readYaml(ctx, file).data;
+    if (!data || typeof data !== "object") continue;
+    const warn = (message: string, stale = false) => out.push({ file, message: `${file}: ${message}`, stale });
+    if (data.needs_review === true) warn("needs_review is true: not published until a person clears it (RF-13)");
+    (Array.isArray(data.versions) ? data.versions : []).forEach((v: any, i: number) => {
+      const r = v?.price?.retrieved;
+      if (days(r) > STALE_DAYS) warn(`versions[${i}].price.retrieved ${r} is older than ${STALE_DAYS} days`, true);
+    });
+    for (const img of Array.isArray(data.images) ? data.images : []) if (img?.file) cited.add(String(img.file));
+    const walk = (node: unknown, path: string) => {
+      if (Array.isArray(node)) return node.forEach((n, i) => walk(n, `${path}[${i}]`));
+      if (!node || typeof node !== "object") return;
+      const o = node as Record<string, unknown>;
+      const status = typeof o.source_id === "string" ? unusable.get(o.source_id) : undefined;
+      if (status) warn(`${path || "."}: source ${o.source_id} is ${status} in the registry`);
+      for (const [k, v] of Object.entries(o)) walk(v, path ? `${path}.${k}` : k);
+    };
+    walk(data, "");
+  }
+
+  // The Researcher cannot delete files (ADR-0010, point 14): an orphan image only warns.
+  const images = join(ctx.dir, "data", "images");
+  if (existsSync(images)) {
+    for (const f of readdirSync(images, { recursive: true }) as string[]) {
+      const rel = `data/images/${f.split(sep).join("/")}`;
+      if (rel.split("/").pop()!.startsWith(".") || !statSync(join(images, f)).isFile() || cited.has(rel)) continue;
+      out.push({ file: rel, message: `${rel}: not cited by any data/raw file`, stale: false });
+    }
+  }
+  return out;
+}
+
+/**
+ * ADR-0010, point 1: the researcher checks over every data/raw/ file and every source, for the CI.
+ * Errors make the CI red; the old image shape and the point 5 findings are warnings.
+ */
+export function validateData(dir: string, today: string): DataReport {
+  const files = [...yamlFiles(dir, "data/raw"), ...yamlFiles(dir, SOURCES)];
+  const ctx: Ctx = { dir, files, writePaths: [], today };
+  const errors: string[] = [];
+  const warnings: DataWarning[] = [];
+  for (const f of [registry, rawData, rawShape].flatMap((check) => check(ctx))) {
+    if (f.includes(`: ${OLD_SHAPE};`)) warnings.push({ file: f.slice(0, f.indexOf(":")), message: f, stale: false });
+    else errors.push(f);
+  }
+  warnings.push(...dataWarnings(ctx));
+  return { checked: files.length, errors, warnings };
 }
