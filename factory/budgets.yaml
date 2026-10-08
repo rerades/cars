@@ -15,15 +15,15 @@ global:
   timezone: Europe/Madrid        # una tarea en curso a las 07:00 termina; no se lanzan nuevas
   default_model: sonnet
   period: monthly            # daily | weekly | monthly
-  max_usd_per_period: 50     # techo total de la factoría (USD-equivalentes); 20 -> 30 on 2026-09-27 for the Opus trial; 30 -> 50 on 2026-09-29
+  max_usd_per_period: 200    # techo total de la factoría (USD-equivalentes); 20 -> 30 on 2026-09-27; 30 -> 50 on 2026-09-29; 50 -> 200 on 2026-10-08: the budget is now 200 EUR/month, kept at 200 USD-eq (below the EUR value)
   stop_file: factory/STOP    # si existe, no se lanzan tareas nuevas
   auto_pr: true              # al terminar bien, sube la rama y abre la PR (nadie la ha revisado)
 
 agents:
-  # suma asignada: 40 USD de los 50 del tope global (10 sin asignar): ningún agente puede agotarlo solo
+  # suma asignada: 175 USD de los 200 del tope global (25 sin asignar): ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
-    max_usd_per_period: 7    # 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
+    max_usd_per_period: 40   # 7 -> 40 on 2026-10-08: brand data, per-brand image migration and the monthly refresh (ADR-0010); earlier: 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
     max_usd_per_run: 1.50   # 1.00 -> 1.50 on 2026-09-29: Mercedes-Benz (8 models) was cut at 1.02
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
@@ -33,7 +33,7 @@ agents:
 
   product:
     max_runs_per_day: 1
-    max_usd_per_period: 2
+    max_usd_per_period: 10   # 2 -> 10 on 2026-10-08
     max_usd_per_run: 0.50
     max_turns_per_run: 15
     api_key_env: PRODUCT_API_KEY
@@ -43,7 +43,7 @@ agents:
 
   planner:
     max_runs_per_day: 1
-    max_usd_per_period: 1
+    max_usd_per_period: 8   # 1 -> 8 on 2026-10-08: breaking down the next PRDs
     max_usd_per_run: 0.60   # 0.30 cortó el troceo de PRD-001 al final, con las historias ya abiertas
     max_turns_per_run: 25   # 15 cortó la revisión de la épica #32 (10 historias) antes del resumen
     api_key_env: PLANNER_API_KEY
@@ -54,7 +54,7 @@ agents:
   architect:
     model: claude-opus-5-5   # kept after the #80 trial (2026-10-06): every run finished, ~0.89 USD per finished task
     max_runs_per_day: 2
-    max_usd_per_period: 6   # 3 -> 8 on 2026-09-27: room for ~10 Opus runs to compare against Sonnet (#80); 8 -> 6 on 2026-09-29, 2 to researcher
+    max_usd_per_period: 15   # 6 -> 15 on 2026-10-08 (Opus); earlier: 3 -> 8 on 2026-09-27: room for ~10 Opus runs to compare against Sonnet (#80); 8 -> 6 on 2026-09-29, 2 to researcher
     max_usd_per_run: 1.50   # 0.75 -> 1.50 on 2026-09-27: Opus is 2x per token; a cut run would skew the trial
     max_turns_per_run: 20
     api_key_env: ARCHITECT_API_KEY
@@ -64,7 +64,7 @@ agents:
 
   developer:
     max_runs_per_day: 4
-    max_usd_per_period: 6   # 3 -> 6 on 2026-09-29: stories #34, #35 and #38 queued at up to 1.50 each
+    max_usd_per_period: 50   # 6 -> 50 on 2026-10-08: PRD-002 stories and what follows; earlier: 3 -> 6 on 2026-09-29: stories #34, #35 and #38 queued at up to 1.50 each
     max_usd_per_run: 1.50   # la #33 levanta el proyecto entero; 1.00 se queda corto
     max_turns_per_run: 40
     api_key_env: DEVELOPER_API_KEY
@@ -74,7 +74,7 @@ agents:
 
   devops:
     max_runs_per_day: 1
-    max_usd_per_period: 1
+    max_usd_per_period: 7   # 1 -> 7 on 2026-10-08
     max_usd_per_run: 0.40
     max_turns_per_run: 15
     api_key_env: DEVOPS_API_KEY
@@ -87,7 +87,7 @@ agents:
   designer:
     model: claude-opus-5-5   # kept after the #80 trial (2026-10-06): every run finished, ~0.89 USD per finished task
     max_runs_per_day: 2   # 2026-09-27: second run to test the isolated launch
-    max_usd_per_period: 7   # 2 -> 7 on 2026-09-27: room for ~5 Opus runs to compare against Sonnet (#80)
+    max_usd_per_period: 20   # 7 -> 20 on 2026-10-08 (Opus); earlier: 2 -> 7 on 2026-09-27: room for ~5 Opus runs to compare against Sonnet (#80)
     max_usd_per_run: 2.00   # 1.00 -> 2.00 on 2026-09-27: Opus is 2x per token; the Sonnet rework already reached 0.77
     max_turns_per_run: 20
     api_key_env: DESIGNER_API_KEY
@@ -97,7 +97,7 @@ agents:
 
   reviewer:
     max_runs_per_day: 2
-    max_usd_per_period: 10   # 1 -> 3 on 2026-09-27; 3 -> 10 on 2026-09-29: every open PR each night, ~0.25-0.30 per PR
+    max_usd_per_period: 25   # 10 -> 25 on 2026-10-08: one review per open PR, more PRs per night; earlier: 1 -> 3 on 2026-09-27; 3 -> 10 on 2026-09-29: every open PR each night, ~0.25-0.30 per PR
     max_usd_per_run: 1.50   # 0.50 -> 1.50 on 2026-09-29: one run reviews every open agent/* PR (~0.25-0.30 each)
     max_turns_per_run: 60   # 20 -> 60 on 2026-09-29: several PRs per run
     api_key_env: REVIEWER_API_KEY
