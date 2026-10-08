@@ -7,5 +7,7 @@ import { resolve } from "node:path";
 process.env.CARS_DATA_DIR ||= resolve(import.meta.dirname, "../data/raw");
 
 export default defineConfig({
+  // Production domain (ADR-0009): canonical URLs are built from it.
+  site: "https://siete3.com",
   vite: { plugins: [tailwindcss()] },
 });
