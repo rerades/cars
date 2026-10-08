@@ -190,7 +190,9 @@ describe("/coches filter panel in the built page", () => {
   });
 
   test("CA-13: canonical to /coches without query string, no cookies or storage", () => {
-    assert.match(html, /<link rel="canonical" href="\/coches"/);
+    assert.match(html, /<link rel="canonical" href="https:\/\/siete3\.com\/coches\/"/);
+    assert.doesNotMatch(html, /rel="canonical" href="[^"]*\?/);
+    assert.doesNotMatch(html, /noindex/);
     assert.doesNotMatch(js + html, /localStorage|sessionStorage|document\.cookie/);
   });
 

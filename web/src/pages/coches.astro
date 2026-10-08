@@ -22,6 +22,5 @@ const { models } = loadModels();
   filters={{
     view: filterPanelView(models),
     facts: models.map((m) => factAttrs(summarize(m))),
-    canonical: "/coches",
   }}
 />

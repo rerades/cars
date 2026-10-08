@@ -33,11 +33,12 @@ interface Props {
     view: FilterPanelView;
     /** Data attributes of each card, same order as `cards` (filter.ts, factAttrs). */
     facts: Record<string, string>[];
-    /** Canonical path, without query string (CA-13). */
-    canonical: string;
   };
 }
 const { title, intro, count, cards, emptyText, explore, currentHref, emptyLink = false, filters } = Astro.props;
+
+// Absolute canonical URL of the page itself, as served (trailing slash), never with a query string (CA-13).
+const canonical = new URL(currentHref, Astro.site).href;
 
 const site = t("sitio.nombre");
 const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio: site }) : title;
@@ -48,7 +49,7 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{documentTitle}</title>
-    {filters && <link rel="canonical" href={filters.canonical} />}
+    <link rel="canonical" href={canonical} />
   </head>
   <body>
     <a

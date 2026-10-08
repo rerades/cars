@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
 import { stringify } from "yaml";
 import { exploreGroups, pricePages, rangePages, segmentPages } from "../src/lib/catalog.ts";
-import { normalize, type ModelRecord } from "../src/lib/data.ts";
+import { loadModels, normalize, type ModelRecord } from "../src/lib/data.ts";
 import { sourced } from "./fixtures.ts";
 
 const WEB = join(import.meta.dirname, "..");
@@ -173,6 +173,43 @@ describe("segment, price and range built pages", () => {
     );
     assert.match(intro(page("segmentos", "urbano")), /Solo aparecen los modelos cuyo segmento está confirmado\.$/);
     assert.match(intro(page("precio", "hasta-30000-euros")), /Precio con oferta/);
+  });
+
+  /** Catalog pages of the build: served index.html carrying the "Explorar" strip (model sheets and `/` do not). */
+  const catalogPaths = () =>
+    (readdirSync(out, { recursive: true, encoding: "utf8" }) as string[])
+      .filter((f) => f.endsWith("index.html") && !f.startsWith("_astro"))
+      .filter((f) => readFileSync(join(out, f), "utf8").includes("data-explore"))
+      .map((f) => "/" + f.slice(0, -"index.html".length))
+      .sort();
+
+  test("CA-12d: the catalog pages are /coches, one per brand, one per segment with models and the 5 bands; no other", () => {
+    const { models } = loadModels(join(root, "data"));
+    const brands = [...new Set(models.map((m) => m.brand))].map((b) => `/marcas/${b}/`);
+    const segments = [...new Set(models.flatMap((m) => (m.segment ? [m.segment.value] : [])))].map(
+      (s) => `/segmentos/${s.replaceAll("_", "-")}/`,
+    );
+    const bands = [
+      "/precio/hasta-30000-euros/",
+      "/precio/de-30000-a-45000-euros/",
+      "/precio/mas-de-45000-euros/",
+      "/autonomia/mas-de-400-km/",
+      "/autonomia/mas-de-500-km/",
+    ];
+    assert.ok(brands.length > 0 && segments.length > 0);
+    assert.deepEqual(catalogPaths(), ["/coches/", ...brands, ...segments, ...bands].sort());
+  });
+
+  test("CA-13: every catalog page carries an absolute canonical to its own served URL, without query string", () => {
+    const paths = catalogPaths();
+    assert.ok(paths.length > 1);
+    for (const path of paths) {
+      const html = readFileSync(join(out, path, "index.html"), "utf8");
+      const links = [...html.matchAll(/<link\b[^>]*rel="canonical"[^>]*>/g)].map((m) => m[0]);
+      assert.equal(links.length, 1, `${path}: exactly one canonical`);
+      assert.match(links[0], new RegExp(`href="https://siete3\\.com${path}"`), path);
+      assert.doesNotMatch(html, /noindex/);
+    }
   });
 
   test("Explorar: <nav> with its h2, links only to built pages, current page marked", () => {
