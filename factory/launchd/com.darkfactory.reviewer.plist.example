@@ -13,7 +13,7 @@
     <string>/opt/homebrew/bin/node</string>
     <string>/Users/USUARIO/_DEV/cars/factory/run.ts</string>
     <string>reviewer</string>
-    <string>Revisa todas las PR abiertas de ramas agent/* que aún no tengan tu revisión (ninguna etiqueta review:* ni comentario que empiece por «🏭 Veredicto» o «Veredicto»). Búscalas con gh pr list y revísalas por este orden: developer, architect, designer, product, researcher; y dentro de cada agente, de la más antigua a la más nueva. Revisa cada una entera según tus instrucciones y publica su comentario antes de pasar a la siguiente. Si se te acaba el presupuesto, las que queden se revisan la noche siguiente. Si no hay ninguna pendiente, no revises nada y dilo en el resultado.</string>
+    <string>Revisa todas las PR abiertas de ramas agent/* que aún no tengan tu revisión (ninguna etiqueta review:* ni comentario que empiece por «🏭 Veredicto» o «Veredicto»). Búscalas con gh pr list y revísalas todas, sea cual sea el agente, por este orden: developer, architect, designer, product, researcher y después cualquier otro agente (devops incluido); y dentro de cada agente, de la más antigua a la más nueva. Revisa cada una entera según tus instrucciones y publica su comentario antes de pasar a la siguiente. Si se te acaba el presupuesto, las que queden se revisan la noche siguiente. Si no hay ninguna pendiente, no revises nada y dilo en el resultado.</string>
   </array>
   <key>EnvironmentVariables</key>
   <dict><key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string></dict>
