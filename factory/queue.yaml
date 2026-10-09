@@ -334,3 +334,23 @@
     queden resueltas. Sigue tus instrucciones de imágenes (.claude/agents/researcher.md) y ADR-0010,
     sección «Imágenes», puntos 12 y 13. No cambies ningún otro dato del fichero salvo retrieved de
     las imágenes; no toques versiones, precios ni specs."
+- id: marca-tesla-2
+  agent: researcher
+  task: "Marca Tesla, sin precio. Repetición de marca-tesla, que falló porque tesla.com responde 403 a
+    toda lectura automática, también a robots.txt: no intentes leer tesla.com ni ninguna web de
+    Tesla, y no busques rodeos (ADR-0001, regla 6). Modelos en data/raw/tesla/ con el esquema de
+    docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo. (1) Specs:
+    lanza node factory/fetch-idae.ts TESLA y toma de su JSON wltp_km, power_kw y battery_kwh (basis:
+    unknown) de cada versión, con source_id idae-es, tier T2 y como url la source_url del JSON; nunca
+    uses mtma_kg como masa. drivetrain solo si el nombre del IDAE lo dice (tracción trasera = rwd;
+    tracción integral o a las cuatro ruedas = awd). (2) Versiones: solo Model 3 (Highland) y Model Y
+    (Juniper); deja fuera el Model S, el Model X y las homologaciones anteriores a Highland y
+    Juniper. Confirma con medios del motor (T3) qué versiones se venden hoy en España y usa su
+    nombre comercial, sin «Highland», «Juniper» ni los km. status on_sale y launch con esa fuente
+    T3; segment con la lista de RF-11. Si el IDAE tiene una versión homologada varias veces con
+    valores distintos (p. ej. 513 y 520 km), no elijas uno: anota los valores y sus id del IDAE en
+    open_questions y pon needs_review: true. (3) price: null en todas las versiones, porque no hay
+    fuente T1 (data-model.md, sección 4). (4) Imágenes solo de Wikimedia Commons, con licencia que
+    permita el uso comercial, descargadas con node factory/fetch-image.ts tesla <slug> <nombre>
+    <page_url>. Crea como data/sources/<id>.yaml las fuentes T3 que uses; no toques
+    data/candidatas.yaml."

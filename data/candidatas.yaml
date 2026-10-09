@@ -90,7 +90,7 @@ candidates:
   - {brand: Range Rover, web_es: null, press_room: unknown, bev_models: 1, doubt: "es submarca de Land Rover; comprobar si hay BEV a la venta", source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Rolls-Royce, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
   # Sin nº de modelos fiable de la fuente. Tesla: 2 modelos en el ranking de ventas 2026 (Model 3 y Model Y).
-  - {brand: Tesla, web_es: "https://www.tesla.com/es_es", press_room: unknown, bev_models: 2, note: "solo Model 3 y Model Y vistos en el ranking; puede haber más. BLOQUEADA el 2026-10-07: tesla.com responde 403 a cualquier lectura automática (ficha y robots.txt) y no hay otra fuente T1; fuera del catálogo hasta que eso cambie (ejecución 20261007-053006-d5c11e, #189). No encolar sin comprobar antes el acceso", source_id: carwow-ventas-2026, retrieved: 2026-09-25}
+  - {brand: Tesla, web_es: "https://www.tesla.com/es_es", press_room: unknown, bev_models: 2, note: "solo Model 3 y Model Y vistos en el ranking; puede haber más. BLOQUEADA el 2026-10-07: tesla.com responde 403 a cualquier lectura automática (ficha y robots.txt) y no hay otra fuente T1; sin T1 (ejecución 20261007-053006-d5c11e, #189). Desde el 2026-10-09 se encola sin precio: specs del IDAE (fuente idae-es, T2) y versiones a la venta confirmadas con T3 (marca-tesla-2)", source_id: carwow-ventas-2026, retrieved: 2026-09-25}
   - {brand: Zeekr, web_es: null, press_room: unknown, bev_models: null, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Yudo, web_es: null, press_room: unknown, bev_models: null, source_id: autonomia-marcas, retrieved: 2026-09-25}
   # Citadas en carwow como con ventas en 2026, sin recuento de modelos:
