@@ -276,7 +276,8 @@ export function stateMergeBlocker(pr: StatePr, stopped: boolean): string | null 
   if (!pr.files.length) return "no cambia nada";
   const odd = pr.files.find((f) => !/^ops\/runs\/[^/]+\.jsonl$/.test(f.path) || f.deletions > 0);
   if (odd) return `toca algo más que añadir filas al registro (${odd.path})`;
-  if (pr.mergeable !== "MERGEABLE") return `no se puede fusionar (${pr.mergeable})`;
+  // UNKNOWN is GitHub still computing it (right after main moves); the merge itself refuses conflicts.
+  if (pr.mergeable === "CONFLICTING") return "tiene conflictos con main";
   if (!pr.statusCheckRollup.length) return "la CI no ha dado resultado";
   const ok = ["SUCCESS", "SKIPPED", "NEUTRAL"];
   if (pr.statusCheckRollup.some((c) => c.status !== "COMPLETED" || !ok.includes(c.conclusion ?? ""))) {
