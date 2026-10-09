@@ -356,3 +356,29 @@
     permita el uso comercial, descargadas con node factory/fetch-image.ts tesla <slug> <nombre>
     <page_url>. Crea como data/sources/<id>.yaml las fuentes T3 que uses; no toques
     data/candidatas.yaml."
+- id: issue-148
+  agent: developer
+  task: "Historia #148 (épica #145, PRD-002): sección «Versiones» de la ficha
+    /marcas/{marca}/{modelo}/ (RF-3, RF-11; CA-3, CA-11). Sigue docs/design/ficha-modelo.md, sección
+    «Versiones», subsecciones «Orden y unicidad», «Pantallas anchas: tabla comparativa», «Móvil y md:
+    bloques apilados», «Las dos presentaciones en el HTML» y «Sin versiones», con los tokens de
+    tokens.md. Añade la sección como <section aria-labelledby> hermana tras la cabecera en
+    web/src/pages/marcas/[marca]/[modelo].astro (de #146); no rehagas la página. (1) Orden: función
+    pura en web/src/lib/ (junto a sort.ts o en un módulo nuevo), con prueba unitaria: por
+    price.value ascendente, financed incluido; a igual precio y las de price: null al final, en el
+    orden del fichero. No dedupliques nombres: el esquema ya lo impide (comentario de la issue #148;
+    regla 6 de data-model.md). (2) Tabla en lg (≥ 1024 px) y lista <ol> de bloques por debajo, las
+    dos en el HTML servido desde la misma lista ordenada y alternadas solo con CSS, sin JavaScript
+    (RNF-1); ningún id dentro de la tabla ni de los bloques. Más de 5 versiones: tablas consecutivas
+    de hasta 5 columnas con captionParte. (3) Armazón: esta historia pinta solo el nombre de cada
+    versión (th de columna y h3 del bloque) y deja la estructura de filas de la tabla y del dl de los
+    bloques lista para que #149 (precio), #150 (autonomía, batería, potencia, tracción y carga) añadan
+    sus campos en el orden de «Campos y formato». No pintes filas con «por confirmar» para datos que
+    existen: eso lo hacen esas historias. (4) versions: [] → párrafo ficha.versiones.vacio, se
+    mantienen sección y h2 y se omite ficha.versiones.entrada. Textos por web/src/lib/i18n.ts
+    (ficha.versiones.titulo, .entrada, .caption, .captionParte, .vacio; RNF-4). Pruebas, con datos de
+    prueba por CARS_DATA_DIR como el resto de web/tests: CA-3 sobre el build (tres versiones, una sin
+    precio: orden y nombres en tabla y en bloques) y con Playwright (ADR-0006, web/e2e/) a 1280 px la
+    tabla visible y a 320 px los bloques visibles y sin scroll horizontal (WCAG 1.4.10); CA-11 con un
+    modelo announced y versions: []. Sin cookies ni localStorage. La PR referencia #148 y enumera los
+    RF y CA cubiertos."
