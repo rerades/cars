@@ -1,0 +1,15 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: motorpasion-es
+brand: (varias; medio del motor)
+tier: T3
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://www.motorpasion.com/
+  robots: https://www.motorpasion.com/robots.txt
+image_license: "" # no se usan imágenes de este medio
+notes: >
+  Medio del motor español. T3: sirve para fechar lanzamientos y confirmar versiones, nunca como fuente de precio.
+  robots.txt, para cualquier agente, solo bloquea rutas de WordPress, login, API y /retro (comprobado el 2026-10-09).
+last_verified: 2026-10-09
+status: active

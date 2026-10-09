@@ -3,6 +3,7 @@ brand: tesla
 brand_name: Tesla
 model: Model Y
 status: {value: on_sale, note: "gama Standard, Premium y Performance a la venta desde octubre de 2025", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/tesla-model-mas-barato-historia-llega-espana-con-534-km-autonomia-aunque-con-algunos-peros_82812_102.html", retrieved: 2026-10-09, tier: T3}
+launch: {value: "2025-01", note: "el Model Y renovado (Juniper) sale a la venta en España con la Launch Edition; entregas previstas en marzo de 2025", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/precio-tesla-model-launch-edition-2025-espana_78062_102.html", retrieved: 2026-10-09, tier: T3}
 needs_review: false
 versions:
   - name: Standard
@@ -40,5 +41,4 @@ images:
 open_questions:
   - "Precio: tesla.com responde 403 a toda lectura automática y no hay otra fuente T1; todas las versiones con price null."
   - "segment: las fuentes T3 leídas dicen solo «SUV», sin precisar suv_pequeno, suv_compacto o suv_grande; se deja vacío."
-  - "launch: las fuentes T3 leídas solo datan la gama Standard (octubre de 2025), no el inicio de venta del Model Y actual; no se rellena."
   - "Cifras del IDAE por versión (ids 607584 a 607587) no contrastadas con la marca; solo Standard (534 km) y Premium Tracción Trasera (622 km) coinciden con cifras publicadas por T3."
