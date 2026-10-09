@@ -130,8 +130,10 @@ Detalles:
    abrirla; el diff solo **añade líneas** a ficheros `ops/runs/*.jsonl` (ni borra ni toca otra ruta);
    todos los checks terminados y en verde; sin conflictos; sin `factory/STOP`; `gh pr merge --merge
    --match-head-commit <sha>` ([2]). No necesita `review:ok`: el Revisor no la revisa. Lo hace
-   `mergeStatePr()` al empezar cada ejecución, así que la PR de la última ejecución de la noche
-   espera a la noche siguiente. Si no cumple la regla, se queda abierta para una persona.
+   `mergeStatePr()` (`node factory/run.ts --merge-state`) en dos sitios: el workflow
+   `merge-state-pr.yml`, en cuanto termina en verde la CI de la rama de estado, y el orquestador al
+   empezar cada ejecución, por si el workflow no llegó. La fusión con el `GITHUB_TOKEN` no lanza la
+   CI de `main`; no hace falta, porque solo entran filas del registro. Si no cumple la regla, se queda abierta para una persona.
 7. **Lista de rutas de ADR-0011.** **Ni `factory/queue*.yaml` ni `ops/runs/` entran** en la lista
    de las PR de agente. La cola decide qué hará la factoría: encolar es de una persona, y una PR de
    agente que la cambie la fusiona una persona. El registro sostiene el presupuesto (ADR-0002) y
