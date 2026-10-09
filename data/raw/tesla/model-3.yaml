@@ -14,9 +14,9 @@ versions:
     drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
     price: null
   - name: Premium Gran Autonomía Tracción Trasera
-    battery_kwh: {value: 77, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608835 (750 km); otra homologación con nombre parecido: id 614202 (691 km, 74 kWh)"}
-    wltp_km: {value: 750, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608835; coincide con los 750 km de Highmotor. Otra homologación: 691 km (id 614202)"}
-    power_kw: {value: 235, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608835; Highmotor publica 235 kW"}
+    battery_kwh: {value: 74, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 614202; menor de 2 homologaciones IDAE: 691 km (id 614202, 74 kWh), 750 km (id 608835, 77 kWh). Forococheselectricos (2026-10-09): 750 km con llantas de 18\" y 691 km con las de 19\""}
+    wltp_km: {value: 691, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 614202; menor de 2 homologaciones IDAE: 691 km (id 614202, 74 kWh), 750 km (id 608835, 77 kWh). Forococheselectricos (2026-10-09): 750 km con llantas de 18\" y 691 km con las de 19\""}
+    power_kw: {value: 235, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 614202; las dos homologaciones dan 235 kW"}
     drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
     price: null
   - name: Premium Gran Autonomía Tracción Integral
@@ -42,5 +42,4 @@ images:
 open_questions:
   - "Precio: tesla.com responde 403 a toda lectura automática y no hay otra fuente T1; todas las versiones con price null."
   - "Premium Gran Autonomía Tracción Integral y Performance: a la venta en España según Forococheselectricos (https://forococheselectricos.com/noticias/tesla-model-3-novedades-configurador-espana-autonomia-precios-20261009-42365.html, 2026-10-09), con entregas en el primer trimestre de 2027."
-  - "Premium Gran Autonomía Tracción Trasera: el IDAE tiene también id 614202 (691 km, 74 kWh, 235 kW) con ese mismo nombre; se ha usado id 608835 (750 km) porque coincide con la cifra de la fuente T3."
   - "El medio T3 sobre la versión Standard (hibridosyelectricos, 05/12/2025) anuncia entregas desde febrero de 2026; no se ha comprobado que ya se entreguen."
