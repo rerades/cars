@@ -1,7 +1,7 @@
 ---
 id: PRD-004
 title: Portada
-status: draft        # draft | ready | in-progress | done | deprecated
+status: ready        # draft | ready | in-progress | done | deprecated
 priority: P0         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: [PRD-001, PRD-002]
 epic: ""
@@ -30,7 +30,9 @@ La portada es una **puerta de entrada**: dice qué es la web y lleva al catálog
 
 ### Fuera de alcance
 - Catálogo, filtros, ordenación y páginas de marca, segmento y tramo (PRD-001) y ficha del modelo (PRD-002): la portada solo enlaza a ellos y no los duplica.
-- Bloques nuevos de contenido (novedades, destacados, cifras de mercado, rankings, reviews): ver preguntas abiertas.
+- Bloques nuevos de contenido (novedades, destacados, cifras agregadas, fecha global de los datos, rankings, reviews): ver decisiones 2 a 4.
+- Buscador (decisión 5).
+- Avisos internos de la ingesta, como «No se pudieron leer N ficheros» de ADR-0010 (decisión 6).
 - Cuentas, favoritos, alertas, newsletter, formularios, comentarios o cualquier cosa que recoja o guarde datos del visitante (visión).
 - Vender, intermediar o promocionar marcas o modelos (visión: no es un marketplace).
 - Precios en tiempo real y ayudas (PRD-001).
@@ -40,7 +42,7 @@ La portada es una **puerta de entrada**: dice qué es la web y lleva al catálog
 - **RF-2:** El contador de RF-1 cuenta los modelos que tienen tarjeta en `/coches`, de cualquier estado (a la venta, próximamente, descatalogado). No cuenta los que tienen `needs_review: true` (PRD-001, RF-13). Es un recuento del propio catálogo: no es un dato de un coche y no lleva fuente.
 - **RF-3:** La portada incluye la franja «Explorar» definida en PRD-001 (RF-10): los mismos cuatro grupos, en el mismo orden y con los mismos textos, más «Todos los coches» que enlaza a `/coches`. Solo enlaza páginas que existen: no hay enlace a marcas ni segmentos sin modelos, y un grupo sin ningún enlace no se pinta. La portada reutiliza esa franja; no define otra.
 - **RF-4:** Todo modelo publicado es alcanzable desde la portada en ≤ 2 interacciones sin JavaScript: portada → página de su marca (`/marcas/{marca}`, PRD-001, RF-4) → su ficha (PRD-002, RF-1), usando la tarjeta de PRD-001 (RF-1).
-- **RF-5:** La portada no muestra datos sueltos de coche (precio, autonomía, estado, versiones). Quien quiera verlos los encuentra en las tarjetas del catálogo y en la ficha, con su presentación y sus fuentes. Si una versión futura de la portada muestra tarjetas de modelos, son las de PRD-001 (RF-1), sin variantes; y si muestra cualquier otro dato de coche, lleva su fuente y su fecha (ADR-0001, regla 2).
+- **RF-5:** La portada no muestra datos sueltos de coche (precio, autonomía, estado, versiones). Quien quiera verlos los encuentra en las tarjetas del catálogo y en la ficha, con su presentación y sus fuentes. Si una versión futura de la portada muestra tarjetas de modelos, son las de PRD-001 (RF-1), sin variantes; y si muestra cualquier otro dato de coche, lleva su fuente y su fecha (ADR-0001, regla 2). Tampoco muestra avisos internos de la ingesta (ADR-0010): van al log del build.
 - **RF-6:** Si no hay ningún modelo publicado, la portada muestra el `h1`, el texto de entrada y un aviso de que todavía no hay modelos, sin contador con valor numérico engañoso, sin franja «Explorar» vacía y sin enlaces rotos.
 - **RF-7:** La portada tiene su propio título de página, distinto del de cualquier otra página del sitio, y un texto de entrada que no se repite en ninguna otra.
 - **RF-8:** La portada es de solo lectura y no recoge datos: no tiene formularios, campos de entrada, botones de envío ni elementos de cuenta, suscripción o contacto.
@@ -64,7 +66,7 @@ Todos son verificables sobre el HTML construido, sin ejecutar JavaScript.
 - [ ] **CA-2** (→ RF-2): Dados tres modelos publicados (a la venta, próximamente y descatalogado) y uno con `needs_review: true`, cuando leo `/`, entonces el contador es 3 y coincide con el número de tarjetas de `/coches`.
 - [ ] **CA-3** (→ RF-3): Dado el sitio construido, cuando comparo la franja «Explorar» de `/` con la de `/coches`, entonces tiene los mismos grupos, en el mismo orden, con los mismos enlaces y textos, y además «Todos los coches» enlaza a `/coches`. Cada enlace de la franja resuelve a una página existente del build, y no hay enlace a una marca o un segmento sin modelos.
 - [ ] **CA-4** (→ RF-4): Dado el sitio construido, cuando recorro los enlaces del HTML a partir de `/`, entonces para cada modelo publicado existe el camino `/` → `/marcas/{marca}` → `/marcas/{marca}/{modelo}/`, y ninguno necesita más de 2 enlaces.
-- [ ] **CA-5** (→ RF-5): Dado el HTML de `/`, cuando lo reviso, entonces no contiene precios, autonomías, versiones ni estados de ningún modelo, ni el `source_id` de ningún dato. Dado que alguna versión posterior incluya algún dato de coche, entonces lleva su fuente y su fecha `retrieved` visibles.
+- [ ] **CA-5** (→ RF-5): Dado el HTML de `/`, cuando lo reviso, entonces no contiene precios, autonomías, versiones ni estados de ningún modelo, ni el `source_id` de ningún dato, ni el aviso «No se pudieron leer N ficheros». Dado que alguna versión posterior incluya algún dato de coche, entonces lleva su fuente y su fecha `retrieved` visibles.
 - [ ] **CA-6** (→ RF-6): Dado un build sin modelos publicados, cuando abro `/`, entonces veo el `h1`, el texto de entrada y el aviso de que aún no hay modelos; no hay franja «Explorar» ni enlaces a páginas inexistentes, y la página no da error.
 - [ ] **CA-7** (→ RF-7): Dado el sitio construido, cuando comparo los títulos de página y los textos de entrada de todas las páginas, entonces los de `/` no coinciden con los de ninguna otra.
 - [ ] **CA-8** (→ RF-8): Dado el HTML de `/`, cuando lo reviso, entonces no contiene `<form>`, `<input>`, `<textarea>`, `<select>` ni botones de envío.
@@ -72,20 +74,21 @@ Todos son verificables sobre el HTML construido, sin ejecutar JavaScript.
 - [ ] **CA-10** (→ RNF-5): Al cargar `/` no se crea ninguna cookie ni se escribe nada en `localStorage`.
 
 ## 8. Decisiones y preguntas abiertas
-### Resueltas
-- Ninguna todavía. Las decisiones de este borrador se deducen de la visión, de PRD-001, PRD-002 y de ADR-0001 y ADR-0003; lo que no se deducía está abajo.
+### Resueltas (2026-10-09, Rod)
+1. **Numeración.** La portada es PRD-004 y Rankings pasa a PRD-005; se corrigen las referencias de PRD-001 y PRD-002. Descartado renumerar la portada: Rankings aún no tiene PRD, así que cambiarle el número no rompe nada.
+2. **Novedades: no, de momento.** La portada es una puerta de entrada y la métrica de ≤ 3 interacciones ya se cumple (RF-4). Descartado un bloque de tarjetas por «Novedad»: se puede añadir más tarde reutilizando la tarjeta de PRD-001 sin rehacer nada.
+3. **Fecha de actualización de los datos: no.** Cada tarjeta y cada ficha ya llevan su fuente y su fecha. Descartada una fecha global (la más reciente o un rango): engaña cuando unas marcas están más al día que otras.
+4. **Cifras agregadas: no** (RF-5). Descartadas porque mezclan datos de fuentes distintas sin una regla de atribución.
+5. **Buscador: no.** No está en ningún PRD ni ADR, el sitio es estático (ADR-0003) y chocaría con RF-8. Si algún día se quiere, se reabre RF-8.
+6. **Aviso «No se pudieron leer N ficheros» (ADR-0010): no lo ve el visitante.** Es información interna de la ingesta y va al log del build; el validador de `data/` ya avisa en la CI. Descartado mostrarlo al pie: el visitante no puede hacer nada con él.
+7. **Texto de entrada y título:** su redactado queda para el diseño (`docs/design/`); este PRD fija sus condiciones (RF-1, RF-7).
+8. **Prioridad: P0**, confirmada: la métrica de PRD-001 y PRD-002, ambos P0, parte de la portada.
 
 ### Abiertas
-1. **Numeración: Rankings también es «PRD-004».** PRD-001 (alcance) y PRD-002 (alcance) citan «Rankings (PRD-004)», pero este PRD, pedido para la portada, toma ese número. Hay que decidir si esas dos referencias pasan a «PRD-005» u otro número cuando se escriba el de Rankings. No se ha tocado ningún PRD existente; la tabla de la visión sigue con Rankings «_pendiente_».
-2. **¿Hay bloque de novedades en la portada?** Se podría mostrar un número reducido de tarjetas ordenadas por «Novedad» (PRD-001, RF-3: fecha de inicio de venta en España, los modelos sin fecha al final), reutilizando la tarjeta de PRD-001. Las tarjetas ya cumplen la fuente y la fecha (están en la ficha). Queda abierto: si se quiere, cuántas, si incluye «Próximamente» y qué pasa con los modelos sin fecha de inicio de venta. Sin esta decisión el borrador no lo incluye, y la métrica de ≤ 3 interacciones se cumple igualmente (RF-4).
-3. **¿Se muestra la fecha de actualización de los datos?** Por ejemplo, «Datos consultados a {fecha}», derivada de la `retrieved` más reciente. El principio 0 pide fecha en todo dato, pero el contador no es un dato de un coche. Hay que decidir si se muestra y con qué regla (más reciente, más antigua, por marca).
-4. **¿Se muestran cifras agregadas?** (modelos por marca, rango de precios del catálogo, autonomía máxima). Serían datos derivados de otros con fuentes distintas; falta decidir cómo se atribuyen. De momento no se muestran (RF-5).
-5. **¿Hay buscador?** Un cuadro de búsqueda por nombre llevaría a la ficha en 1 interacción, pero no está en ningún PRD ni ADR, y el sitio es estático (ADR-0003). Además contradice el RF-8 tal como está escrito. No se incluye.
-6. **El aviso «No se pudieron leer N ficheros»** (ADR-0010) que hoy pinta el borrador de `/`: ¿se muestra al visitante, o es información interna de la ingesta que solo debe verse en los registros de construcción? Se deja fuera del PRD hasta decidirlo.
-7. **Texto de entrada y título de la portada:** el redactado concreto queda para el diseño; aquí solo se fijan sus condiciones (RF-1, RF-7).
-8. **Prioridad:** se ha puesto P0 porque la métrica de ≤ 3 interacciones de PRD-001 y PRD-002 (ambos P0) parte de la portada. Confirmar.
+- Ninguna.
 
 ## 9. Historial de cambios
 | Fecha | Cambio | Autor |
 |---|---|---|
 | 2026-10-09 | Borrador inicial: RF-1 a RF-8, RNF-1 a RNF-5, CA-1 a CA-10; 8 preguntas abiertas | Claude |
+| 2026-10-09 | Resueltas las 8 preguntas abiertas: Rankings pasa a PRD-005; sin novedades, fecha global, cifras agregadas ni buscador; el aviso de ADR-0010 sale de la portada. Pasa a ready y P0 | Rod / Claude |

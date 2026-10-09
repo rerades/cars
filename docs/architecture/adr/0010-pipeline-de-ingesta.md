@@ -40,7 +40,8 @@ frecuencia, validación)». Lo que hay hoy (repositorio leído el 2026-10-04) y 
   tener un precio antes de dejar de mostrarse.
 - **El build ya tiene su propia lectura tolerante.** `web/src/lib/data.ts` (`loadModels`,
   `normalize`) nunca falla por un fichero malo: lo deja en `errors` o descarta el valor con un
-  aviso en `warnings`. La portada muestra «No se pudieron leer N ficheros».
+  aviso en `warnings`. La portada muestra «No se pudieron leer N ficheros» (desde el 2026-10-09, PRD-004
+  decisión 6, ese aviso va al log del build y deja de verse en la portada).
 - **Registro de fuentes:** `data/sources/registry.yaml` ya documenta `status: active | broken |
   deprecated` por fuente, y hoy todas están en `active`.
 - **Presupuesto (ADR-0002, `factory/budgets.yaml`):** el Researcher tiene 7 USD al mes y 1,50 por

@@ -31,7 +31,7 @@ Quien ha encontrado un modelo en el catálogo (PRD-001) y quiere decidir si le i
 
 ### Fuera de alcance
 - Catálogo, filtros y páginas de marca, segmento y tramos (PRD-001).
-- Comparador (PRD-003), rankings (PRD-004) y reviews (previstas en la visión, sin PRD todavía).
+- Comparador (PRD-003), rankings (PRD-005) y reviews (previstas en la visión, sin PRD todavía).
 - Cualquier dato que no exista en el esquema de `architecture/data-model.md` (ADR-0008): dimensiones, maletero, consumo, aceleración, tiempos de carga, garantía, plazas, etc. Si se quieren, primero se cambia el esquema, uno a uno y con fuente (decisión del 2026-10-01).
 - Fichas por versión: las versiones van dentro de la ficha del modelo, sin URL propia.
 - Precios en tiempo real, disponibilidad en concesionarios, ayudas (Plan MOVES) y cualquier interacción que guarde datos del visitante.
@@ -121,3 +121,4 @@ Decididas por el responsable del producto. Cada una se ha llevado ya a los RF y 
 |---|---|---|
 | 2026-09-29 | Borrador inicial: RF-1 a RF-13, RNF-1 a RNF-5, CA-1 a CA-15; 13 preguntas abiertas | Claude |
 | 2026-10-01 | Resueltas las 13 preguntas abiertas. Ajustados RF-3, RF-4, RF-9 y RF-12, la sección 3 y la sección 6; añadidos RF-14, RF-15 y CA-16 a CA-18. Pasa a ready y P0 | Rod / Claude |
+| 2026-10-09 | Rankings pasa a PRD-005: PRD-004 es la portada | Rod / Claude |
