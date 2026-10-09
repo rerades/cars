@@ -14,8 +14,8 @@ import { join } from "node:path";
 import { parseArgs } from "node:util";
 import { exportRun } from "./langfuse.ts";
 import {
-  appendLedger, checkCanRun, commitState, execute, formatTrace, loadConfig, nowInTz, pruneMergedBranches, queueState, readAllLedger,
-  readLedger, readQueue, runsToday, spentInPeriod, STATE_BRANCH, syncState, TRACE_DIR,
+  appendLedger, checkCanRun, commitState, execute, formatTrace, loadConfig, mergeStatePr, nowInTz, pruneMergedBranches, queueState, readAllLedger,
+  readLedger, readQueue, REPO, runsToday, spentInPeriod, STATE_BRANCH, syncState, TRACE_DIR,
   type Config,
 } from "./orchestrator.ts";
 
@@ -66,6 +66,8 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
   if (!dryRun) {
     const borradas = pruneMergedBranches();
     if (borradas.length) console.log(`ramas ya fusionadas borradas: ${borradas.join(", ")}`);
+    const merged = mergeStatePr(existsSync(join(REPO, cfg.global?.stop_file || "factory/STOP")));
+    if (merged) console.log(merged);
   }
   const blocked = syncState();
   if (blocked) {

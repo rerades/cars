@@ -242,12 +242,67 @@ export function commitState(runId: string, repo = REPO, dir = STATE_DIR): string
       "--jq", ".[0].url"], { cwd: repo, encoding: "utf8" }).trim();
     if (open) return open;
     const out = execFileSync("gh", ["pr", "create", "--base", "main", "--head", STATE_BRANCH,
-      "--title", "chore(factory): record factory runs",
+      "--title", "chore(factory): record factory runs", "--label", AUTOMERGE_LABEL,
       "--body", "🏭 Factory state (ADR-0013): ledger rows of the runs since the last merge. " +
-        "Merge with a merge commit, never squash."], { cwd: repo, encoding: "utf8" });
+        "The factory merges it by itself (merge commit, never squash) once CI is green."],
+    { cwd: repo, encoding: "utf8" });
     return out.trim().split("\n").at(-1) ?? null;
   } catch {
     return null;
+  }
+}
+
+export const AUTOMERGE_LABEL = "automerge";
+
+/** The fields of `gh pr view --json` that the state PR merge rule looks at. */
+export interface StatePr {
+  headRefName: string;
+  headRefOid: string;
+  mergeable: string;
+  labels: { name: string }[];
+  statusCheckRollup: { status?: string; conclusion?: string }[];
+  files: { path: string; deletions: number }[];
+}
+
+/**
+ * Why the state PR cannot be merged by the factory, or null when it can (ADR-0013, point 6):
+ * the state branch, the automerge label, only added lines in ops/runs/*.jsonl, every check
+ * finished and green, no conflicts, and no STOP file. No review needed.
+ */
+export function stateMergeBlocker(pr: StatePr, stopped: boolean): string | null {
+  if (stopped) return "interruptor de parada activo";
+  if (pr.headRefName !== STATE_BRANCH) return `la rama no es ${STATE_BRANCH}`;
+  if (!pr.labels.some((l) => l.name === AUTOMERGE_LABEL)) return `sin la etiqueta ${AUTOMERGE_LABEL}`;
+  if (!pr.files.length) return "no cambia nada";
+  const odd = pr.files.find((f) => !/^ops\/runs\/[^/]+\.jsonl$/.test(f.path) || f.deletions > 0);
+  if (odd) return `toca algo más que añadir filas al registro (${odd.path})`;
+  if (pr.mergeable !== "MERGEABLE") return `no se puede fusionar (${pr.mergeable})`;
+  if (!pr.statusCheckRollup.length) return "la CI no ha dado resultado";
+  const ok = ["SUCCESS", "SKIPPED", "NEUTRAL"];
+  if (pr.statusCheckRollup.some((c) => c.status !== "COMPLETED" || !ok.includes(c.conclusion ?? ""))) {
+    return "la CI no ha terminado en verde";
+  }
+  return null;
+}
+
+/**
+ * Merges the open state PR when stateMergeBlocker allows it, pinned to the SHA it checked.
+ * Returns what happened, for the log, or null when there is no state PR. Never throws.
+ */
+export function mergeStatePr(stopped: boolean, repo = REPO): string | null {
+  if (!STATE_IN_GIT) return null;
+  try {
+    const raw = execFileSync("gh", ["pr", "list", "--head", STATE_BRANCH, "--state", "open", "--json",
+      "number,url,headRefName,headRefOid,mergeable,labels,statusCheckRollup,files"], { cwd: repo, encoding: "utf8" });
+    const pr = (JSON.parse(raw) as (StatePr & { number: number; url: string })[])[0];
+    if (!pr) return null;
+    const blocker = stateMergeBlocker(pr, stopped);
+    if (blocker) return `PR de estado sin fusionar: ${blocker} · ${pr.url}`;
+    execFileSync("gh", ["pr", "merge", String(pr.number), "--merge", "--match-head-commit", pr.headRefOid],
+      { cwd: repo, encoding: "utf8" });
+    return `PR de estado fusionada: ${pr.url}`;
+  } catch (e) {
+    return `PR de estado sin fusionar: ${(e as Error).message.split("\n")[0]}`;
   }
 }
 
