@@ -348,8 +348,10 @@
     Juniper. Confirma con medios del motor (T3) qué versiones se venden hoy en España y usa su
     nombre comercial, sin «Highland», «Juniper» ni los km. status on_sale y launch con esa fuente
     T3; segment con la lista de RF-11. Si el IDAE tiene una versión homologada varias veces con
-    valores distintos (p. ej. 513 y 520 km), no elijas uno: anota los valores y sus id del IDAE en
-    open_questions y pon needs_review: true. (3) price: null en todas las versiones, porque no hay
+    valores distintos (p. ej. 513 y 520 km), usa la fila de menor wltp_km para todos sus valores
+    (wltp_km, power_kw, battery_kwh) y pon en cada uno una note con el id del IDAE de esa fila y
+    las otras homologaciones, p. ej. "menor de 2 homologaciones IDAE: 513 km (id 582741), 520 km
+    (id 606186)". No pongas needs_review por esto. (3) price: null en todas las versiones, porque no hay
     fuente T1 (data-model.md, sección 4). (4) Imágenes solo de Wikimedia Commons, con licencia que
     permita el uso comercial, descargadas con node factory/fetch-image.ts tesla <slug> <nombre>
     <page_url>. Crea como data/sources/<id>.yaml las fuentes T3 que uses; no toques
