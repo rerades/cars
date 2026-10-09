@@ -28,7 +28,7 @@ agents:
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
     write_paths: [data/, docs/bitacora/]
-    allowed_tools: [WebSearch, WebFetch, "Bash(node factory/bitacora.ts:*)", "Bash(node factory/fetch-image.ts:*)"]   # en -p no hay quien apruebe permisos: sin esto se deniegan. fetch-image: ADR-0010, «Imágenes»
+    allowed_tools: [WebSearch, WebFetch, "Bash(node factory/bitacora.ts:*)", "Bash(node factory/fetch-image.ts:*)", "Bash(node factory/fetch-idae.ts:*)"]   # en -p no hay quien apruebe permisos: sin esto se deniegan. fetch-image: ADR-0010, «Imágenes»; fetch-idae: fuente idae-es
     network: true
 
   product:
