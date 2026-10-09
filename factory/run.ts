@@ -19,7 +19,7 @@ import {
   type Config,
 } from "./orchestrator.ts";
 
-const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [--trace <run_id>] [agente] [tarea]
+const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [--merge-state] [--trace <run_id>] [agente] [tarea]
 
 Orquestador de la factoría
 
@@ -29,6 +29,7 @@ Orquestador de la factoría
   --ignore-window  ignora el horario permitido
   --status         muestra el estado del presupuesto
   --next           lanza la primera tarea pendiente de factory/queue.yaml
+  --merge-state    fusiona la PR de estado si cumple la regla de ADR-0013
   --trace <run_id> muestra los pasos de una ejecución (ops/traces/)`;
 
 function cmdStatus(cfg: Config): number {
@@ -59,6 +60,13 @@ function cmdStatus(cfg: Config): number {
   return 0;
 }
 
+/** Merges the state PR when ADR-0013 allows it; also run by the merge-state-pr workflow. */
+function cmdMergeState(cfg: Config): number {
+  const merged = mergeStatePr(existsSync(join(REPO, cfg.global?.stop_file || "factory/STOP")));
+  if (merged) console.log(merged);
+  return 0;
+}
+
 /** Lanza la tarea de un agente y la anota en el ledger. Devuelve el código de salida. */
 function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean, dryRun: boolean,
   taskId: string | null = null): number {
@@ -66,8 +74,7 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
   if (!dryRun) {
     const borradas = pruneMergedBranches();
     if (borradas.length) console.log(`ramas ya fusionadas borradas: ${borradas.join(", ")}`);
-    const merged = mergeStatePr(existsSync(join(REPO, cfg.global?.stop_file || "factory/STOP")));
-    if (merged) console.log(merged);
+    cmdMergeState(cfg);
   }
   const blocked = syncState();
   if (blocked) {
@@ -147,6 +154,7 @@ function main(argv: string[]): number {
         "ignore-window": { type: "boolean" },
         status: { type: "boolean" },
         next: { type: "boolean" },
+        "merge-state": { type: "boolean" },
         trace: { type: "string" },
         help: { type: "boolean", short: "h" },
       },
@@ -165,6 +173,7 @@ function main(argv: string[]): number {
   const cfg = loadConfig();
   if (values.trace) return cmdTrace(values.trace);
   if (values.status) return cmdStatus(cfg);
+  if (values["merge-state"]) return cmdMergeState(cfg);
   if (values.next) return cmdNext(cfg, !!values["ignore-window"], !!values["dry-run"]);
   if (!agent || !task || positionals.length > 2) {
     console.error(`${USAGE}\nerror: hacen falta <agente> y "<tarea>"`);
