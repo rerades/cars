@@ -41,3 +41,57 @@ jobs:
       - run: pnpm test
       - run: pnpm run typecheck
       - run: pnpm run build
+
+  # ADR-0006: a job cannot have a `paths` filter, and a workflow-level one would also skip the
+  # other jobs. So this one only answers "does the PR touch web/ or data/?".
+  changes:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    outputs:
+      web: ${{ steps.diff.outputs.web }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: diff
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if git diff --name-only "$BASE" "$HEAD" | grep -qE '^(web|data)/'; then
+            echo "web=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "web=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  # ADR-0006: axe-core over the built site. Red on critical/serious violations. It reports, it
+  # does not block: do NOT add it as a required check of the protected branch (decided 2026-09-27).
+  a11y:
+    needs: [web, changes]
+    if: needs.changes.outputs.web == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install -g pnpm@${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - id: playwright
+        run: echo "version=$(pnpm exec playwright --version | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+      # With a cache hit the download is skipped; --with-deps still installs the system libraries.
+      - run: npx playwright install --with-deps chromium
+      - run: pnpm run test:a11y
