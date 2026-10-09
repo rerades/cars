@@ -33,8 +33,9 @@ Personas en Europa, con foco inicial en **España**, que están informándose so
 |---|---|
 | Catálogo de modelos | PRD-001 |
 | Ficha de modelo | PRD-002 |
+| Portada | PRD-004 |
 | Comparador | _pendiente_ |
-| Rankings | _pendiente_ |
+| Rankings | _pendiente_ (será PRD-005) |
 | Reviews | _pendiente_ |
 
 ## Preguntas abiertas

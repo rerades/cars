@@ -31,7 +31,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 ### Fuera de alcance
 - Ficha detallada del modelo (PRD-002).
 - Comparador (PRD-003).
-- Rankings (PRD-004).
+- Rankings (PRD-005).
 - Precios en tiempo real o disponibilidad en concesionarios.
 - Cualquier interacción que guarde datos del visitante (favoritos persistentes, cuentas, alertas).
 
@@ -133,3 +133,4 @@ Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsa
 | 2026-10-01 | Los modelos con `needs_review: true` no se publican. Añadidos RF-13 y CA-18 | Rod / Claude |
 | 2026-10-01 | `/coches` es indexable y las URL con filtros se marcan con canonical a su página sin query string (CA-13) | Rod / Claude |
 | 2026-10-01 | Fijados en RF-10 los bordes de los tramos de precio y de autonomía (pregunta 1 de `paginas-catalogo.md`) | Rod / Claude |
+| 2026-10-09 | Rankings pasa a PRD-005: PRD-004 es la portada | Rod / Claude |
