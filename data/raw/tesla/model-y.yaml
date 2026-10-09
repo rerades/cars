@@ -1,0 +1,44 @@
+# Researcher — Tesla Model Y. Fuentes: idae-es (T2), hibridosyelectricos-es y highmotor-es (T3). Consultado 2026-10-09. Sin precio: tesla.com no se puede leer.
+brand: tesla
+brand_name: Tesla
+model: Model Y
+status: {value: on_sale, note: "gama Standard, Premium y Performance a la venta desde octubre de 2025", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/tesla-model-mas-barato-historia-llega-espana-con-534-km-autonomia-aunque-con-algunos-peros_82812_102.html", retrieved: 2026-10-09, tier: T3}
+needs_review: false
+versions:
+  - name: Standard
+    battery_kwh: {value: 60, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607584"}
+    wltp_km: {value: 534, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607584; el medio publica 534 km"}
+    power_kw: {value: 220, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607584"}
+    drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    price: null
+  - name: Premium Tracción Trasera
+    battery_kwh: {value: 77, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607587"}
+    wltp_km: {value: 622, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607587; Highmotor publica 622 km"}
+    power_kw: {value: 255, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607587"}
+    drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    price: null
+  - name: Premium Tracción a las cuatro ruedas
+    battery_kwh: {value: 77, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607586"}
+    wltp_km: {value: 600, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607586"}
+    power_kw: {value: 378, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607586"}
+    drivetrain: {value: awd, note: "el nombre del IDAE dice «Tracción a las cuatro ruedas»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    price: null
+  - name: Performance
+    battery_kwh: {value: 77, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607585"}
+    wltp_km: {value: 580, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607585"}
+    power_kw: {value: 461, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 607585"}
+    drivetrain: {value: awd, note: "el nombre del IDAE dice «Tracción a las cuatro ruedas»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    price: null
+images:
+  - file: data/images/tesla/model-y/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Tesla_Model_Y_Juniper_Stealth_Grey_%282%29.jpg/1280px-Tesla_Model_Y_Juniper_Stealth_Grey_%282%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Tesla_Model_Y_Juniper_Stealth_Grey_(2).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-09
+    license: CC-BY-SA-4.0
+    attribution: "Damian B Oh, CC BY-SA 4.0"
+open_questions:
+  - "Precio: tesla.com responde 403 a toda lectura automática y no hay otra fuente T1; todas las versiones con price null."
+  - "segment: las fuentes T3 leídas dicen solo «SUV», sin precisar suv_pequeno, suv_compacto o suv_grande; se deja vacío."
+  - "launch: las fuentes T3 leídas solo datan la gama Standard (octubre de 2025), no el inicio de venta del Model Y actual; no se rellena."
+  - "Cifras del IDAE por versión (ids 607584 a 607587) no contrastadas con la marca; solo Standard (534 km) y Premium Tracción Trasera (622 km) coinciden con cifras publicadas por T3."

@@ -1,0 +1,34 @@
+# Researcher — Tesla Model 3. Fuentes: idae-es (T2), hibridosyelectricos-es y highmotor-es (T3). Consultado 2026-10-09. Sin precio: tesla.com no se puede leer.
+brand: tesla
+brand_name: Tesla
+model: Model 3
+status: {value: on_sale, note: "versiones Standard (entregas desde febrero de 2026) y Premium Gran Autonomía Tracción Trasera (artículo de septiembre de 2026)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/fabricar-7000000-coches-electricos-tesla-lanza-model-3-mas-barato-su-historia-por-35000-euros_83856_102.html", retrieved: 2026-10-09, tier: T3}
+segment: {value: berlina, note: "el medio lo llama «berlina»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/fabricar-7000000-coches-electricos-tesla-lanza-model-3-mas-barato-su-historia-por-35000-euros_83856_102.html", retrieved: 2026-10-09, tier: T3}
+needs_review: false
+versions:
+  - name: Standard
+    battery_kwh: {value: 60, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608832"}
+    wltp_km: {value: 534, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608832; el medio publica 534 km"}
+    power_kw: {value: 208, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608832"}
+    drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    price: null
+  - name: Premium Gran Autonomía Tracción Trasera
+    battery_kwh: {value: 77, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608835 (750 km); otra homologación con nombre parecido: id 614202 (691 km, 74 kWh)"}
+    wltp_km: {value: 750, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608835; coincide con los 750 km de Highmotor. Otra homologación: 691 km (id 614202)"}
+    power_kw: {value: 235, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608835; Highmotor publica 235 kW"}
+    drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    price: null
+images:
+  - file: data/images/tesla/model-3/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Tesla_Model_3_%27Highland%27_%282024%29.jpg/1280px-Tesla_Model_3_%27Highland%27_%282024%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Tesla_Model_3_%27Highland%27_(2024).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-09
+    license: CC-BY-SA-4.0
+    attribution: "Mliu92, CC BY-SA 4.0"
+open_questions:
+  - "Precio: tesla.com responde 403 a toda lectura automática y no hay otra fuente T1; todas las versiones con price null."
+  - "launch: ninguna fuente leída da el inicio de venta en España del Model 3 actual; no se rellena."
+  - "Versiones Premium tracción a las cuatro ruedas y Performance: Highmotor las menciona de pasada («Dual Motor», «Performance») pero sin nombre comercial ni cifras; no se incluyen hasta confirmarlas."
+  - "Premium Gran Autonomía Tracción Trasera: el IDAE tiene también id 614202 (691 km, 74 kWh, 235 kW) con ese mismo nombre; se ha usado id 608835 (750 km) porque coincide con la cifra de la fuente T3."
+  - "El medio T3 sobre la versión Standard (hibridosyelectricos, 05/12/2025) anuncia entregas desde febrero de 2026; no se ha comprobado que ya se entreguen."
