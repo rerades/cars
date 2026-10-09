@@ -1,0 +1,16 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: forococheselectricos-es
+brand: (varias; medio del motor)
+tier: T3
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://forococheselectricos.com/
+  robots: https://forococheselectricos.com/robots.txt
+image_license: "" # no se usan imágenes de este medio
+notes: >
+  Medio del motor español especializado en eléctricos. T3: sirve para confirmar qué versiones se venden y su nombre
+  comercial, nunca como fuente de precio. robots.txt solo bloquea /wp-admin/, /wp-json/, búsquedas, trackbacks y
+  feeds (comprobado el 2026-10-09).
+last_verified: 2026-10-09
+status: active
