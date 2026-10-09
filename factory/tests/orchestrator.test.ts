@@ -570,6 +570,7 @@ describe("fusión de la PR de estado (ADR-0013, punto 6)", () => {
 
   test("se fusiona sola si solo añade filas y la CI está en verde", () => {
     assert.equal(orq.stateMergeBlocker(green, false), null);
+    assert.equal(orq.stateMergeBlocker({ ...green, mergeable: "UNKNOWN" }, false), null);
   });
 
   test("cualquier otra cosa la deja para una persona", () => {
