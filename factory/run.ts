@@ -7,6 +7,7 @@
  *   node factory/run.ts <agente> "<tarea>" --ignore-window  # ignora el horario nocturno
  *   node factory/run.ts --status                            # gasto y ejecuciones del periodo
  *   node factory/run.ts --next                              # primera tarea pendiente de la cola
+ *   node factory/run.ts --task <id>                         # esa tarea pendiente de la cola
  *   node factory/run.ts --trace <run_id>                    # pasos de una ejecución
  */
 import { existsSync, readFileSync } from "node:fs";
@@ -19,7 +20,7 @@ import {
   type Config,
 } from "./orchestrator.ts";
 
-const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [--merge-state] [--trace <run_id>] [agente] [tarea]
+const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [--task <id>] [--merge-state] [--trace <run_id>] [agente] [tarea]
 
 Orquestador de la factoría
 
@@ -29,6 +30,7 @@ Orquestador de la factoría
   --ignore-window  ignora el horario permitido
   --status         muestra el estado del presupuesto
   --next           lanza la primera tarea pendiente de factory/queue.yaml
+  --task <id>      lanza esa tarea de factory/queue.yaml, si está pendiente
   --merge-state    fusiona la PR de estado si cumple la regla de ADR-0013
   --trace <run_id> muestra los pasos de una ejecución (ops/traces/)`;
 
@@ -109,18 +111,23 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
 }
 
 /**
- * Runs the first pending task: the first one in the queue without a ledger row (ADR-0013).
+ * Runs the first pending task: the first one in the queue without a ledger row (ADR-0013),
+ * or the pending task with that id.
  * A blocked run writes no row, so the task stays pending; a failed one is consumed and listed
  * by --status, so it is neither lost nor retried in a loop.
  */
-function cmdNext(cfg: Config, ignoreWindow: boolean, dryRun: boolean): number {
+function cmdNext(cfg: Config, ignoreWindow: boolean, dryRun: boolean, id?: string): number {
   const blocked = syncState();
   if (blocked) {
     console.error(`[bloqueado] ${blocked}`);
     return 3;
   }
   const { pending } = queueState(readQueue(), readAllLedger());
-  const item = pending[0];
+  const item = id ? pending.find((t) => t.id === id) : pending[0];
+  if (id && !item) {
+    console.error(`la tarea ${id} no está pendiente en la cola (ver --status)`);
+    return 2;
+  }
   if (!item) {
     console.log("cola vacía");
     return 0;
@@ -154,6 +161,7 @@ function main(argv: string[]): number {
         "ignore-window": { type: "boolean" },
         status: { type: "boolean" },
         next: { type: "boolean" },
+        task: { type: "string" },
         "merge-state": { type: "boolean" },
         trace: { type: "string" },
         help: { type: "boolean", short: "h" },
@@ -174,7 +182,7 @@ function main(argv: string[]): number {
   if (values.trace) return cmdTrace(values.trace);
   if (values.status) return cmdStatus(cfg);
   if (values["merge-state"]) return cmdMergeState(cfg);
-  if (values.next) return cmdNext(cfg, !!values["ignore-window"], !!values["dry-run"]);
+  if (values.next || values.task) return cmdNext(cfg, !!values["ignore-window"], !!values["dry-run"], values.task);
   if (!agent || !task || positionals.length > 2) {
     console.error(`${USAGE}\nerror: hacen falta <agente> y "<tarea>"`);
     return 2;

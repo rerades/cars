@@ -388,6 +388,19 @@ describe("cola (ADR-0013)", () => {
     assert.deepEqual(failed.map((r) => r.task_id), ["fallida"]);
   });
 
+  test("--task launches only a pending task with that id", () => {
+    const dir = stateDir("- id: ya\n  agent: researcher\n  task: hecha\n- id: otra\n  agent: researcher\n  task: pendiente\n",
+      [{ task_id: "ya", outcome: "success", started: "2026-10-01T01:00:00+02:00" }]);
+    for (const id of ["ya", "no-existe"]) {
+      const r = spawnSync(process.execPath, [join(orq.REPO, "factory", "run.ts"), "--task", id], {
+        encoding: "utf8", env: { ...process.env, FACTORY_STATE_DIR: dir },
+      });
+      assert.equal(r.status, 2);
+      assert.match(r.stderr, new RegExp(`la tarea ${id} no está pendiente`));
+    }
+    rmSync(dir, { recursive: true, force: true });
+  });
+
   test("a consumed task is not run again, even if it failed and its state PR is not merged", () => {
     const dir = stateDir("- id: ya\n  agent: researcher\n  task: no debe ejecutarse\n",
       [{ task_id: "ya", outcome: "failed", started: "2026-10-01T01:00:00+02:00" }]);
