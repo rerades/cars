@@ -559,3 +559,35 @@ describe("hook guardián", () => {
     assert.equal(r.status, 0);
   });
 });
+
+describe("fusión de la PR de estado (ADR-0013, punto 6)", () => {
+  const green: orq.StatePr = {
+    headRefName: orq.STATE_BRANCH, headRefOid: "abc", mergeable: "MERGEABLE",
+    labels: [{ name: orq.AUTOMERGE_LABEL }],
+    statusCheckRollup: [{ status: "COMPLETED", conclusion: "SUCCESS" }, { status: "COMPLETED", conclusion: "SKIPPED" }],
+    files: [{ path: "ops/runs/2026-10.jsonl", deletions: 0 }],
+  };
+
+  test("se fusiona sola si solo añade filas y la CI está en verde", () => {
+    assert.equal(orq.stateMergeBlocker(green, false), null);
+  });
+
+  test("cualquier otra cosa la deja para una persona", () => {
+    const cases: [Partial<orq.StatePr>, boolean][] = [
+      [{}, true],
+      [{ headRefName: "agent/x/1" }, false],
+      [{ labels: [] }, false],
+      [{ files: [] }, false],
+      [{ files: [{ path: "ops/runs/2026-10.jsonl", deletions: 1 }] }, false],
+      [{ files: [{ path: "factory/queue.yaml", deletions: 0 }] }, false],
+      [{ files: [{ path: "ops/runs/x/2026-10.jsonl", deletions: 0 }] }, false],
+      [{ mergeable: "CONFLICTING" }, false],
+      [{ statusCheckRollup: [] }, false],
+      [{ statusCheckRollup: [{ status: "IN_PROGRESS" }] }, false],
+      [{ statusCheckRollup: [{ status: "COMPLETED", conclusion: "FAILURE" }] }, false],
+    ];
+    for (const [change, stopped] of cases) {
+      assert.notEqual(orq.stateMergeBlocker({ ...green, ...change }, stopped), null, JSON.stringify(change));
+    }
+  });
+});

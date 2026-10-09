@@ -122,13 +122,16 @@ Detalles:
    leen del worktree de estado: `origin/main` más las filas aún sin fusionar. Así una tarea
    consumida no se vuelve a lanzar aunque su PR de estado siga abierta (R3), y el presupuesto
    cuenta todas las ejecuciones.
-6. **La fusión de la PR de estado.** Hasta que `auto_merge` esté en `true`, la fusiona una persona,
-   **con commit de merge, no squash** (con squash, la rama acumulada chocaría con `main` en la
-   siguiente pasada). Cuando la fusión automática de ADR-0011 se active, la PR de estado tiene su
-   **propia regla**, no la de las PR de agente: rama `chore/factory-state` abierta por la factoría;
-   el diff solo **añade líneas** a ficheros `ops/runs/*.jsonl` (ni borra, ni modifica, ni toca otra
-   ruta); CI en verde; sin conflictos; sin `factory/STOP`; `gh pr merge --merge
-   --match-head-commit <sha>` ([2]). No necesita `review:ok`: el Revisor no la revisa.
+6. **La fusión de la PR de estado.** Siempre **con commit de merge, no squash** (con squash, la rama
+   acumulada chocaría con `main` en la siguiente pasada). La fusiona la propia factoría, sin esperar
+   a la fusión automática de ADR-0011 (decisión del responsable, 2026-10-09): el registro solo lo
+   escribe el orquestador y revisarlo a mano no aporta nada. Tiene su **propia regla**, no la de las
+   PR de agente: rama `chore/factory-state` con la etiqueta `automerge`, que la factoría pone al
+   abrirla; el diff solo **añade líneas** a ficheros `ops/runs/*.jsonl` (ni borra ni toca otra ruta);
+   todos los checks terminados y en verde; sin conflictos; sin `factory/STOP`; `gh pr merge --merge
+   --match-head-commit <sha>` ([2]). No necesita `review:ok`: el Revisor no la revisa. Lo hace
+   `mergeStatePr()` al empezar cada ejecución, así que la PR de la última ejecución de la noche
+   espera a la noche siguiente. Si no cumple la regla, se queda abierta para una persona.
 7. **Lista de rutas de ADR-0011.** **Ni `factory/queue*.yaml` ni `ops/runs/` entran** en la lista
    de las PR de agente. La cola decide qué hará la factoría: encolar es de una persona, y una PR de
    agente que la cambie la fusiona una persona. El registro sostiene el presupuesto (ADR-0002) y
