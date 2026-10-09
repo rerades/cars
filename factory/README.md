@@ -12,6 +12,7 @@ node factory/run.ts researcher "tarea" --dry-run  # muestra el comando, no ejecu
 node factory/run.ts researcher "tarea"            # ejecuta (solo dentro del horario)
 node factory/run.ts researcher "tarea" --ignore-window   # pruebas supervisadas de día
 node factory/run.ts --trace <run_id>              # pasos de una ejecución (ops/traces/)
+node factory/fetch-idae.ts TESLA                  # versiones BEV de una marca en el IDAE (fuente idae-es, T2)
 ```
 
 ## Cola de tareas
