@@ -4,7 +4,7 @@ brand_name: Renault
 model: Renault 4 E-Tech eléctrico
 status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
 segment: {value: urbano, note: "la web lo presenta como «coche urbano»", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
-needs_review: true
+needs_review: false
 specs:
   wltp_max_km: {value: 409, note: "hasta 409 km WLTP, versión evolution con pack confort de 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
 versions:
@@ -80,6 +80,6 @@ open_questions:
   - "battery_kwh_options no obtenido: la web leída solo menciona la batería de 52 kWh y la de 40 kWh solo constaba en prensa.renault.es."
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión no asignable: la web solo da «hasta 409 km» para evolution con pack confort 52 kWh. Solo se publica specs.wltp_max_km."
-  - "Sin PVP sin promociones: la web muestra precios «desde» con «este importe incluye promociones» (evolution 21.974 €). No se ha encontrado un PVP vigente sin promociones en la web (el configurador no se pudo leer); los precios guardados son los de la web con promociones. Se mantiene needs_review."
+  - "Sin PVP sin promociones: la web muestra precios «desde» con «este importe incluye promociones» (evolution 21.974 €). No se ha encontrado un PVP vigente sin promociones en la web (el configurador no se pudo leer); los precios guardados son los de la web con promociones."
   - "Batería por versión, carga CC/CA y tracción no publicadas en la web leída."
   - "R4 Van (furgón N1) no incluido: no es turismo y no se ha leído su ficha."

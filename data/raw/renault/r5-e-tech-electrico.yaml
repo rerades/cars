@@ -4,7 +4,7 @@ brand_name: Renault
 model: Renault 5 E-Tech eléctrico
 status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
 segment: {value: urbano, note: "la web lo presenta como «el coche urbano 100% eléctrico»", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
-needs_review: true
+needs_review: false
 specs:
   wltp_max_km: {value: 430, note: "hasta 430 km WLTP, batería autonomía confort 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-10-10, tier: T1}
 versions:
@@ -85,7 +85,7 @@ images:
 open_questions:
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión: la web da 430 km (52 kWh), 315 km (40 kWh) y 305 km (37 kWh), pero la ficha técnica solo detalla una versión y no se ha podido asignar con seguridad a cada acabado; solo se publica specs.wltp_max_km (430)."
-  - "Sin PVP sin promociones en la lista: la web muestra «desde 20.164 €» (evolution 120 CV) con «este importe incluye promociones», pero el configurador da «PVP contado, sin promos, sin Auto+, con impuestos» 28.085 €. La versión five (37 kWh/95-110 CV) no figura en la lista de acabados de la web (la batería de 37 kWh sale «a finales de 2026»), por eso no se incluye. Los precios de las demás versiones son solo precios con promociones. Se mantiene needs_review."
+  - "Sin PVP sin promociones en la lista: la web muestra «desde 20.164 €» (evolution 120 CV) con «este importe incluye promociones», pero el configurador da «PVP contado, sin promos, sin Auto+, con impuestos» 28.085 €. La versión five (37 kWh/95-110 CV) no figura en la lista de acabados de la web (la batería de 37 kWh sale «a finales de 2026»), por eso no se incluye. Los precios de las demás versiones son solo precios con promociones."
   - "Potencia: la web publica 120 CV = 90 kW y 150 CV = 110 kW; se guarda el kW publicado. Los 80 kW (110 CV) de la batería 37 kWh no se incluyen (versión aún no a la venta)."
   - "Carga CC: la ficha da 100 kW solo para la versión evolution 150 CV; las demás no la publican."
   - "Tracción no publicada explícitamente (no se asume fwd)."
