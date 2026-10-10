@@ -1,7 +1,7 @@
 ---
 id: VISION
 status: draft
-updated: 2026-09-29
+updated: 2026-10-10
 ---
 
 # Visión del producto
@@ -34,7 +34,7 @@ Personas en Europa, con foco inicial en **España**, que están informándose so
 | Catálogo de modelos | PRD-001 |
 | Ficha de modelo | PRD-002 |
 | Portada | PRD-004 |
-| Comparador | _pendiente_ |
+| Comparador | PRD-003 |
 | Rankings | _pendiente_ (será PRD-005) |
 | Reviews | _pendiente_ |
 
