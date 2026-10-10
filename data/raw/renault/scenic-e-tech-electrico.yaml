@@ -4,7 +4,6 @@ brand_name: Renault
 model: Scenic E-Tech eléctrico
 status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
 launch: {value: "2023-12", note: "pedidos abiertos en la nota de prensa del 14/12/2023; no consta la fecha exacta de apertura", source_id: renault-press, url: "https://prensa.renault.es/apertura-de-pedidos-de-scenic-e-tech-100-electrico/", retrieved: 2026-10-10, tier: T1}
-segment: {value: suv_compacto, note: "la web lo titula «Coche familiar SUV eléctrico»; no da tamaño de SUV, se asigna suv_compacto", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
 needs_review: true
 specs:
   wltp_max_km: {value: 642, note: "«hasta 642 km de autonomía» según versión, WLTP", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
