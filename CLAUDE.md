@@ -62,7 +62,7 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
   en el registro de fuentes.
 - Hecho también: `siete3.com` servido por el static site de Render (#98, 2026-10-01).
 - Hecho también: validador de todo `data/` (`node factory/validate-data.ts`, ADR-0010) e imagen o
-  silueta en la tarjeta (#112, ADR-0012).
-- Pendiente: el paso del validador en la CI (en la cola, DevOps), la migración de las imágenes a
+  silueta en la tarjeta (#112, ADR-0012), y el validador en la CI, en el job `test` (#228).
+- Pendiente: la migración de las imágenes a
   `data/images/` (en la cola, Researcher), el paso `run.ts --merge` de ADR-0011 (fusión automática,
   apagada hasta cumplir sus condiciones), verificar que el configurador de Cupra da el PVP sin ayudas.
