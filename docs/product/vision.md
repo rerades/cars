@@ -26,7 +26,7 @@ Personas en Europa, con foco inicial en **España**, que están informándose so
 ## Qué NO es (por ahora)
 - No hay cuentas de usuario, comentarios, foros ni contenido generado por usuarios.
 - No es un marketplace ni vende coches.
-- No es comercial: es una web personal y sin ánimo de lucro, sin publicidad ni monetización (decisión del responsable, 2026-10-10). Por eso puede usar fuentes cuyos términos limitan el uso a fines personales y no comerciales, citándolas y sin copiar textos ni imágenes (ADR-0001, regla 6).
+- No es comercial: es una web personal y sin ánimo de lucro, sin publicidad ni monetización (decisión del responsable, 2026-10-10). Aun así es una web pública de información: una fuente cuyos términos excluyen el uso «con fines de información» no se puede usar (ADR-0001, regla 6).
 - No hay newsletter ni formularios que recojan datos personales.
 
 ## Funcionalidades previstas
