@@ -237,6 +237,22 @@
     bitácora. Crea las fuentes como ficheros data/sources/<id>.yaml (data-model.md, sección 8); no
     toques data/candidatas.yaml. Descarga las imágenes con node factory/fetch-image.ts, como dicen
     tus instrucciones (ADR-0010, «Imágenes»)."
+- id: issue-212
+  agent: developer
+  task: "Historia #212 (PRD-004, P0): portada (/). Implementa en web/src/pages/index.astro la portada
+    de docs/product/prd/PRD-004-portada.md con el diseño de docs/design/portada.md (léelo entero:
+    estructura, estados, accesibilidad, «Títulos y textos» y «Copy»), sustituyendo el borrador de la
+    historia #33. El h1 es solo sitio.nombre («siete3») y el <title> usa la clave propia
+    pagina.portada.tituloDocumento; el salto al contenido y la cabecera del sitio no son de esta
+    historia. La franja «Explorar» vive hoy dentro de web/src/components/CatalogPage.astro: extráela
+    a su propio componente y úsalo en /coches y en la portada sin cambiar el HTML de /coches (sus
+    pruebas deben seguir pasando); en la portada lleva «Todos los coches» y ningún aria-current. El
+    contador sale del mismo cálculo de modelos publicados que la lista de /coches (sin
+    needs_review), con el plural por Intl.PluralRules. El aviso «No se pudieron leer N ficheros» sale
+    de la página y va al log del build (PRD-004, decisión 6; ADR-0010). Textos en
+    web/src/lib/i18n.ts con las claves del diseño. Añade pruebas sobre el sitio construido para CA-1
+    a CA-10, con datos de prueba (CARS_DATA_DIR) para el estado vacío. La PR referencia #212 y
+    enumera los RF y CA cubiertos."
 - id: imagenes-cupra
   agent: researcher
   task: "Migra a la forma de ADR-0012 las imágenes de data/raw/cupra/ (3 hoy con la clave url, forma
