@@ -1,0 +1,14 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: renault-press
+brand: Renault
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://prensa.renault.es/
+  news: https://prensa.renault.es/renault-5-e-tech-100-electrico-apertura-de-pedidos-de-las-versiones-de-autonomia-urbana/ # ejemplo: apertura de pedidos del R5 (2024-11-19)
+image_license: "" # términos de uso de las imágenes de prensa no leídos: no publicar
+notes: >
+  Verificado (2026-10-10): prensa.renault.es responde. Las notas son de la fecha de apertura de pedidos y sus precios (a menudo "antes de ayudas") pueden estar desfasados respecto a la web. No se ha leído robots.txt ni los términos de las imágenes.
+last_verified: 2026-10-10
+status: active
