@@ -27,11 +27,11 @@ const BANNED_BASH: [RegExp, string][] = [
   // conservan aunque el gestor sea pnpm (ADR-0007): si no, `npm install x` reintroduce un
   // package-lock.json por la puerta de atrás.
   // Los flags se saltan: lo que se busca es un paquete suelto detrás del subcomando.
-  // Only at the start of the command or after a separator: text that mentions
+  // Only at the start of the command or after a separator (newline included): text that mentions
   // `pnpm install` (a bitácora entry, a grep) runs nothing.
-  [/(?:^|[;&|(]\s*)(?:npm|pnpm|yarn|bun)\s+(?:i|in|install|add)\b(?:\s+-{1,2}[\w-]+)*\s+(?!-)[^\s;&|)]/,
+  [/(?:^|[;&|(\n]\s*)(?:npm|pnpm|yarn|bun)\s+(?:i|in|install|add)\b(?:\s+-{1,2}[\w-]+)*\s+(?!-)[^\s;&|)]/,
     "declara la dependencia en package.json y usa `pnpm install` sin argumentos"],
-  [/(?:^|[;&|(]\s*)(?:(?:npx|pnpx|pnx|bunx)\b|(?:npm|pnpm|bun)\s+(?:create|init|exec|dlx)\b|yarn\s+dlx\b)/,
+  [/(?:^|[;&|(\n]\s*)(?:(?:npx|pnpx|pnx|bunx)\b|(?:npm|pnpm|bun)\s+(?:create|init|exec|dlx)\b|yarn\s+dlx\b)/,
     "ejecutar un paquete que no está en package.json no está permitido"],
   // Revisar es informar: quien decide si una PR entra es una persona.
   [/\bgh\s+pr\s+(?:merge|review|close|ready)\b/, "aprobar, cerrar o fusionar una PR no es de un agente"],
