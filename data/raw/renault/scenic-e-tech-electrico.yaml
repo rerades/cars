@@ -1,0 +1,47 @@
+# Researcher — Renault Scenic E-Tech eléctrico. Fuente: renault-es (T1). Consultado 2026-10-10.
+brand: renault
+brand_name: Renault
+model: Scenic E-Tech eléctrico
+status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
+needs_review: true
+specs:
+  wltp_max_km: {value: 642, note: "«hasta 642 km de autonomía» según versión, WLTP", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
+versions:
+  - name: techno 220 CV gran autonomía
+    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
+    price:
+      value: 35326
+      unit: EUR
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/scenic.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/scenic.html"
+      retrieved: 2026-10-10
+      tier: T1
+  - name: esprit Alpine 220 CV gran autonomía
+    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
+    price:
+      value: 37666
+      unit: EUR
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/scenic.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/scenic.html"
+      retrieved: 2026-10-10
+      tier: T1
+images:
+  - file: data/images/renault/scenic-e-tech-electrico/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Renault_Sc%C3%A9nic_E-Tech_Electric_220_Long_Range_Techno_%E2%80%93_f_30062024.jpg/1280px-Renault_Sc%C3%A9nic_E-Tech_Electric_220_Long_Range_Techno_%E2%80%93_f_30062024.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Renault_Sc%C3%A9nic_E-Tech_Electric_220_Long_Range_Techno_%E2%80%93_f_30062024.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-10
+    license: CC-BY-SA-3.0-DE
+    attribution: "M 93, CC BY-SA 3.0 DE, vía Wikimedia Commons"
+open_questions:
+  - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
+  - "Autonomía WLTP por versión no leída (la web da «hasta 642 km» según versión); solo se publica specs.wltp_max_km."
+  - "Sin PVP sin promociones: la web muestra «desde 35.326 €» (techno) con «este importe incluye promociones». No se ha encontrado un PVP vigente sin promociones. Se mantiene needs_review."
+  - "Batería: la web menciona 89 kWh en un ejemplo de coste y una versión comfort de 67 kWh «en otoño de 2026» (335 km WLTP a 110 km/h); no se asigna batería a ninguna versión. La versión comfort aún no se vende, no se incluye."
+  - "Carga CC/CA y tracción no publicadas en la web leída."

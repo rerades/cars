@@ -1,0 +1,40 @@
+# Researcher — Renault Twingo E-Tech eléctrico. Fuente: renault-es (T1). Consultado 2026-10-10.
+brand: renault
+brand_name: Renault
+model: Twingo E-Tech eléctrico
+status: {value: on_sale, note: "pedidos abiertos; entregas «a partir de mayo 2026» (techno) y «verano 2026» (evolution) según la web", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+segment: {value: urbano, note: "la web dice «vehículo urbano por naturaleza»", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+needs_review: false
+specs:
+  wltp_max_km: {value: 263, note: "«263 km de autonomía en la versión evolution», WLTP", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+versions:
+  - name: evolution
+    power_kw: {value: 60, note: "publicado: 60 kW (80 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+    price:
+      value: 13413
+      unit: EUR
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html"
+      retrieved: 2026-10-10
+      tier: T1
+  - name: techno
+    power_kw: {value: 60, note: "publicado: 60 kW (80 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+    price:
+      value: 14909
+      unit: EUR
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html"
+      retrieved: 2026-10-10
+      tier: T1
+images: []
+open_questions:
+  - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
+  - "Autonomía WLTP solo para evolution (263 km); techno no la publica, así que solo se da specs.wltp_max_km. Batería y carga CA no publicadas (carga 15-80 % en 28 min con cargador CC de 50 kW; no es el máximo del coche)."
+  - "No se ha encontrado un PVP vigente sin promociones: los precios son «desde» con «este importe incluye promociones»."
+  - "Imágenes: solo hay en Commons una foto compartida con el R4 (File:Renault Twingo Electric & 4 E-Tech Electric.jpg), que no sirve para una tarjeta de un solo modelo; no se registra. La web pondrá silueta."

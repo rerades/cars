@@ -1,0 +1,85 @@
+# Researcher — Renault 4 E-Tech eléctrico. Fuente: renault-es (T1). Consultado 2026-10-10.
+brand: renault
+brand_name: Renault
+model: Renault 4 E-Tech eléctrico
+status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+segment: {value: urbano, note: "la web lo presenta como «coche urbano»", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+needs_review: true
+specs:
+  wltp_max_km: {value: 409, note: "hasta 409 km WLTP, versión evolution con pack confort de 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+versions:
+  - name: evolution 120 CV autonomía urbana
+    power_kw: {value: 90, note: "publicado: 90 kW (120 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+    price:
+      value: 21974
+      unit: EUR
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      retrieved: 2026-10-10
+      tier: T1
+  - name: techno 150 CV autonomía confort
+    power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+    price:
+      value: 26499
+      unit: EUR
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      retrieved: 2026-10-10
+      tier: T1
+  - name: iconic 150 CV autonomía confort
+    power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+    price:
+      value: 28309
+      unit: EUR
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      retrieved: 2026-10-10
+      tier: T1
+  - name: techno plein sud 150 CV autonomía confort
+    power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+    price:
+      value: 28128
+      unit: EUR
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      retrieved: 2026-10-10
+      tier: T1
+  - name: iconic plein sud 150 CV autonomía confort
+    power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
+    price:
+      value: 29938
+      unit: EUR
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
+      retrieved: 2026-10-10
+      tier: T1
+images:
+  - file: data/images/renault/r4-e-tech-electrico/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Renault-4-E-Tech-electric-2025-rouge-carmin-01-byRundvald.jpg/1280px-Renault-4-E-Tech-electric-2025-rouge-carmin-01-byRundvald.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Renault-4-E-Tech-electric-2025-rouge-carmin-01-byRundvald.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-10
+    license: CC-BY-SA-4.0
+    attribution: "Rundvald, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "battery_kwh_options no obtenido: la web leída solo menciona la batería de 52 kWh y la de 40 kWh solo constaba en prensa.renault.es."
+  - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
+  - "Autonomía WLTP por versión no asignable: la web solo da «hasta 409 km» para evolution con pack confort 52 kWh. Solo se publica specs.wltp_max_km."
+  - "Sin PVP sin promociones: la web muestra precios «desde» con «este importe incluye promociones» (evolution 21.974 €). No se ha encontrado un PVP vigente sin promociones en la web (el configurador no se pudo leer); los precios guardados son los de la web con promociones. Se mantiene needs_review."
+  - "Batería por versión, carga CC/CA y tracción no publicadas en la web leída."
+  - "R4 Van (furgón N1) no incluido: no es turismo y no se ha leído su ficha."

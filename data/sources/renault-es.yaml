@@ -1,0 +1,15 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: renault-es
+brand: Renault
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.renault.es/
+  models: https://www.renault.es/electricos.html
+  prices: https://www.renault.es/electricos/r5-e-tech-electrico/precios-versiones.html # cada modelo tiene su página /electricos/<modelo>.html y su configurador
+image_license: "" # sin términos de uso de imágenes leídos: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-10): www.renault.es responde. robots.txt solo bloquea URL con parámetros de configurador (conf, confuri, dealerId, modelURI, vin); las páginas de modelo y de versiones se pueden leer. Los precios "desde" de las páginas de modelo llevan la letra pequeña "este importe incluye promociones": no son PVP limpio y se guardan como price_kind financed. Solo el configurador del R5 evolution muestra "PVP contado, sin promos, sin Auto+, con impuestos". Gama eléctrica de turismos vista: Twingo, 5, 4, Megane, Scenic (más R5 Turbo 3E sin precio). No verificadas: furgonetas (Kangoo, Trafic, Master) ni R4 Van.
+last_verified: 2026-10-10
+status: active
