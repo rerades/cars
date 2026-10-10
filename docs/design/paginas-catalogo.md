@@ -63,8 +63,8 @@ Orden del DOM = orden visual = orden de lectura (WCAG 1.3.2, RNF-3), el mismo qu
 
 ### Títulos y `<title>` (RF-10, CA-12b)
 - El `h1` es el título propio de cada página.
-- El `<title>` del documento es `pagina.tituloDocumento`: «{h1} · {sitio}». El nombre del sitio no está decidido
-  y va en su propia clave (`sitio.nombre`). Como el `h1` ya es distinto en cada página, el `<title>` también lo es.
+- El `<title>` del documento es `pagina.tituloDocumento`: «{h1} · {sitio}». El nombre del sitio es
+  «siete3» y va en su propia clave (`sitio.nombre`). La portada usa su propio patrón (`portada.md`). Como el `h1` ya es distinto en cada página, el `<title>` también lo es.
 
 ## Títulos y textos de entrada (RF-10, CA-12b, RNF-4)
 
