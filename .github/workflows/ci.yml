@@ -23,6 +23,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: pnpm run typecheck
+      # ADR-0010: validates all of data/raw/ and data/sources/. Errors -> ::error and exit 1 (red);
+      # warnings -> ::warning and the step summary, never red. Meets ADR-0011, point 7 (b).
+      - run: node factory/validate-data.ts
 
   web:
     runs-on: ubuntu-latest
