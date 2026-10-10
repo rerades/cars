@@ -81,7 +81,7 @@ agents:
     # Solo los workflows. Es el agente que puede tocar la guarda que revisa a los demás:
     # su PR se lee siempre entera (ver .claude/agents/devops.md).
     write_paths: [.github/workflows/, docs/bitacora/]
-    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(gh run:*)", "Bash(node factory/bitacora.ts:*)"]
+    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(gh run:*)", "Bash(node factory/bitacora.ts:*)", "Bash(node factory/validate-data.ts:*)"]   # validate-data: ADR-0010 CI step, to check the red path
     network: false
 
   designer:
