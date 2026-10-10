@@ -534,6 +534,7 @@ describe("hook guardián", () => {
       "pnpx astro", "pnx astro", "yarn add astro", "bun add astro", "bunx astro",
       "echo hola; npx astro",   // también detrás de un separador
       "cd web && pnpm add astro", "(pnpm add astro)", "cd web && npm create astro",
+      "cd web\npnpm add astro", "cd web\n  npx astro add",   // en otra línea del comando
     ];
     for (const cmd of bloqueados) {
       assert.equal(runHook({ tool_name: "Bash", tool_input: { command: cmd } }).status, 2, cmd);
