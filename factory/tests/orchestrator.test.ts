@@ -533,6 +533,7 @@ describe("hook guardián", () => {
       "npm create astro@latest", "pnpm add tailwindcss", "pnpm i -D vitest", "pnpm dlx astro",
       "pnpx astro", "pnx astro", "yarn add astro", "bun add astro", "bunx astro",
       "echo hola; npx astro",   // también detrás de un separador
+      "cd web && pnpm add astro", "(pnpm add astro)", "cd web && npm create astro",
     ];
     for (const cmd of bloqueados) {
       assert.equal(runHook({ tool_name: "Bash", tool_input: { command: cmd } }).status, 2, cmd);
@@ -543,6 +544,10 @@ describe("hook guardián", () => {
       "pnpm install", "pnpm install --frozen-lockfile", "pnpm test", "pnpm run build",
       "npm install", "npm ci", "npm test", "npm run build",
       "grep -rn npx .github/",   // hablar de npx no es ejecutarlo
+      "cd web && pnpm install", "pnpm install; pnpm test",
+      // Run 20261010-040006-1bc986: a bitácora text that mentions `pnpm install` was blocked.
+      'node factory/bitacora.ts add --tipo hito --texto "el job test ejecuta validate-data.ts tras pnpm install y antes del build"',
+      'grep -rn "pnpm add tailwindcss" docs/',
     ];
     for (const cmd of permitidos) {
       assert.equal(runHook({ tool_name: "Bash", tool_input: { command: cmd } }).status, 0, cmd);
