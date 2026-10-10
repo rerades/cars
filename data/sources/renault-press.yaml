@@ -9,6 +9,6 @@ urls:
   news: https://prensa.renault.es/renault-5-e-tech-100-electrico-apertura-de-pedidos-de-las-versiones-de-autonomia-urbana/ # ejemplo: apertura de pedidos del R5 (2024-11-19)
 image_license: "" # términos de uso de las imágenes de prensa no leídos: no publicar
 notes: >
-  Verificado (2026-10-10): prensa.renault.es responde. Las notas son de la fecha de apertura de pedidos y sus precios (a menudo "antes de ayudas") pueden estar desfasados respecto a la web. robots.txt leído (2026-10-10): solo bloquea /wp-admin/, /login, /dashboard, /download/, /wp-content/download/, la búsqueda y los feeds; las notas de prensa se pueden leer. Términos leídos (2026-10-10, https://prensa.renault.es/menciones-legales/?lang=spa): licencia de uso personal y no comercial. La web es personal y sin ánimo de lucro (decisión del responsable, 2026-10-10), así que se usan sus datos citando la nota. No se copian textos ni imágenes.
+  Verificado (2026-10-10): prensa.renault.es responde. Las notas son de la fecha de apertura de pedidos y sus precios (a menudo "antes de ayudas") pueden estar desfasados respecto a la web. robots.txt leído (2026-10-10): solo bloquea /wp-admin/, /login, /dashboard, /download/, /wp-content/download/, la búsqueda y los feeds; las notas de prensa se pueden leer. Términos leídos (2026-10-10, https://prensa.renault.es/menciones-legales/?lang=spa): licencia de uso personal, no comercial, y su apartado 9 excluye además reproducir el contenido «con fines publicitarios y/o comerciales y/o de información». Una web pública de referencia es uso de información aunque no tenga ánimo de lucro, así que no se usa ningún dato de esta web (ADR-0001, regla 6).
 last_verified: 2026-10-10
-status: active
+status: deprecated

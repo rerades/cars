@@ -37,7 +37,7 @@ versions:
       tier: T1
 images: []
 open_questions:
-  - "launch no obtenido: no se ha leído la nota de prensa de apertura de pedidos del Megane E-Tech (existe una nota «actualiza su gama y precios» en prensa.renault.es sin leer)."
+  - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión: solo consta 500 km para techno; esprit Alpine no se ha leído, así que solo se publica specs.wltp_max_km."
   - "No se ha encontrado un PVP vigente sin promociones: los precios son «desde» con «este importe incluye promociones»."
   - "Imágenes: no se ha buscado en Commons para este modelo (límite de la ejecución); la web pondrá silueta."

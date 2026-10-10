@@ -34,7 +34,7 @@ versions:
       tier: T1
 images: []
 open_questions:
-  - "launch no obtenido: no se ha leído ninguna nota de prensa con la apertura de pedidos en España."
+  - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP solo para evolution (263 km); techno no la publica, así que solo se da specs.wltp_max_km. Batería y carga CA no publicadas (carga 15-80 % en 28 min con cargador CC de 50 kW; no es el máximo del coche)."
   - "No se ha encontrado un PVP vigente sin promociones: los precios son «desde» con «este importe incluye promociones»."
   - "Imágenes: solo hay en Commons una foto compartida con el R4 (File:Renault Twingo Electric & 4 E-Tech Electric.jpg), que no sirve para una tarjeta de un solo modelo; no se registra. La web pondrá silueta."

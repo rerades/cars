@@ -1,9 +1,8 @@
-# Researcher — Renault 5 E-Tech eléctrico. Fuentes: renault-es, renault-press (T1). Consultado 2026-10-10.
+# Researcher — Renault 5 E-Tech eléctrico. Fuente: renault-es (T1). Consultado 2026-10-10.
 brand: renault
 brand_name: Renault
 model: Renault 5 E-Tech eléctrico
 status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
-launch: {value: "2024-11", note: "apertura de pedidos en España el 19/11/2024 (versiones autonomía urbana)", source_id: renault-press, url: "https://prensa.renault.es/renault-5-e-tech-100-electrico-apertura-de-pedidos-de-las-versiones-de-autonomia-urbana/", retrieved: 2026-10-10, tier: T1}
 segment: {value: urbano, note: "la web lo presenta como «el coche urbano 100% eléctrico»", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
 needs_review: true
 specs:
@@ -84,8 +83,9 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión: la web da 430 km (52 kWh), 315 km (40 kWh) y 305 km (37 kWh), pero la ficha técnica solo detalla una versión y no se ha podido asignar con seguridad a cada acabado; solo se publica specs.wltp_max_km (430)."
-  - "Discrepancia de precio web/prensa: la web muestra «desde 20.164 €» (evolution 120 CV) con «este importe incluye promociones», pero el configurador da «PVP contado, sin promos, sin Auto+, con impuestos» 28.085 €. La nota de prensa del 19/11/2024 daba evolution desde 27.900 € y five 24.900 € «antes de ayudas»; la del 06/06/2025 daba five desde 24.950 € «sin incluir ayudas ni descuentos». La versión five (37 kWh/95-110 CV) no figura en la lista de acabados de la web (la batería de 37 kWh sale «a finales de 2026»), por eso no se incluye. Los precios de las demás versiones son solo precios con promociones. Se mantiene needs_review."
+  - "Sin PVP sin promociones en la lista: la web muestra «desde 20.164 €» (evolution 120 CV) con «este importe incluye promociones», pero el configurador da «PVP contado, sin promos, sin Auto+, con impuestos» 28.085 €. La versión five (37 kWh/95-110 CV) no figura en la lista de acabados de la web (la batería de 37 kWh sale «a finales de 2026»), por eso no se incluye. Los precios de las demás versiones son solo precios con promociones. Se mantiene needs_review."
   - "Potencia: la web publica 120 CV = 90 kW y 150 CV = 110 kW; se guarda el kW publicado. Los 80 kW (110 CV) de la batería 37 kWh no se incluyen (versión aún no a la venta)."
   - "Carga CC: la ficha da 100 kW solo para la versión evolution 150 CV; las demás no la publican."
   - "Tracción no publicada explícitamente (no se asume fwd)."

@@ -1,14 +1,12 @@
-# Researcher — Renault 4 E-Tech eléctrico. Fuentes: renault-es, renault-press (T1). Consultado 2026-10-10.
+# Researcher — Renault 4 E-Tech eléctrico. Fuente: renault-es (T1). Consultado 2026-10-10.
 brand: renault
 brand_name: Renault
 model: Renault 4 E-Tech eléctrico
 status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
-launch: {value: "2025-03", note: "apertura de pedidos el 12/03/2025 (plazo preferente R4 R Pass desde el 04/03)", source_id: renault-press, url: "https://prensa.renault.es/renault-4-e-tech-100-electrico-apertura-de-pedidos-con-dos-opciones-de-autonomia-que-se-adaptan-a-todos-los-usos/?lang=spa", retrieved: 2026-10-10, tier: T1}
 segment: {value: urbano, note: "la web lo presenta como «coche urbano»", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
 needs_review: true
 specs:
   wltp_max_km: {value: 409, note: "hasta 409 km WLTP, versión evolution con pack confort de 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
-  battery_kwh_options: {value: [40, 52], note: "40 kWh según la nota de prensa de 04/03/2025; 52 kWh también en la web", source_id: renault-press, url: "https://prensa.renault.es/renault-4-e-tech-100-electrico-apertura-de-pedidos-con-dos-opciones-de-autonomia-que-se-adaptan-a-todos-los-usos/?lang=spa", retrieved: 2026-10-10, tier: T1}
 versions:
   - name: evolution 120 CV autonomía urbana
     power_kw: {value: 90, note: "publicado: 90 kW (120 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-10-10, tier: T1}
@@ -79,7 +77,9 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Rundvald, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
-  - "Autonomía WLTP por versión no asignable: la web solo da «hasta 409 km» para evolution con pack confort 52 kWh; la nota de prensa de 04/03/2025 daba 308 km (40 kWh) y 409 km (52 kWh). Solo se publica specs.wltp_max_km."
-  - "Discrepancia de precio web/prensa: la web muestra precios «desde» con «este importe incluye promociones» (evolution 21.974 €), mientras la nota de prensa de 04/03/2025 daba evolution 29.900 €, confort 32.900 €, techno 34.900 € e iconic 36.900 € «sin descuentos ni ayudas». No se ha encontrado un PVP vigente sin promociones en la web (el configurador no se pudo leer); los precios guardados son los de la web con promociones. Se mantiene needs_review."
+  - "battery_kwh_options no obtenido: la web leída solo menciona la batería de 52 kWh y la de 40 kWh solo constaba en prensa.renault.es."
+  - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
+  - "Autonomía WLTP por versión no asignable: la web solo da «hasta 409 km» para evolution con pack confort 52 kWh. Solo se publica specs.wltp_max_km."
+  - "Sin PVP sin promociones: la web muestra precios «desde» con «este importe incluye promociones» (evolution 21.974 €). No se ha encontrado un PVP vigente sin promociones en la web (el configurador no se pudo leer); los precios guardados son los de la web con promociones. Se mantiene needs_review."
   - "Batería por versión, carga CC/CA y tracción no publicadas en la web leída."
   - "R4 Van (furgón N1) no incluido: no es turismo y no se ha leído su ficha."

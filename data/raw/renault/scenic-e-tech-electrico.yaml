@@ -1,9 +1,8 @@
-# Researcher — Renault Scenic E-Tech eléctrico. Fuentes: renault-es, renault-press (T1). Consultado 2026-10-10.
+# Researcher — Renault Scenic E-Tech eléctrico. Fuente: renault-es (T1). Consultado 2026-10-10.
 brand: renault
 brand_name: Renault
 model: Scenic E-Tech eléctrico
 status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
-launch: {value: "2023-12", note: "pedidos abiertos en la nota de prensa del 14/12/2023; no consta la fecha exacta de apertura", source_id: renault-press, url: "https://prensa.renault.es/apertura-de-pedidos-de-scenic-e-tech-100-electrico/", retrieved: 2026-10-10, tier: T1}
 needs_review: true
 specs:
   wltp_max_km: {value: 642, note: "«hasta 642 km de autonomía» según versión, WLTP", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
@@ -41,7 +40,8 @@ images:
     license: CC-BY-SA-3.0-DE
     attribution: "M 93, CC BY-SA 3.0 DE, vía Wikimedia Commons"
 open_questions:
+  - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión no leída (la web da «hasta 642 km» según versión); solo se publica specs.wltp_max_km."
-  - "Discrepancia de precio web/prensa: la web muestra «desde 35.326 €» (techno) con «este importe incluye promociones»; la nota de prensa del 14/12/2023 daba techno 87 kWh 46.900 € y evolution 60 kWh 39.900 € (precios de lanzamiento, desfasados). No se ha encontrado un PVP vigente sin promociones. Se mantiene needs_review."
+  - "Sin PVP sin promociones: la web muestra «desde 35.326 €» (techno) con «este importe incluye promociones». No se ha encontrado un PVP vigente sin promociones. Se mantiene needs_review."
   - "Batería: la web menciona 89 kWh en un ejemplo de coste y una versión comfort de 67 kWh «en otoño de 2026» (335 km WLTP a 110 km/h); no se asigna batería a ninguna versión. La versión comfort aún no se vende, no se incluye."
   - "Carga CC/CA y tracción no publicadas en la web leída."
