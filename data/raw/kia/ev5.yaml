@@ -18,9 +18,11 @@ versions:
   - name: EV5 GT-Line
     price: null
 images:
-  - url: "https://upload.wikimedia.org/wikipedia/commons/0/02/Kia_EV5_002.jpg"
+  - file: "data/images/kia/ev5/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Kia_EV5_002.jpg/1280px-Kia_EV5_002.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Kia_EV5_002.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-10-05
+    retrieved: 2026-10-11
     license: CC0-1.0
     attribution: null
 open_questions:
