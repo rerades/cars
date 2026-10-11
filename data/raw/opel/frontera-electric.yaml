@@ -10,9 +10,11 @@ versions:
   - name: Frontera Electric
     price: null   # el precio al contado de ofertas.opel.es (23.800 €) es de la versión térmica/híbrida
 images:
-  - url: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Opel_Frontera_C_Electric_DSC_9331.jpg"
+  - file: data/images/opel/frontera-electric/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Opel_Frontera_C_Electric_DSC_9331.jpg/1280px-Opel_Frontera_C_Electric_DSC_9331.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Opel_Frontera_C_Electric_DSC_9331.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-10-03
+    retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:Opel Frontera C Electric DSC 9331.jpg)"
 open_questions:
