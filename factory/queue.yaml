@@ -398,3 +398,21 @@
     tabla visible y a 320 px los bloques visibles y sin scroll horizontal (WCAG 1.4.10); CA-11 con un
     modelo announced y versions: []. Sin cookies ni localStorage. La PR referencia #148 y enumera los
     RF y CA cubiertos."
+- id: diseno-portada-contador
+  agent: designer
+  task: "Actualiza docs/design/portada.md para recoger cómo quedó implementado el contador en #241:
+    la clave portada.contador se partió en portada.contador.one («{n} modelo en el catálogo») y
+    portada.contador.other («{n} modelos en el catálogo»), que se eligen con Intl.PluralRules (ver
+    web/src/lib/i18n.ts). Cambia las menciones a portada.contador (en «Estructura» y en el texto del
+    contador) para nombrar las dos claves y decir que se eligen por plural. No cambies textos,
+    estructura ni estados. Solo toca docs/design/."
+- id: kia-atribucion-imagenes
+  agent: researcher
+  task: "Unifica la attribution de las imágenes de Kia: ev2, ev4 y ev6 dicen «Alexander Migl» y ev3 y
+    ev9 dicen «Alexander-93», y las cinco son del mismo autor en Wikimedia Commons. Relee con
+    WebFetch la página File: (page_url) de cada una y escribe en attribution el autor tal como lo da
+    Commons en su campo Author o en su línea de atribución, no el EXIF, con la forma «<autor>, CC
+    BY-SA 4.0, via Wikimedia Commons». Si Commons da nombres distintos en páginas distintas, deja en
+    cada fichero el de su página y explícalo en la bitácora. No toques ev5 (CC0, attribution: null),
+    los JPG, las versiones, los precios ni las specs: solo cambian claves attribution de
+    data/raw/kia/."
