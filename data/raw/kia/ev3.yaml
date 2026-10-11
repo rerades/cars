@@ -18,9 +18,11 @@ versions:
   - name: EV3 GT-Line
     price: null
 images:
-  - url: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Kia_EV3_GT-Line_Automesse_Ludwigsburg_2024_IMG_1674.jpg"
+  - file: "data/images/kia/ev3/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Kia_EV3_GT-Line_Automesse_Ludwigsburg_2024_IMG_1674.jpg/1280px-Kia_EV3_GT-Line_Automesse_Ludwigsburg_2024_IMG_1674.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Kia_EV3_GT-Line_Automesse_Ludwigsburg_2024_IMG_1674.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-10-05
+    retrieved: 2026-10-11
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
