@@ -382,6 +382,7 @@ describe("cola (ADR-0013)", () => {
       { task_id: "hecha", outcome: "success" },
       { task_id: "fallida", outcome: "eval_failed", run_id: "r2" },
       { task_id: null, outcome: "failed" }, // manual run: not a queued task
+      { task_id: "borrada", outcome: "failed" }, // failed task later deleted from the queue
     ];
     const { pending, failed } = orq.queueState(queue, rows);
     assert.deepEqual(pending.map((t) => t.id), ["nueva"]);
