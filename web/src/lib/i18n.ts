@@ -6,6 +6,12 @@ export const es = {
   "sitio.nombre": "siete3", // decided by the owner on 2026-10-06 (paginas-catalogo.md, question 3)
   "pagina.tituloDocumento": "{titulo} · {sitio}",
   "pagina.saltar": "Saltar a los resultados",
+  "pagina.portada.tituloDocumento": "siete3 · Coches eléctricos en Europa y España",
+  "pagina.portada.entrada":
+    "Una referencia de los coches eléctricos que se venden en Europa, con foco en España. Para cada modelo, el precio de la marca en España sin ayudas y la autonomía WLTP, cada dato con su fuente y su fecha.",
+  // Plural forms of `portada.contador`, picked with Intl.PluralRules (see homeCountLabel).
+  "portada.contador.one": "{n} modelo en el catálogo",
+  "portada.contador.other": "{n} modelos en el catálogo",
   "pagina.coches.titulo": "Coches eléctricos",
   "pagina.coches.entrada":
     "Todos los modelos eléctricos del mercado español: los que están a la venta, los anunciados y los descatalogados. Precio de la marca en España sin ayudas y autonomía WLTP.",
