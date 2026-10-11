@@ -29,9 +29,11 @@ versions:
     dc_max_kw: {value: 183, note: "dato de la ficha del modelo Born; no se atribuye por versión", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
     price: null   # sin PVP ni precio financiado visible
 images:
-  - url: "https://commons.wikimedia.org/wiki/File:Cupra_Born_1X7A6953.jpg"
+  - file: "data/images/cupra/born/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Cupra_Born_1X7A6953.jpg/1280px-Cupra_Born_1X7A6953.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Cupra_Born_1X7A6953.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-09-28
+    retrieved: 2026-10-11
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
