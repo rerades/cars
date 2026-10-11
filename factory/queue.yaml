@@ -387,3 +387,68 @@
     cada fichero el de su página y explícalo en la bitácora. No toques ev5 (CC0, attribution: null),
     los JPG, las versiones, los precios ni las specs: solo cambian claves attribution de
     data/raw/kia/."
+- id: issue-147
+  agent: developer
+  task: "Historia #147 (épica #145, PRD-002): enlaces de la ficha /marcas/{marca}/{modelo}/ (RF-13,
+    RF-14; CA-13, CA-16). Sigue docs/design/ficha-modelo.md, secciones «Ruta: enlaces de vuelta» y
+    «Cabecera de la ficha» (solo el enlace «Ver en la web de la marca»), con los tokens de tokens.md.
+    En web/src/pages/marcas/[marca]/[modelo].astro (de #146); no rehagas la página. (1) Ruta: <nav
+    aria-label> (ficha.ruta.nombre) antes del h1, con una <ol> de tres elementos: Coches → /coches
+    (ficha.ruta.coches), brand_name → /marcas/{marca}/ (la forma de web/src/pages/marcas/[marca].astro)
+    y el modelo como texto con aria-current=\"page\". Separador «›» por CSS, oculto al lector.
+    (2) «Ver en la web de la marca» (ficha.webMarca) en la cabecera, tras el segmento: un <a> a
+    status.url con aspecto de enlace, no de botón (sin fondo, borde ni icono), en la misma pestaña,
+    rel=\"noopener\", con texto oculto visualmente ficha.webMarcaSr; zona táctil --size-touch. Textos
+    por web/src/lib/i18n.ts (RNF-4). Pruebas sobre el build con CARS_DATA_DIR, como el resto de
+    web/tests: CA-13 (los dos enlaces llevan a páginas que existen en el build) y CA-16 (href =
+    status.url, sin clase ni role de botón). No pintes notas de fuente: son de #154. La PR
+    referencia #147 y enumera los RF y CA cubiertos."
+- id: issue-152
+  agent: developer
+  task: "Historia #152 (épica #145, PRD-002): imagen principal y «Más imágenes» de la ficha
+    /marcas/{marca}/{modelo}/ (RF-12; CA-12). Sigue docs/design/ficha-modelo.md, secciones «Imagen
+    principal», «Disposición de la cabecera» y «Más imágenes», con los tokens de tokens.md (añade
+    --size-segment-icon-lg a web/src/styles/global.css si falta). En
+    web/src/pages/marcas/[marca]/[modelo].astro (de #146); no rehagas la página. Reutiliza
+    ModelImage y readImages de web/src/lib/data.ts y SegmentSilhouette.astro de #112: no hagas otro
+    juego de siluetas ni otra lógica de imagen o silueta. (1) Principal: images[0] entre las que
+    tienen license, 16:9, sin loading=\"lazy\", con fetchpriority=\"high\" y ancho y alto; alt
+    ficha.imagen.alt; figcaption ficha.imagen.atribucion solo si attribution no es null. Sin imagen
+    con licencia: silueta del segmento, o la genérica, de lado --size-segment-icon-lg, decorativa y
+    sin pie. (2) «Más imágenes» (h2 ficha.imagenes.titulo) solo con 2 o más imágenes con licencia:
+    de la 2.ª a la 6.ª, <ul> de <figure>, loading=\"lazy\", rejilla 1/2/3 columnas, sin JavaScript,
+    sin enlaces ni foco. Textos por web/src/lib/i18n.ts. Pruebas sobre el build con CARS_DATA_DIR:
+    CA-12 con 8 imágenes con licencia (6 en el HTML y en orden), attribution bajo la imagen, modelo
+    sin imagen con licencia (silueta y ninguna <img> de la marca), y ninguna imagen pintada sin
+    license y source_id. La PR referencia #152 y enumera los RF y CA cubiertos."
+- id: issue-151
+  agent: developer
+  task: "Historia #151 (épica #145, PRD-002): bloque «Datos del modelo» de la ficha
+    /marcas/{marca}/{modelo}/ (RF-7; CA-7). Sigue docs/design/ficha-modelo.md, sección «Datos del
+    modelo», con los tokens de tokens.md. Añádelo como <section aria-labelledby> hermana en
+    web/src/pages/marcas/[marca]/[modelo].astro (de #146), en el lugar que le da «Estructura y orden
+    de lectura» (tras «Versiones» si ya está en main); no rehagas la página. Solo si specs trae algún
+    campo; h2 ficha.modelo.titulo y entrada ficha.modelo.entrada. dl con solo las filas que specs
+    trae (wltp_max_km, power_max_kw, dc_max_kw, ac_max_kw, battery_kwh_options, drivetrains), con el
+    formato de la tabla del diseño y las etiquetas de tracción de filtros-catalogo.md; si un valor
+    trae note, va debajo tal cual. Reutiliza Specs de web/src/lib/data.ts. No pintes notas de fuente:
+    son de #154. Textos por web/src/lib/i18n.ts. Pruebas sobre el build con CARS_DATA_DIR: CA-7
+    (specs.battery_kwh_options con versiones sin battery_kwh → bloque «del modelo» con las
+    capacidades), un modelo sin specs (sin sección ni h2) y uno con solo algunos campos (solo esas
+    filas). La PR referencia #151 y enumera los RF y CA cubiertos."
+- id: issue-153
+  agent: developer
+  task: "Historia #153 (épica #145, PRD-002): «Otros modelos del segmento» en la ficha
+    /marcas/{marca}/{modelo}/ (RF-15; CA-17). Sigue docs/design/ficha-modelo.md, sección «Otros modelos
+    del segmento». Añádelo como <section aria-labelledby> hermana en
+    web/src/pages/marcas/[marca]/[modelo].astro (de #146), en el lugar que le da «Estructura y orden
+    de lectura»; no rehagas la página. (1) Selección en una función pura de web/src/lib/, con prueba
+    unitaria: modelos publicados del mismo segment y de otra marca, hasta 3, por distancia entre su
+    price_from y el del modelo; los sin precio, al final. Si el modelo no tiene precio, y para los
+    empates, el orden por defecto del catálogo, «Novedad» (sortByNovelty de web/src/lib/catalog.ts),
+    como dice el diseño y el comentario de la issue. (2) Sin segmento o sin candidatos, ni sección ni
+    h2. h2 ficha.relacionados.titulo con la etiqueta del segmento. Las tarjetas son ModelCard.astro
+    con cardView() de web/src/lib/card.ts, sin cambios, con imagen en loading=\"lazy\"; rejilla
+    1/2/3. Textos por web/src/lib/i18n.ts. Pruebas sobre el build con CARS_DATA_DIR: CA-17 (un SUV
+    compacto y cuatro de otras marcas → 3, los de precio más cercano, ninguno de su marca) y un
+    modelo sin segmento (sin bloque). La PR referencia #153 y enumera los RF y CA cubiertos."
