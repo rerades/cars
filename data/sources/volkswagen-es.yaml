@@ -1,0 +1,23 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: volkswagen-es
+brand: Volkswagen
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.volkswagen.es/es.html
+  models: https://www.volkswagen.es/es/modelos.html
+  id3: https://www.volkswagen.es/es/modelos/id3.html
+  id4: https://www.volkswagen.es/es/modelos/id4.html
+  id7: https://www.volkswagen.es/es/modelos/id7.html
+  offers: https://www.volkswagen.es/es/ofertas.html
+  press: https://www.volkswagen.es/comunicacion/
+image_license: "" # sin términos escritos de uso de imágenes revisados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-11): las páginas de modelo (id3, id4, id7), la de modelos y robots.txt responden y se pueden leer; robots.txt no bloquea /es/modelos.
+  Gama BEV listada en /es/modelos.html: ID. Polo, ID. Tiguan, ID. Cross, ID.3 Neo, ID.4, ID.7, ID.7 Tourer, ID. Buzz y e-Caravelle.
+  Limitación: las fichas no desglosan versiones (ni kWh, WLTP y kW por versión) y los precios que muestran son de oferta
+  (descuentos, Plan Auto+ y financiación con permanencia; p. ej. ID.4 desde 32.400 € "sujeto a financiación", ID.3 Neo Life 25.600 € con ayudas incluidas, ID.7 desde 40.200 € con Compra Flexible),
+  sin PVP limpio ni condiciones literales completas. No hay tarifa ni configurador legible. El IDAE (idae-es) no tiene la marca VOLKSWAGEN.
+last_verified: 2026-10-11
+status: active
