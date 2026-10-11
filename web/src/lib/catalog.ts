@@ -8,6 +8,15 @@ export function countLabel(n: number): string {
   return n === 0 ? t("resumen.cero") : n === 1 ? t("resumen.uno") : t("resumen.n", { n });
 }
 
+const PLURAL = new Intl.PluralRules("es");
+
+/** Home page counter (`portada.contador`): "1 modelo en el catálogo" / "36 modelos en el catálogo". */
+export function homeCountLabel(n: number): string {
+  const form = PLURAL.select(n) === "one" ? "one" : "other";
+  const formatted = n.toLocaleString("es-ES", { useGrouping: "always" });
+  return t(`portada.contador.${form}`, { n: formatted });
+}
+
 /**
  * Default order of the pregenerated pages and of the served /coches ("Novedad", RF-3, CA-16): newest
  * launch first, no date last, then by name. The rule lives in sort.ts, shared with the browser.

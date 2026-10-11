@@ -178,7 +178,7 @@ describe("segment, price and range built pages", () => {
   /** Catalog pages of the build: served index.html carrying the "Explorar" strip (model sheets and `/` do not). */
   const catalogPaths = () =>
     (readdirSync(out, { recursive: true, encoding: "utf8" }) as string[])
-      .filter((f) => f.endsWith("index.html") && !f.startsWith("_astro"))
+      .filter((f) => f.endsWith("index.html") && !f.startsWith("_astro") && f !== "index.html") // the home page also carries the strip, but is not a catalog page
       .filter((f) => readFileSync(join(out, f), "utf8").includes("data-explore"))
       .map((f) => "/" + f.slice(0, -"index.html".length))
       .sort();

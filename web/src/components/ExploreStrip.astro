@@ -1,0 +1,56 @@
+---
+import type { ExploreGroup } from "../lib/catalog.ts";
+import { t } from "../lib/i18n.ts";
+
+/**
+ * "Explorar" strip (docs/design/paginas-catalogo.md, "Franja Explorar"), shared by the catalog pages
+ * and the home page (PRD-004, RF-3). `groups` comes from `exploreGroups`, so it only links pages that
+ * exist (CA-12a). `showAll` adds "Todos los coches": every page but /coches itself.
+ */
+interface Props {
+  groups: ExploreGroup[];
+  showAll: boolean;
+}
+const { groups, showAll } = Astro.props;
+---
+
+<nav class="mt-8" aria-labelledby="explorar" data-explore>
+  <h2 id="explorar" class="text-section">{t("explorar.titulo")}</h2>
+  {
+    groups.map((group) => (
+      <div class="mt-4 md:mt-2 md:flex md:items-baseline">
+        <h3 class="text-group md:w-explore-label md:shrink-0">{group.label}</h3>
+        <ul class="flex flex-wrap gap-x-2 gap-y-1">
+          {group.links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                aria-current={link.current ? "page" : undefined}
+                class:list={[
+                  "inline-flex min-h-touch items-center text-body",
+                  link.current
+                    ? "font-semibold text-ink-900 no-underline"
+                    : "text-brand-600 underline hover:text-brand-800",
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+  {
+    showAll && (
+      <p class="mt-4 md:mt-2">
+        <a
+          href="/coches/"
+          class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+        >
+          {t("explorar.todos")}
+        </a>
+      </p>
+    )
+  }
+</nav>
