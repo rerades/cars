@@ -331,13 +331,14 @@ export function readQueue(path = QUEUE): QueueItem[] {
 
 /**
  * A queued task is consumed once the ledger has a row with its id, whatever the outcome: a
- * failed one is not retried in a loop. To retry it, queue it again with a new id.
+ * failed one is not retried in a loop. To retry it, queue it again with a new id. A failed task
+ * deleted from the queue is no longer listed: its row stays in the ledger as history.
  */
 export function queueState(queue: QueueItem[], rows: Row[]): { pending: QueueItem[]; failed: Row[] } {
   const consumed = new Set(rows.map((r) => r.task_id).filter(Boolean));
   return {
     pending: queue.filter((t) => !consumed.has(t.id)),
-    failed: rows.filter((r) => r.task_id && r.outcome !== "success"),
+    failed: rows.filter((r) => r.task_id && r.outcome !== "success" && queue.some((t) => t.id === r.task_id)),
   };
 }
 
