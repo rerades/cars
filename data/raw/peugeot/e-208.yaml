@@ -21,9 +21,11 @@ versions:
       retrieved: 2026-09-29
       tier: T1
 images:
-  - url: "https://upload.wikimedia.org/wikipedia/commons/4/45/Peugeot_e-208_facelift_1X7A2502.jpg"
+  - file: "data/images/peugeot/e-208/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Peugeot_e-208_facelift_1X7A2502.jpg/1280px-Peugeot_e-208_facelift_1X7A2502.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Peugeot_e-208_facelift_1X7A2502.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-09-29
+    retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, Wikimedia Commons"
 open_questions:
