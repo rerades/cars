@@ -27,9 +27,11 @@ versions:
     power_kw: {value: 85, note: "anunciada como 'Próximamente' en la web, sin fecha de lanzamiento", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
     price: null
 images:
-  - url: "https://commons.wikimedia.org/wiki/File:Cupra_Raval_Almedalen_2026.jpg"
+  - file: "data/images/cupra/raval/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Cupra_Raval_Almedalen_2026.jpg/1280px-Cupra_Raval_Almedalen_2026.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Cupra_Raval_Almedalen_2026.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-09-28
+    retrieved: 2026-10-11
     license: "CC-BY-SA-4.0"
     attribution: "Bene Riobó, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:

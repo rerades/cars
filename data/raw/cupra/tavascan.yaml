@@ -34,9 +34,11 @@ versions:
     drivetrain: {value: awd, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
     price: null
 images:
-  - url: "https://commons.wikimedia.org/wiki/File:Cupra_Tavascan_IAA_2023_1X7A0205.jpg"
+  - file: "data/images/cupra/tavascan/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Cupra_Tavascan_IAA_2023_1X7A0205.jpg/1280px-Cupra_Tavascan_IAA_2023_1X7A0205.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Cupra_Tavascan_IAA_2023_1X7A0205.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-09-28
+    retrieved: 2026-10-11
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
