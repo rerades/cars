@@ -146,6 +146,10 @@ test.describe("no cookies, no web storage (RNF-5, CA-7)", () => {
     await checkNoStorage(page, `${baseURL}/coches/?marca=tesla,byd&segmento=suv_compacto&precio_max=60000&autonomia=300&traccion=awd&estado=venta&orden=precio-asc`);
   });
 
+  test("home page (PRD-004, CA-10)", async ({ page, baseURL }) => {
+    await checkNoStorage(page, `${baseURL}/`);
+  });
+
   test("/coches/ without query string", async ({ page, baseURL }) => {
     await checkNoStorage(page, `${baseURL}/coches/`);
   });

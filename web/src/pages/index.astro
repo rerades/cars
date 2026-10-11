@@ -1,38 +1,41 @@
 ---
 import "../styles/global.css";
+import ExploreStrip from "../components/ExploreStrip.astro";
+import { exploreGroups, homeCountLabel } from "../lib/catalog.ts";
 import { loadModels } from "../lib/data.ts";
+import { t } from "../lib/i18n.ts";
 
+// Same published models as the list of /coches (loadModels leaves out needs_review, PRD-001 RF-13).
 const { models, errors } = loadModels();
+
+// Unreadable files are internal ingestion news: build log only, never the page (PRD-004 decision 6, ADR-0010).
+if (errors.length > 0) {
+  console.warn(`[portada] No se pudieron leer ${errors.length} ficheros de data/: ${errors.map((e) => e.file).join(", ")}`);
+}
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Coches eléctricos</title>
+    <title>{t("pagina.portada.tituloDocumento")}</title>
   </head>
-  <body class="mx-auto max-w-3xl p-6">
-    <h1 class="text-2xl font-bold">Coches eléctricos</h1>
-    <ul class="mt-4 space-y-4">
-      {models.map((m) => (
-        <li>
-          <h2 class="font-semibold">{m.brand} {m.model} <small>({m.status.value})</small></h2>
-          <ul class="text-sm">
-            {m.versions.map((v) => (
-              <li>
-                {v.name}:
-                {v.price
-                  ? <>
-                      {v.price.value} {v.price.unit} ({v.price.price_kind}) —
-                      <a class="underline" href={v.price.url}>{v.price.source_id}</a>, {v.price.retrieved}
-                    </>
-                  : " sin precio"}
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </ul>
-    {errors.length > 0 && <p class="mt-4 text-sm">No se pudieron leer {errors.length} ficheros.</p>}
+  <body>
+    <main class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8">
+      <h1 class="text-title [overflow-wrap:anywhere]">{t("sitio.nombre")}</h1>
+      <p class="mt-2 max-w-prose text-body text-ink-900 [overflow-wrap:anywhere]" data-intro>
+        {t("pagina.portada.entrada")}
+      </p>
+      {
+        models.length > 0 ? (
+          <>
+            <p class="mt-3 text-body text-ink-600" data-count>{homeCountLabel(models.length)}</p>
+            <ExploreStrip groups={exploreGroups(models, "")} showAll={true} />
+          </>
+        ) : (
+          <p class="mt-3 text-body text-ink-900" data-empty-catalog>{t("vacio.catalogo.texto")}</p>
+        )
+      }
+    </main>
   </body>
 </html>
