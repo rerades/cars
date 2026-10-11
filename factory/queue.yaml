@@ -561,3 +561,38 @@
     Wikimedia Commons con licencia que permita el uso comercial, descargadas con node
     factory/fetch-image.ts. Crea las fuentes T3 que uses como data/sources/<id>.yaml; no toques
     data/candidatas.yaml."
+- id: prd-005-rankings
+  agent: product
+  task: "PRD-005, rankings. Redacta docs/product/prd/PRD-005-rankings.md en status draft, con la
+    estructura de PRD-001 a PRD-004; docs/product/vision.md lo lista como pendiente. Define qué
+    rankings necesita el visitante con las cifras que ya tenemos con fuente y fecha
+    (docs/architecture/data-model.md: precio, autonomía WLTP, batería, potencia, carga): por qué
+    campo se ordena cada uno, si se ordenan modelos o versiones (PRD-003 compara versiones, decisión
+    1; PRD-001 ordena tarjetas de modelo por precio, autonomía y novedad, RF-4), cuántos puestos,
+    con qué filtros (segmento, tramo de precio de PRD-001, RF-10) y qué pasa con los datos ausentes
+    y las fuentes no oficiales (ADR-0001: un dato que falta no se estima ni puntúa como 0). Un
+    ranking ordena por una cifra con fuente; no puntúa, no combina campos ni opina (visión; PRD-003,
+    RF-13): dilo como requisito. Deja fuera lo que no tenga dato en el esquema, como las ventas
+    (no hay fuente registrada). Reutiliza la tarjeta y las páginas de PRD-001 y la ficha de PRD-002
+    en lugar de inventar bloques. Cada RF con su CA verificable sobre el HTML construido. Lo que no
+    se deduzca de la visión, los PRD o las ADR va a Preguntas abiertas, sin suponerlo (por ejemplo:
+    qué rankings exactos, si son páginas pregeneradas e indexables, en qué se distinguen de la
+    ordenación del catálogo). No decidas cómo se implementa. Cambia la fila «Rankings» de
+    «Funcionalidades previstas» de vision.md a PRD-005. No toques web/, docs/design/ ni factory/."
+- id: revision-historias-prd-002
+  agent: planner
+  task: "Revisa si las historias abiertas de la épica #145 (PRD-002, ficha de modelo: #147 a #155)
+    siguen cubriendo docs/product/prd/PRD-002-ficha-modelo.md y docs/design/ficha-modelo.md, que ya
+    está en main (las issues dicen que «llegará aparte»). Para cada historia: (1) que sus RF y CA
+    sigan siendo los del PRD vigente; (2) que remita a la sección del diseño que le toca (por
+    ejemplo «Ruta: enlaces de vuelta» para #147) y no contradiga el diseño; (3) que sus
+    dependencias estén al día: #146 está cerrada, y #148 está en curso, así que lo que dependa de
+    ella sigue esperando; (4) que ningún RF o CA del PRD quede sin historia, ni cubierto por dos
+    historias sin decir quién hace qué (por ejemplo, la cifra wltp_max_km entre #150 y #151, y las
+    notas de fuente entre #149, #154 y las demás). Corrige el cuerpo de las issues con gh issue
+    edit solo en esos puntos, y deja en cada una un comentario que empiece por «🏭 Revisión de
+    cobertura» con lo que cambiaste y por qué. Si falta una historia, créala con el formato de las
+    demás (épica, PRD, diseño, Cubre, Depende de, CA copiados del PRD, notas técnicas) y las
+    etiquetas story y agente. No cierres issues, no cambies el alcance y no toques las que ya
+    están en factory/queue.yaml salvo para corregir un error del PRD o del diseño. Resume en la
+    bitácora qué revisaste y qué cambió."
