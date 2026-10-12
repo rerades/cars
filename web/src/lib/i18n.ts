@@ -95,6 +95,12 @@ export const es = {
   "ficha.titulo": "{marca} {modelo}",
   "ficha.estado.rotulo": "Estado",
   "ficha.segmento.rotulo": "Segmento",
+  "ficha.versiones.titulo": "Versiones",
+  "ficha.versiones.entrada": "Ordenadas por precio, de menor a mayor. Precios en España con IVA y sin ayudas.",
+  "ficha.versiones.caption": "Versiones de {marca} {modelo}, ordenadas por precio",
+  "ficha.versiones.captionParte":
+    "Versiones de {marca} {modelo}, ordenadas por precio (versiones {desde} a {hasta} de {total})",
+  "ficha.versiones.vacio": "{marca} todavía no ha publicado las versiones de este modelo.",
   "filtros.titulo": "Filtros",
   "filtros.abrir": "Filtros ({n})",
   "filtros.marca": "Marca",

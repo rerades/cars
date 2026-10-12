@@ -55,6 +55,10 @@
 /* Plain custom property, not in @theme: Tailwind would drop an unused theme variable. */
 :root {
   --size-segment-icon: 3rem;
+  /* Versions table of the model page (tokens.md). */
+  --width-version-label: 11rem;
+  --width-version-col: 9rem;
+  --width-version-col-max: 20rem;
 }
 
 @layer base {

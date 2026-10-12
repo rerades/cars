@@ -24,6 +24,21 @@ const bare = (brand: string, brandName: string, model: string, extra: Record<str
   ...extra,
 });
 
+const priced = (name: string, value: number | null) => ({
+  name,
+  price: value === null ? null : { ...sourced(value), unit: "EUR", price_kind: "pvp" },
+});
+/** Six versions out of price order, with a tie and two without price (more than 5 columns). */
+const SHUFFLED_ORDER = ["Cheap", "Tie A", "Tie B", "Dear", "NoPrice 1", "NoPrice 2"];
+const shuffled = [
+  priced("NoPrice 1", null),
+  priced("Dear", 60000),
+  priced("Tie A", 40000),
+  priced("NoPrice 2", null),
+  priced("Tie B", 40000),
+  priced("Cheap", 30000),
+];
+
 const text = (s: string) => s.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 const build = (data: string | null, outDir: string) =>
   execFileSync(join(WEB, "node_modules/.bin/astro"), ["build", "--outDir", outDir], {
@@ -49,6 +64,7 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
       status: sourced("announced"),
       launch: sourced("2026-10-15"),
     });
+    writeModel(data, "acme", "Shuffled", { ...bare("acme", "Acme", "Shuffled"), versions: shuffled });
     writeModel(data, "acme", "Later", { ...bare("acme", "Acme", "Later"), status: sourced("announced") });
     writeModel(data, "acme", "Old", { ...bare("acme", "Acme", "Old"), status: sourced("discontinued") });
     writeModel(data, "beta", "Solo", bare("beta", "Beta", "Solo"));
@@ -79,6 +95,53 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
     assert.deepEqual(badge("Old"), ["Descatalogado"]);
     assert.deepEqual(badge("Volta"), []);
     assert.doesNotMatch(header(page("acme", "Volta")), /Estado/);
+  });
+
+  const section = (html: string) => /<section[^>]*data-ficha-versiones[\s\S]*?<\/section>/.exec(html)![0];
+  const headerNames = (html: string) =>
+    [...html.matchAll(/<th[^>]*scope="col"[^>]*>([\s\S]*?)<\/th>/g)].map((m) => text(m[1]));
+  const blockNames = (html: string) => [...html.matchAll(/<li[^>]*>\s*<h3[^>]*>([\s\S]*?)<\/h3>/g)].map((m) => text(m[1]));
+
+  test("CA-3: versions ordered by price, no-price last, in table and in blocks from the same list", () => {
+    const html = section(page("acme", "Volta"));
+    const expected = ["Volta 60", "Volta 80 AWD", "Volta GT"];
+    assert.deepEqual(headerNames(html), expected);
+    assert.deepEqual(blockNames(html), expected);
+    assert.match(html, /<h2[^>]*>Versiones<\/h2>/);
+    assert.match(html, /aria-labelledby="versiones-titulo"/);
+    assert.match(text(html), /Ordenadas por precio, de menor a mayor/);
+    assert.match(html, /<caption[^>]*>Versiones de Acme Volta, ordenadas por precio<\/caption>/);
+    assert.equal((html.match(/<table\b/g) ?? []).length, 1);
+    const [table, blocks] = [/<table[\s\S]*<\/table>/.exec(html)![0], /<ol[\s\S]*<\/ol>/.exec(html)![0]];
+    assert.doesNotMatch(table, /\sid=/);
+    assert.doesNotMatch(blocks, /\sid=/);
+  });
+
+  test("CA-3: the order comes from the price, not the file; ties keep the file order", () => {
+    const html = section(page("acme", "Shuffled"));
+    assert.deepEqual(headerNames(html), SHUFFLED_ORDER);
+    assert.deepEqual(blockNames(html), SHUFFLED_ORDER);
+  });
+
+  test("CA-3: more than 5 versions split into tables of at most 5 columns, with part captions", () => {
+    const html = section(page("acme", "Shuffled"));
+    assert.equal((html.match(/<table\b/g) ?? []).length, 2);
+    assert.match(html, /versiones 1 a 5 de 6/);
+    assert.match(html, /versiones 6 a 6 de 6/);
+  });
+
+  test("CA-3: both presentations are in the HTML and switched by CSS only", () => {
+    const html = section(page("acme", "Volta"));
+    assert.match(html, /<div[^>]*class="[^"]*\bhidden\b[^"]*\blg:flex\b[^"]*"[^>]*data-versiones-tabla/);
+    assert.match(html, /<ol[^>]*class="[^"]*\blg:hidden\b[^"]*"[^>]*data-versiones-bloques/);
+  });
+
+  test("CA-11: versions: [] keeps the section and h2, shows the empty text and omits the intro", () => {
+    const html = section(page("acme", "Soon"));
+    assert.match(html, /<h2[^>]*>Versiones<\/h2>/);
+    assert.match(text(html), /Acme todavía no ha publicado las versiones de este modelo\./);
+    assert.doesNotMatch(html, /Ordenadas por precio/);
+    assert.doesNotMatch(html, /<table|<ol/);
   });
 
   test("RNF-1/RNF-5: no JavaScript, no cookies or storage", () => {

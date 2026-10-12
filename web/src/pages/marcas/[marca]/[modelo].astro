@@ -1,8 +1,9 @@
 ---
 import "../../../styles/global.css";
 import { cardView, type CardView } from "../../../lib/card.ts";
-import { loadModels } from "../../../lib/data.ts";
+import { loadModels, type Version } from "../../../lib/data.ts";
 import { t } from "../../../lib/i18n.ts";
+import { chunkVersions, sortVersions } from "../../../lib/versions.ts";
 
 /**
  * Model page (PRD-002, docs/design/ficha-modelo.md). This story: URL, title and header (RF-1, RF-2,
@@ -11,11 +12,12 @@ import { t } from "../../../lib/i18n.ts";
 export function getStaticPaths() {
   return loadModels().models.map((model) => {
     const [marca, file] = model.file.replace(/\.yaml$/, "").split("/");
-    return { params: { marca, modelo: file }, props: { card: cardView(model) } };
+    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions) } };
   });
 }
 
-const { card } = Astro.props as { card: CardView };
+const { card, versions } = Astro.props as { card: CardView; versions: Version[] };
+const chunks = chunkVersions(versions);
 const heading = t("ficha.titulo", { marca: card.brand, modelo: card.model });
 const site = t("sitio.nombre");
 const documentTitle = site ? t("pagina.tituloDocumento", { titulo: heading, sitio: site }) : heading;
@@ -60,6 +62,65 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
           </div>
         </dl>
       </header>
+
+      <section aria-labelledby="versiones-titulo" class="mt-8" data-ficha-versiones>
+        <h2 id="versiones-titulo" class="text-section text-ink-900">{t("ficha.versiones.titulo")}</h2>
+        {
+          versions.length === 0 ? (
+            <p class="mt-3 text-body text-ink-900" data-versiones-vacio>
+              {t("ficha.versiones.vacio", { marca: card.brand })}
+            </p>
+          ) : (
+            <>
+              <p class="mt-1 text-small text-ink-600">{t("ficha.versiones.entrada")}</p>
+
+              {/* Wide screens (lg): comparison table(s). No ids inside: the blocks below repeat the same content. */}
+              <div class="mt-4 hidden flex-col gap-6 lg:flex" data-versiones-tabla>
+                {chunks.map((chunk) => (
+                  <table class="w-full table-fixed border-collapse text-left">
+                    <caption class="sr-only">
+                      {chunks.length === 1
+                        ? t("ficha.versiones.caption", { marca: card.brand, modelo: card.model })
+                        : t("ficha.versiones.captionParte", {
+                            marca: card.brand,
+                            modelo: card.model,
+                            desde: chunk.from,
+                            hasta: chunk.to,
+                            total: versions.length,
+                          })}
+                    </caption>
+                    <thead>
+                      <tr>
+                        <td class="w-(--width-version-label) bg-surface-muted p-3" />
+                        {chunk.items.map((version) => (
+                          <th
+                            scope="col"
+                            class="min-w-(--width-version-col) max-w-(--width-version-col-max) bg-surface-muted p-3 align-top text-card-title text-ink-900 [overflow-wrap:anywhere]"
+                          >
+                            {version.name}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    {/* Field rows (<tbody>) come with #149 (price) and #150 (the rest), in the order of «Campos y formato». */}
+                  </table>
+                ))}
+              </div>
+
+              {/* Mobile and md: one block per version, same order. No ids. */}
+              <ol class="mt-4 grid gap-4 md:grid-cols-2 lg:hidden" data-versiones-bloques>
+                {versions.map((version) => (
+                  <li class="rounded-card border border-line-soft bg-surface p-4">
+                    <h3 class="text-card-title text-ink-900 [overflow-wrap:anywhere]">{version.name}</h3>
+                    {/* The <dl> with the fields (same order as the table rows) is filled by #149 and #150. */}
+                    <dl class="mt-3 flex flex-col gap-3 [overflow-wrap:anywhere]" />
+                  </li>
+                ))}
+              </ol>
+            </>
+          )
+        }
+      </section>
     </main>
   </body>
 </html>
