@@ -32,9 +32,11 @@ versions:
     dc_max_kw: {value: 300, note: "hasta 300 kW", source_id: bmw-press, url: "https://www.press.bmwgroup.com/spain/article/detail/T0459447ES/precios-para-espa%20a-nuevo-bmw-ix3-40", retrieved: 2026-10-04, tier: T1}
     price: null   # el comunicado de 2026-07-20 solo da "aproximadamente 63.650 €", no un PVP definitivo
 images:
-  - url: "https://upload.wikimedia.org/wikipedia/commons/8/8e/BMW_iX3_NA5_IAA_2025_DSC_1684.jpg"
+  - file: "data/images/bmw/ix3/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/BMW_iX3_NA5_IAA_2025_DSC_1684.jpg/1280px-BMW_iX3_NA5_IAA_2025_DSC_1684.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BMW_iX3_NA5_IAA_2025_DSC_1684.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-10-04
+    retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:BMW_iX3_NA5_IAA_2025_DSC_1684.jpg)"
 open_questions:
