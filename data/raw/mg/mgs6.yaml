@@ -17,11 +17,17 @@ versions:
       url: "https://www.mgmotor.es/model/mgs6"
       retrieved: 2026-10-07
       tier: T1
-images: []
+images:
+  - file: data/images/mg/mgs6/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/MG_S6_EV_IMG_5213.jpg/1280px-MG_S6_EV_IMG_5213.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:MG_S6_EV_IMG_5213.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-12
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0"
 open_questions:
   - "launch: la web no publica fecha de inicio de venta en España (figura como NUEVO)."
   - "segment: la web lo presenta como SUV eléctrico sin indicar tamaño; sin fuente, queda vacío."
   - "Batería, autonomía WLTP y carga DC: la ficha no los publica; vacíos. La potencia '77kW' no se guarda por ambigüedad (batería o potencia)."
   - "El pie legal cita 'Luxury 77kw' como versión del precio y muestra 'Luxury AWD 77kW'; falta aclarar si el precio corresponde a la AWD."
   - "Precio: solo hay PVP con descuento ligado a financiación; falta un PVP limpio (configurador no leído)."
-  - "Imagen: no encontré foto del MGS6 en Commons en esta búsqueda."

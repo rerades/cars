@@ -27,10 +27,17 @@ versions:
       url: "https://www.mgmotor.es/model/mg4"
       retrieved: 2026-10-07
       tier: T1
-images: []
+images:
+  - file: data/images/mg/mg4/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/MG_MG4.jpg/1280px-MG_MG4.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:MG_MG4.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-12
+    license: CC-BY-4.0
+    attribution: "Soggietoes, CC BY 4.0"
 open_questions:
   - "launch: la web no publica fecha de inicio de venta en España (MG4 Urban figura como NUEVO)."
   - "segment: la web no lo clasifica de forma explícita; sin fuente, queda vacío."
   - "Versiones: la ficha no trae tabla de batería, autonomía WLTP ni potencia por versión; quedan vacías. Solo se leyó el precio visualizado de cada ficha; faltan el resto de acabados (p. ej. 77kW, XPower)."
   - "Precio: solo hay PVP con descuento ligado a financiación; falta un PVP limpio (configurador no leído)."
-  - "Imagen: Commons tiene File:MG MG4.jpg (CC BY 4.0, Soggietoes), pero no pude descargarla en esta ejecución (el comando de descarga requiere aprobación); sin copia local no se registra."
+  - "Imagen: la foto de Commons es un MG4 XPower (Volcano Orange), no una de las versiones listadas; es del mismo modelo."
