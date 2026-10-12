@@ -11,10 +11,16 @@ specs:
 versions:
   - name: INSTER
     price: null
-images: []
+images:
+  - file: data/images/hyundai/inster/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Hyundai_Inster_DSC_7945.jpg/1280px-Hyundai_Inster_DSC_7945.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Hyundai_Inster_DSC_7945.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-12
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "launch: la ficha no da fecha de inicio de venta en España."
   - "Precio: la ficha muestra «Desde 15.555 €» sin etiquetarlo como PVP ni dar condiciones; no se guarda como pvp. Falta leer el configurador o la lista de precios."
   - "Versiones y acabados (Entry/L, TOP, Lounge, Cross) con su batería y potencia: no leídos por versión."
-  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución; la web mostrará la silueta."
   - "Las fichas se leyeron con extracción automática de texto; conviene contrastar cifras con la página."

@@ -22,10 +22,16 @@ versions:
       url: "https://www.hyundai.com/es/es/modelos/ioniq9.html"
       retrieved: 2026-10-07
       tier: T1
-images: []
+images:
+  - file: data/images/hyundai/ioniq-9/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Hyundai_Ioniq_9_Auto_Zuerich_2025_DSC_2978.jpg/1280px-Hyundai_Ioniq_9_Auto_Zuerich_2025_DSC_2978.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Hyundai_Ioniq_9_Auto_Zuerich_2025_DSC_2978.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-12
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "launch: la ficha no da fecha de inicio de venta en España."
   - "Versiones AWD y AWD Performance (acabados ENERGY, CALLIGRAPHY, BLACK INK): sin datos ni precio leídos; falta el configurador."
   - "No se ha confirmado si el PVP de la ficha incluye descuento de marca."
-  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución; la web mostrará la silueta."
   - "Las fichas se leyeron con extracción automática de texto; conviene contrastar cifras con la página."

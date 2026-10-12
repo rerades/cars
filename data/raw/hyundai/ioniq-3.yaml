@@ -22,9 +22,15 @@ versions:
       url: "https://www.hyundai.com/es/es/modelos/ioniq3/ioniq-3-condiciones-unicas.html"
       retrieved: 2026-10-07
       tier: T1
-images: []
+images:
+  - file: data/images/hyundai/ioniq-3/frontal.png
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/2026_Hyundai_Ioniq_3_N_Line_%28Europe%29_front_view_01.png/1280px-2026_Hyundai_Ioniq_3_N_Line_%28Europe%29_front_view_01.png"
+    page_url: "https://commons.wikimedia.org/wiki/File:2026_Hyundai_Ioniq_3_N_Line_(Europe)_front_view_01.png"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-12
+    license: CC-BY-3.0
+    attribution: "AutoGids, CC BY 3.0, via Wikimedia Commons"
 open_questions:
   - "Estado: needs_review lo quitó una persona el 2026-10-07 tras leer la página de condiciones (reserva abierta y PVP del N Line 61 kWh). El ejemplo de financiación dice «hasta el 30/09/2026»; el PVP sin descuentos se toma como vigente."
   - "launch: sin fecha en la ficha ni en la página de condiciones."
   - "Solo una versión con precio (N Line 61 kWh); la de 42,2 kWh y el resto de acabados, sin PVP T1 localizado. Falta leer el configurador."
-  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución; la web mostrará la silueta."
