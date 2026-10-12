@@ -33,9 +33,11 @@ versions:
     ac_max_kw: {value: 11, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
     price: null   # la web solo da el precio con ayudas/financiación para esta versión
 images:
-  - url: "https://upload.wikimedia.org/wikipedia/commons/5/56/BYD_Atto_2_DSC_8763.jpg"
+  - file: "data/images/byd/atto-2/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/BYD_Atto_2_DSC_8763.jpg/1280px-BYD_Atto_2_DSC_8763.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BYD_Atto_2_DSC_8763.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-10-05
+    retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:BYD Atto 2 DSC 8763.jpg)"
 open_questions:
