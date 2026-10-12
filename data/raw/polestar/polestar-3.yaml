@@ -23,9 +23,11 @@ versions:
       retrieved: 2026-09-24
       tier: T1
 images:
-  - url: "https://commons.wikimedia.org/wiki/File:Polestar_3_Auto_Zuerich_2024_DSC_6366.jpg"
+  - file: "data/images/polestar/polestar-3/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Polestar_3_Auto_Zuerich_2024_DSC_6366.jpg/1280px-Polestar_3_Auto_Zuerich_2024_DSC_6366.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Polestar_3_Auto_Zuerich_2024_DSC_6366.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-09-28
+    retrieved: 2026-10-12
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
