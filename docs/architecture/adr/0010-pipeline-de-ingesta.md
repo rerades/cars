@@ -234,6 +234,7 @@ imágenes actuales.**
     - ancho y alto del bloque `IHDR` del PNG o del marcador `SOF` del JPEG; ancho > 1280 se rechaza.
       La API puede devolver una miniatura mayor que la pedida [2], así que el ancho se comprueba
       siempre, no se supone;
+    - un fichero de más de 2 MB se rechaza (ADR-0011, enmienda «Imágenes», punto 10);
     - la **misma función** la usa `factory/evals.ts` (regla 10 de `data-model.md`) sobre el
       fichero ya guardado, para que la CI compruebe lo que hay en el repositorio y no solo lo que el
       script dijo.

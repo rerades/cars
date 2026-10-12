@@ -166,8 +166,9 @@ Lo que una comprobación automática tendrá que rechazar (la comprobación es t
 10. Cada entrada de `images` tiene `file`, `source_url`, `page_url`, `source_id`, `retrieved`,
     `license` y `attribution`; no tiene `url`; `file` existe, está bajo
     `data/images/<brand>/<slug>/` y es una imagen (ADR-0012): JPEG o PNG por la firma de sus
-    primeros bytes, con la extensión que corresponde (`.jpg`/`.jpeg` o `.png`) y de 1280 px de
-    ancho como máximo, leído de su cabecera (ADR-0010, enmienda «Imágenes», punto 11).
+    primeros bytes, con la extensión que corresponde (`.jpg`/`.jpeg` o `.png`), de 1280 px de
+    ancho como máximo, leído de su cabecera (ADR-0010, enmienda «Imágenes», punto 11), y de 2 MB
+    como máximo (ADR-0011, enmienda «Imágenes», punto 10).
     **Transición** (ADR-0010, punto 14): hasta que se migren las imágenes actuales, una entrada con
     solo la forma antigua (`url`, sin `file`, `source_url` ni `page_url`) es aviso en la validación
     de todo `data/raw/` y fallo en el eval de la factoría sobre los ficheros que toca la ejecución;
