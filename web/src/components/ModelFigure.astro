@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { imageRelPath, type ModelImage } from "../lib/data.ts";
+
+/**
+ * One licensed image of the model page (docs/design/ficha-modelo.md, RF-12): 16:9 figure with a
+ * caption only when the data has an attribution. All text arrives by props (RNF-4).
+ */
+interface Props {
+  image: ModelImage;
+  alt: string;
+  /** Already composed caption, or null for no <figcaption>. */
+  caption: string | null;
+  /** Main image: LCP candidate, so eager with high priority. */
+  main?: boolean;
+}
+const { image, alt, caption, main = false } = Astro.props;
+
+const files = import.meta.glob<{ default: ImageMetadata }>("@images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}", { eager: true });
+const rel = imageRelPath(image.file);
+const src = rel ? Object.entries(files).find(([key]) => key.endsWith(`/${rel}`))?.[1].default : undefined;
+---
+
+{
+  src && (
+    <figure class="flex flex-col gap-2">
+      <div class="aspect-video overflow-hidden rounded-card bg-surface-muted">
+        {main ? (
+          <Image
+            src={src}
+            alt={alt}
+            width={1280}
+            height={720}
+            widths={[640, 960, 1280]}
+            sizes="(min-width: 1024px) 58vw, 100vw"
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        ) : (
+          <Image
+            src={src}
+            alt={alt}
+            width={640}
+            height={360}
+            widths={[320, 640, 960]}
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
+        )}
+      </div>
+      {caption && <figcaption class="text-small text-ink-600 [overflow-wrap:anywhere]">{caption}</figcaption>}
+    </figure>
+  )
+}
