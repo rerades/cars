@@ -21,9 +21,11 @@ versions:
       retrieved: 2026-09-24
       tier: T1
 images:
-  - url: "https://commons.wikimedia.org/wiki/File:Polestar_2_1X7A0419.jpg"
+  - file: "data/images/polestar/polestar-2/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Polestar_2_1X7A0419.jpg/1280px-Polestar_2_1X7A0419.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Polestar_2_1X7A0419.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-09-28
+    retrieved: 2026-10-12
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:

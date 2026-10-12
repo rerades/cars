@@ -23,9 +23,11 @@ versions:
     power_kw: {value: 400, source_id: polestar-es, url: "https://www.polestar.com/es/polestar-4/", retrieved: 2026-09-24, tier: T1}
     price: null   # sin PVP ni precio financiado visible para esta versión
 images:
-  - url: "https://commons.wikimedia.org/wiki/File:Polestar_4_Auto_Zuerich_2024_DSC_6581.jpg"
+  - file: "data/images/polestar/polestar-4/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Polestar_4_Auto_Zuerich_2024_DSC_6581.jpg/1280px-Polestar_4_Auto_Zuerich_2024_DSC_6581.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Polestar_4_Auto_Zuerich_2024_DSC_6581.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-09-28
+    retrieved: 2026-10-12
     license: "CC-BY-SA-4.0"
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
