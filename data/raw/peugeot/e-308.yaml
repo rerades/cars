@@ -21,9 +21,11 @@ versions:
       retrieved: 2026-09-29
       tier: T1
 images:
-  - url: "https://upload.wikimedia.org/wikipedia/commons/9/99/Peugeot_e-308_IMG_9970.jpg"
+  - file: "data/images/peugeot/e-308/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Peugeot_e-308_IMG_9970.jpg/1280px-Peugeot_e-308_IMG_9970.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Peugeot_e-308_IMG_9970.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-09-29
+    retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, Wikimedia Commons"
 open_questions:

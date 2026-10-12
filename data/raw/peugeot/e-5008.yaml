@@ -21,9 +21,11 @@ versions:
       retrieved: 2026-09-29
       tier: T1
 images:
-  - url: "https://upload.wikimedia.org/wikipedia/commons/1/14/Peugeot_e-5008_Automesse_Ludwigsburg_2025_DSC_2651.jpg"
+  - file: "data/images/peugeot/e-5008/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Peugeot_e-5008_Automesse_Ludwigsburg_2025_DSC_2651.jpg/1280px-Peugeot_e-5008_Automesse_Ludwigsburg_2025_DSC_2651.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Peugeot_e-5008_Automesse_Ludwigsburg_2025_DSC_2651.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-09-29
+    retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, Wikimedia Commons"
 open_questions:
