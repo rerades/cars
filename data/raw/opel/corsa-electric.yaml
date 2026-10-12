@@ -10,9 +10,11 @@ versions:
   - name: Corsa Electric 50kWh Edition
     price: null   # ofertas.opel.es no muestra precio de la versión eléctrica
 images:
-  - url: "https://upload.wikimedia.org/wikipedia/commons/5/51/2023_Opel_Corsa-e_1X7A2474.jpg"
+  - file: data/images/opel/corsa-electric/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/2023_Opel_Corsa-e_1X7A2474.jpg/1280px-2023_Opel_Corsa-e_1X7A2474.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2023_Opel_Corsa-e_1X7A2474.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-10-03
+    retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:2023 Opel Corsa-e 1X7A2474.jpg)"
 open_questions:
