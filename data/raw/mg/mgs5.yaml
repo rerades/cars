@@ -20,11 +20,17 @@ versions:
       url: "https://www.mgmotor.es/model/mgs5"
       retrieved: 2026-10-07
       tier: T1
-images: []
+images:
+  - file: data/images/mg/mgs5/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/2025_MG_S5_EV_V.jpg/1280px-2025_MG_S5_EV_V.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2025_MG_S5_EV_V.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-12
+    license: CC-BY-SA-4.0
+    attribution: "Chanokchon, CC BY-SA 4.0"
 open_questions:
   - "launch: la web no publica fecha de inicio de venta en España (figura como NUEVO)."
   - "segment: la web lo presenta como SUV eléctrico sin indicar tamaño; no se asigna suv_pequeno/compacto/grande sin fuente."
   - "MGS5 EV Comfort 49kW: el pie legal lo cita pero no da su precio; price null."
   - "Batería y potencia: las fichas rotulan '49kW'/'64kW' sin aclarar si es batería (kWh) o potencia; no se guardan."
   - "Precio: solo hay PVP con descuento ligado a financiación; falta un PVP limpio (configurador no leído)."
-  - "Imagen: Commons tiene File:2025 MG S5 EV V.jpg (CC BY-SA 4.0, Chanokchon), pero no pude descargarla en esta ejecución (el comando de descarga requiere aprobación); sin copia local no se registra."

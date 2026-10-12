@@ -13,9 +13,15 @@ versions:
     wltp_km: {value: 507, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
     power_kw: {value: 375, note: "publicado: 375 kW (510 CV)", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
     price: null
-images: []
+images:
+  - file: data/images/mg/cyberster/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/MG_Cyberster_IAA_2023_1X7A0184.jpg/1280px-MG_Cyberster_IAA_2023_1X7A0184.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:MG_Cyberster_IAA_2023_1X7A0184.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-12
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0"
 open_questions:
   - "launch: la web no publica fecha de inicio de venta en España."
   - "Precio: la ficha no lo publica; el configurador no se leyó."
   - "Versiones, batería y tracción: no publicadas en la ficha; se registra una sola versión genérica."
-  - "Imagen: Commons tiene File:MG Cyberster IAA 2023 1X7A0184.jpg (CC BY-SA 4.0, Alexander-93), pero no pude descargarla en esta ejecución (el comando de descarga requiere aprobación); sin copia local no se registra."
