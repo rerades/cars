@@ -33,12 +33,18 @@ versions:
     power_kw: {value: 239, note: "publicado: 325 CV", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
     drivetrain: {value: awd, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq5.html", retrieved: 2026-10-07, tier: T1}
     price: null
-images: []
+images:
+  - file: data/images/hyundai/ioniq-5/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Hyundai_Ioniq_5_%28front%29.jpg/1280px-Hyundai_Ioniq_5_%28front%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Hyundai_Ioniq_5_(front).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-12
+    license: CC0-1.0
+    attribution: null
 open_questions:
   - "segment: la ficha no clasifica el modelo; sin fuente, queda vacío."
   - "launch: la ficha no da fecha de inicio de venta en España."
   - "Precio solo de la versión LIGHT (la ficha muestra el PVP de una versión); el resto, sin precio T1 localizado. Falta leer el configurador."
   - "No se ha confirmado si el PVP de la ficha incluye descuento de marca; la ficha lo etiqueta como PVP."
   - "WLTP por versión no leído por separado (la ficha da 'hasta 540 km' para el modelo)."
-  - "Imágenes: no se pudo descargar ningún fichero de Wikimedia Commons en esta ejecución (sin acceso de descarga); la web mostrará la silueta."
   - "Las fichas se leyeron con extracción automática de texto; conviene contrastar cifras con la página."
