@@ -3,7 +3,7 @@ brand: audi
 brand_name: Audi
 model: A6 e-tron
 status: {value: on_sale, note: "gama eléctrica de Audi en España 2026 según el medio: A6 Sportback e-tron y A6 Avant e-tron (Standard, Performance, Quattro, S6)", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-10-13, tier: T3}
-launch: {value: "2024-09", note: "artículo de 31/07/2024: Audi abre pedidos del A6 e-tron Sportback y Avant, también S6, «a partir del próximo mes de septiembre» (primeras unidades a inicios de 2025); es apertura de pedidos, no entregas", source_id: motor-es, url: "https://www.motor.es/noticias/audi-a6-e-tron-gama-precios-2025-2024103557.html", retrieved: 2026-10-13, tier: T3}
+launch: null
 needs_review: false
 versions:
   - name: A6 Sportback e-tron
@@ -65,3 +65,4 @@ open_questions:
   - "Segmento: el modelo tiene Sportback (el medio dice «berlina liftback») y Avant (familiar); no hay un único valor de RF-11, así que no se escribe segment."
   - "Fila A6 Advanced Sportback e-tron MY27 (id 611509) del IDAE: batería 100 kWh con 210 kW y 624 km, incoherente con la versión MY26 (83 kWh); no se usa."
   - "Las autonomías WLTP del medio son mayores que las del IDAE (varias homologaciones por acabado); se ha usado la menor del IDAE."
+  - "launch: el artículo del 31/07/2024 anuncia la apertura de pedidos «a partir del próximo mes de septiembre», una previsión que ninguna fuente leída confirma después; sin dato."
