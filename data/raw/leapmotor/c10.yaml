@@ -3,7 +3,7 @@ brand: leapmotor
 brand_name: Leapmotor
 model: C10
 status: {value: on_sale, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
-needs_review: false
+needs_review: true
 versions:
   - name: C10 Pro 69,9 kWh
     battery_kwh: {value: 69.9, basis: unknown, note: "IDAE id 603407", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
@@ -37,3 +37,4 @@ open_questions:
   - "Segmento: la ficha dice SUV de 4,73 m sin clasificarlo; una prueba (T3) lo llama SUV mediano, que no está en la lista de RF-11. Se deja vacío."
   - "La ficha también muestra una variante EV híbrido (REEV), que no es BEV y no se registra."
   - "Tracción de Pro y ProMax y lanzamiento en España: no publicados en las fuentes consultadas (una prueba T3 dice tracción trasera, no confirmado por T1)."
+  - "needs_review: la ficha no asigna con claridad los 84, 180 y 180 kW de dc_max_kw a cada versión; confirmar la asignación."

@@ -4,7 +4,7 @@ brand_name: Leapmotor
 model: B10
 status: {value: on_sale, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/b10", retrieved: 2026-10-13, tier: T1}
 segment: {value: suv_compacto, note: "la prueba lo llama SUV compacto, unos 4,5 m", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/2024/12/prueba-leapmotor-t03-c10.html", retrieved: 2026-10-13, tier: T3}
-needs_review: false
+needs_review: true
 versions:
   - name: B10 Pro 56,2 kWh
     battery_kwh: {value: 56.2, basis: unknown, note: "IDAE id 613494", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
@@ -24,3 +24,4 @@ open_questions:
   - "La ficha también muestra una variante EV híbrido (REEV, 18,8 kWh), que no es BEV y no se registra."
   - "Tracción y lanzamiento en España: no publicados en las fuentes consultadas."
   - "Imágenes: no se buscó ninguna imagen del B10 en Commons con licencia válida."
+  - "needs_review: la ficha no asigna con claridad los 140 y 168 kW de dc_max_kw a cada versión; confirmar la asignación."
