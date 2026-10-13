@@ -3,26 +3,26 @@ brand: leapmotor
 brand_name: Leapmotor
 model: C10
 status: {value: on_sale, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
-needs_review: true
+needs_review: false
 versions:
   - name: C10 Pro 69,9 kWh
     battery_kwh: {value: 69.9, basis: unknown, note: "IDAE id 603407", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
     wltp_km: {value: 420, note: "IDAE id 603407; coincide con la ficha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 603407; la ficha publica 215 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    dc_max_kw: {value: 84, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+    power_kw: {value: 158, note: "publicado: 215 CV (pestaña Pro)", source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+    dc_max_kw: {value: 84, note: "pestaña Pro de la ficha", source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
     price: null
   - name: C10 ProMax 81,9 kWh
     battery_kwh: {value: 81.9, basis: unknown, note: "IDAE id 608724", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
     wltp_km: {value: 510, note: "IDAE id 608724; coincide con la ficha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 215, note: "IDAE id 608724; la ficha publica 299 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    dc_max_kw: {value: 180, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+    power_kw: {value: 220, note: "publicado: 299 CV (pestaña ProMax)", source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+    dc_max_kw: {value: 180, note: "pestaña ProMax de la ficha", source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
     price: null
   - name: C10 ProMax AWD 81,9 kWh
     battery_kwh: {value: 81.9, basis: unknown, note: "IDAE id 608725", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
     wltp_km: {value: 437, note: "IDAE id 608725; coincide con la ficha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 430, note: "IDAE id 608725; la ficha publica 598 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    power_kw: {value: 440, note: "publicado: 598 CV (pestaña ProMax AWD)", source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
     drivetrain: {value: awd, note: "la ficha la presenta como 4x4", source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
-    dc_max_kw: {value: 180, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+    dc_max_kw: {value: 180, note: "pestaña ProMax AWD de la ficha", source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
     price: null
 images:
   - file: data/images/leapmotor/c10/exterior.jpg
@@ -37,4 +37,3 @@ open_questions:
   - "Segmento: la ficha dice SUV de 4,73 m sin clasificarlo; una prueba (T3) lo llama SUV mediano, que no está en la lista de RF-11. Se deja vacío."
   - "La ficha también muestra una variante EV híbrido (REEV), que no es BEV y no se registra."
   - "Tracción de Pro y ProMax y lanzamiento en España: no publicados en las fuentes consultadas (una prueba T3 dice tracción trasera, no confirmado por T1)."
-  - "needs_review: la ficha no asigna con claridad los 84, 180 y 180 kW de dc_max_kw a cada versión; confirmar la asignación."

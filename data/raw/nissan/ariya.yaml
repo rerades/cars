@@ -5,7 +5,7 @@ model: Ariya
 status: {value: on_sale, source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya", retrieved: 2026-10-13, tier: T1, note: "la ficha lista Evolve 4x2 y Evolve 4x4 e-4ORCE"}
 launch: null
 segment: null
-needs_review: true
+needs_review: false
 versions:
   - name: Ariya Evolve 87 kWh 4x2
     battery_kwh: {value: 87, basis: unknown, note: "IDAE id 598056", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
@@ -40,4 +40,4 @@ open_questions:
   - "Precio: la ficha da 'desde 44.375 €' para Evolve 4x2 y 47.575 € para e-4ORCE (financiado), pero la nota 3 da 45.275 € financiando para Evolve 4x2; se guarda el de la nota, con condiciones literales. El e-4ORCE queda sin precio (sin condiciones propias). El precio financiado incluye Plan Auto+: buscar PVP limpio."
   - "wltp: la ficha dice 'hasta 536 km' (Engage, según IDAE) y 525 km para Evolve 4x2; la gama de hoy solo lista Evolve. Las versiones 63 kWh, Engage, Advance, Nismo y e-4ORCE Evolve+ del IDAE no aparecen en la ficha; no se incluyen."
   - "drivetrain del 4x2: la ficha dice solo 4x2 sin indicar el eje; no se rellena."
-  - "No se ha confirmado con medios T3 (highmotor, motorpasion) la gama vigente."
+  - "Gama confirmada el 2026-10-13: nissan.es y motor.es dan como 2026 solo Evolve 4x2 y Evolve e-4ORCE."

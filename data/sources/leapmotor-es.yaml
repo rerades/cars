@@ -13,8 +13,8 @@ urls:
 image_license: "" # sin términos de uso de imágenes verificados (solo "© 2025 Leapmotor. Todos los derechos reservados"): no publicar imágenes de esta web
 notes: >
   Verificado (2026-10-13): https://www.leapmotor.es no se puede leer (error TLS); la web con selector "Spain | ES-ES" es
-  leapmotor.net/es-es (dominio global de la marca; pie "© 2025 Leapmotor"). La página no menciona a Stellantis, así que la
-  distribución por Stellantis no queda confirmada por esta fuente. robots.txt: Googlebot sin restricciones; el resto, solo
+  leapmotor.net/es-es (dominio global de la marca; pie "© 2025 Leapmotor"). Sus términos dicen «Este es el sitio web oficial de Leapmotor
+  International B.V.», empresa conjunta de Stellantis N.V. y Zhejiang Leapmotor (revisión humana, 2026-10-13). robots.txt: Googlebot sin restricciones; el resto, solo
   bloquea /kw-*, /qa-*, /uae-*. Gama en la web: T03, B03X, B05, B10 y C10 (BEV), más variantes EV híbrido (REEV, no BEV). Los
   precios "desde" de cada ficha descuentan 3.375 € del Plan Auto+ y 900 € de la venta del certificado CAE (válidos hasta el
   31/10/2026): incluyen ayudas, así que no son PVP sin ayudas ni se guardan. Las fichas son poco explícitas sobre qué dato

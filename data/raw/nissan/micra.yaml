@@ -5,7 +5,7 @@ model: Micra
 status: {value: on_sale, source_id: nissan-es, url: "https://micra.nissan.es/", retrieved: 2026-10-13, tier: T1, note: "la web del Micra muestra acabados Acenta y N-Connecta con cuota mensual"}
 launch: null
 segment: null
-needs_review: true
+needs_review: false
 specs:
   dc_max_kw: {value: 100, note: "la web cita cargadores CC de 80/100 kW (15-80 % en 30 min)", source_id: nissan-es, url: "https://micra.nissan.es/", retrieved: 2026-10-13, tier: T1}
 versions:
@@ -29,4 +29,5 @@ open_questions:
   - "launch y segment: sin fuente registrada."
   - "Precio: la web solo da cuota mensual (Acenta 99 €/mes, N-Connecta 119 €/mes) con entrada y última cuota, sin precio total; no se guarda precio."
   - "Tekna 52 kWh aparece en el IDAE pero no en la web del Micra; no se incluye hasta confirmarlo. La web no dice qué batería lleva cada acabado: la combinación sale del IDAE."
+  - "Gama confirmada el 2026-10-13 con motor.es: Standard Range Acenta y N-Connecta, Long Range N-Connecta y Tekna. Falta añadir el Tekna 52 kWh (Long Range)."
   - "Imágenes: Commons no devolvió ficheros del Micra eléctrico; sin imagen."
