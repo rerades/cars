@@ -190,6 +190,11 @@ entraría sola. Las 8 PR de imágenes de la noche del 2026-10-12 (#254 a #266 y 
    la etiqueta y cita el SHA (`.claude/agents/reviewer.md`); (b) el validador de todo `data/` corre
    en el job `test` de la CI (#228, ADR-0010); (c) el sitio está en Render (#98). Lo que falta es
    el paso `run.ts --merge` y su LaunchAgent; el interruptor se pone a `true` en la misma PR.
+   **Hecho el 2026-10-13:** `factory/merge.ts` (`node factory/run.ts --merge [--dry-run]`), con
+   `factory/launchd/com.darkfactory.merge.plist.example` a las 07:30 y `auto_merge: true`. Dos
+   detalles de la implementación: un renombrado o una copia en el diff también espera a una
+   persona (gh solo da la ruta nueva, y la vieja desaparece, que es un borrado); y las filas de
+   `ops/merges/` viajan en la PR de estado de ADR-0013, cuya regla admite ahora `ops/merges/*.jsonl`.
 
 10. **Dos límites que cierran huecos de la CI.**
     - **Solo imágenes citadas.** El validador comprueba las imágenes que cita algún `images` de

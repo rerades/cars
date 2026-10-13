@@ -127,7 +127,8 @@ Detalles:
    a la fusión automática de ADR-0011 (decisión del responsable, 2026-10-09): el registro solo lo
    escribe el orquestador y revisarlo a mano no aporta nada. Tiene su **propia regla**, no la de las
    PR de agente: rama `chore/factory-state` con la etiqueta `automerge`, que la factoría pone al
-   abrirla; el diff solo **añade líneas** a ficheros `ops/runs/*.jsonl` (ni borra ni toca otra ruta);
+   abrirla; el diff solo **añade líneas** a ficheros `ops/runs/*.jsonl` u `ops/merges/*.jsonl` (este, el
+   registro de fusiones de ADR-0011, punto 3; añadido el 2026-10-13) (ni borra ni toca otra ruta);
    todos los checks terminados y en verde; sin conflictos; sin `factory/STOP`; `gh pr merge --merge
    --match-head-commit <sha>` ([2]). No necesita `review:ok`: el Revisor no la revisa. Lo hace
    `mergeStatePr()` (`node factory/run.ts --merge-state`) en dos sitios: el workflow

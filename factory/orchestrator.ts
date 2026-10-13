@@ -229,14 +229,15 @@ export function syncState(repo = REPO, dir = STATE_DIR): string | null {
 }
 
 /**
- * Commits the ledger in the state worktree, pushes it and opens the state PR if none is open.
+ * Commits the ledger and the merge log (ADR-0011, point 3) in the state worktree, pushes them and
+ * opens the state PR if none is open. `what` names the commit: "run <run_id>" or "merges".
  * Never throws: a failed push leaves the commit on the local branch and the next run pushes it.
  */
-export function commitState(runId: string, repo = REPO, dir = STATE_DIR): string | null {
+export function commitState(what: string, repo = REPO, dir = STATE_DIR): string | null {
   if (!STATE_IN_GIT) return null;
   try {
-    git(["add", "ops/runs"], dir);
-    git(["commit", "-q", "-m", `chore(factory): record run ${runId}`], dir);
+    git(["add", ...["ops/runs", "ops/merges"].filter((p) => existsSync(join(dir, p)))], dir);
+    git(["commit", "-q", "-m", `chore(factory): record ${what}`], dir);
     git(["push", "-q", "-u", "origin", STATE_BRANCH], dir);
     const open = execFileSync("gh", ["pr", "list", "--head", STATE_BRANCH, "--state", "open", "--json", "url",
       "--jq", ".[0].url"], { cwd: repo, encoding: "utf8" }).trim();
@@ -266,7 +267,7 @@ export interface StatePr {
 
 /**
  * Why the state PR cannot be merged by the factory, or null when it can (ADR-0013, point 6):
- * the state branch, the automerge label, only added lines in ops/runs/*.jsonl, every check
+ * the state branch, the automerge label, only added lines in ops/runs/*.jsonl or ops/merges/*.jsonl, every check
  * finished and green, no conflicts, and no STOP file. No review needed.
  */
 export function stateMergeBlocker(pr: StatePr, stopped: boolean): string | null {
@@ -274,7 +275,7 @@ export function stateMergeBlocker(pr: StatePr, stopped: boolean): string | null 
   if (pr.headRefName !== STATE_BRANCH) return `la rama no es ${STATE_BRANCH}`;
   if (!pr.labels.some((l) => l.name === AUTOMERGE_LABEL)) return `sin la etiqueta ${AUTOMERGE_LABEL}`;
   if (!pr.files.length) return "no cambia nada";
-  const odd = pr.files.find((f) => !/^ops\/runs\/[^/]+\.jsonl$/.test(f.path) || f.deletions > 0);
+  const odd = pr.files.find((f) => !/^ops\/(runs|merges)\/[^/]+\.jsonl$/.test(f.path) || f.deletions > 0);
   if (odd) return `toca algo más que añadir filas al registro (${odd.path})`;
   // UNKNOWN is GitHub still computing it (right after main moves); the merge itself refuses conflicts.
   if (pr.mergeable === "CONFLICTING") return "tiene conflictos con main";
