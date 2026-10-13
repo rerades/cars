@@ -2,10 +2,10 @@
 brand: audi
 brand_name: Audi
 model: Q4 e-tron
-status: {value: on_sale, note: "artículo de 30/04/2026: a la venta desde 49.970 € con entregas programadas para el verano; versiones e-tron, e-tron performance y e-tron quattro, en carrocería compacta y Sportback", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/49970-mas-barato-coches-electricos-audi-mejora-hasta-rozar-600-km-autonomia_86563_102.html", retrieved: 2026-10-13, tier: T3}
+status: {value: on_sale, note: "artículo de 30/06/2026: «El Audi Q4 e-tron 2026 ya está disponible en los concesionarios españoles»; versiones 45 e-tron, 45 e-tron Performance y 55 e-tron quattro, en SUV y Sportback", source_id: coches-es, url: "https://noticias.coches.com/audi-q4-2026", retrieved: 2026-10-13, tier: T3}
 launch: null
 segment: {value: suv_compacto, note: "el medio lo llama «SUV compacto»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-10-13, tier: T3}
-needs_review: true
+needs_review: false
 versions:
   - name: Q4 e-tron
     wltp_km: {value: 426, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611348 (Q4 S line e-tron MY27; mismo valor en id 611349); menor de 4 homologaciones MY27: 426 km (611348, 611349), 430 km (611346), 433 km (611347). El medio (2026-04-30) publica 442 km"}
@@ -51,4 +51,3 @@ open_questions:
   - "El medio (2026-04-30) cita 59/77 kWh y el IDAE 63/82 kWh en el Sportback: probablemente neta frente a bruta, sin confirmar."
   - "Entregas del Q4 e-tron renovado: el medio (2026-04-30) las programa para el verano de 2026; no se ha comprobado que ya se entreguen."
   - "launch: 2021-06 era una fecha prevista en un artículo de abril de 2021, sin confirmar; sin dato."
-  - "needs_review: el Q4 renovado tenía entregas programadas para el verano de 2026 (artículo del 30/04/2026); confirmar que se vende y entrega hoy."

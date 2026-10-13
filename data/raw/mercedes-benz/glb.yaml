@@ -2,26 +2,25 @@
 brand: mercedes-benz
 brand_name: Mercedes-Benz
 model: GLB
-status: {value: on_sale, note: "artículo de 11/12/2025: la marca acepta pedidos del GLB 250+ y el GLB 350 4MATIC con PVP en España; primeras entregas previstas en primavera de 2026 (no se ha comprobado que ya se entreguen)", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-glb-2026-2025111552.html", retrieved: 2026-10-13, tier: T3}
+status: {value: on_sale, note: "la web oficial lista el GLB 250+ y el GLB 350 4MATIC eléctricos con configurador y precios", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/glb-electric/overview.html", retrieved: 2026-10-13, tier: T1}
 launch: null
 segment: null
-needs_review: true
+needs_review: false
 versions:
   - name: GLB 250+
     battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611887"}
-    wltp_km: {value: 671, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611887; menor de 2 homologaciones: 671 km (id 611887), 672 km (id 609714)"}
-    power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611887; las dos homologaciones dan 200 kW"}
+    wltp_km: {value: 630, note: "el IDAE da 671 km (id 611887); prevalece la web (T1)", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/glb-electric/overview.html", retrieved: 2026-10-13, tier: T1}
+    power_kw: {value: 200, note: "publicado: 200 kW (272 CV)", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/glb-electric/overview.html", retrieved: 2026-10-13, tier: T1}
     price: null
   - name: GLB 350 4MATIC
     battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611888"}
-    wltp_km: {value: 632, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611888; menor de 2 homologaciones: 632 km (id 611888), 633 km (id 609715)"}
-    power_kw: {value: 260, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611888; las dos homologaciones dan 260 kW"}
+    wltp_km: {value: 614, note: "el IDAE da 632 km; prevalece la web (T1)", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/glb-electric/overview.html", retrieved: 2026-10-13, tier: T1}
+    power_kw: {value: 260, note: "publicado: 260 kW (354 CV)", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/glb-electric/overview.html", retrieved: 2026-10-13, tier: T1}
     drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
     price: null
 images: []
 open_questions:
-  - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; todas las versiones con price null."
+  - "Precio: la web oficial pone «Financiación y precios 57.777,50 €» (GLB 250+) sin decir si es el PVP sin ayudas ni dar condiciones; no se guarda. Confirmar en el configurador."
   - "Segmento: el medio solo dice «SUV de Mercedes con hasta siete plazas»; no hay clasificación en la lista de RF-11."
   - "Imagen: sin foto del GLB eléctrico con licencia válida localizada."
   - "launch: el artículo de 11/12/2025 dice que ya acepta pedidos, pero no desde cuándo; sin dato."
-  - "status: entregas previstas en primavera de 2026 sin confirmar que ya se entreguen; confirmar antes de quitar needs_review."

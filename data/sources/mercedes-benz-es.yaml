@@ -1,0 +1,18 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: mercedes-benz-es
+brand: Mercedes-Benz
+tier: T1
+market: ES
+kind: [ specs, announcements ]
+urls:
+  home: https://www.mercedes-benz.es/
+  models: https://www.mercedes-benz.es/passengercars/models/suv/glb-electric/overview.html # una ficha por modelo: /passengercars/models/<carrocería>/<modelo>/overview.html
+  robots: https://www.mercedes-benz.es/robots.txt
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  Web oficial de Mercedes-Benz en España. Alta en la revisión humana de needs_review del 2026-10-13: el 2026-10-13
+  responde (antes daba timeout). Cada ficha da potencia y autonomía WLTP por versión en «Datos técnicos». El importe de
+  «Financiación y precios» no dice si es el PVP sin ayudas ni lleva condiciones: no se guarda como precio hasta
+  confirmarlo en el configurador. robots.txt no bloquea /passengercars/models/ (sí el configurador de /*/mercedes-benz-cars/).
+last_verified: 2026-10-13
+status: active

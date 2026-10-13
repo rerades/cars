@@ -2,9 +2,9 @@
 brand: citroen
 brand_name: Citroën
 model: ë-C3
-status: {value: on_sale, note: "el artículo del 05/10/2026 da precio de ë-C3 Max y Outdoor; el del 04/07/2026, de Tonic, You y Plus", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/citroen-c3-c3-aircross-outdoor-precio-espana-20261005-42307.html", retrieved: 2026-10-13, tier: T3}
+status: {value: on_sale, note: "gama 2027 en España: You, Plus y Tonic Urban Range; You, Plus, Tonic, Max, Business, Collection y Outdoor Confort Range", source_id: motor-es, url: "https://www.motor.es/citroen/e-c3/", retrieved: 2026-10-13, tier: T3}
 launch: null
-needs_review: true
+needs_review: false
 versions:
   - name: Tonic Urban Range
     battery_kwh: {value: 30, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611797; otra homologación, id 610613, con los mismos valores. El medio (04/07/2026) da 30 kWh"}
@@ -60,4 +60,4 @@ open_questions:
   - "launch: el medio T3 no da la fecha de inicio de venta (el artículo de precios oficiales es del 18/10/2023); sin dato."
   - "Las versiones del IDAE se casan con el nombre comercial por el nombre de la fila; ids con nombre ambiguo (607624, 607625) pueden no ser exactamente la versión actual."
   - "No se ha escrito el ë-C3 Comercial (variante de empresa del IDAE) ni la edición Collection: ningún medio leído da su versión actual."
-  - "needs_review: hay versiones sin confirmar hoy (Tonic y las Comfort Range, que el medio da por retiradas a finales de 2025 en el ë-C3 Aircross) y los ids del IDAE 607624 y 607625 pueden no ser la versión actual."
+  - "Autonomía: motor.es (gama 2027, 2026-10-13) da 214 km en las Urban Range y 322 km en las Confort Range; el IDAE (T2, prevalece) da 203 a 212 y 300 a 309 km. Pueden ser homologaciones anteriores: conciliar con el IDAE. Faltan Business y Collection Confort Range."
