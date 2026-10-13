@@ -1,0 +1,32 @@
+# Researcher — Nissan Micra (eléctrico). Fuentes: nissan-es (T1), idae-es (T2). Consultado 2026-10-13.
+brand: nissan
+brand_name: Nissan
+model: Micra
+status: {value: on_sale, source_id: nissan-es, url: "https://micra.nissan.es/", retrieved: 2026-10-13, tier: T1, note: "la web del Micra muestra acabados Acenta y N-Connecta con cuota mensual"}
+launch: null
+segment: null
+needs_review: true
+specs:
+  dc_max_kw: {value: 100, note: "la web cita cargadores CC de 80/100 kW (15-80 % en 30 min)", source_id: nissan-es, url: "https://micra.nissan.es/", retrieved: 2026-10-13, tier: T1}
+versions:
+  - name: Micra Acenta 40 kWh
+    battery_kwh: {value: 40, basis: unknown, note: "IDAE id 606741", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    wltp_km: {value: 317, note: "IDAE id 606741; la web dice hasta 317 km con 40 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    power_kw: {value: 90, note: "IDAE id 606741; publicado: 120 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    price: null
+  - name: Micra N-Connecta 40 kWh
+    battery_kwh: {value: 40, basis: unknown, note: "IDAE id 606742", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    wltp_km: {value: 314, note: "IDAE id 606742", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    power_kw: {value: 90, note: "IDAE id 606742; publicado: 120 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    price: null
+  - name: Micra N-Connecta 52 kWh
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 606744", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    wltp_km: {value: 415, note: "IDAE id 606744; la web dice hasta 415 km con 52 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    power_kw: {value: 110, note: "IDAE id 606744; publicado: 150 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "launch y segment: sin fuente registrada."
+  - "Precio: la web solo da cuota mensual (Acenta 99 €/mes, N-Connecta 119 €/mes) con entrada y última cuota, sin precio total; no se guarda precio."
+  - "Tekna 52 kWh aparece en el IDAE pero no en la web del Micra; no se incluye hasta confirmarlo. La web no dice qué batería lleva cada acabado: la combinación sale del IDAE."
+  - "Imágenes: Commons no devolvió ficheros del Micra eléctrico; sin imagen."
