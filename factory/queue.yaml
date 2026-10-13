@@ -596,3 +596,23 @@
     etiquetas story y agente. No cierres issues, no cambies el alcance y no toques las que ya
     están en factory/queue.yaml salvo para corregir un error del PRD o del diseño. Resume en la
     bitácora qué revisaste y qué cambió."
+- id: diseno-rankings
+  agent: designer
+  task: "Diseño de los rankings de PRD-005 (ready, P2). Escribe docs/design/rankings.md con la
+    misma estructura que docs/design/ficha-modelo.md: estructura y orden de lectura, cabecera con
+    el campo y el sentido del orden (RF-1) y el título y el texto introductorio propios de cada uno
+    de los cinco rankings (RF-13), la URL de cada ranking (RF-13 la deja al diseño; sigue el estilo
+    de las de paginas-catalogo.md) y la lista de 10 puestos (RF-7) como ol o tabla (RNF-3). Decide
+    qué lleva un puesto además de lo que fija RF-3 (decisión 4: imagen o segmento, sin ninguna cifra
+    de modelo como «precio desde»), con la cifra, su unidad y su fuente y fecha junto al valor (RF-4)
+    reutilizando el formato de la sección «Versiones» de ficha-modelo.md («Precio con oferta» con
+    sus condiciones, RF-5; «fuente no oficial» para T2) y la base de la batería en ese ranking
+    (sección 6). Diseña los empates con puesto compartido (1, 2, 2, 4; RF-7), el estado sin
+    versiones con enlace a /coches (RF-7), la nota de versiones que se quedan fuera (RF-15) y los
+    filtros de segmento y de tramo (RF-8, RF-9) reutilizando filtros-catalogo.md, en la URL y
+    ocultos sin JavaScript (RNF-1). Fija dónde va en /coches el enlace a los rankings (PRD-001,
+    RF-14) y anótalo como cambio enlazado en paginas-catalogo.md. Tokens de tokens.md,
+    accesibilidad (320 px sin scroll horizontal; etiquetas que no dependen del color) y textos con
+    sus claves de i18n. No decidas cómo llegan los datos ni cómo se filtra en el navegador. Respeta
+    la sección 8 de PRD-005: nada de «mejor», puntuaciones ni insignias. Lo que no se deduzca del PRD
+    ni de los diseños existentes va a Preguntas abiertas. No toques web/, docs/product/ ni factory/."
