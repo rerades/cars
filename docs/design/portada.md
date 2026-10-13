@@ -32,7 +32,8 @@ Orden del DOM = orden visual = orden de lectura (WCAG 1.3.2, RNF-3).
 2. `<main>`:
    1. **`h1`** — el nombre de la web, `sitio.nombre` («siete3») (RF-1, CA-1).
    2. **Texto de entrada** — un párrafo (`<p>`), justo debajo del `h1` (RF-1, RF-7).
-   3. **Contador** — «{n} modelos en el catálogo» (`portada.contador`) (RF-1, RF-2).
+   3. **Contador** — «{n} modelos en el catálogo» (`portada.contador.one` / `portada.contador.other`, elegidas
+      por plural) (RF-1, RF-2).
    4. **Franja «Explorar»** — el `<nav>` de `paginas-catalogo.md` con su `h2`, incluido «Todos los coches» (RF-3).
 3. Pie del sitio (fuera de esta especificación).
 
@@ -53,7 +54,8 @@ sitio lleva un «Saltar al contenido» común, se aplica aquí igual; no es de e
 - Cuenta los modelos que tienen tarjeta en `/coches`, de los tres estados, sin los de `needs_review: true`
   (PRD-001, RF-13). **Debe salir del mismo cálculo** que la lista de `/coches`, no de un recuento propio, para que
   CA-2 («coincide con el número de tarjetas de `/coches`») no pueda romperse.
-- Texto `portada.contador`, con plural: «36 modelos en el catálogo», «1 modelo en el catálogo». Número en formato
+- Texto en dos claves que se eligen por plural con `Intl.PluralRules` de `es` (ver «Textos»):
+  `portada.contador.other` («36 modelos en el catálogo») y `portada.contador.one` («1 modelo en el catálogo»). Número en formato
   `es-ES` (con punto de miles si algún día pasa de 999).
 - No lleva fuente ni fecha: es un recuento del propio catálogo, no un dato de un coche (RF-2).
 - Es un `<p>` normal ya escrito en el HTML (RNF-1, CA-9), `text-body`, `ink-600`, igual que el de las páginas del
@@ -238,7 +240,8 @@ Claves nuevas:
 |---|---|
 | `pagina.portada.tituloDocumento` | siete3 · Coches eléctricos en Europa y España |
 | `pagina.portada.entrada` | (ver «Texto de entrada») |
-| `portada.contador` | {n} modelos en el catálogo · singular: 1 modelo en el catálogo |
+| `portada.contador.one` | {n} modelo en el catálogo |
+| `portada.contador.other` | {n} modelos en el catálogo |
 
 Claves que reutiliza, sin cambiarlas:
 
@@ -248,8 +251,9 @@ Claves que reutiliza, sin cambiarlas:
 | `explorar.*` | Explorar, Marcas, Segmentos, Precio, Autonomía, los tramos, Todos los coches | `paginas-catalogo.md` |
 | `vacio.catalogo.texto` | Todavía no hay ningún modelo en el catálogo. | `paginas-catalogo.md` (aviso vacío) |
 
-El plural de `portada.contador` se resuelve con la regla de plural de `es` (`Intl.PluralRules`), no con un `if`
-sobre el texto; el `0` no llega nunca a esta clave (estado vacío).
+El contador usa `portada.contador.one` o `portada.contador.other` según la categoría que devuelve la regla de
+plural de `es` (`Intl.PluralRules`) para `{n}` (implementado en #241, `web/src/lib/catalog.ts` e `i18n.ts`), no un
+`if` sobre el texto; el `0` no llega nunca a estas claves (estado vacío).
 
 ## Tokens que usa
 
