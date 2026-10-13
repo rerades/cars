@@ -1,0 +1,40 @@
+# Researcher — Leapmotor C10 (solo BEV). Fuentes: leapmotor-es (T1), idae-es (T2). Consultado 2026-10-13.
+brand: leapmotor
+brand_name: Leapmotor
+model: C10
+status: {value: on_sale, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+needs_review: true
+versions:
+  - name: C10 Pro 69,9 kWh
+    battery_kwh: {value: 69.9, basis: unknown, note: "IDAE id 603407", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    wltp_km: {value: 420, note: "IDAE id 603407; coincide con la ficha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 603407; la ficha publica 215 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    dc_max_kw: {value: 84, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+    price: null
+  - name: C10 ProMax 81,9 kWh
+    battery_kwh: {value: 81.9, basis: unknown, note: "IDAE id 608724", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    wltp_km: {value: 510, note: "IDAE id 608724; coincide con la ficha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    power_kw: {value: 215, note: "IDAE id 608724; la ficha publica 299 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    dc_max_kw: {value: 180, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+    price: null
+  - name: C10 ProMax AWD 81,9 kWh
+    battery_kwh: {value: 81.9, basis: unknown, note: "IDAE id 608725", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    wltp_km: {value: 437, note: "IDAE id 608725; coincide con la ficha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    power_kw: {value: 430, note: "IDAE id 608725; la ficha publica 598 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    drivetrain: {value: awd, note: "la ficha la presenta como 4x4", source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+    dc_max_kw: {value: 180, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/c10", retrieved: 2026-10-13, tier: T1}
+    price: null
+images:
+  - file: data/images/leapmotor/c10/exterior.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Leapmotor_C10_IAA_2023_1X7A0248.jpg/1280px-Leapmotor_C10_IAA_2023_1X7A0248.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Leapmotor_C10_IAA_2023_1X7A0248.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "Precio: la ficha da 'desde 29.600 €' y 'desde 32.700 €' (81,9 kWh Design) con 3.375 € del Plan Auto+ y 900 € del CAE descontados, válidos hasta 31/10/2026; sin PVP sin ayudas, price: null."
+  - "Segmento: la ficha dice SUV de 4,73 m sin clasificarlo; una prueba (T3) lo llama SUV mediano, que no está en la lista de RF-11. Se deja vacío."
+  - "La ficha también muestra una variante EV híbrido (REEV), que no es BEV y no se registra."
+  - "Tracción de Pro y ProMax y lanzamiento en España: no publicados en las fuentes consultadas (una prueba T3 dice tracción trasera, no confirmado por T1)."
+  - "needs_review: la ficha no asigna con claridad los 84, 180 y 180 kW de dc_max_kw a cada versión; confirmar la asignación."

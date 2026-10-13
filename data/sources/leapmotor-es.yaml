@@ -1,0 +1,23 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: leapmotor-es
+brand: Leapmotor
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.leapmotor.net/es-es
+  models: https://www.leapmotor.net/es-es/modelos
+  prices: https://www.leapmotor.net/es-es/modelos/b10 # cada ficha lleva su "desde" con ayudas; también /t03, /b03x, /b05, /c10
+  press: https://www.leapmotor.net/es-es/descubre-leapmotor/noticias
+  legal: https://www.leapmotor.net/es-es/terminos-y-condiciones
+image_license: "" # sin términos de uso de imágenes verificados (solo "© 2025 Leapmotor. Todos los derechos reservados"): no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-13): https://www.leapmotor.es no se puede leer (error TLS); la web con selector "Spain | ES-ES" es
+  leapmotor.net/es-es (dominio global de la marca; pie "© 2025 Leapmotor"). La página no menciona a Stellantis, así que la
+  distribución por Stellantis no queda confirmada por esta fuente. robots.txt: Googlebot sin restricciones; el resto, solo
+  bloquea /kw-*, /qa-*, /uae-*. Gama en la web: T03, B03X, B05, B10 y C10 (BEV), más variantes EV híbrido (REEV, no BEV). Los
+  precios "desde" de cada ficha descuentan 3.375 € del Plan Auto+ y 900 € de la venta del certificado CAE (válidos hasta el
+  31/10/2026): incluyen ayudas, así que no son PVP sin ayudas ni se guardan. Las fichas son poco explícitas sobre qué dato
+  pertenece a qué versión; las cifras por versión se toman del IDAE (idae-es) y de la ficha solo lo claro.
+last_verified: 2026-10-13
+status: active
