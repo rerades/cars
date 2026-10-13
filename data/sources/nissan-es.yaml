@@ -1,0 +1,19 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: nissan-es
+brand: Nissan
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.nissan.es/
+  models: https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/leaf
+  ariya: https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya
+  micra: https://micra.nissan.es/
+  robots: https://www.nissan.es/robots.txt
+image_license: "" # no se han leído términos de uso de imágenes; no se publican imágenes de esta fuente
+notes: >
+  Web oficial de Nissan España. Las fichas de modelo solo muestran precio financiado (con oferta, TAE y condiciones en
+  la nota al pie), no un PVP limpio; Micra solo muestra cuota mensual. robots.txt no restringe /cf/ ni micra.nissan.es
+  (comprobado el 2026-10-13). Las ofertas citadas vencen el 31/10/2026.
+last_verified: 2026-10-13
+status: active

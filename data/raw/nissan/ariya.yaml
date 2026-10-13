@@ -1,0 +1,43 @@
+# Researcher — Nissan Ariya. Fuentes: nissan-es (T1), idae-es (T2). Consultado 2026-10-13.
+brand: nissan
+brand_name: Nissan
+model: Ariya
+status: {value: on_sale, source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya", retrieved: 2026-10-13, tier: T1, note: "la ficha lista Evolve 4x2 y Evolve 4x4 e-4ORCE"}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Ariya Evolve 87 kWh 4x2
+    battery_kwh: {value: 87, basis: unknown, note: "IDAE id 598056", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    wltp_km: {value: 525, note: "IDAE id 598056; coincide con la nota 3 de nissan.es (525 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    power_kw: {value: 178, note: "IDAE id 598056; publicado: 242 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    price:
+      value: 45275
+      unit: EUR
+      price_kind: financed
+      price_terms: "Nota 3 (Ariya 87 kWh Auto 4x2 Evolve): oferta válida hasta el 31/10/2026 para particulares y autónomos en Península y Baleares, financiando con Nissan Flex 4D (RCI Banque). Precio al contado 46.275 €; precio financiando 45.275 €; entrada 9.144,01 €; importe a financiar 37.405 €; 36 cuotas de 455 € y última cuota de 28.339,63 € (37 meses); TIN 7,20 %, TAE 8,03 %, comisión de apertura 500 €; importe total adeudado 45.219,63 €. Requiere vehículo usado a nombre del cliente con al menos 6 meses; entrada máxima 40 %, permanencia mínima 36 meses; no acumulable a otras campañas. Incluye ayuda Plan Auto+ de 2.925 € y 900 € del programa CAE (achatarramiento de un vehículo de combustión de más de un año). No incluye gastos de preentrega y matriculación."
+      price_terms_url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya"
+      source_id: nissan-es
+      url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya"
+      retrieved: 2026-10-13
+      tier: T1
+  - name: Ariya Evolve 87 kWh e-4ORCE
+    battery_kwh: {value: 87, basis: unknown, note: "IDAE id 598062", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    wltp_km: {value: 509, note: "IDAE id 598062", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    power_kw: {value: 225, note: "IDAE id 598062; publicado: 306 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    drivetrain: {value: awd, note: "4x4 e-4ORCE", source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya", retrieved: 2026-10-13, tier: T1}
+    price: null
+images:
+  - file: data/images/nissan/ariya/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/2023_Nissan_Ariya_Advance_Front.jpg/1280px-2023_Nissan_Ariya_Advance_Front.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2023_Nissan_Ariya_Advance_Front.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-13
+    license: CC-BY-SA-4.0
+    attribution: "Vauxford, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "launch y segment: sin fuente registrada."
+  - "Precio: la ficha da 'desde 44.375 €' para Evolve 4x2 y 47.575 € para e-4ORCE (financiado), pero la nota 3 da 45.275 € financiando para Evolve 4x2; se guarda el de la nota, con condiciones literales. El e-4ORCE queda sin precio (sin condiciones propias). El precio financiado incluye Plan Auto+: buscar PVP limpio."
+  - "wltp: la ficha dice 'hasta 536 km' (Engage, según IDAE) y 525 km para Evolve 4x2; la gama de hoy solo lista Evolve. Las versiones 63 kWh, Engage, Advance, Nismo y e-4ORCE Evolve+ del IDAE no aparecen en la ficha; no se incluyen."
+  - "drivetrain del 4x2: la ficha dice solo 4x2 sin indicar el eje; no se rellena."
+  - "No se ha confirmado con medios T3 (highmotor, motorpasion) la gama vigente."
