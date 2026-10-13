@@ -71,9 +71,9 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
   publicación del artículo, una fecha sacada de la URL ni una previsión que nadie ha confirmado después.
   Sin una fecha así, `launch` se deja `null` y se anota en `open_questions`.
 - `status: on_sale` exige que la fuente diga que el coche ya se puede pedir o ya se entrega en España.
-  Si solo anuncia una fecha futura de venta o de entregas, sin pedidos abiertos, es `announced`. Si la
-  única fuente de `on_sale` es T3 y tiene más de seis meses, o no se confirma qué versiones se venden
-  hoy, el modelo lleva `needs_review: true`.
+  Si solo anuncia una fecha futura de venta o de entregas, sin pedidos abiertos, es `announced`. Si no se
+  puede confirmar que se sigue vendiendo hoy (por ejemplo, la única fuente es un artículo de hace años) o
+  qué versiones se venden hoy, el modelo lleva `needs_review: true`.
 - **`segment` es obligatorio para publicar la tarjeta (RF-1), pero un fichero sin él es válido**:
   ninguna fuente de marca lo da de forma explícita. El Researcher lo rellena con la fuente que lo
   clasifique (puede ser T3, que ADR-0001 admite para confirmar datos) y, si no la hay, lo deja

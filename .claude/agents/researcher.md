@@ -52,7 +52,7 @@ redondeado y `note: "publicado: 204 CV"`.
   - Si tocas un fichero que aún tiene imágenes con `url`, migra esas entradas así antes de terminar: la página `File:` sale del nombre del fichero en la URL antigua; relee la licencia y descarga con el script.
 - **`launch`, `status` y `segment`** (data-model.md, notas de la sección 4), también con fuentes T3:
   - `launch` de un modelo `on_sale` es la fecha desde la que se puede pedir en España, que la fuente dé como tal. Nunca la fecha del artículo, una fecha sacada de la URL ni una previsión antigua sin confirmar. Sin ella, `null` y `open_questions`.
-  - `on_sale` solo si la fuente dice que ya se puede pedir o se entrega en España. Si solo anuncia una fecha futura, `announced`. Si la única fuente de `on_sale` es T3 de hace más de seis meses, o no confirmas qué versiones se venden hoy, `needs_review: true`.
+  - `on_sale` solo si la fuente dice que ya se puede pedir o se entrega en España. Si solo anuncia una fecha futura, `announced`. Si no puedes confirmar que se sigue vendiendo hoy (por ejemplo, la única fuente es un artículo de hace años) o qué versiones se venden hoy, `needs_review: true`.
   - `segment` solo con el término literal de la lista de RF-11 que use la fuente. Si dice otra cosa («SUV mediano»), no lo traduzcas por tamaño: `null` y anotado.
 - Respeta `robots.txt` y los términos de cada web. No evites protecciones de acceso, paywalls ni captchas.
 - Las fuentes T3 (medios, agregadores) sirven para descubrir modelos anunciados o confirmar datos, nunca como única fuente de precio.
