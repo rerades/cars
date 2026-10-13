@@ -5,7 +5,7 @@ status: ready
 priority: P0
 depends_on: []
 epic: "#32"
-updated: 2026-10-01
+updated: 2026-10-13
 ---
 
 # PRD-001 — Catálogo de modelos
@@ -52,6 +52,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - **RF-11:** El segmento es uno de esta lista, la que usa quien compra: urbano, compacto, berlina, familiar, SUV pequeño, SUV compacto, SUV grande, monovolumen, furgoneta y deportivo. Cada modelo tiene uno solo.
 - **RF-12:** Un modelo sin segmento, autonomía o tracción se muestra igual, con "por confirmar" en el campo que falta. Si el visitante filtra por ese campo, el modelo no aparece, porque no se puede afirmar que cumpla el filtro.
 - **RF-13:** Un modelo marcado `needs_review: true` no se publica: no tiene tarjeta, no cuenta en los contadores ni aparece en ninguna página pregenerada hasta que una persona lo revise y quite la marca (ADR-0001, regla 3).
+- **RF-14:** `/coches` enlaza a los rankings de PRD-005 con un enlace de texto, visible sin JavaScript. Es la entrada a los rankings desde la portada (portada → `/coches` → ranking).
 
 ## 5. Requisitos no funcionales
 - **RNF-1:** Renderizado en servidor o estático para SEO.
@@ -86,6 +87,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - [ ] **CA-16** (→ RF-3): Dados dos modelos con fecha de inicio de venta y uno sin ella, cuando ordeno por novedad, entonces el más reciente va primero y el que no tiene fecha, al final.
 - [ ] **CA-17** (→ RF-8): Dado un modelo sin imagen con licencia registrada, cuando abro `/coches`, entonces su tarjeta muestra la silueta genérica de su segmento, sin imagen de la marca.
 - [ ] **CA-18** (→ RF-13): Dado un modelo con `needs_review: true`, cuando construyo el sitio, entonces no aparece en `/coches` ni en ninguna otra página, y el contador no lo incluye.
+- [ ] **CA-19** (→ RF-14): Dado el HTML construido de `/coches`, cuando lo leo sin ejecutar JavaScript, entonces contiene un enlace a cada ranking publicado de PRD-005, y cada uno lleva a una página que existe en el build.
 - [ ] **CA-7** (→ RNF-5): Al cargar cualquier página del catálogo no se crea ninguna cookie ni se escribe nada en localStorage.
 
 ## 8. Decisiones y preguntas abiertas
@@ -116,6 +118,9 @@ Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsa
 ### Resueltas (2026-10-01)
 - **Modelos en revisión (RF-13, CA-18):** un modelo con `needs_review: true` no se publica entero, decidido por el responsable del producto. Es la opción (a) de la pregunta abierta 5 de PRD-002. Motivo: ADR-0001 dice que lo que está en revisión no se publica, y los agentes marcan así los datos que no han podido leer de una fuente oficial. Alternativas descartadas: publicarlo sin los datos en discrepancia, porque el esquema no dice qué campo es el dudoso; o con un aviso «datos en revisión», porque publica igualmente un dato que no está verificado.
 
+### Resueltas (2026-10-13)
+- **Entrada a los rankings (RF-14, CA-19):** `/coches` enlaza a los rankings de PRD-005, decidido por el responsable del producto al pasar PRD-005 a `ready`. Alternativa descartada: enlazarlos desde la portada, que cambiaría PRD-004.
+
 ### Abiertas
 - Ninguna.
 
@@ -134,3 +139,4 @@ Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsa
 | 2026-10-01 | `/coches` es indexable y las URL con filtros se marcan con canonical a su página sin query string (CA-13) | Rod / Claude |
 | 2026-10-01 | Fijados en RF-10 los bordes de los tramos de precio y de autonomía (pregunta 1 de `paginas-catalogo.md`) | Rod / Claude |
 | 2026-10-09 | Rankings pasa a PRD-005: PRD-004 es la portada | Rod / Claude |
+| 2026-10-13 | `/coches` enlaza a los rankings de PRD-005. Añadidos RF-14 y CA-19 | Rod / Claude |
