@@ -526,25 +526,20 @@ Color: `surface`, `surface-muted`, `ink-900`, `ink-600`, `line`, `line-soft`, `b
 | `soon-fg` / `soon-bg` | «Próximamente» | 17,74 |
 | `deal-fg` / `deal-bg` | «Precio con oferta» | 8,15 |
 
-## Preguntas abiertas para Producto
+## Preguntas de Producto (resueltas el 2026-10-13)
 
-1. **URLs que se rompen si cambia un `name`.** La URL usa `versions[].name` literal (PRD-003, sección 6). Si el
-   Researcher corrige un nombre, los enlaces ya compartidos a esa versión pasan a «no se ha podido incluir»
-   (RF-11 lo cubre sin error). ¿Se acepta, o se quiere un identificador estable por versión en el esquema
-   (cambio de `data-model.md`, fuera del diseño)?
-2. **Modelos sin versiones** (`versions: []`): como cada columna es una versión (RF-1), no se pueden comparar y
-   este diseño no les pone «Comparar» ni los ofrece en «Añadir». RF-11 no los nombra: ¿se confirma?
-3. **Versión por defecto ya presente.** Si al añadir un modelo su versión más barata (RF-8) ya está en la
-   comparación, este diseño añade la siguiente del orden de la ficha (RF-9 impide repetirla). ¿Vale, o se
-   prefiere no permitir añadirlo y pedir que se cambie la versión de la columna existente?
-4. **CA-7 y «≤ 3 interacciones desde la portada».** Se cumple si la portada muestra tarjetas con «Comparar»
-   (PRD-004 usa la tarjeta). Si se llega desde `/coches`, son 3 interacciones contando desde el catálogo. ¿Se
-   cuenta desde la página que tenga la tarjeta?
-5. **Fila de cabecera fija.** Al bajar por la tabla en móvil se pierde de vista qué columna es cuál. Una
-   cabecera `sticky` ayudaría pero, con nombres largos, taparía media pantalla a 320 px. No la pide ningún
-   requisito; no se especifica.
-6. **Botón «Copiar enlace».** RF-10 pide compartir con la URL, y la barra de direcciones ya lo es (la entrada
-   lo dice). Un botón de copiar no está en el PRD; no se especifica.
+Decididas por el responsable del producto al aceptar este diseño:
+
+1. **URLs que se rompen si cambia un `name`:** se acepta. Un enlace compartido a una versión renombrada la
+   muestra como «no se ha podido incluir» (RF-11), sin error. ADR-0014 asume el mismo riesgo. Alternativa
+   descartada: un identificador estable por versión en el esquema, que cambiaría `data-model.md`.
+2. **Modelos sin versiones** (`versions: []`): no se pueden comparar. No llevan «Comparar» ni salen en
+   «Añadir». Queda escrito en PRD-003, RF-11.
+3. **Versión por defecto ya presente:** se añade la siguiente del orden de la ficha, como dice «Añadir».
+4. **CA-7 y «≤ 3 interacciones desde la portada»:** se cuentan desde cualquier página que muestre la tarjeta
+   con «Comparar», también la portada.
+5. **Fila de cabecera fija:** no se especifica; ningún requisito la pide.
+6. **Botón «Copiar enlace»:** no se especifica; la barra de direcciones ya sirve para compartir (RF-10).
 
 ## Pendientes (no se deciden en diseño)
 

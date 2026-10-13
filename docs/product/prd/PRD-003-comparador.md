@@ -5,7 +5,7 @@ status: ready        # draft | ready | in-progress | done | deprecated
 priority: P1         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: [PRD-001, PRD-002]
 epic: ""
-updated: 2026-10-10
+updated: 2026-10-13
 ---
 
 # PRD-003 — Comparador
@@ -49,7 +49,7 @@ Cada columna del comparador es una **versión** (`versions[]` de un modelo, `dat
 - **RF-8:** Al incluir un modelo (RF-6, RF-7, o añadirlo en RF-9), su columna muestra la versión de **precio más bajo**; si ninguna versión tiene precio, la primera del fichero. En cada columna, el visitante puede **cambiar de versión** entre las del mismo modelo.
 - **RF-9:** Dentro del comparador, el visitante puede **quitar** una columna y **añadir** otro coche de entre los del catálogo. Con 3 columnas, la opción de añadir no está disponible y la página dice por qué. La misma versión no puede estar dos veces; dos versiones del mismo modelo sí.
 - **RF-10:** Una comparación se **comparte con una URL** de `/comparar` que contiene las versiones elegidas y su orden. Abierta en una sesión nueva, sin haber visitado antes la web, muestra la misma comparación. La selección vive **solo en la URL**: la web no la guarda en cookies, `localStorage`, `sessionStorage` ni en ningún otro almacenamiento del navegador ni en un servidor (visión, principios 1 y 2; PRD-001, RNF-5; decisión 3).
-- **RF-11:** Solo se pueden comparar modelos publicados `on_sale` o `announced`. Los que tienen `needs_review: true` no se publican (PRD-001, RF-13) y los `discontinued` no entran (decisión 6): sus tarjetas y fichas no tienen la acción «Comparar» y no aparecen al añadir. Si la URL de una comparación cita una versión que no existe, que es de un modelo excluido o que está repetida, la página no da error: ignora esa versión, avisa de que no se ha podido incluir y muestra las demás. Si la URL cita más de 3, se muestran las 3 primeras válidas y se avisa.
+- **RF-11:** Solo se pueden comparar modelos publicados `on_sale` o `announced`. Los que tienen `needs_review: true` no se publican (PRD-001, RF-13) los `discontinued` no entran (decisión 6) y los modelos sin versiones (`versions: []`) tampoco, porque cada columna es una versión (RF-1): sus tarjetas y fichas no tienen la acción «Comparar» y no aparecen al añadir. Si la URL de una comparación cita una versión que no existe, que es de un modelo excluido o que está repetida, la página no da error: ignora esa versión, avisa de que no se ha podido incluir y muestra las demás. Si la URL cita más de 3, se muestran las 3 primeras válidas y se avisa.
 - **RF-12:** Con menos de 2 versiones (comparador abierto sin selección, o con una sola tras RF-11), la página no muestra una tabla vacía: explica que hacen falta al menos 2 coches, ofrece añadirlos (RF-9) y enlaza al catálogo (`/coches`).
 - **RF-13:** El comparador no ordena ni destaca a ninguna versión como mejor ni peor, ni calcula diferencias o puntuaciones, ni resalta las filas que difieren: muestra los datos tal cual. El orden de las columnas es el de la URL.
 - **RF-14:** `/comparar` no se indexa: lleva `noindex` y su canonical apunta a `/comparar` sin parámetros, con cualquier selección (decisión 4).
@@ -115,6 +115,9 @@ Entidades y campos de `architecture/data-model.md` (ADR-0008); el comparador no 
 8. **Ruta `/comparar`,** el verbo de la acción «Comparar» de la tarjeta y la ficha. Descartado `/comparador`.
 9. **Prioridad P1.** Va después del catálogo, la ficha y la portada (P0).
 
+### Resueltas (2026-10-13, Rod)
+- **Modelos sin versiones (RF-11):** no se pueden comparar. Sus tarjetas y fichas no llevan «Comparar» y no aparecen al añadir. Lo propuso el diseño (`docs/design/comparador.md`, pregunta 2).
+
 ### Abiertas
 - Ninguna.
 
@@ -123,3 +126,4 @@ Entidades y campos de `architecture/data-model.md` (ADR-0008); el comparador no 
 |---|---|---|
 | 2026-10-10 | Borrador inicial: RF-1 a RF-12, RNF-1 a RNF-5, CA-1 a CA-17; 9 preguntas abiertas | Claude |
 | 2026-10-10 | Resueltas las 9 preguntas: versiones, máximo 3, selección solo en la URL, `/comparar` sin indexar y con JavaScript, sin descatalogados. RF-8 y RF-14, RNF-6 y CA-19 nuevos. Pasa a `ready` | Claude |
+| 2026-10-13 | RF-11: los modelos sin versiones no se pueden comparar | Rod / Claude |
