@@ -120,6 +120,7 @@ export const es = {
   "ficha.unidad.km": "{n} km",
   "ficha.unidad.kw": "{n} kW",
   "ficha.unidad.kwh": "{n} kWh",
+  "ficha.relacionados.titulo": "Otros modelos del segmento {segmento}",
   "filtros.titulo": "Filtros",
   "filtros.abrir": "Filtros ({n})",
   "filtros.marca": "Marca",

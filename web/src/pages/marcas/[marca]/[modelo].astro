@@ -6,25 +6,30 @@ import SegmentSilhouette from "../../../components/SegmentSilhouette.astro";
 import { loadModels, type ModelImage, type Sourced, type Specs, type Version } from "../../../lib/data.ts";
 import { t, type MessageKey } from "../../../lib/i18n.ts";
 import { chunkVersions, sortVersions } from "../../../lib/versions.ts";
+import { relatedModels } from "../../../lib/related.ts";
+import ModelCard from "../../../components/ModelCard.astro";
 
 /**
  * Model page (PRD-002, docs/design/ficha-modelo.md). This story: URL, title and header (RF-1, RF-2,
  * RF-10). Later stories add their blocks as sibling <section>s after the header inside <main>.
  */
 export function getStaticPaths() {
-  return loadModels().models.map((model) => {
+  const { models } = loadModels();
+  return models.map((model) => {
     const [marca, file] = model.file.replace(/\.yaml$/, "").split("/");
-    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, images: model.images, specs: model.specs } };
+    const related = relatedModels(model, models).map((m) => cardView(m));
+    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, images: model.images, specs: model.specs, related } };
   });
 }
 
-const { card, versions, brandSlug, brandUrl, images, specs } = Astro.props as {
+const { card, versions, brandSlug, brandUrl, images, specs, related } = Astro.props as {
   card: CardView;
   versions: Version[];
   brandSlug: string;
   brandUrl: string;
   images: ModelImage[];
   specs: Specs;
+  related: CardView[];
 };
 const chunks = chunkVersions(versions);
 // readImages (data.ts) already drops any image without license or source_id.
@@ -225,6 +230,21 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
                 <li>
                   <ModelFigure image={img} alt={altOf(i + 2)} caption={captionOf(img)} />
                 </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      {
+        card.hasSegment && related.length > 0 && (
+          <section aria-labelledby="relacionados" class="mt-12" data-related>
+            <h2 id="relacionados" class="text-section text-ink-900 [overflow-wrap:anywhere]">
+              {t("ficha.relacionados.titulo", { segmento: card.segmentLabel })}
+            </h2>
+            <ul class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+              {related.map((r) => (
+                <ModelCard card={r} href={`/marcas/${r.key}/`} />
               ))}
             </ul>
           </section>

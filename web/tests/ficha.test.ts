@@ -218,6 +218,51 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
   });
 });
 
+describe("related models block (RF-15, CA-17)", () => {
+  let root: string;
+  let out: string;
+  const page = (brand: string, model: string) => readFileSync(join(out, "marcas", brand, model, "index.html"), "utf8");
+  const priced = (brand: string, brandName: string, model: string, price: number | null, segment: string | null = "suv_compacto") =>
+    bare(brand, brandName, model, {
+      ...(segment ? { segment: sourced(segment) } : {}),
+      versions: price === null ? [] : [{ name: model, price: sourced(price, { unit: "EUR", price_kind: "pvp" }) }],
+    });
+  const related = (html: string) => /<section[^>]*data-related[\s\S]*?<\/section>/.exec(html)?.[0] ?? null;
+
+  before(() => {
+    root = mkdtempSync(join(tmpdir(), "cars-ficha-rel-"));
+    const data = join(root, "data");
+    writeModel(data, "acme", "Main", priced("acme", "Acme", "Main", 40000));
+    writeModel(data, "acme", "Sibling", priced("acme", "Acme", "Sibling", 40000));
+    writeModel(data, "beta", "Near", priced("beta", "Beta", "Near", 41000));
+    writeModel(data, "gamma", "Close", priced("gamma", "Gamma", "Close", 38000));
+    writeModel(data, "delta", "Mid", priced("delta", "Delta", "Mid", 44000));
+    writeModel(data, "eps", "Far", priced("eps", "Eps", "Far", 90000));
+    writeModel(data, "zeta", "NoSegment", priced("zeta", "Zeta", "NoSegment", 40000, null));
+    out = join(root, "out");
+    build(data, out);
+  });
+  after(() => rmSync(root, { recursive: true, force: true }));
+
+  test("CA-17: a compact SUV and four of other brands: the 3 closest in price, none of its brand", () => {
+    const block = related(page("acme", "Main"))!;
+    assert.ok(block);
+    assert.match(block, /aria-labelledby="relacionados"/);
+    assert.match(text(/<h2[^>]*>[\s\S]*?<\/h2>/.exec(block)![0]), /^Otros modelos del segmento SUV compacto$/);
+    const hrefs = [...block.matchAll(/<h3[\s\S]*?<a[^>]*href="([^"]+)"/g)].map((m) => m[1]);
+    assert.deepEqual(hrefs, ["/marcas/beta/Near/", "/marcas/gamma/Close/", "/marcas/delta/Mid/"]);
+    assert.doesNotMatch(block, /Sibling|Far/);
+    assert.doesNotMatch(block, /loading="eager"/);
+  });
+
+  test("CA-17: a model without segment has no block and no h2 for it", () => {
+    const html = page("zeta", "NoSegment");
+    assert.equal(related(html), null);
+    assert.doesNotMatch(html, /Otros modelos del segmento/);
+  });
+
+});
+
 describe("model pages on the real data", () => {
   let root: string;
   before(() => {
