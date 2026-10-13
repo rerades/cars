@@ -32,7 +32,7 @@ No inventes claves ni bloques: nada de `model_level`, `power_cv` ni `unit` fuera
 comprobación automática rechaza el fichero entero si no encaja, y la ejecución se pierde.
 
 Por cada modelo: `brand` (igual a la carpeta), `brand_name` (igual en todos los ficheros de la marca),
-`status`, `launch` (inicio de venta en España o fecha prevista), `segment`, versiones con `price`
+`status`, `launch` (inicio de venta en España, o fecha prevista si es `announced`), `segment`, versiones con `price`
 (`null` si no hay) e `images`. **Cada valor** va con su fuente: `value`, `source_id`, `url`,
 `retrieved`, `tier` y, si hace falta, `note`. Si la marca solo da CV, guarda `power_kw` = CV × 0,7355
 redondeado y `note: "publicado: 204 CV"`.
@@ -50,6 +50,10 @@ redondeado y `note: "publicado: 204 CV"`.
   - Si sale bien, imprime una línea JSON: copia tal cual `file`, `source_url` y `page_url` a la entrada de `images`, y añade `source_id`, `retrieved` (hoy), `license` y `attribution` (o `null`) leyendo la página de licencia. No escribas `url`: es la forma antigua y la comprobación la rechaza.
   - Si falla (sale con error y no guarda nada), no escribas la entrada: anota en `open_questions` la `page_url` y la causa, y prueba otra imagen o la siguiente fuente. Sin ninguna, `images: []`.
   - Si tocas un fichero que aún tiene imágenes con `url`, migra esas entradas así antes de terminar: la página `File:` sale del nombre del fichero en la URL antigua; relee la licencia y descarga con el script.
+- **`launch`, `status` y `segment`** (data-model.md, notas de la sección 4), también con fuentes T3:
+  - `launch` de un modelo `on_sale` es la fecha desde la que se puede pedir en España, que la fuente dé como tal. Nunca la fecha del artículo, una fecha sacada de la URL ni una previsión antigua sin confirmar. Sin ella, `null` y `open_questions`.
+  - `on_sale` solo si la fuente dice que ya se puede pedir o se entrega en España. Si solo anuncia una fecha futura, `announced`. Si no puedes confirmar que se sigue vendiendo hoy (por ejemplo, la única fuente es un artículo de hace años) o qué versiones se venden hoy, `needs_review: true`.
+  - `segment` solo con el término literal de la lista de RF-11 que use la fuente. Si dice otra cosa («SUV mediano»), no lo traduzcas por tamaño: `null` y anotado.
 - Respeta `robots.txt` y los términos de cada web. No evites protecciones de acceso, paywalls ni captchas.
 - Las fuentes T3 (medios, agregadores) sirven para descubrir modelos anunciados o confirmar datos, nunca como única fuente de precio.
 - Solo escribes en `data/`. No modificas código ni PRD.

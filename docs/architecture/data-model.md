@@ -66,12 +66,22 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
 | `open_questions` | lista de textos | no | — |
 
 - `launch` es la fecha prevista si el estado es `announced` (ADR-0001, regla 4) y la de inicio de
-  venta en España si es `on_sale`.
+  venta en España si es `on_sale`. **Inicio de venta** es la fecha desde la que se puede pedir el coche en
+  España (apertura de pedidos o del configurador), que la fuente dé como tal. No lo son la fecha de
+  publicación del artículo, una fecha sacada de la URL ni una previsión que nadie ha confirmado después.
+  Sin una fecha así, `launch` se deja `null` y se anota en `open_questions`.
+- `status: on_sale` exige que la fuente diga que el coche ya se puede pedir o ya se entrega en España.
+  Si solo anuncia una fecha futura de venta o de entregas, sin pedidos abiertos, es `announced`. Si no se
+  puede confirmar que se sigue vendiendo hoy (por ejemplo, la única fuente es un artículo de hace años) o
+  qué versiones se venden hoy, el modelo lleva `needs_review: true`.
 - **`segment` es obligatorio para publicar la tarjeta (RF-1), pero un fichero sin él es válido**:
   ninguna fuente de marca lo da de forma explícita. El Researcher lo rellena con la fuente que lo
   clasifique (puede ser T3, que ADR-0001 admite para confirmar datos) y, si no la hay, lo deja
-  `null` y lo anota. Regla de asignación: el valor de la lista de RF-11 que use la fuente; un SUV o
-  crossover va a `suv_pequeno`, `suv_compacto` o `suv_grande` según cómo lo presente. Sin segmento, la
+  `null` y lo anota. Regla de asignación: el valor de la lista de RF-11 que use la fuente, **con ese término
+  literal** («berlina», «SUV compacto»…); un SUV o crossover va a `suv_pequeno`, `suv_compacto` o
+  `suv_grande` solo si la fuente lo presenta así. Si la fuente usa un término que no está en la lista
+  («SUV mediano», «segmento D»), no se traduce por tamaño ni por parecido: `null` y anotado. Con una
+  fuente T3 vale lo mismo (decisión del 2026-10-13). Sin segmento, la
   tarjeta dice "por confirmar" y el modelo no sale en ese filtro (RF-12).
 - `status: discontinued` también se publica, con la etiqueta "Descatalogado" (RF-7).
 - **Imagen** (forma de [ADR-0012](adr/0012-imagenes-de-los-modelos.md), aceptada; sustituye a la
