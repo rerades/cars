@@ -124,6 +124,13 @@ Copy nuevo (RNF-4): `tarjeta.rotuloPrecio` «Precio», `tarjeta.rotuloAutonomia`
 `tarjeta.foto` «Foto: {atribucion}». Los meses, de `Intl.DateTimeFormat('es-ES', { month: 'long' })` o de una
 lista en el copy; nunca escritos en el componente.
 
+## Acción «Comparar» (PRD-003, RF-6, RF-11)
+Enlace de texto «Comparar» en la última línea, después del segmento, **por encima** del pseudo-elemento del
+enlace a la ficha. Solo en modelos comparables (`on_sale` o `announced` y con versiones). Con él, la tarjeta
+tiene dos paradas de foco, y el anillo de la tarjeta entera solo aparece con el foco en el enlace a la ficha.
+Destino, aspecto, texto y foco: [`comparador.md`](comparador.md), «La acción "Comparar"». Esto sustituye al
+«un tabulador por tarjeta» de «Estructura» para las tarjetas que la llevan.
+
 ## Rejilla
 Móvil: 1 columna. `md`: 2. `lg`: 3. Sin scroll horizontal a 320 px (WCAG 1.4.10). La tarjeta no tiene alto
 fijo: crece con el texto ampliado al 200 % (WCAG 1.4.4) o con el espaciado de texto de WCAG 1.4.12; las
