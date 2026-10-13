@@ -1,6 +1,6 @@
 ---
 status: draft
-updated: 2026-10-07
+updated: 2026-10-13
 ---
 
 # Arquitectura — visión general
@@ -22,4 +22,5 @@ updated: 2026-10-07
 - ~~Pipeline de ingesta de datos de modelos (fuentes, frecuencia, validación).~~ → [ADR-0010](adr/0010-pipeline-de-ingesta.md) (aceptada el 2026-10-06: la CI valida todo `data/raw/` y el registro en cada PR y en `main` con las comprobaciones de `factory/evals.ts`; forma y procedencia bloquean, antigüedad de más de 45 días y fuentes rotas solo avisan; refresco mensual por marca. Validador implementado el 2026-10-08, `node factory/validate-data.ts`: con los datos actuales, 0 errores; el paso en la CI lo añade DevOps, en la cola).
 - ~~Dónde se sirven las imágenes de los modelos y qué guarda el esquema para su atribución.~~ → [ADR-0012](adr/0012-imagenes-de-los-modelos.md) (aceptada: se descargan en la ingesta a `data/images/`, el build genera WebP y el visitante no pide nada a terceros; `images` pasa a `file`, `source_url` y `page_url`. La descarga la define la enmienda «Imágenes» de ADR-0010, aceptada el 2026-10-07: script determinista que lanza el Researcher, solo JPEG o PNG de ≤ 1280 px, migración por el Researcher y forma antigua de `images` admitida con aviso hasta migrar).
 - ~~Cómo hace commit la factoría de la cola, la pausa y el registro de ejecuciones (#166).~~ → [ADR-0013](adr/0013-commit-del-estado-de-la-factoria.md) (aceptada el 2026-10-06: la factoría no reescribe la cola; consumir una tarea es una fila con su `id` en `ops/runs/`, commiteada en una única rama de estado `chore/factory-state` con su PR, de la que la factoría lee).
+- ~~Cómo llegan los datos al comparador de PRD-003 y cómo se monta su parte interactiva (RNF-6).~~ → [ADR-0014](adr/0014-datos-y-script-del-comparador.md) (aceptada, 2026-10-13: un JSON estático por modelo comparable más un índice ligero, generados en el build; `<script>` propio sin framework; sin almacenamiento, comprobado con los specs de ADR-0006).
 - ~~Cómo publican los agentes (CI/CD, entornos, merge automático o no).~~ → [ADR-0011](adr/0011-publicacion-de-los-agentes.md) (aceptada: el Revisor solo etiqueta el estado, `review:ok`, `review:changes`, `review:needs-human` o `review:error`; fusiona el orquestador sin modelo si la PR tiene `review:ok` ligada al SHA, CI en verde, sin conflictos y solo toca `data/raw/` o `docs/bitacora/`; Render despliega «After CI Checks Pass»; vistas previas manuales. Desactivada hasta que el Revisor etiquete con SHA, la CI valide el esquema y el sitio esté en Render).
