@@ -144,6 +144,30 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
     assert.doesNotMatch(html, /<table|<ol/);
   });
 
+  test("CA-13: breadcrumb before the h1; Coches and brand links point to pages in the build", () => {
+    const html = page("acme", "Volta");
+    const nav = /<nav[^>]*aria-label="Ruta de navegación"[\s\S]*?<\/nav>/.exec(html)![0];
+    assert.ok(html.indexOf(nav) < html.indexOf("<h1"));
+    assert.equal((nav.match(/<li\b/g) ?? []).length, 3);
+    const hrefs = [...nav.matchAll(/<a[^>]*href="([^"]+)"/g)].map((m) => m[1]);
+    assert.deepEqual(hrefs, ["/coches", "/marcas/acme/"]);
+    for (const href of hrefs) assert.ok(existsSync(join(out, href, "index.html")), `${href} has no page`);
+    const current = /<li[^>]*aria-current="page"[^>]*>([^<]*)<\/li>/.exec(nav)!;
+    assert.equal(current[1], "Volta");
+    assert.match(text(nav), /Coches Acme Volta/);
+  });
+
+  test("CA-16: «Ver en la web de la marca» is a plain link to status.url, not a button", () => {
+    const html = page("acme", "Volta");
+    const a = /<a\b[^>]*data-web-marca[^>]*>[\s\S]*?<\/a>/.exec(header(html))![0];
+    const url = acme().status.url;
+    assert.match(a, new RegExp(`href="${url.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&")}"`));
+    assert.match(a, /rel="noopener"/);
+    assert.doesNotMatch(a, /target=|role=|\bbtn\b|bg-|border|<svg|<img/);
+    assert.doesNotMatch(a, /<button/);
+    assert.match(text(a), /^Ver en la web de la marca \(web de Acme, sitio externo\)$/);
+  });
+
   test("RNF-1/RNF-5: no JavaScript, no cookies or storage", () => {
     const html = page("acme", "Volta");
     assert.doesNotMatch(html, /<script\b|localStorage|document\.cookie/i);

@@ -12,11 +12,11 @@ import { chunkVersions, sortVersions } from "../../../lib/versions.ts";
 export function getStaticPaths() {
   return loadModels().models.map((model) => {
     const [marca, file] = model.file.replace(/\.yaml$/, "").split("/");
-    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions) } };
+    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url } };
   });
 }
 
-const { card, versions } = Astro.props as { card: CardView; versions: Version[] };
+const { card, versions, brandSlug, brandUrl } = Astro.props as { card: CardView; versions: Version[]; brandSlug: string; brandUrl: string };
 const chunks = chunkVersions(versions);
 const heading = t("ficha.titulo", { marca: card.brand, modelo: card.model });
 const site = t("sitio.nombre");
@@ -33,6 +33,25 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
   </head>
   <body>
     <main class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8">
+      <nav aria-label={t("ficha.ruta.nombre")} data-ficha-ruta>
+        <ol class="flex flex-wrap items-center text-small">
+          <li class="flex items-center after:mx-2 after:text-ink-600 after:[content:'›'/'']">
+            <a
+              href="/coches"
+              class="inline-flex min-h-touch items-center text-brand-600 underline hover:text-brand-800"
+              >{t("ficha.ruta.coches")}</a
+            >
+          </li>
+          <li class="flex items-center after:mx-2 after:text-ink-600 after:[content:'›'/'']">
+            <a
+              href={`/marcas/${brandSlug}/`}
+              class="inline-flex min-h-touch items-center text-brand-600 underline hover:text-brand-800 [overflow-wrap:anywhere]"
+              >{card.brand}</a
+            >
+          </li>
+          <li aria-current="page" class="text-ink-600 [overflow-wrap:anywhere]">{card.model}</li>
+        </ol>
+      </nav>
       <header data-ficha-header>
         <h1 class="text-title text-ink-900 [overflow-wrap:anywhere]">{heading}</h1>
         <dl class="mt-3 flex flex-col gap-2">
@@ -61,6 +80,13 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
             </dd>
           </div>
         </dl>
+        <a
+          href={brandUrl}
+          rel="noopener"
+          data-web-marca
+          class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+          >{t("ficha.webMarca")}<span class="sr-only"> {t("ficha.webMarcaSr", { marca: card.brand })}</span></a
+        >
       </header>
 
       <section aria-labelledby="versiones-titulo" class="mt-8" data-ficha-versiones>
