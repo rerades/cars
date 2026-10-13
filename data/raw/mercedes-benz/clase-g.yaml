@@ -3,9 +3,9 @@ brand: mercedes-benz
 brand_name: Mercedes-Benz
 model: Clase G
 status: {value: on_sale, note: "artículo de 08/06/2024: «Un todoterreno totalmente eléctrico que ya está a la venta en España»; no se ha comprobado que siga a la venta hoy", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-clase-electrico-ya-tiene-precio-en-espana-es-tan-mastodontico-como-sus-prestaciones_74455_102.html", retrieved: 2026-10-13, tier: T3}
-launch: {value: "2024-06", note: "fecha (08/06/2024) del artículo que lo da ya a la venta en España", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-clase-electrico-ya-tiene-precio-en-espana-es-tan-mastodontico-como-sus-prestaciones_74455_102.html", retrieved: 2026-10-13, tier: T3}
+launch: null
 segment: null
-needs_review: false
+needs_review: true
 versions:
   - name: G 580
     battery_kwh: {value: 116, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609705 («Clase G eléctrico (N465) 580 con tecnología EQ»)"}
@@ -25,3 +25,5 @@ open_questions:
   - "Segmento: el medio lo describe como «4x4 de lujo», sin categoría de RF-11; segment null."
   - "Tracción: no confirmada por una fuente leída (el IDAE no la incluye en el nombre); sin drivetrain."
   - "El artículo T3 es de 2024-06; la venta actual no se ha reconfirmado con una fuente más reciente."
+  - "launch: el artículo de 08/06/2024 lo da ya a la venta, pero no dice desde cuándo; sin dato."
+  - "status: la única fuente de on_sale es de junio de 2024; confirmar que se sigue vendiendo hoy antes de quitar needs_review."

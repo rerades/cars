@@ -2,9 +2,9 @@
 brand: mercedes-benz
 brand_name: Mercedes-Benz
 model: GLA
-status: {value: on_sale, note: "artículo de 03/08/2026 con el PVP en España del GLA 250+ y el GLA 350 4Matic; primeras entregas previstas para noviembre; el GLA 200 llegará más adelante, sin precio", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/precio-mercedes-gla-2026/", retrieved: 2026-10-13, tier: T3}
-launch: {value: "2026-08", note: "fecha (03/08/2026) del artículo que publica el PVP en España; entregas previstas en noviembre de 2026", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/precio-mercedes-gla-2026/", retrieved: 2026-10-13, tier: T3}
-segment: {value: suv_compacto, note: "la ficha del medio dice «SUV Mediano» (versión todocamino del segmento C, tamaño de un Golf); asignado a suv_compacto", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/precio-mercedes-gla-2026/", retrieved: 2026-10-13, tier: T3}
+status: {value: announced, note: "artículo de 03/08/2026 con el PVP en España del GLA 250+ y el GLA 350 4Matic; primeras entregas previstas para noviembre; el GLA 200 llegará más adelante, sin precio", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/precio-mercedes-gla-2026/", retrieved: 2026-10-13, tier: T3}
+launch: null
+segment: null
 needs_review: false
 versions:
   - name: GLA 250+
@@ -24,3 +24,6 @@ open_questions:
   - "Autonomía: el IDAE (725 y 681 km) difiere de la cifra del medio (654 y 640 km); se guarda el IDAE (T2) y la del medio va en la nota."
   - "GLA 200 (58 kWh LFP): anunciado por el medio sin precio y sin homologación en el IDAE; no se ha escrito."
   - "Imagen: sin foto del GLA eléctrico con licencia válida localizada."
+  - "status: el artículo de 03/08/2026 publica el PVP y prevé las primeras entregas en noviembre, pero no dice que haya pedidos abiertos; announced hasta confirmarlo."
+  - "launch: el medio no da fecha de inicio de venta (solo entregas previstas en noviembre de 2026); sin dato."
+  - "Segmento: el medio dice «SUV Mediano», que no está en la lista de RF-11; segment null."

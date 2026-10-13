@@ -3,9 +3,9 @@ brand: mercedes-benz
 brand_name: Mercedes-Benz
 model: GLB
 status: {value: on_sale, note: "artículo de 11/12/2025: la marca acepta pedidos del GLB 250+ y el GLB 350 4MATIC con PVP en España; primeras entregas previstas en primavera de 2026 (no se ha comprobado que ya se entreguen)", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-glb-2026-2025111552.html", retrieved: 2026-10-13, tier: T3}
-launch: {value: "2025-12", note: "fecha (11/12/2025) del artículo con el PVP en España y pedidos abiertos; entregas previstas en primavera de 2026", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-glb-2026-2025111552.html", retrieved: 2026-10-13, tier: T3}
+launch: null
 segment: null
-needs_review: false
+needs_review: true
 versions:
   - name: GLB 250+
     battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611887"}
@@ -23,3 +23,5 @@ open_questions:
   - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; todas las versiones con price null."
   - "Segmento: el medio solo dice «SUV de Mercedes con hasta siete plazas»; no hay clasificación en la lista de RF-11."
   - "Imagen: sin foto del GLB eléctrico con licencia válida localizada."
+  - "launch: el artículo de 11/12/2025 dice que ya acepta pedidos, pero no desde cuándo; sin dato."
+  - "status: entregas previstas en primavera de 2026 sin confirmar que ya se entreguen; confirmar antes de quitar needs_review."

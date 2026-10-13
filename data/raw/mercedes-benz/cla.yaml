@@ -3,7 +3,7 @@ brand: mercedes-benz
 brand_name: Mercedes-Benz
 model: CLA
 status: {value: on_sale, note: "el artículo de 20/10/2025 dice que la oferta eléctrica del CLA la forman el 250+ y el 350 4MATIC y que el CLA 200 «ya admite pedidos» (PVP 48.250 € sin ofertas ni ayudas); entregas del 200 a comienzos de 2026", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mejor-coche-electrico-mercedes-es-ahora-mas-barato-nunca-pero-con-250-km-menos-autonomia_82947_102.html", retrieved: 2026-10-13, tier: T3}
-launch: {value: "2025-05", note: "fecha (14/05/2025) del artículo que publica el PVP del CLA 250+ y 350 4MATIC en España; el medio no da la fecha de inicio de venta", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-cla-electrico-ya-tiene-precio-en-espana-puede-plantar-cara-tesla-model-3-byd-seal_80010_102.html", retrieved: 2026-10-13, tier: T3}
+launch: null
 segment: {value: berlina, note: "el medio lo llama «nueva berlina eléctrica»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-cla-electrico-ya-tiene-precio-en-espana-puede-plantar-cara-tesla-model-3-byd-seal_80010_102.html", retrieved: 2026-10-13, tier: T3}
 needs_review: false
 versions:
@@ -35,3 +35,4 @@ open_questions:
   - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; todas las versiones con price null."
   - "Las baterías del IDAE (58 y 85 kWh) no indican si son útiles o brutas (basis unknown)."
   - "Tracción de CLA 200 y CLA 250+ no confirmada en ninguna fuente leída; solo se registra la del 350 4MATIC."
+  - "launch: el artículo de 14/05/2025 publica el PVP en España, pero no la fecha de inicio de venta; sin dato (data-model.md, sección 4)."

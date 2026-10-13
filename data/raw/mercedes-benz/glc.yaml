@@ -3,7 +3,7 @@ brand: mercedes-benz
 brand_name: Mercedes-Benz
 model: GLC
 status: {value: on_sale, note: "artículo de 22/10/2025: «Por el momento sólo está disponible una única versión mecánica del GLC eléctrico», con PVP en España", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-por-fin-pone-precio-mejor-suv-electrico-jamas-haya-creado-rival-natural-tesla-model_83003_102.html", retrieved: 2026-10-13, tier: T3}
-launch: {value: "2025-10", note: "fecha (22/10/2025) del artículo con el PVP en España; el medio no da fecha de inicio de venta", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-por-fin-pone-precio-mejor-suv-electrico-jamas-haya-creado-rival-natural-tesla-model_83003_102.html", retrieved: 2026-10-13, tier: T3}
+launch: null
 segment: null
 needs_review: false
 versions:
@@ -20,3 +20,4 @@ open_questions:
   - "Autonomía: el IDAE (682 km) difiere de los 666 km del medio; se guarda el IDAE (T2)."
   - "El medio T3 del 2025-11 (electrive) habla de un GLC 200 de entrada en camino; no confirmado ni homologado, no se ha escrito."
   - "Imagen: las fotos de Commons localizadas son del GLC 350L Electric (variante china); no se usan."
+  - "launch: el artículo de 22/10/2025 publica el PVP en España, pero no la fecha de inicio de venta; sin dato."
