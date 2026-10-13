@@ -13,14 +13,14 @@ PRD-003 (ready): RF-1 a RF-14, RNF-1 a RNF-6; CA-1 a CA-19. Tokens: [`tokens.md`
 - La acción «Comparar» de la tarjeta y de la ficha se define aquí (más abajo) y se cita desde
   [`tarjeta-modelo.md`](tarjeta-modelo.md) y [`ficha-modelo.md`](ficha-modelo.md).
 
-**Fuera de este documento:** cómo llegan los datos al navegador (un JSON, datos incrustados, etc.) lo decide la
-ADR del comparador (RNF-6), que está en curso. Este diseño solo supone que, con JavaScript, la página puede
-leer la URL, encontrar cada versión y pintar la tabla. Los estados «cargando» y «error de carga» se describen
-para el caso de que esa ADR los haga posibles; si los datos van en el HTML, no existen.
+**Fuera de este documento:** cómo llegan los datos al navegador lo decide
+[ADR-0014](../architecture/adr/0014-datos-y-script-del-comparador.md) (aceptada el 2026-10-13): el script lee
+la URL y pide a `/comparar/datos/` un JSON por modelo citado. Por eso existen los estados «cargando» y
+«error de carga» (sección de estados).
 
 Componentes de Bearnie (ADR-0005): Table para la comparación, Badge para las etiquetas, Button para «Añadir» y
 «Quitar», Select (o `<select>` nativo con los roles de `tokens.md`) para elegir coche y versión, Alert/Empty
-para los avisos. JavaScript **solo** en `/comparar` (RNF-6, ADR-0003); las acciones «Comparar» de la tarjeta y
+para los avisos. JavaScript **solo** en `/comparar/` (RNF-6, ADR-0003); las acciones «Comparar» de la tarjeta y
 de la ficha son `<a href>` normales.
 
 Lo que el comparador **no** hace (RF-13, CA-15; PRD-003, decisiones 3 y 7): no resalta filas ni celdas que
@@ -35,7 +35,7 @@ Las versiones no tienen identificador propio (PRD-003, sección 6): se identific
 `name`. La URL lleva un parámetro `v` **repetido**, uno por columna, **en el orden de las columnas**:
 
 ```
-/comparar?v={marca}/{modelo}/{name}&v={marca}/{modelo}/{name}[&v=…]
+/comparar/?v={marca}/{modelo}/{name}&v={marca}/{modelo}/{name}[&v=…]
 ```
 
 - `{marca}` y `{modelo}` son la ruta de `data/raw/` (`data/raw/cupra/tavascan.yaml` → `cupra/tavascan`), la
@@ -50,7 +50,7 @@ Las versiones no tienen identificador propio (PRD-003, sección 6): se identific
   «Comparar» de la tarjeta y de la ficha, para no fijar en el HTML estático una versión que puede dejar de ser
   la más barata.
 - Ejemplo de comparación de dos versiones:
-  `/comparar?v=cupra%2Ftavascan%2FTavascan+VZ&v=polestar%2Fpolestar-2%2FStandard+Range+Single+Motor+%28con+Climate+Pack%29`
+  `/comparar/?v=cupra%2Ftavascan%2FTavascan+VZ&v=polestar%2Fpolestar-2%2FStandard+Range+Single+Motor+%28con+Climate+Pack%29`
 
 ### La URL refleja siempre la tabla
 - Tras leer la URL al cargar, y tras añadir, quitar o cambiar de versión, la página **reescribe la URL** con
@@ -66,7 +66,7 @@ Las versiones no tienen identificador propio (PRD-003, sección 6): se identific
 - `h1` = `comparador.titulo`: «Comparar coches».
 - `<title>` = `pagina.tituloDocumento` con ese `h1`: «Comparar coches · {sitio}». No cambia con la selección:
   la página no se indexa y el título no se usa para distinguir comparaciones.
-- `<meta name="robots" content="noindex">` y `<link rel="canonical" href="/comparar">` **sin parámetros**, en
+- `<meta name="robots" content="noindex">` y `<link rel="canonical" href="https://siete3.com/comparar/">` **sin parámetros**, en
   el HTML servido, con cualquier selección (RF-14, CA-16). El JS no los toca.
 
 ## Estructura y orden de lectura
@@ -339,9 +339,9 @@ fechas con mes corto), con dos cambios:
 | Situación | Qué se ve | Requisito |
 |---|---|---|
 | Sin JavaScript | Ver «Sin JavaScript» | RNF-6, CA-19 |
-| Cargando (solo si la ADR carga datos aparte) | `h1`, entrada y `comparador.cargando` «Cargando la comparación…» en un `role="status"`; sin tabla ni lista a medias | RNF-6 |
-| Error al cargar los datos (ídem) | `comparador.error`: «No se ha podido cargar la comparación. Vuelve a cargar la página o ve al catálogo.» con enlace a `/coches`, `ink-900`; sin tabla | RNF-6 |
-| 0 versiones (`/comparar` sin `v`, o todas inválidas) | «Coches comparados» con la lista vacía (no se pinta la `<ol>`), el texto de RF-12, el formulario «Añadir» y el enlace al catálogo; sin «Comparación» ni «Fuentes» | RF-12, CA-14 |
+| Cargando (mientras llegan los JSON de ADR-0014) | `h1`, entrada y `comparador.cargando` «Cargando la comparación…» en un `role="status"`; sin tabla ni lista a medias | RNF-6 |
+| Error al cargar los datos (falla alguna petición de ADR-0014) | `comparador.error`: «No se ha podido cargar la comparación. Vuelve a cargar la página o ve al catálogo.» con enlace a `/coches`, `ink-900`; sin tabla | RNF-6 |
+| 0 versiones (`/comparar/` sin `v`, o todas inválidas) | «Coches comparados» con la lista vacía (no se pinta la `<ol>`), el texto de RF-12, el formulario «Añadir» y el enlace al catálogo; sin «Comparación» ni «Fuentes» | RF-12, CA-14 |
 | 1 versión | La lista con ese coche (versión y «Quitar»), el texto de RF-12, «Añadir» y el enlace al catálogo; sin tabla | RF-12, CA-14 |
 | 2 versiones | Lista, «Añadir», tabla de 2 columnas, condiciones y «Fuentes» | RF-1 |
 | 3 versiones | Lista, texto de máximo en lugar de «Añadir», tabla de 3 columnas | RF-1, RF-9, CA-10 |
@@ -383,7 +383,7 @@ Encima de «Coches comparados», un bloque de aviso (Alert de Bearnie, variante 
 - Ningún caso da error ni página en blanco (CA-13).
 
 ### Sin JavaScript (RNF-6, CA-19)
-El HTML servido de `/comparar` contiene, sin depender de JS: el `h1`, la entrada y un aviso con el mismo
+El HTML servido de `/comparar/` contiene, sin depender de JS: el `h1`, la entrada y un aviso con el mismo
 estilo que el de la URL:
 
 - `comparador.sinJs.texto`: «El comparador necesita JavaScript para leer los coches de la dirección y montar la
@@ -396,7 +396,7 @@ que también aparezca si el script no llega a ejecutarse. Ningún mensaje de err
 ## La acción «Comparar» en la tarjeta y en la ficha (RF-6, RF-7, RF-11, RNF-6, CA-7, CA-8, CA-13)
 
 Es un **enlace `<a href>` normal**, no un botón ni un control de JS: funciona sin JavaScript (lleva a
-`/comparar`, que entonces muestra su aviso). Destino: `/comparar?v={marca}/{modelo}` (forma corta, ver
+`/comparar/`, que entonces muestra su aviso). Destino: `/comparar/?v={marca}/{modelo}` (forma corta, ver
 «Forma de la URL»), que incluye el modelo con su versión por defecto (RF-8).
 
 - **Aspecto**: enlace de texto, `brand-600`, subrayado siempre, hover `brand-800`, `text-body`. **No** es un
@@ -552,5 +552,5 @@ Color: `surface`, `surface-muted`, `ink-900`, `ink-600`, `line`, `line-soft`, `b
    «58 kWh, sin especificar si es útil o bruta»): en papel cabe sin desbordar, pero la legibilidad hay que
    verla en un navegador.
 2. **Anuncios de la región de estado** en VoiceOver y NVDA: no se puede verificar en papel.
-3. **Cargando y error** dependen de la ADR del comparador; si los datos van en el HTML, se eliminan de esta
-   especificación.
+3. ~~**Cargando y error** dependen de la ADR del comparador.~~ Resuelto: ADR-0014 (aceptada) pide los datos
+   aparte, así que los dos estados se quedan.
