@@ -3,9 +3,9 @@ brand: citroen
 brand_name: Citroën
 model: ë-C4
 status: {value: on_sale, note: "artículo del 19/01/2026 con las versiones y precios en España", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/citroen-e-c4-baja-precio-20260119-39566.html", retrieved: 2026-10-13, tier: T3}
-launch: {value: "2020-09", note: "el artículo de 2020-09-18 titula «ya está a la venta» con precios en España (fecha sacada de la URL)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/articulo/mercado/precio-citroen-ec4-electrico-espana/20200918144225038219.html", retrieved: 2026-10-13, tier: T3}
+launch: null
 segment: {value: suv_compacto, note: "el medio lo llama «crossover compacto»", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/citroen-e-c4-baja-precio-20260119-39566.html", retrieved: 2026-10-13, tier: T3}
-needs_review: false
+needs_review: true
 versions:
   - name: You 100 kW
     battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604171; el medio (19/01/2026) da 50 kWh"}
@@ -38,3 +38,5 @@ open_questions:
   - "Imagen: no se ha buscado ninguna en Commons en esta ejecución."
   - "ë-C4 X (berlina): el mismo medio la lista (You, Plus 100 y 115 kW, Max) pero no se ha escrito como modelo aparte en esta ejecución."
   - "La fila del IDAE id 552580 («Nuevo ë-C4 Eléctrico 100 KW», 338 km) no indica acabado y no se ha asignado a ninguna versión."
+  - "launch: 2020-09 era la fecha de la URL del artículo, no un inicio de venta que diga la fuente; sin dato."
+  - "needs_review: Collection 115 kW y Max 115 kW salen del IDAE sin que ningún medio las nombre; confirmar que se venden."

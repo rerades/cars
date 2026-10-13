@@ -3,7 +3,7 @@ brand: citroen
 brand_name: Citroën
 model: ë-C5 Aircross
 status: {value: on_sale, note: "artículo del 25/05/2026: se vende en You, Plus y Max con batería de 73 kWh", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/citroen-e-c5-aircross-baja-precio-20260525-41036.html", retrieved: 2026-10-13, tier: T3}
-segment: {value: suv_compacto, note: "el medio lo sitúa en el segmento de los SUV medios (4,65 m, rival del Toyota RAV4); se asigna suv_compacto", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/citroen-c5-aircross-electrico-mas-barato-puedes-comprar-tambien-es-mas-autonomia-ofrece-con-mismo-motor-210-cv_81810_102.html", retrieved: 2026-10-13, tier: T3}
+segment: null
 needs_review: false
 versions:
   - name: You
@@ -27,3 +27,4 @@ open_questions:
   - "Launch: los medios leídos no dan fecha de inicio de venta en España (hibridosyelectricos, 20/08/2025: pedidos abiertos «unas semanas» antes); se omite."
   - "Extended Range (97 kWh, 677 km en el IDAE): el medio (25/05/2026) dice que aún no está en la gama española; no se ha escrito."
   - "Imagen: no se ha buscado ninguna en Commons en esta ejecución."
+  - "Segmento: el medio lo sitúa entre los «SUV medios», que no es un término de RF-11; segment null."
