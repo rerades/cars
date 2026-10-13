@@ -50,6 +50,7 @@ test("una descarga que no vale no deja ningún fichero", async () => {
     fake(body, { url: "https://upload.wikimedia.org/Acme_Volta.jpg", width: 900 }));
   await assert.rejects(run("<html>error</html>"), /not a JPEG or PNG/);
   await assert.rejects(run(png(1920)), /1920 px wide/);
+  await assert.rejects(run(Buffer.concat([png(800), Buffer.alloc(2_000_000)])), /bytes, more than 2000000/);
   await assert.rejects(run(png(800), { name: "../../x" }), /name must match/);
   await assert.rejects(run(png(800), { pageUrl: "https://press.acme.example/terms" }), /pass the file URL/);
   assert.deepEqual(readdirSync(root), []);

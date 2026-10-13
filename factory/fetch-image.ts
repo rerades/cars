@@ -11,7 +11,7 @@ import { mkdirSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 export const MAX_WIDTH = 1280;
-const MAX_BYTES = 10_000_000;
+export const MAX_BYTES = 2_000_000; // ADR-0011, "Imágenes" amendment
 const USER_AGENT = `siete3-factory/1.0 (https://siete3.com) node/${process.versions.node}`; // Wikimedia UA policy
 const SLUG = /^[a-z0-9-]+$/;
 
@@ -40,13 +40,14 @@ export function imageInfo(buf: Buffer): ImageInfo | null {
   return null;
 }
 
-/** Why a stored file is not acceptable (wrong format, extension or width), or null if it is. */
+/** Why a stored file is not acceptable (wrong format, extension, width or size), or null if it is. */
 export function imageProblem(buf: Buffer, file: string): string | null {
   const info = imageInfo(buf);
   if (!info) return "not a JPEG or PNG";
   const ext = file.split(".").pop()?.toLowerCase();
   if (info.type === "png" ? ext !== "png" : ext !== "jpg" && ext !== "jpeg") return `extension .${ext} does not match ${info.type}`;
   if (info.width > MAX_WIDTH) return `${info.width} px wide, more than ${MAX_WIDTH}`;
+  if (buf.length > MAX_BYTES) return `${buf.length} bytes, more than ${MAX_BYTES}`;
   return null;
 }
 

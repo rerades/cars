@@ -150,6 +150,7 @@ describe("evals del researcher", () => {
     assert.match(images(old, {}).join(), /old shape \(url\)/);
     assert.match(images(image(""), {}).join(), /does not exist/);
     assert.match(images(image(""), { [FILE]: png(1920) }).join(), /1920 px wide/);
+    assert.match(images(image(""), { [FILE]: Buffer.concat([png(1280), Buffer.alloc(2_000_000)]) }).join(), /bytes, more than 2000000/);
     assert.match(images(image(""), { [FILE]: "<html>" }).join(), /not a JPEG or PNG/);
     assert.match(images(image("").replace(FILE, "data/images/acme/otro/frontal.png")).join(), /must be data\/images\/acme\/volta\//);
     assert.match(images(image("").replace(", attribution: null", "")).join(), /attribution: missing/);

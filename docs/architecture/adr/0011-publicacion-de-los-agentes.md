@@ -1,7 +1,12 @@
 # ADR-0011 — Cómo publican los agentes: fusión automática por reglas, sin modelo
 
-- **Estado:** aceptada (2026-10-01)
+- **Estado:** aceptada (2026-10-01). Enmienda «Imágenes» (`data/images/` en la lista de rutas):
+  aceptada (2026-10-12)
 - **Fecha:** 2026-09-30
+- **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
+  aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
+  la Decisión. Lo demás no cambia. 2026-10-13 revisión de la enmienda: solo imágenes citadas por un YAML y de
+  2 MB como máximo (punto 10).
 
 ## Contexto
 Es la última decisión pendiente de `overview.md`: «Cómo publican los agentes (CI/CD, entornos,
@@ -79,8 +84,8 @@ problema. `factory/`, `.claude/`, `.github/` y `web/` quedan fuera, como en la p
 
 ## Decisión
 **El Revisor solo etiqueta; fusiona el orquestador, sin modelo, y solo las PR con `review:ok` ligada
-al commit revisado, CI en verde, sin conflictos y con todo el diff dentro de `data/raw/` y
-`docs/bitacora/`; todo lo demás lo fusiona una persona.**
+al commit revisado, CI en verde, sin conflictos y con todo el diff dentro de `data/raw/`,
+`data/images/` y `docs/bitacora/`; todo lo demás lo fusiona una persona.**
 
 Detalles:
 
@@ -103,8 +108,11 @@ Detalles:
      cero checks cuenta como rojo. El check de accesibilidad (ADR-0006) también cuenta: sin
      persona, el rojo no se puede aceptar a sabiendas;
    - GitHub la da por fusionable, sin conflictos con `main`;
-   - cada fichero del diff (en un renombrado, las dos rutas) empieza por `data/raw/` o
-     `docs/bitacora/`, y ninguno se borra. Un borrado en `data/raw/` lo decide una persona;
+   - cada fichero del diff (en un renombrado, las dos rutas) empieza por `data/raw/`,
+     `data/images/` (enmienda del 2026-10-12) o `docs/bitacora/`, y ninguno se borra. Un borrado
+     en `data/raw/` o `data/images/` lo decide una persona;
+   - cada fichero de `data/images/` del diff está citado en el `file` de una entrada `images` de
+     algún YAML de `data/raw/` en el commit revisado (enmienda del 2026-10-12, punto 10);
    - no existe `factory/STOP`.
 
    Fusiona con `gh pr merge --merge --match-head-commit <sha> --delete-branch` ([1]): commit de
@@ -151,6 +159,52 @@ Detalles:
    Render (#98). Cambiar el interruptor es una PR en `factory/`, así que la
    hace una persona.
 
+### Imágenes (enmienda del 2026-10-12, aceptada)
+
+**`data/images/` entra en la lista de rutas del punto 2, con la misma regla que `data/raw/`: se
+puede añadir o cambiar un fichero, pero no borrarlo, y además tiene que estar citado por un YAML de
+`data/raw/` y pesar 2 MB como máximo.**
+
+Contexto propio de la enmienda: la pregunta abierta «¿las PR del Researcher llevan ficheros fuera
+de `data/raw/` y `docs/bitacora/`?» tiene respuesta. Desde ADR-0012 cada imagen se descarga a
+`data/images/<brand>/<slug>/` en el mismo commit que su entrada en `images` (ADR-0012, punto 3;
+ADR-0010, punto 10). En las PR del Researcher fusionadas hasta el 2026-10-12 hay 37 ficheros en
+`data/images/` y 20 en `data/sources/`. Sin esta enmienda, ninguna PR que añada o migre una imagen
+entraría sola. Las 8 PR de imágenes de la noche del 2026-10-12 (#254 a #266 y #272) tenían
+`review:ok`, CI en verde y licencias que coincidían con Commons; las fusionó una persona.
+
+8. **Por qué `data/images/` y no más.**
+   - **`data/images/` (elegida).** La CI comprueba cada fichero **citado** por un YAML de
+     `data/raw/`, no solo lo que dijo el script (ADR-0010, punto 11; `imageProblem` en
+     `factory/fetch-image.ts`, llamada desde `factory/evals.ts`): JPEG o PNG por la firma, la
+     extensión coincide, el ancho no pasa de 1280 px y el fichero no pasa de 2 MB (punto 10).
+     Un fichero que nadie cita no se comprueba: solo da un aviso, y la CI sigue en verde (punto 10). Su licencia, autor y página están en el YAML de `data/raw/`, que lee el Revisor.
+     Lo que la CI no ve es si la foto es del modelo que dice; eso queda como riesgo (ver abajo).
+   - **`data/sources/`: descartada.** Dar de alta una fuente decide en qué webs confía la factoría
+     y con qué `tier` (ADR-0001). Una PR que añada una marca nueva toca `data/sources/` y sigue
+     esperando a una persona, aunque tenga `review:ok`.
+   - **`data/` entero: descartada** por lo mismo, y porque cualquier carpeta nueva bajo `data/`
+     entraría sola sin que nadie lo haya decidido.
+
+9. **Estado de las condiciones del punto 7 (2026-10-12).** Las tres se cumplen: (a) el Revisor pone
+   la etiqueta y cita el SHA (`.claude/agents/reviewer.md`); (b) el validador de todo `data/` corre
+   en el job `test` de la CI (#228, ADR-0010); (c) el sitio está en Render (#98). Lo que falta es
+   el paso `run.ts --merge` y su LaunchAgent; el interruptor se pone a `true` en la misma PR.
+
+10. **Dos límites que cierran huecos de la CI.**
+    - **Solo imágenes citadas.** El validador comprueba las imágenes que cita algún `images` de
+      `data/raw/`; un fichero de `data/images/` que nadie cita solo da el aviso «not cited by any
+      data/raw file», y `validate-data.ts` sale con 0 cuando solo hay avisos. Sin este límite, una
+      PR con `review:ok` podría meter en `data/images/` un fichero de cualquier contenido y tamaño,
+      sin que la CI lo mirase, y se fusionaría sola. El aviso sigue siendo aviso para las personas;
+      solo la fusión automática lo trata como bloqueo. Lo comprueba `run.ts --merge` sobre el commit
+      revisado, leyendo los `file` de `data/raw/` como hace el validador para el aviso.
+    - **2 MB por fichero.** `imageProblem` solo limitaba el ancho, así que una imagen de 1280 ×
+      20 000 px o de 30 MB pasaba. Ahora rechaza también un fichero de más de 2 MB, y el script de
+      descarga usa el mismo tope. Las miniaturas de Commons a 1280 px pesan menos de 1 MB (la mayor
+      de `data/images/` el 2026-10-13, 632 KB). El alto no se limita aparte: con 2 MB y 1280 px de
+      ancho, una imagen muy alta no cabe salvo con una compresión que no da una foto.
+
 ## Consecuencias
 **Buenas**
 - Las PR del Researcher que salen bien llegan a `main` y a producción sin que nadie las toque.
@@ -172,6 +226,11 @@ Detalles:
 - **El Revisor sigue expuesto a inyección**, y la CI solo detecta lo que comprueba. Un dato falso
   pero con formato válido y fuente con URL (ADR-0001) puede pasar todas las reglas y publicarse
   hasta que alguien lo vea. Esta ADR no lo resuelve: lo limita a `data/raw/` y lo hace reversible.
+- **Una foto de otro coche entra sola** (enmienda del 2026-10-12). La CI comprueba formato, ancho y
+  peso, y la licencia está en el YAML, pero nadie mira la foto antes de publicarla. Se arregla
+  con otra PR que cambie el fichero o la entrada.
+- **Las PR que dan de alta una marca siguen esperando a una persona**, porque tocan
+  `data/sources/` (enmienda del 2026-10-12).
 - **Mientras falte (a), (b) o (c) del punto 7, no hay fusión automática.** Sin la validación del
   esquema, la CI no dice nada sobre los YAML, y la condición «CI en verde» no vale nada para
   `data/raw/`.
@@ -192,9 +251,10 @@ Detalles:
 - ¿El plan del repositorio permite protección de rama con checks obligatorios en `main`? Sería una
   segunda barrera en GitHub; no comprobado.
 - ¿Las vistas previas consumen minutos de build del workspace? No comprobado en esta ejecución.
-- ¿Las PR del Researcher llevan ficheros fuera de `data/raw/` y `docs/bitacora/` (por ejemplo, de
+- ~~¿Las PR del Researcher llevan ficheros fuera de `data/raw/` y `docs/bitacora/` (por ejemplo, de
   `ops/` o de otras carpetas de `data/`)? Si es así, ninguna entraría sola; hay que mirarlo en las
-  PR reales antes de activar el interruptor.
+  PR reales antes de activar el interruptor.~~ Resuelta el 2026-10-12: llevan `data/images/`, que
+  entra en la lista, y `data/sources/` al dar de alta una marca, que no (enmienda «Imágenes»).
 - ¿Cuánto tiempo sin veredicto antes de avisar? Esta ADR pone una noche; ajustar con el uso.
 - ¿Entra `docs/design/` o alguna otra ruta en la lista más adelante? Sería otra ADR o una revisión
   de esta, no un cambio en el código.
