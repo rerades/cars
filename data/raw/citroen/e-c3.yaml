@@ -1,0 +1,62 @@
+# Researcher — Citroën ë-C3. Fuentes: idae-es (T2), forococheselectricos-es (T3). Consultado 2026-10-13. Sin precio: citroen.es responde 403 y no hay otra fuente T1.
+brand: citroen
+brand_name: Citroën
+model: ë-C3
+status: {value: on_sale, note: "el artículo del 05/10/2026 da precio de ë-C3 Max y Outdoor; el del 04/07/2026, de Tonic, You y Plus", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/citroen-c3-c3-aircross-outdoor-precio-espana-20261005-42307.html", retrieved: 2026-10-13, tier: T3}
+launch: {value: "2023-10", note: "el artículo es del 18/10/2023 y da los precios oficiales (You y Max); no dice la fecha de inicio de venta", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/2023/10/citroen-e-c3-precios-oficiales-espana.html", retrieved: 2026-10-13, tier: T3}
+needs_review: false
+versions:
+  - name: Tonic Urban Range
+    battery_kwh: {value: 30, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611797; otra homologación, id 610613, con los mismos valores. El medio (04/07/2026) da 30 kWh"}
+    wltp_km: {value: 204, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611797; id 610613 también 204 km. El medio (04/07/2026) publica 206 km"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611797"}
+    price: null
+  - name: Tonic Comfort Range
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611796; otra homologación, id 610612, con los mismos valores"}
+    wltp_km: {value: 309, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611796; id 610612 también 309 km. El medio (04/07/2026) publica 309 km"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611796"}
+    price: null
+  - name: You Urban Range
+    battery_kwh: {value: 30, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607624 («YOU 200»); menor de 2 homologaciones: 203 km (id 607624) y 205 km (id 611799, «You Urban Range»)"}
+    wltp_km: {value: 203, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607624; menor de 2 homologaciones: 203 km (id 607624) y 205 km (id 611799)"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607624; id 611799 también 83 kW"}
+    price: null
+  - name: Plus Urban Range
+    battery_kwh: {value: 30, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607625 («PLUS 200»); única homologación 30 kWh del acabado Plus"}
+    wltp_km: {value: 212, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607625; única homologación del Plus con 30 kWh"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607625"}
+    price: null
+  - name: You Comfort Range
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598638; menor de 2 homologaciones: 300 km (id 598638) y 311 km (id 611798)"}
+    wltp_km: {value: 300, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598638; menor de 2 homologaciones: 300 km (id 598638) y 311 km (id 611798)"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598638; id 611798 también 83 kW"}
+    price: null
+  - name: Plus Comfort Range
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604562; menor de 2 homologaciones: 300 km (id 604562) y 322 km (id 611800)"}
+    wltp_km: {value: 300, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604562; menor de 2 homologaciones: 300 km (id 604562) y 322 km (id 611800)"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604562; id 611800 también 83 kW"}
+    price: null
+  - name: Max Comfort Range
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598639; menor de 2 homologaciones: 300 km (id 598639) y 321 km (id 611803). El medio no dice la batería del Max; la del IDAE es de 44 kWh"}
+    wltp_km: {value: 300, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598639; menor de 2 homologaciones: 300 km (id 598639) y 321 km (id 611803)"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598639; id 611803 también 83 kW"}
+    price: null
+  - name: Outdoor Comfort Range
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614461; el medio (05/10/2026) da 44 kWh"}
+    wltp_km: {value: 323, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614461; el medio (05/10/2026) publica hasta 323 km"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614461"}
+    price: null
+images:
+  - file: data/images/citroen/e-c3/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Citro%C3%ABn_%C3%AB-C3_DSC_8023.jpg/1280px-Citro%C3%ABn_%C3%AB-C3_DSC_8023.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Citroën_ë-C3_DSC_8023.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0"
+open_questions:
+  - "Precio: citroen.es responde 403 a la lectura automática (2026-10-13) y no hay otra fuente T1; todas las versiones con price null."
+  - "Segmento: ninguna fuente leída lo clasifica; se deja sin segment."
+  - "Launch: el medio T3 no da la fecha de inicio de venta; 2023-10 es la del artículo de precios oficiales."
+  - "Las versiones del IDAE se casan con el nombre comercial por el nombre de la fila; ids con nombre ambiguo (607624, 607625) pueden no ser exactamente la versión actual."
+  - "No se ha escrito el ë-C3 Comercial (variante de empresa del IDAE) ni la edición Collection: ningún medio leído da su versión actual."

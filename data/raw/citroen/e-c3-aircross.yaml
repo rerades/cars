@@ -1,0 +1,40 @@
+# Researcher — Citroën ë-C3 Aircross. Fuentes: idae-es (T2), forococheselectricos-es y hibridosyelectricos-es (T3). Consultado 2026-10-13. Sin precio: citroen.es responde 403 y no hay otra fuente T1.
+brand: citroen
+brand_name: Citroën
+model: ë-C3 Aircross
+status: {value: on_sale, note: "20/01/2026: solo se vende la versión Extended Range (54 kWh) en You, Plus y Max; 05/10/2026: se añade Outdoor", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/citroen-e-c3-aircross-400-km-autonomia-menos-26000-euros-20260120-39598.html", retrieved: 2026-10-13, tier: T3}
+launch: {value: "2024-09", note: "artículo del 20/09/2024: la versión eléctrica «está ya disponible» en tres acabados", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/con-nuevo-diseno-suv-electrico-y-tambien-hibrido-mas-asequible-citroen-ya-esta-venta-en-espana_76065_102.html", retrieved: 2026-10-13, tier: T3}
+segment: {value: suv_pequeno, note: "el medio lo llama «el SUV eléctrico e híbrido más pequeño de la casa»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/con-nuevo-diseno-suv-electrico-y-tambien-hibrido-mas-asequible-citroen-ya-esta-venta-en-espana_76065_102.html", retrieved: 2026-10-13, tier: T3}
+needs_review: false
+versions:
+  - name: You Extended Range
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607626"}
+    wltp_km: {value: 399, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607626"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607626"}
+    price: null
+  - name: Plus Extended Range
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607627"}
+    wltp_km: {value: 394, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607627"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607627"}
+    price: null
+  - name: Max Extended Range
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607628"}
+    wltp_km: {value: 400, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607628"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607628"}
+    price: null
+  - name: Outdoor Extended Range
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614463; el medio (05/10/2026) da 54 kWh"}
+    wltp_km: {value: 397, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614463; el medio (05/10/2026) publica 397 km"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614463"}
+    price: null
+images:
+  - file: data/images/citroen/e-c3-aircross/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Citro%C3%ABn_%C3%AB-C3_Aircross_113_Extended-Range_Max_%28III%29_%E2%80%93_f_15022026.jpg/1280px-Citro%C3%ABn_%C3%AB-C3_Aircross_113_Extended-Range_Max_%28III%29_%E2%80%93_f_15022026.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Citroën_ë-C3_Aircross_113_Extended-Range_Max_(III)_–_f_15022026.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-13
+    license: CC-BY-SA-3.0-DE
+    attribution: "© M 93 / Wikimedia Commons / CC BY-SA 3.0 (DE)"
+open_questions:
+  - "Precio: citroen.es responde 403 a la lectura automática (2026-10-13) y no hay otra fuente T1; todas las versiones con price null."
+  - "La versión de 44/48 kWh (Comfort Range, 300 km) aparece en el IDAE pero el medio (20/01/2026) dice que se retiró del configurador a finales de 2025: no se ha escrito."
