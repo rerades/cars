@@ -43,7 +43,7 @@ agents:
     network: false
 
   planner:
-    max_runs_per_day: 1
+    max_runs_per_day: 2   # 1 -> 2 on 2026-10-13: two planner tasks in one night (PRD-002 review, PRD-003 breakdown) must not stall the queue
     max_usd_per_period: 8   # 1 -> 8 on 2026-10-08: breaking down the next PRDs
     max_usd_per_run: 0.60   # 0.30 cortó el troceo de PRD-001 al final, con las historias ya abiertas
     max_turns_per_run: 25   # 15 cortó la revisión de la épica #32 (10 historias) antes del resumen
