@@ -18,6 +18,7 @@ global:
   max_usd_per_period: 200    # techo total de la factoría (USD-equivalentes); 20 -> 30 on 2026-09-27; 30 -> 50 on 2026-09-29; 50 -> 200 on 2026-10-08: the budget is now 200 EUR/month, kept at 200 USD-eq (below the EUR value)
   stop_file: factory/STOP    # si existe, no se lanzan tareas nuevas
   auto_pr: true              # al terminar bien, sube la rama y abre la PR (nadie la ha revisado)
+  auto_merge: true           # ADR-0011: run.ts --merge fusiona las PR de agente que cumplen todas sus reglas; con false solo avisa
 
 agents:
   # suma asignada: 175 USD de los 200 del tope global (25 sin asignar): ningún agente puede agotarlo solo

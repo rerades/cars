@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copiar a ~/Library/LaunchAgents/com.darkfactory.merge.plist, ajustar RUTA y cargar:
+     launchctl load ~/Library/LaunchAgents/com.darkfactory.merge.plist
+     Fusión automática de ADR-0011 a las 07:30, después del Revisor (06:30): fusiona las PR de
+     agente que cumplen todas las reglas y marca review:needs-human en las demás. No usa el modelo,
+     así que el horario nocturno no le afecta; si hay una ejecución en curso (factory/.run.lock),
+     espera a la pasada del día siguiente. Necesita gh con sesión iniciada. PATH como en el del
+     orquestador. -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.darkfactory.merge</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/node</string>
+    <string>/Users/USUARIO/_DEV/cars/factory/run.ts</string>
+    <string>--merge</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict><key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string></dict>
+  <key>WorkingDirectory</key><string>/Users/USUARIO/_DEV/cars</string>
+  <key>StartCalendarInterval</key>
+  <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>30</integer></dict>
+  <key>StandardOutPath</key><string>/Users/USUARIO/_DEV/cars/ops/launchd.out.log</string>
+  <key>StandardErrorPath</key><string>/Users/USUARIO/_DEV/cars/ops/launchd.err.log</string>
+</dict>
+</plist>

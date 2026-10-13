@@ -9,18 +9,20 @@
  *   node factory/run.ts --next                              # primera tarea pendiente de la cola
  *   node factory/run.ts --task <id>                         # esa tarea pendiente de la cola
  *   node factory/run.ts --trace <run_id>                    # pasos de una ejecución
+ *   node factory/run.ts --merge [--dry-run]                 # fusiona las PR de agente que cumplen ADR-0011
  */
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
 import { exportRun } from "./langfuse.ts";
+import { mergePass, waitingPrs } from "./merge.ts";
 import {
-  appendLedger, checkCanRun, commitState, execute, formatTrace, loadConfig, mergeStatePr, nowInTz, pruneMergedBranches, queueState, readAllLedger,
+  appendLedger, checkCanRun, LOCK, commitState, execute, formatTrace, loadConfig, mergeStatePr, nowInTz, pruneMergedBranches, queueState, readAllLedger,
   readLedger, readQueue, REPO, runsToday, spentInPeriod, STATE_BRANCH, syncState, TRACE_DIR,
   type Config,
 } from "./orchestrator.ts";
 
-const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [--task <id>] [--merge-state] [--trace <run_id>] [agente] [tarea]
+const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [--task <id>] [--merge-state] [--merge] [--trace <run_id>] [agente] [tarea]
 
 Orquestador de la factoría
 
@@ -32,6 +34,7 @@ Orquestador de la factoría
   --next           lanza la primera tarea pendiente de factory/queue.yaml
   --task <id>      lanza esa tarea de factory/queue.yaml, si está pendiente
   --merge-state    fusiona la PR de estado si cumple la regla de ADR-0013
+  --merge          fusiona las PR de agente que cumplen ADR-0011 y avisa de las demás
   --trace <run_id> muestra los pasos de una ejecución (ops/traces/)`;
 
 function cmdStatus(cfg: Config): number {
@@ -59,6 +62,11 @@ function cmdStatus(cfg: Config): number {
     for (const r of failed) console.log(`    - ${r.task_id} · ${r.outcome} · ${r.run_id}`);
   }
   console.log(`  estado: rama ${STATE_BRANCH} (ADR-0013)`);
+  const waiting = waitingPrs();
+  if (waiting.length) {
+    console.log(`  esperan a una persona (review:needs-human): ${waiting.length}`);
+    for (const pr of waiting) console.log(`    - ${pr}`);
+  }
   return 0;
 }
 
@@ -67,6 +75,40 @@ function cmdMergeState(cfg: Config): number {
   const merged = mergeStatePr(existsSync(join(REPO, cfg.global?.stop_file || "factory/STOP")));
   if (merged) console.log(merged);
   return 0;
+}
+
+/**
+ * Merges the agent PRs that meet ADR-0011 and flags the rest for a person. No model, so the
+ * night window does not apply; a run in progress (the lock) leaves it for the next pass.
+ */
+function cmdMerge(cfg: Config, dryRun: boolean): number {
+  if (existsSync(LOCK)) {
+    console.log("hay una ejecución en curso (factory/.run.lock): la fusión espera a la siguiente pasada");
+    return 0;
+  }
+  const blocked = syncState();
+  if (blocked) {
+    console.error(`[bloqueado] ${blocked}`);
+    return 3;
+  }
+  if (!dryRun) writeFileSync(LOCK, "merge\n", "utf8");
+  try {
+    const { log, recorded } = mergePass({
+      autoMerge: cfg.global?.auto_merge === true,
+      stopped: existsSync(join(REPO, cfg.global?.stop_file || "factory/STOP")),
+      dryRun,
+      month: nowInTz(cfg).day.slice(0, 7),
+    });
+    for (const line of log) console.log(line);
+    if (!log.length) console.log("ninguna PR de agente que fusionar ni que avisar");
+    if (recorded) {
+      const statePr = commitState("merges");
+      if (statePr) console.log(`estado: ${statePr}`);
+    }
+    return 0;
+  } finally {
+    if (!dryRun) rmSync(LOCK, { force: true });
+  }
 }
 
 /** Lanza la tarea de un agente y la anota en el ledger. Devuelve el código de salida. */
@@ -100,7 +142,7 @@ function runTask(cfg: Config, agent: string, task: string, ignoreWindow: boolean
   appendLedger(record, month);
   // ponytail: outside the lock (ADR-0013 asks for it under the lock); fine while launchd runs one
   // --next at a time, take the lock here if two runs can ever overlap.
-  const statePr = commitState(record.run_id as string);
+  const statePr = commitState(`run ${record.run_id}`);
   if (statePr) console.log(`estado: ${statePr}`);
   // Not awaited: node waits for it before exiting, and it never throws.
   void exportRun(record).then((line) => line && console.log(line));
@@ -163,6 +205,7 @@ function main(argv: string[]): number {
         next: { type: "boolean" },
         task: { type: "string" },
         "merge-state": { type: "boolean" },
+        merge: { type: "boolean" },
         trace: { type: "string" },
         help: { type: "boolean", short: "h" },
       },
@@ -182,6 +225,7 @@ function main(argv: string[]): number {
   if (values.trace) return cmdTrace(values.trace);
   if (values.status) return cmdStatus(cfg);
   if (values["merge-state"]) return cmdMergeState(cfg);
+  if (values.merge) return cmdMerge(cfg, !!values["dry-run"]);
   if (values.next || values.task) return cmdNext(cfg, !!values["ignore-window"], !!values["dry-run"], values.task);
   if (!agent || !task || positionals.length > 2) {
     console.error(`${USAGE}\nerror: hacen falta <agente> y "<tarea>"`);
