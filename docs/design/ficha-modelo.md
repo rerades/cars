@@ -122,6 +122,10 @@ principal con su atribución.
   de flecha destacada (CA-16; la web no vende, visión). Se abre en la misma pestaña (no se fuerza
   `target="_blank"`). Zona táctil `--size-touch` de alto. Lleva texto oculto visualmente
   `ficha.webMarcaSr`: «(web de {marca}, sitio externo)» para que el lector sepa adónde va.
+- **«Comparar»** (PRD-003, RF-7): enlace de texto en su propia línea, después de «Ver en la web de la marca»,
+  solo si el modelo es comparable (`on_sale` o `announced` y con versiones). Destino, aspecto y texto:
+  [`comparador.md`](comparador.md), «La acción "Comparar"». En el orden de foco va justo después de «Ver en la
+  web de la marca».
 - La fecha del estado y del segmento no se ve aquí: va en su nota del bloque «Fuentes» (RF-9). Solo el precio
   enseña la fecha junto al valor.
 
