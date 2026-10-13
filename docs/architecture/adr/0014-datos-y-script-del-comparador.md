@@ -1,6 +1,6 @@
 # ADR-0014 — Datos y script del comparador (`/comparar`)
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-13)
 - **Fecha:** 2026-10-13
 
 ## Contexto
@@ -151,6 +151,10 @@ Detalles:
      es el mismo con cualquier selección.
    - Las acciones «Comparar» de tarjeta y ficha (RF-6, RF-7) son `<a href>` generados en el build,
      solo en modelos comparables.
+   - `web/public/robots.txt` excluye los datos del comparador con `Disallow: /comparar/datos/`
+     (decisión del 2026-10-13 al aceptar esta ADR). Hoy el sitio no tiene `robots.txt`: se crea
+     con ese único `Disallow` bajo `User-agent: *`, sin bloquear nada más. Una prueba `node --test`
+     comprueba que el build lo lleva.
 5. **Pruebas.**
    - `node --test` de la lógica pura de `web/src/lib/compare.ts` (RF-8, RF-11, ida y vuelta de la
      URL, celdas por confirmar, etiquetas).
@@ -177,9 +181,9 @@ Detalles:
 
 **Malas o a vigilar**
 - **Las cifras de peso son estimaciones**, no mediciones; la prueba de peso del build las tiene
-  que confirmar. Tampoco he comprobado si el static site de Render sirve JSON y HTML comprimidos
-  (gzip o Brotli): no lo dice nada que haya podido abrir en esta ejecución. Con compresión, las
-  cifras bajan mucho porque las `url` se repiten; sin ella, valen tal cual.
+  que confirmar. Son cifras sin comprimir: Render sirve el sitio con Brotli (`content-encoding: br`
+  en `https://siete3.com/coches/`, comprobado el 2026-10-13), así que lo que viaja es bastante
+  menos, porque las `url` se repiten.
 - **El LCP de `/comparar/` depende de una cadena de peticiones**: HTML → script → JSON de modelo →
   pintado. Son ~3 viajes de ida y vuelta en 4G antes de que aparezca la tabla. Creo que cabe en
   2,5 s porque los ficheros son pequeños, pero es una impresión: hay que medir RNF-2 en la página
@@ -187,8 +191,8 @@ Detalles:
   el script en línea; no se decide aquí.
 - **Más ficheros en el build** (uno por modelo comparable más el índice) y una ruta pública
   `/comparar/datos/` que cualquiera puede leer. No hay nada privado en ella (son los mismos datos
-  con fuente de las fichas), pero es una superficie más. No se decide aquí si `robots.txt` la
-  excluye; los buscadores no suelen indexar JSON, pero no lo he verificado.
+  con fuente de las fichas), pero es una superficie más. `robots.txt` la excluye (punto 4), lo que
+  evita que la rastreen los buscadores que lo respetan, aunque no impide que alguien la lea.
 - **Un modelo que deja de ser comparable rompe enlaces compartidos**: su JSON desaparece en el
   siguiente build y la versión se ignora con aviso (RF-11). Es lo que pide el PRD, pero quien
   abra un enlace antiguo verá menos columnas.
@@ -202,9 +206,9 @@ Detalles:
 - **`/comparar/` sin JavaScript no compara nada**: es lo que acepta RNF-6.
 
 **Preguntas abiertas**
-- ¿Sirve Render el static site comprimido? Se comprueba con las cabeceras de `siete3.com` en
-  producción.
-- ¿Se excluye `/comparar/datos/` en `robots.txt`? No lo pide ningún PRD.
+- ~~¿Sirve Render el static site comprimido?~~ Sí: Brotli, comprobado en las cabeceras de
+  `siete3.com` el 2026-10-13.
+- ~~¿Se excluye `/comparar/datos/` en `robots.txt`?~~ Sí, decidido al aceptar la ADR (punto 4).
 - ¿Debe la factoría avisar cuando un cambio de `name` o de slug rompa claves de comparación
   compartidas? No lo pide ningún PRD.
 - La codificación de la terna en la URL: `docs/design/comparador.md`.
