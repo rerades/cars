@@ -99,6 +99,7 @@ para que respeten el ajuste del navegador (WCAG 1.4.4); nada de `px` fijos en te
 | `--text-body` | 1rem / 1.5rem | 400 | Texto general, controles, botones |
 | `--text-small` | 0.875rem / 1.25rem | 400 | Marca, datos, ayudas, atribución |
 | `--text-badge` | 0.875rem / 1.25rem | 600 | Etiquetas |
+| `--text-rank-number` | 1.5rem / 2rem | 700 | Número de puesto en los rankings (`rankings.md`, PRD-005 RF-3) |
 
 Mínimo absoluto 14 px (0,875 rem): ningún texto por debajo.
 
@@ -123,6 +124,8 @@ nombre de diseño es este.
 | `--width-explore-label` | `8rem` | Columna del título de cada grupo de «Explorar» desde `md` |
 | `--width-version-label` | `11rem` | Columna de rótulos de la tabla de versiones de la ficha en `lg` (`ficha-modelo.md`, RF-3 de PRD-002) |
 | `--width-version-col` | `9rem` | Ancho mínimo de cada columna de versión en esa tabla: 11 + 5 × 9 = 56 rem (896 px) caben en los 960 px útiles de 1024 px sin scroll |
+| `--width-ranking` | `48rem` | Ancho máximo de la lista de puestos de un ranking (`rankings.md`, PRD-005 RF-7) |
+| `--width-rank-number` | `3rem` | Columna del número de puesto (y de «empate») en cada puesto del ranking; a 320 px deja 228 px de contenido |
 | `--width-version-col-max` | `20rem` | Ancho máximo de cada columna de versión, para que con 1 o 2 versiones la tabla no se estire. También en el comparador (`comparador.md`, PRD-003): ancho máximo de cada columna de la tabla y del `<select>` de versión |
 
 Márgenes laterales de página: paso `4` en móvil, `6` en `md`, `8` en `lg`. Entre bloques de página: `8`.
