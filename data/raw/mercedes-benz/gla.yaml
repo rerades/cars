@@ -1,0 +1,29 @@
+# Researcher — Mercedes-Benz GLA eléctrico. Fuentes: idae-es (T2) y diariomotor-es (T3). Consultado 2026-10-13. Sin precio: mercedes-benz.es no responde (timeout) y no hay otra fuente T1.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: GLA
+status: {value: announced, note: "artículo de 03/08/2026 con el PVP en España del GLA 250+ y el GLA 350 4Matic; primeras entregas previstas para noviembre; el GLA 200 llegará más adelante, sin precio", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/precio-mercedes-gla-2026/", retrieved: 2026-10-13, tier: T3}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: GLA 250+
+    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613457"}
+    wltp_km: {value: 725, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613457; el medio publica hasta 654 km WLTP"}
+    power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613457; el medio publica 272 CV"}
+    price: null
+  - name: GLA 350 4MATIC
+    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613458"}
+    wltp_km: {value: 681, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613458; el medio publica 640 km WLTP"}
+    power_kw: {value: 260, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613458; el medio publica 354 CV"}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; todas las versiones con price null."
+  - "Autonomía: el IDAE (725 y 681 km) difiere de la cifra del medio (654 y 640 km); se guarda el IDAE (T2) y la del medio va en la nota."
+  - "GLA 200 (58 kWh LFP): anunciado por el medio sin precio y sin homologación en el IDAE; no se ha escrito."
+  - "Imagen: sin foto del GLA eléctrico con licencia válida localizada."
+  - "status: el artículo de 03/08/2026 publica el PVP y prevé las primeras entregas en noviembre, pero no dice que haya pedidos abiertos; announced hasta confirmarlo."
+  - "launch: el medio no da fecha de inicio de venta (solo entregas previstas en noviembre de 2026); sin dato."
+  - "Segmento: el medio dice «SUV Mediano», que no está en la lista de RF-11; segment null."

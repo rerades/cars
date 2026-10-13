@@ -1,0 +1,15 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: diariomotor-es
+brand: (varias; medio del motor)
+tier: T3
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://www.diariomotor.com/
+  robots: https://www.diariomotor.com/robots.txt
+image_license: "" # no se usan imágenes de este medio
+notes: >
+  Medio del motor español. T3: sirve para confirmar qué versiones se venden, su nombre comercial y las fechas, nunca
+  como fuente de precio. robots.txt, para cualquier agente, no bloquea /noticia/ (comprobado el 2026-10-13).
+last_verified: 2026-10-13
+status: active

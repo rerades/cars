@@ -1,0 +1,23 @@
+# Researcher — Mercedes-Benz GLC eléctrico. Fuentes: idae-es (T2) y hibridosyelectricos-es (T3). Consultado 2026-10-13. Sin precio: mercedes-benz.es no responde (timeout) y no hay otra fuente T1.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: GLC
+status: {value: on_sale, note: "artículo de 22/10/2025: «Por el momento sólo está disponible una única versión mecánica del GLC eléctrico», con PVP en España", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-por-fin-pone-precio-mejor-suv-electrico-jamas-haya-creado-rival-natural-tesla-model_83003_102.html", retrieved: 2026-10-13, tier: T3}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: GLC 400 4MATIC
+    battery_kwh: {value: 94, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609716; el medio publica 94 kWh netos"}
+    wltp_km: {value: 682, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609716; el medio publica 666 km homologados y 713 km con la opción Long Range Edition"}
+    power_kw: {value: 360, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609716; el medio publica 489 CV"}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; price null."
+  - "Segmento: el medio lo llama «SUV de segmento D» (4,84 m) sin decir compacto o grande; segment null."
+  - "Autonomía: el IDAE (682 km) difiere de los 666 km del medio; se guarda el IDAE (T2)."
+  - "El medio T3 del 2025-11 (electrive) habla de un GLC 200 de entrada en camino; no confirmado ni homologado, no se ha escrito."
+  - "Imagen: las fotos de Commons localizadas son del GLC 350L Electric (variante china); no se usan."
+  - "launch: el artículo de 22/10/2025 publica el PVP en España, pero no la fecha de inicio de venta; sin dato."
