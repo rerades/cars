@@ -1,0 +1,15 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: movilidadelectrica-es
+brand: (varias; medio del motor)
+tier: T3
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://movilidadelectrica.com/
+  robots: https://movilidadelectrica.com/robots.txt
+image_license: "" # no se usan imágenes de este medio
+notes: >
+  Medio español sobre movilidad eléctrica. T3: sirve para confirmar carrocería y segmento, nunca como fuente de
+  precio. robots.txt no bloquea los artículos y pide Crawl-delay de 10 s (comprobado el 2026-10-13).
+last_verified: 2026-10-13
+status: active
