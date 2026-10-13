@@ -3,8 +3,8 @@ import "../../../styles/global.css";
 import { cardView, type CardView } from "../../../lib/card.ts";
 import ModelFigure from "../../../components/ModelFigure.astro";
 import SegmentSilhouette from "../../../components/SegmentSilhouette.astro";
-import { loadModels, type ModelImage, type Version } from "../../../lib/data.ts";
-import { t } from "../../../lib/i18n.ts";
+import { loadModels, type ModelImage, type Sourced, type Specs, type Version } from "../../../lib/data.ts";
+import { t, type MessageKey } from "../../../lib/i18n.ts";
 import { chunkVersions, sortVersions } from "../../../lib/versions.ts";
 
 /**
@@ -14,16 +14,17 @@ import { chunkVersions, sortVersions } from "../../../lib/versions.ts";
 export function getStaticPaths() {
   return loadModels().models.map((model) => {
     const [marca, file] = model.file.replace(/\.yaml$/, "").split("/");
-    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, images: model.images } };
+    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, images: model.images, specs: model.specs } };
   });
 }
 
-const { card, versions, brandSlug, brandUrl, images } = Astro.props as {
+const { card, versions, brandSlug, brandUrl, images, specs } = Astro.props as {
   card: CardView;
   versions: Version[];
   brandSlug: string;
   brandUrl: string;
   images: ModelImage[];
+  specs: Specs;
 };
 const chunks = chunkVersions(versions);
 // readImages (data.ts) already drops any image without license or source_id.
@@ -32,6 +33,24 @@ const altOf = (i: number) => t("ficha.imagen.alt", { marca: card.brand, modelo: 
 const captionOf = (img: ModelImage) =>
   img.attribution ? t("ficha.imagen.atribucion", { attribution: img.attribution }) : null;
 const [mainImage, ...rest] = images.slice(0, 6);
+
+// "Datos del modelo" (RF-7): only the rows `specs` carries, in the order of the design table.
+const sep = ` ${t("ficha.lista.separador")} `;
+const rows: { key: string; label: string; text: string; note?: string }[] = [];
+const addRow = <T,>(key: keyof Specs, label: MessageKey, value: Sourced<T> | undefined, fmt: (v: T) => string) => {
+  if (value) rows.push({ key, label: t(label), text: fmt(value.value), note: value.note });
+};
+addRow("wltp_max_km", "ficha.modelo.autonomia", specs.wltp_max_km, (n) => t("ficha.unidad.km", { n }));
+addRow("power_max_kw", "ficha.modelo.potencia", specs.power_max_kw, (n) => t("ficha.unidad.kw", { n }));
+addRow("dc_max_kw", "ficha.modelo.cargaCc", specs.dc_max_kw, (n) => t("ficha.unidad.kw", { n }));
+addRow("ac_max_kw", "ficha.modelo.cargaCa", specs.ac_max_kw, (n) => t("ficha.unidad.kw", { n }));
+addRow("battery_kwh_options", "ficha.modelo.baterias", specs.battery_kwh_options, (l) =>
+  l.map((n) => t("ficha.unidad.kwh", { n })).join(sep),
+);
+addRow("drivetrains", "ficha.modelo.tracciones", specs.drivetrains, (l) =>
+  l.map((d) => t(`traccion.${d}` as MessageKey)).join(sep),
+);
+const modelRows = rows;
 const heading = t("ficha.titulo", { marca: card.brand, modelo: card.model });
 const site = t("sitio.nombre");
 const documentTitle = site ? t("pagina.tituloDocumento", { titulo: heading, sitio: site }) : heading;
@@ -177,6 +196,25 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
           )
         }
       </section>
+
+
+      {
+        modelRows.length > 0 && (
+          <section aria-labelledby="datos-modelo" class="mt-10" data-ficha-modelo>
+            <h2 id="datos-modelo" class="text-section text-ink-900">{t("ficha.modelo.titulo")}</h2>
+            <p class="mt-1 text-small text-ink-600">{t("ficha.modelo.entrada")}</p>
+            <dl class="mt-4 grid max-w-prose grid-cols-1 gap-4 md:grid-cols-2">
+              {modelRows.map((row) => (
+                <div data-spec={row.key}>
+                  <dt class="text-small text-ink-600">{row.label}</dt>
+                  <dd class="text-body text-ink-900">{row.text}</dd>
+                  {row.note && <dd class="text-small text-ink-600">{row.note}</dd>}
+                </div>
+              ))}
+            </dl>
+          </section>
+        )
+      }
 
       {
         rest.length > 0 && (

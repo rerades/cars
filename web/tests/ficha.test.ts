@@ -68,6 +68,22 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
     writeModel(data, "acme", "Later", { ...bare("acme", "Acme", "Later"), status: sourced("announced") });
     writeModel(data, "acme", "Old", { ...bare("acme", "Acme", "Old"), status: sourced("discontinued") });
     writeModel(data, "beta", "Solo", bare("beta", "Beta", "Solo"));
+    const bareVersion = (name: string) => ({ name, battery_kwh: null, price: null });
+    writeModel(
+      data,
+      "beta",
+      "Specs",
+      bare("beta", "Beta", "Specs", {
+        versions: [bareVersion("Specs A"), bareVersion("Specs B")],
+        specs: {
+          battery_kwh_options: sourced([58, 77]),
+          drivetrains: sourced(["fwd", "awd"]),
+          dc_max_kw: sourced(135, { note: "10-80 % en 29 min" }),
+          power_max_kw: sourced(250),
+          ac_max_kw: sourced(11),
+        },
+      }),
+    );
     writeModel(data, "gamma", "Hidden", bare("gamma", "Gamma", "Hidden", { needs_review: true }));
     out = join(root, "out");
     build(data, out);
@@ -166,6 +182,34 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
     assert.doesNotMatch(a, /target=|role=|\bbtn\b|bg-|border|<svg|<img/);
     assert.doesNotMatch(a, /<button/);
     assert.match(text(a), /^Ver en la web de la marca \(web de Acme, sitio externo\)$/);
+  });
+
+  const modelBlock = (html: string) => /<section[^>]*data-ficha-modelo[\s\S]*?<\/section>/.exec(html)?.[0];
+
+  test("CA-7: model-level battery capacities in a «Datos del modelo» block, not tied to a version", () => {
+    const block = modelBlock(page("beta", "Specs"))!;
+    assert.ok(block, "block missing");
+    assert.match(block, /<h2[^>]*>Datos del modelo<\/h2>/);
+    assert.match(block, /aria-labelledby="datos-modelo"/);
+    assert.match(text(block), /La marca publica estos datos para el modelo entero, no para cada versión\./);
+    assert.match(text(block), /Capacidades de batería 58 kWh · 77 kWh/);
+    assert.match(text(block), /Tracciones Delantera · Total/);
+    assert.match(text(block), /Potencia máxima del modelo 250 kW/);
+    assert.match(text(block), /Carga máxima en CC 135 kW 10-80 % en 29 min/);
+    assert.match(text(block), /Carga máxima en CA 11 kW/);
+  });
+
+  test("RF-7: a model without specs has no «Datos del modelo» block or h2", () => {
+    const html = page("beta", "Solo");
+    assert.equal(modelBlock(html), undefined);
+    assert.doesNotMatch(html, /Datos del modelo|data-ficha-modelo/);
+  });
+
+  test("RF-7: only the rows that specs carries", () => {
+    const block = text(modelBlock(page("acme", "Volta"))!);
+    assert.match(block, /Autonomía WLTP máxima del modelo 520 km hasta 520 km/);
+    assert.match(block, /Carga máxima en CC 150 kW/);
+    assert.doesNotMatch(block, /Potencia|Carga máxima en CA|batería|Tracciones/);
   });
 
   test("RNF-1/RNF-5: no JavaScript, no cookies or storage", () => {
