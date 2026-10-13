@@ -1,0 +1,27 @@
+# Researcher — Mercedes-Benz Clase G eléctrico (G 580). Fuentes: idae-es (T2) y hibridosyelectricos-es (T3). Consultado 2026-10-13. Sin precio: mercedes-benz.es no responde (timeout) y no hay otra fuente T1.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: Clase G
+status: {value: on_sale, note: "artículo de 08/06/2024: «Un todoterreno totalmente eléctrico que ya está a la venta en España»; no se ha comprobado que siga a la venta hoy", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-clase-electrico-ya-tiene-precio-en-espana-es-tan-mastodontico-como-sus-prestaciones_74455_102.html", retrieved: 2026-10-13, tier: T3}
+launch: {value: "2024-06", note: "fecha (08/06/2024) del artículo que lo da ya a la venta en España", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-clase-electrico-ya-tiene-precio-en-espana-es-tan-mastodontico-como-sus-prestaciones_74455_102.html", retrieved: 2026-10-13, tier: T3}
+segment: null
+needs_review: false
+versions:
+  - name: G 580
+    battery_kwh: {value: 116, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609705 («Clase G eléctrico (N465) 580 con tecnología EQ»)"}
+    wltp_km: {value: 641, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609705"}
+    power_kw: {value: 432, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609705"}
+    price: null
+images:
+  - file: data/images/mercedes-benz/clase-g/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Mercedes-Benz_G_580_with_EQ_Technology_DSC_8256.jpg/1280px-Mercedes-Benz_G_580_with_EQ_Technology_DSC_8256.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_G_580_with_EQ_Technology_DSC_8256.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0"
+open_questions:
+  - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; price null."
+  - "Segmento: el medio lo describe como «4x4 de lujo», sin categoría de RF-11; segment null."
+  - "Tracción: no confirmada por una fuente leída (el IDAE no la incluye en el nombre); sin drivetrain."
+  - "El artículo T3 es de 2024-06; la venta actual no se ha reconfirmado con una fuente más reciente."
