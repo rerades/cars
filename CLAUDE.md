@@ -66,4 +66,4 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
 - Hecho también: la fusión automática de ADR-0011 (`node factory/run.ts --merge`, LaunchAgent a las
   07:30, interruptor `auto_merge` en `budgets.yaml`).
 - Pendiente: la migración de las imágenes a
-  `data/images/` (en la cola, Researcher), verificar que el configurador de Cupra da el PVP sin ayudas.
+  `data/images/` (en la cola, Researcher).
