@@ -59,6 +59,7 @@
   --width-version-label: 11rem;
   --width-version-col: 9rem;
   --width-version-col-max: 20rem;
+  --size-segment-icon-lg: 6rem;
 }
 
 @layer base {

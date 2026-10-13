@@ -6,8 +6,11 @@
  */
 interface Props {
   segment?: string | null;
+  /** Larger side (`--size-segment-icon-lg`), for the model page's main image slot. */
+  large?: boolean;
 }
-const { segment } = Astro.props;
+const { segment, large = false } = Astro.props;
+const side = large ? "var(--size-segment-icon-lg)" : "var(--size-segment-icon)";
 
 const wheels = (xs: [number, number], r: number) => xs.map((cx) => ({ cx, r }));
 const car = (d: string, xs: [number, number], r: number) => ({ d, wheels: wheels(xs, r) });
@@ -41,7 +44,7 @@ const shape = key === "generica" ? GENERIC : SILHOUETTES[key];
   aria-hidden="true"
   focusable="false"
   data-silhouette={key}
-  style="width: var(--size-segment-icon); height: var(--size-segment-icon)"
+  style={`width: ${side}; height: ${side}`}
 >
   <path d={shape.d}></path>
   {shape.wheels.map((w) => <circle cx={w.cx} cy="34" r={w.r}></circle>)}
