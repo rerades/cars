@@ -1,0 +1,34 @@
+# Researcher — Škoda Elroq. Fuente: skoda-es (T1). Consultado 2026-10-14.
+brand: skoda
+brand_name: Škoda
+model: Elroq
+status: {value: on_sale, note: "la ficha muestra versiones, precios y configurador; no dice expresamente que los pedidos estén abiertos", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+launch: null
+segment: {value: suv_compacto, note: "la ficha lo presenta como «SUV compacto»", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+needs_review: true
+specs:
+  wltp_max_km: {value: 574, note: "«hasta 574 km de autonomía en ruta»", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+versions:
+  - name: Urban
+    battery_kwh: {value: 58, basis: usable, note: "publicado: 61 kWh (58 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 140, note: "publicado: 140 kW (190 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+    price: null
+  - name: Selection
+    battery_kwh: {value: 58, basis: usable, note: "publicado: 61 kWh (58 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 140, note: "publicado: 140 kW (190 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+    price: null
+  - name: Sportline
+    battery_kwh: {value: 82, basis: gross, note: "publicado: 82 kWh; una nota de la ficha usa 61 kWh / 140 kW para esta versión (incoherente)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 210, note: "publicado: 210 kW; la nota de financiación habla de 140 kW", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+    price: null
+  - name: RS
+    battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "Precios: la ficha solo da «Precio sujeto a financiación desde» (Urban 26.550 €, Selection 27.850 €, Sportline 35.050 €, RS 40.600 €), que incluye la subvención Plan Auto+ de 4.050-4.500 €; no es PVP sin ayudas y no se guarda. No se ha leído un PVP sin ayudas ni un «PVP recomendado financiando» para el Elroq."
+  - "WLTP por versión, tracción y kW de carga DC no están en la ficha; el IDAE tiene homologaciones MY27 (p. ej. Selection 82 kWh 210 kW: 574 km) pero no se ha cruzado con los nombres comerciales. wltp_km queda sin rellenar en todas las versiones."
+  - "launch: la ficha no da fecha de inicio de venta en España."
+  - "Sportline: la ficha da datos incoherentes (82 kWh / 210 kW frente a 61 kWh / 140 kW en una nota)."
+  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."
