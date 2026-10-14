@@ -1,0 +1,27 @@
+# Researcher — Volkswagen ID.4. Fuente: volkswagen-es (T1). Consultado 2026-10-14.
+brand: volkswagen
+brand_name: Volkswagen
+model: ID.4
+status: {value: on_sale, note: "la ficha muestra oferta de financiación; sin confirmar que se pueda pedir hoy", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-10-14, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  power_max_kw: {value: 210, note: "publicado: hasta 210 kW (286 CV)", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-10-14, tier: T1}
+  battery_kwh_options: {value: [77, 79], note: "de 77 kWh a 79 kWh", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-10-14, tier: T1}
+  drivetrains: {value: [rwd, awd], note: "trasera o 4Motion", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-10-14, tier: T1}
+versions:
+  - name: Pro
+    price: null
+  - name: Pro Black
+    price: null
+  - name: GTX
+    price: null
+images: []
+open_questions:
+  - "needs_review: true porque volkswagen.es no dice qué versiones se pueden pedir hoy (solo muestra ofertas de financiación) ni liga cada potencia a su versión; status on_sale se apoya en esas ofertas."
+  - "Precio: «desde 32.400 €» sujeto a financiación, sin PVP limpio ni condiciones literales completas; no se guarda."
+  - "Datos por versión (kWh, WLTP, kW, tracción) no publicados en la ficha. La autonomía «hasta 560 km» no dice si es WLTP."
+  - "segment: la ficha dice «SUV», que no es un término de la lista de RF-11."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir. Un medio (T3) sugiere nuevos ID.4/ID.7 fabricados en España en 2027; confirmar qué se vende hoy."
+  - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."
