@@ -10,7 +10,6 @@ PRD-005 (ready, P2): RF-1 a RF-15, RNF-1 a RNF-6; CA-1 a CA-18. Tokens: [`tokens
   «Fuente y fecha».
 - Etiquetas de segmento, controles nativos, URL con query string, valores no válidos y región viva:
   [`filtros-catalogo.md`](filtros-catalogo.md).
-- La acción «Comparar»: [`comparador.md`](comparador.md), «La acción "Comparar"» y «Forma de la URL».
 
 Página pregenerada por ranking (RF-13, RNF-1, CA-14): la lista sin filtros, con sus cifras y fuentes, va en el
 HTML servido. Solo los filtros usan JavaScript (RF-8, RF-9) y sin él no se muestran. Componentes de Bearnie
@@ -34,7 +33,7 @@ URL bajo `/rankings/`, con un nombre legible en español y sin parámetros, como
 
 - `h1` = `ranking.{x}.titulo`; `<title>` = `pagina.tituloDocumento` con ese `h1` («Coches eléctricos con más
   autonomía · siete3»).
-- Canonical: `<link rel="canonical">` a la URL de la tabla, sin query string, en el HTML servido; sin `noindex`
+- Canonical: `<link rel="canonical">` a la URL de la página del ranking, sin query string, en el HTML servido; sin `noindex`
   (RF-13, decisión 7, CA-12). Igual que `/coches`.
 - Los textos son distintos entre sí y de los de `paginas-catalogo.md` (CA-12): ninguno empieza como «Coches
   eléctricos hasta…», «… de más de…» ni repite las entradas de tramo o de segmento. El Desarrollador lo
@@ -108,7 +107,7 @@ Móvil (320–767 px)                     Escritorio (≥ 1024 px)
 │                          │           │ │    │ Long range Dual motor · SUV grande      │     │
 │ Puestos                  │           │ │    │ 628 km                                  │     │
 │ 10 versiones             │           │ │    │ Fuente: polestar.com, 22 sep 2026       │     │
-│ ┌───┬──────────────────┐ │           │ │    │ Comparar                                │     │
+│ ┌───┬──────────────────┐ │           │ │    │                                         │     │
 │ │ 1 │ h3 Polestar      │ │           │ ├────┼─────────────────────────────────────────┤     │
 │ │   │ Polestar 3       │ │           │ │ 2  │ h3 Cupra Tavascan                       │     │
 │ │   │ Long range Dual… │ │           │ │empa│ Endurance · SUV compacto                │     │
@@ -116,15 +115,14 @@ Móvil (320–767 px)                     Escritorio (≥ 1024 px)
 │ │   │ 628 km           │ │           │ │    │ Fuente: cupra.com, 24 sep 2026          │     │
 │ │   │ Fuente: polestar.│ │           │ ├────┼─────────────────────────────────────────┤     │
 │ │   │ com, 22 sep 2026 │ │           │ │ 2  │ …                                       │     │
-│ │   │ Comparar         │ │           │ │ 4  │ …                                       │     │
+│ │   │                  │ │           │ │ 4  │ …                                       │     │
 │ ├───┼──────────────────┤ │           │ └────┴─────────────────────────────────────────┘     │
 │ │ 2 │ …                │ │           │ 3 versiones a la venta se han quedado fuera…         │
-│ └───┴──────────────────┘ │           │ Condiciones de las ofertas                           │
+│ └───┴──────────────────┘ │           │                                                      │
 │ 3 versiones a la venta…  │           └──────────────────────────────────────────────────────┘
-│ Condiciones de las ofer… │
 └──────────────────────────┘
 ```
-(Las cifras y versiones del dibujo son ilustrativas, no datos.)
+(Las cifras y versiones del dibujo son ilustrativas, no datos. «Condiciones de las ofertas» no sale porque solo existe en el ranking de precio.)
 
 ## Lista de puestos (RF-3, RF-7, RNF-3, CA-3, CA-7)
 
@@ -149,13 +147,12 @@ En este orden del DOM, en la columna de contenido salvo el número:
 
 | # | Elemento | Origen | Presentación | Requisito |
 |---|---|---|---|---|
-| 1 | Número de puesto | posición (RF-7) | `--text-rank-number`, `ink-900`, en la columna izquierda, alineado arriba. Texto oculto visualmente antes: «Puesto» (`ranking.puesto.sr`) | RF-3, RF-7, CA-3 |
+| 1 | Número de puesto | posición (RF-7) | `--text-rank-number`, `ink-900`, dentro del `h3`, antes del enlace y fuera de él, precedido del texto oculto visualmente «Puesto» (`ranking.puesto.sr`). El `h3` ocupa las dos columnas con `grid-template-columns: subgrid`, así que el número se ve en la columna izquierda, alineado arriba | RF-3, RF-7, CA-3 |
 | 2 | Marca y modelo | `brand_name`, `model` | `h3`, `--text-card-title`, `ink-900`; el texto entero es un enlace a `/marcas/{marca}/{modelo}/` (`brand-600`, subrayado, hover `brand-800`) | RF-3, CA-3 |
 | 3 | Versión | `versions[].name` | `text-body`, `ink-900`, literal | RF-3, CA-3 |
 | 4 | Segmento | `segment.value` | `text-small`, `ink-600`, con el rótulo oculto visualmente «Segmento:» y la etiqueta de `filtros-catalogo.md`. Sin segmento: «Segmento por confirmar» (`ficha.segmento.porConfirmar`) | Decisión 4 |
 | 5 | Cifra del ranking | el campo de RF-1 | Ver «La cifra» | RF-3, RF-4, RF-5 |
 | 6 | Fuente y fecha | `source_id`, `url`, `retrieved`, `tier` | Ver «La cifra» | RF-4, CA-4 |
-| 7 | «Comparar» | — | Enlace de texto de `comparador.md` | RF-14 |
 
 **Decisión 4: segmento sí, imagen no.**
 - **Segmento**: es texto, pesa cero bytes y da el contexto que el filtro de segmento (RF-8) usa; quien ve
@@ -166,10 +163,8 @@ En este orden del DOM, en la columna de contenido salvo el número:
 - **Ninguna cifra de modelo** («precio desde», «autonomía máxima») ni otra cifra de la versión: solo la del
   ranking (RF-3). En el ranking de precio no se enseña la autonomía y en el de autonomía no se enseña el precio.
 - **Sin etiqueta de estado**: todas las versiones son de modelos `on_sale` (RF-11, CA-3).
-- **«Comparar»**: todas las versiones son de modelos a la venta con versiones, así que todas son comparables
-  (`comparador.md`). Enlace a `/comparar/?v={marca}/{modelo}/{name}`, con la versión del puesto y no la
-  versión por defecto del modelo. Texto visible «Comparar» (`comparar.accion`); nombre accesible con
-  `ranking.compararSr`: «Comparar {marca} {modelo} {versión} con otros coches». Ver Pregunta 2.
+- **Sin «Comparar»**: PRD-003 solo lo ofrece desde la tarjeta y la ficha (RF-6, RF-7), y la ficha está a un
+  enlace. Ver Pregunta 2.
 - **Nada más**: ni enlace de compra, ni «Ver en la web de la marca», ni insignias, medallas, colores de podio o
   tamaños distintos para los tres primeros (RF-2, RF-14, sección 8 de PRD-005, CA-2, CA-13). El puesto 1 se pinta
   exactamente igual que el 10.
@@ -225,7 +220,7 @@ empate
 - Mismo número en las versiones con la misma cifra; dentro del empate, orden alfabético de marca, modelo y
   `name`; el siguiente puesto salta (1, 2, 2, 4). La numeración la resuelve el build (y el filtro, con JS); el
   diseño solo la pinta.
-- Bajo el número de cada puesto empatado, la palabra «empate» (`ranking.puesto.empate`), `text-small`,
+- Bajo el número de cada puesto empatado, dentro del `h3` como él, la palabra «empate» (`ranking.puesto.empate`), `text-small`,
   `ink-600`. Así el puesto compartido se entiende sin comparar números a ojo y sin color. El lector oye «Puesto
   2, empate». A 320 px «empate» cabe en los 48 px de la columna en `text-small`; si una traducción no cabe,
   parte línea.
@@ -343,8 +338,7 @@ en pantalla ni condiciones.
 2. Navegación del sitio.
 3. Ruta: «Coches».
 4. Con JS: select «Segmento», select «Precio».
-5. Por puesto, en orden: enlace del modelo → enlace de la fuente → «Ver condiciones de la oferta» (si la hay) →
-   «Comparar».
+5. Por puesto, en orden: enlace del modelo → enlace de la fuente → «Ver condiciones de la oferta» (si la hay).
 6. En el vacío de página, «Ver todos los coches»; en el vacío filtrado, «Quitar filtros».
 7. «Condiciones de las ofertas»: el enlace de cada entrada.
 
@@ -359,12 +353,11 @@ Recorrido de «Más autonomía», de arriba abajo:
 3. (Con JS) «Filtrar, grupo.» «Segmento, Todos, botón emergente.» «Precio, Cualquiera, botón emergente.»
 4. «Puestos, encabezado nivel 2.» «10 versiones.» «Puestos, lista, 10 elementos.»
 5. Cada puesto: «Puesto 2, empate, Cupra Tavascan, enlace, encabezado nivel 3.» «Endurance.» «Segmento: SUV
-   compacto.» «557 km.» «Fuente: cupra.com, enlace, 24 sep 2026.» «Comparar Cupra Tavascan Endurance con otros
-   coches, enlace.»
+   compacto.» «557 km.» «Fuente: cupra.com, enlace, 24 sep 2026.»
 6. La nota de RF-15.
 
 Por encabezados se salta a cada puesto («Puesto 1, Polestar Polestar 3»): el número va **dentro** del `h3`,
-fuera del enlace. Ninguna etiqueta depende del color: «Precio con oferta», «fuente no oficial» y «empate» son
+fuera del enlace (ver «Qué lleva un puesto»). Ninguna etiqueta depende del color: «Precio con oferta», «fuente no oficial» y «empate» son
 texto (RNF-3, CA-17).
 
 ## Entrada desde `/coches` (PRD-001 RF-14, CA-19)
@@ -380,8 +373,8 @@ páginas del catálogo; Pregunta 4). Cambio enlazado anotado en [`paginas-catalo
 | `explorar.rankings` | Rankings |
 | `explorar.ranking.precio` / `.autonomia` / `.bateria` / `.potencia` / `.cargaCc` | Más baratos / Más autonomía / Más batería / Más potencia / Carga más rápida en continua |
 
-Desde un ranking **no** se enlaza a los demás rankings: CA-13 limita los enlaces a fichas, catálogo, fuentes y
-«Comparar». Se vuelve por la ruta («Coches») y desde allí se elige otro.
+Desde un ranking **no** se enlaza a los demás rankings: CA-13 limita los enlaces a fichas, catálogo y fuentes
+(y «Comparar», que aquí no se usa). Se vuelve por la ruta («Coches») y desde allí se elige otro.
 
 ## Copy (RNF-4: claves para i18n, sin textos fijos en los componentes)
 
@@ -399,7 +392,6 @@ Además de las de las tablas anteriores (`ranking.{x}.titulo`, `.entrada`, `.ord
 | `ranking.segmento.sr` | Segmento: |
 | `ranking.fuente` | Fuente: {fuente}, {fecha} (mismo texto que `ficha.precio.fuente`) |
 | `ranking.noOficial` | · fuente no oficial |
-| `ranking.compararSr` | {marca} {modelo} {versión} con otros coches (tras «Comparar») |
 | `ranking.filtros.titulo` | Filtrar |
 | `ranking.filtros.todos` | Todos |
 | `ranking.filtros.cualquiera` | Cualquiera |
@@ -410,7 +402,7 @@ Además de las de las tablas anteriores (`ranking.{x}.titulo`, `.entrada`, `.ord
 
 Reutilizadas sin cambios: `pagina.tituloDocumento`, `pagina.saltar`, `ficha.unidad.*`, `ficha.bateria.*`,
 `ficha.precio.oferta`, `ficha.precio.verCondiciones`, `ficha.condiciones.*`, `ficha.segmento.porConfirmar`,
-`filtros.segmento`, `filtros.precio`, `explorar.precio.*`, las etiquetas de segmento, `comparar.accion`,
+`filtros.segmento`, `filtros.precio`, `explorar.precio.*`, las etiquetas de segmento,
 `vacio.pagina.enlace`, `fecha.*`. Si dos claves dan el mismo texto, el Desarrollador puede usar una sola.
 
 ## Tokens que usa
@@ -426,15 +418,10 @@ calculados en `tokens.md` (`ink-900` 17,74, `ink-600` 7,56, `brand-600` 6,67, `b
 
 ## Preguntas abiertas para Producto
 
-1. **Página índice `/rankings`.** No se especifica: PRD-005 no la pide y la entrada es la franja de `/coches`
-   (decisión 8). Las URL quedan bajo `/rankings/` por si un día se decide; mientras, `/rankings` no existe (404).
-2. **«Comparar» desde un puesto.** RF-14 lo permite «si PRD-003 lo permite para esa versión», pero PRD-003 solo
-   enumera la tarjeta y la ficha como puntos de entrada (RF-6, RF-7). Se ha especificado con la versión del
-   puesto; si Producto no lo quiere, se quita sin tocar nada más.
-3. **Uno o varios segmentos a la vez.** En `/coches` el segmento es de selección múltiple; RF-8 y CA-8 hablan de
-   «un segmento». Se propone un único segmento (select). Si se quieren varios, pasa a casillas como en el
-   catálogo y vuelve el panel.
-4. **Enlaces a los rankings en las demás páginas del catálogo** (marca, segmento, tramos). RF-14 solo los pide en
-   `/coches`; extenderlos a toda la franja «Explorar» sería un cambio de PRD-001.
-5. **Empate cortado en el puesto 10.** RF-7 deja fuera sin aviso a las versiones empatadas que no caben; ¿se
-   quiere decir «y {n} más con la misma cifra»? No se especifica sin confirmarlo.
+Resueltas por el responsable del producto el 2026-10-14, al revisar la PR #311:
+
+1. ~~**Página índice `/rankings`.**~~ No hay: la entrada es la franja de `/coches` (decisión 8) y `/rankings` da 404.
+2. ~~**«Comparar» desde un puesto.**~~ No: el puesto enlaza a la ficha y desde ella se compara. PRD-003 no cambia.
+3. ~~**Uno o varios segmentos a la vez.**~~ Uno, con un `<select>`, como dicen RF-8 y CA-8.
+4. ~~**Enlaces a los rankings en las demás páginas del catálogo.**~~ Solo en `/coches` (PRD-001, RF-14).
+5. ~~**Empate cortado en el puesto 10.**~~ Sin aviso, como dice RF-7.
