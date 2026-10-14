@@ -24,10 +24,14 @@ versions:
     wltp_km: {value: 415, note: "IDAE id 606744; la web dice hasta 415 km con 52 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
     power_kw: {value: 110, note: "IDAE id 606744; publicado: 150 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
     price: null
+  - name: Micra Tekna 52 kWh
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 606746; la versión (Long Range, Tekna) figura en motor.es", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 413, note: "IDAE id 606746; otra homologación, id 606747 («Tekna + Zen Interior»), también 413 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 110, note: "IDAE id 606746; publicado: 150 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
 images: []
 open_questions:
   - "launch y segment: sin fuente registrada."
   - "Precio: la web solo da cuota mensual (Acenta 99 €/mes, N-Connecta 119 €/mes) con entrada y última cuota, sin precio total; no se guarda precio."
-  - "Tekna 52 kWh aparece en el IDAE pero no en la web del Micra; no se incluye hasta confirmarlo. La web no dice qué batería lleva cada acabado: la combinación sale del IDAE."
-  - "Gama confirmada el 2026-10-13 con motor.es: Standard Range Acenta y N-Connecta, Long Range N-Connecta y Tekna. Falta añadir el Tekna 52 kWh (Long Range)."
+  - "La web no dice qué batería lleva cada acabado: la combinación sale del IDAE. Gama confirmada con motor.es (T3): Standard Range Acenta y N-Connecta, Long Range N-Connecta y Tekna."
   - "Imágenes: Commons no devolvió ficheros del Micra eléctrico; sin imagen."

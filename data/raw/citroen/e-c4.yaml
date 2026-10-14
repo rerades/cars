@@ -27,6 +27,11 @@ versions:
     wltp_km: {value: 416, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609286; el medio publica 416 km"}
     power_kw: {value: 115, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609286"}
     price: null
+  - name: Business Edition 115 kW
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 604166; la versión figura en la gama 2026 de motor.es"}
+    wltp_km: {value: 416, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 604166, única homologación del ë-C4 Business Edition"}
+    power_kw: {value: 115, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 604166"}
+    price: null
   - name: Max 115 kW
     battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604170"}
     wltp_km: {value: 416, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604170; menor de 3 homologaciones: 416 km (id 604170), 420 km (ids 583018 y 602729). El medio publica 416 km"}

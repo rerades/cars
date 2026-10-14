@@ -17,9 +17,9 @@ versions:
     power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611796"}
     price: null
   - name: You Urban Range
-    battery_kwh: {value: 30, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607624 («YOU 200»); menor de 2 homologaciones: 203 km (id 607624) y 205 km (id 611799, «You Urban Range»)"}
-    wltp_km: {value: 203, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607624; menor de 2 homologaciones: 203 km (id 607624) y 205 km (id 611799)"}
-    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607624; id 611799 también 83 kW"}
+    battery_kwh: {value: 30, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611799 («You Urban Range», gama 2027); la homologación anterior, id 607624 («YOU 200»), también 30 kWh"}
+    wltp_km: {value: 205, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611799, que lleva el nombre de la versión actual; la homologación anterior, id 607624, da 203 km"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611799; id 607624 también 83 kW"}
     price: null
   - name: Plus Urban Range
     battery_kwh: {value: 30, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607625 («PLUS 200»); única homologación 30 kWh del acabado Plus"}
@@ -27,19 +27,29 @@ versions:
     power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607625"}
     price: null
   - name: You Comfort Range
-    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598638; menor de 2 homologaciones: 300 km (id 598638) y 311 km (id 611798)"}
-    wltp_km: {value: 300, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598638; menor de 2 homologaciones: 300 km (id 598638) y 311 km (id 611798)"}
-    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598638; id 611798 también 83 kW"}
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611798 («You Confort Range», gama 2027); la homologación anterior, id 598638, también 44 kWh"}
+    wltp_km: {value: 311, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611798, que lleva el nombre de la versión actual; la homologación anterior, id 598638, da 300 km"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611798; id 598638 también 83 kW"}
     price: null
   - name: Plus Comfort Range
-    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604562; menor de 2 homologaciones: 300 km (id 604562) y 322 km (id 611800)"}
-    wltp_km: {value: 300, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604562; menor de 2 homologaciones: 300 km (id 604562) y 322 km (id 611800)"}
-    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604562; id 611800 también 83 kW"}
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611800 («Plus Confort Range», gama 2027); la homologación anterior, id 604562, también 44 kWh"}
+    wltp_km: {value: 322, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611800, que lleva el nombre de la versión actual y coincide con los 322 km de motor.es; la homologación anterior, id 604562, da 300 km"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611800; id 604562 también 83 kW"}
     price: null
   - name: Max Comfort Range
-    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598639; menor de 2 homologaciones: 300 km (id 598639) y 321 km (id 611803). El medio no dice la batería del Max; la del IDAE es de 44 kWh"}
-    wltp_km: {value: 300, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598639; menor de 2 homologaciones: 300 km (id 598639) y 321 km (id 611803)"}
-    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 598639; id 611803 también 83 kW"}
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611803 («Max Confort Range», gama 2027); la homologación anterior, id 598639, también 44 kWh"}
+    wltp_km: {value: 321, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611803, que lleva el nombre de la versión actual; la homologación anterior, id 598639, da 300 km"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611803; id 598639 también 83 kW"}
+    price: null
+  - name: Business Confort Range
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611801; la versión figura en la gama 2027 de motor.es"}
+    wltp_km: {value: 325, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611801"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611801"}
+    price: null
+  - name: Collection Confort Range
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611802; la versión figura en la gama 2027 de motor.es"}
+    wltp_km: {value: 325, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611802"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2, note: "IDAE id 611802"}
     price: null
   - name: Outdoor Comfort Range
     battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614461; el medio (05/10/2026) da 44 kWh"}
@@ -59,5 +69,5 @@ open_questions:
   - "Segmento: ninguna fuente leída lo clasifica; se deja sin segment."
   - "launch: el medio T3 no da la fecha de inicio de venta (el artículo de precios oficiales es del 18/10/2023); sin dato."
   - "Las versiones del IDAE se casan con el nombre comercial por el nombre de la fila; ids con nombre ambiguo (607624, 607625) pueden no ser exactamente la versión actual."
-  - "No se ha escrito el ë-C3 Comercial (variante de empresa del IDAE) ni la edición Collection: ningún medio leído da su versión actual."
-  - "Autonomía: motor.es (gama 2027, 2026-10-13) da 214 km en las Urban Range y 322 km en las Confort Range; el IDAE (T2, prevalece) da 203 a 212 y 300 a 309 km. Pueden ser homologaciones anteriores: conciliar con el IDAE. Faltan Business y Collection Confort Range."
+  - "No se ha escrito el ë-C3 Comercial (variante de empresa del IDAE): ningún medio leído da su versión actual."
+  - "Autonomía Urban Range: motor.es da 214 km; el IDAE da 204 km (Tonic) y 205 km (You), y 212 km en el Plus Urban Range (id 607625, sin homologación de gama 2027 con ese nombre). Discrepancia con el medio T3 no resuelta; prevalece el IDAE (T2)."
