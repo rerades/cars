@@ -1,0 +1,34 @@
+# Researcher — Toyota bZ4X. Fuentes: toyota-es (T1), idae-es (T2). Consultado 2026-10-14.
+brand: toyota
+brand_name: Toyota
+model: bZ4X
+status: {value: on_sale, note: "la web lo lista en su catálogo con precio y cuota; no se ha confirmado qué versiones se venden hoy", source_id: toyota-es, url: "https://www.toyota.es/coches/precios", retrieved: 2026-10-14, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: bZ4X 4x2 Advance 73 kWh
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 614149 (MC26); la web indica 73 kWh brutos", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 478, note: "IDAE id 614149 (MC26), menor de las homologaciones; id 611916 (MY27) y 613432 (taxi, MY27) dan 569 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 167, note: "IDAE id 614149; las demás homologaciones de esta versión también dan 167 kW", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: bZ4X 4x4 Spirit 73 kWh
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 614150 (MC26); la web indica 73 kWh brutos", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 436, note: "IDAE id 614150 (MC26), menor de las homologaciones; id 611917 (MY27) da 468 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 255.3, note: "IDAE id 614150; id 611917 da 255 kW. La web publica 343 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+images:
+  - file: data/images/toyota/bz4x/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Toyota_bZ4X.jpg/1280px-Toyota_bZ4X.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Toyota_bZ4X.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-14
+    license: CC-BY-SA-4.0
+    attribution: "UltraTech66, Toyota bZ4X, vía Wikimedia Commons"
+open_questions:
+  - "Precio: toyota.es solo publica 'Desde 39.375,00 €' (con cuota y oferta válida hasta 31-10-2026) y ningún PVP por versión; price: null."
+  - "launch: la web solo dice 'Desde Marzo' y ninguna fuente da la fecha de apertura de pedidos de la gama actual."
+  - "segment: la web dice 'SUV', término que no está en la lista de RF-11; null."
+  - "Versiones: la web cita los acabados Advance y Spirit (468-569 km, 224-343 CV) sin ficha por versión; los datos salen del IDAE. Discrepan las homologaciones MC26 (478 y 436 km) y MY27 (569 y 468 km); la web coincide con MY27. Se usa la de menor autonomía (regla) y no se escribe specs.wltp_max_km."
+  - "IDAE homologa también un bZ4X 4x2 Advance de 58 kWh (id 614148, 385 km, MC26) que la web no muestra: no incluido."
+  - "Tracción: la web dice 4x2 y AWD-i 4x4; sin drivetrain por versión."

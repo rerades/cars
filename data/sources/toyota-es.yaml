@@ -1,0 +1,22 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: toyota-es
+brand: Toyota
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.toyota.es/
+  models: https://www.toyota.es/coches/bz4x # también https://www.toyota.es/coches/toyota-c-hr-plus
+  prices: https://www.toyota.es/coches/precios # solo el precio "Desde" por modelo, sin versiones
+  robots: https://www.toyota.es/robots.txt
+  sitemap: https://www.toyota.es/sitemap-cars.xml
+image_license: "" # sin términos escritos de uso de imágenes localizados (no existe /sala-de-prensa, 404): no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-14): toyota.es responde y las fichas de bZ4X y C-HR+ se leen. robots.txt no bloquea /coches/;
+  solo bloquea URLs con path=model, path=customize, path=engine, path=summary (configurador) y parámetros dealer.
+  El listado de precios solo da un "Desde X €" por modelo, a veces junto a una cuota mensual sin condiciones y con
+  una oferta financiera válida hasta 31-10-2026; no es un PVP por versión limpio, así que no se guardan precios.
+  La ficha del C-HR+ da por acabado (Advance, Spirit) batería, autonomía WLTP y potencia; la del bZ4X solo rangos
+  (468-569 km, 224-343 CV). No se ha localizado sala de prensa oficial en España.
+last_verified: 2026-10-14
+status: active
