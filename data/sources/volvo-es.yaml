@@ -1,0 +1,18 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: volvo-es
+brand: Volvo
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.volvocars.com/es/
+  robots: https://www.volvocars.com/robots.txt
+image_license: "" # sin términos de uso de imágenes leídos: no publicar imágenes de esta web
+notes: >
+  Dominio oficial de Volvo Cars en España. robots.txt (volvocars.com, comprobado el 2026-10-14) no bloquea /es/
+  (solo /ui/, /build/, /*/build/ y algunas rutas de otros mercados). Pero la home responde 403 Forbidden a la lectura
+  automática (2026-10-14): no se fuerza el acceso, así que no hay versiones ni precios leídos de esta web. Marcada
+  broken hasta que se pueda leer. Los datos de Volvo salen del IDAE (idae-es, T2) y se confirman con medios (T3);
+  los precios quedan en null. Las rutas concretas de modelos, configurador y sala de prensa no se han podido verificar.
+last_verified: 2026-10-14
+status: broken
