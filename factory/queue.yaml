@@ -815,3 +815,14 @@
     Imágenes solo de Wikimedia Commons con licencia que permita el uso comercial, descargadas con
     node factory/fetch-image.ts. Crea las fuentes nuevas como data/sources/<id>.yaml; no toques
     data/candidatas.yaml."
+- id: precio-toyota-2026-10
+  agent: researcher
+  task: "Precios de Toyota en data/raw/toyota/ (bz4x.yaml y c-hr-plus.yaml), hoy con price: null.
+    toyota.es publica en la página de cada modelo textos como «Toyota C-HR+ - NG26 Advance 5P
+    Electric 250 Batería 77 kWh aut.. PVP recomendado: 34.375,00 €. PVP al contado: 36.375,00 €»
+    (revisión humana del 2026-10-14). Lee el texto legal entero de cada versión y decide con
+    docs/architecture/data-model.md, sección 4: kind pvp solo si es el precio sin ayudas ni
+    financiación, con IVA; si depende de financiación, ayudas o una promoción, kind financed con
+    price_terms literal (el texto íntegro, no un resumen) y price_terms_url. Si no se puede saber
+    qué es, deja price: null y anótalo en open_questions. Una versión que la web muestre y no esté
+    en el fichero no se añade aquí: anótala en la bitácora. No cambies ningún otro dato."
