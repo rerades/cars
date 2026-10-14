@@ -888,3 +888,17 @@
     web/tests: CA-16 (noindex y canonical sin parámetros) y CA-19 (aviso y enlace a /coches sin JS).
     No hagas el script ni los datos: son #318 y #314. La PR referencia «Closes #317» y enumera los RF
     y CA cubiertos."
+- id: issue-149
+  agent: developer
+  task: "Historia #149 (épica #145, PRD-002): precio de cada versión en la ficha, con su fuente y su
+    fecha. Lee el issue entero y sus comentarios (gh issue view 149 --comments) y haz exactamente lo
+    que dice. Sigue docs/design/ficha-modelo.md, «El precio, en detalle», «Condiciones de las
+    ofertas» y «Fuente y fecha», con los tokens de tokens.md. Trabaja sobre la sección de versiones
+    que dejó #148 en web/src/pages/marcas/[marca]/[modelo].astro; no la rehagas. Reutiliza Price y
+    Sourced de web/src/lib/data.ts y el formateo en euros y tarjeta.oferta de web/src/lib/card.ts,
+    moviendo el formateador a un sitio común en lugar de copiarlo. La indicación de fuente y fecha
+    va en un componente reutilizable (web/src/components/), porque lo usarán #150 y #154. Textos en
+    web/src/lib/i18n.ts. Pruebas sobre el build con CARS_DATA_DIR, como el resto de web/tests: CA-4
+    (pvp, financed, null y discontinued) y la parte de CA-9 del precio (T1 sin indicación, T3 con
+    «fuente no oficial»). No pintes las cifras técnicas ni el bloque «Fuentes»: son #150 y #154.
+    La PR dice «Closes #149» y enumera los RF y CA cubiertos."
