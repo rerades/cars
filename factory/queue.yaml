@@ -864,3 +864,27 @@
     (3) Cada versión, con su nombre comercial y la fila que le toca por la regla, con una note que
     cite el id y las demás homologaciones. (4) price: null y needs_review: true, como ahora. No
     toques los demás modelos de Fiat ni otros datos del 500e que no dependan de las versiones."
+- id: issue-314
+  agent: developer
+  task: "Historia #314 (épica #313, PRD-003): datos del build del comparador. Lee el issue entero
+    (gh issue view 314) y haz exactamente lo que dice: un JSON estático por modelo comparable en
+    /comparar/datos/{marca}/{modelo}.json con endpoints de Astro y getStaticPaths(), con la lista
+    blanca de campos de la sección 6 del PRD (ausente → null), y en web/src/lib/compare.ts, sin
+    node:fs, isComparable y la versión por defecto de RF-8. Reutiliza loadModels() de
+    web/src/lib/data.ts. Sigue docs/architecture/adr/0014-datos-y-script-del-comparador.md. Pruebas
+    con node --test y datos de prueba en CARS_DATA_DIR, como filters.test.ts: isComparable, versión
+    por defecto (CA-9) y la proyección campo por campo contra el YAML (CA-18, CA-13). No hagas la
+    página, el índice ni el script: son otras historias. La PR referencia «Closes #314» y enumera los
+    RF y CA cubiertos."
+- id: issue-317
+  agent: developer
+  task: "Historia #317 (épica #313, PRD-003): página /comparar/ estática. Lee el issue entero (gh
+    issue view 317) y haz exactamente lo que dice: web/src/pages/comparar.astro con title, noindex y
+    canonical a https://siete3.com/comparar/ en el head estático, h1, entrada, el aviso sin
+    JavaScript visible por defecto (patrón [data-no-js] de CatalogFilters.astro) con el enlace a
+    /coches, las secciones vacías o en <template>, la región role=status y data-messages. Sin tabla
+    en el HTML. Textos y claves de la tabla «Copy» de docs/design/comparador.md en
+    web/src/lib/i18n.ts, solo las que usa esta historia. Pruebas sobre el build, como el resto de
+    web/tests: CA-16 (noindex y canonical sin parámetros) y CA-19 (aviso y enlace a /coches sin JS).
+    No hagas el script ni los datos: son #318 y #314. La PR referencia «Closes #317» y enumera los RF
+    y CA cubiertos."
