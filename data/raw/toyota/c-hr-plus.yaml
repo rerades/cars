@@ -12,12 +12,12 @@ versions:
   - name: C-HR+ Advance
     battery_kwh: {value: 77, basis: gross, note: "la ficha indica 77 kWh brutos", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
     wltp_km: {value: 607, source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 165, note: "publicado: 224 CV", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 167, note: "IDAE id 608211 (C-HR+ 4x2 Advance 250 77 kWh, NG26); la web publica 224 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     price: null
   - name: C-HR+ Spirit
-    battery_kwh: {value: 77, basis: unknown, note: "la ficha indica 77 kWh para el Spirit; no aclara si es bruta", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 77, basis: unknown, note: "la web dice que el C-HR+ lleva una batería de 77 kWh, sin separar versiones ni decir si es bruta; el IDAE (id 608212) también da 77 kWh en el nombre", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
     wltp_km: {value: 501, source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 252, note: "publicado: 343 CV", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 252, note: "IDAE id 608212 (C-HR+ AWD-i Spirit 350 77 kWh, NG26); la web publica 343 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     drivetrain: {value: awd, note: "la ficha indica 4x4", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
     price: null
 images:
@@ -33,4 +33,4 @@ open_questions:
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir en España (un medio T3 habló de pedidos abiertos y entregas en el primer trimestre de 2026, sin confirmar)."
   - "segment: la web dice 'SUV eléctrico', término que no está en la lista de RF-11; null."
   - "Tracción del Advance: la ficha dice 4x2, no 'tracción delantera'; sin drivetrain. IDAE homologa también un C-HR+ 4x2 Advance 170 de 58 kWh (458 km, NG26) que la ficha no muestra: no incluido."
-  - "Spirit: la ficha no separa la capacidad bruta de la útil; se repite la del Advance."
+  - "Spirit: la web da 77 kWh para el modelo, sin decir si es bruta o útil; basis unknown."
