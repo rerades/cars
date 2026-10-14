@@ -800,3 +800,18 @@
     tus instrucciones (file, source_url, page_url, source_id, retrieved, license, attribution). Si
     para un modelo no hay ninguna foto válida, anota en open_questions la búsqueda que hiciste y deja
     images: []. No cambies ningún otro dato."
+- id: ford-furgonetas-pasajeros
+  agent: researcher
+  task: "Ford: E-Tourneo Courier y E-Tourneo Custom, las furgonetas de pasajeros que faltaron en la
+    PR #341 por falta de tiempo. Si la #341 ya está en main, añade estos modelos junto a los de
+    data/raw/ford/ y usa la fuente ford-es que ya existe; si no, crea data/raw/ford/ con estos dos.
+    Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008) y segment solo con
+    el término literal de RF-11 (p. ej. «furgoneta» o «monovolumen» si la fuente lo dice así). No
+    incluyas el E-Transit ni ninguna versión solo de carga (Transit, Transit Custom furgón): no es un
+    turismo. Versiones y precios de ford.es si se pueden leer; si no, sigue la vía del IDAE de tus
+    instrucciones (node factory/fetch-idae.ts FORD, homologación más reciente), confirma con medios
+    del motor (T3) qué versiones se venden hoy en España, pon price: null y needs_review: true. Si
+    para un modelo no hay ninguna fuente con sus versiones, no lo escribas y anótalo en la bitácora.
+    Imágenes solo de Wikimedia Commons con licencia que permita el uso comercial, descargadas con
+    node factory/fetch-image.ts. Crea las fuentes nuevas como data/sources/<id>.yaml; no toques
+    data/candidatas.yaml."
