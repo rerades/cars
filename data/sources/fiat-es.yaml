@@ -1,0 +1,18 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: fiat-es
+brand: Fiat
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.fiat.es/ # 403 a la lectura automática (2026-10-14)
+  robots: https://www.fiat.es/robots.txt # 403 a la lectura automática: no se ha podido leer
+image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-14): www.fiat.es (home y robots.txt) devuelve 403 a la lectura automática (protección de acceso, no se
+  evita). Por eso no se ha podido leer ninguna ficha, configurador ni lista de precios, no se confirma el contenido de la web
+  ni sus términos de uso, y no se guarda ningún precio de Fiat (price: null). Datos técnicos de Fiat en España salen de
+  idae-es (T2); las versiones a la venta, de un medio T3 (movilidadelectrica-es). Pendiente: URL de modelos, precios y
+  prensa legibles, y confirmar que fiat.es es el dominio oficial.
+last_verified: 2026-10-14
+status: active
