@@ -4,7 +4,7 @@ brand_name: Volvo
 model: ES90
 status: {value: on_sale, note: "el comparador lo lista con precio y oferta, sin aviso de que no se venda; la web oficial no se pudo leer (403)", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-10-14, tier: T3}
 launch: null
-segment: {value: berlina, note: "el comparador lo clasifica como 'Berlina'", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-10-14, tier: T3}
+segment: null
 needs_review: true
 versions:
   - name: ES90 Single Motor Extended Range RWD
@@ -34,6 +34,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "segment: quecochemecompro.com (T3) lo clasifica como «Berlina»; ADR-0001 solo admite T3 para confirmar, así que null hasta que lo diga una fuente T1 o T2."
   - "Web oficial volvocars.com/es devuelve 403: precios sin leer (price null) y versiones sin confirmar en T1."
   - "Versiones tomadas del IDAE (MY27). La única confirmación de venta es un comparador (T3) que pide confirmarlo con un concesionario; coches.com no trata el ES90."
   - "launch: ninguna fuente da la fecha desde la que se pide en España."
