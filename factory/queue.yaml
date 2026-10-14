@@ -852,3 +852,15 @@
     (pendiente)» y sin notas técnicas de implementación. Que ningún RF ni CA quede sin historia. No
     escribas código ni cambies el alcance; lo que no se deduzca del PRD, del diseño o de una ADR va
     como pregunta en la épica. Resume en la bitácora qué historias abriste."
+- id: fiat-500e-homologaciones
+  agent: researcher
+  task: "Rehaz las versiones de data/raw/fiat/500e.yaml con la regla de homologaciones del IDAE de
+    tus instrucciones (la más reciente y, dentro de esa fecha, la de menor wltp_km). Hoy el fichero
+    agrupa por batería y potencia filas de 2021 a 2025 de tres carrocerías, y sus nombres («500e
+    70 kW (95 CV) 23,8 kWh») no son nombres comerciales (revisión de la PR #339). (1) Saca las filas
+    con node factory/fetch-idae.ts FIAT. (2) Confirma con medios del motor (T3), o con fiat.es si
+    responde, qué versiones del 500e se venden hoy en España y con qué nombre comercial; la de
+    23,8 kWh parece de 2021: si nada dice que se venda hoy, quítala y anótalo en la bitácora.
+    (3) Cada versión, con su nombre comercial y la fila que le toca por la regla, con una note que
+    cite el id y las demás homologaciones. (4) price: null y needs_review: true, como ahora. No
+    toques los demás modelos de Fiat ni otros datos del 500e que no dependan de las versiones."
