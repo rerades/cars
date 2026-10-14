@@ -5,7 +5,7 @@ model: Puma Gen-E
 status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España; la ficha de ford.es muestra cuotas de financiación", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-14, tier: T3}
 launch: null
 segment: null
-needs_review: false
+needs_review: true
 versions:
   - name: Gen-E
     battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610510 (05.2026); también consta la homologación 610512 (11.2025, batería de 43 kWh, 324 km) de la batería anterior, sustituida en marzo de 2026", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
@@ -34,6 +34,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "needs_review: true porque la venta hoy solo la respalda un medio T3 y las versiones salen del IDAE; falta una página de ford.es que lo confirme (revisión de la PR #341)."
   - "Precio: ford.es solo muestra cuotas de financiación (desde 125 €/mes, entrada 7.850 €, cuota final 14.394 €, 49 meses), sin PVP legible; sin precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: ford.es dice «SUV 100% eléctrico» y el medio T3 «SUV urbano, segmento B»; ningún término literal de RF-11."
