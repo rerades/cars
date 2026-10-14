@@ -1,0 +1,17 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: dacia-es
+brand: Dacia
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.dacia.es/
+  models: https://www.dacia.es/modelos-hibridos-electricos/spring-urbano.html
+  new_spring: https://www.dacia.es/modelos-hibridos-electricos/spring.html
+  prices: https://ofertas.dacia.es/particulares/spring/ # no hay lista de precios general; solo precios con oferta
+  catalogs: https://www.dacia.es/catalogos.html
+image_license: "" # sin términos de uso de imágenes leídos: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-15): www.dacia.es y ofertas.dacia.es responden. robots.txt solo bloquea URL con parámetros de configurador (conf, confuri, dealerId, modelURI, vin); sitemap en /sitemap.xml. Las páginas de modelo se pueden leer. El "desde 11.559 €" del Spring Extreme incluye promociones y 3.375 € del Programa Auto+ (ayuda pública): no es PVP limpio ni se guarda. No hay lista de precios general en la web (catálogos solo de Duster y Bigster). Único BEV de turismo visto: Spring (Expression y Extreme; Cargo comercial).
+last_verified: 2026-10-15
+status: active
