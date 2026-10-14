@@ -1,0 +1,42 @@
+# Researcher — Ford Puma Gen-E. Fuentes: idae-es (T2), autonomiacocheselectricos-es (T3), ford-es (T1). Consultado 2026-10-14.
+brand: ford
+brand_name: Ford
+model: Puma Gen-E
+status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España; la ficha de ford.es muestra cuotas de financiación", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-14, tier: T3}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Gen-E
+    battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610510 (05.2026); también consta la homologación 610512 (11.2025, batería de 43 kWh, 324 km) de la batería anterior, sustituida en marzo de 2026", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 417, note: "IDAE id 610510 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 124, note: "IDAE id 610510", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610510: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Premium
+    battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610511 (05.2026); también consta la 610512 (11.2025, 43 kWh, 324 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 404, note: "IDAE id 610511 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 124, note: "IDAE id 610511", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610511: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: BlueCruise Edition
+    battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610509 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 404, note: "IDAE id 610509 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 124, note: "IDAE id 610509", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610509: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+images:
+  - file: data/images/ford/puma-gen-e/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Ford_Puma_Gen-E_DSC_8995.jpg/1280px-Ford_Puma_Gen-E_DSC_8995.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Ford_Puma_Gen-E_DSC_8995.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-14
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "Precio: ford.es solo muestra cuotas de financiación (desde 125 €/mes, entrada 7.850 €, cuota final 14.394 €, 49 meses), sin PVP legible; sin precio."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: ford.es dice «SUV 100% eléctrico» y el medio T3 «SUV urbano, segmento B»; ningún término literal de RF-11."
+  - "IDAE mezcla homologaciones: se usan las filas 05.2026 (batería de 46,8 kWh, posterior al cambio de marzo de 2026 que cuenta el medio T3), no la de menor wltp_km (610512, 43 kWh, 324 km, batería sustituida)."
+  - "El medio T3 indica la retirada del acabado Black Edition, que la ficha de ford.es aún menciona."
+  - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."
