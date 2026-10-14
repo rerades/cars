@@ -1,0 +1,49 @@
+# Researcher — Ford Mustang Mach-E. Fuentes: idae-es (T2), autonomiacocheselectricos-es (T3). Consultado 2026-10-14.
+brand: ford
+brand_name: Ford
+model: Mustang Mach-E
+status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-14, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Standard RWD 73 kWh
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 610472 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 470, note: "IDAE id 610472", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 197, note: "IDAE id 610472", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610472: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Premium RWD 88 kWh
+    battery_kwh: {value: 88, basis: unknown, note: "IDAE id 610479 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 615, note: "IDAE id 610479", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 203, note: "IDAE id 610479", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610479: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Premium AWD 88 kWh
+    battery_kwh: {value: 88, basis: unknown, note: "IDAE id 610475 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 555, note: "IDAE id 610475", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 276, note: "IDAE id 610475", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: awd, note: "IDAE id 610475: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: GT AWD 91 kWh
+    battery_kwh: {value: 91, basis: unknown, note: "IDAE id 610476 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 515, note: "IDAE id 610476", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 358, note: "IDAE id 610476", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: awd, note: "IDAE id 610476: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+images:
+  - file: data/images/ford/mustang-mach-e/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Ford_Mustang_Mach-E_Leonberg_2022_1X7A0434.jpg/1280px-Ford_Mustang_Mach-E_Leonberg_2022_1X7A0434.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Ford_Mustang_Mach-E_Leonberg_2022_1X7A0434.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-14
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "needs_review: true porque la venta hoy solo la respalda un medio T3 y las versiones salen del IDAE; falta una página de ford.es que lo confirme (revisión de la PR #341)."
+  - "Precio: no se ha localizado la ficha ni el configurador del Mach-E en ford.es; sin precio."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: el medio T3 dice «SUV, segmento D»; ningún término literal de RF-11."
+  - "El medio T3 cita también la versión Rally (91 kWh, 487 CV, 510 km); no hay fila IDAE 05.2026 de ella, no se escribe."
+  - "El IDAE tiene también homologaciones de 01.2025 y 11.2025 con otras cifras (p. ej. 610473, 610474, 610480); se usan las filas 05.2026, que coinciden con las potencias del medio T3, y no las de menor wltp_km."
+  - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."

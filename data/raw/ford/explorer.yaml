@@ -1,0 +1,72 @@
+# Researcher — Ford Explorer eléctrico. Fuentes: idae-es (T2), autonomiacocheselectricos-es (T3), ford-es (T1). Consultado 2026-10-14.
+brand: ford
+brand_name: Ford
+model: Explorer
+status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España; ford.es tiene página de compra del Explorer", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-14, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Style RWD 58 kWh
+    battery_kwh: {value: 58, basis: unknown, note: "IDAE id 610426 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 444, note: "IDAE id 610426", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 140, note: "IDAE id 610426", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610426: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Premium RWD 58 kWh
+    battery_kwh: {value: 58, basis: unknown, note: "IDAE id 610425 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 417, note: "IDAE id 610425", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 140, note: "IDAE id 610425", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610425: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Select RWD 79 kWh
+    battery_kwh: {value: 79, basis: unknown, note: "IDAE id 610438 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 602, note: "IDAE id 610438", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 610438", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610438: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Premium RWD 79 kWh
+    battery_kwh: {value: 79, basis: unknown, note: "IDAE id 610437 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 572, note: "IDAE id 610437", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 610437", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610437: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Collection RWD 79 kWh
+    battery_kwh: {value: 79, basis: unknown, note: "IDAE id 610436 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 579, note: "IDAE id 610436", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 610436", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610436: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Select AWD 77 kWh
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 610432 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 553, note: "IDAE id 610432", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 250, note: "IDAE id 610432", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: awd, note: "IDAE id 610432: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Premium AWD 77 kWh
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 610431 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 519, note: "IDAE id 610431", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 250, note: "IDAE id 610431", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: awd, note: "IDAE id 610431: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: Collection AWD 77 kWh
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 610430 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 526, note: "IDAE id 610430", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 250, note: "IDAE id 610430", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    drivetrain: {value: awd, note: "IDAE id 610430: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+images:
+  - file: data/images/ford/explorer/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Ford_Explorer_EV_Auto_Zuerich_2024_DSC_6360.jpg/1280px-Ford_Explorer_EV_Auto_Zuerich_2024_DSC_6360.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Ford_Explorer_EV_Auto_Zuerich_2024_DSC_6360.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-14
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "Precio: ford.es no publica PVP legible por versión; sin precio."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: el medio T3 dice «SUV, segmento C»; ningún término literal de RF-11."
+  - "Collection es serie limitada según el medio T3: no se ha podido confirmar que se siga vendiendo hoy (needs_review)."
+  - "El IDAE tiene también homologaciones de 01.2025 y 11.2025 para las mismas versiones (p. ej. 610433, 610434, 610428) con otras cifras; se usan las filas 05.2026, que coinciden con las potencias del medio T3, y no las de menor wltp_km."
+  - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."
