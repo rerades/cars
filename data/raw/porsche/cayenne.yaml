@@ -1,0 +1,46 @@
+# Researcher — Porsche Cayenne eléctrico (SUV y Coupé). Fuentes: porsche-es (T1), autonomiacocheselectricos-es (T3). Consultado 2026-10-15.
+brand: porsche
+brand_name: Porsche
+model: Cayenne
+status: {value: on_sale, note: "la página de Cayenne de Porsche España publica las versiones eléctricas con PVP; el medio las da como a la venta hoy", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+launch: null
+segment: {value: suv_grande, note: "clasificación del medio: «SUV grande»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/porsche-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-15, tier: T3}
+needs_review: false
+versions:
+  - name: Cayenne Electric
+    wltp_km: {value: 640, note: "rango publicado 568–640 km; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 325, note: "potencia overboost con Launch Control; publicado: 442 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    price: {value: 108296, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+  - name: Cayenne S Electric
+    wltp_km: {value: 653, note: "rango publicado 584–653 km; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 490, note: "potencia overboost con Launch Control; publicado: 666 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    price: {value: 130154, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+  - name: Cayenne Turbo Electric
+    wltp_km: {value: 622, note: "rango publicado 557–622 km; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 850, note: "potencia overboost con Launch Control; publicado: 1.156 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    price: {value: 169124, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+  - name: Cayenne Coupé Electric
+    wltp_km: {value: 661, note: "rango publicado 587–661 km; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 325, note: "potencia overboost con Launch Control; publicado: 442 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    price: {value: 112359, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+  - name: Cayenne S Coupé Electric
+    wltp_km: {value: 669, note: "rango publicado 601–669 km; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 490, note: "potencia overboost con Launch Control; publicado: 666 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    price: {value: 134316, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+  - name: Cayenne Turbo Coupé Electric
+    wltp_km: {value: 637, note: "rango publicado 572–637 km; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 850, note: "potencia overboost con Launch Control; publicado: 1.156 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+    price: {value: 172233, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/cayenne", retrieved: 2026-10-15, tier: T1}
+images:
+  - file: data/images/porsche/cayenne/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Porsche_Cayenne_Electric_IMG_6129.jpg/1280px-Porsche_Cayenne_Electric_IMG_6129.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Porsche_Cayenne_Electric_IMG_6129.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir el Cayenne eléctrico en España; queda null."
+  - "Tracción y batería: la página de Cayenne de Porsche España no las publica; no se rellenan."
+  - "Contradicción menor: el medio (T3) lista solo Electric y Turbo Electric para el SUV; la web oficial (T1) añade Cayenne S Electric. Prevalece la web."
+  - "Las filas del IDAE (potencia 300/490/760 kW) no coinciden con la web (325/490/850 kW overboost): se usa la web, T1."

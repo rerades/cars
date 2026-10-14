@@ -1,0 +1,24 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: porsche-es
+brand: Porsche
+tier: T1
+market: ES
+kind: [ prices, specs ]
+urls:
+  home: https://www.porsche.com/spain/
+  models: https://www.porsche.com/spain/models/
+  macan: https://www.porsche.com/spain/models/macan/configure/ # versiones, precio desde, potencia y WLTP (configurador)
+  taycan: https://www.porsche.com/spain/models/taycan/configure/
+  cayenne: https://www.porsche.com/spain/models/cayenne
+  robots: https://www.porsche.com/robots.txt
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  Web oficial de Porsche en España (dominio porsche.com, /spain/). Responde el 2026-10-15. robots.txt no bloquea /spain/
+  ni /models/ (solo /api/, /search/, login y bots de copia). Las páginas de Macan y Taycan (/models/macan, /models/taycan)
+  llegan vacías sin JavaScript; las listas de versiones se leen en /configure/ (models.porsche.com redirige ahí). Precio:
+  «PVP recomendado» para península y Baleares, con transporte, IVA e IEDMT, sin ayudas y sin condiciones de financiación;
+  «puede cambiar y no es vinculante». La potencia de Macan y de varios Taycan es la máxima con overboost (Launch Control).
+  La autonomía WLTP se publica como rango según llantas. No publican capacidad de batería. No se ha localizado sala de
+  prensa en España (newsroom.porsche.com/es_ES existe pero sus términos de imágenes no se han leído).
+last_verified: 2026-10-15
+status: active
