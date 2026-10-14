@@ -171,6 +171,12 @@ Todos los coches                                 ← enlace a /coches (no aparec
   cada uno (relleno vertical), separados `2` en horizontal y `1` en vertical al partir línea.
 - Fondo `surface`, sin caja: es navegación secundaria y no debe competir con las tarjetas.
 
+**Cambio enlazado (2026-10-14, PRD-001 RF-14, CA-19; PRD-005):** solo en `/coches`, un quinto grupo
+**«Rankings»** (`explorar.rankings`) después de «Autonomía», con un enlace de texto a cada uno de los cinco
+rankings en el orden de PRD-005 RF-1 (`explorar.ranking.*`). Es HTML estático, visible sin JS, con el mismo
+estilo y zona táctil que el resto de la franja. URL, textos y razones: [`rankings.md`](rankings.md), «Entrada
+desde `/coches`». Las demás páginas del catálogo no lo llevan (Pregunta 4 de `rankings.md`).
+
 Disposición:
 - **Móvil (< 768 px):** grupos uno debajo de otro; en cada uno, el `h3` encima y los enlaces en línea, que
   parten línea. Separación entre grupos `4`.
