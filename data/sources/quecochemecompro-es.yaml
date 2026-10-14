@@ -1,0 +1,17 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: quecochemecompro-es
+brand: (varias; comparador de precios)
+tier: T3
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://www.quecochemecompro.com/
+  robots: https://www.quecochemecompro.com/robots.txt
+  volvo: https://www.quecochemecompro.com/volvo/electricos/
+image_license: "" # no se usan imágenes de este sitio
+notes: >
+  Comparador de precios y ofertas español. T3: solo para confirmar qué modelos figuran a la venta y cómo se
+  describen; nunca como fuente de precio. robots.txt no bloquea /volvo/ ni /precios/ (comprobado el 2026-10-14);
+  bloquea la sección by_brand y los parámetros vo y page. Alta para confirmar la gama eléctrica de Volvo.
+last_verified: 2026-10-14
+status: active
