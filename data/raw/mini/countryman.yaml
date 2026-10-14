@@ -1,0 +1,27 @@
+# Researcher — MINI Countryman eléctrico. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-14.
+brand: mini
+brand_name: MINI
+model: Countryman
+status: {value: on_sale, note: "el artículo (09/02/2024) dice que el configurador está abierto; no confirmado hoy con fuente T1", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mini-countryman-electrico-2024100282.html", retrieved: 2026-10-14, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: MINI Countryman E
+    battery_kwh: {value: 64.6, basis: unknown, note: "IDAE id 609158 (03/2024); otra homologación id 609160 (03/2026): 65,2 kWh, 501 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 462, note: "IDAE id 609158 (03/2024); otra homologación id 609160 (03/2026): 501 km. Se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: MINI Countryman SE
+    battery_kwh: {value: 64.6, basis: unknown, note: "IDAE id 609159 (03/2024); otra homologación id 609161 (03/2026): 65 kWh, 467 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 432, note: "IDAE id 609159 (03/2024); otra homologación id 609161 (03/2026): 467 km. Se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 230, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "mini.es no se pudo leer (timeouts): sin precios (price: null) ni confirmación T1 de versiones a la venta hoy."
+  - "Hay homologaciones 03/2026 con más autonomía (E 501 km, SE 467 km); sin fuente que diga cuál se vende hoy, se usa la de menor wltp_km."
+  - "launch: motor.es (09/02/2024) no da fecha de inicio de venta como tal; null."
+  - "segment: motor.es lo llama «SUV», que no es un término de la lista de RF-11; null."
+  - "Tracción (E delantera, SE ALL4 según motor.es) no registrada: se omite al no ser dato de fuente T1/T2."
+  - "Imágenes: sin buscar ficheros de Commons para este modelo en esta ejecución."

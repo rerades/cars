@@ -1,0 +1,17 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: mini-es
+brand: MINI
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.mini.es/es_ES/home.html
+  models: https://www.mini.es/es_ES/home/range/all-electric-mini-cooper.html # también otras páginas de gama del mismo dominio
+image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
+notes: >
+  Verificación incompleta (2026-10-14): mini.es es el dominio oficial de MINI España (aparece como resultado de búsqueda
+  de la gama eléctrica), pero las lecturas automáticas de /robots.txt y de las páginas de gama dieron timeout (no se evita
+  ninguna protección). No se han podido leer versiones, precios ni robots.txt. Por eso ningún precio de data/raw/mini/ sale
+  de esta fuente. Pendiente de reintentar.
+last_verified: 2026-10-14
+status: active
