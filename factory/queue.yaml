@@ -826,3 +826,29 @@
     price_terms literal (el texto íntegro, no un resumen) y price_terms_url. Si no se puede saber
     qué es, deja price: null y anótalo en open_questions. Una versión que la web muestre y no esté
     en el fichero no se añade aquí: anótala en la bitácora. No cambies ningún otro dato."
+- id: adr-filtros-rankings
+  agent: architect
+  task: "ADR de los filtros de los rankings de PRD-005 (ready). El HTML de cada ranking lleva solo
+    los 10 primeros puestos sin filtrar (RNF-1), pero los filtros de segmento y de precio (RF-8,
+    RF-9) renumeran sobre todas las versiones con la cifra, así que el navegador necesita más datos.
+    docs/design/rankings.md no lo decide a propósito («cómo llegan los datos y cómo se filtra»).
+    Decide cómo llegan esos datos y cómo se monta el filtro, con ADR-0003 (estático), ADR-0005
+    (Bearnie) y ADR-0014 (JSON por modelo e índice ligero del comparador) como contexto: valora
+    reutilizar los datos de ADR-0014 frente a un JSON propio por ranking o todas las versiones en el
+    HTML, con el peso por página (RNF-2, LCP < 2,5 s en 4G) y sin guardar nada del visitante
+    (CA-15). Opciones con pros y contras, decisión y consecuencias, como ADR-0014. Añade la decisión
+    pendiente a docs/architecture/overview.md. No toques web/ ni el PRD ni el diseño."
+- id: troceo-prd-005
+  agent: planner
+  task: "Trocea PRD-005 (rankings, ready) en una épica y sus historias como issues de GitHub, con el
+    mismo formato que la épica #313 de PRD-003: épica con el PRD y el diseño; cada historia con Cubre
+    (RF y CA), Depende de, los CA copiados del PRD y notas técnicas, y las etiquetas story y agente.
+    El diseño es docs/design/rankings.md (sus preguntas abiertas ya están resueltas) y la entrada
+    desde /coches es PRD-001 RF-14 y CA-19. Historias pequeñas que un Desarrollador cierre en una
+    ejecución: primero la selección y el orden de las versiones en el build (RF-6, RF-7, RF-11,
+    RF-15), después las cinco páginas sin JavaScript, la entrada desde /coches, y al final los
+    filtros. Los filtros dependen de la ADR de la tarea adr-filtros-rankings: si no está aceptada en
+    main cuando trocees, crea su historia con «Depende de: ADR de los filtros de los rankings
+    (pendiente)» y sin notas técnicas de implementación. Que ningún RF ni CA quede sin historia. No
+    escribas código ni cambies el alcance; lo que no se deduzca del PRD, del diseño o de una ADR va
+    como pregunta en la épica. Resume en la bitácora qué historias abriste."
