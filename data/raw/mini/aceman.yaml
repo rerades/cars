@@ -1,0 +1,31 @@
+# Researcher — MINI Aceman. Fuentes: idae-es (T2), hibridosyelectricos-es (T3). Consultado 2026-10-14.
+brand: mini
+brand_name: MINI
+model: Aceman
+status: {value: on_sale, note: "el artículo (21/06/2024) dice que se puede reservar en España; no confirmado hoy con fuente T1", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mini-aceman-se-estrena-en-espana-37250-euros-con-hasta-218-cv-400-kilometros-autonomia_74703_102.html", retrieved: 2026-10-14, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: MINI Aceman E
+    battery_kwh: {value: 38.5, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 310, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 135, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: MINI Aceman SE
+    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 406, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 160, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: MINI John Cooper Works Aceman E
+    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 391, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 190, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "mini.es no se pudo leer (timeouts): sin precios (price: null) ni confirmación T1 de versiones a la venta hoy."
+  - "Versiones y datos del IDAE (ids 609151, 609152, 609153). Los medios dan otras cifras (Aceman E 42,5 kWh; SE 54,2 kWh, 405 km): no coinciden con el IDAE."
+  - "launch: el artículo T3 es de 21/06/2024 y solo dice que se puede reservar; no da una fecha de inicio de venta; null."
+  - "segment: hibridosyelectricos-es lo llama «SUV compacto» y Autopista «SUV urbano»/«SUV pequeño»; fuentes discrepantes, null."
+  - "Imágenes: sin buscar ficheros de Commons para este modelo en esta ejecución."

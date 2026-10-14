@@ -1,0 +1,38 @@
+# Researcher — MINI Cooper eléctrico. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-14.
+brand: mini
+brand_name: MINI
+model: Cooper
+status: {value: on_sale, note: "no confirmado con fuente actual: motor.es (2023) habla de configurador abierto; mini.es ilegible", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mini-electrico-202398021.html", retrieved: 2026-10-14, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: MINI Cooper E
+    battery_kwh: {value: 36.6, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 300, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 135, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: MINI Cooper SE
+    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 400, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 160, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: MINI John Cooper Works E
+    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 403, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 190, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+images:
+  - file: data/images/mini/cooper/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/BMW_MINI_COOPER_SE_%28J01%29_front.jpg/1280px-BMW_MINI_COOPER_SE_%28J01%29_front.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BMW_MINI_COOPER_SE_(J01)_front.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-14
+    license: CC-BY-SA-4.0
+    attribution: "Tokumeigakarinoaoshima, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "mini.es no se pudo leer (timeouts): sin precios (price: null) ni confirmación T1 de versiones a la venta hoy."
+  - "Versiones y datos del IDAE (ids 609148, 609149, 609150, generación J01). Las webs de medios (Motor16, Motor1) dan otras cifras de batería (40,7 kWh en la E; 54,2 kWh en la SE) y 305/402 km: no coinciden con el IDAE; prevalece la fuente registrada T2 leída."
+  - "launch: motor.es habla de configurador abierto en octubre de 2023, pero no se ha leído una fecha de inicio de venta fiable; null."
+  - "segment: ninguna fuente leída da un término de la lista de RF-11 para el Cooper; null."
+  - "Descartada la generación anterior (F56, Cooper SE 03/2021, id 609162)."

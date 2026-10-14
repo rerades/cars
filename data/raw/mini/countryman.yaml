@@ -1,0 +1,27 @@
+# Researcher — MINI Countryman eléctrico. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-14.
+brand: mini
+brand_name: MINI
+model: Countryman
+status: {value: on_sale, note: "el artículo (09/02/2024) dice que el configurador está abierto; no confirmado hoy con fuente T1", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mini-countryman-electrico-2024100282.html", retrieved: 2026-10-14, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: MINI Countryman E
+    battery_kwh: {value: 65.2, basis: unknown, note: "IDAE id 609160 (03/2026), la homologación más reciente; la anterior, id 609158 (03/2024): 64,6 kWh, 462 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 501, note: "IDAE id 609160 (03/2026), la homologación más reciente; la anterior, id 609158 (03/2024): 462 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+  - name: MINI Countryman SE
+    battery_kwh: {value: 65, basis: unknown, note: "IDAE id 609161 (03/2026), la homologación más reciente; la anterior, id 609159 (03/2024): 64,6 kWh, 432 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    wltp_km: {value: 467, note: "IDAE id 609161 (03/2026), la homologación más reciente; la anterior, id 609159 (03/2024): 432 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    power_kw: {value: 230, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "mini.es no se pudo leer (timeouts): sin precios (price: null) ni confirmación T1 de versiones a la venta hoy."
+  - "Se usa la homologación 03/2026 (la más reciente, regla de la PR #347) y no la de 03/2024; ninguna fuente T1 confirma cuál se entrega hoy."
+  - "launch: motor.es (09/02/2024) no da fecha de inicio de venta como tal; null."
+  - "segment: motor.es lo llama «SUV», que no es un término de la lista de RF-11; null."
+  - "Tracción (E delantera, SE ALL4 según motor.es) no registrada: se omite al no ser dato de fuente T1/T2."
+  - "Imágenes: sin buscar ficheros de Commons para este modelo en esta ejecución."
