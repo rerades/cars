@@ -1,0 +1,20 @@
+# Researcher — Volkswagen ID.3 Neo. Fuente: volkswagen-es (T1). Consultado 2026-10-14.
+brand: volkswagen
+brand_name: Volkswagen
+model: ID.3 Neo
+status: {value: on_sale, note: "la ficha muestra oferta de financiación vigente hasta 31/10/2026; no dice expresamente desde cuándo ni que se entregue", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id3.html", retrieved: 2026-10-14, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Life 125 kW
+    power_kw: {value: 125, note: "publicado: 170 CV; el titular de la página habla de hasta 170 kW (231 CV) sin aclarar versión", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id3.html", retrieved: 2026-10-14, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "Precio: la ficha solo muestra 25.600 € ligado a financiación, descuentos y Plan Auto+ (4.500 €), sin condiciones coherentes (permanencia 36 vs 60 meses); no se guarda como pvp ni financed."
+  - "Batería y autonomía de Life 125 kW: la ficha dice 79 kWh (probable errata) y 628 km; un medio (T3, motor1) da Life 52/61/84 kWh. Sin confirmar, no se guardan (wltp_km en todas las versiones o en ninguna)."
+  - "Faltan versiones Style y otras baterías/potencias (T3 menciona 52, 61 y 84 kWh; 170, 190 y 231 CV): la ficha oficial no las desglosa."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: la fuente no usa un término de la lista de RF-11 (motor1 dice «compacto» en T3, pero sin confirmación de marca)."
+  - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."

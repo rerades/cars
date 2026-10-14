@@ -1,0 +1,25 @@
+# Researcher — Volkswagen ID.7. Fuente: volkswagen-es (T1). Consultado 2026-10-14.
+brand: volkswagen
+brand_name: Volkswagen
+model: ID.7
+status: {value: on_sale, note: "la ficha muestra oferta Compra Flexible; sin confirmar que se pueda pedir hoy", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id7.html", retrieved: 2026-10-14, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Pro
+    price: null
+  - name: Pro S
+    power_kw: {value: 210, note: "publicado: 286 CV", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id7.html", retrieved: 2026-10-14, tier: T1}
+    price: null
+  - name: GTX
+    power_kw: {value: 250, note: "publicado: 340 CV", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id7.html", retrieved: 2026-10-14, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "Precio: «desde 40.200 €» con Compra Flexible, sin asignar a un acabado ni condiciones literales completas; no se guarda."
+  - "Autonomía (707 km en el texto, «hasta 702 km» en cabecera), batería y tracción: no se guardan por incoherencia o falta de ciclo WLTP explícito; wltp_km en todas las versiones o en ninguna."
+  - "Pro: sin potencia publicada en la ficha."
+  - "segment: no aparece un término de RF-11. launch: sin fecha de pedidos."
+  - "ID.7 Tourer, ID.Polo, ID.Tiguan, ID.Cross, ID.Buzz, e-Caravelle y ID.3 GTI: sin fichero, no se han leído sus fichas ni hay fuente de versiones en esta ejecución."
+  - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."
