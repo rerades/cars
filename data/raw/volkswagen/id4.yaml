@@ -19,6 +19,7 @@ versions:
     price: null
 images: []
 open_questions:
+  - "needs_review: true porque volkswagen.es no dice qué versiones se pueden pedir hoy (solo muestra ofertas de financiación) ni liga cada potencia a su versión; status on_sale se apoya en esas ofertas."
   - "Precio: «desde 32.400 €» sujeto a financiación, sin PVP limpio ni condiciones literales completas; no se guarda."
   - "Datos por versión (kWh, WLTP, kW, tracción) no publicados en la ficha. La autonomía «hasta 560 km» no dice si es WLTP."
   - "segment: la ficha dice «SUV», que no es un término de la lista de RF-11."

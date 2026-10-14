@@ -10,13 +10,14 @@ versions:
   - name: Pro
     price: null
   - name: Pro S
-    power_kw: {value: 210, note: "publicado: 286 CV", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id7.html", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 210, note: "IDAE id 602528 (ID.7 Pro S, MY25; publicado en volkswagen.es: 286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     price: null
   - name: GTX
-    power_kw: {value: 250, note: "publicado: 340 CV", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id7.html", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 250, note: "IDAE id 607349 (ID.7 GTX, MY26; publicado en volkswagen.es: 340 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     price: null
 images: []
 open_questions:
+  - "needs_review: true porque volkswagen.es no dice qué versiones se pueden pedir hoy (solo muestra ofertas de financiación) ni liga cada potencia a su versión; status on_sale se apoya en esas ofertas."
   - "Precio: «desde 40.200 €» con Compra Flexible, sin asignar a un acabado ni condiciones literales completas; no se guarda."
   - "Autonomía (707 km en el texto, «hasta 702 km» en cabecera), batería y tracción: no se guardan por incoherencia o falta de ciclo WLTP explícito; wltp_km en todas las versiones o en ninguna."
   - "Pro: sin potencia publicada en la ficha."
