@@ -4,7 +4,7 @@ brand_name: Porsche
 model: Taycan
 status: {value: on_sale, note: "el configurador de Porsche España publica versiones y PVP; el medio confirma que se vende hoy", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
 launch: null
-segment: {value: berlina, note: "clasificación del medio para el Taycan: «Berlina» (Sport Turismo «Familiar», Cross Turismo «Familiar aventurero»)", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/porsche-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-15, tier: T3}
+segment: null
 needs_review: false
 versions:
   - name: Taycan
@@ -129,4 +129,4 @@ open_questions:
   - "launch: ninguna fuente da la fecha desde la que se puede pedir el Taycan MY2027 en España; queda null."
   - "Batería (kWh): la web no la publica; no se toma del IDAE porque sus filas son de homologaciones anteriores (potencia y WLTP distintos de la web)."
   - "El medio (T3) habla de «Standard, 4, 4S, GTS, Turbo, Turbo S, Turbo GT con sus Black Edition»; la web (T1) lista 22 versiones entre berlina, Sport Turismo y Cross Turismo. Se sigue la web."
-  - "Las tres carrocerías van en un solo fichero Taycan; el segmento «Berlina» corresponde a la berlina, el medio da «Familiar» a Sport Turismo y Cross Turismo."
+  - "Las tres carrocerías van en un solo fichero Taycan y el medio (T3) las clasifica distinto: «Berlina» la berlina, «Familiar» Sport Turismo y «Familiar aventurero» Cross Turismo. `segment` queda en null hasta que haya una única clasificación para el modelo."
