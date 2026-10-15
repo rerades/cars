@@ -1,4 +1,5 @@
 import type { ModelRecord } from "./data.ts";
+import { formatEur, formatNumber } from "./format.ts";
 import { t, type MessageKey } from "./i18n.ts";
 
 /**
@@ -28,7 +29,6 @@ export interface CardView {
   image: { file: string; attribution: string | null; pageUrl: string } | null;
 }
 
-const eur = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0, useGrouping: "always" });
 const monthYear = new Intl.DateTimeFormat("es-ES", { month: "short", year: "numeric", timeZone: "UTC" });
 
 /** `YYYY-MM` or `YYYY-MM-DD` to "oct 2026". Null if it does not parse. */
@@ -62,12 +62,12 @@ export function cardView(m: ModelRecord): CardView {
     statusKind,
     hasPrice: price !== null,
     priceLabel: price
-      ? t("tarjeta.precio", { precio: `${eur.format(price.value)} €` })
+      ? t("tarjeta.precio", { precio: formatEur(price.value) })
       : t("tarjeta.precioPendiente"),
     dealLabel: price?.price_kind === "financed" ? t("tarjeta.oferta") : null,
     hasRange: m.max_range_km !== null,
     rangeLabel: m.max_range_km
-      ? t("tarjeta.autonomia", { km: eur.format(m.max_range_km.value) })
+      ? t("tarjeta.autonomia", { km: formatNumber(m.max_range_km.value) })
       : t("tarjeta.autonomiaPendiente"),
     hasSegment: m.segment !== null,
     segmentLabel: m.segment
