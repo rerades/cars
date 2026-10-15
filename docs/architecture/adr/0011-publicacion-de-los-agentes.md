@@ -1,12 +1,14 @@
 # ADR-0011 — Cómo publican los agentes: fusión automática por reglas, sin modelo
 
 - **Estado:** aceptada (2026-10-01). Enmienda «Imágenes» (`data/images/` en la lista de rutas):
-  aceptada (2026-10-12)
+  aceptada (2026-10-12). Enmienda «Fuentes nuevas» (`data/sources/`, solo altas): propuesta
+  (2026-10-15)
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
   la Decisión. Lo demás no cambia. 2026-10-13 revisión de la enmienda: solo imágenes citadas por un YAML y de
-  2 MB como máximo (punto 10).
+  2 MB como máximo (punto 10). 2026-10-15 enmienda «Fuentes nuevas» propuesta: una fuente nueva
+  entra sola con las condiciones del punto 11; cambiar una existente sigue siendo de una persona.
 
 ## Contexto
 Es la última decisión pendiente de `overview.md`: «Cómo publican los agentes (CI/CD, entornos,
@@ -85,7 +87,8 @@ problema. `factory/`, `.claude/`, `.github/` y `web/` quedan fuera, como en la p
 ## Decisión
 **El Revisor solo etiqueta; fusiona el orquestador, sin modelo, y solo las PR con `review:ok` ligada
 al commit revisado, CI en verde, sin conflictos y con todo el diff dentro de `data/raw/`,
-`data/images/` y `docs/bitacora/`; todo lo demás lo fusiona una persona.**
+`data/images/`, `docs/bitacora/` y las altas de `data/sources/` del punto 11; todo lo demás lo
+fusiona una persona.**
 
 Detalles:
 
@@ -113,6 +116,8 @@ Detalles:
      en `data/raw/` o `data/images/` lo decide una persona;
    - cada fichero de `data/images/` del diff está citado en el `file` de una entrada `images` de
      algún YAML de `data/raw/` en el commit revisado (enmienda del 2026-10-12, punto 10);
+   - cada fichero de `data/sources/` del diff es nuevo (no se cambia una fuente existente) y
+     cumple el punto 11 (enmienda del 2026-10-15);
    - no existe `factory/STOP`.
 
    Fusiona con `gh pr merge --merge --match-head-commit <sha> --delete-branch` ([1]): commit de
@@ -182,7 +187,8 @@ entraría sola. Las 8 PR de imágenes de la noche del 2026-10-12 (#254 a #266 y 
      Lo que la CI no ve es si la foto es del modelo que dice; eso queda como riesgo (ver abajo).
    - **`data/sources/`: descartada.** Dar de alta una fuente decide en qué webs confía la factoría
      y con qué `tier` (ADR-0001). Una PR que añada una marca nueva toca `data/sources/` y sigue
-     esperando a una persona, aunque tenga `review:ok`.
+     esperando a una persona, aunque tenga `review:ok`. *Revisado el 2026-10-15: las altas de
+     fuentes oficiales entran con las condiciones del punto 11 (enmienda «Fuentes nuevas»).*
    - **`data/` entero: descartada** por lo mismo, y porque cualquier carpeta nueva bajo `data/`
      entraría sola sin que nadie lo haya decidido.
 
@@ -210,6 +216,45 @@ entraría sola. Las 8 PR de imágenes de la noche del 2026-10-12 (#254 a #266 y 
       de `data/images/` el 2026-10-13, 632 KB). El alto no se limita aparte: con 2 MB y 1280 px de
       ancho, una imagen muy alta no cabe salvo con una compresión que no da una foto.
 
+### Fuentes nuevas (enmienda del 2026-10-15, propuesta)
+
+**Una PR puede dar de alta una fuente en `data/sources/` sin persona si la fuente es la web
+oficial de una marca que ya está en `data/candidatas.yaml`, y todo lo que se puede comprobar sin
+modelo lo confirma. Cambiar o borrar una fuente existente, o dar de alta cualquier otra, sigue
+siendo de una persona.**
+
+Contexto propio de la enmienda: la noche del 2026-10-15 las PR de Dacia (#356) y smart (#358)
+tenían `review:ok` y CI en verde, y esperaron a una persona solo por su fichero de
+`data/sources/`. Las nueve marcas encoladas ese día (#389) harán lo mismo. El responsable pidió
+que entren solas.
+
+11. **Condiciones de una fuente nueva** (`newSourceBlocker` en `factory/merge.ts`, leídas en el
+    commit revisado):
+    - el fichero es nuevo en la PR (`ADDED`). Un cambio en una fuente existente puede subirle el
+      `tier`, cambiarle las URL o darle `image_license`: eso lo decide una persona;
+    - `tier: T1`. Una fuente T2 o T3 nueva (un medio, un organismo) no tiene una web contra la
+      que comprobarla;
+    - `image_license` vacío o ausente. Los términos de uso de imágenes de una web los lee una
+      persona;
+    - algún YAML de `data/raw/` la cita con `source_id`. Una fuente que nadie usa no entra;
+    - su `brand` está en `data/candidatas.yaml` (sin distinguir mayúsculas ni acentos) con
+      `web_es`, y **todas** sus `urls` están en el host de esa `web_es` (sin `www.`) o en un
+      subdominio suyo. `data/candidatas.yaml` está fuera de la lista de rutas, así que la misma PR
+      no puede cambiarlo para que encaje.
+
+12. **Qué ancla la confianza.** El dominio sale de `data/candidatas.yaml`, que entró en `main`
+    por una PR revisada por una persona, y no del texto que el Researcher trae de la web. Una
+    instrucción inyectada que le haga registrar como T1 un dominio ajeno no pasa la comparación de
+    host. Lo que la regla no ve: que la `web_es` de `data/candidatas.yaml` sea de verdad la
+    oficial (sale de un directorio T3 y se marcó «sin verificar»), y que la ruta sea la de España
+    (solo se compara el host: `porsche.com/spain` admite también `porsche.com/germany`). Las
+    dos cosas las sigue mirando el Revisor.
+
+Comprobado sobre las PR abiertas el 2026-10-15: `porsche-es` (#354), `dacia-es` (#356) y
+`smart-es` (#358) entrarían; `ford-es` (#362) y `autonomiacocheselectricos-es` (#354) son
+cambios de fuentes existentes y esperan; `skoda-es` (#333) espera porque Škoda no está en
+`data/candidatas.yaml`.
+
 ## Consecuencias
 **Buenas**
 - Las PR del Researcher que salen bien llegan a `main` y a producción sin que nadie las toque.
@@ -234,8 +279,13 @@ entraría sola. Las 8 PR de imágenes de la noche del 2026-10-12 (#254 a #266 y 
 - **Una foto de otro coche entra sola** (enmienda del 2026-10-12). La CI comprueba formato, ancho y
   peso, y la licencia está en el YAML, pero nadie mira la foto antes de publicarla. Se arregla
   con otra PR que cambie el fichero o la entrada.
-- **Las PR que dan de alta una marca siguen esperando a una persona**, porque tocan
-  `data/sources/` (enmienda del 2026-10-12).
+- ~~**Las PR que dan de alta una marca siguen esperando a una persona**, porque tocan
+  `data/sources/` (enmienda del 2026-10-12).~~ Desde la enmienda «Fuentes nuevas» entran solas
+  si su fuente cumple el punto 11. Siguen esperando las que cambian una fuente existente o añaden
+  un medio T3, y las de marcas que no están en `data/candidatas.yaml`.
+- **Una web oficial mal apuntada en `data/candidatas.yaml` se hereda** (enmienda del 2026-10-15):
+  si su `web_es` fuera de un tercero, las fuentes de esa marca entrarían solas como T1. Se
+  arregla corrigiendo `data/candidatas.yaml` y la fuente en una PR de persona.
 - **Mientras falte (a), (b) o (c) del punto 7, no hay fusión automática.** Sin la validación del
   esquema, la CI no dice nada sobre los YAML, y la condición «CI en verde» no vale nada para
   `data/raw/`.

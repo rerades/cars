@@ -2,7 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { REPO } from "../orchestrator.ts";
-import { agentMergeBlocker, citedImages, type AgentPr } from "../merge.ts";
+import { agentMergeBlocker, citedImages, citedSources, newSourceBlocker, type AgentPr } from "../merge.ts";
 
 const SHA = "c0408f2cdf580da62be602b07a22dccd7d41b1cb";
 const IMG = "data/images/acme/volta/frontal.jpg";
@@ -53,4 +53,46 @@ test("citedImages lee los file de images de data/raw en un commit", () => {
   const images = citedImages("HEAD", REPO);
   assert.ok(images.size > 0);
   for (const f of images) assert.match(f, /^data\/images\//);
+});
+
+const SRC = "data/sources/acme-es.yaml";
+const acme = {
+  id: "acme-es", brand: "Acme", tier: "T1", image_license: "",
+  urls: { home: "https://www.acme.es/", prices: "https://ofertas.acme.es/precios" },
+};
+const candidates = { candidates: [{ brand: "ÁCME", web_es: "https://www.acme.es" }] };
+const ids = new Set(["acme-es"]);
+
+test("una fuente nueva T1 de una marca candidata, citada y en su dominio, entra sola", () => {
+  assert.equal(newSourceBlocker(acme, ids, candidates), null);
+  const pr = { ...green, files: [...green.files, { path: SRC, changeType: "ADDED" }] };
+  assert.equal(agentMergeBlocker(pr, cited, false, new Map([[SRC, null]])), null);
+});
+
+test("cualquier otra fuente espera a una persona", () => {
+  const cases: [unknown, Set<string>?, unknown?][] = [
+    [{ ...acme, tier: "T3" }],
+    [{ ...acme, image_license: "CC BY 4.0" }],
+    [acme, new Set()],
+    [{ ...acme, brand: "Otra" }],
+    [acme, ids, { candidates: [{ brand: "Acme", web_es: null }] }],
+    [{ ...acme, urls: {} }],
+    [{ ...acme, urls: { home: "https://acme.es.evil.com/" } }],
+    [{ ...acme, urls: { home: "https://notacme.es/" } }],
+    [{ ...acme, urls: { home: "no es una url" } }],
+    [null],
+  ];
+  for (const [source, set, cands] of cases) {
+    assert.notEqual(newSourceBlocker(source, set ?? ids, cands ?? candidates), null, JSON.stringify(source));
+  }
+  const modified = { ...green, files: [{ path: SRC, changeType: "MODIFIED" }] };
+  assert.notEqual(agentMergeBlocker(modified, cited, false, new Map([[SRC, null]])), null);
+  const unchecked = { ...green, files: [{ path: SRC, changeType: "ADDED" }] };
+  assert.notEqual(agentMergeBlocker(unchecked, cited, false), null);
+  assert.notEqual(agentMergeBlocker(unchecked, cited, false, new Map([[SRC, "no es T1"]])), null);
+});
+
+test("citedSources lee los source_id de data/raw en un commit", () => {
+  const sources = citedSources("HEAD", REPO);
+  assert.ok(sources.size > 0);
 });
