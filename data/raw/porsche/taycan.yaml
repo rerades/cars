@@ -1,0 +1,132 @@
+# Researcher — Porsche Taycan (berlina, Sport Turismo y Cross Turismo; MY2027). Fuentes: porsche-es (T1), autonomiacocheselectricos-es (T3). Consultado 2026-10-15.
+brand: porsche
+brand_name: Porsche
+model: Taycan
+status: {value: on_sale, note: "el configurador de Porsche España publica versiones y PVP; el medio confirma que se vende hoy", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Taycan
+    wltp_km: {value: 609, note: "rango publicado 520–609 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 300, note: "potencia máxima estándar; publicado: 408 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: rwd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 106252, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan 4
+    wltp_km: {value: 560, note: "rango publicado 494–560 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 300, note: "potencia máxima estándar; publicado: 408 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 111351, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Black Edition
+    wltp_km: {value: 697, note: "rango publicado 599–697 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 320, note: "potencia máxima estándar; publicado: 435 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: rwd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 124504, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan 4S
+    wltp_km: {value: 560, note: "rango publicado 489–560 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 400, note: "potencia máxima overboost con Launch Control; publicado: 544 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 125766, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan 4 Black Edition
+    wltp_km: {value: 634, note: "rango publicado 572–634 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 320, note: "potencia máxima estándar; publicado: 435 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 129584, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan 4S Black Edition
+    wltp_km: {value: 635, note: "rango publicado 566–635 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 440, note: "potencia máxima overboost con Launch Control; publicado: 598 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 141840, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan GTS
+    wltp_km: {value: 637, note: "rango publicado 567–637 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 515, note: "potencia máxima overboost con Launch Control; publicado: 700 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 154159, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Turbo
+    wltp_km: {value: 637, note: "rango publicado 572–637 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 650, note: "potencia máxima overboost con Launch Control; publicado: 884 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 182251, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Turbo S
+    wltp_km: {value: 634, note: "rango publicado 574–634 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 700, note: "potencia máxima overboost con Launch Control; publicado: 952 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 217676, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Turbo GT
+    wltp_km: {value: 559, note: "rango publicado 540–559 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 760, note: "potencia máxima overboost con Launch Control; publicado: 1.034 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 249409, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Turbo GT con Paquete Weissach
+    wltp_km: {value: 555, note: "rango publicado 460–555 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 760, note: "potencia máxima overboost con Launch Control; publicado: 1.034 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 249523, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Sport Turismo
+    wltp_km: {value: 583, note: "rango publicado 495–583 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 300, note: "potencia máxima estándar; publicado: 408 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: rwd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 107539, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Sport Turismo Black Edition
+    wltp_km: {value: 669, note: "rango publicado 571–669 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 320, note: "potencia máxima estándar; publicado: 435 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: rwd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 125832, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan 4S Sport Turismo
+    wltp_km: {value: 536, note: "rango publicado 466–536 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 400, note: "potencia máxima overboost con Launch Control; publicado: 544 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 127044, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan 4S Sport Turismo Black Edition
+    wltp_km: {value: 610, note: "rango publicado 541–610 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 440, note: "potencia máxima overboost con Launch Control; publicado: 598 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 143150, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan GTS Sport Turismo
+    wltp_km: {value: 611, note: "rango publicado 541–611 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 515, note: "potencia máxima overboost con Launch Control; publicado: 700 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 155437, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Turbo Sport Turismo
+    wltp_km: {value: 613, note: "rango publicado 544–613 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 650, note: "potencia máxima overboost con Launch Control; publicado: 884 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 183517, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Turbo S Sport Turismo
+    wltp_km: {value: 607, note: "rango publicado 545–607 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 700, note: "potencia máxima overboost con Launch Control; publicado: 952 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 218942, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan 4 Cross Turismo
+    wltp_km: {value: 613, note: "rango publicado 531–613 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 320, note: "potencia máxima estándar; publicado: 435 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 119013, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan 4S Cross Turismo
+    wltp_km: {value: 613, note: "rango publicado 532–613 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 440, note: "potencia máxima overboost con Launch Control; publicado: 598 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 131839, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Turbo Cross Turismo
+    wltp_km: {value: 603, note: "rango publicado 530–603 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 650, note: "potencia máxima overboost con Launch Control; publicado: 884 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 184016, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+  - name: Taycan Turbo S Cross Turismo
+    wltp_km: {value: 601, note: "rango publicado 532–601 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 700, note: "potencia máxima overboost con Launch Control; publicado: 952 CV", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+    price: {value: 219441, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/taycan/configure/", retrieved: 2026-10-15, tier: T1}
+images:
+  - file: data/images/porsche/taycan/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Porsche_Taycan_4S_1X7A0337.jpg/1280px-Porsche_Taycan_4S_1X7A0337.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Porsche_Taycan_4S_1X7A0337.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir el Taycan MY2027 en España; queda null."
+  - "Batería (kWh): la web no la publica; no se toma del IDAE porque sus filas son de homologaciones anteriores (potencia y WLTP distintos de la web)."
+  - "El medio (T3) habla de «Standard, 4, 4S, GTS, Turbo, Turbo S, Turbo GT con sus Black Edition»; la web (T1) lista 22 versiones entre berlina, Sport Turismo y Cross Turismo. Se sigue la web."
+  - "Las tres carrocerías van en un solo fichero Taycan y el medio (T3) las clasifica distinto: «Berlina» la berlina, «Familiar» Sport Turismo y «Familiar aventurero» Cross Turismo. `segment` queda en null hasta que haya una única clasificación para el modelo."
