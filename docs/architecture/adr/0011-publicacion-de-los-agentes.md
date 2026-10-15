@@ -1,13 +1,13 @@
 # ADR-0011 — Cómo publican los agentes: fusión automática por reglas, sin modelo
 
 - **Estado:** aceptada (2026-10-01). Enmienda «Imágenes» (`data/images/` en la lista de rutas):
-  aceptada (2026-10-12). Enmienda «Fuentes nuevas» (`data/sources/`, solo altas): propuesta
+  aceptada (2026-10-12). Enmienda «Fuentes nuevas» (`data/sources/`, solo altas): aceptada
   (2026-10-15)
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
   la Decisión. Lo demás no cambia. 2026-10-13 revisión de la enmienda: solo imágenes citadas por un YAML y de
-  2 MB como máximo (punto 10). 2026-10-15 enmienda «Fuentes nuevas» propuesta: una fuente nueva
+  2 MB como máximo (punto 10). 2026-10-15 enmienda «Fuentes nuevas» propuesta y aceptada: una fuente nueva
   entra sola con las condiciones del punto 11; cambiar una existente sigue siendo de una persona.
 
 ## Contexto
@@ -216,7 +216,7 @@ entraría sola. Las 8 PR de imágenes de la noche del 2026-10-12 (#254 a #266 y 
       de `data/images/` el 2026-10-13, 632 KB). El alto no se limita aparte: con 2 MB y 1280 px de
       ancho, una imagen muy alta no cabe salvo con una compresión que no da una foto.
 
-### Fuentes nuevas (enmienda del 2026-10-15, propuesta)
+### Fuentes nuevas (enmienda del 2026-10-15, aceptada)
 
 **Una PR puede dar de alta una fuente en `data/sources/` sin persona si la fuente es la web
 oficial de una marca que ya está en `data/candidatas.yaml`, y todo lo que se puede comprobar sin
