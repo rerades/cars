@@ -2,7 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { REPO } from "../orchestrator.ts";
-import { agentMergeBlocker, citedImages, citedSources, newSourceBlocker, type AgentPr } from "../merge.ts";
+import { agentMergeBlocker, changedSourceBlocker, citedImages, citedSources, newSourceBlocker, type AgentPr } from "../merge.ts";
 
 const SHA = "c0408f2cdf580da62be602b07a22dccd7d41b1cb";
 const IMG = "data/images/acme/volta/frontal.jpg";
@@ -86,7 +86,8 @@ test("cualquier otra fuente espera a una persona", () => {
     assert.notEqual(newSourceBlocker(source, set ?? ids, cands ?? candidates), null, JSON.stringify(source));
   }
   const modified = { ...green, files: [{ path: SRC, changeType: "MODIFIED" }] };
-  assert.notEqual(agentMergeBlocker(modified, cited, false, new Map([[SRC, null]])), null);
+  assert.notEqual(agentMergeBlocker(modified, cited, false), null);
+  assert.notEqual(agentMergeBlocker(modified, cited, false, new Map([[SRC, "cambia tier"]])), null);
   const unchecked = { ...green, files: [{ path: SRC, changeType: "ADDED" }] };
   assert.notEqual(agentMergeBlocker(unchecked, cited, false), null);
   assert.notEqual(agentMergeBlocker(unchecked, cited, false, new Map([[SRC, "no es T1"]])), null);
@@ -95,4 +96,24 @@ test("cualquier otra fuente espera a una persona", () => {
 test("citedSources lee los source_id de data/raw en un commit", () => {
   const sources = citedSources("HEAD", REPO);
   assert.ok(sources.size > 0);
+});
+
+test("un cambio de fuente que solo añade URL en sus hosts entra solo", () => {
+  const before = { ...acme, tier: "T3", notes: "a", last_verified: "2026-10-14" };
+  const after = { ...before, notes: "b", last_verified: "2026-10-15",
+    urls: { ...before.urls, nuevo: "https://www.acme.es/otro" } };
+  assert.equal(changedSourceBlocker(before, after), null);
+  const pr = { ...green, files: [{ path: SRC, changeType: "MODIFIED" }] };
+  assert.equal(agentMergeBlocker(pr, cited, false, new Map([[SRC, null]])), null);
+  const cases = [
+    { ...after, tier: "T1" },
+    { ...after, image_license: "CC BY 4.0" },
+    { ...after, brand: "Otra" },
+    { ...after, status: "inactive" },
+    { ...after, urls: { home: before.urls.home } },
+    { ...after, urls: { ...after.urls, home: "https://www.acme.es/cambiada" } },
+    { ...after, urls: { ...after.urls, otra: "https://acme.es/" } },
+    { ...after, urls: { ...after.urls, otra: "no es una url" } },
+  ];
+  for (const c of cases) assert.notEqual(changedSourceBlocker(before, c), null, JSON.stringify(c));
 });
