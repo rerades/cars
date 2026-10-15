@@ -1,6 +1,6 @@
 # ADR-0015 — Datos y filtro de los rankings (`/rankings/*`)
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-15)
 - **Fecha:** 2026-10-15
 
 ## Contexto
@@ -125,7 +125,7 @@ Detalles:
    - **El tramo, no la cifra del precio, en los rankings que no son de precio**: el tramo
      (`hasta-30000-euros`, `de-30000-a-45000-euros`, `mas-de-45000-euros`, los valores de URL que
      propone `rankings.md`) se calcula en el build con los bordes de PRD-001 RF-10, en una función compartida con
-     el catálogo (no he comprobado si `filter.ts` ya tiene una que sirva tal cual). Así no se publica una cifra de precio sin su fuente en un
+     el catálogo: `PRICE_BANDS` de `web/src/lib/catalog.ts`, que ya tiene esos bordes y esos slugs (corregido al aceptar; la propuesta la buscaba en `filter.ts`). Así no se publica una cifra de precio sin su fuente en un
      ranking que no la muestra.
    - **`out[]`**: una por versión `on_sale` publicada **sin** la cifra o con ella solo de T3 (RF-15),
      con **solo** `segment` y tramo, sin identificación ni cifras. Basta para contar «se han quedado
@@ -141,9 +141,9 @@ Detalles:
    - El build construye `entries` y `out` y llama a esa función **sin filtros** para pintar el HTML;
      el script llama a la misma función **con filtros** sobre el JSON. La lista del HTML y la del
      JSON sin filtros no pueden divergir.
-   - Lectura y escritura de la query string: los parámetros y valores de `rankings.md` (el de
-     segmento, el mismo de `/coches`), reutilizando lo que ya haya en `filter.ts` para segmento y
-     tramo. Valor no válido, ignorado. `history.replaceState`, como el catálogo.
+   - Lectura y escritura de la query string: los parámetros y valores de `rankings.md`: `segmento`,
+     el mismo de `/coches` (reutilizando `filter.ts`), y `precio` con el slug del tramo de
+     `PRICE_BANDS` (decidido al aceptar). Valor no válido, ignorado. `history.replaceState`, como el catálogo.
    - El `id` de cada entrada de «Condiciones de las ofertas» se deriva de la terna (`brand`, slug,
      `name`) con una función compartida, no del puesto (`rankings.md`).
 3. **Parte interactiva.**
@@ -158,8 +158,9 @@ Detalles:
      `data-messages` (RNF-4).
    - Arranque: si la query string trae un filtro válido, pide el JSON al cargar; si no, en el
      primer `focus` o `change` de un select. Mientras llega, queda la lista del HTML.
-   - Si el JSON no llega, la lista que se ve **nunca** contradice a los selects. Cómo se le dice al
-     visitante es del diseño (ver Consecuencias).
+   - Si el JSON no llega, la lista que se ve **nunca** contradice a los selects: el select vuelve a
+     su valor anterior, la lista no cambia y la región viva lo dice (`rankings.md`, «Estados»;
+     decidido al aceptar). El siguiente cambio de un select vuelve a pedir el JSON.
 4. **Sin almacenamiento (RNF-5, CA-15).** Igual que ADR-0014: el script no usa `localStorage`,
    `sessionStorage`, `indexedDB`, Cache API, service workers ni `document.cookie`.
    - `web/e2e/storage.spec.ts`: casos para un ranking sin filtros, con filtros en la URL y después
@@ -226,8 +227,12 @@ Detalles:
 - **La CI se alarga**: otro spec de Playwright con su propio build de datos de prueba.
 
 **Preguntas abiertas**
-- Qué se ve si el JSON no llega después de cambiar un select: diseño (`docs/design/rankings.md`).
-- Nombre y valores del parámetro de precio en la URL: `rankings.md` los **propone**; los fija el
-  diseño, no esta ADR.
+- ~~Qué se ve si el JSON no llega después de cambiar un select: diseño (`docs/design/rankings.md`).~~
+  Resuelta al aceptar (2026-10-15): el select vuelve a su valor anterior, la lista no cambia y la
+  región viva avisa (`ranking.filtros.error`); el siguiente cambio reintenta.
+- ~~Nombre y valores del parámetro de precio en la URL: `rankings.md` los **propone**; los fija el
+  diseño, no esta ADR.~~ Resuelta al aceptar (2026-10-15): `precio`, con los slugs de
+  `PRICE_BANDS` (`hasta-30000-euros`, `de-30000-a-45000-euros`, `mas-de-45000-euros`). No es
+  `precio_min`/`precio_max` de `/coches` porque el ranking filtra por tramo, no por rango en euros.
 - Si la medida de peso del build supera lo aceptable, ¿se aplica el recorte por combinaciones? No
   hay un umbral en ningún PRD; RNF-2 solo fija el LCP.

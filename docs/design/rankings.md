@@ -271,8 +271,9 @@ controles no hace falta abrir ni cerrar nada. Ver Pregunta 3 sobre la selección
   select. Sin botón «Aplicar».
 - **URL**: la query string refleja los filtros y abrirla los reproduce, sustituyendo la entrada de historial
   como en `/coches` (`filtros-catalogo.md`, «URL»). El parámetro de segmento usa el **mismo nombre y valores**
-  que el de `/coches`; el de precio, valores legibles (se proponen los slugs de las páginas de tramo:
-  `hasta-30000-euros`, `de-30000-a-45000-euros`, `mas-de-45000-euros`). Un valor no válido se ignora sin aviso
+  que el de `/coches`; el de precio se llama `precio` y lleva el slug del tramo (`hasta-30000-euros`,
+  `de-30000-a-45000-euros`, `mas-de-45000-euros`, los de `PRICE_BANDS`; ADR-0015, 2026-10-15). Ejemplo:
+  `?segmento=suv_compacto&precio=hasta-30000-euros`. Un valor no válido se ignora sin aviso
   (`filtros-catalogo.md`, Pregunta 4). El canonical no cambia (RF-13).
 - **Sin JavaScript** (RNF-1): los dos controles **no existen** en el HTML servido (los inserta el script) y en
   su lugar se ve `ranking.filtros.sinJs`, `text-small`, `ink-600`, dentro de `<noscript>`. Abrir una URL con
@@ -298,7 +299,9 @@ controles no hace falta abrir ni cerrar nada. Ver Pregunta 3 sobre la selección
 | `note` | Bajo la fuente, literal | RF-2 |
 | Sin JS | Lista completa sin filtrar; `ranking.filtros.sinJs` en lugar de los controles | RNF-1, CA-14 |
 | Texto muy largo | Marca, modelo, versión, `note`, `price_terms` y dominio parten línea (`overflow-wrap: anywhere`); nunca se recortan ni se reduce la letra; sin scroll horizontal a 320 px | RNF-3, CA-17 |
-| Cargando / error | No hay: la lista va en el HTML; si el script falla, queda la lista sin filtrar | RNF-1 |
+| Cargando | Sin indicador: mientras llegan los datos del filtro (ADR-0015) se ve la lista del HTML | RNF-1 |
+| Error al filtrar | Si los datos del filtro no llegan, el select que se acaba de cambiar vuelve a su valor anterior, la lista no cambia y la región viva (`ranking.resumen`) dice `ranking.filtros.error`. El foco se queda en el select. El siguiente cambio vuelve a intentarlo. La lista nunca contradice a los selects (ADR-0015) | RNF-1 |
+| Si el script falla | Queda la lista del HTML sin filtrar | RNF-1 |
 
 ### Vacío de página: ninguna versión con el dato (RF-7, CA-7)
 En lugar de la `<ol>` (no hay lista vacía), bajo el `h2` «Puestos», el patrón de `paginas-catalogo.md`, «Estado
@@ -397,6 +400,7 @@ Además de las de las tablas anteriores (`ranking.{x}.titulo`, `.entrada`, `.ord
 | `ranking.filtros.cualquiera` | Cualquiera |
 | `ranking.filtros.quitar` | Quitar filtros |
 | `ranking.filtros.sinJs` | Para filtrar el ranking por segmento o por precio hace falta activar JavaScript. |
+| `ranking.filtros.error` | No se ha podido filtrar. Vuelve a intentarlo. |
 | `ranking.vacio.texto` | Todavía no hay ninguna versión a la venta con {dato} publicado. |
 | `ranking.vacioFiltros.texto` | Ninguna versión cumple los filtros. |
 
