@@ -1074,3 +1074,28 @@
     Wikimedia Commons con licencia que permita el uso comercial, del modelo y la generación
     correctos, descargadas con node factory/fetch-image.ts. Si no hay ninguna foto válida de un
     modelo, déjalo con images: [] y anótalo en la bitácora. No toques nada más de esos ficheros."
+- id: issue-316
+  agent: developer
+  task: "Historia #316 (épica #313, PRD-003): lógica pura de la selección del comparador. Lee el
+    issue entero (gh issue view 316) y haz exactamente lo que dice, en web/src/lib/compare.ts, sin
+    DOM ni node:fs: leer los parámetros v repetidos (forma completa marca/modelo/name y forma corta
+    marca/modelo), escribir la URL en el orden de las columnas, validar contra los modelos
+    (inexistentes, excluidos, repetidas, máximo 3, con el recuento de ignoradas) y elegir la versión
+    que entra al añadir un modelo. Reutiliza isComparable y defaultVersion, que ya están en
+    compare.ts. Sigue docs/design/comparador.md y
+    docs/architecture/adr/0014-datos-y-script-del-comparador.md. Pruebas con node --test en
+    web/tests/compare.test.ts: ida y vuelta con nombres con /, +, paréntesis y acentos, repetidas,
+    más de 3, forma corta y versión por defecto ya presente. No toques el DOM ni la página. La PR
+    dice «Closes #316» y enumera los RF y CA cubiertos."
+- id: issue-315
+  agent: developer
+  task: "Historia #315 (épica #313, PRD-003): índice ligero de modelos comparables y robots.txt.
+    Lee el issue entero (gh issue view 315) y haz exactamente lo que dice: un endpoint estático de
+    Astro que genera /comparar/datos/indice.json con, por modelo comparable, brand, slug,
+    brand_name, model, status, los name de sus versiones en el orden del fichero y el name de la
+    versión por defecto, sin cifras; y web/public/robots.txt con User-agent: * y Disallow:
+    /comparar/datos/, sin bloquear nada más. Reutiliza loadModels(), isComparable y defaultVersion
+    (web/src/lib/data.ts y compare.ts) y el mismo cálculo de {marca}/{modelo} que el endpoint de
+    web/src/pages/comparar/datos/[marca]/[modelo].json.ts. Pruebas sobre el build con
+    CARS_DATA_DIR, como web/tests/compare.test.ts. No toques compare.ts salvo para importar. La PR
+    dice «Closes #315» y enumera los RF y CA cubiertos."
