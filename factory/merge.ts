@@ -10,7 +10,7 @@ import { parse } from "yaml";
 import { REPO, STATE_DIR } from "./orchestrator.ts";
 
 export const AGENT_BRANCH = /^agent\/([^/]+)\/([^/]+)$/;
-export const ALLOWED_PATHS = ["data/raw/", "data/images/", "docs/bitacora/"];
+export const ALLOWED_PATHS = ["data/raw/", "data/images/", "data/sources/", "docs/bitacora/"];
 export const MERGES_DIR = join(STATE_DIR, "ops", "merges");
 const VERDICT = "🏭 Veredicto";
 const NEEDS_HUMAN = "review:needs-human";
@@ -33,9 +33,12 @@ export interface AgentPr {
 
 /**
  * Why the PR cannot be merged by the factory, or null when it can (ADR-0011, point 2).
- * `cited` holds the data/images/ files that a data/raw/ YAML cites at the PR head.
+ * `cited` holds the data/images/ files that a data/raw/ YAML cites at the PR head; `sources` maps
+ * each data/sources/ file of the PR to newSourceBlocker at the head (amendment of 2026-10-15).
  */
-export function agentMergeBlocker(pr: AgentPr, cited: Set<string>, stopped: boolean): string | null {
+export function agentMergeBlocker(
+  pr: AgentPr, cited: Set<string>, stopped: boolean, sources = new Map<string, string | null>(),
+): string | null {
   if (stopped) return "interruptor de parada activo";
   if (!AGENT_BRANCH.test(pr.headRefName)) return "la rama no es agent/<agente>/<run_id>";
   const labels = new Set(pr.labels.map((l) => l.name));
@@ -60,6 +63,11 @@ export function agentMergeBlocker(pr: AgentPr, cited: Set<string>, stopped: bool
     if (f.changeType === "RENAMED" || f.changeType === "COPIED") return `renombra o copia ${f.path}`;
     if (!ALLOWED_PATHS.some((p) => f.path.startsWith(p))) return `toca ${f.path}, fuera de ${ALLOWED_PATHS.join(", ")}`;
     if (f.path.startsWith("data/images/") && !cited.has(f.path)) return `${f.path} no lo cita ningún YAML de data/raw/`;
+    if (f.path.startsWith("data/sources/")) {
+      if (f.changeType !== "ADDED") return `cambia la fuente existente ${f.path}`;
+      const problem = sources.has(f.path) ? sources.get(f.path) : "no se ha comprobado";
+      if (problem) return `${f.path}: ${problem}`;
+    }
   }
   return null;
 }
@@ -67,19 +75,86 @@ export function agentMergeBlocker(pr: AgentPr, cited: Set<string>, stopped: bool
 const git = (args: string[], repo: string) => execFileSync("git", args, { cwd: repo, encoding: "utf8" });
 const gh = (args: string[], repo: string) => execFileSync("gh", args, { cwd: repo, encoding: "utf8" }).trim();
 
+/** Every data/raw/ YAML at that commit, parsed. An unreadable one is skipped; the CI reports it. */
+function rawYamls(sha: string, repo: string): unknown[] {
+  const files = git(["ls-tree", "-r", "--name-only", sha, "--", "data/raw"], repo).split("\n");
+  return files.filter((f) => /\.ya?ml$/.test(f)).flatMap((f) => {
+    try {
+      return [parse(git(["show", `${sha}:${f}`], repo))];
+    } catch {
+      return [];
+    }
+  });
+}
+
 /** The data/images/ files cited by the `images` of any data/raw/ YAML at that commit. */
 export function citedImages(sha: string, repo = REPO): Set<string> {
   const cited = new Set<string>();
-  const files = git(["ls-tree", "-r", "--name-only", sha, "--", "data/raw"], repo).split("\n");
-  for (const f of files.filter((f) => /\.ya?ml$/.test(f))) {
-    try {
-      const images = parse(git(["show", `${sha}:${f}`], repo))?.images;
-      for (const img of Array.isArray(images) ? images : []) if (img?.file) cited.add(String(img.file));
-    } catch {
-      // an unreadable YAML cites nothing; the CI reports it
-    }
+  for (const doc of rawYamls(sha, repo)) {
+    const images = (doc as { images?: unknown } | null)?.images;
+    for (const img of Array.isArray(images) ? images : []) if (img?.file) cited.add(String(img.file));
   }
   return cited;
+}
+
+/** Every source_id, at any depth, of the data/raw/ YAMLs at that commit. */
+export function citedSources(sha: string, repo = REPO): Set<string> {
+  const ids = new Set<string>();
+  const walk = (v: unknown): void => {
+    if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === "object") {
+      for (const [k, x] of Object.entries(v)) k === "source_id" && x ? ids.add(String(x)) : walk(x);
+    }
+  };
+  rawYamls(sha, repo).forEach(walk);
+  return ids;
+}
+
+/**
+ * Why a new data/sources/ file cannot enter without a person, or null (amendment of 2026-10-15):
+ * an official T1 source of a brand from data/candidatas.yaml, cited by data/raw/, with no image
+ * license, and every URL on the host of that brand's web_es or one of its subdomains.
+ */
+export function newSourceBlocker(source: unknown, cited: Set<string>, candidates: unknown): string | null {
+  const s = (source ?? {}) as { id?: unknown; brand?: unknown; tier?: unknown; image_license?: unknown; urls?: unknown };
+  if (s.tier !== "T1") return "una fuente nueva que no es T1 la decide una persona";
+  if (s.image_license) return "trae image_license: los términos de uso de imágenes los lee una persona";
+  if (!cited.has(String(s.id))) return "ningún YAML de data/raw/ la cita";
+  const list = (candidates as { candidates?: { brand?: unknown; web_es?: unknown }[] } | null)?.candidates;
+  const key = (b: unknown) => String(b ?? "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  const webEs = (Array.isArray(list) ? list : []).find((c) => key(c?.brand) === key(s.brand))?.web_es;
+  if (!webEs) return `la marca ${s.brand} no tiene web_es en data/candidatas.yaml`;
+  // ponytail: host match only, not path; porsche.com/spain also admits porsche.com/germany.
+  const base = new URL(String(webEs)).hostname.replace(/^www\./, "");
+  const urls = s.urls && typeof s.urls === "object" ? Object.values(s.urls) : [];
+  if (!urls.length) return "no tiene urls";
+  for (const u of urls) {
+    let host: string;
+    try {
+      host = new URL(String(u)).hostname;
+    } catch {
+      return `url no válida: ${u}`;
+    }
+    if (host !== base && !host.endsWith(`.${base}`)) return `${u} no está en ${base}, la web_es de data/candidatas.yaml`;
+  }
+  return null;
+}
+
+/** newSourceBlocker for each data/sources/ file of the PR, read at its head. */
+function sourceProblems(pr: AgentPr, repo: string): Map<string, string | null> {
+  const out = new Map<string, string | null>();
+  const files = pr.files.filter((f) => f.path.startsWith("data/sources/") && f.changeType === "ADDED");
+  if (!files.length) return out;
+  const cited = citedSources(pr.headRefOid, repo);
+  const candidates = parse(git(["show", `${pr.headRefOid}:data/candidatas.yaml`], repo));
+  for (const f of files) {
+    try {
+      out.set(f.path, newSourceBlocker(parse(git(["show", `${pr.headRefOid}:${f.path}`], repo)), cited, candidates));
+    } catch (e) {
+      out.set(f.path, `no se puede leer: ${(e as Error).message.split("\n")[0]}`);
+    }
+  }
+  return out;
 }
 
 export interface MergeOptions {
@@ -115,7 +190,7 @@ export function mergePass(o: MergeOptions): { log: string[]; recorded: boolean }
       let reason: string;
       if (labels.has("review:ok")) {
         git(["fetch", "-q", "origin", `refs/pull/${pr.number}/head`], repo);
-        const blocker = agentMergeBlocker(pr, citedImages(pr.headRefOid, repo), o.stopped);
+        const blocker = agentMergeBlocker(pr, citedImages(pr.headRefOid, repo), o.stopped, sourceProblems(pr, repo));
         if (!blocker) {
           if (!o.autoMerge || o.dryRun) {
             log.push(`se fusionaría ${pr.url}${o.autoMerge ? "" : " (auto_merge: false)"}`);
@@ -168,6 +243,7 @@ function merge(pr: AgentPr, month: string, now: Date, repo: string): void {
     "Comprobado: rama de agente; `review:ok` sin `review:needs-human`; el último veredicto cita ese SHA; " +
     `sin conflictos; checks terminados en verde (${checks.join(", ")}); todo el diff en ` +
     `${ALLOWED_PATHS.join(", ")}, sin borrados ni renombrados; cada imagen citada por un YAML de data/raw/; ` +
+    "cada fuente nueva T1, citada, sin image_license y en el dominio de su web_es de data/candidatas.yaml; " +
     `sin factory/STOP. Merge: ${mergeSha}. Para volver atrás: \`git revert -m 1 ${mergeSha}\`.`], repo);
   try {
     git(["push", "-q", "origin", "--delete", pr.headRefName], repo);
