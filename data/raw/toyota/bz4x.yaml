@@ -26,7 +26,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "UltraTech66, Toyota bZ4X, vía Wikimedia Commons"
 open_questions:
-  - "Precio: toyota.es solo publica 'Desde 39.375,00 €' (con cuota y oferta válida hasta 31-10-2026) y ningún PVP por versión; price: null."
+  - "Precio (revisado 2026-10-15): el texto legal de Advance en https://www.toyota.es/coches/bz4x dice «Precio por financiar: 37.175,01€. PVP al contado: 38.875,01€. Entrada: 13.996,00€.», «Oferta válida hasta el 31/10/2026 en Península y Baleares.», «Promoción no acumulable a otras ofertas o descuentos.» e «IVA, transporte, promoción y aportaciones de Toyota España y del concesionario incluidas.» La cabecera muestra «Desde 39.375,00 €», que no coincide con el PVP al contado. El precio incluye promoción, así que no es pvp; sería financed, pero la herramienta de lectura solo devuelve resúmenes y no se ha podido copiar el texto íntegro literal que exige price_terms (solo fragmentos). Qué importe es el de la web y cuál la promoción queda sin aclarar; price: null. Spirit: no se ha localizado texto legal ni precio (el contenido leído estaba truncado). Pendiente: leer el texto completo."
   - "launch: la web solo dice 'Desde Marzo' y ninguna fuente da la fecha de apertura de pedidos de la gama actual."
   - "segment: la web dice 'SUV', término que no está en la lista de RF-11; null."
   - "Versiones: la web cita los acabados Advance y Spirit (468-569 km, 224-343 CV) sin ficha por versión; los datos salen del IDAE. Discrepan las homologaciones MC26 (478 y 436 km) y MY27 (569 y 468 km); el IDAE no da su fecha y se usa MY27, que es la que coincide con la web (T1) y no se escribe specs.wltp_max_km."

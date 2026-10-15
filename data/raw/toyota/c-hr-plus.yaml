@@ -29,7 +29,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, Toyota C-HR+ Auto Zuerich 2025 DSC 3056, vía Wikimedia Commons"
 open_questions:
-  - "Precio: toyota.es solo publica 'Desde 36.375,00 €' (con cuota de financiación y oferta válida hasta 31-10-2026) y ningún PVP por versión; price: null."
+  - "Precio (revisado 2026-10-15): el texto legal de Advance en https://www.toyota.es/coches/toyota-c-hr-plus dice «PVP recomendado: 34.375,00 €. PVP al contado: 36.375,00 €.» y, tras la oferta Toyota Easy (entrada 12.751,45 €, 48 cuotas de 237,00 €, TIN 7,75 %, TAE 9,05 %), que el precio incluye «IVA, transporte, promoción y aportaciones de Toyota España y del concesionario», con «Oferta válida hasta 31-10-2026 en Península y Baleares». Ambos importes incluyen promoción y aportaciones, así que ninguno es PVP limpio (pvp); sería financed, pero la herramienta de lectura solo devuelve resúmenes y no se ha podido copiar el texto íntegro literal que exige price_terms. Sin ese texto, price: null. Spirit: la página no muestra texto legal ni precio. Pendiente: copiar el párrafo completo y guardar Advance como financed (¿34.375 o 36.375? decidir con el texto entero)."
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir en España (un medio T3 habló de pedidos abiertos y entregas en el primer trimestre de 2026, sin confirmar)."
   - "segment: la web dice 'SUV eléctrico', término que no está en la lista de RF-11; null."
   - "Tracción del Advance: la ficha dice 4x2, no 'tracción delantera'; sin drivetrain. IDAE homologa también un C-HR+ 4x2 Advance 170 de 58 kWh (458 km, NG26) que la ficha no muestra: no incluido."
