@@ -1,6 +1,6 @@
 ---
 status: draft
-updated: 2026-10-13
+updated: 2026-10-15
 ---
 
 # Arquitectura — visión general
@@ -23,4 +23,5 @@ updated: 2026-10-13
 - ~~Dónde se sirven las imágenes de los modelos y qué guarda el esquema para su atribución.~~ → [ADR-0012](adr/0012-imagenes-de-los-modelos.md) (aceptada: se descargan en la ingesta a `data/images/`, el build genera WebP y el visitante no pide nada a terceros; `images` pasa a `file`, `source_url` y `page_url`. La descarga la define la enmienda «Imágenes» de ADR-0010, aceptada el 2026-10-07: script determinista que lanza el Researcher, solo JPEG o PNG de ≤ 1280 px, migración por el Researcher y forma antigua de `images` admitida con aviso hasta migrar).
 - ~~Cómo hace commit la factoría de la cola, la pausa y el registro de ejecuciones (#166).~~ → [ADR-0013](adr/0013-commit-del-estado-de-la-factoria.md) (aceptada el 2026-10-06: la factoría no reescribe la cola; consumir una tarea es una fila con su `id` en `ops/runs/`, commiteada en una única rama de estado `chore/factory-state` con su PR, de la que la factoría lee).
 - ~~Cómo llegan los datos al comparador de PRD-003 y cómo se monta su parte interactiva (RNF-6).~~ → [ADR-0014](adr/0014-datos-y-script-del-comparador.md) (aceptada, 2026-10-13: un JSON estático por modelo comparable más un índice ligero, generados en el build; `<script>` propio sin framework; sin almacenamiento, comprobado con los specs de ADR-0006).
+- ~~Cómo llegan los datos a los filtros de segmento y de precio de los rankings de PRD-005 (RF-8, RF-9) y cómo se monta el filtro.~~ → [ADR-0015](adr/0015-datos-y-filtro-de-los-rankings.md) (aceptada, 2026-10-15: un JSON estático por ranking con las versiones que pueden dar puesto y las claves de filtro de las que se quedan fuera, pedido solo al filtrar; `<script>` propio sin framework con la misma función pura que numera el HTML; sin almacenamiento).
 - ~~Cómo publican los agentes (CI/CD, entornos, merge automático o no).~~ → [ADR-0011](adr/0011-publicacion-de-los-agentes.md) (aceptada: el Revisor solo etiqueta el estado, `review:ok`, `review:changes`, `review:needs-human` o `review:error`; fusiona el orquestador sin modelo si la PR tiene `review:ok` ligada al SHA, CI en verde, sin conflictos y solo toca `data/raw/`, `data/images/` (enmienda del 2026-10-12) o `docs/bitacora/`, con cada imagen citada por un YAML y de 2 MB como máximo; Render despliega «After CI Checks Pass»; vistas previas manuales. Las tres condiciones de activación se cumplen desde el 2026-10-12; el paso `run.ts --merge` existe desde el 2026-10-13 y el interruptor está a `true`).
