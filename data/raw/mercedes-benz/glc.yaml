@@ -13,7 +13,14 @@ versions:
     power_kw: {value: 360, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609716; el medio publica 489 CV"}
     drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
     price: null
-images: []
+images:
+  - file: "data/images/mercedes-benz/glc/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Mercedes-Benz_GLC_400_4MATIC_mit_EQ-Technologie_AMG_Line_%28X_540%29_%E2%80%93_f_12042026.jpg/1280px-Mercedes-Benz_GLC_400_4MATIC_mit_EQ-Technologie_AMG_Line_%28X_540%29_%E2%80%93_f_12042026.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_GLC_400_4MATIC_mit_EQ-Technologie_AMG_Line_(X_540)_–_f_12042026.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-3.0-DE"
+    attribution: "M 93, CC BY-SA 3.0 de, via Wikimedia Commons"
 open_questions:
   - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; price null."
   - "Segmento: el medio lo llama «SUV de segmento D» (4,84 m) sin decir compacto o grande; segment null."

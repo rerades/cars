@@ -24,6 +24,7 @@ versions:
     price: null
 images: []
 open_questions:
+  - "Imagen (2026-10-15): búsquedas en Commons «Mercedes CLA Shooting Brake» y «Mercedes-Benz CLA Shooting Brake mit EQ-Technologie»; solo hay fotos de la generación X118 (térmica) y una trasera de un CLA 200 con EQ-Technologie (híbrido ligero, X 174), no del eléctrico. Sin foto válida: images []."
   - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; todas las versiones con price null."
   - "launch: la ficha de motor.es no da fecha de inicio de venta en España; sin dato."
   - "El medio lista además el Mercedes-AMG CLA 45 4MATIC+ Shooting Brake eléctrico; no está en el IDAE y no se ha escrito."

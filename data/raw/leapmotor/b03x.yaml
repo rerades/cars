@@ -19,7 +19,14 @@ versions:
     dc_max_kw: {value: 133, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/b03x", retrieved: 2026-10-13, tier: T1}
     drivetrain: {value: fwd, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/b03x", retrieved: 2026-10-13, tier: T1}
     price: null
-images: []
+images:
+  - file: "data/images/leapmotor/b03x/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Leapmotor_B03X_Leonberg_2026_IMG_8735.jpg/1280px-Leapmotor_B03X_Leonberg_2026_IMG_8735.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Leapmotor_B03X_Leonberg_2026_IMG_8735.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "Precio: la ficha da 'desde 17.500 €' (Life Pro) con 3.375 € del Plan Auto+ y 900 € del CAE descontados, válido hasta 31/10/2026; sin PVP sin ayudas, price: null."
   - "Segmento: la ficha dice 'crossover/SUV compacto' de 4,27 m, sin valor claro de RF-11. Se deja vacío. Lanzamiento e imágenes: sin fuente."

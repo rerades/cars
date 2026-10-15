@@ -32,7 +32,14 @@ versions:
       url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html"
       retrieved: 2026-10-10
       tier: T1
-images: []
+images:
+  - file: "data/images/renault/twingo-e-tech-electrico/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Renault_Twingo_E-Tech_IMG_6605.jpg/1280px-Renault_Twingo_E-Tech_IMG_6605.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Renault_Twingo_E-Tech_IMG_6605.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP solo para evolution (263 km); techno no la publica, así que solo se da specs.wltp_max_km. Batería y carga CA no publicadas (carga 15-80 % en 28 min con cargador CC de 50 kW; no es el máximo del coche)."

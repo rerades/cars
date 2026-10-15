@@ -18,7 +18,14 @@ versions:
     power_kw: {value: 260, note: "publicado: 260 kW (354 CV)", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/glb-electric/overview.html", retrieved: 2026-10-13, tier: T1}
     drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
     price: null
-images: []
+images:
+  - file: "data/images/mercedes-benz/glb/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Mercedes-Benz_GLB_250%2B_mit_EQ-Technologie_AMG_Line_%28X_244%29_%E2%80%93_f_18042026.jpg/1280px-Mercedes-Benz_GLB_250%2B_mit_EQ-Technologie_AMG_Line_%28X_244%29_%E2%80%93_f_18042026.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_GLB_250+_mit_EQ-Technologie_AMG_Line_(X_244)_–_f_18042026.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-3.0-DE"
+    attribution: "M 93, CC BY-SA 3.0 de, via Wikimedia Commons"
 open_questions:
   - "Precio: la web oficial pone «Financiación y precios 57.777,50 €» (GLB 250+) sin decir si es el PVP sin ayudas ni dar condiciones; no se guarda. Reintentado el 2026-10-14: mercedes-benz.es sigue sin responder (timeout) y no hay otra fuente T1 que lo diga literalmente. Confirmar en el configurador."
   - "Segmento: el medio solo dice «SUV de Mercedes con hasta siete plazas»; no hay clasificación en la lista de RF-11."

@@ -17,7 +17,14 @@ versions:
     wltp_km: {value: 467, note: "IDAE id 609161 (03/2026), la homologación más reciente; la anterior, id 609159 (03/2024): 432 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     power_kw: {value: 230, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     price: null
-images: []
+images:
+  - file: "data/images/mini/countryman/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Mini_Countryman_%28U25%29_SE_IMG_2244.jpg/1280px-Mini_Countryman_%28U25%29_SE_IMG_2244.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mini_Countryman_(U25)_SE_IMG_2244.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "mini.es no se pudo leer (timeouts): sin precios (price: null) ni confirmación T1 de versiones a la venta hoy."
   - "Se usa la homologación 03/2026 (la más reciente, regla de la PR #347) y no la de 03/2024; ninguna fuente T1 confirma cuál se entrega hoy."

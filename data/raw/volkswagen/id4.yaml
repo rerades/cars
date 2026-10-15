@@ -17,7 +17,14 @@ versions:
     price: null
   - name: GTX
     price: null
-images: []
+images:
+  - file: "data/images/volkswagen/id4/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/2025_Volkswagen_ID.4_PRO_Douane_%2855093133661%29.jpg/1280px-2025_Volkswagen_ID.4_PRO_Douane_%2855093133661%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2025_Volkswagen_ID.4_PRO_Douane_(55093133661).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-4.0"
+    attribution: "Joost J. Bakker IJmuiden, CC BY 4.0, via Wikimedia Commons"
 open_questions:
   - "needs_review: true porque volkswagen.es no dice qué versiones se pueden pedir hoy (solo muestra ofertas de financiación) ni liga cada potencia a su versión; status on_sale se apoya en esas ofertas."
   - "Precio: «desde 32.400 €» sujeto a financiación, sin PVP limpio ni condiciones literales completas; no se guarda."
