@@ -1,0 +1,59 @@
+---
+import "../styles/global.css";
+import { t } from "../lib/i18n.ts";
+
+// Static shell of /comparar/ (PRD-003, RF-14, RNF-6). The script (#318) fills the templates and
+// removes the no-JS notice; there is no table in the served HTML.
+const title = t("comparador.titulo");
+const site = t("sitio.nombre");
+const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio: site }) : title;
+// Fixed canonical, never with a query string, whatever the selection (CA-16).
+const canonical = new URL("/comparar/", Astro.site).href;
+
+const messages = {
+  loading: t("comparador.cargando"),
+  error: t("comparador.error"),
+  noJsLink: t("comparador.sinJs.enlace"),
+};
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{documentTitle}</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <main class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8" data-messages={JSON.stringify(messages)}>
+      <h1 class="text-title [overflow-wrap:anywhere]">{title}</h1>
+      <p class="mt-2 max-w-prose text-body text-ink-600">{t("comparador.entrada")}</p>
+
+      <div
+        class="mt-4 max-w-prose rounded-card border border-line bg-surface-muted p-4 text-body text-ink-900"
+        data-no-js
+      >
+        <p><span class="font-semibold">{t("comparador.aviso.prefijo")}</span> {t("comparador.sinJs.texto")}</p>
+        <a
+          href="/coches"
+          class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+        >{t("comparador.sinJs.enlace")}</a>
+      </div>
+
+      <!-- Sections for the next stories (#318 and following); inert until the script clones them. -->
+      <template data-section="elegidos">
+        <section aria-labelledby="cmp-elegidos" class="mt-8">
+          <h2 id="cmp-elegidos" class="text-section">{t("comparador.elegidos.titulo")}</h2>
+        </section>
+      </template>
+      <template data-section="tabla">
+        <section aria-labelledby="cmp-tabla" class="mt-8">
+          <h2 id="cmp-tabla" class="text-section">{t("comparador.tabla.titulo")}</h2>
+        </section>
+      </template>
+
+      <div role="status" aria-live="polite" class="sr-only" data-status></div>
+    </main>
+  </body>
+</html>

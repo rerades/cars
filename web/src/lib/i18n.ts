@@ -168,6 +168,18 @@ export const es = {
   "segmento.monovolumen": "Monovolumen",
   "segmento.furgoneta": "Furgoneta",
   "segmento.deportivo": "Deportivo",
+  // Comparison page (docs/design/comparador.md, "Copy"); only the keys used by the static page (#317).
+  "comparador.titulo": "Comparar coches",
+  "comparador.entrada":
+    "Hasta 3 versiones, una al lado de otra, con la fuente de cada dato. Para compartir la comparación, copia la dirección de esta página.",
+  "comparador.elegidos.titulo": "Coches comparados",
+  "comparador.tabla.titulo": "Comparación",
+  "comparador.aviso.prefijo": "Aviso:",
+  "comparador.sinJs.texto":
+    "El comparador necesita JavaScript para leer los coches de la dirección y montar la tabla. Puedes consultar los mismos datos en las fichas del catálogo.",
+  "comparador.sinJs.enlace": "Ir al catálogo",
+  "comparador.cargando": "Cargando la comparación…",
+  "comparador.error": "No se ha podido cargar la comparación. Vuelve a cargar la página o ve al catálogo.",
 } as const;
 
 export type MessageKey = keyof typeof es;
