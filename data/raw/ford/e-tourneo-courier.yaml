@@ -1,0 +1,40 @@
+# Researcher — Ford E-Tourneo Courier. Fuentes: ford-es (T1), idae-es (T2), motor-es (T3), wikimedia-commons. Consultado 2026-10-15.
+brand: ford
+brand_name: Ford
+model: E-Tourneo Courier
+status: {value: on_sale, note: "ford.es muestra la ficha con financiación, Plan Auto+ y autonomía; no dice expresamente que se pueda pedir. motor.es lista tres acabados eléctricos con precio 2026", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-courier", retrieved: 2026-10-15, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Trend
+    battery_kwh: {value: 46, basis: unknown, note: "IDAE id 610529 (05.2026); también consta la 610531 (11.2025, 43 kWh, 286 km) de la batería anterior", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 320, note: "IDAE id 610529 (05.2026); ford.es dice «hasta 320 km»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610529", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610529: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    dc_max_kw: {value: 100, note: "ficha del modelo en ford.es: carga rápida de 100 kW, 10-80 % en unos 26 min", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-courier", retrieved: 2026-10-15, tier: T1}
+    ac_max_kw: {value: 11, note: "ficha del modelo en ford.es: cargador de 11 kW", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-courier", retrieved: 2026-10-15, tier: T1}
+    price: null
+  - name: Active
+    battery_kwh: {value: 46, basis: unknown, note: "IDAE id 610528 (05.2026); también consta la 610531 (11.2025, 43 kWh, 286 km) de la batería anterior", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 316, note: "IDAE id 610528 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610528", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610528: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    dc_max_kw: {value: 100, note: "ficha del modelo en ford.es: carga rápida de 100 kW", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-courier", retrieved: 2026-10-15, tier: T1}
+    ac_max_kw: {value: 11, note: "ficha del modelo en ford.es: cargador de 11 kW", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-courier", retrieved: 2026-10-15, tier: T1}
+    price: null
+images:
+  - file: data/images/ford/e-tourneo-courier/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Ford_E-Tourneo_Courier_IAA_2023_1X7A0570.jpg/1280px-Ford_E-Tourneo_Courier_IAA_2023_1X7A0570.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Ford_E-Tourneo_Courier_IAA_2023_1X7A0570.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93 (Alexander Migl), CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "needs_review: true porque ford.es no dice expresamente que se pueda pedir y las versiones salen del IDAE (T2) y de un medio (T3)."
+  - "Precio: ford.es solo muestra cuotas (desde 130 €/mes, entrada 10.550 €, cuota final 15.077 €, 49 meses), sin PVP legible. motor.es (T3) cita 37.865 € (Trend), 39.565 € (Titanium) y 41.255 € (Active) sin descuento, pero T3 no vale como precio. Sin precio."
+  - "Titanium: motor.es (T3) lo lista como acabado eléctrico, pero el IDAE no tiene fila de 05.2026 para él y ford.es no lo cita; no se escribe versión sin datos."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: ford.es lo presenta como «coche eléctrico familiar» y «SUV familiar»; motor.es dice «segmento C». No hay término literal inequívoco de RF-11 para una furgoneta de pasajeros: null."
+  - "Las filas del IDAE de 06.2025 y 11.2025 (43 kWh, 286 km) son de la batería anterior; se usan las de 05.2026 (46 kWh)."

@@ -11,8 +11,10 @@ urls:
   puma_gen_e: https://www.ford.es/turismos/puma-gen-e
   explorer: https://www.ford.es/turismos/explorer-electrico
   capri: https://www.ford.es/turismos/capri-electrico
+  e_tourneo_courier: https://www.ford.es/turismos/e-tourneo-courier
+  e_tourneo_custom: https://www.ford.es/turismos/e-tourneo-custom
 image_license: "" # sin términos escritos de imágenes registrados: no publicar imágenes de esta web
 notes: >
-  Verificado (2026-10-14): www.ford.es es el dominio oficial de Ford en España y responde a la lectura automática. robots.txt permite el rastreo salvo rutas técnicas, cuentas de Ford Credit, páginas de ofertas, dashboard y búsqueda. La página /turismos/electricos da 404. Las fichas de modelo (Puma Gen-E, Explorer, Capri) no publican lista de versiones, potencia, batería ni PVP legibles: solo cuotas ("Desde 125€/mes", entrada, cuota final, 49 meses) y cifras de autonomía sin etiquetar. No se guarda ningún precio de Ford. Las versiones salen del IDAE (idae-es, T2) y de un medio (T3). Pendiente: configurador o tarifa de precios legible con PVP. Sin verificar: Mach-E (la ficha no apareció en el buscador), E-Tourneo Courier, E-Tourneo Custom y furgonetas E-Transit.
-last_verified: 2026-10-14
+  Verificado (2026-10-14): www.ford.es es el dominio oficial de Ford en España y responde a la lectura automática. robots.txt permite el rastreo salvo rutas técnicas, cuentas de Ford Credit, páginas de ofertas, dashboard y búsqueda. La página /turismos/electricos da 404. Las fichas de modelo (Puma Gen-E, Explorer, Capri) no publican lista de versiones, potencia, batería ni PVP legibles: solo cuotas ("Desde 125€/mes", entrada, cuota final, 49 meses) y cifras de autonomía sin etiquetar. No se guarda ningún precio de Ford. Las versiones salen del IDAE (idae-es, T2) y de un medio (T3). Pendiente: configurador o tarifa de precios legible con PVP. Sin verificar: Mach-E (la ficha no apareció en el buscador) y furgonetas E-Transit. Verificado (2026-10-15): las fichas /turismos/e-tourneo-courier y /turismos/e-tourneo-custom responden. Courier: solo cuotas de financiación, autonomía hasta 320 km y carga CC de 100 kW; Custom: título «Monovolumen Versátil», autonomía hasta 339 km, acabados Trend, Titanium, Active, Sport y Titanium X; ninguna publica PVP, batería ni potencia.
+last_verified: 2026-10-15
 status: active
