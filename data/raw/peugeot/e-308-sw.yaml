@@ -20,7 +20,14 @@ versions:
       url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
       retrieved: 2026-09-29
       tier: T1
-images: []
+images:
+  - file: "data/images/peugeot/e-308-sw/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/2025_Peugeot_e-308_SW_Auto_Zuerich_2025_DSC_3023.jpg/1280px-2025_Peugeot_e-308_SW_Auto_Zuerich_2025_DSC_3023.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2025_Peugeot_e-308_SW_Auto_Zuerich_2025_DSC_3023.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "segment: ninguna fuente leída lo clasifica (probable familiar, sin fuente); launch: sin fecha en fuente registrada."
   - "Imagen: no se buscó un fichero de e-308 SW en Commons con garantía de que sea el SW."

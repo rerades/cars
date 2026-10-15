@@ -35,7 +35,14 @@ versions:
       url: "https://www.renault.es/electricos/megane.html"
       retrieved: 2026-10-10
       tier: T1
-images: []
+images:
+  - file: "data/images/renault/megane-e-tech-electrico/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Renault_M%C3%A9gane_E-Tech_GIMS_2024_1X7A2161.jpg/1280px-Renault_M%C3%A9gane_E-Tech_GIMS_2024_1X7A2161.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Renault_Mégane_E-Tech_GIMS_2024_1X7A2161.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión: solo consta 500 km para techno; esprit Alpine no se ha leído, así que solo se publica specs.wltp_max_km."

@@ -15,7 +15,14 @@ versions:
   - name: GTX
     power_kw: {value: 250, note: "IDAE id 607349 (ID.7 GTX, MY26; publicado en volkswagen.es: 340 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     price: null
-images: []
+images:
+  - file: "data/images/volkswagen/id7/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Volkswagen_ID.7_1X7A1779.jpg/1280px-Volkswagen_ID.7_1X7A1779.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID.7_1X7A1779.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "needs_review: true porque volkswagen.es no dice qué versiones se pueden pedir hoy (solo muestra ofertas de financiación) ni liga cada potencia a su versión; status on_sale se apoya en esas ofertas."
   - "Precio: «desde 40.200 €» con Compra Flexible, sin asignar a un acabado ni condiciones literales completas; no se guarda."

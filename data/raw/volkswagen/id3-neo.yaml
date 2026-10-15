@@ -10,7 +10,14 @@ versions:
   - name: Life 125 kW
     power_kw: {value: 125, note: "IDAE id 609272 (ID.3 Neo Life 125 kW, 170 CV, MY27); volkswagen.es no liga la potencia a la versión", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     price: null
-images: []
+images:
+  - file: "data/images/volkswagen/id3-neo/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Volkswagen_ID.3_Neo_IMG_7255.jpg/1280px-Volkswagen_ID.3_Neo_IMG_7255.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID.3_Neo_IMG_7255.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "needs_review: true porque volkswagen.es no dice qué versiones se pueden pedir hoy (solo muestra ofertas de financiación) ni liga cada potencia a su versión; status on_sale se apoya en esas ofertas."
   - "Precio: la ficha solo muestra 25.600 € ligado a financiación, descuentos y Plan Auto+ (4.500 €), sin condiciones coherentes (permanencia 36 vs 60 meses); no se guarda como pvp ni financed."

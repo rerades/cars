@@ -22,7 +22,14 @@ versions:
     wltp_km: {value: 391, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     power_kw: {value: 190, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     price: null
-images: []
+images:
+  - file: "data/images/mini/aceman/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Mini_Aceman_DSC_7115.jpg/1280px-Mini_Aceman_DSC_7115.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mini_Aceman_DSC_7115.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "mini.es no se pudo leer (timeouts): sin precios (price: null) ni confirmación T1 de versiones a la venta hoy."
   - "Versiones y datos del IDAE (ids 609151, 609152, 609153). Los medios dan otras cifras (Aceman E 42,5 kWh; SE 54,2 kWh, 405 km): no coinciden con el IDAE."

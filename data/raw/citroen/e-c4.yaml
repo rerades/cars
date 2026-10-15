@@ -37,7 +37,14 @@ versions:
     wltp_km: {value: 416, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604170; menor de 3 homologaciones: 416 km (id 604170), 420 km (ids 583018 y 602729). El medio publica 416 km"}
     power_kw: {value: 115, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 604170; las demás también 115 kW"}
     price: null
-images: []
+images:
+  - file: "data/images/citroen/e-c4/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Citro%C3%ABn_%C3%AB-C4_Feel_%28III%29_%E2%80%93_f_14042024.jpg/1280px-Citro%C3%ABn_%C3%AB-C4_Feel_%28III%29_%E2%80%93_f_14042024.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Citroën_ë-C4_Feel_(III)_–_f_14042024.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-3.0-DE"
+    attribution: "M 93, CC BY-SA 3.0 de, via Wikimedia Commons"
 open_questions:
   - "Precio: citroen.es responde 403 a la lectura automática (2026-10-13) y no hay otra fuente T1; todas las versiones con price null."
   - "Imagen: no se ha buscado ninguna en Commons en esta ejecución."

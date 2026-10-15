@@ -29,7 +29,14 @@ versions:
     wltp_km: {value: 413, note: "IDAE id 606746; otra homologación, id 606747 («Tekna + Zen Interior»), también 413 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     power_kw: {value: 110, note: "IDAE id 606746; publicado: 150 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
     price: null
-images: []
+images:
+  - file: "data/images/nissan/micra/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Nissan_Micra_EV_IMG_4978.jpg/1280px-Nissan_Micra_EV_IMG_4978.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Nissan_Micra_EV_IMG_4978.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-15
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "launch y segment: sin fuente registrada."
   - "Precio: la web solo da cuota mensual (Acenta 99 €/mes, N-Connecta 119 €/mes) con entrada y última cuota, sin precio total; no se guarda precio."
