@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copiar a ~/Library/LaunchAgents/com.darkfactory.orchestrator.plist, ajustar RUTA y cargar:
      launchctl load ~/Library/LaunchAgents/com.darkfactory.orchestrator.plist
-     Lanza el orquestador cada 30 minutos de 01:00 a 06:00 (11 veces); el reviewer va a las 06:30.
+     Lanza el orquestador cada 30 minutos de 01:00 a 06:00, y además a las 01:15, 01:45 y 02:15
+     (14 veces; con el reviewer de las 06:30 son 15, el max_runs_per_day de budgets.yaml).
+     Los huecos extra van al principio de la noche para no solaparse con el reviewer.
      run.ts descarta las horas fuera de allowed_hours, y factory/.run.lock evita que una ejecución
      larga se solape con la siguiente.
      PATH debe incluir node (lo usan los hooks: si no arrancan, no bloquean) y claude;
@@ -31,6 +33,9 @@
     <dict><key>Hour</key><integer>5</integer><key>Minute</key><integer>0</integer></dict>
     <dict><key>Hour</key><integer>5</integer><key>Minute</key><integer>30</integer></dict>
     <dict><key>Hour</key><integer>6</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>1</integer><key>Minute</key><integer>15</integer></dict>
+    <dict><key>Hour</key><integer>1</integer><key>Minute</key><integer>45</integer></dict>
+    <dict><key>Hour</key><integer>2</integer><key>Minute</key><integer>15</integer></dict>
   </array>
   <key>StandardOutPath</key><string>/Users/USUARIO/_DEV/cars/ops/launchd.out.log</string>
   <key>StandardErrorPath</key><string>/Users/USUARIO/_DEV/cars/ops/launchd.err.log</string>
