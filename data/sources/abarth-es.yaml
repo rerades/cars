@@ -1,0 +1,17 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: abarth-es
+brand: Abarth
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.abarth.es/ # 403 a la lectura automática (2026-10-16)
+  robots: https://www.abarth.es/robots.txt # 403 a la lectura automática: no se ha podido leer
+image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-16): www.abarth.es (home y robots.txt) devuelve 403 a la lectura automática (protección de acceso, no se
+  evita). No se ha podido leer ninguna ficha, configurador ni lista de precios, ni confirmar sus términos de uso ni que
+  abarth.es sea el dominio oficial. Por eso no se guarda ningún precio de Abarth (price: null). Los datos técnicos salen de
+  idae-es (T2); las versiones, de medios T3 (motor-es, motorpasion-es). Pendiente: URLs de modelos, precios y prensa legibles.
+last_verified: 2026-10-16
+status: broken
