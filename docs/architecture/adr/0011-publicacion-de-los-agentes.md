@@ -2,13 +2,14 @@
 
 - **Estado:** aceptada (2026-10-01). Enmienda «Imágenes» (`data/images/` en la lista de rutas):
   aceptada (2026-10-12). Enmienda «Fuentes nuevas» (`data/sources/`, solo altas): aceptada
-  (2026-10-15)
+  (2026-10-15). Enmienda «URL nuevas en fuentes existentes»: aceptada (2026-10-15)
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
   la Decisión. Lo demás no cambia. 2026-10-13 revisión de la enmienda: solo imágenes citadas por un YAML y de
   2 MB como máximo (punto 10). 2026-10-15 enmienda «Fuentes nuevas» propuesta y aceptada: una fuente nueva
-  entra sola con las condiciones del punto 11; cambiar una existente sigue siendo de una persona.
+  entra sola con las condiciones del punto 11; cambiar una existente sigue siendo de una persona. 2026-10-15, más tarde: enmienda «URL nuevas en
+  fuentes existentes» propuesta y aceptada (punto 13).
 
 ## Contexto
 Es la última decisión pendiente de `overview.md`: «Cómo publican los agentes (CI/CD, entornos,
@@ -116,8 +117,8 @@ Detalles:
      en `data/raw/` o `data/images/` lo decide una persona;
    - cada fichero de `data/images/` del diff está citado en el `file` de una entrada `images` de
      algún YAML de `data/raw/` en el commit revisado (enmienda del 2026-10-12, punto 10);
-   - cada fichero de `data/sources/` del diff es nuevo (no se cambia una fuente existente) y
-     cumple el punto 11 (enmienda del 2026-10-15);
+   - cada fichero de `data/sources/` del diff es nuevo y cumple el punto 11, o es una fuente
+     existente que solo cambia como dice el punto 13 (enmiendas del 2026-10-15);
    - no existe `factory/STOP`.
 
    Fusiona con `gh pr merge --merge --match-head-commit <sha> --delete-branch` ([1]): commit de
@@ -231,7 +232,8 @@ que entren solas.
 11. **Condiciones de una fuente nueva** (`newSourceBlocker` en `factory/merge.ts`, leídas en el
     commit revisado):
     - el fichero es nuevo en la PR (`ADDED`). Un cambio en una fuente existente puede subirle el
-      `tier`, cambiarle las URL o darle `image_license`: eso lo decide una persona;
+      `tier`, cambiarle las URL o darle `image_license`: eso lo decide una persona, salvo lo que
+      admite el punto 13;
     - `tier: T1`. Una fuente T2 o T3 nueva (un medio, un organismo) no tiene una web contra la
       que comprobarla;
     - `image_license` vacío o ausente. Los términos de uso de imágenes de una web los lee una
@@ -254,6 +256,32 @@ Comprobado sobre las PR abiertas el 2026-10-15: `porsche-es` (#354), `dacia-es` 
 `smart-es` (#358) entrarían; `ford-es` (#362) y `autonomiacocheselectricos-es` (#354) son
 cambios de fuentes existentes y esperan; `skoda-es` (#333) espera porque Škoda no está en
 `data/candidatas.yaml`.
+
+### URL nuevas en fuentes existentes (enmienda del 2026-10-15, aceptada)
+
+**Una PR puede cambiar una fuente existente sin persona si solo le añade URL en hosts que la fuente
+ya tenía y actualiza `notes` y `last_verified`.**
+
+Contexto propio de la enmienda: el mismo día, Ford (#362) y Porsche (#354) esperaron a una persona
+solo porque añadían una URL a una fuente que ya existía (`ford-es` y
+`autonomiacocheselectricos-es`). Es lo que hace el Researcher cada vez que amplía una marca o usa
+otro artículo de un medio ya registrado.
+
+13. **Condiciones de un cambio en una fuente** (`changedSourceBlocker` en `factory/merge.ts`,
+    comparando el fichero en la base de la PR, `merge-base` con `main`, y en el commit revisado):
+    - fuera de `urls`, `notes` y `last_verified`, ninguna clave cambia, aparece ni desaparece:
+      ni `tier`, ni `image_license`, ni `brand`, ni `id`, ni `status`, ni `kind`;
+    - todas las `urls` de antes siguen, con la misma clave y el mismo valor;
+    - cada URL nueva está **exactamente** en un host que ya tenía alguna URL de la fuente. Un
+      subdominio nuevo (`ofertas.dacia.es` en una fuente que solo tenía `www.dacia.es`) espera
+      a una persona.
+
+    Vale para cualquier `tier`: no sube la confianza en ninguna web nueva, solo apunta a más
+    páginas de una web en la que ya se confiaba. `notes` es texto libre y puede cambiar: lo
+    escribe el Researcher igual que el resto de la fuente y no se publica en la web.
+
+Comprobado el 2026-10-15: los cambios de `ford-es` (#362) y de `autonomiacocheselectricos-es`
+(#354) entrarían.
 
 ## Consecuencias
 **Buenas**
@@ -281,8 +309,9 @@ cambios de fuentes existentes y esperan; `skoda-es` (#333) espera porque Škoda 
   con otra PR que cambie el fichero o la entrada.
 - ~~**Las PR que dan de alta una marca siguen esperando a una persona**, porque tocan
   `data/sources/` (enmienda del 2026-10-12).~~ Desde la enmienda «Fuentes nuevas» entran solas
-  si su fuente cumple el punto 11. Siguen esperando las que cambian una fuente existente o añaden
-  un medio T3, y las de marcas que no están en `data/candidatas.yaml`.
+  si su fuente cumple el punto 11, y las que solo añaden URL a una fuente existente en sus hosts
+  (punto 13). Siguen esperando las que cambian algo más de una fuente, las que añaden un medio T3
+  nuevo y las de marcas que no están en `data/candidatas.yaml`.
 - **Una web oficial mal apuntada en `data/candidatas.yaml` se hereda** (enmienda del 2026-10-15):
   si su `web_es` fuera de un tercero, las fuentes de esa marca entrarían solas como T1. Se
   arregla corrigiendo `data/candidatas.yaml` y la fuente en una PR de persona.

@@ -34,7 +34,8 @@ export interface AgentPr {
 /**
  * Why the PR cannot be merged by the factory, or null when it can (ADR-0011, point 2).
  * `cited` holds the data/images/ files that a data/raw/ YAML cites at the PR head; `sources` maps
- * each data/sources/ file of the PR to newSourceBlocker at the head (amendment of 2026-10-15).
+ * each data/sources/ file of the PR to newSourceBlocker or changedSourceBlocker (amendments of
+ * 2026-10-15).
  */
 export function agentMergeBlocker(
   pr: AgentPr, cited: Set<string>, stopped: boolean, sources = new Map<string, string | null>(),
@@ -64,7 +65,6 @@ export function agentMergeBlocker(
     if (!ALLOWED_PATHS.some((p) => f.path.startsWith(p))) return `toca ${f.path}, fuera de ${ALLOWED_PATHS.join(", ")}`;
     if (f.path.startsWith("data/images/") && !cited.has(f.path)) return `${f.path} no lo cita ningún YAML de data/raw/`;
     if (f.path.startsWith("data/sources/")) {
-      if (f.changeType !== "ADDED") return `cambia la fuente existente ${f.path}`;
       const problem = sources.has(f.path) ? sources.get(f.path) : "no se ha comprobado";
       if (problem) return `${f.path}: ${problem}`;
     }
@@ -140,16 +140,58 @@ export function newSourceBlocker(source: unknown, cited: Set<string>, candidates
   return null;
 }
 
-/** newSourceBlocker for each data/sources/ file of the PR, read at its head. */
+/**
+ * Why a change to an existing data/sources/ file cannot enter without a person, or null (second
+ * amendment of 2026-10-15): it only adds URLs on a host the source already had, and may update
+ * notes and last_verified. Nothing else changes, and no URL is removed or rewritten.
+ */
+export function changedSourceBlocker(before: unknown, after: unknown): string | null {
+  const b = (before ?? {}) as Record<string, unknown>;
+  const a = (after ?? {}) as Record<string, unknown>;
+  const free = new Set(["urls", "notes", "last_verified"]);
+  for (const k of new Set([...Object.keys(b), ...Object.keys(a)])) {
+    if (!free.has(k) && JSON.stringify(b[k]) !== JSON.stringify(a[k])) return `cambia ${k}`;
+  }
+  const map = (v: unknown) => (v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {});
+  const oldUrls = map(b.urls);
+  const newUrls = map(a.urls);
+  const hosts = new Set<string>();
+  for (const [k, u] of Object.entries(oldUrls)) {
+    if (newUrls[k] !== u) return `borra o cambia la url ${k}`;
+    try {
+      hosts.add(new URL(String(u)).hostname);
+    } catch {
+      // an old URL that does not parse adds no host
+    }
+  }
+  for (const [k, u] of Object.entries(newUrls)) {
+    if (k in oldUrls) continue;
+    let host: string;
+    try {
+      host = new URL(String(u)).hostname;
+    } catch {
+      return `url no válida: ${u}`;
+    }
+    if (!hosts.has(host)) return `${u} está en un host que la fuente no tenía`;
+  }
+  return null;
+}
+
+/** newSourceBlocker or changedSourceBlocker for each data/sources/ file of the PR. */
 function sourceProblems(pr: AgentPr, repo: string): Map<string, string | null> {
   const out = new Map<string, string | null>();
-  const files = pr.files.filter((f) => f.path.startsWith("data/sources/") && f.changeType === "ADDED");
+  const files = pr.files.filter((f) => f.path.startsWith("data/sources/") && ["ADDED", "MODIFIED"].includes(f.changeType));
   if (!files.length) return out;
   const cited = citedSources(pr.headRefOid, repo);
   const candidates = parse(git(["show", `${pr.headRefOid}:data/candidatas.yaml`], repo));
+  git(["fetch", "-q", "origin", "main"], repo);
+  const base = git(["merge-base", pr.headRefOid, "FETCH_HEAD"], repo).trim();
+  const at = (sha: string, path: string) => parse(git(["show", `${sha}:${path}`], repo));
   for (const f of files) {
     try {
-      out.set(f.path, newSourceBlocker(parse(git(["show", `${pr.headRefOid}:${f.path}`], repo)), cited, candidates));
+      out.set(f.path, f.changeType === "ADDED"
+        ? newSourceBlocker(at(pr.headRefOid, f.path), cited, candidates)
+        : changedSourceBlocker(at(base, f.path), at(pr.headRefOid, f.path)));
     } catch (e) {
       out.set(f.path, `no se puede leer: ${(e as Error).message.split("\n")[0]}`);
     }
@@ -244,6 +286,7 @@ function merge(pr: AgentPr, month: string, now: Date, repo: string): void {
     `sin conflictos; checks terminados en verde (${checks.join(", ")}); todo el diff en ` +
     `${ALLOWED_PATHS.join(", ")}, sin borrados ni renombrados; cada imagen citada por un YAML de data/raw/; ` +
     "cada fuente nueva T1, citada, sin image_license y en el dominio de su web_es de data/candidatas.yaml; " +
+    "cada fuente cambiada solo con URL nuevas en hosts que ya tenía, notes y last_verified; " +
     `sin factory/STOP. Merge: ${mergeSha}. Para volver atrás: \`git revert -m 1 ${mergeSha}\`.`], repo);
   try {
     git(["push", "-q", "origin", "--delete", pr.headRefName], repo);
