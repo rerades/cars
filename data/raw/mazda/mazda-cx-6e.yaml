@@ -1,0 +1,34 @@
+# Researcher — Mazda CX-6e. Fuentes: idae-es (T2), autonomiacocheselectricos-es (T3). Consultado 2026-10-16. mazda.es no legible.
+brand: mazda
+brand_name: Mazda
+model: CX-6e
+status: {value: on_sale, note: "la fuente dice que llegó a los concesionarios españoles en verano de 2026 y que Mazda vende hoy dos eléctricos", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Takumi
+    battery_kwh: {value: 78, basis: unknown, note: "IDAE id 610096", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 484, note: "IDAE id 610096", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 190, note: "IDAE id 610096", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Takumi Plus
+    battery_kwh: {value: 78, basis: unknown, note: "IDAE id 610097 (Takumi / Takumi Plus 21\")", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 468, note: "IDAE id 610097 (llantas de 21\", que el medio asigna al Takumi Plus)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 190, note: "IDAE id 610097", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    price: null
+images:
+  - file: data/images/mazda/mazda-cx-6e/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Mazda_CX-6e_Leonberg_2026_IMG_8715.jpg/1280px-Mazda_CX-6e_Leonberg_2026_IMG_8715.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mazda_CX-6e_Leonberg_2026_IMG_8715.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-16
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0"
+open_questions:
+  - "mazda.es no se puede leer (inicio solo JavaScript, URL de gama 404, configurador bloqueado por robots.txt): precios null en todas las versiones."
+  - "launch: la preventa se abrió el 10 de marzo de 2026 según un medio T3, pero ninguna fuente dice que sea la fecha desde la que se puede pedir; null."
+  - "segment: la fuente dice «segmento D» (otro medio, «D-SUV» y «SUV»), que no está en la lista de RF-11; null."
+  - "Que ambas versiones se vendan hoy se apoya solo en un medio T3 (2026-09-08); no hay confirmación de entregas en la web de la marca."
