@@ -1,0 +1,43 @@
+# Researcher — Zeekr 7GT. Fuente: zeekr-es (T1). Consultado 2026-10-17.
+brand: zeekr
+brand_name: Zeekr
+model: 7GT
+status: {value: on_sale, note: "la ficha publica precio al contado y financiación con día de contratación 09/10/2026", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Core RWD
+    battery_kwh: {value: 75, basis: gross, note: "la ficha da la batería bruta", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    wltp_km: {value: 519, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 310, note: "publicado: 310 kW / 421 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: rwd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    price:
+      value: 44840
+      unit: EUR
+      price_kind: pvp
+      note: "«Precio al contado 44.840,00 €»; la nota al pie dice «Precio financiando sin Programa Auto + 44.840,00 €»"
+      source_id: zeekr-es
+      url: "https://www.zeekr.es/zeekr-7gt"
+      retrieved: 2026-10-17
+      tier: T1
+  - name: Long Range RWD Launch Edition
+    battery_kwh: {value: 100, basis: gross, note: "la ficha da la batería bruta", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    wltp_km: {value: 655, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 310, note: "publicado: 310 kW / 421 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: rwd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    price: null
+  - name: Privilege AWD Launch Edition
+    battery_kwh: {value: 100, basis: gross, note: "la ficha da la batería bruta", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    wltp_km: {value: 558, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 475, note: "publicado: 475 kW / 646 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: awd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "launch: la web no da la fecha desde la que se puede pedir; los medios solo dicen que la marca llega a España en 2026 (motor16, 2026-05-28). Sin fecha fiable."
+  - "segment: la ficha lo llama «gran turismo 100 % eléctrico», término que no está en la lista de RF-11."
+  - "Precios de Long Range RWD Launch Edition y Privilege AWD Launch Edition: la ficha no los publica (la prensa da 52.890 € y 59.325 €, T3, no se usa)."
+  - "La ficha no da potencia de carga en kW, solo tiempo 10-80 % (13-16 min); dc_max_kw sin dato."
+  - "Los datos IDAE (idae-es) de 7GT MY27 coinciden en autonomía, potencia y batería, pero la batería de la web es bruta."
+  - "Sin imagen de 7GT en Commons con licencia revisada."
