@@ -1,0 +1,37 @@
+# Researcher — Jeep Avenger (eléctrico). Fuentes: idae-es (T2), diariomotor-es (T3). Consultado 2026-10-16. Web de marca ilegible (403).
+brand: jeep
+brand_name: Jeep
+model: Avenger
+status: {value: on_sale, note: "Avenger eléctrico con precios de 2026 en la ficha de Diariomotor (13/05/2026), que dice que la versión eléctrica no cambia en la actualización", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/jeep-avenger-2026/", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: {value: suv_pequeno, note: "la ficha de Diariomotor lo presenta como «SUV Pequeño»", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/jeep-avenger-2026/", retrieved: 2026-10-16, tier: T3}
+needs_review: true
+versions:
+  - name: Longitude
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 577524", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 400, note: "IDAE id 577524", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 577524", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: Altitude
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 577525", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 400, note: "IDAE id 577525", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 577525", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: Summit
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 577526", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 400, note: "IDAE id 577526", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 577526", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+images:
+  - file: data/images/jeep/avenger/frontal.png
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/2023_Jeep_Avenger_EV_front_view.png/1280px-2023_Jeep_Avenger_EV_front_view.png"
+    page_url: "https://commons.wikimedia.org/wiki/File:2023_Jeep_Avenger_EV_front_view.png"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-16
+    license: CC-BY-3.0
+    attribution: "Autosdeprimera, CC BY 3.0"
+open_questions:
+  - "Web oficial de Jeep España ilegible (jeep-official.es no existe; jeep.es devuelve 403): precios sin fuente T1, price: null en todas las versiones."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir el Avenger eléctrico en España."
+  - "Versión 85th Anniversary (Diariomotor, 41.600 € antes de descuentos): sin fila en el IDAE, no se registra para no dejar wltp_km a medias. También hay filas IDAE para «Avenger» y «First Edition» (mismos valores) que Diariomotor no lista."
+  - "Qué versiones se venden hoy solo está confirmado por un medio T3 (Diariomotor, 13/05/2026); la batería del IDAE no dice si es útil o bruta. Tracción no publicada en las fuentes leídas."

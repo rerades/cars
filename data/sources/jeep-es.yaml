@@ -1,0 +1,18 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: jeep-es
+brand: Jeep
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.jeep.es/
+  robots: https://www.jeep.es/robots.txt
+image_license: "" # sin términos registrados: no publicar imágenes de esta web
+notes: >
+  Comprobado el 2026-10-16: el dominio jeep-official.es del encargo no existe (DNS ENOTFOUND, con y sin www).
+  https://www.jeep.es/ y su robots.txt responden 403 a la lectura automática; no se fuerza el acceso. Por eso
+  esta fuente se marca broken: no se ha leído ningún dato de ella ni se ha podido comprobar robots.txt. Los datos
+  de Jeep salen del IDAE (idae-es, T2) y de medios (T3), sin precio. Pendiente: localizar una vía legible del
+  configurador o de la lista de precios y la sala de prensa.
+last_verified: 2026-10-16
+status: broken

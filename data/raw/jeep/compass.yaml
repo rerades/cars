@@ -1,0 +1,51 @@
+# Researcher — Jeep Compass (eléctrico). Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-16. Web de marca ilegible (403).
+brand: jeep
+brand_name: Jeep
+model: Compass
+status: {value: on_sale, note: "el artículo (12/07/2026) da precios de las versiones eléctricas y dice que están listas para llegar a concesionarios; no dice que se entreguen ya", source_id: motor-es, url: "https://www.motor.es/noticias/jeep-compass-electrico-4xe-long-range-venta-espana-2026115234.html", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: {value: suv_compacto, note: "el artículo lo llama «el exitoso SUV compacto de Jeep»", source_id: motor-es, url: "https://www.motor.es/noticias/jeep-compass-electrico-4xe-long-range-venta-espana-2026115234.html", retrieved: 2026-10-16, tier: T3}
+needs_review: true
+versions:
+  - name: Altitude
+    battery_kwh: {value: 74, basis: unknown, note: "IDAE id 610637", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 500, note: "IDAE id 610637", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 157, note: "IDAE id 610637", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: Summit
+    battery_kwh: {value: 74, basis: unknown, note: "IDAE id 610638", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 500, note: "IDAE id 610638", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 157, note: "IDAE id 610638", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: Altitude Long Range
+    battery_kwh: {value: 96, basis: unknown, note: "IDAE id 610640", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 674, note: "IDAE id 610640; Motor.es publica 675 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 170, note: "IDAE id 610640", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: fwd, note: "Motor.es: Long Range, tracción delantera", source_id: motor-es, url: "https://www.motor.es/noticias/jeep-compass-electrico-4xe-long-range-venta-espana-2026115234.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Summit Long Range
+    battery_kwh: {value: 96, basis: unknown, note: "IDAE id 610641", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 674, note: "IDAE id 610641; Motor.es publica 675 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 170, note: "IDAE id 610641", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: fwd, note: "Motor.es: Long Range, tracción delantera", source_id: motor-es, url: "https://www.motor.es/noticias/jeep-compass-electrico-4xe-long-range-venta-espana-2026115234.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: 4xe Upland
+    battery_kwh: {value: 96, basis: unknown, note: "IDAE id 610642", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 600, note: "IDAE id 610642; Motor.es publica 589 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 276, note: "IDAE id 610642", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: awd, note: "Motor.es: tracción total eléctrica, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/jeep-compass-electrico-4xe-long-range-venta-espana-2026115234.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: 4xe Overland
+    battery_kwh: {value: 96, basis: unknown, note: "IDAE id 610643", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 600, note: "IDAE id 610643; Motor.es publica 589 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 276, note: "IDAE id 610643", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: awd, note: "Motor.es: tracción total eléctrica, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/jeep-compass-electrico-4xe-long-range-venta-espana-2026115234.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+images: []
+open_questions:
+  - "Web oficial de Jeep España ilegible (jeep-official.es no existe; jeep.es devuelve 403): precios sin fuente T1, price: null en todas las versiones."
+  - "launch: las fuentes leídas no dan una fecha de apertura de pedidos coherente (Motor16 habla del 6 de mayo, otra de junio de 2026); no se registra."
+  - "Autonomía 4xe: el IDAE da 600 km y Motor.es 589 km; Long Range: 674 frente a 675. Se usa el IDAE (T2) y se anota; revisar contra la web de la marca."
+  - "Versión First Edition (IDAE id 610639, 74 kWh, 500 km): Motor.es no la lista entre las que se venden hoy, no se registra."
+  - "Imagen: sin foto del Compass eléctrico con licencia comprobada en Commons (la categoría Jeep_Compass_(M624) da 404)."
+  - "Qué versiones se venden hoy lo confirma solo un medio T3 (Motor.es, 12/07/2026); la tracción de las versiones de 74 kWh no está publicada."
