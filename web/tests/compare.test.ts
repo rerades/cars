@@ -262,6 +262,30 @@ describe("/comparar/datos/ in the built site", () => {
     assert.doesNotMatch(text, /potencia y batería no publicadas/);
   });
 
+  test("CA-13/CA-10: the index lists comparable models only, with all version names and no figures", () => {
+    const index = JSON.parse(readFileSync(join(out, "comparar/datos/indice.json"), "utf8"));
+    const keys = index.map((e: any) => `${e.brand}/${e.slug}`).sort();
+    assert.deepEqual(keys, ["acme/Soon", "acme/Volta", "zeta/Cheap", "zeta/NoPrice"].sort());
+    const cheap = index.find((e: any) => e.slug === "Cheap");
+    assert.deepEqual(cheap, {
+      brand: "zeta", slug: "Cheap", brand_name: "Zeta", model: "Cheap", status: "on_sale",
+      versions: ["Cheap A", "Cheap B"], default_version: "Cheap B",
+    });
+    const volta = index.find((e: any) => e.slug === "Volta");
+    assert.deepEqual(volta.versions, acme().versions.map((v: any) => v.name));
+    assert.equal(volta.default_version, "Volta 60");
+    assert.equal(index.find((e: any) => e.slug === "NoPrice").default_version, "First");
+    for (const e of index) {
+      assert.deepEqual(Object.keys(e).sort(),
+        ["brand", "brand_name", "default_version", "model", "slug", "status", "versions"]);
+    }
+  });
+
+  test("robots.txt blocks /comparar/datos/ and nothing else", () => {
+    const lines = readFileSync(join(out, "robots.txt"), "utf8").split("\n").map((l) => l.trim()).filter(Boolean);
+    assert.deepEqual(lines, ["User-agent: *", "Disallow: /comparar/datos/"]);
+  });
+
   test("an announced model with only a name publishes nulls", () => {
     const pub = JSON.parse(readFileSync(file("acme", "Soon"), "utf8"));
     assert.equal(pub.versions[0].price, null);
