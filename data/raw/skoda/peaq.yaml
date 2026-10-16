@@ -12,31 +12,14 @@ versions:
   - name: Selection
     battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
-    price:
-      value: 47152.50
-      unit: EUR
-      price_kind: financed
-      price_terms: "PVP recomendado financiando de 47.152,50 € para un PEAQ SELECTION 91 kWh - 210kW. Oferta válida hasta el 31/10/2026 para clientes particulares que financien a través de ŠKODA Financial Services, con capital mínimo de 19.000 €, duración mínima de 84 meses y permanencia mínima de 36 meses; incompatible con otras ofertas financieras."
-      price_terms_url: "https://www.skoda.es/modelos/peaq/peaq"
-      source_id: skoda-es
-      url: "https://www.skoda.es/modelos/peaq/peaq"
-      retrieved: 2026-10-14
-      tier: T1
+    price: null
   - name: Sportline
     battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
-    price:
-      value: 51332.50
-      unit: EUR
-      price_kind: financed
-      price_terms: "PVP recomendado financiando de 51.332,50 € para un PEAQ SPORTLINE 91 kWh - 210kW. Oferta válida hasta el 31/10/2026 para clientes particulares que financien a través de ŠKODA Financial Services, con capital mínimo de 19.000 €, duración mínima de 84 meses y permanencia mínima de 36 meses; incompatible con otras ofertas financieras."
-      price_terms_url: "https://www.skoda.es/modelos/peaq/peaq"
-      source_id: skoda-es
-      url: "https://www.skoda.es/modelos/peaq/peaq"
-      retrieved: 2026-10-14
-      tier: T1
+    price: null
 images: []
 open_questions:
+  - "Revisión (2026-10-16): los precios financed se quitaron (price: null) porque price_terms era un resumen y no el texto literal de la nota (PRD-001 RF-9, ADR-0001). Volver a leer las notas íntegras y copiarlas."
   - "Precios: los «desde» (41.900 / 46.050 €) incluyen Plan Auto+ (4.050 €) y no se usan. Los textos de price_terms son un resumen de las notas, no el texto íntegro; no se ha comprobado qué incluye exactamente el «PVP recomendado financiando» (descuentos, Plan CAE); revisar."
   - "segment: la ficha lo describe como SUV de 5 o 7 plazas sin clase formal; queda null."
   - "La ficha habla de «dos opciones de motor» pero solo detalla la de 210 kW; el IDAE lista también una versión de 220 kW (motor dual). No se añade sin fuente de la marca."
