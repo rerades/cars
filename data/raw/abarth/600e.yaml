@@ -1,0 +1,27 @@
+# Researcher — Abarth 600e. Fuentes: idae-es (T2), motor-es y motorpasion-es (T3). Consultado 2026-10-16. abarth.es da 403.
+brand: abarth
+brand_name: Abarth
+model: 600e
+status: {value: on_sale, note: "artículos de 2024-10-30 y 2024-11-12: pedidos abiertos y configurador activo; no confirmado hoy", source_id: motor-es, url: "https://www.motor.es/noticias/precio-abarth-600e-2024105008.html", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Abarth 600e Turismo
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 603481", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 409, note: "IDAE id 603481", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 175, note: "IDAE id 603481; publicado: 240 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+  - name: Abarth 600e Scorpionissima
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 603482", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 406, note: "IDAE id 603482", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 207, note: "IDAE id 603482; publicado: 280 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "abarth.es devuelve 403 (home y robots.txt): sin precios T1; price: null en todas las versiones."
+  - "Versiones y estado salen de artículos de 2024 (motor.es, motorpasion.com); no se ha podido confirmar que se sigan vendiendo hoy: needs_review."
+  - "launch: los artículos dicen que los pedidos están abiertos pero no dan la fecha de apertura."
+  - "segment: los medios dicen «SUV» / «primer SUV 100% eléctrico», sin término literal de la lista de RF-11 (suv_pequeno, suv_compacto, suv_grande): null."
+  - "Un medio T3 (italpassion.fr) cita 334 km WLTP; el IDAE da 409 y 406 km. Se usa el IDAE (T2, homologación); sin confirmar con la web de la marca."
+  - "Imágenes: no se ha buscado ninguna imagen en Wikimedia Commons en esta ejecución."

@@ -1,0 +1,37 @@
+# Researcher — Abarth 500e. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-16. abarth.es da 403.
+brand: abarth
+brand_name: Abarth
+model: 500e
+status: {value: on_sale, note: "artículo de 2023-05-19: Base y Turismo, hatchback y Cabrio, disponibles en el mercado español; no confirmado hoy", source_id: motor-es, url: "https://www.motor.es/noticias/precio-abarth-500e-202395003.html", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Abarth 500e
+    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 603321", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 253, note: "IDAE id 603321", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 113, note: "IDAE id 603321; publicado: 154 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+  - name: Abarth 500e Turismo
+    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 603323", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 253, note: "IDAE id 603323", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 113, note: "IDAE id 603323; publicado: 154 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+  - name: Abarth 500e Cabrio
+    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 603322", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 242, note: "IDAE id 603322", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 113, note: "IDAE id 603322; publicado: 154 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+  - name: Abarth 500e Cabrio Turismo
+    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 603324", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 242, note: "IDAE id 603324", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 113, note: "IDAE id 603324; publicado: 154 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "abarth.es devuelve 403 (home y robots.txt): sin precios T1; price: null en todas las versiones."
+  - "Versiones y estado salen de un artículo de motor.es de 2023-05-19; no se ha podido confirmar que se sigan vendiendo hoy en España: needs_review."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir (el artículo no la indica)."
+  - "segment: ninguna fuente consultada usa un término literal de la lista de RF-11."
+  - "Las versiones Scorpionissima (hatchback y Cabrio, IDAE 578438 y 578439) no se incluyen: motor.es dice que dejó de venderse en 2023."
+  - "Imágenes: no se ha buscado ninguna imagen en Wikimedia Commons en esta ejecución."
