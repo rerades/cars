@@ -1,0 +1,46 @@
+# Researcher — Alfa Romeo Junior Elettrica. Fuentes: idae-es (T2), hibridosyelectricos-es y motor16 (T3). Consultado 2026-10-17. Web oficial ilegible (403).
+brand: alfa-romeo
+brand_name: Alfa Romeo
+model: Junior Elettrica
+status: {value: on_sale, note: "el artículo de agosto de 2025 lista precios de cuatro acabados en España, pero no dice expresamente que se puedan pedir hoy; la web de la marca no se puede leer", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/electrico-con-hasta-280-cv-este-suv-pequeno-es-nueva-esperanza-historica-marca-italiana_81853_102.html", retrieved: 2026-10-17, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Junior Elettrica
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 602986", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 410, note: "IDAE id 602986; la prensa publica 412 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 602986 (156 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    price: null
+  - name: Junior Elettrica Speciale
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 602987", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 410, note: "IDAE id 602987", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 602987 (156 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    price: null
+  - name: Junior Elettrica Intensa
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 606499", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 410, note: "IDAE id 606499", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 606499 (156 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    price: null
+  - name: Junior Elettrica Veloce
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 606500 (nombre 'VELOC')", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 322, note: "IDAE id 606500", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    price: null
+images:
+  - file: data/images/alfa-romeo/junior-elettrica/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Alfa_Romeo_Junior_Elettrica_Automesse_Ludwigsburg_2024_IMG_1573.jpg/1280px-Alfa_Romeo_Junior_Elettrica_Automesse_Ludwigsburg_2024_IMG_1573.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Alfa_Romeo_Junior_Elettrica_Automesse_Ludwigsburg_2024_IMG_1573.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-17
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "La web alfaromeo.es devuelve 403 (portada y robots.txt): sin precios, launch, segmento oficial ni términos de imágenes."
+  - "Precio null en todas las versiones: los precios de prensa (38.500 € Elettrica, 41.000 € Speciale en 2024) son T3 y de lanzamiento."
+  - "launch null: ninguna fuente da la fecha desde la que se puede pedir en España (motor16, 2024-06-11, solo dice que las primeras unidades llegan en septiembre)."
+  - "segment null: la prensa lo llama «B-SUV»/«B SUV», término que no está en la lista de RF-11."
+  - "Veloce: el IDAE (id 606500) da power_kw 280 con nombre '208KW (280 CV)', contradictorio; la prensa dice 281 CV. Potencia en blanco."
+  - "Veloce: la prensa (agosto 2025) dice que iniciaba comercialización en España en otoño de 2025; sin confirmar que se venda hoy."
+  - "Autonomía: IDAE 410 km frente a 412 km de la prensa (T3); se usa el IDAE."
+  - "Tracción, carga DC/AC sin fuente; no se rellenan."
+  - "Imagen frontal.jpg: el ángulo no se ha comprobado visualmente (el nombre es orientativo)."
