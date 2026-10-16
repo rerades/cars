@@ -1,0 +1,77 @@
+# Researcher — Lexus RZ. Fuentes: lexus-es (T1), idae-es (T2), motor-es (T3). Consultado 2026-10-16.
+brand: lexus
+brand_name: Lexus
+model: RZ
+status: {value: on_sale, note: "la ficha da gama, configurador y precio desde 52.000 €", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+launch: null
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 559, note: "hasta 559 km (RZ 350e)", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+  power_max_kw: {value: 300, note: "408 CV (RZ 550e)", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+  drivetrains:
+    value: [fwd, awd]
+    source_id: lexus-es
+    url: "https://www.lexusauto.es/modelos/rz/"
+    retrieved: 2026-10-16
+    tier: T1
+versions:
+  - name: RZ 350e e-Premium Efficiency FWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607649 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 559, note: "coincide con la web de la marca; IDAE id 607649 (MC26)", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    power_kw: {value: 165, note: "publicado: 224 CV", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: fwd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    price: null
+  - name: RZ 350e e-Premium FWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607650 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 509, note: "IDAE id 607650 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 165, note: "publicado: 224 CV", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: fwd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    price: null
+  - name: RZ 350e e-Executive FWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607651 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 508, note: "IDAE id 607651 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 165, note: "publicado: 224 CV", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: fwd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    price: null
+  - name: RZ 500e e-Executive AWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607652 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 460, note: "IDAE id 607652 (MC26); la web da hasta 460 km para el RZ 500e", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 280, note: "publicado: 380 CV; la web da el valor del RZ 500e, no de este acabado", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: awd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    price: null
+  - name: RZ 500e e-Luxury AWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607653 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 457, note: "IDAE id 607653 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 280, note: "publicado: 380 CV; la web da el valor del RZ 500e, no de este acabado", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: awd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    price: null
+  - name: RZ 500e e-Luxury Steer by Wire AWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607654 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 458, note: "IDAE id 607654 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 280, note: "publicado: 380 CV; la web da el valor del RZ 500e, no de este acabado", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: awd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    price: null
+  - name: RZ 550e F Sport AWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607655 (MC26)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 463, note: "coincide con la web de la marca; IDAE id 607655 (MC26)", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    power_kw: {value: 300, note: "publicado: 408 CV", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: awd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/rz/", retrieved: 2026-10-16, tier: T1}
+    price: null
+images:
+  - file: data/images/lexus/rz/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/2023_Lexus_RZ450e_Premium.jpg/1280px-2023_Lexus_RZ450e_Premium.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2023_Lexus_RZ450e_Premium.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-16
+    license: CC-BY-SA-4.0
+    attribution: "Chanokchon, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "launch: ninguna fuente leída da la fecha desde la que se puede pedir el RZ actual en España (la prensa de oct-nov 2025 habla de configurador y primeras unidades en febrero de 2026, sin confirmar)."
+  - "segment: la web lo presenta como «SUV eléctrico / crossover», que no es un término literal de RF-11; queda null."
+  - "Precios: la web (lexusauto.es) solo da «desde 52.000 €» para el modelo; el JSON de las páginas de acabados no se pudo asociar a cada versión. La prensa (T3) cita 52.000 €, 52.900 € y 55.900 € para el 350e, pero no vale como fuente de precio. price: null en todas."
+  - "Potencia: la web da 165 kW (350e), 280 kW (500e) y 300 kW (550e) por motorización, no por acabado; el IDAE da 167 kW en todas las MC26, que discrepa de la web (T1 prevalece)."
+  - "Autonomía: solo 559 (350e Premium Efficiency) y 463 (550e) están en la web; el resto, del IDAE (T2). La web dice hasta 460 km para el 500e, coherente con 460/457/458."
+  - "Batería: el IDAE da 77 kWh sin decir si es útil o bruta."
+  - "Imagen: la foto de Commons es un RZ 450e de 2023 (antes del lavado de cara), no la gama actual."
+  - "Versiones anteriores del IDAE (RZ 300e, 450e; MY23-MY25) no se incluyen: la web actual solo ofrece 350e, 500e y 550e."

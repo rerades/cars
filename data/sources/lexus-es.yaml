@@ -1,0 +1,24 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: lexus-es
+brand: Lexus
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.lexusauto.es/
+  models: https://www.lexusauto.es/modelos/rz/ # también https://www.lexusauto.es/modelos/es/overview
+  specs: https://www.lexusauto.es/new-cars/es/specifications
+  press: https://prensa.lexusauto.es/
+  legal: https://www.lexusauto.es/legal
+  robots: https://www.lexusauto.es/robots.txt
+image_license: "" # la sala de prensa tiene botones de descarga pero no publica términos de uso de las imágenes: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-16): www.lexus.es devuelve 403 a la lectura automática (home y robots.txt), así que no se usa.
+  La web española de Lexus es www.lexusauto.es (enlaza a prensa.lexusauto.es y prensa@lexusauto.es) y responde.
+  Su robots.txt no bloquea /modelos/ ni /new-cars/; solo formularios, parámetros de concesionario y las rutas del
+  configurador con path=customize, engine, model y summary. Las fichas dan por modelo autonomía WLTP, potencia y
+  tracción y un precio "desde" (RZ 52.000 €, ES 61.500 €); no dan precio por versión ni batería en texto legible:
+  las páginas de especificaciones y del selector de acabados son JSON de más de 300 KB sin tabla legible, así que no
+  se guardan precios. La batería sale del IDAE. La sala de prensa no declara términos de imágenes.
+last_verified: 2026-10-16
+status: active
