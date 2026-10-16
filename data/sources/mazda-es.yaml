@@ -1,0 +1,19 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: mazda-es
+brand: Mazda
+tier: T1
+market: ES
+kind: [ prices, specs, images, announcements ]
+urls:
+  home: https://www.mazda.es/
+  robots: https://www.mazda.es/robots.txt
+  sitemap: https://www.mazda.es/sitemap.xml
+image_license: "" # sin términos de uso de imágenes leídos: no se publican imágenes de esta fuente
+notes: >
+  Web oficial de Mazda España (dominio mazda.es, responde; comprobado el 2026-10-16). robots.txt bloquea el
+  configurador, las búsquedas, accesorios y formularios, pero no las páginas de gama. La página de inicio llega sin
+  contenido legible (solo JavaScript) y las URL de gama probadas (/coches/mazda6e/, /coches/mazda-6e/) dan 404; el
+  sitemap no lista el 6e ni el CX-6e. No se ha podido leer ninguna versión ni precio, así que no se usa como fuente
+  de ningún valor: los datos de Mazda salen del IDAE (idae-es) y de medios (T3). Sin sala de prensa localizada.
+last_verified: 2026-10-16
+status: active
