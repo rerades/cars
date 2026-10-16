@@ -5,7 +5,10 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
 import { stringify } from "yaml";
-import { defaultVersion, isComparable, projectModel } from "../src/lib/compare.ts";
+import {
+  defaultVersion, isComparable, parseEntries, projectModel, sheetOrder, validateSelection, versionToAdd, writeSearch,
+  type SelectableModel,
+} from "../src/lib/compare.ts";
 import { normalize } from "../src/lib/data.ts";
 import { acme, sourced } from "./fixtures.ts";
 
@@ -61,6 +64,117 @@ describe("defaultVersion (RF-8)", () => {
   });
   test("an empty list gives null", () => {
     assert.equal(defaultVersion([]), null);
+  });
+});
+
+describe("selection in the URL (RF-10, RF-11, RF-13)", () => {
+  const ok = { status: { value: "on_sale" } };
+  const NASTY = "Born+ (190 CV) / Año \"é\" & más";
+  const models: SelectableModel[] = [
+    { brand: "cupra", slug: "tavascan", ...ok, versions: [{ name: "Tavascan VZ", price: { value: 60000 } }, { name: "Tavascan", price: { value: 50000 } }] },
+    { brand: "polestar", slug: "polestar-2", ...ok, versions: [{ name: "Standard Range Single Motor (con Climate Pack)" }, { name: NASTY }] },
+    { brand: "kia", slug: "ev3", status: { value: "announced" }, versions: [{ name: "EV3 Air" }] },
+    { brand: "kia", slug: "ev9", ...ok, versions: [{ name: "EV9" }] },
+    { brand: "old", slug: "gone", status: { value: "discontinued" }, versions: [{ name: "Gone 1" }] },
+    { brand: "byd", slug: "atto-2", ...ok, needs_review: true, versions: [{ name: "Atto 2" }] },
+    { brand: "acme", slug: "empty", ...ok, versions: [] },
+  ];
+  const read = (search: string) => validateSelection(parseEntries(search), models);
+
+  test("CA-11: write then read gives the same columns in the same order", () => {
+    const columns = [
+      { brand: "polestar", slug: "polestar-2", name: NASTY },
+      { brand: "cupra", slug: "tavascan", name: "Tavascan VZ" },
+      { brand: "polestar", slug: "polestar-2", name: "Standard Range Single Motor (con Climate Pack)" },
+    ];
+    const search = writeSearch(columns);
+    const sel = read(`?${search}`);
+    assert.deepEqual(sel.columns, columns);
+    assert.equal(sel.ignored, 0);
+    assert.equal(sel.tooMany, false);
+  });
+
+  test("the design's example URL is written exactly like that", () => {
+    assert.equal(
+      writeSearch([
+        { brand: "cupra", slug: "tavascan", name: "Tavascan VZ" },
+        { brand: "polestar", slug: "polestar-2", name: "Standard Range Single Motor (con Climate Pack)" },
+      ]),
+      "v=cupra%2Ftavascan%2FTavascan+VZ&v=polestar%2Fpolestar-2%2FStandard+Range+Single+Motor+%28con+Climate+Pack%29",
+    );
+  });
+
+  test("a name with /, + and accents survives, split at the first two slashes only", () => {
+    const [e] = parseEntries(writeSearch([{ brand: "polestar", slug: "polestar-2", name: NASTY }]));
+    assert.deepEqual(e, { brand: "polestar", slug: "polestar-2", name: NASTY });
+    assert.deepEqual(parseEntries("v=a%2Fb%2Fc%2Fd%2Be")[0], { brand: "a", slug: "b", name: "c/d+e" });
+  });
+
+  test("RF-13: the order is the URL's, not the catalogue's or alphabetical", () => {
+    const sel = read("v=polestar/polestar-2/" + encodeURIComponent(NASTY) + "&v=cupra/tavascan/Tavascan");
+    assert.deepEqual(sel.columns.map((c) => c.brand), ["polestar", "cupra"]);
+  });
+
+  test("short form brand/model: the default version (RF-8)", () => {
+    assert.deepEqual(read("v=cupra%2Ftavascan").columns, [{ brand: "cupra", slug: "tavascan", name: "Tavascan" }]);
+    assert.deepEqual(read("v=polestar/polestar-2").columns[0].name, "Standard Range Single Motor (con Climate Pack)");
+  });
+
+  test("CA-2: 4 valid versions give the first 3 and tooMany", () => {
+    const sel = read("v=cupra/tavascan/Tavascan&v=cupra/tavascan/Tavascan+VZ&v=kia/ev3&v=kia/ev9");
+    assert.equal(sel.columns.length, 3);
+    assert.deepEqual(sel.columns.map((c) => c.slug), ["tavascan", "tavascan", "ev3"]);
+    assert.equal(sel.tooMany, true);
+    assert.equal(sel.ignored, 0);
+  });
+
+  test("an invalid value before the 4th does not use up a column: the 3 first valid are kept", () => {
+    const sel = read("v=nope/x/y&v=kia/ev3&v=kia/ev9&v=cupra/tavascan&v=cupra/tavascan/Tavascan+VZ");
+    assert.deepEqual(sel.columns.map((c) => c.slug), ["ev3", "ev9", "tavascan"]);
+    assert.equal(sel.ignored, 1);
+    assert.equal(sel.tooMany, true);
+  });
+
+  test("CA-13: unknown, repeated, excluded and malformed are ignored and counted, two valid stay", () => {
+    const sel = read([
+      "v=kia/ev3", "v=cupra/tavascan/No+such+version", "v=kia/ev3", "v=old/gone/Gone+1",
+      "v=byd/atto-2/Atto+2", "v=acme/empty", "v=garbage", "v=", "v=cupra/tavascan/Tavascan+VZ",
+    ].join("&"));
+    assert.deepEqual(sel.columns.map((c) => c.name), ["EV3 Air", "Tavascan VZ"]);
+    assert.equal(sel.ignored, 7);
+    assert.equal(sel.tooMany, false);
+  });
+
+  test("a short form that repeats a version already there is a repeat", () => {
+    const sel = read("v=kia/ev3&v=kia/ev3/EV3+Air");
+    assert.equal(sel.columns.length, 1);
+    assert.equal(sel.ignored, 1);
+  });
+
+  test("no v, or only invalid ones, gives an empty selection and no error", () => {
+    assert.deepEqual(read(""), { columns: [], ignored: 0, tooMany: false });
+    assert.deepEqual(read("x=1&v=zzz"), { columns: [], ignored: 1, tooMany: false });
+  });
+});
+
+describe("versionToAdd (RF-8, RF-9)", () => {
+  const cheap = { versions: [{ name: "Cheap A", price: { value: 42000 } }, { name: "Cheap B", price: { value: 35000 } }, { name: "Cheap C" }] };
+  test("CA-9: the 35.000 € version enters first", () => {
+    assert.equal(versionToAdd(cheap, []), "Cheap B");
+  });
+  test("with no price anywhere, the first in the file", () => {
+    assert.equal(versionToAdd({ versions: [{ name: "First" }, { name: "Second" }] }, []), "First");
+  });
+  test("default already present: the next in sheet order that is not", () => {
+    assert.equal(versionToAdd(cheap, ["Cheap B"]), "Cheap A");
+    assert.equal(versionToAdd(cheap, ["Cheap B", "Cheap A"]), "Cheap C");
+  });
+  test("every version taken (or none): null", () => {
+    assert.equal(versionToAdd(cheap, ["Cheap A", "Cheap B", "Cheap C"]), null);
+    assert.equal(versionToAdd({ versions: [] }, []), null);
+  });
+  test("sheetOrder: price ascending, unpriced last in file order", () => {
+    assert.deepEqual(sheetOrder(cheap.versions).map((v) => v.name), ["Cheap B", "Cheap A", "Cheap C"]);
   });
 });
 
