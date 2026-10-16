@@ -1,0 +1,42 @@
+# Researcher — Xpeng G6. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-17.
+brand: xpeng
+brand_name: Xpeng
+model: G6
+status: {value: on_sale, note: "motor.es (2025-09) dice que los G6 y G9 mejorados ya aceptan pedidos en España; motor.es (2026-01-30) añade la versión Standard Range RWD a la gama española", source_id: motor-es, url: "https://www.motor.es/noticias/precio-xpeng-g6-g9-2026-2025110181.html", retrieved: 2026-10-17, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: G6 RWD Standard Range
+    battery_kwh: {value: 68.5, basis: unknown, note: "IDAE id 607455 (G6 MY25. RWD Standard range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 566, note: "IDAE id 607455; motor.es (2026-01-30) publica 455 km para esta versión: discrepancia sin resolver", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 218, note: "IDAE id 607455; motor.es publica 252 CV (185 kW): discrepancia sin resolver", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: rwd, note: "según el nombre de la versión", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: G6 RWD Long Range
+    battery_kwh: {value: 80.8, basis: unknown, note: "IDAE id 607456 (G6 MY25. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 568, note: "IDAE id 607456", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 218, note: "IDAE id 607456", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: rwd, note: "según el nombre de la versión", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: G6 AWD Performance
+    battery_kwh: {value: 80.8, basis: unknown, note: "IDAE id 607457 (G6 MY25. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 528, note: "IDAE id 607457", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 358, note: "IDAE id 607457", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: awd, note: "según el nombre de la versión", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+images:
+  - file: data/images/xpeng/g6/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/XPeng_G6_%282025%29_IAA_2025_DSC_2057.jpg/1280px-XPeng_G6_%282025%29_IAA_2025_DSC_2057.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:XPeng_G6_(2025)_IAA_2025_DSC_2057.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-17
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "No se ha encontrado una web oficial de Xpeng en España (xpeng.com/es devuelve 404; xpeng.com es global y en inglés; es.xpeng.com y xpeng.es no existen): sin T1, todos los precios son null."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir (motor.es, 2024-09-24, solo da precios vigentes desde septiembre de 2024)."
+  - "segment: motor.es lo llama «SUV Coupé», que no está en la lista de RF-11: null."
+  - "G6 RWD Standard Range: el IDAE (id 607455) da 566 km y 218 kW; motor.es (2026-01-30) da 455 km y 252 CV. Confirmar con T1."
+  - "Los IDAE ids 607272-607274 (G6 MY24) son homologaciones anteriores con otras baterías; no se usan."
+  - "Versión Black Edition de AWD Performance (motor.es, 2025-09): sin fila propia en el IDAE; no se incluye."
