@@ -7,7 +7,7 @@ import { execFileSync } from "node:child_process";
 import { appendFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
-import { REPO, STATE_DIR } from "./orchestrator.ts";
+import { notify, REPO, STATE_DIR } from "./orchestrator.ts";
 
 export const AGENT_BRANCH = /^agent\/([^/]+)\/([^/]+)$/;
 export const ALLOWED_PATHS = ["data/raw/", "data/images/", "data/sources/", "docs/bitacora/"];
@@ -307,16 +307,6 @@ function flag(pr: AgentPr, reason: string, repo: string): void {
     ...(preview ? ["--add-label", PREVIEW] : [])], repo);
   gh(["pr", "comment", String(pr.number), "--body",
     `🏭 Espera a una persona (ADR-0011): ${reason}. SHA ${pr.headRefOid}.`], repo);
-}
-
-/** A local notification on the factory's Mac; nothing elsewhere. */
-function notify(text: string): void {
-  if (process.platform !== "darwin") return;
-  try {
-    execFileSync("osascript", ["-e", `display notification ${JSON.stringify(text)} with title "Dark Factory"`]);
-  } catch {
-    // no notification is not a failure
-  }
 }
 
 /** The PRs that wait for a person, for --status. Empty when gh is not available. */
