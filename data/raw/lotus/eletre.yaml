@@ -1,0 +1,39 @@
+# Researcher — Lotus Eletre. Web oficial no legible e IDAE sin Lotus; versiones de motor-es (T3, 20/03/2025). Consultado 2026-10-16.
+brand: lotus
+brand_name: Lotus
+model: Eletre
+status: {value: on_sale, note: "T3: artículo de 20/03/2025 con precios vigentes en España desde marzo de 2025; no confirmado hoy", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Eletre
+    power_kw: {value: 450, note: "publicado: 612 CV / 450 kW", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    drivetrain: {value: awd, note: "publicado: tracción total, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Eletre GT
+    power_kw: {value: 450, note: "publicado: 612 CV / 450 kW", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    drivetrain: {value: awd, note: "publicado: tracción total, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Eletre GT SE
+    power_kw: {value: 450, note: "publicado: 612 CV / 450 kW", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    drivetrain: {value: awd, note: "publicado: tracción total, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Eletre Sport SE
+    power_kw: {value: 450, note: "publicado: 612 CV / 450 kW", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    drivetrain: {value: awd, note: "publicado: tracción total, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Eletre Sport
+    power_kw: {value: 675, note: "publicado: 918 CV / 675 kW", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    drivetrain: {value: awd, note: "publicado: tracción total, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Eletre Sport Carbon
+    power_kw: {value: 675, note: "publicado: 918 CV / 675 kW", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    drivetrain: {value: awd, note: "publicado: tracción total, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+images: []
+open_questions:
+  - "Web oficial de Lotus España: sin fichas ni precios legibles (configurador bloqueado por robots.txt). IDAE no tiene la marca Lotus. Precio, wltp_km y batería sin fuente válida; wltp_km en ninguna versión (motor.es da 600/500 km y 111,9 kWh, solo T3 y sin asignar a cada versión)."
+  - "Única fuente de versiones: motor-es de marzo de 2025 (T3); no se ha confirmado que sigan vendiéndose hoy ni la lista actual. Eletre X (híbrido) excluido."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España. segment: motor.es dice «SUV» sin tamaño y la web «Electric Hyper SUV»; no son términos literales de RF-11; null."
+  - "Imágenes: no se ha buscado ni registrado ninguna imagen de Commons en esta ejecución."
