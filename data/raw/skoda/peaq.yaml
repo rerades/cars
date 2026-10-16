@@ -1,0 +1,28 @@
+# Researcher — Škoda Peaq. Fuente: skoda-es (T1). Consultado 2026-10-14.
+brand: skoda
+brand_name: Škoda
+model: Peaq
+status: {value: on_sale, note: "la ficha tiene configurador y «Pide tu oferta», pero no dice que los pedidos estén abiertos ni da fecha de entregas", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  wltp_max_km: {value: 638, note: "«Con hasta 638 km de autonomía eléctrica»", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+versions:
+  - name: Selection
+    battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+    price: null
+  - name: Sportline
+    battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "Revisión (2026-10-16): los precios financed se quitaron (price: null) porque price_terms era un resumen y no el texto literal de la nota (PRD-001 RF-9, ADR-0001). Volver a leer las notas íntegras y copiarlas."
+  - "Precios: los «desde» (41.900 / 46.050 €) incluyen Plan Auto+ (4.050 €) y no se usan. Los textos de price_terms son un resumen de las notas, no el texto íntegro; no se ha comprobado qué incluye exactamente el «PVP recomendado financiando» (descuentos, Plan CAE); revisar."
+  - "segment: la ficha lo describe como SUV de 5 o 7 plazas sin clase formal; queda null."
+  - "La ficha habla de «dos opciones de motor» pero solo detalla la de 210 kW; el IDAE lista también una versión de 220 kW (motor dual). No se añade sin fuente de la marca."
+  - "Tracción y kW de carga DC no están en la ficha. wltp_km por versión tampoco (el IDAE da 638 km para Selection 210 kW, sin cruzar)."
+  - "launch y pedidos abiertos: la ficha no los indica; modelo marcado needs_review."
+  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."
