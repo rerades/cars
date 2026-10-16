@@ -58,7 +58,7 @@ El cambio es solo de configuración: `billing.mode` en `factory/budgets.yaml` y 
   ```json
   {"run_id":"...","agent":"researcher","task":"#14","started":"...","ended":"...",
    "cost_usd":0.42,"cost_kind":"estimated|billed","turns":18,"tokens_in":0,"tokens_out":0,
-   "outcome":"success|failed|budget_exceeded|rate_limited|blocked","pr":"#21"}
+   "outcome":"success|failed|budget_exceeded|rate_limited|auth_failed|blocked","pr":"#21"}
   ```
 - **Log de acciones:** hooks `PreToolUse` y `PostToolUse` registran cada herramienta usada, con sus argumentos resumidos y si se permitió o se bloqueó.
 - **Trazas detalladas y autoevaluaciones:** ver ADR-0004 (trazas `stream-json` en `ops/traces/` y evals deterministas; Langfuse Cloud queda como paso 2).
@@ -66,6 +66,7 @@ El cambio es solo de configuración: `billing.mode` en `factory/budgets.yaml` y 
 
 ## Consecuencias
 - Fase 1 no tiene coste adicional, pero comparte cuota con el uso personal y depende de una política que Anthropic puede cambiar.
+- Fase 1 comparte también el inicio de sesión (OAuth en el Llavero) con las demás sesiones de Claude del Mac. Si su renovación falla, el CLI no se autentica: el orquestador espera dos minutos y reintenta una vez; si vuelve a fallar, la ejecución queda `auth_failed` y avisa con una notificación (2026-10-16).
 - Los USD del ledger en fase 1 son equivalentes. Sirven para comparar agentes y estimar lo que costaría la fase 2.
 - El orquestador vive en `factory/run.ts` y `factory/orchestrator.ts`; los hooks en `.claude/hooks/`. La cola de tareas está en `factory/queue.yaml` y se consume con `run.ts --next`, que es lo que llama launchd.
 - Los límites iniciales son conservadores y se ajustarán con los datos del ledger.

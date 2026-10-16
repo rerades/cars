@@ -183,6 +183,8 @@ describe("comando", () => {
     assert.equal(orq.classify(0, { is_error: false, result: conFuentes }, ""), "success");
     assert.equal(orq.classify(0, { is_error: false, result: "RESULTADO: ok\nal final no\nRESULTADO: fallido" }, ""), "failed");
     assert.equal(orq.classify(1, { is_error: true }, ""), "failed");
+    const auth = { is_error: true, result: "Failed to authenticate: OAuth session expired and could not be refreshed" };
+    assert.equal(orq.classify(1, auth, ""), "auth_failed");
     assert.equal(orq.classify(1, {}, "Claude usage limit reached"), "rate_limited");
     assert.equal(orq.classify(1, { result: "Budget limit reached" }, ""), "budget_exceeded");
   });

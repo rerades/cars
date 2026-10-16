@@ -500,16 +500,31 @@ const RESULT_INSTRUCTION =
 const RESULT_LINE = /^\s*RESULTADO:\s*`?(ok|fallido)`?\s*$/gim;
 const resultOk = (text: string) => [...text.matchAll(RESULT_LINE)].at(-1)?.[1].toLowerCase() === "ok";
 
+// The CLI could not use the subscription login (e.g. the OAuth token expired and its refresh failed).
+const AUTH_MARKERS = ["failed to authenticate", "oauth session expired"];
+const AUTH_RETRY_MS = 2 * 60_000;
+
 const RATE_LIMIT_MARKERS = ["usage limit", "rate limit", "límite de uso", "try again later"];
 
 export function classify(status: number | null, payload: Record<string, unknown>, stderr: string): string {
   const blob = (JSON.stringify(payload) + " " + (stderr || "")).toLowerCase();
+  if (AUTH_MARKERS.some((m) => blob.includes(m))) return "auth_failed";
   if (RATE_LIMIT_MARKERS.some((m) => blob.includes(m))) return "rate_limited";
   if (blob.includes("budget limit reached") || (blob.includes("budget") && blob.includes("reached"))) {
     return "budget_exceeded";
   }
   if (status === 0 && !payload.is_error && resultOk(String(payload.result ?? ""))) return "success";
   return "failed";
+}
+
+/** A local notification on the factory's Mac; nothing elsewhere. */
+export function notify(text: string): void {
+  if (process.platform !== "darwin") return;
+  try {
+    execFileSync("osascript", ["-e", `display notification ${JSON.stringify(text)} with title "Dark Factory"`]);
+  } catch {
+    // no notification is not a failure
+  }
 }
 
 // --------------------------------------------------------------------------- traces
@@ -588,8 +603,16 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
   writeFileSync(LOCK, `${runId}\n${agent}\n`, "utf8");
   try {
     const [bin, ...args] = cmd;
-    const proc = spawnSync(bin, args, { cwd: ws.dir, env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    const spawn = () => spawnSync(bin, args, { cwd: ws.dir, env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    let proc = spawn();
     if (proc.error) throw proc.error;
+    // A failed OAuth refresh is usually transient (another Claude session rotated the token): the
+    // agent did nothing yet, so wait and try once more. If it fails again, tell the person.
+    if (classify(proc.status, resultEvent(proc.stdout || ""), proc.stderr) === "auth_failed") {
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, Number(process.env.FACTORY_AUTH_RETRY_MS ?? AUTH_RETRY_MS));
+      proc = spawn();
+      if (proc.error) throw proc.error;
+    }
     mkdirSync(TRACE_DIR, { recursive: true });
     writeFileSync(join(TRACE_DIR, `${runId}.jsonl`), proc.stdout || "", "utf8");
     const payload = resultEvent(proc.stdout || "");
@@ -607,6 +630,7 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
     const evals = runEvals(agent, ws.dir, changedFiles(ws.dir), a.write_paths ?? [], now.day);
     record.evals = evals;
     if (record.outcome === "success" && evals.failed.length) record.outcome = "eval_failed";
+    if (record.outcome === "auth_failed") notify(`${agent} no pudo autenticarse en Claude: ejecuta claude /login`);
   } finally {
     rmSync(LOCK, { force: true });
     record.ended = clock(new Date(), now.tz).iso;
