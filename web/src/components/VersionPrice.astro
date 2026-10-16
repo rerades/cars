@@ -1,0 +1,47 @@
+---
+import type { Price } from "../lib/data.ts";
+import { formatEur } from "../lib/format.ts";
+import { t } from "../lib/i18n.ts";
+import SourceDate from "./SourceDate.astro";
+
+/**
+ * Price of one version (RF-4, CA-4; docs/design/ficha-modelo.md, "El precio, en detalle").
+ * `termsIndex` is the 1-based position among the financed versions: the target is #condiciones-{n}.
+ * No ids here: the table and the blocks both render this.
+ */
+interface Props {
+  price: Price | null;
+  discontinued: boolean;
+  termsIndex?: number;
+}
+const { price, discontinued, termsIndex } = Astro.props;
+---
+
+{
+  price === null ? (
+    <p class="text-body text-ink-600" data-price="none">
+      {t("ficha.precio.porConfirmar")}
+    </p>
+  ) : (
+    <div class="flex flex-col gap-1" data-price={price.price_kind}>
+      {discontinued && <p class="text-small text-ink-600">{t("ficha.precio.ultimo")}</p>}
+      <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
+        <span class="text-price text-ink-900">{formatEur(price.value)}</span>
+        {price.price_kind === "financed" && (
+          <span class="inline-block rounded-full bg-deal-bg px-3 py-1 text-badge text-deal-fg">
+            {t("ficha.precio.oferta")}
+          </span>
+        )}
+      </p>
+      <SourceDate source={price} />
+      {price.note && <p class="text-small text-ink-600">{price.note}</p>}
+      {price.price_kind === "financed" && termsIndex && (
+        <a
+          href={`#condiciones-${termsIndex}`}
+          class="inline-flex min-h-touch items-center text-small text-brand-600 underline hover:text-brand-800"
+          >{t("ficha.precio.verCondiciones")}</a
+        >
+      )}
+    </div>
+  )
+}

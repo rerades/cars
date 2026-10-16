@@ -1,0 +1,28 @@
+---
+import type { Sourced } from "../lib/data.ts";
+import { sourceView } from "../lib/format.ts";
+import { t } from "../lib/i18n.ts";
+
+/**
+ * Inline source and date of a datum (RF-9, CA-9): "Fuente: cupra.com, 24 sep 2026", where the source
+ * name (domain of `url`) links to the datum's url. Non-T1 data add "fuente no oficial" as text.
+ * Reusable by the model page's other blocks (#150, #154).
+ */
+interface Props {
+  source: Pick<Sourced, "url" | "retrieved" | "tier">;
+}
+const { source } = Astro.props;
+const { name, date, unofficial } = sourceView(source);
+// The message is "Fuente: {fuente}, {fecha}"; the name is the link, so split around a marker.
+const MARK = "\u0001";
+const [before, after = ""] = t("ficha.precio.fuente", { fuente: MARK, fecha: date }).split(MARK);
+---
+
+<p class="text-small text-ink-600 [overflow-wrap:anywhere]" data-source>
+  {before}<a
+    href={source.url}
+    rel="noopener"
+    class="text-brand-600 underline hover:text-brand-800"
+    data-source-link>{name}</a
+  >{after}{unofficial &&<> <span data-unofficial>{t("ficha.nota.noOficial")}</span></>}
+</p>
