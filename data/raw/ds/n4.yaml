@@ -1,0 +1,20 @@
+# Researcher — DS Nº4 E-Tense. Fuentes: idae-es (T2) y autonomiacocheselectricos-es (T3). Consultado 2026-10-16.
+brand: ds
+brand_name: DS
+model: Nº4 E-Tense
+status: {value: on_sale, note: "solo confirmado por un medio (T3); la web oficial no se puede leer", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-ds-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: {value: compacto, note: "el medio lo clasifica como «Compacto»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-ds-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+needs_review: true
+versions:
+  - name: Nº4 E-Tense 215
+    battery_kwh: {value: 58.3, basis: unknown, note: "IDAE id 610016; el medio (T3) da 61 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 450, note: "IDAE id 610016 (Nº4 E-TENSE 215 DS PERFORMANCE Line); las filas 606512, 606735 y 606509 (213 CV) dan lo mismo y el IDAE no las fecha. El medio (T3) publica 449 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 157, note: "IDAE id 610016; el medio (T3) publica 215 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Web oficial dsautomobiles.es devuelve 403: precio y versiones vigentes sin confirmar con T1. El medio (T3) da 45.400 €, que no se guarda como precio."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "Batería: el IDAE da 58,3 kWh y el medio 61 kWh; sin fuente T1 no se resuelve."
+  - "Imagen: sin ficheros de Nº4 localizados en Commons con licencia revisada."
