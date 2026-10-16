@@ -1,0 +1,56 @@
+# Researcher — Lexus ES eléctrico. Fuentes: lexus-es (T1), idae-es (T2), autofacil/hibridosyelectricos (T3 de contraste). Consultado 2026-10-16.
+brand: lexus
+brand_name: Lexus
+model: ES
+status: {value: on_sale, note: "la ficha da gama ES 350e y 500e, configurador y precio desde 61.500 €; la prensa dice que ya está en concesionarios", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+launch: null
+segment: {value: berlina, note: "la web lo presenta como «berlina premium»", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+needs_review: true
+specs:
+  power_max_kw: {value: 252, note: "343 CV (ES 500e)", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+  drivetrains:
+    value: [fwd, awd]
+    source_id: lexus-es
+    url: "https://www.lexusauto.es/modelos/es/overview"
+    retrieved: 2026-10-16
+    tier: T1
+versions:
+  - name: ES 350e Omotenashi FWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 613500 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 531, note: "IDAE id 613500 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 165, note: "publicado: 224 CV", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: fwd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+    price: null
+  - name: ES 350e Signature Efficiency FWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 613498 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 581, note: "IDAE id 613498 (MY27); coincide con la prensa (hasta 581 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 165, note: "publicado: 224 CV", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: fwd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+    price: null
+  - name: ES 350e Signature FWD
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 613499 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 538, note: "IDAE id 613499 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 165, note: "publicado: 224 CV", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: fwd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+    price: null
+  - name: ES 500e Signature AWD
+    battery_kwh: {value: 75, basis: gross, note: "la ficha de especificaciones da «capacidad bruta de la batería» 75 kWh; IDAE id 613501 (MY27)", source_id: lexus-es, url: "https://www.lexusauto.es/new-cars/es/specifications", retrieved: 2026-10-16, tier: T1}
+    wltp_km: {value: 494, note: "IDAE id 613501 (MY27); coincide con la ficha de especificaciones de la web", source_id: lexus-es, url: "https://www.lexusauto.es/new-cars/es/specifications", retrieved: 2026-10-16, tier: T1}
+    power_kw: {value: 252, note: "publicado: 343 CV", source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+    drivetrain: {value: awd, source_id: lexus-es, url: "https://www.lexusauto.es/modelos/es/overview", retrieved: 2026-10-16, tier: T1}
+    price: null
+images:
+  - file: data/images/lexus/es/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Lexus-ES-2026.jpg/1280px-Lexus-ES-2026.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Lexus-ES-2026.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-16
+    license: CC0-1.0
+    attribution: null
+open_questions:
+  - "launch: la web no da fecha de pedidos; la prensa (T3) habla de preventa en diciembre de 2025 y primeras unidades en abril de 2026, sin confirmar la fecha de apertura de pedidos."
+  - "needs_review: no se ha podido confirmar con la web qué acabados (Omotenashi, Signature Efficiency, Signature) del ES 350e se venden hoy; la lista sale del IDAE (MY27). El acabado del ES 500e (Signature) también sale del IDAE."
+  - "Precios: la web solo da «desde 61.500 €» para la gama ES (incluye híbrido 300h); los precios por versión van en JSON ilegible. La prensa cita 61.500 € (350e) y 65.500-66.100 € (500e), no válidos como fuente de precio. price: null."
+  - "Batería del ES 350e: 77 kWh del IDAE, sin saber si es útil o bruta."
+  - "Imagen: la foto de Commons es un ES de 8.ª generación (el eléctrico comparte carrocería); la página no dice que sea la variante eléctrica."
+  - "Lexus UX 300e: no se crea fichero. El IDAE tiene homologaciones (MY21-MY24) pero la web actual del UX solo menciona el 300h y no se ha podido confirmar que se venda hoy el eléctrico."
