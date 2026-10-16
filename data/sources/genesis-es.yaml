@@ -1,0 +1,16 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: genesis-es
+brand: Genesis
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.genesis.com/es/es.html
+  models: https://www.genesis.com/es/es/models/gv60.html # también /electrified-gv70.html, /electrified-g80.html, /gv60-magma.html
+  legal: https://www.genesis.com/es/es/footer/legal.html
+  wltp: https://www.genesis.com/es/es/footer/wltp.html
+image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-16): la home y las fichas de GV60, GV60 Magma, Electrified GV70 y Electrified G80 responden (WebFetch). robots.txt (genesis.com) permite todo salvo rutas de Corea y /worldwide/; /es/ permitido. La home dice «Genesis llega próximamente a España» y «estará disponible a partir de 2026»; no hay estado de pedidos ni lista de versiones. Muestra "Precio desde" orientativo (no vinculante, PVP recomendado con IVA, matriculación y transporte, Península y Baleares): GV60 55.900 €, GV60 Magma 87.100 €, Electrified GV70 69.400 €, Electrified G80 77.400 €. Sin tabla de versiones por modelo, sin potencia ni batería en varias fichas. Sin sala de prensa española localizada. El IDAE no tiene la marca GENESIS. Datos de modelos no escritos en data/raw porque la marca aún no vende en España.
+last_verified: 2026-10-16
+status: active
