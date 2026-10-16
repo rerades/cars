@@ -1,0 +1,21 @@
+# Researcher — Maserati Grecale Folgore. Fuentes: idae-es (T2), hibridosyelectricos-es (T3). Consultado 2026-10-16. La web de la marca (403) no se pudo leer.
+brand: maserati
+brand_name: Maserati
+model: Grecale
+status: {value: on_sale, note: "hibridosyelectricos (20/12/2023): «la fase de venta ya ha comenzado»; no hay fuente reciente que confirme que se vende hoy (motor.es 30/10/2025 dice que no hay precios del modelo 2026)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/ya-sabemos-precio-primer-coche-electrico-maserati-ya-esta-disponible-en-espana_72202_102.html", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Grecale Folgore
+    battery_kwh: {value: 105, basis: unknown, note: "IDAE id 601647 (6E1ANN1E5B). Otras homologaciones: 502 km (ids 581317, 598880) y 580 km (id 606670, 6E1A5N1E5B, 20,9 kWh/100 km; coincide con la actualización 2026 de electrive/motor1). Sin fecha en las filas ni web legible: se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 502, note: "IDAE id 601647; el IDAE tiene también 580 km (id 606670), cifra de la actualización 2026 según la prensa; sin fecha en el IDAE y sin web legible para decidir", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 410, note: "IDAE id 601647", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "La web oficial maserati.com/es devuelve 403: sin precio T1. price: null."
+  - "Confirmar qué versión se vende hoy: modelo 2026 con 580 km (prensa de octubre de 2025) frente a la de 502 km; los precios 2026 no estaban publicados en octubre de 2025."
+  - "launch: hibridosyelectricos dice que la venta ya había comenzado el 20/12/2023, sin fecha de inicio."
+  - "segment: hibridosyelectricos usa «segmento D-SUV» y motor.es «SUV de lujo»; ninguno está en la lista de RF-11."
+  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."
