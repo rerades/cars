@@ -1,0 +1,33 @@
+# Researcher — Xpeng P7+. Fuentes: idae-es (T2), motor1-es (T3). Consultado 2026-10-17.
+brand: xpeng
+brand_name: Xpeng
+model: P7+
+status: {value: on_sale, note: "Motor1 (fecha del artículo no leída): Xpeng «ha abierto oficialmente los pedidos en España» y las primeras unidades llegan ese mes", source_id: motor1-es, url: "https://es.motor1.com/news/798844/xpeng-p7-berlina-electrica-precios/", retrieved: 2026-10-17, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: P7+ RWD Standard Range
+    battery_kwh: {value: 61.7, basis: unknown, note: "IDAE id 611861 (P7+ MY27. RWD Standard range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 455, note: "IDAE id 611861", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 180, note: "IDAE id 611861", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: P7+ RWD Long Range
+    battery_kwh: {value: 74.9, basis: unknown, note: "IDAE id 611862 (P7+ MY27. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 530, note: "IDAE id 611862", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 230, note: "IDAE id 611862", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: P7+ AWD Performance
+    battery_kwh: {value: 74.9, basis: unknown, note: "IDAE id 611863 (P7+ MY27. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 500, note: "IDAE id 611863", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 370, note: "IDAE id 611863", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "No se ha encontrado una web oficial de Xpeng en España: sin T1, los precios son null (Motor1 y Carwow citan 45.990 / 49.990 / 55.990 €, solo T3)."
+  - "status: on_sale se apoya solo en una noticia T3 de Motor1 cuya fecha no se leyó; ninguna otra fuente confirma que el P7+ se pueda pedir hoy en España. needs_review: true."
+  - "launch: Motor1 y Motor.es no dan el día de apertura de pedidos (Motor.es habla de mayo de 2026, Motor1 de junio): null."
+  - "segment: Motor1 la describe como «berlina 100% eléctrica», que no es un término literal de la lista de RF-11: null."
+  - "drivetrain: ninguna fuente registrada lo da (el IDAE no lo incluye); se omite en las tres versiones."
+  - "Imagen: Commons no muestra ficheros del P7+ en la búsqueda; sin imagen."
+  - "El P7 anterior (IDAE ids 607278-607280, MY24) no se incluye: no hay fuente de que siga a la venta."
