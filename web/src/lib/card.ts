@@ -1,4 +1,5 @@
 import type { ModelRecord } from "./data.ts";
+import { isComparable } from "./compare.ts";
 import { formatEur, formatNumber } from "./format.ts";
 import { t, type MessageKey } from "./i18n.ts";
 
@@ -27,6 +28,11 @@ export interface CardView {
   segment: string | null;
   /** First image with license (RF-8); null gives the silhouette. */
   image: { file: string; attribution: string | null; pageUrl: string } | null;
+  /**
+   * RF-6, RF-11: the "Comparar" action, null unless the model is comparable (`isComparable`).
+   * Short form `?v={brand}/{model}`: the default version is chosen by the comparator, not frozen here.
+   */
+  compare: { href: string; label: string; srLabel: string } | null;
 }
 
 const monthYear = new Intl.DateTimeFormat("es-ES", { month: "short", year: "numeric", timeZone: "UTC" });
@@ -76,6 +82,13 @@ export function cardView(m: ModelRecord): CardView {
     segment: m.segment?.value ?? null,
     image: m.images[0]
       ? { file: m.images[0].file, attribution: m.images[0].attribution, pageUrl: m.images[0].page_url }
+      : null,
+    compare: isComparable(m)
+      ? {
+          href: `/comparar/?v=${m.file.replace(/\.yaml$/, "")}`,
+          label: t("comparar.accion"),
+          srLabel: t("comparar.accionSr", { marca: m.brand_name, modelo: m.model }),
+        }
       : null,
     labels: {
       price: t("tarjeta.etiqueta.precio"),

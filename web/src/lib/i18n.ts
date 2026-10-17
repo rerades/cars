@@ -203,6 +203,8 @@ export const es = {
   "comparador.sinJs.enlace": "Ir al catálogo",
   "comparador.cargando": "Cargando la comparación…",
   "comparador.error": "No se ha podido cargar la comparación. Vuelve a cargar la página o ve al catálogo.",
+  "comparar.accion": "Comparar",
+  "comparar.accionSr": "{marca} {modelo} con otros coches",
 } as const;
 
 export type MessageKey = keyof typeof es;

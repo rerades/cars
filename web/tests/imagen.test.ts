@@ -99,7 +99,8 @@ describe("model card image or silhouette (built HTML)", () => {
     assert.ok(c.indexOf("<img") < c.indexOf("Foto: A. Author"), "attribution goes below the image");
     assert.match(c, /<a href="https:\/\/commons\.wikimedia\.org\/wiki\/File:Acme_Volta\.png"[^>]*>Foto: A\. Author, CC BY-SA 4\.0<\/a>/);
     // No attribution text, no attribution link.
-    assert.equal([...card("NoAttribution").matchAll(/<a\b/g)].length, 1);
+    // (The card's other links are the sheet and "Comparar", not an attribution.)
+    assert.equal([...card("NoAttribution").matchAll(/<a\b(?![^>]*href="\/comparar\/)/g)].length, 1);
   });
 
   test("CA-10: no image without license and source_id reaches the HTML", () => {
