@@ -71,6 +71,16 @@ describe("/comparar/ built page (PRD-003, story #317)", () => {
     assert.doesNotMatch(code, /localStorage|sessionStorage|indexedDB|document\.cookie|serviceWorker/);
   });
 
+  test("data-messages carries non-empty error and noJsLink, so the error notice is never blank", () => {
+    const raw = html.match(/<main\b[^>]*data-messages="([^"]*)"/)?.[1];
+    assert.ok(raw, "no data-messages");
+    const messages = JSON.parse(raw.replaceAll("&#34;", '"').replaceAll("&quot;", '"').replaceAll("&amp;", "&"));
+    for (const key of ["error", "noJsLink"]) {
+      assert.equal(typeof messages[key], "string", `key ${key}`);
+      assert.ok(messages[key].trim().length > 0, `key ${key} is empty`);
+    }
+  });
+
   test("status region at the end of main; messages container", () => {
     const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
     assert.match(main, /data-messages="[^"]+"/);
