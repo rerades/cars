@@ -2009,3 +2009,17 @@
     Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
     Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
     Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: historia-370-orden-rankings
+  agent: developer
+  task: "Historia #370 (épica #368, PRD-005): orden, empates y máximo de 10 puestos. Lee el issue
+    entero (gh issue view 370) y su comentario «🏭 Revisión de cobertura», y haz exactamente lo que
+    dicen. Va en web/src/lib/rankings.ts, sobre candidates() y RANKINGS de #369, que ya están en
+    main: reutilízalos, no los dupliques. Es una función pura sin node:fs ni nada de Node
+    (ADR-0015, detalle 2), y la única que numera: la usarán el build y el script del navegador
+    (#376). Recibe las entradas con la forma de los JSON de #447. Como #447 aún no existe, define
+    tú ese tipo de entrada en rankings.ts según ADR-0015, con lo mínimo que necesitan la ordenación
+    y el desempate (cifra, marca, modelo y name), para que #447 lo reutilice. Que candidates() pueda
+    producirlo sin pasos intermedios. No hagas el conteo de las que se quedan fuera (#374) ni los
+    filtros (#376). Pruebas con node --test: empate en el 1.º y en el 2.º, empate que cruza el
+    décimo, 3 y 0 versiones, batería con bases distintas juntas y precio con financed incluido. La
+    PR dice «Closes #370» y enumera los RF y CA cubiertos."
