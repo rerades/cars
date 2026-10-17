@@ -1,0 +1,20 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: omoda-es
+brand: Omoda
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.omodajaecoo.es/
+  models: https://www.omodajaecoo.es/modelos/omoda-5
+  prices: https://www.omodajaecoo.es/comprar/promociones/omoda-5
+  press: https://www.omodajaecoo.es/prensa
+image_license: "" # términos de uso de las imágenes de prensa/mediateca no verificados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-17): www.omodajaecoo.es es la web "OMODA & JAECOO España" (modelos Omoda 5, 7, 9 y Jaecoo 5, 7, 8;
+  enlaza a la sala de prensa /prensa y a redes oficiales omodajaecoo.es). Responde. robots.txt: solo bloquea
+  /oj-renting/particulares/ofertas/consultar y /api/. La ficha /modelos/omoda-5 incluye el Omoda 5 EV (BEV) junto al Omoda 5 SHS
+  (híbrido, no BEV). No publica PVP sin oferta del EV: solo "precio financiando" con ayuda Auto+ y condiciones largas. Versión EV
+  que aparece en la web: Pure. Omoda 7 y 9 son híbridos.
+last_verified: 2026-10-17
+status: active
