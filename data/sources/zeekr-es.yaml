@@ -1,0 +1,20 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: zeekr-es
+brand: Zeekr
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.zeekr.es
+  models: https://www.zeekr.es/zeekr-7x # también /zeekr-7gt, /zeekr-001, /zeekr-x (el 9X es híbrido, no BEV)
+  prices: https://www.zeekr.es/zeekr-7gt # cada ficha publica "Precio al contado" solo de la versión Core RWD / Long Range RWD de entrada; sin lista de precios ni configurador
+  legal: https://zeekr.es/policy
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-17): zeekr.es responde, se presenta como "Zeekr España" (financiación Open Bank, red de concesionarios
+  en España). robots.txt: "User-agent: *  Disallow:" (todo permitido). Sitemap con 13 URL, sin sala de prensa ni lista de
+  precios. Gama: 001, X, 7X, 7GT (BEV) y 9X (Super Hybrid con generador a bordo, no BEV). Cada ficha solo da precio de una
+  versión; el "Precio al contado" coincide con "Precio financiando sin Programa Auto+", es decir, sin ayudas. Las cuotas
+  mensuales y el precio financiando incluyen el Programa Auto+ y no se guardan.
+last_verified: 2026-10-17
+status: active
