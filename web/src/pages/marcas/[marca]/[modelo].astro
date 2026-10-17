@@ -9,6 +9,8 @@ import { chunkVersions, sortVersions } from "../../../lib/versions.ts";
 import { relatedModels } from "../../../lib/related.ts";
 import ModelCard from "../../../components/ModelCard.astro";
 import VersionPrice from "../../../components/VersionPrice.astro";
+import VersionField from "../../../components/VersionField.astro";
+import { versionFields } from "../../../lib/version-fields.ts";
 
 /**
  * Model page (PRD-002, docs/design/ficha-modelo.md). This story: URL, title and header (RF-1, RF-2,
@@ -33,6 +35,9 @@ const { card, versions, brandSlug, brandUrl, images, specs, related } = Astro.pr
   related: CardView[];
 };
 const chunks = chunkVersions(versions);
+// Technical rows after the price (RF-5, RF-6): same list for the table and the blocks.
+const fieldsOf = (v: Version) => versionFields(v);
+const fieldRows = versions.length > 0 ? fieldsOf(versions[0]!) : [];
 const discontinued = card.statusKind === "discontinued";
 // Financed versions in version order; their position is the n of #condiciones-{n} (RF-4, CA-4).
 const financed = versions.filter((v) => v.price?.price_kind === "financed");
@@ -203,6 +208,18 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
                           </td>
                         ))}
                       </tr>
+                      {fieldRows.map((row, i) => (
+                        <tr class="border-t border-line-soft">
+                          <th scope="row" class="bg-surface-muted p-3 align-top text-body text-ink-900">
+                            {row.label}
+                          </th>
+                          {chunk.items.map((version) => (
+                            <td class="bg-surface p-3 align-top [overflow-wrap:anywhere]">
+                              <VersionField field={fieldsOf(version)[i]} />
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 ))}
@@ -221,6 +238,14 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
                           <VersionPrice price={version.price} discontinued={discontinued} termsIndex={termsIndex(version)} />
                         </dd>
                       </div>
+                      {versionFields(version).map((field) => (
+                        <div>
+                          <dt class="text-small text-ink-600">{field.label}</dt>
+                          <dd class="text-body text-ink-900">
+                            <VersionField field={field} />
+                          </dd>
+                        </div>
+                      ))}
                     </dl>
                   </li>
                 ))}
