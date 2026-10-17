@@ -1,0 +1,22 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: jaecoo-es
+brand: Jaecoo
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://omodajaecoo.es/
+  models: https://omodajaecoo.es/modelos/jaecoo-5
+  prices: https://omodajaecoo.es/comprar/promociones
+  press: https://omodajaecoo.es/prensa
+  media: https://omodajaecoo.es/prensa/mediateca
+  legal: https://omodajaecoo.es/aviso-legal
+image_license: "" # la sala de prensa no publica términos de uso de imágenes (comprobado 2026-10-17): no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-17): www.jaecoo.es redirige (302) a omodajaecoo.es, web conjunta de Omoda & Jaecoo en España
+  (concesionarios españoles, redes omodajaecoo.es); www.jaecoo.com/es no sirve un certificado válido. robots.txt: solo
+  bloquea /oj-renting/particulares/ofertas/consultar y /api/. La ficha del Jaecoo 5 (BEV: "JAECOO 5 EV Pure 155 kW") no da PVP
+  limpio, solo un precio financiando con ayudas Auto+ y su nota al pie incompleta en lo leído; no hay configurador enlazado.
+  La ficha da 402 km WLTP y también 602 km en la tabla (contradicción). No usa un término de segmento.
+last_verified: 2026-10-17
+status: active
