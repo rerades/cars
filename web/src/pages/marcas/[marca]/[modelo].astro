@@ -140,6 +140,17 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
             class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
             >{t("ficha.webMarca")}<span class="sr-only"> {t("ficha.webMarcaSr", { marca: card.brand })}</span></a
           >
+          {
+            card.compare && (
+              <p>
+                <a
+                  href={card.compare.href}
+                  data-compare
+                  class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+                >{card.compare.label}<span class="sr-only"> {card.compare.srLabel}</span></a>
+              </p>
+            )
+          }
         </div>
         <div class="lg:col-span-7" data-main-image>
           {
