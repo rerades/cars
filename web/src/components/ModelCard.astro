@@ -31,7 +31,7 @@ const src = rel
 <li
   data-model={facts ? "" : undefined}
   {...facts}
-  class="relative flex flex-col gap-2 rounded-card border border-line-soft bg-surface p-4 hover:border-brand-600"
+  class="relative flex flex-col gap-2 rounded-card border border-line-soft bg-surface p-4 [&:hover:not(:has(.enlace-comparar:hover))]:border-brand-600 [&:has(h3>a.enlace-ficha:focus-visible)]:outline-3 [&:has(h3>a.enlace-ficha:focus-visible)]:outline-offset-2 [&:has(h3>a.enlace-ficha:focus-visible)]:outline-brand-600"
 >
   <div
     class="flex aspect-video items-center justify-center overflow-hidden rounded-card bg-surface-muted text-line"
@@ -68,7 +68,7 @@ const src = rel
   <h3 class="text-card-title [overflow-wrap:anywhere]">
     <a
       href={href}
-      class="text-ink-900 hover:underline after:absolute after:inset-0 after:content-['']"
+      class="enlace-ficha text-ink-900 hover:underline after:absolute after:inset-0 after:content-['']"
     >{card.model}</a>
   </h3>
   {
@@ -111,4 +111,14 @@ const src = rel
       </dd>
     </div>
   </dl>
+  {
+    card.compare && (
+      <p>
+        <a
+          href={card.compare.href}
+          class="enlace-comparar relative z-10 inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+        >{card.compare.label}<span class="sr-only"> {card.compare.srLabel}</span></a>
+      </p>
+    )
+  }
 </li>

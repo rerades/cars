@@ -112,7 +112,7 @@ Todos son verificables sobre el HTML construido, sin ejecutar JavaScript, salvo 
 - [ ] **CA-15** (→ RNF-5): Al cargar cualquier ranking no se crea ninguna cookie ni se escribe nada en `localStorage` ni en `sessionStorage`.
 - [ ] **CA-16** (→ RNF-6): Dado cualquier puesto, cuando comparo su cifra con el fichero de `data/raw/` que cita, entonces es idéntica, y ningún puesto muestra una cifra que no esté en un fichero.
 - [ ] **CA-17** (→ RNF-3): Dado un ranking a 320 px de ancho, cuando uso la página, entonces no hay scroll horizontal y todos los datos son alcanzables; «Precio con oferta» y «fuente no oficial» se distinguen sin el color.
-- [ ] **CA-18** (→ RF-15): Dado un ranking de batería con 12 versiones publicadas, de las que 3 no tienen `battery_kwh` y 1 la tiene solo de fuente T3, cuando lo abro sin filtros, entonces la página dice que 4 versiones se han quedado fuera por no tener el dato con fuente oficial.
+- [ ] **CA-18** (→ RF-15): Dado un ranking de batería con 12 versiones publicadas, de las que 3 no tienen `battery_kwh` y 1 la tiene solo de fuente T3, cuando lo abro sin filtros, entonces la página dice que 4 versiones se han quedado fuera por no tener el dato con fuente verificable (T1 o T2; RF-4).
 
 ## 8. Decisiones y preguntas abiertas
 ### Resueltas (2026-10-13)
@@ -137,3 +137,4 @@ Decididas por el responsable del producto:
 |---|---|---|
 | 2026-10-13 | Borrador inicial: RF-1 a RF-14, RNF-1 a RNF-6, CA-1 a CA-17; 11 preguntas abiertas | Claude |
 | 2026-10-13 | Resueltas las 11 preguntas abiertas. Ajustados RF-1, RF-3, RF-4, RF-6 a RF-9, RF-11, RF-13, RNF-1, la sección 6 y CA-3, CA-4, CA-7 a CA-12 y CA-17; añadidos RF-15 y CA-18. Pasa a `ready` | Rod / Claude |
+| 2026-10-17 | CA-18 decía «fuente oficial»; pasa a «fuente verificable (T1 o T2)», como RF-4 y el diseño (pregunta 4 de la épica #368). RNF-2 se mide con una prueba de navegador común a todos los PRD (tarea `rnf-2-lcp`); el ranking con filtros se añade cuando exista la página | Rod / Claude |

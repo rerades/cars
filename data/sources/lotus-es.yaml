@@ -1,0 +1,21 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: lotus-es
+brand: Lotus
+tier: T1
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://www.lotuscars.com/es-ES/
+  models_eletre: https://www.lotuscars.com/es-ES/eletre
+  models_emeya: https://www.lotuscars.com/es-ES/emeya
+  press: https://www.lotuscars.com/en/press
+  robots: https://www.lotuscars.com/robots.txt
+image_license: "" # términos de imágenes de la web no revisados; no se publican imágenes de esta fuente
+notes: >
+  Web oficial de Lotus en España (dominio lotuscars.com, ruta /es-ES/; responde). robots.txt bloquea las páginas del
+  configurador (Eletre, Emira, Evija, Emeya), así que no se leen. Las páginas de modelo solo muestran navegación y el
+  eslogan ("Electric Hyper SUV" para Eletre, "Fully Electric Hyper-GT" para Emeya): no traen versiones, precios ni
+  fichas técnicas legibles (comprobado el 2026-10-16). No hay lista de precios pública. El Eletre X es híbrido y no
+  se registra.
+last_verified: 2026-10-16
+status: active

@@ -1,0 +1,18 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: ds-es
+brand: DS
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.dsautomobiles.es/
+  robots: https://www.dsautomobiles.es/robots.txt
+image_license: "" # sin términos de uso de imágenes registrados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-16): www.dsautomobiles.es es el dominio oficial de DS Automobiles en España, pero devuelve 403 a la
+  lectura automática (también robots.txt); no se evita la protección. ofertas.dsautomobiles.es devuelve 404. No se ha
+  podido leer ninguna página de modelos, precios ni prensa, así que de esta fuente no sale ningún dato: versiones y
+  especificaciones vienen de idae-es (T2) y la confirmación de qué se vende, de medios (T3); los precios quedan a null.
+  Sala de prensa oficial por localizar.
+last_verified: 2026-10-16
+status: active

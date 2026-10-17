@@ -1,0 +1,47 @@
+# Researcher — smart #2. Fuente: smart-es (T1). Consultado 2026-10-15.
+brand: smart
+brand_name: smart
+model: "#2"
+status: {value: announced, note: "la web solo admite reservas: «Reserva ya el nuevo smart #2»; no dice que se entregue ni que haya pedidos abiertos", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/order-request/", retrieved: 2026-10-15, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Pure
+    battery_kwh: {value: 35.8, basis: unknown, note: "la ficha publica «LFP, 35,8 kWh»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    wltp_km: {value: 290, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 60, note: "publicado: 60 kW (82 hp)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    dc_max_kw: {value: 65, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    ac_max_kw: {value: 7.4, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    price: null
+  - name: Pure+
+    battery_kwh: {value: 35.8, basis: unknown, note: "la ficha publica «LFP, 35,8 kWh»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    wltp_km: {value: 290, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 60, note: "publicado: 60 kW (82 hp)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    dc_max_kw: {value: 65, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    ac_max_kw: {value: 11, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    price: null
+  - name: Premium
+    battery_kwh: {value: 35.8, basis: unknown, note: "la ficha publica «LFP, 35,8 kWh»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    wltp_km: {value: 290, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 60, note: "publicado: 60 kW (82 hp)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    dc_max_kw: {value: 65, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    ac_max_kw: {value: 11, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    price: null
+  - name: Couture Edition
+    battery_kwh: {value: 35.8, basis: unknown, note: "la ficha publica «LFP, 35,8 kWh»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    wltp_km: {value: 290, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    power_kw: {value: 60, note: "publicado: 60 kW (82 hp)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    dc_max_kw: {value: 65, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    ac_max_kw: {value: 11, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-10-15, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "Precio: la web no lo muestra en el texto servido. Medios (T3, motor16) citan 19.990 € de salida; no se guarda."
+  - "launch: sin fecha de pedidos ni de entregas en la web oficial; solo reservas."
+  - "segment: la web no usa un término de la lista de RF-11 para el #2; null."
+  - "Imágenes: no se ha buscado en Commons una imagen del #2 con licencia comprobada."

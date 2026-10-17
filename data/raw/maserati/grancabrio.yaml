@@ -1,0 +1,22 @@
+# Researcher — Maserati GranCabrio Folgore. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-16. La web de la marca (403) no se pudo leer.
+brand: maserati
+brand_name: Maserati
+model: GranCabrio
+status: {value: on_sale, note: "motor.es (20/04/2024) dice que el configurador está abierto en España; no hay fuente reciente que confirme que se vende hoy", source_id: motor-es, url: "https://www.motor.es/noticias/precio-maserati-grancabrio-folgore-2024101639.html", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: GranCabrio Folgore
+    battery_kwh: {value: 92.5, basis: unknown, note: "IDAE id 601645 (6E1AN11N4B). Otras homologaciones: 441 km (ids 581318, 581319, 601643, 601644, 601646) y 541 km (id 614180, 6E7ANN1N4C). Sin fecha en las filas ni web legible: se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 441, note: "IDAE id 601645; otra homologación de 541 km, id 614180, sin fecha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 572.4, note: "IDAE id 601645; motor.es publica 560 kW (761 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "La web oficial maserati.com/es devuelve 403: sin precio T1. price: null."
+  - "Confirmar con fuente actual que se vende hoy en España; la única fuente de estado es de abril de 2024."
+  - "launch: sin fecha de apertura de pedidos dada como tal."
+  - "segment: motor.es usa «descapotable», que no está en la lista de RF-11."
+  - "WLTP: el IDAE tiene también una homologación de 541 km sin fecha."
+  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."

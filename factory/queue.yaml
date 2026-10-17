@@ -1302,3 +1302,710 @@
     Depende de, CA copiados del PRD, notas técnicas) y las etiquetas story y agente. No cierres
     issues, no cambies el alcance y no toques las que ya están en factory/queue.yaml salvo para
     corregir un error del PRD o del diseño. Resume en la bitácora qué revisaste y qué cambió."
+- id: historia-150-ficha-especificaciones
+  agent: developer
+  task: "Historia #150 (épica #145, PRD-002): autonomía, batería, potencia, tracción y carga de
+    cada versión en la ficha de modelo. Lee el issue entero (gh issue view 150) y haz exactamente lo
+    que dice. Añade las filas a la tabla y los campos a los bloques de web/src/pages/marcas/[marca]/
+    [modelo].astro, después de la fila de precio de #149 y en el orden de «Campos y formato» de
+    docs/design/ficha-modelo.md. Reutiliza SourceDate.astro y web/src/lib/format.ts (formatNumber,
+    sourceView) en vez de formatear de nuevo. Ningún campo que no esté en
+    docs/architecture/data-model.md y ninguna estimación (ADR-0001, ADR-0008). Pruebas con node
+    --test sobre el build, como web/tests/ficha-precio.test.ts. La PR dice «Closes #150» y enumera
+    los RF y CA cubiertos."
+- id: historia-318-script-comparador
+  agent: developer
+  task: "Historia #318 (épica #313, PRD-003): script del comparador. Lee el issue entero (gh issue
+    view 318) y haz exactamente lo que dice: el <script> de módulo de /comparar/ (componente .astro,
+    sin framework ni dependencias nuevas, como CatalogFilters.astro) que lee la URL con
+    parseEntries y validateSelection de web/src/lib/compare.ts, pide en paralelo los JSON de
+    /comparar/datos/, retira el aviso sin JavaScript y monta la tabla en el orden de la URL. Sigue
+    docs/design/comparador.md y docs/architecture/adr/0014-datos-y-script-del-comparador.md. No
+    hagas lo de #319 (notas de fuente), #320 (avisos y estados) ni #321-#322 (quitar y añadir).
+    Pruebas con node --test de lo que no necesita navegador. La PR dice «Closes #318» y enumera los
+    RF y CA cubiertos."
+- id: historia-323-comparar-tarjeta
+  agent: developer
+  task: "Historia #323 (épica #313, PRD-003): acción «Comparar» en la tarjeta del catálogo. Lee el
+    issue entero (gh issue view 323) y haz exactamente lo que dice. El enlace usa writeSearch de
+    web/src/lib/compare.ts o la forma corta marca/modelo según el diseño, y solo aparece en los
+    modelos que cumplen isComparable. Sigue docs/design/comparador.md. Pruebas con node --test
+    sobre el build. La PR dice «Closes #323» y enumera los RF y CA cubiertos."
+- id: historia-324-comparar-ficha
+  agent: developer
+  task: "Historia #324 (épica #313, PRD-003): acción «Comparar» en la cabecera de la ficha de
+    modelo, después de «Ver en la web de la marca». Lee el issue entero (gh issue view 324) y haz
+    exactamente lo que dice. Mismo criterio que la tarjeta (isComparable de
+    web/src/lib/compare.ts); si en main ya existe la acción de la tarjeta (#323), reutiliza su
+    componente o su función en vez de duplicarla. Sigue docs/design/comparador.md y
+    docs/design/ficha-modelo.md. Pruebas con node --test sobre el build. La PR dice «Closes #324» y
+    enumera los RF y CA cubiertos."
+- id: adr-0016-evals-con-langfuse
+  agent: architect
+  task: "ADR nueva (ADR-0016) que amplía ADR-0004: evaluar los prompts de los agentes con distintos
+    modelos y subir su puntuación con datasets, experimentos, evaluadores y scores de Langfuse
+    Cloud (plan Hobby, UE). ADR-0004 dejó fuera el LLM como juez «hasta que haya agentes que
+    escriban texto libre»; ese momento ha llegado. Decisiones del usuario: se acepta gasto de API
+    de Anthropic con un límite, y se empieza por el agente Reviewer (.claude/agents/reviewer.md).
+    Decide: (1) dónde viven los datos de referencia: propuesta, ficheros versionados en el repo que
+    se suben a un dataset de Langfuse con un script idempotente (Langfuse es una vista, ADR-0004);
+    (2) qué es un caso del Reviewer (PR ya cerradas con su revisión y la etiqueta review:* correcta
+    como resultado esperado, por ejemplo) y cuántos hacen falta para empezar; (3) cómo se ejecuta
+    el agente sobre cada caso: por la interfaz de Langfuse (solo prompts sueltos) o con un script
+    que lanza el orquestador y registra un experimento por modelo y versión del prompt; (4) qué se
+    puntúa con código y qué con un evaluador LLM, con qué modelo y qué rúbrica, y cómo se aprueba
+    una nueva versión del prompt (umbral frente a la anterior); (5) el coste: clave de API aparte
+    de la suscripción Pro, guardada en .secrets/, límite por experimento y por mes en
+    factory/budgets.yaml, y estimación por ejecución; (6) límites del plan Hobby (unidades, 30 días)
+    y qué pasa si se superan. Comprueba en la documentación de Langfuse lo que afirmes de su API.
+    Opciones con pros y contras, decisión y consecuencias, como ADR-0004. Añade la decisión a
+    docs/architecture/overview.md si procede. No toques factory/ ni .claude/."
+- id: historia-318-script-comparador-2
+  agent: developer
+  task: "Historia #318 (épica #313, PRD-003), segunda vuelta: sustituye a la PR #452, que el Revisor
+    devolvió. Parte de su trabajo, que está en la rama local agent/developer/20261017-053007-1cc429:
+    tráelo con git merge de esa rama y no lo reescribas; compare.ts y sus pruebas están bien. Lee el
+    issue entero (gh issue view 318). Falta lo que pidió la revisión: (1) una prueba que ejecute el
+    script de ComparisonTable.astro en el navegador. Reutiliza Playwright de web/e2e/ (como las
+    pruebas de a11y), carga /comparar/?v=... del build con datos de prueba y comprueba el número de
+    columnas, el orden de la URL, las filas, la retirada del aviso sin JavaScript, replaceState y
+    que a 320 px no hay scroll horizontal (CA-1, CA-3, CA-4, CA-6 y CA-17). (2) «Fuente no oficial»
+    solo se pinta en la celda de precio, aunque cellView calcula unofficial en todos los campos:
+    píntalo en todos los que lo tengan (CA-17), salvo que la issue #319 lo reserve para ella; en ese
+    caso, dilo en la PR y en la bitácora. (3) Una prueba de que las claves error y noJsLink existen
+    en data-messages, para que el aviso de error nunca salga vacío. No hagas lo de #319, #320 ni
+    #321-#322. La PR dice «Closes #318», enumera los RF y CA cubiertos y dice que sustituye a la
+    #452."
+- id: marca-xpeng-2
+  agent: researcher
+  task: "Marca Xpeng (carpeta y brand: xpeng), segunda vuelta: sustituye a la PR #433, que el
+    Revisor devolvió. Parte de su trabajo, que está en la rama local
+    agent/researcher/20261017-014507-6de141: tráelo con git merge de esa rama y corrige solo esto,
+    sin volver a investigar lo que ya está bien. (1) drivetrain en g6, g9 y p7-plus está deducido del
+    nombre de la versión y atribuido al IDAE, que no lo da: quítalo o cita una fuente que lo diga
+    (ADR-0001, nada se inventa). (2) G6 Standard Range: el IDAE (566 km, 218 kW) y motor.es (455 km,
+    252 CV) se contradicen, y 566 km con 68,5 kWh no cuadra con los 568 km con 80,8 kWh de la Long
+    Range. Deja power_kw en null y quita wltp_km de esa versión; por la regla 8, quítalo también del
+    resto de versiones del G6 y usa specs.wltp_max_km solo si una fuente lo da. Anótalo en
+    open_questions y deja needs_review: true. (3) G9 y P7+: su status on_sale solo se apoya en una
+    noticia T3 (la del P7+ sin fecha leída), así que pon needs_review: true y dilo en open_questions,
+    salvo que otra fuente confirme que se pueden pedir hoy en España. (4) P7+: segment: berlina solo
+    si la fuente usa ese término literal de RF-11; si no, segment: null. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    No toques data/candidatas.yaml. En la bitácora, di que sustituye a la PR #433."
+- id: rnf-2-lcp
+  agent: developer
+  task: "RNF-2 de todos los PRD (LCP < 2,5 s en móvil 4G), que hoy no mide ninguna prueba. Añade
+    web/e2e/lcp.spec.ts con el Playwright que ya está instalado, sin dependencias nuevas (nada de
+    Lighthouse). Debe correr sobre el build servido por astro preview, como las pruebas de a11y, y
+    así entra en el job a11y de la CI, que informa pero no bloquea. Por cada página: viewport móvil
+    (412 x 823), una sesión CDP con Network.emulateNetworkConditions como el «Slow 4G» de
+    Lighthouse (150 ms de RTT, 1,6 Mbit/s de bajada y 750 kbit/s de subida) y
+    Emulation.setCPUThrottlingRate 4. Lee el LCP con un PerformanceObserver de
+    largest-contentful-paint (buffered: true) y comprueba que es menor que 2500 ms. Mide la portada
+    (/), /coches/, /coches/ con una query string de filtros (ADR-0015 pide medir también una URL
+    con filtros), una ficha de modelo que tenga imagen y /comparar/ con tres versiones en ?v=. Toma
+    las rutas de los datos del build, no de una lista fija que se quede vieja. Escribe el LCP medido
+    en la salida de la prueba para poder seguirlo. Los rankings (PRD-005) aún no existen: deja
+    escrito en un comentario de la prueba que su página, con y sin filtros, se añade con la
+    historia #378. En la bitácora, explica la elección de throttling."
+- id: historia-154-fuentes-ficha
+  agent: developer
+  task: "Historia #154 (épica #145, PRD-002): notas del dato y bloque «Fuentes» de la ficha de
+    modelo. Lee el issue entero (gh issue view 154), y sobre todo su comentario «🏭 Revisión de
+    cobertura», que corrige el cuerpo: el nombre de la fuente no sale de data/sources/registry.yaml
+    (ya no existe), sino del dominio de la url del dato sin www., con la función que dejó #149; la
+    clave de agrupado de una nota es source_id + url + retrieved + tier. Reparto: #149 ya pinta la
+    fuente inline del precio, y #150 y #151 la note de los campos de versión y de specs. Esta
+    historia pinta la note de la cabecera (segmento), las marcas [n] y el bloque «Fuentes», y
+    comprueba CA-8 en todos los datos, incluida la note del precio. Si no hay ningún dato con nota,
+    el bloque «Fuentes» no se pinta. Sigue docs/design/ficha-modelo.md («Fuente y fecha», notas de
+    «Cabecera de la ficha» y «Nombre de la fuente»). El agrupado va en una función pura de
+    web/src/lib/ con prueba (misma clave, misma nota; numeración estable por orden de aparición).
+    Textos en i18n.ts. Pruebas con node --test sobre el build. La PR dice «Closes #154» y enumera
+    los RF y CA cubiertos (RF-8, RF-9, CA-8 y CA-9)."
+- id: imagenes-sin-foto-2026-10-17-a
+  agent: researcher
+  task: "Imágenes para los modelos de data/raw/ que siguen con images: []: abarth/500e.yaml,
+    abarth/600e.yaml, ds/n4.yaml, ds/ds-3.yaml, ds/n7.yaml, gwm/ora-5.yaml, lotus/eletre.yaml,
+    lotus/emeya.yaml, jeep/compass.yaml, maserati/granturismo.yaml y maserati/grecale.yaml. Solo de
+    Wikimedia Commons con licencia que permita el uso comercial, del modelo y la generación
+    correctos (el Compass eléctrico es la tercera generación; el Ora 5 no es el Ora 03), descargadas
+    con node factory/fetch-image.ts. Si no hay ninguna foto válida de un modelo, déjalo con images:
+    [] y anótalo en la bitácora. No toques nada más de esos ficheros."
+- id: imagenes-sin-foto-2026-10-17-b
+  agent: researcher
+  task: "Imágenes para los modelos de data/raw/ que siguen con images: []: maserati/grancabrio.yaml,
+    lynk-co/02.yaml, skoda/elroq.yaml, skoda/enyaq-coupe.yaml, skoda/enyaq.yaml, skoda/epiq.yaml,
+    skoda/peaq.yaml, smart/hashtag-2.yaml, smart/hashtag-3.yaml, zeekr/7gt.yaml y zeekr/x.yaml.
+    Solo de Wikimedia Commons con licencia que permita el uso comercial, del modelo y la generación
+    correctos (el Enyaq y el Enyaq Coupé de 2025 tienen el frontal nuevo; un prototipo o concept
+    no vale para un modelo de serie), descargadas con node factory/fetch-image.ts. Si no hay
+    ninguna foto válida de un modelo, déjalo con images: [] y anótalo en la bitácora. No toques
+    nada más de esos ficheros."
+- id: prd-006-reviews-borrador
+  agent: product
+  task: "Borrador de PRD-006, Reviews, la única área de docs/product/vision.md que aún no tiene
+    PRD. Escríbelo en docs/product/prd/PRD-006-reviews.md con la forma de los otros PRD y status:
+    draft. No resuelvas tú lo que es del responsable: deja como preguntas abiertas, con opciones,
+    pros y contras y una recomendada, al menos (1) la pregunta de la visión «¿las reviews son
+    propias (generadas o redactadas) o agregadas de terceros?»; (2) si una review generada por un
+    agente cumple «nada se inventa» (ADR-0001) y cómo se cita cada afirmación; (3) qué fuentes de
+    reviews de terceros se podrían enlazar o resumir sin chocar con sus términos (la web es
+    personal y no comercial, pero pública e informativa; ADR-0001, regla 6), y (4) dónde se ven (la
+    ficha de modelo de PRD-002, una página propia o las dos). Respeta los principios de la visión:
+    solo lectura, sin datos personales, datos estructurados primero. Enlaza el PRD desde la tabla
+    de la visión y anótalo en la bitácora. No toques el código ni otros PRD."
+- id: marca-kg-mobility
+  agent: researcher
+  task: "Marca KG Mobility (carpeta y brand: kg-mobility). Fuentes en el registro y modelos BEV en
+    data/raw/kg-mobility/. Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de
+    híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la
+    tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista
+    de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de
+    launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que
+    se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que
+    la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-lancia
+  agent: researcher
+  task: "Marca Lancia (carpeta y brand: lancia). Fuentes en el registro y modelos BEV en
+    data/raw/lancia/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-geely
+  agent: researcher
+  task: "Marca Geely (carpeta y brand: geely). Fuentes en el registro y modelos BEV en
+    data/raw/geely/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-dongfeng
+  agent: researcher
+  task: "Marca Dongfeng (carpeta y brand: dongfeng). Fuentes en el registro y modelos BEV en
+    data/raw/dongfeng/. Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de
+    híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la
+    tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista
+    de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de
+    launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que
+    se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que
+    la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-voyah
+  agent: researcher
+  task: "Marca Voyah (carpeta y brand: voyah). Fuentes en el registro y modelos BEV en
+    data/raw/voyah/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-deepal
+  agent: researcher
+  task: "Marca Deepal (carpeta y brand: deepal). Fuentes en el registro y modelos BEV en
+    data/raw/deepal/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-changan
+  agent: researcher
+  task: "Marca Changan (carpeta y brand: changan). Fuentes en el registro y modelos BEV en
+    data/raw/changan/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-aion
+  agent: researcher
+  task: "Marca AION (carpeta y brand: aion). Fuentes en el registro y modelos BEV en data/raw/aion/.
+    Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de
+    su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos. Versiones y precios
+    de la web oficial en España (búscala: data/candidatas.yaml no la tiene; confirma que es de la
+    marca, que responde y su robots.txt), del configurador o la lista de precios; pon wltp_km en
+    todas las versiones o en ninguna (regla 8). Sigue las reglas de launch, status y segment de tus
+    instrucciones (launch solo si la fuente da la fecha desde la que se puede pedir; segment solo
+    con el término literal de RF-11; si el modelo tiene carrocerías que la fuente clasifica
+    distinto, segment: null). Un precio financed solo con price_terms literal y completo de la
+    fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se contradice en una cifra,
+    deja esa cifra en null y anótalo en open_questions. Si la web no se puede leer (403, timeouts o
+    solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node factory/fetch-idae.ts con la
+    marca como la escribe el IDAE), confirma con medios del motor (T3) qué versiones se venden hoy
+    en España y deja price: null. Si la marca no vende hoy ningún BEV en España, no crees la carpeta
+    y anótalo en la bitácora. Si para un modelo no hay ninguna fuente con sus versiones, no escribas
+    ese modelo y anótalo en la bitácora. Si un modelo ya está en otra carpeta de data/raw/
+    (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o Mobilize de Renault), no lo
+    dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia Commons con licencia que permita
+    el uso comercial, descargadas con node factory/fetch-image.ts. Crea las fuentes como
+    data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-denza
+  agent: researcher
+  task: "Marca Denza (carpeta y brand: denza). Fuentes en el registro y modelos BEV en
+    data/raw/denza/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-mobilize
+  agent: researcher
+  task: "Marca Mobilize (carpeta y brand: mobilize). Fuentes en el registro y modelos BEV en
+    data/raw/mobilize/. Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de
+    híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la
+    tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista
+    de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de
+    launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que
+    se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que
+    la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-mitsubishi
+  agent: researcher
+  task: "Marca Mitsubishi (carpeta y brand: mitsubishi). Fuentes en el registro y modelos BEV en
+    data/raw/mitsubishi/. Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de
+    híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la
+    tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista
+    de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de
+    launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que
+    se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que
+    la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-aiways
+  agent: researcher
+  task: "Marca Aiways (carpeta y brand: aiways). Fuentes en el registro y modelos BEV en
+    data/raw/aiways/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-yudo
+  agent: researcher
+  task: "Marca Yudo (carpeta y brand: yudo). Fuentes en el registro y modelos BEV en data/raw/yudo/.
+    Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de
+    su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos. Versiones y precios
+    de la web oficial en España (búscala: data/candidatas.yaml no la tiene; confirma que es de la
+    marca, que responde y su robots.txt), del configurador o la lista de precios; pon wltp_km en
+    todas las versiones o en ninguna (regla 8). Sigue las reglas de launch, status y segment de tus
+    instrucciones (launch solo si la fuente da la fecha desde la que se puede pedir; segment solo
+    con el término literal de RF-11; si el modelo tiene carrocerías que la fuente clasifica
+    distinto, segment: null). Un precio financed solo con price_terms literal y completo de la
+    fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se contradice en una cifra,
+    deja esa cifra en null y anótalo en open_questions. Si la web no se puede leer (403, timeouts o
+    solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node factory/fetch-idae.ts con la
+    marca como la escribe el IDAE), confirma con medios del motor (T3) qué versiones se venden hoy
+    en España y deja price: null. Si la marca no vende hoy ningún BEV en España, no crees la carpeta
+    y anótalo en la bitácora. Si para un modelo no hay ninguna fuente con sus versiones, no escribas
+    ese modelo y anótalo en la bitácora. Si un modelo ya está en otra carpeta de data/raw/
+    (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o Mobilize de Renault), no lo
+    dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia Commons con licencia que permita
+    el uso comercial, descargadas con node factory/fetch-image.ts. Crea las fuentes como
+    data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-cadillac
+  agent: researcher
+  task: "Marca Cadillac (carpeta y brand: cadillac). Fuentes en el registro y modelos BEV en
+    data/raw/cadillac/. Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de
+    híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la
+    tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista
+    de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de
+    launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que
+    se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que
+    la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-lucid
+  agent: researcher
+  task: "Marca Lucid (carpeta y brand: lucid). Fuentes en el registro y modelos BEV en
+    data/raw/lucid/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-rivian
+  agent: researcher
+  task: "Marca Rivian (carpeta y brand: rivian). Fuentes en el registro y modelos BEV en
+    data/raw/rivian/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-xiaomi
+  agent: researcher
+  task: "Marca Xiaomi (carpeta y brand: xiaomi). Fuentes en el registro y modelos BEV en
+    data/raw/xiaomi/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-jaguar
+  agent: researcher
+  task: "Marca Jaguar (carpeta y brand: jaguar). Fuentes en el registro y modelos BEV en
+    data/raw/jaguar/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (jaguar.es, sin verificar: confirma dominio,
+    respuesta y robots.txt), del configurador o la lista de precios; pon wltp_km en todas las
+    versiones o en ninguna (regla 8). Sigue las reglas de launch, status y segment de tus
+    instrucciones (launch solo si la fuente da la fecha desde la que se puede pedir; segment solo
+    con el término literal de RF-11; si el modelo tiene carrocerías que la fuente clasifica
+    distinto, segment: null). Un precio financed solo con price_terms literal y completo de la
+    fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se contradice en una cifra,
+    deja esa cifra en null y anótalo en open_questions. Si la web no se puede leer (403, timeouts o
+    solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node factory/fetch-idae.ts con la
+    marca como la escribe el IDAE), confirma con medios del motor (T3) qué versiones se venden hoy
+    en España y deja price: null. Si la marca no vende hoy ningún BEV en España, no crees la carpeta
+    y anótalo en la bitácora. Si para un modelo no hay ninguna fuente con sus versiones, no escribas
+    ese modelo y anótalo en la bitácora. Si un modelo ya está en otra carpeta de data/raw/
+    (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o Mobilize de Renault), no lo
+    dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia Commons con licencia que permita
+    el uso comercial, descargadas con node factory/fetch-image.ts. Crea las fuentes como
+    data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-range-rover
+  agent: researcher
+  task: "Marca Range Rover (carpeta y brand: range-rover). Fuentes en el registro y modelos BEV en
+    data/raw/range-rover/. Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de
+    híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la
+    tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista
+    de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de
+    launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que
+    se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que
+    la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Range Rover es hoy una marca
+    de JLR distinta de Land Rover: aquí solo lo que JLR vende como Range Rover; Defender y Discovery
+    van en land-rover. Si un modelo ya está en otra carpeta de data/raw/ (submarcas como Denza de
+    BYD, Deepal de Changan, Voyah de Dongfeng o Mobilize de Renault), no lo dupliques y anótalo en
+    la bitácora. Imágenes solo de Wikimedia Commons con licencia que permita el uso comercial,
+    descargadas con node factory/fetch-image.ts. Crea las fuentes como data/sources/<id>.yaml; no
+    toques data/candidatas.yaml."
+- id: marca-land-rover
+  agent: researcher
+  task: "Marca Land Rover (carpeta y brand: land-rover). Fuentes en el registro y modelos BEV en
+    data/raw/land-rover/. Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de
+    híbridos. Versiones y precios de la web oficial en España (landrover.es, sin verificar: confirma
+    dominio, respuesta y robots.txt), del configurador o la lista de precios; pon wltp_km en todas
+    las versiones o en ninguna (regla 8). Sigue las reglas de launch, status y segment de tus
+    instrucciones (launch solo si la fuente da la fecha desde la que se puede pedir; segment solo
+    con el término literal de RF-11; si el modelo tiene carrocerías que la fuente clasifica
+    distinto, segment: null). Un precio financed solo con price_terms literal y completo de la
+    fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se contradice en una cifra,
+    deja esa cifra en null y anótalo en open_questions. Si la web no se puede leer (403, timeouts o
+    solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node factory/fetch-idae.ts con la
+    marca como la escribe el IDAE), confirma con medios del motor (T3) qué versiones se venden hoy
+    en España y deja price: null. Si la marca no vende hoy ningún BEV en España, no crees la carpeta
+    y anótalo en la bitácora. Si para un modelo no hay ninguna fuente con sus versiones, no escribas
+    ese modelo y anótalo en la bitácora. Aquí Defender, Discovery y lo que JLR venda como Land
+    Rover; lo que venda como Range Rover va en range-rover. Si un modelo ya está en otra carpeta de
+    data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o Mobilize de
+    Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia Commons con
+    licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts. Crea las
+    fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-seat
+  agent: researcher
+  task: "Marca Seat (carpeta y brand: seat). Fuentes en el registro y modelos BEV en data/raw/seat/.
+    Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de
+    su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos. Versiones y precios
+    de la web oficial en España (seat.es, sin verificar: confirma dominio, respuesta y robots.txt),
+    del configurador o la lista de precios; pon wltp_km en todas las versiones o en ninguna (regla
+    8). Sigue las reglas de launch, status y segment de tus instrucciones (launch solo si la fuente
+    da la fecha desde la que se puede pedir; segment solo con el término literal de RF-11; si el
+    modelo tiene carrocerías que la fuente clasifica distinto, segment: null). Un precio financed
+    solo con price_terms literal y completo de la fuente; si no lo puedes copiar entero, price:
+    null. Si una fuente T1 se contradice en una cifra, deja esa cifra en null y anótalo en
+    open_questions. Si la web no se puede leer (403, timeouts o solo JavaScript), no fuerces el
+    acceso: sigue la vía del IDAE (node factory/fetch-idae.ts con la marca como la escribe el IDAE),
+    confirma con medios del motor (T3) qué versiones se venden hoy en España y deja price: null. Si
+    la marca no vende hoy ningún BEV en España, no crees la carpeta y anótalo en la bitácora. Si
+    para un modelo no hay ninguna fuente con sus versiones, no escribas ese modelo y anótalo en la
+    bitácora. Los Cupra ya están en data/raw/cupra/: no los dupliques. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-rolls-royce
+  agent: researcher
+  task: "Marca Rolls-Royce (carpeta y brand: rolls-royce). Fuentes en el registro y modelos BEV en
+    data/raw/rolls-royce/. Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de
+    híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la
+    tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista
+    de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de
+    launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que
+    se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que
+    la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-ferrari
+  agent: researcher
+  task: "Marca Ferrari (carpeta y brand: ferrari). Fuentes en el registro y modelos BEV en
+    data/raw/ferrari/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-rimac
+  agent: researcher
+  task: "Marca Rimac (carpeta y brand: rimac). Fuentes en el registro y modelos BEV en
+    data/raw/rimac/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008):
+    copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos.
+    Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene;
+    confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de
+    precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch,
+    status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se
+    puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la
+    fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."
+- id: marca-hispano-suiza
+  agent: researcher
+  task: "Marca Hispano Suiza (carpeta y brand: hispano-suiza). Fuentes en el registro y modelos BEV
+    en data/raw/hispano-suiza/. Escribe exactamente el esquema de docs/architecture/data-model.md
+    (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de
+    híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la
+    tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista
+    de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de
+    launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que
+    se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que
+    la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y
+    completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se
+    contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se
+    puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node
+    factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3)
+    qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en
+    España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente
+    con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra
+    carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o
+    Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml."

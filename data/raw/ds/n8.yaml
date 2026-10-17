@@ -1,0 +1,39 @@
+# Researcher — DS Nº8. Fuentes: idae-es (T2), autonomiacocheselectricos-es (T3), wikimedia-commons. Consultado 2026-10-16.
+brand: ds
+brand_name: DS
+model: Nº8
+status: {value: on_sale, note: "solo confirmado por un medio (T3); la web oficial no se puede leer", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-ds-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Nº8 FWD
+    battery_kwh: {value: 74, basis: unknown, note: "IDAE id 606337", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 550, note: "IDAE id 606337 (Nº8 FWD ÉTOILE); la fila Pallas 606335 da lo mismo. El medio (T3) publica 549 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 169, note: "IDAE id 606337", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    drivetrain: {value: fwd, note: "«FWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+  - name: Nº8 FWD Long Range
+    battery_kwh: {value: 97.2, basis: unknown, note: "IDAE id 606338", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 750, note: "IDAE id 606338 (Nº8 FWD LONG RANGE ÉTOILE); las filas Pallas y Jules Verne dan lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 180, note: "IDAE id 606338", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    drivetrain: {value: fwd, note: "«FWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+  - name: Nº8 AWD Long Range
+    battery_kwh: {value: 97.2, basis: unknown, note: "IDAE id 606339", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 688, note: "IDAE id 606339 (Nº8 AWD LONG RANGE ÉTOILE); la fila Jules Verne da lo mismo. El medio (T3) publica 664 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 257, note: "IDAE id 606339; el medio (T3) publica 350 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    drivetrain: {value: awd, note: "«AWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+images:
+  - file: data/images/ds/n8/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/DS_No_8_Auto_Zuerich_2025_DSC_3340.jpg/1280px-DS_No_8_Auto_Zuerich_2025_DSC_3340.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:DS_No_8_Auto_Zuerich_2025_DSC_3340.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-16
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "Web oficial dsautomobiles.es devuelve 403: precios y versiones vigentes sin confirmar con T1. El medio (T3) da precios desde 54.189 €, que no se guardan."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España (electrive, 2025-02-06, habla de Reino Unido, Alemania, Bélgica y Países Bajos)."
+  - "segment: el medio lo clasifica como «SUV coupé», que no está en la lista de RF-11: null."

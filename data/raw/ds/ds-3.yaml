@@ -1,0 +1,20 @@
+# Researcher — DS 3 E-Tense. Fuentes: idae-es (T2) y autonomiacocheselectricos-es (T3). Consultado 2026-10-16.
+brand: ds
+brand_name: DS
+model: DS 3 E-Tense
+status: {value: on_sale, note: "solo confirmado por un medio (T3); la web oficial no se puede leer", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-ds-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: {value: suv_pequeno, note: "el medio lo clasifica como «SUV pequeño»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-ds-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+needs_review: true
+versions:
+  - name: DS 3 E-Tense 156
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 404, note: "IDAE id 610010 (DS 3 E-TENSE 156 DS PERFORMANCE Line). Las filas del IDAE no traen fecha: 404 km (156 CV) y 436 km (Bastille, Opera, Performance Line); se usa la de menor wltp_km. El medio (T3) publica 402 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 610010", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Web oficial dsautomobiles.es devuelve 403: precio, versiones y acabados vigentes sin confirmar con T1. El medio (T3) da una versión «Standard» desde 39.975 €, que no se guarda como precio."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "Confirmar con T1 si la versión de 436 km (Bastille/Opera/Performance Line del IDAE) sigue a la venta."
+  - "Imagen: sin ficheros de DS 3 E-Tense localizados en Commons con licencia revisada."

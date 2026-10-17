@@ -1,0 +1,15 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: motor1-es
+brand: (varias; medio del motor)
+tier: T3
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://es.motor1.com/
+  ds-n7: https://es.motor1.com/news/795321/ds-n7-primeros-precios-europa/
+image_license: "" # no se usan imágenes de este medio
+notes: >
+  Medio español del motor. T3: sirve para confirmar versiones y nombres comerciales, nunca como fuente de precio.
+  Registrada para el DS Nº7 (2026-10-16). robots.txt no comprobado.
+last_verified: 2026-10-16
+status: active

@@ -1,0 +1,17 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: alfa-romeo-es
+brand: Alfa Romeo
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.alfaromeo.es/
+  robots: https://www.alfaromeo.es/robots.txt
+image_license: "" # términos de uso de imágenes no leídos
+notes: >
+  Web oficial de Alfa Romeo en España (dominio alfaromeo.es, de la marca). NO SE PUEDE LEER desde el Researcher: el 2026-10-17
+  tanto la portada como robots.txt devolvieron HTTP 403, así que no se ha podido comprobar robots.txt, ni leer modelos,
+  precios ni términos de imágenes. No se fuerza el acceso. Por eso no hay precios en data/raw/alfa-romeo/. Las versiones
+  salen del IDAE (idae-es) y los modelos a la venta se contrastan con medios (T3).
+last_verified: 2026-10-17
+status: broken

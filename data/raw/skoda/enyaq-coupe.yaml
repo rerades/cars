@@ -1,0 +1,31 @@
+# Researcher — Škoda Enyaq Coupé. Fuente: skoda-es (T1). Consultado 2026-10-14.
+brand: skoda
+brand_name: Škoda
+model: Enyaq Coupé
+status: {value: on_sale, note: "indicio: botones «Solicita tu oferta» y «Pide tu oferta» y oferta válida hasta el 31/10/2026; la ficha remite al concesionario para plazo de entrega y no dice expresamente que se entregue", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-17, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  wltp_max_km: {value: 591, note: "«hasta 591 km de autonomía en ruta»", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+versions:
+  - name: Selection
+    battery_kwh: {value: 58, basis: usable, note: "publicado: 61 kWh (58 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 140, note: "publicado: 140 kW (190 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+    price: null
+  - name: Sportline
+    battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+    price: null
+  - name: RS
+    battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+    power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "Precios: la ficha solo da «desde» 33.700 / 40.100 / 43.750 € sujetos a financiación e incluyendo Plan Auto+ (y Plan CAE); no es PVP sin ayudas y no se guarda. No se ha leído un «PVP recomendado financiando»."
+  - "segment: la ficha dice «SUV deportivo», que no está en la lista de RF-11; queda null."
+  - "La ficha muestra también un bloque «60 150 kW (204 CV)» que no corresponde a ninguna de las tres versiones listadas; no se usa."
+  - "WLTP por versión, tracción y kW de carga DC no están en la ficha; wltp_km queda sin rellenar."
+  - "launch: la ficha no da fecha de inicio de venta en España."
+  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."

@@ -7,7 +7,7 @@ launch: null
 segment: {value: monovolumen, note: "título de la ficha de ford.es: «E-Tourneo Custom 100% Eléctrico: Monovolumen Versátil»", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-custom", retrieved: 2026-10-15, tier: T1}
 needs_review: true
 versions:
-  - name: 64 kWh 160 kW (Titanium/Active/Titanium X)
+  - name: 64 kWh 160 kW
     battery_kwh: {value: 64, basis: unknown, note: "IDAE id 610317 (11.2025), «útil 64kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     wltp_km: {value: 298, note: "IDAE id 610317 (11.2025); igual en la 610315 (Grand Tourneo)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     power_kw: {value: 160, note: "IDAE id 610317", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
@@ -18,18 +18,6 @@ versions:
     wltp_km: {value: 298, note: "IDAE id 610316 (11.2025); igual en la 610314 (Grand Tourneo)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     power_kw: {value: 210, note: "IDAE id 610316", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     drivetrain: {value: rwd, note: "IDAE id 610316: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    price: null
-  - name: 83 kWh 160 kW RWD (Titanium/Active/Titanium X)
-    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610313 (12.2025): «83kWh (71kWh útil)». Esta combinación solo consta en el IDAE como Grand Tourneo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 327, note: "IDAE id 610313 (12.2025), tracción trasera", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 610313", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    drivetrain: {value: rwd, note: "IDAE id 610313: «Tr.Tra.»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    price: null
-  - name: 83 kWh 160 kW AWD (Titanium/Active/Titanium X)
-    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610312 (12.2025): «83kWh (71kWh útil)». Solo consta como Grand Tourneo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 302, note: "IDAE id 610312 (12.2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 610312", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    drivetrain: {value: awd, note: "IDAE id 610312: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     price: null
   - name: 83 kWh 210 kW RWD Sport
     battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610319 (12.2025): «83kWh (71kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
@@ -56,7 +44,8 @@ open_questions:
   - "Precio: ford.es no publica PVP legible en la ficha; sin precio. Los precios de anuncios de concesionario no valen."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "ford.es dice «hasta 339 km»; el máximo del IDAE es 334 km (id 610319). Una página antigua de ford.es daba 325 km."
-  - "El IDAE lista las combinaciones de 83 kWh con 160 kW solo como Grand Tourneo (carrocería larga); no se sabe si la carrocería normal las ofrece."
+  - "Quitadas las versiones de 83 kWh y 160 kW (RWD, id IDAE 610313; AWD, 610312): en el IDAE constan solo como «Grand Tourneo» (carrocería larga) y ni ford.es ni medios T3 confirman que se vendan como E-Tourneo Custom normal. Las otras cuatro versiones tienen fila IDAE «E-Tourneo Custom» sin Grand (64 kWh: 610317 y 610316; 83 kWh 210 kW: 610319 y 610318). Si se confirma, se pueden añadir."
+  - "Nombres de versión: el IDAE agrupa los acabados en una sola fila («Titanium/Active/Titanium X») con las mismas cifras, y ford.es (Trend, Titanium, Active, Sport, Titanium X) no da datos por acabado; no se puede asignar una versión a cada acabado. La de 160 kW se nombra por batería y potencia; Sport sí es un acabado único en la fuente."
   - "Acabado Trend, citado por la ficha de ford.es, no aparece en el IDAE; sin versión."
   - "El IDAE da 83 kWh con 71 kWh útiles; basis queda unknown."
   - "dc_max_kw y ac_max_kw: ford.es solo da tiempo de carga CC (10-80 % en unos 29 min), no la potencia."

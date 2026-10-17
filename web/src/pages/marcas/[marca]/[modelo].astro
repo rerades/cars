@@ -8,6 +8,9 @@ import { t, type MessageKey } from "../../../lib/i18n.ts";
 import { chunkVersions, sortVersions } from "../../../lib/versions.ts";
 import { relatedModels } from "../../../lib/related.ts";
 import ModelCard from "../../../components/ModelCard.astro";
+import VersionPrice from "../../../components/VersionPrice.astro";
+import VersionField from "../../../components/VersionField.astro";
+import { versionFields } from "../../../lib/version-fields.ts";
 
 /**
  * Model page (PRD-002, docs/design/ficha-modelo.md). This story: URL, title and header (RF-1, RF-2,
@@ -32,6 +35,17 @@ const { card, versions, brandSlug, brandUrl, images, specs, related } = Astro.pr
   related: CardView[];
 };
 const chunks = chunkVersions(versions);
+// Technical rows after the price (RF-5, RF-6): same list for the table and the blocks.
+const fieldsOf = (v: Version) => versionFields(v);
+const fieldRows = versions.length > 0 ? fieldsOf(versions[0]!) : [];
+const discontinued = card.statusKind === "discontinued";
+// Financed versions in version order; their position is the n of #condiciones-{n} (RF-4, CA-4).
+const financed = versions.filter((v) => v.price?.price_kind === "financed");
+const termsIndex = (v: Version) => {
+  const i = financed.indexOf(v);
+  return i < 0 ? undefined : i + 1;
+};
+const paragraphs = (text: string) => text.split(/\n\s*\n/).filter((p) => p.trim() !== "");
 // readImages (data.ts) already drops any image without license or source_id.
 const total = Math.min(images.length, 6);
 const altOf = (i: number) => t("ficha.imagen.alt", { marca: card.brand, modelo: card.model, i, n: total });
@@ -182,7 +196,31 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
                         ))}
                       </tr>
                     </thead>
-                    {/* Field rows (<tbody>) come with #149 (price) and #150 (the rest), in the order of «Campos y formato». */}
+                    {/* Field rows come in the order of «Campos y formato»: price (#149), then the rest (#150). */}
+                    <tbody>
+                      <tr class="border-t border-line-soft">
+                        <th scope="row" class="bg-surface-muted p-3 align-top text-body text-ink-900">
+                          {t("ficha.campo.precio")}
+                        </th>
+                        {chunk.items.map((version) => (
+                          <td class="bg-surface p-3 align-top [overflow-wrap:anywhere]">
+                            <VersionPrice price={version.price} discontinued={discontinued} termsIndex={termsIndex(version)} />
+                          </td>
+                        ))}
+                      </tr>
+                      {fieldRows.map((row, i) => (
+                        <tr class="border-t border-line-soft">
+                          <th scope="row" class="bg-surface-muted p-3 align-top text-body text-ink-900">
+                            {row.label}
+                          </th>
+                          {chunk.items.map((version) => (
+                            <td class="bg-surface p-3 align-top [overflow-wrap:anywhere]">
+                              <VersionField field={fieldsOf(version)[i]} />
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
                   </table>
                 ))}
               </div>
@@ -192,11 +230,53 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
                 {versions.map((version) => (
                   <li class="rounded-card border border-line-soft bg-surface p-4">
                     <h3 class="text-card-title text-ink-900 [overflow-wrap:anywhere]">{version.name}</h3>
-                    {/* The <dl> with the fields (same order as the table rows) is filled by #149 and #150. */}
-                    <dl class="mt-3 flex flex-col gap-3 [overflow-wrap:anywhere]" />
+                    {/* The <dl> fields follow the table rows' order: price (#149), then the rest (#150). */}
+                    <dl class="mt-3 flex flex-col gap-3 [overflow-wrap:anywhere]">
+                      <div>
+                        <dt class="text-small text-ink-600">{t("ficha.campo.precio")}</dt>
+                        <dd class="text-body text-ink-900">
+                          <VersionPrice price={version.price} discontinued={discontinued} termsIndex={termsIndex(version)} />
+                        </dd>
+                      </div>
+                      {versionFields(version).map((field) => (
+                        <div>
+                          <dt class="text-small text-ink-600">{field.label}</dt>
+                          <dd class="text-body text-ink-900">
+                            <VersionField field={field} />
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
                   </li>
                 ))}
               </ol>
+
+              {/* Offer terms: once, outside the table and the blocks, always visible (CA-4). Ids live here. */}
+              {
+                financed.length > 0 && (
+                  <div class="mt-8" data-condiciones>
+                    <h3 class="text-card-title text-ink-900">{t("ficha.condiciones.titulo")}</h3>
+                    <ul class="mt-3 flex flex-col gap-6">
+                      {financed.map((version, i) => (
+                        <li id={`condiciones-${i + 1}`} tabindex="-1" class="max-w-prose">
+                          <p class="text-body font-semibold text-ink-900 [overflow-wrap:anywhere]">{version.name}</p>
+                          <div class="mt-1 flex flex-col gap-2 text-small text-ink-900 [overflow-wrap:anywhere]">
+                            {paragraphs(version.price!.price_terms ?? "").map((p) => (
+                              <p class="whitespace-pre-line">{p}</p>
+                            ))}
+                          </div>
+                          <a
+                            href={version.price!.price_terms_url}
+                            rel="noopener"
+                            class="mt-1 inline-flex min-h-touch items-center text-small text-brand-600 underline hover:text-brand-800"
+                            >{t("ficha.condiciones.enlace")}</a
+                          >
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )
+              }
             </>
           )
         }

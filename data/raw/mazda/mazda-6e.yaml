@@ -1,0 +1,47 @@
+# Researcher — Mazda 6e. Fuentes: idae-es (T2), autonomiacocheselectricos-es (T3). Consultado 2026-10-16. mazda.es no legible.
+brand: mazda
+brand_name: Mazda
+model: 6e
+status: {value: on_sale, note: "la fuente dice que Mazda vende hoy dos eléctricos en España, entre ellos el 6e", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Takumi
+    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 606426 (258 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 479, note: "IDAE id 606426", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 190, note: "IDAE id 606426 (258 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Takumi Plus
+    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 606426 (258 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 479, note: "IDAE id 606426", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 190, note: "IDAE id 606426 (258 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Takumi Long Range
+    battery_kwh: {value: 80, basis: unknown, note: "IDAE id 606425 (245 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 552, note: "IDAE id 606425", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 180, note: "IDAE id 606425 (245 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Takumi Plus Long Range
+    battery_kwh: {value: 80, basis: unknown, note: "IDAE id 606425 (245 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 552, note: "IDAE id 606425", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 180, note: "IDAE id 606425 (245 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    price: null
+images:
+  - file: data/images/mazda/mazda-6e/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Mazda_6e%2C_Auto_2025%2C_Zurich_%2820251029-P1073931%29.jpg/1280px-Mazda_6e%2C_Auto_2025%2C_Zurich_%2820251029-P1073931%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mazda_6e,_Auto_2025,_Zurich_(20251029-P1073931).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-16
+    license: CC-BY-SA-4.0
+    attribution: "Matti Blume (MB-one), CC BY-SA 4.0"
+open_questions:
+  - "mazda.es no se puede leer (inicio solo JavaScript, URL de gama 404, configurador bloqueado por robots.txt): precios null en todas las versiones."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir (un medio de abril de 2025 dice que el configurador ya estaba abierto, sin fecha)."
+  - "segment: la fuente dice «segmento D», que no está en la lista de RF-11; null."
+  - "IDAE no distingue Takumi de Takumi Plus (filas «Todas las versiones» 606425 y 606426): se asignan los mismos valores a ambos acabados. Las baterías de las versiones Long Range (80 kWh) y estándar (68,8 kWh según el medio; 69 en IDAE) se emparejan por potencia/autonomía con los acabados citados por el medio."
+  - "Que se sigan vendiendo hoy las cuatro versiones se apoya solo en un medio T3 (2026-09-08)."

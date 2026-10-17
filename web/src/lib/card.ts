@@ -1,4 +1,6 @@
 import type { ModelRecord } from "./data.ts";
+import { isComparable } from "./compare.ts";
+import { formatEur, formatNumber } from "./format.ts";
 import { t, type MessageKey } from "./i18n.ts";
 
 /**
@@ -26,9 +28,13 @@ export interface CardView {
   segment: string | null;
   /** First image with license (RF-8); null gives the silhouette. */
   image: { file: string; attribution: string | null; pageUrl: string } | null;
+  /**
+   * RF-6, RF-11: the "Comparar" action, null unless the model is comparable (`isComparable`).
+   * Short form `?v={brand}/{model}`: the default version is chosen by the comparator, not frozen here.
+   */
+  compare: { href: string; label: string; srLabel: string } | null;
 }
 
-const eur = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0, useGrouping: "always" });
 const monthYear = new Intl.DateTimeFormat("es-ES", { month: "short", year: "numeric", timeZone: "UTC" });
 
 /** `YYYY-MM` or `YYYY-MM-DD` to "oct 2026". Null if it does not parse. */
@@ -62,12 +68,12 @@ export function cardView(m: ModelRecord): CardView {
     statusKind,
     hasPrice: price !== null,
     priceLabel: price
-      ? t("tarjeta.precio", { precio: `${eur.format(price.value)} €` })
+      ? t("tarjeta.precio", { precio: formatEur(price.value) })
       : t("tarjeta.precioPendiente"),
     dealLabel: price?.price_kind === "financed" ? t("tarjeta.oferta") : null,
     hasRange: m.max_range_km !== null,
     rangeLabel: m.max_range_km
-      ? t("tarjeta.autonomia", { km: eur.format(m.max_range_km.value) })
+      ? t("tarjeta.autonomia", { km: formatNumber(m.max_range_km.value) })
       : t("tarjeta.autonomiaPendiente"),
     hasSegment: m.segment !== null,
     segmentLabel: m.segment
@@ -76,6 +82,13 @@ export function cardView(m: ModelRecord): CardView {
     segment: m.segment?.value ?? null,
     image: m.images[0]
       ? { file: m.images[0].file, attribution: m.images[0].attribution, pageUrl: m.images[0].page_url }
+      : null,
+    compare: isComparable(m)
+      ? {
+          href: `/comparar/?v=${m.file.replace(/\.yaml$/, "")}`,
+          label: t("comparar.accion"),
+          srLabel: t("comparar.accionSr", { marca: m.brand_name, modelo: m.model }),
+        }
       : null,
     labels: {
       price: t("tarjeta.etiqueta.precio"),

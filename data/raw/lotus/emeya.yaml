@@ -1,0 +1,33 @@
+# Researcher — Lotus Emeya. Web oficial no legible (configurador bloqueado por robots.txt) e IDAE sin Lotus; versiones de hibridosyelectricos-es (T3). Consultado 2026-10-16.
+brand: lotus
+brand_name: Lotus
+model: Emeya
+status: {value: on_sale, note: "T3: artículo de 06/05/2026 con la gama que se vende en España (cuatro versiones; la 600 básica no se vende aquí)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/lotus-emeya-ya-tiene-precio-en-espana-hasta-918-cv-0-100-km-h-en-278-segundos_86667_102.html", retrieved: 2026-10-16, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Emeya 600 GT
+    power_kw: {value: 450, note: "publicado: 450 kW (612 CV)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/lotus-emeya-ya-tiene-precio-en-espana-hasta-918-cv-0-100-km-h-en-278-segundos_86667_102.html", retrieved: 2026-10-16, tier: T3}
+    drivetrain: {value: awd, note: "publicado: doble motor eléctrico con tracción total", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/lotus-emeya-ya-tiene-precio-en-espana-hasta-918-cv-0-100-km-h-en-278-segundos_86667_102.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Emeya 600 GT SE
+    power_kw: {value: 450, note: "publicado: 450 kW (612 CV)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/lotus-emeya-ya-tiene-precio-en-espana-hasta-918-cv-0-100-km-h-en-278-segundos_86667_102.html", retrieved: 2026-10-16, tier: T3}
+    drivetrain: {value: awd, note: "publicado: doble motor eléctrico con tracción total", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/lotus-emeya-ya-tiene-precio-en-espana-hasta-918-cv-0-100-km-h-en-278-segundos_86667_102.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Emeya 600 Sport SE
+    power_kw: {value: 450, note: "publicado: 450 kW (612 CV)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/lotus-emeya-ya-tiene-precio-en-espana-hasta-918-cv-0-100-km-h-en-278-segundos_86667_102.html", retrieved: 2026-10-16, tier: T3}
+    drivetrain: {value: awd, note: "publicado: doble motor eléctrico con tracción total", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/lotus-emeya-ya-tiene-precio-en-espana-hasta-918-cv-0-100-km-h-en-278-segundos_86667_102.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Emeya 900 Sport
+    power_kw: {value: 675, note: "publicado: 675 kW (918 CV)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/lotus-emeya-ya-tiene-precio-en-espana-hasta-918-cv-0-100-km-h-en-278-segundos_86667_102.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+  - name: Emeya 900 Sport Carbon
+    power_kw: {value: 675, note: "publicado: 675 kW (918 CV)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/lotus-emeya-ya-tiene-precio-en-espana-hasta-918-cv-0-100-km-h-en-278-segundos_86667_102.html", retrieved: 2026-10-16, tier: T3}
+    price: null
+images: []
+open_questions:
+  - "Web oficial de Lotus España: sin fichas ni precios legibles (configurador bloqueado por robots.txt). IDAE no tiene la marca Lotus (fetch-idae.ts LOTUS). Precio, wltp_km y batería sin fuente válida; wltp_km en ninguna versión."
+  - "WLTP discrepante entre T3: motor.es (20/03/2025) da 540 km (612 CV) y 485 km (918 CV); hibridosyelectricos-es (06/05/2026) da hasta 610 km. No se guarda ninguno."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España. segment: las fuentes dicen «GT 100% eléctrico» y «berlina de lujo de altas prestaciones», que no es un término literal de RF-11; null."
+  - "Imágenes: no se ha buscado ni registrado ninguna imagen de Commons en esta ejecución."
