@@ -1,0 +1,239 @@
+---
+import { t } from "../lib/i18n.ts";
+
+/**
+ * «Comparación» section of /comparar/ (docs/design/comparador.md; ADR-0014). The served HTML has no
+ * table: the markup of the table, columns, cells and conditions lives in <template> and the script
+ * below clones it and fills it with `textContent` and attributes, never `innerHTML` (ADR-0014).
+ * Data-dependent texts (formats, «por confirmar», labels) come from lib/compare.ts; the fixed ones
+ * are written here from i18n (RNF-4).
+ */
+const cell = "align-top p-2 text-left text-body text-ink-900 [overflow-wrap:anywhere] md:p-3";
+const link = "text-brand-600 underline hover:text-brand-800";
+const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
+---
+
+<section aria-labelledby="cmp-tabla" class="mt-8" data-compare hidden>
+  <h2 id="cmp-tabla" class="text-section">{t("comparador.tabla.titulo")}</h2>
+  <p class="mt-2 max-w-prose text-small text-ink-600">{t("comparador.tabla.entrada")}</p>
+  <div class="mt-4" data-table-host></div>
+  <div class="mt-6" data-conditions hidden>
+    <h3 class="text-card-title">{t("ficha.condiciones.titulo")}</h3>
+    <div class="mt-2 flex flex-col gap-4" data-conditions-list></div>
+  </div>
+</section>
+
+<template data-tpl="table">
+  <table class="w-full table-fixed border-collapse bg-surface">
+    <caption class="sr-only" data-slot="caption"></caption>
+    <thead><tr data-slot="head"></tr></thead>
+  </table>
+</template>
+
+<template data-tpl="column">
+  <th scope="col" class={`${cell} border-l border-line-soft first:border-l-0`}>
+    <a data-slot="link" class={`block min-h-touch ${link} text-card-title`}>
+      <span class="block text-small text-ink-600" data-slot="brand"></span>
+      <span data-slot="model"></span>
+      <span class="sr-only" data-slot="sr"></span>
+    </a>
+    <span class="block text-body font-semibold text-ink-900" data-slot="name"></span>
+    <span
+      class="mt-1 inline-block rounded-card bg-soon-bg px-3 py-1 text-badge text-soon-fg"
+      data-slot="badge"
+      hidden></span>
+  </th>
+</template>
+
+<template data-tpl="field">
+  <tbody class="border-t border-line-soft">
+    <tr><th class="bg-surface-muted p-2 text-left text-small font-semibold text-ink-900 md:p-3" data-slot="label"></th></tr>
+    <tr data-slot="values"></tr>
+  </tbody>
+</template>
+
+<template data-tpl="cell">
+  <td class={`${cell} border-l border-line-soft first:border-l-0`}>
+    <p data-slot="text"></p>
+    <p class="mt-1" data-slot="dealRow" hidden>
+      <span class="inline-block rounded-card bg-deal-bg px-3 py-1 text-badge text-deal-fg" data-slot="deal"></span>
+    </p>
+    <p class={note} data-slot="source" hidden>
+      <span data-slot="before"></span><a class={link} rel="noopener" data-slot="sourceLink"></a><span data-slot="after"></span>
+      <span data-slot="unofficial" hidden></span>
+    </p>
+    <p class={note} data-slot="note" hidden></p>
+    <a
+      class={`inline-flex min-h-touch items-center text-small ${link}`}
+      data-slot="terms"
+      hidden>{t("ficha.precio.verCondiciones")}</a
+    >
+  </td>
+</template>
+
+<template data-tpl="condition">
+  <div tabindex="-1">
+    <p class="text-body font-semibold text-ink-900 [overflow-wrap:anywhere]" data-slot="title"></p>
+    <p class="text-body text-ink-900 [overflow-wrap:anywhere]" data-slot="text" hidden></p>
+    <a
+      class={`inline-flex min-h-touch items-center text-body ${link}`}
+      rel="noopener"
+      data-slot="link"
+      hidden>{t("ficha.condiciones.enlace")}</a
+    >
+  </div>
+</template>
+
+<script>
+  import {
+    FIELDS,
+    cellView,
+    conditionTitle,
+    fieldLabel,
+    headerView,
+    modelsToFetch,
+    parseEntries,
+    validateSelection,
+    writeSearch,
+    type PublishedModel,
+    type PublishedVersion,
+  } from "../lib/compare.ts";
+  import { t } from "../lib/i18n.ts";
+
+  const main = document.querySelector<HTMLElement>("main[data-messages]");
+  const section = document.querySelector<HTMLElement>("[data-compare]");
+  if (main && section) void init(main, section);
+
+  /** Clones the first element of `<template data-tpl="name">`. */
+  function clone(name: string): HTMLElement {
+    const tpl = document.querySelector<HTMLTemplateElement>(`template[data-tpl="${name}"]`)!;
+    return tpl.content.firstElementChild!.cloneNode(true) as HTMLElement;
+  }
+  const slot = (root: ParentNode, name: string) => root.querySelector<HTMLElement>(`[data-slot="${name}"]`)!;
+  const show = (el: HTMLElement, text: string | null) => {
+    el.hidden = text === null;
+    if (text !== null) el.textContent = text;
+  };
+
+  /** A model's JSON, or null if there is none (404: unknown or not comparable, RF-11). */
+  async function fetchModel(key: { brand: string; slug: string }): Promise<PublishedModel | null> {
+    const res = await fetch(`/comparar/datos/${encodeURIComponent(key.brand)}/${encodeURIComponent(key.slug)}.json`);
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return (await res.json()) as PublishedModel;
+  }
+
+  async function init(main: HTMLElement, section: HTMLElement) {
+    const msg: Record<string, string> = JSON.parse(main.dataset.messages ?? "{}");
+    const entries = parseEntries(location.search);
+    const notice = document.querySelector<HTMLElement>("[data-no-js]");
+    let models: PublishedModel[];
+    try {
+      // All requests at once; only the models the URL names are fetched (ADR-0014).
+      const found = await Promise.all(modelsToFetch(entries).map(fetchModel));
+      models = found.filter((m): m is PublishedModel => m !== null);
+    } catch {
+      // Minimal fallback so a failed request is not a blank page; the full states are story #320.
+      const p = document.createElement("p");
+      p.className = "mt-4 max-w-prose text-body text-ink-900";
+      p.append(`${msg.error ?? ""} `);
+      const a = document.createElement("a");
+      a.href = "/coches";
+      a.className = "text-brand-600 underline hover:text-brand-800";
+      a.textContent = msg.noJsLink ?? "";
+      p.append(a);
+      notice?.replaceWith(p);
+      return;
+    }
+    notice?.remove();
+
+    const { columns } = validateSelection(entries, models);
+    // The URL always shows the table: full form, in column order, without the ignored ones.
+    history.replaceState(null, "", location.pathname + (columns.length ? `?${writeSearch(columns)}` : ""));
+    if (columns.length < 2) return; // fewer than two: states of stories #320 and #321
+
+    const picked = columns.map((c) => {
+      const model = models.find((m) => m.brand === c.brand && m.slug === c.slug)!;
+      return { model, version: model.versions.find((v) => v.name === c.name)! };
+    });
+    render(section, picked);
+    section.hidden = false;
+  }
+
+  function render(section: HTMLElement, picked: { model: PublishedModel; version: PublishedVersion }[]) {
+    const n = picked.length;
+    const table = clone("table");
+    table.style.maxWidth = `calc(${n} * var(--width-version-col-max))`;
+    slot(table, "caption").textContent = t("comparador.tabla.caption", { n });
+
+    const head = slot(table, "head");
+    picked.forEach(({ model, version }, i) => {
+      const h = headerView(model, version);
+      const th = clone("column");
+      th.id = `cmp-col-${i + 1}`;
+      const a = slot(th, "link") as HTMLAnchorElement;
+      a.href = h.href;
+      slot(a, "brand").textContent = h.brand;
+      slot(a, "model").textContent = h.model;
+      slot(a, "sr").textContent = ` ${h.srSuffix}`;
+      slot(th, "name").textContent = h.name;
+      show(slot(th, "badge"), h.badge);
+      head.append(th);
+    });
+
+    for (const field of FIELDS) {
+      const body = clone("field");
+      const label = slot(body, "label");
+      label.id = `cmp-f-${field}`;
+      label.setAttribute("colspan", String(n));
+      label.textContent = fieldLabel(field);
+      const values = slot(body, "values");
+      picked.forEach(({ version }, i) => {
+        const c = cellView(field, version);
+        const td = clone("cell");
+        td.setAttribute("headers", `cmp-col-${i + 1} cmp-f-${field}`);
+        const text = slot(td, "text");
+        text.textContent = c.text;
+        // Same style for every value: only the placeholder is muted, and it also reads as text (CA-17).
+        text.className = c.missing ? "text-ink-600" : field === "precio" ? "text-price text-ink-900" : "";
+        slot(td, "dealRow").hidden = c.deal === null;
+        if (c.deal) slot(td, "deal").textContent = c.deal;
+        const source = slot(td, "source");
+        source.hidden = c.source === null;
+        if (c.source) {
+          const MARK = "\u0001";
+          const [before, after = ""] = t("ficha.precio.fuente", { fuente: MARK, fecha: c.source.date }).split(MARK);
+          slot(source, "before").textContent = before!;
+          const link = slot(source, "sourceLink") as HTMLAnchorElement;
+          link.href = c.source.url;
+          link.textContent = c.source.name;
+          slot(source, "after").textContent = after;
+          show(slot(source, "unofficial"), c.unofficial ? t("ficha.nota.noOficial") : null);
+        }
+        show(slot(td, "note"), c.note);
+        const terms = slot(td, "terms") as HTMLAnchorElement;
+        terms.hidden = c.terms === null;
+        if (c.terms) terms.href = `#cmp-condiciones-${i + 1}`;
+        values.append(td);
+      });
+      table.append(body);
+    }
+    section.querySelector("[data-table-host]")!.replaceChildren(table);
+
+    const list = section.querySelector<HTMLElement>("[data-conditions-list]")!;
+    list.replaceChildren();
+    picked.forEach(({ model, version }, i) => {
+      const terms = cellView("precio", version).terms;
+      if (!terms) return;
+      const entry = clone("condition");
+      entry.id = `cmp-condiciones-${i + 1}`;
+      slot(entry, "title").textContent = conditionTitle(model, version);
+      show(slot(entry, "text"), terms.text);
+      const link = slot(entry, "link") as HTMLAnchorElement;
+      link.hidden = !terms.url;
+      if (terms.url) link.href = terms.url;
+      list.append(entry);
+    });
+    section.querySelector<HTMLElement>("[data-conditions]")!.hidden = list.children.length === 0;
+  }
+</script>
