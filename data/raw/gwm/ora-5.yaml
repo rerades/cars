@@ -1,0 +1,29 @@
+# Researcher — GWM ORA 5 (EV). Fuentes: gwm-es (T1), idae-es (T2), motor-es (T3). Consultado 2026-10-17.
+brand: gwm
+brand_name: GWM
+model: ORA 5
+status: {value: on_sale, note: "motor.es: se estrenó oficialmente en el mercado español en junio de 2026; la web de la marca no dice si el EV ya se puede pedir", source_id: motor-es, url: "https://www.motor.es/gwm/ora-5/", retrieved: 2026-10-17, tier: T3}
+launch: null
+segment: {value: suv_compacto, note: "motor.es: «SUV compacto multi-energía», «segmento C-SUV»; la web de la marca no lo clasifica", source_id: motor-es, url: "https://www.motor.es/gwm/ora-5/", retrieved: 2026-10-17, tier: T3}
+needs_review: true
+specs:
+  wltp_max_km: {value: 435, note: "hasta 435 km WLTP", source_id: gwm-es, url: "https://www.gwm-eu.com/es/models/ora-5", retrieved: 2026-10-17, tier: T1}
+versions:
+  - name: ORA 5 EV Explore
+    battery_kwh: {value: 58.3, basis: unknown, note: "IDAE id 611914", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 435, note: "IDAE id 611914 (ORA 5 EV 164kW (204cv) EXPLORE); coincide con la web de la marca", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 611914; la marca publica 204 cv", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    price: null
+  - name: ORA 5 EV Advance
+    battery_kwh: {value: 58.3, basis: unknown, note: "IDAE id 611915", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 435, note: "IDAE id 611915 (ORA 5 EV 164kW (204cv) ADVANCE); coincide con la web de la marca", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 611915; la marca publica 204 cv", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Precio: la web oficial (gwm-eu.com/es) no publica PVP del EV; su único precio es el ejemplo de financiación del gasolina Explore. Los medios (motor.es: Explore 34.320 €, Advance 36.870 €; motor16: 34.950 € sin campaña) son T3 y no se guardan. price: null."
+  - "launch: motor.es habla de estreno en junio de 2026 pero ninguna fuente da la fecha desde la que se puede pedir el EV. launch: null."
+  - "status/needs_review: la web de la marca no confirma que el EV se pueda pedir hoy; solo medios T3. Confirmar con la marca o concesionarios."
+  - "Versiones: Explore y Advance salen del IDAE (nombres de homologación) y motor.es; motor.es lista además «Advance Pintura Mate» (mismo coche, solo pintura)."
+  - "Tracción, carga DC/AC: la web no los publica por versión (motor16 habla de 120 kW DC, T3, no guardado). drivetrain y dc_max_kw sin dato."
+  - "Imagen: en Commons solo File:GWM_Ora_5.jpg (CC BY-SA 4.0, Turning67) y su descripción no dice si es el EV ni la versión; no se registra. Otras fotos de ORA 5 EV (Tianjín, China) no se han podido identificar por nombre."
