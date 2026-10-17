@@ -1,0 +1,341 @@
+# ADR-0016 — Evaluación de los prompts de los agentes con datasets y experimentos de Langfuse
+
+- **Estado:** propuesta
+- **Fecha:** 2026-10-18
+
+## Contexto
+ADR-0004 dejó dos cosas fuera del paso 1: el LLM como juez, «hasta que haya agentes que escriban
+texto libre (Product, Reviewer)», y los datasets de Langfuse, que se citaron como motivo para elegir
+Langfuse Cloud pero no se usan. Ese momento ha llegado: el Reviewer (`.claude/agents/reviewer.md`)
+escribe un comentario libre y deja una etiqueta `review:*` de la que depende la fusión automática
+de ADR-0011 (`review:ok` ligada al SHA, `auto_merge: true` en `factory/budgets.yaml`). Hoy no hay
+forma de saber si un cambio en su prompt, o de modelo, revisa mejor o peor: los evals de
+`factory/evals.ts` solo miran forma y `write_paths`.
+
+Lo que obliga a decidir, según la tarea:
+- Evaluar los prompts de los agentes **con distintos modelos** y subir su puntuación con
+  datasets, experimentos, evaluadores y scores de **Langfuse Cloud, plan Hobby, región UE**
+  (la misma cuenta de ADR-0004).
+- El usuario **acepta gasto de API de Anthropic con un límite**. Hasta ahora la factoría solo usa
+  la suscripción Pro (ADR-0002, fase 1); la fase 2 de ADR-0002 ya preveía claves y límites de
+  gasto propios.
+- Se empieza por el **Reviewer**. Los demás agentes quedan fuera de esta ADR.
+- ADR-0004: Langfuse es una **vista**; la fuente de verdad está en el repositorio y en `ops/`.
+  El plan Hobby guarda los datos **30 días**.
+- Seis preguntas: dónde viven los datos de referencia, qué es un caso y cuántos hacen falta,
+  cómo se ejecuta el agente, qué se puntúa y cómo se aprueba un prompt, el coste y los límites
+  del plan.
+
+### Lo comprobado en la documentación (consultado el 2026-10-18)
+- **Plan Hobby:** 50 000 unidades al mes, 30 días de acceso a los datos, 2 usuarios; incluye
+  datasets, experimentos por SDK y por interfaz y evaluadores LLM-as-a-judge sin límite indicado.
+  Límites de ritmo: ingesta 1000 peticiones/min, API general 30/min, API de datasets 100/min. Una
+  unidad es «any tracing data point sent to the platform»: trazas, observaciones (spans, eventos,
+  generations) y scores. La página **no dice qué pasa al pasar de 50 000** en Hobby: no hay precio
+  de exceso para ese plan. — <https://langfuse.com/pricing>
+- **Datasets:** cada ítem tiene `input`, `expectedOutput` y `metadata` opcionales, `status`
+  (`ACTIVE`/`ARCHIVED`) y enlace opcional a una traza de origen. Se hace *upsert* pasando el `id`
+  del ítem; cada alta, cambio, borrado o archivado crea una versión nueva del dataset, y se puede
+  leer el dataset tal como era en una fecha (`version`). —
+  <https://langfuse.com/docs/evaluation/experiments/datasets>
+- **Modelo de datos:** «Dataset items are upserted on their id»; el id es único en el proyecto y
+  no se puede reutilizar entre datasets. Un *DatasetRun* (la ejecución de un experimento) tiene
+  `id`, `name` y `datasetId`; un *DatasetRunItem* liga un ítem con una traza (`datasetRunId`,
+  `datasetItemId`, `traceId`). `POST /api/public/dataset-run-items` está **obsoleto** y «There is
+  no public REST endpoint for creating new experiment runs». —
+  <https://langfuse.com/docs/evaluation/experiments/data-model>
+- **Alta de ítems por REST:** `POST /api/public/dataset-items`, con `id` en el cuerpo. La ruta
+  exacta para crear el dataset (`POST …/datasets`) no la he podido confirmar en la referencia; se
+  comprueba al implementar en <https://api.reference.langfuse.com>. — búsqueda en la
+  documentación de Langfuse (`langfuse.com/api/search-docs`), que remite a esa referencia y a
+  <https://langfuse.com/changelog/2024-04-25-datasets-v2>.
+- **Experimentos por OpenTelemetry:** sin SDK, un experimento se forma con atributos en los spans:
+  `langfuse.experiment.id`, `langfuse.experiment.name`, `langfuse.experiment.dataset.id`,
+  `langfuse.experiment.metadata.*` en cada traza; `langfuse.observation.input`,
+  `langfuse.observation.output` y `langfuse.experiment.item.expected_output` en el span raíz del
+  ítem; `langfuse.experiment.item.id`, `langfuse.experiment.item.root_observation_id` y
+  `langfuse.experiment.item.version` (opcional) en los spans del ítem. Langfuse espera **una traza
+  por ítem** y los «synthesize … as one experiment». La página no dice si el experimento se crea
+  al ingerir ni pide cabeceras distintas. —
+  <https://langfuse.com/integrations/native/opentelemetry/experiments> y
+  <https://langfuse.com/docs/evaluation/experiments/experiments-via-opentelemetry>
+- **Evaluadores locales del SDK:** sus resultados se guardan como scores en las trazas. —
+  <https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk>
+- **LLM-as-a-judge gestionado:** necesita una *LLM Connection* del proyecto (credenciales propias;
+  Anthropic está soportado); lo ejecuta el worker de Langfuse; corre sobre observaciones o
+  experimentos (los de traza están obsoletos y en Cloud dejan de funcionar el 2026-11-16); cada
+  ejecución crea una traza completa en el entorno `langfuse-llm-as-a-judge`; coste orientativo
+  0,01-0,10 USD por evaluación. No dice si esas trazas cuentan como unidades. —
+  <https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge> y
+  <https://langfuse.com/docs/administration/llm-connection>
+- **Precios de la API de Anthropic** (por millón de tokens, entrada / salida / lectura de caché):
+  Claude Opus 5.5, 4 / 20 / 0,20 USD; Claude Sonnet 5.5, 2 / 10 / 0,10 USD; Claude Haiku 5.5
+  (prompts de hasta 100 000 tokens), 0,10 / 0,50 / 0,01 USD. —
+  <https://platform.claude.com/docs/en/about-claude/pricing>
+- **Qué pasa al superar las 50 000 unidades en Hobby:** no lo he encontrado ni en la página de
+  precios ni en una búsqueda web; los resultados de terceros tampoco lo dicen. Queda como pregunta
+  abierta.
+
+## Opciones consideradas
+
+### (1) Dónde viven los datos de referencia
+- **Solo en Langfuse (dataset creado y editado en la interfaz):** cómodo, pero contradice
+  ADR-0004 (Langfuse es una vista), los cambios no pasan por PR y, aunque los datasets no caducan
+  como las trazas según lo leído, si se pierde la cuenta se pierde el trabajo de etiquetado.
+  Descartada.
+- **Ficheros en el repositorio sin subirlos:** fuente de verdad clara, pero sin la vista de
+  comparación de experimentos de Langfuse, que es lo que pide la tarea. Descartada.
+- **Ficheros versionados en el repositorio que un script idempotente sube a un dataset de
+  Langfuse:** **elegida**. El *upsert* por `id` de ítem lo permite sin duplicados.
+
+### (2) Qué es un caso del Reviewer
+- **Casos sintéticos escritos a mano (PR inventadas):** cubren cualquier situación, pero miden la
+  capacidad de revisar PR que la factoría no produce, y escribir un diff creíble cuesta más que
+  recogerlo. Se admiten solo para huecos (ver Decisión), no como base.
+- **Las revisiones que ya hizo el Reviewer, tal cual, como resultado esperado:** gratis, pero
+  premia repetir los errores del prompt actual. Descartada.
+- **PR ya cerradas, congeladas en el momento de la revisión, con el resultado que una persona da
+  por correcto:** **elegida**.
+
+### (3) Cómo se ejecuta el agente sobre cada caso
+- **Experimentos de prompt desde la interfaz de Langfuse:** solo ejecutan un prompt suelto contra
+  un modelo, sin herramientas. El Reviewer necesita `Read`, `Grep` y `gh` para leer la PR, la
+  historia y las ADR; sin ellas no se evalúa el agente sino otra cosa. Descartada.
+- **El SDK de Langfuse (`runExperiment` de `@langfuse/client`):** resuelve el enlace
+  ítem-traza-experimento, pero añade una dependencia a la factoría, que hoy envía OTLP a mano sin
+  dependencias (ADR-0004), y tendría que envolver igualmente el lanzamiento de `claude -p`.
+  Descartada.
+- **Lanzar el agente contra las PR cerradas reales con `gh`:** el agente vería en la PR la etiqueta
+  `review:*` y el comentario `🏭 Veredicto:` que ya tiene (el resultado esperado se filtra), y
+  publicaría comentarios y etiquetas nuevos en PR cerradas. Descartada.
+- **Un script que lanza el agente con el mismo arranque del orquestador, sobre una instantánea de
+  cada caso, y registra un experimento por modelo y versión del prompt con los atributos OTel:**
+  **elegida**.
+
+### (4) Qué se puntúa y quién lo puntúa
+- **Todo con código:** reproducible y gratis, pero no puede saber si el comentario encontró el
+  hallazgo que importaba o se inventó un requisito. Insuficiente para texto libre.
+- **Todo con un evaluador LLM:** caro y variable para cosas que se comprueban con una expresión
+  regular (la etiqueta, el prefijo `🏭 Veredicto:`, el SHA). Descartada.
+- **Evaluador LLM gestionado por Langfuse:** la rúbrica y el modelo viven en la interfaz y no se
+  versionan; la clave de Anthropic se guarda en Langfuse; el límite de gasto no lo controla la
+  factoría; y cada ejecución crea una traza más, de la que no consta si cuenta como unidad.
+  Descartada.
+- **Comprobaciones deterministas en el script y un juez LLM local, con rúbrica versionada, cuyos
+  resultados se suben como scores:** **elegida**.
+
+### (5) Coste
+- **Usar la suscripción Pro:** sin gasto extra, pero el experimento compite con la factoría y con
+  el uso personal en la misma ventana de 5 h (ADR-0002), un experimento de 20 casos con Opus
+  puede agotarla, y no se puede fijar modelo y facturación por experimento. Descartada por decisión
+  del usuario.
+- **Clave de API aparte, sin límite propio:** descartada; el usuario acepta gasto «con un límite».
+- **Clave de API aparte, con límite por experimento y por mes en `budgets.yaml` y tope duro en el
+  proveedor:** **elegida**.
+
+### (6) Límites del plan Hobby
+- **Pasar a un plan de pago de Langfuse:** no hace falta con el volumen estimado; se reconsidera
+  si se supera el límite. Descartada por ahora.
+- **Autoalojar Langfuse:** ya descartada en ADR-0004 por el tamaño de la v3. Se mantiene.
+- **Seguir en Hobby, contar unidades antes de lanzar y guardar el resumen en el repositorio:**
+  **elegida**.
+
+## Decisión
+**Los prompts del Reviewer se evalúan con un dataset versionado en el repositorio que se sube a
+Langfuse, un script que ejecuta el agente con el arranque del orquestador sobre instantáneas de PR
+cerradas, por modelo y versión del prompt, comprobaciones deterministas más un juez LLM local con
+rúbrica versionada, y un gasto de API aparte con tope por experimento y por mes.**
+
+Rutas y nombres de script son la propuesta para quien implemente (la factoría la implementa el
+usuario); lo que fija esta ADR es el comportamiento.
+
+### (1) Datos de referencia
+- Un caso por directorio en `factory/datasets/reviewer/<case_id>/`, con `case.yaml` (entrada,
+  resultado esperado y metadatos) y la instantánea de la PR (ver (3)). `case_id` es estable, por
+  ejemplo `pr-0123`.
+- `node factory/dataset-sync.ts reviewer` crea el dataset `reviewer` si no existe y hace *upsert*
+  de cada caso con `POST /api/public/dataset-items` y un `id` derivado del `case_id` (prefijado
+  con el nombre del dataset, porque el id es único en el proyecto). Un caso que se borra del
+  repositorio se marca `ARCHIVED`, no se borra, para no romper experimentos anteriores. Lanzarlo
+  dos veces seguidas no cambia nada.
+- Los cambios en los casos entran por PR, como el resto del repositorio. La versión del dataset
+  que usa un experimento es el SHA del commit de `factory/datasets/reviewer/`, que va en los
+  metadatos del experimento.
+
+### (2) Qué es un caso y cuántos
+- **Un caso es una PR ya cerrada (fusionada o no) que pasó por el Reviewer**, congelada en el SHA
+  que se revisó, con el **resultado esperado que fija una persona**:
+  - `label`: la etiqueta `review:*` correcta. Si el Reviewer acertó, es la suya; si una persona
+    la corrigió (pidió cambios tras un `review:ok`, por ejemplo), es la de la persona.
+  - `findings`: de uno a cinco hallazgos que una buena revisión **tiene** que mencionar, en una
+    frase cada uno, con el fichero si lo hay. Pueden ser cero en un `review:ok`.
+  - `ca`: los `CA` de la historia y si estaban cubiertos o no.
+  - `not_findings` (opcional): cosas que **no** son un fallo y que un revisor podría inventarse
+    (un requisito que no está en el PRD).
+- **Para empezar, 20 casos**, con al menos 4 de `review:ok`, 4 de `review:changes`, 4 de
+  `review:needs-human` y 2 de `review:error`; el resto, donde haya más PR. De los 20, al menos 3
+  deben ser PR que toquen solo `data/raw/`, `data/images/` o `docs/bitacora/`, porque son las que
+  ADR-0011 fusiona solas con `review:ok`.
+- Si alguna etiqueta no llega al mínimo con PR reales, el hueco se cubre con casos sintéticos
+  marcados `synthetic: true` en `case.yaml`, nunca más de 4 de los 20.
+- 20 casos son pocos: un caso es 5 puntos porcentuales. Sirven para detectar regresiones gordas y
+  el falso `review:ok`, no para afinar. Se amplía a 40 cuando haya PR suficientes.
+
+### (3) Cómo se ejecuta
+- `node factory/eval-run.ts reviewer --model <modelo> [--cases <ids>]`. Por cada caso:
+  1. Crea un worktree en el **commit base** de la PR (`baseRefOid` guardado en `case.yaml`), para
+     que el Reviewer lea el `definition-of-done.md`, los PRD y las ADR que había entonces.
+  2. Lanza el agente con el **mismo arranque que el orquestador** (`claude -p --output-format
+     stream-json --verbose`, el prompt de `.claude/agents/reviewer.md` sin tocar, los
+     `allowed_tools` y `max_turns_per_run` de `budgets.yaml`), con `--model <modelo>` y la tarea
+     «Revisa la PR #N».
+  3. Pone **delante en el `PATH` un `gh` falso** que responde `gh pr view`, `gh pr diff`,
+     `gh pr checks` y `gh issue view` desde la instantánea del caso (título, cuerpo, `headRefOid`,
+     diff, estado de la CI y la historia, tal como estaban al revisar), **sin la etiqueta ni los
+     comentarios de la factoría**, y que en vez de publicar guarda lo que el agente intenta con
+     `gh pr comment` y `gh pr edit`. Cualquier otro subcomando devuelve error. Así se evalúa el
+     prompt tal cual, sin publicar nada y sin filtrar el resultado esperado.
+  4. Envía la traza con `factory/langfuse.ts`, añadiendo los atributos de experimento:
+     `langfuse.experiment.id` y `.name` = `reviewer/<sha8 del prompt>/<modelo>/<fecha>`,
+     `langfuse.experiment.dataset.id` = el dataset `reviewer`, `langfuse.experiment.item.id` = el
+     id del ítem, `langfuse.experiment.item.expected_output` = el esperado, y en
+     `langfuse.experiment.metadata.*` el modelo, el SHA del prompt (blob de git de
+     `reviewer.md`), el SHA del dataset, el modelo del juez y el SHA de la rúbrica. Una traza por
+     caso, como pide Langfuse.
+  5. Puntúa (ver (4)) y sube los scores a la traza con `POST /api/public/scores` y ids derivados
+     de experimento y caso, como en ADR-0004, para que reenviar no duplique.
+- Al terminar escribe un resumen en `ops/evals/<experimento>.json` (por caso: etiqueta, scores,
+  coste, turnos; y los totales). **Ese fichero es la fuente de verdad**: Langfuse lo borra a los
+  30 días. Se commitea en la PR que proponga el cambio de prompt.
+- Los casos van en serie (`max_concurrent_runs: 1`, ADR-0002) y fuera de `allowed_hours`, porque
+  no gastan la suscripción; nunca a la vez que una ejecución de la factoría.
+
+### (4) Qué se puntúa y cómo se aprueba un prompt
+**Con código** (scores booleanos o numéricos, gratis):
+- `label_match`: la etiqueta dejada es la esperada.
+- `false_ok`: dejó `review:ok` y la esperada no lo es. Es el error grave, porque ADR-0011 fusiona
+  sin persona.
+- `one_label`: dejó exactamente una etiqueta `review:*`.
+- `format`: el comentario empieza por `🏭 Veredicto:` y cita el `headRefOid` del caso.
+- `ca_listed`: aparece cada `CA` de la historia en el comentario.
+- `forbidden`: intentó `gh pr merge`, `gh pr review` o `gh pr close`, o escribir fuera de
+  `write_paths` (sale de la traza).
+- `cost_usd` y `turns`: del evento `result`.
+
+**Con un juez LLM local** (un `fetch` a la API de Anthropic desde el script, con salida
+estructurada en JSON; sin SDK):
+- **Modelo:** Claude Sonnet 5.5, con el id fijado en el script y en los metadatos. Cambiar de juez
+  o de rúbrica invalida la comparación: obliga a repuntuar la línea base con el juez nuevo.
+- **Entrada:** el diff de la instantánea, la historia, el comentario y la etiqueta del agente, y
+  el resultado esperado. No ve el prompt del agente ni el modelo evaluado.
+- **Rúbrica**, en `factory/datasets/reviewer/rubric.md` y versionada; respuestas sí/no, no notas
+  de 1 a 10, para que varíe menos:
+  - `finding_recall`: por cada hallazgo esperado, ¿el comentario lo menciona, aunque sea con otras
+    palabras? El score es la fracción.
+  - `invented`: ¿hay algún hallazgo que no sale del diff, la historia, el PRD o una ADR, o que está
+    en `not_findings`? (sí = 1).
+  - `concrete`: ¿cada hallazgo dice el fichero y qué hacer? (fracción).
+  - `ca_correct`: por cada `CA`, ¿coincide cubierto/no cubierto con lo esperado? (fracción).
+  - Cada respuesta con una frase de justificación, que va al comentario del score.
+
+**Aprobación de una nueva versión del prompt** (o de un cambio de modelo del Reviewer):
+- Se ejecutan la versión actual (línea base) y la candidata con el mismo modelo, el mismo dataset
+  y el mismo juez. Si la línea base tiene más de 30 días o cambió el dataset o el juez, se repite.
+- La candidata se aprueba si **todo** se cumple:
+  1. `false_ok` = 0 casos y `forbidden` = 0 casos. Sin excepciones.
+  2. `label_match` no baja respecto a la línea base.
+  3. `finding_recall` medio no baja más de 5 puntos y `invented` no sube en más de 1 caso.
+  4. `cost_usd` medio no sube más de un 25 %.
+- Con 20 casos, una diferencia de un caso es ruido: una candidata que solo gana por uno no se
+  presenta como mejora, solo como «no empeora».
+- El script **no cambia el prompt**: la PR del cambio de `reviewer.md` lleva los dos resúmenes de
+  `ops/evals/` y la decide una persona (`review:needs-human`, como toca a `.claude/`).
+
+### (5) Coste
+- **Clave aparte**: una clave de API de Anthropic solo para evaluaciones, en un workspace propio
+  de la Console con su límite de gasto (la fase 2 de ADR-0002 ya preveía workspace y límite por
+  uso), guardada en `.secrets/anthropic-evals.env` (`ANTHROPIC_API_KEY`). Se lee como
+  `factory/langfuse.ts` lee la suya: en un objeto local, y se pasa **solo** al proceso del caso y
+  a la llamada del juez. Nunca a `process.env` del orquestador ni a otros agentes. Sin el fichero,
+  `eval-run.ts` no arranca. La suscripción Pro no se usa para evaluaciones.
+- **Límites** en un bloque `evals:` nuevo de `factory/budgets.yaml`, aparte de `global`, porque
+  aquí los USD son gasto real y allí son USD-equivalentes:
+  - `max_usd_per_experiment: 15`, `max_usd_per_month: 40` (propuesta; los fija el usuario).
+  - Antes de cada caso, el script suma lo gastado (del `result` de cada caso y del uso que devuelve
+    la API para el juez) más la estimación del caso siguiente; si pasa de cualquiera de los dos
+    topes, para, deja el experimento marcado como incompleto y no lo puntúa como completo.
+  - El gasto se apunta en `ops/evals/` y `run.ts --status` lo muestra aparte del de la suscripción.
+  - El límite del workspace en la Console es el tope duro, por si el script falla.
+- **Estimación**, con lo que hay: `budgets.yaml` anota unos 0,25-0,30 USD-equivalentes por PR
+  revisada con el modelo por defecto (Sonnet), que Claude Code calcula a precio de API. Con 20
+  casos:
+  - Sonnet 5.5: ~6 USD por experimento.
+  - Opus 5.5 (el doble de precio por token que Sonnet 5.5): ~12 USD.
+  - Haiku 5.5 (veinte veces más barato que Sonnet 5.5): por debajo de 1 USD, aunque gaste más
+    turnos.
+  - Juez: una llamada por caso; con unos 15 000 tokens de entrada y 1000 de salida, ~0,04 USD a
+    precio de Sonnet 5.5, ~1 USD por experimento.
+  - Una aprobación (línea base + candidata con Sonnet) cuesta ~14 USD; el tope mensual da para
+    unas dos o tres al mes. Son estimaciones: se corrigen con los primeros `ops/evals/`.
+
+### (6) Límites del plan Hobby
+- **Unidades por experimento:** una traza del Reviewer tiene un span raíz, una `generation` por
+  llamada al modelo y un span por herramienta (ADR-0004). ADR-0004 estimó «unas decenas» por
+  ejecución del Researcher; el Reviewer tiene hasta 60 turnos, así que se cuentan hasta ~150
+  unidades por caso, más ~10 scores: **~3200 unidades por experimento de 20 casos**. Las llamadas
+  del juez no crean traza en Langfuse porque se hacen desde el script.
+- Antes de lanzar, `eval-run.ts` estima las unidades del mes (las de `ops/traces/` del mes más
+  las del experimento) y no arranca si pasan de 40 000, para dejar margen a la factoría.
+- **30 días:** las trazas y scores de un experimento desaparecen de Langfuse al mes. Por eso el
+  resumen va a `ops/evals/` y la comparación de aprobación se hace con esos ficheros, no con la
+  interfaz. El dataset en Langfuse se puede regenerar siempre con `dataset-sync.ts`.
+- **Si se superan las 50 000:** no consta qué hace Langfuse en Hobby (ver Contexto). Mientras no
+  se sepa, se supone lo peor: que deja de ingerir hasta el mes siguiente. El envío de la factoría
+  ya no rompe ninguna ejecución si falla (ADR-0004), así que lo que se perdería es la vista, no
+  el ledger ni `ops/evals/`. Si pasa, se reduce a los casos cambiados o se valora un plan de pago.
+- **Ritmo:** con los casos en serie, la API de datasets (100/min) y la general (30/min) sobran;
+  `dataset-sync.ts` sube los ítems de uno en uno.
+
+## Consecuencias
+- **Bueno:** por primera vez se puede decir si un cambio en el prompt del Reviewer, o un cambio de
+  modelo, revisa mejor o peor, y con qué coste. El falso `review:ok`, que es el error que más
+  importa desde que ADR-0011 fusiona sola, tiene una medida propia y bloquea cualquier cambio.
+- **Bueno:** todo lo que importa (casos, rúbrica, resúmenes) está en el repositorio y entra por PR;
+  Langfuse sigue siendo una vista y se puede perder sin perder nada.
+- **Bueno:** el `gh` falso evalúa el prompt real sin publicar en PR cerradas ni dejar ver la
+  etiqueta esperada.
+- **Malo: hay gasto real.** Hasta 40 USD al mes propuestos, aparte de la suscripción y del
+  presupuesto de la factoría. La estimación sale de un comentario de `budgets.yaml`, no de una
+  medición; puede ser bastante mayor con Opus o si un caso agota los 60 turnos.
+- **Malo: etiquetar casos lleva trabajo humano.** Cada caso necesita que una persona fije la
+  etiqueta correcta y los hallazgos que importan. Sin eso no hay dataset, y un hallazgo esperado
+  mal escrito penaliza a todas las versiones.
+- **Malo: 20 casos miden poco.** Un caso es 5 puntos; no distingue mejoras pequeñas, y el juez
+  añade su propia variación. El umbral está pensado para no empeorar, no para optimizar.
+- **Malo: el juez es de la misma familia que los modelos evaluados** y puede preferir textos de
+  su propio estilo. Ninguna regla de esta ADR lo corrige; las comprobaciones de código y el
+  `false_ok`, que no pasan por el juez, son las que deciden la aprobación en lo grave.
+- **Malo: la instantánea no es la PR.** El `gh` falso solo responde a cuatro subcomandos; si el
+  prompt aprende a usar otro (por ejemplo `gh pr view --comments`), en el experimento falla y en
+  producción no. Hay que mantener el `gh` falso cuando cambie el prompt, y la instantánea guarda
+  diffs de PR que pueden ser grandes.
+- **Malo: mantenimiento nuevo en la factoría:** dos scripts (`dataset-sync.ts`, `eval-run.ts`), un
+  `gh` falso, el bloque `evals:` de `budgets.yaml` y los atributos de experimento en
+  `factory/langfuse.ts`. Los implementa el usuario; esta ADR no toca `factory/` ni `.claude/`.
+- **Malo: no se ha comprobado** la ruta REST para crear el dataset, si el experimento aparece en
+  Langfuse solo con los atributos OTel sin crear antes el *run*, ni qué pasa al superar el límite
+  de Hobby. Se comprueba con la primera ejecución, con un caso, antes de lanzar los 20.
+
+### Preguntas abiertas
+- **Límites:** ¿15 USD por experimento y 40 al mes, o qué cifras? ¿Qué límite se pone en el
+  workspace de la Console?
+- **Casos:** ¿hay suficientes PR cerradas revisadas por el Reviewer de cada etiqueta, en
+  particular `review:needs-human` y `review:error`? ¿Quién etiqueta los 20 primeros?
+- **Modelos a comparar:** la tarea dice «distintos modelos», sin decir cuáles. Propuesta para
+  el primer experimento: el modelo actual del Reviewer (Sonnet, por defecto) como línea base, y
+  Opus 5.5 y Haiku 5.5. ¿Se confirma?
+- **Unidades actuales:** ¿cuántas unidades de Langfuse gasta ya la factoría al mes? Con 15
+  ejecuciones al día podría estar cerca del límite antes de añadir experimentos; se mira en la
+  página de uso de Langfuse.
+- **Otros agentes:** Product y Planner escriben texto libre y podrían seguir el mismo esquema;
+  cada uno sería una enmienda o una ADR propia, no esta.
