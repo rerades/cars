@@ -1393,3 +1393,19 @@
     si la fuente usa ese término literal de RF-11; si no, segment: null. Imágenes solo de Wikimedia
     Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
     No toques data/candidatas.yaml. En la bitácora, di que sustituye a la PR #433."
+- id: rnf-2-lcp
+  agent: developer
+  task: "RNF-2 de todos los PRD (LCP < 2,5 s en móvil 4G), que hoy no mide ninguna prueba. Añade
+    web/e2e/lcp.spec.ts con el Playwright que ya está instalado, sin dependencias nuevas (nada de
+    Lighthouse). Debe correr sobre el build servido por astro preview, como las pruebas de a11y, y
+    así entra en el job a11y de la CI, que informa pero no bloquea. Por cada página: viewport móvil
+    (412 x 823), una sesión CDP con Network.emulateNetworkConditions como el «Slow 4G» de
+    Lighthouse (150 ms de RTT, 1,6 Mbit/s de bajada y 750 kbit/s de subida) y
+    Emulation.setCPUThrottlingRate 4. Lee el LCP con un PerformanceObserver de
+    largest-contentful-paint (buffered: true) y comprueba que es menor que 2500 ms. Mide la portada
+    (/), /coches/, /coches/ con una query string de filtros (ADR-0015 pide medir también una URL
+    con filtros), una ficha de modelo que tenga imagen y /comparar/ con tres versiones en ?v=. Toma
+    las rutas de los datos del build, no de una lista fija que se quede vieja. Escribe el LCP medido
+    en la salida de la prueba para poder seguirlo. Los rankings (PRD-005) aún no existen: deja
+    escrito en un comentario de la prueba que su página, con y sin filtros, se añade con la
+    historia #378. En la bitácora, explica la elección de throttling."
