@@ -1,0 +1,39 @@
+# Researcher — Xpeng G9. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-17.
+brand: xpeng
+brand_name: Xpeng
+model: G9
+status: {value: on_sale, note: "motor.es (2025-09): los G6 y G9 mejorados ya aceptan pedidos en España", source_id: motor-es, url: "https://www.motor.es/noticias/precio-xpeng-g6-g9-2026-2025110181.html", retrieved: 2026-10-17, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: G9 RWD Standard Range
+    battery_kwh: {value: 79, basis: unknown, note: "IDAE id 607281 (G9 MY25. RWD Standard range); motor.es: 79 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 502, note: "IDAE id 607281", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 258, note: "IDAE id 607281", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: G9 RWD Long Range
+    battery_kwh: {value: 93.1, basis: unknown, note: "IDAE id 607282 (G9 MY25. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 585, note: "IDAE id 607282", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 258, note: "IDAE id 607282", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+  - name: G9 AWD Performance
+    battery_kwh: {value: 93.1, basis: unknown, note: "IDAE id 607283 (G9 MY25. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 540, note: "IDAE id 607283", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 423, note: "IDAE id 607283", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price: null
+images:
+  - file: data/images/xpeng/g9/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/XPeng_G9_%282025%29_IAA_2025_DSC_2054.jpg/1280px-XPeng_G9_%282025%29_IAA_2025_DSC_2054.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:XPeng_G9_(2025)_IAA_2025_DSC_2054.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "No se ha encontrado una web oficial de Xpeng en España (xpeng.com/es devuelve 404; xpeng.com es global y en inglés): sin T1, todos los precios son null."
+  - "status: on_sale se apoya solo en una noticia T3 de motor.es (2025-09); ninguna otra fuente confirma que el G9 se pueda pedir hoy en España. needs_review: true."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir."
+  - "segment: motor.es lo llama «SUV» de mayor tamaño, cerca del segmento E-SUV; no es un término literal de RF-11: null."
+  - "drivetrain: ninguna fuente registrada lo da (el IDAE no lo incluye); se omite en las tres versiones."
+  - "Los IDAE ids 607275-607277 (G9 MY24) son homologaciones anteriores; no se usan. Black Edition (motor.es) sin fila propia en el IDAE."
