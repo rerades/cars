@@ -1360,3 +1360,36 @@
     y qué pasa si se superan. Comprueba en la documentación de Langfuse lo que afirmes de su API.
     Opciones con pros y contras, decisión y consecuencias, como ADR-0004. Añade la decisión a
     docs/architecture/overview.md si procede. No toques factory/ ni .claude/."
+- id: historia-318-script-comparador-2
+  agent: developer
+  task: "Historia #318 (épica #313, PRD-003), segunda vuelta: sustituye a la PR #452, que el Revisor
+    devolvió. Parte de su trabajo, que está en la rama local agent/developer/20261017-053007-1cc429:
+    tráelo con git merge de esa rama y no lo reescribas; compare.ts y sus pruebas están bien. Lee el
+    issue entero (gh issue view 318). Falta lo que pidió la revisión: (1) una prueba que ejecute el
+    script de ComparisonTable.astro en el navegador. Reutiliza Playwright de web/e2e/ (como las
+    pruebas de a11y), carga /comparar/?v=... del build con datos de prueba y comprueba el número de
+    columnas, el orden de la URL, las filas, la retirada del aviso sin JavaScript, replaceState y
+    que a 320 px no hay scroll horizontal (CA-1, CA-3, CA-4, CA-6 y CA-17). (2) «Fuente no oficial»
+    solo se pinta en la celda de precio, aunque cellView calcula unofficial en todos los campos:
+    píntalo en todos los que lo tengan (CA-17), salvo que la issue #319 lo reserve para ella; en ese
+    caso, dilo en la PR y en la bitácora. (3) Una prueba de que las claves error y noJsLink existen
+    en data-messages, para que el aviso de error nunca salga vacío. No hagas lo de #319, #320 ni
+    #321-#322. La PR dice «Closes #318», enumera los RF y CA cubiertos y dice que sustituye a la
+    #452."
+- id: marca-xpeng-2
+  agent: researcher
+  task: "Marca Xpeng (carpeta y brand: xpeng), segunda vuelta: sustituye a la PR #433, que el
+    Revisor devolvió. Parte de su trabajo, que está en la rama local
+    agent/researcher/20261017-014507-6de141: tráelo con git merge de esa rama y corrige solo esto,
+    sin volver a investigar lo que ya está bien. (1) drivetrain en g6, g9 y p7-plus está deducido del
+    nombre de la versión y atribuido al IDAE, que no lo da: quítalo o cita una fuente que lo diga
+    (ADR-0001, nada se inventa). (2) G6 Standard Range: el IDAE (566 km, 218 kW) y motor.es (455 km,
+    252 CV) se contradicen, y 566 km con 68,5 kWh no cuadra con los 568 km con 80,8 kWh de la Long
+    Range. Deja power_kw en null y quita wltp_km de esa versión; por la regla 8, quítalo también del
+    resto de versiones del G6 y usa specs.wltp_max_km solo si una fuente lo da. Anótalo en
+    open_questions y deja needs_review: true. (3) G9 y P7+: su status on_sale solo se apoya en una
+    noticia T3 (la del P7+ sin fecha leída), así que pon needs_review: true y dilo en open_questions,
+    salvo que otra fuente confirme que se pueden pedir hoy en España. (4) P7+: segment: berlina solo
+    si la fuente usa ese término literal de RF-11; si no, segment: null. Imágenes solo de Wikimedia
+    Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts.
+    No toques data/candidatas.yaml. En la bitácora, di que sustituye a la PR #433."
