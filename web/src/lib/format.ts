@@ -7,6 +7,13 @@ export function formatNumber(n: number): string {
   return eur.format(n);
 }
 
+const decimal = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 2, useGrouping: "always" });
+
+/** Number in es-ES keeping the datum's own decimals (up to 2): 77.5 -> "77,5". Display only. */
+export function formatDecimal(n: number): string {
+  return decimal.format(n);
+}
+
 /** Amount in euros as shown on cards and model pages: "36.273 €" (key `ficha.unidad.eur`). */
 export function formatEur(n: number): string {
   // Non-breaking space: the amount and the symbol never split across lines (as the card has always shown it).
