@@ -1,0 +1,48 @@
+# Researcher — Zeekr 001. Fuentes: zeekr-es (T1), idae-es (T2). Consultado 2026-10-17.
+brand: zeekr
+brand_name: Zeekr
+model: "001"
+status: {value: on_sale, note: "la ficha publica precio al contado y financiación con día de contratación 09/10/2026", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-001", retrieved: 2026-10-17, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Long Range RWD
+    battery_kwh: {value: 100, basis: unknown, note: "IDAE id 611856 (001 MY27. Long Range RWD); la web no da la batería", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 620, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-001", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 200, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-001", retrieved: 2026-10-17, tier: T1}
+    price:
+      value: 58490
+      unit: EUR
+      price_kind: pvp
+      note: "«Precio al contado 58.490,00 €»; las cuotas financiadas no se guardan"
+      source_id: zeekr-es
+      url: "https://www.zeekr.es/zeekr-001"
+      retrieved: 2026-10-17
+      tier: T1
+  - name: Performance AWD
+    battery_kwh: {value: 100, basis: unknown, note: "IDAE id 611858 (001 MY27. Performance AWD); la web no da la batería", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 594, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-001", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 400, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-001", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: awd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-001", retrieved: 2026-10-17, tier: T1}
+    price: null
+  - name: Privilege AWD
+    battery_kwh: {value: 100, basis: unknown, note: "IDAE id 611857 (001 MY27. Privilege AWD); la web no da la batería", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 585, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-001", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 400, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-001", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: awd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-001", retrieved: 2026-10-17, tier: T1}
+    price: null
+images:
+  - file: data/images/zeekr/001/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Zeekr_001_2025.jpg/1280px-Zeekr_001_2025.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Zeekr_001_2025.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-17
+    license: CC-BY-4.0
+    attribution: "\"Zeekr 001 2025.jpg\" by Johnny Vesterlund, licensed under CC BY 4.0, via Wikimedia Commons"
+open_questions:
+  - "launch: la web no da la fecha desde la que se puede pedir; sin fecha fiable."
+  - "segment: la web la llama «El shooting brake de lujo», término que no está en la lista de RF-11."
+  - "drivetrain de Long Range RWD: la tabla comparativa de la web dice «Tracción delantera» pese a llamarla RWD; contradicción en T1, se deja vacío."
+  - "Precios de Performance AWD y Privilege AWD: la ficha no los publica."
+  - "dc_max_kw: la web da 30 min de carga 10-80 % «(200kW CC)*» para todo el modelo y su nota al pie no aparece; sin dato por versión."

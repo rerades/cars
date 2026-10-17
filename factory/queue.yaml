@@ -1340,3 +1340,23 @@
     componente o su función en vez de duplicarla. Sigue docs/design/comparador.md y
     docs/design/ficha-modelo.md. Pruebas con node --test sobre el build. La PR dice «Closes #324» y
     enumera los RF y CA cubiertos."
+- id: adr-0016-evals-con-langfuse
+  agent: architect
+  task: "ADR nueva (ADR-0016) que amplía ADR-0004: evaluar los prompts de los agentes con distintos
+    modelos y subir su puntuación con datasets, experimentos, evaluadores y scores de Langfuse
+    Cloud (plan Hobby, UE). ADR-0004 dejó fuera el LLM como juez «hasta que haya agentes que
+    escriban texto libre»; ese momento ha llegado. Decisiones del usuario: se acepta gasto de API
+    de Anthropic con un límite, y se empieza por el agente Reviewer (.claude/agents/reviewer.md).
+    Decide: (1) dónde viven los datos de referencia: propuesta, ficheros versionados en el repo que
+    se suben a un dataset de Langfuse con un script idempotente (Langfuse es una vista, ADR-0004);
+    (2) qué es un caso del Reviewer (PR ya cerradas con su revisión y la etiqueta review:* correcta
+    como resultado esperado, por ejemplo) y cuántos hacen falta para empezar; (3) cómo se ejecuta
+    el agente sobre cada caso: por la interfaz de Langfuse (solo prompts sueltos) o con un script
+    que lanza el orquestador y registra un experimento por modelo y versión del prompt; (4) qué se
+    puntúa con código y qué con un evaluador LLM, con qué modelo y qué rúbrica, y cómo se aprueba
+    una nueva versión del prompt (umbral frente a la anterior); (5) el coste: clave de API aparte
+    de la suscripción Pro, guardada en .secrets/, límite por experimento y por mes en
+    factory/budgets.yaml, y estimación por ejecución; (6) límites del plan Hobby (unidades, 30 días)
+    y qué pasa si se superan. Comprueba en la documentación de Langfuse lo que afirmes de su API.
+    Opciones con pros y contras, decisión y consecuencias, como ADR-0004. Añade la decisión a
+    docs/architecture/overview.md si procede. No toques factory/ ni .claude/."
