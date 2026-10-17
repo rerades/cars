@@ -186,7 +186,8 @@ describe("/coches built page", () => {
     assert.match(html, /<ul[^>]*aria-labelledby="resultados"/);
     assert.match(html, /<html lang="es"/);
     for (const name of ["Volta", "Soon", "Deal"]) {
-      assert.equal([...card(name).matchAll(/<a\b/g)].length, 1);
+      // The sheet link, plus "Comparar" on comparable models (Soon has no versions: only the sheet link).
+      assert.equal([...card(name).matchAll(/<a\b/g)].length, name === "Soon" ? 1 : 2);
       assert.match(card(name), /<h3\b/);
       assert.match(card(name), /<dl\b/);
     }
