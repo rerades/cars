@@ -48,11 +48,40 @@ describe("/comparar/ built page (PRD-003, story #317)", () => {
     assert.doesNotMatch(notice, /\bhidden\b/);
     assert.match(notice, /El comparador necesita JavaScript/);
     assert.match(notice, /<a\b[^>]*href="\/coches"[^>]*>\s*Ir al catálogo\s*<\/a>/);
-    assert.equal([...html.matchAll(/<script\b/gi)].length, 0, "no script until #318");
   });
 
-  test("no table in the HTML; status region at the end of main; messages container", () => {
-    assert.doesNotMatch(html, /<table\b/i);
+  test("the table section is hidden and its markup lives only in <template>", () => {
+    assert.match(html, /<section\b[^>]*data-compare[^>]*\bhidden\b/);
+    const withoutTemplates = html.replace(/<template\b[\s\S]*?<\/template>/gi, "");
+    assert.doesNotMatch(withoutTemplates, /<table\b/i, "a table outside <template>");
+    for (const name of ["table", "column", "field", "cell", "condition"]) {
+      assert.match(html, new RegExp(`<template data-tpl="${name}"`), `template ${name}`);
+    }
+  });
+
+  test("the module script ships and uses no browser storage (RNF-4)", () => {
+    const srcs = [...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map((m) => m[1]);
+    const inline = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+    assert.ok(srcs.length + inline.filter(Boolean).length > 0, "no script in the page");
+    const code = [
+      ...inline,
+      ...srcs.map((s) => readFileSync(join(root, "out", s!.replace(/^\//, "")), "utf8")),
+    ].join("\n");
+    assert.match(code, /replaceState/);
+    assert.doesNotMatch(code, /localStorage|sessionStorage|indexedDB|document\.cookie|serviceWorker/);
+  });
+
+  test("data-messages carries non-empty error and noJsLink, so the error notice is never blank", () => {
+    const raw = html.match(/<main\b[^>]*data-messages="([^"]*)"/)?.[1];
+    assert.ok(raw, "no data-messages");
+    const messages = JSON.parse(raw.replaceAll("&#34;", '"').replaceAll("&quot;", '"').replaceAll("&amp;", "&"));
+    for (const key of ["error", "noJsLink"]) {
+      assert.equal(typeof messages[key], "string", `key ${key}`);
+      assert.ok(messages[key].trim().length > 0, `key ${key} is empty`);
+    }
+  });
+
+  test("status region at the end of main; messages container", () => {
     const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
     assert.match(main, /data-messages="[^"]+"/);
     assert.match(main, /<div\b[^>]*role="status"[^>]*><\/div>\s*$/);

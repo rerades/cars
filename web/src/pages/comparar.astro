@@ -1,9 +1,10 @@
 ---
 import "../styles/global.css";
+import ComparisonTable from "../components/ComparisonTable.astro";
 import { t } from "../lib/i18n.ts";
 
-// Static shell of /comparar/ (PRD-003, RF-14, RNF-6). The script (#318) fills the templates and
-// removes the no-JS notice; there is no table in the served HTML.
+// Static shell of /comparar/ (PRD-003, RF-14, RNF-6). The script of ComparisonTable removes the
+// no-JS notice and mounts the table; there is no table in the served HTML, only in <template>.
 const title = t("comparador.titulo");
 const site = t("sitio.nombre");
 const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio: site }) : title;
@@ -47,11 +48,7 @@ const messages = {
           <h2 id="cmp-elegidos" class="text-section">{t("comparador.elegidos.titulo")}</h2>
         </section>
       </template>
-      <template data-section="tabla">
-        <section aria-labelledby="cmp-tabla" class="mt-8">
-          <h2 id="cmp-tabla" class="text-section">{t("comparador.tabla.titulo")}</h2>
-        </section>
-      </template>
+      <ComparisonTable />
 
       <div role="status" aria-live="polite" class="sr-only" data-status></div>
     </main>
