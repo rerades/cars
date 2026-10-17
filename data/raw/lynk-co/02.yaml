@@ -1,0 +1,39 @@
+# Researcher — Lynk & Co 02. Fuentes: lynk-co-es (T1), idae-es (T2). Consultado 2026-10-17.
+brand: lynk-co
+brand_name: Lynk & Co
+model: "02"
+status: {value: on_sale, note: "la ficha lleva precio y botón de pedido", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-10-17, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: 02 Core
+    battery_kwh: {value: 66, basis: unknown, note: "IDAE, fila 613859 (02 MY 25 CORE); la fila MY 27 CORE (613861) trae los mismos valores", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 435, note: "hasta 435 km", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 200, note: "IDAE, fila 613859 (02 MY 25 CORE); misma cifra en 613861", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    drivetrain: {value: rwd, note: "la ficha dice «Tracción trasera» para el modelo", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-10-17, tier: T1}
+    dc_max_kw: {value: 150, source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02/features", retrieved: 2026-10-17, tier: T1}
+    price:
+      value: 35495
+      unit: EUR
+      price_kind: pvp
+      note: "nota 2 de la ficha: «PVP: 35.495 €»; la propia ficha indica que es el precio del acabado Core"
+      source_id: lynk-co-es
+      url: "https://www.lynkco.com/es-es/cars/02"
+      retrieved: 2026-10-17
+      tier: T1
+  - name: 02 More
+    battery_kwh: {value: 66, basis: unknown, note: "IDAE, fila 613860 (02 MY 25 MORE); la fila MY 27 MORE (613862) y la 605976 traen los mismos valores", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 445, note: "hasta 445 km", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 200, note: "IDAE, fila 613860 (02 MY 25 MORE); misma cifra en 613862 y 605976", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    drivetrain: {value: rwd, note: "la ficha dice «Tracción trasera» para el modelo", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-10-17, tier: T1}
+    dc_max_kw: {value: 150, source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02/features", retrieved: 2026-10-17, tier: T1}
+    price: null   # la tarjeta dice «Desde 39.495 €» sin aclarar si es PVP; no se guarda
+images: []
+open_questions:
+  - "launch: la web no da la fecha desde la que se puede pedir el 02 en España."
+  - "segment: la web lo llama «crossover coupé urbano», que no está en la lista de RF-11."
+  - "02 More: la tarjeta dice «Desde 39.495 €» (motor.es, T3, da 39.495 € para More en 2024), pero la ficha no lo etiqueta como PVP; price null hasta confirmarlo en el configurador."
+  - "ac_max_kw: la página /features parece dar 11 kW (Core) y 22 kW (More), pero no se ha podido verificar; no se guarda."
+  - "Ofertas con financiación del 02 Core (24.795 € financiando, Plan Auto+): condiciones demasiado largas para copiarlas enteras; no se guardan como financed."
+  - "Imágenes: en Commons solo hay fotos del 02 chino de 2018 (otro coche) o una unidad tuneada por Heico; ninguna del 02 europeo de serie."
