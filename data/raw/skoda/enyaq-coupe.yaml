@@ -2,7 +2,7 @@
 brand: skoda
 brand_name: Škoda
 model: Enyaq Coupé
-status: {value: on_sale, note: "la ficha muestra versiones, precios y configurador; no dice expresamente que los pedidos estén abiertos", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+status: {value: on_sale, note: "indicio: botones «Solicita tu oferta» y «Pide tu oferta» y oferta válida hasta el 31/10/2026; la ficha remite al concesionario para plazo de entrega y no dice expresamente que se entregue", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-17, tier: T1}
 launch: null
 segment: null
 needs_review: true
