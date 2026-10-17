@@ -1,0 +1,20 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: honda-es
+brand: Honda
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.honda.es/
+  models: https://www.honda.es/cars/new/range/electric.html
+  robots: https://www.honda.es/robots.txt
+  sitemap: https://www.honda.es/sitemap.xml
+image_license: "" # sin términos de uso de imágenes leídos: no se publican imágenes de esta fuente
+notes: >
+  Web oficial de Honda España (dominio honda.es, responde; robots.txt permite la gama y solo bloquea búsquedas y
+  formularios de concesionario; comprobado el 2026-10-17). La gama de coches nuevos
+  (/cars/new/range/electric.html) solo lista híbridos (Jazz, Civic, HR-V, ZR-V, CR-V, Prelude) y un híbrido
+  enchufable; el e:Ny1 ya no aparece como modelo pedible (solo en el texto alternativo de una imagen). Sin sala de
+  prensa localizada. No se ha usado como fuente de ningún valor de data/raw/.
+last_verified: 2026-10-17
+status: active

@@ -1,0 +1,23 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: lynk-co-es
+brand: Lynk & Co
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.lynkco.com/es-es
+  models: https://www.lynkco.com/es-es/cars
+  prices: https://www.lynkco.com/es-es/cars/02 # PVP en las notas al pie de la ficha; también /es-es/configure
+  offers: https://www.lynkco.com/es-es/offers
+  features: https://www.lynkco.com/es-es/cars/02/features
+  press: https://press.lynkco.com/en-WW/
+  legal: https://www.lynkco.com/es-es/legal-notice
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-17): lynkco.com/es-es responde y es el dominio oficial de la marca (selector de mercado con España). robots.txt:
+  User-agent * solo bloquea rutas técnicas (/App_*, /bin/, /sitecore/, /login/*...); sitemap de es-es incluido. Gama en España:
+  01 y 08 (híbridos enchufables, no BEV) y 02 (BEV). La ficha del 02 da el PVP del acabado Core en una nota
+  ("PVP: 35.495 €") junto a un precio financiando con ayuda Plan Auto+; la tarjeta de More dice "Desde 39.495 €". No publica
+  kW ni kWh (se toman del IDAE, idae-es). La sala de prensa (press.lynkco.com) no se ha revisado.
+last_verified: 2026-10-17
+status: active

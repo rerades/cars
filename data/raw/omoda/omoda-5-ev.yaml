@@ -1,0 +1,38 @@
+# Researcher — Omoda 5 EV (antes Omoda E5). Fuentes: omoda-es (T1), idae-es (T2), motor-es (T3). Consultado 2026-10-17.
+brand: omoda
+brand_name: Omoda
+model: Omoda 5 EV
+status: {value: on_sale, note: "la ficha oficial muestra el Omoda 5 EV con oferta vigente hasta el 31/10/2026", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  wltp_max_km: {value: 430, note: "autonomía combinada; urbana hasta 604 km", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
+  dc_max_kw: {value: 130, note: "30-80 % en 28 min", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
+versions:
+  - name: Omoda 5 EV Pure
+    battery_kwh: {value: 60.9, basis: unknown, note: "IDAE id 611920 (61 kWh en el nombre); la web no da la batería", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 430, note: "autonomía combinada WLTP; coincide con IDAE id 611920", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 155, note: "publicado: 211 CV", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
+    price: null
+  - name: Omoda 5 EV Premium
+    battery_kwh: {value: 60.9, basis: unknown, note: "IDAE id 611921 (61 kWh en el nombre)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    wltp_km: {value: 430, note: "IDAE id 611921", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    power_kw: {value: 155, note: "IDAE id 611921; publicado: 211 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    price: null
+images:
+  - file: data/images/omoda/omoda-5-ev/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Omoda_E5_IAA_2025_DSC_2133.jpg/1280px-Omoda_E5_IAA_2025_DSC_2133.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Omoda_E5_IAA_2025_DSC_2133.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-17
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0"
+open_questions:
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España (motor.es solo dice que el E5 se renombró 5 EV tras unos meses y que llegó con el Omoda 5 de combustión)."
+  - "segment: motor.es lo llama «SUV eléctrico compacto» / «C-SUV»; no es el término literal de RF-11 en esa forma, se deja null."
+  - "Precio: la web oficial no publica PVP sin oferta del EV. Solo el precio financiando 27.219,95 € (con adelanto del Programa Auto+ de 3.375 €, financiación Open Bank, bonificación CAE) y «desde 22.850 €» con descuentos; sus condiciones no se han podido copiar literales y completas, así que price: null. Prensa (T3, no válida como precio) cita PVP 34.295 € (Pure) y 37.295 € (Premium)."
+  - "Premium: la web oficial solo muestra la versión Pure; Premium sale del IDAE (homologación MY26) y de motor.es. Confirmar con T1 que se vende hoy."
+  - "Homologaciones anteriores del Omoda E5 Comfort/Premium 150 kW (204 CV, 61,1 kWh, IDAE ids 598679/598680) son de la denominación anterior; no se incluyen como versiones."
+  - "Tracción no publicada en la web ni en IDAE: drivetrain omitida. Potencia: motor.es cita 150 kW/204 CV en el texto y 155 kW/211 CV en tablas; se usa la cifra de la web oficial y del IDAE (155 kW)."
+  - "Imágenes: la foto de Commons es de un Omoda E5 (IAA 2025), mismo modelo antes de rebautizarse 5 EV."

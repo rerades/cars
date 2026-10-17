@@ -1,0 +1,23 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: gwm-es
+brand: GWM
+tier: T1
+market: ES
+kind: [ specs, announcements ]
+urls:
+  home: https://www.gwm-eu.com/es
+  models: https://www.gwm-eu.com/es/models
+  ora-5: https://www.gwm-eu.com/es/models/ora-5
+  news: https://www.gwm-eu.com/es/news-list
+  legal: https://www.gwm-eu.com/es/imprint
+  robots: https://www.gwm-eu.com/robots.txt
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-17): gwm-global.com/es da 404 y remite a https://www.gwm-eu.com/es, web europea oficial de GWM con
+  selector de país España («GWM España | Página de inicio», avisos legales en español, buscador de concesionarios).
+  robots.txt: sin restricciones (User-agent * sin Disallow). Gama: ORA 5 (gasolina, HEV y EV), H7 («Próximamente») y
+  JOLION MAX. La ficha del ORA 5 da para el EV 204 cv, 58,3 kWh y hasta 435 km WLTP, pero no PVP: el único precio es el
+  ejemplo de financiación del gasolina Explore (22.450 € con descuentos y entrega de usado). No hay precio T1 del EV.
+  Sin configurador ni sala de prensa en el sitio; hay un catálogo PDF enlazado en la ficha.
+last_verified: 2026-10-17
+status: active

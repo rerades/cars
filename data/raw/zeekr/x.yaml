@@ -1,0 +1,45 @@
+# Researcher — Zeekr X. Fuentes: zeekr-es (T1), idae-es (T2). Consultado 2026-10-17.
+brand: zeekr
+brand_name: Zeekr
+model: X
+status: {value: on_sale, note: "la ficha publica precio al contado y financiación con día de contratación 09/10/2026", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Core RWD
+    battery_kwh: {value: 49, basis: unknown, note: "IDAE id 611806 (X MY27. Core RWD)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    wltp_km: {value: 430, note: "IDAE id 611806; la web no lista esta versión en el comparador", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 611806", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    price:
+      value: 36185
+      unit: EUR
+      price_kind: pvp
+      note: "«Precio al contado 36.185,00 €»; la nota al pie dice «Precio financiando sin Programa Auto + 36.185,00 €»"
+      source_id: zeekr-es
+      url: "https://www.zeekr.es/zeekr-x"
+      retrieved: 2026-10-17
+      tier: T1
+  - name: Long Range RWD
+    battery_kwh: {value: 61, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    wltp_km: {value: 405, note: "la web no indica que sea WLTP; coincide con el IDAE id 611807", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 250, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: rwd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    dc_max_kw: {value: 230, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    ac_max_kw: {value: 11, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    price: null
+  - name: Privilege AWD
+    battery_kwh: {value: 69, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    wltp_km: {value: 415, note: "la web: «415 (WLTP for AWD)»; coincide con el IDAE id 611808", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 365, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: awd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    dc_max_kw: {value: 150, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    ac_max_kw: {value: 11, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "launch: la web no da la fecha desde la que se puede pedir; sin fecha fiable."
+  - "segment: la web dice «El SUV urbano de lujo», término que no está en la lista de RF-11."
+  - "Core RWD: el comparador de la web no la lista (aunque dice «Tres versiones»); sus datos salen del IDAE (T2), sin tracción ni carga."
+  - "Precios de Long Range RWD y Privilege AWD: la ficha no los publica."
+  - "Sin imagen de Zeekr X en Commons con licencia revisada."

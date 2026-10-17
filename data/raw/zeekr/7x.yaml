@@ -1,0 +1,48 @@
+# Researcher — Zeekr 7X. Fuente: zeekr-es (T1). Consultado 2026-10-17.
+brand: zeekr
+brand_name: Zeekr
+model: 7X
+status: {value: on_sale, note: "la ficha publica precio al contado y financiación con día de contratación 09/10/2026", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Core RWD
+    battery_kwh: {value: 75, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    wltp_km: {value: 480, note: "columna «Autonomía (hasta)» de la tabla; coincide con el IDAE", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 310, note: "publicado: 310 kW / 421 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: rwd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    price:
+      value: 51665
+      unit: EUR
+      price_kind: pvp
+      note: "«Precio al contado 51.665,00 €»; la nota al pie dice «Precio financiando sin Programa Auto + 51.665,00 €»"
+      source_id: zeekr-es
+      url: "https://www.zeekr.es/zeekr-7x"
+      retrieved: 2026-10-17
+      tier: T1
+  - name: Long Range RWD
+    battery_kwh: {value: 100, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    wltp_km: {value: 615, note: "la web: «615km de autonomía (WLTP)»; coincide con el IDAE", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 310, note: "publicado: 310 kW / 421 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: rwd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    price: null
+  - name: Privilege AWD
+    battery_kwh: {value: 100, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    wltp_km: {value: 543, note: "columna «Autonomía (hasta)» de la tabla; coincide con el IDAE", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 475, note: "publicado: 475 kW / 646 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    drivetrain: {value: awd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    price: null
+images:
+  - file: data/images/zeekr/7x/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/2025_Zeekr_7X_front.jpg/1280px-2025_Zeekr_7X_front.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2025_Zeekr_7X_front.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-17
+    license: CC-BY-SA-4.0
+    attribution: "\"2025 Zeekr 7X front.jpg\" by LuvsMG481, licensed under CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "launch: la web no da la fecha desde la que se puede pedir; sin fecha fiable."
+  - "segment: la web dice «El SUV eléctrico Zeekr 7X» (sin tamaño); «SUV» solo no está en la lista de RF-11."
+  - "Precios de Long Range RWD y Privilege AWD: la ficha no los publica."
+  - "La web dice 13 min de carga 10-80 % en el texto y 16 min en la tabla para dos versiones; dc_max_kw sin dato."

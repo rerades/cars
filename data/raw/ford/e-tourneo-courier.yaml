@@ -9,7 +9,7 @@ needs_review: true
 versions:
   - name: Trend
     battery_kwh: {value: 46, basis: unknown, note: "IDAE id 610529 (05.2026); también consta la 610531 (11.2025, 43 kWh, 286 km) de la batería anterior", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 320, note: "IDAE id 610529 (05.2026); ford.es dice «hasta 320 km»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    wltp_km: {value: 320, note: "IDAE id 610529 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     power_kw: {value: 100, note: "IDAE id 610529", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     drivetrain: {value: fwd, note: "IDAE id 610529: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     dc_max_kw: {value: 100, note: "ficha del modelo en ford.es: carga rápida de 100 kW, 10-80 % en unos 26 min", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-courier", retrieved: 2026-10-15, tier: T1}
