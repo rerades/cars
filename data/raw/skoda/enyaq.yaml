@@ -2,7 +2,7 @@
 brand: skoda
 brand_name: Škoda
 model: Enyaq
-status: {value: on_sale, note: "la ficha muestra versiones, precios y configurador; no dice expresamente que los pedidos estén abiertos", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq/enyaq", retrieved: 2026-10-14, tier: T1}
+status: {value: on_sale, note: "indicio: botones «Solicita tu oferta» y «Pide tu oferta» y oferta válida hasta el 31/10/2026; la ficha remite al concesionario para plazo de entrega y no dice expresamente que se entregue", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq/enyaq", retrieved: 2026-10-17, tier: T1}
 launch: null
 segment: null
 needs_review: true
@@ -23,8 +23,7 @@ versions:
     price: null
 images: []
 open_questions:
-  - "Revisión (2026-10-16): los precios financed se quitaron (price: null) porque price_terms era un resumen y no el texto literal de la nota (PRD-001 RF-9, ADR-0001). Volver a leer las notas íntegras y copiarlas."
-  - "Precios: solo se ha verificado el texto completo de la nota de Selection; en Sportline y RS se guarda el inicio literal de la nota y las condiciones comunes. Hay que releer sus notas completas (descuento, plan CAE). Los precios «sujeto a financiación desde» (31.400 / 37.650 / 41.150 €) incluyen Plan Auto+ y no se usan."
+  - "Precios (2026-10-17): la ficha da «PVP recomendado financiando» (Selection 37.128,70 €, Sportline 42.923,70 €, RS 46.438,71 € hasta 31/10/2026) con notas largas (cuotas, TIN, TAE, crédito mínimo, permanencia) que no se han podido copiar enteras y literales; por la revisión de #333 price: null. Las notas se contradicen en crédito mínimo (19.000 € frente a 17.000 €). Los precios «sujeto a financiación desde» (31.400 / 37.650 / 41.150 €) incluyen Plan Auto+ y no se usan."
   - "segment: la ficha dice «SUV familiar», que no está en la lista de RF-11; queda null."
   - "WLTP por versión, tracción y kW de carga DC no están en la ficha; wltp_km queda sin rellenar en todas las versiones."
   - "launch: la ficha no da fecha de inicio de venta en España."
