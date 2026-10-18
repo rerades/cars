@@ -1,0 +1,20 @@
+---
+import { t } from "../lib/i18n.ts";
+
+/**
+ * Mark «[n]» that links a datum to its entry in «Fuentes» (RF-9, CA-9). Non-T1 data add
+ * «fuente no oficial» as text. Inline, so it carries no 44 px minimum; the padding enlarges the target.
+ */
+interface Props {
+  n: number;
+  unofficial: boolean;
+}
+const { n, unofficial } = Astro.props;
+---
+
+<a
+  href={`#fuente-${n}`}
+  aria-label={t("ficha.nota.sr", { n })}
+  class="inline-block min-h-6 min-w-6 text-center text-small text-brand-600 underline hover:text-brand-800"
+  data-source-mark={n}><span aria-hidden="true">{t("ficha.nota.marca", { n })}</span></a
+>{unofficial && <> <span class="text-small text-ink-600" data-unofficial>{t("ficha.nota.noOficial")}</span></>}

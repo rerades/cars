@@ -195,7 +195,7 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
     assert.match(text(block), /Capacidades de batería 58 kWh · 77 kWh/);
     assert.match(text(block), /Tracciones Delantera · Total/);
     assert.match(text(block), /Potencia máxima del modelo 250 kW/);
-    assert.match(text(block), /Carga máxima en CC 135 kW 10-80 % en 29 min/);
+    assert.match(text(block), /Carga máxima en CC 135 kW \[\d\] 10-80 % en 29 min/);
     assert.match(text(block), /Carga máxima en CA 11 kW/);
   });
 
@@ -207,7 +207,7 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
 
   test("RF-7: only the rows that specs carries", () => {
     const block = text(modelBlock(page("acme", "Volta"))!);
-    assert.match(block, /Autonomía WLTP máxima del modelo 520 km hasta 520 km/);
+    assert.match(block, /Autonomía WLTP máxima del modelo 520 km (?:<[^>]*>|\s|\[\d\])*hasta 520 km/);
     assert.match(block, /Carga máxima en CC 150 kW/);
     assert.doesNotMatch(block, /Potencia|Carga máxima en CA|batería|Tracciones/);
   });

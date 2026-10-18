@@ -74,7 +74,7 @@ describe("technical fields of each version (RF-5, RF-6, CA-5, CA-6)", () => {
 
   test("CA-5: each version shows its range in km", () => {
     const row = cells(rowOf(table(page("Volta")), "Autonomía WLTP"));
-    assert.match(row[0]!, /^470 km Fuente: acme\.example, 20 sep 2026$/);
+    assert.match(row[0]!, /^470 km \[2\]$/); // [1] is the segment/model-data source; the fields' source is [2]
     assert.match(row[1]!, /^520 km /);
     assert.match(row[2]!, /^490 km /);
   });
@@ -115,18 +115,18 @@ describe("technical fields of each version (RF-5, RF-6, CA-5, CA-6)", () => {
   test("power with note, drivetrain label in Spanish", () => {
     const html = page("Volta");
     const power = cells(rowOf(table(html), "Potencia"));
-    assert.match(power[1]!, /^220 kW publicado: 299 CV/);
+    assert.match(power[1]!, /^220 kW \[2\] publicado: 299 CV/);
     const drive = cells(rowOf(table(html), "Tracción"));
     assert.match(drive[0]!, /^Trasera/);
     assert.match(drive[1]!, /^Total/);
     assert.equal(drive[2]!.startsWith("Total"), true);
   });
 
-  test("«por confirmar» carries no source link; valued fields carry source and date", () => {
+  test("«por confirmar» carries no mark; valued fields carry a mark to «Fuentes»", () => {
     const html = page("Volta");
     for (const m of blocks(html).matchAll(/<p[^>]*data-missing[^>]*>[\s\S]*?<\/p>/g)) {
       assert.doesNotMatch(m[0], /<a\b|Fuente/);
     }
-    assert.match(blocks(html), /<a[^>]*href="https:\/\/www\.acme\.example\/es\/volta\/ficha"[^>]*data-source-link>acme\.example<\/a>/);
+    assert.match(blocks(html), /<a href="#fuente-2"[^>]*data-source-mark="2"/);
   });
 });
