@@ -37,8 +37,8 @@ Personas en Europa, con foco inicial en **España**, que están informándose so
 | Portada | PRD-004 |
 | Comparador | PRD-003 |
 | Rankings | PRD-005 |
-| Reviews | PRD-006 (borrador) |
+| Reviews | PRD-006 |
 
 ## Preguntas abiertas
 - ¿Idiomas? (¿solo español al inicio? ¿inglés después?)
-- ¿Las reviews son propias (generadas o redactadas) o agregadas de terceros? (Opciones y recomendación en PRD-006, OPEN-1.)
+- ~~¿Las reviews son propias (generadas o redactadas) o agregadas de terceros?~~ Resuelta (2026-10-18): enlaces a reviews de terceros y datos objetivos con fuente, sin contenido generado (PRD-006, sección 8).
