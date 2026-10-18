@@ -17,7 +17,14 @@ versions:
     wltp_km: {value: 406, note: "IDAE id 603482", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     power_kw: {value: 207, note: "IDAE id 603482; publicado: 280 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/abarth/600e/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Abarth_600e_Scorpionissima_Auto_Zuerich_2025_DSC_3357.jpg/1280px-Abarth_600e_Scorpionissima_Auto_Zuerich_2025_DSC_3357.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Abarth_600e_Scorpionissima_Auto_Zuerich_2025_DSC_3357.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "abarth.es devuelve 403 (home y robots.txt): sin precios T1; price: null en todas las versiones."
   - "Versiones y estado salen de artículos de 2024 (motor.es, motorpasion.com); no se ha podido confirmar que se sigan vendiendo hoy: needs_review."

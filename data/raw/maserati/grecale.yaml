@@ -12,7 +12,14 @@ versions:
     wltp_km: {value: 502, note: "IDAE id 601647; el IDAE tiene también 580 km (id 606670), cifra de la actualización 2026 según la prensa; sin fecha en el IDAE y sin web legible para decidir", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
     power_kw: {value: 410, note: "IDAE id 601647", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/maserati/grecale/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Maserati_Grecale_Folgore_%282024%29_%2854093864426%29.jpg/1280px-Maserati_Grecale_Folgore_%282024%29_%2854093864426%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Maserati_Grecale_Folgore_(2024)_(54093864426).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-2.0
+    attribution: "Charles from Port Chester, New York, CC BY 2.0, vía Wikimedia Commons"
 open_questions:
   - "La web oficial maserati.com/es devuelve 403: sin precio T1. price: null."
   - "Confirmar qué versión se vende hoy: modelo 2026 con 580 km (prensa de octubre de 2025) frente a la de 502 km; los precios 2026 no estaban publicados en octubre de 2025."

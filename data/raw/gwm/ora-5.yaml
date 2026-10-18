@@ -19,7 +19,14 @@ versions:
     wltp_km: {value: 435, note: "IDAE id 611915 (ORA 5 EV 164kW (204cv) ADVANCE); coincide con la web de la marca", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
     power_kw: {value: 150, note: "IDAE id 611915; la marca publica 204 cv", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/gwm/ora-5/lateral.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Ora_5_004.jpg/1280px-Ora_5_004.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Ora_5_004.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC0-1.0
+    attribution: null
 open_questions:
   - "Precio: la web oficial (gwm-eu.com/es) no publica PVP del EV; su único precio es el ejemplo de financiación del gasolina Explore. Los medios (motor.es: Explore 34.320 €, Advance 36.870 €; motor16: 34.950 € sin campaña) son T3 y no se guardan. price: null."
   - "launch: motor.es habla de estreno en junio de 2026 pero ninguna fuente da la fecha desde la que se puede pedir el EV. launch: null."

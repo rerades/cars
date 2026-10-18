@@ -31,7 +31,14 @@ versions:
     power_kw: {value: 675, note: "publicado: 918 CV / 675 kW", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
     drivetrain: {value: awd, note: "publicado: tracción total, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/precio-lotus-eletre-2025107274.html", retrieved: 2026-10-16, tier: T3}
     price: null
-images: []
+images:
+  - file: data/images/lotus/eletre/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Lotus_Eletre_Automesse_Ludwigsburg_2025_DSC_2658.jpg/1280px-Lotus_Eletre_Automesse_Ludwigsburg_2025_DSC_2658.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Lotus_Eletre_Automesse_Ludwigsburg_2025_DSC_2658.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "Web oficial de Lotus España: sin fichas ni precios legibles (configurador bloqueado por robots.txt). IDAE no tiene la marca Lotus. Precio, wltp_km y batería sin fuente válida; wltp_km en ninguna versión (motor.es da 600/500 km y 111,9 kWh, solo T3 y sin asignar a cada versión)."
   - "Única fuente de versiones: motor-es de marzo de 2025 (T3); no se ha confirmado que sigan vendiéndose hoy ni la lista actual. Eletre X (híbrido) excluido."
