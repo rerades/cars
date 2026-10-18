@@ -1,0 +1,95 @@
+{
+  "number": 433,
+  "title": "researcher: Marca Xpeng (carpeta y brand: xpeng). Fuentes en el registro",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Marca Xpeng (carpeta y brand: xpeng). Fuentes en el registro y modelos BEV en data/raw/xpeng/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3) qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente con sus versiones, no escribas ese modelo y anótalo en la bitácora. Imágenes solo de Wikimedia Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts. Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml.\n- Run: `20261017-014507-6de141` · 0.4567 USD (estimated) · 37 turns\n- Agent: `researcher` · model `sonnet` · may only write to [\"data/\",\"docs/bitacora/\"]\n- Evals: 4 checks passed\n\nWhat the agent says:\n\n```\nition:** no las incluyo, porque no tienen fila propia en el IDAE.\n\n**Para revisar**\n- **G6 RWD Standard Range:** el IDAE da 566 km y 218 kW, y motor.es (30/01/2026) da 455 km y 252 CV. He guardado el valor del IDAE (T2 prevalece sobre T3), con una nota y la discrepancia en `open_questions`.\n- **Slug del P7+:** el fichero se llama `p7-plus.yaml`. No he podido comprobar que ese nombre cuadre con el slug que espera el validador.\n\nHe registrado una entrada de bitácora con lo anterior.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/researcher/20261017-014507-6de141",
+  "baseRefName": "main",
+  "headRefOid": "f285163f666df3403a47a4e89d80c6af77a45f50",
+  "baseRefOid": "d78180fe3f26019056638b950dd65bbb0f8d80ed",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-16T23:47:54Z",
+  "url": "https://github.com/rerades/cars/pull/433",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "data/images/xpeng/g6/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/xpeng/g9/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/xpeng/g6.yaml",
+      "additions": 42,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/xpeng/g9.yaml",
+      "additions": 40,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/xpeng/p7-plus.yaml",
+      "additions": 33,
+      "deletions": 0
+    },
+    {
+      "path": "docs/bitacora/2026-10/2026-10-17T0147-ed246882.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 116,
+  "deletions": 0,
+  "changedFiles": 6,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38983294913/job/117249131202",
+      "startedAt": "2026-10-16T23:48:56Z",
+      "completedAt": "2026-10-16T23:50:10Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38983294913/job/117248883066",
+      "startedAt": "2026-10-16T23:48:00Z",
+      "completedAt": "2026-10-16T23:48:55Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38983294913/job/117248883012",
+      "startedAt": "2026-10-16T23:48:00Z",
+      "completedAt": "2026-10-16T23:48:05Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38983294913/job/117248882935",
+      "startedAt": "2026-10-16T23:48:00Z",
+      "completedAt": "2026-10-16T23:48:24Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

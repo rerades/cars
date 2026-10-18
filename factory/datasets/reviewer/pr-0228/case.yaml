@@ -1,0 +1,13 @@
+case_id: pr-0228
+pr: 228
+reviewed_sha: e92912ffad2589e1159e01de58d35a23e780590e
+base_sha: 1d148cd07f5abd77b25355d1468d2a528aa87010
+issue: null
+synthetic: false
+confirmed: false
+proposed: label = the one left on the PR (review:changes); findings and ca to fill in
+expected:
+  label: review:changes
+  findings: []
+  ca: []
+  not_findings: []

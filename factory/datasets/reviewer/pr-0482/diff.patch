@@ -1,0 +1,111 @@
+diff --git a/data/images/kg-mobility/torres-evx/frontal.jpg b/data/images/kg-mobility/torres-evx/frontal.jpg
+new file mode 100644
+index 0000000..33d9c75
+Binary files /dev/null and b/data/images/kg-mobility/torres-evx/frontal.jpg differ
+diff --git a/data/raw/kg-mobility/musso-evx.yaml b/data/raw/kg-mobility/musso-evx.yaml
+new file mode 100644
+index 0000000..2cda4ca
+--- /dev/null
++++ b/data/raw/kg-mobility/musso-evx.yaml
+@@ -0,0 +1,26 @@
++# Researcher — KG Mobility Musso EVX. Fuentes: kgm-es (T1), idae-es (T2). Consultado 2026-10-18.
++brand: kg-mobility
++brand_name: KG Mobility
++model: Musso EVX
++status: {value: on_sale, note: "la web oficial lo muestra con precio 'desde', configurador y solicitud de oferta", source_id: kgm-es, url: "https://kgm.com.es/musso-evx", retrieved: 2026-10-18, tier: T1}
++launch: null
++segment: null
++needs_review: false
++versions:
++  - name: Musso EVX 4x2
++    wltp_km: {value: 420, note: "IDAE id 613987", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
++    battery_kwh: {value: 80.6, basis: unknown, note: "IDAE id 613987", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
++    price: null
++  - name: Musso EVX 4x4
++    wltp_km: {value: 379, note: "IDAE id 613986", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
++    battery_kwh: {value: 80.6, basis: unknown, note: "IDAE id 613986", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
++    drivetrain: {value: awd, note: "la web: 4x4 con dos motores", source_id: kgm-es, url: "https://kgm.com.es/musso-evx", retrieved: 2026-10-18, tier: T1}
++    price: null
++images: []
++open_questions:
++  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
++  - "segment: la web lo llama «pick-up 100% eléctrico», que no es un término de RF-11."
++  - "Precio: el 'desde 31.875 €' lleva descuentos promocionales hasta fin de mes; no hay PVP sin oferta ni pie de condiciones copiable entero. La prensa (T3) cita 40.179 / 43.325 / 46.229 €, no válido como fuente de precio."
++  - "Potencia: la web dice 152 kW por motor (207 CV) y el IDAE 174 kW en ambas versiones; no concuerdan, se deja vacía."
++  - "Autonomía: la web dice 'hasta 546 km' sin ciclo; se usa el IDAE (420 y 379 km WLTP). Los nombres de versión salen de la web (4x2/4x4); la web no nombra acabados (la prensa cita Pro y Limited)."
++  - "Carga DC/AC no publicada en la web; ficha técnica PDF no consultada. Sin imagen de Musso EVX en Commons localizada."
+diff --git a/data/raw/kg-mobility/torres-evx.yaml b/data/raw/kg-mobility/torres-evx.yaml
+new file mode 100644
+index 0000000..53fc43f
+--- /dev/null
++++ b/data/raw/kg-mobility/torres-evx.yaml
+@@ -0,0 +1,33 @@
++# Researcher — KG Mobility Torres EVX. Fuentes: kgm-es (T1), idae-es (T2). Consultado 2026-10-18.
++brand: kg-mobility
++brand_name: KG Mobility
++model: Torres EVX
++status: {value: on_sale, note: "la web oficial lo muestra con precio 'desde' y configurador", source_id: kgm-es, url: "https://kgm.com.es/torres-evx", retrieved: 2026-10-18, tier: T1}
++launch: null
++segment: null
++needs_review: true
++versions:
++  - name: Torres EVX
++    wltp_km: {value: 443, note: "IDAE id 606768 (única fila de TORRES EVX)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
++    power_kw: {value: 152, note: "IDAE id 606768; la web dice 152 kW (207 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
++    price: null
++  - name: Torres EVX Van
++    wltp_km: {value: 441, note: "IDAE id 607258 (TORRES EVX VAN PRO); la web vende el Torres EVX Van para profesionales", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
++    power_kw: {value: 152, note: "IDAE id 607258", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
++    price: null
++images:
++  - file: data/images/kg-mobility/torres-evx/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/KG_Mobility_Torres_EVX_Automesse_Ludwigsburg_2024_IMG_1423.jpg/1280px-KG_Mobility_Torres_EVX_Automesse_Ludwigsburg_2024_IMG_1423.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:KG_Mobility_Torres_EVX_Automesse_Ludwigsburg_2024_IMG_1423.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
++open_questions:
++  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
++  - "segment: la web lo llama «SUV eléctrico», que no es un término literal de RF-11 (suv_pequeno/compacto/grande)."
++  - "Precio: el 'desde 28.325 €' de la web incluye descuentos promocionales hasta fin de mes y 1.000 € de fidelización; el pie de condiciones no se puede copiar entero y no hay PVP sin oferta. Configurador incoherente (muestra ficha de un diésel 4WD y 'Pro' PVP 34.425 €)."
++  - "Batería: la web dice 80,6 kWh LFP, el IDAE 73 kWh y la prensa 73,4 kWh brutos; discrepancia sin resolver, se deja vacía."
++  - "Acabados (Life, Trend, Pro) citados por concesionarios y configurador: la web no los lista en la ficha; no se sabe qué versiones se venden hoy ni si el Van entra en el catálogo de turismos."
++  - "Autonomía: la web da 'hasta 664 km en circulación urbana' (sin WLTP); se usa la homologación del IDAE. Ficha técnica PDF no legible (binario)."
++  - "Imagen: la foto es de un salón en Alemania (Ludwigsburg 2024)."
+diff --git a/data/sources/kgm-es.yaml b/data/sources/kgm-es.yaml
+new file mode 100644
+index 0000000..7a908f9
+--- /dev/null
++++ b/data/sources/kgm-es.yaml
+@@ -0,0 +1,23 @@
++# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
++id: kgm-es
++brand: KG Mobility
++tier: T1
++market: ES
++kind: [ specs, announcements ]
++urls:
++  home: https://kgm.com.es/
++  models: https://kgm.com.es/torres-evx
++  prices: https://kgm.com.es/configurador/torres-evx # sin lista de precios; cada modelo lleva su "desde" y el configurador
++  press: https://kgm.com.es/newsroom
++  legal: https://kgm.com.es/aviso-legal
++image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
++notes: >
++  Verificado (2026-10-18): kgm.com.es es la web de KGM España (menú Musso EVX, Torres EVX, Korando; sala de prensa /newsroom;
++  teléfono y correo cac.kgm@kgm.com.es). kgm.es y kgm.com son dominios aparcados o ajenos a la marca: no usar. robots.txt de
++  kgm.com.es: "User-agent: *" con "Disallow:" vacío (todo permitido). Los precios "desde" (Torres EVX 28.325 €, Musso EVX
++  31.875 €) llevan descuentos promocionales válidos hasta fin de mes y un descuento de fidelización de 1.000 € sujeto a
++  entregar un KGM; el pie no se puede copiar entero y no hay PVP sin oferta: no se guardan precios. El configurador del Torres
++  EVX es incoherente (mezcla ficha de un diésel 2.2 4WD manual con 'Pro' a 34.425 € PVP / 29.425 € promoción). Las fichas no
++  nombran acabados ni dan la autonomía WLTP por versión; esas cifras salen del IDAE (idae-es).
++last_verified: 2026-10-18
++status: active
+diff --git a/docs/bitacora/2026-10/2026-10-18T0402-25bf6b8e.md b/docs/bitacora/2026-10/2026-10-18T0402-25bf6b8e.md
+new file mode 100644
+index 0000000..2e9d2a1
+--- /dev/null
++++ b/docs/bitacora/2026-10/2026-10-18T0402-25bf6b8e.md
+@@ -0,0 +1 @@
++- **2026-10-18 04:02** · 📝 Nota — KG Mobility: alta de kgm-es (kgm.com.es; kgm.es y kgm.com no son de la marca) y modelos Torres EVX y Musso EVX. Web legible pero sin acabados ni WLTP por versión: autonomía del IDAE, precios null (solo hay precios con descuentos y pie no copiable entero), launch y segment null, Korando e-Motion fuera (descatalogado, solo IDAE). Contradicciones web/IDAE en batería del Torres y potencia del Musso dejadas vacías. Imagen de Commons solo para el Torres. (ADR-0001, ADR-0008)

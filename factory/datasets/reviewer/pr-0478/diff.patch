@@ -1,0 +1,282 @@
+diff --git a/data/images/lynk-co/02/frontal.jpg b/data/images/lynk-co/02/frontal.jpg
+new file mode 100644
+index 0000000..8f53f53
+Binary files /dev/null and b/data/images/lynk-co/02/frontal.jpg differ
+diff --git a/data/images/maserati/grancabrio/frontal.jpg b/data/images/maserati/grancabrio/frontal.jpg
+new file mode 100644
+index 0000000..9b1c568
+Binary files /dev/null and b/data/images/maserati/grancabrio/frontal.jpg differ
+diff --git a/data/images/skoda/elroq/frontal.jpg b/data/images/skoda/elroq/frontal.jpg
+new file mode 100644
+index 0000000..0faef2a
+Binary files /dev/null and b/data/images/skoda/elroq/frontal.jpg differ
+diff --git a/data/images/skoda/enyaq-coupe/frontal.jpg b/data/images/skoda/enyaq-coupe/frontal.jpg
+new file mode 100644
+index 0000000..c9dee6f
+Binary files /dev/null and b/data/images/skoda/enyaq-coupe/frontal.jpg differ
+diff --git a/data/images/skoda/enyaq/frontal.jpg b/data/images/skoda/enyaq/frontal.jpg
+new file mode 100644
+index 0000000..3404576
+Binary files /dev/null and b/data/images/skoda/enyaq/frontal.jpg differ
+diff --git a/data/images/skoda/epiq/frontal.jpg b/data/images/skoda/epiq/frontal.jpg
+new file mode 100644
+index 0000000..cf89e70
+Binary files /dev/null and b/data/images/skoda/epiq/frontal.jpg differ
+diff --git a/data/images/skoda/peaq/frontal.jpg b/data/images/skoda/peaq/frontal.jpg
+new file mode 100644
+index 0000000..dde8945
+Binary files /dev/null and b/data/images/skoda/peaq/frontal.jpg differ
+diff --git a/data/images/smart/hashtag-3/frontal.jpg b/data/images/smart/hashtag-3/frontal.jpg
+new file mode 100644
+index 0000000..b83c14b
+Binary files /dev/null and b/data/images/smart/hashtag-3/frontal.jpg differ
+diff --git a/data/images/zeekr/7gt/frontal.jpg b/data/images/zeekr/7gt/frontal.jpg
+new file mode 100644
+index 0000000..8695a8b
+Binary files /dev/null and b/data/images/zeekr/7gt/frontal.jpg differ
+diff --git a/data/images/zeekr/x/frontal.jpg b/data/images/zeekr/x/frontal.jpg
+new file mode 100644
+index 0000000..da94ff2
+Binary files /dev/null and b/data/images/zeekr/x/frontal.jpg differ
+diff --git a/data/raw/lynk-co/02.yaml b/data/raw/lynk-co/02.yaml
+index 28dc79a..aebf4d0 100644
+--- a/data/raw/lynk-co/02.yaml
++++ b/data/raw/lynk-co/02.yaml
+@@ -29,11 +29,17 @@ versions:
+     drivetrain: {value: rwd, note: "la ficha dice «Tracción trasera» para el modelo", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-10-17, tier: T1}
+     dc_max_kw: {value: 150, source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02/features", retrieved: 2026-10-17, tier: T1}
+     price: null   # la tarjeta dice «Desde 39.495 €» sin aclarar si es PVP; no se guarda
+-images: []
++images:
++  - file: data/images/lynk-co/02/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/2025_Lynk_%26_Co_02_IAA_2025_DSC_2310.jpg/1280px-2025_Lynk_%26_Co_02_IAA_2025_DSC_2310.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:2025_Lynk_&_Co_02_IAA_2025_DSC_2310.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
+ open_questions:
+   - "launch: la web no da la fecha desde la que se puede pedir el 02 en España."
+   - "segment: la web lo llama «crossover coupé urbano», que no está en la lista de RF-11."
+   - "02 More: la tarjeta dice «Desde 39.495 €» (motor.es, T3, da 39.495 € para More en 2024), pero la ficha no lo etiqueta como PVP; price null hasta confirmarlo en el configurador."
+   - "ac_max_kw: la página /features parece dar 11 kW (Core) y 22 kW (More), pero no se ha podido verificar; no se guarda."
+   - "Ofertas con financiación del 02 Core (24.795 € financiando, Plan Auto+): condiciones demasiado largas para copiarlas enteras; no se guardan como financed."
+-  - "Imágenes: en Commons solo hay fotos del 02 chino de 2018 (otro coche) o una unidad tuneada por Heico; ninguna del 02 europeo de serie."
+diff --git a/data/raw/maserati/grancabrio.yaml b/data/raw/maserati/grancabrio.yaml
+index 5cd636d..199311a 100644
+--- a/data/raw/maserati/grancabrio.yaml
++++ b/data/raw/maserati/grancabrio.yaml
+@@ -12,11 +12,17 @@ versions:
+     wltp_km: {value: 441, note: "IDAE id 601645; otra homologación de 541 km, id 614180, sin fecha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+     power_kw: {value: 572.4, note: "IDAE id 601645; motor.es publica 560 kW (761 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+     price: null
+-images: []
++images:
++  - file: data/images/maserati/grancabrio/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/2025_Maserati_GranCabrio_Folgore.jpg/1280px-2025_Maserati_GranCabrio_Folgore.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:2025_Maserati_GranCabrio_Folgore.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Oleg Yunakov, CC BY-SA 4.0, via Wikimedia Commons"
+ open_questions:
+   - "La web oficial maserati.com/es devuelve 403: sin precio T1. price: null."
+   - "Confirmar con fuente actual que se vende hoy en España; la única fuente de estado es de abril de 2024."
+   - "launch: sin fecha de apertura de pedidos dada como tal."
+   - "segment: motor.es usa «descapotable», que no está en la lista de RF-11."
+   - "WLTP: el IDAE tiene también una homologación de 541 km sin fecha."
+-  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."
+diff --git a/data/raw/skoda/elroq.yaml b/data/raw/skoda/elroq.yaml
+index dcbae06..7b767fd 100644
+--- a/data/raw/skoda/elroq.yaml
++++ b/data/raw/skoda/elroq.yaml
+@@ -23,10 +23,16 @@ versions:
+     battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+     power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
+     price: null
+-images: []
++images:
++  - file: data/images/skoda/elroq/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/%C5%A0koda_Elroq_DSC_9262.jpg/1280px-%C5%A0koda_Elroq_DSC_9262.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:Škoda_Elroq_DSC_9262.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+ open_questions:
+   - "Precios: la ficha solo da «Precio sujeto a financiación desde» (Urban 26.550 €, Selection 27.850 €, Sportline 35.050 €, RS 40.600 €), que incluye la subvención Plan Auto+ de 4.050-4.500 €; no es PVP sin ayudas y no se guarda. No se ha leído un PVP sin ayudas ni un «PVP recomendado financiando» para el Elroq."
+   - "WLTP por versión, tracción y kW de carga DC no están en la ficha; el IDAE tiene homologaciones MY27 (p. ej. Selection 82 kWh 210 kW: 574 km) pero no se ha cruzado con los nombres comerciales. wltp_km queda sin rellenar en todas las versiones."
+   - "launch: la ficha no da fecha de inicio de venta en España."
+   - "Sportline: batería y potencia sin guardar (revisión 2026-10-16). La ficha sigue dando datos incoherentes (2026-10-17): la nota dice «ELROQ SPORTLINE 82 kWh - 210kW» y la oferta de financiación menciona 140 kW (190 CV) y 61 kWh. Se dejan sin valor hasta que la ficha sea coherente."
+-  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."
+diff --git a/data/raw/skoda/enyaq-coupe.yaml b/data/raw/skoda/enyaq-coupe.yaml
+index 181e2d5..ef44545 100644
+--- a/data/raw/skoda/enyaq-coupe.yaml
++++ b/data/raw/skoda/enyaq-coupe.yaml
+@@ -21,11 +21,17 @@ versions:
+     battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+     power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+     price: null
+-images: []
++images:
++  - file: data/images/skoda/enyaq-coupe/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/2025_%C5%A0koda_Enyaq_Coup%C3%A9_DSC_8402.jpg/1280px-2025_%C5%A0koda_Enyaq_Coup%C3%A9_DSC_8402.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:2025_Škoda_Enyaq_Coupé_DSC_8402.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+ open_questions:
+   - "Precios: la ficha solo da «desde» 33.700 / 40.100 / 43.750 € sujetos a financiación e incluyendo Plan Auto+ (y Plan CAE); no es PVP sin ayudas y no se guarda. No se ha leído un «PVP recomendado financiando»."
+   - "segment: la ficha dice «SUV deportivo», que no está en la lista de RF-11; queda null."
+   - "La ficha muestra también un bloque «60 150 kW (204 CV)» que no corresponde a ninguna de las tres versiones listadas; no se usa."
+   - "WLTP por versión, tracción y kW de carga DC no están en la ficha; wltp_km queda sin rellenar."
+   - "launch: la ficha no da fecha de inicio de venta en España."
+-  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."
+diff --git a/data/raw/skoda/enyaq.yaml b/data/raw/skoda/enyaq.yaml
+index 2109fce..380b4af 100644
+--- a/data/raw/skoda/enyaq.yaml
++++ b/data/raw/skoda/enyaq.yaml
+@@ -21,10 +21,16 @@ versions:
+     battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq/enyaq", retrieved: 2026-10-14, tier: T1}
+     power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq/enyaq", retrieved: 2026-10-14, tier: T1}
+     price: null
+-images: []
++images:
++  - file: data/images/skoda/enyaq/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/2025_Skoda_Enyaq_sportline_%28facelift%29_-_front.jpg/1280px-2025_Skoda_Enyaq_sportline_%28facelift%29_-_front.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:2025_Skoda_Enyaq_sportline_(facelift)_-_front.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Ssu, CC BY-SA 4.0, via Wikimedia Commons"
+ open_questions:
+   - "Precios (2026-10-17): la ficha da «PVP recomendado financiando» (Selection 37.128,70 €, Sportline 42.923,70 €, RS 46.438,71 € hasta 31/10/2026) con notas largas (cuotas, TIN, TAE, crédito mínimo, permanencia) que no se han podido copiar enteras y literales; por la revisión de #333 price: null. Las notas se contradicen en crédito mínimo (19.000 € frente a 17.000 €). Los precios «sujeto a financiación desde» (31.400 / 37.650 / 41.150 €) incluyen Plan Auto+ y no se usan."
+   - "segment: la ficha dice «SUV familiar», que no está en la lista de RF-11; queda null."
+   - "WLTP por versión, tracción y kW de carga DC no están en la ficha; wltp_km queda sin rellenar en todas las versiones."
+   - "launch: la ficha no da fecha de inicio de venta en España."
+-  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."
+diff --git a/data/raw/skoda/epiq.yaml b/data/raw/skoda/epiq.yaml
+index 696ef89..b1b95c8 100644
+--- a/data/raw/skoda/epiq.yaml
++++ b/data/raw/skoda/epiq.yaml
+@@ -19,10 +19,16 @@ versions:
+     battery_kwh: {value: 52, basis: usable, note: "publicado: 55 kWh (52 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
+     power_kw: {value: 155, note: "publicado: 155 kW (210 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
+     price: null
+-images: []
++images:
++  - file: data/images/skoda/epiq/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Skoda_Epiq_front_view.jpg/1280px-Skoda_Epiq_front_view.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:Skoda_Epiq_front_view.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-4.0
++    attribution: "Oil151kv, CC BY 4.0, via Wikimedia Commons"
+ open_questions:
+   - "Precios (2026-10-17): price: null en todas las versiones. Los «desde» (18.500 / 20.800 / 27.600 €) incluyen Plan Auto+ y no se usan. La ficha se contradice: la nota 1 da capital mínimo de 19.000 € y 84 meses, las notas 2 a 4 un crédito mínimo de 17.000 € y 36 meses de permanencia; el pie de la ficha dice «©2024» y en lecturas anteriores «Oferta vigente hasta 30 de junio de 2025», frente a «Oferta válida hasta el 31/10/2026»."
+   - "Autonomía: la ficha da «hasta 439 km» y «hasta 437 km en ruta», contradictorios; no se rellena wltp_max_km ni wltp_km. El IDAE homologa Epiq MY27 (Urban 55 kWh: 437 km), sin cruzar con la ficha."
+   - "launch y pedidos abiertos: la ficha no los indica; modelo marcado needs_review."
+   - "Tracción y kW de carga DC no están en la ficha (solo «carga rápida en 24 min»)."
+-  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."
+diff --git a/data/raw/skoda/peaq.yaml b/data/raw/skoda/peaq.yaml
+index aa2436d..d8f2a87 100644
+--- a/data/raw/skoda/peaq.yaml
++++ b/data/raw/skoda/peaq.yaml
+@@ -17,11 +17,17 @@ versions:
+     battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+     power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+     price: null
+-images: []
++images:
++  - file: data/images/skoda/peaq/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/2026_Skoda_Peaq_%281%29.jpg/1280px-2026_Skoda_Peaq_%281%29.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:2026_Skoda_Peaq_(1).jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Ssu, CC BY-SA 4.0, via Wikimedia Commons"
+ open_questions:
+   - "Precios (2026-10-17): la ficha da «PVP recomendado financiando» (Selection 47.152,50 €, Sportline 51.332,50 € hasta 31/10/2026) con notas largas que no se han podido copiar enteras y literales; por la revisión de #333 price: null. Los importes tampoco cuadran con el «precio al contado» de las mismas notas (48.907 € y 53.087 €), y el crédito mínimo se contradice (19.000 € frente a 17.000 €). Los «desde» (41.900 / 46.050 €) incluyen Plan Auto+ (4.050 €) y no se usan."
+   - "segment: la ficha lo describe como SUV de 5 o 7 plazas sin clase formal; queda null."
+   - "La ficha habla de «dos opciones de motor» pero solo detalla la de 210 kW; el IDAE lista también una versión de 220 kW (motor dual). No se añade sin fuente de la marca."
+   - "Tracción y kW de carga DC no están en la ficha. wltp_km por versión tampoco (el IDAE da 638 km para Selection 210 kW, sin cruzar)."
+   - "launch y pedidos abiertos: la ficha no los indica; modelo marcado needs_review."
+-  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."
+diff --git a/data/raw/smart/hashtag-3.yaml b/data/raw/smart/hashtag-3.yaml
+index fd059ad..1a67433 100644
+--- a/data/raw/smart/hashtag-3.yaml
++++ b/data/raw/smart/hashtag-3.yaml
+@@ -47,9 +47,15 @@ versions:
+     dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-three/specifications/", retrieved: 2026-10-15, tier: T1}
+     ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-three/specifications/", retrieved: 2026-10-15, tier: T1}
+     price: null
+-images: []
++images:
++  - file: data/images/smart/hashtag-3/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Smart_Hashtag_3_IMG_0269.jpg/1280px-Smart_Hashtag_3_IMG_0269.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:Smart_Hashtag_3_IMG_0269.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
+ open_questions:
+   - "Precios: la web de smart España no muestra PVP en el texto servido (JavaScript); price: null."
+   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir el #3 en España."
+   - "segment: la web lo titula «coupé eléctrico», término que no está en la lista de RF-11; null."
+-  - "Imágenes: no se ha encontrado en Commons una imagen del #3 con licencia comprobada."
+diff --git a/data/raw/zeekr/7gt.yaml b/data/raw/zeekr/7gt.yaml
+index e4fd6dd..448ea36 100644
+--- a/data/raw/zeekr/7gt.yaml
++++ b/data/raw/zeekr/7gt.yaml
+@@ -33,11 +33,18 @@ versions:
+     power_kw: {value: 475, note: "publicado: 475 kW / 646 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+     drivetrain: {value: awd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
+     price: null
+-images: []
++images:
++  - file: data/images/zeekr/7gt/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Zeekr_007_GT_001.jpg/1280px-Zeekr_007_GT_001.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:Zeekr_007_GT_001.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC0-1.0
++    attribution: null
+ open_questions:
+   - "launch: la web no da la fecha desde la que se puede pedir; los medios solo dicen que la marca llega a España en 2026 (motor16, 2026-05-28). Sin fecha fiable."
+   - "segment: la ficha lo llama «gran turismo 100 % eléctrico», término que no está en la lista de RF-11."
+   - "Precios de Long Range RWD Launch Edition y Privilege AWD Launch Edition: la ficha no los publica (la prensa da 52.890 € y 59.325 €, T3, no se usa)."
+   - "La ficha no da potencia de carga en kW, solo tiempo 10-80 % (13-16 min); dc_max_kw sin dato."
+   - "Los datos IDAE (idae-es) de 7GT MY27 coinciden en autonomía, potencia y batería, pero la batería de la web es bruta."
+-  - "Sin imagen de 7GT en Commons con licencia revisada."
++  - "Imagen: Commons la titula «Zeekr 007 GT» (nombre chino del mismo coche, que en Europa se vende como 7GT); no se ha confirmado con fuente de la marca."
+diff --git a/data/raw/zeekr/x.yaml b/data/raw/zeekr/x.yaml
+index a285881..b2dcdb3 100644
+--- a/data/raw/zeekr/x.yaml
++++ b/data/raw/zeekr/x.yaml
+@@ -36,10 +36,16 @@ versions:
+     dc_max_kw: {value: 150, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+     ac_max_kw: {value: 11, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-x", retrieved: 2026-10-17, tier: T1}
+     price: null
+-images: []
++images:
++  - file: data/images/zeekr/x/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/2025_Zeekr_X%2C_front_left.jpg/1280px-2025_Zeekr_X%2C_front_left.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:2025_Zeekr_X,_front_left.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Ethan Llamas, CC BY-SA 4.0, via Wikimedia Commons"
+ open_questions:
+   - "launch: la web no da la fecha desde la que se puede pedir; sin fecha fiable."
+   - "segment: la web dice «El SUV urbano de lujo», término que no está en la lista de RF-11."
+   - "Core RWD: el comparador de la web no la lista (aunque dice «Tres versiones»); sus datos salen del IDAE (T2), sin tracción ni carga."
+   - "Precios de Long Range RWD y Privilege AWD: la ficha no los publica."
+-  - "Sin imagen de Zeekr X en Commons con licencia revisada."
+diff --git a/docs/bitacora/2026-10/2026-10-18T0302-0575e63f.md b/docs/bitacora/2026-10/2026-10-18T0302-0575e63f.md
+new file mode 100644
+index 0000000..c75ab9e
+--- /dev/null
++++ b/docs/bitacora/2026-10/2026-10-18T0302-0575e63f.md
+@@ -0,0 +1 @@
++- **2026-10-18 03:02** · 🏁 Hito — Imágenes de Wikimedia Commons (CC BY, CC BY-SA, CC0) para 10 modelos: GranCabrio, Lynk 02, Elroq, Enyaq, Enyaq Coupé (ambos con el frontal de 2025), Epiq, Peaq, smart #3, Zeekr 7GT y X. smart #2 queda con images: [] porque no hay foto en Commons. El 7GT usa una foto titulada Zeekr 007 GT (mismo coche con nombre chino). (ADR-0001)

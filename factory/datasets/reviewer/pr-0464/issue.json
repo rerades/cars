@@ -1,0 +1,28 @@
+{
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "body": "**Épica:** #313\n**PRD:** docs/product/prd/PRD-003-comparador.md\n**Diseño visual:** docs/design/comparador.md (sección «La acción Comparar»), docs/design/ficha-modelo.md\n**Arquitectura:** docs/architecture/adr/0014-datos-y-script-del-comparador.md\n**Cubre:** RF-7, RF-11 (solo comparables); CA-8, CA-13 (ficha)\n**Depende de:** #314, #147 (la acción va después de «Ver en la web de la marca»)\n\nQué hay que hacer\n-----------------\nEn la cabecera de la ficha, después de «Ver en la web de la marca» y en su propia línea, el mismo enlace `<a href=\"/comparar/?v={marca}/{modelo}\">` «Comparar» con texto oculto «{marca} {modelo} con otros coches», estilo de enlace de texto, solo si el modelo es comparable (`isComparable`). No es un enlace de compra.\n\nCriterios de aceptación (copiados del PRD)\n------------------------------------------\n- [ ] CA-8 (→ RF-7): Dada la ficha de un modelo, cuando uso «Comparar», entonces llego a `/comparar` con ese modelo incluido y con la opción de añadir otros (RF-9). La acción no es un enlace a la web de compra.\n- [ ] CA-13 (→ RF-11), parte de ficha: Dado un modelo con `needs_review: true` o `status: discontinued`, cuando busco cómo compararlo en la ficha, entonces no hay forma de elegirlo.\n\nNotas técnicas\n--------------\n- Reutiliza las claves `comparar.accion` y `comparar.accionSr` (si #323 aún no las ha añadido, añádelas aquí sin duplicarlas). Un modelo `announced` con `versions: []` no lleva el enlace.\n- Enlace generado en el build, sin JavaScript. Actualiza `web/tests/ficha.test.ts` si fija los enlaces de la cabecera.",
+  "comments": [],
+  "labels": [
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4PysRQ",
+      "name": "story",
+      "description": "Unidad de trabajo que cabe en un PR",
+      "color": "0e8a16"
+    },
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4Pysug",
+      "name": "agente",
+      "description": "Abierto por un agente de la factoría, sin revisar",
+      "color": "fbca04"
+    }
+  ],
+  "number": 324,
+  "state": "OPEN",
+  "title": "[PRD-003] Acción «Comparar» en la cabecera de la ficha",
+  "url": "https://github.com/rerades/cars/issues/324"
+}

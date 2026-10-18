@@ -1,0 +1,13 @@
+case_id: pr-0480
+pr: 480
+reviewed_sha: b7812eaf0930d9ee392167fdd9f843ab595c5b09
+base_sha: 1715c59dbaad58225758884e5bf0b692867beabd
+issue: null
+synthetic: false
+confirmed: false
+proposed: label = the one left on the PR (review:needs-human); findings and ca to fill in
+expected:
+  label: review:needs-human
+  findings: []
+  ca: []
+  not_findings: []

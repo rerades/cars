@@ -1,0 +1,59 @@
+{
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "body": "**Épica:** #145\n**PRD:** docs/product/prd/PRD-002-ficha-modelo.md\n**Diseño visual:** docs/design/ficha-modelo.md (llegará aparte; puede no estar aún en main)\n**Cubre:** RF-5, RF-6; CA-5, CA-6\n**Depende de:** el armazón de versiones de la historia «Versiones ordenadas por precio» (de esta épica) y de #146\n\nQué hay que hacer\n-----------------\nEn cada versión: autonomía WLTP (`wltp_km`) en km; capacidad de batería con su base (útil, bruta o «sin especificar»); potencia; tracción con etiqueta española; potencia máxima de carga en DC y en AC. Los campos sin dato muestran «por confirmar», sin ocultarse ni estimarse. Si ninguna versión trae autonomía, se muestra `specs.wltp_max_km` rotulada como dato del modelo, no de una versión.\n\nCriterios de aceptación (copiados del PRD)\n------------------------------------------\n- [ ] CA-5 (→ RF-5): Dado un modelo cuyas versiones traen `wltp_km`, cuando abro la ficha, entonces cada versión muestra su autonomía en km. Dado un modelo cuyas versiones no la traen pero con `specs.wltp_max_km`, entonces veo esa cifra rotulada como del modelo.\n- [ ] CA-6 (→ RF-6): Dada una versión con `battery_kwh` de `basis: gross`, cuando abro la ficha, entonces la capacidad aparece indicada como bruta. Dada una versión sin `dc_max_kw`, entonces ese campo muestra «por confirmar» y no un valor.\n\nNotas técnicas\n--------------\n- Reutiliza `Version` y `Battery` de `web/src/lib/data.ts` y el formateo de km de `card.ts` (`rangeLabel`). La autonomía máxima del modelo ya está derivada en `ModelRecord.max_range_km`, pero la regla de RF-5 es distinta (se muestra `specs.wltp_max_km` solo si NINGUNA versión trae autonomía): no uses `max_range_km` tal cual.\n- Etiquetas de `drivetrain` (`fwd`, `rwd`, `awd`) en `i18n.ts`; comprueba si ya existen en `derived.ts`/`catalog.ts` antes de crearlas.\n- No añadas ningún campo que no esté en `architecture/data-model.md` (ADR-0008). Ninguna estimación (ADR-0001, regla 7).\n- La nota numerada de fuente de cada campo es de la historia del bloque «Fuentes»; aquí basta con dejar el hueco usando el componente de fuente creado en la historia del precio si ya está.",
+  "comments": [
+    {
+      "id": "IC_kwDOUhM2FM8AAAABZBpAcg",
+      "author": {
+        "login": "area73"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "🏭 Aclaración de dependencias: el «armazón de versiones» es la historia #148; el componente de fuente nace en #149. Esta historia depende de #148 y #146.",
+      "createdAt": "2026-10-03T23:02:54Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/rerades/cars/issues/150#issuecomment-5974409330",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOUhM2FM8AAAABbvzUvw",
+      "author": {
+        "login": "area73"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "🏭 Revisión de cobertura: RF-5, RF-6, CA-5 y CA-6 coinciden con el PRD. Diseño (ya en main): «Versiones → Campos y formato», filas 2 a 7, y «Estados». Dependencias: #148 (armazón) y #146 (cerrada). Reparto de wltp_max_km con #151, según el diseño: esta historia NO pinta specs.wltp_max_km; una versión sin autonomía muestra «por confirmar» y nunca se rellena con el valor de specs. La cifra la pinta #151 en «Datos del modelo» («Autonomía WLTP máxima del modelo») siempre que exista, y eso cumple la segunda mitad de CA-5 (se prueba allí). Aquí se prueba la primera mitad de CA-5 y CA-6. Esta historia pinta también la note de cada campo (RF-8); las notas numeradas son de #154. Esto sustituye a la frase del cuerpo «Si ninguna versión trae autonomía, se muestra specs.wltp_max_km…»; no pude editar el cuerpo en esta ejecución.",
+      "createdAt": "2026-10-13T23:02:03Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/rerades/cars/issues/150#issuecomment-6157030591",
+      "viewerDidAuthor": true
+    }
+  ],
+  "labels": [
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4PysRQ",
+      "name": "story",
+      "description": "Unidad de trabajo que cabe en un PR",
+      "color": "0e8a16"
+    },
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4Pysug",
+      "name": "agente",
+      "description": "Abierto por un agente de la factoría, sin revisar",
+      "color": "fbca04"
+    }
+  ],
+  "number": 150,
+  "state": "OPEN",
+  "title": "[PRD-002] Autonomía, batería, potencia, tracción y carga de cada versión",
+  "url": "https://github.com/rerades/cars/issues/150"
+}

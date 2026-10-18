@@ -1,0 +1,13 @@
+case_id: pr-0142
+pr: 142
+reviewed_sha: 7dab7ff59ad4039c68ff0b8f7e46f39e83d369a5
+base_sha: 1a8b8a0f400d24c233a43a0ea45ecd434c05e3ae
+issue: null
+synthetic: false
+confirmed: false
+proposed: label = the one left on the PR (review:needs-human); findings and ca to fill in
+expected:
+  label: review:needs-human
+  findings: []
+  ca: []
+  not_findings: []

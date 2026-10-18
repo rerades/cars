@@ -1,0 +1,95 @@
+{
+  "number": 343,
+  "title": "researcher: Marca MINI. Fuentes en el registro y modelos BEV en data/raw",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Marca MINI. Fuentes en el registro y modelos BEV en data/raw/mini/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos. Versiones y precios de la web oficial en España (mini.es, sin verificar: confirma dominio, respuesta y robots.txt), del configurador o la lista de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se puede pedir; segment solo con el término literal de RF-11). Si la web no se puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3) qué versiones se venden hoy en España y deja price: null. Si para un modelo no hay ninguna fuente con sus versiones, no escribas ese modelo y anótalo en la bitácora. Imágenes solo de Wikimedia Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts. Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml.\n- Run: `20261014-060007-9ecf7c` · 0.3555 USD (estimated) · 28 turns\n- Agent: `researcher` · model `sonnet` · may only write to [\"data/\",\"docs/bitacora/\"]\n- Evals: 4 checks passed\n\nWhat the agent says:\n\n```\n E 42,5 kWh frente a 38,5). Prevalece la fuente T2 y queda anotado en `open_questions`.\n- La tracción del Countryman no está registrada, porque solo aparece en un medio T3.\n\n**Imágenes**\n- Cooper: `data/images/mini/cooper/frontal.jpg`, de Commons, CC BY-SA 4.0, autor Tokumeigakarinoaoshima. Se descargó con `node factory/fetch-image.ts` sin errores.\n- Aceman y Countryman: `images: []`, porque no busqué ficheros de Commons para ellos.\n\nHe registrado una entrada de bitácora (`nota`).\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/researcher/20261014-060007-9ecf7c",
+  "baseRefName": "main",
+  "headRefOid": "b75859ca2fc078285972a8bd145c305690d222f1",
+  "baseRefOid": "8d8588bf43a660388d1f6cdedfa30b173907851e",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-14T04:03:53Z",
+  "url": "https://github.com/rerades/cars/pull/343",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "data/images/mini/cooper/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/mini/aceman.yaml",
+      "additions": 31,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/mini/cooper.yaml",
+      "additions": 38,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/mini/countryman.yaml",
+      "additions": 27,
+      "deletions": 0
+    },
+    {
+      "path": "data/sources/mini-es.yaml",
+      "additions": 17,
+      "deletions": 0
+    },
+    {
+      "path": "docs/bitacora/2026-10/2026-10-14T0603-9fbd7e9e.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 114,
+  "deletions": 0,
+  "changedFiles": 6,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38509470139/job/115674662356",
+      "startedAt": "2026-10-14T04:04:55Z",
+      "completedAt": "2026-10-14T04:05:49Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38509470139/job/115674413864",
+      "startedAt": "2026-10-14T04:03:59Z",
+      "completedAt": "2026-10-14T04:04:06Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38509470139/job/115674413824",
+      "startedAt": "2026-10-14T04:03:59Z",
+      "completedAt": "2026-10-14T04:04:53Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38509470139/job/115674413581",
+      "startedAt": "2026-10-14T04:03:59Z",
+      "completedAt": "2026-10-14T04:04:18Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

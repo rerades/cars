@@ -1,0 +1,70 @@
+{
+  "number": 448,
+  "title": "planner: Revisa si las historias abiertas de la épica #368 (PRD-005, ",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Revisa si las historias abiertas de la épica #368 (PRD-005, rankings: #369 a #378) y la #375 siguen cubriendo docs/product/prd/PRD-005-rankings.md, docs/design/rankings.md y docs/architecture/adr/0015-datos-y-filtro-de-los-rankings.md, que se aceptó después de abrirlas. Para cada historia: (1) que sus RF y CA sigan siendo los del PRD vigente; (2) que siga la ADR-0015: un JSON por ranking en /rankings/datos/{ranking}.json pedido solo al filtrar, una sola función pura que numera el HTML y el filtro, tramos de PRICE_BANDS de web/src/lib/catalog.ts, parámetro precio=<slug del tramo>, estado «Error al filtrar» y robots.txt; (3) que sus dependencias estén al día (#369 en curso); (4) que ningún RF, CA o detalle de la ADR quede sin historia, ni en dos historias sin decir quién hace qué (por ejemplo los JSON, robots.txt y la prueba de peso). Corrige el cuerpo de las issues con gh issue edit solo en esos puntos, y deja en cada una un comentario que empiece por «🏭 Revisión de cobertura» con lo que cambiaste y por qué. Si falta una historia, créala con el formato de las demás (épica, PRD, diseño, Cubre, Depende de, CA copiados del PRD, notas técnicas) y las etiquetas story y agente. No cierres issues, no cambies el alcance y no toques las que ya están en factory/queue.yaml salvo para corregir un error del PRD o del diseño. Resume en la bitácora qué revisaste y qué cambió.\n- Run: `20261017-043007-7a3ee1` · 0.589 USD (estimated) · 41 turns\n- Agent: `planner` · model `sonnet` · may only write to [\"docs/bitacora/\"]\n- Evals: 1 checks passed\n\nWhat the agent says:\n\n```\nstá en `factory/queue.yaml` y no la toqué; sigue siendo la primera.\n\n**Orden:** #369, #370, #371, #372, #373, #374, #375, #447, #376, #377, #378.\n\n**Pendiente:**\n- RNF-2 (LCP) sigue sin historia ni CA; ahora además la ADR pide medirlo con una URL con filtros.\n- CA-18 dice «fuente oficial» y el diseño «verificable»; la historia sigue el diseño. Es la pregunta 4 de la épica, que no resolví.\n- La bitácora quedó registrada con `node factory/bitacora.ts add`, pero no hice commit ni PR.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/planner/20261017-043007-7a3ee1",
+  "baseRefName": "main",
+  "headRefOid": "7cd5e6611b1d3b38c28a327c56d01161b8b0abc5",
+  "baseRefOid": "ade1c64a8fa74b9e11f0820295799dba355a8005",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-17T02:32:49Z",
+  "url": "https://github.com/rerades/cars/pull/448",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "docs/bitacora/2026-10/2026-10-17T0432-fbc629f5.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 1,
+  "deletions": 0,
+  "changedFiles": 1,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38995349357/job/117286849907",
+      "startedAt": "2026-10-17T02:34:13Z",
+      "completedAt": "2026-10-17T02:34:12Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38995349357/job/117286567274",
+      "startedAt": "2026-10-17T02:32:55Z",
+      "completedAt": "2026-10-17T02:34:12Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38995349357/job/117286567239",
+      "startedAt": "2026-10-17T02:32:55Z",
+      "completedAt": "2026-10-17T02:33:01Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38995349357/job/117286567103",
+      "startedAt": "2026-10-17T02:32:55Z",
+      "completedAt": "2026-10-17T02:33:15Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

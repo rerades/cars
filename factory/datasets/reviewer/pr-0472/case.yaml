@@ -1,0 +1,33 @@
+case_id: pr-0472
+pr: 472
+reviewed_sha: bbccf2794b710c271e54d622eeea81e8df9f0c37
+base_sha: 6373ec1e0a8434d1797876fbc7c846f755701815
+issue: 378
+synthetic: false
+confirmed: false
+proposed: label = the one left on the PR (review:ok, review:needs-human, render-preview); findings and ca to fill in
+expected:
+  label: review:ok
+  findings: []
+  ca:
+    - id: CA-2
+      covered: null
+    - id: CA-8
+      covered: null
+    - id: CA-9
+      covered: null
+    - id: CA-11
+      covered: null
+    - id: CA-13
+      covered: null
+    - id: CA-14
+      covered: null
+    - id: CA-15
+      covered: null
+    - id: CA-17
+      covered: null
+    - id: CA-7
+      covered: null
+    - id: CA-18
+      covered: null
+  not_findings: []

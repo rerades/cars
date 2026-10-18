@@ -1,0 +1,13 @@
+case_id: pr-0445
+pr: 445
+reviewed_sha: 2cadf5ae7dacbd0fdc6f3adb0b9a471232823d88
+base_sha: b45be5e41d864750d949b26ed819d250a26602b4
+issue: null
+synthetic: false
+confirmed: false
+proposed: label = the one left on the PR (review:ok); findings and ca to fill in
+expected:
+  label: review:ok
+  findings: []
+  ca: []
+  not_findings: []

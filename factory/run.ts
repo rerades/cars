@@ -14,6 +14,7 @@
 import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
+import { evalsConfig, readSummaries, spentInMonth } from "./eval-run.ts";
 import { exportRun } from "./langfuse.ts";
 import { mergePass, waitingPrs } from "./merge.ts";
 import {
@@ -47,6 +48,8 @@ function cmdStatus(cfg: Config): number {
   console.log(`  gasto total: ${spentInPeriod(rows)} / ${g.max_usd_per_period} USD`);
   console.log(`  ejecuciones hoy: ${runsToday(rows, now.day)} / ${g.max_runs_per_day}`);
   console.log(`  horario: ${g.allowed_hours || "sin restricción"}`);
+  const ev = evalsConfig(cfg);
+  if (ev) console.log(`  evaluaciones (gasto real, ADR-0016): ${spentInMonth(readSummaries(), now.day.slice(0, 7))} / ${ev.max_usd_per_month} USD`);
   for (const [agent, a] of Object.entries(cfg.agents ?? {})) {
     const evaluated = rows.filter((r) => r.agent === agent && r.evals) as { evals: { failed: string[] } }[];
     const passed = evaluated.filter((r) => !r.evals.failed.length).length;

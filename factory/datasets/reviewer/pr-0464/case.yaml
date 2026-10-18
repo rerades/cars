@@ -1,0 +1,17 @@
+case_id: pr-0464
+pr: 464
+reviewed_sha: 714c7a96f462e393d30d43bbd81229d05ecfdfae
+base_sha: 72c21da507f3d3ea526ee07e6b1f74c0085ab97f
+issue: 324
+synthetic: false
+confirmed: false
+proposed: label = the one left on the PR (review:ok, review:needs-human, render-preview); findings and ca to fill in
+expected:
+  label: review:ok
+  findings: []
+  ca:
+    - id: CA-8
+      covered: null
+    - id: CA-13
+      covered: null
+  not_findings: []

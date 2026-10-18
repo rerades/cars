@@ -1,0 +1,143 @@
+diff --git a/data/raw/opel/corsa-electric.yaml b/data/raw/opel/corsa-electric.yaml
+new file mode 100644
+index 0000000..fa45d08
+--- /dev/null
++++ b/data/raw/opel/corsa-electric.yaml
+@@ -0,0 +1,23 @@
++# Researcher — Opel Corsa Electric. Fuentes: opel-es (T1), wikimedia-commons. Consultado 2026-10-03.
++brand: opel
++brand_name: Opel
++model: Corsa Electric
++status: {value: on_sale, note: "ofertas.opel.es: Corsa 'Disponible en Gasolina, Híbrido o Eléctrico'; versión eléctrica 50kWh Edition", source_id: opel-es, url: "https://ofertas.opel.es/particulares?model=corsa", retrieved: 2026-10-03, tier: T1}
++launch: null
++segment: null
++needs_review: false
++versions:
++  - name: Corsa Electric 50kWh Edition
++    price: null   # ofertas.opel.es no muestra precio de la versión eléctrica
++images:
++  - url: "https://upload.wikimedia.org/wikipedia/commons/5/51/2023_Opel_Corsa-e_1X7A2474.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-03
++    license: CC-BY-SA-4.0
++    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:2023 Opel Corsa-e 1X7A2474.jpg)"
++open_questions:
++  - "launch: inicio de venta en España del Corsa Electric no leído en ninguna fuente T1 (www.opel.es devuelve 403)."
++  - "segment: ninguna fuente leída lo clasifica; queda vacío."
++  - "price: sin PVP ni precio financiado de la versión eléctrica en página T1 legible; un T3 (coches.com) da cifras pero no valen."
++  - "Batería, autonomía WLTP, potencia y carga: fichas de www.opel.es no accesibles."
++  - "Imagen: es el Corsa-e con el restyling de 2023 (mismo modelo que Corsa Electric actual)."
+diff --git a/data/raw/opel/frontera-electric.yaml b/data/raw/opel/frontera-electric.yaml
+new file mode 100644
+index 0000000..4ed3ae4
+--- /dev/null
++++ b/data/raw/opel/frontera-electric.yaml
+@@ -0,0 +1,21 @@
++# Researcher — Opel Frontera Electric. Fuentes: opel-es (T1), wikimedia-commons. Consultado 2026-10-03.
++brand: opel
++brand_name: Opel
++model: Frontera Electric
++status: {value: on_sale, note: "ofertas.opel.es: Frontera 'Disponible en Gasolina, Híbrido o Eléctrico'", source_id: opel-es, url: "https://ofertas.opel.es/particulares?model=frontera", retrieved: 2026-10-03, tier: T1}
++launch: null
++segment: null
++needs_review: false
++versions:
++  - name: Frontera Electric
++    price: null   # el precio al contado de ofertas.opel.es (23.800 €) es de la versión térmica/híbrida
++images:
++  - url: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Opel_Frontera_C_Electric_DSC_9331.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-03
++    license: CC-BY-SA-4.0
++    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:Opel Frontera C Electric DSC 9331.jpg)"
++open_questions:
++  - "launch y segment: sin fuente leída."
++  - "price: sin precio de la versión eléctrica en página T1 legible."
++  - "Versiones, batería, autonomía WLTP, potencia y carga: fichas de www.opel.es no accesibles (403)."
+diff --git a/data/raw/opel/mokka-electric.yaml b/data/raw/opel/mokka-electric.yaml
+new file mode 100644
+index 0000000..1579127
+--- /dev/null
++++ b/data/raw/opel/mokka-electric.yaml
+@@ -0,0 +1,21 @@
++# Researcher — Opel Mokka Electric. Fuentes: opel-es (T1), wikimedia-commons. Consultado 2026-10-03.
++brand: opel
++brand_name: Opel
++model: Mokka Electric
++status: {value: on_sale, note: "ofertas.opel.es: Mokka 'Disponible en Gasolina, Híbrido o Eléctrico'", source_id: opel-es, url: "https://ofertas.opel.es/particulares?model=mokka", retrieved: 2026-10-03, tier: T1}
++launch: null
++segment: null
++needs_review: false
++versions:
++  - name: Mokka Electric
++    price: null   # el precio al contado de ofertas.opel.es (23.700 €) es de la versión térmica
++images:
++  - url: "https://upload.wikimedia.org/wikipedia/commons/c/c8/Opel_Mokka_Electric_Edition_%28B%2C_Facelift%29_%E2%80%93_f_12102025.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-03
++    license: CC-BY-SA-3.0-de
++    attribution: "M 93, CC BY-SA 3.0 de, via Wikimedia Commons (File:Opel Mokka Electric Edition (B, Facelift) – f 12102025.jpg)"
++open_questions:
++  - "launch y segment: sin fuente leída."
++  - "price: sin precio de la versión eléctrica en página T1 legible."
++  - "Versiones, batería, autonomía WLTP, potencia y carga: fichas de www.opel.es no accesibles (403); la versión se llama solo 'Mokka Electric' por falta de dato."
+diff --git a/data/sources/registry.yaml b/data/sources/registry.yaml
+index d774e1b..11e5913 100644
+--- a/data/sources/registry.yaml
++++ b/data/sources/registry.yaml
+@@ -118,6 +118,46 @@ sources:
+     last_verified: 2026-09-29
+     status: active
+ 
++  - id: opel-es
++    brand: Opel
++    tier: T1
++    market: ES
++    kind: [prices, specs, announcements]
++    urls:
++      home: https://www.opel.es/
++      models: https://www.opel.es/coches/gama-corsa/nuevo-corsa/resumen.html   # solo consta por buscador (403 a lectura automática)
++      prices: https://ofertas.opel.es/particulares   # subdominio oficial de ofertas; también ?model=corsa, ?model=mokka, ?model=frontera
++      offers_corsa_electric: https://www.opel.es/ofertas/promociones-particulares/opel-corsa-electric.html   # solo consta por buscador (403)
++    image_license: ""   # sin licencia clara registrada: no publicar imágenes de esta web
++    notes: >
++      Verificado (2026-10-03): www.opel.es (home, robots.txt, fichas, ofertas) devuelve 403 a la
++      lectura automática (protección de acceso, no se evita). Solo ofertas.opel.es responde. Allí
++      las páginas por modelo (Corsa, Mokka, Frontera) dicen "Disponible en Gasolina, Híbrido o
++      Eléctrico" pero el precio al contado mostrado es el de la versión térmica/híbrida (Mokka
++      23.700 €, Frontera 23.800 €); no hay precio de la versión eléctrica. No se guarda ningún
++      precio de Opel. Un buscador (T3, coches.com) da precios oficiales de Corsa/Mokka/Frontera/
++      Astra eléctricos, pero T3 no vale como fuente de precio. Pendiente: PVP o precio financiado
++      BEV en una página T1 legible (configurador). Sin verificar: Astra Electric, Grandland
++      Electric, Combo/Vivaro/Movano eléctricos.
++    last_verified: 2026-10-03
++    status: active
++
++  - id: opel-press
++    brand: Opel
++    tier: T1
++    market: ES
++    kind: [images, announcements]
++    urls:
++      press: https://www.media.stellantis.com/es-es/opel/press   # Stellantis Media, sección Opel España
++      article_corsa_electric: https://www.media.stellantis.com/es-es/opel/press/ya-disponible-para-pedidos-opel-corsa-electric-con-aun-mas-autonomia   # solo consta por buscador (403)
++    image_license: ""   # términos de uso no leídos: no registrar imágenes de prensa
++    notes: >
++      Verificado (2026-10-03): los artículos devuelven 403 a la lectura automática. robots.txt
++      de media.stellantis.com bloquea /press-images, /rss y /login. Sin términos escritos de
++      licencia de imágenes leídos: usar Wikimedia Commons.
++    last_verified: 2026-10-03
++    status: active
++
+   - id: wikimedia-commons
+     brand: (varias; solo imágenes)
+     tier: T3
+diff --git a/docs/bitacora/2026-10.md b/docs/bitacora/2026-10.md
+index 4e8bbaf..68db5e5 100644
+--- a/docs/bitacora/2026-10.md
++++ b/docs/bitacora/2026-10.md
+@@ -24,3 +24,4 @@ Entradas en orden cronológico. La genera y actualiza `factory/bitacora.ts`.
+ - **2026-10-01 16:00** · 📝 Nota — En Render Hobby, www.siete3.com cuenta como un dominio aparte (Billing): cada dominio por encima de los 2 incluidos cuesta 0,25 $/mes. Anotado en ADR-0009. (#98,ADR-0009)
+ - **2026-10-01 18:09** · 🧭 Decisión — Las 11 siluetas de segmento (10 de RF-11 y una genérica) las dibuja el Diseñador como SVG en docs/design/siluetas/, porque tokens.md las dejaba para una tarea aparte que no estaba en ninguna cola y no dependen de ADR-0012. La #112 queda en queue.paused.yaml hasta que ADR-0012 esté aceptada y existan las siluetas. (#112,ADR-0012)
+ - **2026-10-02 01:01** · 🏁 Hito — Historia #38: páginas /marcas/{marca} pregeneradas (una por marca con modelos de loadModels()), con plantilla CatalogPage.astro reutilizable para #39; /coches pasa a usar la misma plantilla. La franja Explorar queda para #39 porque solo puede enlazar páginas que existan (CA-12a) y las de segmento/precio/autonomía aún no existen. (RF-4, RF-10, CA-4, CA-12)
++- **2026-10-03 02:31** · 📝 Nota — Researcher Opel: fuentes opel-es y opel-press en el registro (www.opel.es y la prensa dan 403; solo ofertas.opel.es responde y no muestra precio BEV). Creados corsa-electric, mokka-electric y frontera-electric con price null, segment y launch vacíos (sin fuente leída) e imágenes de Wikimedia Commons con licencia CC BY-SA. (ADR-0001, ADR-0008)

@@ -1,0 +1,17 @@
+case_id: pr-0450
+pr: 450
+reviewed_sha: 0d3d01136dfa01e50f5736ed1caabc07bc643de3
+base_sha: 68e9faf7f675ba56ccd167cb34db77e5ae58e033
+issue: 150
+synthetic: false
+confirmed: false
+proposed: label = the one left on the PR (review:changes); findings and ca to fill in
+expected:
+  label: review:changes
+  findings: []
+  ca:
+    - id: CA-5
+      covered: null
+    - id: CA-6
+      covered: null
+  not_findings: []
