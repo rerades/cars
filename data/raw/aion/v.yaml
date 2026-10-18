@@ -1,0 +1,44 @@
+# Researcher — AION V. Fuentes: aion-es (T1), idae-es (T2), motor-es (T3). Consultado 2026-10-19.
+brand: aion
+brand_name: AION
+model: V
+status: {value: on_sale, note: "la ficha da PVP y oferta de financiación; motor.es (junio 2026) dice que el libro de pedidos está abierto", source_id: aion-es, url: "https://gacspain.es/aion-v/", retrieved: 2026-10-19, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: V Premium
+    battery_kwh: {value: 75.3, basis: unknown, note: "IDAE id 610180; la ficha de la marca da 75,26 kWh (LFP)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    wltp_km: {value: 510, note: "IDAE id 610180", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 610180; la ficha de la marca también da 150 kW", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    drivetrain: {value: fwd, note: "tracción delantera", source_id: motor-es, url: "https://www.motor.es/noticias/gac-espana-gama-electrica-2026114556.html", retrieved: 2026-10-19, tier: T3}
+    price:
+      value: 37995
+      unit: EUR
+      price_kind: pvp
+      note: "ficha de la marca: PVP 37.995 € (AION V Premium 150kW 75kWh); sin descuento por financiar ni ayudas"
+      source_id: aion-es
+      url: "https://gacspain.es/aion-v/"
+      retrieved: 2026-10-19
+      tier: T1
+  - name: V Luxury
+    battery_kwh: {value: 75.3, basis: unknown, note: "IDAE id 610181", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    wltp_km: {value: 510, note: "IDAE id 610181", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 610181", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    drivetrain: {value: fwd, note: "tracción delantera", source_id: motor-es, url: "https://www.motor.es/noticias/gac-espana-gama-electrica-2026114556.html", retrieved: 2026-10-19, tier: T3}
+    price: null   # la web de la marca no lista la versión Luxury; el precio solo sale en medios (T3)
+images:
+  - file: data/images/aion/v/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/GAC_Aion_V_Glacier_White_01.jpg/1280px-GAC_Aion_V_Glacier_White_01.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:GAC_Aion_V_Glacier_White_01.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-19
+    license: CC-BY-SA-4.0
+    attribution: "Ethan Llamas, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España (motor.es solo dice «junio de 2026»)."
+  - "segment: la web lo llama «SUV» / «SUV familiar» sin tamaño y a la vez «hatchback urbano»; no hay término literal de RF-11 sin ambigüedad."
+  - "V Luxury: la web de la marca no lo lista; precio sin T1 (motor1.es da 40.595 €). Su existencia en venta se confirma con medios (T3) y con el IDAE."
+  - "Batería: la web da 75,26 kWh, el IDAE 75,3; se guarda el del IDAE con basis unknown."
+  - "Precio de financiación de la web (31.945,80 € con adelanto Programa Auto+) no se guarda: incluye ayuda; se guarda el PVP."
+  - "dc_max_kw y ac_max_kw: la web no los publica."

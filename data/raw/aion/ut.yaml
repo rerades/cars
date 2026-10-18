@@ -1,0 +1,44 @@
+# Researcher — AION UT. Fuentes: aion-es (T1), idae-es (T2), motor-es (T3). Consultado 2026-10-19.
+brand: aion
+brand_name: AION
+model: UT
+status: {value: on_sale, note: "la ficha da PVP y oferta de financiación; motor.es (junio 2026) dice que el libro de pedidos está abierto", source_id: aion-es, url: "https://gacspain.es/aion-ut/", retrieved: 2026-10-19, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: UT Premium
+    battery_kwh: {value: 60, basis: unknown, note: "IDAE id 610178; la ficha de la marca también da 60 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    wltp_km: {value: 430, note: "IDAE id 610178", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 610178; la ficha de la marca también da 150 kW", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    drivetrain: {value: fwd, note: "tracción delantera", source_id: motor-es, url: "https://www.motor.es/noticias/gac-espana-gama-electrica-2026114556.html", retrieved: 2026-10-19, tier: T3}
+    price:
+      value: 30995
+      unit: EUR
+      price_kind: pvp
+      note: "ficha de la marca: «PVP: 30.995 €.» (versión Premium 150kW 60kWh); sin descuento por financiar ni ayudas"
+      source_id: aion-es
+      url: "https://gacspain.es/aion-ut/"
+      retrieved: 2026-10-19
+      tier: T1
+  - name: UT Luxury
+    battery_kwh: {value: 60, basis: unknown, note: "IDAE id 610179", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    wltp_km: {value: 430, note: "IDAE id 610179", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 610179", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    drivetrain: {value: fwd, note: "tracción delantera", source_id: motor-es, url: "https://www.motor.es/noticias/precio-gac-aion-ut-2026114568.html", retrieved: 2026-10-19, tier: T3}
+    price: null   # la web de la marca no lista la versión Luxury; el precio (31.995 €) solo sale en medios (T3)
+images:
+  - file: data/images/aion/ut/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Aion_UT_001.jpg/1280px-Aion_UT_001.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Aion_UT_001.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-19
+    license: CC0-1.0
+    attribution: null
+open_questions:
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España (motor.es solo dice «junio de 2026», sin día de apertura de pedidos)."
+  - "segment: la web lo llama «hatchback urbano», término que no está en la lista de RF-11."
+  - "UT Luxury: la web de la marca no lo lista; precio sin T1 (motor.es y motor1.es dan 31.995 €). Su existencia en venta se confirma con medios (T3) y con el IDAE."
+  - "Precios de financiación de la web (24.947,55 € con descuento por financiar y adelanto Programa Auto+) no se guardan: incluyen ayuda; se guarda el PVP."
+  - "dc_max_kw y ac_max_kw: la web no los publica."
+  - "La imagen es de un UT expuesto en Auto Guangzhou 2024 (modelo chino); la web no ofrece imágenes reutilizables."
