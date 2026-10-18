@@ -1,0 +1,18 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: geely-es
+brand: Geely
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.geely.com/es # no verificada: devolvió HTTP 500 el 2026-10-18
+  news: https://global.geely.com/en/news/2026/geely-e5-starray-em-i-debut-five-european-countries # sala de prensa global (inglés); lanzamiento en España, Alemania, Países Bajos, Bélgica y Luxemburgo
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  No se pudo leer (2026-10-18): https://www.geely.com/es devolvió HTTP 500, www.geely.es no resuelve y www.geely-auto.es
+  rechaza la conexión. Ningún medio consultado cita la URL de la web española, así que la ruta /es no está confirmada como la
+  oficial; se registra por ser la que usa la marca (www.geely.com). robots.txt de www.geely.com: "User-agent: *" sin
+  Disallow (solo Sitemap). Mientras no responda, los datos de Geely salen del IDAE (idae-es, T2) y de medios (T3), y los
+  precios quedan en null. Reintentar y pasar a active cuando responda.
+last_verified: 2026-10-18
+status: broken
