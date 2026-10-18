@@ -2023,3 +2023,38 @@
     filtros (#376). Pruebas con node --test: empate en el 1.º y en el 2.º, empate que cruza el
     décimo, 3 y 0 versiones, batería con bases distintas juntas y precio con financed incluido. La
     PR dice «Closes #370» y enumera los RF y CA cubiertos."
+- id: adr-reviews-esquema
+  agent: architect
+  task: "ADR nueva para PRD-006 (Reviews), que está en ready desde el 2026-10-18. Lee el PRD entero,
+    sobre todo las secciones 4, 6 y 8 (decisiones 1 a 4), y ADR-0001, ADR-0008 y ADR-0010. Decide
+    el esquema de datos de las reviews: dónde viven en data/ (en el YAML del modelo o en ficheros
+    aparte), los campos de un enlace a una review de un tercero (RF-7: título, medio, url, retrieved,
+    source_id, tier) y los de un resultado de prueba de un organismo (RF-9), con qué nivel T1/T2/T3
+    entra cada tipo de fuente, cómo se asocian a un modelo y, si procede, a una versión, y qué
+    comprueba validate-data.ts. Recuerda RF-4 (nada de un modelo en needs_review) y RF-6 (ningún
+    texto generado). Quién obtiene los datos es el Researcher (ADR-0001). Deja la ADR en propuesta,
+    con opciones, pros y contras, decisión y consecuencias, como las demás, y enlázala en la
+    sección de decisiones pendientes de docs/architecture/overview.md. No toques factory/, data/
+    ni web/."
+- id: prd-002-enmienda-reviews
+  agent: product
+  task: "Enmienda de PRD-002 (ficha de modelo) por la decisión 4 de PRD-006 (2026-10-18): las
+    reviews se ven en un bloque al final de la ficha, sin página propia. Lee PRD-006 entero (RF-6 a
+    RF-10 y la sección 8) y PRD-002. Añade a PRD-002 el bloque de reviews: dónde va respecto a los
+    demás bloques y al de notas y fuentes, qué requisitos de PRD-006 aplica (enlaza a ellos, no los
+    copies) y su criterio de aceptación. Qué se ve cuando un modelo no tiene ninguna review lo decide
+    el diseño: déjalo dicho, no lo decidas. Actualiza el historial de cambios de PRD-002. No cambies
+    nada más de PRD-002 ni toques PRD-006."
+- id: e2e-builds-en-paralelo
+  agent: developer
+  task: "El job a11y de la CI falla de vez en cuando (por ejemplo, en la run 39079430332 de la #468)
+    con «Cannot find module .../web/.astro/.prerender/chunks/server_*.mjs» dentro de un astro build.
+    La causa: playwright.config.ts tiene fullyParallel: true, y web/e2e/versiones.spec.ts,
+    storage.spec.ts y comparar.spec.ts lanzan cada uno su propio astro build con cwd en web/, así
+    que comparten web/.astro/ y se pisan. Corrígelo de modo que dos builds de los e2e no compartan
+    ese directorio ni se ejecuten a la vez sobre él, con el cambio más pequeño que lo garantice
+    (por ejemplo, un helper común en web/e2e/ que construya una sola vez o en serie, o que cada
+    build use su propia copia o carpeta de caché si Astro lo permite; compruébalo en la
+    documentación de la versión de Astro instalada). Sin dependencias nuevas. Las pruebas siguen
+    comprobando lo mismo. Ejecuta pnpm run test:a11y en web/ varias veces seguidas para comprobar
+    que no falla. Explica la causa en la bitácora."
