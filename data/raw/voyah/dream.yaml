@@ -1,0 +1,28 @@
+# Researcher — Voyah Dream. Fuentes: voyah-es (T1), idae-es (T2), diariomotor-es (T3). Consultado 2026-10-18.
+brand: voyah
+brand_name: Voyah
+model: Dream
+status: {value: on_sale, note: "Diariomotor: llegó a España en 2024 y lista versiones con precio; la web de la marca presenta el modelo como 100% eléctrico", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/voyah-dream", retrieved: 2026-10-18, tier: T3}
+launch: null
+segment: {value: monovolumen, note: "la web de la marca lo describe como monovolumen de siete plazas", source_id: voyah-es, url: "https://www.voyah.es/vehiculos/voyah-dream", retrieved: 2026-10-18, tier: T1}
+needs_review: true
+versions:
+  - name: Dream AWD
+    battery_kwh: {value: 108.7, basis: unknown, note: "IDAE id 603449", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    wltp_km: {value: 482, note: "IDAE id 603449; la web de la marca también dice 482 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    power_kw: {value: 320, note: "IDAE id 603449; la web de la marca publica 429 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    drivetrain: {value: awd, note: "la web lo presenta como 4x4", source_id: voyah-es, url: "https://www.voyah.es/vehiculos/voyah-dream", retrieved: 2026-10-18, tier: T1}
+    price: null
+images:
+  - file: data/images/voyah/dream/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Voyah_Dream_Auto_Zuerich_2024_DSC_6890.jpg/1280px-Voyah_Dream_Auto_Zuerich_2024_DSC_6890.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Voyah_Dream_Auto_Zuerich_2024_DSC_6890.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "Precio: voyah.es no publica precios ni configurador; price null. Diariomotor (T3, no vale como precio) da Dream BEV 109 kWh 4WD 99.150 € y Premium 4WD 103.400 €."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España (Diariomotor dice solo «llegó a España en el año 2024»)."
+  - "Versiones: el IDAE solo tiene «Dream AWD» (108,7 kWh); Diariomotor lista Dream 4WD y Premium 4WD (109 kWh). No se confirma qué versiones se venden hoy."
+  - "Hay una versión híbrida enchufable del Dream que no se registra (no es BEV)."
