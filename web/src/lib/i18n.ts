@@ -143,6 +143,8 @@ export const es = {
   "ficha.nota.marca": "[{n}]",
   "ficha.nota.sr": "Fuente {n}",
   "ficha.nota.noOficial": "fuente no oficial",
+  "ficha.estado.proximamente": "Próximamente",
+  "ficha.estado.proximamenteFecha": "Próximamente · {fecha}",
   "ficha.fuentes.titulo": "Fuentes",
   "ficha.fuentes.entrada": "Dónde se ha leído cada dato y cuándo. El precio lleva su fuente junto a la cifra.",
   "ficha.fuentes.item": "{fuente}, consultado el {fecha}.",
@@ -213,6 +215,11 @@ export const es = {
     "Hasta 3 versiones, una al lado de otra, con la fuente de cada dato. Para compartir la comparación, copia la dirección de esta página.",
   "comparador.elegidos.titulo": "Coches comparados",
   "comparador.tabla.titulo": "Comparación",
+  "comparador.tabla.entrada":
+    "Precios en España con IVA y sin ayudas. Las columnas siguen el orden que has elegido.",
+  "comparador.tabla.caption": "Comparación de {n} versiones, una por columna",
+  "comparador.fichaSr": "(ficha del modelo)",
+  "comparador.condiciones.entrada": "{marca} {modelo}, {nombre}",
   "comparador.aviso.prefijo": "Aviso:",
   "comparador.sinJs.texto":
     "El comparador necesita JavaScript para leer los coches de la dirección y montar la tabla. Puedes consultar los mismos datos en las fichas del catálogo.",

@@ -1,4 +1,7 @@
+import { formatLaunch } from "./card.ts";
 import type { ModelRecord, Sourced, Version } from "./data.ts";
+import { formatDecimal, formatEur, formatNumber, sourceView } from "./format.ts";
+import { t, type MessageKey } from "./i18n.ts";
 
 /**
  * Comparator logic (PRD-003, ADR-0014). Pure and browser-safe: it must not import `node:fs` or
@@ -230,4 +233,114 @@ export function projectModel(
     launch: datum(m.launch),
     versions: m.versions.map(projectVersion),
   };
+}
+
+/** The seven rows of the table, in the order of the design (comparador.md, «Filas y formato»). */
+export const FIELDS = ["precio", "autonomia", "bateria", "potencia", "traccion", "cargaCc", "cargaCa"] as const;
+export type FieldId = (typeof FIELDS)[number];
+
+/** Label of a row (`ficha.campo.*`, shared with the model page). */
+export function fieldLabel(field: FieldId): string {
+  return t(`ficha.campo.${field}` as MessageKey);
+}
+
+/** What one cell shows. Everything is already formatted: the DOM code only copies it. */
+export interface CellView {
+  /** The value, or «por confirmar» / «Precio por confirmar»: never a figure when `missing`. */
+  text: string;
+  missing: boolean;
+  /** «Precio con oferta» for a `financed` price (RF-5), else null. */
+  deal: string | null;
+  /** The datum's `note`, verbatim (RF-5), else null. */
+  note: string | null;
+  /** True when the datum's `tier` is not T1: «fuente no oficial» goes with it (RF-4, CA-17). */
+  unofficial: boolean;
+  /** Price only: parts of the source line. */
+  source: { name: string; date: string; url: string } | null;
+  /** Price only, `financed`: literal conditions and their link (RF-5). */
+  terms: { text: string | null; url: string | null } | null;
+}
+
+/** The drivetrain label (`traccion.*`); an unknown code is shown as it comes, never invented. */
+function drivetrainLabel(code: string): string {
+  return code === "fwd" || code === "rwd" || code === "awd" ? t(`traccion.${code}` as MessageKey) : code;
+}
+
+/**
+ * Cell of one version for one row (RF-2, RF-3, RF-5). A missing datum gives the placeholder and no
+ * figure (CA-4). Values are formatted, never computed (RNF-5).
+ */
+export function cellView(field: FieldId, v: PublishedVersion): CellView {
+  const datum: PublishedDatum<unknown> | null = {
+    precio: v.price, autonomia: v.wltp_km, bateria: v.battery_kwh, potencia: v.power_kw,
+    traccion: v.drivetrain, cargaCc: v.dc_max_kw, cargaCa: v.ac_max_kw,
+  }[field];
+  if (datum == null || datum.value == null) {
+    const text = field === "precio" ? t("ficha.precio.porConfirmar") : t("ficha.porConfirmar");
+    return { text, missing: true, unofficial: false, deal: null, note: null, source: null, terms: null };
+  }
+  const base = { missing: false, unofficial: datum.tier !== "T1", deal: null, note: datum.note ?? null, source: null, terms: null };
+  const n = datum.value as number;
+  switch (field) {
+    case "precio": {
+      const p = v.price!;
+      const s = sourceView(p);
+      const financed = p.price_kind === "financed";
+      return {
+        ...base,
+        // Plain space, not the card's non-breaking one: a 80 px column may break before «€» (design).
+        text: formatEur(n).replace(/ /g, " "),
+        deal: financed ? t("ficha.precio.oferta") : null,
+        source: { name: s.name, date: s.date, url: p.url },
+        terms: financed ? { text: p.price_terms, url: p.price_terms_url } : null,
+      };
+    }
+    case "autonomia":
+      return { ...base, text: t("ficha.unidad.km", { n: formatNumber(n) }) };
+    case "bateria": {
+      const basis = v.battery_kwh!.basis;
+      const key = basis === "usable" || basis === "gross" ? basis : "unknown";
+      return { ...base, text: t(`ficha.bateria.${key}` as MessageKey, { kwh: formatDecimal(n) }) };
+    }
+    case "potencia":
+    case "cargaCc":
+    case "cargaCa":
+      return { ...base, text: t("ficha.unidad.kw", { n: formatDecimal(n) }) };
+    case "traccion":
+      return { ...base, text: drivetrainLabel(String(datum.value)) };
+  }
+}
+
+/** Column header (RF-1, RF-2): link to the model page and the «Próximamente» badge if announced. */
+export function headerView(m: PublishedModel, v: PublishedVersion) {
+  const when = m.launch ? formatLaunch(m.launch.value) : null;
+  return {
+    brand: m.brand_name,
+    model: m.model,
+    name: v.name,
+    href: `/marcas/${m.brand}/${m.slug}/`,
+    srSuffix: t("comparador.fichaSr"),
+    badge:
+      m.status.value === "announced"
+        ? when ? t("ficha.estado.proximamenteFecha", { fecha: when }) : t("ficha.estado.proximamente")
+        : null,
+  };
+}
+
+/** Title of a column's entry in «Condiciones de las ofertas»: «{marca} {modelo}, {nombre}». */
+export function conditionTitle(m: PublishedModel, v: PublishedVersion): string {
+  return t("comparador.condiciones.entrada", { marca: m.brand_name, modelo: m.model, nombre: v.name });
+}
+
+/**
+ * The distinct models named by the URL, in order of appearance, which the script has to fetch.
+ * Capped so a hand-written URL cannot trigger a flood of requests; 404s are ignored later (RF-11).
+ */
+export const MAX_FETCHED_MODELS = 12;
+export function modelsToFetch(entries: readonly (RawEntry | null)[]): { brand: string; slug: string }[] {
+  const out = new Map<string, { brand: string; slug: string }>();
+  for (const e of entries) {
+    if (e && out.size < MAX_FETCHED_MODELS) out.set(`${e.brand}/${e.slug}`, { brand: e.brand, slug: e.slug });
+  }
+  return [...out.values()];
 }
