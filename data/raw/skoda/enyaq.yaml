@@ -21,10 +21,16 @@ versions:
     battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq/enyaq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq/enyaq", retrieved: 2026-10-14, tier: T1}
     price: null
-images: []
+images:
+  - file: data/images/skoda/enyaq/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/2025_Skoda_Enyaq_sportline_%28facelift%29_-_front.jpg/1280px-2025_Skoda_Enyaq_sportline_%28facelift%29_-_front.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2025_Skoda_Enyaq_sportline_(facelift)_-_front.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Ssu, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "Precios (2026-10-17): la ficha da «PVP recomendado financiando» (Selection 37.128,70 €, Sportline 42.923,70 €, RS 46.438,71 € hasta 31/10/2026) con notas largas (cuotas, TIN, TAE, crédito mínimo, permanencia) que no se han podido copiar enteras y literales; por la revisión de #333 price: null. Las notas se contradicen en crédito mínimo (19.000 € frente a 17.000 €). Los precios «sujeto a financiación desde» (31.400 / 37.650 / 41.150 €) incluyen Plan Auto+ y no se usan."
   - "segment: la ficha dice «SUV familiar», que no está en la lista de RF-11; queda null."
   - "WLTP por versión, tracción y kW de carga DC no están en la ficha; wltp_km queda sin rellenar en todas las versiones."
   - "launch: la ficha no da fecha de inicio de venta en España."
-  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."

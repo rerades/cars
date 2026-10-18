@@ -29,11 +29,17 @@ versions:
     drivetrain: {value: rwd, note: "la ficha dice «Tracción trasera» para el modelo", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-10-17, tier: T1}
     dc_max_kw: {value: 150, source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02/features", retrieved: 2026-10-17, tier: T1}
     price: null   # la tarjeta dice «Desde 39.495 €» sin aclarar si es PVP; no se guarda
-images: []
+images:
+  - file: data/images/lynk-co/02/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/2025_Lynk_%26_Co_02_IAA_2025_DSC_2310.jpg/1280px-2025_Lynk_%26_Co_02_IAA_2025_DSC_2310.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2025_Lynk_&_Co_02_IAA_2025_DSC_2310.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "launch: la web no da la fecha desde la que se puede pedir el 02 en España."
   - "segment: la web lo llama «crossover coupé urbano», que no está en la lista de RF-11."
   - "02 More: la tarjeta dice «Desde 39.495 €» (motor.es, T3, da 39.495 € para More en 2024), pero la ficha no lo etiqueta como PVP; price null hasta confirmarlo en el configurador."
   - "ac_max_kw: la página /features parece dar 11 kW (Core) y 22 kW (More), pero no se ha podido verificar; no se guarda."
   - "Ofertas con financiación del 02 Core (24.795 € financiando, Plan Auto+): condiciones demasiado largas para copiarlas enteras; no se guardan como financed."
-  - "Imágenes: en Commons solo hay fotos del 02 chino de 2018 (otro coche) o una unidad tuneada por Heico; ninguna del 02 europeo de serie."

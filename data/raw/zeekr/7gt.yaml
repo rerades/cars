@@ -33,11 +33,18 @@ versions:
     power_kw: {value: 475, note: "publicado: 475 kW / 646 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
     drivetrain: {value: awd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7gt", retrieved: 2026-10-17, tier: T1}
     price: null
-images: []
+images:
+  - file: data/images/zeekr/7gt/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Zeekr_007_GT_001.jpg/1280px-Zeekr_007_GT_001.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Zeekr_007_GT_001.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC0-1.0
+    attribution: null
 open_questions:
   - "launch: la web no da la fecha desde la que se puede pedir; los medios solo dicen que la marca llega a España en 2026 (motor16, 2026-05-28). Sin fecha fiable."
   - "segment: la ficha lo llama «gran turismo 100 % eléctrico», término que no está en la lista de RF-11."
   - "Precios de Long Range RWD Launch Edition y Privilege AWD Launch Edition: la ficha no los publica (la prensa da 52.890 € y 59.325 €, T3, no se usa)."
   - "La ficha no da potencia de carga en kW, solo tiempo 10-80 % (13-16 min); dc_max_kw sin dato."
   - "Los datos IDAE (idae-es) de 7GT MY27 coinciden en autonomía, potencia y batería, pero la batería de la web es bruta."
-  - "Sin imagen de 7GT en Commons con licencia revisada."
+  - "Imagen: Commons la titula «Zeekr 007 GT» (nombre chino del mismo coche, que en Europa se vende como 7GT); no se ha confirmado con fuente de la marca."

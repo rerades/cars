@@ -47,9 +47,15 @@ versions:
     dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-three/specifications/", retrieved: 2026-10-15, tier: T1}
     ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-three/specifications/", retrieved: 2026-10-15, tier: T1}
     price: null
-images: []
+images:
+  - file: data/images/smart/hashtag-3/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Smart_Hashtag_3_IMG_0269.jpg/1280px-Smart_Hashtag_3_IMG_0269.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Smart_Hashtag_3_IMG_0269.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "Precios: la web de smart España no muestra PVP en el texto servido (JavaScript); price: null."
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir el #3 en España."
   - "segment: la web lo titula «coupé eléctrico», término que no está en la lista de RF-11; null."
-  - "Imágenes: no se ha encontrado en Commons una imagen del #3 con licencia comprobada."
