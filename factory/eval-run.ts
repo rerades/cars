@@ -15,9 +15,9 @@
  * by the `evals:` block of factory/budgets.yaml. The subscription is never used.
  */
 import { spawnSync, execFileSync } from "node:child_process";
-import { chmodSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { chmodSync, copyFileSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join, relative } from "node:path";
+import { dirname, join, relative } from "node:path";
 import { parseArgs, parseEnv } from "node:util";
 import { caseProblem, ensureDataset, itemId, readCases, type Case } from "./dataset-sync.ts";
 import { isForbidden, labelsFromLog, readLog, type GhLogEntry } from "./fake-gh.ts";
@@ -332,6 +332,13 @@ function runCase(cfg: Config, c: Case & { dir: string }, model: string, apiKey: 
   git("worktree", "add", "--detach", "-q", worktree, c.base_sha);
   try {
     for (const leak of ["factory/datasets", "ops/evals"]) rmSync(join(worktree, leak), { recursive: true, force: true });
+    // The prompt, hooks and settings under test are today's, not the ones at the PR's base: copy
+    // the tracked .claude/ files as they are here (prompt_sha hashes this same working copy).
+    rmSync(join(worktree, ".claude"), { recursive: true, force: true });
+    for (const f of git("ls-files", ".claude").split("\n").filter(Boolean)) {
+      mkdirSync(dirname(join(worktree, f)), { recursive: true });
+      copyFileSync(join(REPO, f), join(worktree, f));
+    }
     const bin = join(tmp, "bin");
     mkdirSync(bin);
     writeFileSync(join(bin, "gh"), `#!/bin/sh\nexec node ${JSON.stringify(join(REPO, "factory", "fake-gh.ts"))} "$@"\n`);
