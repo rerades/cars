@@ -1,0 +1,15 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: motor16-es
+brand: Motor16
+tier: T3
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://www.motor16.com/
+  news: https://www.motor16.com/electrico/dongfeng-vigo-electrico-garantia-10-anos/
+image_license: ""
+notes: >
+  Medio del motor. Solo para confirmar disponibilidad (artículo del 2026-08-26: pedidos abiertos del Dongfeng Vigo en 25
+  concesionarios de Grupo Caetano). Nunca como fuente de precio.
+last_verified: 2026-10-18
+status: active

@@ -1,0 +1,28 @@
+# Researcher — Dongfeng Box. Fuentes: dongfeng-es (T1), idae-es (T2). Consultado 2026-10-18.
+brand: dongfeng
+brand_name: Dongfeng
+model: Box
+status: {value: on_sale, note: "la ficha ofrece un ejemplo de financiación con fecha de contrato 09/10/26", source_id: dongfeng-es, url: "https://www.dongfeng-auto.es/modelos/dongfeng-box", retrieved: 2026-10-18, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Box Plus
+    battery_kwh: {value: 42.3, basis: unknown, source_id: dongfeng-es, url: "https://www.dongfeng-auto.es/modelos/dongfeng-box", retrieved: 2026-10-18, tier: T1}
+    wltp_km: {value: 340, note: "la web dice «hasta 340 km»; el IDAE homologa 337 km (id 603464)", source_id: dongfeng-es, url: "https://www.dongfeng-auto.es/modelos/dongfeng-box", retrieved: 2026-10-18, tier: T1}
+    power_kw: {value: 70, note: "IDAE, id 603464", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    price: null
+images:
+  - file: data/images/dongfeng/box/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Dongfeng_Nammi_Box_Auto_Zuerich_2024_DSC_6407.jpg/1280px-Dongfeng_Nammi_Box_Auto_Zuerich_2024_DSC_6407.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Dongfeng_Nammi_Box_Auto_Zuerich_2024_DSC_6407.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: la web la presenta como «utilitario urbano / compacto urbano» sin el término literal de RF-11; queda null."
+  - "price: la ficha da 23.859 € «al contado» (BOX Plus, color blanco) ligado a una oferta con Programa Auto+; la web del concesionario Caetano da «desde 27.266 €». No hay PVP limpio coincidente ni condiciones copiables enteras: null."
+  - "Versiones: en 2026 se prevén versiones con menos equipamiento y batería menor (prensa); hoy solo consta el acabado Plus."
+  - "drivetrain, dc_max_kw: la web no publica potencia de carga ni tracción."
