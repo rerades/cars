@@ -222,6 +222,9 @@ export interface CaseResult {
   turns: number;
   units: number;
   notes: string[];
+  /** What the agent posted and why the judge scored it; Langfuse drops both after 30 days. */
+  comment?: string;
+  judge_why?: Record<string, string>;
 }
 
 export function readSummaries(dir = EVALS_DIR): Summary[] {
@@ -510,6 +513,7 @@ async function main(): Promise<number> {
         turns: Math.trunc(Number(result.num_turns || 0)),
         units: toSpans({ run_id: runId, agent: "reviewer", started: run.started }, run.stdout).length + Object.keys(scores).length + 6,
         notes: run.stderr && !result.total_cost_usd ? [...notes, run.stderr] : notes,
+        comment: comment ?? undefined, judge_why: comments,
       };
       exp.cases.push(r);
       if (keys && datasetId) {
