@@ -6,7 +6,7 @@ issue: 324
 synthetic: false
 confirmed: false
 expected:
-  label: review:ok
+  label: review:changes
   findings:
     - "el cuerpo de la PR no dice «Closes #324», así que la historia no se cerrará sola"
   ca:
