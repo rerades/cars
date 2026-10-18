@@ -6,7 +6,7 @@ issue: 150
 synthetic: true
 from: pr-0450
 note: "copy of pr-0450 without issue.json: the story it closes cannot be read"
-confirmed: false
+confirmed: true
 expected:
   label: review:error
   findings:

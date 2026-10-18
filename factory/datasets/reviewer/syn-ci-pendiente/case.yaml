@@ -6,7 +6,7 @@ issue: 154
 synthetic: true
 from: pr-0474
 note: copy of pr-0474 with the a11y check still running
-confirmed: false
+confirmed: true
 expected:
   label: review:error
   findings:

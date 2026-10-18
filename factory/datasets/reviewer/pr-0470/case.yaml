@@ -4,7 +4,7 @@ reviewed_sha: 12c3b47fd8814be18d5af2f518e0728ce4035f09
 base_sha: f2dcd6eeb2024cdb0208815856c0c725dc1ff11f
 issue: null
 synthetic: false
-confirmed: false
+confirmed: true
 expected:
   label: review:ok
   findings: []

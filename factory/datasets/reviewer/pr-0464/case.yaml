@@ -4,7 +4,7 @@ reviewed_sha: 714c7a96f462e393d30d43bbd81229d05ecfdfae
 base_sha: 72c21da507f3d3ea526ee07e6b1f74c0085ab97f
 issue: 324
 synthetic: false
-confirmed: false
+confirmed: true
 expected:
   label: review:changes
   findings:
