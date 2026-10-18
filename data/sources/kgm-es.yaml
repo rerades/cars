@@ -1,0 +1,23 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: kgm-es
+brand: KG Mobility
+tier: T1
+market: ES
+kind: [ specs, announcements ]
+urls:
+  home: https://kgm.com.es/
+  models: https://kgm.com.es/torres-evx
+  prices: https://kgm.com.es/configurador/torres-evx # sin lista de precios; cada modelo lleva su "desde" y el configurador
+  press: https://kgm.com.es/newsroom
+  legal: https://kgm.com.es/aviso-legal
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-18): kgm.com.es es la web de KGM España (menú Musso EVX, Torres EVX, Korando; sala de prensa /newsroom;
+  teléfono y correo cac.kgm@kgm.com.es). kgm.es y kgm.com son dominios aparcados o ajenos a la marca: no usar. robots.txt de
+  kgm.com.es: "User-agent: *" con "Disallow:" vacío (todo permitido). Los precios "desde" (Torres EVX 28.325 €, Musso EVX
+  31.875 €) llevan descuentos promocionales válidos hasta fin de mes y un descuento de fidelización de 1.000 € sujeto a
+  entregar un KGM; el pie no se puede copiar entero y no hay PVP sin oferta: no se guardan precios. El configurador del Torres
+  EVX es incoherente (mezcla ficha de un diésel 2.2 4WD manual con 'Pro' a 34.425 € PVP / 29.425 € promoción). Las fichas no
+  nombran acabados ni dan la autonomía WLTP por versión; esas cifras salen del IDAE (idae-es).
+last_verified: 2026-10-18
+status: active

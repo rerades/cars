@@ -1,0 +1,80 @@
+{
+  "number": 466,
+  "title": "architect: ADR nueva (ADR-0016) que amplía ADR-0004: evaluar los prompt",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: ADR nueva (ADR-0016) que amplía ADR-0004: evaluar los prompts de los agentes con distintos modelos y subir su puntuación con datasets, experimentos, evaluadores y scores de Langfuse Cloud (plan Hobby, UE). ADR-0004 dejó fuera el LLM como juez «hasta que haya agentes que escriban texto libre»; ese momento ha llegado. Decisiones del usuario: se acepta gasto de API de Anthropic con un límite, y se empieza por el agente Reviewer (.claude/agents/reviewer.md). Decide: (1) dónde viven los datos de referencia: propuesta, ficheros versionados en el repo que se suben a un dataset de Langfuse con un script idempotente (Langfuse es una vista, ADR-0004); (2) qué es un caso del Reviewer (PR ya cerradas con su revisión y la etiqueta review:* correcta como resultado esperado, por ejemplo) y cuántos hacen falta para empezar; (3) cómo se ejecuta el agente sobre cada caso: por la interfaz de Langfuse (solo prompts sueltos) o con un script que lanza el orquestador y registra un experimento por modelo y versión del prompt; (4) qué se puntúa con código y qué con un evaluador LLM, con qué modelo y qué rúbrica, y cómo se aprueba una nueva versión del prompt (umbral frente a la anterior); (5) el coste: clave de API aparte de la suscripción Pro, guardada en .secrets/, límite por experimento y por mes en factory/budgets.yaml, y estimación por ejecución; (6) límites del plan Hobby (unidades, 30 días) y qué pasa si se superan. Comprueba en la documentación de Langfuse lo que afirmes de su API. Opciones con pros y contras, decisión y consecuencias, como ADR-0004. Añade la decisión a docs/architecture/overview.md si procede. No toques factory/ ni .claude/.\n- Run: `20261018-011507-772079` · 0.9974 USD (estimated) · 25 turns\n- Agent: `architect` · model `claude-opus-5-5` · may only write to [\"docs/architecture/\",\"docs/bitacora/\"]\n- Evals: 1 checks passed\n\nWhat the agent says:\n\n```\nudge](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge)\n- [Langfuse, LLM connections](https://langfuse.com/docs/administration/llm-connection)\n- [Langfuse, referencia de la API](https://api.reference.langfuse.com)\n- [Langfuse, changelog de datasets v2](https://langfuse.com/changelog/2024-04-25-datasets-v2)\n- [Anthropic, precios](https://platform.claude.com/docs/en/about-claude/pricing)\n- [ZenML, precios de Langfuse](https://www.zenml.io/blog/langfuse-pricing)\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/architect/20261018-011507-772079",
+  "baseRefName": "main",
+  "headRefOid": "20f338318850e717abb5063886ede9a429ee58c1",
+  "baseRefOid": "c6d7bd903cbb3e372233fc0755c567ac335137d6",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-17T23:19:52Z",
+  "url": "https://github.com/rerades/cars/pull/466",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "docs/architecture/adr/0016-evaluacion-de-prompts-con-langfuse.md",
+      "additions": 341,
+      "deletions": 0
+    },
+    {
+      "path": "docs/architecture/overview.md",
+      "additions": 2,
+      "deletions": 1
+    },
+    {
+      "path": "docs/bitacora/2026-10/2026-10-18T0119-5b6a0716.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 344,
+  "deletions": 1,
+  "changedFiles": 3,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39078602875/job/117531047334",
+      "startedAt": "2026-10-17T23:21:15Z",
+      "completedAt": "2026-10-17T23:21:15Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39078602875/job/117530795175",
+      "startedAt": "2026-10-17T23:19:58Z",
+      "completedAt": "2026-10-17T23:20:22Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39078602875/job/117530795132",
+      "startedAt": "2026-10-17T23:19:58Z",
+      "completedAt": "2026-10-17T23:20:03Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39078602875/job/117530795001",
+      "startedAt": "2026-10-17T23:19:58Z",
+      "completedAt": "2026-10-17T23:21:15Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

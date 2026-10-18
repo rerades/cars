@@ -1,0 +1,28 @@
+# Researcher — Voyah Free. Fuentes: voyah-es (T1), idae-es (T2), diariomotor-es (T3). Consultado 2026-10-18.
+brand: voyah
+brand_name: Voyah
+model: Free
+status: {value: on_sale, note: "Diariomotor: en España se comercializa solo en versión 100% eléctrica", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/voyah-free/", retrieved: 2026-10-18, tier: T3}
+launch: null
+segment: {value: suv_grande, note: "Diariomotor lo clasifica con carrocería «SUV Grande»", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/voyah-free/", retrieved: 2026-10-18, tier: T3}
+needs_review: true
+versions:
+  - name: Free AWD
+    battery_kwh: {value: 100, basis: unknown, note: "IDAE id 603450", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    wltp_km: {value: 500, note: "IDAE id 603450; la web de la marca también dice 500 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    power_kw: {value: 360, note: "IDAE id 603450; la web de la marca publica 489 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    drivetrain: {value: awd, note: "la web lo presenta como 4x4", source_id: voyah-es, url: "https://www.voyah.es/vehiculos/voyah-free", retrieved: 2026-10-18, tier: T1}
+    price: null
+images:
+  - file: data/images/voyah/free/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Voyah_Free_Auto_Zuerich_2023_1X7A1191.jpg/1280px-Voyah_Free_Auto_Zuerich_2023_1X7A1191.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Voyah_Free_Auto_Zuerich_2023_1X7A1191.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "Precio: voyah.es no publica precios ni configurador; price null. Diariomotor (T3, no vale como precio) da Black Edition 4WD 85.550 € y Luxury 4WD 81.300 €."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España (Diariomotor dice solo «llegó a España en el año 2023»)."
+  - "Versiones: el IDAE solo tiene «Free AWD» (100 kWh); Diariomotor lista Black Edition (106 kWh) y Luxury y habla de 100 y 106 kWh. No se confirma qué versiones y qué batería se venden hoy."
+  - "Segmento: fuente T3; la web oficial dice solo «SUV de grandes dimensiones»."

@@ -12,7 +12,14 @@ versions:
     wltp_km: {value: 450, note: "IDAE id 601641; otra homologación posterior (¿MY26?) de 541 km, id 614179, sin fecha para confirmarlo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
     power_kw: {value: 572.4, note: "IDAE id 601641; motor.es publica 560 kW (761 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/maserati/granturismo/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Maserati_GranTurismo_Folgore_Auto_Zuerich_2025_DSC_3319.jpg/1280px-Maserati_GranTurismo_Folgore_Auto_Zuerich_2025_DSC_3319.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Maserati_GranTurismo_Folgore_Auto_Zuerich_2025_DSC_3319.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "La web oficial maserati.com/es devuelve 403 (portada y robots.txt): sin precio T1, sin lista de versiones ni términos de imágenes. price: null."
   - "Acabados Modena, Trofeo y Folgore según motor.es (2023); el IDAE no distingue acabados, por eso hay una sola versión."

@@ -1,0 +1,16 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: lancia-es
+brand: Lancia
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.lancia.com/es-es # dominio oficial de la marca; responde 403 a la lectura automática (2026-10-18)
+  robots: https://www.lancia.com/robots.txt # también 403: no se ha podido leer
+image_license: "" # sin términos leídos: no se publican imágenes de esta fuente
+notes: >
+  Web de Lancia para España. El 2026-10-18 tanto la home como robots.txt devuelven HTTP 403 a la lectura automática;
+  no se fuerza el acceso. No se ha podido confirmar la URL de modelos, precios ni prensa, ni sus términos. Marcada
+  broken hasta que se pueda leer; no se ha tomado ningún dato de ella.
+last_verified: 2026-10-18
+status: broken

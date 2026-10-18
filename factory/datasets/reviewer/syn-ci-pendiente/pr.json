@@ -1,0 +1,115 @@
+{
+  "number": 474,
+  "title": "developer: Historia #154 (épica #145, PRD-002): notas del dato y bloque",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Historia #154 (épica #145, PRD-002): notas del dato y bloque «Fuentes» de la ficha de modelo. Lee el issue entero (gh issue view 154), y sobre todo su comentario «🏭 Revisión de cobertura», que corrige el cuerpo: el nombre de la fuente no sale de data/sources/registry.yaml (ya no existe), sino del dominio de la url del dato sin www., con la función que dejó #149; la clave de agrupado de una nota es source_id + url + retrieved + tier. Reparto: #149 ya pinta la fuente inline del precio, y #150 y #151 la note de los campos de versión y de specs. Esta historia pinta la note de la cabecera (segmento), las marcas [n] y el bloque «Fuentes», y comprueba CA-8 en todos los datos, incluida la note del precio. Si no hay ningún dato con nota, el bloque «Fuentes» no se pinta. Sigue docs/design/ficha-modelo.md («Fuente y fecha», notas de «Cabecera de la ficha» y «Nombre de la fuente»). El agrupado va en una función pura de web/src/lib/ con prueba (misma clave, misma nota; numeración estable por orden de aparición). Textos en i18n.ts. Pruebas con node --test sobre el build. La PR dice «Closes #154» y enumera los RF y CA cubiertos (RF-8, RF-9, CA-8 y CA-9).\n- Run: `20261018-021507-5d6177` · 0.7318 USD (estimated) · 64 turns\n- Agent: `developer` · model `sonnet` · may only write to [\"web/\",\"docs/bitacora/\"]\n- Evals: 1 checks passed\n\nWhat the agent says:\n\n```\nde Alpine A290 («la web de España lista las versiones…»). Seguí el diseño, y por eso el test sobre los datos reales excluye esa nota y la de un `launch` que no se muestra. Si se quiere pintarla, hay que cambiar primero el diseño o el PRD.\n\n**CA sin comprobar automáticamente:** el anillo de foco y el tamaño de la zona de pulsación de 24×24 px de las marcas. No he medido el comportamiento visual ni el foco al saltar a `#fuente-n`.\n\n**Bitácora:** registrada la entrada de tipo `hito`.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/developer/20261018-021507-5d6177",
+  "baseRefName": "main",
+  "headRefOid": "93c8a3ac692a9d72deb76c5929078c48a5f9574d",
+  "baseRefOid": "357a167358df6e1222daf90a73cd500bab4bf0a0",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-18T00:20:03Z",
+  "url": "https://github.com/rerades/cars/pull/474",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "docs/bitacora/2026-10/2026-10-18T0219-f94bfe84.md",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "path": "web/src/components/SourceMark.astro",
+      "additions": 20,
+      "deletions": 0
+    },
+    {
+      "path": "web/src/components/VersionField.astro",
+      "additions": 9,
+      "deletions": 5
+    },
+    {
+      "path": "web/src/lib/i18n.ts",
+      "additions": 6,
+      "deletions": 0
+    },
+    {
+      "path": "web/src/lib/notes.ts",
+      "additions": 62,
+      "deletions": 0
+    },
+    {
+      "path": "web/src/pages/marcas/[marca]/[modelo].astro",
+      "additions": 56,
+      "deletions": 7
+    },
+    {
+      "path": "web/tests/ficha-fuentes.test.ts",
+      "additions": 230,
+      "deletions": 0
+    },
+    {
+      "path": "web/tests/ficha-precio.test.ts",
+      "additions": 0,
+      "deletions": 4
+    },
+    {
+      "path": "web/tests/ficha-versiones-datos.test.ts",
+      "additions": 4,
+      "deletions": 4
+    },
+    {
+      "path": "web/tests/ficha.test.ts",
+      "additions": 2,
+      "deletions": 2
+    }
+  ],
+  "additions": 390,
+  "deletions": 22,
+  "changedFiles": 10,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "IN_PROGRESS",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39082376504/job/117542006518",
+      "startedAt": "2026-10-18T00:21:10Z",
+      "completedAt": null
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39082376504/job/117541817569",
+      "startedAt": "2026-10-18T00:20:10Z",
+      "completedAt": "2026-10-18T00:20:14Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39082376504/job/117541817568",
+      "startedAt": "2026-10-18T00:20:10Z",
+      "completedAt": "2026-10-18T00:20:38Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39082376504/job/117541817407",
+      "startedAt": "2026-10-18T00:20:10Z",
+      "completedAt": "2026-10-18T00:21:08Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

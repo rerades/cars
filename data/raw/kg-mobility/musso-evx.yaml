@@ -1,0 +1,26 @@
+# Researcher — KG Mobility Musso EVX. Fuentes: kgm-es (T1), idae-es (T2). Consultado 2026-10-18.
+brand: kg-mobility
+brand_name: KG Mobility
+model: Musso EVX
+status: {value: on_sale, note: "la web oficial lo muestra con precio 'desde', configurador y solicitud de oferta", source_id: kgm-es, url: "https://kgm.com.es/musso-evx", retrieved: 2026-10-18, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Musso EVX 4x2
+    wltp_km: {value: 420, note: "IDAE id 613987", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    battery_kwh: {value: 80.6, basis: unknown, note: "IDAE id 613987", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    price: null
+  - name: Musso EVX 4x4
+    wltp_km: {value: 379, note: "IDAE id 613986", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    battery_kwh: {value: 80.6, basis: unknown, note: "IDAE id 613986", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    drivetrain: {value: awd, note: "la web: 4x4 con dos motores", source_id: kgm-es, url: "https://kgm.com.es/musso-evx", retrieved: 2026-10-18, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: la web lo llama «pick-up 100% eléctrico», que no es un término de RF-11."
+  - "Precio: el 'desde 31.875 €' lleva descuentos promocionales hasta fin de mes; no hay PVP sin oferta ni pie de condiciones copiable entero. La prensa (T3) cita 40.179 / 43.325 / 46.229 €, no válido como fuente de precio."
+  - "Potencia: la web dice 152 kW por motor (207 CV) y el IDAE 174 kW en ambas versiones; no concuerdan, se deja vacía."
+  - "Autonomía: la web dice 'hasta 546 km' sin ciclo; se usa el IDAE (420 y 379 km WLTP). Los nombres de versión salen de la web (4x2/4x4); la web no nombra acabados (la prensa cita Pro y Limited)."
+  - "Carga DC/AC no publicada en la web; ficha técnica PDF no consultada. Sin imagen de Musso EVX en Commons localizada."

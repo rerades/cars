@@ -1,0 +1,52 @@
+{
+  "experiment": "reviewer/cfa335ed/claude-sonnet-5-5/20261018-1501",
+  "agent": "reviewer",
+  "model": "claude-sonnet-5-5",
+  "prompt_sha": "cfa335ed8e4705cce1548e6cacd3f79b4ae3f3ac",
+  "dataset_sha": "b38c678921f7351b9c21fccc33b1f0f71847ad67",
+  "judge_model": "claude-sonnet-5-5",
+  "rubric_sha": "ff91328d4a58e2bbf53f910da7597780693d60e5",
+  "started": "2026-10-18T15:01:45+02:00",
+  "ended": "2026-10-18T15:02:17+02:00",
+  "complete": true,
+  "stopped": null,
+  "cases": [
+    {
+      "case_id": "pr-0464",
+      "pr": 464,
+      "expected_label": "review:ok",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 1,
+        "concrete": 0.5,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0827,
+      "judge_usd": 0.0153,
+      "turns": 10,
+      "units": 28,
+      "notes": []
+    }
+  ],
+  "totals": {
+    "cases": 1,
+    "usd": 0.098,
+    "usd_avg": 0.098,
+    "label_match": 0,
+    "false_ok": 0,
+    "forbidden": 0,
+    "invented": 1,
+    "finding_recall_avg": 1,
+    "ca_correct_avg": 1,
+    "turns_avg": 10
+  }
+}

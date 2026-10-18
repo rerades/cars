@@ -1,0 +1,13 @@
+case_id: pr-0482
+pr: 482
+reviewed_sha: 36672959f24ed3e73feb67508a4dd91390346a82
+base_sha: f56ac1d71df05587e72887cf25d20b25aebb0969
+issue: null
+synthetic: false
+confirmed: true
+expected:
+  label: review:ok
+  findings: []
+  ca: []
+  not_findings:
+    - dejar en null las cifras que se contradicen, con open_questions, es lo que pide la tarea

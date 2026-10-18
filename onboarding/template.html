@@ -1,0 +1,497 @@
+<meta charset="utf-8">
+<title>Dark Factory por dentro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one presentation "slide" per section, read top to bottom or stepped with ← →; the night shift is the one dark band. */
+:root {
+  --bg: #f1f4f7; --surface: #ffffff; --ink: #121b25; --muted: #566270; --line: #d3dae2;
+  --accent: #0a5cc0; --soft: #e2ebf7; --night: #9a5a00; --ok: #1d7446; --bad: #b3261e;
+  --band-bg: #121b25; --band-ink: #eef2f6; --band-muted: #9aa8b7; --band-line: #2c3a49; --band-night: #f2b25a; --band-glow: rgba(242,178,90,.14);
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d131a; --surface: #141c25; --ink: #e5eaf0; --muted: #94a1af; --line: #283442;
+  --accent: #6db1ff; --soft: #16263a; --night: #f2b25a; --ok: #5cc98d; --bad: #ff8a80;
+  --band-bg: #070b10; --band-ink: #eef2f6; --band-muted: #93a0ae; --band-line: #223040; --band-night: #f2b25a; --band-glow: rgba(242,178,90,.12);
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0d131a; --surface: #141c25; --ink: #e5eaf0; --muted: #94a1af; --line: #283442;
+  --accent: #6db1ff; --soft: #16263a; --night: #f2b25a; --ok: #5cc98d; --bad: #ff8a80;
+  --band-bg: #070b10; --band-ink: #eef2f6; --band-muted: #93a0ae; --band-line: #223040; --band-night: #f2b25a; --band-glow: rgba(242,178,90,.12);
+  color-scheme: dark }
+
+* { box-sizing: border-box }
+html { scroll-padding-top: calc(56px + env(safe-area-inset-top, 0px)) }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--font-body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface) }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0 }
+p { margin: 0 }
+a { color: var(--accent) }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+code, .mono { font-family: var(--font-mono); font-size: .86em }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line) }
+nav .wrap { display: flex; align-items: center; gap: 20px; height: 56px; overflow-x: auto }
+nav .brand { font: 800 15px var(--font-display); font-stretch: 125%; white-space: nowrap; letter-spacing: .02em }
+nav ol { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0 }
+nav a { display: block; padding: 6px 10px; border-radius: 4px; color: var(--muted); text-decoration: none; font-size: 14px; white-space: nowrap }
+nav a:hover { color: var(--ink) }
+nav a[aria-current="true"] { color: var(--accent); background: var(--soft) }
+nav .keys { margin-left: auto; color: var(--muted); font: 12px var(--font-mono); white-space: nowrap }
+
+section.slide { padding-block: 72px; border-bottom: 1px solid var(--line) }
+section.slide > .wrap { display: grid; gap: 32px }
+.eyebrow { font: 500 12px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent) }
+h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; font-stretch: 112%; line-height: 1.1 }
+.lede { font-size: 19px; max-width: 64ch; color: var(--ink) }
+.note { color: var(--muted); max-width: 68ch }
+.head { display: grid; gap: 12px }
+
+/* Hero */
+.hero h1 { font-size: clamp(38px, 6.4vw, 76px); font-weight: 800; font-stretch: 125%; line-height: .98; letter-spacing: -.01em; max-width: 16ch }
+.hero h1 em { font-style: normal; color: var(--accent) }
+.figs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line) }
+.fig { background: var(--surface); padding: 20px; display: grid; gap: 4px; align-content: start }
+.fig b { font: 800 44px/1 var(--font-display); font-stretch: 115%; font-variant-numeric: tabular-nums }
+.fig span { font-weight: 600 }
+.fig small { color: var(--muted); font-size: 14px }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px }
+.cols > * { min-width: 0 }
+.cols h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; letter-spacing: .02em }
+ul.plain { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px }
+ul.plain li { padding-left: 18px; position: relative }
+ul.plain li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 2px; background: var(--accent) }
+ul.no li::before { background: var(--muted) }
+
+/* Diagrams */
+.diagram { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px }
+.diagram svg { display: block; width: 100%; min-width: 760px; height: auto }
+svg .band { fill: var(--bg) }
+svg .bl { font: 500 10px var(--font-mono); letter-spacing: .1em; fill: var(--muted) }
+svg .box rect { fill: var(--surface); stroke: var(--line); stroke-width: 1 }
+svg .box.hi rect { stroke: var(--accent); stroke-width: 1.6 }
+svg .box.ag rect { fill: var(--soft); stroke: var(--soft) }
+svg .box.ext rect { fill: none; stroke: var(--muted); stroke-dasharray: 4 3 }
+svg .box.out rect { fill: var(--soft); stroke: var(--accent) }
+svg .t { font: 650 14px var(--font-body); fill: var(--ink) }
+svg .s { font: 10.5px var(--font-mono); fill: var(--muted) }
+svg .edge { stroke: var(--muted); stroke-width: 1.3; fill: none }
+svg .el { font: 11px var(--font-mono); fill: var(--muted) }
+svg .head-l { font: 500 10px var(--font-mono); letter-spacing: .1em; fill: var(--accent) }
+svg .ah { fill: var(--muted) }
+
+/* Agents */
+.agents { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px }
+.agent { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0 }
+.agent header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px }
+.agent h3 { font-size: 19px; font-weight: 750 }
+.chip { font: 500 11px var(--font-mono); padding: 2px 7px; border-radius: 3px; background: var(--soft); color: var(--accent); white-space: nowrap }
+.chip.night { background: transparent; color: var(--night); border: 1px solid currentColor }
+.chip.ok { background: transparent; color: var(--ok); border: 1px solid currentColor }
+.chip.mute { background: transparent; color: var(--muted); border: 1px solid var(--line) }
+.agent p { font-size: 14px; color: var(--muted) }
+.agent dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px }
+.agent dt { color: var(--muted) }
+.agent dd { margin: 0; font-family: var(--font-mono); font-size: 12px; overflow-wrap: anywhere; font-variant-numeric: tabular-nums }
+.meter { height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden }
+.meter i { display: block; height: 100%; background: var(--accent) }
+.meter i.over { background: var(--bad) }
+
+/* Night band */
+.band-night { background: var(--band-bg); color: var(--band-ink); border-bottom: 0 }
+.band-night .eyebrow { color: var(--band-night) }
+.band-night .note { color: var(--band-muted) }
+.band-night .diagram { background: transparent; border-color: var(--band-line) }
+.band-night svg .nt { font: 600 13px var(--font-body); fill: var(--band-ink) }
+.band-night svg .nm { font: 11px var(--font-mono); fill: var(--band-muted) }
+.band-night svg .grid { stroke: var(--band-line) }
+.band-night svg .win { fill: var(--band-glow); stroke: var(--band-night); stroke-dasharray: 3 3 }
+.band-night svg .wl { font: 500 11px var(--font-mono); fill: var(--band-night) }
+.band-night svg .dot { fill: var(--band-night) }
+.band-night svg .dot.out { fill: none; stroke: var(--band-night); stroke-width: 2 }
+ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--band-line); border: 1px solid var(--band-line) }
+ol.steps li { counter-increment: s; background: var(--band-bg); padding: 18px; display: grid; gap: 6px; align-content: start; min-width: 0 }
+ol.steps li::before { content: counter(s, decimal-leading-zero); font: 500 12px var(--font-mono); color: var(--band-night) }
+ol.steps b { font-family: var(--font-display); font-size: 16px }
+ol.steps span { color: var(--band-muted); font-size: 14px }
+ol.steps code { color: var(--band-ink) }
+
+/* State */
+.panels { display: grid; grid-template-columns: 3fr 2fr; gap: 16px }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: grid; gap: 14px; align-content: start; min-width: 0 }
+.panel h3 { font-size: 16px; font-weight: 700 }
+.legend { display: flex; gap: 16px; font-size: 13px; color: var(--muted); flex-wrap: wrap }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px }
+.chart svg { width: 100%; height: auto; display: block }
+.chart .ax { font: 10.5px var(--font-mono); fill: var(--muted) }
+.chart .gl { stroke: var(--line) }
+.chart .b-ok { fill: var(--accent) }
+.chart .b-bad { fill: var(--bad) }
+.big { font: 800 40px/1 var(--font-display); font-stretch: 115%; font-variant-numeric: tabular-nums }
+.big small { font: 500 15px var(--font-body); color: var(--muted); font-stretch: 100% }
+.bars { display: grid; gap: 10px }
+.bar { display: grid; grid-template-columns: 110px 1fr auto; gap: 10px; align-items: center; font-size: 13px }
+.bar .track { position: relative; height: 10px }
+.bar .cap { position: absolute; inset: 0 auto 0 0; background: var(--bg); border: 1px solid var(--line); border-radius: 2px }
+.bar .fill { position: absolute; inset: 1px auto 1px 1px; background: var(--accent); border-radius: 1px }
+.bar .num { font: 12px var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap }
+ul.log { list-style: none; margin: 0; padding: 0; display: grid }
+ul.log li { display: grid; grid-template-columns: 128px 1fr; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 14px }
+ul.log li > * { min-width: 0 }
+ul.log time { font: 12px var(--font-mono); color: var(--muted); display: grid; gap: 4px; align-content: start }
+
+/* Decisions */
+.table { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px }
+table { border-collapse: collapse; width: 100%; font-size: 14px }
+th, td { text-align: left; padding: 9px 14px; border-top: 1px solid var(--line); vertical-align: top }
+thead th { border-top: 0; font: 500 11px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+td.id, td.d { font-family: var(--font-mono); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px }
+.routes { display: flex; flex-wrap: wrap; gap: 6px }
+.routes code { background: var(--bg); padding: 2px 6px; border-radius: 3px; font-size: 12px }
+footer { padding-block: 32px; color: var(--muted); font-size: 13px }
+
+@media (max-width: 1000px) {
+  .agents { grid-template-columns: repeat(2, 1fr) }
+  ol.steps { grid-template-columns: 1fr 1fr }
+  .panels, .trio { grid-template-columns: 1fr }
+}
+@media (max-width: 640px) {
+  section.slide { padding-block: 48px }
+  .figs { grid-template-columns: 1fr 1fr }
+  .fig b { font-size: 34px }
+  .cols, .agents, ol.steps { grid-template-columns: 1fr }
+  nav .keys { display: none }
+  .bar { grid-template-columns: 90px 1fr }
+  .bar .num { grid-column: 2 }
+  ul.log li { grid-template-columns: 1fr; gap: 4px }
+}
+</style>
+
+<nav aria-label="Secciones">
+  <div class="wrap">
+    <span class="brand">DARK FACTORY</span>
+    <ol id="toc">
+      <li><a href="#que">Qué es</a></li>
+      <li><a href="#arquitectura">Arquitectura</a></li>
+      <li><a href="#agentes">Agentes</a></li>
+      <li><a href="#noche">Una noche</a></li>
+      <li><a href="#estado">Estado</a></li>
+      <li><a href="#decisiones">Decisiones</a></li>
+    </ol>
+    <span class="keys">← → para pasar</span>
+  </div>
+</nav>
+
+<main>
+  <section class="slide hero" id="que">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Qué es</p>
+        <h1>Una web de coches eléctricos que <em>construyen agentes</em></h1>
+        <p class="lede" id="lede">Una web de referencia sobre coches eléctricos para Europa, con foco en España. La construye y la mantiene una factoría de agentes autónomos que trabaja de noche, abre sus propias PR y deja escrito qué hizo y por qué.</p>
+      </div>
+      <div class="figs" id="figs"></div>
+      <div class="cols">
+        <div>
+          <h3>Principios</h3>
+          <ul class="plain">
+            <li><b>Datos fiables.</b> Primero las fuentes oficiales de las marcas. Cada dato lleva su fuente, su URL y su fecha.</li>
+            <li><b>Solo lectura.</b> El visitante consume contenido; no escribe nada y no se guardan datos personales.</li>
+            <li><b>Datos estructurados.</b> Lo que se muestra sale de YAML con un esquema definido, no de texto suelto.</li>
+            <li><b>La documentación es el contrato.</b> Los agentes trabajan a partir de PRD, ADR y diseño; un cambio de alcance empieza en el PRD.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Qué no es</h3>
+          <ul class="plain no">
+            <li>No tiene cuentas, comentarios ni contenido de usuarios.</li>
+            <li>No vende coches ni es un marketplace.</li>
+            <li>No es comercial: es una web personal, sin publicidad ni analítica, pero pública e informativa.</li>
+            <li>No genera reviews: enlaza las de terceros y muestra datos con fuente.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="arquitectura">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Arquitectura</p>
+        <h2>De un documento a siete3.com</h2>
+        <p class="note">Cada capa solo habla con la siguiente. Las personas escriben el contrato y la cola; la factoría lanza a los agentes de uno en uno; todo lo que hacen llega como PR, pasa la CI y, si cumple las reglas, se publica solo.</p>
+      </div>
+      <div class="diagram" id="arch"></div>
+    </div>
+  </section>
+
+  <section class="slide" id="agentes">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Agentes</p>
+        <h2>Ocho agentes, cada uno con su carpeta</h2>
+        <p class="note">Ninguno puede escribir fuera de sus rutas: los hooks de <code>.claude/hooks/</code> lo bloquean. Se pasan el trabajo a través de documentos, issues y PR, nunca directamente.</p>
+      </div>
+      <div class="diagram" id="handoff"></div>
+      <div class="agents" id="agent-cards"></div>
+    </div>
+  </section>
+
+  <section class="slide band-night" id="noche">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Una noche en la factoría</p>
+        <h2>Trabaja mientras nadie usa el ordenador</h2>
+        <p class="note" id="night-note">La factoría corre en el Mac del responsable y comparte la suscripción con su uso personal, así que solo lanza tareas de madrugada.</p>
+      </div>
+      <div class="diagram" id="night"></div>
+      <ol class="steps" id="steps"></ol>
+    </div>
+  </section>
+
+  <section class="slide" id="estado">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Estado</p>
+        <h2 id="state-title">Cómo va el mes</h2>
+        <p class="note">Los costes son USD-equivalentes estimados: la factoría usa la suscripción, no la API, y el tope sirve para no comerse el uso personal.</p>
+      </div>
+      <div class="panels">
+        <div class="panel">
+          <h3>Ejecuciones por día, últimos 30 días</h3>
+          <div class="legend"><span><i style="background:var(--accent)"></i>Terminaron bien</span><span><i style="background:var(--bad)"></i>Fallaron o no pasaron los evals</span></div>
+          <div class="chart" id="runs-chart"></div>
+        </div>
+        <div class="panel">
+          <h3>Gasto del mes</h3>
+          <div class="big" id="month-spend"></div>
+          <div class="meter"><i id="month-meter"></i></div>
+          <div class="bars" id="spend-bars"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Últimas entradas de la bitácora</h3>
+        <ul class="log" id="log"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="decisiones">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Decisiones</p>
+        <h2>Qué se ha decidido y qué hay construido</h2>
+        <p class="note">Cada decisión técnica es una ADR en <code>docs/architecture/adr/</code>; cada funcionalidad, un PRD en <code>docs/product/prd/</code>.</p>
+      </div>
+      <div class="table"><table><thead><tr><th>ADR</th><th>Decisión</th><th>Estado</th><th>Fecha</th></tr></thead><tbody id="adrs"></tbody></table></div>
+      <div class="trio">
+        <div class="panel"><h3>Producto (PRD)</h3><ul class="plain" id="prds"></ul></div>
+        <div class="panel"><h3>Páginas de la web</h3><div class="routes" id="routes"></div></div>
+        <div class="panel"><h3>Datos y CI</h3><ul class="plain" id="facts"></ul></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap" id="footer">Página sin datos: genérala con <code>node onboarding/build.ts</code>.</div></footer>
+
+<script>
+const D = /*__DATA__*/null;
+
+const NAMES = { product: "Producto", planner: "Planificador", designer: "Diseñador", architect: "Arquitecto", developer: "Desarrollador", researcher: "Researcher", devops: "DevOps", reviewer: "Revisor" };
+const name = (a) => NAMES[a] ?? a;
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const nf = new Intl.NumberFormat("es-ES");
+const money = (n) => new Intl.NumberFormat("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n) + " $";
+const pct = (a, b) => (b ? Math.round((100 * a) / b) : 0) + " %";
+const shortModel = (m) => String(m).replace(/^claude-/, "").replace(/-(\d+)-(\d+)$/, " $1.$2");
+const hours = (t) => { const [h, m] = t.split(":").map(Number); return h + m / 60; };
+
+function box(b) {
+  let s = `<g class="box ${b.cls ?? ""}"><rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="6"/>`;
+  if (b.h <= 32) {
+    s += `<text class="t" x="${b.x + 10}" y="${b.y + b.h / 2 + 5}">${esc(b.t)}</text>`;
+    if (b.s) s += `<text class="s" x="${b.x + b.w - 10}" y="${b.y + b.h / 2 + 4}" text-anchor="end">${esc(b.s)}</text>`;
+  } else {
+    const ty = b.h < 50 ? b.y + 18 : b.y + 25;
+    s += `<text class="t" x="${b.x + 12}" y="${ty}">${esc(b.t)}</text>`;
+    if (b.s) s += `<text class="s" x="${b.x + 12}" y="${ty + 17}">${esc(b.s)}</text>`;
+  }
+  return s + "</g>";
+}
+const line = (x1, y1, x2, y2) => `<line class="edge" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" marker-end="url(#ah)"/>`;
+const curve = (x1, y1, x2, y2) => { const dx = (x2 - x1) / 2; return `<path class="edge" d="M${x1} ${y1} C${x1 + dx} ${y1} ${x2 - dx} ${y2} ${x2 - 2} ${y2}" marker-end="url(#ah)"/>`; };
+const marker = `<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>`;
+const row = (y, h, w, gap, items, cls) => items.map(([t, s, c], i) => box({ x: 20 + i * (w + gap), y, w, h, t, s, cls: c ?? cls })).join("");
+
+function archSvg() {
+  const orch = D.schedules.find((s) => s.cmd === "--next");
+  const bands = [[98, "CONTRATO · docs/"], [230, "FACTORÍA · factory/"], [362, "AGENTES · claude -p"], [494, "GITHUB"], [626, "PRODUCTO"]];
+  let s = `<svg viewBox="0 0 1000 740" role="img" aria-label="Mapa de la arquitectura: persona, contrato, factoría, agentes, GitHub y producto">${marker}`;
+  for (const [y, l] of bands) s += `<rect class="band" x="10" y="${y}" width="760" height="100" rx="8"/><text class="bl" x="22" y="${y + 15}">${l}</text>`;
+  s += `<text class="bl" x="790" y="245">FUERA DEL REPO</text>`;
+  s += box({ x: 255, y: 10, w: 270, h: 56, t: "Responsable (persona)", s: "escribe la cola · decide lo dudoso", cls: "hi" });
+  s += row(122, 60, 170, 20, [["Visión y PRD", `${D.prds.length} PRD de producto`], ["ADR", `${D.adrs.length} decisiones técnicas`], ["Diseño", "pantallas y componentes"], ["Bitácora", "qué se hizo y por qué"]]);
+  s += row(254, 60, 132, 20, [["queue.yaml", `${D.queue.total} tareas`], ["budgets.yaml", "límites y gasto"], ["hooks", "frenan escrituras"], ["evals.ts", "comprueba salidas"], ["run.ts", "el orquestador", "hi"]]);
+  D.agents.forEach((a, i) => { s += box({ x: 20 + (i % 4) * 190, y: 384 + Math.floor(i / 4) * 38, w: 170, h: 30, t: name(a.name), s: shortModel(a.model), cls: "ag" }); });
+  s += row(518, 60, 170, 20, [["Ramas agent/*", "una por ejecución"], ["Pull requests", "se abren solas"], ["CI", D.ci.join(" ")], ["Etiquetas review:*", "las pone el Revisor"]]);
+  s += row(650, 60, 230, 25, [["data/", `${D.data.models} fichas · ${D.data.brands} marcas`], ["web/ · Astro", `estático, ${D.pages.length} rutas`], ["siete3.com", "static site de Render", "out"]]);
+  s += box({ x: 790, y: 254, w: 190, h: 60, t: "launchd (Mac)", s: orch ? `${orch.times.length} disparos, ${orch.times[0]}–${orch.times.at(-1)}` : "", cls: "ext" });
+  s += box({ x: 790, y: 352, w: 190, h: 44, t: "Langfuse", s: "trazas y evals", cls: "ext" });
+  s += box({ x: 790, y: 410, w: 190, h: 44, t: "Fuentes oficiales", s: "marcas, IDAE, Commons", cls: "ext" });
+  for (const [y1, y2, l] of [[66, 98, "escribe docs y cola"], [198, 230, "es el contrato de todos"], [330, 362, "lanza un agente cada vez"], [462, 494, "rama propia y PR"], [594, 626, "fusiona y Render despliega"]]) {
+    s += line(390, y1 + 2, 390, y2 - 2) + `<text class="el" x="400" y="${(y1 + y2) / 2 + 4}">${l}</text>`;
+  }
+  s += line(790, 284, 762, 284) + line(762, 374, 788, 374) + line(790, 432, 762, 432);
+  s += line(250, 680, 273, 680) + line(505, 680, 528, 680);
+  return s + "</svg>";
+}
+
+function handoffSvg() {
+  const X = [20, 230, 440, 650, 840], W = 150, H = 58;
+  const N = {
+    product: [0, 150, "PRD"], planner: [1, 50, "épica e historias"], designer: [1, 150, "especificación"], architect: [1, 250, "ADR"],
+    sources: [1, 350, "webs de las marcas", "Fuentes oficiales", "ext"], developer: [2, 100, "código de web/"], devops: [2, 250, "workflows de la CI"],
+    researcher: [2, 350, "YAML con fuente"], reviewer: [3, 200, "etiqueta review:*"],
+    auto: [4, 140, "datos y bitácora", "Fusión automática", "out"], human: [4, 270, "todo lo demás", "Responsable", "hi"],
+  };
+  const pos = (k) => ({ x: X[N[k][0]], y: N[k][1], w: N[k][0] === 4 ? 140 : W });
+  const edges = [["product", "planner"], ["product", "designer"], ["product", "architect"], ["planner", "developer"], ["designer", "developer"], ["architect", "developer"], ["architect", "devops"], ["sources", "researcher"], ["developer", "reviewer"], ["devops", "reviewer"], ["researcher", "reviewer"], ["reviewer", "auto"], ["reviewer", "human"]];
+  let s = `<svg viewBox="0 0 1000 420" role="img" aria-label="Cómo se pasan el trabajo los agentes">${marker}`;
+  ["DEFINIR", "TROCEAR, DISEÑAR, DECIDIR", "CONSTRUIR", "REVISAR", "PUBLICAR"].forEach((l, i) => { s += `<text class="head-l" x="${X[i]}" y="20">${l}</text>`; });
+  for (const [a, b] of edges) { const p = pos(a), q = pos(b); s += curve(p.x + p.w, p.y + H / 2, q.x, q.y + H / 2); }
+  for (const k of Object.keys(N)) { const [, , sub, title, cls] = N[k]; const p = pos(k); s += box({ ...p, h: H, t: title ?? name(k), s: sub, cls: cls ?? "ag" }); }
+  s += `<text class="el" x="806" y="${150 + 4}" text-anchor="end">review:ok</text><text class="el" x="806" y="${300 + 12}" text-anchor="end">needs-human</text>`;
+  return s + "</svg>";
+}
+
+function nightSvg() {
+  const [from, to] = (D.global.hours ?? "01:00-07:00").split("-").map(hours);
+  const x = (h) => 200 + h * 97.5;
+  const rows = [["--next", "Siguiente tarea", "run.ts --next"], ["reviewer", "Revisión de PR", "reviewer"], ["--merge", "Fusión", "run.ts --merge"]];
+  let s = `<svg viewBox="0 0 1000 190" role="img" aria-label="Horario nocturno de la factoría">`;
+  s += `<rect class="win" x="${x(from)}" y="40" width="${x(to) - x(from)}" height="140" rx="4"/><text class="wl" x="${x(from) + 8}" y="56">VENTANA ${D.global.hours ?? ""}: solo aquí se lanzan tareas</text>`;
+  for (let h = 0; h <= 8; h++) s += `<line class="grid" x1="${x(h)}" y1="30" x2="${x(h)}" y2="180"/><text class="nm" x="${x(h)}" y="22" text-anchor="middle">${String(h).padStart(2, "0")}:00</text>`;
+  rows.forEach(([cmd, label, sub], i) => {
+    const y = 88 + i * 36, sch = D.schedules.find((t) => t.cmd === cmd);
+    s += `<text class="nt" x="20" y="${y + 4}">${label}</text><text class="nm" x="20" y="${y + 18}">${sub}</text>`;
+    for (const t of sch?.times ?? []) { const h = hours(t); s += `<circle class="dot ${h >= from && h < to ? "" : "out"}" cx="${x(h)}" cy="${y}" r="5"><title>${t}</title></circle>`; }
+  });
+  return s + "</svg>";
+}
+
+function runsChart() {
+  const end = new Date(D.built.slice(0, 10) + "T12:00:00Z");
+  const days = Array.from({ length: 30 }, (_, i) => new Date(end.getTime() - (29 - i) * 864e5).toISOString().slice(0, 10));
+  const data = days.map((d) => { const r = D.runs.filter((x) => x.day === d); const ok = r.filter((x) => x.outcome === "success").length; return { d, ok, bad: r.length - ok }; });
+  const max = Math.max(4, ...data.map((v) => v.ok + v.bad)), top = Math.ceil(max / 4) * 4;
+  const L = 34, R = 630, T = 10, B = 190, bw = (R - L) / 30, y = (n) => B - (n / top) * (B - T);
+  let s = `<svg viewBox="0 0 640 215" role="img" aria-label="Ejecuciones por día">`;
+  for (const v of [0, top / 2, top]) s += `<line class="gl" x1="${L}" x2="${R}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
+  data.forEach((v, i) => {
+    const bx = L + i * bw + 2, w = bw - 4;
+    if (v.ok) s += `<rect class="b-ok" x="${bx}" y="${y(v.ok)}" width="${w}" height="${B - y(v.ok)}"><title>${v.d}: ${v.ok} bien</title></rect>`;
+    if (v.bad) s += `<rect class="b-bad" x="${bx}" y="${y(v.ok + v.bad)}" width="${w}" height="${y(v.ok) - y(v.ok + v.bad)}"><title>${v.d}: ${v.bad} mal</title></rect>`;
+    if (i % 7 === 0 || i === 29) s += `<text class="ax" x="${bx + w / 2}" y="${B + 18}" text-anchor="middle">${v.d.slice(8, 10)}/${v.d.slice(5, 7)}</text>`;
+  });
+  return s + "</svg>";
+}
+
+function render() {
+  const ok = D.runs.filter((r) => r.outcome === "success").length;
+  const month = D.built.slice(0, 7);
+  const monthRuns = D.runs.filter((r) => r.day.startsWith(month));
+  const spent = monthRuns.reduce((s, r) => s + r.cost, 0);
+  const accepted = D.adrs.filter((a) => a.status === "aceptada").length;
+
+  document.getElementById("lede").insertAdjacentHTML("beforeend", ` Empezó el ${esc(D.git.since)} y lleva ${nf.format(D.git.commits)} commits y ${nf.format(D.git.merges)} PR fusionadas.`);
+  document.getElementById("figs").innerHTML = [
+    [D.agents.length, "agentes", "cada uno con sus rutas y su tope"],
+    [nf.format(D.runs.length), "ejecuciones", `${pct(ok, D.runs.length)} terminaron bien`],
+    [D.data.models, "fichas de modelo", `de ${D.data.brands} marcas, con fuente y fecha`],
+    [D.adrs.length, "decisiones (ADR)", `${accepted} aceptadas · ${D.prds.length} PRD`],
+  ].map(([n, l, s]) => `<div class="fig"><b>${n}</b><span>${l}</span><small>${s}</small></div>`).join("");
+
+  document.getElementById("arch").innerHTML = archSvg();
+  document.getElementById("handoff").innerHTML = handoffSvg();
+  document.getElementById("agent-cards").innerHTML = D.agents.map((a) => {
+    const mine = monthRuns.filter((r) => r.agent === a.name).reduce((s, r) => s + r.cost, 0);
+    const w = a.budget ? Math.min(100, (100 * mine) / a.budget) : 0;
+    return `<article class="agent">
+      <header><h3>${esc(name(a.name))}</h3><span class="chip">${esc(shortModel(a.model))}</span></header>
+      <p>${esc(a.purpose)}</p>
+      <dl>
+        <dt>Escribe en</dt><dd>${a.writes.map(esc).join(" ")}</dd>
+        <dt>Red</dt><dd>${a.network ? "sí" : "no"}</dd>
+        <dt>Ejecuciones</dt><dd>${a.runs} · ${pct(a.ok, a.runs)} bien</dd>
+        <dt>En la cola</dt><dd>${a.pending} pendientes</dd>
+        <dt>Este mes</dt><dd>${money(mine)} de ${a.budget ?? "—"} $</dd>
+      </dl>
+      <div class="meter" title="Gasto del mes frente a su tope"><i class="${w >= 100 ? "over" : ""}" style="width:${w}%"></i></div>
+    </article>`;
+  }).join("");
+
+  const orch = D.schedules.find((s) => s.cmd === "--next");
+  const reviewAt = D.schedules.find((s) => s.cmd === "reviewer")?.times[0] ?? "";
+  const mergeAt = D.schedules.find((s) => s.cmd === "--merge")?.times[0] ?? "";
+  document.getElementById("night").innerHTML = nightSvg();
+  document.getElementById("steps").innerHTML = [
+    ["Se encola", "Una persona añade la tarea a <code>factory/queue.yaml</code> por PR, con un <code>id</code> único (ADR-0013)."],
+    ["Se despierta", `launchd llama a <code>run.ts --next</code> ${orch?.times.length ?? ""} veces por noche, dentro de la ventana.`],
+    ["Comprueba las guardas", "<code>STOP</code>, horario, ejecución en curso, límites del día y presupuesto (ADR-0002). Si alguna falla, la tarea espera a la siguiente."],
+    ["Aísla el trabajo", "Abre un worktree en la rama <code>agent/&lt;agente&gt;/&lt;run_id&gt;</code> desde <code>origin/main</code>."],
+    ["Lanza al agente", "<code>claude -p</code> con su prompt, su modelo y sus topes. Los hooks bloquean cualquier escritura fuera de sus rutas."],
+    ["Evalúa", "<code>evals.ts</code> revisa lo que escribió; si no pasa, no hay PR (ADR-0004). La traza va a Langfuse."],
+    ["Registra y publica", "Apunta la ejecución en la rama <code>chore/factory-state</code> y, si fue bien, abre la PR."],
+    ["Revisa", `A las ${reviewAt} el Revisor lee cada PR nueva y le pone <code>review:ok</code>, <code>review:changes</code> o <code>review:needs-human</code>.`],
+    ["Fusiona", `A las ${mergeAt}, <code>run.ts --merge</code> fusiona sin modelo las PR con <code>review:ok</code>, CI en verde y que solo tocan datos o bitácora (ADR-0011). Render publica siete3.com.`],
+  ].map(([b, t]) => `<li><b>${b}</b><span>${t}</span></li>`).join("");
+  document.getElementById("night-note").insertAdjacentHTML("beforeend", ` Lanza como mucho ${D.global.perDay} ejecuciones al día, de una en una.${D.global.autoMerge ? " La fusión automática está activada." : " La fusión automática está apagada."}`);
+
+  const monthName = new Date(month + "-15").toLocaleDateString("es-ES", { month: "long", year: "numeric" });
+  document.getElementById("state-title").textContent = `Cómo va ${monthName}`;
+  document.getElementById("runs-chart").innerHTML = runsChart();
+  document.getElementById("month-spend").innerHTML = `${money(spent)} <small>de ${D.global.budget} $ · ${monthRuns.length} ejecuciones</small>`;
+  document.getElementById("month-meter").style.width = Math.min(100, (100 * spent) / (D.global.budget || 1)) + "%";
+  const maxB = Math.max(...D.agents.map((a) => a.budget ?? 0));
+  document.getElementById("spend-bars").innerHTML = D.agents.map((a) => {
+    const m = monthRuns.filter((r) => r.agent === a.name).reduce((s, r) => s + r.cost, 0);
+    return `<div class="bar"><span>${esc(name(a.name))}</span><span class="track"><span class="cap" style="width:${(100 * (a.budget ?? 0)) / maxB}%"></span><span class="fill" style="width:calc(${(100 * Math.min(m, a.budget ?? m)) / maxB}% - 2px)"></span></span><span class="num">${money(m)} / ${a.budget} $</span></div>`;
+  }).join("");
+  document.getElementById("log").innerHTML = D.log.map((e) => `<li><time>${esc(e.when)}<span class="chip ${e.kind === "Decisión" ? "night" : e.kind === "Hito" ? "ok" : "mute"}">${esc(e.kind)}</span></time><span>${esc(e.text)}</span></li>`).join("");
+
+  document.getElementById("adrs").innerHTML = D.adrs.map((a) => `<tr><td class="id">${esc(a.id)}</td><td>${esc(a.title)}</td><td><span class="chip ${a.status === "aceptada" ? "ok" : "mute"}">${esc(a.status)}</span></td><td class="d">${esc(a.date ?? "")}</td></tr>`).join("");
+  document.getElementById("prds").innerHTML = D.prds.map((p) => `<li><b class="mono">${esc(p.id)}</b> ${esc(p.title)} <span class="chip mute">${esc(p.status)}</span></li>`).join("");
+  document.getElementById("routes").innerHTML = D.pages.map((p) => `<code>${esc(p || "/")}</code>`).join("");
+  document.getElementById("facts").innerHTML = [
+    `${D.data.models} fichas de modelo en <code>data/raw/</code>`, `${D.data.sources} fuentes registradas`, `${D.data.images} imágenes con licencia`,
+    `CI: ${D.ci.map((j) => `<code>${esc(j)}</code>`).join(" ")}`, `${D.queue.pending} tareas pendientes de ${D.queue.total} en la cola`,
+  ].map((t) => `<li>${t}</li>`).join("");
+  document.getElementById("footer").innerHTML = `Generado con <code>node onboarding/build.ts</code> desde el commit <code>${esc(D.commit)}</code> el ${new Date(D.built).toLocaleString("es-ES", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Madrid" })}. Todas las cifras salen del repositorio.`;
+}
+
+if (D) render();
+
+// Presentation: ← → step through the sections; the nav marks the one in view.
+const slides = [...document.querySelectorAll("section.slide")];
+const links = [...document.querySelectorAll("#toc a")];
+const current = () => { const y = innerHeight * 0.3; let i = 0; slides.forEach((s, j) => { if (s.getBoundingClientRect().top <= y) i = j; }); return i; };
+const mark = () => { const i = current(); links.forEach((a, j) => a.setAttribute("aria-current", String(i === j))); };
+addEventListener("scroll", mark, { passive: true });
+mark();
+addEventListener("keydown", (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+  const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+  if (!step) return;
+  e.preventDefault();
+  slides[Math.max(0, Math.min(slides.length - 1, current() + step))].scrollIntoView();
+});
+</script>

@@ -46,7 +46,7 @@ type Event = Record<string, any>;
 type Attr = { key: string; value: Record<string, unknown> };
 
 /** Deterministic ids: re-sending a run produces the same trace, not a copy. */
-const hex = (seed: string, len: number) => createHash("sha256").update(seed).digest("hex").slice(0, len);
+export const hex = (seed: string, len: number) => createHash("sha256").update(seed).digest("hex").slice(0, len);
 export const traceId = (runId: string) => hex(runId, 32);
 
 const nanos = (iso: unknown) => String(BigInt(Date.parse(String(iso))) * 1_000_000n);
@@ -166,8 +166,14 @@ export interface PromptRef {
   version: number;
 }
 
+/** Extra attributes: `trace` on every span (and overriding the defaults), `root` on the root span only. */
+export interface ExtraAttrs {
+  trace?: Record<string, unknown>;
+  root?: Record<string, unknown>;
+}
+
 /** OTLP/HTTP JSON body. Trace-level attributes go on every span so Langfuse v4 can filter by them. */
-export function toOtlp(record: Row, stdout: string, prompt?: PromptRef) {
+export function toOtlp(record: Row, stdout: string, prompt?: PromptRef, extra: ExtraAttrs = {}) {
   const runId = String(record.run_id);
   const traceAttrs = {
     "langfuse.trace.name": record.agent,
@@ -177,6 +183,7 @@ export function toOtlp(record: Row, stdout: string, prompt?: PromptRef) {
     "langfuse.trace.tags": [record.agent, record.outcome],
     "langfuse.trace.metadata.run_id": runId,
     "langfuse.environment": ENVIRONMENT,
+    ...extra.trace,
   };
   // Langfuse links prompts to generations, so the prompt goes on each model call
   const promptAttrs = prompt && {
@@ -195,6 +202,7 @@ export function toOtlp(record: Row, stdout: string, prompt?: PromptRef) {
       ...traceAttrs,
       ...s.attributes,
       ...(s.attributes["langfuse.observation.type"] === "generation" ? promptAttrs : {}),
+      ...(s.parent ? {} : extra.root),
     }),
     status: { code: s.error ? 2 : 1 },
   }));
@@ -224,7 +232,7 @@ export function evalScore(record: Row) {
 // --------------------------------------------------------------------------- envío
 
 /** GET without a body, POST with one. Returns the parsed JSON response, if any. */
-async function api(keys: Keys, path: string, body?: unknown): Promise<any> {
+export async function api(keys: Keys, path: string, body?: unknown): Promise<any> {
   const res = await fetch(keys.baseUrl + path, {
     method: body === undefined ? "GET" : "POST",
     headers: {

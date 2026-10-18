@@ -158,8 +158,4 @@ describe("price of each version on the model page (RF-4, CA-4, CA-9)", () => {
     assert.doesNotMatch(html, /25\.000|Fuente:/);
   });
 
-  test("RF-4 scope: no other technical figures nor «Fuentes» block yet", () => {
-    const html = page("Volta");
-    assert.doesNotMatch(html, /<h2[^>]*>Fuentes<\/h2>|id="fuente-/);
-  });
 });

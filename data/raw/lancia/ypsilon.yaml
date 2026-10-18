@@ -1,0 +1,40 @@
+# Researcher — Lancia Ypsilon eléctrico. Web oficial ilegible (403): versiones confirmadas con motor-es (T3), sin precio. Consultado 2026-10-18.
+brand: lancia
+brand_name: Lancia
+model: Ypsilon
+status: {value: on_sale, note: "motor.es lista cuatro versiones eléctricas (2026) con stock limitado; no confirma la venta con la web oficial", source_id: motor-es, url: "https://www.motor.es/lancia/ypsilon/", retrieved: 2026-10-18, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Elettrica 54kWh 115kW (156CV)
+    battery_kwh: {value: 54, basis: unknown, source_id: motor-es, url: "https://www.motor.es/lancia/ypsilon/", retrieved: 2026-10-18, tier: T3}
+    power_kw: {value: 115, note: "publicado: 156 CV", source_id: motor-es, url: "https://www.motor.es/lancia/ypsilon/", retrieved: 2026-10-18, tier: T3}
+    price: null
+  - name: LX Elettrica 54kWh 115kW (156CV)
+    battery_kwh: {value: 54, basis: unknown, source_id: motor-es, url: "https://www.motor.es/lancia/ypsilon/", retrieved: 2026-10-18, tier: T3}
+    power_kw: {value: 115, note: "publicado: 156 CV", source_id: motor-es, url: "https://www.motor.es/lancia/ypsilon/", retrieved: 2026-10-18, tier: T3}
+    price: null
+  - name: HF Line Elettrica 54kWh 115kW
+    battery_kwh: {value: 54, basis: unknown, source_id: motor-es, url: "https://www.motor.es/lancia/ypsilon/", retrieved: 2026-10-18, tier: T3}
+    power_kw: {value: 115, note: "motor.es indica 156 CV", source_id: motor-es, url: "https://www.motor.es/lancia/ypsilon/", retrieved: 2026-10-18, tier: T3}
+    price: null
+  - name: HF Elettrica 54kWh 207kW (280CV)
+    battery_kwh: {value: 54, basis: unknown, source_id: motor-es, url: "https://www.motor.es/lancia/ypsilon/", retrieved: 2026-10-18, tier: T3}
+    power_kw: {value: 207, note: "publicado: 280 CV", source_id: motor-es, url: "https://www.motor.es/lancia/ypsilon/", retrieved: 2026-10-18, tier: T3}
+    price: null
+images:
+  - file: data/images/lancia/ypsilon/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Lancia_Ypsilon_BEV.jpg/1280px-Lancia_Ypsilon_BEV.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Lancia_Ypsilon_BEV.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Erremm, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Web oficial de Lancia España (lancia.com/es-es) y su robots.txt devuelven 403 el 2026-10-18: no hay precios ni versiones T1; price: null en todas."
+  - "wltp_km omitido en todas las versiones (regla 8): motor.es no da la cifra de la HF de 280 CV, y el IDAE (51 kWh, 397 km, 115 kW) corresponde a la batería anterior de 51 kWh, no a las versiones de 54 kWh actuales. Cifras T3 de otras versiones: 425, 419 y 403 km, sin confirmar con T1/T2."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: motor.es lo clasifica como «Pequeño o compacto» y «segmento B», términos que no están en la lista de RF-11; se deja null."
+  - "Confirmar con la web oficial qué versiones se venden hoy: motor.es habla de stock limitado hasta fin de existencias."
+  - "Edición Cassina (IDAE, 2024) no aparece en motor.es hoy; no se incluye."

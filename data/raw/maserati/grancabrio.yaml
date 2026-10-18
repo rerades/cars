@@ -12,11 +12,17 @@ versions:
     wltp_km: {value: 441, note: "IDAE id 601645; otra homologación de 541 km, id 614180, sin fecha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
     power_kw: {value: 572.4, note: "IDAE id 601645; motor.es publica 560 kW (761 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/maserati/grancabrio/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/2025_Maserati_GranCabrio_Folgore.jpg/1280px-2025_Maserati_GranCabrio_Folgore.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2025_Maserati_GranCabrio_Folgore.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Oleg Yunakov, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "La web oficial maserati.com/es devuelve 403: sin precio T1. price: null."
   - "Confirmar con fuente actual que se vende hoy en España; la única fuente de estado es de abril de 2024."
   - "launch: sin fecha de apertura de pedidos dada como tal."
   - "segment: motor.es usa «descapotable», que no está en la lista de RF-11."
   - "WLTP: el IDAE tiene también una homologación de 541 km sin fecha."
-  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."

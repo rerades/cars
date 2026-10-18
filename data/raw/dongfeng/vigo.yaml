@@ -1,0 +1,29 @@
+# Researcher — Dongfeng Vigo. Fuentes: dongfeng-es (T1), idae-es (T2), motor16-es (T3). Consultado 2026-10-18.
+brand: dongfeng
+brand_name: Dongfeng
+model: Vigo
+status: {value: on_sale, note: "la prensa dice que los pedidos están abiertos (2026-08-26); la ficha de la marca ofrece lista de espera, por eso needs_review", source_id: motor16-es, url: "https://www.motor16.com/electrico/dongfeng-vigo-electrico-garantia-10-anos/", retrieved: 2026-10-18, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Vigo
+    battery_kwh: {value: 51.87, basis: unknown, note: "«hasta 51,87 kWh»; el IDAE da 51,9 kWh en VIGO MY27 E2+ (id 611822)", source_id: dongfeng-es, url: "https://www.dongfeng-auto.es/modelos/dongfeng-vigo", retrieved: 2026-10-18, tier: T1}
+    wltp_km: {value: 340, note: "la web dice «hasta 340 km» WLTP; el IDAE homologa 348 km para VIGO MY27 E2 y E2+", source_id: dongfeng-es, url: "https://www.dongfeng-auto.es/modelos/dongfeng-vigo", retrieved: 2026-10-18, tier: T1}
+    power_kw: {value: 120, note: "IDAE, id 611822 (VIGO MY27 E2+, 51,9 kWh); la otra fila, E2, también 120 kW", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    price: null
+images:
+  - file: data/images/dongfeng/vigo/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Dongfeng_Vigo_front_Pozna%C5%84_Motor_Show_2026.jpg/1280px-Dongfeng_Vigo_front_Pozna%C5%84_Motor_Show_2026.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Dongfeng_Vigo_front_Poznań_Motor_Show_2026.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Peżot, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "status: la ficha de la marca invita a «lista de espera» y no da fecha de pedidos; solo un medio (T3) dice que los pedidos están abiertos."
+  - "segment: la web dice «SUV totalmente eléctrico» con líneas compactas; no es el término literal «SUV compacto»: null."
+  - "price: la marca publica 29.990 € «al contado» con una oferta de financiación (Open Bank, válida hasta 31/10/26) cuyas cifras se contradicen entre cabecera y nota legal (precio total a plazos 28.607,63 € vs 28.391,57 €; TAE 8,72 % vs 8,86 %); Caetano da «desde 31.990 €». Sin PVP limpio: null."
+  - "Versiones IDAE: VIGO MY27 E2 (44,9 kWh) y E2+ (51,9 kWh) con 348 km; la marca solo ofrece una versión, que casa con la batería de 51,87 kWh (E2+). Sin fechas en las filas del IDAE."
+  - "drivetrain, dc_max_kw: la web no publica potencia de carga ni tracción (solo 30-80 % en 18 min)."

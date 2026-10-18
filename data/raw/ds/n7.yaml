@@ -25,7 +25,14 @@ versions:
     power_kw: {value: 257, note: "IDAE id 610628; la fila Étoile 610624 da 169 kW y motor1/el medio (T3) publican 375 CV (276 kW): sin resolver", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     drivetrain: {value: awd, note: "«AWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/ds/n7/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/DS_N%C2%B07.jpg/1280px-DS_N%C2%B07.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:DS_N%C2%B07.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "DS Automobiles SK, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "Web oficial dsautomobiles.es devuelve 403: precios y versiones vigentes sin confirmar con T1. Los medios (T3) dan precios desde 49.400 €, que no se guardan."
   - "launch: motor1-es (T3, «Actualizado: 20 may», sin año) dice que los pedidos aún no estaban abiertos y que se abrirían en días; ninguna fuente da la fecha de apertura."

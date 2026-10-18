@@ -1,0 +1,95 @@
+{
+  "number": 490,
+  "title": "researcher: Marca Voyah (carpeta y brand: voyah). Fuentes en el registro",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Marca Voyah (carpeta y brand: voyah). Fuentes en el registro y modelos BEV en data/raw/voyah/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3) qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts. Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml.\n- Run: `20261018-060007-6811a1` · 0.319 USD (estimated) · 29 turns\n- Agent: `researcher` · model `sonnet` · may only write to [\"data/\",\"docs/bitacora/\"]\n- Evals: 4 checks passed\n\nWhat the agent says:\n\n```\n_review: true`:** en Free y Dream, por esas dudas de versiones y batería.\n\nBitácora actualizada con un hito.\n\nRESULTADO: ok\n\nSources:\n- [Voyah España](https://www.voyah.es)\n- [Voyah Free](https://www.voyah.es/vehiculos/voyah-free)\n- [Voyah Dream](https://www.voyah.es/vehiculos/voyah-dream)\n- [IDAE](https://coches.idae.es/base-datos/marca-y-modelo)\n- [Diariomotor, Voyah Free](https://www.diariomotor.com/coche/voyah-free/)\n- [Diariomotor, Voyah Dream](https://www.diariomotor.com/coche/voyah-dream)\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/researcher/20261018-060007-6811a1",
+  "baseRefName": "main",
+  "headRefOid": "7dfd84949ff80b5270f52b17f25bb7911c2e452b",
+  "baseRefOid": "4527439e9a2c205ebfecaebe73b06772b5852d5d",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-18T04:02:11Z",
+  "url": "https://github.com/rerades/cars/pull/490",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "data/images/voyah/dream/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/voyah/free/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/voyah/dream.yaml",
+      "additions": 28,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/voyah/free.yaml",
+      "additions": 28,
+      "deletions": 0
+    },
+    {
+      "path": "data/sources/voyah-es.yaml",
+      "additions": 20,
+      "deletions": 0
+    },
+    {
+      "path": "docs/bitacora/2026-10/2026-10-18T0601-1d209fda.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 77,
+  "deletions": 0,
+  "changedFiles": 6,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39095696524/job/117581825932",
+      "startedAt": "2026-10-18T04:03:53Z",
+      "completedAt": "2026-10-18T04:05:15Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39095696524/job/117581554719",
+      "startedAt": "2026-10-18T04:02:17Z",
+      "completedAt": "2026-10-18T04:02:39Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39095696524/job/117581554624",
+      "startedAt": "2026-10-18T04:02:17Z",
+      "completedAt": "2026-10-18T04:03:51Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39095696524/job/117581554545",
+      "startedAt": "2026-10-18T04:02:17Z",
+      "completedAt": "2026-10-18T04:02:24Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

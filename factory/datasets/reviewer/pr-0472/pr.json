@@ -1,0 +1,75 @@
+{
+  "number": 472,
+  "title": "developer: RNF-2 de todos los PRD (LCP < 2,5 s en móvil 4G), que hoy no",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: RNF-2 de todos los PRD (LCP < 2,5 s en móvil 4G), que hoy no mide ninguna prueba. Añade web/e2e/lcp.spec.ts con el Playwright que ya está instalado, sin dependencias nuevas (nada de Lighthouse). Debe correr sobre el build servido por astro preview, como las pruebas de a11y, y así entra en el job a11y de la CI, que informa pero no bloquea. Por cada página: viewport móvil (412 x 823), una sesión CDP con Network.emulateNetworkConditions como el «Slow 4G» de Lighthouse (150 ms de RTT, 1,6 Mbit/s de bajada y 750 kbit/s de subida) y Emulation.setCPUThrottlingRate 4. Lee el LCP con un PerformanceObserver de largest-contentful-paint (buffered: true) y comprueba que es menor que 2500 ms. Mide la portada (/), /coches/, /coches/ con una query string de filtros (ADR-0015 pide medir también una URL con filtros), una ficha de modelo que tenga imagen y /comparar/ con tres versiones en ?v=. Toma las rutas de los datos del build, no de una lista fija que se quede vieja. Escribe el LCP medido en la salida de la prueba para poder seguirlo. Los rankings (PRD-005) aún no existen: deja escrito en un comentario de la prueba que su página, con y sin filtros, se añade con la historia #378. En la bitácora, explica la elección de throttling.\n- Run: `20261018-020006-80460d` · 0.1758 USD (estimated) · 23 turns\n- Agent: `developer` · model `sonnet` · may only write to [\"web/\",\"docs/bitacora/\"]\n- Evals: 1 checks passed\n\nWhat the agent says:\n\n```\nhrottling.\n- **Dependencias:** ninguna nueva.\n\nDos cosas que debes saber:\n- **Filtro `?precio_max=60000`:** lo elegí yo porque `precio_max` es el parámetro que ya usa la prueba de a11y. No lo comprobé contra el PRD ni contra ADR-0015.\n- **CI:** solo confirmé que corre con `playwright test lcp.spec.ts`. No comprobé que el job `a11y` de la CI lo recoja ni que quede como informativo sin bloquear. Eso depende de su configuración, y no la toqué porque la raíz y la factoría no son mías.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/developer/20261018-020006-80460d",
+  "baseRefName": "main",
+  "headRefOid": "bbccf2794b710c271e54d622eeea81e8df9f0c37",
+  "baseRefOid": "6373ec1e0a8434d1797876fbc7c846f755701815",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-18T00:01:29Z",
+  "url": "https://github.com/rerades/cars/pull/472",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "docs/bitacora/2026-10/2026-10-18T0201-62ea5d8e.md",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "path": "web/e2e/lcp.spec.ts",
+      "additions": 95,
+      "deletions": 0
+    }
+  ],
+  "additions": 96,
+  "deletions": 0,
+  "changedFiles": 2,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39081225011/job/117538664481",
+      "startedAt": "2026-10-18T00:03:09Z",
+      "completedAt": "2026-10-18T00:04:31Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39081225011/job/117538374317",
+      "startedAt": "2026-10-18T00:01:36Z",
+      "completedAt": "2026-10-18T00:03:07Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39081225011/job/117538374261",
+      "startedAt": "2026-10-18T00:01:35Z",
+      "completedAt": "2026-10-18T00:01:55Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39081225011/job/117538374136",
+      "startedAt": "2026-10-18T00:01:35Z",
+      "completedAt": "2026-10-18T00:01:40Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

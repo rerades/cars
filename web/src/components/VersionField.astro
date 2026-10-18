@@ -1,16 +1,19 @@
 ---
 import type { VersionField } from "../lib/version-fields.ts";
 import { t } from "../lib/i18n.ts";
-import SourceDate from "./SourceDate.astro";
+import type { NoteSource } from "../lib/notes.ts";
+import SourceMark from "./SourceMark.astro";
 
 /**
  * Value of one technical field of a version (RF-5, RF-6, RF-8, RF-9). Without data: «por confirmar»,
- * no source (there is nothing to cite). No ids: the table and the blocks both render this.
+ * no source (there is nothing to cite). With data: its `note` and the mark «[n]» to «Fuentes».
+ * No ids: the table and the blocks both render this.
  */
 interface Props {
   field: VersionField;
+  numberOf: (s: NoteSource) => number;
 }
-const { field } = Astro.props;
+const { field, numberOf } = Astro.props;
 ---
 
 {
@@ -20,9 +23,10 @@ const { field } = Astro.props;
     </p>
   ) : (
     <div class="flex flex-col gap-1" data-field-value={field.key}>
-      <p class="text-body text-ink-900">{field.text}</p>
+      <p class="text-body text-ink-900">
+        {field.text} <SourceMark n={numberOf(field.datum)} unofficial={field.datum.tier !== "T1"} />
+      </p>
       {field.datum.note && <p class="text-small text-ink-600">{field.datum.note}</p>}
-      <SourceDate source={field.datum} />
     </div>
   )
 }

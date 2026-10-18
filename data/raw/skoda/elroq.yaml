@@ -23,10 +23,16 @@ versions:
     battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
     price: null
-images: []
+images:
+  - file: data/images/skoda/elroq/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/%C5%A0koda_Elroq_DSC_9262.jpg/1280px-%C5%A0koda_Elroq_DSC_9262.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Škoda_Elroq_DSC_9262.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "Precios: la ficha solo da «Precio sujeto a financiación desde» (Urban 26.550 €, Selection 27.850 €, Sportline 35.050 €, RS 40.600 €), que incluye la subvención Plan Auto+ de 4.050-4.500 €; no es PVP sin ayudas y no se guarda. No se ha leído un PVP sin ayudas ni un «PVP recomendado financiando» para el Elroq."
   - "WLTP por versión, tracción y kW de carga DC no están en la ficha; el IDAE tiene homologaciones MY27 (p. ej. Selection 82 kWh 210 kW: 574 km) pero no se ha cruzado con los nombres comerciales. wltp_km queda sin rellenar en todas las versiones."
   - "launch: la ficha no da fecha de inicio de venta en España."
   - "Sportline: batería y potencia sin guardar (revisión 2026-10-16). La ficha sigue dando datos incoherentes (2026-10-17): la nota dice «ELROQ SPORTLINE 82 kWh - 210kW» y la oferta de financiación menciona 140 kW (190 CV) y 61 kWh. Se dejan sin valor hasta que la ficha sea coherente."
-  - "Imágenes: no se han buscado en Wikimedia Commons en esta ejecución."

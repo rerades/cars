@@ -1,0 +1,14 @@
+case_id: pr-0448
+pr: 448
+reviewed_sha: 7cd5e6611b1d3b38c28a327c56d01161b8b0abc5
+base_sha: ade1c64a8fa74b9e11f0820295799dba355a8005
+issue: null
+synthetic: false
+confirmed: true
+expected:
+  label: review:needs-human
+  findings:
+    - RNF-2 (LCP) sigue sin historia ni CA
+    - "CA-18 dice «fuente oficial» y el diseño «verificable»: decidir si cambia el PRD o el diseño no es de un agente"
+  ca: []
+  not_findings: []

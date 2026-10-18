@@ -1,0 +1,72 @@
+{
+  "number": 142,
+  "title": "researcher: Marca Opel. Fuentes en el registro y modelos en data/raw/ope",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Marca Opel. Fuentes en el registro y modelos en data/raw/opel/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo. Rellena segment (lista de RF-11) y launch (inicio de venta en España) con su fuente si la hay, y busca imágenes primero en Wikimedia Commons (fuente wikimedia-commons, ya en el registro), solo con licencia que permita el uso comercial, con license y attribution.\n- Run: `20261003-023005-09c8f3` · 0.4258 USD (estimated) · 31 turns\n- Agent: `researcher` · model `sonnet` · may only write to [\"data/\",\"docs/bitacora/\"]\n- Evals: 4 checks passed\n\nWhat the agent says:\n\n```\n registrado la entrada en la bitácora.\n\nRESULTADO: ok\n\nSources:\n- [ofertas.opel.es/particulares](https://ofertas.opel.es/particulares)\n- [Wikimedia Commons: Corsa-e 2023](https://commons.wikimedia.org/wiki/File:2023_Opel_Corsa-e_1X7A2474.jpg)\n- [Wikimedia Commons: Mokka Electric](https://commons.wikimedia.org/wiki/File:Opel_Mokka_Electric_Edition_(B,_Facelift)_–_f_12102025.jpg)\n- [Wikimedia Commons: Frontera Electric](https://commons.wikimedia.org/wiki/File:Opel_Frontera_C_Electric_DSC_9331.jpg)\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/researcher/20261003-023005-09c8f3",
+  "baseRefName": "main",
+  "headRefOid": "7dab7ff59ad4039c68ff0b8f7e46f39e83d369a5",
+  "baseRefOid": "1a8b8a0f400d24c233a43a0ea45ecd434c05e3ae",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-03T00:32:03Z",
+  "url": "https://github.com/rerades/cars/pull/142",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "data/raw/opel/corsa-electric.yaml",
+      "additions": 23,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/opel/frontera-electric.yaml",
+      "additions": 21,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/opel/mokka-electric.yaml",
+      "additions": 21,
+      "deletions": 0
+    },
+    {
+      "path": "data/sources/registry.yaml",
+      "additions": 40,
+      "deletions": 0
+    },
+    {
+      "path": "docs/bitacora/2026-10.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 106,
+  "deletions": 0,
+  "changedFiles": 5,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/37082474299/job/111085768272",
+      "startedAt": "2026-10-03T00:32:08Z",
+      "completedAt": "2026-10-03T00:32:29Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/37082474299/job/111085767995",
+      "startedAt": "2026-10-03T00:32:09Z",
+      "completedAt": "2026-10-03T00:32:34Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

@@ -10,7 +10,10 @@ import { relatedModels } from "../../../lib/related.ts";
 import ModelCard from "../../../components/ModelCard.astro";
 import VersionPrice from "../../../components/VersionPrice.astro";
 import VersionField from "../../../components/VersionField.astro";
+import SourceMark from "../../../components/SourceMark.astro";
 import { versionFields } from "../../../lib/version-fields.ts";
+import { groupNotes } from "../../../lib/notes.ts";
+import { sourceName } from "../../../lib/format.ts";
 
 /**
  * Model page (PRD-002, docs/design/ficha-modelo.md). This story: URL, title and header (RF-1, RF-2,
@@ -21,12 +24,15 @@ export function getStaticPaths() {
   return models.map((model) => {
     const [marca, file] = model.file.replace(/\.yaml$/, "").split("/");
     const related = relatedModels(model, models).map((m) => cardView(m));
-    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, images: model.images, specs: model.specs, related } };
+    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, status: model.status, launch: model.launch, segment: model.segment, images: model.images, specs: model.specs, related } };
   });
 }
 
-const { card, versions, brandSlug, brandUrl, images, specs, related } = Astro.props as {
+const { card, versions, brandSlug, brandUrl, status, launch, segment, images, specs, related } = Astro.props as {
   card: CardView;
+  status: Sourced;
+  launch: Sourced | null;
+  segment: Sourced | null;
   versions: Version[];
   brandSlug: string;
   brandUrl: string;
@@ -55,9 +61,9 @@ const [mainImage, ...rest] = images.slice(0, 6);
 
 // "Datos del modelo" (RF-7): only the rows `specs` carries, in the order of the design table.
 const sep = ` ${t("ficha.lista.separador")} `;
-const rows: { key: string; label: string; text: string; note?: string }[] = [];
+const rows: { key: string; label: string; text: string; note?: string; datum: Sourced }[] = [];
 const addRow = <T,>(key: keyof Specs, label: MessageKey, value: Sourced<T> | undefined, fmt: (v: T) => string) => {
-  if (value) rows.push({ key, label: t(label), text: fmt(value.value), note: value.note });
+  if (value) rows.push({ key, label: t(label), text: fmt(value.value), note: value.note, datum: value });
 };
 addRow("wltp_max_km", "ficha.modelo.autonomia", specs.wltp_max_km, (n) => t("ficha.unidad.km", { n }));
 addRow("power_max_kw", "ficha.modelo.potencia", specs.power_max_kw, (n) => t("ficha.unidad.kw", { n }));
@@ -70,6 +76,22 @@ addRow("drivetrains", "ficha.modelo.tracciones", specs.drivetrains, (l) =>
   l.map((d) => t(`traccion.${d}` as MessageKey)).join(sep),
 );
 const modelRows = rows;
+
+// Source notes (RF-9): numbered by first appearance in the fixed walk header -> versions (sorted,
+// fields in table order, price excluded: it shows its own source) -> model data. Table and blocks share them.
+const headerData: Sourced[] = [];
+if (card.statusLabel) headerData.push(status);
+if (card.statusKind === "soon" && launch) headerData.push(launch);
+if (segment) headerData.push(segment);
+const { notes, numberOf } = groupNotes([
+  ...headerData,
+  ...versions.flatMap((v) => fieldsOf(v).map((f) => f.datum)),
+  ...modelRows.map((r) => r.datum),
+]);
+const markOf = (s: Sourced) => ({ n: numberOf(s), unofficial: s.tier !== "T1" });
+const statusMark = card.statusLabel ? markOf(status) : null;
+const launchMark = card.statusKind === "soon" && launch ? markOf(launch) : null;
+const segmentMark = segment ? markOf(segment) : null;
 const heading = t("ficha.titulo", { marca: card.brand, modelo: card.model });
 const site = t("sitio.nombre");
 const documentTitle = site ? t("pagina.tituloDocumento", { titulo: heading, sitio: site }) : heading;
@@ -122,6 +144,10 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
                       ]}
                       data-status={card.statusKind}>{card.statusLabel}</span
                     >
+                    {statusMark && <SourceMark {...statusMark} />}
+                    {launchMark && launchMark.n !== statusMark?.n && <SourceMark {...launchMark} />}
+                    {status.note && <p class="text-small text-ink-600" data-note="status">{status.note}</p>}
+                    {launchMark && launch?.note && <p class="text-small text-ink-600" data-note="launch">{launch.note}</p>}
                   </dd>
                 </div>
               )
@@ -130,6 +156,8 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
               <dt class:list={["text-body text-ink-600", !card.hasSegment && "sr-only"]}>{t("ficha.segmento.rotulo")}</dt>
               <dd class:list={["text-body", card.hasSegment ? "text-ink-900" : "text-ink-600"]} data-field="segment">
                 {card.segmentLabel}
+                {segmentMark && <SourceMark {...segmentMark} />}
+                {segment?.note && <p class="text-small text-ink-600" data-note="segment">{segment.note}</p>}
               </dd>
             </div>
           </dl>
@@ -140,6 +168,17 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
             class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
             >{t("ficha.webMarca")}<span class="sr-only"> {t("ficha.webMarcaSr", { marca: card.brand })}</span></a
           >
+          {
+            card.compare && (
+              <p>
+                <a
+                  href={card.compare.href}
+                  data-compare
+                  class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+                >{card.compare.label}<span class="sr-only"> {card.compare.srLabel}</span></a>
+              </p>
+            )
+          }
         </div>
         <div class="lg:col-span-7" data-main-image>
           {
@@ -215,7 +254,7 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
                           </th>
                           {chunk.items.map((version) => (
                             <td class="bg-surface p-3 align-top [overflow-wrap:anywhere]">
-                              <VersionField field={fieldsOf(version)[i]} />
+                              <VersionField field={fieldsOf(version)[i]} numberOf={numberOf} />
                             </td>
                           ))}
                         </tr>
@@ -242,7 +281,7 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
                         <div>
                           <dt class="text-small text-ink-600">{field.label}</dt>
                           <dd class="text-body text-ink-900">
-                            <VersionField field={field} />
+                            <VersionField field={field} numberOf={numberOf} />
                           </dd>
                         </div>
                       ))}
@@ -292,7 +331,9 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
               {modelRows.map((row) => (
                 <div data-spec={row.key}>
                   <dt class="text-small text-ink-600">{row.label}</dt>
-                  <dd class="text-body text-ink-900">{row.text}</dd>
+                  <dd class="text-body text-ink-900">
+                    {row.text} <SourceMark {...markOf(row.datum)} />
+                  </dd>
                   {row.note && <dd class="text-small text-ink-600">{row.note}</dd>}
                 </div>
               ))}
@@ -327,6 +368,25 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
                 <ModelCard card={r} href={`/marcas/${r.key}/`} />
               ))}
             </ul>
+          </section>
+        )
+      }
+
+      {
+        notes.length > 0 && (
+          <section aria-labelledby="fuentes" class="mt-12" data-fuentes>
+            <h2 id="fuentes" class="text-section text-ink-900">{t("ficha.fuentes.titulo")}</h2>
+            <p class="mt-1 text-small text-ink-600">{t("ficha.fuentes.entrada")}</p>
+            <ol class="mt-4 flex flex-col gap-3">
+              {notes.map((note) => (
+                <li id={`fuente-${note.n}`} tabindex="-1" class="text-small text-ink-900 [overflow-wrap:anywhere]" data-fuente={note.n}>
+                  {t("ficha.fuentes.item", { fuente: sourceName(note.url) ?? note.url, fecha: note.date })}
+                  {note.unofficial && <> {t("ficha.fuentes.noOficial")}</>}
+                  <br />
+                  <a href={note.url} rel="noopener" class="text-brand-600 underline hover:text-brand-800">{note.url}</a>
+                </li>
+              ))}
+            </ol>
           </section>
         )
       }

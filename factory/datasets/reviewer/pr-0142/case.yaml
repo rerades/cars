@@ -1,0 +1,15 @@
+case_id: pr-0142
+pr: 142
+reviewed_sha: 7dab7ff59ad4039c68ff0b8f7e46f39e83d369a5
+base_sha: 1a8b8a0f400d24c233a43a0ea45ecd434c05e3ae
+issue: null
+synthetic: false
+confirmed: true
+expected:
+  label: review:needs-human
+  findings:
+    - hay que comprobar en Commons la licencia, el autor y el fichero de las tres imágenes
+    - hay que confirmar en ofertas.opel.es el estado de los tres modelos, porque esa fuente no se pudo leer
+  ca: []
+  not_findings:
+    - dejar segment y launch en null con la razón en open_questions es lo correcto (ADR-0001)

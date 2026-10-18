@@ -27,7 +27,14 @@ versions:
     wltp_km: {value: 242, note: "IDAE id 603324", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     power_kw: {value: 113, note: "IDAE id 603324; publicado: 154 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/abarth/500e/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Abarth_500e_IMG_7996.jpg/1280px-Abarth_500e_IMG_7996.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Abarth_500e_IMG_7996.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "abarth.es devuelve 403 (home y robots.txt): sin precios T1; price: null en todas las versiones."
   - "Versiones y estado salen de un artículo de motor.es de 2023-05-19; no se ha podido confirmar que se sigan vendiendo hoy en España: needs_review."

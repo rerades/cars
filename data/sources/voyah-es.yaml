@@ -1,0 +1,20 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: voyah-es
+brand: Voyah
+tier: T1
+market: ES
+kind: [ specs, announcements ]
+urls:
+  home: https://www.voyah.es
+  models: https://www.voyah.es/vehiculos
+  free: https://www.voyah.es/vehiculos/voyah-free
+  dream: https://www.voyah.es/vehiculos/voyah-dream
+  legal: https://www.voyah.es/avisos-legales
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-18): voyah.es responde, muestra el aviso legal de Caetano 1 SL (importador en España) y la red
+  comercial. robots.txt: "User-agent: *  Disallow: /_nuxt" (las fichas de modelo no están bloqueadas). Sitemap con 14 URL,
+  sin sala de prensa, lista de precios ni configurador. Las fichas de Free y Dream dan potencia (CV), tracción y
+  autonomía, pero ni versiones, ni batería, ni precio, ni fecha de venta. Gama en España: Free y Dream, ambos BEV.
+last_verified: 2026-10-18
+status: active

@@ -1,0 +1,148 @@
+diff --git a/data/images/mini/cooper/frontal.jpg b/data/images/mini/cooper/frontal.jpg
+new file mode 100644
+index 0000000..447fb70
+Binary files /dev/null and b/data/images/mini/cooper/frontal.jpg differ
+diff --git a/data/raw/mini/aceman.yaml b/data/raw/mini/aceman.yaml
+new file mode 100644
+index 0000000..81e5c56
+--- /dev/null
++++ b/data/raw/mini/aceman.yaml
+@@ -0,0 +1,31 @@
++# Researcher — MINI Aceman. Fuentes: idae-es (T2), hibridosyelectricos-es (T3). Consultado 2026-10-14.
++brand: mini
++brand_name: MINI
++model: Aceman
++status: {value: on_sale, note: "el artículo (21/06/2024) dice que se puede reservar en España; no confirmado hoy con fuente T1", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mini-aceman-se-estrena-en-espana-37250-euros-con-hasta-218-cv-400-kilometros-autonomia_74703_102.html", retrieved: 2026-10-14, tier: T3}
++launch: null
++segment: null
++needs_review: true
++versions:
++  - name: MINI Aceman E
++    battery_kwh: {value: 38.5, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    wltp_km: {value: 310, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    power_kw: {value: 135, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    price: null
++  - name: MINI Aceman SE
++    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    wltp_km: {value: 406, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    power_kw: {value: 160, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    price: null
++  - name: MINI John Cooper Works Aceman E
++    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    wltp_km: {value: 391, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    power_kw: {value: 190, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    price: null
++images: []
++open_questions:
++  - "mini.es no se pudo leer (timeouts): sin precios (price: null) ni confirmación T1 de versiones a la venta hoy."
++  - "Versiones y datos del IDAE (ids 609151, 609152, 609153). Los medios dan otras cifras (Aceman E 42,5 kWh; SE 54,2 kWh, 405 km): no coinciden con el IDAE."
++  - "launch: el artículo T3 es de 21/06/2024 y solo dice que se puede reservar; no da una fecha de inicio de venta; null."
++  - "segment: hibridosyelectricos-es lo llama «SUV compacto» y Autopista «SUV urbano»/«SUV pequeño»; fuentes discrepantes, null."
++  - "Imágenes: sin buscar ficheros de Commons para este modelo en esta ejecución."
+diff --git a/data/raw/mini/cooper.yaml b/data/raw/mini/cooper.yaml
+new file mode 100644
+index 0000000..55ed641
+--- /dev/null
++++ b/data/raw/mini/cooper.yaml
+@@ -0,0 +1,38 @@
++# Researcher — MINI Cooper eléctrico. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-14.
++brand: mini
++brand_name: MINI
++model: Cooper
++status: {value: on_sale, note: "no confirmado con fuente actual: motor.es (2023) habla de configurador abierto; mini.es ilegible", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mini-electrico-202398021.html", retrieved: 2026-10-14, tier: T3}
++launch: null
++segment: null
++needs_review: true
++versions:
++  - name: MINI Cooper E
++    battery_kwh: {value: 36.6, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    wltp_km: {value: 300, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    power_kw: {value: 135, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    price: null
++  - name: MINI Cooper SE
++    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    wltp_km: {value: 400, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    power_kw: {value: 160, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    price: null
++  - name: MINI John Cooper Works E
++    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    wltp_km: {value: 403, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    power_kw: {value: 190, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    price: null
++images:
++  - file: data/images/mini/cooper/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/BMW_MINI_COOPER_SE_%28J01%29_front.jpg/1280px-BMW_MINI_COOPER_SE_%28J01%29_front.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:BMW_MINI_COOPER_SE_(J01)_front.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-14
++    license: CC-BY-SA-4.0
++    attribution: "Tokumeigakarinoaoshima, CC BY-SA 4.0, via Wikimedia Commons"
++open_questions:
++  - "mini.es no se pudo leer (timeouts): sin precios (price: null) ni confirmación T1 de versiones a la venta hoy."
++  - "Versiones y datos del IDAE (ids 609148, 609149, 609150, generación J01). Las webs de medios (Motor16, Motor1) dan otras cifras de batería (40,7 kWh en la E; 54,2 kWh en la SE) y 305/402 km: no coinciden con el IDAE; prevalece la fuente registrada T2 leída."
++  - "launch: motor.es habla de configurador abierto en octubre de 2023, pero no se ha leído una fecha de inicio de venta fiable; null."
++  - "segment: ninguna fuente leída da un término de la lista de RF-11 para el Cooper; null."
++  - "Descartada la generación anterior (F56, Cooper SE 03/2021, id 609162)."
+diff --git a/data/raw/mini/countryman.yaml b/data/raw/mini/countryman.yaml
+new file mode 100644
+index 0000000..eb8253c
+--- /dev/null
++++ b/data/raw/mini/countryman.yaml
+@@ -0,0 +1,27 @@
++# Researcher — MINI Countryman eléctrico. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-14.
++brand: mini
++brand_name: MINI
++model: Countryman
++status: {value: on_sale, note: "el artículo (09/02/2024) dice que el configurador está abierto; no confirmado hoy con fuente T1", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mini-countryman-electrico-2024100282.html", retrieved: 2026-10-14, tier: T3}
++launch: null
++segment: null
++needs_review: true
++versions:
++  - name: MINI Countryman E
++    battery_kwh: {value: 64.6, basis: unknown, note: "IDAE id 609158 (03/2024); otra homologación id 609160 (03/2026): 65,2 kWh, 501 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    wltp_km: {value: 462, note: "IDAE id 609158 (03/2024); otra homologación id 609160 (03/2026): 501 km. Se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    price: null
++  - name: MINI Countryman SE
++    battery_kwh: {value: 64.6, basis: unknown, note: "IDAE id 609159 (03/2024); otra homologación id 609161 (03/2026): 65 kWh, 467 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    wltp_km: {value: 432, note: "IDAE id 609159 (03/2024); otra homologación id 609161 (03/2026): 467 km. Se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    power_kw: {value: 230, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
++    price: null
++images: []
++open_questions:
++  - "mini.es no se pudo leer (timeouts): sin precios (price: null) ni confirmación T1 de versiones a la venta hoy."
++  - "Hay homologaciones 03/2026 con más autonomía (E 501 km, SE 467 km); sin fuente que diga cuál se vende hoy, se usa la de menor wltp_km."
++  - "launch: motor.es (09/02/2024) no da fecha de inicio de venta como tal; null."
++  - "segment: motor.es lo llama «SUV», que no es un término de la lista de RF-11; null."
++  - "Tracción (E delantera, SE ALL4 según motor.es) no registrada: se omite al no ser dato de fuente T1/T2."
++  - "Imágenes: sin buscar ficheros de Commons para este modelo en esta ejecución."
+diff --git a/data/sources/mini-es.yaml b/data/sources/mini-es.yaml
+new file mode 100644
+index 0000000..69e89f3
+--- /dev/null
++++ b/data/sources/mini-es.yaml
+@@ -0,0 +1,17 @@
++# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
++id: mini-es
++brand: MINI
++tier: T1
++market: ES
++kind: [ prices, specs, announcements ]
++urls:
++  home: https://www.mini.es/es_ES/home.html
++  models: https://www.mini.es/es_ES/home/range/all-electric-mini-cooper.html # también otras páginas de gama del mismo dominio
++image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
++notes: >
++  Verificación incompleta (2026-10-14): mini.es es el dominio oficial de MINI España (aparece como resultado de búsqueda
++  de la gama eléctrica), pero las lecturas automáticas de /robots.txt y de las páginas de gama dieron timeout (no se evita
++  ninguna protección). No se han podido leer versiones, precios ni robots.txt. Por eso ningún precio de data/raw/mini/ sale
++  de esta fuente. Pendiente de reintentar.
++last_verified: 2026-10-14
++status: active
+diff --git a/docs/bitacora/2026-10/2026-10-14T0603-9fbd7e9e.md b/docs/bitacora/2026-10/2026-10-14T0603-9fbd7e9e.md
+new file mode 100644
+index 0000000..a24ced7
+--- /dev/null
++++ b/docs/bitacora/2026-10/2026-10-14T0603-9fbd7e9e.md
+@@ -0,0 +1 @@
++- **2026-10-14 06:03** · 📝 Nota — Researcher, MINI: alta de mini-es (T1, mini.es no legible por timeouts) y modelos cooper, aceman y countryman en data/raw/mini/ con datos del IDAE (T2), price null, needs_review true; status on_sale apoyado en medios T3 antiguos. Imagen solo del Cooper (Commons, CC BY-SA 4.0). Sin validar con validate-data.ts (no permitido en la ejecución). (ADR-0001, ADR-0008)

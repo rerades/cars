@@ -1,0 +1,25 @@
+case_id: pr-0452
+pr: 452
+reviewed_sha: 0f45d36498560ea86ae83bbfcad0b69ba21da116
+base_sha: 1c89b23646951580fbd602677d6545a0354ca4a0
+issue: 318
+synthetic: false
+confirmed: true
+expected:
+  label: review:changes
+  findings:
+    - el script que monta la tabla en el navegador (ComparisonTable.astro) no tiene ninguna prueba que ejecute su comportamiento; solo regex sobre el bundle
+  ca:
+    - id: CA-1
+      covered: false
+    - id: CA-3
+      covered: false
+    - id: CA-4
+      covered: false
+    - id: CA-6
+      covered: false
+    - id: CA-15
+      covered: false
+    - id: CA-17
+      covered: false
+  not_findings: []

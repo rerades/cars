@@ -7,7 +7,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "test": "node --test \"factory/tests/*.test.ts\"",
+    "test": "node --test \"factory/tests/*.test.ts\" \"onboarding/*.test.ts\"",
     "typecheck": "tsc"
   },
   "dependencies": {

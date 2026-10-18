@@ -1,0 +1,170 @@
+{
+  "number": 478,
+  "title": "researcher: Imágenes para los modelos de data/raw/ que siguen con images",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Imágenes para los modelos de data/raw/ que siguen con images: []: maserati/grancabrio.yaml, lynk-co/02.yaml, skoda/elroq.yaml, skoda/enyaq-coupe.yaml, skoda/enyaq.yaml, skoda/epiq.yaml, skoda/peaq.yaml, smart/hashtag-2.yaml, smart/hashtag-3.yaml, zeekr/7gt.yaml y zeekr/x.yaml. Solo de Wikimedia Commons con licencia que permita el uso comercial, del modelo y la generación correctos (el Enyaq y el Enyaq Coupé de 2025 tienen el frontal nuevo; un prototipo o concept no vale para un modelo de serie), descargadas con node factory/fetch-image.ts. Si no hay ninguna foto válida de un modelo, déjalo con images: [] y anótalo en la bitácora. No toques nada más de esos ficheros.\n- Run: `20261018-030007-796cab` · 0.4934 USD (estimated) · 68 turns\n- Agent: `researcher` · model `sonnet` · may only write to [\"data/\",\"docs/bitacora/\"]\n- Evals: 4 checks passed\n\nWhat the agent says:\n\n```\no lo he confirmado con ninguna fuente de la marca, y lo dejé anotado en `open_questions`.\n\n**Sin imagen:** `smart/hashtag-2` sigue con `images: []`. En Commons solo hay #1 y #3, y el fichero describe un coche pequeño de 35,8 kWh que no coincide con ninguno de ellos. Lo anoté en la bitácora, con una entrada `hito` que lista los 10 modelos con imagen.\n\nNo toqué `needs_review` ni ningún otro dato de esos ficheros. Los modelos de Škoda y el Maserati ya estaban en `needs_review: true`.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/researcher/20261018-030007-796cab",
+  "baseRefName": "main",
+  "headRefOid": "aa6e512d9ef9c6a933affe4b72119e94265fc2f2",
+  "baseRefOid": "bf70220c9dfd8b844cd60fa32c4e74fc0197f431",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-18T01:03:12Z",
+  "url": "https://github.com/rerades/cars/pull/478",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "data/images/lynk-co/02/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/maserati/grancabrio/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/skoda/elroq/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/skoda/enyaq-coupe/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/skoda/enyaq/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/skoda/epiq/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/skoda/peaq/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/smart/hashtag-3/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/zeekr/7gt/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/zeekr/x/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/lynk-co/02.yaml",
+      "additions": 8,
+      "deletions": 2
+    },
+    {
+      "path": "data/raw/maserati/grancabrio.yaml",
+      "additions": 8,
+      "deletions": 2
+    },
+    {
+      "path": "data/raw/skoda/elroq.yaml",
+      "additions": 8,
+      "deletions": 2
+    },
+    {
+      "path": "data/raw/skoda/enyaq-coupe.yaml",
+      "additions": 8,
+      "deletions": 2
+    },
+    {
+      "path": "data/raw/skoda/enyaq.yaml",
+      "additions": 8,
+      "deletions": 2
+    },
+    {
+      "path": "data/raw/skoda/epiq.yaml",
+      "additions": 8,
+      "deletions": 2
+    },
+    {
+      "path": "data/raw/skoda/peaq.yaml",
+      "additions": 8,
+      "deletions": 2
+    },
+    {
+      "path": "data/raw/smart/hashtag-3.yaml",
+      "additions": 8,
+      "deletions": 2
+    },
+    {
+      "path": "data/raw/zeekr/7gt.yaml",
+      "additions": 9,
+      "deletions": 2
+    },
+    {
+      "path": "data/raw/zeekr/x.yaml",
+      "additions": 8,
+      "deletions": 2
+    },
+    {
+      "path": "docs/bitacora/2026-10/2026-10-18T0302-0575e63f.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 82,
+  "deletions": 20,
+  "changedFiles": 21,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39085052728/job/117549922656",
+      "startedAt": "2026-10-18T01:04:16Z",
+      "completedAt": "2026-10-18T01:05:33Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39085052728/job/117549738843",
+      "startedAt": "2026-10-18T01:03:17Z",
+      "completedAt": "2026-10-18T01:04:14Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39085052728/job/117549738838",
+      "startedAt": "2026-10-18T01:03:17Z",
+      "completedAt": "2026-10-18T01:03:22Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39085052728/job/117549738575",
+      "startedAt": "2026-10-18T01:03:17Z",
+      "completedAt": "2026-10-18T01:03:38Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}
