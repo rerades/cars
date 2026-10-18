@@ -12,7 +12,14 @@ versions:
     wltp_km: {value: 404, note: "IDAE id 610010 (DS 3 E-TENSE 156 DS PERFORMANCE Line). Las filas del IDAE no traen fecha: 404 km (156 CV) y 436 km (Bastille, Opera, Performance Line); se usa la de menor wltp_km. El medio (T3) publica 402 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     power_kw: {value: 115, note: "IDAE id 610010", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/ds/ds-3/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/DS_3_E-Tense_%28Facelift%29_Auto_Zuerich_2023_1X7A0916.jpg/1280px-DS_3_E-Tense_%28Facelift%29_Auto_Zuerich_2023_1X7A0916.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:DS_3_E-Tense_(Facelift)_Auto_Zuerich_2023_1X7A0916.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "Web oficial dsautomobiles.es devuelve 403: precio, versiones y acabados vigentes sin confirmar con T1. El medio (T3) da una versión «Standard» desde 39.975 €, que no se guarda como precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."

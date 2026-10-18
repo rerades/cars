@@ -12,7 +12,14 @@ versions:
     wltp_km: {value: 450, note: "IDAE id 610016 (Nº4 E-TENSE 215 DS PERFORMANCE Line); las filas 606512, 606735 y 606509 (213 CV) dan lo mismo y el IDAE no las fecha. El medio (T3) publica 449 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     power_kw: {value: 157, note: "IDAE id 610016; el medio (T3) publica 215 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/ds/n4/frontal.jpg
+    source_url: "https://upload.wikimedia.org/wikipedia/commons/b/b6/DS_N%CB%9A4.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:DS_N%CB%9A4.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "DS Automobiles SK, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "Web oficial dsautomobiles.es devuelve 403: precio y versiones vigentes sin confirmar con T1. El medio (T3) da 45.400 €, que no se guarda como precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
