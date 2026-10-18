@@ -5,7 +5,7 @@ model: E2
 status: {value: on_sale, note: "el artículo (11/09/2026) dice que ha iniciado su periplo comercial y que la marca abrió el libro de reservas un mes antes", source_id: motor-es, url: "https://www.motor.es/noticias/geely-e2-lanzamiento-espana-venta-2026116354.html", retrieved: 2026-10-18, tier: T3}
 launch: null
 segment: null
-needs_review: false
+needs_review: true
 versions:
   - name: E2 PRO
     battery_kwh: {value: 35.3, basis: unknown, note: "IDAE id 614333", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
@@ -24,6 +24,7 @@ versions:
     price: null
 images: []
 open_questions:
+  - "status on_sale solo con prensa T3 (Motor.es) y la web de la marca no se puede leer: needs_review hasta que una fuente T1 o T2 confirme que se puede pedir hoy (revisión de la PR #486)."
   - "Web oficial de Geely España no legible (geely.com/es devolvió HTTP 500 el 2026-10-18): precios a null, sin tracción ni carga DC/AC."
   - "launch: el artículo de Motor.es solo dice que el libro de reservas se abrió «hace un mes» (hacia agosto de 2026) y el lanzamiento se presentó el 9/09/2026; no hay fecha de apertura de pedidos."
   - "segment: Motor.es lo llama «segmento B eléctrico» y «utilitarios», términos que no están en la lista de RF-11."
