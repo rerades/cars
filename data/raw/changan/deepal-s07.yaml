@@ -1,0 +1,35 @@
+# Researcher — Changan Deepal S07. Fuente: changan-es (T1). Consultado 2026-10-19.
+brand: changan
+brand_name: Changan
+model: Deepal S07
+status: {value: on_sale, note: "configurador con PVP y oferta vigente hasta 31/10/2026 en la web de España", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s07", retrieved: 2026-10-19, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Standard
+    drivetrain: {value: rwd, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s07/especificaciones", retrieved: 2026-10-19, tier: T1}
+    price:
+      value: 46990
+      unit: EUR
+      price_kind: pvp
+      note: "PVP recomendado en Península y Baleares; incluye IVA, impuesto de matriculación y transporte; no incluye gastos de matriculación ni pre-entrega. El configurador solo muestra la versión «Standard»"
+      source_id: changan-es
+      url: "https://www.changaneurope.com/es/configurador/deepal-s07"
+      retrieved: 2026-10-19
+      tier: T1
+images:
+  - file: data/images/changan/deepal-s07/trasera.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Deepal_S07_IAA_2025_DSC_1897.jpg/1280px-Deepal_S07_IAA_2025_DSC_1897.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Deepal_S07_IAA_2025_DSC_1897.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-19
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0"
+open_questions:
+  - "La web de Changan se contradice en el S07: la ficha de especificaciones da 475 km WLTP, 160 kW y 79,97 kWh; la página del modelo da 190 kW / 258 CV y 77,94 kWh (y 728 km «urbanos», no WLTP). El IDAE homologa dos S07 (160 kW/80 kWh/475 km y MY26 190 kW/77,9 kWh/500 km). Sin saber cuál es la versión del PVP de 46.990 €, wltp_km, power_kw y battery_kwh quedan vacíos."
+  - "Falta confirmar si «Standard» es la única versión BEV a la venta hoy o si siguen las de 160 kW (ficha de especificaciones y IDAE: S07 EV RWD Llantas 19\"/20\")."
+  - "launch: la nota de prensa del 29-01-2026 presenta el modelo pero no dice desde cuándo se puede pedir; null."
+  - "segment: la web no usa ningún término de RF-11 («SUV inteligente y conectado», «coupé-SUV»); null."
+  - "dc_max_kw y ac_max_kw: la ficha solo da el tiempo de carga rápida (10-80 % en 48 min)."
+  - "Las ofertas de la web (36.490 € financiando, con Auto+ y CAE; precio al contado 43.215 €) se contradicen entre sus notas (plazo mínimo de 72 meses frente a 36 meses; dos fechas de validez) y no se guardan."

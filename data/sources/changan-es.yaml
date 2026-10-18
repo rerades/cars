@@ -1,0 +1,27 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: changan-es
+brand: Changan
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.changaneurope.com/es
+  models: https://www.changaneurope.com/es/modelos/changan-deepal-s05
+  s07: https://www.changaneurope.com/es/modelos/changan-deepal-s07
+  s05_specs: https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones
+  s07_specs: https://www.changaneurope.com/es/modelos/changan-deepal-s07/especificaciones
+  prices: https://www.changaneurope.com/es/configurador/deepal-s05
+  prices_s07: https://www.changaneurope.com/es/configurador/deepal-s07
+  promotions: https://www.changaneurope.com/es/promociones
+  press: https://newsroom.changaneurope.com/changan-lands-in-spain-with-the-debut-of-its-electric-brand-deepal-and-the-launch-of-the-new-s05-and-s07
+  legal: https://www.changaneurope.com/es/terminos-y-condiciones
+image_license: "" # sin términos de uso de imágenes verificados (la página de prensa solo dice "fines ilustrativos"): no publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-19): changan.es no es de la marca (rechaza la conexión, sin dueño identificable). La web oficial en
+  España es la sección /es de changaneurope.com (selector de países de la web europea de Changan; sala de prensa
+  newsroom.changaneurope.com, con contacto de Changan Europe). robots.txt: solo bloquea rutas de administración
+  (/admin/, /bin/, /Config/...); fichas y configurador no están bloqueados. Gama BEV en España: Deepal S05 y Deepal S07
+  (los PHEV S05/S07 y el Nevo Q05 no entran). Las fichas de especificaciones y el configurador dan datos distintos para
+  el S07 (ver open_questions del modelo). Presentación en España el 29-01-2026 (nota de prensa).
+last_verified: 2026-10-19
+status: active

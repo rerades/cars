@@ -1,0 +1,68 @@
+# Researcher — Changan Deepal S05. Fuentes: changan-es (T1), idae-es (T2). Consultado 2026-10-19.
+brand: changan
+brand_name: Changan
+model: Deepal S05
+status: {value: on_sale, note: "configurador con PVP y ofertas vigentes hasta 31/10/2026 en la web de España", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-19, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: RWD Pro
+    battery_kwh: {value: 68.8, basis: unknown, note: "LFP; la ficha no dice si es útil o bruta", source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    wltp_km: {value: 485, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    power_kw: {value: 200, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    drivetrain: {value: rwd, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    ac_max_kw: {value: 11, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    price:
+      value: 36990
+      unit: EUR
+      price_kind: pvp
+      note: "PVP recomendado en Península y Baleares; incluye IVA, impuesto de matriculación y transporte; no incluye gastos de matriculación ni pre-entrega"
+      source_id: changan-es
+      url: "https://www.changaneurope.com/es/configurador/deepal-s05"
+      retrieved: 2026-10-19
+      tier: T1
+  - name: RWD Max
+    battery_kwh: {value: 68.8, basis: unknown, note: "LFP; la ficha no dice si es útil o bruta", source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    wltp_km: {value: 485, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    power_kw: {value: 200, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    drivetrain: {value: rwd, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    ac_max_kw: {value: 11, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    price:
+      value: 39990
+      unit: EUR
+      price_kind: pvp
+      note: "PVP recomendado en Península y Baleares; incluye IVA, impuesto de matriculación y transporte; no incluye gastos de matriculación ni pre-entrega"
+      source_id: changan-es
+      url: "https://www.changaneurope.com/es/configurador/deepal-s05"
+      retrieved: 2026-10-19
+      tier: T1
+  - name: 4WD Max
+    battery_kwh: {value: 68.8, basis: unknown, note: "LFP; la ficha no dice si es útil o bruta", source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    wltp_km: {value: 445, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    power_kw: {value: 320, note: "la ficha da 200 kW + 120 kW (dos motores); el IDAE homologa 320 kW (S05 EV AWD Max, id 610279)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    drivetrain: {value: awd, note: "la web lo llama 4WD", source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    ac_max_kw: {value: 11, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s05/especificaciones", retrieved: 2026-10-19, tier: T1}
+    price:
+      value: 42990
+      unit: EUR
+      price_kind: pvp
+      note: "PVP recomendado en Península y Baleares; incluye IVA, impuesto de matriculación y transporte; no incluye gastos de matriculación ni pre-entrega"
+      source_id: changan-es
+      url: "https://www.changaneurope.com/es/configurador/deepal-s05"
+      retrieved: 2026-10-19
+      tier: T1
+images:
+  - file: data/images/changan/deepal-s05/exterior.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Changan_Deepal_S05%2C_Munich_%2820250909-P1050606%29.jpg/1280px-Changan_Deepal_S05%2C_Munich_%2820250909-P1050606%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Changan_Deepal_S05,_Munich_(20250909-P1050606).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-19
+    license: CC-BY-SA-4.0
+    attribution: "Matti Blume (MB-one), CC BY-SA 4.0"
+open_questions:
+  - "launch: la nota de prensa del 29-01-2026 presenta el modelo pero no dice desde cuándo se puede pedir; launch queda null."
+  - "segment: la web de Changan no clasifica el modelo con un término de RF-11 (la nota de prensa dice «SUV eléctrico compacto», que no es el literal «suv_compacto» de ninguna ficha de modelo); null."
+  - "dc_max_kw: la ficha solo da tiempos de carga rápida (30-80 % en 15 min), no potencia en kW."
+  - "Las ofertas de la web (precio al contado y financiado desde 26.490 €, con Auto+ y condiciones de Open Bank) no se guardan como precio: el PVP limpio es el del configurador."
+  - "La página de promociones del S05 se contradice en las cifras de la versión Max (30.390 € frente a 32.585,41 €); no se usa."
