@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
@@ -220,7 +220,6 @@ describe("CA-8 / CA-9 over all the real data", () => {
   });
 });
 
-import { readdirSync } from "node:fs";
 function readdirSyncSafe(dir: string): string[] {
   try {
     return readdirSync(dir);
