@@ -1,0 +1,90 @@
+{
+  "number": 482,
+  "title": "researcher: Marca KG Mobility (carpeta y brand: kg-mobility). Fuentes en",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Marca KG Mobility (carpeta y brand: kg-mobility). Fuentes en el registro y modelos BEV en data/raw/kg-mobility/. Escribe exactamente el esquema de docs/architecture/data-model.md (ADR-0008): copia la forma de su ejemplo completo. Solo modelos 100 % eléctricos (BEV), nada de híbridos. Versiones y precios de la web oficial en España (búscala: data/candidatas.yaml no la tiene; confirma que es de la marca, que responde y su robots.txt), del configurador o la lista de precios; pon wltp_km en todas las versiones o en ninguna (regla 8). Sigue las reglas de launch, status y segment de tus instrucciones (launch solo si la fuente da la fecha desde la que se puede pedir; segment solo con el término literal de RF-11; si el modelo tiene carrocerías que la fuente clasifica distinto, segment: null). Un precio financed solo con price_terms literal y completo de la fuente; si no lo puedes copiar entero, price: null. Si una fuente T1 se contradice en una cifra, deja esa cifra en null y anótalo en open_questions. Si la web no se puede leer (403, timeouts o solo JavaScript), no fuerces el acceso: sigue la vía del IDAE (node factory/fetch-idae.ts con la marca como la escribe el IDAE), confirma con medios del motor (T3) qué versiones se venden hoy en España y deja price: null. Si la marca no vende hoy ningún BEV en España, no crees la carpeta y anótalo en la bitácora. Si para un modelo no hay ninguna fuente con sus versiones, no escribas ese modelo y anótalo en la bitácora. Si un modelo ya está en otra carpeta de data/raw/ (submarcas como Denza de BYD, Deepal de Changan, Voyah de Dongfeng o Mobilize de Renault), no lo dupliques y anótalo en la bitácora. Imágenes solo de Wikimedia Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts. Crea las fuentes como data/sources/<id>.yaml; no toques data/candidatas.yaml.\n- Run: `20261018-040006-1e8567` · 0.3798 USD (estimated) · 31 turns\n- Agent: `researcher` · model `sonnet` · may only write to [\"data/\",\"docs/bitacora/\"]\n- Evals: 4 checks passed\n\nWhat the agent says:\n\n```\nTrend). El Torres EVX Van es la variante para profesionales.\n- **Carga y fichas técnicas:** no hay datos de carga DC/AC, y los PDF de fichas técnicas no se pudieron leer.\n- **Korando e-Motion:** no creado. Solo aparece en el IDAE, sin confirmación de que se venda hoy.\n\nTodo esto está anotado en `open_questions`, y la bitácora tiene su entrada.\n\n**Entradas con `needs_review`:** `torres-evx` (`true`). `musso-evx` está en `false`, aunque tiene la discrepancia de potencia ya descrita.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/researcher/20261018-040006-1e8567",
+  "baseRefName": "main",
+  "headRefOid": "36672959f24ed3e73feb67508a4dd91390346a82",
+  "baseRefOid": "f56ac1d71df05587e72887cf25d20b25aebb0969",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-18T02:02:29Z",
+  "url": "https://github.com/rerades/cars/pull/482",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "data/images/kg-mobility/torres-evx/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/kg-mobility/musso-evx.yaml",
+      "additions": 26,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/kg-mobility/torres-evx.yaml",
+      "additions": 33,
+      "deletions": 0
+    },
+    {
+      "path": "data/sources/kgm-es.yaml",
+      "additions": 23,
+      "deletions": 0
+    },
+    {
+      "path": "docs/bitacora/2026-10/2026-10-18T0402-25bf6b8e.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 83,
+  "deletions": 0,
+  "changedFiles": 5,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39088650228/job/117560669895",
+      "startedAt": "2026-10-18T02:03:48Z",
+      "completedAt": "2026-10-18T02:05:00Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39088650228/job/117560444375",
+      "startedAt": "2026-10-18T02:02:35Z",
+      "completedAt": "2026-10-18T02:03:04Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39088650228/job/117560444351",
+      "startedAt": "2026-10-18T02:02:35Z",
+      "completedAt": "2026-10-18T02:02:42Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39088650228/job/117560444262",
+      "startedAt": "2026-10-18T02:02:35Z",
+      "completedAt": "2026-10-18T02:03:45Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

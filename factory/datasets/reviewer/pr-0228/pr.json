@@ -1,0 +1,70 @@
+{
+  "number": 228,
+  "title": "devops: ADR-0010, punto 2: añade al job test de .github/workflows/ci",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: ADR-0010, punto 2: añade al job test de .github/workflows/ci.yml un paso que ejecute node factory/validate-data.ts después de pnpm install (lee ADR-0010, sección Decisión, puntos 2 a 5). El job ya corre en pull_request y en push a main; no cambies eso. El script valida todo data/raw/ y data/sources/: los errores salen como anotaciones ::error y ponen la CI en rojo (salida 1); los avisos salen como ::warning y como resumen por marca en GITHUB_STEP_SUMMARY, sin poner nada en rojo. No toques factory/ ni data/. Explica en la PR cómo has comprobado que un error pone el paso en rojo (por ejemplo, ejecutando el script en local sobre una copia con un source_id inventado) y que con los datos actuales sale en verde con avisos. La PR referencia ADR-0010 y dice que cumple la condición (b) del punto 7 de ADR-0011.\n- Run: `20261010-040006-1bc986` · 0.1051 USD (estimated) · 10 turns\n- Agent: `devops` · model `sonnet` · may only write to [\".github/workflows/\",\"docs/bitacora/\"]\n- Evals: 1 checks passed\n\nWhat the agent says:\n\n```\n*No he podido registrar la bitácora.** `node factory/bitacora.ts add` también quedó bloqueado por el hook. Queda pendiente esta entrada, tipo `hito`, con refs ADR-0010 y ADR-0011: «CI: el job test ejecuta validate-data.ts; cumple la condición (b) del punto 7 de ADR-0011».\n- **No he abierto ni redactado la PR.** Debe referenciar ADR-0010 y decir que cumple la condición (b) del punto 7 de ADR-0011.\n- Tampoco he podido ver cómo se comporta en Actions; eso solo se verá al abrir la PR.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/devops/20261010-040006-1bc986",
+  "baseRefName": "main",
+  "headRefOid": "e92912ffad2589e1159e01de58d35a23e780590e",
+  "baseRefOid": "1d148cd07f5abd77b25355d1468d2a528aa87010",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-10T02:00:35Z",
+  "url": "https://github.com/rerades/cars/pull/228",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "additions": 3,
+      "deletions": 0
+    }
+  ],
+  "additions": 3,
+  "deletions": 0,
+  "changedFiles": 1,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38015359574/job/114104387508",
+      "startedAt": "2026-10-10T02:01:06Z",
+      "completedAt": "2026-10-10T02:01:05Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38015359574/job/114104294801",
+      "startedAt": "2026-10-10T02:00:40Z",
+      "completedAt": "2026-10-10T02:01:05Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38015359574/job/114104294724",
+      "startedAt": "2026-10-10T02:00:41Z",
+      "completedAt": "2026-10-10T02:00:44Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38015359574/job/114104294551",
+      "startedAt": "2026-10-10T02:00:41Z",
+      "completedAt": "2026-10-10T02:00:59Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

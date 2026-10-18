@@ -1,0 +1,89 @@
+{
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "body": "**Épica:** #32\n**PRD:** docs/product/prd/PRD-001-catalogo-modelos.md\n**Cubre:** RF-3, RF-5 (orden en URL), RF-7 (sin precio al final), RF-9 (precio con oferta ordena como los demás); CA-3, CA-9\n**Depende de:** #37\n\n## Qué hay que hacer\nOrdenación en navegador por precio, autonomía y novedad, con el orden en la query string junto a los filtros. Sin precio: al final al ordenar por precio ascendente, con \"Precio por confirmar\". El precio `financed` entra en el orden como cualquier otro, siempre con su etiqueta.\n\n## Criterios de aceptación (copiados del PRD)\n- [ ] CA-3 (→ RF-3): Dado el orden \"precio ascendente\", entonces el primer modelo tiene el menor \"precio desde\" del resultado.\n- [ ] CA-9 (→ RF-7): Dado un modelo sin precio, cuando ordeno por precio ascendente, entonces aparece al final con \"Precio por confirmar\".\n\n## Notas técnicas\nReutiliza el modelo derivado (#34) y el estado de URL de #37. \"Novedad\": el PRD no define el campo; usa el año de lanzamiento del data-model y déjalo dicho en la PR.\n",
+  "comments": [
+    {
+      "id": "IC_kwDOUhM2FM8AAAABW3_Sow",
+      "author": {
+        "login": "area73"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "Corrección: esta historia depende de #36 (filtros y estado en URL), no de #37.",
+      "createdAt": "2026-09-25T09:26:44Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/rerades/cars/issues/37#issuecomment-5830070947",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOUhM2FM8AAAABX9J-Nw",
+      "author": {
+        "login": "area73"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "**Revisión contra PRD-001 (2026-09-30).** La nota técnica ya no vale:\n- **Novedad (RF-3, CA-16):** el cuerpo dice \"usa el año de lanzamiento del data-model\". Ya está decidido: la novedad es `launch`, la fecha de inicio de venta en España (`YYYY-MM`, con fuente; ADR-0008). Un modelo `announced` usa su fecha prevista. Los modelos sin `launch` van al final. Hay un `launch` ya cargado y tipado en `web/src/lib/data.ts`.\n- Criterio nuevo, copiado del PRD: **CA-16** (→ RF-3): Dados dos modelos con fecha de inicio de venta y uno sin ella, cuando ordeno por novedad, entonces el más reciente va primero y el que no tiene fecha, al final.\n- **Cubre** pasa a: RF-3, RF-5, RF-7, RF-9; CA-3, CA-9, CA-16.\n- Recordatorio: depende de #36, no de sí misma (el \"Depende de: #37\" del cuerpo es una errata, ya corregida en el primer comentario).",
+      "createdAt": "2026-09-30T02:01:39Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/rerades/cars/issues/37#issuecomment-5902597687",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOUhM2FM8AAAABYXpDNQ",
+      "author": {
+        "login": "area73"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "La tarea está preparada en `factory/queue.paused.yaml`. Hay que pasarla a `queue.yaml` a mano cuando la PR de la #36 esté fusionada. La cola no tiene guarda de dependencias.",
+      "createdAt": "2026-10-01T11:27:23Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/rerades/cars/issues/37#issuecomment-5930369845",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOUhM2FM8AAAABZZlbVQ",
+      "author": {
+        "login": "area73"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "Encolada el 2026-10-05: la #36 está fusionada (#141). La tarea pasó de `queue.paused.yaml` al final de `queue.yaml`, detrás de cinco marcas del Researcher.",
+      "createdAt": "2026-10-05T17:21:17Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/rerades/cars/issues/37#issuecomment-5999516501",
+      "viewerDidAuthor": true
+    }
+  ],
+  "labels": [
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4PysRQ",
+      "name": "story",
+      "description": "Unidad de trabajo que cabe en un PR",
+      "color": "0e8a16"
+    },
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4Pysug",
+      "name": "agente",
+      "description": "Abierto por un agente de la factoría, sin revisar",
+      "color": "fbca04"
+    }
+  ],
+  "number": 37,
+  "state": "OPEN",
+  "title": "[PRD-001] Ordenación por precio, autonomía y novedad",
+  "url": "https://github.com/rerades/cars/issues/37"
+}

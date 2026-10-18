@@ -1,0 +1,80 @@
+{
+  "number": 445,
+  "title": "researcher: Ford E-Tourneo Courier y E-Tourneo Custom (data/raw/ford/e-t",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Ford E-Tourneo Courier y E-Tourneo Custom (data/raw/ford/e-tourneo-courier.yaml y e-tourneo-custom.yaml, de #362): resuelve los tres puntos de su revisión (gh pr view 362 --comments). (1) Custom: 4 de las 6 versiones constan en el IDAE solo como Grand Tourneo (carrocería larga); comprueba con ford.es, el IDAE o medios T3 si se venden como E-Tourneo Custom normal. Si no, quítalas de este fichero y anótalo. (2) Los nombres de versión mezclan acabados («160 kW (Titanium/Active/Titanium X)»): usa nombres comerciales de una versión que dé la fuente, una por versión, o explica en open_questions por qué no se puede. (3) Courier Trend: la nota de wltp_km cita a la vez el IDAE y ford.es; deja una sola fuente por cifra. Deja needs_review: true (solo lo quita una persona) y price: null si ford.es sigue sin PVP. No toques otros modelos de Ford.\n- Run: `20261017-040007-6b38d8` · 0.1944 USD (estimated) · 16 turns\n- Agent: `researcher` · model `sonnet` · may only write to [\"data/\",\"docs/bitacora/\"]\n- Evals: 4 checks passed\n\nWhat the agent says:\n\n```\n He quitado los acabados del nombre de la versión de 160 kW, que ahora es «64 kWh 160 kW». Sport sí es un acabado único en la fuente y se queda. La explicación está en `open_questions`.\n\n3. **Courier Trend.** La nota de `wltp_km` cita ahora solo el IDAE (id 610529, 05.2026).\n\nAmbos ficheros siguen con `needs_review: true` y `price: null`. ford.es no publica PVP legible, y en el Courier solo muestra cuotas. No he tocado otros modelos de Ford. Dejé una entrada `nota` en la bitácora.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/researcher/20261017-040007-6b38d8",
+  "baseRefName": "main",
+  "headRefOid": "2cadf5ae7dacbd0fdc6f3adb0b9a471232823d88",
+  "baseRefOid": "b45be5e41d864750d949b26ed819d250a26602b4",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-17T02:01:06Z",
+  "url": "https://github.com/rerades/cars/pull/445",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "data/raw/ford/e-tourneo-courier.yaml",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "path": "data/raw/ford/e-tourneo-custom.yaml",
+      "additions": 3,
+      "deletions": 14
+    },
+    {
+      "path": "docs/bitacora/2026-10/2026-10-17T0400-e9c7dc27.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 5,
+  "deletions": 15,
+  "changedFiles": 3,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38993250601/job/117280244567",
+      "startedAt": "2026-10-17T02:02:18Z",
+      "completedAt": "2026-10-17T02:03:25Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38993250601/job/117280004784",
+      "startedAt": "2026-10-17T02:01:11Z",
+      "completedAt": "2026-10-17T02:01:16Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38993250601/job/117280004776",
+      "startedAt": "2026-10-17T02:01:11Z",
+      "completedAt": "2026-10-17T02:02:16Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38993250601/job/117280004546",
+      "startedAt": "2026-10-17T02:01:11Z",
+      "completedAt": "2026-10-17T02:01:28Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

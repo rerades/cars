@@ -1,0 +1,13 @@
+case_id: pr-0466
+pr: 466
+reviewed_sha: 20f338318850e717abb5063886ede9a429ee58c1
+base_sha: c6d7bd903cbb3e372233fc0755c567ac335137d6
+issue: null
+synthetic: false
+confirmed: true
+expected:
+  label: review:needs-human
+  findings:
+    - "es una ADR en estado propuesta con gasto real de API: aceptarla y fijar las cifras de gasto es decisión de una persona"
+  ca: []
+  not_findings: []

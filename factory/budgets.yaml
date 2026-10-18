@@ -20,6 +20,15 @@ global:
   auto_pr: true              # al terminar bien, sube la rama y abre la PR (nadie la ha revisado)
   auto_merge: true           # ADR-0011: run.ts --merge fusiona las PR de agente que cumplen todas sus reglas; con false solo avisa
 
+evals:
+  # ADR-0016: prompt evals with factory/eval-run.ts. REAL API spend on a separate key
+  # (.secrets/anthropic-evals.env), not USD-equivalents: it is not part of global.
+  max_usd_per_experiment: 15
+  max_usd_per_month: 40      # the Console workspace has the same monthly limit as the hard cap
+  max_units_per_month: 40000 # Langfuse Hobby allows 50 000; the rest is margin for the factory
+  judge_model: claude-sonnet-5-5   # changing it (or the rubric) means re-running the baseline
+  estimate_usd_per_case: {sonnet: 0.30, opus: 0.60, haiku: 0.05}   # until ops/evals/ has real numbers
+
 agents:
   # suma asignada: 175 USD de los 200 del tope global (25 sin asignar): ningún agente puede agotarlo solo
   researcher:

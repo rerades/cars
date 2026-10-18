@@ -1,0 +1,105 @@
+{
+  "number": 452,
+  "title": "developer: Historia #318 (épica #313, PRD-003): script del comparador. ",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Historia #318 (épica #313, PRD-003): script del comparador. Lee el issue entero (gh issue view 318) y haz exactamente lo que dice: el <script> de módulo de /comparar/ (componente .astro, sin framework ni dependencias nuevas, como CatalogFilters.astro) que lee la URL con parseEntries y validateSelection de web/src/lib/compare.ts, pide en paralelo los JSON de /comparar/datos/, retira el aviso sin JavaScript y monta la tabla en el orden de la URL. Sigue docs/design/comparador.md y docs/architecture/adr/0014-datos-y-script-del-comparador.md. No hagas lo de #319 (notas de fuente), #320 (avisos y estados) ni #321-#322 (quitar y añadir). Pruebas con node --test de lo que no necesita navegador. La PR dice «Closes #318» y enumera los RF y CA cubiertos.\n- Run: `20261017-053007-1cc429` · 0.8872 USD (estimated) · 60 turns\n- Agent: `developer` · model `sonnet` · may only write to [\"web/\",\"docs/bitacora/\"]\n- Evals: 1 checks passed\n\nWhat the agent says:\n\n```\nnea «Fuente: …, fecha» con «fuente no oficial» solo aparece en el precio. Las marcas de nota `[n]` y el bloque «Fuentes» son de #319. `CellView.unofficial` ya se calcula para todos los campos.\n\n**PR:** el título propuesto es «feat(web): comparison script that reads the URL, fetches model JSON and mounts the table». El cuerpo lleva «Closes #318» y la lista de RF-1, RF-2, RF-3, RF-5, RF-13 y CA-1, CA-3, CA-4, CA-6, CA-15, CA-17, con las salvedades de arriba para CA-1, CA-15 y CA-17.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/developer/20261017-053007-1cc429",
+  "baseRefName": "main",
+  "headRefOid": "0f45d36498560ea86ae83bbfcad0b69ba21da116",
+  "baseRefOid": "1c89b23646951580fbd602677d6545a0354ca4a0",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-17T03:34:32Z",
+  "url": "https://github.com/rerades/cars/pull/452",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "docs/bitacora/2026-10/2026-10-17T0534-e500a0bc.md",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "path": "web/src/components/ComparisonTable.astro",
+      "additions": 239,
+      "deletions": 0
+    },
+    {
+      "path": "web/src/lib/compare.ts",
+      "additions": 113,
+      "deletions": 0
+    },
+    {
+      "path": "web/src/lib/format.ts",
+      "additions": 7,
+      "deletions": 0
+    },
+    {
+      "path": "web/src/lib/i18n.ts",
+      "additions": 17,
+      "deletions": 0
+    },
+    {
+      "path": "web/src/pages/comparar.astro",
+      "additions": 4,
+      "deletions": 7
+    },
+    {
+      "path": "web/tests/comparar.test.ts",
+      "additions": 22,
+      "deletions": 3
+    },
+    {
+      "path": "web/tests/compare-view.test.ts",
+      "additions": 127,
+      "deletions": 0
+    }
+  ],
+  "additions": 530,
+  "deletions": 10,
+  "changedFiles": 8,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38999317063/job/117298871972",
+      "startedAt": "2026-10-17T03:35:39Z",
+      "completedAt": "2026-10-17T03:36:56Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38999317063/job/117298671478",
+      "startedAt": "2026-10-17T03:34:38Z",
+      "completedAt": "2026-10-17T03:34:43Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38999317063/job/117298671439",
+      "startedAt": "2026-10-17T03:34:38Z",
+      "completedAt": "2026-10-17T03:35:01Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/38999317063/job/117298671267",
+      "startedAt": "2026-10-17T03:34:37Z",
+      "completedAt": "2026-10-17T03:35:37Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

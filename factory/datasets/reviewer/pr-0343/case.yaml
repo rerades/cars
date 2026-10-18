@@ -1,0 +1,14 @@
+case_id: pr-0343
+pr: 343
+reviewed_sha: b75859ca2fc078285972a8bd145c305690d222f1
+base_sha: 8d8588bf43a660388d1f6cdedfa30b173907851e
+issue: null
+synthetic: false
+confirmed: true
+expected:
+  label: review:changes
+  findings:
+    - "data/sources/mini-es.yaml queda con status: active aunque ni robots.txt ni las páginas de gama se pudieron leer"
+  ca: []
+  not_findings:
+    - "price: null y needs_review: true en los tres modelos son correctos"

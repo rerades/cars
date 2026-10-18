@@ -1,0 +1,95 @@
+{
+  "number": 470,
+  "title": "researcher: Marca Xpeng (carpeta y brand: xpeng), segunda vuelta: sustit",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Marca Xpeng (carpeta y brand: xpeng), segunda vuelta: sustituye a la PR #433, que el Revisor devolvió. Parte de su trabajo, que está en la rama local agent/researcher/20261017-014507-6de141: tráelo con git merge de esa rama y corrige solo esto, sin volver a investigar lo que ya está bien. (1) drivetrain en g6, g9 y p7-plus está deducido del nombre de la versión y atribuido al IDAE, que no lo da: quítalo o cita una fuente que lo diga (ADR-0001, nada se inventa). (2) G6 Standard Range: el IDAE (566 km, 218 kW) y motor.es (455 km, 252 CV) se contradicen, y 566 km con 68,5 kWh no cuadra con los 568 km con 80,8 kWh de la Long Range. Deja power_kw en null y quita wltp_km de esa versión; por la regla 8, quítalo también del resto de versiones del G6 y usa specs.wltp_max_km solo si una fuente lo da. Anótalo en open_questions y deja needs_review: true. (3) G9 y P7+: su status on_sale solo se apoya en una noticia T3 (la del P7+ sin fecha leída), así que pon needs_review: true y dilo en open_questions, salvo que otra fuente confirme que se pueden pedir hoy en España. (4) P7+: segment: berlina solo si la fuente usa ese término literal de RF-11; si no, segment: null. Imágenes solo de Wikimedia Commons con licencia que permita el uso comercial, descargadas con node factory/fetch-image.ts. No toques data/candidatas.yaml. En la bitácora, di que sustituye a la PR #433.\n- Run: `20261018-014507-37d712` · 0.2053 USD (estimated) · 20 turns\n- Agent: `researcher` · model `sonnet` · may only write to [\"data/\",\"docs/bitacora/\"]\n- Evals: 4 checks passed\n\nWhat the agent says:\n\n```\nerlina» no es un término literal de la lista de RF-11.\n- **Imágenes:** G6 y G9 llevan una foto de Commons (CC BY-SA 4.0) descargada con el script. Releí la licencia solo de la rama anterior. El P7+ queda con `images: []`.\n- **Precios y `launch`:** siguen vacíos, porque no hay web oficial de Xpeng en España (T1) ni fecha de inicio de venta en ninguna fuente.\n- **Bitácora:** añadí la entrada con `bitacora.ts add`, diciendo que sustituye a la PR #433. No toqué `data/candidatas.yaml`.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/researcher/20261018-014507-37d712",
+  "baseRefName": "main",
+  "headRefOid": "12c3b47fd8814be18d5af2f518e0728ce4035f09",
+  "baseRefOid": "f2dcd6eeb2024cdb0208815856c0c725dc1ff11f",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-17T23:46:10Z",
+  "url": "https://github.com/rerades/cars/pull/470",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "data/images/xpeng/g6/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/images/xpeng/g9/frontal.jpg",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/xpeng/g6.yaml",
+      "additions": 36,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/xpeng/g9.yaml",
+      "additions": 39,
+      "deletions": 0
+    },
+    {
+      "path": "data/raw/xpeng/p7-plus.yaml",
+      "additions": 33,
+      "deletions": 0
+    },
+    {
+      "path": "docs/bitacora/2026-10/2026-10-18T0145-cef649cc.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 109,
+  "deletions": 0,
+  "changedFiles": 6,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39080281555/job/117535927544",
+      "startedAt": "2026-10-17T23:47:52Z",
+      "completedAt": "2026-10-17T23:49:12Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39080281555/job/117535647823",
+      "startedAt": "2026-10-17T23:46:15Z",
+      "completedAt": "2026-10-17T23:46:19Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39080281555/job/117535647792",
+      "startedAt": "2026-10-17T23:46:15Z",
+      "completedAt": "2026-10-17T23:46:38Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39080281555/job/117535647699",
+      "startedAt": "2026-10-17T23:46:15Z",
+      "completedAt": "2026-10-17T23:47:50Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

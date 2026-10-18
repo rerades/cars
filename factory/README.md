@@ -77,6 +77,45 @@ un *prompt*. Del prompt se crea una versión nueva solo cuando cambia su conteni
 llamada al modelo queda enlazada a la versión que usó la ejecución. Así se comparan coste y evals
 entre versiones. **Los prompts no se editan en Langfuse**: se cambian por PR y Langfuse solo los refleja.
 
+## Evaluación de prompts (ADR-0016)
+
+Mide si un cambio en el prompt del Revisor, o de modelo, revisa mejor o peor. **Gasta dinero de
+verdad**, con una clave de API aparte; la suscripción no se usa.
+
+1. **Clave.** En la Console de Anthropic, crea un workspace solo para evaluaciones con un límite de
+   gasto de 40 USD al mes, y una clave en él. Guárdala así:
+
+   ```bash
+   # .secrets/anthropic-evals.env (no se commitea; solo la ven el caso que se ejecuta y el juez)
+   ANTHROPIC_API_KEY=sk-ant-...
+   ```
+
+2. **Casos.** `node factory/dataset-case.ts <pr> [<pr>...]` congela una PR cerrada en
+   `factory/datasets/reviewer/pr-NNNN/`: la PR tal como estaba en el SHA revisado, sin etiquetas
+   ni comentarios 🏭, su diff, su historia y el comentario del Revisor (`review.md`, solo para
+   quien etiqueta). El `case.yaml` sale con una etiqueta **propuesta** y `confirmed: false`. Una
+   persona fija `expected` (etiqueta, hallazgos que una buena revisión tiene que mencionar, cada
+   `CA` con `covered: true/false` y lo que no es un hallazgo) y pone `confirmed: true`. Solo se usan
+   los casos confirmados. Se cambian por PR.
+3. **Dataset.** `node factory/dataset-sync.ts reviewer` sube los confirmados al dataset `reviewer` de
+   Langfuse y archiva los que ya no están. Lanzarlo dos veces no cambia nada.
+4. **Experimento.** `node factory/eval-run.ts reviewer --model claude-sonnet-5-5 [--cases pr-0464]`.
+   Con `--dry-run`, solo la estimación de gasto y de unidades. Fuera del horario de la factoría y
+   nunca a la vez que ella. Cada caso se ejecuta en un worktree en la base de la PR, con el mismo
+   comando que el orquestador y un `gh` falso (`factory/fake-gh.ts`) que sirve la instantánea y
+   guarda lo que el agente intenta publicar. Después se puntúa con código (`label_match`,
+   `false_ok`, `format`, `ca_listed`, `forbidden`) y con un juez Sonnet 5.5 con la rúbrica de
+   `factory/datasets/reviewer/rubric.md`. El resumen queda en `ops/evals/` y es la fuente de verdad,
+   porque Langfuse lo borra a los 30 días. En Langfuse va al entorno `evals`, no a `factory`.
+5. **Aprobar un cambio.** Se ejecutan la línea base y la candidata con el mismo modelo, dataset y
+   juez, y `node factory/eval-run.ts --compare <base.json> <candidata.json>` aplica las reglas de la
+   ADR: ningún `false_ok` ni `forbidden`, y que `label_match`, `finding_recall`, `invented` y el
+   coste no empeoren. La PR del cambio lleva los dos resúmenes y la decide una persona.
+
+Los topes están en el bloque `evals:` de `budgets.yaml`. El script para antes del caso que se
+pasaría del tope del experimento o del mes, y deja el experimento marcado como incompleto.
+`run.ts --status` muestra lo gastado.
+
 ## Qué comprueba antes de lanzar
 
 1. `factory/STOP` existe → no lanza nada (interruptor de parada).

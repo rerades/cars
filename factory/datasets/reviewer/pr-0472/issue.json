@@ -1,0 +1,59 @@
+{
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "body": "**Épica:** #368\n**PRD:** docs/product/prd/PRD-005-rankings.md\n**Arquitectura:** docs/architecture/adr/0015-datos-y-filtro-de-los-rankings.md (detalles 4 y 6)\n**Cubre:** RF-2, RF-8, RF-9, RF-12, RF-14, RNF-1, RNF-3, RNF-5; CA-2, CA-8, CA-9 (en navegador), CA-11, CA-13, CA-14, CA-15, CA-17\n**Depende de:** #371, #372, #373, #374, #375, #376, #377, #447\n\nQué hay que hacer\n-----------------\nPruebas sobre el HTML construido de las cinco páginas y, para lo que necesita navegador, Playwright. No añaden código de producto. Las pruebas de los JSON, de `robots.txt` y del peso son de #447; las de lógica pura (CA-7, CA-8, CA-9, CA-18, query string), de #370, #374 y #376.\n\nPlaywright (ADR-0015, detalles 4 y 6):\n- `web/e2e/storage.spec.ts`: casos para un ranking sin filtros, con filtros en la URL y después de cambiar los dos selects, con `checkNoStorage`; y que la única petición de datos es a `/rankings/datos/`.\n- Un spec de los rankings con datos de prueba (construido y servido como `storage.spec.ts`): CA-8 y CA-9 en el navegador, el vacío filtrado y «Quitar filtros», la nota de RF-15 al filtrar, el error al filtrar (select vuelve a su valor, aviso en la región viva, reintento), abrir una URL con filtros, y que **no** se pide el JSON al cargar sin filtros.\n- CA-14 con `javaScriptEnabled: false`.\n- Un ranking con un filtro aplicado en `a11y.spec.ts`.\n\nCriterios de aceptación (copiados del PRD)\n------------------------------------------\n- [ ] CA-2 (→ RF-2): Dado el HTML de cualquier ranking, cuando lo reviso, entonces no contiene puntuaciones, medias, «mejor», «recomendado», insignias ni cifras que no estén en un fichero de `data/raw/`; y ningún ranking depende de más de un campo del esquema.\n- [ ] CA-11 (→ RF-12): Dado el HTML de un ranking, cuando lo reviso, entonces no contiene formularios que envíen datos, campos de texto ni elementos de cuenta o valoración. Los controles de filtro de segmento y de tramo solo cambian la URL, como en `/coches`.\n- [ ] CA-13 (→ RF-14): Dado un ranking, cuando recorro sus enlaces, entonces solo llevan a fichas, al catálogo, a las fuentes de los datos y, si procede, a «Comparar»; ninguno lleva a una web de compra.\n- [ ] CA-14 (→ RNF-1): Dado el HTML servido de un ranking, cuando lo leo sin ejecutar JavaScript, entonces contiene la lista completa de puestos con sus cifras y fuentes.\n- [ ] CA-15 (→ RNF-5): Al cargar cualquier ranking no se crea ninguna cookie ni se escribe nada en `localStorage` ni en `sessionStorage`.\n- [ ] CA-17 (→ RNF-3): Dado un ranking a 320 px de ancho, cuando uso la página, entonces no hay scroll horizontal y todos los datos son alcanzables; «Precio con oferta» y «fuente no oficial» se distinguen sin el color.\n- [ ] CA-8 y CA-9 (→ RF-8, RF-9), en navegador: los de #376, verificados en el navegador como dice la sección 7 del PRD.\n\nNotas técnicas\n--------------\nSigue el patrón de las pruebas del catálogo y de #325/#326 de PRD-003. Ver preguntas 3 y 5 de la épica.",
+  "comments": [
+    {
+      "id": "IC_kwDOUhM2FM8AAAABc0AamA",
+      "author": {
+        "login": "area73"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "🏭 Revisión de cobertura: añadidos los casos de Playwright de ADR-0015 (storage con filtros y solo peticiones a `/rankings/datos/`, spec de rankings con CA-8, CA-9, vacío filtrado, error al filtrar y sin petición sin filtros, a11y con filtro) y la dependencia de #377 y #447. Quedaba ambiguo quién hacía las pruebas de filtros en navegador.",
+      "createdAt": "2026-10-17T02:32:35Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/rerades/cars/issues/378#issuecomment-6228548248",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOUhM2FM8AAAABc2rRBw",
+      "author": {
+        "login": "area73"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "🏭 Nota (2026-10-17, épica #368, pregunta 2): RNF-2 lo mide `web/e2e/lcp.spec.ts` (tarea `rnf-2-lcp`). Esta historia añade a esa prueba la página de un ranking, sin filtros y con una query string de filtros (ADR-0015).",
+      "createdAt": "2026-10-17T07:44:25Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/rerades/cars/issues/378#issuecomment-6231347463",
+      "viewerDidAuthor": true
+    }
+  ],
+  "labels": [
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4PysRQ",
+      "name": "story",
+      "description": "Unidad de trabajo que cabe en un PR",
+      "color": "0e8a16"
+    },
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4Pysug",
+      "name": "agente",
+      "description": "Abierto por un agente de la factoría, sin revisar",
+      "color": "fbca04"
+    }
+  ],
+  "number": 378,
+  "state": "OPEN",
+  "title": "[PRD-005] Pruebas sobre el build y en navegador de los rankings",
+  "url": "https://github.com/rerades/cars/issues/378"
+}

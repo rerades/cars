@@ -1,0 +1,14 @@
+case_id: pr-0472
+pr: 472
+reviewed_sha: bbccf2794b710c271e54d622eeea81e8df9f0c37
+base_sha: 6373ec1e0a8434d1797876fbc7c846f755701815
+issue: null
+synthetic: false
+confirmed: true
+expected:
+  label: review:ok
+  findings: []
+  ca: []
+  not_findings:
+    - "dejar los rankings como comentario para #378 es lo que pedía la tarea"
+    - "no tener historia propia no es un fallo: es una tarea de la cola"

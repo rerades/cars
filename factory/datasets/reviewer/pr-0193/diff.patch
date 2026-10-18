@@ -1,0 +1,467 @@
+diff --git a/docs/bitacora/2026-10/2026-10-08T0102-f8c8de07.md b/docs/bitacora/2026-10/2026-10-08T0102-f8c8de07.md
+new file mode 100644
+index 0000000..5f50bc2
+--- /dev/null
++++ b/docs/bitacora/2026-10/2026-10-08T0102-f8c8de07.md
+@@ -0,0 +1 @@
++- **2026-10-08 01:02** · 🏁 Hito — Historia #37: orden en /coches (Novedad por defecto, precio asc/desc, autonomía) en la query string (orden=) junto a los filtros. La lógica vive en web/src/lib/sort.ts, compartida por el build (sortByNovelty la reutiliza, y el HTML de /coches sale ya ordenado por novedad) y el navegador, para que no diverjan. Sin dato (launch, precio, autonomía) va al final; las ofertas ordenan por su valor. (RF-3, RF-5, RF-7, RF-9, CA-3, CA-9, CA-16)
+diff --git a/web/src/components/CatalogFilters.astro b/web/src/components/CatalogFilters.astro
+index a4cb1f9..3990592 100644
+--- a/web/src/components/CatalogFilters.astro
++++ b/web/src/components/CatalogFilters.astro
+@@ -114,6 +114,12 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
+       >
+     </div>
+   </form>
++  <div class="mt-4 flex flex-col gap-1">
++    <label for="orden" class="text-body">{L.sort}</label>
++    <select id="orden" name="orden" data-sort class={field}>
++      {view.sorts.map((o) => <option value={o.value}>{o.label}</option>)}
++    </select>
++  </div>
+ </div>
+ 
+ <script>
+@@ -129,6 +135,7 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
+     toSearch,
+     type Filters,
+   } from "../lib/filter.ts";
++  import { comparator, readSortable } from "../lib/sort.ts";
+ 
+   const root = document.querySelector<HTMLElement>("[data-filters-root]");
+   if (root) init(root);
+@@ -151,7 +158,9 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
+     const items = [...document.querySelectorAll<HTMLElement>("[data-model]")].map((el) => ({
+       el,
+       facts: readFacts((n) => el.getAttribute(n)),
++      sortable: readSortable((n) => el.getAttribute(n)),
+     }));
++    const sortSelect = root.querySelector<HTMLSelectElement>("[data-sort]")!;
+     const inputs = (name: string) => [...form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`)];
+     const select = form.elements.namedItem("autonomia") as HTMLSelectElement;
+     const priceMin = form.elements.namedItem("precio_min") as HTMLInputElement;
+@@ -172,6 +181,7 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
+       q.set("autonomia", select.value);
+       q.set("precio_min", priceMin.value.trim());
+       q.set("precio_max", priceMax.value.trim());
++      q.set("orden", sortSelect.value);
+       return parseFilters(q.toString());
+     }
+ 
+@@ -186,6 +196,7 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
+       select.value = f.minRangeKm === null ? "" : String(f.minRangeKm);
+       priceMin.value = f.priceMin === null ? "" : String(f.priceMin);
+       priceMax.value = f.priceMax === null ? "" : String(f.priceMax);
++      sortSelect.value = f.sort;
+     }
+ 
+     function renderChips(f: Filters) {
+@@ -217,6 +228,9 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
+ 
+     function update(updateUrl = true) {
+       const f = readForm();
++      // Same comparator as the build (sort.ts); appending moves the nodes, hidden ones included.
++      const cmp = comparator(f.sort);
++      list?.append(...[...items].sort((a, b) => cmp(a.sortable, b.sortable)).map(({ el }) => el));
+       const shown = items.filter(({ el, facts }) => {
+         const ok = matches(facts, f);
+         el.hidden = !ok;
+@@ -256,6 +270,7 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
+ 
+     form.addEventListener("input", () => update());
+     form.addEventListener("change", () => update());
++    sortSelect.addEventListener("change", () => update());
+     clearBtn.addEventListener("click", clearAll);
+     document.querySelector("[data-empty-clear]")?.addEventListener("click", clearAll);
+     toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+diff --git a/web/src/lib/catalog.ts b/web/src/lib/catalog.ts
+index 9805bf9..0be05b8 100644
+--- a/web/src/lib/catalog.ts
++++ b/web/src/lib/catalog.ts
+@@ -1,20 +1,22 @@
+ import type { ModelRecord, Segment } from "./data.ts";
++import { summarize } from "./derived.ts";
+ import { t, type MessageKey } from "./i18n.ts";
++import { sortModels } from "./sort.ts";
+ 
+ /** "Ningún modelo" / "1 modelo" / "{n} modelos" (resumen.*). */
+ export function countLabel(n: number): string {
+   return n === 0 ? t("resumen.cero") : n === 1 ? t("resumen.uno") : t("resumen.n", { n });
+ }
+ 
+-/** "2026-10-15" -> 202610; models without a launch date sort last (RF-3). */
+-function launchKey(m: ModelRecord): number {
+-  const match = m.launch ? /^(\d{4})-(\d{2})/.exec(m.launch.value) : null;
+-  return match ? Number(match[1]) * 100 + Number(match[2]) : -1;
+-}
+-
+-/** Default order of the pregenerated pages ("Novedad", RF-3): newest launch first, no date last, then by name. */
++/**
++ * Default order of the pregenerated pages and of the served /coches ("Novedad", RF-3, CA-16): newest
++ * launch first, no date last, then by name. The rule lives in sort.ts, shared with the browser.
++ */
+ export function sortByNovelty(models: ModelRecord[]): ModelRecord[] {
+-  return [...models].sort((a, b) => launchKey(b) - launchKey(a) || a.model.localeCompare(b.model));
++  return sortModels(
++    models.map((m) => ({ m, ...summarize(m) })),
++    "novedad",
++  ).map(({ m }) => m);
+ }
+ 
+ export interface BrandPage {
+diff --git a/web/src/lib/filter-view.ts b/web/src/lib/filter-view.ts
+index 71c53bc..587398f 100644
+--- a/web/src/lib/filter-view.ts
++++ b/web/src/lib/filter-view.ts
+@@ -20,8 +20,10 @@ export interface FilterPanelView {
+   drivetrains: Option[];
+   statuses: Option[];
+   ranges: { value: string; label: string; chip: string }[];
++  /** Options of the order selector; `value` is the `orden` query value (sort.ts). */
++  sorts: { value: string; label: string }[];
+   labels: Record<
+-    "brand" | "segment" | "price" | "range" | "drivetrain" | "status" | "priceFrom" | "priceTo" | "clear" |
++    "sort" | "brand" | "segment" | "price" | "range" | "drivetrain" | "status" | "priceFrom" | "priceTo" | "clear" |
+     "open" | "drivetrainHelp" | "rangeError" | "active" | "all" | "anyRange" | "emptyTitle" | "emptyText",
+     string
+   >;
+@@ -60,7 +62,14 @@ export function filterPanelView(models: ModelRecord[]): FilterPanelView {
+       label: t("filtros.autonomiaMin", { km }),
+       chip: t("filtros.chipAutonomia", { km }),
+     })),
++    sorts: [
++      { value: "novedad", label: t("orden.novedad") },
++      { value: "precio-asc", label: t("orden.precioAsc") },
++      { value: "precio-desc", label: t("orden.precioDesc") },
++      { value: "autonomia-desc", label: t("orden.autonomiaDesc") },
++    ],
+     labels: {
++      sort: t("orden.etiqueta"),
+       brand: t("filtros.marca"),
+       segment: t("filtros.segmento"),
+       price: t("filtros.precio"),
+diff --git a/web/src/lib/filter.ts b/web/src/lib/filter.ts
+index 4dec99e..cbec381 100644
+--- a/web/src/lib/filter.ts
++++ b/web/src/lib/filter.ts
+@@ -1,5 +1,6 @@
+ import type { Drivetrain, Segment, Status } from "./data.ts";
+ import type { ModelSummary } from "./derived.ts";
++import { DEFAULT_SORT, parseSort, type SortKey } from "./sort.ts";
+ 
+ /**
+  * Catalog filters of /coches (docs/design/filtros-catalogo.md). Pure: no DOM, no texts. The same
+@@ -23,6 +24,8 @@ export interface Filters {
+   drivetrains: Drivetrain[];
+   /** null = "Todos". */
+   status: Status | null;
++  /** Order of the results (RF-3). Not a filter: it does not count as active. */
++  sort: SortKey;
+ }
+ 
+ export const SEGMENTS: readonly Segment[] = [
+@@ -49,6 +52,7 @@ export const NO_FILTERS: Filters = {
+   minRangeKm: null,
+   drivetrains: [],
+   status: null,
++  sort: DEFAULT_SORT,
+ };
+ 
+ const list = (v: string | null): string[] => (v ? v.split(",").map((s) => s.trim()).filter(Boolean) : []);
+@@ -70,6 +74,7 @@ export function parseFilters(search: string): Filters {
+       list(q.get("traccion")).flatMap((p) => DRIVETRAINS.filter((d) => DRIVETRAIN_PARAM[d] === p)),
+     ),
+     status: status ?? null,
++    sort: parseSort(q.get("orden")),
+   };
+ }
+ 
+@@ -83,6 +88,7 @@ export function toSearch(f: Filters): string {
+   if (f.minRangeKm !== null) q.set("autonomia", String(f.minRangeKm));
+   if (f.drivetrains.length) q.set("traccion", f.drivetrains.map((d) => DRIVETRAIN_PARAM[d]).join(","));
+   if (f.status) q.set("estado", STATUS_PARAM[f.status]);
++  if (f.sort !== DEFAULT_SORT) q.set("orden", f.sort);
+   const s = q.toString().replace(/%2C/g, ",");
+   return s ? `?${s}` : "";
+ }
+diff --git a/web/src/lib/i18n.ts b/web/src/lib/i18n.ts
+index 3e19399..c778b83 100644
+--- a/web/src/lib/i18n.ts
++++ b/web/src/lib/i18n.ts
+@@ -102,6 +102,11 @@ export const es = {
+     "Para filtrar el catálogo hace falta activar JavaScript. Mientras tanto, explora por marca, segmento, precio o autonomía.",
+   "filtros.traccionAyuda": "Solo cuentan los modelos con este dato publicado",
+   "filtros.errorRango": "El precio mínimo no puede ser mayor que el máximo",
++  "orden.etiqueta": "Ordenar por",
++  "orden.novedad": "Novedad",
++  "orden.precioAsc": "Precio: de menor a mayor",
++  "orden.precioDesc": "Precio: de mayor a menor",
++  "orden.autonomiaDesc": "Autonomía: de mayor a menor",
+   "filtros.quitar": "Quitar filtro: {filtro}",
+   "filtros.activos": "Filtros activos",
+   "filtros.autonomiaCualquiera": "Cualquiera",
+diff --git a/web/src/lib/sort.ts b/web/src/lib/sort.ts
+new file mode 100644
+index 0000000..f1f4a8a
+--- /dev/null
++++ b/web/src/lib/sort.ts
+@@ -0,0 +1,74 @@
++/**
++ * Catalog order of /coches (RF-3, docs/design/filtros-catalogo.md). Pure: no DOM, no texts. The same
++ * module sorts at build time (served HTML, pregenerated pages) and in the browser, so both orders
++ * cannot diverge. The state lives in the query string (RF-5).
++ */
++
++export type SortKey = "novedad" | "precio-asc" | "precio-desc" | "autonomia-desc";
++
++export const SORT_KEYS: readonly SortKey[] = ["novedad", "precio-asc", "precio-desc", "autonomia-desc"];
++/** Default order: omitted from the query string. */
++export const DEFAULT_SORT: SortKey = "novedad";
++
++/** What sorting reads: the derived model (derived.ts) or the data attributes of a card. */
++export interface Sortable {
++  model: string;
++  /** "YYYY-MM" or "YYYY-MM-DD"; the expected date if announced. */
++  launch: string | null;
++  priceFrom: { value: number } | null;
++  maxRangeKm: number | null;
++}
++
++/** Invalid values fall back to the default order (never an error). */
++export function parseSort(value: string | null): SortKey {
++  return (SORT_KEYS as readonly string[]).includes(value ?? "") ? (value as SortKey) : DEFAULT_SORT;
++}
++
++/** "2026-10-15" -> 202610; null when there is no usable date (sorts last, CA-16). */
++export function launchKey(launch: string | null): number | null {
++  const m = launch ? /^(\d{4})-(\d{2})/.exec(launch) : null;
++  return m ? Number(m[1]) * 100 + Number(m[2]) : null;
++}
++
++/** Compares numbers where null always goes last, whatever the direction. */
++function nullsLast(a: number | null, b: number | null, dir: 1 | -1): number {
++  if (a === null || b === null) return a === b ? 0 : a === null ? 1 : -1;
++  return (a - b) * dir;
++}
++
++const byNovelty = (a: Sortable, b: Sortable): number =>
++  nullsLast(launchKey(a.launch), launchKey(b.launch), -1) || a.model.localeCompare(b.model);
++
++/** Comparator of a sort key. Ties fall back to novelty, then to name: the order is total and stable. */
++export function comparator(key: SortKey): (a: Sortable, b: Sortable) => number {
++  switch (key) {
++    case "precio-asc":
++      return (a, b) => nullsLast(a.priceFrom?.value ?? null, b.priceFrom?.value ?? null, 1) || byNovelty(a, b);
++    case "precio-desc":
++      return (a, b) => nullsLast(a.priceFrom?.value ?? null, b.priceFrom?.value ?? null, -1) || byNovelty(a, b);
++    case "autonomia-desc":
++      return (a, b) => nullsLast(a.maxRangeKm, b.maxRangeKm, -1) || byNovelty(a, b);
++    default:
++      return byNovelty;
++  }
++}
++
++export const sortModels = <T extends Sortable>(models: T[], key: SortKey): T[] =>
++  [...models].sort(comparator(key));
++
++/** Data attributes written on each card so the browser can sort without a second copy of the data. */
++export function sortAttrs(m: Sortable): Record<string, string> {
++  return { "data-name": m.model, "data-launch": m.launch ?? "" };
++}
++
++/** Inverse of sortAttrs + factAttrs (data-price, data-range). Empty attributes mean "datum missing". */
++export function readSortable(get: (name: string) => string | null): Sortable {
++  const num = (v: string | null) => (v ? Number(v) : null);
++  const price = num(get("data-price"));
++  return {
++    model: get("data-name") ?? "",
++    launch: get("data-launch") || null,
++    priceFrom: price === null ? null : { value: price },
++    maxRangeKm: num(get("data-range")),
++  };
++}
+diff --git a/web/src/pages/coches.astro b/web/src/pages/coches.astro
+index ae36c53..9cf1272 100644
+--- a/web/src/pages/coches.astro
++++ b/web/src/pages/coches.astro
+@@ -1,14 +1,16 @@
+ ---
+ import CatalogPage from "../components/CatalogPage.astro";
+ import { cardView } from "../lib/card.ts";
+-import { countLabel, exploreGroups } from "../lib/catalog.ts";
++import { countLabel, exploreGroups, sortByNovelty } from "../lib/catalog.ts";
++import { sortAttrs } from "../lib/sort.ts";
+ import { loadModels } from "../lib/data.ts";
+ import { summarize } from "../lib/derived.ts";
+ import { factAttrs } from "../lib/filter.ts";
+ import { filterPanelView } from "../lib/filter-view.ts";
+ import { t } from "../lib/i18n.ts";
+ 
+-const { models } = loadModels();
++// The served HTML is already in the default order ("Novedad", RF-3, CA-16); the browser reorders from there.
++const models = sortByNovelty(loadModels().models);
+ ---
+ 
+ <CatalogPage
+@@ -21,7 +23,7 @@ const { models } = loadModels();
+   currentHref="/coches/"
+   filters={{
+     view: filterPanelView(models),
+-    facts: models.map((m) => factAttrs(summarize(m))),
++    facts: models.map((m) => ({ ...factAttrs(summarize(m)), ...sortAttrs(summarize(m)) })),
+     canonical: "/coches",
+   }}
+ />
+diff --git a/web/tests/sort.test.ts b/web/tests/sort.test.ts
+new file mode 100644
+index 0000000..0b039f3
+--- /dev/null
++++ b/web/tests/sort.test.ts
+@@ -0,0 +1,147 @@
++import assert from "node:assert/strict";
++import { execFileSync } from "node:child_process";
++import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
++import { tmpdir } from "node:os";
++import { join } from "node:path";
++import { after, before, describe, test } from "node:test";
++import { stringify } from "yaml";
++import { normalize } from "../src/lib/data.ts";
++import { summarize } from "../src/lib/derived.ts";
++import { NO_FILTERS, factAttrs, parseFilters, readFacts, toSearch } from "../src/lib/filter.ts";
++import { parseSort, readSortable, sortAttrs, sortModels, type SortKey } from "../src/lib/sort.ts";
++import { sourced } from "./fixtures.ts";
++
++const WEB = join(import.meta.dirname, "..");
++
++const price = (value: number, kind = "pvp") => ({
++  ...sourced(value),
++  unit: "EUR",
++  price_kind: kind,
++  // A financed price must say its conditions (data-model.md), or it is dropped.
++  ...(kind === "financed" ? { price_terms: "Financiando.", price_terms_url: "https://www.acme.example/es/ofertas" } : {}),
++});
++
++/** brand acme; every field optional so each model misses exactly what its name says. */
++function doc(
++  model: string,
++  o: { status?: string; launch?: string; price?: number; kind?: string; km?: number } = {},
++): Record<string, any> {
++  const version: Record<string, any> = { name: `${model} 1` };
++  if (o.price !== undefined) version.price = price(o.price, o.kind);
++  if (o.km !== undefined) version.wltp_km = sourced(o.km);
++  return {
++    brand: "acme",
++    brand_name: "Acme",
++    model,
++    status: sourced(o.status ?? "on_sale"),
++    ...(o.launch ? { launch: sourced(o.launch) } : {}),
++    versions: [version],
++  };
++}
++
++const catalog = () => [
++  doc("Volta", { launch: "2025-03", price: 39990, km: 520 }),
++  doc("Soon", { status: "announced", launch: "2026-10-15" }),
++  doc("Deal", { launch: "2024-01", price: 24990, kind: "financed", km: 300 }),
++  doc("Plain", { price: 19990, km: 600 }),
++  doc("Zzz"),
++];
++
++const summaries = catalog().map((d) => summarize(normalize(d, `acme/${d.model}.yaml`)));
++const order = (key: SortKey) => sortModels(summaries, key).map((m) => m.model);
++
++describe("sort (sort.ts)", () => {
++  test("CA-16: newest launch first, an announced model uses its expected date, no launch last", () => {
++    assert.deepEqual(order("novedad"), ["Soon", "Volta", "Deal", "Plain", "Zzz"]);
++  });
++
++  test("CA-3: price ascending and descending, by 'price from'; an offer price sorts like the rest", () => {
++    // Deal's price is financed (RF-9): it sorts by its value (24.990) between the others.
++    assert.deepEqual(order("precio-asc").slice(0, 3), ["Plain", "Deal", "Volta"]);
++    assert.deepEqual(order("precio-desc").slice(0, 3), ["Volta", "Deal", "Plain"]);
++  });
++
++  test("CA-3: range descending, models without range last", () => {
++    assert.deepEqual(order("autonomia-desc"), ["Plain", "Volta", "Deal", "Soon", "Zzz"]);
++  });
++
++  test("CA-9: models without a price go last in both price orders", () => {
++    assert.deepEqual(order("precio-asc").slice(3), ["Soon", "Zzz"]);
++    assert.deepEqual(order("precio-desc").slice(3), ["Soon", "Zzz"]);
++  });
++
++  test("RF-5: the order travels in the query string, next to the filters, and round-trips", () => {
++    assert.equal(parseFilters("").sort, "novedad");
++    assert.equal(toSearch(NO_FILTERS), "", "the default order is not written");
++    const url = "?marca=acme&estado=venta&orden=precio-asc";
++    assert.equal(parseFilters(url).sort, "precio-asc");
++    assert.equal(toSearch(parseFilters(url)), url);
++    assert.equal(parseSort("nope"), "novedad", "an invalid value is ignored");
++    assert.equal(parseFilters("?orden=raro").sort, "novedad");
++  });
++
++  test("the data attributes of the cards read back to the same order (build and browser agree)", () => {
++    const back = summaries.map((m) => {
++      const a = { ...factAttrs(m), ...sortAttrs(m) };
++      const get = (n: string) => a[n] ?? null;
++      return { ...readSortable(get), facts: readFacts(get) };
++    });
++    for (const key of ["novedad", "precio-asc", "precio-desc", "autonomia-desc"] as const) {
++      assert.deepEqual(sortModels(back, key).map((m) => m.model), order(key));
++    }
++  });
++});
++
++describe("/coches built page: order", () => {
++  let root: string;
++  let html: string;
++  let js: string;
++
++  before(() => {
++    root = mkdtempSync(join(tmpdir(), "cars-web-sort-"));
++    const data = join(root, "data");
++    for (const d of catalog()) {
++      mkdirSync(join(data, d.brand), { recursive: true });
++      writeFileSync(join(data, d.brand, `${d.model}.yaml`), stringify(d));
++    }
++    execFileSync(join(WEB, "node_modules/.bin/astro"), ["build", "--outDir", join(root, "out")], {
++      cwd: WEB,
++      env: { ...process.env, CARS_DATA_DIR: data },
++      stdio: "pipe",
++    });
++    html = readFileSync(join(root, "out/coches/index.html"), "utf8");
++    const dir = join(root, "out/_astro");
++    js = readdirSync(dir).filter((f) => f.endsWith(".js")).map((f) => readFileSync(join(dir, f), "utf8")).join("\n");
++  });
++  after(() => rmSync(root, { recursive: true, force: true }));
++
++  test("CA-16: the served HTML is already ordered by novelty", () => {
++    const names = [...html.matchAll(/<li\b[^>]*data-model[^>]*data-name="([^"]*)"/g)].map((m) => m[1]);
++    assert.deepEqual(names, ["Soon", "Volta", "Deal", "Plain", "Zzz"]);
++  });
++
++  test("CA-3: the order selector has a visible label and the four options, 'Novedad' first", () => {
++    assert.match(html, /<label[^>]*for="orden"[^>]*>Ordenar por<\/label>/);
++    const select = /<select[^>]*id="orden"[\s\S]*?<\/select>/.exec(html)?.[0] ?? "";
++    const options = [...select.matchAll(/<option value="([^"]*)"[^>]*>([^<]*)<\/option>/g)].map((m) => [m[1], m[2]]);
++    assert.deepEqual(options, [
++      ["novedad", "Novedad"],
++      ["precio-asc", "Precio: de menor a mayor"],
++      ["precio-desc", "Precio: de mayor a menor"],
++      ["autonomia-desc", "Autonomía: de mayor a menor"],
++    ]);
++  });
++
++  test("CA-9: a model without price keeps 'Precio por confirmar' on its card", () => {
++    const zzz = [...html.matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]).find((s) => s.includes(">Zzz</a>"));
++    assert.match(zzz ?? "", /Precio por confirmar/);
++    assert.match(zzz ?? "", /data-price(?=[\s>])/, "empty data-price: the sort puts it last");
++    assert.doesNotMatch(zzz ?? "", /data-price="/);
++  });
++
++  test("the shipped script reorders the cards and writes the order to the URL", () => {
++    assert.match(js, /orden/);
++    assert.match(js, /append/);
++    assert.match(js, /replaceState/);
++  });
++});

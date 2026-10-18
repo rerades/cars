@@ -1,0 +1,28 @@
+{
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "body": "**Épica:** #313\n**PRD:** docs/product/prd/PRD-003-comparador.md\n**Diseño visual:** docs/design/comparador.md\n**Arquitectura:** docs/architecture/adr/0014-datos-y-script-del-comparador.md\n**Cubre:** RF-1, RF-2, RF-3, RF-5, RF-13; CA-1, CA-3, CA-4, CA-6, CA-15, CA-17\n**Depende de:** #314, #316, #317\n\nQué hay que hacer\n-----------------\nEl `<script>` de módulo (componente `.astro`, sin framework ni dependencias nuevas, como `CatalogFilters.astro`) que al cargar lee la URL con la lógica de #316, pide en paralelo los ≤ 3 JSON de modelo de #314, retira el aviso sin JavaScript de #317 y monta la tabla de la sección «Comparación» con 2 o 3 versiones: cabecera de columna (marca, modelo como enlace a `/marcas/{marca}/{modelo}/` con texto oculto «(ficha del modelo)», `name`, Badge «Próximamente» si `announced`) y las 7 filas en el orden del diseño (Precio, Autonomía WLTP, Batería con su base, Potencia, Tracción, Carga máxima en CC, Carga máxima en CA), con «por confirmar» / «Precio por confirmar» sin cifra, Badge «Precio con oferta» y `note` junto al dato. Debajo, «Condiciones de las ofertas» con el `price_terms` literal y el enlace a `price_terms_url` para cada columna `financed`. Reescribe la URL con `history.replaceState` (forma completa). Sin marcas de nota ni bloque «Fuentes» (#319).\n\nCriterios de aceptación (copiados del PRD)\n------------------------------------------\n- [ ] CA-1 (→ RF-1): Dadas 3 versiones elegidas, cuando abro el comparador, entonces veo 3 columnas, cada una con la marca, el modelo y el nombre de la versión, y un enlace que lleva a la ficha del modelo; las filas y su orden son los mismos para las tres.\n- [ ] CA-3 (→ RF-2): Dada una versión con todos los campos, cuando abro el comparador, entonces veo, en este orden, estado (si lo lleva), precio, autonomía, batería con su base, potencia, tracción, carga en continua y carga en alterna, y ningún campo que no esté en el esquema. Dada una batería con `basis: gross`, entonces la capacidad aparece indicada como bruta.\n- [ ] CA-4 (→ RF-3): Dada una versión sin `dc_max_kw` junto a otra que sí lo tiene, cuando abro el comparador, entonces la celda de la primera dice «por confirmar», la de la segunda muestra su valor, y la celda de la primera no contiene ninguna cifra. Dado que ninguna versión tiene `ac_max_kw`, entonces la fila de carga en alterna sigue visible con «por confirmar» en todas las columnas.\n- [ ] CA-6 (→ RF-5): Dada una versión con precio `financed` y otra con `pvp`, cuando abro el comparador, entonces la primera muestra la etiqueta «Precio con oferta», el texto literal de `price_terms` y un enlace a `price_terms_url`, y la segunda no muestra etiqueta. Dado un dato con `note: \"publicado: 190 CV\"`, entonces ese texto aparece junto al dato, idéntico al del fichero.\n- [ ] CA-15 (→ RF-13): Dada una comparación, cuando reviso la página, entonces no hay ninguna marca de «mejor»/«peor», ninguna puntuación, ninguna diferencia calculada ni ninguna fila resaltada por ser distinta, y las columnas siguen el orden de la URL.\n- [ ] CA-17 (→ RNF-1): Dada una comparación de 3 versiones a 320 px de ancho, cuando uso la página, entonces no hay scroll horizontal de la página (o se cumple la alternativa que fije el diseño) y todos los datos son alcanzables; «por confirmar», «Precio con oferta» y «fuente no oficial» se distinguen sin el color.\n\nNotas técnicas\n--------------\n- Estructura de la tabla del diseño: una sola tabla en todas las anchuras, `caption` oculta, `headers` explícitos con `id` `cmp-col-{n}` y `cmp-f-{campo}`, fila de rótulo a todo el ancho y fila de valores, `table-layout: fixed`, columnas iguales, sin cambiar estilo por valor.\n- El marcado de columna y celda va en `<template>` del HTML; el script lo clona y rellena con `textContent` y atributos, nunca con `innerHTML` de datos. Textos por `data-messages` desde `i18n.ts`.\n- Formato de cifras, etiquetas de tracción, base de la batería y fechas: reutiliza las funciones de tarjeta y ficha (`card.ts`, `versions.ts`); si dependen de Node, sepáralas primero (ADR-0014, «Formato duplicado en riesgo»). No calcules ni derives cifras (RNF-5).\n- No muestres `specs`, `open_questions` ni `needs_review`. Sin `localStorage`, `sessionStorage`, cookies ni `indexedDB`.\n- Las celdas «por confirmar» y el cálculo de etiquetas (“fuente no oficial” si `tier` ≠ T1) pueden ir en `compare.ts` con prueba `node --test`.",
+  "comments": [],
+  "labels": [
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4PysRQ",
+      "name": "story",
+      "description": "Unidad de trabajo que cabe en un PR",
+      "color": "0e8a16"
+    },
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4Pysug",
+      "name": "agente",
+      "description": "Abierto por un agente de la factoría, sin revisar",
+      "color": "fbca04"
+    }
+  ],
+  "number": 318,
+  "state": "OPEN",
+  "title": "[PRD-003] Script del comparador: leer la URL, pedir los JSON y montar la tabla",
+  "url": "https://github.com/rerades/cars/issues/318"
+}

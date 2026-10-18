@@ -1,0 +1,44 @@
+{
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "body": "**Épica:** #145\n**PRD:** docs/product/prd/PRD-002-ficha-modelo.md\n**Diseño visual:** docs/design/ficha-modelo.md (llegará aparte; puede no estar aún en main)\n**Cubre:** RF-9 (todo lo que no es el precio), RF-8; CA-9, CA-8\n**Depende de:** #146, #148, #149, #150, #151 (los datos que hay que referenciar)\n\nQué hay que hacer\n-----------------\nCada dato mostrado que no sea el precio (estado, fecha de lanzamiento, segmento, cada campo de cada versión, cada valor de `specs`) remite con una nota numerada a un bloque «Fuentes» al final, con la fuente, la fecha de consulta y el enlace a la `url` exacta; los datos con la misma fuente, URL y fecha comparten nota. Un dato que no es T1 lo dice («fuente no oficial»); los T1 no llevan marca. Si un dato trae `note`, se muestra junto al dato, tal cual. Cierra el CA-9 completo y comprueba que ningún dato queda sin fuente.\n\nCriterios de aceptación (copiados del PRD)\n------------------------------------------\n- [ ] CA-9 (→ RF-9): Dada una ficha cualquiera, cuando reviso cada dato mostrado, entonces todos indican su fuente y la fecha `retrieved`, y el enlace lleva a la `url` del dato. Ningún dato aparece sin fuente. El precio muestra su fuente y su fecha junto al valor; los demás remiten a una nota del bloque «Fuentes». Dado un dato de `tier: T3`, entonces su indicación dice «fuente no oficial»; dado uno de T1, no.\n- [ ] CA-8 (→ RF-8): Dado un dato con `note: \"publicado: 190 CV\"`, cuando abro la ficha, entonces ese texto aparece junto al dato, idéntico al del fichero.\n\nNotas técnicas\n--------------\n- Reutiliza `Sourced` (`source_id`, `url`, `retrieved`, `tier`, `note`) de `web/src/lib/data.ts` y el componente de indicación de fuente de la historia del precio. El agrupado de notas va en una función pura en `web/src/lib/` con prueba (misma fuente + URL + fecha = misma nota; numeración estable por orden de aparición).\n- El nombre legible de la fuente sale de `data/sources/registry.yaml` (ADR-0001); si el `source_id` no está, no inventes un nombre: muestra el id y anótalo en la PR.\n- La nota de la historia de precio sigue siendo inline; el resto, notas numeradas. `note` se muestra literal y escapado, sin interpretar. Textos en `i18n.ts`.",
+  "comments": [
+    {
+      "id": "IC_kwDOUhM2FM8AAAABbvzaZA",
+      "author": {
+        "login": "area73"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "🏭 Revisión de cobertura: RF-9 (sin el precio), RF-8, CA-9 y CA-8 coinciden con el PRD. Diseño (ya en main): «Fuente y fecha» y las notas de «Cabecera de la ficha». Dependencias: #146 (cerrada), #148 (en curso), #149, #150, #151. CORRECCIÓN: el cuerpo dice que el nombre de la fuente sale de data/sources/registry.yaml; está obsoleto (hay un fichero por fuente en data/sources/, sin nombre de presentación, #164). El nombre es el dominio de la url del dato, sin www. (decisión de Producto del 2026-10-06, diseño «Nombre de la fuente»), con la función que deja #149. La clave de agrupado incluye tier (source_id + url + retrieved + tier). Reparto de notas: #149 pinta la fuente inline del precio; #150 y #151 pintan la note de los campos de versión y de specs; esta historia pinta la note de la cabecera (segmento), las marcas «[n]» y el bloque «Fuentes», y comprueba CA-8 en todos los datos, incluida la note del precio. Si no hay ningún dato con nota, el bloque «Fuentes» no se pinta. No pude editar el cuerpo en esta ejecución.",
+      "createdAt": "2026-10-13T23:02:09Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/rerades/cars/issues/154#issuecomment-6157032036",
+      "viewerDidAuthor": true
+    }
+  ],
+  "labels": [
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4PysRQ",
+      "name": "story",
+      "description": "Unidad de trabajo que cabe en un PR",
+      "color": "0e8a16"
+    },
+    {
+      "id": "LA_kwDOUhM2FM8AAAAC4Pysug",
+      "name": "agente",
+      "description": "Abierto por un agente de la factoría, sin revisar",
+      "color": "fbca04"
+    }
+  ],
+  "number": 154,
+  "state": "OPEN",
+  "title": "[PRD-002] Notas del dato y bloque «Fuentes» con fuente, fecha y fiabilidad",
+  "url": "https://github.com/rerades/cars/issues/154"
+}

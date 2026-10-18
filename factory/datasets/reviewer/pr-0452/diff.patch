@@ -1,0 +1,632 @@
+diff --git a/docs/bitacora/2026-10/2026-10-17T0534-e500a0bc.md b/docs/bitacora/2026-10/2026-10-17T0534-e500a0bc.md
+new file mode 100644
+index 0000000..1c800f9
+--- /dev/null
++++ b/docs/bitacora/2026-10/2026-10-17T0534-e500a0bc.md
+@@ -0,0 +1 @@
++- **2026-10-17 05:34** · 🏁 Hito — Script del comparador (#318): ComparisonTable.astro lee la URL con parseEntries/validateSelection, pide en paralelo solo los JSON de los modelos citados (máx. 12 distintos, 404 = ignorada), retira el aviso sin JS, monta la tabla con plantillas <template> y reescribe la URL con replaceState. El formato de celdas y cabeceras vive en compare.ts (cellView, headerView) y se prueba con node --test; el precio usa espacio normal antes de € para que parta en columnas de 80 px. Sin notas de fuente (#319), avisos y estados (#320) ni añadir/quitar (#321-#322). (ADR-0014, RF-1, RF-2, RF-3, RF-5, RF-13)
+diff --git a/web/src/components/ComparisonTable.astro b/web/src/components/ComparisonTable.astro
+new file mode 100644
+index 0000000..d6d5a1c
+--- /dev/null
++++ b/web/src/components/ComparisonTable.astro
+@@ -0,0 +1,239 @@
++---
++import { t } from "../lib/i18n.ts";
++
++/**
++ * «Comparación» section of /comparar/ (docs/design/comparador.md; ADR-0014). The served HTML has no
++ * table: the markup of the table, columns, cells and conditions lives in <template> and the script
++ * below clones it and fills it with `textContent` and attributes, never `innerHTML` (ADR-0014).
++ * Data-dependent texts (formats, «por confirmar», labels) come from lib/compare.ts; the fixed ones
++ * are written here from i18n (RNF-4).
++ */
++const cell = "align-top p-2 text-left text-body text-ink-900 [overflow-wrap:anywhere] md:p-3";
++const link = "text-brand-600 underline hover:text-brand-800";
++const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
++---
++
++<section aria-labelledby="cmp-tabla" class="mt-8" data-compare hidden>
++  <h2 id="cmp-tabla" class="text-section">{t("comparador.tabla.titulo")}</h2>
++  <p class="mt-2 max-w-prose text-small text-ink-600">{t("comparador.tabla.entrada")}</p>
++  <div class="mt-4" data-table-host></div>
++  <div class="mt-6" data-conditions hidden>
++    <h3 class="text-card-title">{t("ficha.condiciones.titulo")}</h3>
++    <div class="mt-2 flex flex-col gap-4" data-conditions-list></div>
++  </div>
++</section>
++
++<template data-tpl="table">
++  <table class="w-full table-fixed border-collapse bg-surface">
++    <caption class="sr-only" data-slot="caption"></caption>
++    <thead><tr data-slot="head"></tr></thead>
++  </table>
++</template>
++
++<template data-tpl="column">
++  <th scope="col" class={`${cell} border-l border-line-soft first:border-l-0`}>
++    <a data-slot="link" class={`block min-h-touch ${link} text-card-title`}>
++      <span class="block text-small text-ink-600" data-slot="brand"></span>
++      <span data-slot="model"></span>
++      <span class="sr-only" data-slot="sr"></span>
++    </a>
++    <span class="block text-body font-semibold text-ink-900" data-slot="name"></span>
++    <span
++      class="mt-1 inline-block rounded-card bg-soon-bg px-3 py-1 text-badge text-soon-fg"
++      data-slot="badge"
++      hidden></span>
++  </th>
++</template>
++
++<template data-tpl="field">
++  <tbody class="border-t border-line-soft">
++    <tr><th class="bg-surface-muted p-2 text-left text-small font-semibold text-ink-900 md:p-3" data-slot="label"></th></tr>
++    <tr data-slot="values"></tr>
++  </tbody>
++</template>
++
++<template data-tpl="cell">
++  <td class={`${cell} border-l border-line-soft first:border-l-0`}>
++    <p data-slot="text"></p>
++    <p class="mt-1" data-slot="dealRow" hidden>
++      <span class="inline-block rounded-card bg-deal-bg px-3 py-1 text-badge text-deal-fg" data-slot="deal"></span>
++    </p>
++    <p class={note} data-slot="source" hidden>
++      <span data-slot="before"></span><a class={link} rel="noopener" data-slot="sourceLink"></a><span data-slot="after"></span>
++      <span data-slot="unofficial" hidden></span>
++    </p>
++    <p class={note} data-slot="note" hidden></p>
++    <a
++      class={`inline-flex min-h-touch items-center text-small ${link}`}
++      data-slot="terms"
++      hidden>{t("ficha.precio.verCondiciones")}</a
++    >
++  </td>
++</template>
++
++<template data-tpl="condition">
++  <div tabindex="-1">
++    <p class="text-body font-semibold text-ink-900 [overflow-wrap:anywhere]" data-slot="title"></p>
++    <p class="text-body text-ink-900 [overflow-wrap:anywhere]" data-slot="text" hidden></p>
++    <a
++      class={`inline-flex min-h-touch items-center text-body ${link}`}
++      rel="noopener"
++      data-slot="link"
++      hidden>{t("ficha.condiciones.enlace")}</a
++    >
++  </div>
++</template>
++
++<script>
++  import {
++    FIELDS,
++    cellView,
++    conditionTitle,
++    fieldLabel,
++    headerView,
++    modelsToFetch,
++    parseEntries,
++    validateSelection,
++    writeSearch,
++    type PublishedModel,
++    type PublishedVersion,
++  } from "../lib/compare.ts";
++  import { t } from "../lib/i18n.ts";
++
++  const main = document.querySelector<HTMLElement>("main[data-messages]");
++  const section = document.querySelector<HTMLElement>("[data-compare]");
++  if (main && section) void init(main, section);
++
++  /** Clones the first element of `<template data-tpl="name">`. */
++  function clone(name: string): HTMLElement {
++    const tpl = document.querySelector<HTMLTemplateElement>(`template[data-tpl="${name}"]`)!;
++    return tpl.content.firstElementChild!.cloneNode(true) as HTMLElement;
++  }
++  const slot = (root: ParentNode, name: string) => root.querySelector<HTMLElement>(`[data-slot="${name}"]`)!;
++  const show = (el: HTMLElement, text: string | null) => {
++    el.hidden = text === null;
++    if (text !== null) el.textContent = text;
++  };
++
++  /** A model's JSON, or null if there is none (404: unknown or not comparable, RF-11). */
++  async function fetchModel(key: { brand: string; slug: string }): Promise<PublishedModel | null> {
++    const res = await fetch(`/comparar/datos/${encodeURIComponent(key.brand)}/${encodeURIComponent(key.slug)}.json`);
++    if (res.status === 404) return null;
++    if (!res.ok) throw new Error(`HTTP ${res.status}`);
++    return (await res.json()) as PublishedModel;
++  }
++
++  async function init(main: HTMLElement, section: HTMLElement) {
++    const msg: Record<string, string> = JSON.parse(main.dataset.messages ?? "{}");
++    const entries = parseEntries(location.search);
++    const notice = document.querySelector<HTMLElement>("[data-no-js]");
++    let models: PublishedModel[];
++    try {
++      // All requests at once; only the models the URL names are fetched (ADR-0014).
++      const found = await Promise.all(modelsToFetch(entries).map(fetchModel));
++      models = found.filter((m): m is PublishedModel => m !== null);
++    } catch {
++      // Minimal fallback so a failed request is not a blank page; the full states are story #320.
++      const p = document.createElement("p");
++      p.className = "mt-4 max-w-prose text-body text-ink-900";
++      p.append(`${msg.error ?? ""} `);
++      const a = document.createElement("a");
++      a.href = "/coches";
++      a.className = "text-brand-600 underline hover:text-brand-800";
++      a.textContent = msg.noJsLink ?? "";
++      p.append(a);
++      notice?.replaceWith(p);
++      return;
++    }
++    notice?.remove();
++
++    const { columns } = validateSelection(entries, models);
++    // The URL always shows the table: full form, in column order, without the ignored ones.
++    history.replaceState(null, "", location.pathname + (columns.length ? `?${writeSearch(columns)}` : ""));
++    if (columns.length < 2) return; // fewer than two: states of stories #320 and #321
++
++    const picked = columns.map((c) => {
++      const model = models.find((m) => m.brand === c.brand && m.slug === c.slug)!;
++      return { model, version: model.versions.find((v) => v.name === c.name)! };
++    });
++    render(section, picked);
++    section.hidden = false;
++  }
++
++  function render(section: HTMLElement, picked: { model: PublishedModel; version: PublishedVersion }[]) {
++    const n = picked.length;
++    const table = clone("table");
++    table.style.maxWidth = `calc(${n} * var(--width-version-col-max))`;
++    slot(table, "caption").textContent = t("comparador.tabla.caption", { n });
++
++    const head = slot(table, "head");
++    picked.forEach(({ model, version }, i) => {
++      const h = headerView(model, version);
++      const th = clone("column");
++      th.id = `cmp-col-${i + 1}`;
++      const a = slot(th, "link") as HTMLAnchorElement;
++      a.href = h.href;
++      slot(a, "brand").textContent = h.brand;
++      slot(a, "model").textContent = h.model;
++      slot(a, "sr").textContent = ` ${h.srSuffix}`;
++      slot(th, "name").textContent = h.name;
++      show(slot(th, "badge"), h.badge);
++      head.append(th);
++    });
++
++    for (const field of FIELDS) {
++      const body = clone("field");
++      const label = slot(body, "label");
++      label.id = `cmp-f-${field}`;
++      label.setAttribute("colspan", String(n));
++      label.textContent = fieldLabel(field);
++      const values = slot(body, "values");
++      picked.forEach(({ version }, i) => {
++        const c = cellView(field, version);
++        const td = clone("cell");
++        td.setAttribute("headers", `cmp-col-${i + 1} cmp-f-${field}`);
++        const text = slot(td, "text");
++        text.textContent = c.text;
++        // Same style for every value: only the placeholder is muted, and it also reads as text (CA-17).
++        text.className = c.missing ? "text-ink-600" : field === "precio" ? "text-price text-ink-900" : "";
++        slot(td, "dealRow").hidden = c.deal === null;
++        if (c.deal) slot(td, "deal").textContent = c.deal;
++        const source = slot(td, "source");
++        source.hidden = c.source === null;
++        if (c.source) {
++          const MARK = "\u0001";
++          const [before, after = ""] = t("ficha.precio.fuente", { fuente: MARK, fecha: c.source.date }).split(MARK);
++          slot(source, "before").textContent = before!;
++          const link = slot(source, "sourceLink") as HTMLAnchorElement;
++          link.href = c.source.url;
++          link.textContent = c.source.name;
++          slot(source, "after").textContent = after;
++          show(slot(source, "unofficial"), c.unofficial ? t("ficha.nota.noOficial") : null);
++        }
++        show(slot(td, "note"), c.note);
++        const terms = slot(td, "terms") as HTMLAnchorElement;
++        terms.hidden = c.terms === null;
++        if (c.terms) terms.href = `#cmp-condiciones-${i + 1}`;
++        values.append(td);
++      });
++      table.append(body);
++    }
++    section.querySelector("[data-table-host]")!.replaceChildren(table);
++
++    const list = section.querySelector<HTMLElement>("[data-conditions-list]")!;
++    list.replaceChildren();
++    picked.forEach(({ model, version }, i) => {
++      const terms = cellView("precio", version).terms;
++      if (!terms) return;
++      const entry = clone("condition");
++      entry.id = `cmp-condiciones-${i + 1}`;
++      slot(entry, "title").textContent = conditionTitle(model, version);
++      show(slot(entry, "text"), terms.text);
++      const link = slot(entry, "link") as HTMLAnchorElement;
++      link.hidden = !terms.url;
++      if (terms.url) link.href = terms.url;
++      list.append(entry);
++    });
++    section.querySelector<HTMLElement>("[data-conditions]")!.hidden = list.children.length === 0;
++  }
++</script>
+diff --git a/web/src/lib/compare.ts b/web/src/lib/compare.ts
+index ffbb92a..bd1f53d 100644
+--- a/web/src/lib/compare.ts
++++ b/web/src/lib/compare.ts
+@@ -1,4 +1,7 @@
++import { formatLaunch } from "./card.ts";
+ import type { ModelRecord, Sourced, Version } from "./data.ts";
++import { formatDecimal, formatEur, formatNumber, sourceView } from "./format.ts";
++import { t, type MessageKey } from "./i18n.ts";
+ 
+ /**
+  * Comparator logic (PRD-003, ADR-0014). Pure and browser-safe: it must not import `node:fs` or
+@@ -231,3 +234,113 @@ export function projectModel(
+     versions: m.versions.map(projectVersion),
+   };
+ }
++
++/** The seven rows of the table, in the order of the design (comparador.md, «Filas y formato»). */
++export const FIELDS = ["precio", "autonomia", "bateria", "potencia", "traccion", "cargaCc", "cargaCa"] as const;
++export type FieldId = (typeof FIELDS)[number];
++
++/** Label of a row (`ficha.campo.*`, shared with the model page). */
++export function fieldLabel(field: FieldId): string {
++  return t(`ficha.campo.${field}` as MessageKey);
++}
++
++/** What one cell shows. Everything is already formatted: the DOM code only copies it. */
++export interface CellView {
++  /** The value, or «por confirmar» / «Precio por confirmar»: never a figure when `missing`. */
++  text: string;
++  missing: boolean;
++  /** «Precio con oferta» for a `financed` price (RF-5), else null. */
++  deal: string | null;
++  /** The datum's `note`, verbatim (RF-5), else null. */
++  note: string | null;
++  /** True when the datum's `tier` is not T1: «fuente no oficial» goes with it (RF-4, CA-17). */
++  unofficial: boolean;
++  /** Price only: parts of the source line. */
++  source: { name: string; date: string; url: string } | null;
++  /** Price only, `financed`: literal conditions and their link (RF-5). */
++  terms: { text: string | null; url: string | null } | null;
++}
++
++/** The drivetrain label (`traccion.*`); an unknown code is shown as it comes, never invented. */
++function drivetrainLabel(code: string): string {
++  return code === "fwd" || code === "rwd" || code === "awd" ? t(`traccion.${code}` as MessageKey) : code;
++}
++
++/**
++ * Cell of one version for one row (RF-2, RF-3, RF-5). A missing datum gives the placeholder and no
++ * figure (CA-4). Values are formatted, never computed (RNF-5).
++ */
++export function cellView(field: FieldId, v: PublishedVersion): CellView {
++  const datum: PublishedDatum<unknown> | null = {
++    precio: v.price, autonomia: v.wltp_km, bateria: v.battery_kwh, potencia: v.power_kw,
++    traccion: v.drivetrain, cargaCc: v.dc_max_kw, cargaCa: v.ac_max_kw,
++  }[field];
++  if (datum == null || datum.value == null) {
++    const text = field === "precio" ? t("ficha.precio.porConfirmar") : t("ficha.porConfirmar");
++    return { text, missing: true, unofficial: false, deal: null, note: null, source: null, terms: null };
++  }
++  const base = { missing: false, unofficial: datum.tier !== "T1", deal: null, note: datum.note ?? null, source: null, terms: null };
++  const n = datum.value as number;
++  switch (field) {
++    case "precio": {
++      const p = v.price!;
++      const s = sourceView(p);
++      const financed = p.price_kind === "financed";
++      return {
++        ...base,
++        // Plain space, not the card's non-breaking one: a 80 px column may break before «€» (design).
++        text: formatEur(n).replace(/ /g, " "),
++        deal: financed ? t("ficha.precio.oferta") : null,
++        source: { name: s.name, date: s.date, url: p.url },
++        terms: financed ? { text: p.price_terms, url: p.price_terms_url } : null,
++      };
++    }
++    case "autonomia":
++      return { ...base, text: t("ficha.unidad.km", { n: formatNumber(n) }) };
++    case "bateria": {
++      const basis = v.battery_kwh!.basis;
++      const key = basis === "usable" || basis === "gross" ? basis : "unknown";
++      return { ...base, text: t(`ficha.bateria.${key}` as MessageKey, { kwh: formatDecimal(n) }) };
++    }
++    case "potencia":
++    case "cargaCc":
++    case "cargaCa":
++      return { ...base, text: t("ficha.unidad.kw", { n: formatDecimal(n) }) };
++    case "traccion":
++      return { ...base, text: drivetrainLabel(String(datum.value)) };
++  }
++}
++
++/** Column header (RF-1, RF-2): link to the model page and the «Próximamente» badge if announced. */
++export function headerView(m: PublishedModel, v: PublishedVersion) {
++  const when = m.launch ? formatLaunch(m.launch.value) : null;
++  return {
++    brand: m.brand_name,
++    model: m.model,
++    name: v.name,
++    href: `/marcas/${m.brand}/${m.slug}/`,
++    srSuffix: t("comparador.fichaSr"),
++    badge:
++      m.status.value === "announced"
++        ? when ? t("ficha.estado.proximamenteFecha", { fecha: when }) : t("ficha.estado.proximamente")
++        : null,
++  };
++}
++
++/** Title of a column's entry in «Condiciones de las ofertas»: «{marca} {modelo}, {nombre}». */
++export function conditionTitle(m: PublishedModel, v: PublishedVersion): string {
++  return t("comparador.condiciones.entrada", { marca: m.brand_name, modelo: m.model, nombre: v.name });
++}
++
++/**
++ * The distinct models named by the URL, in order of appearance, which the script has to fetch.
++ * Capped so a hand-written URL cannot trigger a flood of requests; 404s are ignored later (RF-11).
++ */
++export const MAX_FETCHED_MODELS = 12;
++export function modelsToFetch(entries: readonly (RawEntry | null)[]): { brand: string; slug: string }[] {
++  const out = new Map<string, { brand: string; slug: string }>();
++  for (const e of entries) {
++    if (e && out.size < MAX_FETCHED_MODELS) out.set(`${e.brand}/${e.slug}`, { brand: e.brand, slug: e.slug });
++  }
++  return [...out.values()];
++}
+diff --git a/web/src/lib/format.ts b/web/src/lib/format.ts
+index 0924444..1f7e2d0 100644
+--- a/web/src/lib/format.ts
++++ b/web/src/lib/format.ts
+@@ -7,6 +7,13 @@ export function formatNumber(n: number): string {
+   return eur.format(n);
+ }
+ 
++const decimal = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 2, useGrouping: "always" });
++
++/** Number in es-ES keeping the datum's own decimals (up to 2): 77.5 -> "77,5". Display only. */
++export function formatDecimal(n: number): string {
++  return decimal.format(n);
++}
++
+ /** Amount in euros as shown on cards and model pages: "36.273 €" (key `ficha.unidad.eur`). */
+ export function formatEur(n: number): string {
+   // Non-breaking space: the amount and the symbol never split across lines (as the card has always shown it).
+diff --git a/web/src/lib/i18n.ts b/web/src/lib/i18n.ts
+index 3f1e784..a2f7ef1 100644
+--- a/web/src/lib/i18n.ts
++++ b/web/src/lib/i18n.ts
+@@ -131,6 +131,18 @@ export const es = {
+   "ficha.condiciones.titulo": "Condiciones de las ofertas",
+   "ficha.condiciones.enlace": "Ver las condiciones en la web de la marca",
+   "ficha.nota.noOficial": "fuente no oficial",
++  "ficha.campo.autonomia": "Autonomía WLTP",
++  "ficha.campo.bateria": "Batería",
++  "ficha.campo.potencia": "Potencia",
++  "ficha.campo.traccion": "Tracción",
++  "ficha.campo.cargaCc": "Carga máxima en CC",
++  "ficha.campo.cargaCa": "Carga máxima en CA",
++  "ficha.porConfirmar": "por confirmar",
++  "ficha.bateria.usable": "{kwh} kWh, útil",
++  "ficha.bateria.gross": "{kwh} kWh, bruta",
++  "ficha.bateria.unknown": "{kwh} kWh, sin especificar si es útil o bruta",
++  "ficha.estado.proximamente": "Próximamente",
++  "ficha.estado.proximamenteFecha": "Próximamente · {fecha}",
+   "fecha.mes.1": "ene",
+   "fecha.mes.2": "feb",
+   "fecha.mes.3": "mar",
+@@ -197,6 +209,11 @@ export const es = {
+     "Hasta 3 versiones, una al lado de otra, con la fuente de cada dato. Para compartir la comparación, copia la dirección de esta página.",
+   "comparador.elegidos.titulo": "Coches comparados",
+   "comparador.tabla.titulo": "Comparación",
++  "comparador.tabla.entrada":
++    "Precios en España con IVA y sin ayudas. Las columnas siguen el orden que has elegido.",
++  "comparador.tabla.caption": "Comparación de {n} versiones, una por columna",
++  "comparador.fichaSr": "(ficha del modelo)",
++  "comparador.condiciones.entrada": "{marca} {modelo}, {nombre}",
+   "comparador.aviso.prefijo": "Aviso:",
+   "comparador.sinJs.texto":
+     "El comparador necesita JavaScript para leer los coches de la dirección y montar la tabla. Puedes consultar los mismos datos en las fichas del catálogo.",
+diff --git a/web/src/pages/comparar.astro b/web/src/pages/comparar.astro
+index 35edefe..83a18e5 100644
+--- a/web/src/pages/comparar.astro
++++ b/web/src/pages/comparar.astro
+@@ -1,9 +1,10 @@
+ ---
+ import "../styles/global.css";
++import ComparisonTable from "../components/ComparisonTable.astro";
+ import { t } from "../lib/i18n.ts";
+ 
+-// Static shell of /comparar/ (PRD-003, RF-14, RNF-6). The script (#318) fills the templates and
+-// removes the no-JS notice; there is no table in the served HTML.
++// Static shell of /comparar/ (PRD-003, RF-14, RNF-6). The script of ComparisonTable removes the
++// no-JS notice and mounts the table; there is no table in the served HTML, only in <template>.
+ const title = t("comparador.titulo");
+ const site = t("sitio.nombre");
+ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio: site }) : title;
+@@ -47,11 +48,7 @@ const messages = {
+           <h2 id="cmp-elegidos" class="text-section">{t("comparador.elegidos.titulo")}</h2>
+         </section>
+       </template>
+-      <template data-section="tabla">
+-        <section aria-labelledby="cmp-tabla" class="mt-8">
+-          <h2 id="cmp-tabla" class="text-section">{t("comparador.tabla.titulo")}</h2>
+-        </section>
+-      </template>
++      <ComparisonTable />
+ 
+       <div role="status" aria-live="polite" class="sr-only" data-status></div>
+     </main>
+diff --git a/web/tests/comparar.test.ts b/web/tests/comparar.test.ts
+index d0c0278..af1859b 100644
+--- a/web/tests/comparar.test.ts
++++ b/web/tests/comparar.test.ts
+@@ -48,11 +48,30 @@ describe("/comparar/ built page (PRD-003, story #317)", () => {
+     assert.doesNotMatch(notice, /\bhidden\b/);
+     assert.match(notice, /El comparador necesita JavaScript/);
+     assert.match(notice, /<a\b[^>]*href="\/coches"[^>]*>\s*Ir al catálogo\s*<\/a>/);
+-    assert.equal([...html.matchAll(/<script\b/gi)].length, 0, "no script until #318");
+   });
+ 
+-  test("no table in the HTML; status region at the end of main; messages container", () => {
+-    assert.doesNotMatch(html, /<table\b/i);
++  test("the table section is hidden and its markup lives only in <template>", () => {
++    assert.match(html, /<section\b[^>]*data-compare[^>]*\bhidden\b/);
++    const withoutTemplates = html.replace(/<template\b[\s\S]*?<\/template>/gi, "");
++    assert.doesNotMatch(withoutTemplates, /<table\b/i, "a table outside <template>");
++    for (const name of ["table", "column", "field", "cell", "condition"]) {
++      assert.match(html, new RegExp(`<template data-tpl="${name}"`), `template ${name}`);
++    }
++  });
++
++  test("the module script ships and uses no browser storage (RNF-4)", () => {
++    const srcs = [...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map((m) => m[1]);
++    const inline = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
++    assert.ok(srcs.length + inline.filter(Boolean).length > 0, "no script in the page");
++    const code = [
++      ...inline,
++      ...srcs.map((s) => readFileSync(join(root, "out", s!.replace(/^\//, "")), "utf8")),
++    ].join("\n");
++    assert.match(code, /replaceState/);
++    assert.doesNotMatch(code, /localStorage|sessionStorage|indexedDB|document\.cookie|serviceWorker/);
++  });
++
++  test("status region at the end of main; messages container", () => {
+     const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
+     assert.match(main, /data-messages="[^"]+"/);
+     assert.match(main, /<div\b[^>]*role="status"[^>]*><\/div>\s*$/);
+diff --git a/web/tests/compare-view.test.ts b/web/tests/compare-view.test.ts
+new file mode 100644
+index 0000000..2ecca49
+--- /dev/null
++++ b/web/tests/compare-view.test.ts
+@@ -0,0 +1,127 @@
++import assert from "node:assert/strict";
++import { describe, test } from "node:test";
++import { FIELDS, cellView, conditionTitle, headerView, modelsToFetch, parseEntries, projectModel } from "../src/lib/compare.ts";
++import { normalize } from "../src/lib/data.ts";
++import { sourced } from "./fixtures.ts";
++
++const price = (value: number, extra: Record<string, unknown> = {}) => ({
++  ...sourced(value), unit: "EUR", price_kind: "pvp", ...extra,
++});
++const battery = (value: number, basis: string) => ({ ...sourced(value), basis });
++
++/** A model published the way the build does it, so the test sees the browser's input. */
++function published(over: Record<string, any>) {
++  const d = {
++    brand: "acme", brand_name: "Acme", model: "Volta", status: sourced("on_sale"), versions: [], ...over,
++  };
++  return projectModel(normalize(d, `${d.brand}/${d.model}.yaml`), d.model);
++}
++
++describe("cellView (RF-2, RF-3, RF-5)", () => {
++  const full = published({
++    versions: [{
++      name: "Full", price: price(36273), wltp_km: sourced(533), battery_kwh: battery(77.5, "gross"),
++      power_kw: sourced(150, { note: "publicado: 190 CV" }), drivetrain: sourced("rwd"),
++      dc_max_kw: sourced(135), ac_max_kw: sourced(11),
++    }, { name: "Bare" }],
++  });
++  const [fullV, bareV] = full.versions;
++
++  test("CA-3: seven rows in the design's order", () => {
++    assert.deepEqual([...FIELDS], ["precio", "autonomia", "bateria", "potencia", "traccion", "cargaCc", "cargaCa"]);
++    const texts = FIELDS.map((f) => cellView(f, fullV!).text);
++    assert.deepEqual(texts, ["36.273 €", "533 km", "77,5 kWh, bruta", "150 kW", "Trasera", "135 kW", "11 kW"]);
++  });
++
++  test("CA-3: the battery states its basis", () => {
++    const text = (basis: string) =>
++      cellView("bateria", published({ versions: [{ name: "x", battery_kwh: battery(58, basis) }] }).versions[0]!).text;
++    assert.equal(text("usable"), "58 kWh, útil");
++    assert.equal(text("gross"), "58 kWh, bruta");
++    assert.equal(text("unknown"), "58 kWh, sin especificar si es útil o bruta");
++  });
++
++  test("CA-4: a missing datum says «por confirmar» and carries no figure", () => {
++    for (const f of FIELDS) {
++      const c = cellView(f, bareV!);
++      assert.equal(c.missing, true);
++      assert.doesNotMatch(c.text, /\d/);
++      assert.equal(c.note, null);
++      assert.equal(c.source, null);
++    }
++    assert.equal(cellView("cargaCa", bareV!).text, "por confirmar");
++    assert.equal(cellView("precio", bareV!).text, "Precio por confirmar");
++  });
++
++  test("CA-6: a note travels verbatim with its datum", () => {
++    assert.equal(cellView("potencia", fullV!).note, "publicado: 190 CV");
++    assert.equal(cellView("autonomia", fullV!).note, null);
++  });
++
++  test("CA-6: financed price gets the badge and the literal terms; pvp gets neither", () => {
++    const terms = "Entrada 3.000 €,\nfinanciado a 48 meses.";
++    const m = published({
++      versions: [
++        { name: "Deal", price: price(29900, { price_kind: "financed", price_terms: terms, price_terms_url: "https://acme.example/oferta" }) },
++        { name: "Pvp", price: price(31900) },
++      ],
++    });
++    const deal = cellView("precio", m.versions[0]!);
++    assert.equal(deal.deal, "Precio con oferta");
++    assert.deepEqual(deal.terms, { text: terms, url: "https://acme.example/oferta" });
++    assert.equal(deal.source?.name, "acme.example");
++    assert.equal(deal.source?.date, "20 sep 2026");
++    const pvp = cellView("precio", m.versions[1]!);
++    assert.equal(pvp.deal, null);
++    assert.equal(pvp.terms, null);
++  });
++
++  test("CA-17: «fuente no oficial» is computed from the tier, not T1", () => {
++    const of = (t: string) =>
++      cellView("autonomia", published({ versions: [{ name: "x", wltp_km: sourced(400, { tier: t }) }] }).versions[0]!)
++        .unofficial;
++    assert.equal(of("T1"), false);
++    assert.equal(of("T2"), true);
++    assert.equal(of("T3"), true);
++  });
++
++  test("CA-15: no «better/worse», score or difference in any cell", () => {
++    for (const f of FIELDS) {
++      const keys = Object.keys(cellView(f, fullV!)).sort();
++      assert.deepEqual(keys, ["deal", "missing", "note", "source", "terms", "text", "unofficial"]);
++    }
++  });
++});
++
++describe("headerView and conditionTitle (RF-1, RF-2, CA-1)", () => {
++  const m = published({ model: "Soon", status: sourced("announced"), launch: sourced("2026-10"), versions: [{ name: "S 1" }] });
++  test("brand, model, name, link to the model page and the «Próximamente» badge", () => {
++    const h = headerView(m, m.versions[0]!);
++    assert.deepEqual(
++      [h.brand, h.model, h.name, h.href, h.srSuffix, h.badge],
++      ["Acme", "Soon", "S 1", "/marcas/acme/Soon/", "(ficha del modelo)", "Próximamente · oct 2026"],
++    );
++  });
++  test("an on-sale model has no badge", () => {
++    const v = published({ versions: [{ name: "V" }] });
++    assert.equal(headerView(v, v.versions[0]!).badge, null);
++  });
++  test("announced without launch: plain «Próximamente»", () => {
++    const v = published({ status: sourced("announced"), versions: [{ name: "V" }] });
++    assert.equal(headerView(v, v.versions[0]!).badge, "Próximamente");
++  });
++  test("condition title", () => {
++    assert.equal(conditionTitle(m, m.versions[0]!), "Acme Soon, S 1");
++  });
++});
++
++describe("modelsToFetch (ADR-0014: only the models the URL names)", () => {
++  test("distinct models in URL order, malformed values skipped", () => {
++    const e = parseEntries("v=a/b/one&v=a/b/two&v=nonsense&v=c/d");
++    assert.deepEqual(modelsToFetch(e), [{ brand: "a", slug: "b" }, { brand: "c", slug: "d" }]);
++  });
++  test("a hand-made URL cannot ask for an unbounded number of files", () => {
++    const q = Array.from({ length: 50 }, (_, i) => `v=m/x${i}/n`).join("&");
++    assert.equal(modelsToFetch(parseEntries(q)).length, 12);
++  });
++});

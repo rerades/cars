@@ -1,0 +1,14 @@
+case_id: pr-0478
+pr: 478
+reviewed_sha: aa6e512d9ef9c6a933affe4b72119e94265fc2f2
+base_sha: bf70220c9dfd8b844cd60fa32c4e74fc0197f431
+issue: null
+synthetic: false
+confirmed: true
+expected:
+  label: review:needs-human
+  findings:
+    - la foto de zeekr/7gt es del Zeekr 007 GT chino y ninguna fuente confirma que sea el mismo coche
+    - no consta que la foto de skoda/epiq sea el coche de serie y no el concept
+  ca: []
+  not_findings: []

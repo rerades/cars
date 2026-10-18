@@ -1,0 +1,141 @@
+diff --git a/data/images/xpeng/g6/frontal.jpg b/data/images/xpeng/g6/frontal.jpg
+new file mode 100644
+index 0000000..1749a53
+Binary files /dev/null and b/data/images/xpeng/g6/frontal.jpg differ
+diff --git a/data/images/xpeng/g9/frontal.jpg b/data/images/xpeng/g9/frontal.jpg
+new file mode 100644
+index 0000000..03e25d1
+Binary files /dev/null and b/data/images/xpeng/g9/frontal.jpg differ
+diff --git a/data/raw/xpeng/g6.yaml b/data/raw/xpeng/g6.yaml
+new file mode 100644
+index 0000000..d72df61
+--- /dev/null
++++ b/data/raw/xpeng/g6.yaml
+@@ -0,0 +1,36 @@
++# Researcher — Xpeng G6. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-17.
++brand: xpeng
++brand_name: Xpeng
++model: G6
++status: {value: on_sale, note: "motor.es (2025-09) dice que los G6 y G9 mejorados ya aceptan pedidos en España; motor.es (2026-01-30) añade la versión Standard Range RWD a la gama española", source_id: motor-es, url: "https://www.motor.es/noticias/precio-xpeng-g6-g9-2026-2025110181.html", retrieved: 2026-10-17, tier: T3}
++launch: null
++segment: null
++needs_review: true
++versions:
++  - name: G6 RWD Standard Range
++    battery_kwh: {value: 68.5, basis: unknown, note: "IDAE id 607455 (G6 MY25. RWD Standard range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    price: null
++  - name: G6 RWD Long Range
++    battery_kwh: {value: 80.8, basis: unknown, note: "IDAE id 607456 (G6 MY25. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    power_kw: {value: 218, note: "IDAE id 607456", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    price: null
++  - name: G6 AWD Performance
++    battery_kwh: {value: 80.8, basis: unknown, note: "IDAE id 607457 (G6 MY25. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    power_kw: {value: 358, note: "IDAE id 607457", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    price: null
++images:
++  - file: data/images/xpeng/g6/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/XPeng_G6_%282025%29_IAA_2025_DSC_2057.jpg/1280px-XPeng_G6_%282025%29_IAA_2025_DSC_2057.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:XPeng_G6_(2025)_IAA_2025_DSC_2057.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
++open_questions:
++  - "No se ha encontrado una web oficial de Xpeng en España (xpeng.com/es devuelve 404; xpeng.com es global y en inglés): sin T1, todos los precios son null."
++  - "launch: ninguna fuente da la fecha desde la que se puede pedir (motor.es, 2024-09-24, solo da precios vigentes desde septiembre de 2024)."
++  - "segment: motor.es lo llama «SUV Coupé», que no está en la lista de RF-11: null."
++  - "G6 RWD Standard Range: el IDAE (id 607455) da 566 km y 218 kW; motor.es (2026-01-30) da 455 km y 252 CV. Además 566 km con 68,5 kWh no cuadra con los 568 km con 80,8 kWh de la Long Range. Por eso power_kw es null en esta versión y no se publica wltp_km en ninguna versión del G6 (regla 8); specs.wltp_max_km queda vacío al no haber fuente que lo dé. Confirmar con T1."
++  - "drivetrain: ninguna fuente registrada lo da (el IDAE no lo incluye); se omite en las tres versiones. Solo se deducía del nombre de la versión."
++  - "Los IDAE ids 607272-607274 (G6 MY24) son homologaciones anteriores con otras baterías; no se usan."
++  - "Versión Black Edition de AWD Performance (motor.es, 2025-09): sin fila propia en el IDAE; no se incluye."
+diff --git a/data/raw/xpeng/g9.yaml b/data/raw/xpeng/g9.yaml
+new file mode 100644
+index 0000000..4ebf570
+--- /dev/null
++++ b/data/raw/xpeng/g9.yaml
+@@ -0,0 +1,39 @@
++# Researcher — Xpeng G9. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-17.
++brand: xpeng
++brand_name: Xpeng
++model: G9
++status: {value: on_sale, note: "motor.es (2025-09): los G6 y G9 mejorados ya aceptan pedidos en España", source_id: motor-es, url: "https://www.motor.es/noticias/precio-xpeng-g6-g9-2026-2025110181.html", retrieved: 2026-10-17, tier: T3}
++launch: null
++segment: null
++needs_review: true
++versions:
++  - name: G9 RWD Standard Range
++    battery_kwh: {value: 79, basis: unknown, note: "IDAE id 607281 (G9 MY25. RWD Standard range); motor.es: 79 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    wltp_km: {value: 502, note: "IDAE id 607281", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    power_kw: {value: 258, note: "IDAE id 607281", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    price: null
++  - name: G9 RWD Long Range
++    battery_kwh: {value: 93.1, basis: unknown, note: "IDAE id 607282 (G9 MY25. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    wltp_km: {value: 585, note: "IDAE id 607282", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    power_kw: {value: 258, note: "IDAE id 607282", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    price: null
++  - name: G9 AWD Performance
++    battery_kwh: {value: 93.1, basis: unknown, note: "IDAE id 607283 (G9 MY25. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    wltp_km: {value: 540, note: "IDAE id 607283", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    power_kw: {value: 423, note: "IDAE id 607283", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    price: null
++images:
++  - file: data/images/xpeng/g9/frontal.jpg
++    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/XPeng_G9_%282025%29_IAA_2025_DSC_2054.jpg/1280px-XPeng_G9_%282025%29_IAA_2025_DSC_2054.jpg"
++    page_url: "https://commons.wikimedia.org/wiki/File:XPeng_G9_(2025)_IAA_2025_DSC_2054.jpg"
++    source_id: wikimedia-commons
++    retrieved: 2026-10-18
++    license: CC-BY-SA-4.0
++    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
++open_questions:
++  - "No se ha encontrado una web oficial de Xpeng en España (xpeng.com/es devuelve 404; xpeng.com es global y en inglés): sin T1, todos los precios son null."
++  - "status: on_sale se apoya solo en una noticia T3 de motor.es (2025-09); ninguna otra fuente confirma que el G9 se pueda pedir hoy en España. needs_review: true."
++  - "launch: ninguna fuente da la fecha desde la que se puede pedir."
++  - "segment: motor.es lo llama «SUV» de mayor tamaño, cerca del segmento E-SUV; no es un término literal de RF-11: null."
++  - "drivetrain: ninguna fuente registrada lo da (el IDAE no lo incluye); se omite en las tres versiones."
++  - "Los IDAE ids 607275-607277 (G9 MY24) son homologaciones anteriores; no se usan. Black Edition (motor.es) sin fila propia en el IDAE."
+diff --git a/data/raw/xpeng/p7-plus.yaml b/data/raw/xpeng/p7-plus.yaml
+new file mode 100644
+index 0000000..0c5e97c
+--- /dev/null
++++ b/data/raw/xpeng/p7-plus.yaml
+@@ -0,0 +1,33 @@
++# Researcher — Xpeng P7+. Fuentes: idae-es (T2), motor1-es (T3). Consultado 2026-10-17.
++brand: xpeng
++brand_name: Xpeng
++model: P7+
++status: {value: on_sale, note: "Motor1 (fecha del artículo no leída): Xpeng «ha abierto oficialmente los pedidos en España» y las primeras unidades llegan ese mes", source_id: motor1-es, url: "https://es.motor1.com/news/798844/xpeng-p7-berlina-electrica-precios/", retrieved: 2026-10-17, tier: T3}
++launch: null
++segment: null
++needs_review: true
++versions:
++  - name: P7+ RWD Standard Range
++    battery_kwh: {value: 61.7, basis: unknown, note: "IDAE id 611861 (P7+ MY27. RWD Standard range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    wltp_km: {value: 455, note: "IDAE id 611861", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    power_kw: {value: 180, note: "IDAE id 611861", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    price: null
++  - name: P7+ RWD Long Range
++    battery_kwh: {value: 74.9, basis: unknown, note: "IDAE id 611862 (P7+ MY27. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    wltp_km: {value: 530, note: "IDAE id 611862", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    power_kw: {value: 230, note: "IDAE id 611862", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    price: null
++  - name: P7+ AWD Performance
++    battery_kwh: {value: 74.9, basis: unknown, note: "IDAE id 611863 (P7+ MY27. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    wltp_km: {value: 500, note: "IDAE id 611863", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    power_kw: {value: 370, note: "IDAE id 611863", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
++    price: null
++images: []
++open_questions:
++  - "No se ha encontrado una web oficial de Xpeng en España: sin T1, los precios son null (Motor1 y Carwow citan 45.990 / 49.990 / 55.990 €, solo T3)."
++  - "status: on_sale se apoya solo en una noticia T3 de Motor1 cuya fecha no se leyó; ninguna otra fuente confirma que el P7+ se pueda pedir hoy en España. needs_review: true."
++  - "launch: Motor1 y Motor.es no dan el día de apertura de pedidos (Motor.es habla de mayo de 2026, Motor1 de junio): null."
++  - "segment: Motor1 la describe como «berlina 100% eléctrica», que no es un término literal de la lista de RF-11: null."
++  - "drivetrain: ninguna fuente registrada lo da (el IDAE no lo incluye); se omite en las tres versiones."
++  - "Imagen: Commons no muestra ficheros del P7+ en la búsqueda; sin imagen."
++  - "El P7 anterior (IDAE ids 607278-607280, MY24) no se incluye: no hay fuente de que siga a la venta."
+diff --git a/docs/bitacora/2026-10/2026-10-18T0145-cef649cc.md b/docs/bitacora/2026-10/2026-10-18T0145-cef649cc.md
+new file mode 100644
+index 0000000..5de34cc
+--- /dev/null
++++ b/docs/bitacora/2026-10/2026-10-18T0145-cef649cc.md
+@@ -0,0 +1 @@
++- **2026-10-18 01:45** · 📝 Nota — Xpeng, segunda vuelta: sustituye a la PR #433, que el Revisor devolvió. Se reconstruyen g6, g9 y p7-plus desde la rama agent/researcher/20261017-014507-6de141 (el merge no estaba permitido; imágenes redescargadas con fetch-image.ts). Cambios: drivetrain fuera (el IDAE no lo da); G6 sin wltp_km y con power_kw null en Standard Range por la contradicción IDAE/motor.es, needs_review; G9 y P7+ en needs_review porque on_sale solo se apoya en noticias T3; P7+ segment null (berlina no es literal de RF-11). (ADR-0001, ADR-0008)

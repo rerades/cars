@@ -1,0 +1,15 @@
+case_id: pr-0433
+pr: 433
+reviewed_sha: f285163f666df3403a47a4e89d80c6af77a45f50
+base_sha: d78180fe3f26019056638b950dd65bbb0f8d80ed
+issue: null
+synthetic: false
+confirmed: true
+expected:
+  label: review:changes
+  findings:
+    - drivetrain se deduce del nombre de la versión y se atribuye al IDAE, que no lo da (nada se inventa)
+    - "G9 y P7+ quedan publicables (needs_review: false) con el estado de venta apoyado solo en prensa T3"
+    - G6 Standard Range mantiene cifras que se contradicen entre fuentes en vez de dejarlas en null
+  ca: []
+  not_findings: []

@@ -1,0 +1,80 @@
+{
+  "number": 480,
+  "title": "product: Borrador de PRD-006, Reviews, la única área de docs/product/",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Borrador de PRD-006, Reviews, la única área de docs/product/vision.md que aún no tiene PRD. Escríbelo en docs/product/prd/PRD-006-reviews.md con la forma de los otros PRD y status: draft. No resuelvas tú lo que es del responsable: deja como preguntas abiertas, con opciones, pros y contras y una recomendada, al menos (1) la pregunta de la visión «¿las reviews son propias (generadas o redactadas) o agregadas de terceros?»; (2) si una review generada por un agente cumple «nada se inventa» (ADR-0001) y cómo se cita cada afirmación; (3) qué fuentes de reviews de terceros se podrían enlazar o resumir sin chocar con sus términos (la web es personal y no comercial, pero pública e informativa; ADR-0001, regla 6), y (4) dónde se ven (la ficha de modelo de PRD-002, una página propia o las dos). Respeta los principios de la visión: solo lectura, sin datos personales, datos estructurados primero. Enlaza el PRD desde la tabla de la visión y anótalo en la bitácora. No toques el código ni otros PRD.\n- Run: `20261018-033007-f31b4c` · 0.2834 USD (estimated) · 13 turns\n- Agent: `product` · model `sonnet` · may only write to [\"docs/product/\",\"docs/bitacora/\"]\n- Evals: 1 checks passed\n\nWhat the agent says:\n\n```\ns una a una.\n  - **OPEN-3, fuentes de terceros:** recomienda solo enlazar, sin extractos, y excluir los agregadores de opiniones de propietarios. Sin red, no he comprobado ningún término de uso: las categorías son hipótesis para que el Researcher las verifique.\n  - **OPEN-4, dónde se ven:** recomienda un bloque al final de la ficha. Eso obligaría a una enmienda de PRD-002, que no he hecho.\n  - **OPEN-5 (añadida por mí):** la prioridad P2 es una suposición por analogía con PRD-005.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/product/20261018-033007-f31b4c",
+  "baseRefName": "main",
+  "headRefOid": "b7812eaf0930d9ee392167fdd9f843ab595c5b09",
+  "baseRefOid": "1715c59dbaad58225758884e5bf0b692867beabd",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-18T01:31:31Z",
+  "url": "https://github.com/rerades/cars/pull/480",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "docs/bitacora/2026-10/2026-10-18T0331-e89d5855.md",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "path": "docs/product/prd/PRD-006-reviews.md",
+      "additions": 138,
+      "deletions": 0
+    },
+    {
+      "path": "docs/product/vision.md",
+      "additions": 3,
+      "deletions": 3
+    }
+  ],
+  "additions": 142,
+  "deletions": 3,
+  "changedFiles": 3,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "a11y",
+      "status": "COMPLETED",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39086810988/job/117555260618",
+      "startedAt": "2026-10-18T01:33:04Z",
+      "completedAt": "2026-10-18T01:33:04Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39086810988/job/117554991008",
+      "startedAt": "2026-10-18T01:31:36Z",
+      "completedAt": "2026-10-18T01:32:06Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "changes",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39086810988/job/117554990964",
+      "startedAt": "2026-10-18T01:31:37Z",
+      "completedAt": "2026-10-18T01:31:44Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/39086810988/job/117554990738",
+      "startedAt": "2026-10-18T01:31:36Z",
+      "completedAt": "2026-10-18T01:33:04Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}
