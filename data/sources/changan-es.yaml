@@ -1,0 +1,23 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: changan-es
+brand: Deepal
+tier: T1
+market: ES
+kind: [ specs, prices, announcements ]
+urls:
+  home: https://www.changaneurope.com/es
+  models: https://www.changaneurope.com/es/modelos/changan-deepal-s05
+  s07: https://www.changaneurope.com/es/modelos/changan-deepal-s07
+  prices: https://www.changaneurope.com/es/promociones/gama-deepal-s05
+  prices_s07: https://www.changaneurope.com/es/promociones/changan-deepal-s07
+  configurator: https://www.changaneurope.com/es/selector-de-modelos
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  Web oficial de Changan en Europa con sección /es (Deepal es la marca eléctrica de Changan; en España se vende
+  bajo la web de Changan). Verificado (2026-10-19): responde; robots.txt solo bloquea rutas de administración
+  (/admin/, /bin/, /Config/...) y lista sitemap de España. Las fichas de modelo no dan versiones, PVP ni WLTP
+  limpios; las páginas de promociones dan precio al contado y financiado con condiciones resumidas y fechas de
+  validez contradictorias (31/10 y 31/12/2026). La autonomía que muestra la web es "urbana", no WLTP combinado.
+  www.changan.es y www.deepal.es no son de la marca / no resuelven.
+last_verified: 2026-10-19
+status: active

@@ -1,0 +1,15 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: changan-press
+brand: Deepal
+tier: T1
+market: EU
+kind: [ announcements, specs ]
+urls:
+  press: https://newsroom.changaneurope.com
+  spain_launch: https://newsroom.changaneurope.com/changan-lands-in-spain-with-the-debut-of-its-electric-brand-deepal-and-the-launch-of-the-new-s05-and-s07
+image_license: "" # el comunicado no incluye términos de uso de imágenes: no publicar imágenes de esta web
+notes: >
+  Sala de prensa oficial de Changan Europe. Verificado (2026-10-19): responde; robots.txt solo bloquea /subscribe/ y
+  /unsubscribe. Comunicado del 2026-01-29 sobre el lanzamiento en España de Deepal S05 y S07.
+last_verified: 2026-10-19
+status: active
