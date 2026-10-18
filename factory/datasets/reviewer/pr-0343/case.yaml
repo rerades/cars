@@ -5,9 +5,10 @@ base_sha: 8d8588bf43a660388d1f6cdedfa30b173907851e
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:changes); findings and ca to fill in
 expected:
   label: review:changes
-  findings: []
+  findings:
+    - "data/sources/mini-es.yaml queda con status: active aunque ni robots.txt ni las páginas de gama se pudieron leer"
   ca: []
-  not_findings: []
+  not_findings:
+    - "price: null y needs_review: true en los tres modelos son correctos"

@@ -45,9 +45,9 @@ export function proposedLabel(labels: string[], comments: { body: string }[]): s
   return review[0] ?? null;
 }
 
-/** The story the PR closes: «Closes #N» first, then «Historia #N». */
+/** The story the PR closes: «Closes #N» first, then «Historia #N» (capitalised: «la historia #N» in a task is prose). */
 export function storyNumber(title: string, body: string): number | null {
-  const m = body.match(/\b(?:closes|fixes|resolves)\s+#(\d+)/i) ?? `${title}\n${body}`.match(/Historia #(\d+)/i);
+  const m = body.match(/\b(?:closes|fixes|resolves)\s+#(\d+)/i) ?? `${title}\n${body}`.match(/Historia #(\d+)/);
   return m ? Number(m[1]) : null;
 }
 

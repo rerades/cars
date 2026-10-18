@@ -5,13 +5,14 @@ base_sha: 357a167358df6e1222daf90a73cd500bab4bf0a0
 issue: 154
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:ok, review:needs-human, render-preview); findings and ca to fill in
 expected:
   label: review:ok
-  findings: []
+  findings:
+    - las regex nuevas de web/tests/ficha.test.ts usan \[\d\], un solo dígito, y fallarían con 10 o más notas
   ca:
-    - id: CA-9
-      covered: null
     - id: CA-8
-      covered: null
-  not_findings: []
+      covered: true
+    - id: CA-9
+      covered: true
+  not_findings:
+    - eliminar la prueba «RF-4 scope» es correcto, porque ahora el bloque existe

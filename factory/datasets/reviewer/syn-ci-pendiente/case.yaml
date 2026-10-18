@@ -1,0 +1,15 @@
+case_id: syn-ci-pendiente
+pr: 474
+reviewed_sha: 93c8a3ac692a9d72deb76c5929078c48a5f9574d
+base_sha: 357a167358df6e1222daf90a73cd500bab4bf0a0
+issue: 154
+synthetic: true
+from: pr-0474
+note: copy of pr-0474 with the a11y check still running
+confirmed: false
+expected:
+  label: review:error
+  findings:
+    - "la CI sigue en marcha (a11y sin terminar): no se puede dar un veredicto"
+  ca: []
+  not_findings: []

@@ -1,0 +1,62 @@
+{
+  "number": 171,
+  "title": "architect: Issue #164: el registro de fuentes pasa a un fichero por fue",
+  "body": "🏭 Opened automatically by the factory. **Nobody has reviewed this yet.**\n\n- Task: Issue #164: el registro de fuentes pasa a un fichero por fuente, data/sources/<id>.yaml, para que dos PR del Researcher que dan de alta fuentes distintas no choquen al fusionarse (hoy todas añaden su entrada al final de data/sources/registry.yaml). Léela entera, con su lista de lo que hay que cambiar y su criterio de hecho. Decide la pregunta que deja abierta: si basta con cambiar docs/architecture/data-model.md o hace falta enmendar ADR-0001 o ADR-0008; si hace falta una ADR nueva, usa ADR-0014 (la 0010, la 0012 y la 0013 están tomadas). Fija en data-model.md la forma de cada fichero (la de una entrada de hoy, con el nombre del fichero igual a su id) y adónde va el esquema que hoy está en la cabecera del registro. Di si la regla de fusión automática de ADR-0011 cambia con la ruta nueva. Deja escrito qué tiene que cambiar el Desarrollador (factory/evals.ts y sus pruebas) y quién parte el registro en ficheros, sin hacerlo tú. Actualiza las menciones a data/sources/registry.yaml en docs/architecture/. No toques data/, factory/ ni .claude/.\n- Run: `20261006-023005-ec265e` · 0.8422 USD (estimated) · 32 turns\n- Agent: `architect` · model `claude-opus-5-5` · may only write to [\"docs/architecture/\",\"docs/bitacora/\"]\n- Evals: 1 checks passed\n\nWhat the agent says:\n\n```\niene su entrada de tipo `decision`.\n\n**Preguntas abiertas:**\n- ¿Se hace más estricto el esquema del registro (claves desconocidas como error, más claves obligatorias)?\n- ¿Se saca `candidatas.yaml` de `data/sources/` para no tener que saltárselo por nombre?\n- `autonomia-marcas`, que cita `candidatas.yaml`, no está en el registro (lo he comprobado). ¿Se registra como fuente T3?\n- ¿Entra `data/sources/` en la lista de rutas de fusión automática de ADR-0011? Eso sería revisar esa ADR.\n\nRESULTADO: ok\n```",
+  "state": "OPEN",
+  "isDraft": false,
+  "headRefName": "agent/architect/20261006-023005-ec265e",
+  "baseRefName": "main",
+  "headRefOid": "33c6715d0531c0d9d19b537f9b77205949e466fa",
+  "baseRefOid": "250ad12f926545ecfd9a831a1fcdceabf49b7a42",
+  "author": {
+    "id": "MDQ6VXNlcjIwMzA2MDU=",
+    "is_bot": false,
+    "login": "area73",
+    "name": "Rodrigo"
+  },
+  "createdAt": "2026-10-06T00:32:50Z",
+  "url": "https://github.com/rerades/cars/pull/171",
+  "labels": [],
+  "comments": [],
+  "files": [
+    {
+      "path": "docs/architecture/adr/0001-fuentes-de-datos.md",
+      "additions": 5,
+      "deletions": 1
+    },
+    {
+      "path": "docs/architecture/data-model.md",
+      "additions": 170,
+      "deletions": 2
+    },
+    {
+      "path": "docs/bitacora/2026-10/2026-10-06T0232-ec6e3564.md",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "additions": 176,
+  "deletions": 3,
+  "changedFiles": 3,
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/37394582765/job/112047400482",
+      "startedAt": "2026-10-06T00:32:57Z",
+      "completedAt": "2026-10-06T00:33:31Z"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "test",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/rerades/cars/actions/runs/37394582765/job/112047400107",
+      "startedAt": "2026-10-06T00:32:57Z",
+      "completedAt": "2026-10-06T00:33:16Z"
+    }
+  ],
+  "mergeable": "MERGEABLE"
+}

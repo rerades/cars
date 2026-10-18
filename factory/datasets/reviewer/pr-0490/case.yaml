@@ -5,9 +5,9 @@ base_sha: 4527439e9a2c205ebfecaebe73b06772b5852d5d
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:ok, review:needs-human, render-preview); findings and ca to fill in
 expected:
   label: review:ok
-  findings: []
+  findings:
+    - "dream.yaml: power_kw 320 del IDAE frente a unos 315 kW de la web de la marca, sin anotarlo en open_questions"
   ca: []
   not_findings: []

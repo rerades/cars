@@ -5,9 +5,9 @@ base_sha: b45be5e41d864750d949b26ed819d250a26602b4
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:ok); findings and ca to fill in
 expected:
   label: review:ok
   findings: []
   ca: []
-  not_findings: []
+  not_findings:
+    - "quitar 2 versiones y no 4 está explicado: el IDAE solo sostiene 2"

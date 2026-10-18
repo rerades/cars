@@ -5,13 +5,14 @@ base_sha: 72c21da507f3d3ea526ee07e6b1f74c0085ab97f
 issue: 324
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:ok, review:needs-human, render-preview); findings and ca to fill in
 expected:
   label: review:ok
-  findings: []
+  findings:
+    - "el cuerpo de la PR no dice «Closes #324», así que la historia no se cerrará sola"
   ca:
     - id: CA-8
-      covered: null
+      covered: true
     - id: CA-13
-      covered: null
-  not_findings: []
+      covered: true
+  not_findings:
+    - no tocar web/tests/ficha.test.ts no es un fallo; la CI está verde

@@ -5,13 +5,13 @@ base_sha: a553c434035ad8c9b72934aa51d4410000af5216
 issue: 37
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:changes); findings and ca to fill in
 expected:
   label: review:changes
-  findings: []
+  findings:
+    - la prueba del reorden en el navegador solo busca cadenas en el bundle con regex y no falla si se rompe el cableado del selector
   ca:
     - id: CA-3
-      covered: null
+      covered: false
     - id: CA-9
-      covered: null
+      covered: true
   not_findings: []

@@ -5,9 +5,9 @@ base_sha: c6d7bd903cbb3e372233fc0755c567ac335137d6
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:needs-human); findings and ca to fill in
 expected:
   label: review:needs-human
-  findings: []
+  findings:
+    - "es una ADR en estado propuesta con gasto real de API: aceptarla y fijar las cifras de gasto es decisión de una persona"
   ca: []
   not_findings: []

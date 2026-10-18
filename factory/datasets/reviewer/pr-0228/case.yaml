@@ -5,9 +5,11 @@ base_sha: 1d148cd07f5abd77b25355d1468d2a528aa87010
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:changes); findings and ca to fill in
 expected:
   label: review:changes
-  findings: []
+  findings:
+    - falta la entrada de bitácora
+    - el cuerpo de la PR no explica cómo se comprobó que un error en los datos pone el paso en rojo
   ca: []
-  not_findings: []
+  not_findings:
+    - el comentario del YAML en inglés es correcto

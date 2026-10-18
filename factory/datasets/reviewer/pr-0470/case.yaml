@@ -5,9 +5,9 @@ base_sha: f2dcd6eeb2024cdb0208815856c0c725dc1ff11f
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:ok); findings and ca to fill in
 expected:
   label: review:ok
   findings: []
   ca: []
-  not_findings: []
+  not_findings:
+    - "conservar wltp_km y power_kw del IDAE con needs_review: true no es un fallo"

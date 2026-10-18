@@ -5,9 +5,9 @@ base_sha: f56ac1d71df05587e72887cf25d20b25aebb0969
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:ok, review:needs-human, render-preview); findings and ca to fill in
 expected:
   label: review:ok
   findings: []
   ca: []
-  not_findings: []
+  not_findings:
+    - dejar en null las cifras que se contradicen, con open_questions, es lo que pide la tarea

@@ -149,6 +149,7 @@ describe("congelar casos", () => {
     assert.equal(proposedLabel(["review:needs-human"], []), "review:needs-human");
     assert.equal(storyNumber("developer: Historia #154 (épica #145)", "sin closes"), 154);
     assert.equal(storyNumber("x", "Closes #324\nHistoria #1"), 324);
+    assert.equal(storyNumber("x", "se añade con la historia #378"), null);
   });
 
   test("un caso sin confirmar o con un CA sin decidir no se usa", () => {

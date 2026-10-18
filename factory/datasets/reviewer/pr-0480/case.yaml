@@ -5,9 +5,9 @@ base_sha: 1715c59dbaad58225758884e5bf0b692867beabd
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:needs-human); findings and ca to fill in
 expected:
   label: review:needs-human
-  findings: []
+  findings:
+    - deja OPEN-1 a OPEN-5 sin resolver, y son decisiones del responsable de producto
   ca: []
   not_findings: []

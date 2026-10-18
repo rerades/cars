@@ -5,13 +5,14 @@ base_sha: 68e9faf7f675ba56ccd167cb34db77e5ae58e033
 issue: 150
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:changes); findings and ca to fill in
 expected:
   label: review:changes
-  findings: []
+  findings:
+    - "el cuerpo de la PR no dice «Closes #150» ni enumera los RF y CA cubiertos, y la tarea lo exigía"
   ca:
     - id: CA-5
-      covered: null
+      covered: true
     - id: CA-6
-      covered: null
-  not_findings: []
+      covered: true
+  not_findings:
+    - recalcular fieldsOf(version) por celda no es un fallo que bloquee

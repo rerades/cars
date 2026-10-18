@@ -5,9 +5,10 @@ base_sha: ade1c64a8fa74b9e11f0820295799dba355a8005
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:needs-human); findings and ca to fill in
 expected:
   label: review:needs-human
-  findings: []
+  findings:
+    - RNF-2 (LCP) sigue sin historia ni CA
+    - "CA-18 dice «fuente oficial» y el diseño «verificable»: decidir si cambia el PRD o el diseño no es de un agente"
   ca: []
   not_findings: []

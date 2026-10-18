@@ -5,9 +5,11 @@ base_sha: d78180fe3f26019056638b950dd65bbb0f8d80ed
 issue: null
 synthetic: false
 confirmed: false
-proposed: label = the one left on the PR (review:changes); findings and ca to fill in
 expected:
   label: review:changes
-  findings: []
+  findings:
+    - drivetrain se deduce del nombre de la versión y se atribuye al IDAE, que no lo da (nada se inventa)
+    - "G9 y P7+ quedan publicables (needs_review: false) con el estado de venta apoyado solo en prensa T3"
+    - G6 Standard Range mantiene cifras que se contradicen entre fuentes en vez de dejarlas en null
   ca: []
   not_findings: []
