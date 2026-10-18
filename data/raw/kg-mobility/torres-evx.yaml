@@ -1,0 +1,33 @@
+# Researcher — KG Mobility Torres EVX. Fuentes: kgm-es (T1), idae-es (T2). Consultado 2026-10-18.
+brand: kg-mobility
+brand_name: KG Mobility
+model: Torres EVX
+status: {value: on_sale, note: "la web oficial lo muestra con precio 'desde' y configurador", source_id: kgm-es, url: "https://kgm.com.es/torres-evx", retrieved: 2026-10-18, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Torres EVX
+    wltp_km: {value: 443, note: "IDAE id 606768 (única fila de TORRES EVX)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    power_kw: {value: 152, note: "IDAE id 606768; la web dice 152 kW (207 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    price: null
+  - name: Torres EVX Van
+    wltp_km: {value: 441, note: "IDAE id 607258 (TORRES EVX VAN PRO); la web vende el Torres EVX Van para profesionales", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    power_kw: {value: 152, note: "IDAE id 607258", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    price: null
+images:
+  - file: data/images/kg-mobility/torres-evx/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/KG_Mobility_Torres_EVX_Automesse_Ludwigsburg_2024_IMG_1423.jpg/1280px-KG_Mobility_Torres_EVX_Automesse_Ludwigsburg_2024_IMG_1423.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:KG_Mobility_Torres_EVX_Automesse_Ludwigsburg_2024_IMG_1423.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-18
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: la web lo llama «SUV eléctrico», que no es un término literal de RF-11 (suv_pequeno/compacto/grande)."
+  - "Precio: el 'desde 28.325 €' de la web incluye descuentos promocionales hasta fin de mes y 1.000 € de fidelización; el pie de condiciones no se puede copiar entero y no hay PVP sin oferta. Configurador incoherente (muestra ficha de un diésel 4WD y 'Pro' PVP 34.425 €)."
+  - "Batería: la web dice 80,6 kWh LFP, el IDAE 73 kWh y la prensa 73,4 kWh brutos; discrepancia sin resolver, se deja vacía."
+  - "Acabados (Life, Trend, Pro) citados por concesionarios y configurador: la web no los lista en la ficha; no se sabe qué versiones se venden hoy ni si el Van entra en el catálogo de turismos."
+  - "Autonomía: la web da 'hasta 664 km en circulación urbana' (sin WLTP); se usa la homologación del IDAE. Ficha técnica PDF no legible (binario)."
+  - "Imagen: la foto es de un salón en Alemania (Ludwigsburg 2024)."
