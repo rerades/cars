@@ -1,6 +1,6 @@
 # ADR-0016 — Evaluación de los prompts de los agentes con datasets y experimentos de Langfuse
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-18)
 - **Fecha:** 2026-10-18
 
 ## Contexto
@@ -327,15 +327,20 @@ estructurada en JSON; sin SDK):
   de Hobby. Se comprueba con la primera ejecución, con un caso, antes de lanzar los 20.
 
 ### Preguntas abiertas
-- **Límites:** ¿15 USD por experimento y 40 al mes, o qué cifras? ¿Qué límite se pone en el
-  workspace de la Console?
+- ~~**Límites:** ¿15 USD por experimento y 40 al mes, o qué cifras? ¿Qué límite se pone en el
+  workspace de la Console?~~ Resuelta al aceptar (2026-10-18): 15 USD por experimento y 40 al mes;
+  el workspace de la Console lleva el mismo límite mensual.
 - **Casos:** ¿hay suficientes PR cerradas revisadas por el Reviewer de cada etiqueta, en
-  particular `review:needs-human` y `review:error`? ¿Quién etiqueta los 20 primeros?
-- **Modelos a comparar:** la tarea dice «distintos modelos», sin decir cuáles. Propuesta para
+  particular `review:needs-human` y `review:error`? ¿Quién etiqueta los 20 primeros? Al aceptar (2026-10-18): un agente propone los casos y
+  su etiqueta, y el usuario la confirma; si falta alguna etiqueta se usan los sintéticos de (2).
+- ~~**Modelos a comparar:** la tarea dice «distintos modelos», sin decir cuáles. Propuesta para
   el primer experimento: el modelo actual del Reviewer (Sonnet, por defecto) como línea base, y
-  Opus 5.5 y Haiku 5.5. ¿Se confirma?
-- **Unidades actuales:** ¿cuántas unidades de Langfuse gasta ya la factoría al mes? Con 15
+  Opus 5.5 y Haiku 5.5. ¿Se confirma?~~ Resuelta al aceptar (2026-10-18): sí, Sonnet como línea base
+  y Opus 5.5 y Haiku 5.5.
+- ~~**Unidades actuales:** ¿cuántas unidades de Langfuse gasta ya la factoría al mes? Con 15
   ejecuciones al día podría estar cerca del límite antes de añadir experimentos; se mira en la
-  página de uso de Langfuse.
+  página de uso de Langfuse.~~ Resuelta al aceptar (2026-10-18): unas 7.500 observaciones en los
+  últimos 30 días (a las que se suman trazas y puntuaciones, sin contar); hay margen frente a las
+  50.000 unidades del plan Hobby.
 - **Otros agentes:** Product y Planner escriben texto libre y podrían seguir el mismo esquema;
   cada uno sería una enmienda o una ADR propia, no esta.
