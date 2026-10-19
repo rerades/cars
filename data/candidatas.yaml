@@ -64,10 +64,10 @@ candidates:
   - {brand: Maserati, web_es: "https://www.maserati.com/es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: MINI, web_es: "https://www.mini.es", press_room: unknown, bev_models: 3, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Rivian, web_es: null, press_room: unknown, bev_models: 3, doubt: "NO vende aún en España (2026-09-26): autonomia-marcas lista 3 modelos, pero movilidadelectrica.com y flexicar hablan de llegada prevista en 2026; tratar como anunciado, sin verificar con la marca", source_id: autonomia-marcas, retrieved: 2026-09-25}
-  - {brand: AION, web_es: null, press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: AION, web_es: "https://gacspain.es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Aiways, web_es: null, press_room: unknown, bev_models: 2, doubt: "posible marca inactiva en Europa", source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Alpine, web_es: "https://www.alpinecars.com/es-es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
-  - {brand: Deepal, web_es: null, press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Deepal, web_es: "https://www.changaneurope.com/es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Dongfeng, web_es: "https://www.dongfeng-auto.es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Geely, web_es: null, press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Jeep, web_es: "https://www.jeep-official.es", press_room: unknown, bev_models: 2, source_id: autonomia-marcas, retrieved: 2026-09-25}
@@ -84,7 +84,7 @@ candidates:
   - {brand: Honda, web_es: "https://www.honda.es", press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Jaecoo, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Lynk & Co, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
-  - {brand: Mitsubishi Motors, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
+  - {brand: Mitsubishi, web_es: "https://www.mitsubishi-motors.es", press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Mobilize, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Omoda, web_es: null, press_room: unknown, bev_models: 1, source_id: autonomia-marcas, retrieved: 2026-09-25}
   - {brand: Range Rover, web_es: null, press_room: unknown, bev_models: 1, doubt: "es submarca de Land Rover; comprobar si hay BEV a la venta", source_id: autonomia-marcas, retrieved: 2026-09-25}
@@ -95,7 +95,7 @@ candidates:
   - {brand: Yudo, web_es: null, press_room: unknown, bev_models: null, source_id: autonomia-marcas, retrieved: 2026-09-25}
   # Citadas en carwow como con ventas en 2026, sin recuento de modelos:
   - {brand: Xpeng, web_es: null, press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
-  - {brand: Changan, web_es: null, press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
+  - {brand: Changan, web_es: "https://www.changaneurope.com/es", press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
   - {brand: Voyah, web_es: "https://www.voyah.es", press_room: unknown, bev_models: null, source_id: carwow-ventas-2026, retrieved: 2026-09-25}
   # Añadidas 2026-09-26. No salen en la lectura de autonomia-marcas; nº de modelos sin contar. web_es de memoria, sin verificar.
   - {brand: Volkswagen, web_es: "https://www.volkswagen.es", press_room: unknown, bev_models: null, note: "vende BEV en España (volkswagen.es/es/electricos-hibridos/electricos.html en resultados de búsqueda); ID. Polo e ID. Cross anunciados para otoño 2026", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
