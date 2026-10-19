@@ -67,7 +67,7 @@ function cmdStatus(cfg: Config): number {
   console.log(`  estado: rama ${STATE_BRANCH} (ADR-0013)`);
   const waiting = waitingPrs();
   if (waiting.length) {
-    console.log(`  esperan a una persona (review:needs-human): ${waiting.length}`);
+    console.log(`  esperan a una persona (review:needs-human o merger:needs-human): ${waiting.length}`);
     for (const pr of waiting) console.log(`    - ${pr}`);
   }
   return 0;

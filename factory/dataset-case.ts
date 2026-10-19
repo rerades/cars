@@ -36,8 +36,8 @@ export function reviewedSha(comments: { body: string }[]): string | null {
 }
 
 /**
- * The label the Reviewer most likely left. review:needs-human next to review:ok is usually the
- * auto-merge guard (ADR-0011, a «🏭 Espera a una persona» comment), not the Reviewer.
+ * The label the Reviewer most likely left. Before 2026-10-19 the auto-merge guard also used
+ * review:needs-human (ADR-0011, a «🏭 Espera a una persona» comment); now it uses merger:needs-human.
  */
 export function proposedLabel(labels: string[], comments: { body: string }[]): string | null {
   const review = LABELS.filter((l) => labels.includes(l));

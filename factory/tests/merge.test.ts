@@ -30,6 +30,7 @@ test("cualquier otra cosa espera a una persona", () => {
     [{ headRefName: "docs/x" }, false],
     [{ labels: [] }, false],
     [{ labels: [{ name: "review:ok" }, { name: "review:needs-human" }] }, false],
+    [{ labels: [{ name: "review:ok" }, { name: "merger:needs-human" }] }, false],
     [{ comments: [] }, false],
     [{ comments: [green.comments[1], { body: "🏭 Veredicto: revisado el SHA 401ef8c" }] }, false],
     [{ headRefOid: "f".repeat(40) }, false],

@@ -139,7 +139,7 @@ Detalles:
    de las PR de agente. La cola decide qué hará la factoría: encolar es de una persona, y una PR de
    agente que la cambie la fusiona una persona. El registro sostiene el presupuesto (ADR-0002) y
    solo lo escribe el orquestador; si una PR `agent/*` lo toca, es una anomalía y va a
-   `review:needs-human`.
+   `merger:needs-human`.
 
 **Qué cambia en el código (lo hace el Desarrollador; aquí no se escribe):**
 
