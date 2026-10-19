@@ -1,0 +1,20 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: yudo-es
+brand: Yudo
+tier: T1
+market: ES
+kind: [ specs, announcements ]
+urls:
+  home: https://kngloo.eu/
+  brand: https://kngloo.eu/yooudooo/
+  models: https://kngloo.eu/modelo/yooudooo-1
+  robots: https://kngloo.eu/robots.txt
+image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
+notes: >
+  Web de Kngloo, importador oficial en España de Yudo, rebautizada Yooudooo en abril 2025 (motor.es). Yudo no tiene web propia
+  en España (yudo.es da error de certificado, comprobado 2026-10-19). Verificado (2026-10-19): kngloo.eu responde; robots.txt
+  solo bloquea rutas de WooCommerce y /wp-admin/. La marca Yooudooo lista Yooudooo 1, 2, 2 PRO, 3 MAX, 6 y 8 MAX; no lista
+  el Yooudooo 3 eléctrico (antes Yudo 3) ni hay lista de precios con PVP: los precios son «desde… *, no vinculantes». Tampoco
+  hay sala de prensa. Los datos del Yudo 3 salen de IDAE (idae-es) y medios (T3).
+last_verified: 2026-10-19
+status: active

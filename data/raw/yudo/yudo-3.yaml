@@ -1,0 +1,23 @@
+# Researcher — Yudo 3 (hoy Yooudooo 3 en España). Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-19.
+brand: yudo
+brand_name: Yudo
+model: Yudo 3
+status: {value: on_sale, note: "motor.es muestra una oferta vigente («válida hasta fin de existencias») del Yooudooo 3 Elite; no dice fecha de venta ni confirma stock", source_id: motor-es, url: "https://www.motor.es/yooudooo/3/", retrieved: 2026-10-19, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Yudo 3 Elite
+    battery_kwh: {value: 41.7, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2, note: "IDAE id 598280, «YUDO 3 ELECTRÍCA»"}
+    wltp_km: {value: 325, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2, note: "IDAE id 598280"}
+    power_kw: {value: 70, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2, note: "IDAE id 598280"}
+    price: null
+images: []
+open_questions:
+  - "Precio: kngloo.eu (T1) no publica PVP ni ficha del Yooudooo 3 eléctrico (antes Yudo 3); solo hay precios en medios (T3: 24.998 € con oferta, 26.966 € sin ella en motor.es). Precio null."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España (motor.es solo dice que las primeras unidades se matricularon en octubre de 2023 y que se rebautizó en abril de 2025)."
+  - "segment: motor.es lo llama «SUV eléctrico en la parte baja del segmento B-SUV», término fuera de la lista de RF-11; segment null."
+  - "Estado: no se puede confirmar con una fuente T1 que se siga vendiendo; autopista.es (feb 2025) hablaba de 57 unidades en 2024. Nombre de la versión (Elite) sacado de motor.es; el IDAE solo da una fila."
+  - "Nombre comercial: en España es Yooudooo 3 desde abril 2025; se mantiene la carpeta yudo y el nombre del IDAE. Decidir si la marca debe llamarse Yooudooo."
+  - "Imágenes: ninguna encontrada en Wikimedia Commons para el Yudo 3 / Yudo Yuntu."
+  - "Tracción y carga DC: no publicadas en ninguna fuente registrada."
