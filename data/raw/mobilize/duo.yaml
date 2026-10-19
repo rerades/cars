@@ -1,0 +1,40 @@
+# Researcher — Mobilize Duo. Fuentes: idae-es (T2), motor-es (T3). Consultado 2026-10-19.
+brand: mobilize
+brand_name: Mobilize
+model: Duo
+status: {value: on_sale, note: "motor.es (2025-05-23) lista Duo 45 Neo, 80 Evo y 80 Pro con precios 'vigentes desde Mayo / 2025'; no se ha podido confirmar que se sigan vendiendo hoy", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mobilize-duo-2025108307.html", retrieved: 2026-10-19, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Duo 45 Neo (L6e)
+    battery_kwh: {value: 10.3, basis: unknown, note: "IDAE id 606325, DUO Mobilize DUO L6 Neo (Semi: D45 E1 M1)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    wltp_km: {value: 162, note: "IDAE id 606325", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    power_kw: {value: 5.6, note: "IDAE id 606325", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    price: null
+  - name: Duo 80 Evo (L7e)
+    battery_kwh: {value: 10.3, basis: unknown, note: "IDAE id 606326, DUO Mobilize DUO L7 Evo (Semi: D80 E2 M1)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    wltp_km: {value: 158, note: "IDAE id 606326", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    power_kw: {value: 7.4, note: "IDAE id 606326", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    price: null
+  - name: Duo 80 Pro (L7e)
+    battery_kwh: {value: 10.3, basis: unknown, note: "IDAE id 606327, DUO Mobilize DUO L7 Pro (Semi: D80 E0 M1)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    wltp_km: {value: 158, note: "IDAE id 606327", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    power_kw: {value: 7.4, note: "IDAE id 606327", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    price: null
+images:
+  - file: data/images/mobilize/duo/frontal.jpg
+    source_url: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Mobilize_Duo.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mobilize_Duo.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-19
+    license: CC-BY-SA-4.0
+    attribution: "AVMOTO, CC BY-SA 4.0"
+open_questions:
+  - "Precios: las páginas de modelo de www.mobilize.es no son legibles (solo JavaScript) y prensa.mobilize.es tiene el certificado caducado; ninguna fuente T1 leída da PVP. motor.es (T3) citaba 9.798 / 11.798 / 12.798 € en mayo de 2025, que no se guardan por ser T3."
+  - "launch: no se ha podido leer ninguna fuente que dé la fecha desde la que se puede pedir el Duo en España (la nota de prensa de apertura de pedidos en el Salón de Barcelona no se pudo abrir)."
+  - "status: confirmar que Duo 45 Neo, 80 Evo y 80 Pro se venden hoy; la única confirmación es un artículo de mayo de 2025."
+  - "segment: es un cuadriciclo (L6e/L7e), categoría que no está en la lista de RF-11; segment null."
+  - "Tracción y carga (AC/DC) no publicadas en las fuentes leídas."
+  - "Bento (cuadriciclo comercial, IDAE id 606328): no hay fuente que confirme su venta en España; no se crea fichero."
+  - "Potencia: IDAE da 5,6 kW (L6) y 7,4 kW (L7) como potencia eléctrica de homologación; carnovo (T3) habla de 12 kW de motor para el 80 Evo; no se usa."
