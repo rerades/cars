@@ -13,7 +13,12 @@ export const AGENT_BRANCH = /^agent\/([^/]+)\/([^/]+)$/;
 export const ALLOWED_PATHS = ["data/raw/", "data/images/", "data/sources/", "docs/bitacora/"];
 export const MERGES_DIR = join(STATE_DIR, "ops", "merges");
 const VERDICT = "🏭 Veredicto";
-const NEEDS_HUMAN = "review:needs-human";
+const REVIEWER_NEEDS_HUMAN = "review:needs-human";
+// The merge pass never touches review:* labels: those are the Reviewer's (ADR-0011, point 14).
+// merger:needs-human only on PRs with review:ok; merger:unreviewed on those with no verdict.
+const MERGER_NEEDS_HUMAN = "merger:needs-human";
+const MERGER_UNREVIEWED = "merger:unreviewed";
+const NEEDS_HUMAN = [REVIEWER_NEEDS_HUMAN, MERGER_NEEDS_HUMAN, MERGER_UNREVIEWED];
 const PREVIEW = "render-preview";
 const NIGHT_MS = 24 * 3600 * 1000;
 
@@ -43,7 +48,8 @@ export function agentMergeBlocker(
   if (stopped) return "interruptor de parada activo";
   if (!AGENT_BRANCH.test(pr.headRefName)) return "la rama no es agent/<agente>/<run_id>";
   const labels = new Set(pr.labels.map((l) => l.name));
-  if (labels.has(NEEDS_HUMAN)) return `tiene ${NEEDS_HUMAN}`;
+  const human = NEEDS_HUMAN.find((l) => labels.has(l));
+  if (human) return `tiene ${human}`;
   if (!labels.has("review:ok")) return "no tiene review:ok";
   const verdict = pr.comments.filter((c) => c.body.trimStart().startsWith(VERDICT)).at(-1);
   if (!verdict) return "no hay comentario de veredicto del Revisor";
@@ -225,11 +231,12 @@ export function mergePass(o: MergeOptions): { log: string[]; recorded: boolean }
   for (const pr of prs) {
     try {
       const labels = new Set(pr.labels.map((l) => l.name));
-      if (labels.has(NEEDS_HUMAN)) {
+      if (NEEDS_HUMAN.some((l) => labels.has(l))) {
         waiting++;
         continue;
       }
       let reason: string;
+      let label = MERGER_NEEDS_HUMAN;
       if (labels.has("review:ok")) {
         git(["fetch", "-q", "origin", `refs/pull/${pr.number}/head`], repo);
         const blocker = agentMergeBlocker(pr, citedImages(pr.headRefOid, repo), o.stopped, sourceProblems(pr, repo));
@@ -252,6 +259,7 @@ export function mergePass(o: MergeOptions): { log: string[]; recorded: boolean }
         continue; // review:changes or review:error: the PR goes back to its agent
       } else if (now.getTime() - Date.parse(pr.createdAt) > NIGHT_MS) {
         reason = "sin veredicto del Revisor después de una noche";
+        label = MERGER_UNREVIEWED;
       } else {
         continue;
       }
@@ -260,7 +268,7 @@ export function mergePass(o: MergeOptions): { log: string[]; recorded: boolean }
         log.push(`esperaría a una persona ${pr.url}: ${reason}`);
         continue;
       }
-      flag(pr, reason, repo);
+      flag(pr, reason, label, repo);
       log.push(`espera a una persona ${pr.url}: ${reason}`);
     } catch (e) {
       log.push(`error con ${pr.url}: ${(e as Error).message.split("\n")[0]}`);
@@ -282,7 +290,7 @@ function merge(pr: AgentPr, month: string, now: Date, repo: string): void {
   const mergeSha = gh(["pr", "view", String(pr.number), "--json", "mergeCommit", "--jq", ".mergeCommit.oid"], repo);
   const checks = pr.statusCheckRollup.map((c) => `${c.name ?? "?"}: ${c.conclusion}`);
   gh(["pr", "comment", String(pr.number), "--body", `🏭 Fusión automática (ADR-0011) del SHA ${pr.headRefOid}. ` +
-    "Comprobado: rama de agente; `review:ok` sin `review:needs-human`; el último veredicto cita ese SHA; " +
+    "Comprobado: rama de agente; `review:ok` sin `review:needs-human` ni `merger:*`; el último veredicto cita ese SHA; " +
     `sin conflictos; checks terminados en verde (${checks.join(", ")}); todo el diff en ` +
     `${ALLOWED_PATHS.join(", ")}, sin borrados ni renombrados; cada imagen citada por un YAML de data/raw/; ` +
     "cada fuente nueva T1, citada, sin image_license y en el dominio de su web_es de data/candidatas.yaml; " +
@@ -301,9 +309,9 @@ function merge(pr: AgentPr, month: string, now: Date, repo: string): void {
 }
 
 /** Labels the PR for a person, assigns it and says which rule failed (point 4). */
-function flag(pr: AgentPr, reason: string, repo: string): void {
+function flag(pr: AgentPr, reason: string, label: string, repo: string): void {
   const preview = pr.files.some((f) => f.path.startsWith("web/") || f.path.startsWith("data/raw/"));
-  gh(["pr", "edit", String(pr.number), "--add-label", NEEDS_HUMAN, "--add-assignee", "@me",
+  gh(["pr", "edit", String(pr.number), "--add-label", label, "--add-assignee", "@me",
     ...(preview ? ["--add-label", PREVIEW] : [])], repo);
   gh(["pr", "comment", String(pr.number), "--body",
     `🏭 Espera a una persona (ADR-0011): ${reason}. SHA ${pr.headRefOid}.`], repo);
@@ -312,8 +320,9 @@ function flag(pr: AgentPr, reason: string, repo: string): void {
 /** The PRs that wait for a person, for --status. Empty when gh is not available. */
 export function waitingPrs(repo = REPO): string[] {
   try {
-    return gh(["pr", "list", "--state", "open", "--label", NEEDS_HUMAN, "--json", "number,title",
-      "--jq", '.[] | "#\\(.number) \\(.title)"'], repo).split("\n").filter(Boolean);
+    return NEEDS_HUMAN.flatMap((label) => gh(["pr", "list", "--state", "open", "--label", label,
+      "--json", "number,title", "--jq", '.[] | "#\\(.number) \\(.title)"'], repo).split("\n").filter(Boolean)
+      .map((pr) => `${pr} (${label})`));
   } catch {
     return [];
   }
