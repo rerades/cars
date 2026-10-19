@@ -2058,3 +2058,13 @@
     documentación de la versión de Astro instalada). Sin dependencias nuevas. Las pruebas siguen
     comprobando lo mismo. Ejecuta pnpm run test:a11y en web/ varias veces seguidas para comprobar
     que no falla. Explica la causa en la bitácora."
+- id: deepal-pvp-configurador
+  agent: researcher
+  task: "Precios de Deepal (data/raw/deepal/, fuente changan-es). Las fichas deepal-s05.yaml y
+    deepal-s07.yaml tienen price: null porque las páginas de promociones se contradicen. La PR #503
+    (cerrada, duplicada de #501) leyó en el configurador https://www.changaneurope.com/es/selector-de-modelos
+    estos PVP: S05 36.990, 39.990 y 42.990 € y S07 46.990 € («Standard»). No están verificados:
+    ábrelo tú y, si el configurador da el PVP de cada versión de forma legible y asociable a una
+    versión de la ficha, rellena price con la regla de data-model.md (fuente, URL y fecha). Si no
+    se puede asociar a una versión, déjalo en null y anótalo en open_questions. No crees carpetas
+    nuevas ni toques data/raw/changan/."
