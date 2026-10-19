@@ -1,0 +1,20 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: aion-es
+brand: AION
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://gacspain.es/
+  ut: https://gacspain.es/aion-ut/
+  v: https://gacspain.es/aion-v/
+  legal: https://gacspain.es/aviso-legal/
+image_license: "" # el aviso legal prohíbe reproducir contenidos sin autorización (salvo copia privada y no comercial): no publicar imágenes de esta web
+notes: >
+  Web oficial de GAC en España (marca AION: modelos UT y V), titular DISTRIBUIDORA DFSK HISPANIA, S.L. (Grupo Invicta, importador).
+  Verificado (2026-10-19): gacspain.es responde. robots.txt: "User-agent: *  Disallow: /wp-admin/  Allow: /wp-admin/admin-ajax.php".
+  Sin sala de prensa ni configurador. Cada ficha de modelo da un PVP de la versión Premium en la nota de financiación
+  (UT 30.995 €, V 37.995 €); no lista la versión Luxury; los campos de autonomía y potencia salen a 0 (marcador sin rellenar).
+  El aviso legal dice que precios y datos son orientativos. Los datos de homologación salen de idae-es.
+last_verified: 2026-10-19
+status: active
