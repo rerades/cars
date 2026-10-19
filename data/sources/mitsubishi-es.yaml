@@ -1,0 +1,23 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: mitsubishi-es
+brand: Mitsubishi
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.mitsubishi-motors.es/
+  models: https://www.mitsubishi-motors.es/modelos
+  eclipse-cross-ev: https://www.mitsubishi-motors.es/modelos/eclipse-cross-ev
+  promotions: https://www.mitsubishi-motors.es/loquiero/promociones
+  eclipse-cross-offer: https://www.mitsubishi-motors.es/loquiero/promociones/ofertas/promocion_eclipsecrossev
+  configurator: https://www.mitsubishi-motors.es/loquiero/configurador
+  news: https://www.mitsubishi-motors.es/empresa/noticias
+  robots: https://www.mitsubishi-motors.es/robots.txt
+image_license: "" # sin términos de uso de imágenes leídos: no se publican imágenes de esta fuente
+notes: >
+  Web oficial de Mitsubishi Motors España (dominio mitsubishi-motors.es, responde; comprobado el 2026-10-19).
+  robots.txt permite todo (Disallow vacío). No hay tarifa única: los precios salen de la ficha del modelo y del
+  menú de modelos, con la nota «Incluye IVA, impuesto de matriculación en el caso que aplique, transporte y
+  campaña comercial», es decir, no son un PVP limpio. Sin sala de prensa propiamente dicha (/empresa/noticias).
+last_verified: 2026-10-19
+status: active

@@ -1,0 +1,27 @@
+# Researcher — Mitsubishi Eclipse Cross EV. Fuentes: mitsubishi-es (T1), idae-es (T2). Consultado 2026-10-19.
+brand: mitsubishi
+brand_name: Mitsubishi
+model: Eclipse Cross
+status: {value: on_sale, note: "la web oficial lista el modelo con configurador y ofertas con contratación en 2026", source_id: mitsubishi-es, url: "https://www.mitsubishi-motors.es/modelos/eclipse-cross-ev", retrieved: 2026-10-19, tier: T1}
+launch: null
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 626, note: "«Autonomía eléctrica (ciclo combinado WLTP)» de la ficha del modelo; el IDAE da 632 km para ECLIPSE CROSS 87kWh", source_id: mitsubishi-es, url: "https://www.mitsubishi-motors.es/modelos/eclipse-cross-ev", retrieved: 2026-10-19, tier: T1}
+versions:
+  - name: Kaiteki
+    battery_kwh: {value: 87, basis: unknown, source_id: mitsubishi-es, url: "https://www.mitsubishi-motors.es/modelos/eclipse-cross-ev", retrieved: 2026-10-19, tier: T1}
+    power_kw: {value: 160, note: "IDAE, fila ECLIPSE CROSS 87kWh (id 608726); no se indica por acabado", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    price: null
+  - name: Kaiteki+
+    battery_kwh: {value: 87, basis: unknown, source_id: mitsubishi-es, url: "https://www.mitsubishi-motors.es/modelos/eclipse-cross-ev", retrieved: 2026-10-19, tier: T1}
+    power_kw: {value: 160, note: "IDAE, fila ECLIPSE CROSS 87kWh (id 608726); no se indica por acabado", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-19, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Precio: la web da «desde 41.050 €» (Kaiteki) y «desde 45.900 €» (Kaiteki+) con la nota «Incluye IVA, impuesto de matriculación en el caso que aplique, transporte y campaña comercial»; no hay PVP sin campaña y la página de oferta (promocion_eclipsecrossev) se contradice entre bloques (60/48 meses, entradas y fechas distintas) y caducó el 30/09/2026. No se guarda ningún precio."
+  - "Autonomía: la web da 626 km y el IDAE 632 km; se usa la web (T1) solo a nivel de modelo (specs) porque no se confirma la cifra por versión."
+  - "launch: la web no da la fecha desde la que se puede pedir en España."
+  - "segment: la web no usa un término de segmento para este modelo."
+  - "Potencia (160 kW) tomada del IDAE (T2); la web no publica potencia, tracción ni cargas DC/AC."
+  - "Imágenes: sin ficheros del Eclipse Cross eléctrico en Wikimedia Commons (búsquedas del 2026-10-19)."
