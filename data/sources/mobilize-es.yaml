@@ -1,0 +1,22 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: mobilize-es
+brand: Mobilize
+tier: T1
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://www.mobilize.es/
+  models: https://www.mobilize.es/modelos/mobilize-duo.html
+  robots: https://www.mobilize.es/robots.txt
+  legal: https://www.mobilize.es/informacion-legal.html
+  press: https://prensa.mobilize.es/
+image_license: "" # sin términos de uso de imágenes leídos: no publicar imágenes de esta web
+notes: >
+  Web oficial de Mobilize (marca de Renault Group) en España; pie "© mobilize 2017 - 2026". Verificado (2026-10-19):
+  www.mobilize.es responde y su robots.txt solo bloquea URL con parámetros de configurador (conf, confuri, dealerId,
+  modelURI, vin). Las páginas de modelo (/modelos/mobilize-duo.html, /modelos/mobilize-duo/confort.html) devuelven la
+  portada de servicios de recarga al leerlas con WebFetch (contenido solo por JavaScript): no se han podido leer
+  versiones ni precios. prensa.mobilize.es tiene el certificado caducado (2026-10-19): no se fuerza el acceso. La
+  información legal dice que los precios son solo máximos recomendados. Sin precios leídos, no se usa como fuente de precio.
+last_verified: 2026-10-19
+status: active
