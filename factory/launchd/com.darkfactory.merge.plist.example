@@ -2,7 +2,7 @@
 <!-- Copiar a ~/Library/LaunchAgents/com.darkfactory.merge.plist, ajustar RUTA y cargar:
      launchctl load ~/Library/LaunchAgents/com.darkfactory.merge.plist
      Fusión automática de ADR-0011 a las 07:30, después del Revisor (06:30): fusiona las PR de
-     agente que cumplen todas las reglas y marca merger:needs-human en las demás. No usa el modelo,
+     agente que cumplen todas las reglas y marca merger:needs-human (o merger:unreviewed) en las demás. No usa el modelo,
      así que el horario nocturno no le afecta; si hay una ejecución en curso (factory/.run.lock),
      espera a la pasada del día siguiente. Necesita gh con sesión iniciada. PATH como en el del
      orquestador. -->

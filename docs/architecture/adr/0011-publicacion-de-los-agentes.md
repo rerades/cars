@@ -3,7 +3,7 @@
 - **Estado:** aceptada (2026-10-01). Enmienda «Imágenes» (`data/images/` en la lista de rutas):
   aceptada (2026-10-12). Enmienda «Fuentes nuevas» (`data/sources/`, solo altas): aceptada
   (2026-10-15). Enmienda «URL nuevas en fuentes existentes»: aceptada (2026-10-15). Enmienda
-  «Etiqueta de la fusión» (`merger:needs-human`): aceptada (2026-10-19)
+  «Etiqueta de la fusión» (`merger:needs-human` y `merger:unreviewed`): aceptada (2026-10-19)
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
@@ -11,7 +11,7 @@
   2 MB como máximo (punto 10). 2026-10-15 enmienda «Fuentes nuevas» propuesta y aceptada: una fuente nueva
   entra sola con las condiciones del punto 11; cambiar una existente sigue siendo de una persona. 2026-10-15, más tarde: enmienda «URL nuevas en
   fuentes existentes» propuesta y aceptada (punto 13). 2026-10-19 enmienda «Etiqueta de la fusión»
-  propuesta y aceptada: la fusión marca con `merger:needs-human` (punto 14).
+  propuesta y aceptada: la fusión marca con `merger:needs-human` o `merger:unreviewed` (punto 14).
 
 ## Contexto
 Es la última decisión pendiente de `overview.md`: «Cómo publican los agentes (CI/CD, entornos,
@@ -107,7 +107,7 @@ Detalles:
 2. **La fusión.** Un paso nuevo del orquestador (por ejemplo `node factory/run.ts --merge`),
    código sin modelo, idempotente y lanzable a mano. Fusiona una PR solo si se cumplen **todas**:
    - la rama es `agent/<agente>/<run_id>` y la abrió la factoría;
-   - tiene `review:ok` y no tiene `review:needs-human` ni `merger:needs-human`;
+   - tiene `review:ok` y no tiene `review:needs-human`, `merger:needs-human` ni `merger:unreviewed`;
    - el último comentario de veredicto del Revisor cita el SHA que hoy es la cabeza de la PR. Si
      alguien empujó después de la revisión, la etiqueta no vale;
    - **todos** los checks de la PR terminaron y en verde (`gh pr checks`); ninguno pendiente, y
@@ -142,13 +142,14 @@ Detalles:
 4. **Cómo se avisa de lo demás.** En la misma pasada, para cada PR `agent/*` abierta con
    `review:needs-human`, **o** con `review:ok` que no cumple alguna regla, **o** sin veredicto
    después de una noche:
-   - pone `merger:needs-human` (enmienda del 2026-10-19; antes, `review:needs-human`) y comenta **qué regla** falló (así una `review:ok`
+   - pone `merger:needs-human`, o `merger:unreviewed` si no hay veredicto (enmienda del
+     2026-10-19; antes, `review:needs-human`), y comenta **qué regla** falló (así una `review:ok`
      con rutas fuera de la lista no se queda muda);
    - asigna la PR al responsable;
    - si toca `web/` o `data/raw/`, añade `render-preview` para que la vista previa esté lista;
    - muestra una notificación local en el Mac de la factoría con el número de PR pendientes;
    - `run.ts --status` lista las PR que esperan a una persona. La fuente de verdad es el filtro
-     `is:open label:review:needs-human,merger:needs-human`.
+     `is:open label:review:needs-human,merger:needs-human,merger:unreviewed`.
 
 5. **Cómo se vuelve atrás.** Una persona hace `git revert -m 1 <sha-del-merge>` en una rama y abre
    PR; esa PR no es `agent/*`, así que nunca se fusiona sola. La línea de `ops/merges/` da el SHA.
@@ -287,17 +288,20 @@ Comprobado el 2026-10-15: los cambios de `ford-es` (#362) y de `autonomiacochese
 
 ### Etiqueta de la fusión (enmienda del 2026-10-19, aceptada)
 
-**La fusión marca con `merger:needs-human`, no con `review:needs-human`.**
+**La fusión marca con `merger:needs-human` o `merger:unreviewed`, no con `review:needs-human`.**
 
 Contexto propio de la enmienda: la noche del 2026-10-18 al 19, cuatro PR del Researcher (#501,
 #505, #507 y #511) acabaron con `review:ok` y `review:needs-human` a la vez: el Revisor las
 aprobó y la fusión las paró por una regla del punto 2. Con la misma etiqueta no se distinguía
 quién pedía a la persona.
 
-14. **Cada etiqueta, de quien la pone.** `review:*` es solo del Revisor. La fusión pone
-    `merger:needs-human` y nunca toca las `review:*`. Las dos etiquetas bloquean la fusión, y
-    `run.ts --status` lista las PR que tienen cualquiera de ellas. Para que una PR con
-    `merger:needs-human` entre, una persona la fusiona a mano.
+14. **Cada etiqueta, de quien la pone.** `review:*` es solo del Revisor, y la fusión nunca la
+    toca. La fusión pone `merger:needs-human` solo a una PR con `review:ok` que incumple una regla
+    del punto 2: esa etiqueta implica siempre el ok del Revisor. A una PR sin veredicto después de
+    una noche le pone `merger:unreviewed`: nadie la ha revisado. Las tres etiquetas
+    (`review:needs-human` y las dos `merger:*`) bloquean la fusión, y `run.ts --status` lista las PR
+    que tienen cualquiera de ellas. Para que entre una PR marcada por la fusión, una persona la
+    fusiona a mano.
 
 ## Consecuencias
 **Buenas**
