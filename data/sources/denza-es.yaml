@@ -1,0 +1,16 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: denza-es
+brand: Denza
+tier: T1
+market: ES
+kind: [ announcements ]
+urls:
+  home: https://www.denza.com/es
+  models: https://www.denza.com/es/model-page/z9gt # también /model-page/d9, /model-page/bao5, /model-page/z
+  prices: https://www.denza.com/es/configurador/z9gt # configurador: sin precios ni versiones legibles sin JavaScript
+  legal: https://www.denza.com/es/terms-of-use
+image_license: "" # términos de uso: solo uso personal no comercial; cualquier otro uso exige permiso escrito de BYD. No publicar imágenes de esta web
+notes: >
+  Verificado (2026-10-19): denza.com/es responde ("Sitio Oficial | Denza España"; sitio de BYD, términos de uso a nombre de BYD); robots.txt permite todo (User-agent * Allow /). Modelos listados: Z9GT, D9, BAO 5, Z. Las fichas y el configurador no publican versiones, precios, batería, autonomía ni potencia (solo tracción total de tres motores y "Gran turismo inteligente"), ni dicen si hay pedidos abiertos. Sin datos para data/raw/. El IDAE no tiene la marca DENZA. En España solo se anuncian Z9GT (BEV y PHEV DM) y D9 (solo PHEV, fuera de alcance).
+last_verified: 2026-10-19
+status: active
