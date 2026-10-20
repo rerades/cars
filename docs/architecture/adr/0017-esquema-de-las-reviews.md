@@ -172,10 +172,12 @@ Avisan (no bloquean), como el resto de ADR-0010:
   contenido propio de la factoría no existe (RF-6), así que no hace falta un campo que lo distinga.
 
 ### Fuera de esta decisión (pendiente)
-- El cambio de `data-model.md` (secciones 3, 6 y 8) se escribe al aceptar esta ADR, con un ejemplo
-  ficticio de `acme`.
-- El cambio de `factory/evals.ts` y sus pruebas, el de `.claude/agents/researcher.md` y las tareas de
-  la cola: los hacen una persona o el Desarrollador en una sesión sin `FACTORY_AGENT`.
+- ~~El cambio de `data-model.md` (secciones 3, 6 y 8) se escribe al aceptar esta ADR, con un ejemplo
+  ficticio de `acme`.~~ Hecho el 2026-10-20: sección 3.1, regla 11 de la sección 6 y regla 5 de la 8.3.
+  El ejemplo usa un medio ficticio, `motorejemplo-es`.
+- ~~El cambio de `factory/evals.ts` y sus pruebas, el de `.claude/agents/researcher.md`~~ (hecho el
+  2026-10-20, en la misma PR que `data-model.md`) y las tareas de la cola: los hacen una persona o el
+  Desarrollador en una sesión sin `FACTORY_AGENT`.
 - Cómo se ve el bloque, qué se muestra sin reviews y el orden de las entradas: diseño y la enmienda
   de PRD-002 (PRD-006, decisión 4).
 - Si las reviews entran en los JSON del comparador (ADR-0014) o de los rankings (ADR-0015): no; ningún
