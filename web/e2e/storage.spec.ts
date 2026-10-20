@@ -1,10 +1,10 @@
-import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createServer, type Server } from "node:http";
 import { tmpdir } from "node:os";
 import { extname, join, normalize } from "node:path";
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
 import { stringify } from "yaml";
+import { buildSite } from "./build-site.ts";
 import { acme, imageEntry, pngBytes, sourced } from "../tests/fixtures.ts";
 
 /**
@@ -14,7 +14,6 @@ import { acme, imageEntry, pngBytes, sourced } from "../tests/fixtures.ts";
  * (no real YAML has the `file` field yet), built to a temp dir and served by a tiny static server.
  */
 
-const WEB = join(import.meta.dirname, "..");
 const MIME: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css",
@@ -113,11 +112,7 @@ test.describe("no cookies, no web storage (RNF-5, CA-7)", () => {
     };
     writeFileSync(join(data, "acme", "WithImage.yaml"), stringify(doc));
     writeFileSync(join(data, "acme", "Volta.yaml"), stringify(acme()));
-    execFileSync(join(WEB, "node_modules/.bin/astro"), ["build", "--outDir", out], {
-      cwd: WEB,
-      env: { ...process.env, CARS_DATA_DIR: data, CARS_IMAGES_DIR: images },
-      stdio: "pipe",
-    });
+    buildSite(out, { CARS_DATA_DIR: data, CARS_IMAGES_DIR: images });
 
     server = createServer((req, res) => {
       const path = normalize(decodeURIComponent(new URL(req.url ?? "/", "http://x").pathname));
