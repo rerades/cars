@@ -1,6 +1,6 @@
 # ADR-0001 — Fuentes de datos de modelos, precios e imágenes
 
-- **Estado:** aceptada
+- **Estado:** aceptada. Enmendada el 2026-10-06 (#164) y el 2026-10-20 (ADR-0017)
 - **Fecha:** 2026-09-19
 
 ## Contexto
@@ -13,8 +13,8 @@ Un agente **Researcher** mantiene un **registro de fuentes** (un fichero por fue
 | Nivel | Tipo de fuente | Uso |
 |---|---|---|
 | **T1** | Web oficial de la marca en España (configurador, lista de precios, ficha técnica) y sala de prensa oficial | Fuente preferente para precio, specs e imágenes |
-| **T2** | Web oficial de la marca en otro país europeo o a nivel europeo; documentación de homologación | Specs, y modelos aún no disponibles en España |
-| **T3** | Medios del motor reconocidos, bases de datos especializadas | Solo para confirmar datos o para anuncios. Nunca como única fuente de precio |
+| **T2** | Web oficial de la marca en otro país europeo o a nivel europeo; documentación de homologación; organismos de pruebas independientes (enmienda 2026-10-20) | Specs, y modelos aún no disponibles en España; resultados de pruebas y enlaces a ellas (ADR-0017) |
+| **T3** | Medios del motor reconocidos, bases de datos especializadas | Solo para confirmar datos o para anuncios. Nunca como única fuente de precio. Fuente de los enlaces a sus propias reviews (enmienda 2026-10-20, ADR-0017) |
 
 ### Reglas
 1. **Precio:** PVP oficial de la marca en España, **sin ayudas** (sin Plan MOVES ni otros incentivos). Solo desde T1.
@@ -36,3 +36,9 @@ Un agente **Researcher** mantiene un **registro de fuentes** (un fichero por fue
   fichero por fuente (`data/sources/<id>.yaml`) para que dos PR que dan de alta fuentes distintas no
   choquen al fusionarse. Solo cambia la ruta; la decisión es la misma. Motivo, alternativas y forma
   de cada fichero en [data-model.md, sección 8](../data-model.md).
+- **Enmienda 2026-10-20 ([ADR-0017](0017-esquema-de-las-reviews.md)):** para las reviews de PRD-006,
+  T2 incluye a los organismos de pruebas independientes (miden con un protocolo publicado, como la
+  homologación), y un medio T3 puede ser la fuente de un enlace a su propia review. «Solo para
+  confirmar» sigue valiendo para los valores que compiten con los de la marca; un enlace no compite
+  con ninguno. No hay nivel nuevo: el eval sigue aceptando solo T1, T2 y T3. La regla 6 (términos de
+  uso) es la que decide si un medio u organismo se puede enlazar.

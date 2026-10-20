@@ -1,6 +1,7 @@
 # ADR-0017 — Esquema de datos de las reviews: enlaces de terceros y resultados de pruebas
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-20). Enmienda ADR-0001: T2 incluye los organismos de pruebas
+  independientes y los medios pueden ser fuente de un enlace (enmienda del 2026-10-20 en su tabla).
 - **Fecha:** 2026-10-20
 
 ## Contexto
@@ -219,6 +220,8 @@ Avisan (no bloquean), como el resto de ADR-0010:
   `kind`: el registro sigue sin endurecerse para las demás fuentes (decisión del 2026-10-06).
 
 ### Preguntas abiertas
+Siguen abiertas al aceptarla (2026-10-20). Ninguna bloquea el esquema; se deciden con lo que
+encuentre el Researcher en las primeras fuentes.
 - ¿Se guarda la fecha de publicación de la review (no la de consulta)? PRD-006 no la pide; sin ella
   no se puede ordenar por novedad ni avisar de reviews de una versión ya retirada.
 - ¿Se marca el idioma del enlace (`lang`) para el `hreflang` y para avisar al visitante de que está en
