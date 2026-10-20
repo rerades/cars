@@ -1,10 +1,10 @@
-import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createServer, type Server } from "node:http";
 import { tmpdir } from "node:os";
 import { extname, join, normalize } from "node:path";
 import { expect, test } from "@playwright/test";
 import { stringify } from "yaml";
+import { buildSite } from "./build-site.ts";
 import { acme, sourced } from "../tests/fixtures.ts";
 
 /**
@@ -13,7 +13,6 @@ import { acme, sourced } from "../tests/fixtures.ts";
  * (WCAG 1.4.10). Test data built to a temp dir, served by a tiny static server.
  */
 
-const WEB = join(import.meta.dirname, "..");
 const MIME: Record<string, string> = { ".html": "text/html; charset=utf-8", ".css": "text/css" };
 
 test.describe("model page versions (CA-3, CA-11)", () => {
@@ -34,11 +33,7 @@ test.describe("model page versions (CA-3, CA-11)", () => {
       join(data, "acme", "Soon.yaml"),
       stringify({ brand: "acme", brand_name: "Acme", model: "Soon", status: sourced("announced"), versions: [] }),
     );
-    execFileSync(join(WEB, "node_modules/.bin/astro"), ["build", "--outDir", out], {
-      cwd: WEB,
-      env: { ...process.env, CARS_DATA_DIR: data },
-      stdio: "pipe",
-    });
+    buildSite(out, { CARS_DATA_DIR: data });
     server = createServer((req, res) => {
       const path = normalize(decodeURIComponent(new URL(req.url ?? "/", "http://x").pathname));
       let file = join(out, path);
