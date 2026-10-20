@@ -26,7 +26,13 @@ Este directorio es la **fuente de verdad** del producto. Lo leen y lo escriben t
 
 | ID | Título | Estado | Depende de |
 |---|---|---|---|
-| PRD-001 | Catálogo de modelos | draft | — |
+| [PRD-001](product/prd/PRD-001-catalogo-modelos.md) | Catálogo de modelos | ready | — |
+| [PRD-002](product/prd/PRD-002-ficha-modelo.md) | Ficha de modelo | ready | PRD-001 |
+| [PRD-003](product/prd/PRD-003-comparador.md) | Comparador | ready | PRD-001, PRD-002 |
+| [PRD-004](product/prd/PRD-004-portada.md) | Portada | ready | PRD-001, PRD-002 |
+| [PRD-005](product/prd/PRD-005-rankings.md) | Rankings | ready | PRD-001, PRD-002 |
+| [PRD-006](product/prd/PRD-006-reviews.md) | Reviews | ready | PRD-001, PRD-002 |
+| [PRD-007](product/prd/PRD-007-harness-factoria.md) | Harness de la factoría | draft | — |
 
 ## Agentes
 
