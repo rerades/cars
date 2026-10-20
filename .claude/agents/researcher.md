@@ -23,6 +23,7 @@ Lee siempre:
 - Wikimedia Commons es la fuente de imágenes por defecto (PRD-001, RF-8): regístrala como una fuente más.
 - Verifica que cada URL responde y pertenece al dominio oficial de la marca. Actualiza `last_verified`.
 - Marca como `broken` las fuentes que dejen de funcionar, en lugar de borrarlas.
+- **Medios y organismos de pruebas** (para reviews, ADR-0017): un medio del motor cuyas reviews se enlazan va con `kind: [reviews]` y T3; un organismo de pruebas independiente, con `kind: [tests]` y T2. Los dos llevan `name` (el nombre que ve el visitante), `terms_url` (la página de términos o de reutilización que has leído) y `terms_checked` (la fecha en que la leíste). Regístralos solo si esos términos permiten enlazar sus páginas (ADR-0001, regla 6), y pon en `urls` todos los dominios desde los que publican. Nunca agregadores de opiniones de propietarios ni foros (PRD-006, RF-8).
 
 ### 2. Obtener datos (`data/raw/<marca>/<modelo>.yaml`)
 Escribe **exactamente el esquema de `data-model.md`**: copia la forma de su ejemplo completo (sección 7)
@@ -36,6 +37,18 @@ Por cada modelo: `brand` (igual a la carpeta), `brand_name` (igual en todos los 
 (`null` si no hay) e `images`. **Cada valor** va con su fuente: `value`, `source_id`, `url`,
 `retrieved`, `tier` y, si hace falta, `note`. Si la marca solo da CV, guarda `power_kw` = CV × 0,7355
 redondeado y `note: "publicado: 204 CV"`.
+
+**Reviews y resultados de pruebas** (`data-model.md`, sección 3.1; ADR-0017), solo cuando la tarea
+lo pida, y nunca para un modelo con `needs_review: true`:
+- `reviews`: copia la forma del ejemplo de la sección 3.1. `title` es el título **literal** de la
+  pieza, en su idioma, sin traducir ni acortar. `url` es la URL exacta, sin parámetros de seguimiento
+  ni de afiliación. Pon `retrieved` solo después de comprobar que la página existe y trata de ese
+  modelo. `version`, solo si la review trata de una versión concreta del fichero.
+- No escribas ningún resumen, extracto, valoración, nota ni traducción: no hay claves para eso y la
+  comprobación rechaza el fichero entero (PRD-006, RF-6 y RF-7).
+- `test_results`: la lista de métricas aún está vacía, así que no los escribas. Si encuentras un
+  organismo, regístralo y propone sus métricas (nombre, unidad, rango y URL donde las publica) en
+  `open_questions` y en tu resumen final. Una persona las añade al esquema.
 
 ## Reglas innegociables
 - **Precio = PVP oficial en España, sin ayudas** (sin Plan MOVES ni otros incentivos). Solo desde fuentes T1. Guárdalo con `price_kind: pvp`.
