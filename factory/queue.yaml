@@ -2157,3 +2157,33 @@
     prueba destapa un incumplimiento de un CA, corrígelo en la misma PR si el arreglo es pequeño y
     está en la ficha; si no, deja esa prueba con test.todo y explícalo en la PR y en la bitácora.
     La PR dice «Closes #155» y enumera los RF y CA cubiertos."
+- id: adr-0018-cola-desde-issues
+  agent: architect
+  task: "ADR nueva, ADR-0018 (usa ese número: esta noche se escribe también la ADR-0019), para RF-2
+    de PRD-007 (Harness de la factoría, en draft): la cola se alimenta de las issues. Lee el PRD
+    entero, sobre todo las secciones 1, 4 (RF-2), 5, 7 (CA-2, CA-3 y CA-14) y 8 (OPEN-5), y lee
+    ADR-0013, ADR-0002 y factory/queue.yaml. Decide: cómo se marca una historia lista (la etiqueta
+    factory:ready) y cómo declara sus dependencias (la línea «Depende de: #x» del cuerpo u otra
+    forma, con pros y contras); qué agente y qué texto de tarea recibe cada historia encolada; cómo
+    se evita encolarla dos veces y qué pasa si falla; si convive con queue.yaml durante la
+    migración y en qué orden se intercalan las dos fuentes (OPEN-5); cuándo pasa el alimentador y
+    qué rastro deja (RNF-4); y qué cambia de ADR-0013, como enmienda. Todo sin modelo (RNF-1). Deja
+    la ADR en propuesta, con opciones, pros y contras, decisión y consecuencias, como las demás, y
+    enlázala en la sección de decisiones pendientes de docs/architecture/overview.md. No toques
+    factory/, data/ ni web/."
+- id: adr-0019-puerta-antes-de-la-pr
+  agent: architect
+  task: "ADR nueva, ADR-0019 (usa ese número: esta noche se escribe también la ADR-0018), para RF-1,
+    RF-3 y RF-4 de PRD-007 (Harness de la factoría, en draft). Lee el PRD entero, sobre todo las
+    secciones 2, 4 (fases 0 y 1), 5, 7 (CA-1, CA-4, CA-5 y CA-6) y 8 (OPEN-6), y lee ADR-0002,
+    ADR-0004, ADR-0011, factory/evals.ts, la parte de factory/orchestrator.ts que llama a runEvals y
+    docs/process/definition-of-done.md. Decide: (1) RF-1, cómo calcula run.ts --metrics cada métrica
+    de la sección 2 a partir de ops/runs, ops/merges y gh, y qué es exactamente un defecto escapado;
+    (2) RF-3, qué comprobaciones corre la puerta según las rutas del diff, en qué orden, con qué
+    tiempo máximo y cómo se guarda en el ledger cuál falló; si el build de web/ comparte el cerrojo
+    de e2e (web/node_modules/.e2e-build.lock) o cada worktree tiene su node_modules (OPEN-6); y si el
+    coste en tiempo de la puerta cabe en la ventana de ADR-0002; (3) RF-4, cómo se sacan los RF y CA
+    de la historia y de la PR, y qué cuenta como que una prueba nombra un CA. Todo sin modelo
+    (RNF-1). Deja la ADR en propuesta, con opciones, pros y contras, decisión y consecuencias, como
+    las demás, y enlázala en la sección de decisiones pendientes de docs/architecture/overview.md. No
+    toques factory/, data/ ni web/."
