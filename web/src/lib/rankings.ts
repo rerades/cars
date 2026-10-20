@@ -75,3 +75,74 @@ export function candidates(models: readonly ModelRecord[], ranking: RankingId | 
   }
   return out;
 }
+
+/** Maximum number of places of a ranking (RF-7). */
+export const MAX_PLACES = 10;
+
+/**
+ * What ordering and tie-breaking need of a version (ADR-0015, detail 2). It is the minimum of an
+ * `entries[]` item of the ranking JSON (#447), which carries more fields: those are kept as they are.
+ */
+export interface RankingEntry {
+  /** Brand slug. */
+  brand: string;
+  /** Presentation name of the brand; the alphabetical tie-break uses it. */
+  brand_name: string;
+  /** Model name. */
+  model: string;
+  /** Version name. */
+  name: string;
+  /** The figure of the ranking. */
+  figure: { value: number };
+}
+
+/** Anything `rankPlaces` takes: an entry of the JSON, or a `Candidate` straight from `candidates()`. */
+export type Rankable = RankingEntry | Candidate;
+
+export interface Place<T extends Rankable = Rankable> {
+  /** Position with ties: 1, 2, 2, 4 (RF-7). */
+  place: number;
+  entry: T;
+}
+
+function keyOf(item: Rankable): RankingEntry {
+  if (typeof item.model === "string") return item as RankingEntry;
+  const c = item as Candidate;
+  return {
+    brand: c.model.brand,
+    brand_name: c.model.brand_name,
+    model: c.model.model,
+    name: c.version.name,
+    figure: c.figure,
+  };
+}
+
+const collator = new Intl.Collator("es", { sensitivity: "base", numeric: true });
+
+/**
+ * Orders by the figure and direction of RF-1, numbers with ties (same figure, same place; the next
+ * one skips: 1, 2, 2, 4), and cuts at 10 (RF-7). Equal figures go in alphabetical order of brand,
+ * model and `name`. If a tie crosses the tenth place, the first ones in that order get in, silently.
+ * Fewer than 10 candidates: no padding. All battery bases are ordered together (RF-10); the price
+ * ranking takes every priced version, `financed` included. Pure: no input is modified.
+ * The one function that numbers, for the build (no filters) and the browser script (#376).
+ */
+export function rankPlaces<T extends Rankable>(items: readonly T[], ranking: RankingId | RankingDef): Place<T>[] {
+  const { direction } = typeof ranking === "string" ? rankingById(ranking) : ranking;
+  const sign = direction === "asc" ? 1 : -1;
+  const keyed = items.map((item) => ({ item, key: keyOf(item) }));
+  keyed.sort(
+    (a, b) =>
+      sign * (a.key.figure.value - b.key.figure.value) ||
+      collator.compare(a.key.brand_name, b.key.brand_name) ||
+      collator.compare(a.key.model, b.key.model) ||
+      collator.compare(a.key.name, b.key.name),
+  );
+  const places: Place<T>[] = [];
+  let place = 0;
+  for (const [i, { item, key }] of keyed.entries()) {
+    if (i === 0 || key.figure.value !== keyed[i - 1].key.figure.value) place = i + 1;
+    places.push({ place, entry: item });
+  }
+  return places.slice(0, MAX_PLACES);
+}
