@@ -2068,3 +2068,92 @@
     versión de la ficha, rellena price con la regla de data-model.md (fuente, URL y fecha). Si no
     se puede asociar a una versión, déjalo en null y anótalo en open_questions. No crees carpetas
     nuevas ni toques data/raw/changan/."
+- id: prd-006-enmienda-adr-0017
+  agent: product
+  task: "Enmienda de PRD-006 y PRD-002 por la ADR-0017 (aceptada el 2026-10-20). La sección 6 de
+    PRD-006 dice que no existe ninguna entidad de reviews en data-model.md y que hace falta una ADR;
+    ya existen: ADR-0017 y la sección 3.1 de docs/architecture/data-model.md. Reescríbela para que
+    remita a las dos sin copiar el esquema, y comprueba que lo que pedía (asociar a un modelo y a
+    una versión, los cuatro campos de ADR-0001 regla 2, distinguir el origen) queda cubierto; si
+    algo no lo está, dilo. La tabla de la sección 6 de PRD-002 no menciona las reviews: añade lo que
+    remita a PRD-006 y a la sección 3.1, con el estilo del resto de la tabla. Actualiza el
+    historial y updated de los dos PRD. No cambies requisitos ni criterios de aceptación: si alguno
+    choca con la ADR, déjalo como pregunta abierta. No toques docs/architecture/ ni docs/design/."
+- id: diseno-reviews-ficha
+  agent: designer
+  task: "Diseño del bloque de reviews de la ficha (PRD-006, ready; PRD-002 RF-16 y CA-19). Añade a
+    docs/design/ficha-modelo.md una sección «Reviews» con la misma estructura que las demás, y
+    llévala a «Estructura y orden de lectura» y al wireframe: es el último bloque de la ficha,
+    después de los modelos relacionados y de «Fuentes» (RF-16). El esquema está en la sección 3.1
+    de docs/architecture/data-model.md (ADR-0017): cada enlace tiene el title literal, el name del
+    medio en el registro, retrieved y url, y puede ir asociado a una versión. Los resultados de
+    pruebas son datos con fuente, pero la lista de métricas aún está vacía: describe su
+    presentación en general (dato, unidad, organismo, fecha y enlace) sin inventar métricas.
+    Decide: el título del bloque y su nivel de encabezado; qué lleva cada enlace y en qué orden
+    (PRD-006, RF-1 y RF-7: quién lo firma, la url y la fecha junto al contenido, sin extracto);
+    cómo se indica que el enlace lleva a otra web y que puede estar en otro idioma (RNF-4; el
+    esquema no guarda el idioma: si hace falta, va a Preguntas abiertas); cómo se marca la versión
+    cuando la review es de una; el orden de las entradas y si hay un máximo (preguntas abiertas de
+    ADR-0017); y qué se muestra en un modelo sin reviews, que PRD-002 dejó al diseño. Nada de
+    compra ni afiliación (RF-5), ni «mejor», puntuaciones o insignias. Tokens de tokens.md,
+    accesibilidad (320 px sin scroll horizontal, enlaces cuyo texto se entiende fuera de contexto)
+    y textos con sus claves de i18n. No decidas cómo llegan los datos. Lo que no se deduzca del
+    PRD, de la ADR ni de los diseños existentes va a Preguntas abiertas. No toques web/,
+    docs/product/ ni factory/."
+- id: reviews-fuentes-iniciales
+  agent: researcher
+  task: "Primeras fuentes de reviews para PRD-006 (ADR-0017; docs/architecture/data-model.md,
+    secciones 3.1 y 8). Solo fuentes: no escribas reviews ni test_results en data/raw/; los enlaces
+    irán en otra tarea cuando una persona apruebe estas fuentes. Evalúa 2 o 3 medios españoles del
+    motor reconocidos que publiquen pruebas de coches eléctricos, empezando por diariomotor-es (ya
+    registrado como T3 con kind [announcements]), y un organismo de pruebas independiente (por
+    ejemplo, Euro NCAP). De cada uno, lee sus términos de uso o aviso legal y su robots.txt, y
+    regístralo solo si permiten enlazar sus páginas (ADR-0001, regla 6) y no es un agregador de
+    opiniones de propietarios ni un foro (PRD-006, RF-8). Los medios van en T3 con reviews en kind;
+    el organismo, en T2 con tests en kind; todos con name, terms_url, terms_checked (la fecha de
+    hoy) y, en urls, todos los dominios desde los que publican sus pruebas. Para diariomotor-es,
+    edita su fichero: añade reviews a kind y las claves nuevas. Del organismo, propone en notes de
+    su fichero y en tu resumen final las métricas que publica (nombre en snake_case con la unidad
+    en el sufijo, tipo, rango y la URL donde las publica), sin añadirlas a ningún esquema. Anota en
+    la bitácora cada fuente descartada y el motivo."
+- id: historia-371-paginas-rankings
+  agent: developer
+  task: "Historia #371 (épica #368, PRD-005): las cinco páginas de los rankings, con URL, cabecera,
+    título y canonical. Lee el issue entero (gh issue view 371) y su comentario «🏭 Revisión de
+    cobertura», y haz exactamente lo que dicen. Sigue docs/design/rankings.md (secciones «Los cinco
+    rankings» y «Estructura») con los tokens de tokens.md y los textos en i18n.ts (claves
+    ranking.*). Si la página necesita RANKINGS, candidates() o rankPlaces() de web/src/lib/rankings.ts
+    (#369 y #370, ya en main), reutilízalos, no los dupliques. No hagas la lista de puestos (#372),
+    las ofertas (#373), las versiones que se quedan fuera (#374), la entrada desde /coches (#375) ni
+    los filtros (#376). Pruebas con node --test sobre el build, como las de las páginas de precio/.
+    La PR dice «Closes #371» y enumera los RF y CA cubiertos."
+- id: historia-319-fuentes-comparador
+  agent: developer
+  task: "Historia #319 (épica #313, PRD-003): fuente y fecha de cada dato del comparador, con notas
+    numeradas, «fuente no oficial» y bloque «Fuentes». Lee el issue entero (gh issue view 319) y haz
+    exactamente lo que dice, sobre la tabla y el script de #318, que ya están en main. La numeración
+    y la agrupación de notas van como función pura en web/src/lib/compare.ts con pruebas node --test.
+    Reutiliza lo que ya hace la ficha para agrupar y formatear (sección «Fuente y fecha» de
+    docs/design/ficha-modelo.md), sin copiarlo. La numeración y las anclas cmp-fuente-{n} siguen
+    docs/design/comparador.md. No hagas lo de #320 (avisos y estados) ni lo de #321 y #322 (quitar y
+    añadir). Si amplías web/e2e/comparar.spec.ts, el build sigue pasando por buildSite de
+    web/e2e/build-site.ts. La PR dice «Closes #319» y enumera los RF y CA cubiertos."
+- id: historia-325-pruebas-build-comparador
+  agent: developer
+  task: "Historia #325 (épica #313, PRD-003): pruebas node --test sobre el build del comparador. Lee
+    el issue entero (gh issue view 325) y haz exactamente lo que dice, con el patrón de
+    web/tests/ficha.test.ts y build.test.ts y datos de prueba en CARS_DATA_DIR. Si una prueba
+    destapa un incumplimiento de un CA, corrígelo en la misma PR si el arreglo es pequeño y está en
+    el código del comparador; si no, deja esa prueba con test.todo y explícalo en la PR y en la
+    bitácora. La medición de peso solo imprime, sin límite. No hagas lo de #326 (pruebas en
+    navegador). La PR dice «Closes #325» y enumera los RF y CA cubiertos."
+- id: historia-155-pruebas-html-ficha
+  agent: developer
+  task: "Historia #155 (épica #145, PRD-002): pruebas sobre el HTML generado de las fichas. Lee el
+    issue entero (gh issue view 155) y su comentario «🏭 Revisión de cobertura», que corrige el
+    cuerpo: #40 y #41 ya están cerradas, así que amplía sus pruebas a /marcas/*/*/ en lugar de montar
+    otra infraestructura, y no hace falta un modelo con un nombre de versión repetido. Usa datos de
+    prueba en CARS_DATA_DIR con un modelo con open_questions y otro announced sin versiones. Si una
+    prueba destapa un incumplimiento de un CA, corrígelo en la misma PR si el arreglo es pequeño y
+    está en la ficha; si no, deja esa prueba con test.todo y explícalo en la PR y en la bitácora.
+    La PR dice «Closes #155» y enumera los RF y CA cubiertos."

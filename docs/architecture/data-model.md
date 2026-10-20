@@ -142,7 +142,7 @@ con tres claves más:
 Su `tier` es `T2` y su `source_id` es una fuente con `kind: [tests]`.
 
 **Lista de `metric`: vacía.** Ningún documento sabe todavía qué publica cada organismo. La primera PR
-del Researcher que registre un organismo propone sus métricas en `open_questions`, y una persona las
+del Researcher que registre un organismo propone sus métricas en `notes` de la fuente, y una persona las
 añade aquí, con su tipo, unidad y rango, y en `METRICS` de `factory/evals.ts`, antes o en la misma PR.
 Hasta entonces, cualquier `test_results` no vacío falla.
 

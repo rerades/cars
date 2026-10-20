@@ -48,7 +48,7 @@ lo pida, y nunca para un modelo con `needs_review: true`:
   comprobación rechaza el fichero entero (PRD-006, RF-6 y RF-7).
 - `test_results`: la lista de métricas aún está vacía, así que no los escribas. Si encuentras un
   organismo, regístralo y propone sus métricas (nombre, unidad, rango y URL donde las publica) en
-  `open_questions` y en tu resumen final. Una persona las añade al esquema.
+  `notes` de su fichero de `data/sources/` y en tu resumen final. Una persona las añade al esquema.
 
 ## Reglas innegociables
 - **Precio = PVP oficial en España, sin ayudas** (sin Plan MOVES ni otros incentivos). Solo desde fuentes T1. Guárdalo con `price_kind: pvp`.
