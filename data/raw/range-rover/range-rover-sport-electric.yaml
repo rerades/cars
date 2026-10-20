@@ -1,0 +1,57 @@
+# Researcher — Range Rover Sport Electric. Fuentes: range-rover-es (T1), autonomiacocheselectricos-es (T3). Consultado 2026-10-20.
+brand: range-rover
+brand_name: Range Rover
+model: Range Rover Sport Electric
+status: {value: on_sale, note: "artículo T3 2026-10-01: 'JLR abre en España los pedidos del Range Rover Sport Electric'; la web oficial ofrece configurar online", source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/electric.html", retrieved: 2026-10-20, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  wltp_max_km: {value: 609, note: "\"609 KM\" autonomía eléctrica máxima (nota WLTP)", source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/electric.html", retrieved: 2026-10-20, tier: T1}
+  battery_kwh_options: {value: [118.5], source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/electric.html", retrieved: 2026-10-20, tier: T1}
+  drivetrains: {value: [awd], source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+versions:
+  - name: Dynamic SE EV450
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/electric.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    wltp_km: {value: 609, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    price: null
+  - name: Dynamic SE EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/electric.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    wltp_km: {value: 601, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    price: null
+  - name: Dynamic HSE EV450
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    wltp_km: {value: 609, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    price: null
+  - name: Dynamic HSE EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    wltp_km: {value: 601, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    price: null
+  - name: Autobiography EV450
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/electric.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    wltp_km: {value: 609, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    price: null
+  - name: Autobiography EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/electric.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    wltp_km: {value: 601, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    price: null
+  - name: First Edition EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover-sport/electric.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    wltp_km: {value: 601, source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/range-rover-sport-electric-precio-espana-versiones/", retrieved: 2026-10-20, tier: T3}
+    price: null
+images: []
+open_questions:
+  - "Precio: la web oficial no publica lista de precios; solo el artículo T3 los cita (Dynamic SE EV450 120.450 €, Dynamic HSE EV550 132.350 €, First Edition EV550 153.350 €), pero ADR-0001 exige T1. Todos los precios en null."
+  - "wltp_km por versión: el artículo T3 da 609 km para EV450 y 601 km para EV550; la web oficial solo da 609 km como máximo. Se usa la cifra del artículo T3."
+  - "launch: ninguna fuente da la fecha exacta de apertura de pedidos (el artículo T3 2026-10-01 dice que ya están abiertos); entregas sin fecha."
+  - "segment: la web lo presenta como SUV de lujo y deportivo; no es un término de la lista de RF-11."
+  - "Versiones: la lista sale del artículo T3 (Dynamic SE, Dynamic HSE, Autobiography, First Edition) y de la página de gama de la web oficial; no se confirma si hay otras variantes (batalla larga)."
+  - "Imágenes: no se ha buscado ninguna en Wikimedia Commons; images: []."
+  - "IDAE: sin datos de Range Rover Sport Electric; homologación WLTP por versión pendiente."

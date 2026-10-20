@@ -8,15 +8,18 @@ urls:
   home: https://www.rangerover.com/es-es/
   models: https://www.rangerover.com/es-es/range-rover/models-and-specifications.html
   electric: https://www.rangerover.com/es-es/range-rover/electric.html
+  sport_models: https://www.rangerover.com/es-es/range-rover-sport/models-and-specifications.html
+  sport_electric: https://www.rangerover.com/es-es/range-rover-sport/electric.html
   press: https://media.jlr.com/corporate/
   robots: https://www.rangerover.com/robots.txt
 image_license: "" # términos de imágenes no revisados; no se publican imágenes de esta fuente
 notes: >
   Web oficial de Range Rover en España (dominio rangerover.com, ruta /es-es/; responde, comprobado el 2026-10-20).
-  robots.txt de raíz solo bloquea /lr/* (el configurador), que no se lee. La página de gama (models-and-specifications)
-  lista las versiones con motor eléctrico EV450/EV550 (118,5 kWh, tracción total AWD) y un "Precio desde" por
-  versión que es de la versión, no de la motorización (hay también PHEV y combustión), así que no vale como PVP del
-  eléctrico. La página electric.html da 600 km WLTP (máximo) y no da versiones ni precios. Sala de prensa de JLR
+  robots.txt de raíz solo bloquea /lr/* (el configurador), que no se lee. La marca tiene dos BEV: Range Rover Electric
+  y Range Rover Sport Electric. Páginas de gama (models-and-specifications) listan versiones con motor eléctrico
+  EV450/EV550 (118,5 kWh, tracción total AWD) y un "Precio desde" por versión que es de la versión, no de la
+  motorización (hay también PHEV y combustión), así que no vale como PVP del eléctrico. Las páginas electric.html dan
+  autonomía WLTP máxima (600 km Range Rover, 609 km Range Rover Sport) sin versiones ni precios. Sala de prensa de JLR
   (media.jlr.com, antes media.jaguarlandrover.com): términos de imágenes sin revisar. Range Rover no tiene datos en el
   IDAE como marca (fetch-idae "RANGE ROVER" falla; "LAND ROVER" devuelve vacío).
 last_verified: 2026-10-20
