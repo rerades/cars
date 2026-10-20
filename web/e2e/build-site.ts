@@ -1,24 +1,27 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync, rmSync, statSync } from "node:fs";
-import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 /**
  * Builds the site to `out` with test data, one build at a time across all Playwright workers.
  *
- * Every `astro build` run from web/ shares web/.astro (prerender chunks). With fullyParallel,
- * several spec files build at once and one deletes the chunks another is about to import
- * ("Cannot find module .../.astro/.prerender/chunks/server_*.mjs"). A lock directory (mkdir is
- * atomic) makes the builds run in series.
+ * Every `astro build` run from web/ shares two directories. With `--outDir` outside the cwd,
+ * Astro stages prerender chunks in web/.astro/.prerender/ and deletes them when done; and Vite
+ * optimizes deps into web/node_modules/.vite/deps. With fullyParallel, several spec files build
+ * at once and collide ("Cannot find module .../.astro/.prerender/chunks/server_*.mjs", or
+ * "ENOTEMPTY ... .vite/deps"). A lock directory (mkdir is atomic) makes the builds run in series.
  */
 
 const WEB = join(import.meta.dirname, "..");
-const LOCK = join(tmpdir(), "cars-e2e-astro-build.lock");
-// A build takes well under this; an older lock belongs to a crashed worker.
-const STALE_MS = 5 * 60_000;
+// Inside web/node_modules: one lock per checkout, since each has its own .astro and .vite.
+const LOCK = join(WEB, "node_modules", ".e2e-build.lock");
+// A build takes well under this; an older lock was left by a killed worker (Ctrl-C skips the
+// finally). Shorter than WAIT_MS so waiters break it instead of timing out.
+const STALE_MS = 2 * 60_000;
 const WAIT_MS = 4 * 60_000;
 
-const sleep = (ms: number) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const SLEEPER = new Int32Array(new SharedArrayBuffer(4));
+const sleep = (ms: number) => Atomics.wait(SLEEPER, 0, 0, ms);
 
 function acquire(): void {
   const start = Date.now();
