@@ -12,7 +12,7 @@ versions:
     wltp_km: {value: 500, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610286 (MY26). Otras homologaciones del IDAE, ids 610284 y 610285 (160 kW, 80 kWh, 475 y 467 km), son de la versión anterior"}
     power_kw: {value: 190, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s07", retrieved: 2026-10-19, tier: T1, note: "publicado: 190 kW (258 CV); coincide con IDAE id 610286"}
     drivetrain: {value: rwd, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610286: «RWD»"}
-    price: null
+    price: {value: 46990, unit: EUR, price_kind: pvp, note: "configurador, acabado «Standard» (única versión BEV listada): PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s07", retrieved: 2026-10-21, tier: T1}
 images:
   - file: data/images/deepal/deepal-s07/trasera.jpg
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Deepal_S07_IAA_2025_DSC_1897.jpg/1280px-Deepal_S07_IAA_2025_DSC_1897.jpg"
@@ -22,7 +22,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precio: la web oficial (changaneurope.com/es/promociones/changan-deepal-s07) da 43.215 € al contado y 36.490 € financiado (con Plan Auto+ y CAE), con letra pequeña que no se puede copiar entera y sin rotular como PVP; las fechas de validez se contradicen (31/10 y 31/12/2026). price: null."
+  - "Precio: se usa el PVPR del configurador (46.990 €, acabado «Standard», 2026-10-21). La promoción (changaneurope.com/es/promociones/changan-deepal-s07) da 43.215 € al contado y 36.490 € financiado con Plan Auto+ y CAE, que no se usan. El configurador no dice RWD/MY26: se asocia a la única versión BEV de la ficha."
   - "Versión: el comunicado de enero 2026 y medios daban 160 kW / ~80 kWh / 475 km (versión anterior); la web actual muestra MY26 de 190 kW. Se asume que solo se vende la MY26 (la promoción habla de «MY'26 BEV»); confirmar. La web da 728 km de «autonomía urbana», no WLTP."
   - "Lanzamiento: ninguna fuente da la fecha desde la que se pueden pedir. launch: null."
   - "Segmento: el comunicado lo describe como SUV de tamaño medio («D-SUV»), no es término literal de RF-11. segment: null."
