@@ -1,0 +1,19 @@
+# data/sources/hispano-suiza-eu.yaml — Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: hispano-suiza-eu
+brand: Hispano Suiza
+tier: T2
+market: global
+kind: [specs, announcements]
+urls:
+  home: https://www.hispanosuizacars.com/
+  models: https://www.hispanosuizacars.com/carmen/
+  carmen_sagrera: https://www.hispanosuizacars.com/carmen-sagrera/
+image_license: ""
+notes: >
+  Web oficial de Hispano Suiza Cars (hispanosuiza.com no responde: error TLS). Sin web específica
+  para España, sin precios, sin pedidos (solo "Register your interest") y sin sala de prensa
+  localizada. robots.txt solo bloquea /cms/wp-admin/. Términos de uso de imágenes no localizados
+  (solo aviso legal): no se publican imágenes de esta fuente. Carmen: 80 kWh, hasta 500 km (ciclo no
+  indicado), 750 kW. Carmen Sagrera: 820 kW, 480 km (ciclo no indicado), batería no publicada.
+last_verified: 2026-10-20
+status: active
