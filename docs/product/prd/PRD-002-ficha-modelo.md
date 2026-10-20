@@ -31,7 +31,7 @@ Quien ha encontrado un modelo en el catálogo (PRD-001) y quiere decidir si le i
 
 ### Fuera de alcance
 - Catálogo, filtros y páginas de marca, segmento y tramos (PRD-001).
-- Comparador (PRD-003), rankings (PRD-005) y reviews (previstas en la visión, sin PRD todavía).
+- Comparador (PRD-003) y rankings (PRD-005). Las reviews tienen su PRD (PRD-006); esta ficha solo fija dónde va su bloque (RF-16).
 - Cualquier dato que no exista en el esquema de `architecture/data-model.md` (ADR-0008): dimensiones, maletero, consumo, aceleración, tiempos de carga, garantía, plazas, etc. Si se quieren, primero se cambia el esquema, uno a uno y con fuente (decisión del 2026-10-01).
 - Fichas por versión: las versiones van dentro de la ficha del modelo, sin URL propia.
 - Precios en tiempo real, disponibilidad en concesionarios, ayudas (Plan MOVES) y cualquier interacción que guarde datos del visitante.
@@ -52,7 +52,6 @@ Quien ha encontrado un modelo en el catálogo (PRD-001) y quiere decidir si le i
 - **RF-13:** La ficha ofrece un enlace de vuelta a la página de la marca (`/marcas/{marca}`, PRD-001, RF-4) y otro al catálogo (`/coches`).
 - **RF-14:** La ficha ofrece un enlace de texto «Ver en la web de la marca» a la URL de la fuente del estado (`status.url`). Tiene aspecto de enlace, no de botón de compra: la web no vende ni intermedia (visión).
 - **RF-15:** La ficha muestra hasta 3 modelos del mismo segmento y de otras marcas, como tarjetas del catálogo (PRD-001, RF-1), ordenados por la cercanía de su precio desde al del modelo; los que no tienen precio van al final. Un modelo sin segmento no muestra este bloque.
-
 - **RF-16:** La ficha incluye un **bloque de reviews**, sin página propia (PRD-006, RF-10; decisión 4 de PRD-006, 2026-10-18).
   - **Posición:** es el **último bloque de la ficha**, después de todos los demás, incluidos los modelos relacionados (RF-15) y el bloque «Fuentes» (RF-9). Las notas numeradas de «Fuentes» siguen cubriendo solo los datos de la ficha; cada review o resultado de prueba lleva su propio origen junto al contenido (PRD-006, RF-1).
   - **Qué requisitos de PRD-006 aplica:** todos los de su sección 4, sin excepción y sin reescribirlos aquí: origen visible (RF-1), nada inventado (RF-2), solo lectura (RF-3), solo modelos publicados (RF-4), sin compra ni afiliación (RF-5), sin texto generado (RF-6), solo enlaces con título, medio y fecha de consulta (RF-7), solo fuentes registradas con términos comprobados (RF-8) y resultados de organismos como dato con fuente (RF-9). Aplican también sus RNF (PRD-006, sección 5).
@@ -128,4 +127,4 @@ Decididas por el responsable del producto. Cada una se ha llevado ya a los RF y 
 | 2026-09-29 | Borrador inicial: RF-1 a RF-13, RNF-1 a RNF-5, CA-1 a CA-15; 13 preguntas abiertas | Claude |
 | 2026-10-01 | Resueltas las 13 preguntas abiertas. Ajustados RF-3, RF-4, RF-9 y RF-12, la sección 3 y la sección 6; añadidos RF-14, RF-15 y CA-16 a CA-18. Pasa a ready y P0 | Rod / Claude |
 | 2026-10-09 | Rankings pasa a PRD-005: PRD-004 es la portada | Rod / Claude |
-| 2026-10-20 | Enmienda por la decisión 4 de PRD-006 (2026-10-18): añadidos RF-16 (bloque de reviews al final de la ficha, sin página propia) y CA-19. El caso de un modelo sin reviews queda para el diseño | Claude |
+| 2026-10-20 | Enmienda por la decisión 4 de PRD-006 (2026-10-18): añadidos RF-16 (bloque de reviews al final de la ficha, sin página propia) y CA-19. El caso de un modelo sin reviews queda para el diseño. La sección 3 deja de decir que las reviews no tienen PRD | Claude |
