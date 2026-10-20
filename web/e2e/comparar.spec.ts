@@ -1,10 +1,10 @@
-import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createServer, type Server } from "node:http";
 import { tmpdir } from "node:os";
 import { extname, join, normalize } from "node:path";
 import { expect, test } from "@playwright/test";
 import { stringify } from "yaml";
+import { buildSite } from "./build-site.ts";
 import { acme } from "../tests/fixtures.ts";
 
 /**
@@ -12,7 +12,6 @@ import { acme } from "../tests/fixtures.ts";
  * /comparar/ page (CA-1, CA-3, CA-4, CA-6, CA-15, CA-17). Test data built to a temp dir.
  */
 
-const WEB = join(import.meta.dirname, "..");
 const MIME: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css",
@@ -36,11 +35,7 @@ test.describe("comparator table (story #318)", () => {
     const out = join(tmp, "out");
     mkdirSync(join(data, "acme"), { recursive: true });
     writeFileSync(join(data, "acme", "Volta.yaml"), stringify(acme()));
-    execFileSync(join(WEB, "node_modules/.bin/astro"), ["build", "--outDir", out], {
-      cwd: WEB,
-      env: { ...process.env, CARS_DATA_DIR: data },
-      stdio: "pipe",
-    });
+    buildSite(out, { CARS_DATA_DIR: data });
     server = createServer((req, res) => {
       const path = normalize(decodeURIComponent(new URL(req.url ?? "/", "http://x").pathname));
       let file = join(out, path);
