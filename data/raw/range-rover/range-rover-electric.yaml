@@ -1,0 +1,70 @@
+# Researcher — Range Rover Electric. Fuente: range-rover-es (T1). Consultado 2026-10-20.
+brand: range-rover
+brand_name: Range Rover
+model: Range Rover Electric
+status: {value: on_sale, note: "la web ofrece configurar y encargar online; la prensa (T3, 2026-09-02) dice que los pedidos ya están abiertos en España; entregas sin confirmar", source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/electric.html", retrieved: 2026-10-20, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  wltp_max_km: {value: 600, note: "\"600 KM\" autonomía eléctrica máxima (nota WLTP)", source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/electric.html", retrieved: 2026-10-20, tier: T1}
+  battery_kwh_options: {value: [118.5], source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+  drivetrains: {value: [awd], source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+versions:
+  - name: SE EV450
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: HSE EV450
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: HSE EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: Autobiography EV450
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: Autobiography EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: First Edition EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: SV EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: SV Black EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: SV Ultra EV550
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: SV EV550 batalla larga
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: SV Black EV550 batalla larga
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+  - name: SV Ultra EV550 batalla larga
+    battery_kwh: {value: 118.5, basis: unknown, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    drivetrain: {value: awd, source_id: range-rover-es, url: "https://www.rangerover.com/es-es/range-rover/models-and-specifications.html", retrieved: 2026-10-20, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "Precio: la página de gama da un \"Precio desde\" por versión (p. ej. SE 152.250 €) sin decir qué motorización cubre (hay PHEV y combustión). La prensa (T3) cita 163.250 € como precio de partida del eléctrico, pero no vale como única fuente. Todos los precios en null."
+  - "wltp_km por versión: la web solo da 600 km como máximo del modelo; no hay cifra por versión (EV450/EV550). Se deja solo specs.wltp_max_km. Potencia: tampoco hay kW de sistema por versión."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir (la prensa del 2026-09-02 dice solo que ya están abiertos). Entregas sin fecha."
+  - "segment: la web lo presenta como SUV de lujo; no es un término de la lista de RF-11."
+  - "Versiones: la lista sale de las que muestran motor EV en la página de gama; no se confirma qué otras (Westminster, 7 plazas) tendrán eléctrico. El nombre de versión mezcla acabado y motor (EV450/EV550) y la batalla larga se deduce de la URL del configurador."
+  - "Imágenes: no se ha buscado ninguna en Wikimedia Commons; images: []."
+  - "IDAE: sin datos de Range Rover/Land Rover; homologación WLTP por versión pendiente."

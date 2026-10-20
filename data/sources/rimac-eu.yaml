@@ -1,0 +1,18 @@
+# data/sources/rimac-eu.yaml — Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: rimac-eu
+brand: Rimac
+tier: T2
+market: global
+kind: [specs, announcements]
+urls:
+  home: https://www.rimac-automobili.com/
+  models: https://www.rimac-automobili.com/nevera/
+  press: https://www.rimac-newsroom.com/
+image_license: ""
+notes: >
+  Web oficial global de Rimac Automobili (no hay web ni configurador para España; el dominio es de la
+  marca). robots.txt (2026-10-20): User-agent * sin Disallow. No publica precios ni indica distribuidor
+  en España. Nevera: 120 kWh, 489 km WLTP, 1.408 kW, 4 motores, "Limited to 150 units"; Nevera R: 108 kWh,
+  1,55 MW, sin autonomía. El IDAE no tiene la marca RIMAC. Sin términos de imagen registrados.
+last_verified: 2026-10-20
+status: active

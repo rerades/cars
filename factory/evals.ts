@@ -27,19 +27,34 @@ type Check = (ctx: Ctx) => string[];
 const SOURCES = "data/sources";
 const isSource = (f: string) => /^data\/sources\/[^/]+\.ya?ml$/.test(f);
 
-/** Every source id in the worktree, changed or not. A file that cannot be read adds none. */
-function sourceIds(ctx: Ctx): Set<string> {
+/** Every source in the worktree by id, changed or not. A file that cannot be read adds none. */
+function sources(ctx: Ctx): Map<string, Record<string, any>> {
   const dir = join(ctx.dir, SOURCES);
-  if (!existsSync(dir)) return new Set();
-  const ids = readdirSync(dir).filter((f) => /\.ya?ml$/.test(f)).map((f) => {
+  const out = new Map<string, Record<string, any>>();
+  if (!existsSync(dir)) return out;
+  for (const f of readdirSync(dir).filter((f) => /\.ya?ml$/.test(f))) {
     try {
-      return parse(readFileSync(join(dir, f), "utf8"))?.id;
+      const s = parse(readFileSync(join(dir, f), "utf8"));
+      if (typeof s?.id === "string") out.set(s.id, s);
     } catch {
-      return undefined; // the registry check reports it if the file changed
+      // the registry check reports it if the file changed
     }
-  });
-  return new Set(ids.filter((id): id is string => typeof id === "string"));
+  }
+  return out;
 }
+
+const sourceIds = (ctx: Ctx) => new Set(sources(ctx).keys());
+
+/** ADR-0017: a source with one of these kinds also needs name, terms_url and terms_checked. */
+const LINK_KINDS = ["reviews", "tests"];
+const isHttps = (v: unknown) => typeof v === "string" && /^https:\/\/[^\s/]+/.test(v);
+const hostOf = (v: unknown) => {
+  try {
+    return new URL(String(v)).hostname;
+  } catch {
+    return undefined;
+  }
+};
 
 /** Modified and new files in the worktree (deletions need no eval). */
 export function changedFiles(dir: string): string[] {
@@ -76,6 +91,12 @@ const registry: Check = (ctx) =>
     if (!["T1", "T2", "T3"].includes(s.tier)) out.push(`${file}: tier must be T1, T2 or T3`);
     if (!s.urls || !Object.keys(s.urls).length) out.push(`${file}: missing urls`);
     if (!isDay(s.last_verified, ctx.today)) out.push(`${file}: last_verified must be a past date`);
+    if (Array.isArray(s.kind) && s.kind.some((k: unknown) => LINK_KINDS.includes(k as string))) {
+      if (typeof s.name !== "string" || !s.name.trim()) out.push(`${file}: kind reviews or tests needs name`);
+      if (!isHttps(s.terms_url)) out.push(`${file}: kind reviews or tests needs terms_url, an https URL`);
+      if (!("terms_checked" in s)) out.push(`${file}: kind reviews or tests needs terms_checked`);
+    }
+    if ("terms_checked" in s && !isDay(s.terms_checked, ctx.today)) out.push(`${file}: terms_checked must be a past date`);
     return out;
   });
 
@@ -112,7 +133,7 @@ const STATUSES = ["on_sale", "announced", "discontinued"];
 const DRIVES = ["fwd", "rwd", "awd"];
 const SOURCED = ["value", "source_id", "url", "retrieved", "tier", "note"];
 const MODEL = ["brand", "brand_name", "model", "status", "launch", "segment", "needs_review", "specs", "versions",
-  "images", "open_questions"];
+  "images", "reviews", "test_results", "open_questions"];
 const MODEL_REQUIRED = ["brand", "brand_name", "model", "status", "needs_review", "versions", "images"];
 const VERSION = ["name", "battery_kwh", "wltp_km", "power_kw", "drivetrain", "dc_max_kw", "ac_max_kw", "price"];
 const SPECS = ["wltp_max_km", "power_max_kw", "dc_max_kw", "ac_max_kw", "battery_kwh_options", "drivetrains"];
@@ -121,6 +142,15 @@ const IMAGE = ["file", "source_url", "page_url", "source_id", "retrieved", "lice
 const OLD_IMAGE_KEY = "url";
 /** Marks the old-shape failure, which validateData turns into a warning (ADR-0010, point 14.1). */
 const OLD_SHAPE = "old shape (url)";
+/** ADR-0017: a link to a third-party review (not a Sourced: it has no value). */
+const REVIEW = ["title", "url", "source_id", "retrieved", "tier", "version"];
+/** ADR-0017: what a test result adds to a Sourced. */
+const TEST_RESULT = ["test", "metric", "version"];
+/**
+ * ADR-0017: the closed list of test metrics of data-model.md, name -> check of `value`. Empty until
+ * a person adds the first one, so any test result fails until then.
+ */
+const METRICS: Record<string, (v: unknown) => boolean> = {};
 
 const positive = (v: unknown) => typeof v === "number" && v > 0;
 const positiveInt = (v: unknown) => Number.isInteger(v) && (v as number) > 0;
@@ -131,7 +161,8 @@ const listOf = (ok: (v: unknown) => boolean) => (v: unknown) => Array.isArray(v)
 const rawShape: Check = (ctx) => {
   const files = ctx.files.filter((f) => f.startsWith("data/raw/") && /\.ya?ml$/.test(f));
   if (!files.length) return [];
-  const ids = sourceIds(ctx);
+  const srcs = sources(ctx);
+  const ids = new Set(srcs.keys());
   return files.flatMap((file) => {
     const { data, error } = readYaml(ctx, file);
     if (error) return [];  // rawData already reports it
@@ -233,6 +264,61 @@ const rawShape: Check = (ctx) => {
       if (img.retrieved && !isDay(img.retrieved, ctx.today)) fail(`${at}.retrieved: must be a past date`);
     });
 
+    // ADR-0017: links to reviews and test results, each from a registered source of its kind
+    const list = (key: string): unknown[] => {
+      if (data[key] === undefined) return [];
+      if (Array.isArray(data[key])) return data[key];
+      fail(`${key}: must be a list`);
+      return [];
+    };
+    /** What both lists check against the registry: kind, presentation keys, tier and the URL's host. */
+    const cited = (e: Record<string, any>, at: string, kind: string, tiers: string[]) => {
+      // A missing tier or url is already reported, by the list or by rawData.
+      if (e.tier && !tiers.includes(e.tier)) fail(`${at}.tier: must be ${tiers.join(" or ")}`);
+      if (e.url && !isHttps(e.url)) fail(`${at}.url: must be an https URL`);
+      const src = srcs.get(e.source_id);
+      if (!src) return; // reported as not in the registry
+      if (!Array.isArray(src.kind) || !src.kind.includes(kind)) fail(`${at}: source ${e.source_id} needs kind ${kind}`);
+      if (!src.name || !src.terms_url || !src.terms_checked) {
+        fail(`${at}: source ${e.source_id} needs name, terms_url and terms_checked`);
+      }
+      if (e.tier && e.tier !== src.tier) fail(`${at}.tier: must be the source's (${src.tier})`);
+      // A medium's link points to that medium (RF-5): its host is one of the source's, or a subdomain.
+      const host = hostOf(e.url);
+      const bases = Object.values(src.urls ?? {}).flat().map((u) => hostOf(u)?.replace(/^www\./, ""));
+      if (host && !bases.some((b) => b && (host === b || host.endsWith(`.${b}`)))) {
+        fail(`${at}.url: host ${host} is not one of the source's urls`);
+      }
+      if ("version" in e && !names.has(e.version)) fail(`${at}.version: ${e.version} is not a version of this file`);
+    };
+
+    const urls = new Set<string>();
+    list("reviews").forEach((e, i) => {
+      const at = `reviews[${i}]`;
+      if (!obj(e)) return fail(`${at}: must be a map`);
+      keys(e, REVIEW, `${at}.`);
+      for (const k of ["title", "url", "source_id", "retrieved", "tier"]) if (!e[k]) fail(`${at}.${k}: missing`);
+      if (e.retrieved && !isDay(e.retrieved, ctx.today)) fail(`${at}.retrieved: must be a past date`);
+      if (e.source_id && !ids.has(e.source_id)) fail(`${at}: source_id ${e.source_id} is not in the registry`);
+      cited(e, at, "reviews", ["T2", "T3"]);
+      if (urls.has(e.url)) fail(`${at}.url: repeated (${e.url})`);
+      urls.add(e.url);
+    });
+
+    const tests = new Set<string>();
+    list("test_results").forEach((e, i) => {
+      const at = `test_results[${i}]`;
+      if (!obj(e)) return fail(`${at}: must be a map`);
+      // Source fields and dates are rawData's job, as for any Sourced value.
+      sourced(e, at, (v) => !(e.metric in METRICS) || METRICS[e.metric](v), TEST_RESULT);
+      for (const k of ["test", "metric"]) if (!e[k]) fail(`${at}.${k}: missing`);
+      if (e.metric && !(e.metric in METRICS)) fail(`${at}.metric: ${e.metric} is not in the list of data-model.md`);
+      cited(e, at, "tests", ["T2"]);
+      const key = JSON.stringify([e.source_id, e.test, e.metric, e.version ?? null]);
+      if (tests.has(key)) fail(`${at}: repeated (same source_id, test, metric and version)`);
+      tests.add(key);
+    });
+
     // brand_name must match the other files of the brand, changed or not
     const folder = join(ctx.dir, "data", "raw", parts[2]);
     for (const other of existsSync(folder) ? readdirSync(folder) : []) {
@@ -312,6 +398,15 @@ function dataWarnings(ctx: Ctx): DataWarning[] {
       const r = v?.price?.retrieved;
       if (days(r) > STALE_DAYS) warn(`versions[${i}].price.retrieved ${r} is older than ${STALE_DAYS} days`, true);
     });
+    // ADR-0017, points 9 to 11
+    for (const key of ["reviews", "test_results"]) {
+      const list = Array.isArray(data[key]) ? data[key] : [];
+      if (list.length && data.needs_review === true) warn(`${key}: the model has needs_review, so they are not published`);
+      list.forEach((e: any, i: number) => {
+        if (days(e?.retrieved) > STALE_DAYS) warn(`${key}[${i}].retrieved ${e.retrieved} is older than ${STALE_DAYS} days`, true);
+        if (typeof e?.url === "string" && e.url.includes("?")) warn(`${key}[${i}].url has a query string: check it is not tracking or affiliate`);
+      });
+    }
     for (const img of Array.isArray(data.images) ? data.images : []) if (img?.file) cited.add(String(img.file));
     const walk = (node: unknown, path: string) => {
       if (Array.isArray(node)) return node.forEach((n, i) => walk(n, `${path}[${i}]`));

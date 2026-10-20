@@ -17,11 +17,13 @@ const SOURCES = {
   "data/sources/acme-es.yaml": "id: acme-es\ntier: T1\nurls: { home: https://www.acme.example/es/ }\nlast_verified: 2026-09-20\n",
 };
 
+const DATA_MODEL = readFileSync(join(import.meta.dirname, "..", "..", "docs", "architecture", "data-model.md"), "utf8");
 /** The full example of data-model.md: the schema check must accept the document it enforces. */
-const EXAMPLE = /## 7\. Ejemplo completo[\s\S]*?```yaml\n([\s\S]*?)```/.exec(
-  readFileSync(join(import.meta.dirname, "..", "..", "docs", "architecture", "data-model.md"), "utf8"),
-)![1];
+const EXAMPLE = /## 7\. Ejemplo completo[\s\S]*?```yaml\n([\s\S]*?)```/.exec(DATA_MODEL)![1];
 const VOLTA = "data/raw/acme/volta.yaml";
+/** Section 3.1's example (ADR-0017): the reviews to append to EXAMPLE, and the medium they cite. */
+const [REVIEWS, MEDIUM] = [...(/### 3\.1[\s\S]*?\n## 4\./.exec(DATA_MODEL)![0].matchAll(/```yaml\n([\s\S]*?)```/g))].map((m) => m[1]);
+const MEDIUM_FILE = "data/sources/motorejemplo-es.yaml";
 
 /** Writes files into a temp dir and runs the researcher evals on them. */
 function evalFiles(files: Record<string, string | Buffer>, paths = ["data/"]) {
@@ -160,6 +162,63 @@ describe("evals del researcher", () => {
   });
 });
 
+describe("reviews y resultados de pruebas (ADR-0017)", () => {
+  const WITH = EXAMPLE + REVIEWS;
+  const ORG_FILE = "data/sources/pruebas-eu.yaml";
+  const ORG = "id: pruebas-eu\ntier: T2\nkind: [tests]\nname: Pruebas Ejemplo\nterms_url: https://www.pruebas.example/terms\n"
+    + "terms_checked: 2026-09-20\nurls: { home: https://www.pruebas.example/ }\nlast_verified: 2026-09-20\n";
+  const run = (body: string, medium = MEDIUM) =>
+    evalFiles({ ...SOURCES, [MEDIUM_FILE]: medium, [ORG_FILE]: ORG, [VOLTA]: body }).failed;
+
+  test("el ejemplo de la sección 3.1 y su medio pasan", () => {
+    assert.ok(REVIEWS?.startsWith("reviews:") && MEDIUM?.includes("id: motorejemplo-es"), "section 3.1 examples not found");
+    assert.deepEqual(run(WITH), []);
+  });
+  test("cada regla de las reviews rechaza su error", () => {
+    const cases: [string, string, RegExp][] = [
+      ["    version: Volta 80 AWD", "    version: Volta 80 AWD\n    summary: muy bueno", /reviews\[0\]\.summary: unknown key/],
+      ['  - title: "Acme Volta, primera prueba"\n', "  -\n", /reviews\[1\]\.title: missing/],
+      ["source_id: motorejemplo-es", "source_id: otro-es", /reviews\[0\]: source_id otro-es is not in the registry/],
+      ["tier: T3\n    version", "tier: T1\n    version", /reviews\[0\]\.tier: must be T2 or T3/],
+      ["https://www.motor.example/pruebas", "https://www.tienda.example/pruebas", /reviews\[0\]\.url: host www\.tienda\.example is not one of the source's urls/],
+      ["https://videos.motor.example", "http://videos.motor.example", /reviews\[1\]\.url: must be an https URL/],
+      ["version: Volta 80 AWD", "version: Volta 99", /reviews\[0\]\.version: Volta 99 is not a version of this file/],
+      ["https://videos.motor.example/acme-volta", "https://www.motor.example/pruebas/acme-volta-80-awd", /reviews\[1\]\.url: repeated/],
+      ["retrieved: 2026-09-20\n    tier: T3", "retrieved: 2027-01-01\n    tier: T3", /reviews\[0\]\.retrieved: must be a past date/],
+    ];
+    for (const [from, to, error] of cases) {
+      const body = WITH.replace(from, to);
+      assert.notEqual(body, WITH, `fixture did not change: ${from}`);
+      const failed = run(body);
+      assert.ok(failed.some((f) => error.test(f)), `${error}: ${JSON.stringify(failed)}`);
+    }
+    assert.match(run(EXAMPLE + "reviews: {}\n").join(), /reviews: must be a list/);
+  });
+  test("la fuente de una review: kind, name, términos y nivel", () => {
+    const medium = (from: string, to: string) => {
+      const body = MEDIUM.replace(from, to);
+      assert.notEqual(body, MEDIUM, `fixture did not change: ${from}`);
+      return run(WITH, body).join("\n");
+    };
+    const unnamed = medium("name: Motor Ejemplo\n", "");
+    assert.match(unnamed, /motorejemplo-es\.yaml: kind reviews or tests needs name/);
+    assert.match(unnamed, /reviews\[0\]: source motorejemplo-es needs name, terms_url and terms_checked/);
+    assert.match(medium("terms_url: https://www.motor.example/aviso-legal\n", ""), /needs terms_url, an https URL/);
+    assert.match(medium("terms_checked: 2026-09-20", "terms_checked: 2027-01-01"), /terms_checked must be a past date/);
+    assert.match(medium("kind: [reviews]", "kind: [announcements]"), /reviews\[0\]: source motorejemplo-es needs kind reviews/);
+    assert.match(medium("tier: T3", "tier: T2"), /reviews\[0\]\.tier: must be the source's \(T2\)/);
+  });
+  test("un resultado de prueba falla mientras la lista de métricas esté vacía", () => {
+    const result = (extra = "") => EXAMPLE + "test_results:\n  - {value: 5, test: \"Protocolo 2026\", metric: estrellas, "
+      + `source_id: pruebas-eu, url: "https://www.pruebas.example/acme-volta", retrieved: 2026-09-20, tier: T2${extra}}\n`;
+    // Everything else about it is right: the metric is the only failure.
+    assert.deepEqual(run(result()), ["data/raw/acme/volta.yaml: test_results[0].metric: estrellas is not in the list of data-model.md"]);
+    assert.match(run(result().replace("tier: T2", "tier: T3")).join(), /test_results\[0\]\.tier: must be T2/);
+    assert.match(run(result().replace(', url: "https://www.pruebas.example/acme-volta"', "")).join(), /test_results\[0\]: missing url/);
+    assert.match(run(result(", summary: x")).join(), /test_results\[0\]\.summary: unknown key/);
+  });
+});
+
 test("changedFiles ve modificados y nuevos", () => {
   const dir = mkdtempSync(join(tmpdir(), "evals-git-"));
   const git = (...args: string[]) => execFileSync("git", args, { cwd: dir, encoding: "utf8" });
@@ -255,6 +314,17 @@ describe("validateData (ADR-0010)", () => {
     assert.match(all, /data\/images\/acme\/volta\/old\.png: not cited/);
     assert.doesNotMatch(all, /gitkeep/);
     assert.ok(r.warnings.filter((w) => w.stale).every((w) => /older than/.test(w.message)));
+  });
+
+  test("ADR-0017 warnings: stale review, query string, needs_review with reviews", () => {
+    const body = (EXAMPLE + REVIEWS).replace("needs_review: false", "needs_review: true")
+      .replace("acme-volta-80-awd", "acme-volta-80-awd?utm_source=x");
+    const r = validate({ ...SOURCES, [MEDIUM_FILE]: MEDIUM, [VOLTA]: body }, "2026-11-10");
+    assert.deepEqual(r.errors, []);
+    const all = messages(r).join("\n");
+    assert.match(all, /reviews: the model has needs_review, so they are not published/);
+    assert.match(all, /reviews\[0\]\.url has a query string/);
+    assert.match(all, /reviews\[1\]\.retrieved 2026-09-20 is older than 45 days/);
   });
 
   test("45 days is still fresh, 46 is stale", () => {

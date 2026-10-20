@@ -1,6 +1,6 @@
 ---
 status: accepted
-updated: 2026-10-06
+updated: 2026-10-20
 ---
 
 # Modelo de datos
@@ -12,8 +12,10 @@ documento es vigente cuando esa ADR se acepte. Las reglas de fuente y de precio 
 
 ```
 Marca 1───* Modelo 1───* Versión
-                          │
-                          └── Precio (0..1, en España, con fecha y fuente)
+             │            │
+             │            └── Precio (0..1, en España, con fecha y fuente)
+             ├──* Review (enlace a un tercero; 0..1 versión)
+             └──* Resultado de prueba (0..1 versión)
 Cualquier valor ──> fuente (source_id, url, retrieved, tier)
 ```
 
@@ -45,9 +47,9 @@ Todo dato de un coche va en este formato, en línea o en bloque:
 | `tier` | `T1` \| `T2` \| `T3` | sí | El de la fuente en el registro |
 | `note` | texto | no | Matiz del dato ("hasta 631 km, máximo de la gama") |
 
-Son los cuatro nombres que ya comprueba el eval de ADR-0004, sin cambios. Solo dos campos añaden
-claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` y
-`price_terms_url` en `price`.
+Son los cuatro nombres que ya comprueba el eval de ADR-0004, sin cambios. Solo tres campos añaden
+claves propias: `basis` en `battery_kwh`; `unit`, `price_kind`, `price_terms` y
+`price_terms_url` en `price`; y `test`, `metric` y `version` en cada `test_results` (sección 3.1).
 
 ## 3. Nivel de modelo
 
@@ -63,6 +65,8 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
 | `specs` | mapa de valores agregados del modelo (abajo) | no | RF-1, RF-2 |
 | `versions` | lista de versiones (sección 4); puede ir vacía si `announced` | sí | todo |
 | `images` | lista de imágenes (forma abajo); `[]` si no hay ninguna con licencia válida | sí | RF-8, CA-10, CA-17 |
+| `reviews` | lista de enlaces a reviews de terceros (sección 3.1); ausente o `[]` si no hay | no | PRD-006, RF-7 |
+| `test_results` | lista de resultados de pruebas de organismos independientes (sección 3.1); ausente o `[]` | no | PRD-006, RF-9 |
 | `open_questions` | lista de textos | no | — |
 
 - `launch` es la fecha prevista si el estado es `announced` (ADR-0001, regla 4) y la de inicio de
@@ -107,6 +111,81 @@ claves propias: `basis` en `battery_kwh`, y `unit`, `price_kind`, `price_terms` 
 - `specs` solo recoge lo que la fuente publica **para el modelo entero** y no por versión. Campos
   permitidos: `wltp_max_km`, `power_max_kw`, `dc_max_kw`, `ac_max_kw`, `battery_kwh_options`
   (lista de números) y `drivetrains` (lista de valores de tracción). `specs` no lleva `unit`.
+
+### 3.1 Reviews y resultados de pruebas ([ADR-0017](adr/0017-esquema-de-las-reviews.md))
+
+Las dos listas viven en el fichero de su modelo: no hay review sin modelo, y un modelo con
+`needs_review: true` no publica las suyas (PRD-006, RF-4). Todo lo que hay en ellas es de un
+tercero; no hay ningún campo para un texto propio, un resumen, una nota ni una traducción
+(PRD-006, RF-6). Por eso `summary`, `excerpt`, `rating`, `text` y `outlet` son claves desconocidas.
+
+**`reviews`**: un enlace a una review de un medio. No es un `Sourced`, porque no tiene `value`.
+
+| Clave | Tipo | Obligatoria | Nota |
+|---|---|---|---|
+| `title` | texto | sí | Título **literal** de la pieza, en su idioma, sin traducir ni acortar (RF-6, RNF-4) |
+| `url` | URL `https://` | sí | La URL exacta de la review, del dominio de la fuente |
+| `source_id` | texto | sí | Fichero de `data/sources/` con `kind: [reviews]`; su `name` es el medio que ve el visitante |
+| `retrieved` | `YYYY-MM-DD` | sí | Fecha en que se comprobó que la página existe y trata de este modelo; no futura |
+| `tier` | `T2` \| `T3` | sí | El de la fuente en el registro. `T1` no: la web de la marca no es una review |
+| `version` | texto | no | `name` de una versión de este fichero, si la review trata solo de esa; ausente = el modelo |
+
+**`test_results`**: un dato de un organismo de pruebas independiente. Es un `Sourced` (sección 2)
+con tres claves más:
+
+| Clave | Tipo | Obligatoria | Nota |
+|---|---|---|---|
+| `test` | texto | sí | Nombre literal de la prueba o del protocolo, como lo publica el organismo |
+| `metric` | valor de la lista de abajo | sí | Fija el tipo, la unidad (en el nombre, `_km`, `_kwh`…; sin `unit`) y el rango de `value` |
+| `version` | texto | no | `name` de una versión de este fichero si el organismo probó esa; ausente = el modelo |
+
+Su `tier` es `T2` y su `source_id` es una fuente con `kind: [tests]`.
+
+**Lista de `metric`: vacía.** Ningún documento sabe todavía qué publica cada organismo. La primera PR
+del Researcher que registre un organismo propone sus métricas en `open_questions`, y una persona las
+añade aquí, con su tipo, unidad y rango, y en `METRICS` de `factory/evals.ts`, antes o en la misma PR.
+Hasta entonces, cualquier `test_results` no vacío falla.
+
+Ejemplo (ficticio, como el de la sección 7). Se añade al fichero de `acme/volta.yaml`, y la fuente
+`motorejemplo-es` es un medio inventado:
+
+```yaml
+reviews:
+  - title: "Acme Volta 80 AWD: probamos el SUV eléctrico de 520 km"
+    url: "https://www.motor.example/pruebas/acme-volta-80-awd"
+    source_id: motorejemplo-es
+    retrieved: 2026-09-20
+    tier: T3
+    version: Volta 80 AWD
+  - title: "Acme Volta, primera prueba"
+    url: "https://videos.motor.example/acme-volta"
+    source_id: motorejemplo-es
+    retrieved: 2026-09-20
+    tier: T3
+```
+
+```yaml
+# data/sources/motorejemplo-es.yaml — Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: motorejemplo-es
+brand: (varias; medio del motor)
+name: Motor Ejemplo
+tier: T3
+market: ES
+kind: [reviews]
+urls:
+  home: https://www.motor.example/
+terms_url: https://www.motor.example/aviso-legal
+terms_checked: 2026-09-20
+image_license: ""
+notes: >
+  Ejemplo de la forma; no es un medio real.
+last_verified: 2026-09-20
+status: active
+```
+
+El host de cada `url` tiene que ser el de alguna URL de `urls` de su fuente, sin el `www.` inicial, o
+un subdominio suyo: `videos.motor.example` vale con `https://www.motor.example/`. Un medio que
+publica en otro dominio necesita ese dominio en sus `urls`.
 
 ## 4. Nivel de versión
 
@@ -174,6 +253,17 @@ Lo que una comprobación automática tendrá que rechazar (la comprobación es t
     de todo `data/raw/` y fallo en el eval de la factoría sobre los ficheros que toca la ejecución;
     mezclar `url` con las claves nuevas es siempre fallo. Tras la migración, `url` es clave
     desconocida (regla 2). Un fichero de `data/images/` que ningún YAML cita es aviso, no fallo.
+11. `reviews` y `test_results` (sección 3.1, ADR-0017), si están, son listas, y cada entrada tiene sus
+    claves obligatorias y ninguna más. Su `source_id` está en el registro, y esa fuente tiene en
+    `kind` `reviews` (para `reviews`) o `tests` (para `test_results`), más `name`, `terms_url` y
+    `terms_checked`. Su `tier` es el de la fuente: `T2` o `T3` en `reviews`, `T2` en `test_results`.
+    Su `url` es `https://` y su host es el de una URL de la fuente o un subdominio suyo. `retrieved`
+    no es futura. `version`, si está, es el `name` de una versión del mismo fichero. No hay dos
+    `reviews` con la misma `url` ni dos `test_results` con la misma `source_id`, `test`, `metric` y
+    `version`. `metric` está en la lista de la sección 3.1 y `value` cumple su tipo y rango.
+    Solo avisan, como en ADR-0010: un `retrieved` de más de 45 días, una fuente `broken`, una `url`
+    con parámetros (`?…`, que pueden ser de seguimiento o de afiliación) y un modelo con
+    `needs_review: true` que tiene reviews o resultados.
 
 ## 7. Ejemplo completo
 
@@ -281,7 +371,10 @@ cabecera desaparece con él.
 | `brand` | texto de presentación (`Cupra`) | sí en la práctica | La cabecera antigua no la marcaba obligatoria; ver preguntas abiertas |
 | `tier` | `T1` \| `T2` \| `T3` | sí | ADR-0001 |
 | `market` | `ES` \| `EU` \| código de país (`FR`, `DE`…) \| `global` | — | |
-| `kind` | lista de `prices` \| `specs` \| `images` \| `announcements` | — | |
+| `kind` | lista de `prices` \| `specs` \| `images` \| `announcements` \| `reviews` \| `tests` | — | `reviews`: medio cuyas reviews se enlazan; `tests`: organismo de pruebas (ADR-0017) |
+| `name` | texto de presentación del medio u organismo (`Motor Ejemplo`) | sí si `kind` tiene `reviews` o `tests` | Lo que ve el visitante junto al enlace (PRD-006, RF-7) |
+| `terms_url` | URL `https://` | sí si `kind` tiene `reviews` o `tests` | Página de términos o de reutilización que se leyó (PRD-006, RF-8 y CA-7) |
+| `terms_checked` | `YYYY-MM-DD` | sí si `kind` tiene `reviews` o `tests` | Fecha en que se leyeron; no futura. Si permiten enlazar lo decide la regla 6 de ADR-0001 |
 | `urls` | mapa nombre → URL, al menos una | sí | Nombres de la cabecera antigua: `models`, `prices` (lista o configurador), `press` (sala de prensa). Las entradas reales usan además `home`, `news`, `legal`; la lista de nombres no está cerrada |
 | `image_license` | texto; `""` si no hay licencia registrada | — | Términos de uso de imágenes y atribución exigida. Vacío = no se publican imágenes de esa fuente (ADR-0001, regla 5) |
 | `notes` | texto | — | |
@@ -318,7 +411,9 @@ status: active
    dos ficheros con el mismo nombre, esto garantiza que no hay `id` repetidos.
 3. `tier` es `T1`, `T2` o `T3`; `urls` tiene al menos una entrada; `last_verified` es una fecha no
    futura.
-4. Todo `source_id` de `data/raw/` (valores e `images`) tiene su fichero `data/sources/<source_id>.yaml`.
+4. Todo `source_id` de `data/raw/` (valores, `images`, `reviews` y `test_results`) tiene su fichero `data/sources/<source_id>.yaml`.
+5. Una fuente con `reviews` o `tests` en `kind` tiene `name`, `terms_url` (`https://`) y
+   `terms_checked`; `terms_checked`, en cualquier fuente que la tenga, es una fecha no futura (ADR-0017).
 
 ### 8.4 Qué cambia y quién lo hace
 
