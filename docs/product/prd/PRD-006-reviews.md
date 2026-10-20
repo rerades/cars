@@ -5,12 +5,12 @@ status: ready        # draft | ready | in-progress | done | deprecated
 priority: P2         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: [PRD-001, PRD-002]
 epic: ""
-updated: 2026-10-18
+updated: 2026-10-21
 ---
 
 # PRD-006 — Reviews
 
-> **Listo (2026-10-18).** El responsable cerró OPEN-1 a OPEN-5 (sección 8): reviews de terceros solo como enlace, datos objetivos de organismos con fuente, nada generado por un agente y un bloque al final de la ficha. Antes de construir hacen falta una ADR y un cambio de esquema (sección 6) y la enmienda de PRD-002 que añade el bloque a la ficha.
+> **Listo (2026-10-18).** El responsable cerró OPEN-1 a OPEN-5 (sección 8): reviews de terceros solo como enlace, datos objetivos de organismos con fuente, nada generado por un agente y un bloque al final de la ficha. El esquema ya está decidido en la ADR-0017 (sección 6) y la enmienda de PRD-002 que añade el bloque a la ficha está hecha (RF-16).
 
 ## 1. Problema
 Quien está comparando coches eléctricos antes de comprar quiere, además de las cifras, saber **cómo se comporta el coche en la práctica**: qué dicen quienes lo han probado. La visión incluye «reviews» entre las áreas del producto y es la única sin PRD. La web ya da cifras con fuente y fecha (PRD-002), las pone lado a lado (PRD-003) y las ordena (PRD-005), pero ninguna de esas páginas dice nada de la experiencia de uso.
@@ -66,13 +66,20 @@ Los de los demás PRD, que también aplican aquí:
 - **RNF-5:** Sin cookies ni almacenamiento del navegador.
 
 ## 6. Datos
-No existe hoy ninguna entidad de reviews en `architecture/data-model.md` (ADR-0008). Principio 3: todo lo que se muestra sale de datos con modelo definido, así que una review necesita, antes de construirse, una **ADR y un cambio de esquema** de Arquitectura. Este PRD no los diseña. Lo que sí pide es que el esquema permita:
+El esquema de las reviews lo fija la [ADR-0017](../../architecture/adr/0017-esquema-de-las-reviews.md) (aceptada el 2026-10-20) y está en la sección 3.1 de `architecture/data-model.md`. Este PRD no copia los campos: si difieren, mandan esos dos documentos. Lo que este PRD pide del esquema, y cómo queda cubierto (comprobado el 2026-10-21):
 
-- Asociar la review a un modelo (y, si procede, a una versión) existente en `data/raw/`.
-- Guardar, por cada review o afirmación, `source_id`, `url`, `retrieved` y `tier`, con los mismos nombres que ADR-0001, regla 2, y registrar la fuente en `data/sources/<id>.yaml`.
-- Distinguir el origen del contenido (propio o de tercero) sin que el visitante tenga que adivinarlo.
+| Petición | Estado | Dónde |
+|---|---|---|
+| Asociar la review a un modelo y, si procede, a una versión | Cubierta | Las listas viven en el fichero del modelo en `data/raw/`; la versión es opcional y debe existir en ese fichero (ADR-0017, decisión) |
+| `source_id`, `url`, `retrieved` y `tier` por review o afirmación, con los nombres de ADR-0001, regla 2, y fuente registrada | Cubierta | Los enlaces (RF-7) llevan los cuatro; los resultados de prueba (RF-9) son un dato con fuente. Las dos exigen fuente en `data/sources/<id>.yaml`, con `terms_url` y `terms_checked` (RF-8, CA-7) |
+| Nivel de los resultados de prueba (RF-9) | Cubierta | T2 (ADR-0017, opción 3); los enlaces, el de su fuente (T2 o T3) |
+| Distinguir el origen (propio o de tercero) | Cubierta por construcción | No hay campo: todo lo de estas listas es de un tercero y el contenido propio no existe (RF-6). El medio que ve el visitante es el `name` del registro |
 
-Los campos concretos, la ingesta y quién los obtiene (hoy solo el Researcher obtiene datos del producto de fuera, ADR-0001) quedan para esa ADR. `open_questions` y `needs_review` no se muestran (PRD-002, sección 6).
+Lo que **no** queda cubierto todavía:
+- **RF-9 y CA-8 no se pueden construir aún.** La lista de métricas de los resultados de prueba empieza vacía, y mientras lo esté un `test_results` no vacío no valida. Hasta que el Researcher registre un organismo y se añadan sus métricas a `data-model.md`, solo es posible RF-7 (enlaces).
+- **«Término comprobado» solo deja rastro, no lo verifica la máquina.** Que el título sea literal, que la página trate de ese modelo y que la fuente no sea un agregador de opiniones de propietarios (CA-7) los comprueban el Revisor y una persona, no el validador.
+
+`open_questions` y `needs_review` no se muestran (PRD-002, sección 6). Hoy solo el Researcher obtiene datos del producto de fuera (ADR-0001).
 
 ## 7. Criterios de aceptación
 Verificables sobre el HTML construido y los ficheros de datos, sin JavaScript.
@@ -95,6 +102,11 @@ Decididas por el responsable del producto:
 3. **Fuentes (OPEN-3):** solo enlazar, sin resumir ni extractar, fuentes con términos comprobados por el Researcher; empezando por organismos de pruebas y medios; sin agregadores de opiniones de propietarios.
 4. **Ubicación (OPEN-4):** A, un bloque al final de la ficha. Obliga a una enmienda de PRD-002. Descartadas: B (páginas casi vacías) y C (dos superficies sin contenido que las justifique).
 5. **Prioridad (OPEN-5):** P2, dependiente de PRD-001 y PRD-002.
+
+### Abiertas
+Las deja la ADR-0017 (sección «Preguntas abiertas») y tocan al producto; no cambian ningún RF ni CA vigente. Ninguna bloquea el esquema.
+- **OPEN-6:** ¿Hay un máximo de enlaces por modelo o por medio en el bloque? La ADR-0017 dice que lo decide el diseño o Producto.
+- **OPEN-7:** ¿Se muestra la fecha de publicación de la review (no la de consulta), el idioma del enlace o si es un vídeo? Hoy el esquema no los guarda y ningún RF los pide; añadirlos sería ampliar alcance y esquema.
 
 ### Opciones que se consideraron
 Se conservan como registro. En la ejecución que escribió el borrador no había red, así que no se comprobó ningún término de uso de terceros: lo que se dice de las fuentes es hipótesis que debe verificar el Researcher.
@@ -151,5 +163,6 @@ Se ha puesto P2 por analogía con PRD-005, y depende de PRD-001 y PRD-002 porque
 ## 9. Historial de cambios
 | Fecha | Cambio | Autor |
 |---|---|---|
+| 2026-10-21 | Enmienda por la ADR-0017 (aceptada el 2026-10-20): la sección 6 remite a la ADR y a `data-model.md` (sección 3.1) en lugar de pedirlas; comprobada la cobertura de sus tres peticiones y anotado lo no cubierto (métricas de RF-9 aún sin definir). Añadidas OPEN-6 y OPEN-7. Sin cambios en RF ni CA | Claude |
 | 2026-10-18 | OPEN-1 a OPEN-5 resueltas; RF-6 a RF-10 y CA-6 a CA-9; pasa a ready | Claude |
 | 2026-10-18 | Borrador inicial: RF-1 a RF-5, RNF-1 a RNF-5, CA-1 a CA-5; 5 preguntas abiertas (OPEN-1 a OPEN-5), cada una con opciones y recomendación | Claude |
