@@ -1,7 +1,7 @@
 # data/sources/hispano-suiza-eu.yaml — Researcher. Esquema: docs/architecture/data-model.md, sección 8.
 id: hispano-suiza-eu
 brand: Hispano Suiza
-tier: T1
+tier: T2
 market: global
 kind: [specs, announcements]
 urls:
