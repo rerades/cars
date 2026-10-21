@@ -1,7 +1,8 @@
 # Ficha de modelo
 
-PRD-002 (ready): RF-1 a RF-15, RNF-1 a RNF-5; CA-1 a CA-18. Tokens: [`tokens.md`](tokens.md). Esquema:
-`docs/architecture/data-model.md` (ADR-0008). Se apoya en lo ya especificado y no lo repite:
+PRD-002 (ready): RF-1 a RF-16, RNF-1 a RNF-5; CA-1 a CA-19. El bloque «Reviews» (RF-16) aplica además
+PRD-006 (ready): RF-1 a RF-10, RNF-1 a RNF-5, CA-1 a CA-9. Tokens: [`tokens.md`](tokens.md). Esquema:
+`docs/architecture/data-model.md` (ADR-0008; reviews y resultados de pruebas en su sección 3.1, ADR-0017). Se apoya en lo ya especificado y no lo repite:
 
 - La tarjeta de los modelos relacionados (RF-15): [`tarjeta-modelo.md`](tarjeta-modelo.md), sin cambios.
 - `<title>`, márgenes y anchos de página, jerarquía de encabezados, estilo de enlaces y regla de «texto muy
@@ -34,11 +35,14 @@ Orden del DOM = orden visual = orden de lectura (WCAG 1.3.2) en todas las anchur
    3. **Datos del modelo** (`h2`, RF-5, RF-7): solo si hay `specs`.
    4. **Más imágenes** (`h2`, RF-12): solo si hay 2 o más imágenes con licencia.
    5. **Otros modelos del segmento** (`h2`, RF-15): solo si hay segmento y algún modelo que mostrar.
-   6. **Fuentes** (`h2`, RF-9): siempre, al final.
+   6. **Fuentes** (`h2`, RF-9): siempre, al final de los datos de la ficha (solo «Reviews» va detrás).
+   7. **Reviews** (`h2`, RF-16; PRD-006): solo si hay alguna review o resultado de prueba. Es el último
+      bloque de `main`, después de «Fuentes» (CA-19).
 4. Pie del sitio.
 
 Encabezados: un `h1`; `h2` para cada bloque de `main`; `h3` para el nombre de versión en los bloques, para
-«Condiciones de las ofertas» y para el modelo en las tarjetas relacionadas (como en `paginas-catalogo.md`).
+«Condiciones de las ofertas», para el modelo en las tarjetas relacionadas (como en `paginas-catalogo.md`) y
+para las dos sublistas de «Reviews» cuando aparecen las dos.
 
 ### Wireframe
 
@@ -73,13 +77,16 @@ Móvil (320–767 px)                     Escritorio (≥ 1024 px)
 │ ┌──────────────────────┐ │           │ ┌──────┐ ┌──────┐ ┌──────┐                           │
 │ │ h3 Tavascan VZ …     │ │           │ Fuentes                                              │
 │ └──────────────────────┘ │           │ 1. cupra.com, consultado el 24 sep 2026: https://…   │
-│ h3 Condiciones…          │           └──────────────────────────────────────────────────────┘
-│ Datos del modelo         │
-│ Más imágenes             │
-│ Otros modelos…           │
-│ Fuentes                  │
+│ h3 Condiciones…          │           │                                                      │
+│ Datos del modelo         │           │ Reviews                                              │
+│ Más imágenes             │           │ Título literal de la review (enlace)                 │
+│ Otros modelos…           │           │ Medio · dominio · consultado el 20 sep 2026          │
+│ Fuentes                  │           └──────────────────────────────────────────────────────┘
+│ Reviews *                │
 └──────────────────────────┘
 ```
+
+(* «Reviews» solo existe si el modelo tiene alguna review o resultado de prueba; ver «Reviews».)
 
 (Los «¹ ² ³» del dibujo son las notas numeradas de RF-9; en pantalla se pintan como «[1]», ver «Fuente y
 fecha».)
@@ -343,7 +350,9 @@ lleva su fuente visible (ver «El precio»). Las imágenes llevan su atribución
   orden creciente de izquierda a derecha, y es aceptable: el número identifica la fuente, no la posición).
 
 ### Bloque «Fuentes»
-Último bloque de `main`. `h2` `ficha.fuentes.titulo` «Fuentes»; debajo, `ficha.fuentes.entrada` (`text-small`,
+Último bloque de los datos de la ficha; solo «Reviews», si existe, va detrás (RF-16). Sus notas cubren solo
+los datos de la ficha: las reviews y los resultados de pruebas llevan su origen junto a cada entrada y no
+tienen número. `h2` `ficha.fuentes.titulo` «Fuentes»; debajo, `ficha.fuentes.entrada` (`text-small`,
 `ink-600`): «Dónde se ha leído cada dato y cuándo. El precio lleva su fuente junto a la cifra.»
 
 `<ol>` con un `<li id="fuente-{n}" tabindex="-1">` por nota:
@@ -377,6 +386,158 @@ escrito para el visitante. La ficha usa como `{fuente}` el **dominio de la `url`
 `retrieved` y `launch` con mes corto español: «24 sep 2026», «oct 2026» (`fecha.mes.1` a `.12`: ene, feb, mar,
 abr, may, jun, jul, ago, sep, oct, nov, dic). Mismo formato que la tarjeta (CA-10).
 
+## Reviews (PRD-002 RF-16, CA-19; PRD-006 RF-1 a RF-10, CA-1 a CA-9)
+
+Bloque con los datos de `reviews` y `test_results` del fichero del modelo (`data-model.md`, sección 3.1;
+ADR-0017). Todo lo que contiene es de un tercero y va en el HTML servido, sin JavaScript (PRD-006, RNF-1).
+Cómo llegan los datos al build no es de este documento.
+
+### Cuándo existe y dónde va (RF-16, CA-19; PRD-006 RF-10, CA-9)
+- **Último bloque de `main`**, después de «Otros modelos del segmento» y de «Fuentes». No hay ninguna otra
+  página ni URL de reviews (CA-9): ni ancla de navegación propia en la cabecera ni enlace «Ver todas».
+- **Solo existe si hay al menos una entrada publicable** en `reviews` o en `test_results`. Un modelo sin
+  ninguna **no muestra el bloque**: ni `h2` ni texto (decisión de diseño que PRD-002, RF-16 deja abierta).
+  Motivos: es lo que ya hace la ficha con los bloques opcionales («Más imágenes», «Otros modelos del
+  segmento»); con la cobertura inicial (PRD-006, sección 2: aún sin fuentes registradas) casi todas las
+  fichas acabarían con un aviso vacío al pie, que no da información sobre el coche; y un texto como «Aún no
+  hay reviews» podría leerse como un juicio sobre el modelo. «Versiones» sí muestra su vacío porque es el
+  contenido central de la ficha (RF-11); este bloque no.
+- Modelo con `needs_review: true`: no hay ficha, así que tampoco bloque (PRD-006 RF-4, CA-4).
+
+### Título y estructura
+- `<section aria-labelledby>` con `h2` `ficha.reviews.titulo`: **«Reviews»** (el nombre del área en la visión
+  y en PRD-006). `--text-section`, `ink-900`, como los demás `h2`.
+- Dos sublistas posibles, cada una con su línea de entrada:
+  - **Resultados de pruebas** (`test_results`, PRD-006 RF-9), primero: es dato con fuente (T2) y la ficha
+    pone lo concreto antes que lo demás (como «Versiones» antes que «Datos del modelo»).
+  - **Reviews de medios** (`reviews`, PRD-006 RF-7), después.
+- **Si solo hay una de las dos** (hoy siempre: la lista de `metric` está vacía y cualquier `test_results` falla
+  la validación), no hay `h3`: la línea de entrada de esa sublista va directamente bajo el `h2`.
+- **Si hay las dos**, cada una lleva su `h3` (`ficha.reviews.pruebasTitulo` «Resultados de pruebas»,
+  `ficha.reviews.mediosTitulo` «Reviews de medios»), `--text-card-title`, `ink-900`, y su entrada debajo.
+- Líneas de entrada, `text-small`, `ink-600`, ancho `--width-prose`:
+  - `ficha.reviews.mediosEntrada`: «Enlaces a pruebas de este modelo publicadas por otros medios. Llevan a
+    su web, con el título original y en el idioma en que se publicaron, sin traducir ni resumir.» (PRD-006
+    RF-6, RF-7, RNF-4).
+  - `ficha.reviews.pruebasEntrada`: «Resultados publicados por organismos de pruebas independientes, con el
+    nombre de la prueba tal como lo publican.» (PRD-006 RF-9).
+- Cada sublista es una `<ul>` (el orden es de presentación, no un ranking: PRD-006 RF-5, sin «mejor»).
+  Entradas separadas `4` y con una línea `line-soft` entre ellas (decorativa). Sin Card: son enlaces en una
+  lista, no bloques de datos comparables. Una columna, ancho máximo `--width-prose`, en todas las anchuras.
+
+### Cada enlace a una review (PRD-006 RF-1, RF-5, RF-7, CA-1, CA-5, CA-6)
+
+```
+Acme Volta 80 AWD: probamos el SUV eléctrico de 520 km    ← enlace a url; text-body, peso 600, brand-600
+Motor Ejemplo · motor.example · consultado el 20 sep 2026  ← text-small, ink-600
+Sobre la versión Volta 80 AWD                              ← solo si hay version; text-small, ink-600
+```
+(Datos del ejemplo ficticio de `data-model.md`, sección 3.1.)
+
+Orden dentro de la entrada y por qué:
+1. **Título** (`title`), literal, como texto del enlace `<a href="{url}">`: es lo que identifica la pieza
+   (RF-7) y lo que se pulsa. Ni comillas, ni recorte, ni «…», ni traducción (ADR-0017: literal y sin acortar;
+   RF-6). `text-body`, peso 600, `brand-600`, subrayado, hover `brand-800`. Se abre en la misma pestaña, como
+   «Ver en la web de la marca» (sin `target="_blank"`).
+2. **Quién lo firma, adónde lleva y cuándo se consultó**, en una sola línea `ficha.reviews.origen`:
+   «{medio} · {dominio} · consultado el {fecha}».
+   - `{medio}`: el `name` de `data/sources/{source_id}.yaml` (ADR-0017, decisión 4), tal cual.
+   - `{dominio}`: el host de `url` sin `www.` («motor.example», «videos.motor.example»), con la misma regla que
+     «Nombre de la fuente». Es la señal visible de que el enlace sale de la web y a cuál (RNF-4, RF-5).
+   - `{fecha}`: `retrieved` con mes corto («20 sep 2026», «Fechas»). Rotulada como consulta, no como
+     publicación: el esquema no guarda la fecha de publicación y no se puede dar a entender que la tiene.
+3. **Versión**, si la entrada trae `version`: `ficha.reviews.version` «Sobre la versión {version}», con el
+   `name` literal. En texto, no en Badge ni en color (PRD-006 RNF-3): las etiquetas Badge de la ficha son de
+   estado y de oferta, y una más competiría con ellas. Sin `version`, la review es del modelo y no se añade
+   nada (no hace falta «Sobre el modelo»: el bloque ya está en su ficha).
+
+No hay extracto, resumen, puntuación, estrellas, «recomendado», logotipo del medio ni miniatura de la pieza
+(PRD-006 RF-6, RF-7, CA-6; sin «mejor» ni insignias). Ningún enlace es de compra ni lleva el aspecto de un
+botón (RF-5, CA-5).
+
+**El enlace se entiende fuera de contexto** (WCAG 2.4.4; listas de enlaces del lector): el título literal
+puede no nombrar el modelo ni el medio («Primera prueba»). Por eso el enlace lleva, tras el título, texto
+oculto visualmente `ficha.reviews.enlaceSr`: «(review de {medio} sobre {marca} {modelo}, en otra web)». El
+nombre accesible queda «Primera prueba (review de Motor Ejemplo sobre Acme Volta, en otra web)».
+
+### Cada resultado de prueba (PRD-006 RF-1, RF-9, CA-1, CA-2, CA-8)
+
+La lista de `metric` de `data-model.md` está vacía: aquí solo se fija la forma general. No se inventa ninguna
+métrica ni su rótulo.
+
+```
+{Rótulo de la métrica}: {valor} {unidad}                    ← text-body, ink-900
+{test}                                                       ← text-small, ink-600, literal
+Fuente: {organismo}, {fecha}                                 ← text-small, ink-600; {organismo} enlaza a url
+Sobre la versión {version}                                   ← solo si hay version
+{note}                                                       ← solo si la trae, literal
+```
+
+- **Dato y unidad:** `{Rótulo de la métrica}` sale de una clave `ficha.pruebas.metrica.{metric}`, que se crea
+  cuando la métrica entre en `data-model.md` (no antes). `{valor}` con formato `es-ES` y la unidad que fija el
+  sufijo del nombre de la métrica con las claves `ficha.unidad.*` existentes (o una nueva junto a la métrica).
+  Una métrica sin rótulo definido no se pinta (no se muestra el identificador `snake_case`).
+- **`test`:** el nombre literal de la prueba o protocolo, sin traducir (RF-6, RNF-4).
+- **Origen junto al dato**, como el precio: `ficha.pruebas.fuente` «Fuente: {organismo}, {fecha}»; `{organismo}`
+  es el `name` del registro y es el enlace a `url`, con texto oculto `ficha.pruebas.fuenteSr` «(resultado de
+  {test} para {marca} {modelo}, en otra web)». El enlace va en línea con el texto (excepción «en línea» del
+  tamaño táctil) con la zona de pulsación ampliada a 24 × 24 px, como las marcas de nota.
+- **`version`** como en las reviews; **`note`** debajo, literal, `text-small`, `ink-600` (como RF-8 de PRD-002).
+- Un `dl` por resultado: `dt` el rótulo de la métrica, `dd` el valor; las líneas siguientes en el `dd`.
+
+### Nivel de la fuente
+Ninguna entrada del bloque lleva «fuente no oficial»: todas son de un tercero por construcción (ADR-0017), el
+nombre del medio u organismo está escrito en cada una y la línea de entrada lo dice. Esa marca distingue, en
+los datos de la ficha, un valor que no viene de la marca de uno que sí; aquí no hay valor de la marca con el
+que confundirlo. Pregunta 7.
+
+### Orden de las entradas (preguntas abiertas de ADR-0017)
+Se resuelve al construir; no hay control para cambiarlo.
+1. Primero las entradas **sin `version`** (del modelo entero); después, las de cada versión, **en el orden
+   del bloque «Versiones»** (RF-3), para que el visitante encuentre las de una versión juntas y en el mismo
+   orden que arriba.
+2. Dentro de cada grupo, por `{medio}` (u `{organismo}`) en orden alfabético español (`Intl.Collator('es')`),
+   y a igual medio, en el orden del fichero. Es un orden neutro: no sugiere que un medio sea mejor ni más
+   reciente (PRD-006, fuera de alcance: sin «mejor»).
+3. No se ordena por `retrieved`: es la fecha de consulta, no la de publicación, y ordenar por ella haría
+   pasar por «más reciente» lo que solo se comprobó más tarde.
+
+**Sin máximo** de entradas por modelo ni por medio: todas van en el HTML servido y visibles (sin `<details>`
+ni «ver más», que esconderían el origen de lo que hay detrás). Con la cobertura prevista (PRD-006, P2), un
+tope sería arbitrario. Pregunta 6.
+
+### Idioma de los títulos (PRD-006 RNF-4; WCAG 3.1.2)
+El esquema no guarda el idioma del enlace (ADR-0017, pregunta abierta). Mientras no lo guarde:
+- El aviso de idioma va **una vez, en la línea de entrada** de la sublista (`ficha.reviews.mediosEntrada`), no
+  en cada enlace: decir «en inglés» en una entrada concreta exigiría deducir el idioma del título, y eso es
+  inventar un dato.
+- No se pone atributo `lang` en el título: no se sabe cuál es. Esto deja sin cumplir WCAG 3.1.2 (idioma de las
+  partes, nivel AA) cuando un título está en otro idioma: el lector lo pronunciará con la voz española.
+  Pregunta 5.
+
+### Disposición
+Igual en móvil y escritorio: una columna dentro del ancho de página, limitada a `--width-prose`. A 320 px, el
+título, el dominio y el nombre de la versión parten línea (`overflow-wrap: anywhere`) y nada se recorta: sin
+scroll horizontal (PRD-006 RNF-3). La línea de origen puede ocupar dos o tres líneas; los separadores «·»
+(`ficha.lista.separador`) van con espacio fino no separable delante para no quedar al principio de línea.
+Zona táctil: el enlace de título es un bloque propio (no está dentro de una frase), así que su caja tiene al
+menos `--size-touch` de alto (relleno vertical si el título ocupa una sola línea).
+
+### Estados del bloque
+| Situación | Qué se ve | Requisito |
+|---|---|---|
+| Sin `reviews` ni `test_results` (o las dos `[]`) | No hay bloque | PRD-002 RF-16; PRD-006 RF-10 |
+| Solo `reviews` (el caso de hoy) | `h2`, entrada de medios, lista; sin `h3` | PRD-006 RF-7 |
+| Solo `test_results` | `h2`, entrada de pruebas, lista; sin `h3` | PRD-006 RF-9 |
+| Las dos | `h2`; `h3` «Resultados de pruebas» y su lista; `h3` «Reviews de medios» y su lista | PRD-006 RF-7, RF-9 |
+| Review de una versión | «Sobre la versión {version}» en texto | PRD-006 sección 6 |
+| Título muy largo o en otro idioma | Literal, completo, parte línea; sin `lang` (pregunta 5) | PRD-006 RF-6, RNF-4 |
+| Varias reviews del mismo medio | Todas, ordenadas como arriba; sin tope | Pregunta 6 |
+| `retrieved` antiguo o fuente `broken` | Se muestra igual, con su fecha visible: el visitante ve cuándo se comprobó | PRD-006 RF-1; pregunta 8 |
+| Métrica sin rótulo definido | Ese resultado no se pinta | PRD-006 RF-2 |
+| Modelo `needs_review: true` | No hay ficha | PRD-006 RF-4, CA-4 |
+| Cargando / error | No hay: va en el HTML generado | PRD-006 RNF-1 |
+
 ## Estados
 
 | Situación | Qué se ve | Requisito |
@@ -395,6 +556,8 @@ abr, may, jun, jul, ago, sep, oct, nov, dic). Mismo formato que la tarjeta (CA-1
 | 1 imagen / 2–6 / más de 6 | Solo la principal / principal + «Más imágenes» / las 6 primeras | RF-12, CA-12 |
 | Sin `specs` | No hay «Datos del modelo» | RF-7 |
 | Sin candidatos relacionados | No hay «Otros modelos del segmento» | RF-15 |
+| Sin reviews ni resultados de pruebas | No hay bloque «Reviews»; la ficha acaba en «Fuentes» | RF-16 |
+| Con reviews o resultados | Bloque «Reviews» al final, detrás de «Fuentes» (estados propios en «Reviews») | RF-16, CA-19 |
 | `open_questions` | **No se muestra nunca**, en ningún bloque ni atributo | Sección 6, CA-18 |
 | `needs_review: true` | No hay ficha (no se genera la página) | Sección 6, decisión 5 |
 | Texto muy largo | `h1`, nombres de versión, notas, `price_terms`, atribuciones y URL parten línea (`overflow-wrap: anywhere`); nunca se recortan ni se reduce la letra. Sin scroll horizontal a 320 px | RNF-3 |
@@ -412,6 +575,8 @@ abr, may, jun, jul, ago, sep, oct, nov, dic). Mismo formato que la tarjeta (CA-1
 5. «Datos del modelo»: marcas de nota.
 6. «Otros modelos del segmento»: una parada por tarjeta.
 7. «Fuentes»: el enlace de cada nota.
+8. «Reviews»: en los resultados de pruebas, el enlace del organismo de cada uno; en las reviews de medios,
+   el enlace del título de cada una. Una parada por entrada, en el orden de «Orden de las entradas».
 
 Las imágenes, los `h2` y los textos no son paradas de foco. Los destinos de ancla (`#condiciones-{n}`,
 `#fuente-{n}`) tienen `tabindex="-1"`: reciben el foco al saltar a ellos y muestran el anillo, pero no son
@@ -428,9 +593,13 @@ Recorrido de Tavascan, de arriba abajo:
    Precio por confirmar». En los bloques: «Tavascan VZ, encabezado nivel 3», y «Precio: Precio por confirmar».
 5. «Condiciones de las ofertas, encabezado nivel 3.» …
 6. «Fuentes, encabezado nivel 2.» «Lista, 1 elemento.» «cupra.com, consultado el 24 sep 2026…»
+7. Si hay reviews (ejemplo ficticio de `data-model.md`): «Reviews, encabezado nivel 2.» La línea de entrada.
+   «Lista, 2 elementos.» «Acme Volta, primera prueba (review de Motor Ejemplo sobre Acme Volta, en otra web),
+   enlace.» «Motor Ejemplo · motor.example · consultado el 20 sep 2026.» Y en la segunda: «… Sobre la versión
+   Volta 80 AWD.»
 
 Landmarks: `nav` de la ruta y `main`. Por encabezados se llega directo a «Versiones», «Datos del modelo»,
-«Más imágenes», «Otros modelos del segmento» y «Fuentes». Las etiquetas se leen como texto («Precio con
+«Más imágenes», «Otros modelos del segmento», «Fuentes» y «Reviews». Las etiquetas se leen como texto («Precio con
 oferta», «Descatalogado»); nada depende del color.
 
 ## Copy (RNF-4: claves para i18n, sin textos fijos en los componentes)
@@ -479,6 +648,17 @@ oferta», «Descatalogado»); nada depende del color.
 | `ficha.fuentes.entrada` | Dónde se ha leído cada dato y cuándo. El precio lleva su fuente junto a la cifra. |
 | `ficha.fuentes.item` | {fuente}, consultado el {fecha}. |
 | `ficha.fuentes.noOficial` | Fuente no oficial. |
+| `ficha.reviews.titulo` | Reviews |
+| `ficha.reviews.mediosTitulo` | Reviews de medios |
+| `ficha.reviews.pruebasTitulo` | Resultados de pruebas |
+| `ficha.reviews.mediosEntrada` | Enlaces a pruebas de este modelo publicadas por otros medios. Llevan a su web, con el título original y en el idioma en que se publicaron, sin traducir ni resumir. |
+| `ficha.reviews.pruebasEntrada` | Resultados publicados por organismos de pruebas independientes, con el nombre de la prueba tal como lo publican. |
+| `ficha.reviews.origen` | {medio} · {dominio} · consultado el {fecha} |
+| `ficha.reviews.version` | Sobre la versión {version} |
+| `ficha.reviews.enlaceSr` | (review de {medio} sobre {marca} {modelo}, en otra web) |
+| `ficha.pruebas.fuente` | Fuente: {organismo}, {fecha} |
+| `ficha.pruebas.fuenteSr` | (resultado de {test} para {marca} {modelo}, en otra web) |
+| `ficha.pruebas.metrica.{metric}` | Se define con cada métrica de `data-model.md`; hoy ninguna |
 | `fecha.mes.1` … `fecha.mes.12` | ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic |
 | `fecha.mesAno` / `fecha.diaMesAno` | {mes} {ano} / {dia} {mes} {ano} |
 
@@ -496,6 +676,11 @@ Color: `surface`, `surface-muted`, `ink-900`, `ink-600`, `line-soft`, `brand-600
 **Nuevos** (añadidos en `tokens.md`): `--size-segment-icon-lg`, `--width-version-label`, `--width-version-col`,
 `--width-version-col-max`. **No hay colores nuevos**; los pares usados ya están calculados en `tokens.md`.
 
+El bloque «Reviews» **no añade tokens**: usa `--text-section`, `--text-card-title`, `--text-body`,
+`--text-small`, `--width-prose`, `--size-touch`, `line-soft` y estos pares, todos sobre `surface` y ya
+calculados en `tokens.md`: `ink-900` (17,74:1), `ink-600` (7,56:1), `brand-600` (6,67:1) y `brand-800` en
+hover (9,33:1); todos cumplen 4,5:1. Los enlaces se distinguen por el subrayado, no solo por el color.
+
 ## Preguntas abiertas para Producto
 
 Respondidas el 2026-10-06 por delegación del responsable (se dejan las preguntas originales debajo):
@@ -507,6 +692,21 @@ Respondidas el 2026-10-06 por delegación del responsable (se dejan las pregunta
    primero por el PRD.
 4. ~~Meta descripción~~: no por ahora. Ni PRD-001 ni PRD-002 la piden, y se decidirá una vez para todas las
    páginas (la misma pregunta sigue abierta en `paginas-catalogo.md`).
+
+Abiertas (bloque «Reviews», 2026-10-21). El diseño de arriba funciona sin responderlas:
+5. **Idioma de cada enlace (`lang`).** Sin un campo de idioma en `reviews` (ADR-0017 lo deja abierto), un
+   título en otro idioma no puede llevar `lang` y la página incumple WCAG 3.1.2 (AA, ADR-0006) para ese
+   título. ¿Se añade `lang` al esquema (decisión de Arquitectura)? Con él, el título llevaría su `lang` y la
+   línea de origen podría decir «en inglés» por entrada; el aviso general de la entrada seguiría valiendo.
+6. **Máximo de entradas.** Se ha diseñado sin tope. ¿Quiere Producto un máximo por modelo o por medio cuando
+   haya cobertura (ADR-0017)? Si lo hay, hay que decidir también qué se descarta, porque no se puede esconder
+   tras un control sin JS que oculte el origen.
+7. **«Fuente no oficial» en el bloque.** Se ha omitido porque todo es de terceros y lleva su firma. ¿Lo
+   confirma Producto, o se quiere la marca de RF-9 también aquí?
+8. **Enlaces de fuentes `broken` o con `retrieved` de más de 45 días.** Hoy se muestran (el validador solo
+   avisa). ¿Debe el build dejar de publicar los de una fuente `broken`? No lo dice ningún RF.
+9. **Fecha de publicación.** Con ella se podría ordenar por novedad y mostrarla junto a la de consulta
+   (ADR-0017, pregunta abierta). Hasta entonces el orden es alfabético por medio.
 
 Preguntas originales:
 
