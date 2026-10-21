@@ -1,15 +1,27 @@
 # Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
 id: motorpasion-es
+name: Motorpasión
 brand: (varias; medio del motor)
 tier: T3
 market: ES
-kind: [ announcements ]
+kind: [ announcements, reviews ]
+terms_url: https://weblogs.webedia.es/condiciones-uso.html
+terms_checked: 2026-10-21
 urls:
   home: https://www.motorpasion.com/
   robots: https://www.motorpasion.com/robots.txt
+  legal: https://weblogs.webedia.es/aviso-legal.html
+  reviews: https://www.motorpasion.com/categoria/pruebas-de-coches
+  electric: https://www.motorpasion.com/categoria/coches-electricos
 image_license: "" # no se usan imágenes de este medio
 notes: >
   Medio del motor español. T3: sirve para fechar lanzamientos y confirmar versiones, nunca como fuente de precio.
-  robots.txt, para cualquier agente, solo bloquea rutas de WordPress, login, API y /retro (comprobado el 2026-10-09).
-last_verified: 2026-10-09
+  robots.txt, para cualquier agente, solo bloquea rutas de WordPress, login, API y /retro (comprobado el 2026-10-09 y el
+  2026-10-21); no bloquea /categoria/ ni los artículos. Reviews (ADR-0017): pruebas en motorpasion.com, sección
+  /categoria/pruebas-de-coches, y eléctricos en /categoria/coches-electricos. Condiciones de uso (Webedia, enlazadas desde
+  el pie de la web) leídas el 2026-10-21: no prohíben ni condicionan enlazar; piden, para quien reutilice contenido,
+  atribución con enlace directo sin nofollow a la página individual. Solo se enlaza; no se reproduce contenido. No es
+  agregador de opiniones de propietarios ni foro. Pendiente: no he fijado una URL concreta de prueba de un eléctrico
+  (la portada solo mostraba vídeos de YouTube sin fecha).
+last_verified: 2026-10-21
 status: active

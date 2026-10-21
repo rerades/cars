@@ -1,15 +1,25 @@
 # Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
 id: diariomotor-es
+name: Diariomotor
 brand: (varias; medio del motor)
 tier: T3
 market: ES
-kind: [ announcements ]
+kind: [ announcements, reviews ]
+terms_url: https://www.diariomotor.com/aviso-legal/
+terms_checked: 2026-10-21
 urls:
   home: https://www.diariomotor.com/
   robots: https://www.diariomotor.com/robots.txt
+  legal: https://www.diariomotor.com/aviso-legal/
+  reviews: https://www.diariomotor.com/pruebas/
 image_license: "" # no se usan imágenes de este medio
 notes: >
   Medio del motor español. T3: sirve para confirmar qué versiones se venden, su nombre comercial y las fechas, nunca
-  como fuente de precio. robots.txt, para cualquier agente, no bloquea /noticia/ (comprobado el 2026-10-13).
-last_verified: 2026-10-13
+  como fuente de precio. robots.txt, para cualquier agente, no bloquea /noticia/ (comprobado el 2026-10-13 y el 2026-10-21);
+  tampoco bloquea /pruebas/. Reviews (ADR-0017): las pruebas se publican en diariomotor.com bajo /noticia/prueba-...
+  (por ejemplo «Prueba Tesla Model Y 2025», https://www.diariomotor.com/noticia/prueba-tesla-model-y-2025-video/); el
+  listado /pruebas/ mostraba el 2026-10-21 como más reciente una de junio de 2025. Aviso legal leído el 2026-10-21: trata
+  privacidad, cookies y derechos; no menciona enlaces entrantes ni los prohíbe ni exige autorización, y no tiene sección de
+  propiedad intelectual. Solo se enlaza; no se reproduce contenido. No es agregador de opiniones de propietarios ni foro.
+last_verified: 2026-10-21
 status: active

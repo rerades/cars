@@ -1,0 +1,35 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: euroncap-eu
+name: Euro NCAP
+brand: (varias; organismo de pruebas independiente)
+tier: T2
+market: EU
+kind: [ tests ]
+terms_url: https://www.euroncap.com/terms-conditions/
+terms_checked: 2026-10-21
+urls:
+  home: https://www.euroncap.com/en
+  robots: https://www.euroncap.com/robots.txt
+  legal: https://www.euroncap.com/terms-conditions/
+  ratings: https://www.euroncap.com/en/ratings-rewards/latest-safety-ratings/
+  news: https://news.euroncap.com/
+  cdn: https://cdn.euroncap.com/
+image_license: "" # no se usan imágenes de este organismo
+notes: >
+  Organismo europeo de pruebas de seguridad (valoración de estrellas). Dominios desde los que publica: euroncap.com,
+  news.euroncap.com y cdn.euroncap.com. robots.txt (comprobado el 2026-10-21): para cualquier agente solo bloquea /admin,
+  /api/, /preview/ y URLs con parámetro id; no bloquea las fichas de valoración. Términos leídos el 2026-10-21: no hay
+  cláusula sobre enlazar (ni la prohíbe ni la condiciona); sí dicen que la reproducción no está autorizada con fines
+  comerciales y que reproducir texto o contenido multimedia exige permiso previo. Por eso solo se enlaza: no se copian
+  textos, tablas ni imágenes sin permiso. Las puntuaciones como dato propio quedan a decisión de una persona (ADR-0001,
+  regla 6; los términos no tratan la reutilización de datos). Métricas propuestas (no añadidas a ningún esquema),
+  publicadas por ficha de coche en https://www.euroncap.com/en/ratings-rewards/latest-safety-ratings/ (resumen por ronda
+  en https://news.euroncap.com/): overall_stars (entero, 1 a 5; la web habla de «five-star safety rating»; no he
+  comprobado si publica 0 estrellas), adult_occupant_pct (porcentaje, 0 a 100), child_occupant_pct (porcentaje, 0 a 100),
+  vulnerable_road_users_pct (porcentaje, 0 a 100), safety_assist_pct (porcentaje, 0 a 100). Ejemplo visto en la ronda
+  final de 2025: Mercedes-Benz CLA, 5 estrellas, 94/89/93/85 (según un resumen de búsqueda, no leído en la ficha). La
+  ficha de ejemplo /assessments/kia/ev2/1265/ no la pude abrir (404 con las rutas probadas), así que los nombres y rangos
+  exactos de la ficha están sin confirmar. Además publica «Assisted Driving Gradings» con etiquetas textuales (Good,
+  Moderate, Very good), en https://www.euroncap.com/en/ratings-rewards/assisted-driving-gradings/.
+last_verified: 2026-10-21
+status: active
