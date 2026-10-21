@@ -128,5 +128,5 @@ Decididas por el responsable del producto. Cada una se ha llevado ya a los RF y 
 | 2026-09-29 | Borrador inicial: RF-1 a RF-13, RNF-1 a RNF-5, CA-1 a CA-15; 13 preguntas abiertas | Claude |
 | 2026-10-01 | Resueltas las 13 preguntas abiertas. Ajustados RF-3, RF-4, RF-9 y RF-12, la sección 3 y la sección 6; añadidos RF-14, RF-15 y CA-16 a CA-18. Pasa a ready y P0 | Rod / Claude |
 | 2026-10-09 | Rankings pasa a PRD-005: PRD-004 es la portada | Rod / Claude |
-| 2026-10-21 | Enmienda por la ADR-0017: la tabla de la sección 6 recoge las reviews y los resultados de prueba, con remisión a PRD-006 y a la sección 3.1 de `data-model.md`. Sin cambios en RF ni CA | Claude |
 | 2026-10-20 | Enmienda por la decisión 4 de PRD-006 (2026-10-18): añadidos RF-16 (bloque de reviews al final de la ficha, sin página propia) y CA-19. El caso de un modelo sin reviews queda para el diseño. La sección 3 deja de decir que las reviews no tienen PRD | Claude |
+| 2026-10-21 | Enmienda por la ADR-0017: la tabla de la sección 6 recoge las reviews y los resultados de prueba, con remisión a PRD-006 y a la sección 3.1 de `data-model.md`. Sin cambios en RF ni CA | Claude |
