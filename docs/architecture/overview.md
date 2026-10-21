@@ -1,6 +1,6 @@
 ---
 status: draft
-updated: 2026-10-20
+updated: 2026-10-21
 ---
 
 # Arquitectura — visión general
@@ -27,3 +27,4 @@ updated: 2026-10-20
 - ~~Cómo publican los agentes (CI/CD, entornos, merge automático o no).~~ → [ADR-0011](adr/0011-publicacion-de-los-agentes.md) (aceptada: el Revisor solo etiqueta el estado, `review:ok`, `review:changes`, `review:needs-human` o `review:error`; fusiona el orquestador sin modelo si la PR tiene `review:ok` ligada al SHA, CI en verde, sin conflictos y solo toca `data/raw/`, `data/images/` (enmienda del 2026-10-12) o `docs/bitacora/`, con cada imagen citada por un YAML y de 2 MB como máximo; Render despliega «After CI Checks Pass»; vistas previas manuales. Las tres condiciones de activación se cumplen desde el 2026-10-12; el paso `run.ts --merge` existe desde el 2026-10-13 y el interruptor está a `true`).
 - ~~Esquema de datos de las reviews de PRD-006 (enlaces a terceros, RF-7; resultados de pruebas, RF-9).~~ → [ADR-0017](adr/0017-esquema-de-las-reviews.md) (aceptada, 2026-10-20, con enmienda de ADR-0001: dos listas nuevas en el YAML del modelo, `reviews` y `test_results`; enlaces T3 o T2 y pruebas T2; métricas en lista cerrada, vacía hasta el primer organismo; registro con `name`, `terms_url` y `terms_checked`).
 - ~~Cómo se evalúan los prompts de los agentes con distintos modelos (LLM como juez, datasets y experimentos de Langfuse), empezando por el Reviewer.~~ → [ADR-0016](adr/0016-evaluacion-de-prompts-con-langfuse.md) (aceptada 2026-10-18: casos de PR cerradas versionados en `factory/datasets/` y subidos a Langfuse; script que lanza el agente con un `gh` falso sobre instantáneas; código más juez Sonnet 5.5 local; gasto de API aparte con tope por experimento y por mes).
+- Cómo se alimenta la cola de la factoría desde las issues (PRD-007, RF-2 y OPEN-5) → [ADR-0018](adr/0018-cola-desde-issues.md) (propuesta, 2026-10-21: alimentador sin modelo al empezar cada `--next`; cola virtual de historias abiertas con `story`, `factory:ready` y `agent:<nombre>` cuyas dependencias de la línea `Depende de:` están cerradas, con `id` `issue-N`, detrás de las pendientes de `queue.yaml`; rastro en `ops/feeder/` solo cuando cambia la decisión. Enmienda ADR-0013).
