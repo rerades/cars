@@ -1,6 +1,8 @@
 # ADR-0014 — Datos y script del comparador (`/comparar`)
 
-- **Estado:** aceptada (2026-10-13)
+- **Estado:** aceptada (2026-10-13); enmendada el 2026-10-22: las estimaciones de peso se sustituyen
+  por las cifras medidas con datos reales en `web/tests/comparar-build.test.ts` (#571,
+  2026-10-21). La decisión no cambia.
 - **Fecha:** 2026-10-13
 
 ## Contexto
@@ -36,23 +38,70 @@ navegador (**RNF-6**). Lo que obliga a decidir:
 
 ## Opciones consideradas
 ### 1. Cómo llegan los datos al navegador
-Estimación de peso (no medida; calculada a partir del esquema de `data-model.md`): un dato con
-fuente en JSON ocupa ~130 B sin `note` y ~200 B con ella (la `url` es casi todo); una versión con los
-7 campos y las condiciones de precio, ~1,5 KB; la cabecera de un modelo (`brand`, `brand_name`,
-`model`, slug, `status`, `launch`), ~0,4 KB. Son cotas altas: hoy la mayoría de campos son `null`.
+**Peso medido** (enmienda del 2026-10-22). La prueba de peso de
+`web/tests/comparar-build.test.ts` construyó el sitio con los datos reales el 2026-10-21 (#571;
+entrada de la bitácora `docs/bitacora/2026-10/2026-10-21T0232-6b79808c.md`). Cifras sin comprimir:
+
+| Fichero | Estimado al aceptar (2026-10-13) | Medido (2026-10-21) |
+|---|---|---|
+| `indice.json` | ~6 KB | **17 483 B** (82 modelos, ~213 B por modelo) |
+| Mayor JSON de modelo | ≤ ~8 KB (5 versiones) | **22 257 B**, `porsche/taycan` (22 versiones, ~1 010 B por versión) |
+| Todos los JSON de modelo | ~135 KB | **232 039 B** (82 ficheros, ~2 830 B por modelo de media) |
+
+Las estimaciones originales partían de 39 modelos comparables, ~80 versiones y un máximo de 5
+versiones por modelo, con ~1,5 KB por versión y ~0,4 KB de cabecera por modelo.
+
+**De dónde sale la diferencia.** Leyendo `projectModel()` y `projectVersion()` en
+`web/src/lib/compare.ts` y los endpoints `web/src/pages/comparar/datos/[marca]/[modelo].json.ts` e
+`indice.json.ts` (`JSON.stringify` sin espacios), y contando a mano una versión de
+`data/raw/porsche/taycan.yaml` (cálculo en bytes UTF-8, no medición):
+
+- **El tamaño por dato está dentro de lo estimado; lo que se desvió es el número de versiones y de
+  modelos.** Una versión del Taycan ocupa ~1 KB, *menos* que los ~1,5 KB supuestos, porque
+  `battery_kwh`, `dc_max_kw` y `ac_max_kw` salen como `null` (~55 B entre los tres). El catálogo
+  comparable pasó de 39 a 82 modelos (×2,1), y el Taycan reúne 22 versiones (berlina, Sport Turismo
+  y Cross Turismo en un solo fichero) frente a las 5 que se tomaron como peor caso. En los ficheros
+  de hoy, los 82 modelos comparables suman unas 254 versiones (~3,1 por modelo, no ~2); es un
+  recuento con `grep` del 2026-10-22 que puede no coincidir exactamente con el build del día 21.
+- **Lo que pesa dentro de cada dato:** `note` va en casi todos (en el Taycan, en 3 de los 4 campos
+  presentes) y el Researcher repite el mismo texto largo en cada versión: la nota del precio («PVP
+  recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde») son ~80 B por versión
+  y las de autonomía y potencia, 45–65 B. La `url` (54 B en el Taycan, idéntica en todos los datos del
+  fichero) y las claves fijas (`"source_id"`, `"retrieved"`, `"tier"`… ~75 B por dato) completan
+  los ~150–210 B por dato. `price` añade `price_kind`, `price_terms` y `price_terms_url` aunque los
+  dos últimos sean `null` (~60 B): ~290 B el precio entero. La estimación del 2026-10-13 suponía
+  `note` como excepción y la mayoría de campos a `null`; con los datos reales la nota es la norma.
+- **Índice:** ~213 B por modelo frente a ~150 B. Los siete nombres de clave (`brand`, `slug`,
+  `brand_name`, `model`, `status`, `versions`, `default_version`) se repiten en cada entrada (~75 B),
+  `default_version` repite uno de los nombres de `versions`, y hay más versiones por modelo con
+  nombres largos (p. ej. «Taycan Turbo GT con Paquete Weissach»).
+
+**Proyección a 300 modelos** con las medias medidas (supone que los modelos nuevos se parecen a
+los de hoy; un catálogo con más fichas tipo Taycan la sube):
+
+- Índice: 300 × ~213 B ≈ **~64 KB** (antes ~45 KB).
+- Todos los JSON de modelo juntos: 300 × ~2 830 B ≈ **~850 KB** (antes ~1 MB por otra vía de
+  cálculo; la cifra es del mismo orden).
+- JSON de un modelo: **no depende del catálogo**, sino de sus versiones (~1 KB por versión con los
+  campos que hoy publica el Researcher). Peor caso de una tabla de 3 columnas con tres modelos del
+  tamaño del Taycan: ~67 KB sin comprimir.
+
+Lo que viaja comprimido no se ha medido. Brotli debería reducir mucho estos ficheros, porque
+`url`, `source_id`, claves y notas se repiten, pero es una impresión: no hay cifra.
 
 - **Datos incrustados en el HTML de `/comparar/`:** descartada. Todos los modelos viajarían en
-  cada visita aunque se comparen 2: ~135 KB sin comprimir hoy (39 × 0,4 + 80 × 1,5) y ~1 MB con 300
-  modelos (~620 versiones a la media actual de ~2 por modelo). Engorda el documento que contiene el
-  propio elemento LCP y retrasa el primer pintado en 4G; crece sin tope con el catálogo.
+  cada visita aunque se comparen 2: **232 039 B medidos hoy** y ~850 KB con 300 modelos (proyección
+  de arriba). Engorda el documento que contiene el propio elemento LCP y retrasa el primer pintado
+  en 4G; crece sin tope con el catálogo.
 - **Un único JSON generado en el build con todos los modelos comparables:** descartada por el
-  mismo número: ~135 KB hoy, ~1 MB a 300 modelos, descargado entero para pintar 2 o 3 columnas, y
-  la tabla (que será el elemento LCP una vez montada) espera a esa descarga. Hoy valdría; deja de
-  valer justo cuando el catálogo crece, y cambiarlo después obliga a rehacer el script.
+  mismo número: ~232 KB hoy, ~850 KB a 300 modelos, descargado entero para pintar 2 o 3 columnas, y
+  la tabla (que será el elemento LCP una vez montada) espera a esa descarga. Con las cifras medidas
+  ya no «valdría hoy», como se dijo al aceptar: hoy es casi el doble de lo estimado.
 - **Un JSON por modelo comparable y un índice ligero** (elegida): la tabla solo pide los ficheros
-  de los ≤ 3 modelos citados, en paralelo: ≤ ~8 KB cada uno en el peor caso actual (5 versiones).
-  El índice (marca, nombre de marca, modelo, slug, estado y nombres de versión, ~150 B por modelo)
-  solo hace falta para «añadir» (**RF-9**): ~6 KB hoy, ~45 KB con 300 modelos, y no bloquea la tabla.
+  de los ≤ 3 modelos citados, en paralelo: **22 257 B el mayor hoy** (`porsche/taycan`, 22
+  versiones), ~2,8 KB de media. El índice (marca, nombre de marca, modelo, slug, estado, nombres de
+  versión y versión por defecto) solo hace falta para «añadir» (**RF-9**): **17 483 B hoy**, ~64 KB
+  con 300 modelos, y no bloquea la tabla.
 - **Pregenerar todas las combinaciones:** descartada por el PRD (decisión 5).
 - **Un servicio o función en el servidor:** descartada; no hay servidor (ADR-0003, ADR-0009).
 
@@ -164,7 +213,8 @@ Detalles:
      el HTML de `/comparar/` lleva `noindex`, el canonical y el aviso sin JavaScript; las tarjetas
      y fichas comparables llevan el enlace y las excluidas no. Y una prueba que **mide el peso**
      del índice y del mayor JSON de modelo con los datos reales y lo imprime, para comprobar las
-     estimaciones de arriba.
+     estimaciones de arriba. (Enmienda del 2026-10-22: ya las comprobó, #571; las cifras medidas
+     están en «Opciones consideradas». Si se convierte en alarma, ver Consecuencias.)
    - Playwright (`web/e2e/`) para lo que solo existe con JavaScript: un spec nuevo del comparador
      con datos de prueba (construido a un directorio temporal y servido como hace
      `storage.spec.ts`) que cubre CA-1 a CA-4, CA-6, CA-9 a CA-15 y CA-17; CA-19 con
@@ -180,10 +230,34 @@ Detalles:
 - RNF-4 queda vigilado por dos lados: navegador (Playwright) y texto del JavaScript construido.
 
 **Malas o a vigilar**
-- **Las cifras de peso son estimaciones**, no mediciones; la prueba de peso del build las tiene
-  que confirmar. Son cifras sin comprimir: Render sirve el sitio con Brotli (`content-encoding: br`
-  en `https://siete3.com/coches/`, comprobado el 2026-10-13), así que lo que viaja es bastante
-  menos, porque las `url` se repiten.
+- **El peso real es entre 1,7 y 2,9 veces el estimado** (enmienda del 2026-10-22, #571): índice 17 483 B
+  (estimado ~6 KB), mayor modelo `porsche/taycan` 22 257 B (estimado ~8 KB), todos los JSON de
+  modelo 232 039 B (estimado ~135 KB). La causa es el número de modelos y, sobre todo, de versiones
+  por modelo, más notas en casi todos los datos (ver «Opciones consideradas»), no un error en el
+  tamaño de cada dato. **La decisión sigue valiendo y sale reforzada**: las dos alternativas
+  descartadas (todo incrustado o un único JSON) cargarían hoy ~232 KB en cada visita, y la elegida
+  carga ≤ 3 ficheros cuyo tamaño no depende del catálogo. Son cifras sin comprimir: Render sirve el
+  sitio con Brotli (`content-encoding: br` en `https://siete3.com/coches/`, comprobado el
+  2026-10-13); el peso comprimido no se ha medido.
+- **El JSON de un modelo crece sin tope con sus versiones.** El Taycan pasó de un peor caso
+  supuesto de 5 versiones a 22, y nada impide que un fichero tenga más (el Researcher decide si las
+  carrocerías van juntas o separadas). Con 3 modelos así, la tabla espera a ~67 KB sin comprimir.
+  Hoy no parece un problema para **RNF-2**, pero es una impresión: RNF-2 sigue sin medirse en la
+  página montada.
+- **Hace falta una alarma en la prueba de peso; hoy solo imprime.** La prueba de
+  `web/tests/comparar-build.test.ts` no tiene umbral, y su mensaje aún cita las estimaciones
+  antiguas («index ~6 KB, model <= ~8 KB, all ~135 KB»). Sin umbral, nadie se entera de que el
+  índice o un modelo se disparan hasta que alguien lee la salida. Propuesta, **pendiente de que la
+  acepte una persona y se encole al developer** (esta ADR no toca `web/`): que la prueba falle si
+  `indice.json` supera **64 KB** (la proyección a 300 modelos: superarla antes significa que el
+  catálogo o los nombres crecen más de lo previsto) o si un JSON de modelo supera **32 KB** (~1,5 ×
+  el Taycan, unas 30 versiones), y que el mensaje cite las cifras medidas en vez de las estimadas.
+  Los umbrales son razonados, no medidos contra RNF-2; si se mide el LCP de la página montada,
+  deben salir de esa medición. El total de todos los JSON no necesita umbral: no lo descarga nadie
+  entero.
+- **Las notas repetidas son la mayor parte del peso evitable**, pero recortarlas o deduplicarlas
+  es cosa del esquema de datos y del PRD, no de esta ADR: el fichero publica la `note` tal cual
+  (RF-5, CA-18).
 - **El LCP de `/comparar/` depende de una cadena de peticiones**: HTML → script → JSON de modelo →
   pintado. Son ~3 viajes de ida y vuelta en 4G antes de que aparezca la tabla. Creo que cabe en
   2,5 s porque los ficheros son pequeños, pero es una impresión: hay que medir RNF-2 en la página
@@ -212,3 +286,6 @@ Detalles:
 - ¿Debe la factoría avisar cuando un cambio de `name` o de slug rompa claves de comparación
   compartidas? No lo pide ningún PRD.
 - La codificación de la terna en la URL: `docs/design/comparador.md`.
+- ¿Se aceptan los umbrales de la prueba de peso (índice 64 KB, modelo 32 KB) y se encola el cambio
+  al developer? Ver Consecuencias (enmienda del 2026-10-22).
+- ¿Cuánto pesan comprimidos con Brotli el índice y el JSON del Taycan? No se ha medido.
