@@ -1,8 +1,6 @@
 # ADR-0018 — La cola se alimenta de las issues (alimentador sin modelo)
 
-- **Estado:** aceptada (2026-10-21), con dos cambios de la persona al aceptarla: solo desbloquea
-  una dependencia cerrada como completada (punto 3) y `factory:ready` la pone solo una persona
-  (punto 1). Enmienda ADR-0013.
+- **Estado:** propuesta
 - **Fecha:** 2026-10-21
 
 ## Contexto

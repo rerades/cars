@@ -5,7 +5,7 @@ status: draft        # draft | ready | in-progress | done | deprecated
 priority: P1         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: []
 epic: ""
-updated: 2026-10-21
+updated: 2026-10-20
 ---
 
 # PRD-007 — Harness de la factoría
@@ -80,9 +80,7 @@ fase 3.
 
 ### Fase 1 — Velocidad sin modelo
 - **RF-2:** **Cola desde issues.** Una historia abierta con la etiqueta `factory:ready` entra en la
-  cola cuando están cerradas **como completadas** todas las issues que su cuerpo cita en una línea
-  `Depende de: #x, #y`; una cerrada por otro motivo (no planificada, duplicada) no la desbloquea.
-  `factory:ready` la pone solo una persona, nunca un agente.
+  cola cuando están cerradas todas las issues que su cuerpo cita en una línea `Depende de: #x, #y`.
   La tarea que se encola nombra la historia y su agente. `factory/queue.yaml` se queda para las
   tareas que no son historias (datos, PRD, ADR, diseño). Una historia no se encola dos veces.
   Enmienda la ADR-0013.
@@ -192,10 +190,8 @@ fase 3.
   RF-7.
 - **OPEN-4** (→ RF-10): Presupuesto, topes y frecuencia del agente retro (¿semanal?). ¿Usa Opus,
   como el Arquitecto?
-- ~~**OPEN-5** (→ RF-2): ¿Sustituye el alimentador a las tareas de historias de `queue.yaml`, o conviven
-  durante la migración? ¿En qué orden se intercalan las dos fuentes?~~ Resuelta por ADR-0018
-  (2026-10-21): conviven; primero las pendientes de `queue.yaml`, después las historias, de la más
-  antigua a la más nueva.
+- **OPEN-5** (→ RF-2): ¿Sustituye el alimentador a las tareas de historias de `queue.yaml`, o conviven
+  durante la migración? ¿En qué orden se intercalan las dos fuentes?
 - **OPEN-6** (→ RF-3): El build de `web/` usa el cerrojo de e2e (`web/node_modules/.e2e-build.lock`).
   ¿Lo comparte la puerta, o cada worktree tiene su propio `node_modules`?
 
@@ -203,4 +199,3 @@ fase 3.
 | Fecha | Cambio | Autor |
 |---|---|---|
 | 2026-10-20 | Borrador, nacido de la lluvia de ideas con el responsable. Eligió las cuatro palancas (cola desde issues, puerta antes de la PR, bucle de corrección y verificador de datos), un Researcher con skills en vez de dos agentes, la escalera de confianza y dos cambios de agentes (retro nuevo y Revisor con rúbrica por tipo). | responsable + Claude |
-| 2026-10-21 | Aceptada la ADR-0018: RF-2 pide que las dependencias estén cerradas como completadas y que `factory:ready` la ponga solo una persona. OPEN-5 resuelta. Sin cambios en CA. | Claude |
