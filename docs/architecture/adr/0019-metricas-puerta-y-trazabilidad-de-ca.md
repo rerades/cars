@@ -1,6 +1,8 @@
 # ADR-0019 — Métricas del harness, puerta antes de la PR y trazabilidad de los CA
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-21). La persona acepta que la puerta corra sin contenedor y pide que
+  toda PR `fix` cite la PR que arregla (definition of done), para que la cifra de defectos escapados
+  no se quede corta
 - **Fecha:** 2026-10-21
 
 ## Contexto
@@ -247,7 +249,9 @@ que está recortado a 500 caracteres) y el cuerpo de la historia.
   `.claude/hooks/` (RNF-3 protege las escrituras del agente, no lo que hace un proceso hijo del
   orquestador). Hoy el developer ya puede lanzar `pnpm` por su Bash, pero dentro de Claude; con la
   puerta, ocurre siempre. Quitar las variables `FACTORY_*` no basta para aislarlo. Si se considera
-  inaceptable, la alternativa es correr la puerta en un contenedor, y eso es otra ADR.
+  inaceptable, la alternativa es correr la puerta en un contenedor, y eso es otra ADR. **Aceptado
+  sin contenedor (2026-10-21):** el developer ya lanza `pnpm` desde su Bash, y ese mismo código lo
+  ejecutan la CI y la copia de la persona al fusionar; lo que añade la puerta es poco.
 - **Una PR de datos que rompa el build no se ve en la puerta.** Para `data/` solo corre
   `validate-data`, como dice RF-3; el job `web` de la CI construye siempre. Si pasa, se añade
   `web:build` a la fila de `data/` y se paga en minutos del researcher.
@@ -257,6 +261,7 @@ que está recortado a 500 caracteres) y el cuerpo de la historia.
 - **Parar en el primer fallo esconde los siguientes.** El reintento de RF-5 puede encontrarse otro.
 - **La métrica de defectos escapados cuenta de menos**: un arreglo que no cita la PR, o que no se
   titula `fix`, no cuenta. RF-9 sube peldaños con ella; un fallo sin citar no bajará ninguno.
+  **Mitigado (2026-10-21):** la definition of done pide que una PR `fix` cite la PR que arregla.
 - **El rendimiento a la primera depende del historial de GitHub**, una llamada por PR fusionada (unas
   100 al mes). Sin red, `--metrics` no sale; no hay caché.
 - **«Noches con la cola vacía» no tiene datos de octubre**: CA-1 no puede dar cifra para esa métrica
@@ -271,8 +276,8 @@ que está recortado a 500 caracteres) y el cuerpo de la historia.
   línea `Covers:` del cuerpo de la PR.
 
 **Preguntas abiertas** (no se deciden aquí)
-- ¿Se acepta que la puerta ejecute el código del agente sin aislamiento, o se pide antes una ADR de
-  contenedor?
+- ~~¿Se acepta que la puerta ejecute el código del agente sin aislamiento, o se pide antes una ADR de
+  contenedor?~~ Resuelta (2026-10-21): se acepta sin contenedor (ver «En contra»).
 - ¿El texto final del agente es la «descripción de la PR» que pide RF-4, o tiene que haber una
   plantilla de cuerpo de PR propia del developer? Esta ADR asume lo primero porque hoy el orquestador
   construye el cuerpo con ese texto.
