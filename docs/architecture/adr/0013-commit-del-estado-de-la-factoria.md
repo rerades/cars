@@ -1,6 +1,8 @@
 # ADR-0013 — Cómo hace commit la factoría de la cola y del registro de ejecuciones
 
-- **Estado:** aceptada (2026-10-06)
+- **Estado:** aceptada (2026-10-06). Enmendada el 2026-10-21 por ADR-0018: la lista de pendientes
+  suma las historias de la cola virtual detrás de `queue.yaml`, `issue-N` sin sufijo lo genera el
+  alimentador y la fusión automática de la rama de estado admite líneas añadidas a `ops/feeder/*.jsonl`
 - **Fecha:** 2026-10-06
 
 ## Contexto

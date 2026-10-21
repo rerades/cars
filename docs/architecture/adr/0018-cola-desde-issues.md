@@ -1,6 +1,8 @@
 # ADR-0018 — La cola se alimenta de las issues (alimentador sin modelo)
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-21), con dos cambios de la persona al aceptarla: solo desbloquea
+  una dependencia cerrada como completada (punto 3) y `factory:ready` la pone solo una persona
+  (punto 1). Enmienda ADR-0013.
 - **Fecha:** 2026-10-21
 
 ## Contexto
@@ -142,7 +144,7 @@ decenas de historias bloqueadas llenan el fichero de filas iguales.
 ## Decisión
 **Al empezar cada `--next`, un alimentador sin modelo calcula una cola virtual de historias a
 partir de GitHub —issues abiertas con `story`, `factory:ready` y una etiqueta `agent:<nombre>`,
-cuyas dependencias de la línea `Depende de:` están cerradas—, con el `id` `issue-N` de ADR-0013,
+cuyas dependencias de la línea `Depende de:` están cerradas como completadas—, con el `id` `issue-N` de ADR-0013,
 detrás de las pendientes de `queue.yaml`, y deja en `ops/feeder/` una fila cada vez que cambia su
 decisión sobre una historia.**
 
@@ -152,20 +154,26 @@ Detalles:
    y **exactamente una** etiqueta `agent:<nombre>`, donde `<nombre>` es un agente de
    `factory/budgets.yaml` que no está a `null`. Sin `factory:ready` no se mira (CA-3). Con
    `factory:ready` pero sin `story`, sin `agent:` o con más de uno, o con un agente desconocido, no
-   se encola y queda rechazada con su motivo.
+   se encola y queda rechazada con su motivo. **`factory:ready` la pone solo una persona**
+   (2026-10-21): es la que decide gastar. El Planificador crea la historia y pone `agent:`, pero
+   nunca `factory:ready`. El alimentador no lo comprueba (GitHub no dice de forma barata quién puso
+   la etiqueta): es una regla de `planner.md` y de quien revisa.
 2. **Consulta.** `gh issue list --state open --label factory:ready --json
    number,title,body,labels,createdAt --limit 200` ([2]; `--limit` por defecto es 30). Si devuelve
    200, se avisa de que puede faltar alguna. Para cada dependencia, su estado con `gh`.
 3. **Dependencias.** Se buscan en el cuerpo las líneas que, quitando el marcado de negrita, empiezan
    por `Depende de:` (sin distinguir mayúsculas); de ellas se toman todos los `#N`. Varias líneas se
-   suman. Sin línea, no hay dependencias. La historia entra si todas están **cerradas** (`state:
-   CLOSED`, sea cual sea el motivo del cierre, como dice RF-2). Se **rechaza** (no se encola, con
-   motivo) si:
+   suman. Sin línea, no hay dependencias. La historia entra si todas están **cerradas como
+   completadas** (`state: CLOSED` y `stateReason: COMPLETED`, que da `gh issue view --json
+   state,stateReason`; decisión de la persona al aceptar, 2026-10-21). Se **rechaza** (no se encola,
+   con motivo) si:
+   - una dependencia está cerrada por otro motivo (no planificada, duplicada): la persona corrige la
+     línea `Depende de:` o reabre y completa la dependencia;
    - el cuerpo contiene «depende de» fuera de una línea con ese formato, o la línea no tiene ningún
      `#N`: probablemente es una dependencia mal escrita;
    - un `#N` no existe o no es una issue;
    - se cita a sí misma.
-   Las dependencias en cadena no se siguen: basta con que las citadas estén cerradas.
+   Las dependencias en cadena no se siguen: basta con que las citadas estén completadas.
 4. **La tarea.** `id: issue-N` (convención de ADR-0013), `agent` el de la etiqueta y este texto fijo,
    en el que solo cambian el número y el título:
 
@@ -220,7 +228,7 @@ Detalles:
 función pura en `factory/`; `cmdNext` y `--status` en `run.ts`; `stateMergeBlocker` para
 `ops/feeder/`; la línea `**Depende de:** #` en `.github/ISSUE_TEMPLATE/story.md`; las etiquetas
 `factory:ready` y `agent:<nombre>` en el repositorio; y en `.claude/agents/planner.md`, que escriba
-la línea con ese formato y ponga la etiqueta `agent:`. `factory/README.md` y la cabecera de
+la línea con ese formato, ponga la etiqueta `agent:` y no ponga nunca `factory:ready`. `factory/README.md` y la cabecera de
 `queue.yaml` describen el flujo de hoy y hay que actualizarlos.
 
 ## Consecuencias
@@ -240,9 +248,10 @@ la línea con ese formato y ponga la etiqueta `agent:`. `factory/README.md` y la
   Desarrollador trabaja con menos información y puede subir el número de `review:changes`.
 - **Una dependencia mal escrita se puede escapar.** El punto 3 caza «depende de» fuera de formato,
   pero no un número equivocado (`#21` por `#12`): esa historia se lanzaría antes de tiempo.
-- **Una dependencia cerrada como «no planificada» desbloquea** igual que una terminada, porque RF-2
+- ~~**Una dependencia cerrada como «no planificada» desbloquea** igual que una terminada, porque RF-2
   solo pide que esté cerrada. Cerrar una issue para descartarla puede lanzar trabajo que dependía
-  de ella.
+  de ella.~~ Resuelto al aceptarla (2026-10-21): solo desbloquea `stateReason: COMPLETED`, y RF-2
+  de PRD-007 lo dice así.
 - **Cerrada no es fusionada en `main`.** Si una issue se cierra a mano antes de que su PR entre, la
   dependiente se lanza sobre un `main` sin ese cambio.
 - **La cola de historias va siempre detrás de `queue.yaml`.** Con una `queue.yaml` larga, las
@@ -261,9 +270,10 @@ la línea con ese formato y ponga la etiqueta `agent:`. `factory/README.md` y la
   por código.
 
 **Preguntas abiertas**
-- ¿Quién pone `factory:ready`: solo una persona, o también el Planificador? ¿Y debe el alimentador
+- ~~¿Quién pone `factory:ready`: solo una persona, o también el Planificador? ¿Y debe el alimentador
   exigir que la historia ya no tenga la etiqueta `agente` (sin revisar, `planner.md`)? PRD-007 no lo
-  dice.
+  dice.~~ Resuelta (2026-10-21): solo una persona (punto 1). Como la pone una persona, poner la
+  etiqueta ya es revisar la historia; el alimentador no mira `agente`.
 - ¿Debe `--next` saltar las tareas cuyo agente ha llegado a su tope y probar la siguiente, en vez de
   terminar la pasada? Afecta a las dos fuentes y es una enmienda de ADR-0013 aparte.
 - ¿Se reintenta una historia fallida de forma automática (por ejemplo, con una etiqueta
