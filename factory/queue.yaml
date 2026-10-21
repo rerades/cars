@@ -2187,3 +2187,14 @@
     (RNF-1). Deja la ADR en propuesta, con opciones, pros y contras, decisión y consecuencias, como
     las demás, y enlázala en la sección de decisiones pendientes de docs/architecture/overview.md. No
     toques factory/, data/ ni web/."
+- id: adr-0014-pesos-medidos
+  agent: architect
+  task: "Enmienda ADR-0014 (aceptada), sin crear una ADR nueva: sustituye las estimaciones de peso
+    de la sección de opciones y de las consecuencias por las cifras medidas con datos reales en la
+    prueba de peso de web/tests/comparar-build.test.ts (#571, 2026-10-21): índice 17 483 B (estimado
+    ~6 KB), mayor modelo porsche/taycan 22 257 B (estimado ~8 KB), total 232 039 B (estimado
+    ~135 KB). Vuelve a calcular la proyección a 300 modelos con esas cifras y di si la decisión (un
+    JSON por modelo más un índice) sigue valiendo o si hace falta un umbral o una alarma en la prueba.
+    Explica de dónde sale la diferencia (qué campos pesan más de lo previsto), leyendo el build y
+    web/src/lib/compare.ts. Anota la enmienda en el estado de la ADR. No toques factory/, data/ ni
+    web/."
