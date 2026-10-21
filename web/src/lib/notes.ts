@@ -1,5 +1,6 @@
 import type { Sourced } from "./data.ts";
 import { sourceView } from "./format.ts";
+import { t } from "./i18n.ts";
 
 /** The part of a datum that identifies its source note (ficha-modelo.md, «Agrupación y numeración»). */
 export type NoteSource = Pick<Sourced, "source_id" | "url" | "retrieved" | "tier">;
@@ -18,6 +19,12 @@ export interface SourceNote {
   date: string;
   /** Not T1: shown as «fuente no oficial». */
   unofficial: boolean;
+}
+
+/** Text of an entry of «Fuentes» (without the link): «cupra.com, consultado el 24 sep 2026. Fuente no oficial.» */
+export function noteLine(note: Pick<SourceNote, "name" | "date" | "unofficial">): string {
+  const line = t("ficha.fuentes.item", { fuente: note.name, fecha: note.date });
+  return note.unofficial ? `${line} ${t("ficha.fuentes.noOficial")}` : line;
 }
 
 /** Grouping key: same source_id + url + retrieved + tier, same note. */

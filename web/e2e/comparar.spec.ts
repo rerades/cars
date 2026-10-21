@@ -34,7 +34,11 @@ test.describe("comparator table (story #318)", () => {
     const data = join(tmp, "data");
     const out = join(tmp, "out");
     mkdirSync(join(data, "acme"), { recursive: true });
-    writeFileSync(join(data, "acme", "Volta.yaml"), stringify(acme()));
+    const volta = acme();
+    // One non-official datum (story #319, CA-5): dc_max_kw of Volta 80 AWD comes from a T3 source.
+    const awd = volta.versions.find((x: any) => x.name === "Volta 80 AWD");
+    awd.dc_max_kw = { ...awd.dc_max_kw, tier: "T3", url: "https://hibridosyelectricos.com/volta", source_id: "hye" };
+    writeFileSync(join(data, "acme", "Volta.yaml"), stringify(volta));
     buildSite(out, { CARS_DATA_DIR: data });
     server = createServer((req, res) => {
       const path = normalize(decodeURIComponent(new URL(req.url ?? "/", "http://x").pathname));
@@ -118,6 +122,46 @@ test.describe("comparator table (story #318)", () => {
     );
     await expect(conditions.locator("a")).toHaveAttribute("href", "https://www.acme.example/es/volta/ofertas");
     await expect(page.locator("[data-compare] td[headers='cmp-col-3 cmp-f-potencia']")).toContainText("publicado: 299 CV");
+  });
+
+  test("CA-5: price shows source and date beside the figure; the rest carry numbered marks to «Fuentes»", async ({ page }) => {
+    await page.goto(`${site}/comparar/?${three}`);
+    // Price: «Fuente: {fuente}, {fecha}» linked to price.url, no mark, never «fuente no oficial» (T1).
+    const p60 = page.locator("[data-compare] td[headers='cmp-col-2 cmp-f-precio']");
+    await expect(p60).toContainText("Fuente: acme.example, 20 sep 2026");
+    await expect(p60.locator("a[data-slot=sourceLink]")).toHaveAttribute("href", "https://www.acme.example/es/volta/precios");
+    await expect(p60.locator("[data-mark]")).toHaveCount(0);
+    // «por confirmar» has no source and no mark.
+    const dc1 = page.locator("[data-compare] td[headers='cmp-col-1 cmp-f-cargaCc']");
+    await expect(dc1.locator("[data-mark]")).toHaveCount(0);
+    // A T1 datum: mark [1] to the ficha source, without «fuente no oficial».
+    const range = page.locator("[data-compare] td[headers='cmp-col-1 cmp-f-autonomia']");
+    await expect(range.locator("[data-mark] a")).toHaveAttribute("href", "#cmp-fuente-1");
+    await expect(range.locator("[data-mark]")).not.toContainText("fuente no oficial");
+    // The T3 datum: another number and «fuente no oficial» beside the mark.
+    const dc3 = page.locator("[data-compare] td[headers='cmp-col-3 cmp-f-cargaCc']");
+    await expect(dc3.locator("[data-mark] a")).toHaveAttribute("href", "#cmp-fuente-2");
+    await expect(dc3.locator("[data-mark]")).toContainText("fuente no oficial");
+    // «Fuentes» block: h2, ol with li#cmp-fuente-{n}[tabindex=-1], domain, date, link to the url.
+    await expect(page.locator("h2", { hasText: "Fuentes" })).toBeVisible();
+    const items = page.locator("ol > li[id^=cmp-fuente-]");
+    await expect(items).toHaveCount(2);
+    await expect(items.nth(0)).toHaveAttribute("id", "cmp-fuente-1");
+    await expect(items.nth(0)).toHaveAttribute("tabindex", "-1");
+    await expect(items.nth(0)).toContainText("acme.example, consultado el 20 sep 2026.");
+    await expect(items.nth(0)).not.toContainText("Fuente no oficial");
+    await expect(items.nth(0).locator("a")).toHaveAttribute("href", "https://www.acme.example/es/volta/ficha");
+    await expect(items.nth(1)).toContainText("hibridosyelectricos.com, consultado el 20 sep 2026. Fuente no oficial.");
+    await expect(items.nth(1).locator("a")).toHaveAttribute("href", "https://hibridosyelectricos.com/volta");
+    // Every mark leads to an existing entry.
+    for (const href of await page.locator("[data-compare] [data-mark] a").evaluateAll((els) => els.map((e) => e.getAttribute("href")))) {
+      await expect(page.locator(href!)).toHaveCount(1);
+    }
+  });
+
+  test("CA-5: «Fuentes» does not exist with fewer than 2 versions", async ({ page }) => {
+    await page.goto(`${site}/comparar/?${v("Volta GT")}`);
+    await expect(page.locator("[data-sources]")).toBeHidden();
   });
 
   test("the notice without JavaScript is removed once the table is mounted", async ({ page }) => {
