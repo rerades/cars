@@ -196,13 +196,12 @@ fase 3.
   durante la migración? ¿En qué orden se intercalan las dos fuentes?~~ Resuelta por ADR-0018
   (2026-10-21): conviven; primero las pendientes de `queue.yaml`, después las historias, de la más
   antigua a la más nueva.
-- ~~**OPEN-6** (→ RF-3): El build de `web/` usa el cerrojo de e2e (`web/node_modules/.e2e-build.lock`).
-  ¿Lo comparte la puerta, o cada worktree tiene su propio `node_modules`?~~ Resuelta por ADR-0019
-  (2026-10-21): cada worktree tiene su propio `node_modules` y la puerta no toma el cerrojo de e2e.
+- **OPEN-6** (→ RF-3): El build de `web/` usa el cerrojo de e2e (`web/node_modules/.e2e-build.lock`).
+  ¿Lo comparte la puerta, o cada worktree tiene su propio `node_modules`? **Pendiente de resolución
+  en ADR-0019.**
 
 ## 9. Historial de cambios
 | Fecha | Cambio | Autor |
 |---|---|---|
 | 2026-10-20 | Borrador, nacido de la lluvia de ideas con el responsable. Eligió las cuatro palancas (cola desde issues, puerta antes de la PR, bucle de corrección y verificador de datos), un Researcher con skills en vez de dos agentes, la escalera de confianza y dos cambios de agentes (retro nuevo y Revisor con rúbrica por tipo). | responsable + Claude |
 | 2026-10-21 | Aceptada la ADR-0018: RF-2 pide que las dependencias estén cerradas como completadas y que `factory:ready` la ponga solo una persona. OPEN-5 resuelta. Sin cambios en CA. | Claude |
-| 2026-10-21 | Aceptada la ADR-0019: OPEN-6 resuelta. La puerta corre sin contenedor. Una PR `fix` cita la PR que arregla (definition of done), para RF-1 y RF-9. Sin cambios en RF ni CA. | Claude |

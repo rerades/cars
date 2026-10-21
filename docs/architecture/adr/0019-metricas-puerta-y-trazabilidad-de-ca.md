@@ -1,8 +1,6 @@
 # ADR-0019 — Métricas del harness, puerta antes de la PR y trazabilidad de los CA
 
-- **Estado:** aceptada (2026-10-21). La persona acepta que la puerta corra sin contenedor y pide que
-  toda PR `fix` cite la PR que arregla (definition of done), para que la cifra de defectos escapados
-  no se quede corta
+- **Estado:** propuesta
 - **Fecha:** 2026-10-21
 
 ## Contexto
@@ -198,10 +196,12 @@ se añade a `evals.failed` como `gate: web:typecheck failed (exit 2)`, para que 
 a `ops/traces/<run_id>.gate.log`, que no se versiona, como las trazas. La rama se queda en local, como
 cualquier ejecución fallida.
 
-**OPEN-6.** Cada worktree tiene su propio `node_modules`, instalado por la propia puerta desde el
-almacén de pnpm de la máquina. El build de la puerta no toma el cerrojo de e2e: ese cerrojo es por
-checkout (`web/node_modules/.e2e-build.lock`), protege a los workers de Playwright entre sí y la
-puerta no corre Playwright. Como no hay dos ejecuciones a la vez, no hay dos builds compitiendo.
+**OPEN-6** (pendiente de decidir): ¿El build de `web/` usa el cerrojo de e2e
+(`web/node_modules/.e2e-build.lock`). ¿Lo comparte la puerta, o cada worktree tiene su propio
+`node_modules`?
+
+La opción elegida es B (cada worktree instala su `node_modules`), pero **queda pendiente de que una
+persona acepte que la puerta ejecute código del agente sin aislamiento** (ver «En contra»).
 
 **¿Cabe en la ventana de ADR-0002?** Sí, con holgura, en el peor caso: 6 h de ventana; hoy unos 30 min
 de ejecuciones (PRD-007, sección 1); el developer, como mucho 4 ejecuciones × 15 min de puerta =
@@ -261,7 +261,6 @@ que está recortado a 500 caracteres) y el cuerpo de la historia.
 - **Parar en el primer fallo esconde los siguientes.** El reintento de RF-5 puede encontrarse otro.
 - **La métrica de defectos escapados cuenta de menos**: un arreglo que no cita la PR, o que no se
   titula `fix`, no cuenta. RF-9 sube peldaños con ella; un fallo sin citar no bajará ninguno.
-  **Mitigado (2026-10-21):** la definition of done pide que una PR `fix` cite la PR que arregla.
 - **El rendimiento a la primera depende del historial de GitHub**, una llamada por PR fusionada (unas
   100 al mes). Sin red, `--metrics` no sale; no hay caché.
 - **«Noches con la cola vacía» no tiene datos de octubre**: CA-1 no puede dar cifra para esa métrica
@@ -276,8 +275,8 @@ que está recortado a 500 caracteres) y el cuerpo de la historia.
   línea `Covers:` del cuerpo de la PR.
 
 **Preguntas abiertas** (no se deciden aquí)
-- ~~¿Se acepta que la puerta ejecute el código del agente sin aislamiento, o se pide antes una ADR de
-  contenedor?~~ Resuelta (2026-10-21): se acepta sin contenedor (ver «En contra»).
+- ¿Se acepta que la puerta ejecute el código del agente sin aislamiento, o se pide antes una ADR de
+  contenedor? **Pendiente de decisión por una persona.**
 - ¿El texto final del agente es la «descripción de la PR» que pide RF-4, o tiene que haber una
   plantilla de cuerpo de PR propia del developer? Esta ADR asume lo primero porque hoy el orquestador
   construye el cuerpo con ese texto.
