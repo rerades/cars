@@ -30,10 +30,10 @@ evals:
   estimate_usd_per_case: {sonnet: 0.30, opus: 0.60, haiku: 0.05}   # until ops/evals/ has real numbers
 
 agents:
-  # suma asignada: 175 USD de los 200 del tope global (25 sin asignar): ningún agente puede agotarlo solo
+  # suma asignada: 185 USD de los 200 del tope global (15 sin asignar): ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
-    max_usd_per_period: 40   # 7 -> 40 on 2026-10-08: brand data, per-brand image migration and the monthly refresh (ADR-0010); earlier: 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
+    max_usd_per_period: 50   # 40 -> 50 on 2026-10-21: six tasks queued for one night (prices, images, reviews) at up to 1.50 each, with 8.06 left; from the unassigned 25. 7 -> 40 on 2026-10-08: brand data, per-brand image migration and the monthly refresh (ADR-0010); earlier: 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
     max_usd_per_run: 1.50   # 1.00 -> 1.50 on 2026-09-29: Mercedes-Benz (8 models) was cut at 1.02
     max_turns_per_run: 25
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
