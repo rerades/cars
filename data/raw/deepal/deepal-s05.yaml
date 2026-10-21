@@ -12,19 +12,19 @@ versions:
     wltp_km: {value: 485, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610281"}
     power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610281"}
     drivetrain: {value: rwd, source_id: changan-es, url: "https://www.changaneurope.com/es/promociones/gama-deepal-s05", retrieved: 2026-10-19, tier: T1, note: "Deepal S05 Pro BEV (RWD)"}
-    price: null
+    price: {value: 36990, unit: EUR, price_kind: pvp, note: "configurador, «Acabado RWD Pro»: PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-21, tier: T1}
   - name: S05 EV RWD Max
     battery_kwh: {value: 68.8, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610280"}
     wltp_km: {value: 485, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610280"}
     power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610280"}
     drivetrain: {value: rwd, source_id: changan-es, url: "https://www.changaneurope.com/es/promociones/gama-deepal-s05", retrieved: 2026-10-19, tier: T1, note: "Deepal S05 Max BEV (RWD)"}
-    price: null
+    price: {value: 39990, unit: EUR, price_kind: pvp, note: "configurador, «Acabado RWD Max»: PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-21, tier: T1}
   - name: S05 EV AWD Max
     battery_kwh: {value: 68.8, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610279"}
     wltp_km: {value: 445, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610279"}
     power_kw: {value: 320, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610279"}
     drivetrain: {value: awd, source_id: changan-es, url: "https://www.changaneurope.com/es/promociones/gama-deepal-s05", retrieved: 2026-10-19, tier: T1, note: "Max AWD BEV"}
-    price: null
+    price: {value: 42990, unit: EUR, price_kind: pvp, note: "configurador, «Acabado 4WD Max»: PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-21, tier: T1}
 images:
   - file: data/images/deepal/deepal-s05/trasera.jpg
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Changan_Deepal_S05%2C_Munich_%2820250909-P1050606%29.jpg/1280px-Changan_Deepal_S05%2C_Munich_%2820250909-P1050606%29.jpg"
@@ -34,7 +34,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Matti Blume, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precio: la web oficial (changaneurope.com/es/promociones/gama-deepal-s05) da precio «al contado» (Pro 33.665 €, Max 37.565 €, AWD 41.265 €) y «financiado» (26.490/30.390/34.090 €) con ayudas Plan Auto+ y CAE y letra pequeña que no se puede copiar entera; no se rotula como PVP. Además la tabla de financiación de la Max da otras cifras (36.760,41 € / 32.585,41 €) y las fechas de validez se contradicen. Se deja price: null."
+  - "Precio: se usa el PVPR del configurador (36.990 / 39.990 / 42.990 €, 2026-10-21). Las páginas de promociones (changaneurope.com/es/promociones/gama-deepal-s05) dan otras cifras «al contado» y «financiado» con ayudas Plan Auto+ y CAE, que no se usan. El catálogo de septiembre de 2026 coincide con el configurador."
   - "Lanzamiento: ninguna fuente da la fecha desde la que se pueden pedir (el comunicado del 2026-01-29 solo dice que la red arranca con 32 puntos de venta a finales de enero). launch: null."
   - "Segmento: el comunicado de prensa lo describe como «SUV eléctrico compacto», que no es el término literal de RF-11. segment: null."
   - "Autonomía: la web muestra cifras «urbanas» (605/550 km) y Highmotor/comunicado dan 485/445 km; se usa la homologación del IDAE (WLTP). El IDAE no dice qué versiones se venden hoy; confirmadas Pro, Max y AWD Max por la página de promociones. Existen además versiones PHEV (no incluidas)."
