@@ -32,6 +32,9 @@
   --text-price: 1.25rem;
   --text-price--line-height: 1.75rem;
   --text-price--font-weight: 700;
+  --text-rank-number: 1.5rem;
+  --text-rank-number--line-height: 2rem;
+  --text-rank-number--font-weight: 700;
   --text-group: 1rem;
   --text-group--line-height: 1.5rem;
   --text-group--font-weight: 600;
@@ -60,6 +63,9 @@
   --width-version-col: 9rem;
   --width-version-col-max: 20rem;
   --size-segment-icon-lg: 6rem;
+  /* Ranking list (tokens.md): max width of the list and the place-number column. */
+  --width-ranking: 48rem;
+  --width-rank-number: 3rem;
 }
 
 @layer base {

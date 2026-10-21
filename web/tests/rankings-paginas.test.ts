@@ -119,7 +119,8 @@ describe("ranking pages (#371)", () => {
 
   test("CA-2 (texts): no scores, averages, «mejor», «recomendado» nor badges in the header; RF-12 no form", () => {
     for (const r of RANKINGS) {
-      const body = text(/<main[\s\S]*<\/main>/.exec(page(r.url))![0]);
+      // header only: the list of places (#372) carries figures and dates
+      const body = text(/<main[\s\S]*?<\/header>/.exec(page(r.url))![0]);
       assert.doesNotMatch(body, /\b(mejor(es)?|recomendad[oa]s?|puntuaci[oó]n|media|valoraci[oó]n|insignia|medalla)\b/i);
       assert.doesNotMatch(page(r.url), /<form\b|<script\b/i);
       // the only digits are the 10-place limit of the shared scope line

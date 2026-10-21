@@ -262,6 +262,11 @@ export const es = {
   "ranking.alcance":
     "Solo entran versiones de modelos a la venta, con la cifra publicada por una fuente oficial o no oficial verificable. Como máximo, 10 puestos.",
   "ranking.lista.titulo": "Puestos",
+  "ranking.puesto.sr": "Puesto",
+  "ranking.puesto.empate": "empate",
+  "ranking.segmento.sr": "Segmento:",
+  "ranking.fuente": "Fuente: {fuente}, {fecha}",
+  "ranking.noOficial": "· fuente no oficial",
 } as const;
 
 export type MessageKey = keyof typeof es;

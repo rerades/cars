@@ -1,7 +1,9 @@
 ---
 import "../../styles/global.css";
 import { t, type MessageKey } from "../../lib/i18n.ts";
+import { loadModels } from "../../lib/data.ts";
 import { RANKINGS, type RankingDef } from "../../lib/rankings.ts";
+import { placeViews } from "../../lib/ranking-view.ts";
 
 export function getStaticPaths() {
   // The URL is `/rankings/<slug>`; the slug is the last segment of the table's `url`.
@@ -12,6 +14,13 @@ export function getStaticPaths() {
 }
 
 const { ranking } = Astro.props as { ranking: RankingDef };
+const places = placeViews(loadModels().models, ranking);
+// "Fuente: {fuente}, {fecha}": the source name is the link, so split the message around a marker.
+const MARK = "\u0001";
+const sourceParts = (date: string) => {
+  const [before, after = ""] = t("ranking.fuente", { fuente: MARK, fecha: date }).split(MARK);
+  return { before, after };
+};
 const key = (suffix: string) => `${ranking.textKey}.${suffix}` as MessageKey;
 const title = t(key("titulo"));
 // Served with a trailing slash like the other pages; never with a query string (RF-13).
@@ -52,9 +61,64 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
         <p class="mt-2 max-w-prose text-body font-semibold text-ink-900" data-order>{t(key("orden"))}</p>
         <p class="mt-2 max-w-prose text-small text-ink-600" data-scope>{t("ranking.alcance")}</p>
       </header>
-      <!-- The list of places is another story (#372): this section is the target of the skip link. -->
       <section aria-labelledby="resultados" class="mt-8">
         <h2 id="resultados" tabindex="-1" class="text-section">{t("ranking.lista.titulo")}</h2>
+        <ol
+          role="list"
+          aria-labelledby="resultados"
+          class="mt-4 max-w-(--width-ranking) list-none p-0"
+          data-ranking-list
+        >
+          {
+            places.map((p) => (
+              <li
+                value={p.place}
+                class="grid grid-cols-[var(--width-rank-number)_minmax(0,1fr)] gap-x-3 border-b border-line-soft py-4 [overflow-wrap:anywhere]"
+                data-place={p.place}
+              >
+                <h3 class="col-span-2 grid grid-cols-subgrid items-start text-card-title text-ink-900">
+                  <span class="flex flex-col text-rank-number text-ink-900" data-place-number>
+                    <span class="sr-only">{t("ranking.puesto.sr")} </span>
+                    {p.place}
+                    {p.tied && (
+                      <span class="text-small font-normal text-ink-600" data-tie>
+                        {t("ranking.puesto.empate")}
+                      </span>
+                    )}
+                  </span>
+                  <a href={p.href} class="text-brand-600 underline hover:text-brand-800" data-place-link>
+                    {p.brand} {p.model}
+                  </a>
+                </h3>
+                <p class="col-start-2 text-body text-ink-900" data-version>
+                  {p.version}
+                </p>
+                <p class:list={["col-start-2 text-small text-ink-600"]} data-segment>
+                  <span class="sr-only">{t("ranking.segmento.sr")} </span>
+                  {p.segment}
+                </p>
+                <p class="col-start-2 mt-1 text-price text-ink-900" data-figure>
+                  {p.figure}
+                </p>
+                <p class="col-start-2 text-small text-ink-600" data-source>
+                  {sourceParts(p.source.date).before}<a
+                    href={p.source.url}
+                    rel="noopener"
+                    class="text-brand-600 underline hover:text-brand-800"
+                    data-source-link>{p.source.name}</a
+                  >{sourceParts(p.source.date).after}{p.source.unofficial && (
+                    <> <span data-unofficial>{t("ranking.noOficial")}</span></>
+                  )}
+                </p>
+                {p.note && (
+                  <p class="col-start-2 text-small text-ink-600" data-note>
+                    {p.note}
+                  </p>
+                )}
+              </li>
+            ))
+          }
+        </ol>
       </section>
     </main>
   </body>
