@@ -20,7 +20,7 @@ const d = <T>(value: T, over: Partial<PublishedDatum<T>> = {}): PublishedDatum<T
   ...over,
 });
 const B = { url: "https://www.other.example/b", source_id: "other", retrieved: "2026-09-28" };
-const C = { url: "https://hibridosyelectricos.com/c", source_id: "hye", retrieved: "2026-10-01", tier: "T3" };
+const C = { url: "https://hibridosyelectricos.com/c", source_id: "hye", retrieved: "2026-10-01", tier: "T3" } as const;
 
 const version = (over: Partial<PublishedVersion> = {}): PublishedVersion => ({
   name: "V",

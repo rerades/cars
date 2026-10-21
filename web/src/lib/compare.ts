@@ -1,5 +1,5 @@
 import { formatLaunch } from "./card.ts";
-import type { ModelRecord, Sourced, Version } from "./data.ts";
+import type { ModelRecord, Sourced, Tier, Version } from "./data.ts";
 import { formatDecimal, formatEur, formatNumber, sourceView } from "./format.ts";
 import { t, type MessageKey } from "./i18n.ts";
 import { groupNotes, type NoteSource, type SourceNote } from "./notes.ts";
@@ -158,7 +158,7 @@ export interface PublishedDatum<T = unknown> {
   source_id: string;
   url: string;
   retrieved: string;
-  tier: string;
+  tier: Tier;
   note: string | null;
 }
 export interface PublishedBattery extends PublishedDatum<number> {
