@@ -2302,3 +2302,18 @@
     valen. Si no lo encuentras, deja price: null y actualiza la open_question con dónde has mirado.
     No cambies needs_review (solo lo quita una persona) ni versiones o specs. Quita de
     open_questions lo que resuelvas."
+- id: reviews-primeros-enlaces-1
+  agent: researcher
+  task: "Primeros enlaces a reviews (PRD-006, ADR-0017, data-model.md sección 3.1). Añade la lista
+    reviews a estos modelos: data/raw/tesla/model-y.yaml, data/raw/tesla/model-3.yaml,
+    data/raw/renault/r5-e-tech-electrico.yaml, data/raw/renault/r4-e-tech-electrico.yaml,
+    data/raw/kia/ev3.yaml, data/raw/hyundai/inster.yaml, data/raw/cupra/born.yaml y
+    data/raw/mg/mg4.yaml. Solo de las fuentes diariomotor-es y motorpasion-es, que ya están en el
+    registro con kind reviews; no registres medios nuevos. Hasta dos reviews por modelo, como mucho
+    una por medio: pruebas del coche (no noticias de lanzamiento ni comparativas de precios) de la
+    generación que describe la ficha. title es el titular literal de la página, url la exacta sin
+    parámetros, tier T3 y retrieved la fecha en que abriste la página. version solo si la prueba es
+    de una versión concreta que está en la ficha. Si un modelo no tiene prueba en ninguno de los
+    dos medios, no le pongas reviews y anótalo en open_questions. Si fijas por fin una URL de prueba
+    de motorpasion.com, quita el «Pendiente» de notes en data/sources/motorpasion-es.yaml. No
+    toques test_results, needs_review ni ningún otro dato. node factory/validate-data.ts sin errores."
