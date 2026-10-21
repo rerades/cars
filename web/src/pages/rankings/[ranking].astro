@@ -1,0 +1,61 @@
+---
+import "../../styles/global.css";
+import { t, type MessageKey } from "../../lib/i18n.ts";
+import { RANKINGS, type RankingDef } from "../../lib/rankings.ts";
+
+export function getStaticPaths() {
+  // The URL is `/rankings/<slug>`; the slug is the last segment of the table's `url`.
+  return RANKINGS.map((ranking) => ({
+    params: { ranking: ranking.url.split("/").pop()! },
+    props: { ranking },
+  }));
+}
+
+const { ranking } = Astro.props as { ranking: RankingDef };
+const key = (suffix: string) => `${ranking.textKey}.${suffix}` as MessageKey;
+const title = t(key("titulo"));
+// Served with a trailing slash like the other pages; never with a query string (RF-13).
+const canonical = new URL(`${ranking.url}/`, Astro.site).href;
+const site = t("sitio.nombre");
+const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio: site }) : title;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{documentTitle}</title>
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <a
+      href="#resultados"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:bg-surface focus:p-2 focus:text-brand-600 focus:underline"
+      >{t("pagina.saltar")}</a
+    >
+    <main class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8">
+      <nav aria-label={t("ficha.ruta.nombre")} data-ranking-ruta>
+        <ol class="flex flex-wrap items-center text-small">
+          <li class="flex items-center after:mx-2 after:text-ink-600 after:[content:'›'/'']">
+            <a
+              href="/coches"
+              class="inline-flex min-h-touch items-center text-brand-600 underline hover:text-brand-800"
+              >{t("ficha.ruta.coches")}</a
+            >
+          </li>
+          <li aria-current="page" class="text-ink-600 [overflow-wrap:anywhere]">{title}</li>
+        </ol>
+      </nav>
+      <header data-ranking-header>
+        <h1 class="text-title text-ink-900 [overflow-wrap:anywhere]">{title}</h1>
+        <p class="mt-2 max-w-prose text-body text-ink-900" data-intro>{t(key("entrada"))}</p>
+        <p class="mt-2 max-w-prose text-body font-semibold text-ink-900" data-order>{t(key("orden"))}</p>
+        <p class="mt-2 max-w-prose text-small text-ink-600" data-scope>{t("ranking.alcance")}</p>
+      </header>
+      <!-- The list of places is another story (#372): this section is the target of the skip link. -->
+      <section aria-labelledby="resultados" class="mt-8">
+        <h2 id="resultados" tabindex="-1" class="text-section">{t("ranking.lista.titulo")}</h2>
+      </section>
+    </main>
+  </body>
+</html>

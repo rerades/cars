@@ -228,6 +228,30 @@ export const es = {
   "comparador.error": "No se ha podido cargar la comparación. Vuelve a cargar la página o ve al catálogo.",
   "comparar.accion": "Comparar",
   "comparar.accionSr": "{marca} {modelo} con otros coches",
+  // Rankings (docs/design/rankings.md, "Los cinco rankings")
+  "ranking.precio.titulo": "Coches eléctricos más baratos",
+  "ranking.precio.entrada":
+    "Las versiones de coches eléctricos a la venta en España con el precio más bajo. Precio publicado por la marca, con IVA y sin descontar ayudas; si es una oferta, lo verás marcado como «Precio con oferta».",
+  "ranking.precio.orden": "Ordenadas por precio, de menor a mayor.",
+  "ranking.autonomia.titulo": "Coches eléctricos con más autonomía",
+  "ranking.autonomia.entrada":
+    "Las versiones de coches eléctricos a la venta en España con más autonomía homologada WLTP. Es la cifra de homologación que publica la marca, no la de uso real.",
+  "ranking.autonomia.orden": "Ordenadas por autonomía WLTP, de mayor a menor.",
+  "ranking.bateria.titulo": "Coches eléctricos con más batería",
+  "ranking.bateria.entrada":
+    "Las versiones de coches eléctricos a la venta en España con la batería de más capacidad. Cada cifra dice si la marca publica la capacidad útil, la bruta o no lo especifica.",
+  "ranking.bateria.orden": "Ordenadas por capacidad de batería, de mayor a menor.",
+  "ranking.potencia.titulo": "Coches eléctricos con más potencia",
+  "ranking.potencia.entrada":
+    "Las versiones de coches eléctricos a la venta en España con más potencia, en kilovatios, según la marca.",
+  "ranking.potencia.orden": "Ordenadas por potencia, de mayor a menor.",
+  "ranking.cargaCc.titulo": "Coches eléctricos con la carga más rápida en continua",
+  "ranking.cargaCc.entrada":
+    "Las versiones de coches eléctricos a la venta en España que admiten más potencia de carga en corriente continua. Es la potencia máxima que publica la marca, no un tiempo de carga.",
+  "ranking.cargaCc.orden": "Ordenadas por potencia máxima de carga en continua, de mayor a menor.",
+  "ranking.alcance":
+    "Solo entran versiones de modelos a la venta, con la cifra publicada por una fuente oficial o no oficial verificable. Como máximo, 10 puestos.",
+  "ranking.lista.titulo": "Puestos",
 } as const;
 
 export type MessageKey = keyof typeof es;
