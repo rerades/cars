@@ -132,6 +132,31 @@ export function validateSelection(
   return { columns, ignored, tooMany };
 }
 
+const PLURAL = new Intl.PluralRules("es");
+
+/**
+ * RF-11: the paragraphs of the URL notice, after the «Aviso:» prefix. One for ignored values (only
+ * their count, never the URL's text), one for too many; empty when the URL was fully usable.
+ */
+export function noticeParagraphs(sel: Pick<Selection, "ignored" | "tooMany">): string[] {
+  const out: string[] = [];
+  if (sel.ignored > 0) {
+    const form = PLURAL.select(sel.ignored) === "one" ? "one" : "other";
+    out.push(t(`comparador.aviso.ignoradas.${form}`, { n: sel.ignored }));
+  }
+  if (sel.tooMany) out.push(t("comparador.aviso.maximo"));
+  return out;
+}
+
+/**
+ * RF-12: the text of «Coches comparados» when fewer than 2 versions are valid, else null (the table
+ * is shown). With one valid version it asks for one more.
+ */
+export function emptyText(validCount: number): string | null {
+  if (validCount >= 2) return null;
+  return validCount === 1 ? t("comparador.vacio.unoMas") : t("comparador.vacio.texto");
+}
+
 /** Versions in the order of the model page: price ascending, unpriced last in file order. */
 export function sheetOrder<V extends { price?: { value: number } | null }>(versions: readonly V[]): V[] {
   const priced = versions.filter((v) => v.price).sort((a, b) => a.price!.value - b.price!.value);

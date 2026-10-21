@@ -221,6 +221,16 @@ export const es = {
   "comparador.fichaSr": "(ficha del modelo)",
   "comparador.condiciones.entrada": "{marca} {modelo}, {nombre}",
   "comparador.aviso.prefijo": "Aviso:",
+  // Plural forms of `comparador.aviso.ignoradas`, picked with Intl.PluralRules (see noticeParagraphs).
+  "comparador.aviso.ignoradas.one":
+    "No se ha podido incluir {n} coche del enlace: no está en el catálogo, ya no se puede comparar o estaba repetido.",
+  "comparador.aviso.ignoradas.other":
+    "No se ha podido incluir {n} coches del enlace: no está en el catálogo, ya no se puede comparar o estaba repetido.",
+  "comparador.aviso.maximo": "El enlace tenía más de 3 coches. Se muestran los 3 primeros.",
+  "comparador.vacio.texto":
+    "Para comparar hacen falta al menos 2 coches. Añádelos aquí o elígelos en el catálogo.",
+  "comparador.vacio.unoMas": "Añade al menos un coche más para ver la comparación.",
+  "comparador.vacio.catalogo": "Ver el catálogo",
   "comparador.sinJs.texto":
     "El comparador necesita JavaScript para leer los coches de la dirección y montar la tabla. Puedes consultar los mismos datos en las fichas del catálogo.",
   "comparador.sinJs.enlace": "Ir al catálogo",
