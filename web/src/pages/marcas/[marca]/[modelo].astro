@@ -12,8 +12,7 @@ import VersionPrice from "../../../components/VersionPrice.astro";
 import VersionField from "../../../components/VersionField.astro";
 import SourceMark from "../../../components/SourceMark.astro";
 import { versionFields } from "../../../lib/version-fields.ts";
-import { groupNotes } from "../../../lib/notes.ts";
-import { sourceName } from "../../../lib/format.ts";
+import { groupNotes, noteLine } from "../../../lib/notes.ts";
 
 /**
  * Model page (PRD-002, docs/design/ficha-modelo.md). This story: URL, title and header (RF-1, RF-2,
@@ -380,8 +379,7 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
             <ol class="mt-4 flex flex-col gap-3">
               {notes.map((note) => (
                 <li id={`fuente-${note.n}`} tabindex="-1" class="text-small text-ink-900 [overflow-wrap:anywhere]" data-fuente={note.n}>
-                  {t("ficha.fuentes.item", { fuente: sourceName(note.url) ?? note.url, fecha: note.date })}
-                  {note.unofficial && <> {t("ficha.fuentes.noOficial")}</>}
+                  {noteLine(note)}
                   <br />
                   <a href={note.url} rel="noopener" class="text-brand-600 underline hover:text-brand-800">{note.url}</a>
                 </li>

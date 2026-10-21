@@ -2,6 +2,7 @@ import { formatLaunch } from "./card.ts";
 import type { ModelRecord, Sourced, Version } from "./data.ts";
 import { formatDecimal, formatEur, formatNumber, sourceView } from "./format.ts";
 import { t, type MessageKey } from "./i18n.ts";
+import { groupNotes, type NoteSource, type SourceNote } from "./notes.ts";
 
 /**
  * Comparator logic (PRD-003, ADR-0014). Pure and browser-safe: it must not import `node:fs` or
@@ -266,15 +267,20 @@ function drivetrainLabel(code: string): string {
   return code === "fwd" || code === "rwd" || code === "awd" ? t(`traccion.${code}` as MessageKey) : code;
 }
 
+/** The sourced datum behind a row of a version, or null. */
+function fieldDatum(field: FieldId, v: PublishedVersion): PublishedDatum<unknown> | null {
+  return {
+    precio: v.price, autonomia: v.wltp_km, bateria: v.battery_kwh, potencia: v.power_kw,
+    traccion: v.drivetrain, cargaCc: v.dc_max_kw, cargaCa: v.ac_max_kw,
+  }[field];
+}
+
 /**
  * Cell of one version for one row (RF-2, RF-3, RF-5). A missing datum gives the placeholder and no
  * figure (CA-4). Values are formatted, never computed (RNF-5).
  */
 export function cellView(field: FieldId, v: PublishedVersion): CellView {
-  const datum: PublishedDatum<unknown> | null = {
-    precio: v.price, autonomia: v.wltp_km, bateria: v.battery_kwh, potencia: v.power_kw,
-    traccion: v.drivetrain, cargaCc: v.dc_max_kw, cargaCa: v.ac_max_kw,
-  }[field];
+  const datum = fieldDatum(field, v);
   if (datum == null || datum.value == null) {
     const text = field === "precio" ? t("ficha.precio.porConfirmar") : t("ficha.porConfirmar");
     return { text, missing: true, unofficial: false, deal: null, note: null, source: null, terms: null };
@@ -325,6 +331,51 @@ export function headerView(m: PublishedModel, v: PublishedVersion) {
         ? when ? t("ficha.estado.proximamenteFecha", { fecha: when }) : t("ficha.estado.proximamente")
         : null,
   };
+}
+
+/** Source marks of one column: the header's (status, launch) and one per row that has a datum. */
+export interface ColumnNotes {
+  /** Note numbers of the header, deduplicated, in order (empty if the model is not announced). */
+  header: number[];
+  /** Note number of each row; absent for the price (it shows its source) and for «por confirmar». */
+  cells: Partial<Record<FieldId, number>>;
+}
+
+/**
+ * RF-4, CA-5: numbers the source notes of a comparison in reading order of the table: header
+ * (columns left to right: status, then launch), then each row top to bottom and, within it, the
+ * columns left to right. Grouping and wording are those of the model page (lib/notes.ts). The price
+ * carries its source beside the figure and has no note; «por confirmar» has nothing to cite.
+ * Pure: call it again whenever the selection changes.
+ */
+export function numberNotes(columns: readonly { model: PublishedModel; version: PublishedVersion }[]): {
+  notes: SourceNote[];
+  columns: ColumnNotes[];
+} {
+  type Slot = { col: number; field: FieldId | "status" | "launch"; datum: NoteSource };
+  const walk: Slot[] = [];
+  columns.forEach(({ model }, col) => {
+    if (model.status.value !== "announced") return; // only announced models show a badge (RF-2)
+    walk.push({ col, field: "status", datum: model.status });
+    if (model.launch && formatLaunch(model.launch.value)) walk.push({ col, field: "launch", datum: model.launch });
+  });
+  for (const field of FIELDS) {
+    if (field === "precio") continue;
+    columns.forEach(({ version }, col) => {
+      const datum = fieldDatum(field, version);
+      if (datum && datum.value != null) walk.push({ col, field, datum });
+    });
+  }
+  const { notes, numberOf } = groupNotes(walk.map((s) => s.datum));
+  const out: ColumnNotes[] = columns.map(() => ({ header: [], cells: {} }));
+  for (const s of walk) {
+    const n = numberOf(s.datum);
+    const target = out[s.col]!;
+    if (s.field === "status" || s.field === "launch") {
+      if (!target.header.includes(n)) target.header.push(n);
+    } else target.cells[s.field] = n;
+  }
+  return { notes, columns: out };
 }
 
 /** Title of a column's entry in «Condiciones de las ofertas»: «{marca} {modelo}, {nombre}». */

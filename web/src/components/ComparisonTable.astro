@@ -23,6 +23,12 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
   </div>
 </section>
 
+<section aria-labelledby="cmp-fuentes" class="mt-12" data-sources hidden>
+  <h2 id="cmp-fuentes" class="text-section text-ink-900">{t("ficha.fuentes.titulo")}</h2>
+  <p class="mt-1 text-small text-ink-600">{t("ficha.fuentes.entrada")}</p>
+  <ol class="mt-4 flex flex-col gap-3" data-sources-list></ol>
+</section>
+
 <template data-tpl="table">
   <table class="w-full table-fixed border-collapse bg-surface">
     <caption class="sr-only" data-slot="caption"></caption>
@@ -42,7 +48,24 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
       class="mt-1 inline-block rounded-card bg-soon-bg px-3 py-1 text-badge text-soon-fg"
       data-slot="badge"
       hidden></span>
+    <span data-slot="marks"></span>
   </th>
+</template>
+
+<template data-tpl="mark">
+  <span data-mark>
+    <a
+      class="inline-block min-h-6 min-w-6 text-center text-small text-brand-600 underline hover:text-brand-800"
+      data-slot="markLink"><span aria-hidden="true" data-slot="markText"></span></a
+    ><span class={note} data-slot="markUnofficial" hidden></span>
+  </span>
+</template>
+
+<template data-tpl="source">
+  <li tabindex="-1" class="text-small text-ink-900 [overflow-wrap:anywhere]">
+    <span data-slot="line"></span><br />
+    <a rel="noopener" class={link} data-slot="link"></a>
+  </li>
 </template>
 
 <template data-tpl="field">
@@ -92,6 +115,7 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
     fieldLabel,
     headerView,
     modelsToFetch,
+    numberNotes,
     parseEntries,
     validateSelection,
     writeSearch,
@@ -99,6 +123,7 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
     type PublishedVersion,
   } from "../lib/compare.ts";
   import { t } from "../lib/i18n.ts";
+  import { noteLine, type SourceNote } from "../lib/notes.ts";
 
   const main = document.querySelector<HTMLElement>("main[data-messages]");
   const section = document.querySelector<HTMLElement>("[data-compare]");
@@ -160,8 +185,22 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
     section.hidden = false;
   }
 
+  /** Mark «[n]» to the entry in «Fuentes», plus «fuente no oficial» for non-T1 data. */
+  function makeMark(note: SourceNote): HTMLElement {
+    const mark = clone("mark");
+    const a = slot(mark, "markLink") as HTMLAnchorElement;
+    a.href = `#cmp-fuente-${note.n}`;
+    a.setAttribute("aria-label", t("ficha.nota.sr", { n: note.n }));
+    slot(a, "markText").textContent = t("ficha.nota.marca", { n: note.n });
+    const un = slot(mark, "markUnofficial");
+    // The leading space keeps the text apart from the mark; not a separate flow element.
+    show(un, note.unofficial ? ` ${t("ficha.nota.noOficial")}` : null);
+    return mark;
+  }
+
   function render(section: HTMLElement, picked: { model: PublishedModel; version: PublishedVersion }[]) {
     const n = picked.length;
+    const { notes, columns: marks } = numberNotes(picked);
     const table = clone("table");
     table.style.maxWidth = `calc(${n} * var(--width-version-col-max))`;
     slot(table, "caption").textContent = t("comparador.tabla.caption", { n });
@@ -178,6 +217,7 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
       slot(a, "sr").textContent = ` ${h.srSuffix}`;
       slot(th, "name").textContent = h.name;
       show(slot(th, "badge"), h.badge);
+      for (const num of marks[i]!.header) slot(th, "marks").append(" ", makeMark(notes[num - 1]!));
       head.append(th);
     });
 
@@ -190,12 +230,14 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
       const values = slot(body, "values");
       picked.forEach(({ version }, i) => {
         const c = cellView(field, version);
+        const num = marks[i]!.cells[field];
         const td = clone("cell");
         td.setAttribute("headers", `cmp-col-${i + 1} cmp-f-${field}`);
         const text = slot(td, "text");
         text.textContent = c.text;
         // Same style for every value: only the placeholder is muted, and it also reads as text (CA-17).
         text.className = c.missing ? "text-ink-600" : field === "precio" ? "text-price text-ink-900" : "";
+        if (num !== undefined) text.append(" ", makeMark(notes[num - 1]!));
         slot(td, "dealRow").hidden = c.deal === null;
         if (c.deal) slot(td, "deal").textContent = c.deal;
         const source = slot(td, "source");
@@ -235,5 +277,19 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
       list.append(entry);
     });
     section.querySelector<HTMLElement>("[data-conditions]")!.hidden = list.children.length === 0;
+
+    // «Fuentes» exists only with 2 or 3 versions; the table is only rendered then, so show it here.
+    const sources = document.querySelector<HTMLElement>("[data-sources]")!;
+    const items = notes.map((note) => {
+      const li = clone("source");
+      li.id = `cmp-fuente-${note.n}`;
+      slot(li, "line").textContent = noteLine(note);
+      const a = slot(li, "link") as HTMLAnchorElement;
+      a.href = note.url;
+      a.textContent = note.url;
+      return li;
+    });
+    sources.querySelector("[data-sources-list]")!.replaceChildren(...items);
+    sources.hidden = false;
   }
 </script>
