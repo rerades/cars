@@ -35,7 +35,7 @@ images:
     attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "needs_review: true porque la venta hoy solo la respalda un medio T3 y las versiones salen del IDAE; falta una página de ford.es que lo confirme (revisión de la PR #341)."
-  - "Precio: ford.es solo muestra cuotas de financiación (desde 125 €/mes, entrada 7.850 €, cuota final 14.394 €, 49 meses), sin PVP legible; sin precio."
+  - "Precio: ford.es solo muestra cuotas de financiación (desde 125 €/mes, entrada 7.850 €, cuota final 14.394 €, 49 meses), sin PVP legible; sin precio. Revisado el 2026-10-22: /turismos/puma-gen-e, /turismos/puma-gen-e/shop, /compra/promociones/particulares y /compra/comprar-online/inventory/pv no dan PVP por versión ni enlazan a tarifa en PDF; el configurador remite al concesionario; /compra/gama-y-precios da 404."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: ford.es dice «SUV 100% eléctrico» y el medio T3 «SUV urbano, segmento B»; ningún término literal de RF-11."
   - "IDAE mezcla homologaciones: se usan las filas 05.2026 (batería de 46,8 kWh, posterior al cambio de marzo de 2026 que cuenta el medio T3), no la de menor wltp_km (610512, 43 kWh, 324 km, batería sustituida)."
