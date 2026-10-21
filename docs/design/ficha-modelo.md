@@ -35,7 +35,7 @@ Orden del DOM = orden visual = orden de lectura (WCAG 1.3.2) en todas las anchur
    3. **Datos del modelo** (`h2`, RF-5, RF-7): solo si hay `specs`.
    4. **Más imágenes** (`h2`, RF-12): solo si hay 2 o más imágenes con licencia.
    5. **Otros modelos del segmento** (`h2`, RF-15): solo si hay segmento y algún modelo que mostrar.
-   6. **Fuentes** (`h2`, RF-9): siempre que haya algún dato con nota; cierra los datos de la ficha.
+   6. **Fuentes** (`h2`, RF-9): siempre, al final de los datos de la ficha (solo «Reviews» va detrás).
    7. **Reviews** (`h2`, RF-16; PRD-006): solo si hay alguna review o resultado de prueba. Es el último
       bloque de `main`, después de «Fuentes» (CA-19).
 4. Pie del sitio.
@@ -82,11 +82,11 @@ Móvil (320–767 px)                     Escritorio (≥ 1024 px)
 │ Más imágenes             │           │ Título literal de la review (enlace)                 │
 │ Otros modelos…           │           │ Medio · dominio · consultado el 20 sep 2026          │
 │ Fuentes                  │           └──────────────────────────────────────────────────────┘
-│ Reviews ⁴                │
+│ Reviews *                │
 └──────────────────────────┘
 ```
 
-(⁴ «Reviews» solo existe si el modelo tiene alguna review o resultado de prueba; ver «Reviews».)
+(* «Reviews» solo existe si el modelo tiene alguna review o resultado de prueba; ver «Reviews».)
 
 (Los «¹ ² ³» del dibujo son las notas numeradas de RF-9; en pantalla se pintan como «[1]», ver «Fuente y
 fecha».)
