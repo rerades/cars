@@ -76,6 +76,18 @@ images:
     retrieved: 2026-10-10
     license: CC-BY-SA-4.0
     attribution: "Rundvald, CC BY-SA 4.0, vía Wikimedia Commons"
+reviews:
+  - title: "Prueba en vídeo del Renault 4 eléctrico"
+    url: "https://www.diariomotor.com/noticia/prueba-renault-4-2025/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-22
+    tier: T3
+    version: iconic 150 CV autonomía confort
+  - title: "Probamos el Renault 4 E-Tech: una acertada reencarnación en coche eléctrico con extra de espacio y practicidad respecto al R5"
+    url: "https://www.motorpasion.com/pruebas-de-coches/2026-renault-4-e-tech-prueba"
+    source_id: motorpasion-es
+    retrieved: 2026-10-22
+    tier: T3
 open_questions:
   - "battery_kwh_options no obtenido: la web leída solo menciona la batería de 52 kWh y la de 40 kWh solo constaba en prensa.renault.es."
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
