@@ -2375,3 +2375,107 @@
     de una versión concreta de la ficha. Si un modelo no tiene prueba en ninguno de los dos medios,
     no le pongas reviews y anótalo en open_questions. No toques test_results, needs_review ni
     ningún otro dato. node factory/validate-data.ts sin errores."
+- id: precios-ford-oferta-2026-10
+  agent: researcher
+  task: "Repite la búsqueda de precios. Ford: anoche (#588) se buscó en ford.es y solo había cuotas y
+    ofertas; la tarea decía, por error, que las ofertas no valían. Precios de Ford (data/raw/ford/,
+    fuente T1 de ford.es). Revisa en open_questions por qué cada versión no tiene precio. Sigue al
+    pie de la letra las reglas de precio de .claude/agents/researcher.md y de data-model.md: primero
+    un PVP oficial sin oferta (configurador, lista de precios o PDF de tarifas) con price_kind: pvp;
+    si la marca no publica un PVP limpio y el único precio es el de una oferta (descuento de marca,
+    bonificación por financiar, permanencia), guárdalo con price_kind: financed, price_terms con el
+    texto literal de las condiciones (la letra pequeña) y price_terms_url con la URL donde aparecen.
+    Nunca una cuota mensual como precio, nunca un precio con ayudas públicas (Plan MOVES, Plan Auto+ u otras)
+    restadas, nunca anuncios de concesionario, y solo si el precio se asocia sin duda a una versión
+    de la ficha. Si no hay ninguno de los dos, deja price: null y actualiza la open_question con
+    dónde has mirado. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-volkswagen-oferta-2026-10
+  agent: researcher
+  task: "Repite la búsqueda de precios. Volkswagen: anoche (#607) solo se encontraron precios de oferta
+    con financiación; la tarea decía, por error, que no valían. Precios de Volkswagen
+    (data/raw/volkswagen/, fuente T1 de volkswagen.es). Revisa en open_questions por qué cada
+    versión no tiene precio. Sigue al pie de la letra las reglas de precio de
+    .claude/agents/researcher.md y de data-model.md: primero un PVP oficial sin oferta
+    (configurador, lista de precios o PDF de tarifas) con price_kind: pvp; si la marca no publica un
+    PVP limpio y el único precio es el de una oferta (descuento de marca, bonificación por
+    financiar, permanencia), guárdalo con price_kind: financed, price_terms con el texto literal de
+    las condiciones (la letra pequeña) y price_terms_url con la URL donde aparecen. Nunca una cuota
+    mensual como precio, nunca un precio con ayudas públicas (Plan MOVES, Plan Auto+ u otras) restadas, nunca
+    anuncios de concesionario, y solo si el precio se asocia sin duda a una versión de la ficha. Si
+    no hay ninguno de los dos, deja price: null y actualiza la open_question con dónde has mirado.
+    No cambies needs_review (solo lo quita una persona) ni versiones o specs. Quita de
+    open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-skoda-oferta-2026-10
+  agent: researcher
+  task: "Repite la búsqueda de precios. Skoda: anoche (#611) la lista de precios del Elroq y la ficha del
+    Enyaq solo daban importes ligados a Plan Auto+ o financiación. Los que restan el Plan Auto+ (ayuda pública) siguen sin valer; un precio de oferta por financiar, sin ayudas restadas, sí vale como financed. Precios de Skoda (data/raw/skoda/, fuente T1 de skoda.es). Revisa en open_questions por
+    qué cada versión no tiene precio. Sigue al pie de la letra las reglas de precio de
+    .claude/agents/researcher.md y de data-model.md: primero un PVP oficial sin oferta
+    (configurador, lista de precios o PDF de tarifas) con price_kind: pvp; si la marca no publica un
+    PVP limpio y el único precio es el de una oferta (descuento de marca, bonificación por
+    financiar, permanencia), guárdalo con price_kind: financed, price_terms con el texto literal de
+    las condiciones (la letra pequeña) y price_terms_url con la URL donde aparecen. Nunca una cuota
+    mensual como precio, nunca un precio con ayudas públicas (Plan MOVES, Plan Auto+ u otras) restadas, nunca
+    anuncios de concesionario, y solo si el precio se asocia sin duda a una versión de la ficha. Si
+    no hay ninguno de los dos, deja price: null y actualiza la open_question con dónde has mirado.
+    No cambies needs_review (solo lo quita una persona) ni versiones o specs. Quita de
+    open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-smart-2026-10
+  agent: researcher
+  task: "Precios de smart (data/raw/smart/, fuente T1 de smart.com/es). Revisa en open_questions por qué
+    cada versión no tiene precio. Sigue al pie de la letra las reglas de precio de
+    .claude/agents/researcher.md y de data-model.md: primero un PVP oficial sin oferta
+    (configurador, lista de precios o PDF de tarifas) con price_kind: pvp; si la marca no publica un
+    PVP limpio y el único precio es el de una oferta (descuento de marca, bonificación por
+    financiar, permanencia), guárdalo con price_kind: financed, price_terms con el texto literal de
+    las condiciones (la letra pequeña) y price_terms_url con la URL donde aparecen. Nunca una cuota
+    mensual como precio, nunca un precio con ayudas públicas (Plan MOVES, Plan Auto+ u otras) restadas, nunca
+    anuncios de concesionario, y solo si el precio se asocia sin duda a una versión de la ficha. Si
+    no hay ninguno de los dos, deja price: null y actualiza la open_question con dónde has mirado.
+    No cambies needs_review (solo lo quita una persona) ni versiones o specs. Quita de
+    open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-kia-2026-10
+  agent: researcher
+  task: "Precios de Kia (data/raw/kia/, fuente T1 de kia.com/es). Revisa en open_questions por qué cada
+    versión no tiene precio. Sigue al pie de la letra las reglas de precio de
+    .claude/agents/researcher.md y de data-model.md: primero un PVP oficial sin oferta
+    (configurador, lista de precios o PDF de tarifas) con price_kind: pvp; si la marca no publica un
+    PVP limpio y el único precio es el de una oferta (descuento de marca, bonificación por
+    financiar, permanencia), guárdalo con price_kind: financed, price_terms con el texto literal de
+    las condiciones (la letra pequeña) y price_terms_url con la URL donde aparecen. Nunca una cuota
+    mensual como precio, nunca un precio con ayudas públicas (Plan MOVES, Plan Auto+ u otras) restadas, nunca
+    anuncios de concesionario, y solo si el precio se asocia sin duda a una versión de la ficha. Si
+    no hay ninguno de los dos, deja price: null y actualiza la open_question con dónde has mirado.
+    No cambies needs_review (solo lo quita una persona) ni versiones o specs. Quita de
+    open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-range-rover-2026-10
+  agent: researcher
+  task: "Range Rover: la página de gama da un «Precio desde» por versión sin decir qué motorización
+    cubre; busca en el configurador o en la lista de precios el de la versión eléctrica. Precios de
+    Range Rover (data/raw/range-rover/, fuente T1 de landrover.es). Revisa en open_questions por qué
+    cada versión no tiene precio. Sigue al pie de la letra las reglas de precio de
+    .claude/agents/researcher.md y de data-model.md: primero un PVP oficial sin oferta
+    (configurador, lista de precios o PDF de tarifas) con price_kind: pvp; si la marca no publica un
+    PVP limpio y el único precio es el de una oferta (descuento de marca, bonificación por
+    financiar, permanencia), guárdalo con price_kind: financed, price_terms con el texto literal de
+    las condiciones (la letra pequeña) y price_terms_url con la URL donde aparecen. Nunca una cuota
+    mensual como precio, nunca un precio con ayudas públicas (Plan MOVES, Plan Auto+ u otras) restadas, nunca
+    anuncios de concesionario, y solo si el precio se asocia sin duda a una versión de la ficha. Si
+    no hay ninguno de los dos, deja price: null y actualiza la open_question con dónde has mirado.
+    No cambies needs_review (solo lo quita una persona) ni versiones o specs. Quita de
+    open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-nissan-2026-10
+  agent: researcher
+  task: "Precios de Nissan (data/raw/nissan/, fuente T1 de nissan.es). Revisa en open_questions por qué
+    cada versión no tiene precio. Sigue al pie de la letra las reglas de precio de
+    .claude/agents/researcher.md y de data-model.md: primero un PVP oficial sin oferta
+    (configurador, lista de precios o PDF de tarifas) con price_kind: pvp; si la marca no publica un
+    PVP limpio y el único precio es el de una oferta (descuento de marca, bonificación por
+    financiar, permanencia), guárdalo con price_kind: financed, price_terms con el texto literal de
+    las condiciones (la letra pequeña) y price_terms_url con la URL donde aparecen. Nunca una cuota
+    mensual como precio, nunca un precio con ayudas públicas (Plan MOVES, Plan Auto+ u otras) restadas, nunca
+    anuncios de concesionario, y solo si el precio se asocia sin duda a una versión de la ficha. Si
+    no hay ninguno de los dos, deja price: null y actualiza la open_question con dónde has mirado.
+    No cambies needs_review (solo lo quita una persona) ni versiones o specs. Quita de
+    open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
