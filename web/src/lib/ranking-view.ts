@@ -1,7 +1,15 @@
-import type { ModelRecord } from "./data.ts";
+import type { ModelRecord, Price } from "./data.ts";
 import { formatEur, sourceView } from "./format.ts";
 import { t, type MessageKey } from "./i18n.ts";
-import { candidates, rankPlaces, rankingById, type RankingDef, type RankingId } from "./rankings.ts";
+import {
+  candidates,
+  leftOut,
+  rankPlaces,
+  rankingById,
+  termsAnchorId,
+  type RankingDef,
+  type RankingId,
+} from "./rankings.ts";
 import { versionFields } from "./version-fields.ts";
 
 /** What one place of a ranking shows (docs/design/rankings.md, "Lista de puestos"). */
@@ -23,7 +31,23 @@ export interface PlaceView {
   source: { name: string; date: string; url: string; unofficial: boolean };
   /** `note` of the figure, literal. */
   note: string | null;
+  /** Offer data of a `financed` price in the price ranking (RF-5); null for `pvp` and for other rankings. */
+  deal: DealView | null;
 }
+
+/** One entry of "Condiciones de las ofertas": also the content of the `<template>` entry (#377). */
+export interface DealView {
+  /** Anchor id, derived from (brand, model slug, version name) and not from the place. */
+  id: string;
+  /** "{marca} {modelo}, {versión}". */
+  title: string;
+  /** `price_terms`, literal. */
+  terms: string;
+  termsUrl: string;
+}
+
+/** Splits `price_terms` into paragraphs like the model page does. */
+export const termsParagraphs = (text: string) => text.split(/\n\s*\n/).filter((p) => p.trim() !== "");
 
 /** The places (max 10) of a ranking, ready to paint. Selection and numbering come from rankings.ts. */
 export function placeViews(models: readonly ModelRecord[], ranking: RankingId | RankingDef): PlaceView[] {
@@ -50,6 +74,32 @@ export function placeViews(models: readonly ModelRecord[], ranking: RankingId | 
       figure: text,
       source: { ...sourceView(figure), url: figure.url },
       note: figure.note ?? null,
+      deal: dealOf(model, version.name, def, figure as Partial<Price>),
     };
   });
+}
+
+function dealOf(model: ModelRecord, name: string, def: RankingDef, price: Partial<Price>): DealView | null {
+  if (def.field !== "price" || price.price_kind !== "financed") return null;
+  return {
+    id: termsAnchorId(model.brand, model.file.replace(/\.yaml$/, "").split("/").pop()!, name),
+    title: t("comparador.condiciones.entrada", { marca: model.brand_name, modelo: model.model, nombre: name }),
+    terms: price.price_terms ?? "",
+    termsUrl: price.price_terms_url ?? "",
+  };
+}
+
+/** What the page shows below the list (RF-15, CA-18): the "data" noun of the ranking and the count. */
+export interface LeftOutView {
+  count: number;
+  text: string;
+}
+
+/** Sentence of RF-15 for the `out` set of the ranking (no filters yet: #376 passes a filtered set). */
+export function leftOutView(models: readonly ModelRecord[], ranking: RankingId | RankingDef): LeftOutView {
+  const def = typeof ranking === "string" ? rankingById(ranking) : ranking;
+  const count = leftOut(models, def).length;
+  const dato = t(`${def.textKey}.dato` as MessageKey);
+  const key = count === 0 ? "ranking.fuera.ninguna" : count === 1 ? "ranking.fuera.uno" : "ranking.fuera.n";
+  return { count, text: t(key, { n: count, dato }) };
 }

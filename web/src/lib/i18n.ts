@@ -289,6 +289,18 @@ export const es = {
   "ranking.segmento.sr": "Segmento:",
   "ranking.fuente": "Fuente: {fuente}, {fecha}",
   "ranking.noOficial": "· fuente no oficial",
+  "ranking.precio.dato": "el precio",
+  "ranking.autonomia.dato": "la autonomía WLTP",
+  "ranking.bateria.dato": "la capacidad de batería",
+  "ranking.potencia.dato": "la potencia",
+  "ranking.cargaCc.dato": "la potencia de carga en continua",
+  "ranking.fuera.n":
+    "{n} versiones a la venta se han quedado fuera por no tener {dato} publicado con fuente verificable.",
+  "ranking.fuera.uno":
+    "1 versión a la venta se ha quedado fuera por no tener {dato} publicado con fuente verificable.",
+  "ranking.fuera.ninguna": "Ninguna versión a la venta se ha quedado fuera por falta de {dato}.",
+  "ranking.vacio.titulo": "Ninguna versión",
+  "ranking.vacio.texto": "Todavía no hay ninguna versión a la venta con {dato} publicado.",
 } as const;
 
 export type MessageKey = keyof typeof es;

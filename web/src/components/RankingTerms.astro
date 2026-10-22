@@ -1,0 +1,28 @@
+---
+import { termsParagraphs, type DealView } from "../lib/ranking-view.ts";
+import { t } from "../lib/i18n.ts";
+
+/**
+ * One entry of "Condiciones de las ofertas" of a ranking (RF-5, docs/design/rankings.md).
+ * The same markup paints the block of the HTML and the `<template>` the filter script of #377
+ * clones and fills with `textContent` and attributes (never `innerHTML`). `deal` is null for the template.
+ */
+interface Props {
+  deal: DealView | null;
+}
+const { deal } = Astro.props;
+const paragraphs = deal ? termsParagraphs(deal.terms) : [""];
+---
+
+<li id={deal?.id} tabindex="-1" class="max-w-prose" data-terms-entry>
+  <p class="text-body font-semibold text-ink-900 [overflow-wrap:anywhere]" data-terms-title>{deal?.title}</p>
+  <div class="mt-1 flex flex-col gap-2 text-small text-ink-900 [overflow-wrap:anywhere]" data-terms-text>
+    {paragraphs.map((p) => <p class="whitespace-pre-line">{p}</p>)}
+  </div>
+  <a
+    href={deal?.termsUrl}
+    rel="noopener"
+    class="mt-1 inline-flex min-h-touch items-center text-small text-brand-600 underline hover:text-brand-800"
+    data-terms-link>{t("ficha.condiciones.enlace")}</a
+  >
+</li>
