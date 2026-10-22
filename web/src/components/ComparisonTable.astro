@@ -112,9 +112,11 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
     FIELDS,
     cellView,
     conditionTitle,
+    emptyText,
     fieldLabel,
     headerView,
     modelsToFetch,
+    noticeParagraphs,
     numberNotes,
     parseEntries,
     validateSelection,
@@ -149,40 +151,72 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
   }
 
   async function init(main: HTMLElement, section: HTMLElement) {
-    const msg: Record<string, string> = JSON.parse(main.dataset.messages ?? "{}");
     const entries = parseEntries(location.search);
-    const notice = document.querySelector<HTMLElement>("[data-no-js]");
+    const noJs = document.querySelector<HTMLElement>("[data-no-js]");
+    const loading = document.querySelector<HTMLElement>("[data-loading]")!;
+    // Loading state (RNF-6): only the status text, no table or list yet.
+    noJs?.remove();
+    loading.hidden = false;
     let models: PublishedModel[];
     try {
       // All requests at once; only the models the URL names are fetched (ADR-0014).
       const found = await Promise.all(modelsToFetch(entries).map(fetchModel));
       models = found.filter((m): m is PublishedModel => m !== null);
     } catch {
-      // Minimal fallback so a failed request is not a blank page; the full states are story #320.
-      const p = document.createElement("p");
-      p.className = "mt-4 max-w-prose text-body text-ink-900";
-      p.append(`${msg.error ?? ""} `);
-      const a = document.createElement("a");
-      a.href = "/coches";
-      a.className = "text-brand-600 underline hover:text-brand-800";
-      a.textContent = msg.noJsLink ?? "";
-      p.append(a);
-      notice?.replaceWith(p);
+      // Error state (RNF-6): our own message and a link, never the browser's error; no table.
+      loading.hidden = true;
+      document.querySelector<HTMLElement>("[data-error]")!.hidden = false;
       return;
     }
-    notice?.remove();
+    loading.hidden = true;
 
-    const { columns } = validateSelection(entries, models);
+    const selection = validateSelection(entries, models);
+    const { columns } = selection;
     // The URL always shows the table: full form, in column order, without the ignored ones.
     history.replaceState(null, "", location.pathname + (columns.length ? `?${writeSearch(columns)}` : ""));
-    if (columns.length < 2) return; // fewer than two: states of stories #320 and #321
 
     const picked = columns.map((c) => {
       const model = models.find((m) => m.brand === c.brand && m.slug === c.slug)!;
       return { model, version: model.versions.find((v) => v.name === c.name)! };
     });
+    renderNotice(selection);
+    renderChosen(picked);
+    if (columns.length < 2) return; // RF-12: no table, conditions or sources
     render(section, picked);
     section.hidden = false;
+  }
+
+  /** RF-11: the notice above «Coches comparados», one paragraph per cause; nothing if the URL was fine. */
+  function renderNotice(selection: Parameters<typeof noticeParagraphs>[0]) {
+    const box = document.querySelector<HTMLElement>("[data-url-notice]")!;
+    const proto = box.querySelector<HTMLElement>("[data-notice-p]")!;
+    const paragraphs = noticeParagraphs(selection).map((text) => {
+      const p = proto.cloneNode(true) as HTMLElement;
+      p.hidden = false;
+      p.querySelector("[data-notice-text]")!.textContent = text;
+      return p;
+    });
+    box.replaceChildren(...paragraphs);
+    box.hidden = paragraphs.length === 0;
+  }
+
+  /** «Coches comparados» (RF-12): the cars, and with fewer than 2 the explanation and the catalogue link. */
+  function renderChosen(picked: { model: PublishedModel; version: PublishedVersion }[]) {
+    const chosen = document.querySelector<HTMLElement>("[data-chosen]")!;
+    const list = chosen.querySelector<HTMLElement>("[data-chosen-list]")!;
+    list.replaceChildren(
+      ...picked.map(({ model, version }) => {
+        const li = document.createElement("li");
+        li.className = "text-body text-ink-900 [overflow-wrap:anywhere]";
+        li.textContent = conditionTitle(model, version);
+        return li;
+      }),
+    );
+    list.hidden = picked.length === 0; // no empty <ol>
+    const text = emptyText(picked.length);
+    show(chosen.querySelector<HTMLElement>("[data-empty-text]")!, text);
+    chosen.querySelector<HTMLElement>("[data-empty-link]")!.hidden = text === null;
+    chosen.hidden = false;
   }
 
   /** Mark «[n]» to the entry in «Fuentes», plus «fuente no oficial» for non-T1 data. */

@@ -42,12 +42,39 @@ const messages = {
         >{t("comparador.sinJs.enlace")}</a>
       </div>
 
-      <!-- Sections for the next stories (#318 and following); inert until the script clones them. -->
-      <template data-section="elegidos">
-        <section aria-labelledby="cmp-elegidos" class="mt-8">
-          <h2 id="cmp-elegidos" class="text-section">{t("comparador.elegidos.titulo")}</h2>
-        </section>
-      </template>
+      <!-- Loading and error states (RNF-6); the script unhides them. Not in the page without JS. -->
+      <p role="status" class="mt-4 max-w-prose text-body text-ink-900" data-loading hidden>{messages.loading}</p>
+      <div class="mt-4 max-w-prose text-body text-ink-900" data-error hidden>
+        <p>{messages.error}</p>
+        <a
+          href="/coches"
+          class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+        >{messages.noJsLink}</a>
+      </div>
+
+      <!-- URL notice (RF-11): paragraphs filled by the script; not a live region. -->
+      <div
+        class="mt-4 flex max-w-prose flex-col gap-2 rounded-card border border-line bg-surface-muted p-4 text-body text-ink-900"
+        data-url-notice
+        hidden
+      >
+        <p data-notice-p hidden>
+          <span class="font-semibold">{t("comparador.aviso.prefijo")}</span> <span data-notice-text></span>
+        </p>
+      </div>
+
+      <!-- «Coches comparados» (RF-12); the version and «Quitar» (#321) and «Añadir» (#322) come later. -->
+      <section aria-labelledby="cmp-elegidos" class="mt-8" data-chosen hidden>
+        <h2 id="cmp-elegidos" class="text-section">{t("comparador.elegidos.titulo")}</h2>
+        <ol class="mt-4 flex flex-col gap-2" data-chosen-list></ol>
+        <p class="mt-4 max-w-prose text-body text-ink-900" data-empty-text hidden></p>
+        <a
+          href="/coches"
+          class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+          data-empty-link
+          hidden>{t("comparador.vacio.catalogo")}</a
+        >
+      </section>
       <ComparisonTable />
 
       <div role="status" aria-live="polite" class="sr-only" data-status></div>
