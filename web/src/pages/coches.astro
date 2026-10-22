@@ -7,10 +7,23 @@ import { loadModels } from "../lib/data.ts";
 import { summarize } from "../lib/derived.ts";
 import { factAttrs } from "../lib/filter.ts";
 import { filterPanelView } from "../lib/filter-view.ts";
-import { t } from "../lib/i18n.ts";
+import { t, type MessageKey } from "../lib/i18n.ts";
+import type { ExploreGroup } from "../lib/catalog.ts";
+import { RANKINGS } from "../lib/rankings.ts";
 
 // The served HTML is already in the default order ("Novedad", RF-3, CA-16); the browser reorders from there.
 const models = sortByNovelty(loadModels().models);
+
+// "Rankings" group of the Explorar strip (PRD-001 RF-14): one link per ranking, in RF-1 order.
+// The five pages are always built (PRD-005 RF-13), so the group is never empty. Only on /coches.
+const rankingsGroup: ExploreGroup = {
+  label: t("explorar.rankings"),
+  links: RANKINGS.map((r) => ({
+    label: t(`explorar.ranking.${r.id}` as MessageKey),
+    href: `${r.url}/`,
+    current: false,
+  })),
+};
 ---
 
 <CatalogPage
@@ -19,7 +32,7 @@ const models = sortByNovelty(loadModels().models);
   count={countLabel(models.length)}
   cards={models.map(cardView)}
   emptyText={t("vacio.catalogo.texto")}
-  explore={exploreGroups(models, "/coches/")}
+  explore={[...exploreGroups(models, "/coches/"), rankingsGroup]}
   currentHref="/coches/"
   filters={{
     view: filterPanelView(models),
