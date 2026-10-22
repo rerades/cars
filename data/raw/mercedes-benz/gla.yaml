@@ -24,7 +24,6 @@ open_questions:
   - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; todas las versiones con price null."
   - "Autonomía: el IDAE (725 y 681 km) difiere de la cifra del medio (654 y 640 km); se guarda el IDAE (T2) y la del medio va en la nota."
   - "GLA 200 (58 kWh LFP): anunciado por el medio sin precio y sin homologación en el IDAE; no se ha escrito."
-  - "Imagen: sin foto del GLA eléctrico con licencia válida localizada."
   - "status: el artículo de 03/08/2026 publica el PVP y prevé las primeras entregas en noviembre, pero no dice que haya pedidos abiertos; announced hasta confirmarlo."
   - "launch: el medio no da fecha de inicio de venta (solo entregas previstas en noviembre de 2026); sin dato."
   - "Segmento: el medio dice «SUV Mediano», que no está en la lista de RF-11; segment null."
