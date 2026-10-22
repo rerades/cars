@@ -2326,33 +2326,40 @@
     tamaño. Cambia el console.log para que cite las cifras medidas de la ADR (índice 17 483 B,
     mayor modelo porsche/taycan 22 257 B, total 232 039 B) en vez de las estimaciones antiguas. No
     pongas umbral al total. No toques nada fuera de esa prueba. La PR cita ADR-0014 y #584."
-- id: historia-595-lectura-reviews
+- id: historia-595-596-lectura-reviews
   agent: developer
-  task: "Historia #595 (épica #594, PRD-006): lectura de las reviews de cada modelo en data.ts.
-    Lee el issue entero (gh issue view 595 --comments) y haz exactamente lo que dice. El esquema
-    está en docs/architecture/data-model.md, sección 3.1, y ADR-0017. Hoy hay reviews reales en
-    siete modelos de data/raw/ (Cupra Born, Hyundai Inster, Kia EV3, MG4, Tesla Model Y, Renault 4
-    y Renault 5). Solo la lectura y sus pruebas: no pintes nada en la ficha (eso es #598 y
-    siguientes) ni leas test_results (#597). Pruebas con node --test. La PR dice «Closes #595» y
-    enumera los RF y CA cubiertos."
-- id: historia-321-lista-coches-comparados
+  task: "Historias #595 y #596 (épica #594, PRD-006), juntas en una PR porque las dos son la
+    lectura de las reviews en data.ts: #595 lee la lista reviews de cada modelo y #596 la enlaza
+    con su registro data/sources/<source_id>.yaml (name del medio, terms_url, terms_checked, kind y
+    tier). Lee las dos issues enteras (gh issue view 595 --comments y gh issue view 596 --comments)
+    y haz exactamente lo que dicen. El esquema está en docs/architecture/data-model.md, secciones
+    3.1 y 8, y en ADR-0017. Hoy hay reviews reales en siete modelos de data/raw/ (Cupra Born,
+    Hyundai Inster, Kia EV3, MG4, Tesla Model Y, Renault 4 y Renault 5). Solo la lectura y sus
+    pruebas: no pintes nada en la ficha (#598 y siguientes), no leas test_results (#597) y no
+    toques factory/. Pruebas con node --test. La PR dice «Closes #595» y «Closes #596» y enumera
+    los RF y CA cubiertos de cada una."
+- id: historia-321-322-lista-y-anadir-comparador
   agent: developer
-  task: "Historia #321 (épica #313, PRD-003): lista «Coches comparados» del comparador: quitar una
-    columna y cambiar de versión. Lee el issue entero (gh issue view 321 --comments) y haz
-    exactamente lo que dice. Sigue docs/design/comparador.md con los tokens de tokens.md y los
-    textos en i18n.ts. Parte de lo que dejó #320 (ya en main: avisos, estados y la región «Coches
-    comparados» en ComparisonTable.astro) y reutiliza sus funciones de web/src/lib/compare.ts, sin
-    duplicarlas. No hagas «añadir un coche» (#322). Pruebas con node --test. La PR dice «Closes
-    #321» y enumera los RF y CA cubiertos."
-- id: historia-374-versiones-fuera-rankings
+  task: "Historias #321 y #322 (épica #313, PRD-003), juntas en una PR porque las dos tocan la
+    lista «Coches comparados» del comparador: #321 quita una columna y cambia de versión, y #322
+    añade un coche desde el comparador, con máximo de 3. Lee las dos issues enteras (gh issue view
+    321 --comments y gh issue view 322 --comments) y haz exactamente lo que dicen. Sigue
+    docs/design/comparador.md con los tokens de tokens.md y los textos en i18n.ts. Parte de lo que
+    dejó #320 (ya en main: avisos, estados y la región «Coches comparados» en
+    ComparisonTable.astro) y reutiliza sus funciones de web/src/lib/compare.ts, sin duplicarlas.
+    Pruebas con node --test. La PR dice «Closes #321» y «Closes #322» y enumera los RF y CA
+    cubiertos de cada una."
+- id: historia-373-374-ofertas-y-fuera-rankings
   agent: developer
-  task: "Historia #374 (épica #368, PRD-005): versiones que se quedan fuera de un ranking y estado
-    vacío. Lee el issue entero (gh issue view 374 --comments) y haz exactamente lo que dice. Sigue
-    docs/design/rankings.md con los tokens de tokens.md y los textos en i18n.ts. Parte de la lista
-    de puestos de #372, ya en main (web/src/lib/ranking-view.ts y rankings/[ranking].astro), sin
-    duplicar candidates() ni rankPlaces(). No hagas precios con oferta (#373) ni filtros (#376).
-    Pruebas con node --test sobre el build. La PR dice «Closes #374» y enumera los RF y CA
-    cubiertos."
+  task: "Historias #373 y #374 (épica #368, PRD-005), juntas en una PR porque las dos cambian la
+    página de cada ranking: #373 pone el precio con oferta y el bloque «Condiciones de las
+    ofertas», y #374 las versiones que se quedan fuera y el estado vacío. Lee las dos issues
+    enteras (gh issue view 373 --comments y gh issue view 374 --comments) y haz exactamente lo que
+    dicen. Sigue docs/design/rankings.md con los tokens de tokens.md y los textos en i18n.ts. Parte
+    de la lista de puestos de #372, ya en main (web/src/lib/ranking-view.ts y
+    rankings/[ranking].astro), sin duplicar candidates() ni rankPlaces(). No hagas filtros (#376)
+    ni el JSON de #447. Pruebas con node --test sobre el build. La PR dice «Closes #373» y «Closes
+    #374» y enumera los RF y CA cubiertos de cada una."
 - id: reviews-primeros-enlaces-2
   agent: researcher
   task: "Más enlaces a reviews (PRD-006, ADR-0017, data-model.md sección 3.1), igual que
