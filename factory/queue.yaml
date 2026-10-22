@@ -2317,3 +2317,54 @@
     dos medios, no le pongas reviews y anótalo en open_questions. Si fijas por fin una URL de prueba
     de motorpasion.com, quita el «Pendiente» de notes en data/sources/motorpasion-es.yaml. No
     toques test_results, needs_review ni ningún otro dato. node factory/validate-data.ts sin errores."
+- id: umbrales-peso-comparador
+  agent: developer
+  task: "ADR-0014, enmienda del 2026-10-22 (Consecuencias, «Hace falta una alarma en la prueba de
+    peso»), con los umbrales ya aceptados por una persona. En web/tests/comparar-build.test.ts, la
+    prueba de peso pasa a fallar si out/comparar/datos/indice.json supera 64 KB (65 536 B) o si
+    cualquier JSON de modelo supera 32 KB (32 768 B); el mensaje de fallo nombra el fichero y su
+    tamaño. Cambia el console.log para que cite las cifras medidas de la ADR (índice 17 483 B,
+    mayor modelo porsche/taycan 22 257 B, total 232 039 B) en vez de las estimaciones antiguas. No
+    pongas umbral al total. No toques nada fuera de esa prueba. La PR cita ADR-0014 y #584."
+- id: historia-595-lectura-reviews
+  agent: developer
+  task: "Historia #595 (épica #594, PRD-006): lectura de las reviews de cada modelo en data.ts.
+    Lee el issue entero (gh issue view 595 --comments) y haz exactamente lo que dice. El esquema
+    está en docs/architecture/data-model.md, sección 3.1, y ADR-0017. Hoy hay reviews reales en
+    siete modelos de data/raw/ (Cupra Born, Hyundai Inster, Kia EV3, MG4, Tesla Model Y, Renault 4
+    y Renault 5). Solo la lectura y sus pruebas: no pintes nada en la ficha (eso es #598 y
+    siguientes) ni leas test_results (#597). Pruebas con node --test. La PR dice «Closes #595» y
+    enumera los RF y CA cubiertos."
+- id: historia-321-lista-coches-comparados
+  agent: developer
+  task: "Historia #321 (épica #313, PRD-003): lista «Coches comparados» del comparador: quitar una
+    columna y cambiar de versión. Lee el issue entero (gh issue view 321 --comments) y haz
+    exactamente lo que dice. Sigue docs/design/comparador.md con los tokens de tokens.md y los
+    textos en i18n.ts. Parte de lo que dejó #320 (ya en main: avisos, estados y la región «Coches
+    comparados» en ComparisonTable.astro) y reutiliza sus funciones de web/src/lib/compare.ts, sin
+    duplicarlas. No hagas «añadir un coche» (#322). Pruebas con node --test. La PR dice «Closes
+    #321» y enumera los RF y CA cubiertos."
+- id: historia-374-versiones-fuera-rankings
+  agent: developer
+  task: "Historia #374 (épica #368, PRD-005): versiones que se quedan fuera de un ranking y estado
+    vacío. Lee el issue entero (gh issue view 374 --comments) y haz exactamente lo que dice. Sigue
+    docs/design/rankings.md con los tokens de tokens.md y los textos en i18n.ts. Parte de la lista
+    de puestos de #372, ya en main (web/src/lib/ranking-view.ts y rankings/[ranking].astro), sin
+    duplicar candidates() ni rankPlaces(). No hagas precios con oferta (#373) ni filtros (#376).
+    Pruebas con node --test sobre el build. La PR dice «Closes #374» y enumera los RF y CA
+    cubiertos."
+- id: reviews-primeros-enlaces-2
+  agent: researcher
+  task: "Más enlaces a reviews (PRD-006, ADR-0017, data-model.md sección 3.1), igual que
+    reviews-primeros-enlaces-1 (#613). Añade la lista reviews a estos modelos:
+    data/raw/kia/ev6.yaml, data/raw/hyundai/ioniq-5.yaml, data/raw/hyundai/kona-electrico.yaml,
+    data/raw/peugeot/e-208.yaml, data/raw/peugeot/e-3008.yaml, data/raw/citroen/e-c3.yaml,
+    data/raw/renault/scenic-e-tech-electrico.yaml y data/raw/byd/atto-2.yaml. Vuelve a mirar
+    también data/raw/tesla/model-3.yaml, que se quedó sin ninguna. Solo de las fuentes
+    diariomotor-es y motorpasion-es; no registres medios nuevos. Hasta dos reviews por modelo, como
+    mucho una por medio: pruebas del coche (no noticias de lanzamiento ni comparativas de precios)
+    de la generación que describe la ficha. title es el titular literal, url la exacta sin
+    parámetros, tier T3 y retrieved la fecha en que abriste la página. version solo si la prueba es
+    de una versión concreta de la ficha. Si un modelo no tiene prueba en ninguno de los dos medios,
+    no le pongas reviews y anótalo en open_questions. No toques test_results, needs_review ni
+    ningún otro dato. node factory/validate-data.ts sin errores."
