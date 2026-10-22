@@ -35,7 +35,14 @@ images:
     retrieved: 2026-10-12
     license: CC-BY-4.0
     attribution: "Soggietoes, CC BY 4.0"
+reviews:
+  - title: "MG4 2023: probamos el chollo del coche eléctrico, es chino y... ¡cuesta menos de 20.000 euros!"
+    url: "https://www.diariomotor.com/noticia/mg4-2023-prueba-coche-electrico/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-22
+    tier: T3
 open_questions:
+  - "reviews: sin prueba de conducción del MG4 en motorpasion-es (el «Primer contacto» de septiembre de 2022 admite que no lo habían conducido)."
   - "launch: la web no publica fecha de inicio de venta en España (MG4 Urban figura como NUEVO)."
   - "segment: la web no lo clasifica de forma explícita; sin fuente, queda vacío."
   - "Versiones: la ficha no trae tabla de batería, autonomía WLTP ni potencia por versión; quedan vacías. Solo se leyó el precio visualizado de cada ficha; faltan el resto de acabados (p. ej. 77kW, XPower)."

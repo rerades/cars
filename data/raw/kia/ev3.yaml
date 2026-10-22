@@ -25,6 +25,18 @@ images:
     retrieved: 2026-10-11
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+reviews:
+  - title: "Prueba a fondo Kia EV3: el primer eléctrico que te hará dudar"
+    url: "https://www.diariomotor.com/noticia/prueba-kia-ev3/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-22
+    tier: T3
+  - title: "Probamos el Kia EV3: el primer eléctrico que me hace pensar que un coche eléctrico puede ser el único coche de una casa. Cumple en todo, incluso en precio."
+    url: "https://www.motorpasion.com/pruebas-de-coches/prueba-kia-ev3-2025"
+    source_id: motorpasion-es
+    retrieved: 2026-10-22
+    tier: T3
+    version: EV3 GT-Line
 open_questions:
   - "Precio (PVP sin ayudas) de todas las versiones: la ficha no lo publica y el configurador no se ha leído. Los 'Desde' de concesionarios difieren (23.570 € / 24.530 €) y no se usan."
   - "launch: ninguna fuente T1 con la fecha de inicio de venta en España (solo T3 sitúa el inicio a finales de 2024)."

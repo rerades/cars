@@ -19,7 +19,14 @@ images:
     retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
+reviews:
+  - title: "Probamos el Hyundai Inster: pequeño por fuera, mega-práctico por dentro y con un precio que ya me hace plantearme en serio los coches eléctricos para usar todos los días"
+    url: "https://www.motorpasion.com/pruebas-de-coches/prueba-hyundai-inster-2025"
+    source_id: motorpasion-es
+    retrieved: 2026-10-22
+    tier: T3
 open_questions:
+  - "reviews: sin prueba del Inster en diariomotor-es (solo noticias, ofertas y fichas)."
   - "launch: la ficha no da fecha de inicio de venta en España."
   - "Precio: la ficha muestra «Desde 15.555 €» sin etiquetarlo como PVP ni dar condiciones; no se guarda como pvp. Falta leer el configurador o la lista de precios."
   - "Versiones y acabados (Entry/L, TOP, Lounge, Cross) con su batería y potencia: no leídos por versión."
