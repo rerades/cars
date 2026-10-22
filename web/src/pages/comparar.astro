@@ -63,11 +63,29 @@ const messages = {
         </p>
       </div>
 
-      <!-- «Coches comparados» (RF-12); the version and «Quitar» (#321) and «Añadir» (#322) come later. -->
+      <!-- «Coches comparados» (RF-8, RF-9, RF-12): the list, the empty text, «Añadir» or the maximum. -->
       <section aria-labelledby="cmp-elegidos" class="mt-8" data-chosen hidden>
         <h2 id="cmp-elegidos" class="text-section">{t("comparador.elegidos.titulo")}</h2>
-        <ol class="mt-4 flex flex-col gap-2" data-chosen-list></ol>
+        <ol class="mt-4 flex flex-col" data-chosen-list></ol>
         <p class="mt-4 max-w-prose text-body text-ink-900" data-empty-text hidden></p>
+        <form class="mt-4 flex max-w-prose flex-col gap-2 md:flex-row md:flex-wrap md:items-end" data-add-form novalidate hidden>
+          <div class="flex flex-col gap-1">
+            <label for="cmp-anadir" class="text-small font-semibold text-ink-900">{t("comparador.anadir.rotulo")}</label>
+            <select
+              id="cmp-anadir"
+              data-add-select
+              class="min-h-touch w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900"
+            >
+              <option value="">{t("comparador.anadir.elige")}</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="min-h-touch self-start rounded-card bg-brand-600 px-4 text-body text-on-brand hover:bg-brand-800"
+          >{t("comparador.anadir.boton")}</button>
+          <p id="cmp-anadir-msg" class="w-full text-body text-ink-900" data-add-message hidden></p>
+        </form>
+        <p class="mt-4 max-w-prose text-body text-ink-900" data-max-text hidden>{t("comparador.maximo")}</p>
         <a
           href="/coches"
           class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"

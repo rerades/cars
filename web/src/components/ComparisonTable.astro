@@ -36,6 +36,28 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
   </table>
 </template>
 
+<template data-tpl="chosen">
+  <li
+    tabindex="-1"
+    class="flex flex-col gap-2 border-t border-line-soft py-4 first:border-t-0 md:flex-row md:flex-wrap md:items-center md:gap-4"
+  >
+    <span class="text-card-title text-ink-900 [overflow-wrap:anywhere]" data-slot="title"></span>
+    <div class="flex flex-col gap-1 md:flex-row md:items-center md:gap-2" data-slot="wrap">
+      <label class="text-small font-semibold text-ink-900" data-slot="label"></label>
+      <select
+        class="min-h-touch w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900"
+        style="max-width: var(--width-version-col-max)"
+        data-slot="select"></select>
+    </div>
+    <p class="text-body text-ink-900 [overflow-wrap:anywhere]" data-slot="single" hidden></p>
+    <button
+      type="button"
+      class="min-h-touch self-start rounded-card border border-line bg-surface px-4 text-body text-ink-900 hover:border-brand-600 md:ml-auto"
+      data-slot="remove"
+    ><span data-slot="removeText"></span><span class="sr-only" data-slot="removeSr"></span></button>
+  </li>
+</template>
+
 <template data-tpl="column">
   <th scope="col" class={`${cell} border-l border-line-soft first:border-l-0`}>
     <a data-slot="link" class={`block min-h-touch ${link} text-card-title`}>
@@ -110,17 +132,27 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
 <script>
   import {
     FIELDS,
+    addGroups,
+    announce,
+    canAdd,
     cellView,
     conditionTitle,
     emptyText,
     fieldLabel,
+    focusAfterRemove,
     headerView,
     modelsToFetch,
     noticeParagraphs,
     numberNotes,
     parseEntries,
     validateSelection,
+    versionOptions,
+    withAdded,
+    withVersion,
+    withoutColumn,
     writeSearch,
+    type ColumnKey,
+    type IndexEntry,
     type PublishedModel,
     type PublishedVersion,
   } from "../lib/compare.ts";
@@ -171,19 +203,140 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
     loading.hidden = true;
 
     const selection = validateSelection(entries, models);
-    const { columns } = selection;
-    // The URL always shows the table: full form, in column order, without the ignored ones.
-    history.replaceState(null, "", location.pathname + (columns.length ? `?${writeSearch(columns)}` : ""));
+    for (const m of models) loaded.set(`${m.brand}/${m.slug}`, m);
+    columns = selection.columns;
+    renderNotice(selection);
+    update();
+    wireForm();
+    // The index is requested apart: if it fails only «Añadir» fails, the table is already there.
+    try {
+      const res = await fetch("/comparar/datos/indice.json");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      catalogue = (await res.json()) as IndexEntry[];
+    } catch {
+      catalogue = null;
+    }
+    renderAddOptions();
+  }
 
-    const picked = columns.map((c) => {
-      const model = models.find((m) => m.brand === c.brand && m.slug === c.slug)!;
+  // State of the page: the columns (the only truth), the models fetched so far and the index.
+  let columns: ColumnKey[] = [];
+  const loaded = new Map<string, PublishedModel>();
+  let catalogue: IndexEntry[] | null = null;
+  const $ = <T extends HTMLElement>(sel: string) => document.querySelector<T>(sel)!;
+
+  const pickedNow = () =>
+    columns.map((c) => {
+      const model = loaded.get(`${c.brand}/${c.slug}`)!;
       return { model, version: model.versions.find((v) => v.name === c.name)! };
     });
-    renderNotice(selection);
+
+  type Focus = { kind: "select" | "remove" | "item"; index: number } | { kind: "add" } | null;
+
+  /**
+   * Redraws everything from `columns`: URL (RF-10), list, «Añadir», and table with notes and sources
+   * (or nothing with fewer than 2, RF-12). Then announces and moves the focus (never to the body).
+   */
+  function update(message: string | null = null, focus: Focus = null) {
+    history.replaceState(null, "", location.pathname + (columns.length ? `?${writeSearch(columns)}` : ""));
+    const picked = pickedNow();
     renderChosen(picked);
-    if (columns.length < 2) return; // RF-12: no table, conditions or sources
-    render(section, picked);
-    section.hidden = false;
+    renderAddOptions();
+    const compare = $("[data-compare]");
+    const sources = $("[data-sources]");
+    if (columns.length < 2) {
+      compare.hidden = true;
+      sources.hidden = true;
+    } else {
+      render(compare, picked);
+      compare.hidden = false;
+    }
+    if (message !== null) {
+      const status = $("[data-status]");
+      status.textContent = "";
+      status.textContent = message;
+    }
+    if (!focus) return;
+    const items = [...document.querySelectorAll<HTMLElement>("[data-chosen-list] > li")];
+    if (focus.kind === "add") $("[data-add-select]").focus();
+    else if (focus.kind === "item") items[focus.index]?.focus();
+    else items[focus.index]?.querySelector<HTMLElement>(`[data-slot="${focus.kind}"]`)?.focus();
+  }
+
+  /** RF-9: «Añadir» is a form the script intercepts, or the maximum text; never a disabled control. */
+  function renderAddOptions() {
+    const form = $("[data-add-form]");
+    const open = canAdd(columns.length);
+    form.hidden = !open;
+    $("[data-max-text]").hidden = open;
+    if (!open) return;
+    const select = $<HTMLSelectElement>("[data-add-select]");
+    const first = select.options[0]!; // «Elige un coche»
+    select.replaceChildren(first);
+    for (const g of catalogue ? addGroups(catalogue, columns) : []) {
+      const group = document.createElement("optgroup");
+      group.label = g.label;
+      for (const o of g.options) {
+        const opt = document.createElement("option");
+        opt.value = o.value;
+        opt.textContent = o.label;
+        opt.disabled = o.disabled;
+        group.append(opt);
+      }
+      select.append(group);
+    }
+    select.value = "";
+  }
+
+  function setAddMessage(text: string | null) {
+    const select = $<HTMLSelectElement>("[data-add-select]");
+    show($("[data-add-message]"), text);
+    if (text === null) {
+      select.removeAttribute("aria-invalid");
+      select.removeAttribute("aria-describedby");
+    } else {
+      select.setAttribute("aria-invalid", "true");
+      select.setAttribute("aria-describedby", "cmp-anadir-msg");
+    }
+  }
+
+  /** RF-8, RF-9: adds the chosen model at the end with its default (or next free) version. */
+  function wireForm() {
+    $("[data-add-form]").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const select = $<HTMLSelectElement>("[data-add-select]");
+      setAddMessage(null);
+      if (!select.value) {
+        setAddMessage(t("comparador.anadir.sinEleccion"));
+        select.focus();
+        return;
+      }
+      if (!canAdd(columns.length)) return;
+      const [brand, slug] = select.value.split("/") as [string, string];
+      try {
+        let model = loaded.get(select.value) ?? null;
+        if (!model) {
+          model = await fetchModel({ brand, slug });
+          if (model) loaded.set(select.value, model);
+        }
+        if (!model) throw new Error("not comparable");
+        const next = withAdded(columns, model);
+        if (next.length === columns.length) return;
+        columns = next;
+        renderNotice({ ignored: 0, tooMany: false }); // the URL notice no longer describes the URL
+        const added = columns[columns.length - 1]!;
+        update(
+          announce("anadido", model, added.name, columns.length),
+          { kind: "select", index: columns.length - 1 },
+        );
+        // A model with one version has no <select>: its <li> takes the focus instead (design).
+        const li = document.querySelectorAll<HTMLElement>("[data-chosen-list] > li")[columns.length - 1]!;
+        if (!li.querySelector("select")) li.focus();
+      } catch {
+        // Reuses the page's error text (#322); the table stays as it was.
+        setAddMessage(t("comparador.error"));
+      }
+    });
   }
 
   /** RF-11: the notice above «Coches comparados», one paragraph per cause; nothing if the URL was fine. */
@@ -205,10 +358,49 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
     const chosen = document.querySelector<HTMLElement>("[data-chosen]")!;
     const list = chosen.querySelector<HTMLElement>("[data-chosen-list]")!;
     list.replaceChildren(
-      ...picked.map(({ model, version }) => {
-        const li = document.createElement("li");
-        li.className = "text-body text-ink-900 [overflow-wrap:anywhere]";
-        li.textContent = conditionTitle(model, version);
+      ...picked.map(({ model, version }, i) => {
+        const li = clone("chosen");
+        slot(li, "title").textContent = `${model.brand_name} ${model.model}`;
+        const select = slot(li, "select") as HTMLSelectElement;
+        if (model.versions.length >= 2) {
+          select.id = `cmp-version-${i + 1}`;
+          (slot(li, "label") as HTMLLabelElement).htmlFor = select.id;
+          slot(li, "label").textContent = t("comparador.version.rotulo");
+          select.setAttribute(
+            "aria-label",
+            t("comparador.version.sr", { marca: model.brand_name, modelo: model.model, n: i + 1 }),
+          );
+          for (const o of versionOptions(model, columns, i)) {
+            const opt = document.createElement("option");
+            opt.value = o.name;
+            opt.textContent = o.label;
+            opt.disabled = o.disabled;
+            opt.selected = o.name === version.name;
+            select.append(opt);
+          }
+          // RF-8: applied at once; the focus stays on this <select> (WCAG 3.2.2).
+          select.addEventListener("change", () => {
+            columns = withVersion(columns, i, select.value);
+            renderNotice({ ignored: 0, tooMany: false });
+            update(announce("cambio", model, columns[i]!.name, i + 1), { kind: "select", index: i });
+          });
+        } else {
+          slot(li, "wrap").remove();
+          show(slot(li, "single"), t("comparador.version.unica", { nombre: version.name }));
+        }
+        const remove = slot(li, "remove");
+        slot(remove, "removeText").textContent = t("comparador.quitar");
+        slot(remove, "removeSr").textContent = ` ${t("comparador.quitarSr", { marca: model.brand_name, modelo: model.model, nombre: version.name })}`;
+        remove.addEventListener("click", () => {
+          const gone = columns[i]!;
+          columns = withoutColumn(columns, i);
+          renderNotice({ ignored: 0, tooMany: false });
+          const target = focusAfterRemove(i, columns.length);
+          update(
+            announce("quitado", model, gone.name, columns.length),
+            target.kind === "add" ? target : { kind: "remove", index: target.index },
+          );
+        });
         return li;
       }),
     );

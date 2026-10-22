@@ -177,6 +177,122 @@ export function versionToAdd(
   return sheetOrder(model.versions).find((v) => !taken.includes(v.name))?.name ?? null;
 }
 
+/** One entry of `/comparar/datos/indice.json` (names only, no figures). */
+export interface IndexEntry {
+  brand: string;
+  slug: string;
+  brand_name: string;
+  model: string;
+  status: string;
+  versions: string[];
+  default_version: string | null;
+}
+
+/** RF-9: whether the «Añadir» form is offered (else the maximum text). */
+export function canAdd(count: number): boolean {
+  return count < MAX_COLUMNS;
+}
+
+/** RF-12: the list of columns is replaced, never mutated; these return the new list. */
+export function withVersion(columns: readonly ColumnKey[], index: number, name: string): ColumnKey[] {
+  const col = columns[index];
+  if (!col || columns.some((c, i) => i !== index && c.brand === col.brand && c.slug === col.slug && c.name === name)) {
+    return [...columns]; // RF-9: the same version never twice
+  }
+  return columns.map((c, i) => (i === index ? { ...c, name } : c));
+}
+
+export function withoutColumn(columns: readonly ColumnKey[], index: number): ColumnKey[] {
+  return columns.filter((_, i) => i !== index);
+}
+
+/**
+ * RF-8, RF-9: adds a model at the end with {@link versionToAdd}. Unchanged if the list is full, the
+ * model is unknown or all its versions are taken.
+ */
+export function withAdded(
+  columns: readonly ColumnKey[],
+  model: Pick<IndexEntry, "brand" | "slug"> & { versions: readonly { name: string; price?: { value: number } | null }[] },
+): ColumnKey[] {
+  if (!canAdd(columns.length)) return [...columns];
+  const taken = columns.filter((c) => c.brand === model.brand && c.slug === model.slug).map((c) => c.name);
+  const name = versionToAdd(model, taken);
+  return name == null ? [...columns] : [...columns, { brand: model.brand, slug: model.slug, name }];
+}
+
+/** Focus target after removing the column at `removed`: same position, else the previous, else «Añadir». */
+export function focusAfterRemove(removed: number, remaining: number): { kind: "remove"; index: number } | { kind: "add" } {
+  if (remaining === 0) return { kind: "add" };
+  return { kind: "remove", index: Math.min(removed, remaining - 1) };
+}
+
+export interface VersionOption {
+  name: string;
+  /** Text of the option: the name, plus «(ya está en la comparación)» when taken by another column. */
+  label: string;
+  disabled: boolean;
+}
+
+/** RF-8, RF-9: the options of a column's version `<select>`, in sheet order; others' versions disabled. */
+export function versionOptions(
+  model: { brand: string; slug: string; versions: readonly { name: string; price?: { value: number } | null }[] },
+  columns: readonly ColumnKey[],
+  index: number,
+): VersionOption[] {
+  return sheetOrder(model.versions).map((v) => {
+    const taken = columns.some(
+      (c, i) => i !== index && c.brand === model.brand && c.slug === model.slug && c.name === v.name,
+    );
+    return { name: v.name, label: taken ? `${v.name} ${t("comparador.version.yaIncluida")}` : v.name, disabled: taken };
+  });
+}
+
+export interface AddGroup {
+  label: string;
+  options: { value: string; label: string; disabled: boolean }[];
+}
+
+/**
+ * RF-9, RF-11: the groups of the «Añadir» `<select>`: a group per brand and models, both in
+ * alphabetical order. Announced models carry «(Próximamente)»; a model with all versions taken is
+ * disabled with its suffix. Models that are not comparable are left out. `value` is `brand/slug`.
+ */
+export function addGroups(index: readonly IndexEntry[], columns: readonly ColumnKey[]): AddGroup[] {
+  const collator = new Intl.Collator("es");
+  const byBrand = new Map<string, { label: string; entries: IndexEntry[] }>();
+  for (const e of index) {
+    if (!isComparable({ status: { value: e.status }, versions: e.versions })) continue;
+    const g = byBrand.get(e.brand) ?? { label: e.brand_name, entries: [] };
+    g.entries.push(e);
+    byBrand.set(e.brand, g);
+  }
+  return [...byBrand.values()]
+    .sort((a, b) => collator.compare(a.label, b.label))
+    .map((g) => ({
+      label: g.label,
+      options: g.entries
+        .sort((a, b) => collator.compare(a.model, b.model))
+        .map((e) => {
+          const taken = columns.filter((c) => c.brand === e.brand && c.slug === e.slug).map((c) => c.name);
+          const full = e.versions.every((n) => taken.includes(n));
+          const parts = [e.model];
+          if (e.status === "announced") parts.push(t("comparador.anadir.proximamente"));
+          if (full) parts.push(t("comparador.anadir.completo"));
+          return { value: `${e.brand}/${e.slug}`, label: parts.join(" "), disabled: full };
+        }),
+    }));
+}
+
+/** Announcements of the status region (one message per action). */
+export function announce(
+  kind: "anadido" | "quitado" | "cambio",
+  m: { brand_name: string; model: string },
+  name: string,
+  n: number,
+): string {
+  return t(`comparador.anuncio.${kind}` as MessageKey, { marca: m.brand_name, modelo: m.model, nombre: name, n });
+}
+
 /** A sourced datum as published: always the six keys, `note` null when absent (RF-3). */
 export interface PublishedDatum<T = unknown> {
   value: T;
