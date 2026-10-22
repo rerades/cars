@@ -22,12 +22,18 @@ versions:
     wltp_km: {value: 500, note: "IDAE id 611863", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
     power_kw: {value: 370, note: "IDAE id 611863", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/xpeng/p7-plus/iaa-2025.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/XPeng_P7%2B_IAA_2025_DSC_2059.jpg/1280px-XPeng_P7%2B_IAA_2025_DSC_2059.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:XPeng_P7%2B_IAA_2025_DSC_2059.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-22
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0"
 open_questions:
   - "No se ha encontrado una web oficial de Xpeng en España: sin T1, los precios son null (Motor1 y Carwow citan 45.990 / 49.990 / 55.990 €, solo T3)."
   - "status: on_sale se apoya solo en una noticia T3 de Motor1 cuya fecha no se leyó; ninguna otra fuente confirma que el P7+ se pueda pedir hoy en España. needs_review: true."
   - "launch: Motor1 y Motor.es no dan el día de apertura de pedidos (Motor.es habla de mayo de 2026, Motor1 de junio): null."
   - "segment: Motor1 la describe como «berlina 100% eléctrica», que no es un término literal de la lista de RF-11: null."
   - "drivetrain: ninguna fuente registrada lo da (el IDAE no lo incluye); se omite en las tres versiones."
-  - "Imagen: Commons no muestra ficheros del P7+ en la búsqueda; sin imagen."
   - "El P7 anterior (IDAE ids 607278-607280, MY24) no se incluye: no hay fuente de que siga a la venta."
