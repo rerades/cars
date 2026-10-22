@@ -2,7 +2,8 @@
 
 - **Estado:** aceptada (2026-10-13); enmendada el 2026-10-22: las estimaciones de peso se sustituyen
   por las cifras medidas con datos reales en `web/tests/comparar-build.test.ts` (#571,
-  2026-10-21). La decisión no cambia.
+  2026-10-21). La decisión no cambia. Los umbrales de la prueba de peso (Consecuencias) los aceptó
+  una persona el 2026-10-22.
 - **Fecha:** 2026-10-13
 
 ## Contexto
@@ -247,11 +248,11 @@ Detalles:
 - **Hace falta una alarma en la prueba de peso; hoy solo imprime.** La prueba de
   `web/tests/comparar-build.test.ts` no tiene umbral, y su mensaje aún cita las estimaciones
   antiguas («index ~6 KB, model <= ~8 KB, all ~135 KB»). Sin umbral, nadie se entera de que el
-  índice o un modelo se disparan hasta que alguien lee la salida. Propuesta, **pendiente de que la
-  acepte una persona y se encole al developer** (esta ADR no toca `web/`): que la prueba falle si
+  índice o un modelo se disparan hasta que alguien lee la salida. Decidido (aceptado por una persona
+  el 2026-10-22 y encolado al developer, porque esta ADR no toca `web/`): la prueba falla si
   `indice.json` supera **64 KB** (la proyección a 300 modelos: superarla antes significa que el
   catálogo o los nombres crecen más de lo previsto) o si un JSON de modelo supera **32 KB** (~1,5 ×
-  el Taycan, unas 30 versiones), y que el mensaje cite las cifras medidas en vez de las estimadas.
+  el Taycan, unas 30 versiones), y el mensaje cita las cifras medidas en vez de las estimadas.
   Los umbrales son razonados, no medidos contra RNF-2; si se mide el LCP de la página montada,
   deben salir de esa medición. El total de todos los JSON no necesita umbral: no lo descarga nadie
   entero.
@@ -286,6 +287,6 @@ Detalles:
 - ¿Debe la factoría avisar cuando un cambio de `name` o de slug rompa claves de comparación
   compartidas? No lo pide ningún PRD.
 - La codificación de la terna en la URL: `docs/design/comparador.md`.
-- ¿Se aceptan los umbrales de la prueba de peso (índice 64 KB, modelo 32 KB) y se encola el cambio
-  al developer? Ver Consecuencias (enmienda del 2026-10-22).
+- ~~¿Se aceptan los umbrales de la prueba de peso (índice 64 KB, modelo 32 KB)?~~ Sí, aceptados el
+  2026-10-22 y encolados al developer.
 - ¿Cuánto pesan comprimidos con Brotli el índice y el JSON del Taycan? No se ha medido.
