@@ -22,11 +22,18 @@ versions:
     wltp_km: {value: 345, note: "IDAE id 614335", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
     power_kw: {value: 85, note: "IDAE id 614335", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/geely/e2/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Geely_EX2_E22H_Pro_Comet_Gray_01.jpg/1280px-Geely_EX2_E22H_Pro_Comet_Gray_01.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Geely_EX2_E22H_Pro_Comet_Gray_01.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-22
+    license: CC-BY-SA-4.0
+    attribution: "Ethan Llamas, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "status on_sale solo con prensa T3 (Motor.es) y la web de la marca no se puede leer: needs_review hasta que una fuente T1 o T2 confirme que se puede pedir hoy (revisión de la PR #486)."
   - "Web oficial de Geely España no legible (geely.com/es devolvió HTTP 500 el 2026-10-18): precios a null, sin tracción ni carga DC/AC."
   - "launch: el artículo de Motor.es solo dice que el libro de reservas se abrió «hace un mes» (hacia agosto de 2026) y el lanzamiento se presentó el 9/09/2026; no hay fecha de apertura de pedidos."
   - "segment: Motor.es lo llama «segmento B eléctrico» y «utilitarios», términos que no están en la lista de RF-11."
   - "Precios de Motor.es (20.990 / 24.990 / 27.490 € sin descuentos; «desde 14.490 €» con promociones) y de otros medios (Motor16 20.280 €) discrepan y no son T1: no se guardan."
-  - "Sin imagen: Commons no tiene ficheros del E2."
+  - "Imagen: Commons no tiene ficheros con el nombre E2; la foto es de un Geely EX2 (Filipinas), el mismo coche que se vende en Europa como E2 (Xingyuan en China) según la prensa (Xataka, Carwow, motor.es); aceptada por una persona el 2026-10-22 (#592)."

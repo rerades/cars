@@ -28,5 +28,5 @@ open_questions:
   - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; todas las versiones con price null."
   - "launch: la ficha de motor.es no da fecha de inicio de venta en España; sin dato."
   - "El medio lista además el Mercedes-AMG CLA 45 4MATIC+ Shooting Brake eléctrico; no está en el IDAE y no se ha escrito."
-  - "Imagen: sin foto del Shooting Brake con licencia válida localizada; images vacío (la berlina CLA tiene la suya en cla.yaml)."
+  - "Imagen (2026-10-22): nueva búsqueda «Mercedes-Benz CLA Shooting Brake 2026»; solo X118 y un CLA 220 híbrido ligero (X 178), ninguno eléctrico. images [] (la berlina CLA tiene la suya en cla.yaml)."
   - "Tracción de las versiones 200 y 250+ no confirmada en ninguna fuente leída."
