@@ -281,7 +281,10 @@ describe("comparator weight with the real data (informational)", () => {
   });
   after(() => rmSync(out, { recursive: true, force: true }));
 
-  test("prints the size of the index and of the largest model JSON (no limit)", () => {
+  const INDEX_LIMIT = 65_536; // 64 KB
+  const MODEL_LIMIT = 32_768; // 32 KB
+
+  test("prints the weight and fails if the index or a model JSON exceeds its limit", () => {
     const dir = join(out, "out/comparar/datos");
     const index = statSync(join(dir, "indice.json")).size;
     const models: { file: string; size: number }[] = [];
@@ -294,8 +297,19 @@ describe("comparator weight with the real data (informational)", () => {
     const total = models.reduce((n, m) => n + m.size, 0);
     console.log(
       `[comparar weight] index: ${index} B; models: ${models.length}; largest: ${models[0]?.file} ${models[0]?.size} B; ` +
-        `total of model JSON: ${total} B (ADR-0014 estimates: index ~6 KB, model <= ~8 KB, all ~135 KB)`,
+        `total of model JSON: ${total} B (ADR-0014 measured: index 17483 B, largest porsche/taycan 22257 B, total 232039 B)`,
     );
     assert.ok(index > 0 && models.length > 0);
+    // ADR-0014 alarm thresholds (no limit on the total).
+    assert.ok(
+      index <= INDEX_LIMIT,
+      `comparar/datos/indice.json is ${index} B, over the ${INDEX_LIMIT} B limit (ADR-0014)`,
+    );
+    for (const m of models) {
+      assert.ok(
+        m.size <= MODEL_LIMIT,
+        `comparar/datos/${m.file} is ${m.size} B, over the ${MODEL_LIMIT} B limit (ADR-0014)`,
+      );
+    }
   });
 });
