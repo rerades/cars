@@ -13,6 +13,7 @@ node factory/run.ts researcher "tarea"            # ejecuta (solo dentro del hor
 node factory/run.ts researcher "tarea" --ignore-window   # pruebas supervisadas de día
 node factory/run.ts --trace <run_id>              # pasos de una ejecución (ops/traces/)
 node factory/fetch-idae.ts TESLA                  # versiones BEV de una marca en el IDAE (fuente idae-es, T2)
+node factory/fetch-page.ts <url> PVP          # texto literal de una página de una fuente registrada (robots.txt)
 ```
 
 ## Cola de tareas

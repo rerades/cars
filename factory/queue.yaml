@@ -2541,3 +2541,55 @@
     cita con las de la ficha, y si no cuadran no la pongas. Si un modelo no tiene prueba válida en
     ninguno de los dos medios, anótalo en open_questions. No toques test_results, needs_review ni
     ningún otro dato. node factory/validate-data.ts sin errores."
+- id: precios-skoda-literal-2026-10
+  agent: researcher
+  task: "Repite la búsqueda de precios de data/raw/skoda/ con el script nuevo node factory/fetch-page.ts
+    (ver «Texto literal de una web registrada» en .claude/agents/researcher.md). La noche del
+    2026-10-23 no entró ningún precio porque WebFetch no devolvía la letra pequeña literal; lo que
+    encontraste está en las open_questions de cada ficha. Sigue al pie de la letra las reglas de
+    precio de .claude/agents/researcher.md y de data-model.md. Abre con fetch-page.ts las páginas
+    que citan las open_questions, con palabras como PVP, Precio, Oferta válida o el nombre de la
+    versión, y copia price_terms tal cual de los párrafos que imprime. Solo si el precio se asocia
+    sin duda a una versión de la ficha. Si no hay precio válido, deja price: null y actualiza la
+    open_question con qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni
+    versiones o specs. Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin
+    errores."
+- id: precios-volkswagen-literal-2026-10
+  agent: researcher
+  task: "Repite la búsqueda de precios de data/raw/volkswagen/ con el script nuevo node factory/fetch-page.ts
+    (ver «Texto literal de una web registrada» en .claude/agents/researcher.md). La noche del
+    2026-10-23 no entró ningún precio porque WebFetch no devolvía la letra pequeña literal; lo que
+    encontraste está en las open_questions de cada ficha. Sigue al pie de la letra las reglas de
+    precio de .claude/agents/researcher.md y de data-model.md. Abre con fetch-page.ts las páginas
+    que citan las open_questions, con palabras como PVP, Precio, Oferta válida o el nombre de la
+    versión, y copia price_terms tal cual de los párrafos que imprime. Solo si el precio se asocia
+    sin duda a una versión de la ficha. Si no hay precio válido, deja price: null y actualiza la
+    open_question con qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni
+    versiones o specs. Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin
+    errores."
+- id: precios-smart-literal-2026-10
+  agent: researcher
+  task: "Repite la búsqueda de precios de data/raw/smart/ con el script nuevo node factory/fetch-page.ts
+    (ver «Texto literal de una web registrada» en .claude/agents/researcher.md). La noche del
+    2026-10-23 no entró ningún precio porque WebFetch no devolvía la letra pequeña literal; lo que
+    encontraste está en las open_questions de cada ficha. Sigue al pie de la letra las reglas de
+    precio de .claude/agents/researcher.md y de data-model.md. Abre con fetch-page.ts las páginas
+    que citan las open_questions, con palabras como PVP, Precio, Oferta válida o el nombre de la
+    versión, y copia price_terms tal cual de los párrafos que imprime. Solo si el precio se asocia
+    sin duda a una versión de la ficha. Si no hay precio válido, deja price: null y actualiza la
+    open_question con qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni
+    versiones o specs. Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin
+    errores."
+- id: precios-ford-literal-2026-10
+  agent: researcher
+  task: "Repite la búsqueda de precios de data/raw/ford/ con el script nuevo node factory/fetch-page.ts
+    (ver «Texto literal de una web registrada» en .claude/agents/researcher.md). La noche del
+    2026-10-23 no entró ningún precio porque WebFetch no devolvía la letra pequeña literal; lo que
+    encontraste está en las open_questions de cada ficha. Sigue al pie de la letra las reglas de
+    precio de .claude/agents/researcher.md y de data-model.md. Abre con fetch-page.ts las páginas
+    que citan las open_questions, con palabras como PVP, Precio, Oferta válida o el nombre de la
+    versión, y copia price_terms tal cual de los párrafos que imprime. Solo si el precio se asocia
+    sin duda a una versión de la ficha. Si no hay precio válido, deja price: null y actualiza la
+    open_question con qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni
+    versiones o specs. Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin
+    errores."
