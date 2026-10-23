@@ -2479,3 +2479,65 @@
     no hay ninguno de los dos, deja price: null y actualiza la open_question con dónde has mirado.
     No cambies needs_review (solo lo quita una persona) ni versiones o specs. Quita de
     open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: historia-326-playwright-comparador
+  agent: developer
+  task: "Historia #326 (épica #313, PRD-003): pruebas en navegador (Playwright) del comparador. Lee
+    la issue entera (gh issue view 326 --comments) y haz exactamente lo que dice. Ya están en main
+    todas sus dependencias, también #321 y #322 (#625). La revisión de #625 pidió en concreto dos
+    comprobaciones de navegador que hoy solo tienen prueba de lógica: al quitar una columna, el foco
+    va donde dice focusAfterRemove (CA-10), y al cambiar de versión el foco sigue en su select
+    (CA-9); inclúyelas en el spec. Reutiliza la instalación de Playwright y axe de ADR-0006 y el
+    patrón de build a un directorio temporal de storage.spec.ts. No cambies el código del
+    comparador salvo para corregir un fallo que la prueba destape, y si lo haces dilo en la PR. La
+    PR dice «Closes #326» y enumera los CA cubiertos."
+- id: historia-447-json-rankings
+  agent: developer
+  task: "Historia #447 (épica #368, PRD-005): datos de los rankings para filtrar, un JSON por
+    ranking y robots.txt. Lee la issue entera (gh issue view 447 --comments) y haz exactamente lo
+    que dice, con ADR-0015 (detalles 1 y 5). Parte de lo que ya está en main: candidates(),
+    rankPlaces() y leftOut() en web/src/lib/rankings.ts y ranking-view.ts (#627), sin duplicarlos.
+    No hagas los filtros en el navegador (#376 y siguientes). Pruebas con node --test sobre el
+    build. La PR dice «Closes #447» y enumera los RF y CA cubiertos."
+- id: historia-597-test-results-data
+  agent: developer
+  task: "Historia #597 (épica #594, PRD-006): lectura de los resultados de pruebas (test_results)
+    en data.ts. Lee la issue entera (gh issue view 597 --comments) y haz exactamente lo que dice,
+    con ADR-0017 y docs/architecture/data-model.md, sección 3.1. Sigue el patrón de la lectura de
+    reviews de #595 y #596, ya en main (web/src/lib/data.ts, loadSources), sin duplicarlo. Solo la
+    lectura y sus pruebas: no pintes nada en la ficha y no toques factory/. Pruebas con node
+    --test. La PR dice «Closes #597» y enumera los RF y CA cubiertos."
+- id: historia-598-bloque-reviews-ficha
+  agent: developer
+  task: "Historia #598 (épica #594, PRD-006 y PRD-002): bloque «Reviews» al final de la ficha del
+    modelo. Lee la issue entera (gh issue view 598 --comments) y haz exactamente lo que dice. Sigue
+    docs/design/ficha-modelo.md (apartado Reviews) con los tokens de tokens.md y los textos en
+    i18n.ts. Usa las reviews que ya lee data.ts (#595 y #596, en main: cada review trae outlet);
+    no leas test_results, que es #597. Pruebas con node --test sobre el build. La PR dice «Closes
+    #598» y enumera los RF y CA cubiertos."
+- id: reviews-primeros-enlaces-3
+  agent: researcher
+  task: "Más enlaces a reviews (PRD-006, ADR-0017, data-model.md sección 3.1), igual que
+    reviews-primeros-enlaces-2 (#629). Sigue las reglas de reviews de .claude/agents/researcher.md.
+    Modelos: data/raw/volkswagen/id3-neo.yaml, data/raw/volkswagen/id4.yaml,
+    data/raw/skoda/elroq.yaml, data/raw/skoda/enyaq.yaml, data/raw/ford/explorer.yaml,
+    data/raw/ford/mustang-mach-e.yaml, data/raw/volvo/ex30.yaml y data/raw/mini/cooper.yaml. Solo de
+    las fuentes diariomotor-es y motorpasion-es; no registres medios nuevos. Hasta dos reviews por
+    modelo, como mucho una por medio: pruebas del coche de la generación que describe la ficha. En
+    #629 entraron dos pruebas del Kia EV6 de 2021 y 2022, con la batería de antes del restyling, y
+    hubo que quitarlas: antes de añadir una, compara la fecha de la prueba y la batería o la
+    potencia que cita con las de la ficha, y si no cuadran no la pongas. Si un modelo no tiene
+    prueba válida en ninguno de los dos medios, anótalo en open_questions. No toques test_results,
+    needs_review ni ningún otro dato. node factory/validate-data.ts sin errores."
+- id: reviews-primeros-enlaces-4
+  agent: researcher
+  task: "Más enlaces a reviews (PRD-006, ADR-0017, data-model.md sección 3.1), igual que
+    reviews-primeros-enlaces-3. Sigue las reglas de reviews de .claude/agents/researcher.md.
+    Modelos: data/raw/kia/ev6.yaml (solo pruebas del EV6 actual, de 84 kWh; las de 2021 y 2022
+    no valen), data/raw/dacia/spring.yaml, data/raw/bmw/ix3.yaml, data/raw/mercedes-benz/cla.yaml,
+    data/raw/fiat/500e.yaml, data/raw/fiat/grande-panda.yaml, data/raw/volvo/ex40.yaml y
+    data/raw/mini/aceman.yaml. Solo de las fuentes diariomotor-es y motorpasion-es; no registres
+    medios nuevos. Hasta dos reviews por modelo, como mucho una por medio: pruebas del coche de la
+    generación que describe la ficha; compara la fecha de la prueba y la batería o la potencia que
+    cita con las de la ficha, y si no cuadran no la pongas. Si un modelo no tiene prueba válida en
+    ninguno de los dos medios, anótalo en open_questions. No toques test_results, needs_review ni
+    ningún otro dato. node factory/validate-data.ts sin errores."
