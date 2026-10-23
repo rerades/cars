@@ -273,7 +273,7 @@ describe("comparator build with test data (PRD-003, story #325)", () => {
   });
 });
 
-describe("comparator weight with the real data (informational)", () => {
+describe("comparator weight with the real data (ADR-0014 limits)", () => {
   let out: string;
   before(() => {
     out = mkdtempSync(join(tmpdir(), "cars-web-real-"));
