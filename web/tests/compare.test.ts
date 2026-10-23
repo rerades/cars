@@ -283,7 +283,7 @@ describe("/comparar/datos/ in the built site", () => {
 
   test("robots.txt blocks /comparar/datos/ and nothing else", () => {
     const lines = readFileSync(join(out, "robots.txt"), "utf8").split("\n").map((l) => l.trim()).filter(Boolean);
-    assert.deepEqual(lines, ["User-agent: *", "Disallow: /comparar/datos/"]);
+    assert.deepEqual(lines, ["User-agent: *", "Disallow: /comparar/datos/", "Disallow: /rankings/datos/"]);
   });
 
   test("an announced model with only a name publishes nulls", () => {
