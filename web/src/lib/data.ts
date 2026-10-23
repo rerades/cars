@@ -84,6 +84,35 @@ export interface ModelImage {
   attribution: string | null;
 }
 
+/**
+ * A link to a third-party review (data-model.md, section 3.1; ADR-0017). Nothing here is our own
+ * text. `outlet` is the `name` of the source record (#596); it is null only when `normalize` is
+ * called without a source registry, and then the review must not be shown.
+ */
+export interface Review {
+  title: string;
+  url: string;
+  source_id: string;
+  retrieved: string;
+  tier: "T2" | "T3";
+  version?: string;
+  outlet: string | null;
+}
+
+/** The part of `data/sources/<id>.yaml` that reviews need (data-model.md, section 8). */
+export interface SourceRecord {
+  id: string;
+  name: string | null;
+  tier: Tier | null;
+  kind: string[];
+  terms_url: string | null;
+  terms_checked: string | null;
+  /** Hosts of every `urls` entry, lowercase and without the leading `www.`. */
+  hosts: string[];
+}
+
+export type SourceRegistry = ReadonlyMap<string, SourceRecord>;
+
 export interface ModelRecord {
   /** Slug, equal to the folder name. */
   brand: string;
@@ -99,6 +128,8 @@ export interface ModelRecord {
   versions: Version[];
   specs: Specs;
   images: ModelImage[];
+  /** Valid reviews only; empty if none. */
+  reviews: Review[];
   open_questions: string[];
   /** Derived (section 5): cheapest version price, `financed` included. Null: "Precio por confirmar". */
   price_from: Price | null;
@@ -123,6 +154,9 @@ export const DEFAULT_DATA_DIR = process.env.CARS_DATA_DIR || resolve(import.meta
 
 /** Where `data/images/` lives; CARS_IMAGES_DIR wins, as with the data dir (astro.config.mjs). */
 export const DEFAULT_IMAGES_DIR = process.env.CARS_IMAGES_DIR || resolve(import.meta.dirname, "../../../data/images");
+
+/** Where `data/sources/` lives; CARS_SOURCES_DIR wins, as with the data dir (astro.config.mjs). */
+export const DEFAULT_SOURCES_DIR = process.env.CARS_SOURCES_DIR || resolve(import.meta.dirname, "../../../data/sources");
 
 const STATUSES: readonly Status[] = ["on_sale", "announced", "discontinued"];
 const SEGMENTS: readonly Segment[] = [
@@ -298,6 +332,128 @@ function readImages(raw: unknown, warnings: string[], imagesDir: string): ModelI
   return out;
 }
 
+const REVIEW_KEYS = ["title", "url", "source_id", "retrieved", "tier", "version"];
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const isHttps = (v: unknown): v is string => {
+  if (!isStr(v)) return false;
+  try {
+    return new URL(v).protocol === "https:" && v.startsWith("https://");
+  } catch {
+    return false;
+  }
+};
+const hostOf = (url: string): string | null => {
+  try {
+    return new URL(url).hostname.toLowerCase().replace(/^www\./, "");
+  } catch {
+    return null;
+  }
+};
+
+/** Why the review breaks the schema of section 3.1, or null. Nothing is completed or guessed. */
+function reviewProblem(r: unknown, versionNames: string[]): string | null {
+  if (!isObj(r)) return "not a mapping";
+  const unknown = Object.keys(r).find((k) => !REVIEW_KEYS.includes(k));
+  if (unknown) return `unknown key ${unknown}`;
+  for (const k of ["title", "url", "source_id", "retrieved", "tier"]) if (!isStr(r[k])) return `missing ${k}`;
+  if (!isHttps(r.url)) return "url must be https://";
+  if (!DATE_RE.test(r.retrieved as string)) return "retrieved must be YYYY-MM-DD";
+  if (r.tier !== "T2" && r.tier !== "T3") return "tier must be T2 or T3";
+  if (r.version !== undefined && (!isStr(r.version) || !versionNames.includes(r.version))) {
+    return "version is not the name of a version of this file";
+  }
+  return null;
+}
+
+/** Why the source record does not allow showing this review (PRD-006 RF-1, RF-8), or null. */
+function sourceProblem(r: Review, sources: SourceRegistry): string | null {
+  const s = sources.get(r.source_id);
+  if (!s) return `source ${r.source_id} is not in data/sources/`;
+  if (!s.kind.includes("reviews")) return `source ${r.source_id} does not have kind reviews`;
+  if (!isStr(s.name)) return `source ${r.source_id} has no name`;
+  if (!isHttps(s.terms_url) || !s.terms_checked || !DATE_RE.test(s.terms_checked)) {
+    return `source ${r.source_id} has no terms_url and terms_checked`;
+  }
+  if (s.tier !== r.tier) return `tier ${r.tier} differs from the source tier ${s.tier ?? "none"}`;
+  const host = hostOf(r.url);
+  if (!host || !s.hosts.some((h) => host === h || host.endsWith(`.${h}`))) {
+    return `url is not on the domain of ${r.source_id}`;
+  }
+  return null;
+}
+
+/**
+ * Reads `reviews`. Invalid entries are dropped with a warning. With a `sources` registry each review
+ * is also linked to its source (outlet name) and dropped if the record does not allow it.
+ */
+function readReviews(raw: unknown, warnings: string[], versionNames: string[], sources: SourceRegistry | null): Review[] {
+  if (raw == null) return [];
+  if (!Array.isArray(raw)) {
+    warnings.push("reviews: not a list");
+    return [];
+  }
+  const out: Review[] = [];
+  raw.forEach((r, i) => {
+    const why = reviewProblem(r, versionNames);
+    if (why) {
+      warnings.push(`reviews[${i}]: dropped, ${why}`);
+      return;
+    }
+    const e = r as Record<string, string>;
+    const review: Review = {
+      title: e.title,
+      url: e.url,
+      source_id: e.source_id,
+      retrieved: e.retrieved,
+      tier: e.tier as "T2" | "T3",
+      ...(e.version !== undefined ? { version: e.version } : {}),
+      outlet: null,
+    };
+    if (sources) {
+      const bad = sourceProblem(review, sources);
+      if (bad) {
+        warnings.push(`reviews[${i}]: dropped, ${bad}`);
+        return;
+      }
+      review.outlet = sources.get(review.source_id)!.name;
+    }
+    out.push(review);
+  });
+  return out;
+}
+
+/** Reads `<dir>/*.yaml` into a registry; unreadable or malformed files are skipped (they have no record). */
+export function loadSources(dir: string = DEFAULT_SOURCES_DIR): SourceRegistry {
+  const map = new Map<string, SourceRecord>();
+  let names: string[] = [];
+  try {
+    names = readdirSync(dir).filter((n) => n.endsWith(".yaml"));
+  } catch {
+    return map;
+  }
+  for (const n of names) {
+    try {
+      const d = parse(readFileSync(join(dir, n), "utf8"));
+      const id = n.slice(0, -".yaml".length);
+      if (!isObj(d) || d.id !== id) continue;
+      const urls = isObj(d.urls) ? Object.values(d.urls) : [];
+      const hosts = urls.flatMap((u) => (typeof u === "string" ? (hostOf(u) ?? []) : []));
+      map.set(id, {
+        id,
+        name: isStr(d.name) ? d.name : null,
+        tier: isOneOf(["T1", "T2", "T3"] as const)(d.tier) ? d.tier : null,
+        kind: Array.isArray(d.kind) ? d.kind.filter((k): k is string => typeof k === "string") : [],
+        terms_url: typeof d.terms_url === "string" ? d.terms_url : null,
+        terms_checked: typeof d.terms_checked === "string" ? d.terms_checked : null,
+        hosts,
+      });
+    } catch {
+      // skipped: a review of this source is dropped for lack of a record
+    }
+  }
+  return map;
+}
+
 /** Section 5: minimum over `versions[].price.value`, `financed` included (RF-9). */
 function derivePriceFrom(versions: Version[]): Price | null {
   let best: Price | null = null;
@@ -323,7 +479,12 @@ function deriveDrivetrains(versions: Version[], specs: Specs): Drivetrain[] {
   return DRIVETRAINS.filter((d) => set.has(d));
 }
 
-export function normalize(raw: unknown, file: string, imagesDir: string = DEFAULT_IMAGES_DIR): ModelRecord {
+export function normalize(
+  raw: unknown,
+  file: string,
+  imagesDir: string = DEFAULT_IMAGES_DIR,
+  sources: SourceRegistry | null = null,
+): ModelRecord {
   if (!isObj(raw)) throw new Error("not a YAML mapping");
   if (!isStr(raw.brand) || !isStr(raw.model)) throw new Error("missing brand or model");
   if (!isStr(raw.brand_name)) throw new Error("missing brand_name");
@@ -346,6 +507,7 @@ export function normalize(raw: unknown, file: string, imagesDir: string = DEFAUL
     versions,
     specs,
     images: readImages(raw.images, warnings, imagesDir),
+    reviews: readReviews(raw.reviews, warnings, versions.map((v) => v.name), sources),
     open_questions: Array.isArray(raw.open_questions) ? raw.open_questions.map(String) : [],
     price_from: derivePriceFrom(versions),
     max_range_km: deriveMaxRange(versions, specs),
@@ -356,7 +518,8 @@ export function normalize(raw: unknown, file: string, imagesDir: string = DEFAUL
 }
 
 /** Reads every `<dir>/<brand>/*.yaml`, skips models under review, sorts by brand then model. Never throws on bad files. */
-export function loadModels(dir: string = DEFAULT_DATA_DIR): LoadResult {
+export function loadModels(dir: string = DEFAULT_DATA_DIR, sourcesDir: string = DEFAULT_SOURCES_DIR): LoadResult {
+  const sources = loadSources(sourcesDir);
   const models: ModelRecord[] = [];
   const errors: LoadResult["errors"] = [];
   try {
@@ -365,7 +528,7 @@ export function loadModels(dir: string = DEFAULT_DATA_DIR): LoadResult {
       for (const f of readdirSync(join(dir, brandDir.name)).filter((n) => n.endsWith(".yaml")).sort()) {
         const file = `${brandDir.name}/${f}`;
         try {
-          const model = normalize(parse(readFileSync(join(dir, file), "utf8")), file);
+          const model = normalize(parse(readFileSync(join(dir, file), "utf8")), file, DEFAULT_IMAGES_DIR, sources);
           // PRD-001 RF-13: a model under review is not published anywhere.
           if (!model.needs_review) models.push(model);
         } catch (e) {
