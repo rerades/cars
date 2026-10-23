@@ -3,7 +3,8 @@ import "../../styles/global.css";
 import { t, type MessageKey } from "../../lib/i18n.ts";
 import { loadModels } from "../../lib/data.ts";
 import { RANKINGS, type RankingDef } from "../../lib/rankings.ts";
-import { placeViews } from "../../lib/ranking-view.ts";
+import { leftOutView, placeViews } from "../../lib/ranking-view.ts";
+import RankingTerms from "../../components/RankingTerms.astro";
 
 export function getStaticPaths() {
   // The URL is `/rankings/<slug>`; the slug is the last segment of the table's `url`.
@@ -14,7 +15,11 @@ export function getStaticPaths() {
 }
 
 const { ranking } = Astro.props as { ranking: RankingDef };
-const places = placeViews(loadModels().models, ranking);
+const { models } = loadModels();
+const places = placeViews(models, ranking);
+const leftOut = leftOutView(models, ranking);
+const deals = places.flatMap((p) => (p.deal ? [p.deal] : []));
+const isPrice = ranking.id === "precio";
 // "Fuente: {fuente}, {fecha}": the source name is the link, so split the message around a marker.
 const MARK = "\u0001";
 const sourceParts = (date: string) => {
@@ -63,7 +68,22 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
       </header>
       <section aria-labelledby="resultados" class="mt-8">
         <h2 id="resultados" tabindex="-1" class="text-section">{t("ranking.lista.titulo")}</h2>
-        <ol
+        {
+          places.length === 0 && (
+            <div class="mt-4 max-w-prose" data-ranking-empty>
+              <p class="text-body font-semibold text-ink-900">{t("ranking.vacio.titulo")}</p>
+              <p class="text-body text-ink-900">
+                {t("ranking.vacio.texto", { dato: t(key("dato")) })}
+              </p>
+              <a
+                href="/coches"
+                class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
+                >{t("vacio.pagina.enlace")}</a
+              >
+            </div>
+          )
+        }
+        {places.length > 0 && <ol
           role="list"
           aria-labelledby="resultados"
           class="mt-4 max-w-(--width-ranking) list-none p-0"
@@ -97,8 +117,19 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
                   <span class="sr-only">{t("ranking.segmento.sr")} </span>
                   {p.segment}
                 </p>
-                <p class="col-start-2 mt-1 text-price text-ink-900" data-figure>
-                  {p.figure}
+                <p
+                  class="col-start-2 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-price text-ink-900"
+                  data-figure
+                >
+                  <span data-figure-value>{p.figure}</span>
+                  {p.deal && (
+                    <span
+                      class="inline-block rounded-full bg-deal-bg px-3 py-1 text-badge text-deal-fg"
+                      data-deal-badge
+                    >
+                      {t("ficha.precio.oferta")}
+                    </span>
+                  )}
                 </p>
                 <p class="col-start-2 text-small text-ink-600" data-source>
                   {sourceParts(p.source.date).before}<a
@@ -115,11 +146,36 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
                     {p.note}
                   </p>
                 )}
+                {p.deal && (
+                  <a
+                    href={`#${p.deal.id}`}
+                    class="col-start-2 inline-flex min-h-touch items-center text-small text-brand-600 underline hover:text-brand-800"
+                    data-terms-ref>{t("ficha.precio.verCondiciones")}</a
+                  >
+                )}
               </li>
             ))
           }
-        </ol>
+        </ol>}
       </section>
+      <p class="mt-4 max-w-prose text-small text-ink-600" data-left-out>{leftOut.text}</p>
+      {
+        deals.length > 0 && (
+          <section aria-labelledby="condiciones" class="mt-8" data-condiciones>
+            <h2 id="condiciones" class="text-section">{t("ficha.condiciones.titulo")}</h2>
+            <ul class="mt-3 flex flex-col gap-6">
+              {deals.map((deal) => <RankingTerms deal={deal} />)}
+            </ul>
+          </section>
+        )
+      }
+      {
+        isPrice && (
+          <template data-terms-template>
+            <RankingTerms deal={null} />
+          </template>
+        )
+      }
     </main>
   </body>
 </html>

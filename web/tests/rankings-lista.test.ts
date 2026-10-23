@@ -63,7 +63,9 @@ describe("ranking list of places (#372)", () => {
         const seg = text(/data-segment[^>]*>([\s\S]*?)<\/p>/.exec(li)![1]);
         if (model.segment) assert.ok(seg.startsWith("Segmento:") && seg.length > "Segmento:".length);
         else assert.equal(seg, "Segmento: Segmento por confirmar");
-        assert.doesNotMatch(li, /<img|<svg|Próximamente|Descatalogado|Precio con oferta|Comprar/i);
+        assert.doesNotMatch(li, /<img|<svg|Próximamente|Descatalogado|Comprar/i);
+        // the offer label belongs to the price ranking only, and only to financed prices (#373)
+        if (r.id !== "precio") assert.doesNotMatch(li, /Precio con oferta/);
         // only one external link (the source); the rest is internal
         assert.equal([...li.matchAll(/href="https?:/g)].length, 1);
       });
@@ -77,7 +79,7 @@ describe("ranking list of places (#372)", () => {
       const expected = rankPlaces(candidates(models, r), r);
       items(page(r.url)).forEach((li, i) => {
         const { version, figure } = expected[i].entry as ReturnType<typeof candidates>[number];
-        const shown = text(/data-figure[^>]*>([\s\S]*?)<\/p>/.exec(li)![1]).replace(/ /g, " ");
+        const shown = text(/data-figure-value[^>]*>([\s\S]*?)<\/span>/.exec(li)![1]).replace(/ /g, " ");
         const n = figure.value;
         const want = {
           precio: formatEur(n),

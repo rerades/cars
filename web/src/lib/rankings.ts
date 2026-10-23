@@ -76,6 +76,45 @@ export function candidates(models: readonly ModelRecord[], ranking: RankingId | 
   return out;
 }
 
+/** A published, on-sale version that has no place because its figure is missing, `null` or only T3 (RF-15). */
+export interface LeftOut {
+  model: ModelRecord;
+  version: Version;
+}
+
+/**
+ * The `out` set of a ranking (RF-15, ADR-0015): versions of on-sale models not under review that
+ * `candidates()` rejects (no figure, `null` or tier T3). Versions with a figure that do not fit in
+ * the 10 places are not here; `announced`, `discontinued` and `needs_review` models neither.
+ * Built from `candidates()` so both sets always agree. The count is the length of the result.
+ */
+export function leftOut(models: readonly ModelRecord[], ranking: RankingId | RankingDef): LeftOut[] {
+  const ranked = new Set(candidates(models, ranking).map((c) => c.version));
+  const out: LeftOut[] = [];
+  for (const model of models) {
+    if (model.needs_review || model.status.value !== "on_sale") continue;
+    for (const version of model.versions) if (!ranked.has(version)) out.push({ model, version });
+  }
+  return out;
+}
+
+const ascii = (s: string) =>
+  s
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+/**
+ * Anchor id of the offer-terms entry of a version (ADR-0015): derived from (brand, model slug, version
+ * name), never from the place, so it does not point to another version when the list is filtered.
+ * Shared by the build and the browser script of #377.
+ */
+export function termsAnchorId(brand: string, modelSlug: string, name: string): string {
+  return `condiciones-${ascii(brand)}-${ascii(modelSlug)}-${ascii(name)}`;
+}
+
 /** Maximum number of places of a ranking (RF-7). */
 export const MAX_PLACES = 10;
 
