@@ -88,6 +88,17 @@ test.describe("accessibility (ADR-0006)", () => {
     await checkA11y(page, bandUrl);
   });
 
+  test("comparator /comparar/ with a selection (table mounted)", async ({ page }) => {
+    // Real data: the first two comparable models, read from the comparator's own index.
+    const res = await page.request.get("/comparar/datos/indice.json");
+    expect(res.ok()).toBe(true);
+    const index = (await res.json()) as { brand: string; slug: string; status: string; versions: string[] }[];
+    const picks = index.filter((e) => e.status === "on_sale" && e.versions.length > 0).slice(0, 2);
+    expect(picks.length, "at least two comparable models in the data").toBe(2);
+    const query = picks.map((p) => `v=${encodeURIComponent(`${p.brand}/${p.slug}`)}`).join("&");
+    await checkA11y(page, `/comparar/?${query}`, () => expect(page.locator("[data-compare] table")).toBeVisible());
+  });
+
   test("empty state of /coches/", async ({ page }) => {
     // The query must still match nothing, or this would be checking another view.
     await checkA11y(page, `/coches/${EMPTY_QUERY}`, () => expect(page.locator("[data-empty]")).toBeVisible());
