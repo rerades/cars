@@ -2593,3 +2593,33 @@
     open_question con qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni
     versiones o specs. Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin
     errores."
+- id: precios-lexus-literal-2026-10
+  agent: researcher
+  task: "Precios de data/raw/lexus/ (fuente T1 de lexusauto.es). La ficha del RZ (https://www.lexusauto.es/modelos/rz/) da «De 52.000,00 €» en el HTML; mira si es un PVP de una versión concreta o un precio de oferta. Lee las páginas con node factory/fetch-page.ts
+    (ver «Texto literal de una web registrada» en .claude/agents/researcher.md), con palabras como
+    PVP, Precio, Desde, Oferta válida o el nombre de la versión, y copia price_terms tal cual de los
+    párrafos que imprime. Sigue al pie de la letra las reglas de precio de
+    .claude/agents/researcher.md y de data-model.md, y solo si el precio se asocia sin duda a una
+    versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
+    qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-toyota-literal-2026-10
+  agent: researcher
+  task: "Precios de data/raw/toyota/ (fuente T1 de toyota.es). La página https://www.toyota.es/coches/precios lista bZ4X y C-HR+; busca el importe de cada versión eléctrica en ella y en la ficha de cada modelo. Lee las páginas con node factory/fetch-page.ts
+    (ver «Texto literal de una web registrada» en .claude/agents/researcher.md), con palabras como
+    PVP, Precio, Desde, Oferta válida o el nombre de la versión, y copia price_terms tal cual de los
+    párrafos que imprime. Sigue al pie de la letra las reglas de precio de
+    .claude/agents/researcher.md y de data-model.md, y solo si el precio se asocia sin duda a una
+    versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
+    qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-opel-literal-2026-10
+  agent: researcher
+  task: "Precios de data/raw/opel/ (fuente T1 de opel.es). https://ofertas.opel.es/particulares da ofertas con entrada y cuotas; busca antes un PVP sin oferta en opel.es y, si no lo hay, el precio de oferta con su letra pequeña literal. Lee las páginas con node factory/fetch-page.ts
+    (ver «Texto literal de una web registrada» en .claude/agents/researcher.md), con palabras como
+    PVP, Precio, Desde, Oferta válida o el nombre de la versión, y copia price_terms tal cual de los
+    párrafos que imprime. Sigue al pie de la letra las reglas de precio de
+    .claude/agents/researcher.md y de data-model.md, y solo si el precio se asocia sin duda a una
+    versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
+    qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
