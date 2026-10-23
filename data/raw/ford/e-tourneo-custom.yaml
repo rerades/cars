@@ -41,7 +41,7 @@ images:
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "needs_review: true porque ford.es no dice expresamente que se pueda pedir y no se ha confirmado con un medio (T3) qué versiones se venden hoy: las versiones salen del IDAE (T2), que no dice qué se vende."
-  - "Precio: ford.es no publica PVP legible en la ficha; sin precio. Los precios de anuncios de concesionario no valen. Revisado el 2026-10-22: promociones de particulares y buscador de stock de ford.es sin PVP ni tarifa en PDF; /compra/gama-y-precios da 404."
+  - "Precio: ford.es no publica PVP legible en la ficha; sin precio. Los precios de anuncios de concesionario no valen. Revisado el 2026-10-22: promociones de particulares y buscador de stock de ford.es sin PVP ni tarifa en PDF; /compra/gama-y-precios da 404. Repetido el 2026-10-23 aceptando ofertas (price_kind: financed): /compra/promociones/plan-auto-plus solo da la ayuda por modelo (E-Transit Custom, 4.250 €; sin ficha del E-Tourneo Custom en esa lista); la ficha no se ha vuelto a leer hoy y no se ha visto ningún precio total asociado a una versión. Sin precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "ford.es dice «hasta 339 km»; el máximo del IDAE es 334 km (id 610319). Una página antigua de ford.es daba 325 km."
   - "Quitadas las versiones de 83 kWh y 160 kW (RWD, id IDAE 610313; AWD, 610312): en el IDAE constan solo como «Grand Tourneo» (carrocería larga) y ni ford.es ni medios T3 confirman que se vendan como E-Tourneo Custom normal. Las otras cuatro versiones tienen fila IDAE «E-Tourneo Custom» sin Grand (64 kWh: 610317 y 610316; 83 kWh 210 kW: 610319 y 610318). Si se confirma, se pueden añadir."

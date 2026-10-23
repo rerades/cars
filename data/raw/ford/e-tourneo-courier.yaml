@@ -33,7 +33,7 @@ images:
     attribution: "Alexander-93 (Alexander Migl), CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "needs_review: true porque ford.es no dice expresamente que se pueda pedir y las versiones salen del IDAE (T2) y de un medio (T3)."
-  - "Precio: ford.es solo muestra cuotas (desde 130 €/mes, entrada 10.550 €, cuota final 15.077 €, 49 meses), sin PVP legible. motor.es (T3) cita 37.865 € (Trend), 39.565 € (Titanium) y 41.255 € (Active) sin descuento, pero T3 no vale como precio. Sin precio. Revisado el 2026-10-22: promociones de particulares y buscador de stock de ford.es sin PVP ni tarifa en PDF; /compra/gama-y-precios da 404."
+  - "Precio: ford.es solo muestra cuotas (desde 130 €/mes, entrada 10.550 €, cuota final 15.077 €, 49 meses), sin PVP legible. motor.es (T3) cita 37.865 € (Trend), 39.565 € (Titanium) y 41.255 € (Active) sin descuento, pero T3 no vale como precio. Sin precio. Revisado el 2026-10-22: promociones de particulares y buscador de stock de ford.es sin PVP ni tarifa en PDF; /compra/gama-y-precios da 404. Repetido el 2026-10-23 aceptando ofertas (price_kind: financed): /compra/promociones/plan-auto-plus solo da la ayuda por modelo (4.500 €) y la ficha solo cuotas; ningún precio total asociado a una versión. Sin precio."
   - "Titanium: motor.es (T3) lo lista como acabado eléctrico, pero el IDAE no tiene fila de 05.2026 para él y ford.es no lo cita; no se escribe versión sin datos."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: ford.es lo presenta como «coche eléctrico familiar» y «SUV familiar»; motor.es dice «segmento C». No hay término literal inequívoco de RF-11 para una furgoneta de pasajeros: null."

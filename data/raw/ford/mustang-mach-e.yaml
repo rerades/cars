@@ -41,7 +41,7 @@ images:
     attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "needs_review: true porque la venta hoy solo la respalda un medio T3 y las versiones salen del IDAE; falta una página de ford.es que lo confirme (revisión de la PR #341)."
-  - "Precio: no se ha localizado la ficha ni el configurador del Mach-E en ford.es; sin precio. Revisado el 2026-10-22: la búsqueda en ford.es y las páginas de promociones y stock no dan PVP ni tarifa en PDF del Mach-E."
+  - "Precio: no se ha localizado la ficha ni el configurador del Mach-E en ford.es; sin precio. Repetido el 2026-10-23 aceptando ofertas (price_kind: financed): la ficha https://www.ford.es/turismos/mustang-mach-e responde y solo da cuota (desde 230 €/mes, entrada 15.100 €, cuota en el mes 12 de 2.925 €, cuota final 18.376 €, 49 meses) y un descuento de 4.500 € sumado al Programa Auto+; ningún precio total ni asociado a una versión. Sin precio. Revisado el 2026-10-22: la búsqueda en ford.es y las páginas de promociones y stock no dan PVP ni tarifa en PDF del Mach-E."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: el medio T3 dice «SUV, segmento D»; ningún término literal de RF-11."
   - "El medio T3 cita también la versión Rally (91 kWh, 487 CV, 510 km); no hay fila IDAE 05.2026 de ella, no se escribe."
