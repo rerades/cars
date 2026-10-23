@@ -39,6 +39,17 @@ images:
     retrieved: 2026-10-10
     license: CC-BY-SA-3.0-DE
     attribution: "M 93, CC BY-SA 3.0 DE, vía Wikimedia Commons"
+reviews:
+  - title: "Convertido en el mejor anti-SUV, es todo un desconocido de 218 CV que resulta imbatible para viajar con toda la familia"
+    url: "https://www.diariomotor.com/noticia/prueba-renault-scenic-2024/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-23
+    tier: T3
+  - title: "Probamos el nuevo Renault Scenic: no creía que me gustaría un SUV eléctrico pero del coche del año me ha convencido casi todo, menos su precio"
+    url: "https://www.motorpasion.com/pruebas-de-coches/renault-scenic-e-tech-2024-prueba-contacto"
+    source_id: motorpasion-es
+    retrieved: 2026-10-23
+    tier: T3
 open_questions:
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión no leída (la web da «hasta 642 km» según versión); solo se publica specs.wltp_max_km."

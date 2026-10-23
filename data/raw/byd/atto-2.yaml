@@ -43,7 +43,14 @@ images:
     retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:BYD Atto 2 DSC 8763.jpg)"
+reviews:
+  - title: "Probamos el BYD ATTO 2: un SUV eléctrico pequeño muy equipado por poco más de 20.000 euros (con ayudas) que viene de China para hacerse hueco en Europa"
+    url: "https://www.motorpasion.com/pruebas-de-coches/2025-byd-atto-2-prueba-contacto"
+    source_id: motorpasion-es
+    retrieved: 2026-10-23
+    tier: T3
 open_questions:
+  - "reviews: diariomotor-es no tiene una prueba del Atto 2 eléctrico (solo ofertas y fichas); solo hay review de motorpasion-es."
   - "Boost: autonomía y potencia solo de motor.es (T3); carga y precio sin fuente."
   - "Hay un 'Precio Recomendado Contado' de 31.921 € en la letra pequeña de la promoción, sin versión clara; no se registra como pvp."
   - "Tracción no publicada de forma explícita (monomotor); no se registra drivetrain."
