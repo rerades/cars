@@ -99,6 +99,24 @@ export interface Review {
   outlet: string | null;
 }
 
+/** A result from an independent testing body (data-model.md, section 3.1): a `Sourced` plus what was measured. */
+export interface TestResult extends Sourced<unknown> {
+  test: string;
+  metric: string;
+  version?: string;
+}
+
+/** Metric name -> check of `value`. */
+export type TestMetrics = Readonly<Record<string, (value: unknown) => boolean>>;
+
+/**
+ * The closed list of `metric` of data-model.md, section 3.1, read from this one place. Empty until a
+ * person adds the first one (with `METRICS` in factory/evals.ts), so any test result is dropped.
+ */
+export const TEST_METRICS: TestMetrics = {};
+
+const TEST_RESULT_KEYS = ["value", "note", "source_id", "url", "retrieved", "tier", "test", "metric", "version"];
+
 /** The part of `data/sources/<id>.yaml` that reviews need (data-model.md, section 8). */
 export interface SourceRecord {
   id: string;
@@ -130,6 +148,8 @@ export interface ModelRecord {
   images: ModelImage[];
   /** Valid reviews only; empty if none. */
   reviews: Review[];
+  /** Valid test results only; empty if none (and always, while `TEST_METRICS` is empty). */
+  test_results: TestResult[];
   open_questions: string[];
   /** Derived (section 5): cheapest version price, `financed` included. Null: "Precio por confirmar". */
   price_from: Price | null;
@@ -366,10 +386,14 @@ function reviewProblem(r: unknown, versionNames: string[]): string | null {
 }
 
 /** Why the source record does not allow showing this review (PRD-006 RF-1, RF-8), or null. */
-function sourceProblem(r: Review, sources: SourceRegistry): string | null {
+function sourceProblem(
+  r: { source_id: string; url: string; tier: Tier },
+  sources: SourceRegistry,
+  kind: "reviews" | "tests" = "reviews",
+): string | null {
   const s = sources.get(r.source_id);
   if (!s) return `source ${r.source_id} is not in data/sources/`;
-  if (!s.kind.includes("reviews")) return `source ${r.source_id} does not have kind reviews`;
+  if (!s.kind.includes(kind)) return `source ${r.source_id} does not have kind ${kind}`;
   if (!isStr(s.name)) return `source ${r.source_id} has no name`;
   if (!isHttps(s.terms_url) || !s.terms_checked || !DATE_RE.test(s.terms_checked)) {
     return `source ${r.source_id} has no terms_url and terms_checked`;
@@ -418,6 +442,53 @@ function readReviews(raw: unknown, warnings: string[], versionNames: string[], s
       review.outlet = sources.get(review.source_id)!.name;
     }
     out.push(review);
+  });
+  return out;
+}
+
+/**
+ * Reads `test_results` (data-model.md, section 3.1; ADR-0017). Each entry is a `Sourced` plus `test`,
+ * `metric` and optional `version`. Invalid entries are dropped with a warning; with a `sources`
+ * registry the source must also allow it (kind tests), through the same check as reviews.
+ */
+function readTestResults(
+  raw: unknown,
+  warnings: string[],
+  versionNames: string[],
+  sources: SourceRegistry | null,
+  metrics: TestMetrics,
+): TestResult[] {
+  if (raw == null) return [];
+  if (!Array.isArray(raw)) {
+    warnings.push("test_results: not a list");
+    return [];
+  }
+  const out: TestResult[] = [];
+  const seen = new Set<string>();
+  raw.forEach((e, i) => {
+    const at = `test_results[${i}]`;
+    const drop = (why: string) => warnings.push(`${at}: dropped, ${why}`);
+    if (!isObj(e)) return drop("not a mapping");
+    const unknown = Object.keys(e).find((k) => !TEST_RESULT_KEYS.includes(k));
+    if (unknown) return drop(`unknown key ${unknown}`);
+    if (!isStr(e.test)) return drop("missing test");
+    if (!isStr(e.metric)) return drop("missing metric");
+    if (!Object.hasOwn(metrics, e.metric)) return drop(`metric ${e.metric} is not in the list of data-model.md`);
+    if (!hasSource(e)) return drop("needs value, source_id, url, retrieved (YYYY-MM-DD) and tier");
+    if (!metrics[e.metric](e.value)) return drop("invalid value for its metric");
+    if (!isHttps(e.url)) return drop("url must be https://");
+    if (e.tier !== "T2") return drop("tier must be T2");
+    if (e.version !== undefined && (!isStr(e.version) || !versionNames.includes(e.version))) {
+      return drop("version is not the name of a version of this file");
+    }
+    if (sources) {
+      const bad = sourceProblem(e as { source_id: string; url: string; tier: Tier }, sources, "tests");
+      if (bad) return drop(bad);
+    }
+    const key = JSON.stringify([e.source_id, e.test, e.metric, e.version ?? null]);
+    if (seen.has(key)) return drop("repeated (same source_id, test, metric and version)");
+    seen.add(key);
+    out.push(e as unknown as TestResult);
   });
   return out;
 }
@@ -484,6 +555,7 @@ export function normalize(
   file: string,
   imagesDir: string = DEFAULT_IMAGES_DIR,
   sources: SourceRegistry | null = null,
+  metrics: TestMetrics = TEST_METRICS,
 ): ModelRecord {
   if (!isObj(raw)) throw new Error("not a YAML mapping");
   if (!isStr(raw.brand) || !isStr(raw.model)) throw new Error("missing brand or model");
@@ -508,6 +580,7 @@ export function normalize(
     specs,
     images: readImages(raw.images, warnings, imagesDir),
     reviews: readReviews(raw.reviews, warnings, versions.map((v) => v.name), sources),
+    test_results: readTestResults(raw.test_results, warnings, versions.map((v) => v.name), sources, metrics),
     open_questions: Array.isArray(raw.open_questions) ? raw.open_questions.map(String) : [],
     price_from: derivePriceFrom(versions),
     max_range_km: deriveMaxRange(versions, specs),
