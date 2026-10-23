@@ -33,7 +33,14 @@ images:
     retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+reviews:
+  - title: "Probamos el Hyundai Kona Eléctrico: un SUV eléctrico familiar al que le vendría bien más batería para viajar"
+    url: "https://www.motorpasion.com/pruebas-de-coches/prueba-hyundai-kona-electrico-2024"
+    source_id: motorpasion-es
+    retrieved: 2026-10-23
+    tier: T3
 open_questions:
+  - "reviews: diariomotor-es no tiene una prueba del Kona Eléctrico de la generación actual (la que hay es de la primera generación); solo hay review de motorpasion-es."
   - "launch: la ficha no da fecha de inicio de venta en España (solo menciona 2024)."
   - "Precio solo de la versión BLACK LINE de 65 kWh; la versión de 48 kWh y el resto de acabados, sin precio T1 localizado. Falta leer el configurador."
   - "Las fichas se leyeron con extracción automática de texto; conviene contrastar cifras con la página."

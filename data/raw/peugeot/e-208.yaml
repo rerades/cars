@@ -28,7 +28,14 @@ images:
     retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, Wikimedia Commons"
+reviews:
+  - title: "Probamos el nuevo Peugeot E-208, un cómodo y eficiente utilitario a precio de MINI eléctrico"
+    url: "https://www.motorpasion.com/pruebas-de-coches/peugeot-e-208-2024-prueba-contacto"
+    source_id: motorpasion-es
+    retrieved: 2026-10-23
+    tier: T3
 open_questions:
+  - "reviews: diariomotor-es no tiene una prueba del E-208 renovado (la que hay es de 2019, de la generación anterior); solo hay review de motorpasion-es."
   - "segment: el buscador titula la página de www.peugeot.es como 'Coche urbano 100% eléctrico', pero la página devuelve 403 y no se ha leído: sin fuente leída, queda null (revisión 2026-09-29)."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
   - "Versión concreta del precio de contado no identificada; sin PVP sin oferta; sin batería, potencia ni carga por versión."

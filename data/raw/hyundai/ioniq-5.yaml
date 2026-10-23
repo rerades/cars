@@ -41,7 +41,14 @@ images:
     retrieved: 2026-10-12
     license: CC0-1.0
     attribution: null
+reviews:
+  - title: "Probamos el Hyundai IONIQ 5, un coche eléctrico de diseño rompedor con hasta 481 km de autonomía"
+    url: "https://www.motorpasion.com/pruebas-de-coches/hyundai-ioniq-5-prueba-contacto"
+    source_id: motorpasion-es
+    retrieved: 2026-10-23
+    tier: T3
 open_questions:
+  - "reviews: diariomotor-es no tiene una prueba del Ioniq 5 (solo presentación, ofertas y la prueba de autonomía a 130 km/h); solo hay review de motorpasion-es."
   - "segment: la ficha no clasifica el modelo; sin fuente, queda vacío."
   - "launch: la ficha no da fecha de inicio de venta en España."
   - "Precio solo de la versión LIGHT (la ficha muestra el PVP de una versión); el resto, sin precio T1 localizado. Falta leer el configurador."

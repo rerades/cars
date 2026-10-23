@@ -64,6 +64,17 @@ images:
     retrieved: 2026-10-13
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0"
+reviews:
+  - title: "Prueba del Citroën C3 2024, análisis de la versión de gasolina y eléctrica (+vídeo)"
+    url: "https://www.diariomotor.com/noticia/citroen-c3-2024-prueba/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-23
+    tier: T3
+  - title: "Probamos el Citroën ë-C3: un eléctrico asequible que es más coche por un poco más de dinero de lo que cuesta un Dacia Spring"
+    url: "https://www.motorpasion.com/pruebas-de-coches/citroen-c3-e-c3-2024-prueba-contacto"
+    source_id: motorpasion-es
+    retrieved: 2026-10-23
+    tier: T3
 open_questions:
   - "Precio: citroen.es responde 403 a la lectura automática (2026-10-13) y no hay otra fuente T1; todas las versiones con price null."
   - "Segmento: ninguna fuente leída lo clasifica; se deja sin segment."
