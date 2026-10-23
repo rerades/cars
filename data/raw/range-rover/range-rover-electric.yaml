@@ -61,7 +61,7 @@ versions:
     price: null
 images: []
 open_questions:
-  - "Precio: la página de gama da un \"Precio desde\" por versión (p. ej. SE 152.250 €) sin decir qué motorización cubre (hay PHEV y combustión). La prensa (T3) cita 163.250 € como precio de partida del eléctrico, pero no vale como única fuente. Todos los precios en null."
+  - "Precio: la página de gama da un \"Precio desde\" por versión (p. ej. SE 152.250 €) sin decir qué motorización cubre (hay PHEV y combustión). La prensa (T3) cita 163.250 € como precio de partida del eléctrico, pero no vale como única fuente. Todos los precios en null. Revisado 2026-10-23: electric.html no trae precios (solo enlaza al configurador, que no es legible sin JavaScript); models-and-specifications.html repite los \"Precio desde\" por acabado sin separar motorización (EV, PHEV, diésel, gasolina); offers.html solo tiene ofertas del PHEV P460e Autobiography; no hay PDF de tarifas enlazado. Sin PVP ni oferta del eléctrico en T1, no se guarda ni price_kind pvp ni financed."
   - "wltp_km por versión: la web solo da 600 km como máximo del modelo; no hay cifra por versión (EV450/EV550). Se deja solo specs.wltp_max_km. Potencia: tampoco hay kW de sistema por versión."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir (la prensa del 2026-09-02 dice solo que ya están abiertos). Entregas sin fecha."
   - "segment: la web lo presenta como SUV de lujo; no es un término de la lista de RF-11."
