@@ -56,7 +56,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Matti Blume (MB-one), CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
-  - "Precios: la web de smart España no muestra PVP en el texto servido (JavaScript); price: null."
+  - "Precios (2026-10-23): mirados es.smart.com customizer, latest-offers, stock-search y campaign/mainland: sin precios ni letra pequeña en el texto servido (JavaScript), ni PDF de tarifas; price: null."
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir el #5 en España."
   - "segment: la web lo titula «un robusto SUV eléctrico», que no es un término de la lista de RF-11 (suv_pequeno/compacto/grande); null."
   - "El IDAE lista además un #5 Pro (250 kW, 76 kWh, 465 km) y un Summit Edition que la ficha oficial no muestra; no se incluyen."

@@ -41,7 +41,7 @@ versions:
     price: null
 images: []
 open_questions:
-  - "Precio: la web no lo muestra en el texto servido. Medios (T3, motor16) citan 19.990 € de salida; no se guarda."
+  - "Precio (2026-10-23): ni la ficha, ni el configurador ni /latest-offers/ ni /stock-search/ de es.smart.com muestran precios en el texto servido (JavaScript). La nota de prensa media.smart.com/es-ES/273208-smart-acepta-pedidos-del-nuevo-smart-2/ (12/10/2026) da «precio de acceso» Pure 19.990 €, Pure+ 20.990 €, Premium 24.490 €, Couture Edition 25.690 €, pero dice que está «sujeto a las condiciones locales de cada región», no aclara IVA y el coche sigue en homologación; no se guarda como PVP. Una persona debe decidir si vale."
   - "launch: sin fecha de pedidos ni de entregas en la web oficial; solo reservas."
   - "segment: la web no usa un término de la lista de RF-11 para el #2; null."
   - "Imagen (2026-10-22): la búsqueda en Commons («smart #2») solo devuelve el smart fortwo/forfour y conceptos antiguos, ninguna foto del #2; images []."
