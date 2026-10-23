@@ -30,7 +30,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precios: la ficha solo da «desde» 33.700 / 40.100 / 43.750 € sujetos a financiación e incluyendo Plan Auto+ (y Plan CAE); no es PVP sin ayudas y no se guarda. No se ha leído un «PVP recomendado financiando»."
+  - "Precios: la ficha solo da «desde» 33.700 / 40.100 / 43.750 € sujetos a financiación e incluyendo Plan Auto+ (y Plan CAE); no es PVP sin ayudas y no se guarda. No se ha leído un «PVP recomendado financiando». Revisado 2026-10-23: sin PVP limpio ni texto literal de condiciones de oferta; price: null."
   - "segment: la ficha dice «SUV deportivo», que no está en la lista de RF-11; queda null."
   - "La ficha muestra también un bloque «60 150 kW (204 CV)» que no corresponde a ninguna de las tres versiones listadas; no se usa."
   - "WLTP por versión, tracción y kW de carga DC no están en la ficha; wltp_km queda sin rellenar."
