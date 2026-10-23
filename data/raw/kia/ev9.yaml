@@ -22,7 +22,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador sin leer. Los 'Desde' de concesionario (63.340 €) no se usan."
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23: ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario (63.340 €) no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha dice 'SUV de tres filas, hasta 7 asientos' sin categoría de tamaño explícita; queda vacío."
   - "Lista completa de versiones no leída (solo consta GT-line por su 0-100 km/h)."

@@ -28,7 +28,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador sin leer. Los 'Desde' de concesionario no se usan."
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23: ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha habla de 'proporciones del segmento C' pero no da una categoría de RF-11; queda vacío."
   - "Batería, potencia y tracción por versión no publicadas en la ficha estática."

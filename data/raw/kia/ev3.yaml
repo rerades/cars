@@ -38,7 +38,7 @@ reviews:
     tier: T3
     version: EV3 GT-Line
 open_questions:
-  - "Precio (PVP sin ayudas) de todas las versiones: la ficha no lo publica y el configurador no se ha leído. Los 'Desde' de concesionarios difieren (23.570 € / 24.530 €) y no se usan."
+  - "Precio de todas las versiones (2026-10-23): mirado en /modelos/ev3/descubrelo/ (sin precio), /modelos/ev3/precios/ y /campana-hibridos-y-electricos/ (404) y el configurador (interactivo, no legible). Sin lista de tarifas ni PDF de PVP. Solo hay 'Desde' en páginas de concesionario (24.530 €, 'financiando desde 23.610 €', 28.620 €), que discrepan, no se asocian a una versión y no son T1 de marca: no se usan. La nota del configurador (oferta con entrega de usado y financiación mínima) no es utilizable sin versión asociada."
   - "launch: ninguna fuente T1 con la fecha de inicio de venta en España (solo T3 sitúa el inicio a finales de 2024)."
   - "segment: la ficha no clasifica el modelo; sin fuente, queda vacío."
   - "Potencia, batería y autonomía por versión no publicadas en la ficha estática (solo en el configurador)."
