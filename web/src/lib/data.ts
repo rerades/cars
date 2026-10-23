@@ -158,7 +158,7 @@ export const DEFAULT_IMAGES_DIR = process.env.CARS_IMAGES_DIR || resolve(import.
 /** Where `data/sources/` lives; CARS_SOURCES_DIR wins, as with the data dir (astro.config.mjs). */
 export const DEFAULT_SOURCES_DIR = process.env.CARS_SOURCES_DIR || resolve(import.meta.dirname, "../../../data/sources");
 
-const STATUSES:readonly Status[] = ["on_sale", "announced", "discontinued"];
+const STATUSES: readonly Status[] = ["on_sale", "announced", "discontinued"];
 const SEGMENTS: readonly Segment[] = [
   "urbano", "compacto", "berlina", "familiar", "suv_pequeno",
   "suv_compacto", "suv_grande", "monovolumen", "furgoneta", "deportivo",
