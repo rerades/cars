@@ -41,7 +41,11 @@ describe("ranking pages (#371)", () => {
       ],
     );
     for (const r of RANKINGS) assert.ok(existsSync(join(out, r.url, "index.html")), r.url);
-    assert.deepEqual(readdirSync(join(out, "rankings")).sort(), RANKINGS.map((r) => slugOf(r.url)).sort());
+    // `datos/` holds the JSON for the filters (#447), not a page.
+    assert.deepEqual(
+      readdirSync(join(out, "rankings")).filter((f) => f !== "datos").sort(),
+      RANKINGS.map((r) => slugOf(r.url)).sort(),
+    );
     assert.equal(existsSync(join(out, "rankings", "index.html")), false);
   });
 

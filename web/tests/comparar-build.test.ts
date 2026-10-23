@@ -258,7 +258,7 @@ describe("comparator build with test data (PRD-003, story #325)", () => {
     assert.match(robots, /^Disallow: \/comparar\/datos\/\s*$/m);
     assert.deepEqual(
       robots.split("\n").filter((l) => /^Disallow:/i.test(l)),
-      ["Disallow: /comparar/datos/"],
+      ["Disallow: /comparar/datos/", "Disallow: /rankings/datos/"],
     );
   });
 
