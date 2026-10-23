@@ -64,7 +64,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
-  - "Precio: ford.es no publica PVP legible por versión; sin precio. Revisado el 2026-10-22: ficha del Explorer, página de promociones de particulares y buscador de stock de ford.es sin PVP ni tarifa en PDF (solo cuotas); /compra/gama-y-precios da 404."
+  - "Precio: ford.es no publica PVP legible por versión; sin precio. Revisado el 2026-10-22: ficha del Explorer, página de promociones de particulares y buscador de stock de ford.es sin PVP ni tarifa en PDF (solo cuotas); /compra/gama-y-precios da 404. Repetido el 2026-10-23 aceptando ofertas (price_kind: financed): la ficha de ford.es solo da cuota (desde 135 €/mes, entrada 12.300 €, cuota en el mes 12 de 4.050 €, cuota final 15.364 €, 49 meses) y el descuento de 4.500 € sumado al Programa Auto+; ningún precio total, y «las cifras mostradas pueden proceder de distintos acabados». Sin precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: el medio T3 dice «SUV, segmento C»; ningún término literal de RF-11."
   - "Collection es serie limitada según el medio T3: no se ha podido confirmar que se siga vendiendo hoy (needs_review)."
