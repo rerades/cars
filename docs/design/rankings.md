@@ -244,9 +244,9 @@ la cifra o la tienen solo de fuente T3. El número lo calcula el build o el filt
 
 | Clave | Texto |
 |---|---|
-| `ranking.fuera.n` | {n} versiones a la venta se han quedado fuera por no tener {dato} publicado con fuente verificable. |
-| `ranking.fuera.uno` | 1 versión a la venta se ha quedado fuera por no tener {dato} publicado con fuente verificable. |
-| `ranking.fuera.ninguna` | Ninguna versión a la venta se ha quedado fuera por falta de {dato}. |
+| `ranking.fuera.n` | {n} versiones a la venta se han quedado fuera por no tener publicado {dato} con fuente verificable. |
+| `ranking.fuera.uno` | 1 versión a la venta se ha quedado fuera por no tener publicado {dato} con fuente verificable. |
+| `ranking.fuera.ninguna` | Ninguna versión a la venta se ha quedado fuera: todas tienen publicado {dato}. |
 | `ranking.{x}.dato` | precio: «el precio» · autonomía: «la autonomía WLTP» · batería: «la capacidad de batería» · potencia: «la potencia» · carga: «la potencia de carga en continua» |
 
 «Publicado con fuente verificable» cubre a la vez el dato ausente y el dato solo T3 (CA-18 pide contarlos
@@ -310,7 +310,7 @@ vacío de página» (Empty de Bearnie, sin caja, sin `role="status"`):
 ```
 Puestos
 Ninguna versión
-Todavía no hay ninguna versión a la venta con {dato} publicado.   ← ranking.vacio.texto, text-body ink-900
+Todavía no hay ninguna versión a la venta que tenga publicado {dato}.   ← ranking.vacio.texto, text-body ink-900
 Ver todos los coches                                             ← vacio.pagina.enlace → /coches, 44 px
 {n} versiones a la venta se han quedado fuera…  (nota de RF-15)
 ```
@@ -401,7 +401,7 @@ Además de las de las tablas anteriores (`ranking.{x}.titulo`, `.entrada`, `.ord
 | `ranking.filtros.quitar` | Quitar filtros |
 | `ranking.filtros.sinJs` | Para filtrar el ranking por segmento o por precio hace falta activar JavaScript. |
 | `ranking.filtros.error` | No se ha podido filtrar. Vuelve a intentarlo. |
-| `ranking.vacio.texto` | Todavía no hay ninguna versión a la venta con {dato} publicado. |
+| `ranking.vacio.texto` | Todavía no hay ninguna versión a la venta que tenga publicado {dato}. |
 | `ranking.vacioFiltros.texto` | Ninguna versión cumple los filtros. |
 
 Reutilizadas sin cambios: `pagina.tituloDocumento`, `pagina.saltar`, `ficha.unidad.*`, `ficha.bateria.*`,

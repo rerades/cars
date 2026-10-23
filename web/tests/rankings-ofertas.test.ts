@@ -160,7 +160,7 @@ describe("offer price and terms, left-out count and empty state of the rankings 
     const p = /<p[^>]*data-left-out[^>]*>([\s\S]*?)<\/p>/.exec(html)!;
     assert.equal(
       text(p[1]),
-      "4 versiones a la venta se han quedado fuera por no tener la capacidad de batería publicado con fuente verificable.",
+      "4 versiones a la venta se han quedado fuera por no tener publicado la capacidad de batería con fuente verificable.",
     );
     // right below the list, after the section of places
     assert.ok(html.indexOf("data-left-out") > html.indexOf("data-ranking-list"));
@@ -169,11 +169,11 @@ describe("offer price and terms, left-out count and empty state of the rankings 
   test("RF-15: the singular, and zero left out says so; the sentence is always there", () => {
     const html = page(main, "mas-baratos");
     // price: 3 Mix + Bat none 3 ranked; the 17 other on-sale versions have no price
-    assert.match(text(/data-left-out[^>]*>([\s\S]*?)<\/p>/.exec(html)![1]), /^17 versiones a la venta se han quedado fuera por no tener el precio publicado/);
+    assert.match(text(/data-left-out[^>]*>([\s\S]*?)<\/p>/.exec(html)![1]), /^17 versiones a la venta se han quedado fuera por no tener publicado el precio/);
     const noneOut = page(noBlock, "mas-baratos");
     assert.equal(
       text(/data-left-out[^>]*>([\s\S]*?)<\/p>/.exec(noneOut)![1]),
-      "Ninguna versión a la venta se ha quedado fuera por falta de el precio.",
+      "Ninguna versión a la venta se ha quedado fuera: todas tienen publicado el precio.",
     );
   });
 
@@ -182,7 +182,7 @@ describe("offer price and terms, left-out count and empty state of the rankings 
     assert.doesNotMatch(html, /<ol\b[^>]*data-ranking-list|data-place=/);
     assert.match(html, /<h2[^>]*id="resultados"[^>]*>Puestos<\/h2>/);
     const empty = /data-ranking-empty[\s\S]*?<\/div>/.exec(html)![0];
-    assert.match(text(empty), /Todavía no hay ninguna versión a la venta con la potencia publicado\./);
+    assert.match(text(empty), /Todavía no hay ninguna versión a la venta que tenga publicado la potencia\./);
     assert.match(empty, /<a[^>]*href="\/coches"[^>]*>Ver todos los coches<\/a>/);
     assert.match(text(/data-left-out[^>]*>([\s\S]*?)<\/p>/.exec(html)![1]), /^21 versiones a la venta se han quedado fuera/);
   });
