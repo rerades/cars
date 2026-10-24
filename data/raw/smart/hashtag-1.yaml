@@ -64,7 +64,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
-  - "Precios (2026-10-23): mirados es.smart.com customizer, latest-offers, stock-search y campaign/mainland: sin precios en el texto servido (JavaScript), ni PDF de tarifas; price: null. Medios (T3) citan Pure 37.900 €, Pro 40.400 €, Pro+ 45.400 €, Premium 48.910 € del configurador, sin poder leerlo en la web oficial."
+  - "Precios (2026-10-24, con fetch-page.ts y palabras PVP, Precio, Oferta válida, €, Pure): leídas es.smart.com customizer, latest-offers, stock-search, campaign/mainland y models/hashtag-one: sin ningún párrafo con precio ni letra pequeña (JavaScript), ni PDF de tarifas; price: null. Medios (T3) citan Pure 37.900 €, Pro 40.400 €, Pro+ 45.400 €, Premium 48.910 € del configurador, sin poder leerlo en la web oficial."
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir el #1 en España."
   - "Gama de 2027 (motor.es cita que el #1 pierde dos versiones): conviene confirmar qué versiones se venden hoy; la ficha oficial aún lista Pure, Pro, Pro+, Pro+ Black Collection, Premium y BRABUS."
   - "La imagen de Commons es un #1 BRABUS."
