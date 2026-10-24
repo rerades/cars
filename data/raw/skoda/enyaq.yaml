@@ -34,3 +34,4 @@ open_questions:
   - "segment: la ficha dice «SUV familiar», que no está en la lista de RF-11; queda null."
   - "WLTP por versión, tracción y kW de carga DC no están en la ficha; wltp_km queda sin rellenar en todas las versiones."
   - "launch: la ficha no da fecha de inicio de venta en España."
+  - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."

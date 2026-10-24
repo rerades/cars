@@ -38,3 +38,4 @@ open_questions:
   - "launch: ninguna fuente da la fecha desde la que se pide en España."
   - "segment: el comparador lo llama 'Crossover pequeño' y coches.com 'urbano premium compacto'; ninguno es un término de la lista de RF-11."
   - "drivetrain de P5 y P5 Long Range: el nombre del IDAE no lo dice."
+  - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."

@@ -31,4 +31,5 @@ open_questions:
   - "Datos por versión (kWh, WLTP, kW, tracción) no publicados en la ficha. La autonomía «hasta 560 km» no dice si es WLTP."
   - "segment: la ficha dice «SUV», que no es un término de la lista de RF-11."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir. Un medio (T3) sugiere nuevos ID.4/ID.7 fabricados en España en 2027; confirmar qué se vende hoy."
+  - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."
   - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."

@@ -36,3 +36,4 @@ open_questions:
   - "launch: motor.es habla de configurador abierto en octubre de 2023, pero no se ha leído una fecha de inicio de venta fiable; null."
   - "segment: ninguna fuente leída da un término de la lista de RF-11 para el Cooper; null."
   - "Descartada la generación anterior (F56, Cooper SE 03/2021, id 609162)."
+  - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."
