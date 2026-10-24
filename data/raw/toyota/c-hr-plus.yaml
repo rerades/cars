@@ -13,7 +13,17 @@ versions:
     battery_kwh: {value: 77, basis: gross, note: "la ficha indica 77 kWh brutos", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
     wltp_km: {value: 607, source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 167, note: "IDAE id 608211 (C-HR+ 4x2 Advance 250 77 kWh, NG26); la web publica 224 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    price: null
+    price:
+      value: 36375
+      unit: EUR
+      price_kind: financed
+      price_terms: "Toyota C-HR+ - NG26 Advance 5P Electric 250 Batería 77 kWh aut.. PVP recomendado: 34.375,00 €. PVP al contado: 36.375,00 €. Entrada: 12.751,45 €. TIN: 7,75 %, TAE: 9,05 %. 48 cuotas de 237,00 € y Última cuota (Valor Futuro Garantizado) de 17.157,02 €. Comisión de apertura financiada (2,99 %): 646,54 €. Precio Total a Plazos: 41.284,47 €, Importe Total del Crédito 22.270,09 € e Importe Total Adeudado: 28.533,02 €. Oferta financiera con el producto Toyota Easy de Toyota Kreditbank GmbH sucursal en España. IVA, transporte, promoción y aportaciones de Toyota España y del concesionario incluidas. 3 años de garantía o 100.000 km (lo que antes suceda). Oferta válida hasta 31-10-2026 en Península y Baleares. Consulte en su concesionario el descuento para otro tipo de corporación o colectivo. El modelo visualizado puede no coincidir con el modelo ofertado. Para más información consulta en tu concesionario habitual o en www.toyota.es"
+      price_terms_url: "https://www.toyota.es/coches/toyota-c-hr-plus"
+      note: "PVP al contado de la ficha (coincide con «Desde 36.375,00 €» de https://www.toyota.es/coches); incluye promoción y aportaciones, no es PVP limpio"
+      source_id: toyota-es
+      url: "https://www.toyota.es/coches/toyota-c-hr-plus"
+      retrieved: 2026-10-24
+      tier: T1
   - name: C-HR+ Spirit
     battery_kwh: {value: 77, basis: unknown, note: "la web dice que el C-HR+ lleva una batería de 77 kWh, sin separar versiones ni decir si es bruta; el IDAE (id 608212) también da 77 kWh en el nombre", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
     wltp_km: {value: 501, source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
@@ -29,7 +39,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, Toyota C-HR+ Auto Zuerich 2025 DSC 3056, vía Wikimedia Commons"
 open_questions:
-  - "Precio (revisado 2026-10-15): el texto legal de Advance en https://www.toyota.es/coches/toyota-c-hr-plus dice «PVP recomendado: 34.375,00 €. PVP al contado: 36.375,00 €.» y, tras la oferta Toyota Easy (entrada 12.751,45 €, 48 cuotas de 237,00 €, TIN 7,75 %, TAE 9,05 %), que el precio incluye «IVA, transporte, promoción y aportaciones de Toyota España y del concesionario», con «Oferta válida hasta 31-10-2026 en Península y Baleares». Ambos importes incluyen promoción y aportaciones, así que ninguno es PVP limpio (pvp); sería financed, pero la herramienta de lectura solo devuelve resúmenes y no se ha podido copiar el texto íntegro literal que exige price_terms. Sin ese texto, price: null. Spirit: la página no muestra texto legal ni precio. Pendiente: copiar el párrafo completo y guardar Advance como financed (¿34.375 o 36.375? decidir con el texto entero)."
+  - "Precio (revisado 2026-10-24): Advance guardado como financed con el PVP al contado de 36.375 € (coincide con la lista de https://www.toyota.es/coches/precios); no hay PVP limpio sin promoción en la web (el «PVP recomendado» de 34.375 € también incluye promoción y aportaciones según el texto). Spirit: leídas /coches/precios y la ficha /coches/toyota-c-hr-plus; la lista da otro «Desde 44.250,00 €» sin versión asociada con certeza y la ficha no trae texto legal de Spirit; price: null."
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir en España (un medio T3 habló de pedidos abiertos y entregas en el primer trimestre de 2026, sin confirmar)."
   - "segment: la web dice 'SUV eléctrico', término que no está en la lista de RF-11; null."
   - "Tracción del Advance: la ficha dice 4x2, no 'tracción delantera'; sin drivetrain. IDAE homologa también un C-HR+ 4x2 Advance 170 de 58 kWh (458 km, NG26) que la ficha no muestra: no incluido."
