@@ -56,6 +56,6 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precios (2026-10-23): mirados es.smart.com customizer, latest-offers, stock-search y campaign/mainland: sin precios ni letra pequeña en el texto servido (JavaScript), ni PDF de tarifas; price: null."
+  - "Precios (2026-10-24, con fetch-page.ts y palabras PVP, Precio, Oferta válida, €): leídas es.smart.com customizer, latest-offers, stock-search y campaign/mainland: sin ningún párrafo con precio ni letra pequeña (JavaScript), ni PDF de tarifas; price: null."
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir el #3 en España."
   - "segment: la web lo titula «coupé eléctrico», término que no está en la lista de RF-11; null."
