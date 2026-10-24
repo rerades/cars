@@ -25,4 +25,5 @@ open_questions:
   - "Faltan versiones Style y otras baterías/potencias (T3 menciona 52, 61 y 84 kWh; 170, 190 y 231 CV): la ficha oficial no las desglosa."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: la fuente no usa un término de la lista de RF-11 (motor1 dice «compacto» en T3, pero sin confirmación de marca)."
+  - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."
   - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."
