@@ -12,11 +12,29 @@ versions:
   - name: Selection
     battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
-    price: null
+    price:
+      value: 47152.50
+      unit: EUR
+      price_kind: financed
+      price_terms: "2.*Oferta para un PEAQ SELECTION 210 kW (286 CV) 91 kWh. PVP recomendado financiando en Península y Baleares: 47.152,50 € (IVA, descuento y plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 17.000 € con una permanencia mínima de la financiación de 36 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 35 cuotas de 290 € y una mensualidad en el mes 12 de 4.050 €. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto+. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 28.556,22 € (calculada con 10.000 km anuales). *TAE: 9,67%*. TIN: 7,99%. Entrada: 10.936,81 €. Importe total del crédito: 35.215,69 €. Comisión de apertura al contado: 1.052,95 €. Importe de los intereses: 7.540,53 €. Coste total del crédito: 8.593,48 €. Importe total adeudado: 42.756,22 €. Precio total a plazos: 53.693,03 €. Precio al contado: 48.907 €. Sistema de amortización francés. El precio incluye el Plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente. Oferta válida hasta el 31/10/2026 para clientes particulares y ofrecida por Škoda Financial Services, marca comercializada por Volkswagen Bank GmbH S.E. Oferta que incluye, sin coste para el cliente, el Cargador modelo Wall Box Pulsar Plus junto con su instalación, sin que ello genere impacto económico en la operación. Consumo de combustible combinado WLTP (kWh/100km): 15,2 kWh/100km, emisiones CO2 (g/km): WLTP: 0 g/km. La oferta incluye 3 años de garantía sin límite de km + 1 año adicional de extensión de garantía (para vehículos con un máximo de 60.000km)."
+      price_terms_url: "https://www.skoda.es/modelos/peaq/peaq"
+      source_id: skoda-es
+      url: "https://www.skoda.es/modelos/peaq/peaq"
+      retrieved: 2026-10-24
+      tier: T1
   - name: Sportline
     battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
-    price: null
+    price:
+      value: 51332.50
+      unit: EUR
+      price_kind: financed
+      price_terms: "4.*Oferta para un PEAQ SPORTLINE 210 kW (286 CV) 91 kWh. PVP recomendado financiando en Península y Baleares: 51.332,50 € (IVA, descuento y plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 17.000 € con una permanencia mínima de la financiación de 36 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 35 cuotas de 360 € y una mensualidad en el mes 12 de 4.050 €. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto+. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 30.859,62 € (calculada con 10.000 km anuales). *TAE: 9,68%*. TIN: 7,99%. Entrada: 11.133,39 €. Importe total del crédito: 39.199,10 €. Comisión de apertura al contado: 1.172,05 €. Importe de los intereses: 8.310,52 €. Coste total del crédito: 9.482,57 €. Importe total adeudado: 47.509,62 €. Precio total a plazos: 58.643,01 €. Precio al contado: 53.087 €. Sistema de amortización francés. El precio incluye el Plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente. Oferta válida hasta el 31/10/2026 para clientes particulares y ofrecida por Škoda Financial Services, marca comercializada por Volkswagen Bank GmbH S.E. Oferta que incluye, sin coste para el cliente, el Cargador modelo Wall Box Pulsar Plus junto con su instalación, sin que ello genere impacto económico en la operación. Consumo de combustible combinado WLTP (kWh/100km): 15,2 kWh/100km, emisiones CO2 (g/km): WLTP: 0 g/km. La oferta incluye 3 años de garantía sin límite de km + 1 año adicional de extensión de garantía (para vehículos con un máximo de 60.000km)."
+      price_terms_url: "https://www.skoda.es/modelos/peaq/peaq"
+      source_id: skoda-es
+      url: "https://www.skoda.es/modelos/peaq/peaq"
+      retrieved: 2026-10-24
+      tier: T1
 images:
   - file: data/images/skoda/peaq/frontal.jpg
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/2026_Skoda_Peaq_%281%29.jpg/1280px-2026_Skoda_Peaq_%281%29.jpg"
@@ -26,7 +44,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Ssu, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precios (2026-10-17): la ficha da «PVP recomendado financiando» (Selection 47.152,50 €, Sportline 51.332,50 € hasta 31/10/2026) con notas largas que no se han podido copiar enteras y literales; por la revisión de #333 price: null. Los importes tampoco cuadran con el «precio al contado» de las mismas notas (48.907 € y 53.087 €), y el crédito mínimo se contradice (19.000 € frente a 17.000 €). Los «desde» (41.900 / 46.050 €) incluyen Plan Auto+ (4.050 €) y no se usan."
+  - "Precios (2026-10-24): leída con fetch-page.ts la ficha https://www.skoda.es/modelos/peaq/peaq; las notas 2 y 4 dan un «PVP recomendado financiando» (Selection 47.152,50 €, Sportline 51.332,50 €, hasta 31/10/2026), guardado como financed con el texto literal. Sigue sin PVP limpio. El «precio al contado» de esas notas (48.907 € y 53.087 €) es mayor (diferencia de 1.754,50 € en ambas, igual que en otras fichas de la marca) y la ficha no explica por qué; las notas «desde» piden capital mínimo de 19.000 € frente a los 17.000 € de las notas de «PVP recomendado financiando». Los «desde» (41.900 / 46.050 €) incluyen Plan Auto+ (4.050 €) y no se usan."
   - "segment: la ficha lo describe como SUV de 5 o 7 plazas sin clase formal; queda null."
   - "La ficha habla de «dos opciones de motor» pero solo detalla la de 210 kW; el IDAE lista también una versión de 220 kW (motor dual). No se añade sin fuente de la marca."
   - "Tracción y kW de carga DC no están en la ficha. wltp_km por versión tampoco (el IDAE da 638 km para Selection 210 kW, sin cruzar)."
