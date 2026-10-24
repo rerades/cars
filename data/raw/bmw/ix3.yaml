@@ -39,7 +39,15 @@ images:
     retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:BMW_iX3_NA5_IAA_2025_DSC_1684.jpg)"
+reviews:
+  - title: "Probamos el BMW iX3: hasta 805 km de autonomía para el SUV eléctrico con el que BMW se ha tomado muy en serio empezar de nuevo"
+    url: "https://www.motorpasion.com/pruebas-de-coches/prueba-bmw-ix3-2026"
+    source_id: motorpasion-es
+    retrieved: 2026-10-24
+    tier: T3
+    version: iX3 50 xDrive
 open_questions:
+  - "Reviews (2026-10-24): Diariomotor no tiene una prueba del iX3 actual (solo noticias, ficha y una prueba en vídeo del iX3 de 2021, generación anterior)."
   - "Segmento sin fuente: la ficha bmw.es no se pudo abrir y el comunicado no lo clasifica (el iX3 se aloja en /coches-bmw/x/, familia X)."
   - "iX3 40: el comunicado de 2026-07-20 da \"aproximadamente 63.650 €\"; falta PVP definitivo y confirmar si ya se vende (anunciado para verano de 2026)."
   - "iX3 50 xDrive: capacidad de batería y carga AC no publicadas en el comunicado; precio sin reverificar en el configurador (bmw.es dio timeout)."
