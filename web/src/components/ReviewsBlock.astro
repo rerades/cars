@@ -1,0 +1,35 @@
+---
+import { t } from "../lib/i18n.ts";
+import type { Review } from "../lib/data.ts";
+
+/**
+ * «Reviews» block (PRD-002 RF-16, PRD-006 RF-10; docs/design/ficha-modelo.md). Last block of the model page.
+ * It only renders when there is something to show. Entry content (link, outlet, date, version) is #599.
+ * The «Resultados de pruebas» sublist, and the h3 of both sublists when there are two, are #601: no
+ * test result can be published until the first metric exists (#597), so that branch could not be tested here.
+ */
+interface Props {
+  reviews: Review[];
+}
+const { reviews } = Astro.props as Props;
+// A review without outlet cannot be shown (data.ts): it counts as not publishable.
+const media = reviews.filter((r) => r.outlet !== null);
+---
+
+{
+  media.length > 0 && (
+    <section aria-labelledby="reviews" class="mt-12" data-reviews>
+      <h2 id="reviews" class="text-section text-ink-900">{t("ficha.reviews.titulo")}</h2>
+      <div class="mt-4 max-w-prose" data-reviews-medios>
+        <p class="mt-1 text-small text-ink-600">{t("ficha.reviews.mediosEntrada")}</p>
+        <ul class="mt-4 flex flex-col gap-4">
+          {media.map((r) => (
+            <li class="border-t border-line-soft pt-4 first:border-t-0 first:pt-0">
+              <a href={r.url} rel="noopener" class="text-body font-semibold text-brand-600 underline hover:text-brand-800 [overflow-wrap:anywhere]">{r.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

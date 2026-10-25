@@ -155,6 +155,13 @@ export const es = {
   "ficha.fuentes.entrada": "Dónde se ha leído cada dato y cuándo. El precio lleva su fuente junto a la cifra.",
   "ficha.fuentes.item": "{fuente}, consultado el {fecha}.",
   "ficha.fuentes.noOficial": "Fuente no oficial.",
+  "ficha.reviews.titulo": "Reviews",
+  "ficha.reviews.pruebasTitulo": "Resultados de pruebas",
+  "ficha.reviews.mediosTitulo": "Reviews de medios",
+  "ficha.reviews.mediosEntrada":
+    "Enlaces a pruebas de este modelo publicadas por otros medios. Llevan a su web, con el título original y en el idioma en que se publicaron, sin traducir ni resumir.",
+  "ficha.reviews.pruebasEntrada":
+    "Resultados publicados por organismos de pruebas independientes, con el nombre de la prueba tal como lo publican.",
   "fecha.mes.1": "ene",
   "fecha.mes.2": "feb",
   "fecha.mes.3": "mar",
