@@ -12,7 +12,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
 
-const USER_AGENT = `siete3-factory/1.0 (https://siete3.com) node/${process.versions.node}`;
+export const USER_AGENT = `siete3-factory/1.0 (https://siete3.com) node/${process.versions.node}`;
 const SOURCES_DIR = join(import.meta.dirname, "../data/sources");
 export const MAX_TEXT = 60_000;
 const MAX_PARAGRAPH = 4_000;
