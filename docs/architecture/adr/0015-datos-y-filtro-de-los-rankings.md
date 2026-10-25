@@ -1,7 +1,7 @@
 # ADR-0015 — Datos y filtro de los rankings (`/rankings/*`)
 
 - **Estado:** aceptada (2026-10-15). Enmienda «Peso medido» (umbral de 50 KB con Brotli por JSON):
-  propuesta (2026-10-25)
+  aceptada (2026-10-25)
 - **Fecha:** 2026-10-15
 
 ## Contexto
@@ -187,7 +187,7 @@ Detalles:
      RF-15 al filtrar, abrir una URL con filtros y que **no** se pide el JSON al cargar sin filtros;
      CA-14 con `javaScriptEnabled: false`; un ranking con un filtro aplicado en `a11y.spec.ts`.
 
-### Peso medido (enmienda del 2026-10-25, propuesta)
+### Peso medido (enmienda del 2026-10-25, aceptada)
 
 **Cada JSON de `/rankings/datos/` debe pesar 50 KB o menos comprimido con Brotli. Por ahora no se
 recorta nada: con los datos de hoy, el más grande pesa 5 KB.**
