@@ -161,6 +161,60 @@ test.describe("no cookies, no web storage (RNF-5, CA-7)", () => {
     await checkNoStorage(page, bandUrl);
   });
 
+  /**
+   * PRD-003 CA-12 on test data: loads /comparar/, runs `actions` and checks the same things as
+   * checkNoStorage, plus that every fetch/XHR goes to /comparar/datos/ of the own origin.
+   */
+  async function checkComparator(page: Page, query: string, actions: (page: Page) => Promise<void> = async () => {}) {
+    const dataRequests: string[] = [];
+    const hosts = new Set<string>();
+    page.on("request", (req) => {
+      const u = new URL(req.url());
+      if (u.protocol !== "http:" && u.protocol !== "https:") return;
+      hosts.add(u.host);
+      if (req.resourceType() === "fetch" || req.resourceType() === "xhr") dataRequests.push(`${u.host}${u.pathname}`);
+    });
+    const host = new URL(imageSiteUrl).host;
+    const response = await page.goto(`${imageSiteUrl}/comparar/${query}`, { waitUntil: "networkidle" });
+    expect(response?.ok()).toBe(true);
+    await expect(page.locator("[data-loading]")).toBeHidden();
+    await expect(page.locator("[data-chosen]")).toBeVisible();
+    await actions(page);
+    await page.waitForLoadState("networkidle");
+
+    expect(await page.context().cookies(), "cookies in the comparator").toEqual([]);
+    const storage = await page.evaluate(() => ({
+      local: Object.keys(window.localStorage),
+      session: Object.keys(window.sessionStorage),
+      cookie: document.cookie,
+    }));
+    expect(storage).toEqual({ local: [], session: [], cookie: "" });
+    expect([...hosts]).toEqual([host]);
+    expect(dataRequests.length, "the comparator asks for its data").toBeGreaterThan(0);
+    for (const r of dataRequests) expect(r.startsWith(`${host}/comparar/datos/`), `data request ${r}`).toBe(true);
+    for (const h of hosts) requestedHosts.add(h);
+  }
+
+  test("/comparar/ without a selection (CA-12)", async ({ page }) => {
+    await checkComparator(page, "");
+  });
+
+  test("/comparar/ with one selection (CA-12)", async ({ page }) => {
+    await checkComparator(page, `?v=${encodeURIComponent("acme/Volta")}`);
+  });
+
+  test("/comparar/ after adding, changing version and removing (CA-12)", async ({ page }) => {
+    await checkComparator(page, `?v=${encodeURIComponent("acme/Volta")}`, async (p) => {
+      await p.locator("[data-add-select]").selectOption("acme/WithImage");
+      await p.locator("[data-add-form] button[type=submit]").click();
+      await expect(p.locator("[data-compare] thead th[scope=col]")).toHaveCount(2);
+      await p.locator("[data-chosen-list] > li").first().locator("select").selectOption("Volta GT");
+      await expect(p.locator("[data-compare] thead th[scope=col] [data-slot=name]").first()).toHaveText("Volta GT");
+      await p.locator("[data-chosen-list] > li").last().locator("[data-slot=remove]").click();
+      await expect(p.locator("[data-chosen-list] > li")).toHaveCount(1);
+    });
+  });
+
   test("page with a card with an image (test data)", async ({ page }) => {
     await checkNoStorage(page, `${imageSiteUrl}/coches/?orden=precio-desc`, { expectImg: true });
   });
