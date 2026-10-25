@@ -10,15 +10,42 @@ versions:
   - name: Urban
     battery_kwh: {value: 37, basis: usable, note: "publicado: 38,5 kWh (37 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 99, note: "publicado: 99 kW (135 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
-    price: null
+    price:
+      value: 24170.10
+      unit: EUR
+      price_kind: financed
+      price_terms: "2.*Oferta para un EPIQ URBAN 99 kW (135 CV) 38,5 kWh (37 kwh neta). PVP recomendado financiando en Península y Baleares: 24.170,10 € (IVA, descuento y plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 17.000 € con una permanencia mínima de la financiación de 36 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 35 cuotas de 130 € y una mensualidad en el mes 12 de 4.500 €. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto+. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 15.544,09 € (calculada con 10.000 km anuales). *TAE: 9,73%*. TIN: 7,99%. Entrada: 2.744,66 €. Importe total del crédito: 20.425,44 €. Comisión de apertura al contado: 610,72 €. Importe de los intereses: 4.168,65 €. Coste total del crédito: 4.779,37 €. Importe total adeudado: 24.594,09 €. Precio total a plazos: 27.338,75 €. Precio al contado: 25.924,60 €. Sistema de amortización francés. El precio incluye el Plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente. Oferta válida hasta el 31/10/2026 para clientes particulares y ofrecida por Škoda Financial Services, marca comercializada por Volkswagen Bank GmbH S.E. Oferta que incluye, sin coste para el cliente, el Cargador modelo Wall Box Pulsar Plus, sin que ello genere impacto económico en la operación. Consumo de combustible combinado WLTP (kWh/100km): 14,0 kWh/100km, emisiones CO2 (g/km): WLTP: 0 g/km. La oferta incluye 3 años de garantía sin límite de km + 1 año adicional de extensión de garantía (para vehículos con un máximo de 60.000km)."
+      price_terms_url: "https://www.skoda.es/modelos/epiq/epiq"
+      source_id: skoda-es
+      url: "https://www.skoda.es/modelos/epiq/epiq"
+      retrieved: 2026-10-24
+      tier: T1
   - name: Selection
     battery_kwh: {value: 37, basis: usable, note: "publicado: 38,5 kWh (37 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 99, note: "publicado: 99 kW (135 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
-    price: null
+    price:
+      value: 26495.19
+      unit: EUR
+      price_kind: financed
+      price_terms: "3.*Oferta para un EPIQ SELECTION 99 kW (135 CV) 38,5 kWh (37 kwh neta). PVP recomendado financiando en Península y Baleares: 26.495,19 € (IVA, descuento y plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 17.000 € con una permanencia mínima de la financiación de 36 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 35 cuotas de 160 € y una mensualidad en el mes 12 de 4.500 €. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto+. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 16.831,20 € (calculada con 10.000 km anuales). *TAE: 9,73%*. TIN: 7,99%. Entrada: 3.126,37 €. Importe total del crédito: 22.368,82 €. Comisión de apertura al contado: 668,83 €. Importe de los intereses: 4.562,38 €. Coste total del crédito: 5.231,21 €. Importe total adeudado: 26.931,20 €. Precio total a plazos: 30.057,57 €. Precio al contado: 28.249,69 €. Sistema de amortización francés. El precio incluye el Plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente. Oferta válida hasta el 31/10/2026 para clientes particulares y ofrecida por Škoda Financial Services, marca comercializada por Volkswagen Bank GmbH S.E. Oferta que incluye, sin coste para el cliente, el Cargador modelo Wall Box Pulsar Plus, sin que ello genere impacto económico en la operación. Consumo de combustible combinado WLTP (kWh/100km): 14,1 kWh/100km, emisiones CO2 (g/km): WLTP: 0 g/km. La oferta incluye 3 años de garantía sin límite de km + 1 año adicional de extensión de garantía (para vehículos con un máximo de 60.000km)."
+      price_terms_url: "https://www.skoda.es/modelos/epiq/epiq"
+      source_id: skoda-es
+      url: "https://www.skoda.es/modelos/epiq/epiq"
+      retrieved: 2026-10-24
+      tier: T1
   - name: First Edition
     battery_kwh: {value: 52, basis: usable, note: "publicado: 55 kWh (52 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 155, note: "publicado: 155 kW (210 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
-    price: null
+    price:
+      value: 33346.69
+      unit: EUR
+      price_kind: financed
+      price_terms: "4.*Oferta para un EPIQ FIRST EDITION 155 kW (210 CV) 55 kWh (52 kwh neta). PVP recomendado financiando en Península y Baleares: 33.346,69 € (IVA, descuento y plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 17.000 € con una permanencia mínima de la financiación de 36 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 35 cuotas de 190 € y una mensualidad en el mes 12 de 4.500 €. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto+. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 20.619,05 € (calculada con 10.000 km anuales). *TAE: 9,70%*. TIN: 7,99%. Entrada: 6.065,19 €. Importe total del crédito: 26.281,50 €. Comisión de apertura al contado: 785,82 €. Importe de los intereses: 5.487,55 €. Coste total del crédito: 6.273,37 €. Importe total adeudado: 31.769,05 €. Precio total a plazos: 37.834,24 €. Precio al contado: 35.101,19 €. Sistema de amortización francés. El precio incluye el Plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente. Oferta válida hasta el 31/10/2026 para clientes particulares y ofrecida por Škoda Financial Services, marca comercializada por Volkswagen Bank GmbH S.E. Oferta que incluye, sin coste para el cliente, el Cargador modelo Wall Box Pulsar Plus, sin que ello genere impacto económico en la operación. Consumo de combustible combinado WLTP (kWh/100km): 14,1 kWh/100km, emisiones CO2 (g/km): WLTP: 0 g/km. La oferta incluye 3 años de garantía sin límite de km + 1 año adicional de extensión de garantía (para vehículos con un máximo de 60.000km)."
+      price_terms_url: "https://www.skoda.es/modelos/epiq/epiq"
+      source_id: skoda-es
+      url: "https://www.skoda.es/modelos/epiq/epiq"
+      retrieved: 2026-10-24
+      tier: T1
 images:
   - file: data/images/skoda/epiq/frontal.jpg
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Skoda_Epiq_front_view.jpg/1280px-Skoda_Epiq_front_view.jpg"
@@ -28,7 +55,7 @@ images:
     license: CC-BY-4.0
     attribution: "Oil151kv, CC BY 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precios (2026-10-17): price: null en todas las versiones. Los «desde» (18.500 / 20.800 / 27.600 €) incluyen Plan Auto+ y no se usan. La ficha se contradice: la nota 1 da capital mínimo de 19.000 € y 84 meses, las notas 2 a 4 un crédito mínimo de 17.000 € y 36 meses de permanencia; el pie de la ficha dice «©2024» y en lecturas anteriores «Oferta vigente hasta 30 de junio de 2025», frente a «Oferta válida hasta el 31/10/2026»."
+  - "Precios (2026-10-24): leída con fetch-page.ts la ficha https://www.skoda.es/modelos/epiq/epiq; las notas 2, 3 y 4 dan un «PVP recomendado financiando» por versión (Urban 24.170,10 €, Selection 26.495,19 €, First Edition 33.346,69 €, hasta 31/10/2026), guardado como financed con el texto literal. Sigue sin PVP limpio. Los «desde» (18.500 / 20.800 / 27.600 €) incluyen Plan Auto+ y no se usan. La ficha se contradice: la nota 1 da capital mínimo de 19.000 € y 84 meses, las notas 2 a 4 un crédito mínimo de 17.000 € y 36 meses de permanencia; el pie de la ficha dice «©2024» y en lecturas anteriores «Oferta vigente hasta 30 de junio de 2025», frente a «Oferta válida hasta el 31/10/2026»."
   - "Autonomía: la ficha da «hasta 439 km» y «hasta 437 km en ruta», contradictorios; no se rellena wltp_max_km ni wltp_km. El IDAE homologa Epiq MY27 (Urban 55 kWh: 437 km), sin cruzar con la ficha."
   - "launch y pedidos abiertos: la ficha no los indica; modelo marcado needs_review."
   - "Tracción y kW de carga DC no están en la ficha (solo «carga rápida en 24 min»)."

@@ -12,17 +12,44 @@ versions:
   - name: Urban
     battery_kwh: {value: 58, basis: usable, note: "publicado: 61 kWh (58 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 140, note: "publicado: 140 kW (190 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
-    price: null
+    price:
+      value: 32364.69
+      unit: EUR
+      price_kind: financed
+      price_terms: "2.*Oferta para un ELROQ URBAN 140 kW (190 CV) 61 kWh (58 kwh neta). PVP recomendado financiando en Península y Baleares: 32.364,69 € (IVA, descuento y plan CAE por importe de 1.000€ si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 17.000,00 € con una permanencia mínima de la financiación de 36 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 35 cuotas de 150,00 € y una mensualidad en el mes 12 de 4.500 €. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto+. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 20.475,37 € (calculada con 10.000 km anuales). *TAE: 9,68%*. TIN: 7,99%. Entrada: 6.436,06 €. Importe total del crédito: 24.928,63 €. Comisión de apertura al contado: 745,37 €. Importe de los intereses: 5.296,74 €. Coste total del crédito: 6.042,10 €. Importe total adeudado: 30.225,37 €. Precio total a plazos: 36.661,43 €. Precio al contado: 34.119,19 €. Sistema de amortización francés. El precio incluye el Plan CAE por importe de 1.000€ si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente. Oferta válida hasta el 31/10/2026 para clientes particulares y ofrecida por Škoda Financial Services, marca comercializada por Volkswagen Bank GmbH S.E. Oferta que incluye, sin coste para el cliente, el Cargador modelo Wall Box Pulsar Plus, sin que ello genere impacto económico en la operación. Consumo de combustible combinado WLTP (kWh/100km): 15,2 kWh/100km, emisiones CO2 (g/km): WLTP: 0 g/km. La oferta incluye 3 años de garantía sin límite de km + 1 año adicional de extensión de garantía (para vehículos con un máximo de 60.000km)."
+      price_terms_url: "https://www.skoda.es/modelos/elroq/elroq"
+      source_id: skoda-es
+      url: "https://www.skoda.es/modelos/elroq/elroq"
+      retrieved: 2026-10-24
+      tier: T1
   - name: Selection
     battery_kwh: {value: 58, basis: usable, note: "publicado: 61 kWh (58 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 140, note: "publicado: 140 kW (190 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
-    price: null
+    price:
+      value: 33615.86
+      unit: EUR
+      price_kind: financed
+      price_terms: "3.*Oferta para un ELROQ SELECTION 140 kW (190 CV) 61 kWh (58 kwh neta). PVP recomendado financiando en Península y Baleares: 33.615,86 € (IVA, descuento y plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 17.000 € con una permanencia mínima de la financiación de 36 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 35 cuotas de 180 € y una mensualidad en el mes 12 de 4.500 €. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto+. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 21.169,21 € (calculada con 10.000 km anuales). *TAE: 9,69%*. TIN: 7,99%. Entrada: 6.211,05 €. Importe total del crédito: 26.404,81 €. Comisión de apertura al contado: 789,50 €. Importe de los intereses: 5.564,40 €. Coste total del crédito: 6.353,90 €. Importe total adeudado: 31.969,21 €. Precio total a plazos: 38.180,26 €. Precio al contado: 35.370,36 €. Sistema de amortización francés. El precio incluye el Plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente. Oferta válida hasta el 31/10/2026 para clientes particulares y ofrecida por Škoda Financial Services, marca comercializada por Volkswagen Bank GmbH S.E. Oferta que incluye, sin coste para el cliente, el Cargador modelo Wall Box Pulsar Plus, sin que ello genere impacto económico en la operación. Consumo de combustible combinado WLTP (kWh/100km): 15,3 kWh/100km, emisiones CO2 (g/km): WLTP: 0 g/km. La oferta incluye 3 años de garantía sin límite de km + 1 año adicional de extensión de garantía (para vehículos con un máximo de 60.000km)."
+      price_terms_url: "https://www.skoda.es/modelos/elroq/elroq"
+      source_id: skoda-es
+      url: "https://www.skoda.es/modelos/elroq/elroq"
+      retrieved: 2026-10-24
+      tier: T1
   - name: Sportline
     price: null
   - name: RS
     battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
     power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/elroq/elroq", retrieved: 2026-10-14, tier: T1}
-    price: null
+    price:
+      value: 45871.35
+      unit: EUR
+      price_kind: financed
+      price_terms: "5.*Oferta para un ELROQ RS 250 kW (340 CV) 82 kWh (77 kwh neta). PVP recomendado financiando en Península y Baleares: 45.871,35 € (IVA, descuento y plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente). Oferta de financiación válida para clientes particulares que financien un crédito mínimo de 17.000 € con una permanencia mínima de la financiación de 36 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 35 cuotas de 260 € y una mensualidad en el mes 12 de 4.050 €. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto+. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 27.944,65 € (calculada con 10.000 km anuales). *TAE: 9,66%*. TIN: 7,99%. Entrada: 11.067,06 €. Importe total del crédito: 33.804,29 €. Comisión de apertura al contado: 1.010,75 €. Importe de los intereses: 7.290,36 €. Coste total del crédito: 8.301,11 €. Importe total adeudado: 41.094,65 €. Precio total a plazos: 52.161,71 €. Precio al contado: 47.625,85 €. Sistema de amortización francés. El precio incluye el Plan CAE por importe de 1.000 € si el cliente sustituye un vehículo de combustión según términos y condiciones de la normativa vigente. Oferta válida hasta el 31/10/2026 para clientes particulares y ofrecida por Škoda Financial Services, marca comercializada por Volkswagen Bank GmbH S.E. Oferta que incluye, sin coste para el cliente, el Cargador modelo Wall Box Pulsar Plus, sin que ello genere impacto económico en la operación. Consumo de combustible combinado WLTP (kWh/100km): 16,1 kWh/100km, emisiones CO2 (g/km): WLTP: 0 g/km. La oferta incluye 3 años de garantía sin límite de km + 1 año adicional de extensión de garantía (para vehículos con un máximo de 60.000km)."
+      price_terms_url: "https://www.skoda.es/modelos/elroq/elroq"
+      source_id: skoda-es
+      url: "https://www.skoda.es/modelos/elroq/elroq"
+      retrieved: 2026-10-24
+      tier: T1
 images:
   - file: data/images/skoda/elroq/frontal.jpg
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/%C5%A0koda_Elroq_DSC_9262.jpg/1280px-%C5%A0koda_Elroq_DSC_9262.jpg"
@@ -32,7 +59,8 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precios: la ficha solo da «Precio sujeto a financiación desde» (Urban 26.550 €, Selection 27.850 €, Sportline 35.050 €, RS 40.600 €), que incluye la subvención Plan Auto+ de 4.050-4.500 €; no es PVP sin ayudas y no se guarda. No se ha leído un PVP sin ayudas ni un «PVP recomendado financiando» para el Elroq. Revisado 2026-10-22: https://www.skoda.es/modelos/elroq/elroq/skoda-elroq-price-list repite esos mismos importes por versión (también Selection 82 kWh 32.100 €, Sportline 35.050-35.500 €) sin ninguna nota que diga qué incluyen ni su vigencia, y las versiones no casan con las de la ficha (61/82 kWh, 190/286/299/340 CV); no se puede asociar sin duda un PVP limpio. No hay PDF de tarifa enlazado. Revisado 2026-10-23 en la ficha: además de los «desde» ligados a Plan Auto+, las notas 2 a 5 dan un «PVP recomendado financiando» (Urban 32.364,69 €, Selection 33.615,86 €, Sportline 36.221,36 €, RS 45.871,35 €, válido hasta 31/10/2026, con financiación mínima de 17.000 € y permanencia de 36 meses). No se guarda como financed porque la lectura de la página solo devuelve las notas resumidas y no se puede copiar el texto literal de las condiciones para price_terms; sigue sin PVP limpio."
+  - "Precios: la ficha solo da «Precio sujeto a financiación desde» (Urban 26.550 €, Selection 27.850 €, Sportline 35.050 €, RS 40.600 €), que incluye la subvención Plan Auto+ de 4.050-4.500 €; no es PVP sin ayudas y no se guarda. No se ha leído un PVP sin ayudas ni un «PVP recomendado financiando» para el Elroq. Revisado 2026-10-22: https://www.skoda.es/modelos/elroq/elroq/skoda-elroq-price-list repite esos mismos importes por versión (también Selection 82 kWh 32.100 €, Sportline 35.050-35.500 €) sin ninguna nota que diga qué incluyen ni su vigencia, y las versiones no casan con las de la ficha (61/82 kWh, 190/286/299/340 CV); no se puede asociar sin duda un PVP limpio. No hay PDF de tarifa enlazado. Leída 2026-10-24 con fetch-page.ts la ficha https://www.skoda.es/modelos/elroq/elroq: las notas 2, 3 y 5 dan un «PVP recomendado financiando» para Urban, Selection y RS, guardado como financed con el texto literal. Sigue sin PVP limpio para ninguna versión."
+  - "Sportline: precio sin guardar (2026-10-24). La nota 4 de la ficha da «PVP recomendado financiando» 36.221,36 € para «ELROQ SPORTLINE 140 kW (190 CV) 61 kWh», pero la nota del precio «desde» dice «SPORTLINE 82 kWh - 210kW» y la ficha del Sportline es incoherente, así que no se asocia sin duda a la versión de esta ficha."
   - "WLTP por versión, tracción y kW de carga DC no están en la ficha; el IDAE tiene homologaciones MY27 (p. ej. Selection 82 kWh 210 kW: 574 km) pero no se ha cruzado con los nombres comerciales. wltp_km queda sin rellenar en todas las versiones."
   - "launch: la ficha no da fecha de inicio de venta en España."
   - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."
