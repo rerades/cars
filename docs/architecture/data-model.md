@@ -217,6 +217,13 @@ se escribe siempre para distinguir "no hay precio" de "no se miró".
 
 `tier` de un precio debe ser `T1` (ADR-0001, regla 1).
 
+**Qué importe se guarda en un `financed`** (decisión del 2026-10-25): si las condiciones dan un
+precio al contado («precio al contado», «PVP al contado», «precio contado») además del precio
+financiando, `value` es **el de contado**, aunque también lleve promoción. Es lo que paga quien no
+pide el préstamo. Solo si no hay precio al contado se guarda el precio financiando. El otro importe
+puede ir en `note`. Así, «Precio desde» (sección 5) compara el mismo tipo de importe en todas las
+marcas.
+
 ## 5. Cómo se derivan los datos del catálogo
 
 - **Precio desde** = mínimo de `versions[].price.value` (incluye `financed`, RF-9). Sin ninguno:
