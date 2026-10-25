@@ -1,6 +1,7 @@
 # ADR-0015 — Datos y filtro de los rankings (`/rankings/*`)
 
-- **Estado:** aceptada (2026-10-15)
+- **Estado:** aceptada (2026-10-15). Enmienda «Peso medido» (umbral de 50 KB con Brotli por JSON):
+  aceptada (2026-10-25)
 - **Fecha:** 2026-10-15
 
 ## Contexto
@@ -186,6 +187,48 @@ Detalles:
      RF-15 al filtrar, abrir una URL con filtros y que **no** se pide el JSON al cargar sin filtros;
      CA-14 con `javaScriptEnabled: false`; un ranking con un filtro aplicado en `a11y.spec.ts`.
 
+### Peso medido (enmienda del 2026-10-25, aceptada)
+
+**Cada JSON de `/rankings/datos/` debe pesar 50 KB o menos comprimido con Brotli. Por ahora no se
+recorta nada: con los datos de hoy, el más grande pesa 5 KB.**
+
+Contexto propio de la enmienda: la prueba de peso de la historia #447 (#653) dio 270 KB y el
+Revisor lo leyó como si fuera un solo ranking, nueve veces la estimación. En realidad es **la suma
+de los cinco** sin comprimir. Medido el 2026-10-25 sobre `main`, con 145 ficheros de modelo:
+
+| Ranking | Sin comprimir | gzip -9 | Brotli | Puestos (`entries`) | Fuera (`out`) |
+|---|---|---|---|---|---|
+| `mas-potencia` | 68,6 KB | 5,2 KB | 4,4 KB | 207 | 41 |
+| `mas-autonomia` | 64,5 KB | 6,0 KB | 5,0 KB | 179 | 69 |
+| `mas-bateria` | 57,2 KB | 4,5 KB | 3,9 KB | 159 | 89 |
+| `mas-baratos` | 53,2 KB | 5,6 KB | 4,8 KB | 85 | 163 |
+| `carga-mas-rapida-en-continua` | 20,1 KB | 1,6 KB | 1,4 KB | 37 | 211 |
+
+- **La estimación por entrada se cumple.** Sale a ~0,3 KB por puesto; la ADR calculaba ~0,4 KB.
+  Lo que ha cambiado es el catálogo: los ~30 KB eran para ~80 puestos, y hoy hay hasta 207.
+- **Lo que viaja es lo comprimido.** `siete3.com` sirve estos ficheros con
+  `content-encoding: br` (comprobado el 2026-10-25 en `/rankings/datos/mas-potencia.json`).
+- **Los `price_terms` no son el problema.** En `mas-baratos` suman ~14 KB sin comprimir y ~2 KB
+  con gzip. Además, el puesto los pinta, así que no se pueden quitar del JSON sin quitarlos de la
+  página.
+- **Cuánto pesará a 300 modelos.** Si los ficheros crecen igual que los puestos (de ~250
+  versiones hoy a las ~620 del horizonte, ×2,5), el mayor quedará en ~170 KB sin comprimir y unos
+  12–13 KB con Brotli. Es una proyección, no una medida.
+
+7. **Umbral de peso.** La prueba de peso de la Decisión, punto 6, deja de solo imprimir. Pasa a
+   comprobar que cada uno de los cinco JSON del build con los datos reales pesa **50 KB o menos
+   comprimido con Brotli** (`zlib.brotliCompressSync` de Node, con sus opciones por defecto).
+   Sigue imprimiendo el peso sin comprimir y el comprimido de cada uno.
+   - **Por qué 50 KB:** deja unas cuatro veces de margen sobre la proyección a 300 modelos. A
+     10 Mbit/s, 50 KB son unos 40 ms de descarga, y el JSON solo se pide al filtrar, nunca para el
+     LCP (RNF-2).
+   - **Si un JSON pasa del umbral:** la prueba falla en la CI de la PR que lo hace crecer, y una
+     persona decide si sube el umbral o aplica la palanca de «Malas o a vigilar» (solo las
+     versiones que entran en el top 10 de alguna combinación de filtros). Ningún agente sube el
+     umbral por su cuenta.
+   - Cambiar la prueba es trabajo del Desarrollador (`web/tests/rankings-datos.test.ts`), como
+     tarea propia después de aceptar esta enmienda. No bloquea la #376.
+
 ## Consecuencias
 **Buenas**
 - La página que se indexa y la que ve quien no filtra es solo HTML: el LCP no depende del JSON ni
@@ -200,7 +243,8 @@ Detalles:
 
 **Malas o a vigilar**
 - **Las cifras de peso son estimaciones**, no mediciones; la prueba de peso del build las tiene que
-  confirmar. Son sin comprimir; Render sirve con Brotli (comprobado el 2026-10-13, ADR-0014) y las
+  confirmar. Medidas el 2026-10-25: 20–69 KB por ranking sin comprimir y 1,4–5 KB con Brotli
+  (enmienda «Peso medido»). Son sin comprimir; Render sirve con Brotli (comprobado el 2026-10-13, ADR-0014) y las
   `url` se repiten mucho, pero el JSON **crece con el catálogo**: a 300 modelos, ~250 KB por
   ranking, y el de precio más, por los `price_terms` literales. Si pesa demasiado, la palanca es
   publicar solo las versiones que entran en el top 10 de alguna de las 44 combinaciones de filtros,
@@ -234,5 +278,7 @@ Detalles:
   diseño, no esta ADR.~~ Resuelta al aceptar (2026-10-15): `precio`, con los slugs de
   `PRICE_BANDS` (`hasta-30000-euros`, `de-30000-a-45000-euros`, `mas-de-45000-euros`). No es
   `precio_min`/`precio_max` de `/coches` porque el ranking filtra por tramo, no por rango en euros.
-- Si la medida de peso del build supera lo aceptable, ¿se aplica el recorte por combinaciones? No
-  hay un umbral en ningún PRD; RNF-2 solo fija el LCP.
+- ~~Si la medida de peso del build supera lo aceptable, ¿se aplica el recorte por combinaciones? No
+  hay un umbral en ningún PRD; RNF-2 solo fija el LCP.~~ Resuelta por la enmienda «Peso medido»
+  (2026-10-25): el umbral es de 50 KB con Brotli por JSON y hoy no se recorta nada. El recorte por
+  combinaciones solo se aplica si una persona lo decide cuando la prueba falle.

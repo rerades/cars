@@ -2623,3 +2623,21 @@
     versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
     qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
     Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: umbral-peso-json-rankings
+  agent: developer
+  task: "Umbral de peso de los JSON de los rankings: aplica el punto 7 de la enmienda «Peso
+    medido» de ADR-0015 (léela entera) en web/tests/rankings-datos.test.ts. La prueba de peso con
+    los datos reales deja de solo imprimir: comprueba que cada uno de los cinco JSON pesa 50 KB o
+    menos comprimido con zlib.brotliCompressSync de Node (opciones por defecto) e imprime el peso
+    sin comprimir y el comprimido de cada uno. No toques los JSON, ranking-data.ts ni el umbral.
+    Solo esa prueba; pnpm test en web/ en verde."
+- id: historia-376-filtros-rankings
+  agent: developer
+  task: "Historia #376 (épica #368, PRD-005): filtros de segmento y de precio de los rankings.
+    Lee la issue entera (gh issue view 376 --comments) y haz exactamente lo que dice, con ADR-0015
+    (detalles 2 a 4, y la enmienda «Peso medido»). Parte de lo que ya está en main: la función
+    pura de web/src/lib/rankings.ts (#370), las páginas (#371), out[] y el vacío (#374) y los JSON
+    de web/src/lib/ranking-data.ts (#447), sin duplicarlos; y del patrón de CatalogFilters.astro y
+    web/src/lib/filter.ts. No hagas el resumen, la nota de RF-15, las condiciones, el vacío
+    filtrado ni el error de red (#377), ni las pruebas de navegador (#378). Pruebas con node
+    --test. La PR dice «Closes #376» y enumera los RF y CA cubiertos."
