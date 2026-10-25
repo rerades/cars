@@ -5,7 +5,7 @@ status: draft        # draft | ready | in-progress | done | deprecated
 priority: P1         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: []
 epic: ""
-updated: 2026-10-21
+updated: 2026-10-25
 ---
 
 # PRD-007 — Harness de la factoría
@@ -61,6 +61,8 @@ fase 3.
   Researcher con skills (fase 2).
 - Confianza para dar más autonomía: el verificador de datos, la escalera de confianza y el agente
   retro (fase 3).
+- Mantenimiento de los datos publicados: la comprobación semanal de las URL de `data/` (RF-11).
+  No depende de ninguna fase.
 
 ### Fuera de alcance
 - Cambiar de plan (Pro o Max), ampliar `allowed_hours` o subir `max_concurrent_runs`. Se reconsidera
@@ -126,6 +128,22 @@ fase 3.
   (ADR-0016) y la fusiona siempre una persona. Cada defecto escapado se convierte en un caso del
   dataset.
 
+### Mantenimiento de los datos
+- **RF-11:** **Comprobación semanal de URL.** Una vez por semana, un workflow de GitHub Actions
+  comprueba, sin modelo, todas las URL que cita `data/`: las `url` y `price_terms_url` de
+  `data/raw/`, las `source_url` y `page_url` de las imágenes y las `urls` de `data/sources/`.
+  - **Rota:** después de un reintento, responde 404 o 410, o el host no resuelve.
+  - **No comprobable:** responde 401, 403, 429 o 5xx, o se agota el tiempo. Suele ser un bloqueo de
+    bots o una caída pasajera. Se lista aparte y no cuenta como rota.
+  - **Cortesía:** respeta `robots.txt` igual que `factory/fetch-page.ts` (una URL prohibida se lista
+    como no comprobable), con como mucho una petición por segundo y host, y con el mismo agente.
+  - **Resultado:** una sola issue abierta con la etiqueta `fuentes-rotas`, no una por URL. Se crea o
+    se actualiza en cada pasada y lista cada URL rota con el fichero que la cita. Se cierra sola
+    cuando no queda ninguna rota.
+  - **No cambia datos.** Arreglar una URL rota es una tarea del Researcher.
+  - **Quién lo escribe:** el script va en `factory/` y lo escribe una persona, porque ningún agente
+    escribe ahí (RNF-3). El workflow va en `.github/workflows/` y es de DevOps.
+
 ## 5. Requisitos no funcionales
 - **RNF-1:** Todo lo que se pueda decidir con código va sin modelo: RF-1, RF-2, RF-3, RF-4 y la
   parte de reglas de RF-5 y RF-9. No se añaden servicios externos.
@@ -180,6 +198,10 @@ fase 3.
   paso de fusión le pone `merger:needs-human`.
 - [ ] **CA-14** (→ RNF-5): Con `factory/STOP`, ni el alimentador encola ni el bucle de corrección
   reintenta.
+- [ ] **CA-15** (→ RF-11): Dada una URL de `data/raw/` que responde 404 y otra que responde 403,
+  cuando corre la comprobación semanal, entonces la issue `fuentes-rotas` lista la primera como rota,
+  con el fichero que la cita, y la segunda como no comprobable. Cuando en una pasada ya no queda
+  ninguna rota, la issue se cierra.
 
 ## 8. Preguntas abiertas
 - **OPEN-1** (→ RF-9): ¿Cuánto vale N? ¿Qué es un «tipo de cambio»: el agente más un prefijo de
@@ -206,3 +228,4 @@ fase 3.
 | 2026-10-20 | Borrador, nacido de la lluvia de ideas con el responsable. Eligió las cuatro palancas (cola desde issues, puerta antes de la PR, bucle de corrección y verificador de datos), un Researcher con skills en vez de dos agentes, la escalera de confianza y dos cambios de agentes (retro nuevo y Revisor con rúbrica por tipo). | responsable + Claude |
 | 2026-10-21 | Aceptada la ADR-0018: RF-2 pide que las dependencias estén cerradas como completadas y que `factory:ready` la ponga solo una persona. OPEN-5 resuelta. Sin cambios en CA. | Claude |
 | 2026-10-21 | Aceptada la ADR-0019: OPEN-6 resuelta. La puerta corre sin contenedor. Una PR `fix` cita la PR que arregla (definition of done), para RF-1 y RF-9. Sin cambios en RF ni CA. | Claude |
+| 2026-10-25 | RF-11 y CA-15: comprobación semanal de las URL de `data/`, a petición del responsable. Se descartó dejarlo a las revisiones del Researcher, que solo miran las marcas que tocan. El script lo escribe una persona y el workflow, DevOps. | responsable + Claude |
