@@ -62,6 +62,12 @@ describe("«Reviews» block on the model page (PRD-006 RF-10, CA-9; PRD-002 RF-1
     ];
     write("Volta", withReviews);
     write("Plain", base("Plain", {}));
+    // Another brand in Volta's segment, so Volta gets «Otros modelos del segmento».
+    mkdirSync(join(root, "data", "beta"), { recursive: true });
+    writeFileSync(
+      join(root, "data", "beta", "Rival.yaml"),
+      stringify({ ...base("Rival", { segment: sourced("suv_compacto") }), brand: "beta", brand_name: "Beta" }),
+    );
     // Invalid (url off the source's domain): dropped, so the model has no publishable review.
     write("Dropped", base("Dropped", { reviews: [review({ url: "https://other.example/x" })] }));
     // needs_review: no page at all.
@@ -87,10 +93,10 @@ describe("«Reviews» block on the model page (PRD-006 RF-10, CA-9; PRD-002 RF-1
   });
 
   test("CA-19: after the related-models block when the model has one", () => {
-    // Real data: every page with both blocks keeps the order. Here, the order in the template.
-    const html = readFileSync(join(WEB, "src/pages/marcas/[marca]/[modelo].astro"), "utf8");
-    assert.ok(html.indexOf("<ReviewsBlock") > html.indexOf("data-related"));
-    assert.ok(html.indexOf("<ReviewsBlock") > html.indexOf("data-fuentes"));
+    const html = page("Volta");
+    const related = html.indexOf("data-related");
+    assert.ok(related > 0, "Volta has «Otros modelos del segmento» (Rival)");
+    assert.ok(html.indexOf("<section aria-labelledby=\"reviews\"") > related);
   });
 
   test("only `reviews`: h2, entry line and a ul with one li per review, no h3; links go to the url", () => {
