@@ -2641,3 +2641,144 @@
     web/src/lib/filter.ts. No hagas el resumen, la nota de RF-15, las condiciones, el vacío
     filtrado ni el error de red (#377), ni las pruebas de navegador (#378). Pruebas con node
     --test. La PR dice «Closes #376» y enumera los RF y CA cubiertos."
+- id: adr-verificador-de-datos-prd-007
+  agent: architect
+  task: "ADR nueva (estado: propuesta) que responde a la pregunta OPEN-2 de PRD-007 para RF-8, el
+    verificador de datos independiente: si es código sin modelo o un agente, el tamaño de la muestra
+    y qué hace con las páginas que solo cargan los precios con JavaScript. Lee PRD-007 entero, ADR-0004,
+    ADR-0011 (merge.ts y merger:needs-human), ADR-0019 (la puerta) y factory/fetch-page.ts, que ya
+    abre solo hosts registrados, respeta robots.txt y devuelve párrafos literales. Ten en cuenta que
+    PRD-007 RF-11 (comprobación semanal de URL) también descarga las páginas de data/: di si comparten
+    código. Cumple RNF-1 de PRD-007 (sin modelo donde baste el código). Anota en
+    docs/architecture/overview.md la decisión pendiente y su ADR. No toques PRD-007: la pregunta la
+    cierra la persona al aceptar la ADR."
+- id: revision-epicas-abiertas-2026-10
+  agent: planner
+  task: "Revisa las épicas abiertas #313 (PRD-003), #368 (PRD-005) y #594 (PRD-006). Para cada una,
+    lista sus historias, abiertas y cerradas (gh issue view N --comments y gh issue list), y
+    contrástalas con los RF y CA de su PRD en docs/product/prd/. Si todas las historias de una épica
+    están cerradas y todos sus RF y CA tienen historia, ciérrala con un comentario que lo diga. Si un
+    RF o un CA no tiene historia, créala con tu formato habitual y enlázala en la épica. No cambies
+    el texto de las historias que ya existen."
+- id: diseno-bloque-reviews-revision
+  agent: designer
+  task: "Revisa el bloque «Reviews» de docs/design/ficha-modelo.md frente a PRD-006 (todos sus RF y
+    CA), ADR-0017 y las historias #599, #600, #601 y #602 (gh issue view N). Cada RF o CA que afecte
+    a lo que se ve tiene que tener especificados la estructura, los textos (claves de i18n), los
+    estados y la accesibilidad (WCAG 2.1 AA), para que el Desarrollador no tenga que decidir nada.
+    Corrige solo los huecos, sin cambiar el alcance; si algo es una decisión de producto, déjalo como
+    pregunta abierta. En la PR, di qué historia cubre cada cambio."
+- id: prd-001-segmento-sin-dato
+  agent: product
+  task: "Pregunta abierta nueva en PRD-001 sobre el segmento. El 2026-10-25, 104 de las 145 fichas de
+    data/raw/ no tienen segment, y 103 lo intentaron: la regla de data-model.md (sección 4, notas;
+    decisión del 2026-10-13) solo acepta el término literal de la lista que use la fuente, y casi
+    ninguna marca lo usa. Sin segmento, un modelo no tiene tarjeta publicable (RF-1), no sale al
+    filtrar por segmento (RF-2), ni en los rankings filtrados (PRD-005, RF-8), y su silueta es la
+    genérica. Cuéntalo con datos (léelos de data/raw/), propone dos o tres alternativas con sus
+    consecuencias para PRD-001, PRD-002, PRD-005 y la regla de ADR-0001 (fuente, URL y fecha), y di
+    cuál recomiendas. Añádela a la sección 8 de PRD-001 como pregunta abierta, con una fila en el
+    historial. No cambies RF, CA ni la regla: lo decide la persona al revisar la PR."
+- id: precios-audi-literal-2026-10
+  agent: researcher
+  task: "Precios de data/raw/audi/ (fuente T1 audi-es). Busca el importe de cada versión en la web de
+    la marca: la página de precios, la ficha de cada modelo y sus ofertas. Lee las páginas con node
+    factory/fetch-page.ts (ver «Texto literal de una web registrada» en .claude/agents/researcher.md),
+    con palabras como PVP, Precio, Desde, Oferta válida o el nombre de la versión, y copia
+    price_terms tal cual de los párrafos que imprime. Sigue al pie de la letra las reglas de precio
+    de .claude/agents/researcher.md y de data-model.md, y solo si el precio se asocia sin duda a una
+    versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
+    qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-volvo-literal-2026-10
+  agent: researcher
+  task: "Precios de data/raw/volvo/ (fuente T1 volvo-es). Busca el importe de cada versión en la web de
+    la marca: la página de precios, la ficha de cada modelo y sus ofertas. Lee las páginas con node
+    factory/fetch-page.ts (ver «Texto literal de una web registrada» en .claude/agents/researcher.md),
+    con palabras como PVP, Precio, Desde, Oferta válida o el nombre de la versión, y copia
+    price_terms tal cual de los párrafos que imprime. Sigue al pie de la letra las reglas de precio
+    de .claude/agents/researcher.md y de data-model.md, y solo si el precio se asocia sin duda a una
+    versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
+    qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-mercedes-benz-literal-2026-10
+  agent: researcher
+  task: "Precios de data/raw/mercedes-benz/ (fuente T1 mercedes-benz-es). Busca el importe de cada versión en la web de
+    la marca: la página de precios, la ficha de cada modelo y sus ofertas. Lee las páginas con node
+    factory/fetch-page.ts (ver «Texto literal de una web registrada» en .claude/agents/researcher.md),
+    con palabras como PVP, Precio, Desde, Oferta válida o el nombre de la versión, y copia
+    price_terms tal cual de los párrafos que imprime. Sigue al pie de la letra las reglas de precio
+    de .claude/agents/researcher.md y de data-model.md, y solo si el precio se asocia sin duda a una
+    versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
+    qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-leapmotor-literal-2026-10
+  agent: researcher
+  task: "Precios de data/raw/leapmotor/ (fuente T1 leapmotor-es). Busca el importe de cada versión en la web de
+    la marca: la página de precios, la ficha de cada modelo y sus ofertas. Lee las páginas con node
+    factory/fetch-page.ts (ver «Texto literal de una web registrada» en .claude/agents/researcher.md),
+    con palabras como PVP, Precio, Desde, Oferta válida o el nombre de la versión, y copia
+    price_terms tal cual de los párrafos que imprime. Sigue al pie de la letra las reglas de precio
+    de .claude/agents/researcher.md y de data-model.md, y solo si el precio se asocia sin duda a una
+    versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
+    qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-lotus-literal-2026-10
+  agent: researcher
+  task: "Precios de data/raw/lotus/ (fuente T1 lotus-es). Busca el importe de cada versión en la web de
+    la marca: la página de precios, la ficha de cada modelo y sus ofertas. Lee las páginas con node
+    factory/fetch-page.ts (ver «Texto literal de una web registrada» en .claude/agents/researcher.md),
+    con palabras como PVP, Precio, Desde, Oferta válida o el nombre de la versión, y copia
+    price_terms tal cual de los párrafos que imprime. Sigue al pie de la letra las reglas de precio
+    de .claude/agents/researcher.md y de data-model.md, y solo si el precio se asocia sin duda a una
+    versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
+    qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: precios-jeep-literal-2026-10
+  agent: researcher
+  task: "Precios de data/raw/jeep/ (fuente T1 jeep-es). Busca el importe de cada versión en la web de
+    la marca: la página de precios, la ficha de cada modelo y sus ofertas. Lee las páginas con node
+    factory/fetch-page.ts (ver «Texto literal de una web registrada» en .claude/agents/researcher.md),
+    con palabras como PVP, Precio, Desde, Oferta válida o el nombre de la versión, y copia
+    price_terms tal cual de los párrafos que imprime. Sigue al pie de la letra las reglas de precio
+    de .claude/agents/researcher.md y de data-model.md, y solo si el precio se asocia sin duda a una
+    versión de la ficha. Si no hay precio válido, deja price: null y actualiza la open_question con
+    qué páginas leíste. No cambies needs_review (solo lo quita una persona) ni versiones o specs.
+    Quita de open_questions lo que resuelvas. node factory/validate-data.ts sin errores."
+- id: imagenes-sin-imagen-3
+  agent: researcher
+  task: "Añade imágenes a estos modelos, que hoy tienen images: []: data/raw/jeep/compass.yaml,
+    data/raw/mercedes-benz/cla-shooting-brake.yaml, data/raw/mercedes-benz/gla.yaml,
+    data/raw/mitsubishi/eclipse-cross.yaml, data/raw/peugeot/e-408.yaml,
+    data/raw/range-rover/range-rover-electric.yaml, data/raw/smart/hashtag-2.yaml y
+    data/raw/zeekr/7gt.yaml. Primero Wikimedia Commons (fuente wikimedia-commons), solo con licencia
+    que permita el uso comercial; descarga con node factory/fetch-image.ts y escribe la entrada con
+    file, source_url, page_url, source_id, retrieved, license y attribution. La imagen tiene que ser
+    del modelo y de la generación de la ficha (el Compass y el Eclipse Cross, de su versión
+    eléctrica); si no la hay, deja images: [] y anótalo en open_questions. Quita de open_questions
+    las notas de imagen que queden resueltas. Sigue tus instrucciones de imágenes
+    (.claude/agents/researcher.md) y ADR-0010, sección «Imágenes», puntos 12 y 13. No cambies ningún
+    otro dato de los ficheros."
+- id: reviews-primeros-enlaces-5
+  agent: researcher
+  task: "Más enlaces a reviews (PRD-006, ADR-0017, data-model.md sección 3.1), igual que
+    reviews-primeros-enlaces-4. Sigue las reglas de reviews de .claude/agents/researcher.md.
+    Modelos: data/raw/audi/q4-e-tron.yaml, data/raw/audi/q6-e-tron.yaml,
+    data/raw/cupra/tavascan.yaml, data/raw/hyundai/ioniq-6.yaml, data/raw/kia/ev9.yaml,
+    data/raw/nissan/ariya.yaml, data/raw/nissan/leaf.yaml y data/raw/peugeot/e-2008.yaml. Solo de
+    las fuentes diariomotor-es y motorpasion-es; no registres medios nuevos. Hasta dos reviews por
+    modelo, como mucho una por medio: pruebas del coche de la generación que describe la ficha;
+    compara la fecha de la prueba y la batería o la potencia que cita con las de la ficha, y si no
+    cuadran no la pongas. Copia el título literal con node factory/fetch-page.ts. Si un modelo no
+    tiene prueba válida en ninguno de los dos medios, anótalo en open_questions. No toques
+    test_results, needs_review ni ningún otro dato. node factory/validate-data.ts sin errores."
+- id: reviews-primeros-enlaces-6
+  agent: researcher
+  task: "Más enlaces a reviews, igual que reviews-primeros-enlaces-5 y con las mismas reglas.
+    Modelos: data/raw/peugeot/e-308.yaml, data/raw/polestar/polestar-2.yaml,
+    data/raw/polestar/polestar-4.yaml, data/raw/porsche/macan.yaml, data/raw/porsche/taycan.yaml,
+    data/raw/renault/megane-e-tech-electrico.yaml, data/raw/renault/twingo-e-tech-electrico.yaml y
+    data/raw/opel/frontera-electric.yaml. Solo de diariomotor-es y motorpasion-es; hasta dos por
+    modelo, una por medio, de la generación de la ficha (compara fecha y batería o potencia), título
+    literal con node factory/fetch-page.ts. Sin prueba válida, anótalo en open_questions. No toques
+    test_results, needs_review ni ningún otro dato. node factory/validate-data.ts sin errores."
