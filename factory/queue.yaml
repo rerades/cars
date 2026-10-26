@@ -2803,3 +2803,16 @@
     modelo, una por medio, de la generación de la ficha (compara fecha y batería o potencia), título
     literal con node factory/fetch-page.ts. Sin prueba válida, anótalo en open_questions. No toques
     test_results, needs_review ni ningún otro dato. node factory/validate-data.ts sin errores."
+- id: adr-0020-enmienda-version-del-precio
+  agent: architect
+  task: "Enmienda de ADR-0020 (aceptada el 2026-10-26), sin crear una ADR nueva. Lee ADR-0020 entera,
+    PRD-007 RF-8 y CA-10, data-model.md (versiones y precios) y factory/fetch-page.ts (htmlToText,
+    que da párrafos). Hoy la regla da por bueno un número si aparece en cualquier parte del texto
+    visible: no detecta un precio asignado a otra versión de la misma página, y los números de una o
+    dos cifras casan casi siempre. Decide: (1) si un precio (y price_terms) solo cuenta como
+    encontrado en el mismo párrafo, o a cierta distancia, que el nombre de la versión, y qué se hace
+    cuando la página no repite el nombre de la versión junto al precio; (2) si los números de una o
+    dos cifras se sacan de la muestra o se exige la unidad; (3) cómo cambian «encontrado» y «no
+    coincide» y qué dice el comentario. Da alternativas con sus falsos positivos y negativos y su
+    efecto en la métrica del 50 % de PRD-007, sin modelo (RNF-1). Pon la enmienda como propuesta en
+    el estado de ADR-0020, sin tocar PRD-007 ni el código. Bitácora."
