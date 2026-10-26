@@ -1,4 +1,6 @@
+import { PRICE_BANDS } from "./catalog.ts";
 import type { ModelRecord, Sourced, Tier, Version } from "./data.ts";
+import { SEGMENTS } from "./filter.ts";
 
 /**
  * Rankings (PRD-005). Pure module: no file access. Data comes from `loadModels()` (data.ts).
@@ -138,6 +140,66 @@ export interface RankingEntry {
 /** Anything `rankPlaces` takes: an entry of the JSON, or a `Candidate` straight from `candidates()`. */
 export type Rankable = RankingEntry | Candidate;
 
+/**
+ * Filters of a ranking (RF-8, RF-9, RF-10; ADR-0015, detail 3). `segment` is a model segment (same
+ * values as `/coches`); `priceBand` is the slug of a `PRICE_BANDS` band. null = no filter.
+ */
+export interface RankingFilters {
+  segment: string | null;
+  priceBand: string | null;
+}
+
+export const NO_RANKING_FILTERS: RankingFilters = { segment: null, priceBand: null };
+
+/** Slug of the price band of a price, or null (also for no price). */
+export function bandOf(price: number | null | undefined): string | null {
+  if (typeof price !== "number") return null;
+  return PRICE_BANDS.find((b) => b.accepts(price))?.slug ?? null;
+}
+
+/** Segment and price band of a version, from a `Candidate` or from an item of the JSON `entries[]`/`out[]`. */
+function facetsOf(item: Rankable | { segment: string | null; price_band: string | null }) {
+  if ("price_band" in item) return { segment: item.segment, band: item.price_band };
+  const c = item as Candidate;
+  return { segment: c.model.segment?.value ?? null, band: bandOf(c.version.price?.value) };
+}
+
+/**
+ * Whether a version passes the filters. A model without segment does not pass a segment filter, and a
+ * version without price does not pass a price filter (RF-8, RF-9): the datum is never assumed.
+ * Works on `entries[]`/`out[]` of the JSON (#447) and on a `Candidate`.
+ */
+export function passesFilters(
+  item: Rankable | { segment: string | null; price_band: string | null },
+  filters: RankingFilters,
+): boolean {
+  if (filters.segment === null && filters.priceBand === null) return true;
+  const { segment, band } = facetsOf(item);
+  if (filters.segment !== null && segment !== filters.segment) return false;
+  if (filters.priceBand !== null && band !== filters.priceBand) return false;
+  return true;
+}
+
+/** Valid values only: anything else in the query string is ignored without a warning. */
+export function parseRankingFilters(search: string): RankingFilters {
+  const q = new URLSearchParams(search);
+  const segment = q.get("segmento");
+  const band = q.get("precio");
+  return {
+    segment: segment !== null && (SEGMENTS as readonly string[]).includes(segment) ? segment : null,
+    priceBand: band !== null && PRICE_BANDS.some((b) => b.slug === band) ? band : null,
+  };
+}
+
+/** Query string with the leading "?" (or ""). Round-trips with `parseRankingFilters`. */
+export function rankingSearch(filters: RankingFilters): string {
+  const q = new URLSearchParams();
+  if (filters.segment !== null) q.set("segmento", filters.segment);
+  if (filters.priceBand !== null) q.set("precio", filters.priceBand);
+  const s = q.toString();
+  return s ? `?${s}` : "";
+}
+
 export interface Place<T extends Rankable = Rankable> {
   /** Position with ties: 1, 2, 2, 4 (RF-7). */
   place: number;
@@ -166,10 +228,15 @@ const collator = new Intl.Collator("es", { sensitivity: "base", numeric: true })
  * ranking takes every priced version, `financed` included. Pure: no input is modified.
  * The one function that numbers, for the build (no filters) and the browser script (#376).
  */
-export function rankPlaces<T extends Rankable>(items: readonly T[], ranking: RankingId | RankingDef): Place<T>[] {
+export function rankPlaces<T extends Rankable>(
+  items: readonly T[],
+  ranking: RankingId | RankingDef,
+  filters: RankingFilters = NO_RANKING_FILTERS,
+): Place<T>[] {
   const { direction } = typeof ranking === "string" ? rankingById(ranking) : ranking;
   const sign = direction === "asc" ? 1 : -1;
-  const keyed = items.map((item) => ({ item, key: keyOf(item) }));
+  // Filtered before numbering: places are 1..10 inside the result (RF-8).
+  const keyed = items.filter((item) => passesFilters(item, filters)).map((item) => ({ item, key: keyOf(item) }));
   keyed.sort(
     (a, b) =>
       sign * (a.key.figure.value - b.key.figure.value) ||

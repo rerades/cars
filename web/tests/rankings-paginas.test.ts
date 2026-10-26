@@ -126,7 +126,8 @@ describe("ranking pages (#371)", () => {
       // header only: the list of places (#372) carries figures and dates
       const body = text(/<main[\s\S]*?<\/header>/.exec(page(r.url))![0]);
       assert.doesNotMatch(body, /\b(mejor(es)?|recomendad[oa]s?|puntuaci[oó]n|media|valoraci[oó]n|insignia|medalla)\b/i);
-      assert.doesNotMatch(page(r.url), /<form\b|<script\b/i);
+      // the filters (#376) bring a module script, but the page has no form: nothing is submitted
+      assert.doesNotMatch(page(r.url), /<form\b/i);
       // the only digits are the 10-place limit of the shared scope line
       assert.deepEqual(body.replace(es["ranking.alcance"], "").match(/\d+/g) ?? [], []);
     }

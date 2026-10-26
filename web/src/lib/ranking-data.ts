@@ -1,6 +1,5 @@
-import { PRICE_BANDS } from "./catalog.ts";
 import type { Battery, ModelRecord, Price, Sourced } from "./data.ts";
-import { candidates, leftOut, rankingById, type RankingDef, type RankingId } from "./rankings.ts";
+import { bandOf, candidates, leftOut, rankingById, type RankingDef, type RankingId } from "./rankings.ts";
 
 /**
  * Data a ranking JSON publishes so the browser can filter (ADR-0015, detail 1; PRD-005 RF-4, RF-6,
@@ -49,10 +48,7 @@ export interface RankingJson {
 }
 
 /** Slug of the price band of `price` (PRD-001 RF-10 edges, kept in `PRICE_BANDS`), or null. */
-export function priceBandSlug(price: number | null | undefined): string | null {
-  if (typeof price !== "number") return null;
-  return PRICE_BANDS.find((b) => b.accepts(price))?.slug ?? null;
-}
+export const priceBandSlug = bandOf;
 
 const slugOf = (m: ModelRecord) => m.file.replace(/\.yaml$/, "").split("/").pop()!;
 

@@ -139,8 +139,10 @@ describe("offer price and terms, left-out count and empty state of the rankings 
   });
 
   test("RF-5: with no financed place shown there is no block; a pvp never has a label", () => {
-    const html = page(noBlock, "mas-baratos");
-    assert.equal(places(html).length, 10);
+    const full = page(noBlock, "mas-baratos");
+    assert.equal(places(full).length, 10);
+    // the inert place template of the filters (#376) carries every optional part: look outside it
+    const html = full.replace(/<template[\s\S]*?<\/template>/g, "");
     // the intro sentence of the page mentions the label, so look at the places and the block only
     assert.doesNotMatch(html, /data-condiciones|Condiciones de las ofertas|data-deal-badge|data-terms-ref|Ver condiciones/);
     assert.doesNotMatch(places(html).join(""), /Precio con oferta/);
@@ -148,7 +150,8 @@ describe("offer price and terms, left-out count and empty state of the rankings 
 
   test("RF-3, RF-5: the other four rankings show no price, no label, no block, no template", () => {
     for (const slug of ["mas-autonomia", "mas-bateria", "mas-potencia", "carga-mas-rapida-en-continua"]) {
-      const html = page(main, slug);
+      // the inert place template of the filters (#376) carries every optional part: look outside it
+      const html = page(main, slug).replace(/<template[\s\S]*?<\/template>/g, "");
       assert.doesNotMatch(html, /data-condiciones|Ver condiciones|data-terms-template|data-deal-badge/, slug);
       assert.doesNotMatch(places(html).join(""), /Precio con oferta/, slug);
     }

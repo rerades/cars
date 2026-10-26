@@ -309,6 +309,10 @@ export const es = {
   "ranking.fuera.uno":
     "1 versión a la venta se ha quedado fuera por no tener publicado {dato} con fuente verificable.",
   "ranking.fuera.ninguna": "Ninguna versión a la venta se ha quedado fuera: todas tienen publicado {dato}.",
+  "ranking.filtros.titulo": "Filtrar",
+  "ranking.filtros.todos": "Todos",
+  "ranking.filtros.cualquiera": "Cualquiera",
+  "ranking.filtros.sinJs": "Para filtrar el ranking por segmento o por precio hace falta activar JavaScript.",
   "ranking.vacio.titulo": "Ninguna versión",
   "ranking.vacio.texto": "Todavía no hay ninguna versión a la venta que tenga publicado {dato}.",
 } as const;
