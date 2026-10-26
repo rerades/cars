@@ -2898,3 +2898,14 @@
     sus casos como test.todo. No añade código de producto: si una prueba falla por el producto, no
     lo arregles; márcala test.todo y explícalo en la PR. La PR dice «Closes #378» y enumera los CA
     cubiertos."
+- id: prd-007-open-1-y-4
+  agent: product
+  task: "Propón respuesta a OPEN-1 (→ RF-9, escalera de confianza) y OPEN-4 (→ RF-10, agente retro)
+    de PRD-007. Lee PRD-007 entero, ADR-0002, ADR-0011 y budgets.yaml, y usa los datos reales:
+    ops/runs/*.jsonl (ejecuciones, coste y resultado por agente) y ops/merges/*.jsonl (qué se
+    fusionó solo y qué fue a una persona). Para OPEN-1: valor de N, qué es un «tipo de cambio» y
+    dónde vive el estado, con lo que habría pasado en octubre con cada opción. Para OPEN-4:
+    frecuencia, modelo y topes del retro, con su coste estimado frente al presupuesto. Da dos o
+    tres alternativas por pregunta y una recomendación, pero no las cierres: escríbelas debajo de
+    cada pregunta en la sección 8, con una fila en el historial, sin cambiar RF ni CA. Decide la
+    persona al revisar la PR. Bitácora."
