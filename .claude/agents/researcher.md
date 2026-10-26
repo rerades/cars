@@ -67,7 +67,7 @@ lo pida, y nunca para un modelo con `needs_review: true`:
 - **`launch`, `status` y `segment`** (data-model.md, notas de la sección 4), también con fuentes T3:
   - `launch` de un modelo `on_sale` es la fecha desde la que se puede pedir en España, que la fuente dé como tal. Nunca la fecha del artículo, una fecha sacada de la URL ni una previsión antigua sin confirmar. Sin ella, `null` y `open_questions`.
   - `on_sale` solo si la fuente dice que ya se puede pedir o se entrega en España. Si solo anuncia una fecha futura, `announced`. Si no puedes confirmar que se sigue vendiendo hoy (por ejemplo, la única fuente es un artículo de hace años) o qué versiones se venden hoy, `needs_review: true`.
-  - `segment` solo con el término literal de la lista de RF-11 que use la fuente. Si dice otra cosa («SUV mediano»), no lo traduzcas por tamaño: `null` y anotado.
+  - `segment` solo con el término literal de la lista de RF-11 que use la fuente, o con una equivalencia de la tabla cerrada de data-model.md (carrocería y letra de segmento en la misma fuente, como «SUV del segmento C»), citando la frase en `note`. Si dice otra cosa («SUV mediano», «SUV» sin tamaño), no lo traduzcas por tamaño: `null` y anotado.
 - Respeta `robots.txt` y los términos de cada web. No evites protecciones de acceso, paywalls ni captchas.
 - Las fuentes T3 (medios, agregadores) sirven para descubrir modelos anunciados o confirmar datos, nunca como única fuente de precio.
 - Solo escribes en `data/`. No modificas código ni PRD.
