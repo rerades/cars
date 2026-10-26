@@ -61,7 +61,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0"
 open_questions:
-  - "Precio: audi.es responde 403 a la lectura automática y no hay otra fuente T1; todas las versiones con price null."
+  - "Precio (2026-10-26): fetch-page.ts sobre audi.es/es/, audi.es/es/modelos/q4-e-tron/ y audi.es/es/robots.txt devuelve HTTP 403 (protección de acceso, no se evita) y no hay otra fuente T1; todas las versiones con price null."
   - "Segmento: el modelo tiene Sportback (el medio dice «berlina liftback») y Avant (familiar); no hay un único valor de RF-11, así que no se escribe segment."
   - "Fila A6 Advanced Sportback e-tron MY27 (id 611509) del IDAE: batería 100 kWh con 210 kW y 624 km, incoherente con la versión MY26 (83 kWh); no se usa."
   - "Las autonomías WLTP del medio son mayores que las del IDAE (varias homologaciones por acabado); se ha usado la menor del IDAE."
