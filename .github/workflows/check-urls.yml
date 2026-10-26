@@ -1,0 +1,63 @@
+name: Check source URLs
+
+# PRD-007, RF-11: once a week, check every URL cited by data/ (no model) and keep a single open
+# issue labelled `fuentes-rotas`. It never changes data: fixing a URL is a Researcher task.
+on:
+  schedule:
+    - cron: "17 3 * * 1" # Mondays, 03:17 UTC
+  workflow_dispatch:
+
+env:
+  PNPM_VERSION: 11.19.0
+  LABEL: fuentes-rotas
+
+# Only one pass at a time, so two runs cannot create two issues.
+concurrency:
+  group: check-urls
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    # The script takes about 3 minutes (one request per second and host).
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install -g pnpm@${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Check URLs
+        run: node factory/check-urls.ts > body.md
+      - name: Create, update or close the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          marker=$(head -n 1 body.md)
+          broken=$(sed -n 's/^<!-- fuentes-rotas: broken=\([0-9][0-9]*\) .*-->$/\1/p' <<< "$marker")
+          if [ -z "$broken" ]; then
+            echo "::error::First line of the report is not the expected marker: $marker"
+            exit 1
+          fi
+          echo "$marker"
+          # --label fails if the label is missing; --force creates it or leaves it as is.
+          gh label create "$LABEL" --force --color d93f0b --description "Broken source URLs in data/"
+          number=$(gh issue list --label "$LABEL" --state open --limit 1 --json number --jq '.[0].number // empty')
+          if [ "$broken" -gt 0 ]; then
+            if [ -n "$number" ]; then
+              gh issue edit "$number" --body-file body.md
+            else
+              gh issue create --title "Broken source URLs in data/" --body-file body.md --label "$LABEL"
+            fi
+          elif [ -n "$number" ]; then
+            gh issue comment "$number" --body "No broken URLs in the pass of $(date -u +%F). Closing."
+            gh issue close "$number"
+          else
+            echo "No broken URLs and no open issue."
+          fi
