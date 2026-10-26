@@ -34,7 +34,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
-  - "Web oficial de Lotus España: sin fichas ni precios legibles (configurador bloqueado por robots.txt). IDAE no tiene la marca Lotus (fetch-idae.ts LOTUS). Precio, wltp_km y batería sin fuente válida; wltp_km en ninguna versión."
+  - "Web oficial de Lotus España: sin fichas ni precios legibles (configurador bloqueado por robots.txt). Precios 2026-10-26: leídas con fetch-page.ts (palabras PVP, Precio, Desde, Oferta) lotuscars.com/es-ES/, /es-ES/emeya y /es-ES/eletre; ninguna trae párrafos con precio, así que price: null en todas las versiones (el precio de hibridosyelectricos-es es T3 y no vale). IDAE no tiene la marca Lotus (fetch-idae.ts LOTUS). Precio, wltp_km y batería sin fuente válida; wltp_km en ninguna versión."
   - "WLTP discrepante entre T3: motor.es (20/03/2025) da 540 km (612 CV) y 485 km (918 CV); hibridosyelectricos-es (06/05/2026) da hasta 610 km. No se guarda ninguno."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España. segment: las fuentes dicen «GT 100% eléctrico» y «berlina de lujo de altas prestaciones», que no es un término literal de RF-11; null."
   - "Imágenes: no se ha buscado ni registrado ninguna imagen de Commons en esta ejecución."
