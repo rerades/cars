@@ -43,7 +43,7 @@ versions:
     price: null
 images: []
 open_questions:
-  - "Web oficial de Jeep España ilegible (jeep-official.es no existe; jeep.es devuelve 403): precios sin fuente T1, price: null en todas las versiones."
+  - "Web oficial de Jeep España ilegible (jeep-official.es no existe; jeep.es devuelve 403): precios sin fuente T1, price: null en todas las versiones. Revisado el 2026-10-26 con fetch-page.ts: https://www.jeep.es/ y https://www.jeep.es/robots.txt dan HTTP 403; no se lee ni PVP ni oferta."
   - "launch: las fuentes leídas no dan una fecha de apertura de pedidos coherente (Motor16 habla del 6 de mayo, otra de junio de 2026); no se registra."
   - "Autonomía 4xe: el IDAE da 600 km y Motor.es 589 km; Long Range: 674 frente a 675. Se usa el IDAE (T2) y se anota; revisar contra la web de la marca."
   - "Versión First Edition (IDAE id 610639, 74 kWh, 500 km): Motor.es no la lista entre las que se venden hoy, no se registra."

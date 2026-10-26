@@ -31,7 +31,7 @@ images:
     license: CC-BY-3.0
     attribution: "Autosdeprimera, CC BY 3.0"
 open_questions:
-  - "Web oficial de Jeep España ilegible (jeep-official.es no existe; jeep.es devuelve 403): precios sin fuente T1, price: null en todas las versiones."
+  - "Web oficial de Jeep España ilegible (jeep-official.es no existe; jeep.es devuelve 403): precios sin fuente T1, price: null en todas las versiones. Revisado el 2026-10-26 con fetch-page.ts: https://www.jeep.es/, https://www.jeep.es/robots.txt y https://www.jeep.es/jeep-avenger-electrico dan HTTP 403; no se lee ni PVP ni oferta."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir el Avenger eléctrico en España."
   - "Versión 85th Anniversary (Diariomotor, 41.600 € antes de descuentos): sin fila en el IDAE, no se registra para no dejar wltp_km a medias. También hay filas IDAE para «Avenger» y «First Edition» (mismos valores) que Diariomotor no lista."
   - "Qué versiones se venden hoy solo está confirmado por un medio T3 (Diariomotor, 13/05/2026); la batería del IDAE no dice si es útil o bruta. Tracción no publicada en las fuentes leídas."
