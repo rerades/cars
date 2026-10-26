@@ -576,7 +576,8 @@ menos `--size-touch` de alto (relleno vertical si el título ocupa una sola lín
 | Métrica sin rótulo definido | Ese resultado no se pinta | PRD-006 RF-2 |
 | Resultado sin `value` | Ese resultado no se pinta | PRD-006 RF-2 |
 | Fuente sin registro o sin `name` | Esa entrada no se pinta; si era la única, no hay bloque | PRD-006 RF-1, RF-8, CA-1, CA-7 |
-| Las dos listas en el dato, pero una sin entradas publicables | Como «Solo `reviews`» o «Solo `test_results`»: sin `h3` | PRD-006 RF-7, RF-9 | | Modelo `needs_review: true` | No hay ficha | PRD-006 RF-4, CA-4 |
+| Las dos listas en el dato, pero una sin entradas publicables | Como «Solo `reviews`» o «Solo `test_results`»: sin `h3` | PRD-006 RF-7, RF-9 |
+| Modelo `needs_review: true` | No hay ficha | PRD-006 RF-4, CA-4 |
 | Cargando / error | No hay: va en el HTML generado | PRD-006 RNF-1 |
 
 ### Qué se ve en el HTML construido (PRD-006 CA-1 a CA-9; #602)
