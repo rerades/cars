@@ -2679,18 +2679,6 @@
     consecuencias para PRD-001, PRD-002, PRD-005 y la regla de ADR-0001 (fuente, URL y fecha), y di
     cuál recomiendas. Añádela a la sección 8 de PRD-001 como pregunta abierta, con una fila en el
     historial. No cambies RF, CA ni la regla: lo decide la persona al revisar la PR."
-- id: workflow-fuentes-rotas
-  agent: devops
-  task: "Workflow semanal de la comprobación de URL: PRD-007, RF-11 y CA-15 (léelos enteros). El
-    script ya está en main: node factory/check-urls.ts escribe en la salida estándar el cuerpo de la
-    issue, y su primera línea es <!-- fuentes-rotas: broken=N unchecked=M checked=K -->. Crea un
-    workflow nuevo en .github/workflows/ que se lance una vez por semana (lunes, de madrugada, hora
-    UTC) y a mano (workflow_dispatch). Instala con pnpm como ci.yml, ejecuta el script y, con gh, mantén
-    una sola issue abierta con la etiqueta fuentes-rotas (créala si falta): si broken > 0, crea la
-    issue o actualiza su cuerpo; si broken = 0 y hay una abierta, ciérrala con un comentario. Sigue el
-    patrón de langfuse-alert.yml para crear issues (permisos mínimos: issues: write, contents:
-    read). El script tarda unos 3 minutos: pon un timeout-minutes razonable. No toques ci.yml ni
-    factory/."
 - id: historia-599-enlace-review
   agent: developer
   task: "Historia #599 (épica #594, PRD-006): enlace a una review, con título, medio, dominio, fecha
