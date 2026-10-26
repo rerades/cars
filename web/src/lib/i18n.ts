@@ -162,6 +162,9 @@ export const es = {
     "Enlaces a pruebas de este modelo publicadas por otros medios. Llevan a su web, con el título original y en el idioma en que se publicaron, sin traducir ni resumir.",
   "ficha.reviews.pruebasEntrada":
     "Resultados publicados por organismos de pruebas independientes, con el nombre de la prueba tal como lo publican.",
+  "ficha.reviews.origen": "{medio} · {dominio} · consultado el {fecha}", // narrow no-break space before each «·» (ficha.lista.separador)
+  "ficha.reviews.version": "Sobre la versión {version}",
+  "ficha.reviews.enlaceSr": "(review de {medio} sobre {marca} {modelo}, en otra web)",
   "fecha.mes.1": "ene",
   "fecha.mes.2": "feb",
   "fecha.mes.3": "mar",
