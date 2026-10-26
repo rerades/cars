@@ -3,7 +3,8 @@
 - **Estado:** aceptada (2026-10-01). Enmienda «Imágenes» (`data/images/` en la lista de rutas):
   aceptada (2026-10-12). Enmienda «Fuentes nuevas» (`data/sources/`, solo altas): aceptada
   (2026-10-15). Enmienda «URL nuevas en fuentes existentes»: aceptada (2026-10-15). Enmienda
-  «Etiqueta de la fusión» (`merger:needs-human` y `merger:unreviewed`): aceptada (2026-10-19)
+  «Etiqueta de la fusión» (`merger:needs-human` y `merger:unreviewed`): aceptada (2026-10-19). Enmendada por ADR-0020 (2026-10-26): el verificador de datos es la última
+  regla de la fusión para las PR de `data/raw/` y también pone `merger:needs-human` (punto 14).
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de

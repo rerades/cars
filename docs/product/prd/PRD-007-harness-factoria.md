@@ -5,7 +5,7 @@ status: draft        # draft | ready | in-progress | done | deprecated
 priority: P1         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: []
 epic: ""
-updated: 2026-10-25
+updated: 2026-10-26
 ---
 
 # PRD-007 — Harness de la factoría
@@ -206,9 +206,11 @@ fase 3.
 ## 8. Preguntas abiertas
 - **OPEN-1** (→ RF-9): ¿Cuánto vale N? ¿Qué es un «tipo de cambio»: el agente más un prefijo de
   ruta? ¿Dónde se guarda el estado de la escalera?
-- **OPEN-2** (→ RF-8): ¿El verificador es código sin modelo (descargar la página y buscar el valor)
+- ~~**OPEN-2** (→ RF-8): ¿El verificador es código sin modelo (descargar la página y buscar el valor)
   o un agente? ¿De qué tamaño es la muestra? ¿Qué hace con las páginas que solo cargan los precios
-  con JavaScript?
+  con JavaScript?~~ Resuelta por ADR-0020 (2026-10-26): código sin modelo, última regla de la fusión;
+  hasta 10 URL por PR, precios primero; un valor que no está en el texto servido, también en páginas
+  de solo JavaScript, va a una persona.
 - **OPEN-3** (→ RF-7): ¿Cargan las skills de `.claude/skills/` en `claude -p` dentro del worktree con
   `FACTORY_AGENT`? ¿Puede una skill limitarse a un solo agente? Hay que comprobarlo antes de trocear
   RF-7.
@@ -229,3 +231,4 @@ fase 3.
 | 2026-10-21 | Aceptada la ADR-0018: RF-2 pide que las dependencias estén cerradas como completadas y que `factory:ready` la ponga solo una persona. OPEN-5 resuelta. Sin cambios en CA. | Claude |
 | 2026-10-21 | Aceptada la ADR-0019: OPEN-6 resuelta. La puerta corre sin contenedor. Una PR `fix` cita la PR que arregla (definition of done), para RF-1 y RF-9. Sin cambios en RF ni CA. | Claude |
 | 2026-10-25 | RF-11 y CA-15: comprobación semanal de las URL de `data/`, a petición del responsable. Se descartó dejarlo a las revisiones del Researcher, que solo miran las marcas que tocan. El script lo escribe una persona y el workflow, DevOps. | responsable + Claude |
+| 2026-10-26 | Aceptada la ADR-0020: OPEN-2 resuelta. Una PR de datos sin ningún valor comprobable (403, `robots.txt`) se sigue fusionando sola y se mide con RF-1. Sin cambios en RF ni CA. | responsable + Claude |
