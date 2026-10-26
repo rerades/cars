@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { after, before, describe, test } from "node:test";
+import { brotliCompressSync } from "node:zlib";
 import { parse, stringify } from "yaml";
 import { priceBandSlug } from "../src/lib/ranking-data.ts";
 import { RANKINGS, rankPlaces } from "../src/lib/rankings.ts";
@@ -15,7 +16,8 @@ import { sourced } from "./fixtures.ts";
  * Covers RF-4 (T3), RF-6, RF-11, RF-15 (out set), RNF-6; CA-4 (T3 part), CA-10, CA-16.
  */
 const WEB = resolve(import.meta.dirname, "..");
-const SLUGS = RANKINGS.map((r) => r.url.split("/").pop()!);
+const BROTLI_LIMIT = 50 * 1024; // ADR-0015, weight amendment, point 7
+const SLUGS =RANKINGS.map((r) => r.url.split("/").pop()!);
 
 const build = (data: string | null, outDir: string) => {
   const env = { ...process.env };
@@ -223,15 +225,20 @@ describe("ranking JSON weight with the real data (ADR-0015 estimate)", () => {
   });
   after(() => rmSync(out, { recursive: true, force: true }));
 
-  test("measures and prints the size of the five JSON; no threshold", () => {
+  test("each of the five JSON weighs 50 KB or less with Brotli (ADR-0015, weight amendment, point 7)", () => {
     const dir = join(out, "out/rankings/datos");
-    const sizes = SLUGS.map((s) => ({ s, bytes: statSync(join(dir, `${s}.json`)).size }));
-    const total = sizes.reduce((n, x) => n + x.bytes, 0);
+    const sizes = SLUGS.map((s) => {
+      const raw = readFileSync(join(dir, `${s}.json`));
+      return { s, bytes: raw.length, brotli: brotliCompressSync(raw).length };
+    });
     console.log(
-      `[rankings weight] ${sizes.map((x) => `${x.s}: ${x.bytes} B`).join("; ")}; total: ${total} B ` +
-        `(ADR-0015 estimate: ~30 KB today, price up to double; uncompressed)`,
+      `[rankings weight] ${sizes.map((x) => `${x.s}: ${x.bytes} B raw, ${x.brotli} B brotli`).join("; ")} ` +
+        `(threshold: ${BROTLI_LIMIT} B brotli each)`,
     );
     assert.equal(sizes.length, 5);
-    for (const x of sizes) assert.ok(x.bytes > 0, x.s);
+    for (const x of sizes) {
+      assert.ok(x.bytes > 0, x.s);
+      assert.ok(x.brotli <= BROTLI_LIMIT, `${x.s}: ${x.brotli} B brotli exceeds ${BROTLI_LIMIT} B`);
+    }
   });
 });
