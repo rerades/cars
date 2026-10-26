@@ -57,7 +57,7 @@ describe("«Reviews» block on the model page (PRD-006 RF-10, CA-9; PRD-002 RF-1
     source("motorejemplo-es");
     const withReviews = acme();
     withReviews.reviews = [
-      review(),
+      review({ version: "Volta 80 AWD" }),
       review({ title: "Acme Volta, primera prueba", url: "https://videos.motor.example/acme-volta" }),
     ];
     write("Volta", withReviews);
@@ -107,9 +107,50 @@ describe("«Reviews» block on the model page (PRD-006 RF-10, CA-9; PRD-002 RF-1
     assert.doesNotMatch(section, /Resultados de pruebas|Resultados publicados por organismos/);
     assert.equal((section.match(/<ul/g) ?? []).length, 1);
     assert.equal((section.match(/<li/g) ?? []).length, 2);
-    assert.match(section, /<a href="https:\/\/www\.motor\.example\/pruebas\/acme-volta-80-awd"[^>]*>Acme Volta 80 AWD: probamos el SUV eléctrico de 520 km<\/a>/);
+    assert.match(section, /<a href="https:\/\/www\.motor\.example\/pruebas\/acme-volta-80-awd"[^>]*>Acme Volta 80 AWD: probamos el SUV eléctrico de 520 km<span class="sr-only">/);
     assert.match(section, /<a href="https:\/\/videos\.motor\.example\/acme-volta"/);
     assert.doesNotMatch(section, /target="_blank"/);
+  });
+
+  const entries = () =>
+    [...(/<section[^>]*data-reviews[\s\S]*?<\/section>/.exec(page("Volta"))![0].matchAll(/<li[\s\S]*?<\/li>/g))].map((m) => m[0]);
+
+  test("CA-1, CA-6: each entry has the title as link text, outlet, domain and retrieval date", () => {
+    const [first, second] = entries();
+    assert.match(first, /<a href="https:\/\/www\.motor\.example\/pruebas\/acme-volta-80-awd"[^>]*>Acme Volta 80 AWD: probamos el SUV eléctrico de 520 km<span/);
+    assert.match(first, /Motor Ejemplo · motor\.example · consultado el 20 sep 2026/);
+    assert.match(second, /Motor Ejemplo · videos\.motor\.example · consultado el 20 sep 2026/);
+    for (const e of [first, second]) assert.doesNotMatch(e.replace(/href="[^"]*"/, ""), /www\./, "domain shown without www.");
+  });
+
+  test("RF-7: «Sobre la versión» only when the review has a version, as plain text", () => {
+    const [first, second] = entries();
+    assert.match(first, /<p[^>]*>Sobre la versión Volta 80 AWD<\/p>/);
+    assert.doesNotMatch(second, /Sobre la versión/);
+  });
+
+  test("CA-6: nothing but link, source line and version: no details, img, extract, rating, button, lang", () => {
+    for (const e of entries()) {
+      assert.doesNotMatch(e, /<details|<img|<svg|<button|<blockquote|lang=|target=|★|estrella|puntuaci/i);
+      assert.equal((e.match(/<a /g) ?? []).length, 1);
+      const text = e.replace(/<[^>]+>/g, "|").split("|").map((s) => s.trim()).filter(Boolean);
+      assert.ok(text.length <= 4, `title, sr text, source line, optional version: ${JSON.stringify(text)}`);
+    }
+  });
+
+  test("accessible name includes the hidden text with outlet, brand and model", () => {
+    const [first] = entries();
+    assert.match(first, /<span class="sr-only"> \(review de Motor Ejemplo sobre Acme Volta, en otra web\)<\/span><\/a>/);
+  });
+
+  test("CA-5: no link in the block has affiliate parameters or leaves the source's domain", () => {
+    const section = /<section[^>]*data-reviews[\s\S]*?<\/section>/.exec(page("Volta"))![0];
+    const hrefs = [...section.matchAll(/href="([^"]*)"/g)].map((m) => m[1]);
+    assert.equal(hrefs.length, 2);
+    for (const h of hrefs) {
+      assert.doesNotMatch(h, /[?&](utm_|aff|ref)|\?/i);
+      assert.match(new URL(h).hostname, /(^|\.)motor\.example$/);
+    }
   });
 
   test("without reviews (or only dropped ones) there is no block: no h2, no text", () => {
