@@ -1,0 +1,214 @@
+---
+import { t, type MessageKey } from "../lib/i18n.ts";
+import { SEGMENTS } from "../lib/filter.ts";
+import type { FilterOption } from "../lib/ranking-view.ts";
+import type { RankingDef } from "../lib/rankings.ts";
+
+/**
+ * Segment and price filters of a ranking (docs/design/rankings.md, "Filtros"; ADR-0015, details 2-4).
+ * Progressive enhancement: the selects are not in the served HTML, they live in a `<template>` the
+ * script clones (RNF-1); without JavaScript the visitor sees `ranking.filtros.sinJs`. It is not a
+ * form and sends nothing (RF-12). The script asks for `/rankings/datos/<slug>.json` only when a
+ * filter is needed, and numbers with the same `rankPlaces()` the build uses. Nothing is stored (RNF-5).
+ * Texts arrive through `data-messages` (RNF-4).
+ */
+interface Props {
+  ranking: RankingDef;
+  segments: FilterOption[];
+  prices: FilterOption[];
+}
+const { ranking, segments, prices } = Astro.props;
+const dataUrl = `/rankings/datos/${ranking.url.split("/").pop()}.json`;
+const messages: Record<string, string> = {
+  segmentoPendiente: t("tarjeta.segmentoPendiente"),
+  empate: t("ranking.puesto.empate"),
+};
+for (const s of SEGMENTS) messages[`segmento.${s}`] = t(`segmento.${s}` as MessageKey);
+const field = "min-h-touch w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900";
+---
+
+<div
+  role="group"
+  aria-labelledby="ranking-filtros-titulo"
+  class="mt-6"
+  data-ranking-filters
+  data-ranking={ranking.id}
+  data-url={dataUrl}
+  data-messages={JSON.stringify(messages)}
+>
+  <h2 id="ranking-filtros-titulo" class="sr-only">{t("ranking.filtros.titulo")}</h2>
+  <noscript>
+    <p class="text-small text-ink-600">{t("ranking.filtros.sinJs")}</p>
+  </noscript>
+  <template data-filters-template>
+    <div class="flex flex-col gap-4 md:flex-row md:items-end">
+      {
+        segments.length > 0 && (
+          <label class="flex flex-col gap-1 text-body md:w-64">
+            {t("filtros.segmento")}
+            <select name="segmento" class={field} data-filter-segment>
+              <option value="">{t("ranking.filtros.todos")}</option>
+              {segments.map((o) => <option value={o.value}>{o.label}</option>)}
+            </select>
+          </label>
+        )
+      }
+      <label class="flex flex-col gap-1 text-body md:w-64">
+        {t("filtros.precio")}
+        <select name="precio" class={field} data-filter-price>
+          <option value="">{t("ranking.filtros.cualquiera")}</option>
+          {prices.map((o) => <option value={o.value}>{o.label}</option>)}
+        </select>
+      </label>
+    </div>
+  </template>
+</div>
+
+<script>
+  import { formatEur, sourceView } from "../lib/format.ts";
+  import {
+    parseRankingFilters,
+    rankPlaces,
+    rankingById,
+    rankingSearch,
+    type RankingFilters,
+    type RankingId,
+  } from "../lib/rankings.ts";
+  import type { RankingJson, RankingJsonEntry } from "../lib/ranking-data.ts";
+  import type { Version } from "../lib/data.ts";
+  import { versionFields } from "../lib/version-fields.ts";
+
+  const root = document.querySelector<HTMLElement>("[data-ranking-filters]");
+  const list = document.querySelector<HTMLElement>("[data-ranking-list]");
+  const placeTemplate = document.querySelector<HTMLTemplateElement>("[data-place-template]");
+  const controls = root?.querySelector<HTMLTemplateElement>("[data-filters-template]");
+  if (root && list && placeTemplate && controls) init(root, list, placeTemplate, controls);
+
+  function init(
+    root: HTMLElement,
+    list: HTMLElement,
+    placeTemplate: HTMLTemplateElement,
+    controls: HTMLTemplateElement,
+  ) {
+    const def = rankingById(root.dataset.ranking as RankingId);
+    const msg: Record<string, string> = JSON.parse(root.dataset.messages ?? "{}");
+    root.append(controls.content.cloneNode(true));
+    const segmentSelect = root.querySelector<HTMLSelectElement>("[data-filter-segment]");
+    const priceSelect = root.querySelector<HTMLSelectElement>("[data-filter-price]")!;
+    // The list of the HTML (unfiltered): put back when the filters are cleared, with no request.
+    const original = [...list.children];
+
+    let json: Promise<RankingJson> | null = null;
+    /** One request for the page, asked for only when a filter needs it; a failure allows a new try. */
+    const load = () => {
+      json ??= fetch(root.dataset.url!)
+        .then((r) => {
+          if (!r.ok) throw new Error(String(r.status));
+          return r.json() as Promise<RankingJson>;
+        })
+        .catch((e) => {
+          json = null;
+          throw e;
+        });
+      return json;
+    };
+
+    const read = (): RankingFilters => ({
+      segment: segmentSelect?.value || null,
+      priceBand: priceSelect.value || null,
+    });
+    const write = (f: RankingFilters) => {
+      if (segmentSelect) segmentSelect.value = f.segment ?? "";
+      priceSelect.value = f.priceBand ?? "";
+    };
+    // A value the select has no option for (e.g. a segment this ranking does not have) is not a filter.
+    const clamp = (f: RankingFilters): RankingFilters => {
+      write(f);
+      return read();
+    };
+
+    function figureText(entry: RankingJsonEntry): string {
+      if (def.field === "price") return formatEur(entry.figure.value);
+      const v = { [def.field]: entry.figure } as unknown as Version;
+      return versionFields(v).find((x) => x.key === def.field)?.text ?? String(entry.figure.value);
+    }
+
+    function fill(entry: RankingJsonEntry, place: number, tied: boolean): HTMLElement {
+      const li = (placeTemplate.content.cloneNode(true) as DocumentFragment).firstElementChild as HTMLElement;
+      const $ = (sel: string) => li.querySelector<HTMLElement>(sel)!;
+      li.setAttribute("value", String(place));
+      li.dataset.place = String(place);
+      $("[data-place-value]").textContent = String(place);
+      if (!tied) $("[data-tie]").remove();
+      const link = $("[data-place-link]") as HTMLAnchorElement;
+      link.href = `/marcas/${entry.brand}/${entry.slug}/`;
+      link.textContent = `${entry.brand_name} ${entry.model}`;
+      $("[data-version]").textContent = entry.name;
+      $("[data-segment-text]").textContent = entry.segment ? msg[`segmento.${entry.segment}`]! : msg.segmentoPendiente!;
+      $("[data-figure-value]").textContent = figureText(entry);
+      if (def.field !== "price" || entry.figure.price_kind !== "financed") $("[data-deal-badge]").remove();
+      // The link to "Condiciones de las ofertas" goes with that block, which the filtered list rebuilds (#377).
+      $("[data-terms-ref]")?.remove();
+      const src = sourceView(entry.figure);
+      const a = $("[data-source-link]") as HTMLAnchorElement;
+      a.href = entry.figure.url;
+      a.textContent = src.name;
+      $("[data-source-date]").textContent = src.date;
+      if (!src.unofficial) $("[data-unofficial]").remove();
+      if (entry.figure.note) $("[data-note]").textContent = entry.figure.note;
+      else $("[data-note]").remove();
+      return li;
+    }
+
+    function render(data: RankingJson, f: RankingFilters) {
+      // Same function as the build, now with the filters: numbered 1..10 inside the result (RF-8).
+      const places = rankPlaces(data.entries, def, f);
+      list.replaceChildren(
+        ...places.map((p, i) =>
+          fill(p.entry, p.place, places[i - 1]?.place === p.place || places[i + 1]?.place === p.place),
+        ),
+      );
+    }
+
+    let seq = 0;
+    async function apply(previous: RankingFilters) {
+      const f = read();
+      const mine = ++seq;
+      if (f.segment === null && f.priceBand === null) {
+        list.replaceChildren(...original);
+      } else {
+        try {
+          const data = await load();
+          if (mine !== seq) return; // a later change won
+          render(data, f);
+        } catch {
+          // The data did not arrive: the list stays as it was and the selects go back to match it.
+          // The message in the live region is #377.
+          if (mine === seq) {
+            write(previous);
+            shown = previous;
+          }
+          return;
+        }
+      }
+      // Replace, not push: one history entry per page (as /coches).
+      history.replaceState(null, "", location.pathname + rankingSearch(f));
+    }
+
+    // What the list on screen corresponds to: the HTML list (no filters) until a filter is applied.
+    let shown: RankingFilters = { segment: null, priceBand: null };
+    const wanted = clamp(parseRankingFilters(location.search));
+    for (const s of [segmentSelect, priceSelect]) {
+      s?.addEventListener("focus", () => void load().catch(() => {}), { once: true });
+      s?.addEventListener("change", () => {
+        const previous = shown;
+        shown = read();
+        void apply(previous);
+      });
+    }
+    if (wanted.segment !== null || wanted.priceBand !== null) {
+      shown = wanted;
+      void apply({ segment: null, priceBand: null });
+    }
+  }
+</script>

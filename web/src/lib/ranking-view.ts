@@ -1,3 +1,4 @@
+import { PRICE_BANDS } from "./catalog.ts";
 import type { ModelRecord, Price } from "./data.ts";
 import { formatEur, sourceView } from "./format.ts";
 import { t, type MessageKey } from "./i18n.ts";
@@ -87,6 +88,29 @@ function dealOf(model: ModelRecord, name: string, def: RankingDef, price: Partia
     terms: price.price_terms ?? "",
     termsUrl: price.price_terms_url ?? "",
   };
+}
+
+export interface FilterOption {
+  value: string;
+  label: string;
+}
+
+/**
+ * Options of the two filter selects (docs/design/rankings.md, "Filtros"). Segments: only those some
+ * version of this ranking has, alphabetical by label; empty = the control is not painted. Price bands:
+ * the three of `PRICE_BANDS`, always.
+ */
+export function filterOptions(
+  models: readonly ModelRecord[],
+  ranking: RankingId | RankingDef,
+): { segments: FilterOption[]; prices: FilterOption[] } {
+  const present = new Set<string>();
+  for (const c of candidates(models, ranking)) if (c.model.segment) present.add(c.model.segment.value);
+  const segments = [...present]
+    .map((value) => ({ value, label: t(`segmento.${value}` as MessageKey) }))
+    .sort((a, b) => a.label.localeCompare(b.label, "es"));
+  const prices = PRICE_BANDS.map((b) => ({ value: b.slug, label: t(`explorar.precio.${b.key}` as MessageKey) }));
+  return { segments, prices };
 }
 
 /** What the page shows below the list (RF-15, CA-18): the "data" noun of the ranking and the count. */
