@@ -2855,3 +2855,46 @@
     node factory/fetch-page.ts para comprobar que responde. Si ya no hay sala de prensa en España,
     quita urls.press y anótalo en notes. Actualiza last_verified. No toques ninguna otra fuente ni
     data/raw/. Bitácora."
+- id: historia-600-orden-reviews
+  agent: developer
+  task: "Historia #600 (épica #594, PRD-006): orden de las entradas del bloque de reviews. Lee la
+    issue entera (gh issue view 600 --comments) y haz exactamente lo que dice, con ADR-0017 y
+    docs/design/ficha-modelo.md (bloque «Reviews», revisado en #694 y #721). Parte de lo que ya
+    está en main (ReviewsBlock.astro, #700), sin duplicarlo. Además, el diseño revisado pide la
+    fecha de cada entrada en <time datetime=\"{retrieved}\"> y #700 la pinta como texto: cámbialo
+    aquí, con su prueba. No hagas los resultados de pruebas (#601). Pruebas con node --test sobre
+    el build, como ficha-reviews.test.ts. La PR dice «Closes #600» y enumera los RF y CA cubiertos."
+- id: historia-601-resultado-prueba
+  agent: developer
+  task: "Historia #601 (épica #594, PRD-006): resultado de prueba en el bloque (dato, prueba, fuente
+    y fecha). Lee la issue entera (gh issue view 601 --comments) y haz exactamente lo que dice, con
+    ADR-0017 y docs/design/ficha-modelo.md (bloque «Reviews»: «Cada resultado de prueba», «Nivel de
+    la fuente» y la tabla de estados). Ningún modelo de data/raw/ tiene aún test_results: prueba
+    con fixtures, como las demás pruebas de la ficha. Si #600 ya está en main, aplica su orden
+    también a test_results. Pruebas con node --test sobre el build. La PR dice «Closes #601» y
+    enumera los RF y CA cubiertos."
+- id: historia-377-estados-filtrar
+  agent: developer
+  task: "Historia #377 (épica #368, PRD-005): estados al filtrar (resumen, vacío filtrado y
+    recálculo). Lee la issue entera (gh issue view 377 --comments) y haz exactamente lo que dice,
+    con ADR-0015 (detalle 3) y docs/design/rankings.md («Vacío filtrado», «Línea de resumen»,
+    «Estados»). Parte de los filtros de #376 que ya están en main (RankingFilters.astro, #689), sin
+    duplicarlos; su catch de apply() ya revierte los selects tras un fallo de red, así que aquí va
+    el mensaje de error. Revisa también el aviso de la revisión de #689: el diseño pide el control
+    de precio aunque el ranking no tenga puestos. Sin pruebas de navegador (#378). La PR dice
+    «Closes #377» y enumera los RF y CA cubiertos."
+- id: historia-602-pruebas-build-reviews
+  agent: developer
+  task: "Historia #602 (épica #594, PRD-006): pruebas del build del bloque de reviews (solo lectura,
+    sin almacenamiento, sin compra y sin URL propia). Lee la issue entera (gh issue view 602
+    --comments) y haz exactamente lo que dice, con el patrón de web/tests/build.test.ts. No añade
+    funcionalidad: si una prueba falla por el producto, no lo arregles; deja la prueba marcada como
+    pendiente (test.todo) y explícalo en la PR. La PR dice «Closes #602» y enumera los CA cubiertos."
+- id: historia-378-pruebas-rankings
+  agent: developer
+  task: "Historia #378 (épica #368, PRD-005): pruebas sobre el build y en navegador de los rankings.
+    Lee la issue entera (gh issue view 378 --comments) y haz exactamente lo que dice, con ADR-0015
+    (detalles 4 y 6) y el Playwright que ya usa web/ (ADR-0006). Si #377 aún no está en main, deja
+    sus casos como test.todo. No añade código de producto: si una prueba falla por el producto, no
+    lo arregles; márcala test.todo y explícalo en la PR. La PR dice «Closes #378» y enumera los CA
+    cubiertos."
