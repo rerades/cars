@@ -1,6 +1,6 @@
 # ADR-0020 — Verificador de datos independiente
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-26). Enmienda el punto 14 de ADR-0011: el verificador es una regla más de la fusión.
 - **Fecha:** 2026-10-26
 
 ## Contexto
@@ -228,10 +228,13 @@ que no bloquea y un `robots.txt` que lo prohíbe.
   salida JSON del script no debe cambiar.
 
 **Preguntas abiertas (no se deciden aquí):**
-- ¿Una PR de datos en la que no se pudo comprobar **ningún** valor debe ir a una persona?
+- ~~¿Una PR de datos en la que no se pudo comprobar **ningún** valor debe ir a una persona?~~
+  Resuelta al aceptar (2026-10-26): no. Se fusiona como hoy, el comentario y el campo `verify` lo
+  dicen, y se revisa con los datos de RF-1.
 - ¿Debe el registro marcar las fuentes de solo JavaScript (un campo en `data/sources/`) para que el
   Researcher no las use como `url` de valores, o para que el verificador las trate distinto? Sería
-  una enmienda de ADR-0001 y del modelo de datos.
+  una enmienda de ADR-0001 y del modelo de datos. Sigue abierta al aceptar (2026-10-26): se decide
+  cuando RF-1 diga cuántas PR van a una persona por esas páginas.
 - ¿Se verifican también las PR de datos que no son del Researcher, o las fusionadas a mano? Con esta
   decisión solo las que la fusión automática iba a fusionar.
 - El tope de 10 URL y el tiempo que añade a la pasada se revisan con los datos de RF-1.
