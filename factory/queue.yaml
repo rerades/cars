@@ -2846,3 +2846,12 @@
     con alternativas descartadas. Si propones enmendar ADR-0001 o ADR-0008, dilo en su estado como
     propuesta. Anota la decisión pendiente en docs/architecture/overview.md. No toques PRD-001 ni
     data/. Bitácora."
+- id: fuente-leapmotor-press-404
+  agent: researcher
+  task: "URL rota de la issue #719 (comprobación semanal, PRD-007 RF-11): urls.press de
+    data/sources/leapmotor-es.yaml (https://www.leapmotor.net/es-es/descubre-leapmotor/noticias) da
+    404. Sigue las reglas del registro de fuentes de .claude/agents/researcher.md y data-model.md
+    (sección 8). Busca en leapmotor.net/es-es la página de noticias o prensa vigente y cámbiala, con
+    node factory/fetch-page.ts para comprobar que responde. Si ya no hay sala de prensa en España,
+    quita urls.press y anótalo en notes. Actualiza last_verified. No toques ninguna otra fuente ni
+    data/raw/. Bitácora."
