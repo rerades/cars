@@ -403,6 +403,15 @@ Cómo llegan los datos al build no es de este documento.
   hay reviews» podría leerse como un juicio sobre el modelo. «Versiones» sí muestra su vacío porque es el
   contenido central de la ficha (RF-11); este bloque no.
 - Modelo con `needs_review: true`: no hay ficha, así que tampoco bloque (PRD-006 RF-4, CA-4).
+- **Entrada publicable** (PRD-006 RF-1, RF-8, CA-1, CA-7): la que, además de validar, tiene registro en
+  `data/sources/{source_id}.yaml` con `name` no vacío, porque sin él no hay «quién lo firma» que mostrar. Una
+  entrada sin `name` **no se pinta** (ni con el `source_id`, ni con el dominio en su lugar, ni con un
+  «medio desconocido»): mostrarla sin firma incumpliría CA-1. En `test_results`, además, hace falta `value`
+  y el rótulo de su métrica (ver «Cada resultado de prueba»). Si una sublista se queda sin entradas
+  publicables, se trata como ausente: cuenta para decidir si hay `h3` y si existe el bloque.
+- **Enlace a la ficha** (PRD-006 RF-4, CA-4, segunda mitad): el bloque solo existe dentro de
+  `/marcas/{marca}/{modelo}/`, así que cada review ya está en la página de su modelo; no se añade un enlace
+  de vuelta a la propia ficha (sería un enlace a la página actual).
 
 ### Título y estructura
 - `<section aria-labelledby>` con `h2` `ficha.reviews.titulo`: **«Reviews»** (el nombre del área en la visión
@@ -424,6 +433,14 @@ Cómo llegan los datos al build no es de este documento.
 - Cada sublista es una `<ul>` (el orden es de presentación, no un ranking: PRD-006 RF-5, sin «mejor»).
   Entradas separadas `4` y con una línea `line-soft` entre ellas (decorativa). Sin Card: son enlaces en una
   lista, no bloques de datos comparables. Una columna, ancho máximo `--width-prose`, en todas las anchuras.
+- Marcado (WCAG 1.3.1, 2.4.6):
+  - `<section aria-labelledby="reviews">` con `<h2 id="reviews">` (el `id` que ya usa `ReviewsBlock`, #598).
+  - Con dos sublistas, cada una en su contenedor con su `h3`: `id="reviews-pruebas"` y `id="reviews-medios"`
+    (#601). Con una sola, sin `h3` ni `id` propio.
+  - Las `<ul>` llevan `role="list"` explícito: con `list-style: none` Safari y VoiceOver dejan de anunciarlas
+    como lista, y el recorrido del lector («Lista, 2 elementos») depende de ello (mismo criterio que
+    `rankings.md`).
+  - La línea de entrada es un `<p>` antes de la `<ul>`, fuera de ella.
 
 ### Cada enlace a una review (PRD-006 RF-1, RF-5, RF-7, CA-1, CA-5, CA-6)
 
@@ -460,6 +477,20 @@ puede no nombrar el modelo ni el medio («Primera prueba»). Por eso el enlace l
 oculto visualmente `ficha.reviews.enlaceSr`: «(review de {medio} sobre {marca} {modelo}, en otra web)». El
 nombre accesible queda «Primera prueba (review de Motor Ejemplo sobre Acme Volta, en otra web)».
 
+Marcado de cada entrada (#599), dentro de su `<li>`:
+1. `<a href="{url}">{title}<span class="sr-only">{ficha.reviews.enlaceSr}</span></a>`. El `href` es la `url`
+   del dato **tal cual**: no se le añaden parámetros (`utm_*`, `ref`, afiliación), no se acorta ni se
+   redirige por otra URL (PRD-006 RF-5, CA-5). Sin `target`, como se dice arriba. El título no lleva
+   `title=""` ni `aria-label` (el `aria-label` taparía el título literal para el lector).
+2. `<p>` con `ficha.reviews.origen`. `{fecha}` va en `<time datetime="{retrieved}">` (`YYYY-MM-DD`), como las
+   demás fechas de la ficha. `{medio}` y `{dominio}` son texto, no enlaces: la entrada tiene **una sola**
+   parada de foco (CA-6: cada entrada es un enlace).
+3. `<p>` con `ficha.reviews.version`, solo si hay `version`.
+
+El anillo de foco del enlace es el de `tokens.md` («Tamaño táctil y foco»), igual que los demás enlaces de la
+ficha. El enlace es un bloque propio («Disposición»), así que con el título en varias líneas el anillo rodea
+toda su caja; el contenedor no lleva `overflow: hidden`, que lo recortaría.
+
 ### Cada resultado de prueba (PRD-006 RF-1, RF-9, CA-1, CA-2, CA-8)
 
 La lista de `metric` de `data-model.md` está vacía: aquí solo se fija la forma general. No se inventa ninguna
@@ -484,6 +515,14 @@ Sobre la versión {version}                                   ← solo si hay ve
   tamaño táctil) con la zona de pulsación ampliada a 24 × 24 px, como las marcas de nota.
 - **`version`** como en las reviews; **`note`** debajo, literal, `text-small`, `ink-600` (como RF-8 de PRD-002).
 - Un `dl` por resultado: `dt` el rótulo de la métrica, `dd` el valor; las líneas siguientes en el `dd`.
+  Cada `dl` va dentro de un `<li>` de la `<ul role="list">` de la sublista (#601).
+- **Valor sin redondear** (PRD-006 RF-2): `{valor}` con el número de decimales que trae el dato, con coma
+  decimal y punto de miles de `es-ES`; no se redondea ni se completa con ceros.
+- **Sin `value`** (`null` o ausente): ese resultado no se pinta. No hay «por confirmar» aquí: a diferencia de
+  un campo de versión, un resultado sin valor no dice nada del coche (RF-2: sin fuente verificable no se
+  muestra).
+- `{fecha}` en `<time datetime="{retrieved}">`, como en las reviews. El enlace del organismo es la única parada
+  de foco del resultado.
 
 ### Nivel de la fuente
 Ninguna entrada del bloque lleva «fuente no oficial»: todas son de un tercero por construcción (ADR-0017), el
@@ -535,8 +574,26 @@ menos `--size-touch` de alto (relleno vertical si el título ocupa una sola lín
 | Varias reviews del mismo medio | Todas, ordenadas como arriba; sin tope | Pregunta 6 |
 | `retrieved` antiguo o fuente `broken` | Se muestra igual, con su fecha visible: el visitante ve cuándo se comprobó | PRD-006 RF-1; pregunta 8 |
 | Métrica sin rótulo definido | Ese resultado no se pinta | PRD-006 RF-2 |
-| Modelo `needs_review: true` | No hay ficha | PRD-006 RF-4, CA-4 |
+| Resultado sin `value` | Ese resultado no se pinta | PRD-006 RF-2 |
+| Fuente sin registro o sin `name` | Esa entrada no se pinta; si era la única, no hay bloque | PRD-006 RF-1, RF-8, CA-1, CA-7 |
+| Las dos listas en el dato, pero una sin entradas publicables | Como «Solo `reviews`» o «Solo `test_results`»: sin `h3` | PRD-006 RF-7, RF-9 || Modelo `needs_review: true` | No hay ficha | PRD-006 RF-4, CA-4 |
 | Cargando / error | No hay: va en el HTML generado | PRD-006 RNF-1 |
+
+### Qué se ve en el HTML construido (PRD-006 CA-1 a CA-9; #602)
+Lo que el diseño de arriba deja comprobable sin JavaScript, para que las pruebas del build no tengan que
+interpretar nada. Los ganchos `data-reviews` y `data-reviews-medios` ya están en `ReviewsBlock` (#598); la
+sublista de pruebas usa `data-reviews-pruebas` (#601). Son para las pruebas, no para estilos.
+
+| CA | En el HTML de la ficha |
+|---|---|
+| CA-1 | Cada `<li>` del bloque contiene el `name` de su fuente, un `<a>` con `href` igual a la `url` del dato y un `<time datetime>` igual a su `retrieved` |
+| CA-2, CA-8 | Cada resultado pintado corresponde a una entrada de `test_results` con sus cuatro campos; ninguna cifra del bloque sale de otro sitio |
+| CA-3 | Dentro de `[data-reviews]` no hay `form`, `input`, `textarea`, `select` ni `button`; el bloque no añade `script` |
+| CA-4 | Un modelo `needs_review: true` no tiene página, así que ninguno de sus títulos aparece en el sitio; el bloque solo está en `/marcas/{marca}/{modelo}/` |
+| CA-5 | Los `href` del bloque son exactamente las `url` de los datos (sin parámetros añadidos); el bloque no tiene otros enlaces |
+| CA-6 | En la sublista de medios, cada `<li>` tiene un solo `<a>` y, fuera de él, solo el origen y, si hay, la versión: ningún otro texto |
+| CA-7 | Cada entrada pintada tiene un `source_id` con registro y `terms_checked` (dato, no HTML; lo cubre el validador) |
+| CA-9 | `[data-reviews]` es la última `section` de `main` y no existe otra ruta con reviews |
 
 ## Estados
 
@@ -597,6 +654,10 @@ Recorrido de Tavascan, de arriba abajo:
    «Lista, 2 elementos.» «Acme Volta, primera prueba (review de Motor Ejemplo sobre Acme Volta, en otra web),
    enlace.» «Motor Ejemplo · motor.example · consultado el 20 sep 2026.» Y en la segunda: «… Sobre la versión
    Volta 80 AWD.»
+   Con resultados de pruebas (cuando haya métricas; #601) y las dos sublistas: «Resultados de pruebas,
+   encabezado nivel 3.» La línea de entrada. «Lista, 1 elemento.» «{Rótulo de la métrica}: {valor} {unidad}.»
+   «{test}.» «Fuente: {organismo} (resultado de {test} para {marca} {modelo}, en otra web), enlace, {fecha}.»
+   Después, «Reviews de medios, encabezado nivel 3.» y la lista de reviews como arriba.
 
 Landmarks: `nav` de la ruta y `main`. Por encabezados se llega directo a «Versiones», «Datos del modelo»,
 «Más imágenes», «Otros modelos del segmento», «Fuentes» y «Reviews». Las etiquetas se leen como texto («Precio con
