@@ -21,7 +21,7 @@ versions:
 images: []
 open_questions:
   - "Imagen (2026-10-15): búsquedas en Commons «Mercedes GLA electric H247 2026» y «Mercedes-Benz GLA mit EQ-Technologie»; solo hay un GLA 250 e (H247, híbrido enchufable de la generación anterior). Sin foto válida: images []."
-  - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y no hay otra fuente T1; todas las versiones con price null."
+  - "Precio: mercedes-benz.es dio timeout el 2026-10-13 y de nuevo el 2026-10-26 (fetch-page.ts falló en la ficha del GLB y la home; WebFetch, timeout) sin poder leer ninguna página de precios u ofertas, y no hay otra fuente T1; todas las versiones con price null."
   - "Autonomía: el IDAE (725 y 681 km) difiere de la cifra del medio (654 y 640 km); se guarda el IDAE (T2) y la del medio va en la nota."
   - "GLA 200 (58 kWh LFP): anunciado por el medio sin precio y sin homologación en el IDAE; no se ha escrito."
   - "status: el artículo de 03/08/2026 publica el PVP y prevé las primeras entregas en noviembre, pero no dice que haya pedidos abiertos; announced hasta confirmarlo."
