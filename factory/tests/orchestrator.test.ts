@@ -1,6 +1,6 @@
 /** Pruebas del orquestador y del hook guardián. Ejecutar: npm test */
 import { execFileSync, spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, test } from "node:test";
@@ -611,6 +611,25 @@ describe("fusión de la PR de estado (ADR-0013, punto 6)", () => {
     ];
     for (const [change, stopped] of cases) {
       assert.notEqual(orq.stateMergeBlocker({ ...green, ...change }, stopped), null, JSON.stringify(change));
+    }
+  });
+});
+
+describe("mainCheckout (#681)", () => {
+  test("from a linked worktree it gives the main checkout, not the worktree", () => {
+    const repo = realpathSync(mkdtempSync(join(tmpdir(), "main-checkout-")));
+    const git = (...args: string[]) => execFileSync("git", ["-c", "user.name=t", "-c", "user.email=t@t", "-c", "core.hooksPath=/dev/null",
+      "-c", "commit.gpgsign=false", ...args], { cwd: repo, encoding: "utf8" });
+    try {
+      git("init", "-q", "-b", "trunk");
+      git("commit", "-q", "--allow-empty", "-m", "init");
+      const wt = join(repo, "ops", "worktrees", "factory-state");
+      git("worktree", "add", "-q", "-b", "state", wt);
+      assert.equal(orq.mainCheckout(repo), repo);
+      assert.equal(orq.mainCheckout(wt), repo);
+      assert.equal(orq.mainCheckout(tmpdir()), tmpdir());
+    } finally {
+      rmSync(repo, { recursive: true, force: true });
     }
   });
 });

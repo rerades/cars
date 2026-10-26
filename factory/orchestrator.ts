@@ -8,7 +8,7 @@
 import { execFileSync, spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { basename, join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { parse } from "yaml";
 import { changedFiles, runEvals } from "./evals.ts";
 
@@ -20,7 +20,19 @@ export const BUDGETS = join(REPO, "factory", "budgets.yaml");
  * at a plain folder and turns off its git handling; the tests use it.
  */
 export const STATE_BRANCH = "chore/factory-state";
-export const STATE_DIR = process.env.FACTORY_STATE_DIR || join(REPO, "ops", "worktrees", "factory-state");
+/**
+ * The main checkout of the repository that holds `dir`, even when `dir` is a linked worktree
+ * (the state worktree, an agent worktree). Falls back to `dir` outside git (#681).
+ */
+export function mainCheckout(dir: string): string {
+  try {
+    const common = execFileSync("git", ["rev-parse", "--path-format=absolute", "--git-common-dir"], { cwd: dir, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    return dirname(common.trim());
+  } catch {
+    return dir;
+  }
+}
+export const STATE_DIR = process.env.FACTORY_STATE_DIR || join(mainCheckout(REPO), "ops", "worktrees", "factory-state");
 const STATE_IN_GIT = !process.env.FACTORY_STATE_DIR;
 export const LEDGER_DIR = join(STATE_DIR, "ops", "runs");
 export const QUEUE = join(STATE_DIR, "factory", "queue.yaml");
