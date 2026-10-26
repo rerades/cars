@@ -27,7 +27,7 @@ images:
     license: "CC-BY-SA-3.0-DE"
     attribution: "M 93, CC BY-SA 3.0 de, via Wikimedia Commons"
 open_questions:
-  - "Precio: la web oficial pone «Financiación y precios 57.777,50 €» (GLB 250+) sin decir si es el PVP sin ayudas ni dar condiciones; no se guarda. Reintentado el 2026-10-14: mercedes-benz.es sigue sin responder (timeout) y no hay otra fuente T1 que lo diga literalmente. Confirmar en el configurador."
+  - "Precio: la web oficial pone «Financiación y precios 57.777,50 €» (GLB 250+) sin decir si es el PVP sin ayudas ni dar condiciones; no se guarda. Reintentado el 2026-10-14 y el 2026-10-26 (fetch-page.ts falló en la ficha del GLB y la home; WebFetch, timeout): mercedes-benz.es sigue sin responder y no hay otra fuente T1 que lo diga literalmente. Confirmar en el configurador."
   - "Segmento: el medio solo dice «SUV de Mercedes con hasta siete plazas»; no hay clasificación en la lista de RF-11."
   - "Imagen: sin foto del GLB eléctrico con licencia válida localizada."
   - "launch: el artículo de 11/12/2025 dice que ya acepta pedidos, pero no desde cuándo; sin dato."

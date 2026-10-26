@@ -21,7 +21,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0"
 open_questions:
-  - "Precio: la web oficial pone «Financiación y precios 175.463,46 €» (G 580) sin decir si es el PVP sin ayudas ni dar condiciones; no se guarda. Reintentado el 2026-10-14: mercedes-benz.es sigue sin responder (timeout) y no hay otra fuente T1 que lo diga literalmente. Confirmar en el configurador."
+  - "Precio: la web oficial pone «Financiación y precios 175.463,46 €» (G 580) sin decir si es el PVP sin ayudas ni dar condiciones; no se guarda. Reintentado el 2026-10-14 y el 2026-10-26 (fetch-page.ts falló en la ficha del GLB y la home; WebFetch, timeout): mercedes-benz.es sigue sin responder y no hay otra fuente T1 que lo diga literalmente. Confirmar en el configurador."
   - "Segmento: el medio lo describe como «4x4 de lujo», sin categoría de RF-11; segment null."
   - "Tracción: no confirmada por una fuente leída (el IDAE no la incluye en el nombre); sin drivetrain."
   - "launch: el artículo de 08/06/2024 lo da ya a la venta, pero no dice desde cuándo; sin dato."
