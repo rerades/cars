@@ -2816,3 +2816,45 @@
     coincide» y qué dice el comentario. Da alternativas con sus falsos positivos y negativos y su
     efecto en la métrica del 50 % de PRD-007, sin modelo (RNF-1). Pon la enmienda como propuesta en
     el estado de ADR-0020, sin tocar PRD-007 ni el código. Bitácora."
+- id: segmento-tabla-equivalencias-1
+  agent: researcher
+  task: "Segmento con la tabla cerrada de equivalencias (PRD-001 RF-11, decisión del 2026-10-26).
+    Sigue la regla de segment de data-model.md (sección 4, notas, con su tabla) y de
+    .claude/agents/researcher.md; no la amplíes. Fichas, que hoy no tienen segmento y cuyas
+    open_questions citan una letra de segmento: data/raw/alfa-romeo/junior-elettrica.yaml,
+    data/raw/deepal/deepal-s07.yaml, data/raw/ds/n7.yaml, data/raw/fiat/600e.yaml,
+    data/raw/fiat/grande-panda.yaml, data/raw/ford/capri.yaml, data/raw/ford/e-tourneo-courier.yaml,
+    data/raw/ford/explorer.yaml, data/raw/ford/mustang-mach-e.yaml y data/raw/ford/puma-gen-e.yaml.
+    Vuelve a leer la fuente con node factory/fetch-page.ts; pon el segmento solo si la carrocería y
+    la letra están en la misma fuente, con la frase literal en note, y quita la open_question que
+    queda resuelta. Si no encaja en la lista ni en la tabla, sigue en null. No toques needs_review
+    ni ningún otro dato. node factory/validate-data.ts sin errores."
+- id: segmento-tabla-equivalencias-2
+  agent: researcher
+  task: "Igual que segmento-tabla-equivalencias-1, con las mismas reglas (data-model.md, sección 4,
+    y su tabla cerrada; .claude/agents/researcher.md). Fichas: data/raw/geely/e2.yaml,
+    data/raw/kia/ev4.yaml, data/raw/lancia/ypsilon.yaml, data/raw/maserati/grecale.yaml,
+    data/raw/mazda/mazda-6e.yaml, data/raw/mazda/mazda-cx-6e.yaml,
+    data/raw/mercedes-benz/glc.yaml, data/raw/omoda/omoda-5-ev.yaml, data/raw/xpeng/g9.yaml y
+    data/raw/volvo/es90.yaml. En el ES90, la fuente T3 que dice «Berlina» vale lo mismo que una T1
+    (data-model.md). No toques needs_review ni ningún otro dato. node factory/validate-data.ts sin
+    errores."
+- id: segmento-peugeot-reintento
+  agent: researcher
+  task: "Segmento de los siete Peugeot (data/raw/peugeot/e-208.yaml, e-2008.yaml, e-308.yaml,
+    e-308-sw.yaml, e-408.yaml, e-3008.yaml y e-5008.yaml), que siguen sin él porque la web de la
+    marca dio 403. Sigue la regla de segment de data-model.md (sección 4, con su tabla cerrada) y de
+    .claude/agents/researcher.md: reintenta la T1 con node factory/fetch-page.ts y, si sigue sin
+    leerse, usa una fuente T3 registrada que lo diga. Sin fuente que lo diga, sigue en null y
+    anotado. No toques needs_review ni ningún otro dato. node factory/validate-data.ts sin errores."
+- id: adr-clasificacion-editorial-segmento
+  agent: architect
+  task: "ADR nueva (estado: propuesta) sobre la alternativa C de la pregunta de los modelos sin
+    segmento de PRD-001 (sección 8, resuelta el 2026-10-26): que una persona asigne el segmento de
+    los modelos que ninguna fuente clasifica. Lee PRD-001 (RF-11, RF-12 y esa pregunta con su
+    análisis), ADR-0001, ADR-0008, data-model.md (sección 4, notas de segment) y la visión
+    (principio 0). Decide si cabe y cómo: qué fuente y nivel lleva un dato editorial (o si es una
+    excepción de ADR-0001), qué se guarda en el YAML, quién lo escribe y cómo se distingue en la web,
+    con alternativas descartadas. Si propones enmendar ADR-0001 o ADR-0008, dilo en su estado como
+    propuesta. Anota la decisión pendiente en docs/architecture/overview.md. No toques PRD-001 ni
+    data/. Bitácora."
