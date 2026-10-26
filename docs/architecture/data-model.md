@@ -78,13 +78,23 @@ claves propias: `basis` en `battery_kwh`; `unit`, `price_kind`, `price_terms` y
   Si solo anuncia una fecha futura de venta o de entregas, sin pedidos abiertos, es `announced`. Si no se
   puede confirmar que se sigue vendiendo hoy (por ejemplo, la única fuente es un artículo de hace años) o
   qué versiones se venden hoy, el modelo lleva `needs_review: true`.
-- **`segment` es obligatorio para publicar la tarjeta (RF-1), pero un fichero sin él es válido**:
-  ninguna fuente de marca lo da de forma explícita. El Researcher lo rellena con la fuente que lo
+- **`segment` es opcional: un modelo sin él se publica con "por confirmar" (RF-12)**. Casi ninguna
+  fuente de marca lo da de forma explícita. El Researcher lo rellena con la fuente que lo
   clasifique (puede ser T3, que ADR-0001 admite para confirmar datos) y, si no la hay, lo deja
   `null` y lo anota. Regla de asignación: el valor de la lista de RF-11 que use la fuente, **con ese término
   literal** («berlina», «SUV compacto»…); un SUV o crossover va a `suv_pequeno`, `suv_compacto` o
-  `suv_grande` solo si la fuente lo presenta así. Si la fuente usa un término que no está en la lista
-  («SUV mediano», «segmento D»), no se traduce por tamaño ni por parecido: `null` y anotado. Con una
+  `suv_grande` solo si la fuente lo presenta así o con una de las equivalencias de esta tabla cerrada, que es la
+  única traducción permitida, con el tipo de carrocería y la letra de segmento **en la misma fuente** (decisión del 2026-10-26, PRD-001):
+
+  | La fuente dice | `segment` |
+  |---|---|
+  | SUV o crossover + «segmento B» (o «B-SUV») | `suv_pequeno` |
+  | SUV o crossover + «segmento C» (o «C-SUV»), o «crossover compacto» | `suv_compacto` |
+  | SUV o crossover + «segmento D» o «segmento E» (o «D-SUV», «E-SUV») | `suv_grande` |
+
+  La `note` cita la frase literal de la fuente. Cualquier otro término que no esté en la lista ni en
+  la tabla («SUV mediano», «SUV» sin tamaño, «segmento D» sin carrocería) no se traduce por tamaño ni
+  por parecido: `null` y anotado. Con una
   fuente T3 vale lo mismo (decisión del 2026-10-13). Sin segmento, la
   tarjeta dice "por confirmar" y el modelo no sale en ese filtro (RF-12).
 - `status: discontinued` también se publica, con la etiqueta "Descatalogado" (RF-7).
