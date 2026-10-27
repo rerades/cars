@@ -2,7 +2,7 @@
 
 - **Estado:** aceptada (2026-10-26). Enmienda el punto 14 de ADR-0011: el verificador es una regla más de la fusión.
   Enmienda «Versión y unidad» (precio junto al nombre de su versión; unidad para números de una o
-  dos cifras): propuesta (2026-10-27).
+  dos cifras): aceptada (2026-10-27).
 - **Fecha:** 2026-10-26
 
 ## Contexto
@@ -193,7 +193,7 @@ con un `fetch` falso: CA-10 (un precio que no está en la página da `merger:nee
 valor y su URL, y la PR no se fusiona), una página que lo tiene con otra grafía (`39.990 €`), un 403
 que no bloquea y un `robots.txt` que lo prohíbe.
 
-### Versión y unidad (enmienda del 2026-10-27, propuesta)
+### Versión y unidad (enmienda del 2026-10-27, aceptada)
 
 **El precio de una versión cuenta como encontrado solo si aparece bajo el nombre de esa versión, y
 solo bloquea si aparece únicamente bajo el nombre de otra versión del mismo fichero. Los números de
@@ -335,7 +335,9 @@ negativos sin quitar falsos positivos.
 
 **Preguntas abiertas de la enmienda (no se deciden aquí):**
 - ¿Debe el `name` de la versión copiar el nombre que usa la página? Sería un cambio del modelo de
-  datos y de `researcher.md`, no de esta ADR.
+  datos y de `researcher.md`, no de esta ADR. Medido al aceptar (2026-10-27): de 104 precios con
+  `url`, 53 tienen el `name` de su versión escrito tal cual en la página y 29 no (nombres compuestos
+  como «135 CV 61 kWh N LINE» o «(versión no especificada en la oferta)»). Encolada para el Arquitecto.
 - ¿Se ancla también el resto de números de versión (`wltp_km`, `battery_kwh`, `power_kw`…)? Tienen el
   mismo hueco que el precio; se decide con los datos de RF-1 sobre cuántos precios salen *sin versión*.
 - ¿Deben contar como nombres los de las versiones de otros ficheros de la misma marca que citan la
@@ -366,7 +368,7 @@ negativos sin quitar falsos positivos.
   cualquier página, y un precio casa si aparece en otra versión de la misma página. La regla prueba
   que el valor está en la página, no que esté junto a la versión correcta. Un valor que el
   Researcher redondeó o convirtió (la página dice `39.900` y el YAML `39990`, o da la batería en
-  Wh) da un «no coincide» que tendrá que mirar una persona. (La enmienda «Versión y unidad», propuesta
+  Wh) da un «no coincide» que tendrá que mirar una persona. (La enmienda «Versión y unidad», aceptada
   el 2026-10-27, trata los dos primeros casos.)
 - **Malo: la pasada de la fusión se alarga y pide páginas a terceros.** Con el tope de 10 URL y una
   petición por segundo y host, unas decenas de segundos por PR de datos; no lo he medido. Una caída
@@ -386,7 +388,9 @@ negativos sin quitar falsos positivos.
 - ¿Debe el registro marcar las fuentes de solo JavaScript (un campo en `data/sources/`) para que el
   Researcher no las use como `url` de valores, o para que el verificador las trate distinto? Sería
   una enmienda de ADR-0001 y del modelo de datos. Sigue abierta al aceptar (2026-10-26): se decide
-  cuando RF-1 diga cuántas PR van a una persona por esas páginas.
+  cuando RF-1 diga cuántas PR van a una persona por esas páginas. Medido el 2026-10-27: 22 de 104
+  precios no están en el texto servido (Škoda, Peugeot y algunos Cupra y Renault); encolado para el
+  Researcher buscar una `url` registrada donde sí estén.
 - ¿Se verifican también las PR de datos que no son del Researcher, o las fusionadas a mano? Con esta
   decisión solo las que la fusión automática iba a fusionar.
 - El tope de 10 URL y el tiempo que añade a la pasada se revisan con los datos de RF-1.
