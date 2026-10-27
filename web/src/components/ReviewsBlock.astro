@@ -2,11 +2,12 @@
 import { t } from "../lib/i18n.ts";
 import { formatDate, sourceName } from "../lib/format.ts";
 import type { Review } from "../lib/data.ts";
+import { sortReviews } from "../lib/reviews.ts";
 
 /**
  * «Reviews» block (PRD-002 RF-16, PRD-006 RF-10; docs/design/ficha-modelo.md). Last block of the model page.
  * It only renders when there is something to show. Each entry is a link with title, outlet, domain,
- * retrieval date and optional version (#599). Entry order is #600.
+ * retrieval date and optional version (#599), ordered by sortReviews (#600).
  * The «Resultados de pruebas» sublist, and the h3 of both sublists when there are two, are #601: no
  * test result can be published until the first metric exists (#597), so that branch could not be tested here.
  */
@@ -14,10 +15,18 @@ interface Props {
   reviews: Review[];
   brand: string;
   model: string;
+  /** Names of the versions in the order of the «Versiones» block (RF-3). */
+  versionNames?: string[];
 }
-const { reviews, brand, model } = Astro.props as Props;
+const { reviews, brand, model, versionNames = [] } = Astro.props as Props;
 // A review without outlet cannot be shown (data.ts): it counts as not publishable.
-const media = reviews.filter((r) => r.outlet !== null);
+const media = sortReviews(
+  reviews.filter((r) => r.outlet !== null),
+  versionNames,
+  (r) => r.outlet!,
+);
+// The date goes in a <time>: the message is rendered with a marker that is split around it.
+const MARK = "\u0001";
 ---
 
 {
@@ -36,11 +45,9 @@ const media = reviews.filter((r) => r.outlet !== null);
                 >{r.title}<span class="sr-only"> {t("ficha.reviews.enlaceSr", { medio: r.outlet!, marca: brand, modelo: model })}</span></a
               >
               <p class="text-small text-ink-600 [overflow-wrap:anywhere]">
-                {t("ficha.reviews.origen", {
-                  medio: r.outlet!,
-                  dominio: sourceName(r.url) ?? r.url,
-                  fecha: formatDate(r.retrieved) ?? r.retrieved,
-                })}
+                {t("ficha.reviews.origen", { medio: r.outlet!, dominio: sourceName(r.url) ?? r.url, fecha: MARK })
+                  .split(MARK)
+                  .flatMap((part, i) => (i === 0 ? [part] : [<time datetime={r.retrieved}>{formatDate(r.retrieved) ?? r.retrieved}</time>, part]))}
               </p>
               {r.version && (
                 <p class="text-small text-ink-600 [overflow-wrap:anywhere]">{t("ficha.reviews.version", { version: r.version })}</p>
