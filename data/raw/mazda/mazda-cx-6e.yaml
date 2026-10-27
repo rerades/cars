@@ -4,7 +4,7 @@ brand_name: Mazda
 model: CX-6e
 status: {value: on_sale, note: "la fuente dice que llegó a los concesionarios españoles en verano de 2026 y que Mazda vende hoy dos eléctricos", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
 launch: null
-segment: null
+segment: {value: suv_grande, note: "autonomiacocheselectricos: «El Mazda CX-6e es un SUV de 4,85 metros»; tabla de la gama: «SUV, segmento D»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-27, tier: T3}
 needs_review: true
 versions:
   - name: Takumi
@@ -30,5 +30,4 @@ images:
 open_questions:
   - "mazda.es no se puede leer (inicio solo JavaScript, URL de gama 404, configurador bloqueado por robots.txt): precios null en todas las versiones."
   - "launch: la preventa se abrió el 10 de marzo de 2026 según un medio T3, pero ninguna fuente dice que sea la fecha desde la que se puede pedir; null."
-  - "segment: la fuente dice «segmento D» (otro medio, «D-SUV» y «SUV»), que no está en la lista de RF-11; null."
   - "Que ambas versiones se vendan hoy se apoya solo en un medio T3 (2026-09-08); no hay confirmación de entregas en la web de la marca."

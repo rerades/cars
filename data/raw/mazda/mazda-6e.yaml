@@ -4,7 +4,7 @@ brand_name: Mazda
 model: 6e
 status: {value: on_sale, note: "la fuente dice que Mazda vende hoy dos eléctricos en España, entre ellos el 6e", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
 launch: null
-segment: null
+segment: {value: berlina, note: "autonomiacocheselectricos: «El Mazda 6e es una berlina de 4,92 metros con portón trasero»; tabla de la gama: «Berlina liftback, segmento D»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-27, tier: T3}
 needs_review: true
 versions:
   - name: Takumi
@@ -42,6 +42,5 @@ images:
 open_questions:
   - "mazda.es no se puede leer (inicio solo JavaScript, URL de gama 404, configurador bloqueado por robots.txt): precios null en todas las versiones."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir (un medio de abril de 2025 dice que el configurador ya estaba abierto, sin fecha)."
-  - "segment: la fuente dice «segmento D», que no está en la lista de RF-11; null."
   - "IDAE no distingue Takumi de Takumi Plus (filas «Todas las versiones» 606425 y 606426): se asignan los mismos valores a ambos acabados. Las baterías de las versiones Long Range (80 kWh) y estándar (68,8 kWh según el medio; 69 en IDAE) se emparejan por potencia/autonomía con los acabados citados por el medio."
   - "Que se sigan vendiendo hoy las cuatro versiones se apoya solo en un medio T3 (2026-09-08)."
