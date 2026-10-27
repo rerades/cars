@@ -5,7 +5,7 @@
   (2026-10-15). Enmienda «URL nuevas en fuentes existentes»: aceptada (2026-10-15). Enmienda
   «Etiqueta de la fusión» (`merger:needs-human` y `merger:unreviewed`): aceptada (2026-10-19). Enmendada por ADR-0020 (2026-10-26): el verificador de datos es la última
   regla de la fusión para las PR de `data/raw/` y también pone `merger:needs-human` (punto 14).
-  Enmienda propuesta por [ADR-0021](0021-segmento-editorial.md) (2026-10-27): no se fusiona sola
+  Enmienda aceptada de [ADR-0021](0021-segmento-editorial.md) (2026-10-27): no se fusiona sola
   ninguna PR que añada o cambie un `tier: E` ni que toque `data/sources/editorial.yaml`.
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y

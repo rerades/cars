@@ -1,6 +1,6 @@
 # ADR-0021 — Segmento asignado por una persona (clasificación editorial)
 
-- **Estado:** propuesta. Si se acepta, enmienda [ADR-0001](0001-fuentes-de-datos.md) (regla 8 nueva),
+- **Estado:** aceptada (2026-10-27). Enmienda [ADR-0001](0001-fuentes-de-datos.md) (regla 8 nueva),
   [ADR-0008](0008-esquema-unico-de-datos-raw.md) (valor con fuente de `segment`) y
   [ADR-0011](0011-publicacion-de-los-agentes.md) (una condición más para no fusionar sola)
 - **Fecha:** 2026-10-27
@@ -165,11 +165,15 @@ Detalles:
   decidir si `E` queda fuera de ese aviso (pregunta abierta).
 
 ### Preguntas abiertas
-1. **Producto:** ¿se acepta C con estas condiciones? Exige cambiar RF-11 (PRD-001) y RF-9 (PRD-002).
-2. **Producto:** ¿la tarjeta del catálogo marca el segmento editorial o solo la ficha?
-3. **Producto:** ¿quién es «la persona»: solo el responsable del producto o cualquiera con permiso de
-   fusión en el repositorio?
-4. **Producto:** ¿hace falta un criterio escrito común (por ejemplo, qué cuenta como SUV compacto) o
-   basta la `note` de cada caso? Si hace falta, ¿dónde vive y es público?
+1. ~~**Producto:** ¿se acepta C con estas condiciones? Exige cambiar RF-11 (PRD-001) y RF-9 (PRD-002).~~
+   Sí (2026-10-27, el responsable). Producto cambia RF-11 y RF-9.
+2. ~~**Producto:** ¿la tarjeta del catálogo marca el segmento editorial o solo la ficha?~~ Solo la
+   ficha (2026-10-27): la tarjeta lo muestra como cualquier segmento.
+3. ~~**Producto:** ¿quién es «la persona»: solo el responsable del producto o cualquiera con permiso de
+   fusión en el repositorio?~~ Cualquiera con permiso de fusión en el repositorio (2026-10-27).
+4. ~~**Producto:** ¿hace falta un criterio escrito común (por ejemplo, qué cuenta como SUV compacto) o
+   basta la `note` de cada caso? Si hace falta, ¿dónde vive y es público?~~ Sí: un criterio común en
+   `data-model.md`, junto a la tabla de equivalencias, y la `note` lo cita (2026-10-27). Es público.
 5. **Arquitectura (posterior):** ¿el aviso de antigüedad de ADR-0010 ignora los valores `E`?
-6. ¿Es público el repositorio? Condiciona si la `url` de la PR sirve a alguien fuera del proyecto.
+6. ~~¿Es público el repositorio? Condiciona si la `url` de la PR sirve a alguien fuera del proyecto.~~
+   Sí, es público (comprobado el 2026-10-27).

@@ -1,7 +1,7 @@
 # ADR-0001 — Fuentes de datos de modelos, precios e imágenes
 
 - **Estado:** aceptada. Enmendada el 2026-10-06 (#164) y el 2026-10-20 (ADR-0017). Enmienda
-  propuesta por [ADR-0021](0021-segmento-editorial.md) (2026-10-27): regla 8 nueva, el segmento
+  aceptada de [ADR-0021](0021-segmento-editorial.md) (2026-10-27): regla 8 nueva, el segmento
   puede ser una clasificación editorial (`tier: E`) escrita solo por una persona
 - **Fecha:** 2026-09-19
 
