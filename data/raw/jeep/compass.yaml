@@ -41,11 +41,17 @@ versions:
     power_kw: {value: 276, note: "IDAE id 610643", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
     drivetrain: {value: awd, note: "Motor.es: tracción total eléctrica, un motor por eje", source_id: motor-es, url: "https://www.motor.es/noticias/jeep-compass-electrico-4xe-long-range-venta-espana-2026115234.html", retrieved: 2026-10-16, tier: T3}
     price: null
-images: []
+images:
+  - file: data/images/jeep/compass/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Jeep_Compass_e_%28J4U%29_Leonberg_2026_IMG_8766.jpg/1280px-Jeep_Compass_e_%28J4U%29_Leonberg_2026_IMG_8766.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Jeep_Compass_e_(J4U)_Leonberg_2026_IMG_8766.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-10-27
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0"
 open_questions:
   - "Web oficial de Jeep España ilegible (jeep-official.es no existe; jeep.es devuelve 403): precios sin fuente T1, price: null en todas las versiones. Revisado el 2026-10-26 con fetch-page.ts: https://www.jeep.es/ y https://www.jeep.es/robots.txt dan HTTP 403; no se lee ni PVP ni oferta."
   - "launch: las fuentes leídas no dan una fecha de apertura de pedidos coherente (Motor16 habla del 6 de mayo, otra de junio de 2026); no se registra."
   - "Autonomía 4xe: el IDAE da 600 km y Motor.es 589 km; Long Range: 674 frente a 675. Se usa el IDAE (T2) y se anota; revisar contra la web de la marca."
   - "Versión First Edition (IDAE id 610639, 74 kWh, 500 km): Motor.es no la lista entre las que se venden hoy, no se registra."
-  - "Imagen (2026-10-22): búsquedas en Commons «Jeep Compass electric 2026» y «Jeep Compass Summit Altitude BEV» sin resultados; sin foto del Compass eléctrico, images []."
   - "Qué versiones se venden hoy lo confirma solo un medio T3 (Motor.es, 12/07/2026); la tracción de las versiones de 74 kWh no está publicada."
