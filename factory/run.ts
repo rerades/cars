@@ -84,7 +84,7 @@ function cmdMergeState(cfg: Config): number {
  * Merges the agent PRs that meet ADR-0011 and flags the rest for a person. No model, so the
  * night window does not apply; a run in progress (the lock) leaves it for the next pass.
  */
-function cmdMerge(cfg: Config, dryRun: boolean): number {
+async function cmdMerge(cfg: Config, dryRun: boolean): Promise<number> {
   if (existsSync(LOCK)) {
     console.log("hay una ejecución en curso (factory/.run.lock): la fusión espera a la siguiente pasada");
     return 0;
@@ -96,7 +96,7 @@ function cmdMerge(cfg: Config, dryRun: boolean): number {
   }
   if (!dryRun) writeFileSync(LOCK, "merge\n", "utf8");
   try {
-    const { log, recorded } = mergePass({
+    const { log, recorded } = await mergePass({
       autoMerge: cfg.global?.auto_merge === true,
       stopped: existsSync(join(REPO, cfg.global?.stop_file || "factory/STOP")),
       dryRun,
@@ -195,7 +195,7 @@ function cmdTrace(runId: string): number {
   return 0;
 }
 
-function main(argv: string[]): number {
+function main(argv: string[]): number | Promise<number> {
   let parsed;
   try {
     parsed = parseArgs({
@@ -238,4 +238,4 @@ function main(argv: string[]): number {
   return runTask(cfg, agent, task, !!values["ignore-window"], !!values["dry-run"]);
 }
 
-process.exitCode = main(process.argv.slice(2));
+process.exitCode = await main(process.argv.slice(2));

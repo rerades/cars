@@ -178,6 +178,13 @@ persona.
 **Cortesía.** El mismo agente y `robots.txt` que `fetch-page.ts`, como mucho una petición por segundo
 y host, y tiempo agotado de 20 s por petición, como `check-urls.ts`.
 
+**Valores de una consulta (añadido al implementar, 2026-10-27, decisión del responsable).** La `url`
+de los valores de IDAE (`idae-es`) es la del buscador, `https://coches.idae.es/base-datos/marca-y-modelo`:
+los datos salen de una consulta POST que hace `factory/fetch-idae.ts` y nunca están en esa página. El
+verificador trata esa URL como **no comprobable** («datos de una consulta de fetch-idae.ts»), sin
+descargarla: no bloquea y se lista. Sin esto, toda PR que tocara uno de sus 764 valores (87 fichas)
+iría a una persona. Repetir la consulta de IDAE para comprobarlos queda como mejora.
+
 **Código compartido con RF-11.** No es el mismo script, pero comparten piezas:
 - de `fetch-page.ts`: `USER_AGENT`, `robotsAllows`, `registeredHosts`, `hostAllowed` y `htmlToText`.
   Se extrae de `fetchPage` una función que devuelve la respuesta y el texto completo, que usan

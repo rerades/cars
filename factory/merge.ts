@@ -1,6 +1,7 @@
 /**
  * Auto-merge of agent PRs (ADR-0011): code without a model. The Reviewer only labels; this pass
  * merges the agent/* PRs that meet every rule of point 2 and flags the rest for a person (point 4).
+ * The data verifier of ADR-0020 is the last rule, for PRs that touch data/raw/.
  * The CLI is `node factory/run.ts --merge`.
  */
 import { execFileSync } from "node:child_process";
@@ -8,6 +9,7 @@ import { appendFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
 import { notify, REPO, STATE_DIR } from "./orchestrator.ts";
+import { changedItems, report, summary, verify, type Changes, type Verification } from "./verify-data.ts";
 
 export const AGENT_BRANCH = /^agent\/([^/]+)\/([^/]+)$/;
 export const ALLOWED_PATHS = ["data/raw/", "data/images/", "data/sources/", "docs/bitacora/"];
@@ -183,6 +185,26 @@ export function changedSourceBlocker(before: unknown, after: unknown): string | 
   return null;
 }
 
+/** The merge-base of the PR head with main. */
+function mergeBase(pr: AgentPr, repo: string): string {
+  git(["fetch", "-q", "origin", "main"], repo);
+  return git(["merge-base", pr.headRefOid, "FETCH_HEAD"], repo).trim();
+}
+
+/** The new or changed values of the data/raw/ YAMLs of the PR, base against head (ADR-0020). */
+function dataChanges(pr: AgentPr, repo: string): Changes {
+  const base = mergeBase(pr, repo);
+  const at = (sha: string, path: string) => parse(git(["show", `${sha}:${path}`], repo));
+  const out: Changes = { items: [], unverifiable: [] };
+  for (const f of pr.files) {
+    if (!f.path.startsWith("data/raw/") || !/\.ya?ml$/.test(f.path)) continue;
+    const c = changedItems(f.path, f.changeType === "ADDED" ? null : at(base, f.path), at(pr.headRefOid, f.path));
+    out.items.push(...c.items);
+    out.unverifiable.push(...c.unverifiable);
+  }
+  return out;
+}
+
 /** newSourceBlocker or changedSourceBlocker for each data/sources/ file of the PR. */
 function sourceProblems(pr: AgentPr, repo: string): Map<string, string | null> {
   const out = new Map<string, string | null>();
@@ -190,8 +212,7 @@ function sourceProblems(pr: AgentPr, repo: string): Map<string, string | null> {
   if (!files.length) return out;
   const cited = citedSources(pr.headRefOid, repo);
   const candidates = parse(git(["show", `${pr.headRefOid}:data/candidatas.yaml`], repo));
-  git(["fetch", "-q", "origin", "main"], repo);
-  const base = git(["merge-base", pr.headRefOid, "FETCH_HEAD"], repo).trim();
+  const base = mergeBase(pr, repo);
   const at = (sha: string, path: string) => parse(git(["show", `${sha}:${path}`], repo));
   for (const f of files) {
     try {
@@ -219,7 +240,7 @@ export interface MergeOptions {
  * on) and flags for a person the ones with review:ok that fail a rule, or without a verdict after
  * a night (point 4). Returns the log lines and whether it wrote merge rows. Each PR fails alone.
  */
-export function mergePass(o: MergeOptions): { log: string[]; recorded: boolean } {
+export async function mergePass(o: MergeOptions): Promise<{ log: string[]; recorded: boolean }> {
   const repo = o.repo ?? REPO;
   const now = o.now ?? new Date();
   const log: string[] = [];
@@ -236,16 +257,26 @@ export function mergePass(o: MergeOptions): { log: string[]; recorded: boolean }
         continue;
       }
       let reason: string;
+      let details = "";
       let label = MERGER_NEEDS_HUMAN;
       if (labels.has("review:ok")) {
         git(["fetch", "-q", "origin", `refs/pull/${pr.number}/head`], repo);
-        const blocker = agentMergeBlocker(pr, citedImages(pr.headRefOid, repo), o.stopped, sourceProblems(pr, repo));
+        let blocker = agentMergeBlocker(pr, citedImages(pr.headRefOid, repo), o.stopped, sourceProblems(pr, repo));
+        // The verifier reads third-party pages, so it only runs once every other rule holds.
+        let verification: Verification | undefined;
+        if (!blocker && pr.files.some((f) => f.path.startsWith("data/raw/"))) {
+          verification = await verify(dataChanges(pr, repo));
+          if (verification.blocking) {
+            blocker = "verificador de datos (RF-8): hay valores que no están en su página";
+            details = report(verification);
+          }
+        }
         if (!blocker) {
           if (!o.autoMerge || o.dryRun) {
             log.push(`se fusionaría ${pr.url}${o.autoMerge ? "" : " (auto_merge: false)"}`);
             continue;
           }
-          merge(pr, o.month, now, repo);
+          merge(pr, o.month, now, repo, verification);
           recorded = true;
           log.push(`fusionada ${pr.url}`);
           continue;
@@ -268,7 +299,7 @@ export function mergePass(o: MergeOptions): { log: string[]; recorded: boolean }
         log.push(`esperaría a una persona ${pr.url}: ${reason}`);
         continue;
       }
-      flag(pr, reason, label, repo);
+      flag(pr, reason, label, repo, details);
       log.push(`espera a una persona ${pr.url}: ${reason}`);
     } catch (e) {
       log.push(`error con ${pr.url}: ${(e as Error).message.split("\n")[0]}`);
@@ -282,20 +313,24 @@ export function mergePass(o: MergeOptions): { log: string[]; recorded: boolean }
 }
 
 /** Merges pinned to the checked SHA, records it in the PR, the merge commit and ops/merges/ (point 3). */
-function merge(pr: AgentPr, month: string, now: Date, repo: string): void {
+function merge(pr: AgentPr, month: string, now: Date, repo: string, verification?: Verification): void {
   const [, agent, runId] = pr.headRefName.match(AGENT_BRANCH)!;
   gh(["pr", "merge", String(pr.number), "--merge", "--match-head-commit", pr.headRefOid,
     "--subject", `Merge pull request #${pr.number} from ${pr.headRefName}`,
     "--body", `Auto-merged-by: factory\nRun-id: ${runId}`], repo);
   const mergeSha = gh(["pr", "view", String(pr.number), "--json", "mergeCommit", "--jq", ".mergeCommit.oid"], repo);
   const checks = pr.statusCheckRollup.map((c) => `${c.name ?? "?"}: ${c.conclusion}`);
+  const verify = verification && summary(verification);
+  const verified = verify ? `verificador de datos (RF-8): ${verify.urls} URL leídas, ${verify.found} valores encontrados, ` +
+    `${verify.unanchored} sin versión, ${verify.no_unit} sin unidad, ${verify.unchecked} URL no comprobables, ` +
+    `${verify.out_of_sample} valores fuera de la muestra y ${verify.unverifiable} no verificables por código; ` : "";
   gh(["pr", "comment", String(pr.number), "--body", `🏭 Fusión automática (ADR-0011) del SHA ${pr.headRefOid}. ` +
     "Comprobado: rama de agente; `review:ok` sin `review:needs-human` ni `merger:*`; el último veredicto cita ese SHA; " +
     `sin conflictos; checks terminados en verde (${checks.join(", ")}); todo el diff en ` +
     `${ALLOWED_PATHS.join(", ")}, sin borrados ni renombrados; cada imagen citada por un YAML de data/raw/; ` +
     "cada fuente nueva T1, citada, sin image_license y en el dominio de su web_es de data/candidatas.yaml; " +
     "cada fuente cambiada solo con URL nuevas en hosts que ya tenía, notes y last_verified; " +
-    `sin factory/STOP. Merge: ${mergeSha}. Para volver atrás: \`git revert -m 1 ${mergeSha}\`.`], repo);
+    `${verified}sin factory/STOP. Merge: ${mergeSha}. Para volver atrás: \`git revert -m 1 ${mergeSha}\`.`], repo);
   try {
     git(["push", "-q", "origin", "--delete", pr.headRefName], repo);
   } catch {
@@ -304,17 +339,17 @@ function merge(pr: AgentPr, month: string, now: Date, repo: string): void {
   mkdirSync(MERGES_DIR, { recursive: true });
   appendFileSync(join(MERGES_DIR, `${month}.jsonl`), JSON.stringify({
     pr: pr.number, agent, run_id: runId, sha: pr.headRefOid, merge_sha: mergeSha,
-    files: pr.files.map((f) => f.path), checks, at: now.toISOString(),
+    files: pr.files.map((f) => f.path), checks, ...(verify ? { verify } : {}), at: now.toISOString(),
   }) + "\n", "utf8");
 }
 
 /** Labels the PR for a person, assigns it and says which rule failed (point 4). */
-function flag(pr: AgentPr, reason: string, label: string, repo: string): void {
+function flag(pr: AgentPr, reason: string, label: string, repo: string, details = ""): void {
   const preview = pr.files.some((f) => f.path.startsWith("web/") || f.path.startsWith("data/raw/"));
   gh(["pr", "edit", String(pr.number), "--add-label", label, "--add-assignee", "@me",
     ...(preview ? ["--add-label", PREVIEW] : [])], repo);
   gh(["pr", "comment", String(pr.number), "--body",
-    `🏭 Espera a una persona (ADR-0011): ${reason}. SHA ${pr.headRefOid}.`], repo);
+    `🏭 Espera a una persona (ADR-0011): ${reason}. SHA ${pr.headRefOid}.${details ? `\n\n${details}` : ""}`], repo);
 }
 
 /** The PRs that wait for a person, for --status. Empty when gh is not available. */

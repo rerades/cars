@@ -67,5 +67,7 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
   07:30, interruptor `auto_merge` en `budgets.yaml`).
 - Hecho también: la evaluación de prompts del Revisor de ADR-0016 (`factory/eval-run.ts`, casos en
   `factory/datasets/reviewer/`). Falta confirmar los casos y crear `.secrets/anthropic-evals.env`.
+- Hecho también: el verificador de datos de ADR-0020 (`factory/verify-data.ts`), última regla de
+  `run.ts --merge` para las PR de `data/raw/`.
 - Pendiente: la migración de las imágenes a
   `data/images/` (en la cola, Researcher).
