@@ -126,7 +126,8 @@ describe("«Reviews» block in the built site (PRD-006, story #602)", () => {
 
   test("CA-5: every link of the block goes to the review's own URL; none has affiliate parameters", () => {
     const hrefs = [...block().matchAll(/href="([^"]*)"/g)].map((m) => m[1]);
-    assert.deepEqual(hrefs, [URL_OK, "https://videos.motor.example/acme-volta"]);
+    // Order is #600's concern (reviews-order.test.ts); CA-5 is only about which URLs.
+    assert.deepEqual([...hrefs].sort(), [URL_OK, "https://videos.motor.example/acme-volta"].sort());
     for (const h of hrefs) assert.doesNotMatch(new URL(h).search, /(^|[?&])(utm_[^=]*|aff[^=]*|ref|tag)=/i);
   });
 
