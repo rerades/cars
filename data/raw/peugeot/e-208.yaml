@@ -4,7 +4,7 @@ brand_name: Peugeot
 model: E-208
 status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
 launch: null
-segment: null
+segment: {value: urbano, note: "Motorpasión: «su precio lo convierte en un coche urbano de gama alta»", source_id: motorpasion-es, url: "https://www.motorpasion.com/pruebas-de-coches/peugeot-e-208-2024-prueba-contacto", retrieved: 2026-10-27, tier: T3}
 needs_review: false
 specs:
   wltp_max_km: {value: 433, note: "hasta 433 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
@@ -36,7 +36,7 @@ reviews:
     tier: T3
 open_questions:
   - "reviews: diariomotor-es no tiene una prueba del E-208 renovado (la que hay es de 2019, de la generación anterior); solo hay review de motorpasion-es."
-  - "segment: el buscador titula la página de www.peugeot.es como 'Coche urbano 100% eléctrico', pero la página devuelve 403 y no se ha leído: sin fuente leída, queda null (revisión 2026-09-29)."
+  - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27); el segmento sale de una fuente T3 (motorpasion-es)."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
   - "Versión concreta del precio de contado no identificada; sin PVP sin oferta; sin batería, potencia ni carga por versión."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."

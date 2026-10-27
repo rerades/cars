@@ -23,5 +23,5 @@ versions:
 images: []
 open_questions:
   - "Imagen (2026-10-15): búsquedas en Commons «Peugeot E-408» y «Peugeot E-408 electric 2025»; solo hay fotos del 408 térmico/híbrido (T9 China, 408 II, 408 Hybrid 225), ninguna del eléctrico. Sin foto válida: images []."
-  - "segment y launch: sin fuente."
+  - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27) y ninguna fuente T3 registrada leída clasifica el E-408 con un término de la lista (electrive habla de 'crossover coupé' y km77, no registrada, de segmento C): sigue null. launch: sin fuente."
   - "Versión concreta del precio no identificada; sin PVP sin oferta; sin batería, potencia ni carga."

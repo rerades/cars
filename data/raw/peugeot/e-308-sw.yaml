@@ -4,7 +4,7 @@ brand_name: Peugeot
 model: E-308 SW
 status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
 launch: null
-segment: null
+segment: {value: familiar, note: "Motor16: «E-308 SW, el familiar eléctrico de Peugeot»", source_id: motor16-es, url: "https://www.motor16.com/electrico/e-308-sw-electrico-peugeot/", retrieved: 2026-10-27, tier: T3}
 needs_review: false
 specs:
   wltp_max_km: {value: 444, note: "hasta 444 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
@@ -29,6 +29,6 @@ images:
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "segment: ninguna fuente leída lo clasifica (probable familiar, sin fuente); launch: sin fecha en fuente registrada."
+  - "segment: sale de una fuente T3 (motor16-es); www.peugeot.es sigue devolviendo 403 (2026-10-27). launch: sin fecha en fuente registrada."
   - "Imagen: no se buscó un fichero de e-308 SW en Commons con garantía de que sea el SW."
   - "Versión concreta del precio no identificada; sin PVP sin oferta; sin batería, potencia ni carga."
