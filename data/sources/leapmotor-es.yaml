@@ -8,7 +8,6 @@ urls:
   home: https://www.leapmotor.net/es-es
   models: https://www.leapmotor.net/es-es/modelos
   prices: https://www.leapmotor.net/es-es/modelos/b10 # cada ficha lleva su "desde" con ayudas; también /t03, /b03x, /b05, /c10
-  press: https://www.leapmotor.net/es-es/descubre-leapmotor/noticias
   legal: https://www.leapmotor.net/es-es/terminos-y-condiciones
 image_license: "" # sin términos de uso de imágenes verificados (solo "© 2025 Leapmotor. Todos los derechos reservados"): no publicar imágenes de esta web
 notes: >
@@ -19,5 +18,9 @@ notes: >
   precios "desde" de cada ficha descuentan 3.375 € del Plan Auto+ y 900 € de la venta del certificado CAE (válidos hasta el
   31/10/2026): incluyen ayudas, así que no son PVP sin ayudas ni se guardan. Las fichas son poco explícitas sobre qué dato
   pertenece a qué versión; las cifras por versión se toman del IDAE (idae-es) y de la ficha solo lo claro.
-last_verified: 2026-10-13
+  Sala de prensa (2026-10-27): /es-es/descubre-leapmotor/noticias (enlazada en el menú «Descubre Leapmotor > Noticias») da 404 con fetch-page.ts
+  y con WebFetch, igual que /es-es/noticias y /es-es/descubre-leapmotor/news; no hay otra página de noticias o prensa en leapmotor.net/es-es,
+  así que se quita urls.press. Un buscador apunta a https://www.media.stellantis.com/es-es/leapmotor/press (sala de prensa de Stellantis, otro
+  dominio, no verificada ni registrada como fuente de Leapmotor): decisión humana si se registra.
+last_verified: 2026-10-27
 status: active
