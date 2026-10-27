@@ -163,7 +163,9 @@ export const es = {
   "ficha.reviews.pruebasEntrada":
     "Resultados publicados por organismos de pruebas independientes, con el nombre de la prueba tal como lo publican.",
   "ficha.reviews.origen": "{medio} · {dominio} · consultado el {fecha}", // narrow no-break space before each «·» (ficha.lista.separador)
-  "ficha.reviews.version": "Sobre la versión {version}",
+  "ficha.pruebas.fuente": "Fuente: {organismo}, {fecha}",
+  "ficha.pruebas.fuenteSr": "(resultado de {test} para {marca} {modelo}, en otra web)",
+  "ficha.reviews.version":"Sobre la versión {version}",
   "ficha.reviews.enlaceSr": "(review de {medio} sobre {marca} {modelo}, en otra web)",
   "fecha.mes.1": "ene",
   "fecha.mes.2": "feb",

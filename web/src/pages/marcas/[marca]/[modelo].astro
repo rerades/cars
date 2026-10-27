@@ -4,7 +4,7 @@ import { cardView, type CardView } from "../../../lib/card.ts";
 import ModelFigure from "../../../components/ModelFigure.astro";
 import SegmentSilhouette from "../../../components/SegmentSilhouette.astro";
 import ReviewsBlock from "../../../components/ReviewsBlock.astro";
-import { loadModels, type ModelImage, type Review, type Sourced, type Specs, type Version } from "../../../lib/data.ts";
+import { loadModels, type ModelImage, type Review, type Sourced, type TestResult, type Specs, type Version } from "../../../lib/data.ts";
 import { t, type MessageKey } from "../../../lib/i18n.ts";
 import { chunkVersions, sortVersions } from "../../../lib/versions.ts";
 import { relatedModels } from "../../../lib/related.ts";
@@ -24,12 +24,13 @@ export function getStaticPaths() {
   return models.map((model) => {
     const [marca, file] = model.file.replace(/\.yaml$/, "").split("/");
     const related = relatedModels(model, models).map((m) => cardView(m));
-    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, status: model.status, launch: model.launch, segment: model.segment, images: model.images, specs: model.specs, related, reviews: model.reviews } };
+    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, status: model.status, launch: model.launch, segment: model.segment, images: model.images, specs: model.specs, related, reviews: model.reviews, testResults: model.test_results } };
   });
 }
 
-const { card, versions, brandSlug, brandUrl, status, launch, segment, images, specs, related, reviews } = Astro.props as {
+const { card, versions, brandSlug, brandUrl, status, launch, segment, images, specs, related, reviews, testResults } = Astro.props as {
   reviews: Review[];
+  testResults: TestResult[];
   card: CardView;
   status: Sourced;
   launch: Sourced | null;
@@ -391,7 +392,7 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
         )
       }
 
-      <ReviewsBlock reviews={reviews} brand={card.brand} model={card.model} versionNames={versions.map((v) => v.name)} />
+      <ReviewsBlock reviews={reviews} testResults={testResults} brand={card.brand} model={card.model} versionNames={versions.map((v) => v.name)} />
     </main>
   </body>
 </html>

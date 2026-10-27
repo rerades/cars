@@ -104,16 +104,38 @@ export interface TestResult extends Sourced<unknown> {
   test: string;
   metric: string;
   version?: string;
+  /** `name` of the source record; set only when `normalize` has a source registry. */
+  organism?: string;
 }
 
 /** Metric name -> check of `value`. */
 export type TestMetrics = Readonly<Record<string, (value: unknown) => boolean>>;
 
 /**
+ * Test seam for the built-HTML tests (no real metric exists yet): `CARS_TEST_METRICS_FIXTURE` is the
+ * path of a JSON `{ "<metric>": "<label>" }`. Each entry becomes a metric accepting positive numbers,
+ * with that label. Never set outside tests.
+ */
+function readFixtureLabels(): Record<string, string> {
+  const path = process.env.CARS_TEST_METRICS_FIXTURE;
+  if (!path) return {};
+  try {
+    return JSON.parse(readFileSync(path, "utf8")) as Record<string, string>;
+  } catch {
+    return {};
+  }
+}
+
+/** Labels of the metrics defined only by the test fixture; real labels are `ficha.pruebas.metrica.*` keys. */
+export const FIXTURE_METRIC_LABELS: Readonly<Record<string, string>> = readFixtureLabels();
+
+/**
  * The closed list of `metric` of data-model.md, section 3.1, read from this one place. Empty until a
  * person adds the first one (with `METRICS` in factory/evals.ts), so any test result is dropped.
  */
-export const TEST_METRICS: TestMetrics = {};
+export const TEST_METRICS: TestMetrics = Object.fromEntries(
+  Object.keys(FIXTURE_METRIC_LABELS).map((m) => [m, (v: unknown) => typeof v === "number" && Number.isFinite(v) && v > 0]),
+);
 
 const TEST_RESULT_KEYS = ["value", "note", "source_id", "url", "retrieved", "tier", "test", "metric", "version"];
 
@@ -488,7 +510,9 @@ function readTestResults(
     const key = JSON.stringify([e.source_id, e.test, e.metric, e.version ?? null]);
     if (seen.has(key)) return drop("repeated (same source_id, test, metric and version)");
     seen.add(key);
-    out.push(e as unknown as TestResult);
+    const result = e as unknown as TestResult;
+    if (sources) result.organism = sources.get(result.source_id)!.name!;
+    out.push(result);
   });
   return out;
 }
