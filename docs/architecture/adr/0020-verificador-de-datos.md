@@ -1,6 +1,8 @@
 # ADR-0020 — Verificador de datos independiente
 
 - **Estado:** aceptada (2026-10-26). Enmienda el punto 14 de ADR-0011: el verificador es una regla más de la fusión.
+  Enmienda «Versión y unidad» (precio junto al nombre de su versión; unidad para números de una o
+  dos cifras): aceptada (2026-10-27).
 - **Fecha:** 2026-10-26
 
 ## Contexto
@@ -191,6 +193,157 @@ con un `fetch` falso: CA-10 (un precio que no está en la página da `merger:nee
 valor y su URL, y la PR no se fusiona), una página que lo tiene con otra grafía (`39.990 €`), un 403
 que no bloquea y un `robots.txt` que lo prohíbe.
 
+### Versión y unidad (enmienda del 2026-10-27, aceptada)
+
+**El precio de una versión cuenta como encontrado solo si aparece bajo el nombre de esa versión, y
+solo bloquea si aparece únicamente bajo el nombre de otra versión del mismo fichero. Los números de
+una o dos cifras solo cuentan como encontrados si llevan su unidad, y sin ella no bloquean. `price_terms`
+no cambia.**
+
+Contexto propio de la enmienda. La regla de «Cómo se busca» da por bueno un número si aparece en
+cualquier parte del texto visible (lo dice la propia ADR en Consecuencias). Eso deja dos huecos frente
+a RF-8 («comprueba que el valor está en la página») y CA-10:
+- **Un precio de otra versión de la misma página casa.** Si el Researcher copia la fila equivocada
+  de una tabla de precios, el número sí está en la página y el verificador lo da por bueno. Es el
+  error más probable en un precio y el que CA-10 quiere parar.
+- **Un número de una o dos cifras casa casi siempre.** `11` (kW en alterna) o `77` (kWh) aparecen en
+  casi cualquier página por fechas, notas al pie o menús.
+
+Lo que condiciona la solución:
+- **Los párrafos de `htmlToText`** (`factory/fetch-page.ts`, leído el 2026-10-27): corta párrafo en
+  `p`, `div`, `br`, `li`, `h1`–`h6`, `tr`, `table`, `section`, `dt`, `dd` y otros bloques, pero
+  **no en `td`, `th` ni `span`**. Una fila de tabla sale en un solo párrafo («Volta 60 470 km 39.990 €»);
+  la cabecera de una tabla con una versión por columna, también («Volta 60 Volta 80 AWD»); una tarjeta
+  sale en varios párrafos seguidos (el nombre en su `h3`, el precio dos o tres párrafos más abajo).
+- **El `name` de la versión no es texto literal de la página.** El modelo de datos solo exige que sea
+  texto único dentro del fichero (data-model.md, sección 4). La página puede no repetirlo, o
+  escribirlo de otra forma.
+- **Muchos valores no son de una versión** (`specs.*`, `status`, `launch`), y un precio `financed`
+  tiene además `price_terms`, que es una cadena literal larga que ya contiene el importe.
+- **RNF-1:** sin modelo. **Métrica de PRD-007, sección 2:** «PR de agente fusionadas sin intervención
+  humana ≥ 50 %» (hoy, 23 de 111, 21 %). Cada «no coincide» falso es una PR de datos menos que se
+  fusiona sola.
+
+#### Opciones consideradas (enmienda)
+
+**1. Precio y versión.**
+- **A. Como hasta ahora: en cualquier parte de la página.** Descartada. Falso positivo: el precio de
+  otra versión de la misma página. Ningún falso negativo nuevo y ningún efecto en la métrica, pero no
+  cubre el error que CA-10 describe.
+- **B. Mismo párrafo que el nombre de la versión; si la página no lo repite ahí, «no coincide».**
+  Descartada. Solo funciona con tablas por filas. En una tarjeta el nombre y el precio están en
+  párrafos distintos, en una tabla por columnas el nombre está en la cabecera, y si el `name` del YAML
+  no es el de la página no aparece nunca: todo eso iría a una persona. Es la opción que más baja la
+  métrica y los bloqueos que añade serían, en su mayoría, falsos.
+- **C. A una distancia fija (±N párrafos) del nombre; si la página no lo repite, «no coincide».**
+  Descartada. Arregla las tarjetas, pero en dos tarjetas seguidas el precio de la primera queda a la
+  misma distancia, o menos, del nombre de la segunda (que viene justo debajo) que del suyo. Y deja
+  igual que B el caso de la página que no repite el nombre: falsos negativos y PR a una persona.
+- **D. Bajo el nombre: el precio pertenece al nombre de versión que tiene en su párrafo o, si no, al
+  último nombre de versión que aparece antes, a 3 párrafos como mucho. Solo bloquea si la página
+  pone el precio bajo otra versión y nunca bajo la suya; si no hay nombre cerca, no bloquea.**
+  Elegida. Lee bien filas, tarjetas y cabeceras de columna (empate: no bloquea) y solo bloquea con una
+  prueba que se puede enseñar en la PR (el párrafo y el nombre de la otra versión). Falsos positivos
+  que quedan: el precio de otra versión en una página que no nombra ninguna versión, o en una tabla por
+  columnas. Falsos negativos nuevos: una maqueta con el precio **encima** del nombre, o una página que
+  nombra la versión de otra forma que el YAML y tiene el nombre de otra versión justo antes. Efecto en
+  la métrica: solo bloquea cuando hay una prueba de que el precio está bajo otra versión, que en su
+  mayoría serán errores de verdad. No lo he medido.
+
+**2. Números de una o dos cifras.**
+- **A. Como hasta ahora.** Descartada: casan casi siempre, así que «encontrado» no dice nada, y el
+  campo `verify` los cuenta como verificados.
+- **B. Sacarlos de la muestra, como «no verificables por código».** Descartada. No bloquean y no
+  engañan, pero tampoco comprueban nada cuando la página sí escribe «11 kW».
+- **C. Exigir la unidad; sin ella, «no coincide».** Descartada. Las fichas en tabla suelen poner la
+  unidad en la cabecera («Capacidad (kWh) | 77»), y todas esas irían a una persona. Bloquea más que hoy
+  y baja la métrica.
+- **D. Exigir la unidad para contar como encontrado; sin ella, «sin unidad», que no bloquea; y
+  «no coincide» solo si el número no está de ninguna forma.** Elegida. Bloquea exactamente lo mismo que
+  hoy (el número no está en ninguna grafía), así que no cambia la métrica. Falso positivo que queda:
+  «11 kW» puede ser de otra versión o de otro dato (con la regla 1 solo se ancla el precio). Lo que
+  gana es que `verify` deja de contar como verificado lo que solo casó por casualidad.
+
+**3. `price_terms` y la versión.** No se ancla a la versión. Es una cadena literal larga que ya
+contiene el importe y las condiciones, así que casar por azar es casi imposible, y las condiciones
+legales suelen ir en un bloque de notas al pie lejos de las tarjetas: anclarlas daría falsos
+negativos sin quitar falsos positivos.
+
+#### Decisión (enmienda)
+
+8. **A qué se aplica el anclaje.** Solo a `versions[].price.value`. Los demás números de versión
+   (`battery_kwh`, `wltp_km`, `power_kw`, `dc_max_kw`, `ac_max_kw`) y los del nivel de modelo siguen
+   la regla de «Cómo se busca», con el punto 10 si son cortos. `price_terms` no cambia.
+9. **Cómo se ancla un precio**, sobre los párrafos (las líneas) del texto completo de `htmlToText`:
+   - **Nombres de versión:** los `name` de todas las versiones del **mismo fichero**. Se comparan
+     sin distinguir mayúsculas, con los espacios (también el fino y el no separable) colapsados y con
+     `-`, `–` y `—` tratados como espacio. Si un nombre contiene a otro («Volta 80» y «Volta 80 AWD»),
+     en cada posición gana el más largo.
+   - **Dueño de cada aparición del precio** (con las grafías de «Cómo se busca»): las versiones cuyo
+     nombre está en el mismo párrafo; si no hay ninguna, la del último párrafo anterior con algún
+     nombre, si está a 3 párrafos o menos; si no, ninguna. Un párrafo con varios nombres (la cabecera
+     de una tabla por columnas) hace dueñas a todas. El 3 no está medido: es un tope de partida que
+     se revisa con los datos de RF-1, como el 10 de la muestra.
+   - **Resultado del precio:** *encontrado* si alguna aparición tiene por dueña a su versión;
+     *no coincide (otra versión)* si ninguna la tiene y al menos una tiene por dueña solo a otra
+     versión; *encontrado sin versión* si las apariciones no tienen dueño; *no coincide* si el número
+     no está, como hasta ahora.
+10. **Números de una o dos cifras.** Un valor cuya grafía más corta tiene una o dos cifras (`7`, `11`,
+    `7,4`, `77`) cuenta como *encontrado* solo si alguna aparición va seguida, con o sin espacio
+    (normal, fino o no separable), de la unidad de su campo: `kWh` en `battery_kwh`; `kW` (no seguido
+    de `h`) en `power_kw`, `dc_max_kw` y `ac_max_kw`; `km` en `wltp_km`; sin distinguir mayúsculas y
+    con la unidad no seguida de otra letra. Si solo aparece sin unidad es *sin unidad*; si no aparece,
+    *no coincide*. Un `test_results` corto no tiene unidad en esta lista: es *sin unidad* si aparece.
+    Los números de tres cifras o más no cambian.
+11. **Qué bloquea.** Solo *no coincide* y *no coincide (otra versión)*, más rota y rechazada, como
+    hasta ahora. *Encontrado sin versión* y *sin unidad* no bloquean. Una URL sale «encontrada» si
+    ninguno de sus valores bloquea.
+12. **El comentario de la fusión.**
+    - Por cada *no coincide (otra versión)*: el fichero, la ruta del campo, el valor, la URL, el código
+      HTTP, el párrafo donde aparece el precio y el nombre de la versión de la que cuelga, y el primer
+      párrafo con el nombre de la versión del YAML o «la página no nombra esta versión». No lleva la
+      frase de JavaScript: la página se lee, el precio está y está en otro sitio.
+    - Por cada *no coincide*: como hasta ahora, con la frase de JavaScript.
+    - Debajo, además de lo que ya lista, los valores *encontrado sin versión* y *sin unidad*, cada uno
+      con su ruta, valor y URL.
+    - Si fusiona, el resumen del punto 3 de ADR-0011 y el campo `verify` de `ops/merges/` separan
+      *encontrados*, *sin versión* (`unanchored`) y *sin unidad* (`no_unit`), para que RF-1 cuente
+      cuántos valores se verificaron de verdad.
+13. **Pruebas que se añaden** en `factory/tests/`, con el `fetch` falso: un precio en la fila de otra
+    versión da `merger:needs-human` con los dos párrafos; dos tarjetas seguidas, cada precio bajo su
+    nombre, se fusiona; una cabecera de tabla por columnas no bloquea; una página sin nombres de
+    versión da *sin versión* y se fusiona; `11` sin unidad da *sin unidad* y se fusiona; `11 kW` da
+    *encontrado*; «Volta 80» y «Volta 80 AWD» en la misma página no se confunden.
+
+#### Consecuencias (enmienda)
+- **Bueno:** CA-10 cubre el caso del precio copiado de la fila o tarjeta de otra versión, con una
+  prueba que una persona puede leer en el comentario (los dos párrafos).
+- **Bueno:** no bloquea más que hoy por la página que no repite el nombre ni por los números cortos:
+  el efecto en la métrica del 50 % se limita a los precios que la página pone bajo otra versión.
+- **Bueno:** `verify` deja de contar como verificados los números que solo casaron por casualidad.
+- **Malo: el anclaje depende de que el `name` del YAML esté escrito como en la página**, y el modelo
+  de datos no lo exige. Si el Researcher pone nombres propios, casi todos los precios saldrán *sin
+  versión*: no bloquean, pero tampoco se verifican contra su versión. No sé cuántos `name` de hoy
+  aparecen tal cual en su página; no lo he medido.
+- **Malo: bloqueos falsos con algunas maquetas.** El precio encima del nombre (el de la tarjeta
+  siguiente queda como dueño), o una versión que la página nombra distinto con el nombre de otra
+  versión justo antes. Irán a una persona y bajan la métrica; cuántas, lo dirá RF-1.
+- **Malo: sigue sin detectarse** un precio de otra versión en una tabla por columnas o en una página
+  sin nombres de versión, un precio de otro **modelo** en una página de precios de toda la gama (solo
+  se miran los nombres del mismo fichero) y un número corto con unidad que es de otra versión.
+- **Malo: más código y más casos** en una regla que escribe una persona (RNF-3), y un 3 sin medir.
+
+**Preguntas abiertas de la enmienda (no se deciden aquí):**
+- ¿Debe el `name` de la versión copiar el nombre que usa la página? Sería un cambio del modelo de
+  datos y de `researcher.md`, no de esta ADR. Medido al aceptar (2026-10-27): de 104 precios con
+  `url`, 53 tienen el `name` de su versión escrito tal cual en la página y 29 no (nombres compuestos
+  como «135 CV 61 kWh N LINE» o «(versión no especificada en la oferta)»). Encolada para el Arquitecto.
+- ¿Se ancla también el resto de números de versión (`wltp_km`, `battery_kwh`, `power_kw`…)? Tienen el
+  mismo hueco que el precio; se decide con los datos de RF-1 sobre cuántos precios salen *sin versión*.
+- ¿Deben contar como nombres los de las versiones de otros ficheros de la misma marca que citan la
+  misma `url`?
+- El tope de 3 párrafos, con los datos de RF-1.
+
 ## Consecuencias
 - **Bueno:** cumple RNF-1: no gasta modelo ni presupuesto de ADR-0002, y su resultado es
   reproducible y se puede enseñar (el valor, la URL y el texto).
@@ -215,7 +368,8 @@ que no bloquea y un `robots.txt` que lo prohíbe.
   cualquier página, y un precio casa si aparece en otra versión de la misma página. La regla prueba
   que el valor está en la página, no que esté junto a la versión correcta. Un valor que el
   Researcher redondeó o convirtió (la página dice `39.900` y el YAML `39990`, o da la batería en
-  Wh) da un «no coincide» que tendrá que mirar una persona.
+  Wh) da un «no coincide» que tendrá que mirar una persona. (La enmienda «Versión y unidad», aceptada
+  el 2026-10-27, trata los dos primeros casos.)
 - **Malo: la pasada de la fusión se alarga y pide páginas a terceros.** Con el tope de 10 URL y una
   petición por segundo y host, unas decenas de segundos por PR de datos; no lo he medido. Una caída
   pasajera de la web de una marca deja el valor como no comprobable para siempre en esa PR, porque
@@ -234,7 +388,9 @@ que no bloquea y un `robots.txt` que lo prohíbe.
 - ¿Debe el registro marcar las fuentes de solo JavaScript (un campo en `data/sources/`) para que el
   Researcher no las use como `url` de valores, o para que el verificador las trate distinto? Sería
   una enmienda de ADR-0001 y del modelo de datos. Sigue abierta al aceptar (2026-10-26): se decide
-  cuando RF-1 diga cuántas PR van a una persona por esas páginas.
+  cuando RF-1 diga cuántas PR van a una persona por esas páginas. Medido el 2026-10-27: 22 de 104
+  precios no están en el texto servido (Škoda, Peugeot y algunos Cupra y Renault); encolado para el
+  Researcher buscar una `url` registrada donde sí estén.
 - ¿Se verifican también las PR de datos que no son del Researcher, o las fusionadas a mano? Con esta
   decisión solo las que la fusión automática iba a fusionar.
 - El tope de 10 URL y el tiempo que añade a la pasada se revisan con los datos de RF-1.
