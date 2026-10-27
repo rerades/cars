@@ -39,6 +39,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "reviews: las pruebas de motorpasion-es (hyundai-ioniq-6-prueba-contacto, hyundai-ioniq-6-2023-prueba) son del Ioniq 6 con batería de 77,4 kWh, y la ficha tiene 63 y 84 kWh; diariomotor-es solo prueba el Ioniq 6 N (otro modelo). Sin prueba válida en ninguno de los dos medios."
   - "launch: la ficha no da fecha de inicio de venta en España."
   - "Precio solo de la versión LIGHT de 63 kWh; el resto, sin precio T1 localizado. Falta leer el configurador."
   - "Potencia de la versión LIGHT (151 CV): no se registra por incoherencia en la lectura; WLTP no registrado por versión."

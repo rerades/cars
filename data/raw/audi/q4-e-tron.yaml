@@ -44,7 +44,14 @@ images:
     retrieved: 2026-10-13
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0"
+reviews:
+  - title: "Probamos el nuevo Audi Q4 e-tron: el coche eléctrico más barato de Audi es absolutamente cómodo y puedes enchufar una bici, pero podría mejorar en algo fundamental"
+    url: "https://www.motorpasion.com/pruebas-de-coches/audi-q4-e-tron-2026-prueba-contacto"
+    source_id: motorpasion-es
+    retrieved: 2026-10-27
+    tier: T3
 open_questions:
+  - "reviews: diariomotor-es solo tiene la prueba de 2021 del Q4 e-tron (batería y potencia anteriores a la renovación), que no cuadra con la ficha; no se enlaza."
   - "Precio (2026-10-26): fetch-page.ts sobre audi.es/es/, audi.es/es/modelos/q4-e-tron/ y audi.es/es/robots.txt devuelve HTTP 403 (protección de acceso, no se evita) y no hay otra fuente T1; todas las versiones con price null."
   - "Batería de las versiones de carrocería compacta: las filas MY27 del IDAE dan 59, 75,8, 77 y 94,9 kWh de forma incoherente (p. ej. 94,9 kWh en un Q4), así que no se ha guardado battery_kwh en esas tres versiones."
   - "Tracción de las versiones sin «quattro»: ninguna fuente leída la da de forma coherente (autonomiacocheselectricos y la nomenclatura se contradicen); no se guarda."
