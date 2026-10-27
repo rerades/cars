@@ -1,6 +1,8 @@
 # ADR-0008 — Esquema único para los YAML de `data/raw/`
 
-- **Estado:** aceptada (2026-09-27); la forma de `images` la sustituye [ADR-0012](0012-imagenes-de-los-modelos.md) (2026-10-05)
+- **Estado:** aceptada (2026-09-27); la forma de `images` la sustituye [ADR-0012](0012-imagenes-de-los-modelos.md) (2026-10-05).
+  Enmienda aceptada de [ADR-0021](0021-segmento-editorial.md) (2026-10-27): `segment` admite
+  `tier: E` con `source_id: editorial` y `note` obligatoria
 - **Fecha:** 2026-09-27
 
 ## Contexto
