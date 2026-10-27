@@ -21,7 +21,14 @@ images:
     retrieved: 2026-10-11
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+reviews:
+  - title: "Probamos el Kia EV9: qué nos gusta y qué podría mejorar en el Kia más caro de la historia"
+    url: "https://www.motorpasion.com/pruebas-de-coches/prueba-kia-ev9-2024"
+    source_id: motorpasion-es
+    retrieved: 2026-10-27
+    tier: T3
 open_questions:
+  - "reviews: diariomotor-es no tiene una prueba del EV9 (solo noticias y ficha); solo hay review de motorpasion-es."
   - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23: ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario (63.340 €) no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha dice 'SUV de tres filas, hasta 7 asientos' sin categoría de tamaño explícita; queda vacío."

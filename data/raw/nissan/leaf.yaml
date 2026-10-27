@@ -52,7 +52,14 @@ images:
     retrieved: 2026-10-13
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+reviews:
+  - title: "Nissan Leaf 2026: toma de contacto con un coche que ha cambiado tanto que no tiene nada que ver con su antecesor"
+    url: "https://www.diariomotor.com/noticia/nissan-leaf-2026-toma-de-contacto/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-27
+    tier: T3
 open_questions:
+  - "reviews: motorpasion-es no tiene una prueba del Leaf de tercera generación (solo la noticia de presentación); solo hay review de diariomotor-es."
   - "launch: nissan.es no publica la fecha de inicio de venta en España; sin fuente T1/T2."
   - "segment: ninguna fuente registrada lo clasifica; no se asigna."
   - "Precio (revisado 2026-10-23): ninguna versión tiene precio. nissan.es/cf/.../leaf solo da precios financiados 'desde' (Engage 27.000 €, Engage+ 28.920 €, Advance 32.480 €, Evolve 34.400 €, hasta el 31/10/2026), sin nota por versión, y el ejemplo de la nota 3 (28.000 € al contado, 27.000 € financiando) incluye el Plan Auto+ de 3.375 € y 900 € CAE: precio con ayudas públicas restadas, no se guarda (se quitó el que había). Hay un catálogo PDF enlazado cuyo contenido no se pudo leer y ninguna tarifa PDF en nissan.es. Sin PVP limpio."

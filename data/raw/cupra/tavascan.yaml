@@ -42,6 +42,19 @@ images:
     retrieved: 2026-10-11
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
+reviews:
+  - title: "CUPRA Tavascan VZ, a prueba: SUV eléctrico, deportivo, ¿y español? [+Video]"
+    url: "https://www.diariomotor.com/noticia/prueba-cupra-tavascan-vz/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-27
+    tier: T3
+    version: Tavascan VZ
+  - title: "Probamos el CUPRA Tavascan VZ, el único SUV eléctrico familiar del Grupo Volkswagen con algo de carácter y dinamismo"
+    url: "https://www.motorpasion.com/pruebas-de-coches/prueba-cupra-tavascan-vz-340-cv"
+    source_id: motorpasion-es
+    retrieved: 2026-10-27
+    tier: T3
+    version: Tavascan VZ
 open_questions:
   - "Sin PVP limpio: la web solo muestra precio con oferta, y solo para la versión de acceso."
   - "Batería de Endurance y VZ, y carga AC, no publicadas en la ficha."

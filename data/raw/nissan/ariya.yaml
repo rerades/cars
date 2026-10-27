@@ -26,6 +26,18 @@ images:
     retrieved: 2026-10-13
     license: CC-BY-SA-4.0
     attribution: "Vauxford, CC BY-SA 4.0, vía Wikimedia Commons"
+reviews:
+  - title: "Prueba Nissan ARIYA e-4ORCE"
+    url: "https://www.diariomotor.com/noticia/prueba-del-nissan-ariya-e-4orce/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-27
+    tier: T3
+    version: Ariya Evolve 87 kWh e-4ORCE
+  - title: "Probamos el Nissan Ariya 2027: la actualización más discreta del año esconde el SUV eléctrico más sereno y refinado que vas a conducir"
+    url: "https://www.motorpasion.com/pruebas-de-coches/probamos-nissan-ariya-2027-actualizacion-discreta-ano-esconde-suv-electrico-sereno-refinado-que-puedes-conducir"
+    source_id: motorpasion-es
+    retrieved: 2026-10-27
+    tier: T3
 open_questions:
   - "launch y segment: sin fuente registrada."
   - "Precio (revisado 2026-10-23): ninguna versión tiene precio. nissan.es/cf/.../ariya solo da 'desde 44.375 €' (Evolve 4x2) y 47.575 € (e-4ORCE) financiados, y el ejemplo de la nota 3 (46.275 € al contado, 45.275 € financiando) incluye la ayuda Plan Auto+ de 2.925 € y 900 € CAE: es un precio con ayudas públicas restadas y no se guarda (se quitó el que había). No hay tarifa PDF (solo ficha técnica y catálogo); la búsqueda en nissan.es solo devolvió páginas de ofertas y una tarifa de mantenimiento de 2022. Sin PVP limpio ni oferta sin ayudas."

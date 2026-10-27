@@ -29,7 +29,14 @@ images:
     retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, Wikimedia Commons"
+reviews:
+  - title: "Probamos el nuevo Peugeot e-2008: el SUV eléctrico sube de potencia y autonomía y mantiene sus cotas de confort"
+    url: "https://www.motorpasion.com/pruebas-de-coches/peugeot-e-2008-2023-prueba-contacto"
+    source_id: motorpasion-es
+    retrieved: 2026-10-27
+    tier: T3
 open_questions:
+  - "reviews: la toma de contacto de diariomotor-es (peugeot-e-2008-prueba-video) es del e-2008 de 50 kWh y 136 CV, anterior a los 115 kW de la ficha; no se enlaza."
   - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27); el segmento sale de una fuente T3 (hibridosyelectricos-es, B-SUV). El título de buscador de la web de la marca ('SUV Compacto') no se ha leído y no se usa."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
   - "Versión concreta del precio de contado no identificada; sin PVP sin oferta; sin batería ni carga."
