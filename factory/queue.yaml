@@ -2940,3 +2940,25 @@
     aparte para el texto de la página, no hacer nada): qué se cambia y en qué documento. Si es una
     enmienda, ponla como propuesta en el estado de la ADR que toque, sin tocar el código ni data/.
     Bitácora."
+- id: prd-segmento-editorial
+  agent: product
+  task: "ADR-0021 (segmento editorial) está aceptada desde el 2026-10-27. Léela entera, con PRD-001
+    (RF-11, RF-12 y la sección 8, alternativa C) y PRD-002 (RF-9). Cambia RF-11 de PRD-001 para que
+    admita el segmento con tier E cuando ninguna fuente lo clasifica tras la regla y la tabla de
+    equivalencias, y RF-9 de PRD-002 para que la ficha lo muestre como «clasificación editorial» con
+    la fecha y la note, sin enlace. Decisiones del responsable que hay que reflejar: la tarjeta del
+    catálogo no lo marca (solo la ficha); puede asignarlo cualquiera con permiso de fusión; habrá un
+    criterio común en data-model.md (lo escribe el Arquitecto). Tacha la alternativa C en la sección 8
+    diciendo qué se decidió, añade los CA que hagan falta y una fila en el historial de cada PRD. No
+    toques data/, el código ni las ADR. Bitácora."
+- id: data-model-segmento-editorial
+  agent: architect
+  task: "ADR-0021 (segmento editorial) está aceptada desde el 2026-10-27; su punto 6 pide cambiar
+    data-model.md, secciones 2, 3, 6 y 8. Léela entera con data-model.md, ADR-0001, ADR-0008 y
+    ADR-0010. Haz esos cambios (tier E solo en segment, source_id editorial, note obligatoria, el
+    fichero data/sources/editorial.yaml que crea una persona) y escribe, junto a la tabla de
+    equivalencias del segmento, el criterio común que la note de cada caso debe citar (decidido por
+    el responsable): qué cuenta como cada segmento cuando ninguna fuente lo dice, con medidas o
+    rasgos comprobables, no con opiniones. Responde también la pregunta 5 de ADR-0021 (si el aviso de
+    antigüedad de ADR-0010 ignora los valores E) en la propia ADR. No toques data/, el código ni los
+    PRD. Bitácora."
