@@ -17,6 +17,7 @@ const SOURCES_DIR = join(import.meta.dirname, "../data/sources");
 export const MAX_TEXT = 60_000;
 const MAX_PARAGRAPH = 4_000;
 const MAX_MATCHES = 30;
+const TIMEOUT_MS = 20_000;
 
 /** Hostnames of every url in data/sources/*.yaml, without "www.". */
 export function registeredHosts(dir = SOURCES_DIR): Set<string> {
@@ -108,23 +109,45 @@ export function excerpts(text: string, keywords: string[]): string[] {
     .map((i) => lines[i].slice(0, MAX_PARAGRAPH));
 }
 
-export async function fetchPage(url: string, keywords: string[], fetchImpl: typeof fetch = fetch, hosts = registeredHosts(), today = new Date()) {
-  const target = new URL(url);
-  if (target.protocol !== "https:") throw new Error("only https URLs");
-  if (!hostAllowed(target.hostname, hosts)) throw new Error(`${target.hostname} is not in any data/sources/*.yaml`);
-  const headers = { "User-Agent": USER_AGENT };
+/** Why a page is not read: outside the source registry (ADR-0001) or kept out by robots.txt. */
+export class Refused extends Error {
+  kind: "rejected" | "robots";
+  constructor(message: string, kind: "rejected" | "robots") {
+    super(message);
+    this.kind = kind;
+  }
+}
 
-  const robots = await fetchImpl(new URL("/robots.txt", target), { headers });
-  if (robots.status >= 500) throw new Error(`robots.txt answered HTTP ${robots.status}: not reading the page`);
+/**
+ * The status and full visible text of a page of a registered source, read under robots.txt. Throws
+ * Refused when the rules forbid reading it, or the fetch error when there is no answer. Shared by
+ * fetchPage (the Researcher) and the data verifier (ADR-0020), so both see the same text.
+ */
+export async function readPage(url: string, fetchImpl: typeof fetch = fetch, hosts = registeredHosts()) {
+  const target = new URL(url);
+  if (target.protocol !== "https:") throw new Refused("only https URLs", "rejected");
+  if (!hostAllowed(target.hostname, hosts)) throw new Refused(`${target.hostname} is not in any data/sources/*.yaml`, "rejected");
+  const init = () => ({ headers: { "User-Agent": USER_AGENT }, signal: AbortSignal.timeout(TIMEOUT_MS) });
+
+  const robots = await fetchImpl(new URL("/robots.txt", target), init());
+  if (robots.status >= 500) throw new Refused(`robots.txt answered HTTP ${robots.status}: not reading the page`, "robots");
   if (robots.ok && !robotsAllows(await robots.text(), target.pathname + target.search)) {
-    throw new Error(`robots.txt of ${target.hostname} disallows ${target.pathname}`);
+    throw new Refused(`robots.txt of ${target.hostname} disallows ${target.pathname}`, "robots");
   }
 
-  const res = await fetchImpl(target, { headers });
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  const res = await fetchImpl(target, init());
+  if (!res.ok) {
+    await res.body?.cancel();
+    return { status: res.status, finalUrl: res.url || url, text: "" };
+  }
   const finalUrl = res.url || url;
-  if (!hostAllowed(new URL(finalUrl).hostname, hosts)) throw new Error(`redirected to ${finalUrl}, not a registered source`);
-  const text = htmlToText(await res.text());
+  if (!hostAllowed(new URL(finalUrl).hostname, hosts)) throw new Refused(`redirected to ${finalUrl}, not a registered source`, "rejected");
+  return { status: res.status, finalUrl, text: htmlToText(await res.text()) };
+}
+
+export async function fetchPage(url: string, keywords: string[], fetchImpl: typeof fetch = fetch, hosts = registeredHosts(), today = new Date()) {
+  const { status, finalUrl, text } = await readPage(url, fetchImpl, hosts);
+  if (status < 200 || status > 299) throw new Error(`HTTP ${status} for ${url}`);
   const base = { url, final_url: finalUrl, retrieved: today.toISOString().slice(0, 10), chars: text.length };
   if (keywords.length) return { ...base, keywords, paragraphs: excerpts(text, keywords) };
   return { ...base, truncated: text.length > MAX_TEXT, text: text.slice(0, MAX_TEXT) };
