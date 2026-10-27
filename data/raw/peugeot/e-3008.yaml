@@ -4,7 +4,7 @@ brand_name: Peugeot
 model: E-3008
 status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
 launch: null
-segment: null
+segment: {value: suv_compacto, note: "Diariomotor: «Por dimensiones y posicionamiento, sigue siendo un SUV compacto de pleno derecho»", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/prueba-peugeot-3008-2024/", retrieved: 2026-10-27, tier: T3}
 needs_review: false
 specs:
   wltp_max_km: {value: 526, note: "hasta 526 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
@@ -40,7 +40,7 @@ reviews:
     retrieved: 2026-10-23
     tier: T3
 open_questions:
-  - "segment: el buscador titula la página de www.peugeot.es como 'SUV compacto fastback', pero la página devuelve 403 y no se ha leído: sin fuente leída, queda null (revisión 2026-09-29)."
+  - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27); el segmento sale de una fuente T3 (diariomotor-es)."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
   - "Versión concreta del precio de contado no identificada (la oferta financiada cita Allure Eléctrico 210, 157 kW, 40.650 € financiado); sin PVP sin oferta; sin batería ni carga."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."

@@ -4,7 +4,7 @@ brand_name: Peugeot
 model: E-308
 status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
 launch: null
-segment: null
+segment: {value: compacto, note: "Motor.es: «el Peugeot E-308. Un compacto impulsado con baterías»", source_id: motor-es, url: "https://www.motor.es/pruebas-coches/prueba-peugeot-e-308-202398551.html", retrieved: 2026-10-27, tier: T3}
 needs_review: false
 specs:
   wltp_max_km: {value: 450, note: "hasta 450 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
@@ -29,6 +29,6 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, Wikimedia Commons"
 open_questions:
-  - "segment: ninguna fuente leída lo clasifica; launch: sin fecha en fuente registrada."
+  - "segment: sale de una fuente T3 (motor-es); www.peugeot.es sigue devolviendo 403 (2026-10-27). launch: sin fecha en fuente registrada."
   - "Versión concreta del precio no identificada; sin PVP sin oferta; sin batería, potencia ni carga."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."
