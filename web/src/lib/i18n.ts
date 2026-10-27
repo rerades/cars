@@ -313,6 +313,12 @@ export const es = {
   "ranking.filtros.todos": "Todos",
   "ranking.filtros.cualquiera": "Cualquiera",
   "ranking.filtros.sinJs": "Para filtrar el ranking por segmento o por precio hace falta activar JavaScript.",
+  "ranking.filtros.quitar": "Quitar filtros",
+  "ranking.filtros.error": "No se ha podido filtrar. Vuelve a intentarlo.",
+  "ranking.vacioFiltros.texto": "Ninguna versión cumple los filtros.",
+  "ranking.resumen.n": "{n} versiones",
+  "ranking.resumen.uno": "1 versión",
+  "ranking.resumen.ninguna": "Ninguna versión",
   "ranking.vacio.titulo": "Ninguna versión",
   "ranking.vacio.texto": "Todavía no hay ninguna versión a la venta que tenga publicado {dato}.",
 } as const;
