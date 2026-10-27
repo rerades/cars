@@ -29,6 +29,7 @@ images:
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "reviews: las pruebas de diariomotor-es y motorpasion-es son del Polestar 2 de 2023-2024 (baterías anteriores, p. ej. 69 kWh de LG); la ficha es la del MY2026 (659 km). No se enlazan."
   - "PVP sin oferta no publicado en la ficha; el 41.900 € incluye descuento exclusivo de marca (price_kind: financed)."
   - "Batería útil, potencia y WLTP por versión, y carga AC/DC no figuran en la ficha; buscar en configurador/ficha técnica."
   - "launch: fecha de inicio de comercialización en España no publicada en la ficha (verificado 2026-09-28)."

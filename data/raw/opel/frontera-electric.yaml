@@ -17,7 +17,14 @@ images:
     retrieved: 2026-10-12
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:Opel Frontera C Electric DSC 9331.jpg)"
+reviews:
+  - title: "Opel Frontera 2025, primera prueba del SUV barato por el que esperar a 2025 para comprar coche"
+    url: "https://www.diariomotor.com/noticia/prueba-opel-frontera-2025/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-27
+    tier: T3
 open_questions:
+  - "reviews: la prueba de diariomotor-es trata sobre todo del Frontera eléctrico de 44 kWh y 113 CV; la ficha no trae batería ni potencia con que compararla. motorpasion-es no tiene prueba del Frontera Electric (solo noticias de lanzamiento y precio)."
   - "launch y segment: sin fuente leída."
   - "price: sin precio de la versión eléctrica en página T1 legible. Leídas el 2026-10-24: ofertas.opel.es/particulares y ?model=frontera (redirigen a /ofertas; solo 'Disponible en Gasolina, Híbrido o Eléctrico' y ofertas de entrada/cuota sin indicar versión) y www.opel.es (403)."
   - "Versiones, batería, autonomía WLTP, potencia y carga: fichas de www.opel.es no accesibles (403)."
