@@ -4,7 +4,7 @@ brand_name: Ford
 model: Explorer
 status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España; ford.es tiene página de compra del Explorer", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-14, tier: T3}
 launch: null
-segment: null
+segment: {value: suv_compacto, note: "tabla del artículo: «SUV, segmento C, 4,47 m»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-27, tier: T3}
 needs_review: true
 versions:
   - name: Style RWD 58 kWh
@@ -66,7 +66,6 @@ images:
 open_questions:
   - "Precio: releído el 2026-10-24 con fetch-page.ts (palabras PVP, Precio, Oferta válida, Collection, €, TAE): /turismos/explorer-electrico no trae precio y /compra/promociones/particulares solo da cuota mensual, entrada, cuota final y el descuento de 4.500 € del Programa Auto+ («Oferta válida hasta 31/10/2026»); ninguna página da un precio total, así que no se guarda precio financed. Anterior: ford.es no publica PVP legible por versión; sin precio. Revisado el 2026-10-22: ficha del Explorer, página de promociones de particulares y buscador de stock de ford.es sin PVP ni tarifa en PDF (solo cuotas); /compra/gama-y-precios da 404. Repetido el 2026-10-23 aceptando ofertas (price_kind: financed): la ficha de ford.es solo da cuota (desde 135 €/mes, entrada 12.300 €, cuota en el mes 12 de 4.050 €, cuota final 15.364 €, 49 meses) y el descuento de 4.500 € sumado al Programa Auto+; ningún precio total, y «las cifras mostradas pueden proceder de distintos acabados». Sin precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
-  - "segment: el medio T3 dice «SUV, segmento C»; ningún término literal de RF-11."
   - "Collection es serie limitada según el medio T3: no se ha podido confirmar que se siga vendiendo hoy (needs_review)."
   - "El IDAE tiene también homologaciones de 01.2025 y 11.2025 para las mismas versiones (p. ej. 610433, 610434, 610428) con otras cifras; se usan las filas 05.2026, que coinciden con las potencias del medio T3, y no las de menor wltp_km."
   - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."
