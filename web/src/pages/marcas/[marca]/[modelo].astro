@@ -391,7 +391,7 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
         )
       }
 
-      <ReviewsBlock reviews={reviews} brand={card.brand} model={card.model} />
+      <ReviewsBlock reviews={reviews} brand={card.brand} model={card.model} versionNames={versions.map((v) => v.name)} />
     </main>
   </body>
 </html>

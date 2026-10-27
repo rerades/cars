@@ -61,6 +61,19 @@ describe("«Reviews» block on the model page (PRD-006 RF-10, CA-9; PRD-002 RF-1
       review({ title: "Acme Volta, primera prueba", url: "https://videos.motor.example/acme-volta" }),
     ];
     write("Volta", withReviews);
+    // Order (#600): outlets with accents, two versions, same outlet twice.
+    source("alvarez-es", { name: "Álvarez Motor", urls: { home: "https://alvarez.example/" } });
+    source("zeta-es", { name: "Zeta Cars", urls: { home: "https://zeta.example/" } });
+    const ordered = acme();
+    ordered.reviews = [
+      review({ title: "R1 zeta 80", url: "https://zeta.example/1", source_id: "zeta-es", version: "Volta 80 AWD" }),
+      review({ title: "R2 zeta model", url: "https://zeta.example/2", source_id: "zeta-es", retrieved: "2020-01-01" }),
+      review({ title: "R3 alvarez 60", url: "https://alvarez.example/3", source_id: "alvarez-es", version: "Volta 60" }),
+      review({ title: "R4 motor model", url: "https://www.motor.example/4" }),
+      review({ title: "R5 motor model b", url: "https://www.motor.example/5", retrieved: "2026-10-01" }),
+      review({ title: "R7 alvarez model", url: "https://alvarez.example/7", source_id: "alvarez-es" }),
+    ];
+    write("Ordered", ordered);
     write("Plain", base("Plain", {}));
     // Another brand in Volta's segment, so Volta gets «Otros modelos del segmento».
     mkdirSync(join(root, "data", "beta"), { recursive: true });
@@ -116,15 +129,15 @@ describe("«Reviews» block on the model page (PRD-006 RF-10, CA-9; PRD-002 RF-1
     [...(/<section[^>]*data-reviews[\s\S]*?<\/section>/.exec(page("Volta"))![0].matchAll(/<li[\s\S]*?<\/li>/g))].map((m) => m[0]);
 
   test("CA-1, CA-6: each entry has the title as link text, outlet, domain and retrieval date", () => {
-    const [first, second] = entries();
+    const [second, first] = entries(); // without version comes first (#600)
     assert.match(first, /<a href="https:\/\/www\.motor\.example\/pruebas\/acme-volta-80-awd"[^>]*>Acme Volta 80 AWD: probamos el SUV eléctrico de 520 km<span/);
-    assert.match(first, /Motor Ejemplo · motor\.example · consultado el 20 sep 2026/);
-    assert.match(second, /Motor Ejemplo · videos\.motor\.example · consultado el 20 sep 2026/);
+    assert.match(first, /Motor Ejemplo · motor\.example · consultado el <time datetime="2026-09-20">20 sep 2026<\/time>/);
+    assert.match(second, /Motor Ejemplo · videos\.motor\.example · consultado el <time datetime="2026-09-20">20 sep 2026<\/time>/);
     for (const e of [first, second]) assert.doesNotMatch(e.replace(/href="[^"]*"/, ""), /www\./, "domain shown without www.");
   });
 
   test("RF-7: «Sobre la versión» only when the review has a version, as plain text", () => {
-    const [first, second] = entries();
+    const [second, first] = entries(); // without version comes first (#600)
     assert.match(first, /<p[^>]*>Sobre la versión Volta 80 AWD<\/p>/);
     assert.doesNotMatch(second, /Sobre la versión/);
   });
@@ -134,12 +147,12 @@ describe("«Reviews» block on the model page (PRD-006 RF-10, CA-9; PRD-002 RF-1
       assert.doesNotMatch(e, /<details|<img|<svg|<button|<blockquote|lang=|target=|★|estrella|puntuaci/i);
       assert.equal((e.match(/<a /g) ?? []).length, 1);
       const text = e.replace(/<[^>]+>/g, "|").split("|").map((s) => s.trim()).filter(Boolean);
-      assert.ok(text.length <= 4, `title, sr text, source line, optional version: ${JSON.stringify(text)}`);
+      assert.ok(text.length <= 5, `title, sr text, source line (before and date), optional version: ${JSON.stringify(text)}`);
     }
   });
 
   test("accessible name includes the hidden text with outlet, brand and model", () => {
-    const [first] = entries();
+    const [, first] = entries();
     assert.match(first, /<span class="sr-only"> \(review de Motor Ejemplo sobre Acme Volta, en otra web\)<\/span><\/a>/);
   });
 
@@ -151,6 +164,28 @@ describe("«Reviews» block on the model page (PRD-006 RF-10, CA-9; PRD-002 RF-1
       assert.doesNotMatch(h, /[?&](utm_|aff|ref)|\?/i);
       assert.match(new URL(h).hostname, /(^|\.)motor\.example$/);
     }
+  });
+
+  test("RF-5, RF-7: entries ordered by version (page order), then outlet (es), then file order; none dropped", () => {
+    const html = page("Ordered");
+    const titles = [...html.matchAll(/<li[^>]*>\s*<a href="[^"]*"[^>]*>(R\d[^<]*)</g)].map((m) => m[1]);
+    // Versions on the page: Volta 60 (cheaper) before Volta 80 AWD; a review of an unknown version never reaches the page (data.ts drops it).
+    assert.deepEqual(titles, [
+      "R7 alvarez model",
+      "R4 motor model",
+      "R5 motor model b",
+      "R2 zeta model",
+      "R3 alvarez 60",
+      "R1 zeta 80",
+    ]);
+  });
+
+  test("RF-7: the date of each entry is a <time datetime> with the retrieval date", () => {
+    const html = page("Ordered");
+    assert.match(html, /<time datetime="2020-01-01">1 ene 2020<\/time>/);
+    assert.match(html, /<time datetime="2026-10-01">1 oct 2026<\/time>/);
+    const section = /<section[^>]*data-reviews[\s\S]*?<\/section>/.exec(html)![0];
+    assert.equal((section.match(/<time /g) ?? []).length, 6);
   });
 
   test("without reviews (or only dropped ones) there is no block: no h2, no text", () => {
