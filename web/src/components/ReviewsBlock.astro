@@ -1,61 +1,109 @@
 ---
 import { t } from "../lib/i18n.ts";
 import { formatDate, sourceName } from "../lib/format.ts";
-import type { Review } from "../lib/data.ts";
+import type { Review, TestResult } from "../lib/data.ts";
+import { publishableResults } from "../lib/test-results.ts";
 import { sortReviews } from "../lib/reviews.ts";
 
 /**
- * «Reviews» block (PRD-002 RF-16, PRD-006 RF-10; docs/design/ficha-modelo.md). Last block of the model page.
- * It only renders when there is something to show. Each entry is a link with title, outlet, domain,
- * retrieval date and optional version (#599), ordered by sortReviews (#600).
- * The «Resultados de pruebas» sublist, and the h3 of both sublists when there are two, are #601: no
- * test result can be published until the first metric exists (#597), so that branch could not be tested here.
+ * «Reviews» block (PRD-002 RF-16, PRD-006 RF-9, RF-10; docs/design/ficha-modelo.md). Last block of the model page.
+ * It only renders when there is something to show. «Resultados de pruebas» (#601) comes first, one `dl` per
+ * result; «Reviews de medios» follows, each entry a link with title, outlet, domain, retrieval date and
+ * optional version (#599), ordered by sortReviews (#600). With both sublists each gets an h3.
+ * A result with no metric label, no numeric value or no source name is not shown.
  */
 interface Props {
   reviews: Review[];
+  testResults?: TestResult[];
   brand: string;
   model: string;
   /** Names of the versions in the order of the «Versiones» block (RF-3). */
   versionNames?: string[];
 }
-const { reviews, brand, model, versionNames = [] } = Astro.props as Props;
+const { reviews, testResults = [], brand, model, versionNames = [] } = Astro.props as Props;
 // A review without outlet cannot be shown (data.ts): it counts as not publishable.
 const media = sortReviews(
   reviews.filter((r) => r.outlet !== null),
   versionNames,
   (r) => r.outlet!,
 );
-// The date goes in a <time>: the message is rendered with a marker that is split around it.
+const results = publishableResults(testResults);
+const both = results.length > 0 && media.length > 0;
+
+// «Fuente: {organismo}, {fecha}»: the template is split so the organism can be a link.
+const SOURCE_PARTS = t("ficha.pruebas.fuente", { organismo: "\u0000O", fecha: "\u0000F" }).split(/(\u0000[OF])/);
+// The review date goes in a <time>: the message is rendered with a marker that is split around it.
 const MARK = "\u0001";
+const link = "inline-block min-h-6 min-w-6 text-brand-600 underline hover:text-brand-800";
 ---
 
 {
-  media.length > 0 && (
+  (media.length > 0 || results.length > 0) && (
     <section aria-labelledby="reviews" class="mt-12" data-reviews>
       <h2 id="reviews" class="text-section text-ink-900">{t("ficha.reviews.titulo")}</h2>
-      <div class="mt-4 max-w-prose" data-reviews-medios>
-        <p class="mt-1 text-small text-ink-600">{t("ficha.reviews.mediosEntrada")}</p>
-        <ul class="mt-4 flex flex-col gap-4">
-          {media.map((r) => (
-            <li class="border-t border-line-soft pt-4 first:border-t-0 first:pt-0">
-              <a
-                href={r.url}
-                rel="noopener"
-                class="block min-h-touch text-body font-semibold text-brand-600 underline hover:text-brand-800 [overflow-wrap:anywhere]"
-                >{r.title}<span class="sr-only"> {t("ficha.reviews.enlaceSr", { medio: r.outlet!, marca: brand, modelo: model })}</span></a
-              >
-              <p class="text-small text-ink-600 [overflow-wrap:anywhere]">
-                {t("ficha.reviews.origen", { medio: r.outlet!, dominio: sourceName(r.url) ?? r.url, fecha: MARK })
-                  .split(MARK)
-                  .flatMap((part, i) => (i === 0 ? [part] : [<time datetime={r.retrieved}>{formatDate(r.retrieved) ?? r.retrieved}</time>, part]))}
-              </p>
-              {r.version && (
-                <p class="text-small text-ink-600 [overflow-wrap:anywhere]">{t("ficha.reviews.version", { version: r.version })}</p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {results.length > 0 && (
+        <div class="mt-4 max-w-prose" data-reviews-pruebas id={both ? "reviews-pruebas" : undefined}>
+          {both && <h3 class="text-card-title text-ink-900">{t("ficha.reviews.pruebasTitulo")}</h3>}
+          <p class="mt-1 text-small text-ink-600">{t("ficha.reviews.pruebasEntrada")}</p>
+          <ul role="list" class="mt-4 flex flex-col gap-4">
+            {results.map(({ result: r, label, value, organism }) => (
+              <li class="border-t border-line-soft pt-4 first:border-t-0 first:pt-0">
+                <dl class="grid grid-cols-[auto_1fr] gap-x-1 text-body text-ink-900">
+                  <dt>{label}:</dt>
+                  <dd class="m-0">
+                    {value}
+                    <span class="block text-small text-ink-600 [overflow-wrap:anywhere]">{r.test}</span>
+                    <span class="block text-small text-ink-600 [overflow-wrap:anywhere]">
+                      {SOURCE_PARTS.map((part) =>
+                        part === "\u0000O" ? (
+                          <a href={r.url} rel="noopener" class={link}>
+                            {organism}
+                            <span class="sr-only"> {t("ficha.pruebas.fuenteSr", { test: r.test, marca: brand, modelo: model })}</span>
+                          </a>
+                        ) : part === "\u0000F" ? (
+                          <time datetime={r.retrieved}>{formatDate(r.retrieved) ?? r.retrieved}</time>
+                        ) : (
+                          part
+                        ),
+                      )}
+                    </span>
+                    {r.version && (
+                      <span class="block text-small text-ink-600 [overflow-wrap:anywhere]">{t("ficha.reviews.version", { version: r.version })}</span>
+                    )}
+                    {r.note && <span class="block text-small text-ink-600 [overflow-wrap:anywhere]">{r.note}</span>}
+                  </dd>
+                </dl>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {media.length > 0 && (
+        <div class="mt-4 max-w-prose" data-reviews-medios id={both ? "reviews-medios" : undefined}>
+          {both && <h3 class="text-card-title text-ink-900">{t("ficha.reviews.mediosTitulo")}</h3>}
+          <p class="mt-1 text-small text-ink-600">{t("ficha.reviews.mediosEntrada")}</p>
+          <ul class="mt-4 flex flex-col gap-4">
+            {media.map((r) => (
+              <li class="border-t border-line-soft pt-4 first:border-t-0 first:pt-0">
+                <a
+                  href={r.url}
+                  rel="noopener"
+                  class="block min-h-touch text-body font-semibold text-brand-600 underline hover:text-brand-800 [overflow-wrap:anywhere]"
+                  >{r.title}<span class="sr-only"> {t("ficha.reviews.enlaceSr", { medio: r.outlet!, marca: brand, modelo: model })}</span></a
+                >
+                <p class="text-small text-ink-600 [overflow-wrap:anywhere]">
+                  {t("ficha.reviews.origen", { medio: r.outlet!, dominio: sourceName(r.url) ?? r.url, fecha: MARK })
+                    .split(MARK)
+                    .flatMap((part, i) => (i === 0 ? [part] : [<time datetime={r.retrieved}>{formatDate(r.retrieved) ?? r.retrieved}</time>, part]))}
+                </p>
+                {r.version && (
+                  <p class="text-small text-ink-600 [overflow-wrap:anywhere]">{t("ficha.reviews.version", { version: r.version })}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   )
 }
