@@ -118,7 +118,8 @@ export type TestMetrics = Readonly<Record<string, (value: unknown) => boolean>>;
  */
 function readFixtureLabels(): Record<string, string> {
   const path = process.env.CARS_TEST_METRICS_FIXTURE;
-  if (!path) return {};
+  // Render sets RENDER=true: a stray fixture there would publish invented metrics.
+  if (!path || process.env.RENDER) return {};
   try {
     return JSON.parse(readFileSync(path, "utf8")) as Record<string, string>;
   } catch {

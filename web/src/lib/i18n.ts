@@ -165,7 +165,7 @@ export const es = {
   "ficha.reviews.origen": "{medio} · {dominio} · consultado el {fecha}", // narrow no-break space before each «·» (ficha.lista.separador)
   "ficha.pruebas.fuente": "Fuente: {organismo}, {fecha}",
   "ficha.pruebas.fuenteSr": "(resultado de {test} para {marca} {modelo}, en otra web)",
-  "ficha.reviews.version":"Sobre la versión {version}",
+  "ficha.reviews.version": "Sobre la versión {version}",
   "ficha.reviews.enlaceSr": "(review de {medio} sobre {marca} {modelo}, en otra web)",
   "fecha.mes.1": "ene",
   "fecha.mes.2": "feb",

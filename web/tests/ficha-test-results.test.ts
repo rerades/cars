@@ -25,6 +25,8 @@ const result = (extra: Record<string, unknown> = {}) => ({
   tier: "T2",
   ...extra,
 });
+/** A valid result without one of its required keys. */
+const without = (key: string) => Object.fromEntries(Object.entries(result()).filter(([k]) => k !== key));
 const review = {
   title: "Acme: primera prueba",
   url: "https://www.motor.example/pruebas/acme",
@@ -79,6 +81,9 @@ describe("«Resultados de pruebas» in the Reviews block (#601)", () => {
     write("Both", { test_results: [result()], reviews: [review] });
     write("Unknown", { test_results: [result({ metric: "invented_metric_km" })] });
     write("NoSource", { test_results: [result({ source_id: "missing-source" })] });
+    write("NoTier", { test_results: [without("tier")] });
+    write("NoUrl", { test_results: [without("url")] });
+    write("NoRetrieved", { test_results: [without("retrieved")] });
     out = join(root, "out");
     execFileSync(join(WEB, "node_modules/.bin/astro"), ["build", "--outDir", out], {
       cwd: WEB,
@@ -135,6 +140,13 @@ describe("«Resultados de pruebas» in the Reviews block (#601)", () => {
     assert.ok(s.indexOf("data-reviews-pruebas") < s.indexOf("data-reviews-medios"));
     assert.ok(s.indexOf("Resultados publicados") < s.indexOf("Enlaces a pruebas"));
     assert.ok(s.indexOf("412,5 km") < s.indexOf("Acme: primera prueba"));
+  });
+
+  test("CA-8, CA-2: a result without tier, url or retrieved is not drawn, nor is its value", () => {
+    for (const m of ["NoTier", "NoUrl", "NoRetrieved"]) {
+      assert.doesNotMatch(page(m), /data-reviews[ >]/, m);
+      assert.doesNotMatch(page(m), /412,5/, m);
+    }
   });
 
   test("CA-2: every number shown comes from data with source, url, retrieved and tier (no value without link and date)", () => {
