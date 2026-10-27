@@ -40,7 +40,14 @@ images:
     retrieved: 2026-10-15
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+reviews:
+  - title: "Prueba del Renault Twingo Mk4 eléctrico en Ibiza (+vídeo)"
+    url: "https://www.diariomotor.com/noticia/renault-twingo-prueba-video/"
+    source_id: diariomotor-es
+    retrieved: 2026-10-27
+    tier: T3
 open_questions:
+  - "reviews: motorpasion-es no tiene una prueba del Twingo E-Tech de 2026 (solo noticias de precio y la prueba del Twingo Electric de 2020, otra generación); solo hay review de diariomotor-es."
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP solo para evolution (263 km); techno no la publica, así que solo se da specs.wltp_max_km. Batería y carga CA no publicadas (carga 15-80 % en 28 min con cargador CC de 50 kW; no es el máximo del coche)."
   - "No se ha encontrado un PVP vigente sin promociones: los precios son «desde» con «este importe incluye promociones»."

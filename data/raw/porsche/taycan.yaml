@@ -125,7 +125,15 @@ images:
     retrieved: 2026-10-15
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+reviews:
+  - title: "Después de probar el Porsche Taycan GTS te lo digo claro: un coche eléctrico puede ser una de las mejores berlinas del mundo"
+    url: "https://www.motorpasion.com/pruebas-de-coches/prueba-porsche-taycan-gts-2026"
+    source_id: motorpasion-es
+    retrieved: 2026-10-27
+    tier: T3
+    version: Taycan GTS
 open_questions:
+  - "reviews: las pruebas de diariomotor-es son del Taycan anterior al restyling (por ejemplo, GTS de 598 CV frente a los 700 CV de la ficha); no se enlazan."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir el Taycan MY2027 en España; queda null."
   - "Batería (kWh): la web no la publica; no se toma del IDAE porque sus filas son de homologaciones anteriores (potencia y WLTP distintos de la web)."
   - "El medio (T3) habla de «Standard, 4, 4S, GTS, Turbo, Turbo S, Turbo GT con sus Black Edition»; la web (T1) lista 22 versiones entre berlina, Sport Turismo y Cross Turismo. Se sigue la web."

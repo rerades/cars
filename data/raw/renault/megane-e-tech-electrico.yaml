@@ -44,6 +44,7 @@ images:
     license: "CC-BY-SA-4.0"
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "reviews: las pruebas de diariomotor-es y motorpasion-es son del Mégane de 2022 (40 o 60 kWh); la ficha es la versión renovada de 67 kWh y 220 CV. No se enlazan."
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión: solo consta 500 km para techno; esprit Alpine no se ha leído, así que solo se publica specs.wltp_max_km."
   - "No se ha encontrado un PVP vigente sin promociones: los precios son «desde» con «este importe incluye promociones»."

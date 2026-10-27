@@ -40,7 +40,15 @@ images:
     retrieved: 2026-10-15
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
+reviews:
+  - title: "Probamos el Porsche Macan GTS: la demostración de que un SUV eléctrico puede ser divertido, rapidísimo en curvas y la forma más accesible de tener un Porsche de casi 600 CV"
+    url: "https://www.motorpasion.com/pruebas-de-coches/2026-porsche-macan-gts-prueba"
+    source_id: motorpasion-es
+    retrieved: 2026-10-27
+    tier: T3
+    version: Macan GTS
 open_questions:
+  - "reviews: diariomotor-es no tiene una prueba del Macan eléctrico (solo noticias y la ficha del modelo); no se enlaza."
   - "launch: la web de Porsche España y el medio no dan la fecha desde la que se puede pedir el Macan eléctrico; queda null."
   - "Batería (kWh): la web de Porsche España no la publica por versión; no se toma del IDAE porque sus filas son de homologaciones anteriores al MY2027 (WLTP e hasta potencia distintos)."
   - "Los precios son «precio desde» del configurador, con la configuración base; la autonomía y la potencia son las del rango/overboost publicado."
