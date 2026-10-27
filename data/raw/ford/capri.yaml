@@ -4,7 +4,7 @@ brand_name: Ford
 model: Capri
 status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España; ford.es tiene la página del Capri eléctrico con cuotas de financiación", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-14, tier: T3}
 launch: null
-segment: null
+segment: {value: suv_grande, note: "tabla del artículo: «SUV coupé, segmento D, 4,63 m»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-27, tier: T3}
 needs_review: true
 versions:
   - name: Style RWD 58 kWh
@@ -66,7 +66,6 @@ images:
 open_questions:
   - "Precio: releído el 2026-10-24 con fetch-page.ts (palabras PVP, Precio, Oferta válida, €, Importe, TAE): /turismos/capri-electrico y /compra/promociones/particulares solo dan cuota mensual, entrada, cuota final y el descuento de 4.500 € del Programa Auto+; los avisos legales («disclosure») no salen en el texto y ninguna página da un precio total, así que no se guarda precio financed. Anterior: ford.es solo muestra cuotas de financiación; sin PVP legible por versión; sin precio. Revisado el 2026-10-22: página de promociones de particulares, buscador de stock y búsquedas en ford.es solo dan cuotas de financiación y ofertas de empresa; sin tarifa en PDF; /compra/gama-y-precios da 404. Repetido el 2026-10-23 aceptando ofertas (price_kind: financed): la ficha de ford.es solo da cuota (desde 145 €/mes, entrada 13.050 €, cuota en el mes 12 de 4.050 €, cuota final 16.680 €, 49 meses) y el descuento de 4.500 € sumado al Programa Auto+; ningún precio total ni asociado a una versión. Sin precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
-  - "segment: el medio T3 dice «SUV coupé, segmento D»; ningún término literal de RF-11."
   - "El medio T3 no cita la serie Collection del Capri (sí la del Explorer, como serie limitada); consta en el IDAE (05.2026). No confirmado que se venda hoy (needs_review)."
   - "El IDAE tiene también homologaciones de 01.2025 y 11.2025 para las mismas versiones, con otras cifras; se usan las filas 05.2026, que coinciden con las potencias del medio T3, y no las de menor wltp_km."
   - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."

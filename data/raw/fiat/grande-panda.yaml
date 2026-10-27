@@ -4,7 +4,7 @@ brand_name: Fiat
 model: Grande Panda
 status: {value: on_sale, note: "artículo de 2026-02-17 que lista el Grande Panda eléctrico (113 CV, 44 kWh) entre los eléctricos de Fiat disponibles en España en 2026; no se ha confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-10-14, tier: T3}
 launch: null
-segment: null
+segment: {value: suv_pequeno, note: "«Es un SUV eléctrico del segmento B construido sobre la plataforma Smart Car»", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-10-27, tier: T3}
 needs_review: true
 versions:
   - name: Grande Panda 83 kW (113 CV) 44 kWh
@@ -24,4 +24,3 @@ open_questions:
   - "price: fiat.es devuelve 403; sin PVP ni precio financiado en fuente T1. Un T3 cita 24.450 €, que no vale como precio."
   - "status y versiones: solo un artículo T3 de 2026-02-17; hay que confirmar qué acabados eléctricos se venden hoy (el IDAE lista Pop, Icon, Business, La Prima y Red)."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España (un artículo T3 de 2024-10 decía que los precios españoles aún no se conocían)."
-  - "segment: el medio lo llama «SUV del segmento B», que no es un término literal de la lista de RF-11; queda vacío."

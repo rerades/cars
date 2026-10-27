@@ -4,7 +4,7 @@ brand_name: Ford
 model: Puma Gen-E
 status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España; la ficha de ford.es muestra cuotas de financiación", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-14, tier: T3}
 launch: null
-segment: null
+segment: {value: suv_pequeno, note: "tabla del artículo: «SUV urbano, segmento B, 4,21 m»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-27, tier: T3}
 needs_review: true
 versions:
   - name: Gen-E
@@ -37,7 +37,6 @@ open_questions:
   - "needs_review: true porque la venta hoy solo la respalda un medio T3 y las versiones salen del IDAE; falta una página de ford.es que lo confirme (revisión de la PR #341)."
   - "Precio: releído el 2026-10-24 con fetch-page.ts (palabras PVP, Precio, Oferta válida, €, Importe, TAE y texto completo de la ficha): la ficha y /compra/promociones/particulares solo dan cuota (la oferta cita «46,8kWh FWD (168CV)»: 125 €/mes, entrada 7.850 €, cuota final 14.394 €, «Oferta válida hasta 31/10/2026»); ningún precio total ni nota legal legible, así que no se guarda precio financed. Anterior: ford.es solo muestra cuotas de financiación (desde 125 €/mes, entrada 7.850 €, cuota final 14.394 €, 49 meses), sin PVP legible; sin precio. Revisado el 2026-10-22: /turismos/puma-gen-e, /turismos/puma-gen-e/shop, /compra/promociones/particulares y /compra/comprar-online/inventory/pv no dan PVP por versión ni enlazan a tarifa en PDF; el configurador remite al concesionario; /compra/gama-y-precios da 404. Repetido el 2026-10-23 aceptando ofertas (price_kind: financed): la ficha, /promociones/particulares, /promociones/empresas, /shop y /compra/promociones/plan-auto-plus de ford.es solo muestran cuota mensual, entrada, cuota final y la ayuda de 4.500 € del Programa Auto+; ningún precio total (ni con descuento de marca ni financiando), y la ficha avisa de que «las cifras mostradas pueden proceder de distintos acabados», sin asociarlas a una versión. Las notas legales no se leen en la página. Sin precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
-  - "segment: ford.es dice «SUV 100% eléctrico» y el medio T3 «SUV urbano, segmento B»; ningún término literal de RF-11."
   - "IDAE mezcla homologaciones: se usan las filas 05.2026 (batería de 46,8 kWh, posterior al cambio de marzo de 2026 que cuenta el medio T3), no la de menor wltp_km (610512, 43 kWh, 324 km, batería sustituida)."
   - "El medio T3 indica la retirada del acabado Black Edition, que la ficha de ford.es aún menciona."
   - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."
