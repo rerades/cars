@@ -9,8 +9,7 @@ import { loadModels } from "../src/lib/data.ts";
  *
  * Routes come from the same data the build used (loadModels), not from a fixed list.
  *
- * TODO(#378): the rankings page (PRD-005) does not exist yet. Its page, with and without
- * filters, is added to PAGES with story #378.
+ * PRD-005: a ranking page, without filters and with a filters query string (ADR-0015), story #378.
  */
 
 const LCP_BUDGET_MS = 2500;
@@ -43,6 +42,12 @@ const PAGES: PageToMeasure[] = [
   { name: "home", url: "/", skipReason: "" },
   { name: "listing", url: "/coches/", skipReason: "" },
   { name: "listing with filters", url: `/coches/${FILTERS_QUERY}`, skipReason: "" },
+  { name: "ranking", url: "/rankings/mas-autonomia/", skipReason: "" },
+  {
+    name: "ranking with filters",
+    url: "/rankings/mas-autonomia/?segmento=suv_compacto&precio=de-30000-a-45000-euros",
+    skipReason: "",
+  },
   {
     name: "model page with image",
     url: withImage ? `/marcas/${stem(withImage.file)}/` : null,

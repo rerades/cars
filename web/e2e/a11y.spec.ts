@@ -99,6 +99,14 @@ test.describe("accessibility (ADR-0006)", () => {
     await checkA11y(page, `/comparar/?${query}`, () => expect(page.locator("[data-compare] table")).toBeVisible());
   });
 
+  test("ranking with a filter applied (PRD-005, ADR-0015)", async ({ page }) => {
+    // Real data; the controls and the filtered list are mounted by the script.
+    await checkA11y(page, "/rankings/mas-autonomia/?precio=de-30000-a-45000-euros", async () => {
+      await expect(page.locator("[data-filter-price]")).toHaveValue("de-30000-a-45000-euros");
+      await expect(page.locator("[data-ranking-list], [data-filtered-empty]").first()).toBeVisible();
+    });
+  });
+
   test("empty state of /coches/", async ({ page }) => {
     // The query must still match nothing, or this would be checking another view.
     await checkA11y(page, `/coches/${EMPTY_QUERY}`, () => expect(page.locator("[data-empty]")).toBeVisible());
