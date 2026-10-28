@@ -2,7 +2,9 @@
 
 - **Estado:** aceptada (2026-10-26). Enmienda el punto 14 de ADR-0011: el verificador es una regla más de la fusión.
   Enmienda «Versión y unidad» (precio junto al nombre de su versión; unidad para números de una o
-  dos cifras): aceptada (2026-10-27).
+  dos cifras): aceptada (2026-10-27). Enmienda «Nombre de la versión en la página» (campo opcional
+  `price.page_name` con el nombre literal que da la página del precio; `name` no cambia): aceptada
+  (2026-10-28).
 - **Fecha:** 2026-10-26
 
 ## Contexto
@@ -341,15 +343,125 @@ negativos sin quitar falsos positivos.
 - **Malo: más código y más casos** en una regla que escribe una persona (RNF-3), y un 3 sin medir.
 
 **Preguntas abiertas de la enmienda (no se deciden aquí):**
-- ¿Debe el `name` de la versión copiar el nombre que usa la página? Sería un cambio del modelo de
-  datos y de `researcher.md`, no de esta ADR. Medido al aceptar (2026-10-27): de 104 precios con
-  `url`, 53 tienen el `name` de su versión escrito tal cual en la página y 29 no (nombres compuestos
-  como «135 CV 61 kWh N LINE» o «(versión no especificada en la oferta)»). Encolada para el Arquitecto.
+- ~~¿Debe el `name` de la versión copiar el nombre que usa la página?~~ Medido al aceptar (2026-10-27):
+  de 104 precios con `url`, 53 tienen el `name` de su versión escrito tal cual en la página y 29 no
+  (nombres compuestos como «135 CV 61 kWh N LINE» o «(versión no especificada en la oferta)»).
+  Tratada en la enmienda «Nombre de la versión en la página» (aceptada, 2026-10-28): `name` no
+  cambia; un campo opcional `price.page_name` guarda el texto de la página.
 - ¿Se ancla también el resto de números de versión (`wltp_km`, `battery_kwh`, `power_kw`…)? Tienen el
   mismo hueco que el precio; se decide con los datos de RF-1 sobre cuántos precios salen *sin versión*.
 - ¿Deben contar como nombres los de las versiones de otros ficheros de la misma marca que citan la
   misma `url`?
 - El tope de 3 párrafos, con los datos de RF-1.
+
+### Nombre de la versión en la página (enmienda del 2026-10-28, aceptada)
+
+**`versions[].name` sigue siendo el nombre que ve el visitante y no tiene que copiar la página; el
+precio gana un campo opcional `page_name`, el nombre literal que la página de `price.url` da a esa
+versión, y el anclaje del punto 9 lo usa además de `name`.**
+
+Contexto propio de la enmienda.
+- **La pregunta abierta de «Versión y unidad»** y su medida (2026-10-27): de 104 precios con `url`,
+  53 tienen el `name` tal cual en su página y 29 no. Esos 29 salen *encontrado sin versión* (punto 9):
+  no bloquean, pero no se comprueban contra su versión, que es el hueco de CA-10 que la enmienda
+  quería cerrar. Los otros 22 no están en el texto servido (pregunta abierta del final).
+- **PRD-002, RF-3:** la ficha lista las versiones «cada una con su nombre (`name`)», sin repetir
+  nombres, en columnas de una tabla a 1280 px y en bloques a 320 px (CA-3). (La tarea citaba PRD-001;
+  PRD-001 no muestra el nombre de la versión, solo deriva de las versiones el «precio desde».)
+- **`name` es la clave de otros datos:** `reviews[].version` y `test_results[].version` son el `name`
+  de una versión del mismo fichero (data-model.md, secciones 3.1 y 6). Cambiar un
+  `name` obliga a cambiar esas referencias.
+- **data-model.md, sección 4:** `name` es «texto; único dentro del fichero», sin más regla. Una
+  versión cita a menudo varias páginas: el precio la de precios o la oferta, y `wltp_km`, `power_kw`
+  y `battery_kwh` la ficha técnica o el IDAE (`researcher.md`, regla de IDAE), donde se llama de otra
+  forma (el IDAE pone la fecha de homologación en el nombre).
+- **El texto de la página ya se copia literal** en un caso: `price_terms`, con `fetch-page.ts`
+  (`researcher.md`, «Texto literal de una web registrada»). El mismo método sirve para el nombre.
+- **RNF-3 de PRD-007:** `factory/` (validador y `merge.ts`) lo cambia una persona; `researcher.md`,
+  `data-model.md` y `data/` no los toca el Arquitecto.
+
+#### Opciones consideradas (enmienda)
+- **A. No hacer nada.** Descartada. Coste cero en datos y código, pero los 29 precios (el 28 % de los
+  que tienen `url`) y los que vengan con nombres compuestos se quedan sin comprobar contra su versión
+  para siempre, y nada empuja a que mejore: el Researcher no tiene ninguna regla que lo pida.
+- **B. Que `name` copie el nombre de la página de `price.url`.** Descartada. (1) Lleva a la ficha
+  nombres pensados para la página de una oferta, no para una tabla: «135 CV 61 kWh N LINE» o
+  «E-208 (versión no especificada en la oferta)» como cabecera de columna (PRD-002, RF-3), y nombres
+  de la misma gama escritos de formas distintas según de qué página salió cada precio. (2) Solo vale
+  para una de las páginas de la versión: el precio y la autonomía suelen venir de URL distintas, y
+  `name` no puede copiar las dos. (3) Cambia datos: 29 `name` que reescribir, con sus referencias en
+  `reviews` y `test_results`, y con el riesgo de que dos versiones acaben con el mismo nombre de página
+  (regla 6). (4) Una versión sin precio o cuya página no la nombra no tiene de dónde copiar.
+- **C. Comparar de forma aproximada en `merge.ts`** (por palabras sueltas, ignorando «CV», «kWh»…).
+  Descartada. Sin cambio de datos, pero las versiones de un mismo modelo comparten casi todas las
+  palabras («61 kWh», «N LINE», la potencia), así que una búsqueda aproximada daría dueños falsos y
+  convertiría el «no coincide (otra versión)» del punto 9, que hoy bloquea solo con una prueba
+  exacta, en una conjetura. Más código en una regla que escribe una persona, para un resultado que no
+  se puede enseñar en la PR.
+- **D. Un campo aparte con el texto de la página, en la versión (`versions[].page_name`).**
+  Descartada frente a E: la versión puede citar varias páginas que la nombran distinto, y el campo
+  no diría de cuál es.
+- **E. Un campo aparte en el precio (`price.page_name`), ligado a `price.url`.** Elegida. Sin
+  nombres feos en la ficha (la web no lo muestra), sin cambio obligatorio de datos (es opcional) y
+  con el mismo método literal que `price_terms`. Coste: un campo más en el esquema y en el
+  validador, una regla más para el Researcher, y los 29 precios solo mejoran cuando alguien los
+  vuelva a leer.
+
+#### Decisión (enmienda)
+14. **`name` no cambia.** Sigue siendo texto único dentro del fichero, el que muestra la ficha
+    (PRD-002, RF-3) y al que apuntan `reviews` y `test_results`. Ninguna regla le pide copiar una
+    página.
+15. **Campo nuevo `page_name` en `Price`**, opcional: el nombre de la versión **tal como lo escribe la
+    página de `price.url`**, copiado literal de la salida de `fetch-page.ts`, sin añadir ni quitar
+    palabras. Solo se escribe si la página nombra la versión junto a ese precio y el texto no es ya
+    igual a `name` (comparado como en el punto 9). Si la página no nombra la versión, no se escribe:
+    nunca un texto como «versión no especificada». No es un `Sourced` aparte: hereda la `url`, la
+    fuente y la fecha del precio. Solo existe si `price` no es `null`.
+16. **Anclaje (cambia el punto 9).** Los nombres de cada versión son su `name` y, si lo tiene, su
+    `price.page_name`, los dos con la normalización del punto 9. Un párrafo con cualquiera de los dos
+    hace dueña a esa versión. El resto del punto 9, el 10 y el 11 no cambian.
+17. **Qué se cambia y dónde, al aceptarla:**
+    - `docs/architecture/data-model.md`, sección 4, tabla `Price`: fila `page_name` (texto literal de
+      la página de `url`; opcional; prohibida si `price` es `null`), y en la sección 6 una regla: si
+      está, no es vacía y no es igual a `name` de su versión con la normalización del punto 9. Lo
+      escribe el Arquitecto.
+    - `factory/evals.ts` (validador de ADR-0010) y `factory/merge.ts` (punto 16), con pruebas en
+      `factory/tests/`: un precio cuya página escribe solo el `page_name` sale *encontrado*; el
+      mismo precio bajo el `page_name` de otra versión da *no coincide (otra versión)*. Los escribe
+      una persona (RNF-3).
+    - `.claude/agents/researcher.md`, regla de `price_terms`: copiar `page_name` igual que
+      `price_terms`, con las condiciones del punto 15. Lo cambia una persona.
+    - `data/raw/`: nada en bloque. Los 29 precios ganan `page_name` cuando el Researcher vuelva a leer
+      su página (refresco mensual de ADR-0010) o en una tarea propia, si se encola.
+    - La web: nada. `page_name` no se muestra (PRD-002 no lo pide).
+
+#### Consecuencias (enmienda)
+- **Bueno:** la ficha conserva nombres hechos para leerse, y la `name` no se toca, así que no se
+  rompen las referencias de `reviews` y `test_results` ni hay datos que migrar.
+- **Bueno:** el anclaje puede comprobar el precio de los 29 cuando tengan `page_name`, y la prueba que
+  enseña la PR (el párrafo y el nombre) sigue siendo exacta.
+- **Malo: el autor elige su propia ancla.** El Researcher que copia la fila equivocada puede copiar
+  también el nombre equivocado como `page_name`, y el verificador dará el precio por bueno. Si ese
+  nombre es el `name` o el `page_name` de otra versión del fichero, el párrafo tiene dos dueñas y no
+  bloquea (empate del punto 9). Lo que protege es que el Revisor ve los dos campos juntos en el diff,
+  no el código.
+- **Malo: no se comprueba que `page_name` esté en la página.** Un `page_name` que no aparece
+  simplemente no ancla nada (el precio sale *sin versión*, como hoy). No he añadido esa comprobación
+  para no crear un motivo de bloqueo nuevo; sería otra enmienda.
+- **Malo: no sé cuántos de los 29 se arreglan.** Los que la página no nombra («E-208 (versión no
+  especificada en la oferta)») seguirán *sin versión*; cuántos son, no lo he medido.
+- **Malo: un campo más** en el esquema, el validador, `researcher.md` y la ventana de contexto del
+  Researcher, para algo que el visitante no ve.
+- **Malo: solo el precio.** Si se decide anclar también `wltp_km` y los demás números (pregunta
+  abierta de «Versión y unidad»), hará falta lo mismo para sus URL, que no son la del precio.
+
+**Preguntas abiertas de esta enmienda (no se deciden aquí):**
+- «E-208 (versión no especificada en la oferta)» como `name` describe un precio que la página no
+  asigna a ninguna versión. Si eso es una versión válida para la ficha es una pregunta de datos y de
+  Producto (PRD-002, RF-3), no del verificador.
+- ~~¿Se encola una tarea para que el Researcher rellene `page_name` en los 29 precios, o se espera al
+  refresco mensual?~~ Decidido al aceptar (2026-10-28): se encola, por marcas, cuando el validador,
+  el anclaje y `researcher.md` ya lo admitan.
 
 ## Consecuencias
 - **Bueno:** cumple RNF-1: no gasta modelo ni presupuesto de ADR-0002, y su resultado es
