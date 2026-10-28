@@ -117,15 +117,24 @@ fase 3.
   hace quien no escribió el dato. Si un valor no coincide, la PR recibe `merger:needs-human` con el
   valor, la URL y lo que encontró.
 - **RF-9:** **Escalera de confianza.** Cada agente sube un peldaño para un tipo de cambio después de
-  N fusiones limpias seguidas de ese tipo. Una fusión es limpia si entró sin `review:changes`, sin
+  5 fusiones limpias seguidas de ese tipo (N = 5, decidido el 2026-10-28). Un tipo de cambio es el agente
+  más el primer nivel de ruta del diff (`developer` + `web/`); una PR que toca varios tipos solo se
+  fusiona sola si todos están en el peldaño. De momento solo `web/` tiene escalera: `docs/product/` y
+  `docs/design/` siguen siempre con una persona, y ampliarlo es una enmienda. Una fusión es limpia si entró sin `review:changes`, sin
   CI roja y sin defecto escapado. Con el peldaño, las PR de ese tipo se fusionan solas con las
   reglas de ADR-0011 más la puerta de RF-3; por ejemplo, las de `web/` del developer. Un revert o un
-  defecto escapado (sección 2) baja un peldaño. El estado de la escalera se versiona y
-  `run.ts --status` lo muestra. Enmienda la ADR-0011.
+  defecto escapado (sección 2) baja un peldaño. El estado de la escalera son eventos (fusión limpia,
+  subida, bajada, con la PR y el motivo) en `ops/trust/YYYY-MM.jsonl`, en la rama de estado de
+  ADR-0013, y `run.ts --status` lo muestra. Enmienda la ADR-0011 y la ADR-0013.
 - **RF-10:** **Agente retro.** Un agente nuevo, `retro`, lee las ejecuciones fallidas, los
   `review:changes` y los defectos escapados del periodo, con sus trazas (ADR-0004), y propone cambios
-  a `.claude/agents/*.md` o a las skills. Cada propuesta lleva el resultado de `factory/eval-run.ts`
-  (ADR-0016) y la fusiona siempre una persona. Cada defecto escapado se convierte en un caso del
+  a `.claude/agents/*.md` o a las skills **como texto** (el diff propuesto, en una PR de
+  `docs/bitacora/` o en una issue): no escribe en `.claude/` (ADR-0002, RNF-3). Una persona lo
+  aplica, con el resultado de `factory/eval-run.ts` (ADR-0016). Corre como mucho una vez por semana
+  y solo si desde la pasada anterior hay al menos 3 señales (fallo, `review:changes` o defecto
+  escapado), contadas por código sin modelo. Usa Sonnet, con topes de 1 USD-eq por ejecución y 6 al
+  mes en `budgets.yaml`. Mientras solo el Revisor tenga dataset de evals, solo propone cambios a
+  su prompt. Cada defecto escapado se convierte en un caso del
   dataset.
 
 ### Mantenimiento de los datos
@@ -194,8 +203,8 @@ fase 3.
 - [ ] **CA-12** (→ RF-9): Una PR que toca `factory/`, `.claude/`, `.github/` o `docs/architecture/adr/`
   nunca se fusiona sola, esté en el peldaño que esté.
 - [ ] **CA-13** (→ RF-10): Dado un periodo con ejecuciones fallidas, cuando corre el agente retro,
-  entonces abre una PR que cambia un prompt o una skill y adjunta el resultado de `eval-run.ts`, y el
-  paso de fusión le pone `merger:needs-human`.
+  entonces deja el cambio propuesto a un prompt o una skill como texto, sin escribir en `.claude/`,
+  y nada lo aplica sin una persona. Con menos de 3 señales en la semana, no corre.
 - [ ] **CA-14** (→ RNF-5): Con `factory/STOP`, ni el alimentador encola ni el bucle de corrección
   reintenta.
 - [ ] **CA-15** (→ RF-11): Dada una URL de `data/raw/` que responde 404 y otra que responde 403,
@@ -204,10 +213,11 @@ fase 3.
   ninguna rota, la issue se cierra.
 
 ## 8. Preguntas abiertas
-- **OPEN-1** (→ RF-9): ¿Cuánto vale N? ¿Qué es un «tipo de cambio»: el agente más un prefijo de
+- ~~**OPEN-1** (→ RF-9)~~ Resuelta el 2026-10-28 por el responsable: N = 5; tipo = agente + primer
+  nivel de ruta, empezando solo por `web/`; estado en `ops/trust/` (alternativa E1). Ver RF-9. ¿Cuánto vale N? ¿Qué es un «tipo de cambio»: el agente más un prefijo de
   ruta? ¿Dónde se guarda el estado de la escalera?
 
-  > **Propuesta para decidir al revisar la PR (2026-10-28). Sigue abierta: no cambia RF-9 ni CA-11.**
+  > **Propuesta para decidir al revisar la PR (2026-10-28). Decidida: N = 5 en vez de 10, el resto como se recomienda.**
   >
   > **Datos de octubre** (`ops/runs/2026-10.jsonl` y `ops/merges/2026-10.jsonl`, del 1 al 27):
   > 256 ejecuciones y 8 no exitosas (3 %). El developer hizo 54 ejecuciones y abrió 51 PR; **ninguna
@@ -283,10 +293,11 @@ fase 3.
 - **OPEN-3** (→ RF-7): ¿Cargan las skills de `.claude/skills/` en `claude -p` dentro del worktree con
   `FACTORY_AGENT`? ¿Puede una skill limitarse a un solo agente? Hay que comprobarlo antes de trocear
   RF-7.
-- **OPEN-4** (→ RF-10): Presupuesto, topes y frecuencia del agente retro (¿semanal?). ¿Usa Opus,
+- ~~**OPEN-4** (→ RF-10)~~ Resuelta el 2026-10-28 por el responsable: F3 (semanal con umbral 3), M1
+  (Sonnet), los topes de la tabla y propuestas como texto. Ver RF-10 y CA-13. Presupuesto, topes y frecuencia del agente retro (¿semanal?). ¿Usa Opus,
   como el Arquitecto?
 
-  > **Propuesta para decidir al revisar la PR (2026-10-28). Sigue abierta: no cambia RF-10 ni CA-13.**
+  > **Propuesta para decidir al revisar la PR (2026-10-28). Decidida tal como se recomienda.**
   >
   > **Datos.** Materia prima del retro en octubre (1 al 27): 8 ejecuciones no exitosas (6 del
   > Researcher o el developer entre ellas; ~2 por semana) y, según la sección 1, 11 `review:changes`
@@ -369,3 +380,4 @@ fase 3.
 | 2026-10-25 | RF-11 y CA-15: comprobación semanal de las URL de `data/`, a petición del responsable. Se descartó dejarlo a las revisiones del Researcher, que solo miran las marcas que tocan. El script lo escribe una persona y el workflow, DevOps. | responsable + Claude |
 | 2026-10-26 | Aceptada la ADR-0020: OPEN-2 resuelta. Una PR de datos sin ningún valor comprobable (403, `robots.txt`) se sigue fusionando sola y se mide con RF-1. Sin cambios en RF ni CA. | responsable + Claude |
 | 2026-10-28 | Propuestas de respuesta, sin cerrar, para OPEN-1 (N, tipo de cambio y estado de la escalera) y OPEN-4 (frecuencia, modelo y topes del retro), con los datos de octubre y tres alternativas cada una. Decide la persona al revisar la PR. Sin cambios en RF ni CA. | Claude |
+| 2026-10-28 | OPEN-1 y OPEN-4 resueltas por el responsable. RF-9: N = 5, tipo = agente + primer nivel de ruta, solo `web/` de momento, estado en `ops/trust/`. RF-10 y CA-13: el retro propone como texto y no escribe en `.claude/`; semanal con umbral de 3 señales, Sonnet, 1 USD-eq por ejecución y 6 al mes. Hace falta enmendar ADR-0011 y ADR-0013 (Arquitecto). | responsable + Claude |
