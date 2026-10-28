@@ -215,6 +215,68 @@ test.describe("no cookies, no web storage (RNF-5, CA-7)", () => {
     });
   });
 
+  /**
+   * PRD-005 CA-15 / ADR-0015, detail 4: loads a ranking, runs `actions` and checks cookies, storage,
+   * origins, and that every fetch/XHR goes to /rankings/datos/ of the own origin.
+   * `expectData` is whether the page must have asked for the JSON (it only does when it filters).
+   */
+  async function checkRanking(
+    page: Page,
+    path: string,
+    expectData: boolean,
+    actions: (page: Page) => Promise<void> = async () => {},
+  ) {
+    const dataRequests: string[] = [];
+    const hosts = new Set<string>();
+    page.on("request", (req) => {
+      const u = new URL(req.url());
+      if (u.protocol !== "http:" && u.protocol !== "https:") return;
+      hosts.add(u.host);
+      if (req.resourceType() === "fetch" || req.resourceType() === "xhr") dataRequests.push(`${u.host}${u.pathname}`);
+    });
+    const base = test.info().project.use.baseURL!;
+    const host = new URL(base).host;
+    const response = await page.goto(`${base}${path}`, { waitUntil: "networkidle" });
+    expect(response?.ok(), `${path} status ${response?.status()}`).toBe(true);
+    await expect(page.locator("[data-filter-price]")).toBeVisible();
+    await actions(page);
+    await page.waitForLoadState("networkidle");
+
+    expect(await page.context().cookies(), `cookies in ${path}`).toEqual([]);
+    const storage = await page.evaluate(() => ({
+      local: Object.keys(window.localStorage),
+      session: Object.keys(window.sessionStorage),
+      cookie: document.cookie,
+    }));
+    expect(storage).toEqual({ local: [], session: [], cookie: "" });
+    expect([...hosts]).toEqual([host]);
+    if (expectData) expect(dataRequests.length, "the ranking asks for its data").toBeGreaterThan(0);
+    for (const r of dataRequests) expect(r.startsWith(`${host}/rankings/datos/`), `data request ${r}`).toBe(true);
+    for (const h of hosts) requestedHosts.add(h);
+  }
+
+  test("ranking without filters (PRD-005, CA-15)", async ({ page }) => {
+    await checkRanking(page, "/rankings/mas-autonomia/", false);
+  });
+
+  test("ranking with filters in the URL (PRD-005, CA-15)", async ({ page }) => {
+    await checkRanking(page, "/rankings/mas-autonomia/?precio=de-30000-a-45000-euros", true);
+  });
+
+  test("ranking after changing both selects (PRD-005, CA-15)", async ({ page }) => {
+    await checkRanking(page, "/rankings/mas-baratos/", true, async (p) => {
+      const pick = async (sel: string) => {
+        const value = await p.locator(`${sel} option:not([value=""])`).first().getAttribute("value");
+        await p.locator(sel).focus();
+        await p.locator(sel).selectOption(value!);
+      };
+      await pick("[data-filter-segment]");
+      await pick("[data-filter-price]");
+      await p.waitForLoadState("networkidle");
+      await expect(p.locator("[data-filter-price]")).not.toHaveValue("");
+    });
+  });
+
   test("page with a card with an image (test data)", async ({ page }) => {
     await checkNoStorage(page, `${imageSiteUrl}/coches/?orden=precio-desc`, { expectImg: true });
   });
