@@ -3,7 +3,7 @@
 - **Estado:** aceptada (2026-10-26). Enmienda el punto 14 de ADR-0011: el verificador es una regla más de la fusión.
   Enmienda «Versión y unidad» (precio junto al nombre de su versión; unidad para números de una o
   dos cifras): aceptada (2026-10-27). Enmienda «Nombre de la versión en la página» (campo opcional
-  `price.page_name` con el nombre literal que da la página del precio; `name` no cambia): propuesta
+  `price.page_name` con el nombre literal que da la página del precio; `name` no cambia): aceptada
   (2026-10-28).
 - **Fecha:** 2026-10-26
 
@@ -346,7 +346,7 @@ negativos sin quitar falsos positivos.
 - ~~¿Debe el `name` de la versión copiar el nombre que usa la página?~~ Medido al aceptar (2026-10-27):
   de 104 precios con `url`, 53 tienen el `name` de su versión escrito tal cual en la página y 29 no
   (nombres compuestos como «135 CV 61 kWh N LINE» o «(versión no especificada en la oferta)»).
-  Tratada en la enmienda «Nombre de la versión en la página» (propuesta, 2026-10-28): `name` no
+  Tratada en la enmienda «Nombre de la versión en la página» (aceptada, 2026-10-28): `name` no
   cambia; un campo opcional `price.page_name` guarda el texto de la página.
 - ¿Se ancla también el resto de números de versión (`wltp_km`, `battery_kwh`, `power_kw`…)? Tienen el
   mismo hueco que el precio; se decide con los datos de RF-1 sobre cuántos precios salen *sin versión*.
@@ -354,7 +354,7 @@ negativos sin quitar falsos positivos.
   misma `url`?
 - El tope de 3 párrafos, con los datos de RF-1.
 
-### Nombre de la versión en la página (enmienda del 2026-10-28, propuesta)
+### Nombre de la versión en la página (enmienda del 2026-10-28, aceptada)
 
 **`versions[].name` sigue siendo el nombre que ve el visitante y no tiene que copiar la página; el
 precio gana un campo opcional `page_name`, el nombre literal que la página de `price.url` da a esa
@@ -459,8 +459,9 @@ Contexto propio de la enmienda.
 - «E-208 (versión no especificada en la oferta)» como `name` describe un precio que la página no
   asigna a ninguna versión. Si eso es una versión válida para la ficha es una pregunta de datos y de
   Producto (PRD-002, RF-3), no del verificador.
-- ¿Se encola una tarea para que el Researcher rellene `page_name` en los 29 precios, o se espera al
-  refresco mensual? Lo decide quien acepte la enmienda.
+- ~~¿Se encola una tarea para que el Researcher rellene `page_name` en los 29 precios, o se espera al
+  refresco mensual?~~ Decidido al aceptar (2026-10-28): se encola, por marcas, cuando el validador,
+  el anclaje y `researcher.md` ya lo admitan.
 
 ## Consecuencias
 - **Bueno:** cumple RNF-1: no gasta modelo ni presupuesto de ADR-0002, y su resultado es
