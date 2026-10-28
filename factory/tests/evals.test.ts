@@ -112,6 +112,8 @@ describe("evals del researcher", () => {
       ["power_kw: {value: 150,", "power_cv: {value: 204,", /power_cv: unknown key/],
       ["price_kind: pvp", "price_kind: pvp\n      price_terms: x", /pvp must not have price_terms/],
       ["      price_terms_url:", "      terms_url:", /financed needs price_terms/],
+      ["price_kind: pvp", "price_kind: pvp\n      page_name: volta-60", /price\.page_name: must be text other than the version name/],
+      ["price_kind: pvp", "price_kind: pvp\n      page_name: \"\"", /price\.page_name: must be text other than the version name/],
       ["    price: null   #", "    #", /versions\[2\]\.price: missing/],
       ["name: Volta 80 AWD", "name: Volta 60", /repeated \(Volta 60\)/],
       ["wltp_max_km: {value: 520", "wltp_max_km: {value: 530", /must match the versions. maximum/],

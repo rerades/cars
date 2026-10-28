@@ -1,5 +1,6 @@
 /**
- * Data verifier of PRD-007 RF-8 (ADR-0020 and its amendment «Versión y unidad»): code without a
+ * Data verifier of PRD-007 RF-8 (ADR-0020 and its amendments «Versión y unidad» and «Nombre de la
+ * versión en la página»): code without a
  * model, the last rule of the merge pass (merge.ts). For a data PR it reads again, with the rules of
  * fetch-page.ts, the pages cited by the new or changed values and looks for each number (and each
  * price_terms) in the visible text. A value that is not there sends the PR to a person.
@@ -25,6 +26,8 @@ export interface Item {
   /** The version that owns a versions[].price, and the names of every version of the file. */
   version?: string;
   names?: string[];
+  /** [version name, price.page_name] of the versions that have one (amendment «Nombre de la versión en la página»). */
+  pageNames?: [string, string][];
 }
 export interface Unverifiable { file: string; path: string; value: unknown }
 export interface Changes { items: Item[]; unverifiable: Unverifiable[] }
@@ -51,11 +54,16 @@ const isObj = (v: unknown): v is Node => !!v && typeof v === "object" && !Array.
 const isSourced = (v: unknown): v is Node => isObj(v) && "value" in v && typeof v.url === "string";
 
 /** Every Sourced of a YAML by a stable path; list entries are keyed by name (versions) or by content. */
-function sourcedByPath(doc: unknown): Map<string, { node: Node; field: string; version?: string; names?: string[] }> {
-  const out = new Map<string, { node: Node; field: string; version?: string; names?: string[] }>();
-  const names = isObj(doc) && Array.isArray(doc.versions) ? doc.versions.map((v) => String((v as Node)?.name ?? "")) : [];
+type Anchor = { names: string[]; pageNames: [string, string][] };
+function sourcedByPath(doc: unknown): Map<string, { node: Node; field: string; version?: string; anchor?: Anchor }> {
+  const out = new Map<string, { node: Node; field: string; version?: string; anchor?: Anchor }>();
+  const versions = (isObj(doc) && Array.isArray(doc.versions) ? doc.versions : []).map((v) => (isObj(v) ? v : {}));
+  const anchor: Anchor = {
+    names: versions.map((v) => String(v.name ?? "")),
+    pageNames: versions.flatMap((v) => (isObj(v.price) && typeof v.price.page_name === "string" ? [[String(v.name), v.price.page_name] as [string, string]] : [])),
+  };
   const walk = (v: unknown, path: string, field: string, version?: string) => {
-    if (isSourced(v)) out.set(path, { node: v, field, version, names: version === undefined ? undefined : names });
+    if (isSourced(v)) out.set(path, { node: v, field, version, anchor: version === undefined ? undefined : anchor });
     if (Array.isArray(v)) {
       v.forEach((x, i) => {
         const e = (x ?? {}) as Node;
@@ -75,10 +83,10 @@ export function changedItems(file: string, base: unknown, head: unknown): Change
   const before = sourcedByPath(base);
   const items: Item[] = [];
   const unverifiable: Unverifiable[] = [];
-  for (const [path, { node, field, version, names }] of sourcedByPath(head)) {
+  for (const [path, { node, field, version, anchor: a }] of sourcedByPath(head)) {
     const old = before.get(path)?.node;
     if (!old || old.value !== node.value || old.url !== node.url) {
-      const anchor = field === "price" && version !== undefined ? { version, names } : {};
+      const anchor = field === "price" && version !== undefined && a ? { version, names: a.names, pageNames: a.pageNames } : {};
       if (typeof node.value === "number") items.push({ file, path, field, value: node.value, url: String(node.url), kind: "number", ...anchor });
       else unverifiable.push({ file, path, value: node.value });
     }
@@ -108,7 +116,7 @@ function unitPattern(field: string): string | null {
   return null;
 }
 
-const norm = (s: string) => s.toLowerCase().replace(/[-–—]/g, " ").replace(SPACES, " ").trim();
+export const norm = (s: string) => s.toLowerCase().replace(/[-–—]/g, " ").replace(SPACES, " ").trim();
 const quote = (s: string) => `«${s.length > MAX_QUOTE ? `${s.slice(0, MAX_QUOTE)}…` : s}»`;
 
 /** The version names in a paragraph; when one contains another, the longest wins (point 9). */
@@ -148,8 +156,11 @@ export function check(item: Item, lines: string[]): Finding {
     return { item, status: "missing", detail: near.length ? near : ["ninguno"] };
   }
   if (item.version !== undefined) {
+    // A paragraph names a version by its name or its price.page_name; a text that is both gives two owners.
     const names = item.names ?? [];
-    const named = lines.map((l) => namesIn(l, names));
+    const pages = item.pageNames ?? [];
+    const versionsOf = (n: string) => [...(names.includes(n) ? [n] : []), ...pages.filter(([, p]) => p === n).map(([v]) => v)];
+    const named = lines.map((l) => namesIn(l, [...new Set([...names, ...pages.map(([, p]) => p)])]).flatMap(versionsOf));
     const owners = (i: number) => {
       if (named[i].length) return named[i];
       for (let j = i - 1; j >= Math.max(0, i - ANCHOR_LINES); j--) if (named[j].length) return named[j];

@@ -8,6 +8,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, sep } from "node:path";
 import { parse } from "yaml";
 import { imageProblem } from "./fetch-image.ts";
+import { norm } from "./verify-data.ts";
 
 export interface EvalResult {
   passed: number;
@@ -221,8 +222,11 @@ const rawShape: Check = (ctx) => {
       sourced(v.drivetrain, `${at}.drivetrain`, oneOf(DRIVES));
       if (!("price" in v)) return fail(`${at}.price: missing (write null if there is none)`);
       const p = v.price;
-      sourced(p, `${at}.price`, positive, ["unit", "price_kind", "price_terms", "price_terms_url"]);
+      sourced(p, `${at}.price`, positive, ["unit", "price_kind", "price_terms", "price_terms_url", "page_name"]);
       if (!obj(p)) return;
+      if ("page_name" in p && (typeof p.page_name !== "string" || !norm(p.page_name) || norm(p.page_name) === norm(String(v.name)))) {
+        fail(`${at}.price.page_name: must be text other than the version name`);
+      }
       if (p.unit !== "EUR") fail(`${at}.price.unit: must be EUR`);
       if (p.tier !== "T1") fail(`${at}.price.tier: must be T1`);
       if (p.price_kind === "financed") {
