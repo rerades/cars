@@ -1,4 +1,4 @@
-/** Tests for the data verifier (ADR-0020 and its amendment «Versión y unidad»). Run: pnpm test */
+/** Tests for the data verifier (ADR-0020 and its amendments «Versión y unidad» and «Nombre de la versión en la página»). Run: pnpm test */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { changedItems, numberPattern, report, summary, verify, type Changes } from "../verify-data.ts";
@@ -113,6 +113,20 @@ test("«Volta 80» and «Volta 80 AWD» on the same page are not mixed up", asyn
   assert.equal(ok.blocking, false);
   const swapped = await run(changes, { [PRICES]: "<p>Volta 80 AWD: 45.990 €</p><p>Volta 80: 49.990 €</p>" });
   assert.equal(swapped.blocking, true);
+});
+
+test("price.page_name anchors a price like its name; under another version's page_name it blocks", async () => {
+  const named = (a: string, b: string) => doc([
+    { name: "Volta 60", price: { ...price(39990), page_name: a } },
+    { name: "Volta 80", price: { ...price(45990), page_name: b } },
+  ]);
+  const page = { [PRICES]: "<p>135 CV 61 kWh N LINE</p><p>39.990 €</p><p>204 CV 77 kWh GT</p><p>45.990 €</p>" };
+  const ok = await run(changedItems(FILE, null, named("135 CV 61 kWh N LINE", "204 CV 77 kWh GT")), page);
+  assert.equal(summary(ok).found, 2);
+  const swapped = await run(changedItems(FILE, null, named("204 CV 77 kWh GT", "135 CV 61 kWh N LINE")), page);
+  assert.equal(swapped.blocking, true);
+  const without = await run(changedItems(FILE, null, versionsOf(["Volta 60", 39990], ["Volta 80", 45990])), page);
+  assert.equal(summary(without).unanchored, 2, "without page_name it is unanchored, as before");
 });
 
 test("a one- or two-digit number counts as found only with its unit; without it, «sin unidad», no block", async () => {

@@ -2962,3 +2962,68 @@
     rasgos comprobables, no con opiniones. Responde también la pregunta 5 de ADR-0021 (si el aviso de
     antigüedad de ADR-0010 ignora los valores E) en la propia ADR. No toques data/, el código ni los
     PRD. Bitácora."
+- id: precio-url-legible-peugeot-2
+  agent: researcher
+  task: "Repite precio-url-legible-peugeot-cupra-renault solo para Peugeot (la anterior se cortó por
+    turnos). Medido el 2026-10-28 con factory/verify-data.ts: el precio de la única versión de
+    data/raw/peugeot/e-208.yaml, e-3008.yaml, e-308.yaml, e-308-sw.yaml, e-408.yaml y e-5008.yaml no
+    está en el texto que sirve su price.url. Comprueba cada uno con node factory/fetch-page.ts <url>
+    y busca en una fuente registrada de data/sources/ una página donde sí salga en el HTML. Si la
+    encuentras y el importe coincide, cambia solo price.url y price.retrieved; si el importe es otro,
+    sigue las reglas de precio de .claude/agents/researcher.md y data-model.md. Si no hay ninguna,
+    deja el precio y anótalo en open_questions con la fecha. Pon en la PR, por fichero, la salida de
+    fetch-page.ts que lo demuestra. No toques otros campos. Bitácora."
+- id: precio-url-legible-cupra-renault-2
+  agent: researcher
+  task: "Igual que precio-url-legible-peugeot-2, con las mismas reglas, para tres precios que el
+    2026-10-28 no estaban en el texto servido de su price.url: data/raw/cupra/born.yaml versión
+    «Born+ (190 CV)», data/raw/cupra/tavascan.yaml versión «Tavascan (58 kWh, 140 kW)» y
+    data/raw/renault/scenic-e-tech-electrico.yaml versión «techno 220 CV gran autonomía». Bitácora."
+- id: precio-bajo-otra-version
+  agent: researcher
+  task: "factory/verify-data.ts (ADR-0020, punto 9) encontró el 2026-10-28 estos precios en su
+    price.url, pero bajo el nombre de otra versión del mismo fichero: data/raw/byd/atto-2.yaml «Atto 2
+    Active», data/raw/hyundai/kona-electrico.yaml «204 CV 65 kWh BLACK LINE», data/raw/mg/mgs5.yaml
+    «MGS5 EV Luxury 64kW» y data/raw/polestar/polestar-4.yaml «Long Range Single Motor (Rear Motor)
+    Coupé». Lee cada página con node factory/fetch-page.ts <url> y mira qué importe da la página a
+    cada versión. Si el precio guardado es de otra versión, corrígelo con las reglas de precio de
+    .claude/agents/researcher.md y data-model.md; si es correcto y la página nombra la versión de
+    otra forma, escribe price.page_name con la regla de researcher.md. Pon en la PR el párrafo de la
+    página de cada caso. No toques otros campos. Bitácora."
+- id: page-name-renault
+  agent: researcher
+  task: "Rellena price.page_name (regla de .claude/agents/researcher.md y data-model.md, Price;
+    ADR-0020, enmienda «Nombre de la versión en la página») en las versiones cuyo precio está en su
+    price.url pero sin el nombre de su versión cerca (medido el 2026-10-28): en data/raw/renault/,
+    r4-e-tech-electrico.yaml (5 versiones), r5-e-tech-electrico.yaml (5), megane-e-tech-electrico.yaml
+    («esprit Alpine 220 CV autonomía confort» y «techno 220 CV autonomía confort») y
+    scenic-e-tech-electrico.yaml («esprit Alpine 220 CV gran autonomía»). Lee cada página con node
+    factory/fetch-page.ts <url> <importe> y copia el nombre que la página da a esa versión junto a su
+    precio. Si la página no la nombra, no escribas nada. No toques otros campos. Bitácora."
+- id: page-name-hyundai-alpine
+  agent: researcher
+  task: "Igual que page-name-renault, con las mismas reglas, para: data/raw/hyundai/ioniq-3.yaml
+    «135 CV 61 kWh N LINE», ioniq-5.yaml «170 CV 63 kWh RWD LIGHT», ioniq-6.yaml «63 kWh RWD
+    LIGHT» e ioniq-9.yaml «218 CV 110 kWh RWD STAR»; data/raw/alpine/a290.yaml (A290 GT, A290 GT
+    Performance y A290 GTS) y a390.yaml (A390 GT y A390 GTS). Bitácora."
+- id: page-name-resto
+  agent: researcher
+  task: "Igual que page-name-renault, con las mismas reglas, para: data/raw/bmw/ix3.yaml «iX3 50
+    xDrive»; data/raw/deepal/deepal-s05.yaml (S05 EV AWD Max, S05 EV RWD Max y S05 EV RWD Pro) y
+    deepal-s07.yaml «S07 EV RWD MY26»; data/raw/lynk-co/02.yaml «02 Core»; data/raw/mg/mgs6.yaml
+    «MGS6 EV Luxury AWD 77kW»; data/raw/peugeot/e-2008.yaml (su única versión);
+    data/raw/polestar/polestar-2.yaml «Standard Range Single Motor (con Climate Pack)» y
+    polestar-3.yaml «Long Range Dual Motor MY2025 km0 (Pilot Pack y Plus Pack)»; y
+    data/raw/toyota/c-hr-plus.yaml «C-HR+ Advance». Bitácora."
+- id: data-model-segmento-editorial-2
+  agent: architect
+  task: "Repite data-model-segmento-editorial (se cortó el 2026-10-28 por el presupuesto del mes),
+    con el mismo texto: ADR-0021 (segmento editorial) está aceptada desde el 2026-10-27; su punto 6
+    pide cambiar data-model.md, secciones 2, 3, 6 y 8. Léela entera con data-model.md, ADR-0001,
+    ADR-0008 y ADR-0010. Haz esos cambios (tier E solo en segment, source_id editorial, note
+    obligatoria, el fichero data/sources/editorial.yaml que crea una persona) y escribe, junto a la
+    tabla de equivalencias del segmento, el criterio común que la note de cada caso debe citar
+    (decidido por el responsable): qué cuenta como cada segmento cuando ninguna fuente lo dice, con
+    medidas o rasgos comprobables, no con opiniones. Responde también la pregunta 5 de ADR-0021 (si
+    el aviso de antigüedad de ADR-0010 ignora los valores E) en la propia ADR. No toques data/, el
+    código ni los PRD. Bitácora."

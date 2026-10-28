@@ -48,8 +48,8 @@ Todo dato de un coche va en este formato, en línea o en bloque:
 | `note` | texto | no | Matiz del dato ("hasta 631 km, máximo de la gama") |
 
 Son los cuatro nombres que ya comprueba el eval de ADR-0004, sin cambios. Solo tres campos añaden
-claves propias: `basis` en `battery_kwh`; `unit`, `price_kind`, `price_terms` y
-`price_terms_url` en `price`; y `test`, `metric` y `version` en cada `test_results` (sección 3.1).
+claves propias: `basis` en `battery_kwh`; `unit`, `price_kind`, `price_terms`,
+`price_terms_url` y `page_name` en `price`; y `test`, `metric` y `version` en cada `test_results` (sección 3.1).
 
 ## 3. Nivel de modelo
 
@@ -224,6 +224,7 @@ se escribe siempre para distinguir "no hay precio" de "no se miró".
 | `price_kind` | `pvp` \| `financed` | sí, siempre |
 | `price_terms` | texto literal de las condiciones | sí si `financed`; prohibida si `pvp` |
 | `price_terms_url` | URL donde aparecen las condiciones | sí si `financed`; prohibida si `pvp` |
+| `page_name` | nombre de la versión tal como lo escribe la página de `url`, copiado literal | no; solo si la página nombra la versión junto al precio y no es ya su `name` (ADR-0020, enmienda «Nombre de la versión en la página») |
 
 `tier` de un precio debe ser `T1` (ADR-0001, regla 1).
 
@@ -254,7 +255,8 @@ Lo que una comprobación automática tendrá que rechazar (la comprobación es t
 3. Todo `Sourced` cumple la sección 2; `source_id` está en el registro; `retrieved` no es futura.
 4. Los valores enumerados están en su lista; los números son > 0 y `wltp_km` es entero.
 5. `price`: `price_kind` presente; `financed` con `price_terms` y `price_terms_url`; `pvp` sin ellos;
-   `unit: EUR`; `tier: T1`.
+   `unit: EUR`; `tier: T1`. `page_name`, si está, no es vacío ni igual al `name` de su versión
+   (sin distinguir mayúsculas, guiones ni espacios repetidos).
 6. Los `name` de versión no se repiten. `status: on_sale` exige al menos una versión.
 7. `brand_name` es igual en todos los ficheros de la misma carpeta.
 8. `specs.wltp_max_km` coincide con el máximo de las versiones cuando las dos existen.
