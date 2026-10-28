@@ -3027,3 +3027,13 @@
     medidas o rasgos comprobables, no con opiniones. Responde también la pregunta 5 de ADR-0021 (si
     el aviso de antigüedad de ADR-0010 ignora los valores E) en la propia ADR. No toques data/, el
     código ni los PRD. Bitácora."
+- id: adr-escalera-y-retro
+  agent: architect
+  task: "PRD-007 tiene resueltas OPEN-1 y OPEN-4 desde el 2026-10-28 (RF-9, RF-10, CA-11 a CA-13 y la
+    sección 8). Léelo entero con ADR-0002, ADR-0011, ADR-0013, ADR-0016 y ADR-0019. Escribe una ADR
+    nueva, propuesta, para la escalera de confianza y el agente retro: el formato de los eventos de
+    ops/trust/YYYY-MM.jsonl y cómo se rehace el peldaño desde ellos; cómo cuenta el paso de fusión
+    una fusión limpia, un revert y un defecto escapado (la definición de ADR-0019), también de las
+    PR fusionadas a mano; dónde propone el retro sus cambios como texto y cómo cuenta las 3 señales
+    sin modelo. Pon en el estado de ADR-0011 y ADR-0013 la enmienda que propone. No toques factory/,
+    .claude/, data/ ni los PRD. Bitácora."
