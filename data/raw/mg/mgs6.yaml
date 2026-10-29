@@ -13,6 +13,7 @@ versions:
       price_kind: financed
       price_terms: "*PVP válido para particulares para Península y Baleares válido hasta el 31/10/2026 para la versión MGS6 EV Luxury 77kw con pintura Blue. Modelo visualizado MGS6 Luxury AWD 77kW con pintura Golden por 41.980€. Los precios incluyen impuestos, transporte, promociones de la marca, descuento ligado a financiación, sujeto a aprobación por Santander Consumer Finance (SCF). El precio incluye CAE estimado de 800€ de descuento y el Plan Auto+. No incluye gastos de matriculación, gastos de pre-entrega y cable de carga tipo 2 ni ningún otro tipo accesorio."
       price_terms_url: "https://www.mgmotor.es/model/mgs6"
+      page_name: "MGS6 Luxury AWD 77kW"
       source_id: mg-es
       url: "https://www.mgmotor.es/model/mgs6"
       retrieved: 2026-10-07
