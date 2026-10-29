@@ -15,6 +15,7 @@ versions:
       value: 44770
       unit: EUR
       price_kind: pvp
+      page_name: "151CV 63kWh RWD LIGHT"
       note: "la ficha muestra «IONIQ 6 151CV 63kWh RWD LIGHT PVP: 44.770 €»"
       source_id: hyundai-es
       url: "https://www.hyundai.com/es/es/modelos/ioniq6.html"
