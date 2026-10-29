@@ -3037,3 +3037,16 @@
     PR fusionadas a mano; dónde propone el retro sus cambios como texto y cómo cuenta las 3 señales
     sin modelo. Pon en el estado de ADR-0011 y ADR-0013 la enmienda que propone. No toques factory/,
     .claude/, data/ ni los PRD. Bitácora."
+- id: precio-url-legible-peugeot-3
+  agent: researcher
+  task: "Repite precio-url-legible-peugeot-2 (#773 se quedó sin la salida de fetch-page.ts por
+    fichero), con las mismas reglas y los mismos seis ficheros de data/raw/peugeot/. La prueba que
+    pide la tarea es la regla «La prueba de un precio es la salida de fetch-page.ts» de
+    .claude/agents/researcher.md: la factoría copia en la PR cada llamada desde la traza. Bitácora."
+- id: precio-url-legible-cupra-renault-3
+  agent: researcher
+  task: "Repite precio-url-legible-cupra-renault-2 (#775 se quedó sin la salida de fetch-page.ts por
+    fichero), con las mismas reglas y las mismas tres versiones de data/raw/cupra/born.yaml,
+    data/raw/cupra/tavascan.yaml y data/raw/renault/scenic-e-tech-electrico.yaml. La prueba que pide
+    la tarea es la regla «La prueba de un precio es la salida de fetch-page.ts» de
+    .claude/agents/researcher.md: la factoría copia en la PR cada llamada desde la traza. Bitácora."
