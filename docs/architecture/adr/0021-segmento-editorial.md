@@ -174,6 +174,19 @@ Detalles:
 4. ~~**Producto:** ¿hace falta un criterio escrito común (por ejemplo, qué cuenta como SUV compacto) o
    basta la `note` de cada caso? Si hace falta, ¿dónde vive y es público?~~ Sí: un criterio común en
    `data-model.md`, junto a la tabla de equivalencias, y la `note` lo cita (2026-10-27). Es público.
-5. **Arquitectura (posterior):** ¿el aviso de antigüedad de ADR-0010 ignora los valores `E`?
+   Escrito el 2026-10-29: reglas E1–E7 de `data-model.md`, sección 3 (carrocería, puertas, plazas,
+   versión de carga y longitud exterior; umbrales de 4 000, 4 350 y 4 650 mm, convención propia).
+5. ~~**Arquitectura (posterior):** ¿el aviso de antigüedad de ADR-0010 ignora los valores `E`?~~
+   Sí (2026-10-29, Arquitecto). El aviso de ADR-0010 (punto 5) mira dos cosas: el `retrieved` de los
+   **precios** y el `last_verified` de las fuentes. Lo primero nunca toca un `E` (los precios son T1),
+   así que la consecuencia de arriba sobre «avisos en todos los editoriales cada mes» no ocurre con el
+   aviso tal como está. Lo segundo sí: `editorial.yaml` avisaría a los 45 días y marcaría como
+   vencidas marcas que no lo están. Por eso la fuente `editorial` queda fuera del aviso de
+   `last_verified` y del cálculo de marcas vencidas, y si el aviso de `retrieved` se amplía a otros
+   campos, los `E` quedan fuera también (`data-model.md`, sección 8.3, regla 6). Se descartó dar a
+   `editorial.yaml` un `last_verified` que la persona actualice cada mes: es trabajo sin contenido,
+   porque la decisión no caduca; la revisión real de un `E` es el refresco del Researcher, que lo
+   sustituye cuando aparece una fuente. Coste: un `E` puede quedarse años sin que nadie lo mire; nada
+   avisa de ello. Lo implementa el Desarrollador en `evals.ts` junto con el resto de esta ADR.
 6. ~~¿Es público el repositorio? Condiciona si la `url` de la PR sirve a alguien fuera del proyecto.~~
    Sí, es público (comprobado el 2026-10-27).
