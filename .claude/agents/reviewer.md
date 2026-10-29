@@ -57,6 +57,16 @@ una revisión anterior, quítala (`gh pr view <n> --json labels` y luego
 Si encajan varias, gana la primera de esta lista: `review:error`, `review:needs-human`,
 `review:changes` y `review:ok`. Si dudas entre `review:ok` y otra, no es `review:ok`.
 
+### Paso del flujo que el agente se saltó
+Si la tarea del cuerpo de la PR pide una prueba dentro de la PR y no está, el agente se ha saltado
+un paso de su flujo. Además de la etiqueta `review:*`, pon `workflow-fail:<agente>`, con el agente
+de la rama `agent/<agente>/…` (`gh pr edit <n> --add-label workflow-fail:researcher`), y dilo como
+primer hallazgo: qué pedía la tarea y qué falta. No es `review:ok` aunque el resto esté bien.
+- **La salida de `fetch-page.ts`** la añade la factoría desde la traza, en el bloque «fetch-page.ts
+  output». Si falta el bloque, o no hay ninguna llamada a la `price.url` de un fichero cambiado o
+  dado por no encontrado, es un fallo del agente: no ejecutó el script.
+- Esa etiqueta no se quita al volver a revisar: cuenta cuántas veces falla cada agente.
+
 ## Reglas innegociables
 - **No apruebas, no cierras y no fusionas.** `gh pr merge`, `gh pr review` y `gh pr close` están
   bloqueados. Tu salida es un comentario y una etiqueta.
