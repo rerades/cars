@@ -24,6 +24,7 @@ versions:
     price:
       value: 37666
       unit: EUR
+      page_name: "SCENIC E-TECH ELÉCTRICO esprit Alpine 160 kW (220 CV) gran autonomía"
       price_kind: financed
       price_terms: "este importe incluye promociones"
       price_terms_url: "https://www.renault.es/electricos/scenic.html"

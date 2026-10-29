@@ -13,6 +13,7 @@ versions:
     price:
       value: 21974
       unit: EUR
+      page_name: "RENAULT 4 E-TECH ELÉCTRICO evolution 90 kW (120 CV) autonomía urbana-SS"
       price_kind: financed
       price_terms: "este importe incluye promociones"
       price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
@@ -25,6 +26,7 @@ versions:
     price:
       value: 26499
       unit: EUR
+      page_name: "RENAULT 4 E-TECH ELÉCTRICO techno 110 kW (150 CV) autonomía confort-SS"
       price_kind: financed
       price_terms: "este importe incluye promociones"
       price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
@@ -37,6 +39,7 @@ versions:
     price:
       value: 28309
       unit: EUR
+      page_name: "RENAULT 4 E-TECH ELÉCTRICO iconic 110 kW (150 CV) autonomía confort-SS"
       price_kind: financed
       price_terms: "este importe incluye promociones"
       price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
@@ -49,6 +52,7 @@ versions:
     price:
       value: 28128
       unit: EUR
+      page_name: "RENAULT 4 E-TECH ELÉCTRICO techno 110 kW (150 CV) “plein sud®” autonomía confort-SS"
       price_kind: financed
       price_terms: "este importe incluye promociones"
       price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"
@@ -61,6 +65,7 @@ versions:
     price:
       value: 29938
       unit: EUR
+      page_name: "RENAULT 4 E-TECH ELÉCTRICO iconic 110 kW (150 CV) “plein sud®” autonomía confort-SS"
       price_kind: financed
       price_terms: "este importe incluye promociones"
       price_terms_url: "https://www.renault.es/electricos/r4-e-tech-electrico.html"

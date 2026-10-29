@@ -15,6 +15,7 @@ versions:
     price:
       value: 28666
       unit: EUR
+      page_name: "NUEVO MEGANE E-TECH ELÉCTRICO techno 160 kW (220 CV) autonomía confort"
       price_kind: financed
       price_terms: "este importe incluye promociones"
       price_terms_url: "https://www.renault.es/electricos/megane.html"
@@ -28,6 +29,7 @@ versions:
     price:
       value: 31366
       unit: EUR
+      page_name: "NUEVO MEGANE E-TECH ELÉCTRICO esprit Alpine 160 kW (220 CV) autonomía confort"
       price_kind: financed
       price_terms: "este importe incluye promociones"
       price_terms_url: "https://www.renault.es/electricos/megane.html"
