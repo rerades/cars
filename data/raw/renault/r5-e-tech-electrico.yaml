@@ -14,6 +14,7 @@ versions:
     price:
       value: 28085
       unit: EUR
+      page_name: "RENAULT 5 E-TECH ELÉCTRICO evolution 90 kW (120 CV) autonomía urbana"
       price_kind: pvp
       note: "configurador: «PVP contado, sin promos, sin Auto+, con impuestos»; no se ha podido confirmar qué equipamiento incluye"
       source_id: renault-es
