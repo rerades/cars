@@ -577,6 +577,35 @@ export function formatTrace(stdout: string): string {
   return out.join("\n");
 }
 
+const FETCH_PAGE_CALL_CHARS = 4000;
+const FETCH_PAGE_LOG_CHARS = 40000; // GitHub caps a PR body at 65 536 characters
+
+/**
+ * Every `fetch-page.ts` call with its literal output, taken from the trace. The agent cannot write
+ * the PR body and only the tail of its last message reaches it, so the evidence goes in from here.
+ */
+export function fetchPageLog(stdout: string): string {
+  const calls = new Map<string, string>();
+  const out: string[] = [];
+  for (const e of events(stdout)) {
+    const content: Event[] = Array.isArray(e.message?.content) ? e.message.content : [];
+    for (const c of content) {
+      if (e.type === "assistant" && c.type === "tool_use" && c.name === "Bash" &&
+        String(c.input?.command ?? "").includes("factory/fetch-page.ts")) calls.set(c.id, c.input.command);
+      if (e.type === "user" && c.type === "tool_result" && calls.has(c.tool_use_id)) {
+        const text = typeof c.content === "string" ? c.content
+          : (Array.isArray(c.content) ? c.content : []).map((p: Event) => p.text ?? "").join("\n");
+        const cut = text.length > FETCH_PAGE_CALL_CHARS ? `${text.slice(0, FETCH_PAGE_CALL_CHARS)}\n… (${text.length} chars, cut)` : text;
+        out.push(`\`${calls.get(c.tool_use_id)}\`\n\n\`\`\`\n${cut}\n\`\`\``);
+      }
+    }
+  }
+  if (!out.length) return "";
+  let log = out.join("\n\n");
+  if (log.length > FETCH_PAGE_LOG_CHARS) log = `${log.slice(0, FETCH_PAGE_LOG_CHARS)}\n\`\`\`\n… (log cut)`;
+  return `<details><summary>fetch-page.ts output (${out.length} calls, from the trace)</summary>\n\n${log}\n\n</details>`;
+}
+
 export function execute(cfg: Config, agent: string, task: string, now: Clock, dryRun = false): Row {
   const a = agentConfig(cfg, agent);
   const stamp = `${now.day.replaceAll("-", "")}-${now.time.replaceAll(":", "")}`;
@@ -613,6 +642,7 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
   };
 
   writeFileSync(LOCK, `${runId}\n${agent}\n`, "utf8");
+  let stdout = "";
   try {
     const [bin, ...args] = cmd;
     const spawn = () => spawnSync(bin, args, { cwd: ws.dir, env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
@@ -625,8 +655,9 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
       proc = spawn();
       if (proc.error) throw proc.error;
     }
+    stdout = proc.stdout || "";
     mkdirSync(TRACE_DIR, { recursive: true });
-    writeFileSync(join(TRACE_DIR, `${runId}.jsonl`), proc.stdout || "", "utf8");
+    writeFileSync(join(TRACE_DIR, `${runId}.jsonl`), stdout, "utf8");
     const payload = resultEvent(proc.stdout || "");
     const usage = payload.usage ?? {};
     record.session_id = payload.session_id ?? null;
@@ -665,7 +696,9 @@ export function execute(cfg: Config, agent: string, task: string, now: Clock, dr
         "```",
         String(record.result ?? "").slice(-1500),
         "```",
-      ].join("\n");
+        ``,
+        fetchPageLog(stdout),
+      ].join("\n").trimEnd();
       record.pr = openPullRequest(ws, title, body);
     }
   }
