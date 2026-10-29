@@ -3039,10 +3039,18 @@
     .claude/, data/ ni los PRD. Bitácora."
 - id: precio-url-legible-peugeot-3
   agent: researcher
-  task: "Repite precio-url-legible-peugeot-2 (#773 se quedó sin la salida de fetch-page.ts por
-    fichero), con las mismas reglas y los mismos seis ficheros de data/raw/peugeot/. La prueba que
-    pide la tarea es la regla «La prueba de un precio es la salida de fetch-page.ts» de
-    .claude/agents/researcher.md: la factoría copia en la PR cada llamada desde la traza. Bitácora."
+  task: "Pasa a la oferta vigente el precio de la única versión de data/raw/peugeot/e-208.yaml,
+    e-3008.yaml, e-308.yaml, e-308-sw.yaml, e-408.yaml y e-5008.yaml (decisión de una persona del
+    2026-10-29, tras #773): el importe guardado ya no está en ofertas.peugeot.es y la oferta de hoy
+    nombra otra versión (por ejemplo «E-208 5P Style Eléctrico 136 (100 Kw)… Precio al contado:
+    29.270€», según las open_questions del 2026-10-29 de #773). Lee cada página con node
+    factory/fetch-page.ts <url> \"Precio al contado\" <modelo>, una llamada por fichero (regla «La
+    prueba de un precio es la salida de fetch-page.ts» de .claude/agents/researcher.md). Escribe el
+    precio con las reglas de precio de .claude/agents/researcher.md y data-model.md (Price: value,
+    price_kind, price_terms y price_terms_url literales, retrieved) y la versión con la de la oferta:
+    name, y page_name con su regla. Los datos técnicos de la versión que la oferta no da se quedan
+    como están si coinciden con su motor; si no, déjalos y anótalo en open_questions. Quita las
+    open_questions de precio del 2026-10-29 que esto resuelve. No toques needs_review. Bitácora."
 - id: precio-url-legible-cupra-renault-3
   agent: researcher
   task: "Repite precio-url-legible-cupra-renault-2 (#775 se quedó sin la salida de fetch-page.ts por
