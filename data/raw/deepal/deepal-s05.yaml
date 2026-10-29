@@ -12,19 +12,19 @@ versions:
     wltp_km: {value: 485, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610281"}
     power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610281"}
     drivetrain: {value: rwd, source_id: changan-es, url: "https://www.changaneurope.com/es/promociones/gama-deepal-s05", retrieved: 2026-10-19, tier: T1, note: "Deepal S05 Pro BEV (RWD)"}
-    price: {value: 36990, unit: EUR, price_kind: pvp, note: "configurador, «Acabado RWD Pro»: PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-21, tier: T1}
+    price: {value: 36990, unit: EUR, price_kind: pvp, page_name: "Acabado RWD Pro", note: "configurador, «Acabado RWD Pro»: PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-21, tier: T1}
   - name: S05 EV RWD Max
     battery_kwh: {value: 68.8, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610280"}
     wltp_km: {value: 485, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610280"}
     power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610280"}
     drivetrain: {value: rwd, source_id: changan-es, url: "https://www.changaneurope.com/es/promociones/gama-deepal-s05", retrieved: 2026-10-19, tier: T1, note: "Deepal S05 Max BEV (RWD)"}
-    price: {value: 39990, unit: EUR, price_kind: pvp, note: "configurador, «Acabado RWD Max»: PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-21, tier: T1}
+    price: {value: 39990, unit: EUR, price_kind: pvp, page_name: "Acabado RWD Max", note: "configurador, «Acabado RWD Max»: PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-21, tier: T1}
   - name: S05 EV AWD Max
     battery_kwh: {value: 68.8, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610279"}
     wltp_km: {value: 445, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610279"}
     power_kw: {value: 320, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610279"}
     drivetrain: {value: awd, source_id: changan-es, url: "https://www.changaneurope.com/es/promociones/gama-deepal-s05", retrieved: 2026-10-19, tier: T1, note: "Max AWD BEV"}
-    price: {value: 42990, unit: EUR, price_kind: pvp, note: "configurador, «Acabado 4WD Max»: PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-21, tier: T1}
+    price: {value: 42990, unit: EUR, price_kind: pvp, page_name: "Acabado 4WD Max", note: "configurador, «Acabado 4WD Max»: PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s05", retrieved: 2026-10-21, tier: T1}
 images:
   - file: data/images/deepal/deepal-s05/trasera.jpg
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Changan_Deepal_S05%2C_Munich_%2820250909-P1050606%29.jpg/1280px-Changan_Deepal_S05%2C_Munich_%2820250909-P1050606%29.jpg"
