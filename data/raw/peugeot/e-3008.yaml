@@ -44,3 +44,4 @@ open_questions:
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
   - "Versión concreta del precio de contado no identificada (la oferta financiada cita Allure Eléctrico 210, 157 kW, 40.650 € financiado); sin PVP sin oferta; sin batería ni carga."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."
+  - "precio (2026-10-29): fetch-page.ts ya no encuentra 42.650 en ofertas.peugeot.es/particulares; la oferta vigente (hasta 31/10/2026) dice «E-3008 Style Eléctrico 210 (157 kW)… Precio al contado: 41.890€». Importe distinto y versión del valor guardado sin identificar: no se cambia el precio; sin fuente T1 con el importe guardado."

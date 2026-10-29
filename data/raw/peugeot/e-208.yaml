@@ -40,3 +40,4 @@ open_questions:
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
   - "Versión concreta del precio de contado no identificada; sin PVP sin oferta; sin batería, potencia ni carga por versión."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."
+  - "precio (2026-10-29): fetch-page.ts ya no encuentra 29.070 en ofertas.peugeot.es/particulares; la oferta vigente (hasta 31/10/2026) dice «E-208 5P Style Eléctrico 136 (100 Kw)… Precio al contado: 29.270€». Importe distinto y versión del valor guardado sin identificar: no se cambia el precio; sin fuente T1 con el importe guardado."

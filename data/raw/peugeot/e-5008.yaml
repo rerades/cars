@@ -31,3 +31,4 @@ images:
 open_questions:
   - "segment: sale de una fuente T3 (motor-es, D-SUV); www.peugeot.es sigue devolviendo 403 (2026-10-27). launch: sin fuente."
   - "Versión concreta del precio no identificada; sin PVP sin oferta; sin batería, potencia ni carga."
+  - "precio (2026-10-29): fetch-page.ts ya no encuentra 44.500 en ofertas.peugeot.es/coches-electricos-hibridos; la oferta vigente (hasta 31/10/2026) dice «E-5008 Style Eléctrico 210 (157 kW)… Precio al contado: 43.740€». Importe distinto y versión del valor guardado sin identificar: no se cambia el precio; sin fuente T1 con el importe guardado."

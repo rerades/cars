@@ -32,3 +32,4 @@ open_questions:
   - "segment: sale de una fuente T3 (motor16-es); www.peugeot.es sigue devolviendo 403 (2026-10-27). launch: sin fecha en fuente registrada."
   - "Imagen: no se buscó un fichero de e-308 SW en Commons con garantía de que sea el SW."
   - "Versión concreta del precio no identificada; sin PVP sin oferta; sin batería, potencia ni carga."
+  - "precio (2026-10-29): fetch-page.ts ya no encuentra 37.940 en ofertas.peugeot.es/coches-electricos-hibridos; la oferta vigente (hasta 31/10/2026) dice «E-308 SW Style Eléctrico 156 (115 kW)… Precio al contado: 38.140€». Importe distinto y versión del valor guardado sin identificar: no se cambia el precio; sin fuente T1 con el importe guardado."
