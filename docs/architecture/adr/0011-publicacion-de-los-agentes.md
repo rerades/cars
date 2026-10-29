@@ -7,6 +7,12 @@
   regla de la fusión para las PR de `data/raw/` y también pone `merger:needs-human` (punto 14).
   Enmienda aceptada de [ADR-0021](0021-segmento-editorial.md) (2026-10-27): no se fusiona sola
   ninguna PR que añada o cambie un `tier: E` ni que toque `data/sources/editorial.yaml`.
+  Enmienda propuesta por [ADR-0022](0022-escalera-de-confianza-y-agente-retro.md) (2026-10-29,
+  sin aceptar): una PR `agent/*` también se fusiona sola si cada fichero fuera de la lista está en
+  un área de `trust.areas` (hoy `web/`) donde su agente tiene el peldaño y su ejecución pasó la
+  puerta de RF-3; nunca las rutas de CA-12. El paso de fusión lee también las PR `agent/*`
+  fusionadas a mano y escribe los eventos de `ops/trust/`. Las PR `agent/retro/*` nunca se fusionan
+  solas.
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
