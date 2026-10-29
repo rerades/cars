@@ -54,5 +54,6 @@ open_questions:
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión no leída (la web da «hasta 642 km» según versión); solo se publica specs.wltp_max_km."
   - "Sin PVP sin promociones: la web muestra «desde 35.326 €» (techno) con «este importe incluye promociones». No se ha encontrado un PVP vigente sin promociones."
+  - "2026-10-29: el precio de «techno 220 CV gran autonomía» (35.326 €) no sale en el texto servido de renault.es/electricos/scenic.html (fetch-page.ts) ni en /electricos/scenic/precios-versiones.html (solo «desde …» de otros modelos); la página nombra ahora «techno 160 kW (220 CV) autonomía confort» y «esprit Alpine 160 kW (220 CV) gran autonomía», no «techno … gran autonomía». Se mantiene el precio sin confirmar."
   - "Batería: la web menciona 89 kWh en un ejemplo de coste y una versión comfort de 67 kWh «en otoño de 2026» (335 km WLTP a 110 km/h); no se asigna batería a ninguna versión. La versión comfort aún no se vende, no se incluye."
   - "Carga CC/CA y tracción no publicadas en la web leída."
