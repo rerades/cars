@@ -175,7 +175,7 @@ Detalles:
    basta la `note` de cada caso? Si hace falta, ¿dónde vive y es público?~~ Sí: un criterio común en
    `data-model.md`, junto a la tabla de equivalencias, y la `note` lo cita (2026-10-27). Es público.
    Escrito el 2026-10-29: reglas E1–E7 de `data-model.md`, sección 3 (carrocería, puertas, plazas,
-   versión de carga y longitud exterior; umbrales de 4 000, 4 350 y 4 650 mm, convención propia).
+   versión de carga y longitud exterior; umbrales de 4 100, 4 400 y 4 700 mm, convención propia fijada por una persona el 2026-10-30).
 5. ~~**Arquitectura (posterior):** ¿el aviso de antigüedad de ADR-0010 ignora los valores `E`?~~
    Sí (2026-10-29, Arquitecto). El aviso de ADR-0010 (punto 5) mira dos cosas: el `retrieved` de los
    **precios** y el `last_verified` de las fuentes. Lo primero nunca toca un `E` (los precios son T1),

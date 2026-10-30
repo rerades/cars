@@ -138,18 +138,20 @@ claves propias: `basis` en `battery_kwh`; `unit`, `price_kind`, `price_terms`,
   | E1 | Carrocería de 2 o 3 puertas (coupé, roadster, cabrio) y 4 plazas o menos | `deportivo` |
   | E2 | La marca vende del mismo modelo una versión de carga (sin asientos traseros, homologada como comercial) | `furgoneta` |
   | E3 | Puertas laterales traseras correderas, o tres filas de asientos, y ninguna fuente lo llama SUV ni crossover | `monovolumen` |
-  | E4 | Alguna fuente lo llama SUV o crossover (sin tamaño, o con un tamaño que no está en la tabla): según su longitud exterior, menos de 4 350 mm → `suv_pequeno`; de 4 350 a 4 649 mm → `suv_compacto`; 4 650 mm o más → `suv_grande` | `suv_*` |
+  | E4 | Alguna fuente lo llama SUV o crossover (sin tamaño, o con un tamaño que no está en la tabla): según su longitud exterior, menos de 4 400 mm → `suv_pequeno`; de 4 400 a 4 699 mm → `suv_compacto`; 4 700 mm o más → `suv_grande` | `suv_*` |
   | E5 | La marca vende la carrocería como familiar: la fuente la nombra «familiar», «ranchera», «estate», «wagon», «touring», «tourer», «sportswagon», «sports tourer» o «SW» | `familiar` |
-  | E6 | Cuatro puertas con tapa de maletero que no incluye la luneta (tres volúmenes), o cualquier carrocería de 4 o 5 puertas de 4 650 mm o más que no cumpla E1–E5 | `berlina` |
-  | E7 | Carrocería de 4 o 5 puertas que no cumple E1–E6: menos de 4 000 mm → `urbano`; de 4 000 a 4 649 mm → `compacto` | `urbano` \| `compacto` |
+  | E6 | Cuatro puertas con tapa de maletero que no incluye la luneta (tres volúmenes), o cualquier carrocería de 4 o 5 puertas de 4 700 mm o más que no cumpla E1–E5 | `berlina` |
+  | E7 | Carrocería de 4 o 5 puertas que no cumple E1–E6: menos de 4 100 mm → `urbano`; de 4 100 a 4 699 mm → `compacto` | `urbano` \| `compacto` |
 
   - **Longitud:** la exterior en milímetros que publique la ficha técnica de la marca (T1) o, si no la
     publica, una fuente T2–T3; si dos fuentes difieren, la de nivel más alto (ADR-0001, regla 3). Si
     las versiones tienen longitudes distintas, la mayor. No hay campo de longitud en este esquema: va
     solo en la `note`.
-  - **Los umbrales (4 000, 4 350 y 4 650 mm) son una convención de esta web**, no una norma ni la
-    clasificación de nadie. No se han contrastado con datos de producto (el Arquitecto no los obtiene,
-    ADR-0001). Cambiarlos es cambiar este documento, y los valores `E` ya asignados con el umbral
+  - **Los umbrales (4 100, 4 400 y 4 700 mm) son una convención de esta web**, no una norma ni la
+    clasificación de nadie. Los fijó una persona al revisar la PR (2026-10-30), para que los
+    utilitarios del segmento B queden en `urbano`, el Kona en `suv_pequeno` y el Enyaq en
+    `suv_compacto`; no se han contrastado con las longitudes de `data/raw/` (el Arquitecto no las
+    obtiene, ADR-0001). Cambiarlos es cambiar este documento, y los valores `E` ya asignados con el umbral
     anterior se revisan en la misma PR.
   - Lo que la fuente sí dice manda sobre el criterio: si una fuente llama al coche «berlina», se aplica
     la regla de arriba (valor de fuente), no E6.
