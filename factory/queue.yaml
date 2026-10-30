@@ -3069,3 +3069,411 @@
     limitan al Researcher y qué cambia en budgets.yaml y en los evals. Lo que la documentación no
     aclare, déjalo como pregunta abierta con la prueba que lo resolvería. No toques factory/,
     .claude/, data/ ni los PRD. Bitácora."
+- id: refresco-2026-11-cupra
+  agent: researcher
+  task: "Refresco mensual de data/raw/cupra/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-polestar
+  agent: researcher
+  task: "Refresco mensual de data/raw/polestar/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-peugeot
+  agent: researcher
+  task: "Refresco mensual de data/raw/peugeot/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-opel
+  agent: researcher
+  task: "Refresco mensual de data/raw/opel/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-bmw
+  agent: researcher
+  task: "Refresco mensual de data/raw/bmw/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-byd
+  agent: researcher
+  task: "Refresco mensual de data/raw/byd/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-kia
+  agent: researcher
+  task: "Refresco mensual de data/raw/kia/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-hyundai
+  agent: researcher
+  task: "Refresco mensual de data/raw/hyundai/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-mg
+  agent: researcher
+  task: "Refresco mensual de data/raw/mg/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-tesla
+  agent: researcher
+  task: "Refresco mensual de data/raw/tesla/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-renault
+  agent: researcher
+  task: "Refresco mensual de data/raw/renault/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-audi
+  agent: researcher
+  task: "Refresco mensual de data/raw/audi/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-citroen
+  agent: researcher
+  task: "Refresco mensual de data/raw/citroen/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-leapmotor
+  agent: researcher
+  task: "Refresco mensual de data/raw/leapmotor/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-mercedes-benz
+  agent: researcher
+  task: "Refresco mensual de data/raw/mercedes-benz/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-nissan
+  agent: researcher
+  task: "Refresco mensual de data/raw/nissan/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-dacia
+  agent: researcher
+  task: "Refresco mensual de data/raw/dacia/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-fiat
+  agent: researcher
+  task: "Refresco mensual de data/raw/fiat/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-ford
+  agent: researcher
+  task: "Refresco mensual de data/raw/ford/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-mini
+  agent: researcher
+  task: "Refresco mensual de data/raw/mini/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-skoda
+  agent: researcher
+  task: "Refresco mensual de data/raw/skoda/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-toyota
+  agent: researcher
+  task: "Refresco mensual de data/raw/toyota/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-volkswagen
+  agent: researcher
+  task: "Refresco mensual de data/raw/volkswagen/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-volvo
+  agent: researcher
+  task: "Refresco mensual de data/raw/volvo/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-abarth
+  agent: researcher
+  task: "Refresco mensual de data/raw/abarth/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-ds
+  agent: researcher
+  task: "Refresco mensual de data/raw/ds/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-porsche
+  agent: researcher
+  task: "Refresco mensual de data/raw/porsche/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-smart
+  agent: researcher
+  task: "Refresco mensual de data/raw/smart/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-alpine
+  agent: researcher
+  task: "Refresco mensual de data/raw/alpine/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-jeep
+  agent: researcher
+  task: "Refresco mensual de data/raw/jeep/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-lexus
+  agent: researcher
+  task: "Refresco mensual de data/raw/lexus/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-lotus
+  agent: researcher
+  task: "Refresco mensual de data/raw/lotus/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-maserati
+  agent: researcher
+  task: "Refresco mensual de data/raw/maserati/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-mazda
+  agent: researcher
+  task: "Refresco mensual de data/raw/mazda/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-xpeng
+  agent: researcher
+  task: "Refresco mensual de data/raw/xpeng/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-zeekr
+  agent: researcher
+  task: "Refresco mensual de data/raw/zeekr/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-alfa-romeo
+  agent: researcher
+  task: "Refresco mensual de data/raw/alfa-romeo/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-gwm
+  agent: researcher
+  task: "Refresco mensual de data/raw/gwm/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-jaecoo
+  agent: researcher
+  task: "Refresco mensual de data/raw/jaecoo/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-lynk-co
+  agent: researcher
+  task: "Refresco mensual de data/raw/lynk-co/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-omoda
+  agent: researcher
+  task: "Refresco mensual de data/raw/omoda/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-aion
+  agent: researcher
+  task: "Refresco mensual de data/raw/aion/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-deepal
+  agent: researcher
+  task: "Refresco mensual de data/raw/deepal/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-dongfeng
+  agent: researcher
+  task: "Refresco mensual de data/raw/dongfeng/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-geely
+  agent: researcher
+  task: "Refresco mensual de data/raw/geely/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-kg-mobility
+  agent: researcher
+  task: "Refresco mensual de data/raw/kg-mobility/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-lancia
+  agent: researcher
+  task: "Refresco mensual de data/raw/lancia/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-voyah
+  agent: researcher
+  task: "Refresco mensual de data/raw/voyah/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-mitsubishi
+  agent: researcher
+  task: "Refresco mensual de data/raw/mitsubishi/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-mobilize
+  agent: researcher
+  task: "Refresco mensual de data/raw/mobilize/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
+- id: refresco-2026-11-range-rover
+  agent: researcher
+  task: "Refresco mensual de data/raw/range-rover/ (ADR-0010, punto 6): relee en sus fuentes todos los
+    valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de
+    data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de
+    ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
+    prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
+    toques needs_review. Bitácora."
