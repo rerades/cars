@@ -1,6 +1,6 @@
-# ADR-0022 — Researcher con skills
+# ADR-0023 — Researcher con skills
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-10-30). Numerada 0023 al aceptarla: la 0022 es la escalera de confianza.
 - **Fecha:** 2026-10-30
 
 ## Contexto
@@ -172,7 +172,7 @@ esa herramienta y el permiso `Skill(researcher-…)` en `budgets.yaml`.**
 - **Las `description` de las cinco skills siguen cargándose en las sesiones humanas** del
   repositorio. `user-invocable: false` las quita del menú `/`, no del contexto de Claude. Que también
   se carguen en los agentes sin `Skill` no está documentado (prueba 3).
-- **El límite de 3 000 caracteres es una interpretación.** RF-7 dice «3 K» sin unidad; el «9,3 K»
+- **El límite de 3 000 caracteres lo confirmó el responsable el 2026-10-30.** RF-7 dice «3 K» sin unidad; el «9,3 K»
   de la sección 1 no coincide con los 11 784 bytes de hoy. Si Producto quería otra unidad, cambia el
   número de la prueba, no el diseño.
 - **Diferencia entre la tarea y RF-7:** «reviews» no está en la lista de RF-7. Producto debería
@@ -195,4 +195,4 @@ esa herramienta y el permiso `Skill(researcher-…)` en `budgets.yaml`.**
 4. **¿Elige el Researcher la skill correcta por su cuenta?** *Prueba:* tras el troceo, las 10
    primeras tareas de precios y de imágenes de la cola, contando en la traza cuáles invocaron la
    skill esperada y cuáles cargaron otra.
-5. **Unidad de «3 K»** (RF-7, CA-9): ¿caracteres, bytes o tokens? La responde Producto.
+5. ~~**Unidad de «3 K»** (RF-7, CA-9): ¿caracteres, bytes o tokens?~~ **Caracteres**, contados con `String.length` sobre el fichero entero con frontmatter (decisión del responsable, 2026-10-30): se comprueba con una prueba sin modelo ni API.
