@@ -1,6 +1,6 @@
 # ADR-0022 — Escalera de confianza y agente retro
 
-- **Estado:** propuesta. Propone enmendar [ADR-0011](0011-publicacion-de-los-agentes.md) (rutas
+- **Estado:** aceptada (2026-10-30). Enmienda [ADR-0011](0011-publicacion-de-los-agentes.md) (rutas
   que se fusionan solas con el peldaño, fusiones a mano leídas por el paso de fusión, las PR del
   retro nunca se fusionan solas) y [ADR-0013](0013-commit-del-estado-de-la-factoria.md) (la PR de
   estado admite líneas añadidas a `ops/trust/*.jsonl`).
@@ -121,6 +121,9 @@ no corrió. Para cada área que toca la PR, un evento:
   `review:changes`, también si luego se arregló con el bucle de RF-5;
 - `unclean` con `reason: red CI` si alguna ejecución de la CI de su rama terminó en `failure`;
 - `unclean` con `reason: escaped defect` si en sus 7 días hay revert o PR `fix` que la cita (ADR-0019);
+- `unclean` con `reason: human commits` si la PR se fusionó a mano y su rama tiene algún commit que
+  no es del agente, sin contar los merges de `main` que solo la ponen al día (decisión del
+  responsable, 2026-10-30);
 - `clean` en otro caso.
 
 La misma regla vale para fusiones automáticas y a mano: lo que mide la escalera es si el trabajo del
@@ -131,7 +134,7 @@ demás van en `evidence`.
 **Subida.** Tras escribir un `clean`, si los cinco últimos eventos `clean`/`unclean` del par
 (agente, área) posteriores al último `up` o `down` son `clean`, y el nivel es 0, escribe `up` con
 `level: 1`. **El nivel máximo es 1**: con él, las PR de ese tipo se fusionan solas; RF-9 no dice qué
-más daría un segundo peldaño (ver preguntas abiertas).
+más daría un segundo peldaño (pregunta resuelta el 2026-10-30).
 
 **Bajada.** Escribe `down` (nivel `max(0, nivel − 1)`) cuando:
 - se escribe un `unclean` por `escaped defect` para el par; o
@@ -161,7 +164,7 @@ fichero de CA-12 entra nunca, esté en el peldaño que esté. La línea de `ops/
 
 ### Agente retro
 **Cuándo corre.** `node factory/run.ts --retro`, desde su propio LaunchAgent una noche por semana
-dentro de `allowed_hours` (la noche concreta, al instalarlo). Código sin modelo:
+dentro de `allowed_hours` (la del domingo al lunes). Código sin modelo:
 
 1. Si existe `factory/STOP`, o hay una fila del agente `retro` en `ops/runs/` con menos de 7 días,
    sale sin lanzar nada.
@@ -216,8 +219,6 @@ ejemplo en `factory/tests/`.
 - **Bajar no deshace.** Entre una fusión sola defectuosa y su `down` pueden entrar otras PR del mismo
   tipo sin persona; se arreglan con revert o `fix`, que a su vez bajan.
 - **El defecto escapado cuenta de menos** (ADR-0019): un arreglo que no cita la PR no baja nada.
-- **Una fusión a mano con commits de una persona** en la rama cuenta como trabajo del agente si no
-  tuvo `review:changes` ni CI roja. Puede inflar la racha (ver preguntas).
 - **Depende de `gh` en el paso de fusión** para el historial de etiquetas y de la CI, una llamada por
   PR evaluada. Sin red, no escribe eventos esa noche; el margen de 30 días lo recupera.
 - **`ops/trust/` vive en la rama de estado**: hereda sus riesgos (ADR-0013). Si se pierde una línea,
@@ -232,16 +233,18 @@ ejemplo en `factory/tests/`.
   `docs/bitacora/YYYY-MM/`); no lo he verificado en esta ejecución.
 - Más código en `merge.ts` y un LaunchAgent más.
 
-**Preguntas abiertas**
-- ¿Qué da un segundo peldaño? RF-9 habla de subir «un peldaño» pero solo describe el efecto del
-  primero. Esta ADR fija el máximo en 1.
-- ¿Una PR fusionada a mano en la que una persona empujó commits debe contar como `unclean`? Hoy no:
-  RF-9 no lo dice.
-- ¿Qué noche corre el retro? Se fija al escribir el LaunchAgent; RF-10 solo dice semanal.
-- ¿Debe quedar rastro en `ops/` cuando el retro no se lanza por falta de señales? RNF-4 no lo pide
-  para esta decisión; hoy solo sale en la consola.
-- ¿Basta `auto_merge` como interruptor de la escalera, o se quiere uno propio? Con `trust.areas`
-  vacío la escalera no fusiona nada, y así queda hasta que una persona la rellene.
+**Preguntas abiertas** (resueltas por el responsable el 2026-10-30, al aceptar la ADR)
+- ~~¿Qué da un segundo peldaño?~~ Nada: **el nivel máximo es 1**. Un segundo peldaño se decide en
+  otra ADR cuando RF-9 diga qué daría.
+- ~~¿Una PR fusionada a mano en la que una persona empujó commits debe contar como `unclean`?~~
+  **Sí**: `unclean` con `reason: human commits` (cuarta causa de la lista). El agente necesitó
+  ayuda y eso no suma a su racha.
+- ~~¿Qué noche corre el retro?~~ **La del domingo al lunes**, dentro de `allowed_hours`: revisa la
+  semana entera y la propuesta está el lunes por la mañana.
+- ~~¿Debe quedar rastro en `ops/` cuando el retro no se lanza por falta de señales?~~ **No**: solo
+  la consola. Se añade si alguna vez hace falta reconstruir por qué no corrió.
+- ~~¿Basta `auto_merge` como interruptor de la escalera, o se quiere uno propio?~~ **Basta**: con
+  `auto_merge: false` no fusiona nada, y con `trust.areas` vacío la escalera no fusiona nada.
 
 **Fuentes (repositorio, consultadas el 2026-10-29)**
 - `docs/product/prd/PRD-007-harness-factoria.md` (RF-9, RF-10, RNF-1 a RNF-5, CA-11 a CA-13, OPEN-1 y

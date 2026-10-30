@@ -12,7 +12,7 @@ versions:
     wltp_km: {value: 500, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610286 (MY26). Otras homologaciones del IDAE, ids 610284 y 610285 (160 kW, 80 kWh, 475 y 467 km), son de la versión anterior"}
     power_kw: {value: 190, source_id: changan-es, url: "https://www.changaneurope.com/es/modelos/changan-deepal-s07", retrieved: 2026-10-19, tier: T1, note: "publicado: 190 kW (258 CV); coincide con IDAE id 610286"}
     drivetrain: {value: rwd, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2, note: "IDAE id 610286: «RWD»"}
-    price: {value: 46990, unit: EUR, price_kind: pvp, note: "configurador, acabado «Standard» (única versión BEV listada): PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s07", retrieved: 2026-10-21, tier: T1}
+    price: {value: 46990, unit: EUR, price_kind: pvp, page_name: "Standard", note: "configurador, acabado «Standard» (única versión BEV listada): PVPR con IVA, impuesto de matriculación y transporte, Península y Baleares; sin gastos de matriculación ni preentrega", source_id: changan-es, url: "https://www.changaneurope.com/es/configurador/deepal-s07", retrieved: 2026-10-21, tier: T1}
 images:
   - file: data/images/deepal/deepal-s07/trasera.jpg
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Deepal_S07_IAA_2025_DSC_1897.jpg/1280px-Deepal_S07_IAA_2025_DSC_1897.jpg"

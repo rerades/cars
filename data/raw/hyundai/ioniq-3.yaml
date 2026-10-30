@@ -17,6 +17,7 @@ versions:
       value: 39995
       unit: EUR
       price_kind: pvp
+      page_name: "135CV 61kWh N LINE"
       note: "la página de condiciones muestra «IONIQ 3 135CV 61kWh N LINE PVP: 39.995 € (no incluye descuentos)» en su ejemplo de financiación"
       source_id: hyundai-es
       url: "https://www.hyundai.com/es/es/modelos/ioniq3/ioniq-3-condiciones-unicas.html"

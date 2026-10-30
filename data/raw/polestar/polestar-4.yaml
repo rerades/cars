@@ -15,6 +15,7 @@ versions:
       price_kind: financed
       price_terms: "Oferta para particulares, autónomos o empresas para pedidos de un Polestar 4 Long range Single motor. Península y Baleares: PVP recomendado de 49.900€ (IVA incluido). Incluye descuento exclusivo de marca, transporte al punto de entrega, gastos de matriculación y legalización. Oferta válida hasta el 30/09/2026 o hasta fin de existencias."
       price_terms_url: "https://www.polestar.com/es/polestar-4/"
+      page_name: "Polestar 4 Long range Single motor"
       source_id: polestar-es
       url: "https://www.polestar.com/es/polestar-4/"
       retrieved: 2026-09-24

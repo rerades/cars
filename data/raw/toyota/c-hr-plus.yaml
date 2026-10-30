@@ -19,6 +19,7 @@ versions:
       price_kind: financed
       price_terms: "Toyota C-HR+ - NG26 Advance 5P Electric 250 Batería 77 kWh aut.. PVP recomendado: 34.375,00 €. PVP al contado: 36.375,00 €. Entrada: 12.751,45 €. TIN: 7,75 %, TAE: 9,05 %. 48 cuotas de 237,00 € y Última cuota (Valor Futuro Garantizado) de 17.157,02 €. Comisión de apertura financiada (2,99 %): 646,54 €. Precio Total a Plazos: 41.284,47 €, Importe Total del Crédito 22.270,09 € e Importe Total Adeudado: 28.533,02 €. Oferta financiera con el producto Toyota Easy de Toyota Kreditbank GmbH sucursal en España. IVA, transporte, promoción y aportaciones de Toyota España y del concesionario incluidas. 3 años de garantía o 100.000 km (lo que antes suceda). Oferta válida hasta 31-10-2026 en Península y Baleares. Consulte en su concesionario el descuento para otro tipo de corporación o colectivo. El modelo visualizado puede no coincidir con el modelo ofertado. Para más información consulta en tu concesionario habitual o en www.toyota.es"
       price_terms_url: "https://www.toyota.es/coches/toyota-c-hr-plus"
+      page_name: "Toyota C-HR+ - NG26 Advance 5P Electric 250 Batería 77 kWh aut.."
       note: "PVP al contado de la ficha (coincide con «Desde 36.375,00 €» de https://www.toyota.es/coches); incluye promoción y aportaciones, no es PVP limpio"
       source_id: toyota-es
       url: "https://www.toyota.es/coches/toyota-c-hr-plus"

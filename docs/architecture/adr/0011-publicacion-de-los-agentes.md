@@ -7,12 +7,13 @@
   regla de la fusión para las PR de `data/raw/` y también pone `merger:needs-human` (punto 14).
   Enmienda aceptada de [ADR-0021](0021-segmento-editorial.md) (2026-10-27): no se fusiona sola
   ninguna PR que añada o cambie un `tier: E` ni que toque `data/sources/editorial.yaml`.
-  Enmienda propuesta por [ADR-0022](0022-escalera-de-confianza-y-agente-retro.md) (2026-10-29,
-  sin aceptar): una PR `agent/*` también se fusiona sola si cada fichero fuera de la lista está en
+  Enmienda de [ADR-0022](0022-escalera-de-confianza-y-agente-retro.md) (propuesta el 2026-10-29,
+  aceptada el 2026-10-30): una PR `agent/*` también se fusiona sola si cada fichero fuera de la lista está en
   un área de `trust.areas` (hoy `web/`) donde su agente tiene el peldaño y su ejecución pasó la
   puerta de RF-3; nunca las rutas de CA-12. El paso de fusión lee también las PR `agent/*`
   fusionadas a mano y escribe los eventos de `ops/trust/`. Las PR `agent/retro/*` nunca se fusionan
   solas.
+  Enmienda «Paso del flujo saltado» (`workflow-fail:<agente>`): aceptada (2026-10-29).
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
@@ -311,6 +312,20 @@ quién pedía a la persona.
     (`review:needs-human` y las dos `merger:*`) bloquean la fusión, y `run.ts --status` lista las PR
     que tienen cualquiera de ellas. Para que entre una PR marcada por la fusión, una persona la
     fusiona a mano.
+
+### Paso del flujo saltado (enmienda del 2026-10-29, aceptada)
+#773 y #775 (2026-10-29) se quedaron sin la salida de `fetch-page.ts` por fichero que pedía su
+tarea. La causa no era solo del agente: el agente no escribe la PR y el orquestador solo copiaba en
+ella el final de su último mensaje, así que la salida no podía llegar.
+- **La prueba la pone el orquestador.** Al abrir la PR, añade un bloque plegado con cada llamada a
+  `factory/fetch-page.ts` de la traza y su salida literal (hasta 4 000 caracteres por llamada y
+  40 000 en total). No depende de lo que el agente diga.
+- **El Revisor marca el paso saltado.** Si la tarea pide una prueba en la PR y no está, además de su
+  `review:*` pone `workflow-fail:<agente>` y lo dice como primer hallazgo. No es un estado: no la
+  quita al volver a revisar y la fusión no la mira (ya la bloquea el `review:*`). Sirve para contar
+  cuántas veces se salta su flujo cada agente.
+- Descartado: pedir al agente que guarde la salida en un fichero de la PR. Ensucia `data/` o la
+  bitácora con texto de páginas ajenas, y seguiría dependiendo de que el agente lo haga.
 
 ## Consecuencias
 **Buenas**

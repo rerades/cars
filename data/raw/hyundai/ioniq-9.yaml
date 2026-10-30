@@ -17,6 +17,7 @@ versions:
       value: 70080
       unit: EUR
       price_kind: pvp
+      page_name: "218CV 110kWh RWD STAR"
       note: "la ficha muestra «Nuevo Hyundai IONIQ 9: 218CV 110kWh RWD STAR PVP: 70.080 €»"
       source_id: hyundai-es
       url: "https://www.hyundai.com/es/es/modelos/ioniq9.html"
