@@ -3487,3 +3487,12 @@
     excepción quede explícita: qué cambio de un E puede hacer un agente (solo sustituirlo por un
     valor T1–T3 según la regla y la tabla de RF-11) y cuál rechaza el eval. No cambies el alcance ni
     otros RF o CA; anota el cambio en el historial del PRD. Bitácora."
+- id: prd007-rf7-skills-researcher
+  agent: product
+  task: "ADR-0023 (aceptada el 2026-10-30) fija cómo se cumple RF-7 de
+    docs/product/prd/PRD-007-harness-factoria.md: un prompt base de menos de 3 000 caracteres
+    (String.length del fichero entero, decisión del responsable) y cinco skills: fuentes, modelos,
+    precios, imágenes y reviews. Alinea RF-7 y CA-9 con la ADR: la unidad del «3 K», la lista de
+    tipos de tarea (RF-7 no nombra reviews) y el tamaño de hoy (el PRD dice 9,3 K; la ADR midió
+    11 784 bytes). Tacha OPEN-3 con lo que resolvió la ADR. No cambies el alcance ni otros RF o CA;
+    anota el cambio en el historial del PRD. Bitácora."
