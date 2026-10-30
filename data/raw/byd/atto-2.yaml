@@ -13,16 +13,7 @@ versions:
     power_kw: {value: 130, note: "publicado: 177 CV", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
     dc_max_kw: {value: 65, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
     ac_max_kw: {value: 11, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
-    price:
-      value: 24796
-      unit: EUR
-      price_kind: financed
-      price_terms: "Precio Recomendado Financiando: 24.796,00 €. Válida hasta 31/10/2026. CA Auto Bank, SpA Sucursal en España. Península y Baleares. Importe mínimo a financiar 15.000 €, plazo mínimo 72 meses, permanencia mínima 36 meses. Incluye adelanto de 3.375 € del Plan Auto+, incentivo de 950 € por CAE y descuentos de concesionario y fabricante."
-      price_terms_url: "https://www.byd.com/es-es/promociones/atto-2-promocion"
-      source_id: byd-es
-      url: "https://www.byd.com/es-es/promociones/atto-2-promocion"
-      retrieved: 2026-10-05
-      tier: T1
+    price: null   # la página de la oferta nombra solo la versión Comfort
   - name: Atto 2 Boost
     battery_kwh: {value: 45.1, basis: unknown, note: "«Las versiones Active y Boost cuentan con una batería de 45,1 kWh»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-13, tier: T1}
     wltp_km: {value: 312, source_id: motor-es, url: "https://www.motor.es/byd/atto-2/", retrieved: 2026-10-13, tier: T3}
@@ -34,7 +25,18 @@ versions:
     power_kw: {value: 150, note: "publicado: 204 CV", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
     dc_max_kw: {value: 155, source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
     ac_max_kw: {value: 11, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
-    price: null   # la web solo da el precio con ayudas/financiación para esta versión
+    price:
+      value: 31921
+      unit: EUR
+      price_kind: financed
+      price_terms: "* Oferta válida para Financiación Lineal BYD ATTO 2 COMFORT (Climbing Grey). Precio Recomendado Contado: 31.921,00€. Precio Recomendado Financiando (1): 24.796,00€. No incluye gastos de gestoría, ni matriculación ni transporte. Sistema de amortización francés. Sujeta a estudio y aprobación de la entidad financiera CA Auto Bank, SpA Sucursal en España. Oferta válida en Península y Baleares , solo para autónomos y particulares por un importe mínimo a financiar de 15.000€ y un plazo mínimo de 72 meses y permanencia de 36 meses, hasta el 31/10/2026. La versión visionada puede no corresponder con el vehículo ofertado."
+      price_terms_url: "https://www.byd.com/es-es/promociones/atto-2-promocion"
+      page_name: "BYD ATTO 2 COMFORT (Climbing Grey)"
+      note: "precio al contado; financiando la página da 24.796 €"
+      source_id: byd-es
+      url: "https://www.byd.com/es-es/promociones/atto-2-promocion"
+      retrieved: 2026-10-29
+      tier: T1
 images:
   - file: "data/images/byd/atto-2/frontal.jpg"
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/BYD_Atto_2_DSC_8763.jpg/1280px-BYD_Atto_2_DSC_8763.jpg"

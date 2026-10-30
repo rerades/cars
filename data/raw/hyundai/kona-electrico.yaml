@@ -17,6 +17,7 @@ versions:
       value: 42510
       unit: EUR
       price_kind: pvp
+      page_name: "KONA EV 204CV 65kWh BLACK LINE"
       note: "la ficha muestra «PVP: 42.510 € (no incluye descuentos)» para KONA EV 204CV 65kWh BLACK LINE"
       source_id: hyundai-es
       url: "https://www.hyundai.com/es/es/modelos/kona-electrico.html"
