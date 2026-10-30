@@ -3477,3 +3477,22 @@
     ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
     prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
     toques needs_review. Bitácora."
+- id: prd001-ca21-sustitucion-editorial
+  agent: product
+  task: "En docs/product/prd/PRD-001-catalogo-modelos.md, CA-21 dice a la vez que el eval rechaza
+    cualquier ejecución de un agente que añada, cambie o borre un segment de tier E, y que el
+    Researcher lo sustituye por el de una fuente T1–T3 al refrescar. docs/architecture/data-model.md
+    (sección 8.3, regla 6) ya lo resuelve con «salvo que lo sustituya por un valor T1–T3 (PRD-001,
+    CA-21)», pero el PRD no lo dice (hallazgo 4 del Revisor en #786). Reescribe CA-21 para que la
+    excepción quede explícita: qué cambio de un E puede hacer un agente (solo sustituirlo por un
+    valor T1–T3 según la regla y la tabla de RF-11) y cuál rechaza el eval. No cambies el alcance ni
+    otros RF o CA; anota el cambio en el historial del PRD. Bitácora."
+- id: prd007-rf7-skills-researcher
+  agent: product
+  task: "ADR-0023 (aceptada el 2026-10-30) fija cómo se cumple RF-7 de
+    docs/product/prd/PRD-007-harness-factoria.md: un prompt base de menos de 3 000 caracteres
+    (String.length del fichero entero, decisión del responsable) y cinco skills: fuentes, modelos,
+    precios, imágenes y reviews. Alinea RF-7 y CA-9 con la ADR: la unidad del «3 K», la lista de
+    tipos de tarea (RF-7 no nombra reviews) y el tamaño de hoy (el PRD dice 9,3 K; la ADR midió
+    11 784 bytes). Tacha OPEN-3 con lo que resolvió la ADR. No cambies el alcance ni otros RF o CA;
+    anota el cambio en el historial del PRD. Bitácora."
