@@ -1,6 +1,6 @@
 ---
 status: accepted
-updated: 2026-10-20
+updated: 2026-10-29
 ---
 
 # Modelo de datos
@@ -44,8 +44,15 @@ Todo dato de un coche va en este formato, en línea o en bloque:
 | `source_id` | texto | sí | Debe existir en el registro: un fichero `data/sources/<source_id>.yaml` (sección 8) |
 | `url` | URL | sí | La URL exacta donde se leyó |
 | `retrieved` | `YYYY-MM-DD` | sí | Fecha de consulta; no futura |
-| `tier` | `T1` \| `T2` \| `T3` | sí | El de la fuente en el registro |
-| `note` | texto | no | Matiz del dato ("hasta 631 km, máximo de la gama") |
+| `tier` | `T1` \| `T2` \| `T3` \| `E` | sí | El de la fuente en el registro. `E` solo en `segment` (abajo) |
+| `note` | texto | no; **sí con `tier: E`** | Matiz del dato ("hasta 631 km, máximo de la gama") |
+
+**Excepción editorial (`tier: E`, [ADR-0021](adr/0021-segmento-editorial.md), regla 8 de ADR-0001).**
+Solo vale en `segment` (sección 3), nunca en otro campo, en `images`, `reviews` ni `test_results`.
+Con `tier: E`: `source_id` es `editorial` (y `editorial` solo va con `E`); `url` es la de la PR que
+introduce el valor; `retrieved` es la fecha de la decisión; `note` es obligatoria y no vacía. Lo
+escribe solo una persona: ningún agente añade, cambia ni borra un valor `E`; el Researcher solo lo
+sustituye por el de una fuente T1–T3 que clasifique el modelo (ADR-0021, punto 4).
 
 Son los cuatro nombres que ya comprueba el eval de ADR-0004, sin cambios. Solo tres campos añaden
 claves propias: `basis` en `battery_kwh`; `unit`, `price_kind`, `price_terms`,
@@ -60,7 +67,7 @@ claves propias: `basis` en `battery_kwh`; `unit`, `price_kind`, `price_terms`,
 | `model` | texto de presentación (`Born`). El fichero es `<slug de model>.yaml` | sí | RF-1 |
 | `status` | `Sourced`; `value`: `on_sale` \| `announced` \| `discontinued` | sí | RF-2, RF-7 |
 | `launch` | `Sourced`; `value`: texto `"YYYY-MM"` o `"YYYY-MM-DD"` (inicio de venta en España) | no | RF-3 (novedad), RF-7 |
-| `segment` | `Sourced`; `value`: `urbano` \| `compacto` \| `berlina` \| `familiar` \| `suv_pequeno` \| `suv_compacto` \| `suv_grande` \| `monovolumen` \| `furgoneta` \| `deportivo` | no (ver nota) | RF-1, RF-2, RF-10, RF-11 |
+| `segment` | `Sourced`; `value`: `urbano` \| `compacto` \| `berlina` \| `familiar` \| `suv_pequeno` \| `suv_compacto` \| `suv_grande` \| `monovolumen` \| `furgoneta` \| `deportivo`. Único campo que admite `tier: E` (sección 2) | no (ver nota) | RF-1, RF-2, RF-10, RF-11 |
 | `needs_review` | booleano | sí | ADR-0001, regla 3 |
 | `specs` | mapa de valores agregados del modelo (abajo) | no | RF-1, RF-2 |
 | `versions` | lista de versiones (sección 4); puede ir vacía si `announced` | sí | todo |
@@ -97,6 +104,57 @@ claves propias: `basis` en `battery_kwh`; `unit`, `price_kind`, `price_terms`,
   por parecido: `null` y anotado. Con una
   fuente T3 vale lo mismo (decisión del 2026-10-13). Sin segmento, la
   tarjeta dice "por confirmar" y el modelo no sale en ese filtro (RF-12).
+- **Clasificación editorial (`tier: E`, [ADR-0021](adr/0021-segmento-editorial.md)).** Si tras la
+  regla y la tabla anteriores ninguna fuente clasifica el modelo, **una persona** con permiso de
+  fusión puede asignarle el segmento en una PR propia, con la forma de la sección 2:
+
+  ```yaml
+  segment:
+    value: suv_compacto
+    source_id: editorial
+    url: "<URL de la PR que introduce el valor>"
+    retrieved: 2026-10-27        # fecha de la decisión
+    tier: E
+    note: "Fuentes: acme-es lo llama «SUV» sin tamaño (URL, 2026-10-20). Longitud 4 420 mm (ficha técnica de acme-es, URL, 2026-10-20). Criterio: data-model.md, sección 3, regla E4."
+  ```
+
+  (Ejemplo ficticio, como el de la sección 7.)
+
+  La entrada de `open_questions` que anotaba la falta de segmento se conserva. Un valor `E` no es
+  permanente: el Researcher lo sustituye cuando una fuente T1–T3 clasifica el modelo según la regla y
+  la tabla, y lo dice en la PR si el valor de la fuente es otro. Ningún agente escribe, cambia ni
+  borra un `E`.
+
+  **Criterio común de la clasificación editorial.** La `note` de cada valor `E` cita la regla aplicada
+  (`E1`…`E7`) y los datos que la sostienen, cada uno con su fuente, URL y fecha. Las reglas se
+  aplican **en este orden** y vale la primera que se cumple. Solo usan rasgos que una fuente publica
+  (carrocería, puertas, plazas, versión de carga, longitud exterior); nunca el precio, la potencia, el
+  parecido con otro modelo ni la impresión de quien clasifica. Si un dato que la regla necesita no lo
+  publica ninguna fuente, esa regla no se cumple; si no se cumple ninguna, **no hay valor `E`**: el
+  campo sigue `null` y anotado.
+
+  | Regla | Se cumple si (según una fuente, con URL y fecha) | `segment` |
+  |---|---|---|
+  | E1 | Carrocería de 2 o 3 puertas (coupé, roadster, cabrio) y 4 plazas o menos | `deportivo` |
+  | E2 | La marca vende del mismo modelo una versión de carga (sin asientos traseros, homologada como comercial) | `furgoneta` |
+  | E3 | Puertas laterales traseras correderas, o tres filas de asientos, y ninguna fuente lo llama SUV ni crossover | `monovolumen` |
+  | E4 | Alguna fuente lo llama SUV o crossover (sin tamaño, o con un tamaño que no está en la tabla): según su longitud exterior, menos de 4 400 mm → `suv_pequeno`; de 4 400 a 4 699 mm → `suv_compacto`; 4 700 mm o más → `suv_grande` | `suv_*` |
+  | E5 | La marca vende la carrocería como familiar: la fuente la nombra «familiar», «ranchera», «estate», «wagon», «touring», «tourer», «sportswagon», «sports tourer» o «SW» | `familiar` |
+  | E6 | Cuatro puertas con tapa de maletero que no incluye la luneta (tres volúmenes), o cualquier carrocería de 4 o 5 puertas de 4 700 mm o más que no cumpla E1–E5 | `berlina` |
+  | E7 | Carrocería de 4 o 5 puertas que no cumple E1–E6: menos de 4 100 mm → `urbano`; de 4 100 a 4 699 mm → `compacto` | `urbano` \| `compacto` |
+
+  - **Longitud:** la exterior en milímetros que publique la ficha técnica de la marca (T1) o, si no la
+    publica, una fuente T2–T3; si dos fuentes difieren, la de nivel más alto (ADR-0001, regla 3). Si
+    las versiones tienen longitudes distintas, la mayor. No hay campo de longitud en este esquema: va
+    solo en la `note`.
+  - **Los umbrales (4 100, 4 400 y 4 700 mm) son una convención de esta web**, no una norma ni la
+    clasificación de nadie. Los fijó una persona al revisar la PR (2026-10-30), para que los
+    utilitarios del segmento B queden en `urbano`, el Kona en `suv_pequeno` y el Enyaq en
+    `suv_compacto`; no se han contrastado con las longitudes de `data/raw/` (el Arquitecto no las
+    obtiene, ADR-0001). Cambiarlos es cambiar este documento, y los valores `E` ya asignados con el umbral
+    anterior se revisan en la misma PR.
+  - Lo que la fuente sí dice manda sobre el criterio: si una fuente llama al coche «berlina», se aplica
+    la regla de arriba (valor de fuente), no E6.
 - `status: discontinued` también se publica, con la etiqueta "Descatalogado" (RF-7).
 - **Imagen** (forma de [ADR-0012](adr/0012-imagenes-de-los-modelos.md), aceptada; sustituye a la
   de ADR-0008, que tenía un solo `url`). Todas las claves son obligatorias:
@@ -253,6 +311,11 @@ Lo que una comprobación automática tendrá que rechazar (la comprobación es t
 1. La ruta es `data/raw/<brand>/<slug>.yaml`, con `brand` igual a la carpeta.
 2. Todas las claves obligatorias están y no hay claves fuera de este documento.
 3. Todo `Sourced` cumple la sección 2; `source_id` está en el registro; `retrieved` no es futura.
+   `tier: E` solo en `segment`, y entonces con `source_id: editorial` y `note` no vacía;
+   `source_id: editorial` solo con `tier: E` (ADR-0021, punto 4). En el eval de las ejecuciones de
+   agentes, además, falla toda ejecución que añada, cambie o borre un `segment` con `tier: E`
+   respecto a `main`, salvo que lo sustituya por un valor T1–T3 (PRD-001, CA-21). La fusión
+   automática no acepta un diff que añada o cambie un `tier: E` (ADR-0011, enmienda de ADR-0021).
 4. Los valores enumerados están en su lista; los números son > 0 y `wltp_km` es entero.
 5. `price`: `price_kind` presente; `financed` con `price_terms` y `price_terms_url`; `pvp` sin ellos;
    `unit: EUR`; `tier: T1`. `page_name`, si está, no es vacío ni igual al `name` de su versión
@@ -388,7 +451,7 @@ cabecera desaparece con él.
 |---|---|---|---|
 | `id` | texto kebab-case | sí | Igual al nombre del fichero. Es el `source_id` de los datos |
 | `brand` | texto de presentación (`Cupra`) | sí en la práctica | La cabecera antigua no la marcaba obligatoria; ver preguntas abiertas |
-| `tier` | `T1` \| `T2` \| `T3` | sí | ADR-0001 |
+| `tier` | `T1` \| `T2` \| `T3` \| `E` | sí | ADR-0001. `E` solo en `editorial.yaml` (abajo) |
 | `market` | `ES` \| `EU` \| código de país (`FR`, `DE`…) \| `global` | — | |
 | `kind` | lista de `prices` \| `specs` \| `images` \| `announcements` \| `reviews` \| `tests` | — | `reviews`: medio cuyas reviews se enlazan; `tests`: organismo de pruebas (ADR-0017) |
 | `name` | texto de presentación del medio u organismo (`Motor Ejemplo`) | sí si `kind` tiene `reviews` o `tests` | Lo que ve el visitante junto al enlace (PRD-006, RF-7) |
@@ -423,16 +486,43 @@ last_verified: 2026-09-20
 status: active
 ```
 
+**La fuente editorial (`data/sources/editorial.yaml`, [ADR-0021](adr/0021-segmento-editorial.md),
+punto 3).** Es la única fuente con `tier: E` y la única cuyo `id` no tiene la forma
+`<marca>-<país|press|eu>`. **La crea una persona**, no el Researcher, y una PR que la toque no se
+fusiona sola (ADR-0011, enmienda de ADR-0021). Forma:
+
+```yaml
+# data/sources/editorial.yaml — una persona. Esquema: docs/architecture/data-model.md, sección 8.
+id: editorial
+name: Clasificación editorial
+tier: E
+urls:
+  adr: <URL de docs/architecture/adr/0021-segmento-editorial.md en el repositorio>
+notes: >
+  Segmento asignado por una persona cuando ninguna fuente lo clasifica (ADR-0021). Criterio común:
+  docs/architecture/data-model.md, sección 3.
+last_verified: <fecha en que se crea o se revisa>
+```
+
+Sin `brand`, `market`, `kind`, `image_license` ni `status`: no es un tercero, no tiene términos ni
+imágenes, y no se rompe. `last_verified` sigue siendo obligatoria para que la regla 3 de 8.3 sea la
+misma para todas las fuentes, pero no genera aviso de antigüedad (8.3, regla 6).
+
 ### 8.3 Reglas comprobables del registro
 
 1. Cada `data/sources/*.yaml` es YAML válido y es un mapa (no una lista).
 2. `id` existe y es igual al nombre del fichero sin `.yaml`. Como el sistema de ficheros no admite
    dos ficheros con el mismo nombre, esto garantiza que no hay `id` repetidos.
-3. `tier` es `T1`, `T2` o `T3`; `urls` tiene al menos una entrada; `last_verified` es una fecha no
-   futura.
+3. `tier` es `T1`, `T2` o `T3`, o `E` solo si el fichero es `editorial.yaml` (que tiene que llevar
+   `E`); `urls` tiene al menos una entrada; `last_verified` es una fecha no futura.
 4. Todo `source_id` de `data/raw/` (valores, `images`, `reviews` y `test_results`) tiene su fichero `data/sources/<source_id>.yaml`.
 5. Una fuente con `reviews` o `tests` en `kind` tiene `name`, `terms_url` (`https://`) y
    `terms_checked`; `terms_checked`, en cualquier fuente que la tenga, es una fecha no futura (ADR-0017).
+6. Avisos de antigüedad de ADR-0010 (punto 5) y los valores `E` (ADR-0021, pregunta 5): la fuente
+   `editorial` no avisa por `last_verified` de más de 45 días ni cuenta para marcar una marca como
+   vencida. El aviso de `retrieved` de ADR-0010 es solo de precios, que nunca son `E`, así que un
+   `segment` `E` no avisa por su fecha. Si un día ese aviso se amplía a otros campos, los `E` quedan
+   fuera.
 
 ### 8.4 Qué cambia y quién lo hace
 
