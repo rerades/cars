@@ -2,13 +2,13 @@
 brand: kia
 brand_name: Kia
 model: EV6
-status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-05, tier: T1}
+status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-31, tier: T1}
 segment: null
 needs_review: false
 specs:
-  wltp_max_km: {value: 582, note: "hasta 582 km", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-05, tier: T1}
-  battery_kwh_options: {value: [62.9, 84.0], note: "SR 62,9 kWh y LR 84,0 kWh; la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-05, tier: T1}
-  drivetrains: {value: [rwd, awd], source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  wltp_max_km: {value: 582, note: "hasta 582 km", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-31, tier: T1}
+  battery_kwh_options: {value: [62.9, 84.0], note: "SR 62,9 kWh y LR 84,0 kWh; la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-31, tier: T1}
+  drivetrains: {value: [rwd, awd], source_id: kia-es, url: "https://www.kia.com/es/modelos/ev6/descubrelo/", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: EV6 Air
     price: null
@@ -26,7 +26,7 @@ images:
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "Reviews: las pruebas encontradas de Diariomotor (2021-12-09) y Motorpasión (2022-07-24) son de la generación anterior, con batería de 77,4 kWh; esta ficha es la actual (84,0 kWh). Se quitaron el 2026-10-23 (#629); falta una prueba del EV6 actual. Revisado de nuevo el 2026-10-24: ni Diariomotor ni Motorpasión tienen prueba del EV6 de 84 kWh (solo las de 77,4 kWh o menos)."
-  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23: ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23 y el 2026-10-31 (el configurador solo da condiciones de oferta financiada, caducada el 26/10/2026, sin importe por versión): ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha dice 'crossover' sin tamaño; queda vacío."
   - "Potencia, carga DC en kW y correspondencia versión-batería-tracción no publicadas en la ficha estática."

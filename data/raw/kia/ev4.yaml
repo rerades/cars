@@ -2,12 +2,12 @@
 brand: kia
 brand_name: Kia
 model: EV4
-status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev4/descubrelo/", retrieved: 2026-10-05, tier: T1}
+status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev4/descubrelo/", retrieved: 2026-10-31, tier: T1}
 segment: null
 needs_review: false
 specs:
-  wltp_max_km: {value: 633, note: "hasta 633 km (Fastback); 625 km el hatchback", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev4/descubrelo/", retrieved: 2026-10-05, tier: T1}
-  dc_max_kw: {value: 150, note: "\"carga rápida de 150 kW\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev4/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  wltp_max_km: {value: 633, note: "hasta 633 km (Fastback); 625 km el hatchback", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev4/descubrelo/", retrieved: 2026-10-31, tier: T1}
+  dc_max_kw: {value: 150, note: "\"carga rápida de 150 kW\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev4/descubrelo/", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: EV4 Air
     price: null
@@ -28,7 +28,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23: ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23 y el 2026-10-31 (el configurador solo da condiciones de oferta financiada, caducada el 26/10/2026, sin importe por versión): ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha habla de 'proporciones del segmento C' pero no da una categoría de RF-11; queda vacío."
   - "Batería, potencia y tracción por versión no publicadas en la ficha estática."

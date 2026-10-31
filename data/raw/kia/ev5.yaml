@@ -2,14 +2,14 @@
 brand: kia
 brand_name: Kia
 model: EV5
-status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
+status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-31, tier: T1}
 segment: null
 needs_review: false
 specs:
-  wltp_max_km: {value: 530, note: "hasta 530 km (llantas de 18\"); 520 km FWD Earth 19\"; 505 km FWD GT-Line 19\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
-  battery_kwh_options: {value: [81.4], note: "la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
-  dc_max_kw: {value: 150, note: "\"carga rápida de 150 kW\", 10-80 % en 30 minutos", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
-  drivetrains: {value: [fwd], source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  wltp_max_km: {value: 530, note: "hasta 530 km (llantas de 18\"); 520 km FWD Earth 19\"; 505 km FWD GT-Line 19\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-31, tier: T1}
+  battery_kwh_options: {value: [81.4], note: "la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-31, tier: T1}
+  dc_max_kw: {value: 150, note: "\"carga rápida de 150 kW\", 10-80 % en 30 minutos", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-31, tier: T1}
+  drivetrains: {value: [fwd], source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: EV5 Air
     price: null
@@ -26,7 +26,7 @@ images:
     license: CC0-1.0
     attribution: null
 open_questions:
-  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23: ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23 y el 2026-10-31 (el configurador solo da condiciones de oferta financiada, caducada el 26/10/2026, sin importe por versión): ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha dice 'SUV EV' sin tamaño; queda vacío."
   - "Potencia por versión no publicada en la ficha estática."
