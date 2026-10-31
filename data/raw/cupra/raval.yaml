@@ -1,21 +1,21 @@
-# Researcher — Cupra Raval. Fuente: cupra-es (T1). Consultado 2026-09-24; segment e imagen 2026-09-28.
+# Researcher — Cupra Raval. Fuente: cupra-es (T1). Consultado 2026-09-24; refresco mensual 2026-10-31.
 brand: cupra
 brand_name: Cupra
 model: Raval
-status: {value: on_sale, note: "Plus, Endurance y VZ a la venta; versión base 85 kW 'Próximamente'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
-segment: {value: urbano, note: "la web lo presenta como 'un coche eléctrico 100 % urbano'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-28, tier: T1}
+status: {value: on_sale, note: "Plus, Endurance y VZ a la venta; versión base 85 kW 'Próximamente'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
+segment: {value: urbano, note: "la web lo presenta como 'un coche eléctrico 100 % urbano'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
 needs_review: false
 specs:
-  dc_max_kw: {value: 105, note: "10-80 % en ~24 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
+  dc_max_kw: {value: 105, note: "10-80 % en ~24 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: Raval Plus
-    power_kw: {value: 99, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
-    wltp_km: {value: 328, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
+    power_kw: {value: 99, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
+    wltp_km: {value: 328, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
     price: null
   - name: Raval Endurance
-    battery_kwh: {value: 51.5, basis: unknown, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
-    power_kw: {value: 155, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
-    wltp_km: {value: 446, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
+    battery_kwh: {value: 51.5, basis: unknown, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
+    power_kw: {value: 155, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
+    wltp_km: {value: 446, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
     price:
       value: 32072.74
       unit: EUR
@@ -26,12 +26,12 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 31.301,49 €"
       source_id: cupra-es
       url: "https://www.cupra.com/es-es/coches/raval"
-      retrieved: 2026-10-13
+      retrieved: 2026-10-31
       tier: T1
   - name: Raval VZ
-    battery_kwh: {value: 52, basis: unknown, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
-    power_kw: {value: 166, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
-    wltp_km: {value: 440, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
+    battery_kwh: {value: 52, basis: unknown, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
+    power_kw: {value: 166, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
+    wltp_km: {value: 440, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-31, tier: T1}
     price: null
   - name: Raval (base, 85 kW)
     battery_kwh: {value: 37, basis: unknown, note: "'Batería de 37 kWh con potencia de 85kW (115 CV)', versión 'Próximamente'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-02, tier: T1}
@@ -47,7 +47,8 @@ images:
     attribution: "Bene Riobó, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "Batería resuelta (2026-10-02): los 37 kWh son de la versión base 85 kW ('Próximamente'). La web no publica la batería de Plus ni de VZ: vacío."
-  - "Precio: Endurance con la oferta financiada vigente hasta el 31/10/2026 (leída el 2026-10-13); sin PVP limpio. Releer en el refresco de noviembre. Plus y VZ sin precio propio."
-  - "La ficha parece mostrar 'desde 26.000 €' para la versión base (lectura no literal, sin nota de condiciones): no se guarda; releer."
+  - "Precio: Endurance con la oferta financiada que sigue en la ficha el 2026-10-31, 'Oferta válida hasta el 31/10/2026' (caduca hoy); sin PVP limpio. Releer en el refresco de noviembre. Plus y VZ sin precio propio."
+  - "La ficha muestra 'Desde 26.000' para la versión base 'Próximamente' (2026-10-31), sin nota de condiciones ni indicación de PVP: no se guarda."
+  - "Versión base (85 kW / 37 kWh): su valor no aparece en el texto de la ficha leído el 2026-10-31; se mantiene con su fecha anterior."
   - "Sin PVP limpio; carga AC no publicada; sin fecha para la versión base."
-  - "launch: fecha de inicio de comercialización en España no publicada en la ficha del modelo (verificado 2026-09-28)."
+  - "launch: fecha de inicio de comercialización en España no publicada en la ficha del modelo (verificado 2026-10-31)."

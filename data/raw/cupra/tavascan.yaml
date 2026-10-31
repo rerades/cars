@@ -1,18 +1,18 @@
-# Researcher — Cupra Tavascan. Fuente: cupra-es (T1). Consultado 2026-09-24; segment e imagen 2026-09-28.
+# Researcher — Cupra Tavascan. Fuente: cupra-es (T1). Consultado 2026-09-24; refresco mensual 2026-10-31.
 brand: cupra
 brand_name: Cupra
 model: Tavascan
-status: {value: on_sale, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+status: {value: on_sale, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
 segment: {value: suv_compacto, note: "la web lo presenta como 'SUV Coupé 100 % Eléctrico'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-28, tier: T1}
 needs_review: false
 specs:
-  dc_max_kw: {value: 135, note: "10-80 % en 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+  dc_max_kw: {value: 135, note: "10-80 % en 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: Tavascan (58 kWh, 140 kW)
-    battery_kwh: {value: 58, basis: unknown, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
-    power_kw: {value: 140, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
-    wltp_km: {value: 441, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
-    drivetrain: {value: fwd, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    battery_kwh: {value: 58, basis: unknown, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
+    power_kw: {value: 140, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
+    wltp_km: {value: 441, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
+    drivetrain: {value: fwd, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
     price:
       value: 37151.49
       unit: EUR
@@ -23,16 +23,16 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 36.380,24 €"
       source_id: cupra-es
       url: "https://www.cupra.com/es-es/coches/tavascan"
-      retrieved: 2026-10-30
+      retrieved: 2026-10-31
       tier: T1
   - name: Tavascan Endurance
-    power_kw: {value: 210, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
-    wltp_km: {value: 557, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    power_kw: {value: 210, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
+    wltp_km: {value: 557, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
     price: null
   - name: Tavascan VZ
-    power_kw: {value: 250, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
-    wltp_km: {value: 533, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
-    drivetrain: {value: awd, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+    power_kw: {value: 250, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
+    wltp_km: {value: 533, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
+    drivetrain: {value: awd, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-10-31, tier: T1}
     price: null
 images:
   - file: "data/images/cupra/tavascan/frontal.jpg"
@@ -56,6 +56,8 @@ reviews:
     tier: T3
     version: Tavascan VZ
 open_questions:
+  - "Precio: la oferta financiada sigue en la ficha el 2026-10-31 con 'Oferta válida hasta el 31/10/2026' (caduca hoy). Releer en el refresco de noviembre."
   - "Sin PVP limpio: la web solo muestra precio con oferta, y solo para la versión de acceso."
   - "Batería de Endurance y VZ, y carga AC, no publicadas en la ficha."
-  - "launch: fecha de inicio de comercialización en España no publicada en la ficha del modelo (verificado 2026-09-28)."
+  - "segment: no releído el 2026-10-31 (la frase 'SUV Coupé 100 % Eléctrico' no salió en el texto extraído; sí 'SUV coupé 100 % eléctrico'); se mantiene su fecha."
+  - "launch: fecha de inicio de comercialización en España no publicada en la ficha del modelo (verificado 2026-10-31)."
