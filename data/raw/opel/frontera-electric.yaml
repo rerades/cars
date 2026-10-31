@@ -1,8 +1,8 @@
-# Researcher — Opel Frontera Electric. Fuentes: opel-es (T1), wikimedia-commons. Consultado 2026-10-03.
+# Researcher — Opel Frontera Electric. Fuentes: opel-es (T1), wikimedia-commons. Consultado 2026-10-31.
 brand: opel
 brand_name: Opel
 model: Frontera Electric
-status: {value: on_sale, note: "ofertas.opel.es: Frontera 'Disponible en Gasolina, Híbrido o Eléctrico'", source_id: opel-es, url: "https://ofertas.opel.es/particulares?model=frontera", retrieved: 2026-10-03, tier: T1}
+status: {value: on_sale, note: "ofertas.opel.es: Frontera 'Disponible en Gasolina, Híbrido o Eléctrico'", source_id: opel-es, url: "https://ofertas.opel.es/particulares?model=frontera", retrieved: 2026-10-31, tier: T1}
 launch: null
 segment: null
 needs_review: false
@@ -21,10 +21,10 @@ reviews:
   - title: "Opel Frontera 2025, primera prueba del SUV barato por el que esperar a 2025 para comprar coche"
     url: "https://www.diariomotor.com/noticia/prueba-opel-frontera-2025/"
     source_id: diariomotor-es
-    retrieved: 2026-10-27
+    retrieved: 2026-10-31
     tier: T3
 open_questions:
   - "reviews: la prueba de diariomotor-es trata sobre todo del Frontera eléctrico de 44 kWh y 113 CV; la ficha no trae batería ni potencia con que compararla. motorpasion-es no tiene prueba del Frontera Electric (solo noticias de lanzamiento y precio)."
   - "launch y segment: sin fuente leída."
-  - "price: sin precio de la versión eléctrica en página T1 legible. Leídas el 2026-10-24: ofertas.opel.es/particulares y ?model=frontera (redirigen a /ofertas; solo 'Disponible en Gasolina, Híbrido o Eléctrico' y ofertas de entrada/cuota sin indicar versión) y www.opel.es (403)."
+  - "price: sin precio de la versión eléctrica en página T1 legible. Releídas el 2026-10-31: ofertas.opel.es/particulares y ?model=frontera (redirigen a /ofertas; solo 'Disponible en Gasolina, Híbrido o Eléctrico' y ofertas de entrada/cuota sin indicar versión) y www.opel.es (403)."
   - "Versiones, batería, autonomía WLTP, potencia y carga: fichas de www.opel.es no accesibles (403)."
