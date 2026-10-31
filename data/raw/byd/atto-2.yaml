@@ -1,30 +1,30 @@
-# Researcher — BYD Atto 2. Fuente: byd-es (T1). Consultado 2026-10-05.
+# Researcher — BYD Atto 2. Fuente: byd-es (T1). Refrescado 2026-10-31.
 brand: byd
 brand_name: BYD
 model: Atto 2
-status: {value: on_sale, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+status: {value: on_sale, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-31, tier: T1}
 launch: null
-segment: {value: suv_compacto, note: "«El SUV compacto eléctrico»; «el segmento de los SUV eléctricos compactos»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-13, tier: T1}
+segment: {value: suv_compacto, note: "«El SUV compacto eléctrico»; «el segmento de los SUV eléctricos compactos»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-31, tier: T1}
 needs_review: false
 versions:
   - name: Atto 2 Active
-    battery_kwh: {value: 45.1, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
-    wltp_km: {value: 312, note: "ciclo combinado; la web destaca 403 km en ciclo urbano", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
-    power_kw: {value: 130, note: "publicado: 177 CV", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
-    dc_max_kw: {value: 65, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+    battery_kwh: {value: 45.1, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-31, tier: T1}
+    wltp_km: {value: 312, note: "ciclo combinado; la web destaca 403 km en ciclo urbano en la tarjeta del acabado y 463 km en las preguntas frecuentes", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-31, tier: T1}
+    power_kw: {value: 130, note: "publicado: 177 CV", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-31, tier: T1}
+    dc_max_kw: {value: 65, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-31, tier: T1}
     ac_max_kw: {value: 11, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
     price: null   # la página de la oferta nombra solo la versión Comfort
   - name: Atto 2 Boost
-    battery_kwh: {value: 45.1, basis: unknown, note: "«Las versiones Active y Boost cuentan con una batería de 45,1 kWh»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-13, tier: T1}
-    wltp_km: {value: 312, source_id: motor-es, url: "https://www.motor.es/byd/atto-2/", retrieved: 2026-10-13, tier: T3}
-    power_kw: {value: 130, note: "publicado: 177 CV", source_id: motor-es, url: "https://www.motor.es/byd/atto-2/", retrieved: 2026-10-13, tier: T3}
+    battery_kwh: {value: 45.1, basis: unknown, note: "«Las versiones Active y Boost cuentan con una batería de 45,1 kWh»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-31, tier: T1}
+    wltp_km: {value: 312, source_id: motor-es, url: "https://www.motor.es/byd/atto-2/", retrieved: 2026-10-31, tier: T3}
+    power_kw: {value: 130, note: "publicado: 177 CV", source_id: motor-es, url: "https://www.motor.es/byd/atto-2/", retrieved: 2026-10-31, tier: T3}
     price: null   # sin precio propio leído en fuente T1
   - name: Atto 2 Comfort
-    battery_kwh: {value: 64.8, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
-    wltp_km: {value: 430, source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
-    power_kw: {value: 150, note: "publicado: 204 CV", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
-    dc_max_kw: {value: 155, source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-05, tier: T1}
-    ac_max_kw: {value: 11, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-2", retrieved: 2026-10-05, tier: T1}
+    battery_kwh: {value: 64.8, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-31, tier: T1}
+    wltp_km: {value: 430, source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-31, tier: T1}
+    power_kw: {value: 150, note: "publicado: 204 CV", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-31, tier: T1}
+    dc_max_kw: {value: 155, source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-31, tier: T1}
+    ac_max_kw: {value: 11, note: "«cargador trifásico de corriente alterna (CA) de 11 kW»", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-31, tier: T1}
     price:
       value: 31921
       unit: EUR
@@ -35,7 +35,7 @@ versions:
       note: "precio al contado; financiando la página da 24.796 €"
       source_id: byd-es
       url: "https://www.byd.com/es-es/promociones/atto-2-promocion"
-      retrieved: 2026-10-29
+      retrieved: 2026-10-31
       tier: T1
 images:
   - file: "data/images/byd/atto-2/frontal.jpg"
@@ -55,6 +55,8 @@ open_questions:
   - "reviews: diariomotor-es no tiene una prueba del Atto 2 eléctrico (solo ofertas y fichas); solo hay review de motorpasion-es."
   - "Boost: autonomía y potencia solo de motor.es (T3); carga y precio sin fuente."
   - "Hay un 'Precio Recomendado Contado' de 31.921 € en la letra pequeña de la promoción, sin versión clara; no se registra como pvp."
+  - "Precio Comfort: la oferta financed vence el 31/10/2026 (hoy, en el refresco); la página aún la mostraba. Revisar en el siguiente refresco qué precio publica."
+  - "Active ac_max_kw (11 kW): la ficha ya no lo muestra en el texto; la nota de prensa da 11 kW trifásica en una celda única. Sin releer; retrieved sin cambiar."
   - "Tracción no publicada de forma explícita (monomotor); no se registra drivetrain."
   - "launch: la noticia de llegada a España (2025-02) no da una fecha de inicio de venta; sin dato."
   - "Batería: la web no indica si es útil o bruta."
