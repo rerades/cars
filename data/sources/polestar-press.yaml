@@ -10,5 +10,6 @@ urls:
 image_license: "" # página de copyright es JS-rendered; no se ha podido leer el texto de licencia, pendiente verificación manual
 notes: >
   No se ha encontrado una versión en español del media newsroom (solo /global/en y /us/en). robots.txt de media.polestar.com no se ha podido recuperar (fetch vacío); no confirmado. No registrar imágenes hasta verificar el texto de /about/copyright.
-last_verified: 2026-09-22
+  Refresco 2026-10-31: la página de fotos sigue respondiendo pero sin texto legible (JS); sin cambios.
+last_verified: 2026-10-31
 status: active
