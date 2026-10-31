@@ -581,8 +581,9 @@ const FETCH_PAGE_CALL_CHARS = 4000;
 const FETCH_PAGE_LOG_CHARS = 40000; // GitHub caps a PR body at 65 536 characters
 
 /**
- * Every `fetch-page.ts` call with its literal output, taken from the trace. The agent cannot write
- * the PR body and only the tail of its last message reaches it, so the evidence goes in from here.
+ * Every `fetch-page.ts` and `fetch-idae.ts` call with its literal output, taken from the trace. The
+ * agent cannot write the PR body and only the tail of its last message reaches it, so the evidence
+ * goes in from here. WebFetch is left out on purpose: it returns a summary, not the page.
  */
 export function fetchPageLog(stdout: string): string {
   const calls = new Map<string, string>();
@@ -591,7 +592,7 @@ export function fetchPageLog(stdout: string): string {
     const content: Event[] = Array.isArray(e.message?.content) ? e.message.content : [];
     for (const c of content) {
       if (e.type === "assistant" && c.type === "tool_use" && c.name === "Bash" &&
-        String(c.input?.command ?? "").includes("factory/fetch-page.ts")) calls.set(c.id, c.input.command);
+        /factory\/fetch-(page|idae)\.ts/.test(String(c.input?.command ?? ""))) calls.set(c.id, c.input.command);
       if (e.type === "user" && c.type === "tool_result" && calls.has(c.tool_use_id)) {
         const text = typeof c.content === "string" ? c.content
           : (Array.isArray(c.content) ? c.content : []).map((p: Event) => p.text ?? "").join("\n");
@@ -603,7 +604,7 @@ export function fetchPageLog(stdout: string): string {
   if (!out.length) return "";
   let log = out.join("\n\n");
   if (log.length > FETCH_PAGE_LOG_CHARS) log = `${log.slice(0, FETCH_PAGE_LOG_CHARS)}\n\`\`\`\n… (log cut)`;
-  return `<details><summary>fetch-page.ts output (${out.length} calls, from the trace)</summary>\n\n${log}\n\n</details>`;
+  return `<details><summary>fetch-page.ts / fetch-idae.ts output (${out.length} calls, from the trace)</summary>\n\n${log}\n\n</details>`;
 }
 
 export function execute(cfg: Config, agent: string, task: string, now: Clock, dryRun = false): Row {

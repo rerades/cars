@@ -226,19 +226,22 @@ describe("traza", () => {
       "= success · 2 turnos · 0.1 USD · 4 s",
     ].join("\n"));
   });
-  test("fetchPageLog copies each fetch-page.ts call with its output, and nothing else", () => {
+  test("fetchPageLog copies each fetch-page.ts and fetch-idae.ts call with its output, and nothing else", () => {
     const trace = [
       JSON.stringify({ type: "assistant", message: { content: [
         { type: "tool_use", id: "a", name: "Bash", input: { command: "node factory/fetch-page.ts https://x.es PVP" } },
         { type: "tool_use", id: "b", name: "Bash", input: { command: "ls data/sources" } },
+        { type: "tool_use", id: "c", name: "Bash", input: { command: "node factory/fetch-idae.ts TESLA" } },
       ] } }),
       JSON.stringify({ type: "user", message: { content: [
         { type: "tool_result", tool_use_id: "a", content: [{ type: "text", text: "{\"final_url\":\"https://x.es\"}" }] },
         { type: "tool_result", tool_use_id: "b", content: "bmw-es.yaml" },
+        { type: "tool_result", tool_use_id: "c", content: "{\"source_url\":\"https://idae.es\"}" },
       ] } }),
     ].join("\n");
     const log = orq.fetchPageLog(trace);
-    assert.match(log, /1 calls/);
+    assert.match(log, /2 calls/);
+    assert.match(log, /fetch-idae\.ts TESLA/);
     assert.match(log, /node factory\/fetch-page\.ts https:\/\/x\.es PVP/);
     assert.match(log, /"final_url":"https:\/\/x\.es"/);
     assert.doesNotMatch(log, /bmw-es/);
