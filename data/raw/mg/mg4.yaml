@@ -1,8 +1,8 @@
-# Researcher — MG MG4 (Urban y 64kW Premium). Fuente: mg-es (T1). Consultado 2026-10-07.
+# Researcher — MG MG4 (Urban y 64kW Premium). Fuente: mg-es (T1). Consultado 2026-10-31.
 brand: mg
 brand_name: MG
 model: MG4
-status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/mg4", retrieved: 2026-10-07, tier: T1}
+status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/mg4", retrieved: 2026-10-31, tier: T1}
 needs_review: false
 versions:
   - name: MG4 Urban 54kW Premium
@@ -14,7 +14,7 @@ versions:
       price_terms_url: "https://www.mgmotor.es/model/mg4-urban"
       source_id: mg-es
       url: "https://www.mgmotor.es/model/mg4-urban"
-      retrieved: 2026-10-07
+      retrieved: 2026-10-31
       tier: T1
   - name: MG4 64kW Premium
     price:
@@ -25,7 +25,7 @@ versions:
       price_terms_url: "https://www.mgmotor.es/model/mg4"
       source_id: mg-es
       url: "https://www.mgmotor.es/model/mg4"
-      retrieved: 2026-10-07
+      retrieved: 2026-10-31
       tier: T1
 images:
   - file: data/images/mg/mg4/frontal.jpg

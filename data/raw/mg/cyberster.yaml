@@ -1,17 +1,17 @@
-# Researcher — MG Cyberster. Fuente: mg-es (T1). Consultado 2026-10-07.
+# Researcher — MG Cyberster. Fuente: mg-es (T1). Consultado 2026-10-31.
 brand: mg
 brand_name: MG
 model: Cyberster
-status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
-segment: {value: deportivo, note: "la web lo presenta como 'Deportivo eléctrico'", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
+status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-31, tier: T1}
+segment: {value: deportivo, note: "la web lo presenta como 'Deportivo eléctrico'", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-31, tier: T1}
 needs_review: false
 specs:
-  wltp_max_km: {value: 507, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
-  power_max_kw: {value: 375, note: "publicado: 375 kW (510 CV)", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
+  wltp_max_km: {value: 507, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-31, tier: T1}
+  power_max_kw: {value: 375, note: "publicado: 375 kW (510 CV)", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: Cyberster
-    wltp_km: {value: 507, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
-    power_kw: {value: 375, note: "publicado: 375 kW (510 CV)", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-07, tier: T1}
+    wltp_km: {value: 507, source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-31, tier: T1}
+    power_kw: {value: 375, note: "publicado: 375 kW (510 CV)", source_id: mg-es, url: "https://www.mgmotor.es/model/cyberster", retrieved: 2026-10-31, tier: T1}
     price: null
 images:
   - file: data/images/mg/cyberster/frontal.jpg

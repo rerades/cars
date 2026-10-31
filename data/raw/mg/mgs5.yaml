@@ -1,11 +1,11 @@
-# Researcher — MG MGS5 EV. Fuente: mg-es (T1). Consultado 2026-10-07.
+# Researcher — MG MGS5 EV. Fuente: mg-es (T1). Consultado 2026-10-31.
 brand: mg
 brand_name: MG
 model: MGS5 EV
-status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/mgs5", retrieved: 2026-10-07, tier: T1}
+status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/mgs5", retrieved: 2026-10-31, tier: T1}
 needs_review: false
 specs:
-  wltp_max_km: {value: 682, note: "hasta 682 km", source_id: mg-es, url: "https://www.mgmotor.es/model/mgs5", retrieved: 2026-10-07, tier: T1}
+  wltp_max_km: {value: 682, note: "hasta 682 km", source_id: mg-es, url: "https://www.mgmotor.es/model/mgs5", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: MGS5 EV Comfort 49kW
     price: null
@@ -18,7 +18,7 @@ versions:
       price_terms_url: "https://www.mgmotor.es/model/mgs5"
       source_id: mg-es
       url: "https://www.mgmotor.es/model/mgs5"
-      retrieved: 2026-10-07
+      retrieved: 2026-10-31
       tier: T1
 images:
   - file: data/images/mg/mgs5/frontal.jpg
