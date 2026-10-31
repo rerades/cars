@@ -2,12 +2,12 @@
 brand: peugeot
 brand_name: Peugeot
 model: E-308 SW
-status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 launch: null
-segment: {value: familiar, note: "Motor16: «E-308 SW, el familiar eléctrico de Peugeot»", source_id: motor16-es, url: "https://www.motor16.com/electrico/e-308-sw-electrico-peugeot/", retrieved: 2026-10-27, tier: T3}
+segment: {value: familiar, note: "Motor16: «E-308 SW, el familiar eléctrico de Peugeot»", source_id: motor16-es, url: "https://www.motor16.com/electrico/e-308-sw-electrico-peugeot/", retrieved: 2026-10-31, tier: T3}
 needs_review: false
 specs:
-  wltp_max_km: {value: 444, note: "hasta 444 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+  wltp_max_km: {value: 444, note: "hasta 444 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: E-308 SW Style Eléctrico 156
     price:
@@ -19,7 +19,7 @@ versions:
       page_name: "E-308 SW Style Eléctrico 156 (115 kW)"
       source_id: peugeot-es
       url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
-      retrieved: 2026-10-30
+      retrieved: 2026-10-31
       tier: T1
 images:
   - file: "data/images/peugeot/e-308-sw/frontal.jpg"
@@ -32,4 +32,4 @@ images:
 open_questions:
   - "segment: sale de una fuente T3 (motor16-es); www.peugeot.es sigue devolviendo 403 (2026-10-27). launch: sin fecha en fuente registrada."
   - "Imagen: no se buscó un fichero de e-308 SW en Commons con garantía de que sea el SW."
-  - "Precio (2026-10-30): oferta vigente de ofertas.peugeot.es/coches-electricos-hibridos para el E-308 SW Style Eléctrico 156 (115 kW), precio al contado 38.140 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (115 kW) solo en el nombre de la oferta, no se guarda como dato."
+  - "Precio (2026-10-31): oferta releída, sin cambios, de ofertas.peugeot.es/coches-electricos-hibridos para el E-308 SW Style Eléctrico 156 (115 kW), precio al contado 38.140 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (115 kW) solo en el nombre de la oferta, no se guarda como dato."

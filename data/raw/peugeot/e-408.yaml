@@ -2,12 +2,12 @@
 brand: peugeot
 brand_name: Peugeot
 model: E-408
-status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 launch: null
 segment: null
 needs_review: false
 specs:
-  wltp_max_km: {value: 456, note: "hasta 456 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+  wltp_max_km: {value: 456, note: "hasta 456 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: E-408 Allure Plus Eléctrico 210
     price:
@@ -19,10 +19,10 @@ versions:
       page_name: "E-408 Allure Plus Eléctrico 210 (157kW)"
       source_id: peugeot-es
       url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
-      retrieved: 2026-10-30
+      retrieved: 2026-10-31
       tier: T1
 images: []
 open_questions:
   - "Imagen (2026-10-15): búsquedas en Commons «Peugeot E-408» y «Peugeot E-408 electric 2025»; solo hay fotos del 408 térmico/híbrido (T9 China, 408 II, 408 Hybrid 225), ninguna del eléctrico. Sin foto válida: images []."
   - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27) y ninguna fuente T3 registrada leída clasifica el E-408 con un término de la lista (electrive habla de 'crossover coupé' y km77, no registrada, de segmento C): sigue null. launch: sin fuente."
-  - "Precio (2026-10-30): oferta vigente de ofertas.peugeot.es/coches-electricos-hibridos para el E-408 Allure Plus Eléctrico 210 (157kW), precio al contado 41.760 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (157 kW) solo en el nombre de la oferta, no se guarda como dato."
+  - "Precio (2026-10-31): oferta releída, sin cambios, de ofertas.peugeot.es/coches-electricos-hibridos para el E-408 Allure Plus Eléctrico 210 (157kW), precio al contado 41.760 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (157 kW) solo en el nombre de la oferta, no se guarda como dato."
