@@ -12,6 +12,6 @@ urls:
   sitemap: https://www.hyundai.com/es/es/sitemap.xml
 image_license: "" # sin términos escritos de uso de imágenes localizados: no publicar imágenes de esta web
 notes: >
-  Verificado (2026-10-07): home, sitemap y fichas de IONIQ 3, 5, 6, 9, KONA Eléctrico e INSTER responden. robots.txt de hyundai.com no bloquea /es/. Las fichas muestran el "PVP" de una sola versión (p. ej. IONIQ 5 170CV 63kWh RWD LIGHT, 44.790 €) junto a una cuota de financiación; la de KONA añade "no incluye descuentos". No se ha localizado lista de precios por versión ni sala de prensa oficial en España. Pendiente: leer el configurador y localizar la prensa.
-last_verified: 2026-10-07
+  Verificado (2026-10-31): home, promociones, sitemap, configurador y las fichas de IONIQ 3 (y su página de condiciones), 5, 6, 9, KONA Eléctrico e INSTER responden. robots.txt de hyundai.com no bloquea /es/. Las fichas muestran el "PVP" de una sola versión (p. ej. IONIQ 5 170CV 63kWh RWD LIGHT, 44.790 €; INSTER 97CV 42kWh MAXX, 26.950 €) dentro de un ejemplo de financiación, con «no incluye descuentos». El configurador no devuelve contenido sin scripts. No se ha localizado lista de precios por versión ni sala de prensa oficial en España. Pendiente: leer el configurador y localizar la prensa.
+last_verified: 2026-10-31
 status: active
