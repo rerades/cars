@@ -2,12 +2,12 @@
 brand: peugeot
 brand_name: Peugeot
 model: E-308
-status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 launch: null
-segment: {value: compacto, note: "Motor.es: «el Peugeot E-308. Un compacto impulsado con baterías»", source_id: motor-es, url: "https://www.motor.es/pruebas-coches/prueba-peugeot-e-308-202398551.html", retrieved: 2026-10-27, tier: T3}
+segment: {value: compacto, note: "Motor.es: «el Peugeot E-308. Un compacto impulsado con baterías»", source_id: motor-es, url: "https://www.motor.es/pruebas-coches/prueba-peugeot-e-308-202398551.html", retrieved: 2026-10-31, tier: T3}
 needs_review: false
 specs:
-  wltp_max_km: {value: 450, note: "hasta 450 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+  wltp_max_km: {value: 450, note: "hasta 450 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: E-308 5p Style Eléctrico 156
     price:
@@ -19,7 +19,7 @@ versions:
       page_name: "E-308 5p Style Eléctrico 156 (115 kW)"
       source_id: peugeot-es
       url: "https://ofertas.peugeot.es/coches-electricos-hibridos"
-      retrieved: 2026-10-30
+      retrieved: 2026-10-31
       tier: T1
 images:
   - file: "data/images/peugeot/e-308/frontal.jpg"
@@ -32,5 +32,5 @@ images:
 open_questions:
   - "reviews: la prueba de motorpasion-es (peugeot-e-308-prueba-contacto) es del E-308 de 54 kWh y 416 km WLTP, y la de diariomotor-es («Probamos el Peugeot e-308 y e-308 SW…», de la primera generación, URL no localizada) también es anterior a la versión renovada de 55,4 kWh y 450 km de la ficha. No se enlazan."
   - "segment: sale de una fuente T3 (motor-es); www.peugeot.es sigue devolviendo 403 (2026-10-27). launch: sin fecha en fuente registrada."
-  - "Precio (2026-10-30): oferta vigente de ofertas.peugeot.es/coches-electricos-hibridos para el E-308 5p Style Eléctrico 156 (115 kW), precio al contado 37.240 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (115 kW) solo en el nombre de la oferta, no se guarda como dato."
+  - "Precio (2026-10-31): oferta releída, sin cambios, de ofertas.peugeot.es/coches-electricos-hibridos para el E-308 5p Style Eléctrico 156 (115 kW), precio al contado 37.240 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (115 kW) solo en el nombre de la oferta, no se guarda como dato."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."

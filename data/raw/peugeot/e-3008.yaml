@@ -2,12 +2,12 @@
 brand: peugeot
 brand_name: Peugeot
 model: E-3008
-status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 launch: null
-segment: {value: suv_compacto, note: "Diariomotor: «Por dimensiones y posicionamiento, sigue siendo un SUV compacto de pleno derecho»", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/prueba-peugeot-3008-2024/", retrieved: 2026-10-27, tier: T3}
+segment: {value: suv_compacto, note: "Diariomotor: «Por dimensiones y posicionamiento, sigue siendo un SUV compacto de pleno derecho»", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/prueba-peugeot-3008-2024/", retrieved: 2026-10-31, tier: T3}
 needs_review: false
 specs:
-  wltp_max_km: {value: 526, note: "hasta 526 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+  wltp_max_km: {value: 526, note: "hasta 526 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: E-3008 Style Eléctrico 210
     price:
@@ -19,7 +19,7 @@ versions:
       page_name: "E-3008 Style Eléctrico 210 (157 kW)"
       source_id: peugeot-es
       url: "https://ofertas.peugeot.es/particulares"
-      retrieved: 2026-10-30
+      retrieved: 2026-10-31
       tier: T1
 images:
   - file: "data/images/peugeot/e-3008/frontal.jpg"
@@ -33,15 +33,15 @@ reviews:
   - title: "La peor pesadilla del Hyundai Tucson acaba de llegar, y ya lo hemos probado"
     url: "https://www.diariomotor.com/noticia/prueba-peugeot-3008-2024/"
     source_id: diariomotor-es
-    retrieved: 2026-10-23
+    retrieved: 2026-10-31
     tier: T3
   - title: "Probamos el Peugeot E-3008: el SUV eléctrico que me compraría para viajar por cómodo y eficiente… si fuese más barato"
     url: "https://www.motorpasion.com/pruebas-de-coches/peugeot-3008-2024-prueba-contacto"
     source_id: motorpasion-es
-    retrieved: 2026-10-23
+    retrieved: 2026-10-31
     tier: T3
 open_questions:
   - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27); el segmento sale de una fuente T3 (diariomotor-es)."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
-  - "Precio (2026-10-30): oferta vigente de ofertas.peugeot.es/particulares para el E-3008 Style Eléctrico 210 (157 kW), precio al contado 41.890 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (157 kW) solo en el nombre de la oferta, no se guarda como dato."
+  - "Precio (2026-10-31): oferta releída, sin cambios, de ofertas.peugeot.es/particulares (caduca hoy) para el E-3008 Style Eléctrico 210 (157 kW), precio al contado 41.890 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (157 kW) solo en el nombre de la oferta, no se guarda como dato."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."
