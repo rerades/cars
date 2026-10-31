@@ -1,8 +1,8 @@
-# Researcher — Opel Mokka Electric. Fuentes: opel-es (T1), wikimedia-commons. Consultado 2026-10-03.
+# Researcher — Opel Mokka Electric. Fuentes: opel-es (T1), wikimedia-commons. Consultado 2026-10-31.
 brand: opel
 brand_name: Opel
 model: Mokka Electric
-status: {value: on_sale, note: "ofertas.opel.es: Mokka 'Disponible en Gasolina, Híbrido o Eléctrico'", source_id: opel-es, url: "https://ofertas.opel.es/particulares?model=mokka", retrieved: 2026-10-03, tier: T1}
+status: {value: on_sale, note: "ofertas.opel.es: Mokka 'Disponible en Gasolina, Híbrido o Eléctrico'", source_id: opel-es, url: "https://ofertas.opel.es/particulares?model=mokka", retrieved: 2026-10-31, tier: T1}
 launch: null
 segment: null
 needs_review: false
@@ -19,5 +19,5 @@ images:
     attribution: "M 93, CC BY-SA 3.0 de, via Wikimedia Commons (File:Opel Mokka Electric Edition (B, Facelift) – f 12102025.jpg)"
 open_questions:
   - "launch y segment: sin fuente leída."
-  - "price: sin precio de la versión eléctrica en página T1 legible. Leídas el 2026-10-24: ofertas.opel.es/particulares y ?model=mokka (redirigen a /ofertas; solo 'Disponible en Gasolina, Híbrido o Eléctrico' y ofertas de entrada/cuota sin indicar versión) y www.opel.es (403)."
+  - "price: sin precio de la versión eléctrica en página T1 legible. Releídas el 2026-10-31: ofertas.opel.es/particulares y ?model=mokka (redirigen a /ofertas; solo 'Disponible en Gasolina, Híbrido o Eléctrico' y ofertas de entrada/cuota sin indicar versión) y www.opel.es (403)."
   - "Versiones, batería, autonomía WLTP, potencia y carga: fichas de www.opel.es no accesibles (403); la versión se llama solo 'Mokka Electric' por falta de dato."
