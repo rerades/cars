@@ -2,16 +2,16 @@
 brand: renault
 brand_name: Renault
 model: Megane E-Tech eléctrico
-status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-10-10, tier: T1}
+status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
 segment: {value: berlina, note: "la web lo titula «La berlina eléctrica»", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-10-10, tier: T1}
 needs_review: false
 specs:
-  wltp_max_km: {value: 500, note: "«autonomía ampliada hasta 500 km», WLTP, versión techno", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-10-10, tier: T1}
-  dc_max_kw: {value: 165, note: "«La potencia máxima en pico es de 165 kW»", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-10-10, tier: T1}
+  wltp_max_km: {value: 500, note: "«autonomía ampliada hasta 500 km», WLTP, versión techno", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
+  dc_max_kw: {value: 165, note: "«La potencia máxima en pico es de 165 kW»", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
 versions:
   - name: techno 220 CV autonomía confort
-    battery_kwh: {value: 67, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-10-10, tier: T1}
-    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-10-10, tier: T1}
+    battery_kwh: {value: 67, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
+    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 28666
       unit: EUR
@@ -24,8 +24,8 @@ versions:
       retrieved: 2026-10-10
       tier: T1
   - name: esprit Alpine 220 CV autonomía confort
-    battery_kwh: {value: 67, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-10-10, tier: T1}
-    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-10-10, tier: T1}
+    battery_kwh: {value: 67, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
+    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 31366
       unit: EUR
@@ -35,7 +35,7 @@ versions:
       price_terms_url: "https://www.renault.es/electricos/megane.html"
       source_id: renault-es
       url: "https://www.renault.es/electricos/megane.html"
-      retrieved: 2026-10-10
+      retrieved: 2026-11-01
       tier: T1
 images:
   - file: "data/images/renault/megane-e-tech-electrico/frontal.jpg"
@@ -52,3 +52,4 @@ open_questions:
   - "No se ha encontrado un PVP vigente sin promociones: los precios son «desde» con «este importe incluye promociones»."
   - "Imágenes: no se ha buscado en Commons para este modelo (límite de la ejecución); la web pondrá silueta."
   - "Carga CA y tracción no publicadas en la web leída."
+  - "Refresco 2026-11-01: fetch-page.ts no encuentra «28.666» (techno) en la página del Megane ni la palabra «berlina» (segment); ese precio y el segment se quedan con su fecha 2026-10-10."
