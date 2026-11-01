@@ -3477,3 +3477,30 @@
     ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La
     prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No
     toques needs_review. Bitácora."
+- id: refresco-2026-11-cupra-2
+  agent: researcher
+  task: "Refresco mensual de data/raw/cupra/ (ADR-0010, punto 6), repetición del de la PR #806: relee
+    en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y
+    verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado,
+    con los puntos 7 y 8 de ADR-0010. Las fechas, con la regla «Una fecha solo cambia con una
+    lectura que llegue a la PR» de .claude/agents/researcher.md, y los precios con sus reglas de
+    precio, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions
+    lo que resuelvas. No toques needs_review. Bitácora."
+- id: refresco-2026-11-bmw-2
+  agent: researcher
+  task: "Refresco mensual de data/raw/bmw/ (ADR-0010, punto 6), repetición del de la PR #814: relee
+    en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y
+    verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado,
+    con los puntos 7 y 8 de ADR-0010. Las fechas, con la regla «Una fecha solo cambia con una
+    lectura que llegue a la PR» de .claude/agents/researcher.md, y los precios con sus reglas de
+    precio, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions
+    lo que resuelvas. No toques needs_review. Bitácora."
+- id: refresco-2026-11-tesla-2
+  agent: researcher
+  task: "Refresco mensual de data/raw/tesla/ (ADR-0010, punto 6), repetición del de la PR #824: relee
+    en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y
+    verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado,
+    con los puntos 7 y 8 de ADR-0010. Las fechas, con la regla «Una fecha solo cambia con una
+    lectura que llegue a la PR» de .claude/agents/researcher.md, y los precios con sus reglas de
+    precio, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions
+    lo que resuelvas. No toques needs_review. Bitácora."
