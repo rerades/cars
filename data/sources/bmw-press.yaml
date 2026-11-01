@@ -5,10 +5,10 @@ tier: T1
 market: ES
 kind: [ prices, specs, images, announcements ]
 urls:
-  home: https://www.press.bmwgroup.com/spain/
-  prices: https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es # ejemplo de comunicado "Precios para España"
+  home: https://newsroom.bmwgroup.com/emea/es/ # antes www.press.bmwgroup.com/spain/ (301 permanente)
+  prices: https://newsroom.bmwgroup.com/emea/es/precios-para-espana-nuevo-bmw-ix3-50-xdrive # ejemplo de comunicado "Precios para España"
 image_license: "" # la home no declara términos de uso de las imágenes; "Aviso legal" sin leer. No publicar imágenes de esta web
 notes: >
-  PressClub España de BMW Group (verificada 2026-10-04: responde). Los comunicados "Precios para España" dan PVP de lanzamiento; son de fecha concreta y pueden quedar desactualizados (el de iX1 xDrive30 es de 2023: no se usa). No se ha leído robots.txt ni el aviso legal.
-last_verified: 2026-10-04
+  PressClub España de BMW Group (verificada 2026-10-04: responde). Los comunicados "Precios para España" dan PVP de lanzamiento; son de fecha concreta y pueden quedar desactualizados (el de iX1 xDrive30 es de 2023: no se usa). No se ha leído robots.txt ni el aviso legal. Refresco 2026-10-31: la sala de prensa se ha movido a newsroom.bmwgroup.com/emea/es/ (www.press.bmwgroup.com redirige con 301 y su robots.txt dio 503); los comunicados del iX3 conservan el mismo contenido en la URL nueva.
+last_verified: 2026-10-31
 status: active
