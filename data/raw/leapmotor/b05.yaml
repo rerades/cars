@@ -1,21 +1,21 @@
-# Researcher — Leapmotor B05. Fuentes: leapmotor-es (T1), idae-es (T2). Consultado 2026-10-13.
+# Researcher — Leapmotor B05. Fuentes: leapmotor-es (T1), idae-es (T2). Refrescado 2026-11-01.
 brand: leapmotor
 brand_name: Leapmotor
 model: B05
-status: {value: on_sale, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/b05", retrieved: 2026-10-13, tier: T1}
+status: {value: on_sale, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/b05", retrieved: 2026-11-01, tier: T1}
 needs_review: false
 versions:
   - name: B05 Pro 56,2 kWh
-    battery_kwh: {value: 56.2, basis: unknown, note: "IDAE id 610057", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 401, note: "IDAE id 610057", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 610057; la ficha publica 218 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    dc_max_kw: {value: 156, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/b05", retrieved: 2026-10-13, tier: T1}
+    battery_kwh: {value: 56.2, basis: unknown, note: "IDAE id 610057", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 401, note: "IDAE id 610057", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 610057; la ficha publica 218 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    dc_max_kw: {value: 156, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/b05", retrieved: 2026-11-01, tier: T1}
     price: null   # solo hay "desde 19.400 €" con ayudas
   - name: B05 ProMax 67,1 kWh
-    battery_kwh: {value: 67.1, basis: unknown, note: "IDAE id 610058", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 482, note: "IDAE id 610058", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 610058; la ficha publica 218 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    dc_max_kw: {value: 174, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/b05", retrieved: 2026-10-13, tier: T1}
+    battery_kwh: {value: 67.1, basis: unknown, note: "IDAE id 610058", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 482, note: "IDAE id 610058", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 610058; la ficha publica 218 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    dc_max_kw: {value: 174, source_id: leapmotor-es, url: "https://www.leapmotor.net/es-es/modelos/b05", retrieved: 2026-11-01, tier: T1}
     price: null
 images:
   - file: "data/images/leapmotor/b05/frontal.jpg"
@@ -26,7 +26,7 @@ images:
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precio: la ficha da 'desde 19.400 €' (56,2 kWh Life Pro) con 3.375 € del Plan Auto+ y 900 € del CAE descontados, válido hasta 31/10/2026; sin PVP sin ayudas, price: null. Releída el 2026-10-26 (leapmotor.net/es-es/modelos/b05): sin cambios."
+  - "Precio: la ficha da 'desde 19.400 €' (56,2 kWh Life Pro) con 3.375 € del Plan Auto+ y 900 € del CAE descontados ('Oferta válida hasta el 31/10/2026', que la página aún muestra el 2026-11-01); sin PVP sin ayudas, price: null. Releída el 2026-11-01 (leapmotor.net/es-es/modelos/b05): sin cambios."
   - "Segmento: la ficha dice cupé deportivo eléctrico de 4,43 m, valor que no está en la lista de RF-11. Se deja vacío."
   - "Tracción y lanzamiento: no confirmados por versión."
   - "Imágenes: no se buscó ninguna imagen del B05 en Commons con licencia válida."
