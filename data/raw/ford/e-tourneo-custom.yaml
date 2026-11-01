@@ -2,34 +2,34 @@
 brand: ford
 brand_name: Ford
 model: E-Tourneo Custom
-status: {value: on_sale, note: "la ficha de ford.es ofrece configurador, stock y Plan Auto+; no dice expresamente que se pueda pedir", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-custom", retrieved: 2026-10-15, tier: T1}
+status: {value: on_sale, note: "la ficha de ford.es ofrece configurador, stock y Plan Auto+; no dice expresamente que se pueda pedir", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-custom", retrieved: 2026-11-01, tier: T1}
 launch: null
 segment: {value: monovolumen, note: "título de la ficha de ford.es: «E-Tourneo Custom 100% Eléctrico: Monovolumen Versátil»", source_id: ford-es, url: "https://www.ford.es/turismos/e-tourneo-custom", retrieved: 2026-10-15, tier: T1}
 needs_review: true
 versions:
   - name: 64 kWh 160 kW
-    battery_kwh: {value: 64, basis: unknown, note: "IDAE id 610317 (11.2025), «útil 64kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 298, note: "IDAE id 610317 (11.2025); igual en la 610315 (Grand Tourneo)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 610317", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    drivetrain: {value: rwd, note: "IDAE id 610317: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 64, basis: unknown, note: "IDAE id 610317 (11.2025), «útil 64kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 298, note: "IDAE id 610317 (11.2025); igual en la 610315 (Grand Tourneo)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 610317", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610317: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: 64 kWh 210 kW Sport
-    battery_kwh: {value: 64, basis: unknown, note: "IDAE id 610316 (11.2025), «útil 64kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 298, note: "IDAE id 610316 (11.2025); igual en la 610314 (Grand Tourneo)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 210, note: "IDAE id 610316", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    drivetrain: {value: rwd, note: "IDAE id 610316: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 64, basis: unknown, note: "IDAE id 610316 (11.2025), «útil 64kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 298, note: "IDAE id 610316 (11.2025); igual en la 610314 (Grand Tourneo)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 610316", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610316: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: 83 kWh 210 kW RWD Sport
-    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610319 (12.2025): «83kWh (71kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 334, note: "IDAE id 610319 (12.2025), tracción trasera", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 210, note: "IDAE id 610319", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    drivetrain: {value: rwd, note: "IDAE id 610319: «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610319 (12.2025): «83kWh (71kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 334, note: "IDAE id 610319 (12.2025), tracción trasera", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 610319", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610319: «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: 83 kWh 210 kW AWD Sport
-    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610318 (12.2025): «83kWh (71kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 307, note: "IDAE id 610318 (12.2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 210, note: "IDAE id 610318", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    drivetrain: {value: awd, note: "IDAE id 610318: «Tracción AWD»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610318 (12.2025): «83kWh (71kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 307, note: "IDAE id 610318 (12.2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 610318", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: awd, note: "IDAE id 610318: «Tracción AWD»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: data/images/ford/e-tourneo-custom/exterior.jpg
