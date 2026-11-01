@@ -11,5 +11,5 @@ image_license: "" # no se usan imágenes de este medio
 notes: >
   Medio del motor español. T3: sirve para confirmar qué versiones se venden y su nombre comercial, nunca como fuente
   de precio. robots.txt no bloquea /coches/ (comprobado el 2026-10-09).
-last_verified: 2026-10-09
+last_verified: 2026-10-31
 status: active

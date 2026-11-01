@@ -15,5 +15,5 @@ notes: >
   qué versiones siguen a la venta: mezcla homologaciones actuales y antiguas. Se lee con
   `node factory/fetch-idae.ts <MARCA>`, porque la tabla llega por un POST con token que WebFetch no envía. robots.txt
   lo permite todo (comprobado el 2026-10-09). Registrada a mano para Tesla, cuya web bloquea toda lectura automática.
-last_verified: 2026-10-09
+last_verified: 2026-10-31
 status: active

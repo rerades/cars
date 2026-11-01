@@ -2,41 +2,41 @@
 brand: tesla
 brand_name: Tesla
 model: Model 3
-status: {value: on_sale, note: "versiones Standard (entregas desde febrero de 2026) y Premium Gran Autonomía Tracción Trasera (artículo de septiembre de 2026)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/fabricar-7000000-coches-electricos-tesla-lanza-model-3-mas-barato-su-historia-por-35000-euros_83856_102.html", retrieved: 2026-10-09, tier: T3}
-launch: {value: "2023-09", note: "el Model 3 renovado (Highland) abre configurador y pedidos en España el 1 de septiembre de 2023; primeras entregas previstas en octubre y noviembre", source_id: motorpasion-es, url: "https://www.motorpasion.com/compra-coches/tesla-model-3-2024-precio-espana", retrieved: 2026-10-09, tier: T3}
-segment: {value: berlina, note: "el medio lo llama «berlina»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/fabricar-7000000-coches-electricos-tesla-lanza-model-3-mas-barato-su-historia-por-35000-euros_83856_102.html", retrieved: 2026-10-09, tier: T3}
+status: {value: on_sale, note: "versiones Standard (entregas desde febrero de 2026) y Premium Gran Autonomía Tracción Trasera (artículo de septiembre de 2026)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/fabricar-7000000-coches-electricos-tesla-lanza-model-3-mas-barato-su-historia-por-35000-euros_83856_102.html", retrieved: 2026-10-31, tier: T3}
+launch: {value: "2023-09", note: "el Model 3 renovado (Highland) abre configurador y pedidos en España el 1 de septiembre de 2023; primeras entregas previstas en octubre y noviembre", source_id: motorpasion-es, url: "https://www.motorpasion.com/compra-coches/tesla-model-3-2024-precio-espana", retrieved: 2026-10-31, tier: T3}
+segment: {value: berlina, note: "el medio lo llama «berlina»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/fabricar-7000000-coches-electricos-tesla-lanza-model-3-mas-barato-su-historia-por-35000-euros_83856_102.html", retrieved: 2026-10-31, tier: T3}
 needs_review: false
 versions:
   - name: Standard
-    battery_kwh: {value: 60, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608832"}
-    wltp_km: {value: 534, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608832; el medio publica 534 km"}
-    power_kw: {value: 208, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608832"}
-    drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    battery_kwh: {value: 60, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 608832"}
+    wltp_km: {value: 534, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 608832; el medio publica 534 km"}
+    power_kw: {value: 208, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 608832"}
+    drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2}
     price: null
   - name: Premium Gran Autonomía Tracción Trasera
-    battery_kwh: {value: 74, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 614202; menor de 2 homologaciones IDAE: 691 km (id 614202, 74 kWh), 750 km (id 608835, 77 kWh). Forococheselectricos (2026-10-09): 750 km con llantas de 18\" y 691 km con las de 19\""}
-    wltp_km: {value: 691, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 614202; menor de 2 homologaciones IDAE: 691 km (id 614202, 74 kWh), 750 km (id 608835, 77 kWh). Forococheselectricos (2026-10-09): 750 km con llantas de 18\" y 691 km con las de 19\""}
-    power_kw: {value: 235, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 614202; las dos homologaciones dan 235 kW"}
-    drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    battery_kwh: {value: 74, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 614202; menor de 2 homologaciones IDAE: 691 km (id 614202, 74 kWh), 750 km (id 608835, 77 kWh). Forococheselectricos (2026-10-09): 750 km con llantas de 18\" y 691 km con las de 19\""}
+    wltp_km: {value: 691, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 614202; menor de 2 homologaciones IDAE: 691 km (id 614202, 74 kWh), 750 km (id 608835, 77 kWh). Forococheselectricos (2026-10-09): 750 km con llantas de 18\" y 691 km con las de 19\""}
+    power_kw: {value: 235, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 614202; las dos homologaciones dan 235 kW"}
+    drivetrain: {value: rwd, note: "el nombre del IDAE dice «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2}
     price: null
   - name: Premium Gran Autonomía Tracción Integral
-    battery_kwh: {value: 80, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608834"}
-    wltp_km: {value: 660, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608834. Forococheselectricos (2026-10-09) da 660 km con llantas de 19\" y 718 km con las de 18\"; el IDAE solo tiene la de 660"}
-    power_kw: {value: 366, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608834"}
-    drivetrain: {value: awd, note: "el nombre del IDAE dice «Tracción a las cuatro ruedas»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    battery_kwh: {value: 80, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 608834"}
+    wltp_km: {value: 660, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 608834. Forococheselectricos (2026-10-09) da 660 km con llantas de 19\" y 718 km con las de 18\"; el IDAE solo tiene la de 660"}
+    power_kw: {value: 366, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 608834"}
+    drivetrain: {value: awd, note: "el nombre del IDAE dice «Tracción a las cuatro ruedas»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2}
     price: null
   - name: Performance
-    battery_kwh: {value: 80, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608833"}
-    wltp_km: {value: 571, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608833 («Performance Tracción a las cuatro ruedas», de la misma tanda que las Premium). Otra homologación más antigua: 528 km (id 601504). Forococheselectricos (2026-10-09) anuncia 600 km tras la actualización, aún sin homologación en el IDAE"}
-    power_kw: {value: 461, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2, note: "IDAE id 608833"}
-    drivetrain: {value: awd, note: "el nombre del IDAE dice «Tracción a las cuatro ruedas»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-09, tier: T2}
+    battery_kwh: {value: 80, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 608833"}
+    wltp_km: {value: 571, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 608833 («Performance Tracción a las cuatro ruedas», de la misma tanda que las Premium). Otra homologación más antigua: 528 km (id 601504). Forococheselectricos (2026-10-09) anuncia 600 km tras la actualización, aún sin homologación en el IDAE"}
+    power_kw: {value: 461, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2, note: "IDAE id 608833"}
+    drivetrain: {value: awd, note: "el nombre del IDAE dice «Tracción a las cuatro ruedas»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-31, tier: T2}
     price: null
 images:
   - file: data/images/tesla/model-3/frontal.jpg
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Tesla_Model_3_%27Highland%27_%282024%29.jpg/1280px-Tesla_Model_3_%27Highland%27_%282024%29.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Tesla_Model_3_%27Highland%27_(2024).jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-10-09
+    retrieved: 2026-10-31
     license: CC-BY-SA-4.0
     attribution: "Mliu92, CC BY-SA 4.0"
 open_questions:
