@@ -2,47 +2,47 @@
 brand: nissan
 brand_name: Nissan
 model: Leaf
-status: {value: on_sale, source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/leaf", retrieved: 2026-10-13, tier: T1, note: "la ficha de nissan.es muestra la gama con precios financiados"}
+status: {value: on_sale, source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/leaf", retrieved: 2026-11-01, tier: T1, note: "la ficha de nissan.es muestra la gama con precios financiados"}
 launch: null
 segment: null
 needs_review: false
 specs:
-  dc_max_kw: {value: 150, note: "carga 20-80 % en 30 min a 150 kW CC, estimación según la ficha", source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/leaf", retrieved: 2026-10-13, tier: T1}
+  dc_max_kw: {value: 150, note: "carga 20-80 % en 30 min a 150 kW CC, estimación según la ficha", source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/leaf", retrieved: 2026-11-01, tier: T1}
 versions:
   - name: Leaf Engage 52 kWh
-    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 608902", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 445, note: "IDAE id 608902; la ficha de nissan.es dice 445 km pendiente de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 130, note: "IDAE id 608902; publicado: 177 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 608902", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 445, note: "IDAE id 608902; la ficha de nissan.es dice 445 km pendiente de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 130, note: "IDAE id 608902; publicado: 177 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Leaf Engage+ 52 kWh
-    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 608903", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 434, note: "IDAE id 608903", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 130, note: "IDAE id 608903; publicado: 177 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 608903", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 434, note: "IDAE id 608903", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 130, note: "IDAE id 608903; publicado: 177 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Leaf Advance 52 kWh
-    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 608907 (Advance + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 427, note: "IDAE id 608907 (Advance + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 130, note: "IDAE id 608907; publicado: 177 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 608907 (Advance + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 427, note: "IDAE id 608907 (Advance + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 130, note: "IDAE id 608907; publicado: 177 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Leaf Evolve 52 kWh
-    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 608909 (Evolve + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 419, note: "IDAE id 608909 (Evolve + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 130, note: "IDAE id 608909; publicado: 177 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 608909 (Evolve + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 419, note: "IDAE id 608909 (Evolve + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 130, note: "IDAE id 608909; publicado: 177 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Leaf Engage 75 kWh
-    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608911", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 623, note: "«La autonomía de 623 km hace referencia al LEAF 75 kWh Engage»; el IDAE (id 608911) da 622 km; prevalece la web (T1)", source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/leaf", retrieved: 2026-10-13, tier: T1}
-    power_kw: {value: 160, note: "IDAE id 608911; publicado: 217 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608911", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 623, note: "«La autonomía de 623 km hace referencia al LEAF 75 kWh Engage»; el IDAE (id 608911) da 622 km; prevalece la web (T1)", source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/leaf", retrieved: 2026-11-01, tier: T1}
+    power_kw: {value: 160, note: "IDAE id 608911; publicado: 217 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Leaf Engage+ 75 kWh
-    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608912", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 606, note: "IDAE id 608912", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 608912; publicado: 217 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608912", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 606, note: "IDAE id 608912", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 608912; publicado: 217 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Leaf Advance 75 kWh
-    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608916 (Advance + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 595, note: "IDAE id 608916 (Advance + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 608916; publicado: 217 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608916 (Advance + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 595, note: "IDAE id 608916 (Advance + V2L)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 608916; publicado: 217 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: data/images/nissan/leaf/frontal.jpg
@@ -56,13 +56,13 @@ reviews:
   - title: "Nissan Leaf 2026: toma de contacto con un coche que ha cambiado tanto que no tiene nada que ver con su antecesor"
     url: "https://www.diariomotor.com/noticia/nissan-leaf-2026-toma-de-contacto/"
     source_id: diariomotor-es
-    retrieved: 2026-10-27
+    retrieved: 2026-11-01
     tier: T3
 open_questions:
   - "reviews: motorpasion-es no tiene una prueba del Leaf de tercera generación (solo la noticia de presentación); solo hay review de diariomotor-es."
   - "launch: nissan.es no publica la fecha de inicio de venta en España; sin fuente T1/T2."
   - "segment: ninguna fuente registrada lo clasifica; no se asigna."
-  - "Precio (revisado 2026-10-23): ninguna versión tiene precio. nissan.es/cf/.../leaf solo da precios financiados 'desde' (Engage 27.000 €, Engage+ 28.920 €, Advance 32.480 €, Evolve 34.400 €, hasta el 31/10/2026), sin nota por versión, y el ejemplo de la nota 3 (28.000 € al contado, 27.000 € financiando) incluye el Plan Auto+ de 3.375 € y 900 € CAE: precio con ayudas públicas restadas, no se guarda (se quitó el que había). Hay un catálogo PDF enlazado cuyo contenido no se pudo leer y ninguna tarifa PDF en nissan.es. Sin PVP limpio."
+  - "Precio (revisado 2026-11-01): ninguna versión tiene precio. nissan.es/cf/.../leaf solo da cuotas y precios financiados (oferta válida hasta el 30/11/2026; la lectura del 2026-11-01 muestra 'Por 150€ /mes' para Engage 52 kWh), sin nota por versión, y el ejemplo de la nota 3 (28.000 € al contado, 27.000 € financiando) incluye el Plan Auto+ de 3.375 € y 900 € CAE: precio con ayudas públicas restadas, no se guarda (se quitó el que había). Hay un catálogo PDF enlazado cuyo contenido no se pudo leer y ninguna tarifa PDF en nissan.es. Sin PVP limpio."
   - "La ficha de nissan.es no publica potencia; potencia y batería salen del IDAE (T2) y no distinguen batería útil o bruta."
   - "Versiones Advance y Evolve: el IDAE solo las tiene con V2L; confirmar el nombre comercial en el configurador."
   - "Leaf 75 kWh: motor.es (2026-10-13) lista Engage, Engage+ y Advance V2L con 75 kWh; el Evolve 75 kWh (IDAE id 608918, 584 km, 160 kW) no aparece en nissan.es ni en motor.es y se ha quitado hasta confirmarlo."
