@@ -1,4 +1,4 @@
-# Researcher — Citroën ë-C3 Aircross. Fuentes: idae-es (T2), forococheselectricos-es y hibridosyelectricos-es (T3). Consultado 2026-10-13. Sin precio: citroen.es responde 403 y no hay otra fuente T1.
+# Researcher — Citroën ë-C3 Aircross. Fuentes: idae-es (T2), forococheselectricos-es y hibridosyelectricos-es (T3). Refresco 2026-11-01. Sin precio: citroen.es responde 403 y no hay otra fuente T1.
 brand: citroen
 brand_name: Citroën
 model: ë-C3 Aircross
@@ -8,24 +8,24 @@ segment: null
 needs_review: false
 versions:
   - name: You Extended Range
-    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607626"}
-    wltp_km: {value: 399, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607626"}
-    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607626"}
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 607626"}
+    wltp_km: {value: 399, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 607626"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 607626"}
     price: null
   - name: Plus Extended Range
-    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607627"}
-    wltp_km: {value: 394, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607627"}
-    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607627"}
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 607627"}
+    wltp_km: {value: 394, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 607627"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 607627"}
     price: null
   - name: Max Extended Range
-    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607628"}
-    wltp_km: {value: 400, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607628"}
-    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 607628"}
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 607628"}
+    wltp_km: {value: 400, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 607628"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 607628"}
     price: null
   - name: Outdoor Extended Range
-    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614463; el medio (05/10/2026) da 54 kWh"}
-    wltp_km: {value: 397, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614463; el medio (05/10/2026) publica 397 km"}
-    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 614463"}
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614463; el medio (05/10/2026) da 54 kWh"}
+    wltp_km: {value: 397, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614463; el medio (05/10/2026) publica 397 km"}
+    power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614463"}
     price: null
 images:
   - file: data/images/citroen/e-c3-aircross/frontal.jpg
@@ -36,7 +36,8 @@ images:
     license: CC-BY-SA-3.0-DE
     attribution: "© M 93 / Wikimedia Commons / CC BY-SA 3.0 (DE)"
 open_questions:
-  - "Precio: citroen.es responde 403 a la lectura automática (2026-10-13) y no hay otra fuente T1; todas las versiones con price null."
+  - "Precio: citroen.es responde 403 a la lectura automática (2026-10-13) y no hay otra fuente T1 registrada en data/sources/ (citroen.es no está registrada, así que fetch-page.ts no la abre); todas las versiones con price null. Refresco 2026-11-01: sin cambios."
   - "La versión de 44/48 kWh (Comfort Range, 300 km) aparece en el IDAE pero el medio (20/01/2026) dice que se retiró del configurador a finales de 2025: no se ha escrito."
   - "launch: el artículo del 20/09/2024 dice que «está ya disponible», pero no desde cuándo; sin dato."
   - "Segmento: el medio lo llama «el SUV más pequeño de la casa», que no es un término de RF-11; segment null."
+  - "Estado: la nota de status cita una pieza del 05/10/2026 (Outdoor) que no es la URL del valor; en el refresco de 2026-11-01 la URL de status confirma Extended Range pero no Outdoor, por eso su retrieved no se ha actualizado."
