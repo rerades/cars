@@ -8,8 +8,8 @@ segment: null
 needs_review: false
 versions:
   - name: G 580
-    battery_kwh: {value: 116, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609705 («Clase G eléctrico (N465) 580 con tecnología EQ»)"}
-    wltp_km: {value: 468, note: "el IDAE da 641 km; la web da 468 km combinado y 656 km en ciudad; prevalece la web (T1)", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/g-class-electric/overview.html", retrieved: 2026-10-13, tier: T1}
+    battery_kwh: {value: 117, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609705 («Clase G eléctrico (N465) 580 con tecnología EQ»); el 2026-10-13 el IDAE daba 116 kWh"}
+    wltp_km: {value: 468, note: "el IDAE da 617 km (lectura del 2026-11-01); la web da 468 km combinado y 656 km en ciudad; prevalece la web (T1)", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/g-class-electric/overview.html", retrieved: 2026-10-13, tier: T1}
     power_kw: {value: 432, note: "publicado: 432 kW (587 CV)", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/g-class-electric/overview.html", retrieved: 2026-10-13, tier: T1}
     price: null
 images:
@@ -21,7 +21,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0"
 open_questions:
-  - "Precio: la web oficial pone «Financiación y precios 175.463,46 €» (G 580) sin decir si es el PVP sin ayudas ni dar condiciones; no se guarda. Reintentado el 2026-10-14 y el 2026-10-26 (fetch-page.ts falló en la ficha del GLB y la home; WebFetch, timeout): mercedes-benz.es sigue sin responder y no hay otra fuente T1 que lo diga literalmente. Confirmar en el configurador."
+  - "Precio: la web oficial pone «Financiación y precios 175.463,46 €» (G 580) sin decir si es el PVP sin ayudas ni dar condiciones; no se guarda. Reintentado el 2026-10-14, el 2026-10-26 y el 2026-11-01 (fetch-page.ts: HTTP 403 en la ficha del Clase G y la home): mercedes-benz.es sigue sin poder leerse, así que los valores T1 de este fichero (estado, autonomía y potencia) conservan su fecha del 2026-10-13 y no hay otra fuente T1 que lo diga literalmente. Confirmar en el configurador."
   - "Segmento: el medio lo describe como «4x4 de lujo», sin categoría de RF-11; segment null."
   - "Tracción: no confirmada por una fuente leída (el IDAE no la incluye en el nombre); sin drivetrain."
   - "launch: el artículo de 08/06/2024 lo da ya a la venta, pero no dice desde cuándo; sin dato."
