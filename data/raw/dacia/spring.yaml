@@ -1,20 +1,20 @@
-# Researcher — Dacia Spring. Fuentes: dacia-es (T1), idae-es (T2). Consultado 2026-10-15.
+# Researcher — Dacia Spring. Fuentes: dacia-es (T1), idae-es (T2). Refrescado 2026-11-01.
 brand: dacia
 brand_name: Dacia
 model: Spring
-status: {value: on_sale, note: "la web muestra configurador, stock y oferta con pedidos entre 01/10/2026 y 31/10/2026", source_id: dacia-es, url: "https://ofertas.dacia.es/particulares/spring/", retrieved: 2026-10-15, tier: T1}
+status: {value: on_sale, note: "la web muestra configurador y búsqueda de vehículos nuevos en stock del Spring; la oferta con pedidos del 01/10/2026 al 31/10/2026 ya ha caducado", source_id: dacia-es, url: "https://ofertas.dacia.es/particulares/spring/", retrieved: 2026-11-01, tier: T1}
 launch: null
-segment: {value: urbano, note: "la web lo presenta como «coche urbano»", source_id: dacia-es, url: "https://www.dacia.es/modelos-hibridos-electricos/spring.html", retrieved: 2026-10-15, tier: T1}
+segment: {value: urbano, note: "la web lo presenta como «coche urbano»", source_id: dacia-es, url: "https://www.dacia.es/modelos-hibridos-electricos/spring.html", retrieved: 2026-11-01, tier: T1}
 needs_review: true
 versions:
   - name: Spring Expression 70 (52 kW)
-    battery_kwh: {value: 24.3, basis: unknown, note: "IDAE id 609277 (Spring S2E Electric 70 (52 kW)); sin fecha de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 52, note: "kW del nombre de la versión en la página de ofertas", source_id: dacia-es, url: "https://ofertas.dacia.es/particulares/spring/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 24.3, basis: unknown, note: "IDAE id 609277 (Spring S2E Electric 70 (52 kW)); sin fecha de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 52, note: "kW del nombre de la versión en la página de ofertas", source_id: dacia-es, url: "https://ofertas.dacia.es/particulares/spring/", retrieved: 2026-11-01, tier: T1}
     price: null
   - name: Spring Extreme 100 (75 kW)
-    battery_kwh: {value: 24.3, basis: unknown, note: "IDAE id 609281 (Spring S2E Electric 100 (75 kW))", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 75, note: "publicado: 100 CV (75 kW)", source_id: dacia-es, url: "https://www.dacia.es/modelos-hibridos-electricos/spring-urbano.html", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 40, note: "cargador DC de 40 kW opcional", source_id: dacia-es, url: "https://www.dacia.es/modelos-hibridos-electricos/spring-urbano.html", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 24.3, basis: unknown, note: "IDAE id 609281 (Spring S2E Electric 100 (75 kW))", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 75, note: "publicado: 100 CV (75 kW)", source_id: dacia-es, url: "https://www.dacia.es/modelos-hibridos-electricos/spring-urbano.html", retrieved: 2026-11-01, tier: T1}
+    dc_max_kw: {value: 40, note: "cargador DC de 40 kW opcional", source_id: dacia-es, url: "https://www.dacia.es/modelos-hibridos-electricos/spring-urbano.html", retrieved: 2026-11-01, tier: T1}
     price: null
 images:
   - file: data/images/dacia/spring/frontal.jpg
@@ -26,9 +26,9 @@ images:
     attribution: "© M 93, CC BY-SA 3.0 de, vía Wikimedia Commons"
 open_questions:
   - "launch: ninguna fuente registrada da la fecha desde la que se puede pedir el Spring actual (un medio T3 habla de comercialización en marzo de 2026, sin fecha de pedidos)."
-  - "price: la web solo muestra «desde 11.559 €» (Extreme 100), que incluye promociones y 3.375 € del Programa Auto+ (ayuda pública), y «desde 16.245 €» (Expression 70) sin aclarar si es PVP; no hay lista de precios. Se deja null."
-  - "wltp_km: la web da 225 km WLTP mixto para el Extreme (otra página dice «hasta 250 km» según versión) y no da cifra del Expression; el IDAE da 238 km para ambos (id 609277 y 609281, sin fecha). Discrepancia T1/T2, no se guarda en ninguna versión (regla 8)."
+  - "price: la web (2026-11-01) solo muestra «precio desde 16.245 €» para el Expression 70 sin aclarar si es PVP ni condiciones; la oferta del Extreme 100 (pedidos hasta 31/10/2026, con financiación y ayudas) ha caducado y ya no aparece. No hay lista de precios. Se deja null."
+  - "wltp_km: la web da 315 km WLTP urbano en spring-urbano.html y «hasta 250 km» en spring.html, sin cifra por versión; el IDAE da 238 km para ambos (id 609277 y 609281, sin fecha). Discrepancia T1/T2, no se guarda en ninguna versión (regla 8)."
   - "battery_kwh: la web no la publica; 24,3 kWh viene del IDAE (basis unknown). Un medio T3 coincide con la batería LFP de 24,3 kWh."
   - "Spring Cargo (versión comercial) no se incluye: la web no da sus datos y es furgoneta."
   - "Se mantiene needs_review: no hay PVP limpio ni fecha de inicio de venta, y las cifras de autonomía discrepan."
-  - "images: solo una foto frontal de Commons (CC BY-SA 3.0 de) del Spring facelift 2026."
+  - "images: solo una foto frontal de Commons (CC BY-SA 3.0 de) del Spring facelift 2026; no releída en este refresco (no hay script de lectura de Commons), su retrieved se queda."
