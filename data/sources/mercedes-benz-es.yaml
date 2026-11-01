@@ -13,6 +13,8 @@ notes: >
   Web oficial de Mercedes-Benz en España. Alta en la revisión humana de needs_review del 2026-10-13: el 2026-10-13
   responde (antes daba timeout). Cada ficha da potencia y autonomía WLTP por versión en «Datos técnicos». El importe de
   «Financiación y precios» no dice si es el PVP sin ayudas ni lleva condiciones: no se guarda como precio hasta
-  confirmarlo en el configurador. robots.txt no bloquea /passengercars/models/ (sí el configurador de /*/mercedes-benz-cars/).
+  confirmarlo en el configurador. Refresco del 2026-11-01: fetch-page.ts recibe HTTP 403 en la home y en las fichas del GLB y del
+  Clase G (el 2026-10-26, timeout); no se marca broken (la web respondió el 2026-10-13) y last_verified no cambia; se reintenta en el
+  siguiente refresco. robots.txt no bloquea /passengercars/models/ (sí el configurador de /*/mercedes-benz-cars/).
 last_verified: 2026-10-13
 status: active
