@@ -2,16 +2,16 @@
 brand: renault
 brand_name: Renault
 model: Scenic E-Tech eléctrico
-status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
+status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-11-01, tier: T1}
 needs_review: false
 specs:
-  wltp_max_km: {value: 642, note: "«hasta 642 km de autonomía» según versión, WLTP", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
+  wltp_max_km: {value: 642, note: "«hasta 642 km de autonomía» según versión, WLTP", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-11-01, tier: T1}
 versions:
   - name: techno 220 CV gran autonomía
-    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
+    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-11-01, tier: T1}
     price: null   # el 2026-10-30 la web ya no muestra 35.326 €; la versión techno aparece como «autonomía confort»
   - name: esprit Alpine 220 CV gran autonomía
-    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-10-10, tier: T1}
+    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/scenic.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 37666
       unit: EUR
@@ -21,7 +21,7 @@ versions:
       price_terms_url: "https://www.renault.es/electricos/scenic.html"
       source_id: renault-es
       url: "https://www.renault.es/electricos/scenic.html"
-      retrieved: 2026-10-30
+      retrieved: 2026-11-01
       tier: T1
 images:
   - file: data/images/renault/scenic-e-tech-electrico/frontal.jpg
@@ -35,17 +35,17 @@ reviews:
   - title: "Convertido en el mejor anti-SUV, es todo un desconocido de 218 CV que resulta imbatible para viajar con toda la familia"
     url: "https://www.diariomotor.com/noticia/prueba-renault-scenic-2024/"
     source_id: diariomotor-es
-    retrieved: 2026-10-23
+    retrieved: 2026-11-01
     tier: T3
   - title: "Probamos el nuevo Renault Scenic: no creía que me gustaría un SUV eléctrico pero del coche del año me ha convencido casi todo, menos su precio"
     url: "https://www.motorpasion.com/pruebas-de-coches/renault-scenic-e-tech-2024-prueba-contacto"
     source_id: motorpasion-es
-    retrieved: 2026-10-23
+    retrieved: 2026-11-01
     tier: T3
 open_questions:
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Autonomía WLTP por versión no leída (la web da «hasta 642 km» según versión); solo se publica specs.wltp_max_km."
   - "Sin PVP sin promociones: la web muestra «desde 37.666 €» (esprit Alpine) con «este importe incluye promociones». No se ha encontrado un PVP vigente sin promociones."
-  - "techno 220 CV gran autonomía: el 2026-10-30 fetch-page.ts no encuentra «35.326» en la página (solo aparece «techno 160 kW (220 CV) autonomía confort», sin precio); precio a null."
+  - "techno 220 CV gran autonomía: el 2026-11-01 fetch-page.ts sigue sin encontrar «35.326» en la página (solo aparece «techno 160 kW (220 CV) autonomía confort», sin precio); precio a null."
   - "Batería: la web menciona 89 kWh en un ejemplo de coste y una versión comfort de 67 kWh «en otoño de 2026» (335 km WLTP a 110 km/h); no se asigna batería a ninguna versión. La versión comfort aún no se vende, no se incluye."
   - "Carga CC/CA y tracción no publicadas en la web leída."
