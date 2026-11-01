@@ -2,51 +2,51 @@
 brand: audi
 brand_name: Audi
 model: Q6 e-tron
-status: {value: on_sale, note: "gama eléctrica de Audi en España 2026 según el medio: Q6 e-tron (Standard, Performance, Quattro, SQ6) y Q6 Sportback e-tron (Performance, Quattro, SQ6)", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-10-13, tier: T3}
-launch: {value: "2024-04", note: "artículo de 02/04/2024: Audi «inicia la comercialización» del Q6 e-tron en España, «ya está a la venta»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/precio-audi-q6-e-tron-electrico_73486_102.html", retrieved: 2026-10-13, tier: T3}
+status: {value: on_sale, note: "gama eléctrica de Audi en España 2026 según el medio: Q6 e-tron (Standard, Performance, Quattro, SQ6) y Q6 Sportback e-tron (Performance, Quattro, SQ6)", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-11-01, tier: T3}
+launch: {value: "2024-04", note: "artículo de 02/04/2024: Audi «inicia la comercialización» del Q6 e-tron en España, «ya está a la venta»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/precio-audi-q6-e-tron-electrico_73486_102.html", retrieved: 2026-11-01, tier: T3}
 segment: {value: suv_grande, note: "el medio (25/02/2026) lo clasifica como «SUV grande»", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-audi/", retrieved: 2026-10-13, tier: T3}
 needs_review: false
 versions:
   - name: Q6 e-tron
-    battery_kwh: {value: 83, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611439"}
-    wltp_km: {value: 487, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611439 (Q6 S line e-tron MY27); menor de 2 homologaciones MY27: 487 km (611439), 533 km (611436). El medio (autonomiacocheselectricos, 2026-10-13) da 533 km"}
-    power_kw: {value: 185, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611439; el medio da 292 CV (≈215 kW, posible potencia con Launch Control)"}
+    battery_kwh: {value: 83, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611439"}
+    wltp_km: {value: 487, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611439 (Q6 S line e-tron MY27); menor de 2 homologaciones MY27: 487 km (611439), 533 km (611436). El medio (autonomiacocheselectricos, 2026-10-13) da 533 km"}
+    power_kw: {value: 185, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611439; el medio da 292 CV (≈215 kW, posible potencia con Launch Control)"}
     drivetrain: {value: rwd, note: "el medio la llama «Standard», tracción trasera", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-10-13, tier: T3}
     price: null
   - name: Q6 e-tron performance
-    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611442"}
-    wltp_km: {value: 585, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611442 (Q6 Black line e-tron performance MY27); menor de 3 homologaciones: 585 km (611442), 590 km (611440), 646 km (611437). El medio da 641 km"}
-    power_kw: {value: 225, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611442; el medio da 326 CV"}
-    drivetrain: {value: rwd, note: "el medio la da con tracción trasera", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-10-13, tier: T3}
+    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611442"}
+    wltp_km: {value: 585, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611442 (Q6 Black line e-tron performance MY27); menor de 3 homologaciones: 585 km (611442), 590 km (611440), 646 km (611437). El medio da 641 km"}
+    power_kw: {value: 225, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611442; el medio da 326 CV"}
+    drivetrain: {value: rwd, note: "el medio la da con tracción trasera", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-11-01, tier: T3}
     price: null
   - name: Q6 e-tron quattro
-    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611443"}
-    wltp_km: {value: 571, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611443 (Q6 Black line e-tron quattro MY27); menor de 3 homologaciones: 571 km (611443), 576 km (611441), 631 km (611438). El medio da 625 km"}
-    power_kw: {value: 315, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611443; el medio da 388 CV"}
-    drivetrain: {value: awd, note: "el nombre dice «quattro»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611443"}
+    wltp_km: {value: 571, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611443 (Q6 Black line e-tron quattro MY27); menor de 3 homologaciones: 571 km (611443), 576 km (611441), 631 km (611438). El medio da 625 km"}
+    power_kw: {value: 315, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611443; el medio da 388 CV"}
+    drivetrain: {value: awd, note: "el nombre dice «quattro»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: SQ6 e-tron
-    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611531"}
-    wltp_km: {value: 585, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611531 (SQ6 e-tron MY27; mismo valor en MY26, id 611532). El medio da 598 km"}
-    power_kw: {value: 360, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611531; el medio da 517 CV"}
+    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611531"}
+    wltp_km: {value: 585, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611531 (SQ6 e-tron MY27; mismo valor en MY26, id 611532). El medio da 598 km"}
+    power_kw: {value: 360, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611531; el medio da 517 CV"}
     drivetrain: {value: awd, note: "el medio la da con tracción total", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-10-13, tier: T3}
     price: null
   - name: Q6 Sportback e-tron performance
-    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611412"}
-    wltp_km: {value: 614, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611412 (Q6 Sportback Black line e-tron performance MY27); menor de 3 homologaciones: 614 km (611412), 615 km (611410), 664 km (611408). El medio da 656 km"}
-    power_kw: {value: 225, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611412; el medio da 326 CV"}
+    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611412"}
+    wltp_km: {value: 614, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611412 (Q6 Sportback Black line e-tron performance MY27); menor de 3 homologaciones: 614 km (611412), 615 km (611410), 664 km (611408). El medio da 656 km"}
+    power_kw: {value: 225, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611412; el medio da 326 CV"}
     drivetrain: {value: rwd, note: "el medio la da con tracción trasera", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-10-13, tier: T3}
     price: null
   - name: Q6 Sportback e-tron quattro
-    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611413"}
-    wltp_km: {value: 595, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611413 (Q6 Sportback Black line e-tron quattro MY27); menor de 3 homologaciones: 595 km (611413), 596 km (611411), 645 km (611409). El medio da 636 km"}
-    power_kw: {value: 315, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611413; el medio da 388 CV"}
-    drivetrain: {value: awd, note: "el nombre dice «quattro»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611413"}
+    wltp_km: {value: 595, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611413 (Q6 Sportback Black line e-tron quattro MY27); menor de 3 homologaciones: 595 km (611413), 596 km (611411), 645 km (611409). El medio da 636 km"}
+    power_kw: {value: 315, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611413; el medio da 388 CV"}
+    drivetrain: {value: awd, note: "el nombre dice «quattro»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: SQ6 Sportback e-tron
-    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611533"}
-    wltp_km: {value: 598, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611533 (SQ6 Sportback e-tron MY27; mismo valor en MY26, id 611534). El medio da 637 km"}
-    power_kw: {value: 360, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611533; el medio da 517 CV"}
+    battery_kwh: {value: 100, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611533"}
+    wltp_km: {value: 598, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611533 (SQ6 Sportback e-tron MY27; mismo valor en MY26, id 611534). El medio da 637 km"}
+    power_kw: {value: 360, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611533; el medio da 517 CV"}
     drivetrain: {value: awd, note: "el medio la da con tracción total", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-10-13, tier: T3}
     price: null
 images:
@@ -61,12 +61,14 @@ reviews:
   - title: "Probamos el Audi Q6 e-tron: un SUV eléctrico que justifica un precio de casi 100.000 euros a base de confort y no tanto por autonomía"
     url: "https://www.motorpasion.com/pruebas-de-coches/prueba-audi-q6-e-tron-2025"
     source_id: motorpasion-es
-    retrieved: 2026-10-27
+    retrieved: 2026-11-01
     tier: T3
     version: Q6 e-tron quattro
 open_questions:
   - "reviews: diariomotor-es no tiene una prueba del Q6 e-tron (solo noticias y ficha); solo hay review de motorpasion-es."
-  - "Precio (2026-10-26): fetch-page.ts sobre audi.es/es/, audi.es/es/modelos/q4-e-tron/ y audi.es/es/robots.txt devuelve HTTP 403 (protección de acceso, no se evita) y no hay otra fuente T1; todas las versiones con price null."
+  - "Precio (2026-11-01): fetch-page.ts sobre audi.es/es/, audi.es/es/modelos/q4-e-tron/ y audi.es/es/robots.txt devuelve HTTP 403 (protección de acceso, no se evita) y no hay otra fuente T1; todas las versiones con price null."
+  - "Refresco 2026-11-01: movilidadelectrica.com/coches-electricos-audi/ ya no contiene «SUV grande» (ahora dice «SUV totalmente eléctrico de gran tamaño», que no es un término de RF-11); el segment se deja con su valor y fecha anteriores hasta que una fuente lo confirme o una persona lo revise."
+  - "Refresco 2026-11-01: de las tracciones del medio autonomiacocheselectricos-es solo se ha podido releer la del Q6 e-tron performance (el texto dice «tracción trasera»); las de Q6 e-tron, SQ6 e-tron, Q6 Sportback e-tron performance y SQ6 Sportback e-tron están en tablas que fetch-page.ts no devuelve, así que conservan su fecha del 2026-10-13."
   - "Q6 e-tron (acceso, 83 kWh) con 185 kW frente a los 292 CV (≈215 kW) del medio: no se ha podido aclarar la diferencia."
   - "Se omite el Q6 Sportback e-tron de acceso: el medio no lo lista y no se ha confirmado que se venda."
   - "Las autonomías WLTP del medio son mayores que las del IDAE (el IDAE tiene varias homologaciones por acabado); se ha usado la menor del IDAE."
