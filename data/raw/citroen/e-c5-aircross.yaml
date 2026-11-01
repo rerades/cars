@@ -1,25 +1,25 @@
-# Researcher — Citroën ë-C5 Aircross. Fuentes: idae-es (T2), forococheselectricos-es y hibridosyelectricos-es (T3). Consultado 2026-10-13. Sin precio: citroen.es responde 403 y no hay otra fuente T1.
+# Researcher — Citroën ë-C5 Aircross. Fuentes: idae-es (T2), forococheselectricos-es y hibridosyelectricos-es (T3). Refresco 2026-11-01. Sin precio: citroen.es responde 403 y no hay otra fuente T1.
 brand: citroen
 brand_name: Citroën
 model: ë-C5 Aircross
-status: {value: on_sale, note: "artículo del 25/05/2026: se vende en You, Plus y Max con batería de 73 kWh", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/citroen-e-c5-aircross-baja-precio-20260525-41036.html", retrieved: 2026-10-13, tier: T3}
+status: {value: on_sale, note: "artículo del 25/05/2026: se vende en You, Plus y Max con batería de 73 kWh", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/citroen-e-c5-aircross-baja-precio-20260525-41036.html", retrieved: 2026-11-01, tier: T3}
 segment: null
 needs_review: false
 versions:
   - name: You
-    battery_kwh: {value: 73, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609292"}
-    wltp_km: {value: 520, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609292; el medio publica 520 km"}
-    power_kw: {value: 157, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609292; el medio da 154 kW (210 CV)"}
+    battery_kwh: {value: 73, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609292"}
+    wltp_km: {value: 520, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609292; el medio publica 520 km"}
+    power_kw: {value: 157, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609292; el medio da 154 kW (210 CV)"}
     price: null
   - name: Plus
-    battery_kwh: {value: 73, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609293"}
-    wltp_km: {value: 520, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609293; el medio publica 520 km"}
-    power_kw: {value: 157, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609293; el medio da 154 kW (210 CV)"}
+    battery_kwh: {value: 73, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609293"}
+    wltp_km: {value: 520, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609293; el medio publica 520 km"}
+    power_kw: {value: 157, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609293; el medio da 154 kW (210 CV)"}
     price: null
   - name: Max
-    battery_kwh: {value: 73, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609291"}
-    wltp_km: {value: 520, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609291; el medio publica 520 km"}
-    power_kw: {value: 157, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609291; el medio da 154 kW (210 CV)"}
+    battery_kwh: {value: 73, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609291"}
+    wltp_km: {value: 520, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609291; el medio publica 520 km"}
+    power_kw: {value: 157, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609291; el medio da 154 kW (210 CV)"}
     price: null
 images:
   - file: "data/images/citroen/e-c5-aircross/frontal.jpg"
@@ -30,8 +30,7 @@ images:
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Precio: citroen.es responde 403 a la lectura automática (2026-10-13) y no hay otra fuente T1; todas las versiones con price null."
+  - "Precio: citroen.es responde 403 a la lectura automática (2026-10-13) y no hay otra fuente T1 registrada en data/sources/ (citroen.es no está registrada, así que fetch-page.ts no la abre); todas las versiones con price null. Refresco 2026-11-01: sin cambios."
   - "Launch: los medios leídos no dan fecha de inicio de venta en España (hibridosyelectricos, 20/08/2025: pedidos abiertos «unas semanas» antes); se omite."
-  - "Extended Range (97 kWh, 677 km en el IDAE): el medio (25/05/2026) dice que aún no está en la gama española; no se ha escrito."
-  - "Imagen: no se ha buscado ninguna en Commons en esta ejecución."
+  - "Extended Range (97 kWh, 677 km en el IDAE, ids 614443, 610644, 614442): el medio (25/05/2026) dice que aún no está en la gama española; no se ha escrito."
   - "Segmento: el medio lo sitúa entre los «SUV medios», que no es un término de RF-11; segment null."
