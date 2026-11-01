@@ -22,5 +22,5 @@ notes: >
   y con WebFetch, igual que /es-es/noticias y /es-es/descubre-leapmotor/news; no hay otra página de noticias o prensa en leapmotor.net/es-es,
   así que se quita urls.press. Un buscador apunta a https://www.media.stellantis.com/es-es/leapmotor/press (sala de prensa de Stellantis, otro
   dominio, no verificada ni registrada como fuente de Leapmotor): decisión humana si se registra.
-last_verified: 2026-10-27
+last_verified: 2026-11-01
 status: active
