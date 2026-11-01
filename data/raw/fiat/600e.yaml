@@ -2,15 +2,15 @@
 brand: fiat
 brand_name: Fiat
 model: 600e
-status: {value: on_sale, note: "artículo de 2026-02-17 que lista el 600e entre los eléctricos de Fiat disponibles en España en 2026; no se ha confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-10-14, tier: T3}
+status: {value: on_sale, note: "artículo de 2026-02-17 que lista el 600e entre los eléctricos de Fiat disponibles en España en 2026; no se ha confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-01, tier: T3}
 launch: null
-segment: {value: suv_pequeno, note: "«El Fiat 600e es un B-SUV cien por cien eléctrico»", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-10-27, tier: T3}
+segment: {value: suv_pequeno, note: "«El Fiat 600e es un B-SUV cien por cien eléctrico»", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-01, tier: T3}
 needs_review: true
 versions:
   - name: 600e 115 kW (156 CV) 54 kWh
-    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 404, note: "IDAE ids 611267 (Business) y 611266 (Icon); otras homologaciones (Pop, La Prima, Sport, Red) dan 405, 406 y 409 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 115, note: "publicado: 156 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 404, note: "IDAE ids 611267 (Business) y 611266 (Icon); otras homologaciones (Pop, La Prima, Sport, Red) dan 405, 406 y 409 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 115, note: "publicado: 156 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: data/images/fiat/600e/frontal.jpg

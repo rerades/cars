@@ -2,40 +2,40 @@
 brand: fiat
 brand_name: Fiat
 model: 500e
-status: {value: on_sale, note: "artículo de 2026-02-17 que lista el 500e entre los eléctricos de Fiat disponibles en España en 2026; no se ha confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-10-14, tier: T3}
+status: {value: on_sale, note: "artículo de 2026-02-17 que lista el 500e entre los eléctricos de Fiat disponibles en España en 2026; no se ha confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-01, tier: T3}
 launch: null
 segment: null
 needs_review: true
 versions:
   - name: POP 24 kWh
-    battery_kwh: {value: 23.8, basis: unknown, note: "IDAE id 611259 (500e 500 Eléctrico POP 190km 70kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 190, note: "IDAE id 611259, única fila de POP; sin fecha en el IDAE. Versión listada en la tabla de octubre 2026 de Diariomotor (T3) como «FIAT 500 BEV 24KWH POP»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 70, note: "publicado: 95 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 23.8, basis: unknown, note: "IDAE id 611259 (500e 500 Eléctrico POP 190km 70kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 190, note: "IDAE id 611259, única fila de POP; sin fecha en el IDAE. Versión listada en la tabla de octubre 2026 de Diariomotor (T3) como «FIAT 500 BEV 24KWH POP»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 70, note: "publicado: 95 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Icon 24 kWh
-    battery_kwh: {value: 23.8, basis: unknown, note: "IDAE id 611260 (500e 500 Eléctrico ICON 2.0 190km 70kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 190, note: "IDAE id 611260 (ICON 2.0, berlina). Filas sin fecha, todas de 190 km: 571510, 571511 (3+1) y 571512 (cabrio) también dan 190; se elige la de id mayor entre las empatadas. Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 24KWH ICON»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 70, note: "publicado: 95 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 23.8, basis: unknown, note: "IDAE id 611260 (500e 500 Eléctrico ICON 2.0 190km 70kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 190, note: "IDAE id 611260 (ICON 2.0, berlina). Filas sin fecha, todas de 190 km: 571510, 571511 (3+1) y 571512 (cabrio) también dan 190; se elige la de id mayor entre las empatadas. Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 24KWH ICON»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 70, note: "publicado: 95 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Icon 42 kWh
-    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 540797 (500e Berlina - Icon / Passion / Business 87kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 313, note: "IDAE id 540797 (berlina; la fila sin fecha de menor wltp_km). Otras homologaciones de berlina Icon: 562241 (320 km) y 611261 (ICON 2.0, 322 km). Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 42KWH ICON»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 87, note: "publicado: 118 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 540797 (500e Berlina - Icon / Passion / Business 87kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 313, note: "IDAE id 540797 (berlina; la fila sin fecha de menor wltp_km). Otras homologaciones de berlina Icon: 562241 (320 km) y 611261 (ICON 2.0, 322 km). Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 42KWH ICON»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 87, note: "publicado: 118 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: La Prima 42 kWh
-    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 604586 (500e MY25 500e La Prima 320km 87kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 320, note: "IDAE id 604586 (berlina, MY25). Filas sin fecha de berlina La Prima con 320 km: 562244 y 576988; 611262 da 322 km; se elige la de id mayor entre las empatadas. Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 42KWH LA PRIMA»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 87, note: "publicado: 118 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 604586 (500e MY25 500e La Prima 320km 87kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 320, note: "IDAE id 604586 (berlina, MY25). Filas sin fecha de berlina La Prima con 320 km: 562244 y 576988; 611262 da 322 km; se elige la de id mayor entre las empatadas. Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 42KWH LA PRIMA»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 87, note: "publicado: 118 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: La Prima 3+1 42 kWh
-    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 540799 (500e 3+1 - La Prima 87kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 313, note: "IDAE id 540799 (3+1; la fila sin fecha de menor wltp_km). Otras homologaciones 3+1 La Prima: 562246, 604593 y 611263 (320 km). Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 42KWH LA PRIMA 3+1»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 87, note: "publicado: 118 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 540799 (500e 3+1 - La Prima 87kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 313, note: "IDAE id 540799 (3+1; la fila sin fecha de menor wltp_km). Otras homologaciones 3+1 La Prima: 562246, 604593 y 611263 (320 km). Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 42KWH LA PRIMA 3+1»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 87, note: "publicado: 118 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Business 42 kWh
-    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 540797 (500e Berlina - Icon / Passion / Business 87kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 313, note: "IDAE id 540797, fila compartida con Icon y Passion (sin fila propia de berlina Business; 559955 «500e Business 87kW» da 320 km pero su masa de 350 kg indica otro tipo de vehículo). Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 42KWH BUSINESS»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 87, note: "publicado: 118 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 42, basis: unknown, note: "IDAE id 540797 (500e Berlina - Icon / Passion / Business 87kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 313, note: "IDAE id 540797, fila compartida con Icon y Passion (sin fila propia de berlina Business; 559955 «500e Business 87kW» da 320 km pero su masa de 350 kg indica otro tipo de vehículo). Versión listada en Diariomotor (T3, octubre 2026) como «FIAT 500 BEV 42KWH BUSINESS»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 87, note: "publicado: 118 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: data/images/fiat/500e/frontal.jpg
