@@ -8,19 +8,19 @@ segment: null
 needs_review: true
 versions:
   - name: MINI Aceman E
-    battery_kwh: {value: 38.5, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 310, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 135, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 38.5, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 310, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 135, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: MINI Aceman SE
-    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 406, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 160, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 406, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 160, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: MINI John Cooper Works Aceman E
-    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 391, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 190, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 49.2, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 391, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 190, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: "data/images/mini/aceman/frontal.jpg"
