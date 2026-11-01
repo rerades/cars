@@ -2,25 +2,25 @@
 brand: peugeot
 brand_name: Peugeot
 model: E-2008
-status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 launch: null
-segment: {value: suv_pequeno, note: "Híbridos y Eléctricos: «Peugeot E-2008 queda perfectamente enclavado en el núcleo central del segmento B-SUV europeo»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/peugeot-e-2008-2024-electrico-precio-medidas-motor-interior-maletero_78989_102.html", retrieved: 2026-10-27, tier: T3}
+segment: {value: suv_pequeno, note: "Híbridos y Eléctricos: «Peugeot E-2008 queda perfectamente enclavado en el núcleo central del segmento B-SUV europeo»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/peugeot-e-2008-2024-electrico-precio-medidas-motor-interior-maletero_78989_102.html", retrieved: 2026-10-31, tier: T3}
 needs_review: false
 specs:
-  wltp_max_km: {value: 406, note: "hasta 406 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
-  power_max_kw: {value: 115, note: "publicado: nuevo motor eléctrico de 115 kW (156 CV)", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+  wltp_max_km: {value: 406, note: "hasta 406 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
+  power_max_kw: {value: 115, note: "publicado: nuevo motor eléctrico de 115 kW (156 CV)", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 versions:
-  - name: E-2008 (versión no especificada en la oferta)
+  - name: E-2008 Style Eléctrico 156
     price:
       value: 33545
       unit: EUR
       price_kind: financed
-      price_terms: "Precio contado 33.545 €. Incluidos impuestos, transporte, descuentos. Sujeto a aprobación financiera. Validez hasta 30/09/2026."
+      price_terms: "En 36 mensualidades (con un kilometraje máximo contractual de 30.000 km -Última cuota calculada sobre dicho kilometraje máximo) para un E-2008 Style Eléctrico 156 (115 kW) válido en Península y Baleares para consumidores que financien mínimo a 36 meses a través de Stellantis Financial Services España EFC, S.A. Sujeto a aprobación financiera. Las mensualidades de 210€ se componen de una cuota financiera mensual de 190,51€ y de un seguro de crédito de 19,49€ al mes. Última cuota: 18.394,67€. Capital financiado con comisión de apertura: 21.611,69€. Comisión de apertura (0,00%): 0,00€. Intereses: 3.450,83€. Coste total del crédito: 3.450,83€. Importe total adeudado: 25.062,52€. Precio total a plazos: 33.995,83€. TIN: 5,75%. TAE: 5,91% . Sistema de amortización francés. Al final del contrato podrá elegir entre entregar su vehículo, o abonar o refinanciar la última cuota. Oferta válida hasta el 31/10/2026. Precio al contado: 33.545€ ."
       price_terms_url: "https://ofertas.peugeot.es/particulares"
       page_name: "E-2008 Style Eléctrico 156 (115 kW)"
       source_id: peugeot-es
       url: "https://ofertas.peugeot.es/particulares"
-      retrieved: 2026-09-29
+      retrieved: 2026-10-31
       tier: T1
 images:
   - file: "data/images/peugeot/e-2008/frontal.jpg"
@@ -34,11 +34,11 @@ reviews:
   - title: "Probamos el nuevo Peugeot e-2008: el SUV eléctrico sube de potencia y autonomía y mantiene sus cotas de confort"
     url: "https://www.motorpasion.com/pruebas-de-coches/peugeot-e-2008-2023-prueba-contacto"
     source_id: motorpasion-es
-    retrieved: 2026-10-27
+    retrieved: 2026-10-31
     tier: T3
 open_questions:
   - "reviews: la toma de contacto de diariomotor-es (peugeot-e-2008-prueba-video) es del e-2008 de 50 kWh y 136 CV, anterior a los 115 kW de la ficha; no se enlaza."
   - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27); el segmento sale de una fuente T3 (hibridosyelectricos-es, B-SUV). El título de buscador de la web de la marca ('SUV Compacto') no se ha leído y no se usa."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
-  - "Versión concreta del precio de contado no identificada; sin PVP sin oferta; sin batería ni carga."
+  - "Precio (2026-10-31): oferta de ofertas.peugeot.es/particulares, versión E-2008 Style Eléctrico 156 (115 kW), precio al contado 33.545 €, válida hasta el 31/10/2026 (caduca hoy); sin PVP sin oferta; sin batería ni carga."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."

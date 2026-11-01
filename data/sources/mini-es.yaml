@@ -12,6 +12,7 @@ notes: >
   Verificación incompleta (2026-10-14): mini.es es el dominio oficial de MINI España (aparece como resultado de búsqueda
   de la gama eléctrica), pero las lecturas automáticas de /robots.txt y de las páginas de gama dieron timeout (no se evita
   ninguna protección). No se han podido leer versiones, precios ni robots.txt. Por eso ningún precio de data/raw/mini/ sale
-  de esta fuente. Pendiente de reintentar.
+  de esta fuente. Pendiente de reintentar. Reintento 2026-11-01: fetch-page.ts sigue dando timeout en la home y en la
+  página de gama; se mantiene broken y last_verified.
 last_verified: 2026-10-14
 status: broken

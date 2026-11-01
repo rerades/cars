@@ -2,21 +2,21 @@
 brand: nissan
 brand_name: Nissan
 model: Ariya
-status: {value: on_sale, source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya", retrieved: 2026-10-13, tier: T1, note: "la ficha lista Evolve 4x2 y Evolve 4x4 e-4ORCE"}
+status: {value: on_sale, source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya", retrieved: 2026-11-01, tier: T1, note: "la ficha lista Evolve 4x2 y Evolve 4x4 e-4ORCE"}
 launch: null
 segment: null
 needs_review: false
 versions:
   - name: Ariya Evolve 87 kWh 4x2
-    battery_kwh: {value: 87, basis: unknown, note: "IDAE id 598056", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 525, note: "IDAE id 598056; coincide con la nota 3 de nissan.es (525 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 178, note: "IDAE id 598056; publicado: 242 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 87, basis: unknown, note: "IDAE id 598056", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 525, note: "IDAE id 598056; coincide con la nota 3 de nissan.es (525 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 178, note: "IDAE id 598056; publicado: 242 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Ariya Evolve 87 kWh e-4ORCE
-    battery_kwh: {value: 87, basis: unknown, note: "IDAE id 598062", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    wltp_km: {value: 509, note: "IDAE id 598062", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    power_kw: {value: 225, note: "IDAE id 598062; publicado: 306 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
-    drivetrain: {value: awd, note: "4x4 e-4ORCE", source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya", retrieved: 2026-10-13, tier: T1}
+    battery_kwh: {value: 87, basis: unknown, note: "IDAE id 598062", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 509, note: "IDAE id 598062", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 225, note: "IDAE id 598062; publicado: 306 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: awd, note: "4x4 e-4ORCE", source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya", retrieved: 2026-11-01, tier: T1}
     price: null
 images:
   - file: data/images/nissan/ariya/frontal.jpg
@@ -30,17 +30,17 @@ reviews:
   - title: "Prueba Nissan ARIYA e-4ORCE"
     url: "https://www.diariomotor.com/noticia/prueba-del-nissan-ariya-e-4orce/"
     source_id: diariomotor-es
-    retrieved: 2026-10-27
+    retrieved: 2026-11-01
     tier: T3
     version: Ariya Evolve 87 kWh e-4ORCE
   - title: "Probamos el Nissan Ariya 2027: la actualización más discreta del año esconde el SUV eléctrico más sereno y refinado que vas a conducir"
     url: "https://www.motorpasion.com/pruebas-de-coches/probamos-nissan-ariya-2027-actualizacion-discreta-ano-esconde-suv-electrico-sereno-refinado-que-puedes-conducir"
     source_id: motorpasion-es
-    retrieved: 2026-10-27
+    retrieved: 2026-11-01
     tier: T3
 open_questions:
   - "launch y segment: sin fuente registrada."
-  - "Precio (revisado 2026-10-23): ninguna versión tiene precio. nissan.es/cf/.../ariya solo da 'desde 44.375 €' (Evolve 4x2) y 47.575 € (e-4ORCE) financiados, y el ejemplo de la nota 3 (46.275 € al contado, 45.275 € financiando) incluye la ayuda Plan Auto+ de 2.925 € y 900 € CAE: es un precio con ayudas públicas restadas y no se guarda (se quitó el que había). No hay tarifa PDF (solo ficha técnica y catálogo); la búsqueda en nissan.es solo devolvió páginas de ofertas y una tarifa de mantenimiento de 2022. Sin PVP limpio ni oferta sin ayudas."
+  - "Precio (revisado 2026-11-01): ninguna versión tiene precio. nissan.es/cf/.../ariya solo da la cuota 'Por 455€ /mes' del Evolve 4x2 (oferta válida hasta el 30/11/2026), y el ejemplo de la nota 3 (46.275 € al contado, 45.275 € financiando) incluye la ayuda Plan Auto+ de 2.925 € y 900 € CAE: es un precio con ayudas públicas restadas y no se guarda (se quitó el que había). No hay tarifa PDF (solo ficha técnica y catálogo); la búsqueda en nissan.es solo devolvió páginas de ofertas y una tarifa de mantenimiento de 2022. Sin PVP limpio ni oferta sin ayudas."
   - "wltp: la ficha dice 'hasta 536 km' (Engage, según IDAE) y 525 km para Evolve 4x2; la gama de hoy solo lista Evolve. Las versiones 63 kWh, Engage, Advance, Nismo y e-4ORCE Evolve+ del IDAE no aparecen en la ficha; no se incluyen."
   - "drivetrain del 4x2: la ficha dice solo 4x2 sin indicar el eje; no se rellena."
   - "Gama confirmada el 2026-10-13: nissan.es y motor.es dan como 2026 solo Evolve 4x2 y Evolve e-4ORCE."

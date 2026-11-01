@@ -2,12 +2,12 @@
 brand: peugeot
 brand_name: Peugeot
 model: E-208
-status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+status: {value: on_sale, source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 launch: null
-segment: {value: urbano, note: "Motorpasión: «su precio lo convierte en un coche urbano de gama alta»", source_id: motorpasion-es, url: "https://www.motorpasion.com/pruebas-de-coches/peugeot-e-208-2024-prueba-contacto", retrieved: 2026-10-27, tier: T3}
+segment: {value: urbano, note: "Motorpasión: «su precio lo convierte en un coche urbano de gama alta»", source_id: motorpasion-es, url: "https://www.motorpasion.com/pruebas-de-coches/peugeot-e-208-2024-prueba-contacto", retrieved: 2026-10-31, tier: T3}
 needs_review: false
 specs:
-  wltp_max_km: {value: 433, note: "hasta 433 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-09-29, tier: T1}
+  wltp_max_km: {value: 433, note: "hasta 433 km WLTP", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: E-208 5P Style Eléctrico 136
     price:
@@ -19,7 +19,7 @@ versions:
       page_name: "E-208 5P Style Eléctrico 136 (100 Kw)"
       source_id: peugeot-es
       url: "https://ofertas.peugeot.es/particulares"
-      retrieved: 2026-10-30
+      retrieved: 2026-10-31
       tier: T1
 images:
   - file: "data/images/peugeot/e-208/frontal.jpg"
@@ -33,11 +33,12 @@ reviews:
   - title: "Probamos el nuevo Peugeot E-208, un cómodo y eficiente utilitario a precio de MINI eléctrico"
     url: "https://www.motorpasion.com/pruebas-de-coches/peugeot-e-208-2024-prueba-contacto"
     source_id: motorpasion-es
-    retrieved: 2026-10-23
+    retrieved: 2026-10-31
     tier: T3
 open_questions:
   - "reviews: diariomotor-es no tiene una prueba del E-208 renovado (la que hay es de 2019, de la generación anterior); solo hay review de motorpasion-es."
   - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27); el segmento sale de una fuente T3 (motorpasion-es)."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
-  - "Precio (2026-10-30): oferta vigente de ofertas.peugeot.es/particulares para el E-208 5P Style Eléctrico 136 (100 Kw), precio al contado 29.270 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (100 kW) solo en el nombre de la oferta, no se guarda como dato."
+  - "wltp_max_km (2026-10-31): ofertas.peugeot.es/coches-electricos-hibridos dice «Hasta 433 km de autonomía WLTP» (primera ficha de la página, que no nombra el modelo en el texto leído) y la letra pequeña de ofertas.peugeot.es/particulares dice «Gama E-208: Autonomía eléctrica: Hasta 410 km». Mismo nivel (T1) y misma fuente; se mantiene 433 sin confirmar a qué modelo pertenece la ficha. El flag needs_review no se toca en un refresco: lo decide una persona."
+  - "Precio (2026-10-31): oferta de ofertas.peugeot.es/particulares releída, sin cambios, para el E-208 5P Style Eléctrico 136 (100 Kw), precio al contado 29.270 €, válida hasta el 31/10/2026 (caduca hoy); sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (100 kW) solo en el nombre de la oferta, no se guarda como dato."
   - "www.peugeot.es devuelve 403: fichas técnicas no leídas."

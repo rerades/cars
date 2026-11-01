@@ -2,15 +2,15 @@
 brand: fiat
 brand_name: Fiat
 model: Grande Panda
-status: {value: on_sale, note: "artículo de 2026-02-17 que lista el Grande Panda eléctrico (113 CV, 44 kWh) entre los eléctricos de Fiat disponibles en España en 2026; no se ha confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-10-14, tier: T3}
+status: {value: on_sale, note: "artículo de 2026-02-17 que lista el Grande Panda eléctrico (113 CV, 44 kWh) entre los eléctricos de Fiat disponibles en España en 2026; no se ha confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-01, tier: T3}
 launch: null
-segment: {value: suv_pequeno, note: "«Es un SUV eléctrico del segmento B construido sobre la plataforma Smart Car»", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-10-27, tier: T3}
+segment: {value: suv_pequeno, note: "«Es un SUV eléctrico del segmento B construido sobre la plataforma Smart Car»", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-01, tier: T3}
 needs_review: true
 versions:
   - name: Grande Panda 83 kW (113 CV) 44 kWh
-    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 320, note: "IDAE ids 611270 a 611273 (Pop, Icon, Business, La Prima), 605689 (Red) y 605690; todas dan 320 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 83, note: "publicado: 113 CV (los ids 605689 y 605690 citan 118 CV en el nombre pero 83 kW en el dato)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 44, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 320, note: "IDAE ids 611270 a 611273 (Pop, Icon, Business, La Prima), 605689 (Red) y 605690; todas dan 320 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 83, note: "publicado: 113 CV (los ids 605689 y 605690 citan 118 CV en el nombre pero 83 kW en el dato)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: data/images/fiat/grande-panda/frontal.jpg

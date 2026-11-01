@@ -1,12 +1,12 @@
-# Researcher — MG MGS6 EV. Fuente: mg-es (T1). Consultado 2026-10-07.
+# Researcher — MG MGS6 EV. Fuente: mg-es (T1). Consultado 2026-10-31.
 brand: mg
 brand_name: MG
 model: MGS6 EV
-status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/mgs6", retrieved: 2026-10-07, tier: T1}
+status: {value: on_sale, source_id: mg-es, url: "https://www.mgmotor.es/model/mgs6", retrieved: 2026-10-31, tier: T1}
 needs_review: false
 versions:
   - name: MGS6 EV Luxury AWD 77kW
-    drivetrain: {value: awd, note: "por el nombre de la versión en la ficha", source_id: mg-es, url: "https://www.mgmotor.es/model/mgs6", retrieved: 2026-10-07, tier: T1}
+    drivetrain: {value: awd, note: "por el nombre de la versión en la ficha", source_id: mg-es, url: "https://www.mgmotor.es/model/mgs6", retrieved: 2026-10-31, tier: T1}
     price:
       value: 41980
       unit: EUR
@@ -16,7 +16,7 @@ versions:
       page_name: "MGS6 Luxury AWD 77kW"
       source_id: mg-es
       url: "https://www.mgmotor.es/model/mgs6"
-      retrieved: 2026-10-07
+      retrieved: 2026-10-31
       tier: T1
 images:
   - file: data/images/mg/mgs6/frontal.jpg

@@ -11,5 +11,5 @@ urls:
 image_license: "" # sin términos de uso de imágenes leídos: no publicar imágenes de esta web
 notes: >
   Verificado (2026-10-10): www.renault.es responde. robots.txt solo bloquea URL con parámetros de configurador (conf, confuri, dealerId, modelURI, vin); las páginas de modelo y de versiones se pueden leer. Los precios "desde" de las páginas de modelo llevan la letra pequeña "este importe incluye promociones": no son PVP limpio y se guardan como price_kind financed. Solo el configurador del R5 evolution muestra "PVP contado, sin promos, sin Auto+, con impuestos". Gama eléctrica de turismos vista: Twingo, 5, 4, Megane, Scenic (más R5 Turbo 3E sin precio). No verificadas: furgonetas (Kangoo, Trafic, Master) ni R4 Van.
-last_verified: 2026-10-10
+last_verified: 2026-11-01
 status: active

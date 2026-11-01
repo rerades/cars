@@ -9,6 +9,6 @@ urls:
   article_corsa_electric: https://www.media.stellantis.com/es-es/opel/press/ya-disponible-para-pedidos-opel-corsa-electric-con-aun-mas-autonomia # solo consta por buscador (403)
 image_license: "" # términos de uso no leídos: no registrar imágenes de prensa
 notes: >
-  Verificado (2026-10-03): los artículos devuelven 403 a la lectura automática. robots.txt de media.stellantis.com bloquea /press-images, /rss y /login. Sin términos escritos de licencia de imágenes leídos: usar Wikimedia Commons.
-last_verified: 2026-10-03
+  Verificado (2026-10-31, igual que el 2026-10-03): los artículos devuelven 403 a la lectura automática. robots.txt de media.stellantis.com bloquea /press-images, /rss y /login. Sin términos escritos de licencia de imágenes leídos: usar Wikimedia Commons.
+last_verified: 2026-10-31
 status: active

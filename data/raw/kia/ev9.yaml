@@ -2,14 +2,14 @@
 brand: kia
 brand_name: Kia
 model: EV9
-status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
+status: {value: on_sale, source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-31, tier: T1}
 segment: null
 needs_review: false
 specs:
-  wltp_max_km: {value: 505, note: "hasta 505 km", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
-  power_max_kw: {value: 282.6, note: "publicado: 141,3 + 141,3 kW / 384 cv", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
-  battery_kwh_options: {value: [99.8], note: "la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
-  drivetrains: {value: [awd], note: "\"AWD, tracción integral\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-05, tier: T1}
+  wltp_max_km: {value: 505, note: "hasta 505 km", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-31, tier: T1}
+  power_max_kw: {value: 282.6, note: "publicado: 141,3 + 141,3 kW / 384 cv", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-31, tier: T1}
+  battery_kwh_options: {value: [99.8], note: "la web no indica si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-31, tier: T1}
+  drivetrains: {value: [awd], note: "\"AWD, tracción integral\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: EV9 GT-Line
     price: null
@@ -29,7 +29,7 @@ reviews:
     tier: T3
 open_questions:
   - "reviews: diariomotor-es no tiene una prueba del EV9 (solo noticias y ficha); solo hay review de motorpasion-es."
-  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23: ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario (63.340 €) no se asocian a una versión ni son PVP: no se usan."
+  - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23 y el 2026-10-31 (el configurador solo da condiciones de oferta financiada, caducada el 26/10/2026, sin importe por versión): ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario (63.340 €) no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha dice 'SUV de tres filas, hasta 7 asientos' sin categoría de tamaño explícita; queda vacío."
   - "Lista completa de versiones no leída (solo consta GT-line por su 0-100 km/h)."

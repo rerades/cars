@@ -2,7 +2,10 @@
 
 - **Estado:** aceptada (2026-10-06). Enmendada el 2026-10-21 por ADR-0018: la lista de pendientes
   suma las historias de la cola virtual detrás de `queue.yaml`, `issue-N` sin sufijo lo genera el
-  alimentador y la fusión automática de la rama de estado admite líneas añadidas a `ops/feeder/*.jsonl`
+  alimentador y la fusión automática de la rama de estado admite líneas añadidas a `ops/feeder/*.jsonl`. Enmienda
+  de [ADR-0022](0022-escalera-de-confianza-y-agente-retro.md) (propuesta el 2026-10-29, aceptada el 2026-10-30): la regla
+  del punto 6 admite también líneas añadidas a `ops/trust/*.jsonl`, que escribe solo el paso de
+  fusión; una PR `agent/*` que toque `ops/trust/` va a `merger:needs-human` (punto 7).
 - **Fecha:** 2026-10-06
 
 ## Contexto

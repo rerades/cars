@@ -2,28 +2,28 @@
 brand: ford
 brand_name: Ford
 model: Puma Gen-E
-status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España; la ficha de ford.es muestra cuotas de financiación", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-14, tier: T3}
+status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España; la ficha de ford.es muestra cuotas de financiación", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-11-01, tier: T3}
 launch: null
-segment: {value: suv_pequeno, note: "tabla del artículo: «SUV urbano, segmento B, 4,21 m»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-27, tier: T3}
+segment: {value: suv_pequeno, note: "tabla del artículo: «SUV urbano, segmento B, 4,21 m»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-11-01, tier: T3}
 needs_review: true
 versions:
   - name: Gen-E
-    battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610510 (05.2026); también consta la homologación 610512 (11.2025, batería de 43 kWh, 324 km) de la batería anterior, sustituida en marzo de 2026", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 417, note: "IDAE id 610510 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 124, note: "IDAE id 610510", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: fwd, note: "IDAE id 610510: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610510 (05.2026); también consta la homologación 610512 (11.2025, batería de 43 kWh, 324 km) de la batería anterior, sustituida en marzo de 2026", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 417, note: "IDAE id 610510 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 124, note: "IDAE id 610510", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610510: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Premium
-    battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610511 (05.2026); también consta la 610512 (11.2025, 43 kWh, 324 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 404, note: "IDAE id 610511 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 124, note: "IDAE id 610511", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: fwd, note: "IDAE id 610511: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610511 (05.2026); también consta la 610512 (11.2025, 43 kWh, 324 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 404, note: "IDAE id 610511 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 124, note: "IDAE id 610511", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610511: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: BlueCruise Edition
-    battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610509 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 404, note: "IDAE id 610509 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 124, note: "IDAE id 610509", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: fwd, note: "IDAE id 610509: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 46.8, basis: unknown, note: "IDAE id 610509 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 404, note: "IDAE id 610509 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 124, note: "IDAE id 610509", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610509: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: data/images/ford/puma-gen-e/frontal.jpg
@@ -36,6 +36,7 @@ images:
 open_questions:
   - "needs_review: true porque la venta hoy solo la respalda un medio T3 y las versiones salen del IDAE; falta una página de ford.es que lo confirme (revisión de la PR #341)."
   - "Precio: releído el 2026-10-24 con fetch-page.ts (palabras PVP, Precio, Oferta válida, €, Importe, TAE y texto completo de la ficha): la ficha y /compra/promociones/particulares solo dan cuota (la oferta cita «46,8kWh FWD (168CV)»: 125 €/mes, entrada 7.850 €, cuota final 14.394 €, «Oferta válida hasta 31/10/2026»); ningún precio total ni nota legal legible, así que no se guarda precio financed. Anterior: ford.es solo muestra cuotas de financiación (desde 125 €/mes, entrada 7.850 €, cuota final 14.394 €, 49 meses), sin PVP legible; sin precio. Revisado el 2026-10-22: /turismos/puma-gen-e, /turismos/puma-gen-e/shop, /compra/promociones/particulares y /compra/comprar-online/inventory/pv no dan PVP por versión ni enlazan a tarifa en PDF; el configurador remite al concesionario; /compra/gama-y-precios da 404. Repetido el 2026-10-23 aceptando ofertas (price_kind: financed): la ficha, /promociones/particulares, /promociones/empresas, /shop y /compra/promociones/plan-auto-plus de ford.es solo muestran cuota mensual, entrada, cuota final y la ayuda de 4.500 € del Programa Auto+; ningún precio total (ni con descuento de marca ni financiando), y la ficha avisa de que «las cifras mostradas pueden proceder de distintos acabados», sin asociarlas a una versión. Las notas legales no se leen en la página. Sin precio."
+  - "Refresco 2026-11-01: releída la ficha /turismos/puma-gen-e con fetch-page.ts (PVP, Precio, Oferta válida): ya no muestra cuota ni oferta (la del 31/10/2026 terminó) ni PVP; sigue sin precio (null). Autonomía de la ficha: «hasta 376 km» (cifra antigua de 43 kWh) frente a 417 km del IDAE 05.2026; se mantiene el IDAE."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "IDAE mezcla homologaciones: se usan las filas 05.2026 (batería de 46,8 kWh, posterior al cambio de marzo de 2026 que cuenta el medio T3), no la de menor wltp_km (610512, 43 kWh, 324 km, batería sustituida)."
   - "El medio T3 indica la retirada del acabado Black Edition, que la ficha de ford.es aún menciona."

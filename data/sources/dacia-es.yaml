@@ -13,5 +13,5 @@ urls:
 image_license: "" # sin términos de uso de imágenes leídos: no publicar imágenes de esta web
 notes: >
   Verificado (2026-10-15): www.dacia.es y ofertas.dacia.es responden. robots.txt solo bloquea URL con parámetros de configurador (conf, confuri, dealerId, modelURI, vin); sitemap en /sitemap.xml. Las páginas de modelo se pueden leer. El "desde 11.559 €" del Spring Extreme incluye promociones y 3.375 € del Programa Auto+ (ayuda pública): no es PVP limpio ni se guarda. No hay lista de precios general en la web (catálogos solo de Duster y Bigster). Único BEV de turismo visto: Spring (Expression y Extreme; Cargo comercial).
-last_verified: 2026-10-15
+last_verified: 2026-11-01
 status: active

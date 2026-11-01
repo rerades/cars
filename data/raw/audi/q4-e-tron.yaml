@@ -2,39 +2,39 @@
 brand: audi
 brand_name: Audi
 model: Q4 e-tron
-status: {value: on_sale, note: "artículo de 30/06/2026: «El Audi Q4 e-tron 2026 ya está disponible en los concesionarios españoles»; versiones 45 e-tron, 45 e-tron Performance y 55 e-tron quattro, en SUV y Sportback", source_id: coches-es, url: "https://noticias.coches.com/audi-q4-2026", retrieved: 2026-10-13, tier: T3}
+status: {value: on_sale, note: "artículo de 30/06/2026: «El Audi Q4 e-tron 2026 ya está disponible en los concesionarios españoles»; versiones 45 e-tron, 45 e-tron Performance y 55 e-tron quattro, en SUV y Sportback", source_id: coches-es, url: "https://noticias.coches.com/audi-q4-2026", retrieved: 2026-11-01, tier: T3}
 launch: null
-segment: {value: suv_compacto, note: "el medio lo llama «SUV compacto»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-10-13, tier: T3}
+segment: {value: suv_compacto, note: "el medio lo llama «SUV compacto»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-11-01, tier: T3}
 needs_review: false
 versions:
   - name: Q4 e-tron
-    wltp_km: {value: 426, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611348 (Q4 S line e-tron MY27; mismo valor en id 611349); menor de 4 homologaciones MY27: 426 km (611348, 611349), 430 km (611346), 433 km (611347). El medio (2026-04-30) publica 442 km"}
-    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611348; el medio publica 204 CV"}
+    wltp_km: {value: 426, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611348 (Q4 S line e-tron MY27; mismo valor en id 611349); menor de 4 homologaciones MY27: 426 km (611348, 611349), 430 km (611346), 433 km (611347). El medio (2026-04-30) publica 442 km"}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611348; el medio publica 204 CV"}
     price: null
   - name: Q4 e-tron performance
-    wltp_km: {value: 559, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611325 (Q4 Black line e-tron performance MY27); menor de 4 homologaciones: 559 km (611325), 560 km (611324), 564 km (611322), 568 km (611323). El medio (2026-04-30) publica 578 km"}
-    power_kw: {value: 210, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611325; el medio publica 286 CV"}
+    wltp_km: {value: 559, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611325 (Q4 Black line e-tron performance MY27); menor de 4 homologaciones: 559 km (611325), 560 km (611324), 564 km (611322), 568 km (611323). El medio (2026-04-30) publica 578 km"}
+    power_kw: {value: 210, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611325; el medio publica 286 CV"}
     price: null
   - name: Q4 e-tron quattro
-    wltp_km: {value: 539, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611340 (Q4 Black line e-tron quattro MY27; mismo valor en id 611339); menor de 4 homologaciones: 539 km (611340, 611339), 544 km (611337), 548 km (611338). El medio (2026-04-30) publica 558 km"}
-    power_kw: {value: 220, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611340; el medio publica 299 CV"}
-    drivetrain: {value: awd, note: "el nombre dice «quattro»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    wltp_km: {value: 539, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611340 (Q4 Black line e-tron quattro MY27; mismo valor en id 611339); menor de 4 homologaciones: 539 km (611340, 611339), 544 km (611337), 548 km (611338). El medio (2026-04-30) publica 558 km"}
+    power_kw: {value: 220, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611340; el medio publica 299 CV"}
+    drivetrain: {value: awd, note: "el nombre dice «quattro»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Q4 Sportback e-tron
-    battery_kwh: {value: 63, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611352; el medio (2026-04-30) habla de 59 kWh"}
-    wltp_km: {value: 439, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611352 (Business e-tron MY27); menor de 4 homologaciones: 439 km (611352), 440 km (611354, 611355), 441 km (611353). El medio (2026-04-30) publica 452 km"}
-    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611352; el medio publica 204 CV"}
+    battery_kwh: {value: 63, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611352; el medio (2026-04-30) habla de 59 kWh"}
+    wltp_km: {value: 439, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611352 (Business e-tron MY27); menor de 4 homologaciones: 439 km (611352), 440 km (611354, 611355), 441 km (611353). El medio (2026-04-30) publica 452 km"}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611352; el medio publica 204 CV"}
     price: null
   - name: Q4 Sportback e-tron performance
-    battery_kwh: {value: 82, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611314; el medio (2026-04-30) habla de 77 kWh"}
-    wltp_km: {value: 577, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611314 (Business e-tron performance MY27); menor de 4 homologaciones: 577 km (611314), 578 km (611316, 611317), 580 km (611315). El medio (2026-04-30) publica 592 km"}
-    power_kw: {value: 210, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611314; el medio publica 286 CV"}
+    battery_kwh: {value: 82, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611314; el medio (2026-04-30) habla de 77 kWh"}
+    wltp_km: {value: 577, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611314 (Business e-tron performance MY27); menor de 4 homologaciones: 577 km (611314), 578 km (611316, 611317), 580 km (611315). El medio (2026-04-30) publica 592 km"}
+    power_kw: {value: 210, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611314; el medio publica 286 CV"}
     price: null
   - name: Q4 Sportback e-tron quattro
-    battery_kwh: {value: 82, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611330; el medio (2026-04-30) habla de 77 kWh"}
-    wltp_km: {value: 557, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611330 (Business e-tron quattro MY27); menor de 4 homologaciones: 557 km (611330), 558 km (611332, 611333), 560 km (611331). El medio (2026-04-30) publica 573 km"}
-    power_kw: {value: 220, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611330; el medio publica 299 CV"}
-    drivetrain: {value: awd, note: "el nombre dice «quattro»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 82, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611330; el medio (2026-04-30) habla de 77 kWh"}
+    wltp_km: {value: 557, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611330 (Business e-tron quattro MY27); menor de 4 homologaciones: 557 km (611330), 558 km (611332, 611333), 560 km (611331). El medio (2026-04-30) publica 573 km"}
+    power_kw: {value: 220, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611330; el medio publica 299 CV"}
+    drivetrain: {value: awd, note: "el nombre dice «quattro»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: data/images/audi/q4-e-tron/frontal.jpg
@@ -48,11 +48,11 @@ reviews:
   - title: "Probamos el nuevo Audi Q4 e-tron: el coche eléctrico más barato de Audi es absolutamente cómodo y puedes enchufar una bici, pero podría mejorar en algo fundamental"
     url: "https://www.motorpasion.com/pruebas-de-coches/audi-q4-e-tron-2026-prueba-contacto"
     source_id: motorpasion-es
-    retrieved: 2026-10-27
+    retrieved: 2026-11-01
     tier: T3
 open_questions:
   - "reviews: diariomotor-es solo tiene la prueba de 2021 del Q4 e-tron (batería y potencia anteriores a la renovación), que no cuadra con la ficha; no se enlaza."
-  - "Precio (2026-10-26): fetch-page.ts sobre audi.es/es/, audi.es/es/modelos/q4-e-tron/ y audi.es/es/robots.txt devuelve HTTP 403 (protección de acceso, no se evita) y no hay otra fuente T1; todas las versiones con price null."
+  - "Precio (2026-11-01): fetch-page.ts sobre audi.es/es/, audi.es/es/modelos/q4-e-tron/ y audi.es/es/robots.txt devuelve HTTP 403 (protección de acceso, no se evita) y no hay otra fuente T1; todas las versiones con price null."
   - "Batería de las versiones de carrocería compacta: las filas MY27 del IDAE dan 59, 75,8, 77 y 94,9 kWh de forma incoherente (p. ej. 94,9 kWh en un Q4), así que no se ha guardado battery_kwh en esas tres versiones."
   - "Tracción de las versiones sin «quattro»: ninguna fuente leída la da de forma coherente (autonomiacocheselectricos y la nomenclatura se contradicen); no se guarda."
   - "El medio (2026-04-30) cita 59/77 kWh y el IDAE 63/82 kWh en el Sportback: probablemente neta frente a bruta, sin confirmar."
