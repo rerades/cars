@@ -8,14 +8,14 @@ segment: null
 needs_review: true
 versions:
   - name: MINI Countryman E
-    battery_kwh: {value: 65.2, basis: unknown, note: "IDAE id 609160 (03/2026), la homologación más reciente; la anterior, id 609158 (03/2024): 64,6 kWh, 462 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 501, note: "IDAE id 609160 (03/2026), la homologación más reciente; la anterior, id 609158 (03/2024): 462 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 65.2, basis: unknown, note: "IDAE id 609160 (03/2026), la homologación más reciente; la anterior, id 609158 (03/2024): 64,6 kWh, 462 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 501, note: "IDAE id 609160 (03/2026), la homologación más reciente; la anterior, id 609158 (03/2024): 462 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: MINI Countryman SE
-    battery_kwh: {value: 65, basis: unknown, note: "IDAE id 609161 (03/2026), la homologación más reciente; la anterior, id 609159 (03/2024): 64,6 kWh, 432 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 467, note: "IDAE id 609161 (03/2026), la homologación más reciente; la anterior, id 609159 (03/2024): 432 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 230, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 65, basis: unknown, note: "IDAE id 609161 (03/2026), la homologación más reciente; la anterior, id 609159 (03/2024): 64,6 kWh, 432 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 467, note: "IDAE id 609161 (03/2026), la homologación más reciente; la anterior, id 609159 (03/2024): 432 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 230, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: "data/images/mini/countryman/frontal.jpg"
