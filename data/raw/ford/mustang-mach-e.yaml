@@ -2,34 +2,34 @@
 brand: ford
 brand_name: Ford
 model: Mustang Mach-E
-status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-14, tier: T3}
+status: {value: on_sale, note: "el artículo de septiembre de 2026 lista las versiones a la venta en España", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-11-01, tier: T3}
 launch: null
-segment: {value: suv_grande, note: "tabla del artículo: «SUV, segmento D, 4,71 m»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-27, tier: T3}
+segment: {value: suv_grande, note: "tabla del artículo: «SUV, segmento D, 4,71 m»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/ford-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-11-01, tier: T3}
 needs_review: true
 versions:
   - name: Standard RWD 73 kWh
-    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 610472 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 470, note: "IDAE id 610472", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 197, note: "IDAE id 610472", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: rwd, note: "IDAE id 610472: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 610472 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 470, note: "IDAE id 610472", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 197, note: "IDAE id 610472", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610472: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Premium RWD 88 kWh
-    battery_kwh: {value: 88, basis: unknown, note: "IDAE id 610479 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 615, note: "IDAE id 610479", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 203, note: "IDAE id 610479", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: rwd, note: "IDAE id 610479: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 88, basis: unknown, note: "IDAE id 610479 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 615, note: "IDAE id 610479", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 203, note: "IDAE id 610479", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610479: RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: Premium AWD 88 kWh
-    battery_kwh: {value: 88, basis: unknown, note: "IDAE id 610475 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 555, note: "IDAE id 610475", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 276, note: "IDAE id 610475", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: awd, note: "IDAE id 610475: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 88, basis: unknown, note: "IDAE id 610475 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 555, note: "IDAE id 610475", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 276, note: "IDAE id 610475", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: awd, note: "IDAE id 610475: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
   - name: GT AWD 91 kWh
-    battery_kwh: {value: 91, basis: unknown, note: "IDAE id 610476 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 515, note: "IDAE id 610476", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 358, note: "IDAE id 610476", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: awd, note: "IDAE id 610476: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 91, basis: unknown, note: "IDAE id 610476 (05.2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    wltp_km: {value: 515, note: "IDAE id 610476", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    power_kw: {value: 358, note: "IDAE id 610476", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
+    drivetrain: {value: awd, note: "IDAE id 610476: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: data/images/ford/mustang-mach-e/frontal.jpg
