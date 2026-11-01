@@ -11,5 +11,5 @@ image_license: "" # no se usan imágenes de este medio
 notes: >
   Medio español sobre movilidad eléctrica. T3: sirve para confirmar carrocería y segmento, nunca como fuente de
   precio. robots.txt no bloquea los artículos y pide Crawl-delay de 10 s (comprobado el 2026-10-13).
-last_verified: 2026-10-13
+last_verified: 2026-11-01
 status: active
