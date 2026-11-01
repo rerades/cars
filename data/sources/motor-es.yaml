@@ -11,5 +11,5 @@ image_license: "" # no se usan imágenes de este medio
 notes: >
   Medio del motor español. T3: sirve para confirmar qué versiones se venden, su nombre comercial y las fechas, nunca
   como fuente de precio. robots.txt, para cualquier agente, no bloquea /noticias/ ni /mercedes/ (comprobado el 2026-10-13).
-last_verified: 2026-10-13
+last_verified: 2026-11-01
 status: active

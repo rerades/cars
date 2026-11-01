@@ -2,25 +2,25 @@
 brand: mercedes-benz
 brand_name: Mercedes-Benz
 model: CLA Shooting Brake
-status: {value: on_sale, note: "la ficha del medio lista el CLA Shooting Brake 200, 250+ y 350 4MATIC eléctricos (2026) con precio de partida en España", source_id: motor-es, url: "https://www.motor.es/mercedes/clase-cla/shooting-brake", retrieved: 2026-10-13, tier: T3}
-segment: {value: familiar, note: "la ficha del medio lo clasifica como «Familiar» y lo describe como la variante más práctica de la gama CLA", source_id: motor-es, url: "https://www.motor.es/mercedes/clase-cla/shooting-brake", retrieved: 2026-10-13, tier: T3}
+status: {value: on_sale, note: "la ficha del medio lista el CLA Shooting Brake 200, 250+ y 350 4MATIC eléctricos (2026) con precio de partida en España", source_id: motor-es, url: "https://www.motor.es/mercedes/clase-cla/shooting-brake", retrieved: 2026-11-01, tier: T3}
+segment: {value: familiar, note: "la ficha del medio lo clasifica como «Familiar» y lo describe como la variante más práctica de la gama CLA", source_id: motor-es, url: "https://www.motor.es/mercedes/clase-cla/shooting-brake", retrieved: 2026-11-01, tier: T3}
 needs_review: false
 versions:
   - name: CLA 200 Shooting Brake
-    battery_kwh: {value: 58, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611880"}
-    wltp_km: {value: 520, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611880"}
-    power_kw: {value: 165, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 611880"}
+    battery_kwh: {value: 58, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611880"}
+    wltp_km: {value: 520, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611880"}
+    power_kw: {value: 165, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 611880"}
     price: null
   - name: CLA 250+ Shooting Brake
-    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609710"}
-    wltp_km: {value: 757, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609710; menor de 2 homologaciones: 757 km (id 609710), 758 km (id 611881)"}
-    power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609710; las dos homologaciones dan 200 kW"}
+    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609710"}
+    wltp_km: {value: 757, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609710; menor de 2 homologaciones: 757 km (id 609710), 758 km (id 611881)"}
+    power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609710; las dos homologaciones dan 200 kW"}
     price: null
   - name: CLA 350 4MATIC Shooting Brake
-    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609711"}
-    wltp_km: {value: 717, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609711; menor de 2 homologaciones: 717 km (id 609711), 718 km (id 611882)"}
-    power_kw: {value: 260, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609711; las dos homologaciones dan 260 kW"}
-    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609711"}
+    wltp_km: {value: 717, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609711; menor de 2 homologaciones: 717 km (id 609711), 718 km (id 611882)"}
+    power_kw: {value: 260, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609711; las dos homologaciones dan 260 kW"}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images: []
 open_questions:
