@@ -1,22 +1,22 @@
-# Researcher — Volvo EX60. Fuentes: idae-es (T2, versiones MY27), quecochemecompro-es y coches-es (T3). Consultado 2026-10-14.
+# Researcher — Volvo EX60. Fuentes: idae-es (T2, versiones MY27), quecochemecompro-es y coches-es (T3). Consultado 2026-10-14; refrescado 2026-11-02.
 brand: volvo
 brand_name: Volvo
 model: EX60
-status: {value: on_sale, note: "el comparador lo lista como a la venta con precio y oferta; la web oficial no se pudo leer (403)", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-10-14, tier: T3}
+status: {value: on_sale, note: "el comparador lo lista como a la venta con precio y oferta; la web oficial no se pudo leer (403)", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-11-02, tier: T3}
 launch: null
 segment: null
 needs_review: true
 versions:
   - name: EX60 P6
-    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 625, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 275, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 625, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 275, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
   - name: EX60 P10 AWD
-    battery_kwh: {value: 95, basis: unknown, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 677, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 375, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 95, basis: unknown, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 677, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 375, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
 images:
   - file: data/images/volvo/ex60/frontal.jpg
@@ -27,7 +27,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Herranderssvensson, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
-  - "Web oficial volvocars.com/es devuelve 403: precios sin leer (price null) y versiones sin confirmar en T1."
+  - "Web oficial volvocars.com/es devuelve 403 (reintentado el 2026-11-02): precios sin leer (price null) y versiones sin confirmar en T1."
   - "Versiones tomadas del IDAE (MY27). Los medios citan además una versión de 680 CV y hasta 810 km (P12) que no está en el IDAE: no se incluye."
   - "launch: ninguna fuente da la fecha desde la que se pide en España; si ya se entrega, no está confirmado."
   - "segment: coches.com lo llama 'SUV eléctrico de tamaño medio', que no es un término de la lista de RF-11."
