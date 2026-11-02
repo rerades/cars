@@ -2,7 +2,7 @@
 brand: volkswagen
 brand_name: Volkswagen
 model: ID.7
-status: {value: on_sale, note: "la ficha muestra oferta Compra Flexible; sin confirmar que se pueda pedir hoy", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id7.html", retrieved: 2026-10-14, tier: T1}
+status: {value: on_sale, note: "la ficha muestra oferta Compra Flexible; sin confirmar que se pueda pedir hoy", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id7.html", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: null
 needs_review: true
@@ -30,4 +30,5 @@ open_questions:
   - "Pro: sin potencia publicada en la ficha."
   - "segment: no aparece un término de RF-11. launch: sin fecha de pedidos."
   - "ID.7 Tourer, ID.Polo, ID.Tiguan, ID.Cross, ID.Buzz, e-Caravelle y ID.3 GTI: sin fichero, no se han leído sus fichas ni hay fuente de versiones en esta ejecución."
+  - "Refresco 2026-11-02 (fetch-page.ts, id7.html): la ficha sigue mostrando 40.200 € (ID.7 Business 210 kW) con «Oferta válida hasta el 31/10/2026», ya vencida; sin PVP limpio ni versión del fichero asociada, el precio queda null. Las potencias de Pro S y GTX salen del IDAE (retrieved 2026-10-14): fetch-idae.ts VOLKSWAGEN falla («IDAE has no brand»), no se ha podido releer y su fecha no cambia (la web sí publica 286 CV y 250 kW/340 CV)."
   - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."
