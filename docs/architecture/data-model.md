@@ -319,7 +319,10 @@ Lo que una comprobación automática tendrá que rechazar (la comprobación es t
 4. Los valores enumerados están en su lista; los números son > 0 y `wltp_km` es entero.
 5. `price`: `price_kind` presente; `financed` con `price_terms` y `price_terms_url`; `pvp` sin ellos;
    `unit: EUR`; `tier: T1`. `page_name`, si está, no es vacío ni igual al `name` de su versión
-   (sin distinguir mayúsculas, guiones ni espacios repetidos).
+   (sin distinguir mayúsculas, guiones ni espacios repetidos). Un `financed` cuyo `price_terms` diga
+   «hasta (el) DD/MM/AAAA» con una fecha anterior a su `retrieved` falla: la oferta ya había
+   terminado al leerla (ADR-0010, punto 8). Si la fecha es anterior a hoy, solo avisa, como un
+   precio viejo, para que el refresco lo relea.
 6. Los `name` de versión no se repiten. `status: on_sale` exige al menos una versión.
 7. `brand_name` es igual en todos los ficheros de la misma carpeta.
 8. `specs.wltp_max_km` coincide con el máximo de las versiones cuando las dos existen.

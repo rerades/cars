@@ -231,6 +231,8 @@ const rawShape: Check = (ctx) => {
       if (p.tier !== "T1") fail(`${at}.price.tier: must be T1`);
       if (p.price_kind === "financed") {
         if (!p.price_terms || !p.price_terms_url) fail(`${at}.price: financed needs price_terms and price_terms_url`);
+        const end = offerEnd(p.price_terms);
+        if (end && String(p.retrieved) > end) fail(`${at}.price: the offer ended ${end}, before retrieved ${p.retrieved}: store the price the page shows now, or null (ADR-0010, point 8)`);
       } else if (p.price_kind === "pvp") {
         if ("price_terms" in p || "price_terms_url" in p) fail(`${at}.price: pvp must not have price_terms`);
       } else fail(`${at}.price.price_kind: must be pvp or financed`);
@@ -338,6 +340,12 @@ const rawShape: Check = (ctx) => {
   });
 };
 
+/** ADR-0010, point 8: the end date of a financed offer, when price_terms says "hasta (el) DD/MM/YYYY". */
+export function offerEnd(terms: unknown): string | undefined {
+  const m = /hasta(?: el)? (\d{1,2})[/-](\d{1,2})[/-](\d{4})/i.exec(String(terms ?? ""));
+  return m ? `${m[3]}-${m[2].padStart(2, "0")}-${m[1].padStart(2, "0")}` : undefined;
+}
+
 const CHECKS: Record<string, Check[]> = {
   researcher: [registry, rawData, rawShape],
 };
@@ -401,6 +409,8 @@ function dataWarnings(ctx: Ctx): DataWarning[] {
     (Array.isArray(data.versions) ? data.versions : []).forEach((v: any, i: number) => {
       const r = v?.price?.retrieved;
       if (days(r) > STALE_DAYS) warn(`versions[${i}].price.retrieved ${r} is older than ${STALE_DAYS} days`, true);
+      const end = v?.price?.price_kind === "financed" ? offerEnd(v.price.price_terms) : undefined;
+      if (end && end < ctx.today) warn(`versions[${i}].price: the offer ended ${end}; the refresh applies ADR-0010, point 8`, true);
     });
     // ADR-0017, points 9 to 11
     for (const key of ["reviews", "test_results"]) {
