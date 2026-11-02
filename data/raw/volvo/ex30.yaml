@@ -1,27 +1,27 @@
-# Researcher — Volvo EX30. Fuentes: idae-es (T2, versiones MY27), quecochemecompro-es (T3, estado). Consultado 2026-10-14.
+# Researcher — Volvo EX30. Fuentes: idae-es (T2, versiones MY27), quecochemecompro-es (T3, estado). Consultado 2026-10-14; refrescado 2026-11-02.
 brand: volvo
 brand_name: Volvo
 model: EX30
-status: {value: on_sale, note: "figura a la venta con precio y oferta en un comparador; la web oficial no se pudo leer (403)", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-10-14, tier: T3}
+status: {value: on_sale, note: "figura a la venta con precio y oferta en un comparador; la web oficial no se pudo leer (403)", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-11-02, tier: T3}
 launch: null
 segment: null
 needs_review: true
 versions:
   - name: EX30 P5
-    battery_kwh: {value: 51, basis: unknown, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 341, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 200, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 51, basis: unknown, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 341, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
   - name: EX30 P5 Long Range
-    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 480, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 200, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 480, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
   - name: EX30 P8 AWD
-    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 451, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 315, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 451, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 315, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
 images:
   - file: data/images/volvo/ex30/frontal.jpg
@@ -32,7 +32,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Vauxford, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
-  - "Web oficial volvocars.com/es devuelve 403: precios sin leer (price null) y versiones sin confirmar en T1."
+  - "Web oficial volvocars.com/es devuelve 403 (reintentado el 2026-11-02): precios sin leer (price null) y versiones sin confirmar en T1."
   - "Versiones tomadas del IDAE (MY27, el año modelo más reciente). Ningún medio consultado confirma qué versiones se venden hoy en España ni con qué nombre comercial (coches.com cita 'Single Motor Extended Range' y 'Twin Motor Performance', nombres del MY24-26)."
   - "Existen homologaciones EX30 Cross Country (P5 Long Range 470 km y P8 AWD 439 km, MY27) no incluidas: no se sabe si son versiones del EX30 o un modelo aparte."
   - "launch: ninguna fuente da la fecha desde la que se pide en España."

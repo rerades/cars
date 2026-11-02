@@ -1,29 +1,29 @@
-# Researcher — Volvo ES90. Fuentes: idae-es (T2, versiones MY27), quecochemecompro-es (T3, estado y segmento). Consultado 2026-10-14.
+# Researcher — Volvo ES90. Fuentes: idae-es (T2, versiones MY27), quecochemecompro-es (T3, estado y segmento). Consultado 2026-10-14; refrescado 2026-11-02.
 brand: volvo
 brand_name: Volvo
 model: ES90
-status: {value: on_sale, note: "el comparador lo lista con precio y oferta, sin aviso de que no se venda; la web oficial no se pudo leer (403)", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-10-14, tier: T3}
+status: {value: on_sale, note: "el comparador lo lista con precio y oferta, sin aviso de que no se venda; la web oficial no se pudo leer (403)", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-11-02, tier: T3}
 launch: null
-segment: {value: berlina, note: "quecochemecompro: «La berlina de lujo sueca que apuesta por la seguridad y calidad»", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-10-27, tier: T3}
+segment: {value: berlina, note: "quecochemecompro: «La berlina de lujo sueca que apuesta por la seguridad y calidad»", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/volvo/electricos/", retrieved: 2026-11-02, tier: T3}
 needs_review: true
 versions:
   - name: ES90 Single Motor Extended Range RWD
-    battery_kwh: {value: 92, basis: unknown, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 682, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 245, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: rwd, note: "el nombre homologado dice RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 92, basis: unknown, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 682, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 245, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: rwd, note: "el nombre homologado dice RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
   - name: ES90 Twin AWD
-    battery_kwh: {value: 106, basis: unknown, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 722, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 335, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 106, basis: unknown, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 722, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 335, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
   - name: ES90 Twin Performance AWD
-    battery_kwh: {value: 106, basis: unknown, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 722, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 500, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 106, basis: unknown, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 722, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 500, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
 images:
   - file: data/images/volvo/es90/frontal.jpg
@@ -34,6 +34,6 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
-  - "Web oficial volvocars.com/es devuelve 403: precios sin leer (price null) y versiones sin confirmar en T1."
+  - "Web oficial volvocars.com/es devuelve 403 (reintentado el 2026-11-02): precios sin leer (price null) y versiones sin confirmar en T1."
   - "Versiones tomadas del IDAE (MY27). La única confirmación de venta es un comparador (T3) que pide confirmarlo con un concesionario; coches.com no trata el ES90."
   - "launch: ninguna fuente da la fecha desde la que se pide en España."
