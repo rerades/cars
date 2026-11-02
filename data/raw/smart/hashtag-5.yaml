@@ -8,44 +8,44 @@ segment: null
 needs_review: false
 versions:
   - name: Pro+
-    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 590, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 267, note: "la ficha no pone unidad; se interpreta kW (coincide con la homologación del IDAE)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 590, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 267, note: "la ficha no pone unidad; se interpreta kW (coincide con la homologación del IDAE)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
   - name: Pro+ Black Collection
-    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 590, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 267, note: "la ficha no pone unidad; se interpreta kW", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 590, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 267, note: "la ficha no pone unidad; se interpreta kW", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
   - name: Premium
-    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 590, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 267, note: "la ficha no pone unidad; se interpreta kW", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 590, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 267, note: "la ficha no pone unidad; se interpreta kW", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: rwd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
   - name: Premium AWD
-    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 540, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 432, note: "la ficha no pone unidad; se interpreta kW (coincide con la homologación del IDAE)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: awd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 540, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 432, note: "la ficha no pone unidad; se interpreta kW (coincide con la homologación del IDAE)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: awd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
   - name: BRABUS
-    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 540, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 475, note: "la ficha no pone unidad; se interpreta kW (coincide con la homologación del IDAE)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: awd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 100, basis: unknown, note: "la ficha publica «NCM 100/94 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 540, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 475, note: "la ficha no pone unidad; se interpreta kW (coincide con la homologación del IDAE)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: awd, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 400, note: "cabecera de la ficha: «Carga CC (400 kW)»", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-five/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
 images:
   - file: data/images/smart/hashtag-5/frontal.jpg

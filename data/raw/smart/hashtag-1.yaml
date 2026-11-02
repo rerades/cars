@@ -8,52 +8,52 @@ segment: {value: suv_compacto, note: "el título de la página dice «sofisticad
 needs_review: false
 versions:
   - name: Pure
-    battery_kwh: {value: 49, basis: unknown, note: "la ficha publica «LFP 49/47 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 310, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 130, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 7.4, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 49, basis: unknown, note: "la ficha publica «LFP 49/47 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 310, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 130, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 7.4, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
   - name: Pro
-    battery_kwh: {value: 49, basis: unknown, note: "la ficha publica «LFP 49/47 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 310, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 130, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 7.4, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 49, basis: unknown, note: "la ficha publica «LFP 49/47 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 310, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 130, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 7.4, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
   - name: Pro+
-    battery_kwh: {value: 66, basis: unknown, note: "la ficha publica «NCM 66/62 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 420, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 66, basis: unknown, note: "la ficha publica «NCM 66/62 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 420, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
   - name: Pro+ Black Collection
-    battery_kwh: {value: 66, basis: unknown, note: "la ficha publica «NCM 66/62 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 420, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 66, basis: unknown, note: "la ficha publica «NCM 66/62 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 420, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
   - name: Premium
-    battery_kwh: {value: 66, basis: unknown, note: "la ficha publica «NCM 66/62 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 440, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 66, basis: unknown, note: "la ficha publica «NCM 66/62 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 440, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 200, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: rwd, note: "publicado: Trasera", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
   - name: BRABUS
-    battery_kwh: {value: 66, basis: unknown, note: "la ficha publica «NCM 66/62 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    wltp_km: {value: 400, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 315, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: awd, note: "publicado: Total (AWD)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
-    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-10-15, tier: T1}
+    battery_kwh: {value: 66, basis: unknown, note: "la ficha publica «NCM 66/62 kWh» sin decir cuál es bruta o útil", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 400, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 315, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: awd, note: "publicado: Total (AWD)", source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 150, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
+    ac_max_kw: {value: 22, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-one/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
 images:
   - file: data/images/smart/hashtag-1/frontal.jpg
@@ -65,6 +65,7 @@ images:
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "Precios (2026-10-24, con fetch-page.ts y palabras PVP, Precio, Oferta válida, €, Pure): leídas es.smart.com customizer, latest-offers, stock-search, campaign/mainland y models/hashtag-one: sin ningún párrafo con precio ni letra pequeña (JavaScript), ni PDF de tarifas; price: null. Medios (T3) citan Pure 37.900 €, Pro 40.400 €, Pro+ 45.400 €, Premium 48.910 € del configurador, sin poder leerlo en la web oficial."
+  - "Refresco 2026-11-02: las fichas /specifications/ se releen y no cambian. Las páginas de modelo, customizer y latest-offers siguen sin texto servido (fetch-page.ts: sin párrafos), así que status y segment conservan su fecha y no se pueden releer; price sigue null."
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir el #1 en España."
   - "Gama de 2027 (motor.es cita que el #1 pierde dos versiones): conviene confirmar qué versiones se venden hoy; la ficha oficial aún lista Pure, Pro, Pro+, Pro+ Black Collection, Premium y BRABUS."
   - "La imagen de Commons es un #1 BRABUS."
