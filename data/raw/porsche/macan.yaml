@@ -2,52 +2,53 @@
 brand: porsche
 brand_name: Porsche
 model: Macan
-status: {value: on_sale, note: "el configurador de Porsche España publica versiones y PVP; el medio confirma que se vende hoy y que no hay versión de combustión", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
+status: {value: on_sale, note: "el configurador de Porsche España publica versiones y PVP; el medio confirma que se vende hoy y que no hay versión de combustión", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: {value: suv_compacto, note: "clasificación del medio: «SUV compacto»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/porsche-gama-electrica-espana-que-modelo-elegir/", retrieved: 2026-10-15, tier: T3}
 needs_review: false
 versions:
   - name: Macan
-    wltp_km: {value: 641, note: "rango publicado 547–641 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 265, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: rwd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    price: {value: 83296, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
+    wltp_km: {value: 641, note: "rango publicado 547–641 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 265, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: rwd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    price: {value: 83296, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
   - name: Macan 4
-    wltp_km: {value: 611, note: "rango publicado 526–611 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 300, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    price: {value: 86372, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
+    wltp_km: {value: 611, note: "rango publicado 526–611 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 300, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    price: {value: 86372, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
   - name: Macan 4S
-    wltp_km: {value: 611, note: "rango publicado 523–611 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 380, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    price: {value: 93499, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
+    wltp_km: {value: 611, note: "rango publicado 523–611 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 380, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    price: {value: 93499, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
   - name: Macan GTS
-    wltp_km: {value: 585, note: "rango publicado 529–585 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 420, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    price: {value: 108327, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
+    wltp_km: {value: 585, note: "rango publicado 529–585 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 420, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    price: {value: 108327, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
   - name: Macan Turbo
-    wltp_km: {value: 589, note: "rango publicado 527–589 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    power_kw: {value: 470, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
-    price: {value: 119649, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-10-15, tier: T1}
+    wltp_km: {value: 589, note: "rango publicado 527–589 km según llantas; se guarda el máximo", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 470, note: "potencia máxima overboost con Launch Control", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: awd, source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
+    price: {value: 119649, unit: EUR, price_kind: pvp, note: "PVP recomendado península y Baleares, con transporte, IVA e IEDMT; precio desde", source_id: porsche-es, url: "https://www.porsche.com/spain/models/macan/configure/", retrieved: 2026-11-02, tier: T1}
 images:
   - file: data/images/porsche/macan/frontal.jpg
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Porsche_Macan_%28XAB%29_IMG_2425.jpg/1280px-Porsche_Macan_%28XAB%29_IMG_2425.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Porsche_Macan_(XAB)_IMG_2425.jpg"
     source_id: wikimedia-commons
-    retrieved: 2026-10-15
+    retrieved: 2026-11-02
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 reviews:
   - title: "Probamos el Porsche Macan GTS: la demostración de que un SUV eléctrico puede ser divertido, rapidísimo en curvas y la forma más accesible de tener un Porsche de casi 600 CV"
     url: "https://www.motorpasion.com/pruebas-de-coches/2026-porsche-macan-gts-prueba"
     source_id: motorpasion-es
-    retrieved: 2026-10-27
+    retrieved: 2026-11-02
     tier: T3
     version: Macan GTS
 open_questions:
+  - "segment: autonomiacocheselectricos.es respondió HTTP 403 a fetch-page.ts el 2026-11-02; el valor y su fecha (2026-10-15) se quedan como estaban hasta el siguiente refresco."
   - "reviews: diariomotor-es no tiene una prueba del Macan eléctrico (solo noticias y la ficha del modelo); no se enlaza."
   - "launch: la web de Porsche España y el medio no dan la fecha desde la que se puede pedir el Macan eléctrico; queda null."
   - "Batería (kWh): la web de Porsche España no la publica por versión; no se toma del IDAE porque sus filas son de homologaciones anteriores al MY2027 (WLTP e hasta potencia distintos)."
