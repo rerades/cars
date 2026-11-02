@@ -2,20 +2,20 @@
 brand: toyota
 brand_name: Toyota
 model: bZ4X
-status: {value: on_sale, note: "la web lo lista en su catálogo con precio y cuota; no se ha confirmado qué versiones se venden hoy", source_id: toyota-es, url: "https://www.toyota.es/coches/precios", retrieved: 2026-10-14, tier: T1}
+status: {value: on_sale, note: "la web lo lista en su catálogo con precio y cuota; no se ha confirmado qué versiones se venden hoy", source_id: toyota-es, url: "https://www.toyota.es/coches/precios", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: null
 needs_review: true
 versions:
   - name: bZ4X 4x2 Advance 73 kWh
-    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 611916 (MY27); la web indica 73 kWh brutos", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 569, note: "IDAE id 611916 (MY27), la homologación que coincide con la web (toyota.es: 468-569 km); id 614149 (MC26) da 478 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 167, note: "IDAE id 611916; las demás homologaciones de esta versión también dan 167 kW", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 611916 (MY27); la web indica 73 kWh brutos", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 569, note: "IDAE id 611916 (MY27), la homologación que coincide con la web (toyota.es: 468-569 km); id 614149 (MC26) da 478 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 167, note: "IDAE id 611916; las demás homologaciones de esta versión también dan 167 kW", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
   - name: bZ4X 4x4 Spirit 73 kWh
-    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 611917 (MY27); la web indica 73 kWh brutos", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    wltp_km: {value: 468, note: "IDAE id 611917 (MY27), la homologación que coincide con la web (toyota.es: 468-569 km); id 614150 (MC26) da 436 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    power_kw: {value: 255, note: "IDAE id 611917 (MY27); id 614150 (MC26) da 255,3 kW. La web publica 343 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 611917 (MY27); la web indica 73 kWh brutos", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 468, note: "IDAE id 611917 (MY27), la homologación que coincide con la web (toyota.es: 468-569 km); id 614150 (MC26) da 436 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 255, note: "IDAE id 611917 (MY27); id 614150 (MC26) da 255,3 kW. La web publica 343 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
 images:
   - file: data/images/toyota/bz4x/frontal.jpg
@@ -27,6 +27,7 @@ images:
     attribution: "UltraTech66, Toyota bZ4X, vía Wikimedia Commons"
 open_questions:
   - "Precio (revisado 2026-10-24): leídas https://www.toyota.es/coches/precios y https://www.toyota.es/coches/bz4x. El texto legal de Advance dice «Precio por financiar: 37.175,01€. PVP al contado: 38.875,01€.» (con promoción y aportaciones incluidas, Oferta válida hasta el 31/10/2026), pero la lista y la cabecera muestran «Desde 39.375,00 €» con la misma cuota de 339,75 €/mes; los dos importes discrepan en 500 € y no se sabe cuál es el de la oferta, así que price: null. No hay PVP limpio sin promoción. Spirit: sin texto legal ni precio asociado con certeza."
+  - "Precio (refresco 2026-11-02): el texto legal del Advance sigue con «Oferta válida hasta el 31/10/2026» (ya pasada) y los mismos importes (Precio por financiar 37.175,01 €, PVP al contado 38.875,01 €) frente a «Desde 39.375,00 €» en la lista; la discrepancia de 500 € persiste, así que price: null."
   - "launch: la web solo dice 'Desde Marzo' y ninguna fuente da la fecha de apertura de pedidos de la gama actual."
   - "segment: la web dice 'SUV', término que no está en la lista de RF-11; null."
   - "Versiones: la web cita los acabados Advance y Spirit (468-569 km, 224-343 CV) sin ficha por versión; los datos salen del IDAE. Discrepan las homologaciones MC26 (478 y 436 km) y MY27 (569 y 468 km); el IDAE no da su fecha y se usa MY27, que es la que coincide con la web (T1) y no se escribe specs.wltp_max_km."
