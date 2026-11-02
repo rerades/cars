@@ -15,7 +15,8 @@ notes: >
   Verificado (2026-10-16): alpinecars.com/es-es es solo el selector de mercado; el sitio de España es www.alpinecars.es (responde y se lee).
   robots.txt de alpinecars.es solo bloquea URLs con parámetros (conf, confuri, dealerId, modelURI, vin) y declara sitemap.xml.
   BEV: A290 (GT 39.000 €, GT Performance 42.200 €, GTS 45.000 €) y A390 (GT 67.500 €, GTS 78.000 €), como "Precio a partir de" sin nota legal propia;
-  las ofertas de financiación (A290 desde 180 €/mes; A390 desde 495 €/mes) van aparte. El A110 es de combustión: fuera de alcance.
+  las ofertas de financiación van aparte (refresco 2026-11-02: ambas fichas muestran "desde 195€/mes").
+  Refresco 2026-11-02: precios sin cambios en ambas fichas (leídas con fetch-page.ts). El A110 es de combustión: fuera de alcance.
   Las fichas no dan batería ni autonomía por versión (A290 "hasta 380 km"; A390 GT 557 km con llantas de 20"), de ahí que esos datos salgan del IDAE.
-last_verified: 2026-10-16
+last_verified: 2026-11-02
 status: active
