@@ -2,17 +2,17 @@
 brand: toyota
 brand_name: Toyota
 model: C-HR+
-status: {value: on_sale, note: "la web lo lista en su catálogo con precio y cuota; un medio (T3) dice que la red admite pedidos, sin fecha actual", source_id: toyota-es, url: "https://www.toyota.es/coches/precios", retrieved: 2026-10-14, tier: T1}
+status: {value: on_sale, note: "la web lo lista en su catálogo con precio y cuota; un medio (T3) dice que la red admite pedidos, sin fecha actual", source_id: toyota-es, url: "https://www.toyota.es/coches/precios", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: null
 needs_review: true
 specs:
-  wltp_max_km: {value: 607, note: "Advance", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
+  wltp_max_km: {value: 607, note: "Advance", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-11-02, tier: T1}
 versions:
   - name: C-HR+ Advance
-    battery_kwh: {value: 77, basis: gross, note: "la ficha indica 77 kWh brutos", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
-    wltp_km: {value: 607, source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 167, note: "IDAE id 608211 (C-HR+ 4x2 Advance 250 77 kWh, NG26); la web publica 224 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 77, basis: gross, note: "la ficha indica 77 kWh brutos", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 607, source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 167, note: "IDAE id 608211 (C-HR+ 4x2 Advance 250 77 kWh, NG26); la web publica 224 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price:
       value: 36375
       unit: EUR
@@ -23,13 +23,13 @@ versions:
       note: "PVP al contado de la ficha (coincide con «Desde 36.375,00 €» de https://www.toyota.es/coches); incluye promoción y aportaciones, no es PVP limpio"
       source_id: toyota-es
       url: "https://www.toyota.es/coches/toyota-c-hr-plus"
-      retrieved: 2026-10-24
+      retrieved: 2026-11-02
       tier: T1
   - name: C-HR+ Spirit
-    battery_kwh: {value: 77, basis: unknown, note: "la web dice que el C-HR+ lleva una batería de 77 kWh, sin separar versiones ni decir si es bruta; el IDAE (id 608212) también da 77 kWh en el nombre", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
-    wltp_km: {value: 501, source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 252, note: "IDAE id 608212 (C-HR+ AWD-i Spirit 350 77 kWh, NG26); la web publica 343 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
-    drivetrain: {value: awd, note: "la ficha indica 4x4", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 77, basis: unknown, note: "la web dice que el C-HR+ lleva una batería de 77 kWh, sin separar versiones ni decir si es bruta; el IDAE (id 608212) también da 77 kWh en el nombre", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 501, source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 252, note: "IDAE id 608212 (C-HR+ AWD-i Spirit 350 77 kWh, NG26); la web publica 343 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: awd, note: "la ficha indica 4x4", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-11-02, tier: T1}
     price: null
 images:
   - file: data/images/toyota/c-hr-plus/frontal.jpg
@@ -41,6 +41,7 @@ images:
     attribution: "Alexander Migl, Toyota C-HR+ Auto Zuerich 2025 DSC 3056, vía Wikimedia Commons"
 open_questions:
   - "Precio (revisado 2026-10-24): Advance guardado como financed con el PVP al contado de 36.375 € (coincide con la lista de https://www.toyota.es/coches/precios); no hay PVP limpio sin promoción en la web (el «PVP recomendado» de 34.375 € también incluye promoción y aportaciones según el texto). Spirit: leídas /coches/precios y la ficha /coches/toyota-c-hr-plus; la lista da otro «Desde 44.250,00 €» sin versión asociada con certeza y la ficha no trae texto legal de Spirit; price: null."
+  - "Precio caducado (refresco 2026-11-02, ADR-0010 punto 8): el texto legal del Advance sigue diciendo «Oferta válida hasta 31-10-2026», fecha ya pasada, pero la ficha y la lista siguen mostrando el mismo importe (PVP al contado 36.375,00 €, «Desde 36.375,00 €»). Se mantiene el precio que la página muestra ahora; hay que releerlo en el próximo refresco por si Toyota publica una oferta nueva."
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir en España (un medio T3 habló de pedidos abiertos y entregas en el primer trimestre de 2026, sin confirmar)."
   - "segment: la web dice 'SUV eléctrico', término que no está en la lista de RF-11; null."
   - "Tracción del Advance: la ficha dice 4x2, no 'tracción delantera'; sin drivetrain. IDAE homologa también un C-HR+ 4x2 Advance 170 de 58 kWh (458 km, NG26) que la ficha no muestra: no incluido."
