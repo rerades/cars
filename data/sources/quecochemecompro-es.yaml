@@ -13,5 +13,5 @@ notes: >
   Comparador de precios y ofertas español. T3: solo para confirmar qué modelos figuran a la venta y cómo se
   describen; nunca como fuente de precio. robots.txt no bloquea /volvo/ ni /precios/ (comprobado el 2026-10-14);
   bloquea la sección by_brand y los parámetros vo y page. Alta para confirmar la gama eléctrica de Volvo.
-last_verified: 2026-10-14
+last_verified: 2026-11-02
 status: active

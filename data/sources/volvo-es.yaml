@@ -13,6 +13,7 @@ notes: >
   (solo /ui/, /build/, /*/build/ y algunas rutas de otros mercados). Pero la home responde 403 Forbidden a la lectura
   automática (2026-10-14): no se fuerza el acceso, así que no hay versiones ni precios leídos de esta web. Marcada
   broken hasta que se pueda leer. Los datos de Volvo salen del IDAE (idae-es, T2) y se confirman con medios (T3);
-  los precios quedan en null. Las rutas concretas de modelos, configurador y sala de prensa no se han podido verificar.
+  los precios quedan en null. Reintentado el 2026-11-02 con fetch-page.ts: sigue en HTTP 403, así que status y
+  last_verified no cambian. Las rutas concretas de modelos, configurador y sala de prensa no se han podido verificar.
 last_verified: 2026-10-14
 status: broken
