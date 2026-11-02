@@ -2,16 +2,16 @@
 brand: skoda
 brand_name: Škoda
 model: Peaq
-status: {value: on_sale, note: "indicio: botones «Solicita tu oferta» y «Pide tu oferta» y ofertas válidas hasta el 31/10/2026; la ficha remite al concesionario para plazo de entrega y no dice expresamente que se entregue", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-17, tier: T1}
+status: {value: on_sale, note: "indicio: botones «Solicita tu oferta» y «Pide tu oferta» y ofertas válidas hasta el 31/10/2026; la ficha remite al concesionario para plazo de entrega y no dice expresamente que se entregue", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: null
 needs_review: true
 specs:
-  wltp_max_km: {value: 638, note: "«Con hasta 638 km de autonomía eléctrica»", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+  wltp_max_km: {value: 638, note: "«Con hasta 638 km de autonomía eléctrica»", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
 versions:
   - name: Selection
-    battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
     price:
       value: 48907
       unit: EUR
@@ -21,11 +21,11 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 47.152,50 €"
       source_id: skoda-es
       url: "https://www.skoda.es/modelos/peaq/peaq"
-      retrieved: 2026-10-24
+      retrieved: 2026-11-02
       tier: T1
   - name: Sportline
-    battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
     price:
       value: 53087
       unit: EUR
@@ -35,7 +35,7 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 51.332,50 €"
       source_id: skoda-es
       url: "https://www.skoda.es/modelos/peaq/peaq"
-      retrieved: 2026-10-24
+      retrieved: 2026-11-02
       tier: T1
 images:
   - file: data/images/skoda/peaq/frontal.jpg
@@ -46,6 +46,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Ssu, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "Refresco 2026-11-02 (ADR-0010, punto 8): la ficha, leída con fetch-page.ts, sigue publicando las notas 2 y 4 con la oferta válida hasta el 31/10/2026, ya vencida, y con los mismos importes; se conservan como financed con su fecha. Sin otro precio en la página; revisar en el siguiente refresco si la marca publica una oferta nueva."
   - "Precios (2026-10-24): leída con fetch-page.ts la ficha https://www.skoda.es/modelos/peaq/peaq; las notas 2 y 4 dan un «PVP recomendado financiando» (Selection 47.152,50 €, Sportline 51.332,50 €, hasta 31/10/2026), guardado como financed con el texto literal. Sigue sin PVP limpio. El «precio al contado» de esas notas (48.907 € y 53.087 €) es mayor (diferencia de 1.754,50 € en ambas, igual que en otras fichas de la marca) y la ficha no explica por qué; las notas «desde» piden capital mínimo de 19.000 € frente a los 17.000 € de las notas de «PVP recomendado financiando». Los «desde» (41.900 / 46.050 €) incluyen Plan Auto+ (4.050 €) y no se usan."
   - "segment: la ficha lo describe como SUV de 5 o 7 plazas sin clase formal; queda null."
   - "La ficha habla de «dos opciones de motor» pero solo detalla la de 210 kW; el IDAE lista también una versión de 220 kW (motor dual). No se añade sin fuente de la marca."
