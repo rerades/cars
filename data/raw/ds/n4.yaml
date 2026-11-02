@@ -8,9 +8,9 @@ segment: {value: compacto, note: "el medio lo clasifica como «Compacto»", sour
 needs_review: true
 versions:
   - name: Nº4 E-Tense 215
-    battery_kwh: {value: 58.3, basis: unknown, note: "IDAE id 610016; el medio (T3) da 61 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 450, note: "IDAE id 610016 (Nº4 E-TENSE 215 DS PERFORMANCE Line); las filas 606512, 606735 y 606509 (213 CV) dan lo mismo y el IDAE no las fecha. El medio (T3) publica 449 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 157, note: "IDAE id 610016; el medio (T3) publica 215 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 58.3, basis: unknown, note: "IDAE id 610016; el medio (T3) da 61 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 450, note: "IDAE id 610016 (Nº4 E-TENSE 215 DS PERFORMANCE Line); las filas 606512, 606735 y 606509 (213 CV) dan lo mismo y el IDAE no las fecha. El medio (T3) publica 449 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 157, note: "IDAE id 610016; el medio (T3) publica 215 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
 images:
   - file: data/images/ds/n4/frontal.jpg
@@ -21,6 +21,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "DS Automobiles SK, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "Refresco 2026-11-02: fetch-page.ts sigue dando HTTP 403 en dsautomobiles.es y en autonomiacocheselectricos.es; status y segment (T3) conservan su fecha. IDAE releído: valores sin cambios."
   - "Web oficial dsautomobiles.es devuelve 403: precio y versiones vigentes sin confirmar con T1. El medio (T3) da 45.400 €, que no se guarda como precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "Batería: el IDAE da 58,3 kWh y el medio 61 kWh; sin fuente T1 no se resuelve."
