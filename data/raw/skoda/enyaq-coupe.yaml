@@ -2,16 +2,16 @@
 brand: skoda
 brand_name: Škoda
 model: Enyaq Coupé
-status: {value: on_sale, note: "indicio: botones «Solicita tu oferta» y «Pide tu oferta» y oferta válida hasta el 31/10/2026; la ficha remite al concesionario para plazo de entrega y no dice expresamente que se entregue", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-17, tier: T1}
+status: {value: on_sale, note: "indicio: botones «Solicita tu oferta» y «Pide tu oferta» y oferta válida hasta el 31/10/2026; la ficha remite al concesionario para plazo de entrega y no dice expresamente que se entregue", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: null
 needs_review: true
 specs:
-  wltp_max_km: {value: 591, note: "«hasta 591 km de autonomía en ruta»", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+  wltp_max_km: {value: 591, note: "«hasta 591 km de autonomía en ruta»", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
 versions:
   - name: Selection
-    battery_kwh: {value: 58, basis: usable, note: "publicado: 61 kWh (58 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 140, note: "publicado: 140 kW (190 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 58, basis: usable, note: "publicado: 61 kWh (58 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 140, note: "publicado: 140 kW (190 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
     price:
       value: 41163.20
       unit: EUR
@@ -21,11 +21,11 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 39.408,70 €"
       source_id: skoda-es
       url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe"
-      retrieved: 2026-10-24
+      retrieved: 2026-11-02
       tier: T1
   - name: Sportline
-    battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
     price:
       value: 47148.21
       unit: EUR
@@ -35,11 +35,11 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 45.393,71 €"
       source_id: skoda-es
       url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe"
-      retrieved: 2026-10-24
+      retrieved: 2026-11-02
       tier: T1
   - name: RS
-    battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
     price:
       value: 50758.21
       unit: EUR
@@ -49,7 +49,7 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 49.003,71 €"
       source_id: skoda-es
       url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe"
-      retrieved: 2026-10-24
+      retrieved: 2026-11-02
       tier: T1
 images:
   - file: data/images/skoda/enyaq-coupe/frontal.jpg
@@ -60,6 +60,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "Refresco 2026-11-02 (ADR-0010, punto 8): la ficha, leída con fetch-page.ts, sigue publicando las notas 2, 3 y 4 con la oferta válida hasta el 31/10/2026, ya vencida, y con los mismos importes; se conservan como financed con su fecha. Sin otro precio en la página; revisar en el siguiente refresco si la marca publica una oferta nueva."
   - "Precios: la ficha solo da «desde» 33.700 / 40.100 / 43.750 € sujetos a financiación e incluyendo Plan Auto+ (y Plan CAE); no es PVP sin ayudas y no se guarda. Leída 2026-10-24 con fetch-page.ts la ficha https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe: las notas 2, 3 y 4 dan un «PVP recomendado financiando» por versión (Selection 39.408,70 €, Sportline 45.393,71 €, RS 49.003,71 €, hasta 31/10/2026), guardado como financed con el texto literal. Sigue sin PVP limpio."
   - "segment: la ficha dice «SUV deportivo», que no está en la lista de RF-11; queda null."
   - "La ficha muestra también un bloque «60 150 kW (204 CV)» que no corresponde a ninguna de las tres versiones listadas; no se usa."

@@ -2,14 +2,14 @@
 brand: skoda
 brand_name: Škoda
 model: Epiq
-status: {value: on_sale, note: "indicio débil: botones «Pide tu oferta» y «Quiero mi Epiq» y «Oferta válida hasta el 31/10/2026»; sin botón de reserva, plazo de entrega ni cifras de entregas", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-17, tier: T1}
+status: {value: on_sale, note: "indicio débil: botones «Pide tu oferta» y «Quiero mi Epiq» y «Oferta válida hasta el 31/10/2026»; sin botón de reserva, plazo de entrega ni cifras de entregas", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
 launch: null
-segment: {value: suv_compacto, note: "título de la ficha: «SUV compacto y 100% eléctrico»", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
+segment: {value: suv_compacto, note: "título de la ficha: «SUV compacto y 100% eléctrico»", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
 needs_review: true
 versions:
   - name: Urban
-    battery_kwh: {value: 37, basis: usable, note: "publicado: 38,5 kWh (37 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 99, note: "publicado: 99 kW (135 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 37, basis: usable, note: "publicado: 38,5 kWh (37 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 99, note: "publicado: 99 kW (135 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
     price:
       value: 25924.60
       unit: EUR
@@ -19,11 +19,11 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 24.170,10 €"
       source_id: skoda-es
       url: "https://www.skoda.es/modelos/epiq/epiq"
-      retrieved: 2026-10-24
+      retrieved: 2026-11-02
       tier: T1
   - name: Selection
-    battery_kwh: {value: 37, basis: usable, note: "publicado: 38,5 kWh (37 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 99, note: "publicado: 99 kW (135 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 37, basis: usable, note: "publicado: 38,5 kWh (37 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 99, note: "publicado: 99 kW (135 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
     price:
       value: 28249.69
       unit: EUR
@@ -33,11 +33,11 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 26.495,19 €"
       source_id: skoda-es
       url: "https://www.skoda.es/modelos/epiq/epiq"
-      retrieved: 2026-10-24
+      retrieved: 2026-11-02
       tier: T1
   - name: First Edition
-    battery_kwh: {value: 52, basis: usable, note: "publicado: 55 kWh (52 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
-    power_kw: {value: 155, note: "publicado: 155 kW (210 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-10-14, tier: T1}
+    battery_kwh: {value: 52, basis: usable, note: "publicado: 55 kWh (52 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
+    power_kw: {value: 155, note: "publicado: 155 kW (210 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
     price:
       value: 35101.19
       unit: EUR
@@ -47,7 +47,7 @@ versions:
       note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 33.346,69 €"
       source_id: skoda-es
       url: "https://www.skoda.es/modelos/epiq/epiq"
-      retrieved: 2026-10-24
+      retrieved: 2026-11-02
       tier: T1
 images:
   - file: data/images/skoda/epiq/frontal.jpg
@@ -58,6 +58,7 @@ images:
     license: CC-BY-4.0
     attribution: "Oil151kv, CC BY 4.0, via Wikimedia Commons"
 open_questions:
+  - "Refresco 2026-11-02 (ADR-0010, punto 8): la ficha, leída con fetch-page.ts, sigue publicando las notas 2, 3 y 4 con la oferta válida hasta el 31/10/2026, ya vencida, y con los mismos importes; se conservan como financed con su fecha. Sin otro precio en la página; revisar en el siguiente refresco si la marca publica una oferta nueva."
   - "Precios (2026-10-24): leída con fetch-page.ts la ficha https://www.skoda.es/modelos/epiq/epiq; las notas 2, 3 y 4 dan un «PVP recomendado financiando» por versión (Urban 24.170,10 €, Selection 26.495,19 €, First Edition 33.346,69 €, hasta 31/10/2026), guardado como financed con el texto literal. Sigue sin PVP limpio. Los «desde» (18.500 / 20.800 / 27.600 €) incluyen Plan Auto+ y no se usan. La ficha se contradice: la nota 1 da capital mínimo de 19.000 € y 84 meses, las notas 2 a 4 un crédito mínimo de 17.000 € y 36 meses de permanencia; el pie de la ficha dice «©2024» y en lecturas anteriores «Oferta vigente hasta 30 de junio de 2025», frente a «Oferta válida hasta el 31/10/2026»."
   - "Autonomía: la ficha da «hasta 439 km» y «hasta 437 km en ruta», contradictorios; no se rellena wltp_max_km ni wltp_km. El IDAE homologa Epiq MY27 (Urban 55 kWh: 437 km), sin cruzar con la ficha."
   - "launch y pedidos abiertos: la ficha no los indica; modelo marcado needs_review."
