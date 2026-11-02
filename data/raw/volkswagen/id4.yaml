@@ -2,14 +2,14 @@
 brand: volkswagen
 brand_name: Volkswagen
 model: ID.4
-status: {value: on_sale, note: "la ficha muestra oferta de financiación; sin confirmar que se pueda pedir hoy", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-10-14, tier: T1}
+status: {value: on_sale, note: "la ficha muestra oferta de financiación; sin confirmar que se pueda pedir hoy", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: null
 needs_review: true
 specs:
-  power_max_kw: {value: 210, note: "publicado: hasta 210 kW (286 CV)", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-10-14, tier: T1}
-  battery_kwh_options: {value: [77, 79], note: "de 77 kWh a 79 kWh", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-10-14, tier: T1}
-  drivetrains: {value: [rwd, awd], note: "trasera o 4Motion", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-10-14, tier: T1}
+  power_max_kw: {value: 210, note: "publicado: hasta 210 kW (286 CV)", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-11-02, tier: T1}
+  battery_kwh_options: {value: [77, 79], note: "de 77 kWh a 79 kWh", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-11-02, tier: T1}
+  drivetrains: {value: [rwd, awd], note: "trasera o 4Motion", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-11-02, tier: T1}
 versions:
   - name: Pro
     price: null
@@ -32,4 +32,5 @@ open_questions:
   - "segment: la ficha dice «SUV», que no es un término de la lista de RF-11."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir. Un medio (T3) sugiere nuevos ID.4/ID.7 fabricados en España en 2027; confirmar qué se vende hoy."
   - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."
+  - "Refresco 2026-11-02 (fetch-page.ts, id4.html): valores de status y specs releídos y sin cambios. La ficha sigue mostrando 32.400 € con «Oferta válida hasta el 31/10/2026», ya vencida, con la misma nota legal (ayudas Plan Auto+ y CAES incluidas); sigue sin PVP limpio, el precio queda null."
   - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."
