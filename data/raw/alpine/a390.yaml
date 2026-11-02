@@ -2,16 +2,16 @@
 brand: alpine
 brand_name: Alpine
 model: A390
-status: {value: on_sale, note: "la web de España lista las versiones con configurador y oferta de pedido", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a390.html", retrieved: 2026-10-16, tier: T1}
+status: {value: on_sale, note: "la web de España lista las versiones con configurador y oferta de pedido", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a390.html", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: null
 needs_review: false
 versions:
   - name: A390 GT
-    battery_kwh: {value: 89, basis: unknown, note: "IDAE id 608972; la web publica 'Batería de 89 kWh'", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 568, note: "IDAE id 608972; la web publica 557 km para el GT con llantas opcionales de 20\"", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 295, note: "IDAE id 608972", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    drivetrain: {value: awd, note: "'tracción a las cuatro ruedas con tres motores eléctricos'", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a390.html", retrieved: 2026-10-16, tier: T1}
+    battery_kwh: {value: 89, basis: unknown, note: "IDAE id 608972; la web publica 'Batería de 89 kWh'", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 568, note: "IDAE id 608972; la web publica 557 km para el GT con llantas opcionales de 20\"", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 295, note: "IDAE id 608972", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: awd, note: "'tracción a las cuatro ruedas con tres motores eléctricos'", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a390.html", retrieved: 2026-11-02, tier: T1}
     price:
       value: 67500
       unit: EUR
@@ -19,14 +19,14 @@ versions:
       note: "'Precio a partir de 67.500 €'; la oferta de financiación usa otro precio al contado (67.550 €)"
       source_id: alpine-es
       url: "https://www.alpinecars.es/modelos-electricos/a390.html"
-      retrieved: 2026-10-16
+      retrieved: 2026-11-02
       tier: T1
   - name: A390 GTS
-    battery_kwh: {value: 89, basis: unknown, note: "IDAE id 614312", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 560, note: "IDAE id 614312", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 345, note: "IDAE id 614312; la web publica 'hasta 470 CV'", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    drivetrain: {value: awd, note: "'tracción a las cuatro ruedas con tres motores eléctricos'", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a390.html", retrieved: 2026-10-16, tier: T1}
-    dc_max_kw: {value: 190, note: "nota al pie: 'hasta 190 kW', solo GTS", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a390.html", retrieved: 2026-10-16, tier: T1}
+    battery_kwh: {value: 89, basis: unknown, note: "IDAE id 614312", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 560, note: "IDAE id 614312", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 345, note: "IDAE id 614312; la web publica 'hasta 470 CV'", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: awd, note: "'tracción a las cuatro ruedas con tres motores eléctricos'", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a390.html", retrieved: 2026-11-02, tier: T1}
+    dc_max_kw: {value: 190, note: "nota al pie: 'hasta 190 kW', solo GTS", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a390.html", retrieved: 2026-11-02, tier: T1}
     price:
       value: 78000
       unit: EUR
@@ -34,7 +34,7 @@ versions:
       note: "'Precio a partir de 78.000 €'; sin nota legal propia"
       source_id: alpine-es
       url: "https://www.alpinecars.es/modelos-electricos/a390.html"
-      retrieved: 2026-10-16
+      retrieved: 2026-11-02
       tier: T1
 images:
   - file: data/images/alpine/a390/frontal.jpg

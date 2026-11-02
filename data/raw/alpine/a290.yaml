@@ -2,15 +2,15 @@
 brand: alpine
 brand_name: Alpine
 model: A290
-status: {value: on_sale, note: "la web de España lista las versiones con configurador y ofertas de pedido", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a290.html", retrieved: 2026-10-16, tier: T1}
+status: {value: on_sale, note: "la web de España lista las versiones con configurador y ofertas de pedido", source_id: alpine-es, url: "https://www.alpinecars.es/modelos-electricos/a290.html", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: null
 needs_review: false
 versions:
   - name: A290 GT
-    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 603418; mismos valores en 609760 (MY26) y 614309 (E-Call)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 389, note: "IDAE id 603418; la web de la marca publica 'hasta 380 km' para la gama", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 130, note: "IDAE id 603418", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 603418; mismos valores en 609760 (MY26) y 614309 (E-Call)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 389, note: "IDAE id 603418; la web de la marca publica 'hasta 380 km' para la gama", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 130, note: "IDAE id 603418", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price:
       value: 39000
       unit: EUR
@@ -18,12 +18,12 @@ versions:
       note: "'Precio a partir de 39.000 €'; la página no liga ese precio a ninguna oferta"
       source_id: alpine-es
       url: "https://www.alpinecars.es/modelos-electricos/a290.html"
-      retrieved: 2026-10-16
+      retrieved: 2026-11-02
       tier: T1
   - name: A290 GT Performance
-    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 603417; mismos valores en 609759 (MY26) y 614310 (E-Call)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 389, note: "IDAE id 603417; la web de la marca publica 'hasta 380 km' para la gama", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 603417; la web publica 'hasta 220 CV (160kW)'", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 603417; mismos valores en 609759 (MY26) y 614310 (E-Call)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 389, note: "IDAE id 603417; la web de la marca publica 'hasta 380 km' para la gama", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 603417; la web publica 'hasta 220 CV (160kW)'", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price:
       value: 42200
       unit: EUR
@@ -31,12 +31,12 @@ versions:
       note: "'Precio a partir de 42.200 €'; la página no liga ese precio a ninguna oferta"
       source_id: alpine-es
       url: "https://www.alpinecars.es/modelos-electricos/a290.html"
-      retrieved: 2026-10-16
+      retrieved: 2026-11-02
       tier: T1
   - name: A290 GTS
-    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 603420; mismos valores en 609762 (MY26) y 614311 (E-Call)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 389, note: "IDAE id 603420; la web de la marca publica 'hasta 380 km' para la gama", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 603420; la web publica 'hasta 220 CV (160kW)'", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 603420; mismos valores en 609762 (MY26) y 614311 (E-Call)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 389, note: "IDAE id 603420; la web de la marca publica 'hasta 380 km' para la gama", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 603420; la web publica 'hasta 220 CV (160kW)'", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price:
       value: 45000
       unit: EUR
@@ -44,7 +44,7 @@ versions:
       note: "'Precio a partir de 45.000 €'; la página no liga ese precio a ninguna oferta"
       source_id: alpine-es
       url: "https://www.alpinecars.es/modelos-electricos/a290.html"
-      retrieved: 2026-10-16
+      retrieved: 2026-11-02
       tier: T1
 images:
   - file: data/images/alpine/a290/frontal.jpg
