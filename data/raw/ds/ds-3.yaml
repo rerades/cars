@@ -8,9 +8,9 @@ segment: {value: suv_pequeno, note: "el medio lo clasifica como «SUV pequeño»
 needs_review: true
 versions:
   - name: DS 3 E-Tense 156
-    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 404, note: "IDAE id 610010 (DS 3 E-TENSE 156 DS PERFORMANCE Line). Las filas del IDAE no traen fecha: 404 km (156 CV) y 436 km (Bastille, Opera, Performance Line); se usa la de menor wltp_km. El medio (T3) publica 402 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 115, note: "IDAE id 610010", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 404, note: "IDAE id 610010 (DS 3 E-TENSE 156 DS PERFORMANCE Line). Las filas del IDAE no traen fecha: 404 km (156 CV) y 436 km (Bastille, Opera, Performance Line); se usa la de menor wltp_km. El medio (T3) publica 402 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 610010", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
 images:
   - file: data/images/ds/ds-3/frontal.jpg
@@ -21,6 +21,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "Refresco 2026-11-02: fetch-page.ts sigue dando HTTP 403 en dsautomobiles.es y en autonomiacocheselectricos.es; status y segment (T3) conservan su fecha. IDAE releído: valores sin cambios."
   - "Web oficial dsautomobiles.es devuelve 403: precio, versiones y acabados vigentes sin confirmar con T1. El medio (T3) da una versión «Standard» desde 39.975 €, que no se guarda como precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "Confirmar con T1 si la versión de 436 km (Bastille/Opera/Performance Line del IDAE) sigue a la venta."

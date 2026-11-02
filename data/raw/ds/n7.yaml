@@ -8,22 +8,22 @@ segment: null
 needs_review: true
 versions:
   - name: Nº7 E-Tense FWD
-    battery_kwh: {value: 74.3, basis: unknown, note: "IDAE id 610622; el medio (T3) da 80 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 543, note: "IDAE id 610622 (Nº7 ÉTOILE E-TENSE FWD); las demás filas FWD (Nº7, Pallas, La Premiere) dan lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 169, note: "IDAE id 610622; motor1 (T3) publica 230 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    drivetrain: {value: fwd, note: "«FWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 74.3, basis: unknown, note: "IDAE id 610622; el medio (T3) da 80 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 543, note: "IDAE id 610622 (Nº7 ÉTOILE E-TENSE FWD); las demás filas FWD (Nº7, Pallas, La Premiere) dan lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 169, note: "IDAE id 610622; motor1 (T3) publica 230 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: fwd, note: "«FWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
   - name: Nº7 E-Tense FWD Long Range
-    battery_kwh: {value: 97.2, basis: unknown, note: "IDAE id 610627; el medio (T3) da 101 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 740, note: "IDAE id 610627 (Nº7 LA PREMIERE E-TENSE FWD Long Range); las demás filas FWD Long Range dan lo mismo. El medio (T3) publica 739 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 180, note: "IDAE id 610627 (180 kW; las filas Étoile, Pallas y Nº7 dan 169 kW, sin fecha para elegir). Coincide con los 245 CV de motor1 (T3).", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    drivetrain: {value: fwd, note: "«FWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 97.2, basis: unknown, note: "IDAE id 610627; el medio (T3) da 101 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 740, note: "IDAE id 610627 (Nº7 LA PREMIERE E-TENSE FWD Long Range); las demás filas FWD Long Range dan lo mismo. El medio (T3) publica 739 km.", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 180, note: "IDAE id 610627 (180 kW; las filas Étoile, Pallas y Nº7 dan 169 kW, sin fecha para elegir). Coincide con los 245 CV de motor1 (T3).", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: fwd, note: "«FWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
   - name: Nº7 E-Tense AWD Long Range
-    battery_kwh: {value: 97.2, basis: unknown, note: "IDAE id 610628; el medio (T3) da 101 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    wltp_km: {value: 679, note: "IDAE id 610628 (Nº7 LA PREMIERE E-TENSE AWD Long Range); la fila Étoile 610624 da lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    power_kw: {value: 257, note: "IDAE id 610628; la fila Étoile 610624 da 169 kW y motor1/el medio (T3) publican 375 CV (276 kW): sin resolver", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
-    drivetrain: {value: awd, note: "«AWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-15, tier: T2}
+    battery_kwh: {value: 97.2, basis: unknown, note: "IDAE id 610628; el medio (T3) da 101 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    wltp_km: {value: 679, note: "IDAE id 610628 (Nº7 LA PREMIERE E-TENSE AWD Long Range); la fila Étoile 610624 da lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    power_kw: {value: 257, note: "IDAE id 610628; la fila Étoile 610624 da 169 kW y motor1/el medio (T3) publican 375 CV (276 kW): sin resolver", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    drivetrain: {value: awd, note: "«AWD» en el nombre de la versión del IDAE", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
     price: null
 images:
   - file: data/images/ds/n7/frontal.jpg
@@ -34,6 +34,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "DS Automobiles SK, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "Refresco 2026-11-02: fetch-page.ts sigue dando HTTP 403 en dsautomobiles.es y en autonomiacocheselectricos.es; status (T3) conserva su fecha. IDAE releído: valores sin cambios."
   - "Web oficial dsautomobiles.es devuelve 403: precios y versiones vigentes sin confirmar con T1. Los medios (T3) dan precios desde 49.400 €, que no se guardan."
   - "launch: motor1-es (T3, «Actualizado: 20 may», sin año) dice que los pedidos aún no estaban abiertos y que se abrirían en días; ninguna fuente da la fecha de apertura."
   - "segment: motor1 dice «segmento C» y el medio «SUV medio»; ninguno está en la lista de RF-11, queda null."
