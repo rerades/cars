@@ -2,7 +2,7 @@
 brand: volkswagen
 brand_name: Volkswagen
 model: ID.3 Neo
-status: {value: on_sale, note: "la ficha muestra oferta de financiación vigente hasta 31/10/2026; no dice expresamente desde cuándo ni que se entregue", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id3.html", retrieved: 2026-10-14, tier: T1}
+status: {value: on_sale, note: "la ficha muestra oferta de financiación vigente hasta 31/10/2026; no dice expresamente desde cuándo ni que se entregue", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id3.html", retrieved: 2026-11-02, tier: T1}
 launch: null
 segment: null
 needs_review: true
@@ -26,4 +26,4 @@ open_questions:
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: la fuente no usa un término de la lista de RF-11 (motor1 dice «compacto» en T3, pero sin confirmación de marca)."
   - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."
-  - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."
+  - "Refresco 2026-11-02 (fetch-page.ts, id3.html): la ficha sigue mostrando 25.600 € con «Oferta válida hasta el 31/10/2026», ya vencida, y la misma nota legal (ayudas Plan Auto+ y CAES incluidas, 60 vs 36 meses); sigue sin PVP limpio, el precio queda null. La potencia de Life 125 kW sale del IDAE (retrieved 2026-10-14): fetch-idae.ts VOLKSWAGEN falla («IDAE has no brand»), no se ha podido releer y su fecha no cambia."
