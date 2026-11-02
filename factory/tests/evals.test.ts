@@ -115,6 +115,8 @@ describe("evals del researcher", () => {
       ["price_kind: pvp", "price_kind: pvp\n      page_name: volta-60", /price\.page_name: must be text other than the version name/],
       ["price_kind: pvp", "price_kind: pvp\n      page_name: \"\"", /price\.page_name: must be text other than the version name/],
       ["    price: null   #", "    #", /versions\[2\]\.price: missing/],
+      ["permanencia de 48 meses.", "permanencia de 48 meses. Oferta válida hasta el 31/08/2026.",
+        /versions\[1\]\.price: the offer ended 2026-08-31, before retrieved 2026-09-20/],
       ["name: Volta 80 AWD", "name: Volta 60", /repeated \(Volta 60\)/],
       ["wltp_max_km: {value: 520", "wltp_max_km: {value: 530", /must match the versions. maximum/],
       ["images: []", "images: [{file: x, source_url: x, page_url: x, source_id: acme-es, retrieved: 2026-09-20, attribution: null}]",
@@ -315,7 +317,15 @@ describe("validateData (ADR-0010)", () => {
     assert.match(all, /needs_review is true/);
     assert.match(all, /data\/images\/acme\/volta\/old\.png: not cited/);
     assert.doesNotMatch(all, /gitkeep/);
-    assert.ok(r.warnings.filter((w) => w.stale).every((w) => /older than/.test(w.message)));
+    assert.ok(r.warnings.filter((w) => w.stale).every((w) => /older than|offer ended/.test(w.message)));
+  });
+
+  test("point 8 warning: a financed offer that has ended since it was read", () => {
+    const ends = (date: string, today: string) => messages(validate({
+      ...SOURCES, [VOLTA]: EXAMPLE.replace("permanencia de 48 meses.", `permanencia de 48 meses. Oferta válida hasta ${date}.`),
+    }, today)).filter((m) => /offer ended/.test(m));
+    assert.deepEqual(ends("30-09-2026", "2026-10-01"), [`${VOLTA}: versions[1].price: the offer ended 2026-09-30; the refresh applies ADR-0010, point 8`]);
+    assert.deepEqual(ends("30-09-2026", "2026-09-30"), []);
   });
 
   test("ADR-0017 warnings: stale review, query string, needs_review with reviews", () => {
