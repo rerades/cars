@@ -13,6 +13,7 @@ notes: >
   lectura automática (también robots.txt); no se evita la protección. ofertas.dsautomobiles.es devuelve 404. No se ha
   podido leer ninguna página de modelos, precios ni prensa, así que de esta fuente no sale ningún dato: versiones y
   especificaciones vienen de idae-es (T2) y la confirmación de qué se vende, de medios (T3); los precios quedan a null.
-  Sala de prensa oficial por localizar.
+  Sala de prensa oficial por localizar. Refresco 2026-11-02: la home sigue dando HTTP 403 con fetch-page.ts; se mantiene
+  active y last_verified (ADR-0010, punto 7) y se reintenta en el siguiente refresco.
 last_verified: 2026-10-16
 status: active
