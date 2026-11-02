@@ -9,10 +9,10 @@ urls:
   models: https://es.smart.com/es/models/hashtag-one/ # también hashtag-two, hashtag-three, hashtag-five; fichas en /specifications/
   prices: https://es.smart.com/es/customizer/ # configurador; sin precios en el texto servido (JavaScript)
   offers: https://es.smart.com/es/latest-offers/
-  press: https://media.smart.com/eu/es # enlace "Recursos multimedia y noticias" de la home; no verificado
+  press: https://media.smart.com/eu/es # enlace "Recursos multimedia y noticias" de la home; carga bien (2026-11-02) y redirige a https://media.smart.com/es-ES/
   sitemap: https://es.smart.com/sitemap.xml
 image_license: "" # sin términos de imágenes registrados: no publicar imágenes de esta web
 notes: >
   Dominio oficial: www.smart.com/es/es/ redirige (302) a es.smart.com. robots.txt (es.smart.com): "User-agent: *, Allow: /". Las fichas /specifications/ de #1, #2, #3 y #5 se leen y dan potencia, tracción, batería, WLTP mixto y carga por versión. Las páginas de modelo, el configurador y las ofertas no muestran precios en el texto servido: no hay PVP ni precio financiado legible, por eso price es null. Segmento literal: solo #1 se presenta como "SUV compacto" (título de la página); #3 "coupé eléctrico", #5 "SUV eléctrico", #2 sin término. #2 solo admite reservas ("Reserva ya el nuevo smart #2"). Medios (T3) citan precios de configurador para #1 2027 (Pure 37.900 €), pero no se han podido leer en la web oficial.
-last_verified: 2026-10-15
+last_verified: 2026-11-02
 status: active
