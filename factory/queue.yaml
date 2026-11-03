@@ -3534,3 +3534,17 @@
     criterio de precio financed a todos los modelos con el mismo tipo de oferta, y no cambies una
     price_terms_url por otra que no hayas leído con fetch-page.ts. Quita de open_questions lo que
     resuelvas. No toques needs_review. Bitácora."
+- id: adr-evals-researcher
+  agent: architect
+  task: "ADR-0016 evalúa solo los prompts del Reviewer («Los demás agentes quedan fuera de esta ADR»), y
+    ADR-0022 limita al agente retro a proponer cambios al prompt de un agente con dataset: hoy el retro
+    no podría mejorar al Researcher, que es quien acumula los review:changes. Lee ADR-0004, ADR-0010,
+    ADR-0016, ADR-0020 y ADR-0022, PRD-007 (RF-10, CA-13), .claude/agents/researcher.md y las revisiones
+    de las PR #806, #808, #814 y #824 (gh pr view <n> --comments). Escribe una ADR nueva, propuesta,
+    para evaluar los prompts del Researcher con un dataset en factory/datasets/researcher/: qué es un
+    caso (una de esas PR, con la tarea, los ficheros de partida y la salida de fetch-page.ts congelada
+    desde su traza, para que el experimento no lea la web), qué se compara (las reglas de fechas y de
+    precio de researcher.md que esas PR incumplieron) y con qué evaluador (código determinista donde se
+    pueda, como ADR-0020, juez solo donde no), su coste por experimento frente a budgets.yaml, y cómo
+    lo usa el retro. Pon en el estado de ADR-0016 y ADR-0022 la enmienda que propone. No toques
+    factory/, .claude/, data/ ni los PRD. Bitácora."

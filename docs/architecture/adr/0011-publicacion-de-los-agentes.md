@@ -14,7 +14,7 @@
   fusionadas a mano y escribe los eventos de `ops/trust/`. Las PR `agent/retro/*` nunca se fusionan
   solas.
   Enmienda «Paso del flujo saltado» (`workflow-fail:<agente>`): aceptada (2026-10-29).
-  Enmienda «Conflictos de `last_verified`» (punto 15): propuesta (2026-11-04).
+  Enmienda «Conflictos de `last_verified`» (punto 15): propuesta y aceptada (2026-11-04, #899).
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
@@ -328,7 +328,7 @@ ella el final de su último mensaje, así que la salida no podía llegar.
 - Descartado: pedir al agente que guarde la salida en un fichero de la PR. Ensucia `data/` o la
   bitácora con texto de páginas ajenas, y seguiría dependiendo de que el agente lo haga.
 
-### Conflictos de `last_verified` (enmienda del 2026-11-04, propuesta)
+### Conflictos de `last_verified` (enmienda del 2026-11-04, aceptada)
 La #837 (Mercedes, `review:ok`) no entró en tres pasadas seguidas: chocaba con `main` solo en la
 línea `last_verified` de cuatro fuentes T3 que comparten varias marcas (`motor-es`, `idae-es`…),
 porque otros refrescos las habían verificado después. Con 50 marcas al mes, se repetirá.
