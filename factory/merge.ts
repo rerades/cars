@@ -5,7 +5,8 @@
  * The CLI is `node factory/run.ts --merge`.
  */
 import { execFileSync } from "node:child_process";
-import { appendFileSync, mkdirSync } from "node:fs";
+import { appendFileSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { parse } from "yaml";
 import { notify, REPO, STATE_DIR } from "./orchestrator.ts";
@@ -38,14 +39,20 @@ export interface AgentPr {
   comments: { body: string }[];
 }
 
+const CONFLICT = "tiene conflictos con main";
+
+/** The body of the last verdict comment of the Reviewer, or undefined. */
+const lastVerdict = (pr: AgentPr) => pr.comments.filter((c) => c.body.trimStart().startsWith(VERDICT)).at(-1)?.body;
+
 /**
  * Why the PR cannot be merged by the factory, or null when it can (ADR-0011, point 2).
  * `cited` holds the data/images/ files that a data/raw/ YAML cites at the PR head; `sources` maps
  * each data/sources/ file of the PR to newSourceBlocker or changedSourceBlocker (amendments of
- * 2026-10-15).
+ * 2026-10-15). `reviewed` is the commit the verdict has to cite (reviewedCommit, point 15).
  */
 export function agentMergeBlocker(
   pr: AgentPr, cited: Set<string>, stopped: boolean, sources = new Map<string, string | null>(),
+  reviewed = pr.headRefOid,
 ): string | null {
   if (stopped) return "interruptor de parada activo";
   if (!AGENT_BRANCH.test(pr.headRefName)) return "la rama no es agent/<agente>/<run_id>";
@@ -53,13 +60,14 @@ export function agentMergeBlocker(
   const human = NEEDS_HUMAN.find((l) => labels.has(l));
   if (human) return `tiene ${human}`;
   if (!labels.has("review:ok")) return "no tiene review:ok";
-  const verdict = pr.comments.filter((c) => c.body.trimStart().startsWith(VERDICT)).at(-1);
+  const verdict = lastVerdict(pr);
   if (!verdict) return "no hay comentario de veredicto del Revisor";
-  if (!verdict.body.includes(pr.headRefOid)) {
+  // `reviewed` is the head, or the commit the head was brought up to date from (point 15).
+  if (!verdict.includes(reviewed)) {
     return `el último veredicto no cita la cabeza ${pr.headRefOid.slice(0, 7)}: hubo commits después de la revisión`;
   }
   // UNKNOWN is GitHub still computing it; the merge itself refuses conflicts.
-  if (pr.mergeable === "CONFLICTING") return "tiene conflictos con main";
+  if (pr.mergeable === "CONFLICTING") return CONFLICT;
   if (!pr.statusCheckRollup.length) return "la CI no ha dado resultado";
   const ok = ["SUCCESS", "SKIPPED", "NEUTRAL"];
   if (pr.statusCheckRollup.some((c) => c.status !== "COMPLETED" || !ok.includes(c.conclusion ?? ""))) {
@@ -191,6 +199,100 @@ function mergeBase(pr: AgentPr, repo: string): string {
   return git(["merge-base", pr.headRefOid, "FETCH_HEAD"], repo).trim();
 }
 
+/** The SHA of main on origin, fetched now. */
+function mainSha(repo: string): string {
+  git(["fetch", "-q", "origin", "main"], repo);
+  return git(["rev-parse", "FETCH_HEAD"], repo).trim();
+}
+
+const LAST_VERIFIED = /^last_verified: *(\d{4}-\d{2}-\d{2}) *$/m;
+
+/**
+ * The tree of merging `main` into `head` when every conflict is the last_verified line of a
+ * data/sources/ file, each one set to the later of the two dates (point 15); null otherwise,
+ * also when the merge has no conflict at all.
+ */
+export function resolvedTree(head: string, main: string, repo = REPO): string | null {
+  let out: string;
+  try {
+    git(["merge-tree", "--write-tree", "--name-only", "--no-messages", head, main], repo);
+    return null;
+  } catch (e) {
+    const err = e as { status?: number; stdout?: string };
+    if (err.status !== 1 || !err.stdout) throw e; // 1 is "conflicts"; anything else is an error
+    out = err.stdout;
+  }
+  const [tree, ...paths] = out.trim().split("\n");
+  if (paths.some((p) => !p.startsWith("data/sources/"))) return null;
+  const base = git(["merge-base", head, main], repo).trim();
+  const dir = mkdtempSync(join(tmpdir(), "merge-dates-"));
+  const env = { ...process.env, GIT_INDEX_FILE: join(dir, "index") };
+  const show = (sha: string, path: string) => {
+    try {
+      return git(["show", `${sha}:${path}`], repo);
+    } catch {
+      return null;
+    }
+  };
+  try {
+    execFileSync("git", ["read-tree", tree], { cwd: repo, env });
+    for (const path of paths) {
+      const [m, b, h] = [main, base, head].map((sha) => show(sha, path));
+      const dm = m?.match(LAST_VERIFIED)?.[1];
+      const dh = h?.match(LAST_VERIFIED)?.[1];
+      if (b === null || !dm || !dh) return null;
+      const line = `last_verified: ${dm > dh ? dm : dh}`;
+      const files = [m!, b, h!].map((text, i) => {
+        const f = join(dir, String(i));
+        writeFileSync(f, text.replace(LAST_VERIFIED, line));
+        return f;
+      });
+      let merged: string;
+      try {
+        merged = execFileSync("git", ["merge-file", "-p", ...files], { cwd: repo, encoding: "utf8" });
+      } catch {
+        return null; // the file has another conflict besides last_verified
+      }
+      const blob = execFileSync("git", ["hash-object", "-w", "--stdin"], { cwd: repo, input: merged, encoding: "utf8" }).trim();
+      execFileSync("git", ["update-index", "--cacheinfo", `100644,${blob},${path}`], { cwd: repo, env });
+    }
+    return execFileSync("git", ["write-tree"], { cwd: repo, env, encoding: "utf8" }).trim();
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+/**
+ * The commit the verdict has to cite: the head itself, or the commit a chain of point-15 updates
+ * starts from. Each update must be a merge whose second parent is in main and whose tree is the
+ * one resolvedTree rebuilds from its two parents; anything else stops the chain.
+ */
+export function reviewedCommit(head: string, verdict: string, main: string, repo = REPO): string {
+  let sha = head;
+  for (let i = 0; i < 20 && !verdict.includes(sha); i++) {
+    const parents = git(["rev-list", "--parents", "-n", "1", sha], repo).trim().split(" ").slice(1);
+    if (parents.length !== 2) break;
+    const [reviewed, fromMain] = parents;
+    try {
+      git(["merge-base", "--is-ancestor", fromMain, main], repo);
+    } catch {
+      break;
+    }
+    if (resolvedTree(reviewed, fromMain, repo) !== git(["rev-parse", `${sha}^{tree}`], repo).trim()) break;
+    sha = reviewed;
+  }
+  return sha;
+}
+
+/** Merges main into the PR head with resolvedTree and pushes it to its branch (point 15). */
+function bringUpToDate(pr: AgentPr, main: string, repo: string): string {
+  const tree = resolvedTree(pr.headRefOid, main, repo)!;
+  const sha = git(["commit-tree", tree, "-p", pr.headRefOid, "-p", main, "-m",
+    `Merge main into ${pr.headRefName}\n\nResolved-by: factory (ADR-0011, point 15): last_verified of data/sources/ only`], repo).trim();
+  git(["push", "-q", "origin", `${sha}:refs/heads/${pr.headRefName}`], repo);
+  return sha;
+}
+
 /** The new or changed values of the data/raw/ YAMLs of the PR, base against head (ADR-0020). */
 function dataChanges(pr: AgentPr, repo: string): Changes {
   const base = mergeBase(pr, repo);
@@ -260,8 +362,24 @@ export async function mergePass(o: MergeOptions): Promise<{ log: string[]; recor
       let details = "";
       let label = MERGER_NEEDS_HUMAN;
       if (labels.has("review:ok")) {
+        const main = mainSha(repo);
         git(["fetch", "-q", "origin", `refs/pull/${pr.number}/head`], repo);
-        let blocker = agentMergeBlocker(pr, citedImages(pr.headRefOid, repo), o.stopped, sourceProblems(pr, repo));
+        const reviewed = reviewedCommit(pr.headRefOid, lastVerdict(pr) ?? "", main, repo);
+        const images = citedImages(pr.headRefOid, repo);
+        const sources = sourceProblems(pr, repo);
+        let blocker = agentMergeBlocker(pr, images, o.stopped, sources, reviewed);
+        // Point 15: a PR that only conflicts on last_verified is brought up to date, and merged
+        // in a later pass, once its CI has run on the new head.
+        if (blocker === CONFLICT && o.autoMerge && resolvedTree(pr.headRefOid, main, repo)
+          && !agentMergeBlocker({ ...pr, mergeable: "MERGEABLE" }, images, o.stopped, sources, reviewed)) {
+          if (o.dryRun) {
+            log.push(`se pondría al día ${pr.url}: solo choca en last_verified`);
+            continue;
+          }
+          const sha = bringUpToDate(pr, main, repo);
+          log.push(`puesta al día ${pr.url} (${sha.slice(0, 7)}): solo chocaba en last_verified; se fusiona con su CI en verde`);
+          continue;
+        }
         // The verifier reads third-party pages, so it only runs once every other rule holds.
         let verification: Verification | undefined;
         if (!blocker && pr.files.some((f) => f.path.startsWith("data/raw/"))) {
@@ -325,7 +443,7 @@ function merge(pr: AgentPr, month: string, now: Date, repo: string, verification
     `${verify.unanchored} sin versión, ${verify.no_unit} sin unidad, ${verify.unchecked} URL no comprobables, ` +
     `${verify.out_of_sample} valores fuera de la muestra y ${verify.unverifiable} no verificables por código; ` : "";
   gh(["pr", "comment", String(pr.number), "--body", `🏭 Fusión automática (ADR-0011) del SHA ${pr.headRefOid}. ` +
-    "Comprobado: rama de agente; `review:ok` sin `review:needs-human` ni `merger:*`; el último veredicto cita ese SHA; " +
+    "Comprobado: rama de agente; `review:ok` sin `review:needs-human` ni `merger:*`; el último veredicto cita ese SHA o el commit del que se puso al día (punto 15); " +
     `sin conflictos; checks terminados en verde (${checks.join(", ")}); todo el diff en ` +
     `${ALLOWED_PATHS.join(", ")}, sin borrados ni renombrados; cada imagen citada por un YAML de data/raw/; ` +
     "cada fuente nueva T1, citada, sin image_license y en el dominio de su web_es de data/candidatas.yaml; " +

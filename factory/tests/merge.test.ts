@@ -1,8 +1,12 @@
 /** Tests for the auto-merge rule of agent PRs (ADR-0011). Run: npm test */
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
 import { REPO } from "../orchestrator.ts";
-import { agentMergeBlocker, changedSourceBlocker, citedImages, citedSources, newSourceBlocker, type AgentPr } from "../merge.ts";
+import { agentMergeBlocker, changedSourceBlocker, citedImages, citedSources, newSourceBlocker, resolvedTree, reviewedCommit, type AgentPr } from "../merge.ts";
 
 const SHA = "c0408f2cdf580da62be602b07a22dccd7d41b1cb";
 const IMG = "data/images/acme/volta/frontal.jpg";
@@ -118,4 +122,51 @@ test("un cambio de fuente que solo añade URL en sus hosts entra solo", () => {
     { ...after, urls: { ...after.urls, otra: "no es una url" } },
   ];
   for (const c of cases) assert.notEqual(changedSourceBlocker(before, c), null, JSON.stringify(c));
+});
+
+test("resolvedTree only resolves last_verified conflicts in data/sources/, to the later date (point 15)", () => {
+  const repo = mkdtempSync(join(tmpdir(), "merge-dates-"));
+  const g = (...args: string[]) => execFileSync("git", ["-c", "user.name=t", "-c", "user.email=t@t",
+    "-c", "core.hooksPath=/dev/null", "-c", "commit.gpgsign=false", ...args], { cwd: repo, encoding: "utf8" }).trim();
+  const commit = (files: Record<string, string>) => {
+    for (const [f, text] of Object.entries(files)) {
+      mkdirSync(join(repo, dirname(f)), { recursive: true });
+      writeFileSync(join(repo, f), text);
+    }
+    g("add", "-A");
+    g("commit", "-q", "-m", "x");
+    return g("rev-parse", "HEAD");
+  };
+  const src = (date: string, notes = "a") => `id: motor-es\nnotes: ${notes}\nlast_verified: ${date}\nstatus: active\n`;
+  try {
+    g("init", "-q", "-b", "trunk");
+    const base = commit({ "data/sources/motor-es.yaml": src("2026-10-13"), "data/raw/x.yaml": "a: 1\n" });
+    const main = commit({ "data/sources/motor-es.yaml": src("2026-11-03") });
+    g("checkout", "-q", "-b", "pr", base);
+    const head = commit({ "data/sources/motor-es.yaml": src("2026-11-01"), "data/raw/x.yaml": "a: 2\n" });
+
+    const tree = resolvedTree(head, main, repo);
+    assert.ok(tree);
+    assert.equal(g("show", `${tree}:data/sources/motor-es.yaml`), src("2026-11-03").trim());
+    assert.equal(g("show", `${tree}:data/raw/x.yaml`), "a: 2");
+
+    // The update commit is accepted as reviewed only while its tree is the rebuilt one.
+    const update = g("commit-tree", tree!, "-p", head, "-p", main, "-m", "m");
+    assert.equal(reviewedCommit(update, `SHA ${head}`, main, repo), head);
+    const forged = g("commit-tree", `${head}^{tree}`, "-p", head, "-p", main, "-m", "m");
+    assert.equal(reviewedCommit(forged, `SHA ${head}`, main, repo), forged);
+
+    // Any other conflict, in data/sources/ or elsewhere, is left for a person.
+    g("checkout", "-q", "-b", "other", base);
+    const notes = commit({ "data/sources/motor-es.yaml": src("2026-11-01", "b") });
+    g("checkout", "-q", "trunk");
+    const main2 = commit({ "data/sources/motor-es.yaml": src("2026-11-04", "c") });
+    assert.equal(resolvedTree(notes, main2, repo), null);
+    g("checkout", "-q", "-b", "raw", main);
+    const raw = commit({ "data/raw/x.yaml": "a: 3\n" });
+    assert.equal(resolvedTree(head, raw, repo), null);
+    assert.equal(resolvedTree(head, head, repo), null); // no conflict, nothing to resolve
+  } finally {
+    rmSync(repo, { recursive: true, force: true });
+  }
 });
