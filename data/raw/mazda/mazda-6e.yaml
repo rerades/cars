@@ -2,34 +2,34 @@
 brand: mazda
 brand_name: Mazda
 model: 6e
-status: {value: on_sale, note: "la fuente dice que Mazda vende hoy dos eléctricos en España, entre ellos el 6e", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+status: {value: on_sale, note: "la fuente dice que Mazda vende hoy dos eléctricos en España, entre ellos el 6e", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-11-03, tier: T3}
 launch: null
-segment: {value: berlina, note: "autonomiacocheselectricos: «El Mazda 6e es una berlina de 4,92 metros con portón trasero»; tabla de la gama: «Berlina liftback, segmento D»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-27, tier: T3}
+segment: {value: berlina, note: "autonomiacocheselectricos: «El Mazda 6e es una berlina de 4,92 metros con portón trasero»; tabla de la gama: «Berlina liftback, segmento D»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-11-03, tier: T3}
 needs_review: true
 versions:
   - name: Takumi
-    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 606426 (258 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 479, note: "IDAE id 606426", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 190, note: "IDAE id 606426 (258 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 606426 (258 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 479, note: "IDAE id 606426", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 190, note: "IDAE id 606426 (258 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-11-03, tier: T3}
     price: null
   - name: Takumi Plus
-    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 606426 (258 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 479, note: "IDAE id 606426", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 190, note: "IDAE id 606426 (258 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 606426 (258 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 479, note: "IDAE id 606426", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 190, note: "IDAE id 606426 (258 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-11-03, tier: T3}
     price: null
   - name: Takumi Long Range
-    battery_kwh: {value: 80, basis: unknown, note: "IDAE id 606425 (245 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 552, note: "IDAE id 606425", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 180, note: "IDAE id 606425 (245 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    battery_kwh: {value: 80, basis: unknown, note: "IDAE id 606425 (245 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 552, note: "IDAE id 606425", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 180, note: "IDAE id 606425 (245 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-11-03, tier: T3}
     price: null
   - name: Takumi Plus Long Range
-    battery_kwh: {value: 80, basis: unknown, note: "IDAE id 606425 (245 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 552, note: "IDAE id 606425", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 180, note: "IDAE id 606425 (245 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-10-16, tier: T3}
+    battery_kwh: {value: 80, basis: unknown, note: "IDAE id 606425 (245 CV, todas las versiones)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 552, note: "IDAE id 606425", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 180, note: "IDAE id 606425 (245 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    drivetrain: {value: rwd, note: "un solo motor en el eje trasero", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-mazda-espana-que-modelo-elegir/", retrieved: 2026-11-03, tier: T3}
     price: null
 images:
   - file: data/images/mazda/mazda-6e/frontal.jpg
