@@ -2,22 +2,22 @@
 brand: gwm
 brand_name: GWM
 model: ORA 5
-status: {value: on_sale, note: "motor.es: se estrenó oficialmente en el mercado español en junio de 2026; la web de la marca no dice si el EV ya se puede pedir", source_id: motor-es, url: "https://www.motor.es/gwm/ora-5/", retrieved: 2026-10-17, tier: T3}
+status: {value: on_sale, note: "motor.es: se estrenó oficialmente en el mercado español en junio de 2026; la web de la marca no dice si el EV ya se puede pedir", source_id: motor-es, url: "https://www.motor.es/gwm/ora-5/", retrieved: 2026-11-03, tier: T3}
 launch: null
-segment: {value: suv_compacto, note: "motor.es: «SUV compacto multi-energía», «segmento C-SUV»; la web de la marca no lo clasifica", source_id: motor-es, url: "https://www.motor.es/gwm/ora-5/", retrieved: 2026-10-17, tier: T3}
+segment: {value: suv_compacto, note: "motor.es: «SUV compacto multi-energía», «segmento C-SUV»; la web de la marca no lo clasifica", source_id: motor-es, url: "https://www.motor.es/gwm/ora-5/", retrieved: 2026-11-03, tier: T3}
 needs_review: true
 specs:
-  wltp_max_km: {value: 435, note: "hasta 435 km WLTP", source_id: gwm-es, url: "https://www.gwm-eu.com/es/models/ora-5", retrieved: 2026-10-17, tier: T1}
+  wltp_max_km: {value: 435, note: "hasta 435 km WLTP", source_id: gwm-es, url: "https://www.gwm-eu.com/es/models/ora-5", retrieved: 2026-11-03, tier: T1}
 versions:
   - name: ORA 5 EV Explore
-    battery_kwh: {value: 58.3, basis: unknown, note: "IDAE id 611914", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
-    wltp_km: {value: 435, note: "IDAE id 611914 (ORA 5 EV 164kW (204cv) EXPLORE); coincide con la web de la marca", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
-    power_kw: {value: 150, note: "IDAE id 611914; la marca publica 204 cv", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    battery_kwh: {value: 58.3, basis: unknown, note: "IDAE id 611914", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 435, note: "IDAE id 611914 (ORA 5 EV 164kW (204cv) EXPLORE); coincide con la web de la marca", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 611914; la marca publica 204 cv", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     price: null
   - name: ORA 5 EV Advance
-    battery_kwh: {value: 58.3, basis: unknown, note: "IDAE id 611915", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
-    wltp_km: {value: 435, note: "IDAE id 611915 (ORA 5 EV 164kW (204cv) ADVANCE); coincide con la web de la marca", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
-    power_kw: {value: 150, note: "IDAE id 611915; la marca publica 204 cv", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    battery_kwh: {value: 58.3, basis: unknown, note: "IDAE id 611915", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 435, note: "IDAE id 611915 (ORA 5 EV 164kW (204cv) ADVANCE); coincide con la web de la marca", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 611915; la marca publica 204 cv", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     price: null
 images:
   - file: data/images/gwm/ora-5/lateral.jpg
