@@ -14,6 +14,7 @@
   fusionadas a mano y escribe los eventos de `ops/trust/`. Las PR `agent/retro/*` nunca se fusionan
   solas.
   Enmienda «Paso del flujo saltado» (`workflow-fail:<agente>`): aceptada (2026-10-29).
+  Enmienda «Conflictos de `last_verified`» (punto 15): propuesta (2026-11-04).
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
@@ -326,6 +327,25 @@ ella el final de su último mensaje, así que la salida no podía llegar.
   cuántas veces se salta su flujo cada agente.
 - Descartado: pedir al agente que guarde la salida en un fichero de la PR. Ensucia `data/` o la
   bitácora con texto de páginas ajenas, y seguiría dependiendo de que el agente lo haga.
+
+### Conflictos de `last_verified` (enmienda del 2026-11-04, propuesta)
+La #837 (Mercedes, `review:ok`) no entró en tres pasadas seguidas: chocaba con `main` solo en la
+línea `last_verified` de cuatro fuentes T3 que comparten varias marcas (`motor-es`, `idae-es`…),
+porque otros refrescos las habían verificado después. Con 50 marcas al mes, se repetirá.
+- **15. La fusión pone al día una PR que solo choca en `last_verified`.** Si una PR con `review:ok`
+  cumple todo el punto 2 salvo «sin conflictos», y cada conflicto con `main` es la línea
+  `last_verified` de un fichero de `data/sources/`, la fusión crea un commit de merge de `main`
+  sobre la cabeza revisada, con la fecha más reciente de las dos en cada conflicto, y lo sube a la
+  rama. No la fusiona en esa pasada: la CI tiene que correr sobre la cabeza nueva. Cualquier otro
+  conflicto sigue con `merger:needs-human`.
+- **El veredicto sigue valiendo para esa cabeza** solo si la fusión puede rehacerla: es un merge
+  cuyo primer padre cita el veredicto (o es otra puesta al día de este tipo), cuyo segundo padre
+  está en `main`, y cuyo árbol es idéntico al que da la regla con esos dos padres. Cualquier otro
+  commit después de la revisión la sigue invalidando.
+- Descartado: rebasar la rama. Cambia los commits del agente y su `run_id` (ADR-0002) y obliga a un
+  `push --force`.
+- Descartado: que el Researcher no toque `last_verified` de las fuentes compartidas. La fecha es la
+  prueba de que la fuente se ha verificado (ADR-0010, punto 7).
 
 ## Consecuencias
 **Buenas**
