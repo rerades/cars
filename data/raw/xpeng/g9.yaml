@@ -2,25 +2,25 @@
 brand: xpeng
 brand_name: Xpeng
 model: G9
-status: {value: on_sale, note: "motor.es (2025-09): los G6 y G9 mejorados ya aceptan pedidos en España", source_id: motor-es, url: "https://www.motor.es/noticias/precio-xpeng-g6-g9-2026-2025110181.html", retrieved: 2026-10-17, tier: T3}
+status: {value: on_sale, note: "motor.es (2025-09): los G6 y G9 mejorados ya aceptan pedidos en España", source_id: motor-es, url: "https://www.motor.es/noticias/precio-xpeng-g6-g9-2026-2025110181.html", retrieved: 2026-11-03, tier: T3}
 launch: null
 segment: null
 needs_review: true
 versions:
   - name: G9 RWD Standard Range
-    battery_kwh: {value: 79, basis: unknown, note: "IDAE id 607281 (G9 MY25. RWD Standard range); motor.es: 79 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 502, note: "IDAE id 607281", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 258, note: "IDAE id 607281", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 79, basis: unknown, note: "IDAE id 607281 (G9 MY25. RWD Standard range); motor.es: 79 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 502, note: "IDAE id 607281", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 258, note: "IDAE id 607281", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     price: null
   - name: G9 RWD Long Range
-    battery_kwh: {value: 93.1, basis: unknown, note: "IDAE id 607282 (G9 MY25. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 585, note: "IDAE id 607282", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 258, note: "IDAE id 607282", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 93.1, basis: unknown, note: "IDAE id 607282 (G9 MY25. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 585, note: "IDAE id 607282", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 258, note: "IDAE id 607282", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     price: null
   - name: G9 AWD Performance
-    battery_kwh: {value: 93.1, basis: unknown, note: "IDAE id 607283 (G9 MY25. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 540, note: "IDAE id 607283", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 423, note: "IDAE id 607283", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 93.1, basis: unknown, note: "IDAE id 607283 (G9 MY25. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 540, note: "IDAE id 607283", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 423, note: "IDAE id 607283", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     price: null
 images:
   - file: data/images/xpeng/g9/frontal.jpg
