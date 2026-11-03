@@ -2,21 +2,21 @@
 brand: xpeng
 brand_name: Xpeng
 model: G6
-status: {value: on_sale, note: "motor.es (2025-09) dice que los G6 y G9 mejorados ya aceptan pedidos en España; motor.es (2026-01-30) añade la versión Standard Range RWD a la gama española", source_id: motor-es, url: "https://www.motor.es/noticias/precio-xpeng-g6-g9-2026-2025110181.html", retrieved: 2026-10-17, tier: T3}
+status: {value: on_sale, note: "motor.es (2025-09) dice que los G6 y G9 mejorados ya aceptan pedidos en España; motor.es (2026-01-30) añade la versión Standard Range RWD a la gama española", source_id: motor-es, url: "https://www.motor.es/noticias/precio-xpeng-g6-g9-2026-2025110181.html", retrieved: 2026-11-03, tier: T3}
 launch: null
 segment: null
 needs_review: true
 versions:
   - name: G6 RWD Standard Range
-    battery_kwh: {value: 68.5, basis: unknown, note: "IDAE id 607455 (G6 MY25. RWD Standard range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 68.5, basis: unknown, note: "IDAE id 607455 (G6 MY25. RWD Standard range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     price: null
   - name: G6 RWD Long Range
-    battery_kwh: {value: 80.8, basis: unknown, note: "IDAE id 607456 (G6 MY25. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 218, note: "IDAE id 607456", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 80.8, basis: unknown, note: "IDAE id 607456 (G6 MY25. RWD Long range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 218, note: "IDAE id 607456", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     price: null
   - name: G6 AWD Performance
-    battery_kwh: {value: 80.8, basis: unknown, note: "IDAE id 607457 (G6 MY25. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 358, note: "IDAE id 607457", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 80.8, basis: unknown, note: "IDAE id 607457 (G6 MY25. AWD Performance)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 358, note: "IDAE id 607457", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     price: null
 images:
   - file: data/images/xpeng/g6/frontal.jpg
