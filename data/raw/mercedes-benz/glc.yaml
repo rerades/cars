@@ -2,16 +2,16 @@
 brand: mercedes-benz
 brand_name: Mercedes-Benz
 model: GLC
-status: {value: on_sale, note: "artículo de 22/10/2025: «Por el momento sólo está disponible una única versión mecánica del GLC eléctrico», con PVP en España", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-por-fin-pone-precio-mejor-suv-electrico-jamas-haya-creado-rival-natural-tesla-model_83003_102.html", retrieved: 2026-10-13, tier: T3}
+status: {value: on_sale, note: "artículo de 22/10/2025: «Por el momento sólo está disponible una única versión mecánica del GLC eléctrico», con PVP en España", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-por-fin-pone-precio-mejor-suv-electrico-jamas-haya-creado-rival-natural-tesla-model_83003_102.html", retrieved: 2026-11-01, tier: T3}
 launch: null
-segment: {value: suv_grande, note: "hibridosyelectricos: «estamos ante un SUV digno del segmento D»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-por-fin-pone-precio-mejor-suv-electrico-jamas-haya-creado-rival-natural-tesla-model_83003_102.html", retrieved: 2026-10-27, tier: T3}
+segment: {value: suv_grande, note: "hibridosyelectricos: «estamos ante un SUV digno del segmento D»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/mercedes-por-fin-pone-precio-mejor-suv-electrico-jamas-haya-creado-rival-natural-tesla-model_83003_102.html", retrieved: 2026-11-01, tier: T3}
 needs_review: false
 versions:
   - name: GLC 400 4MATIC
-    battery_kwh: {value: 94, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609716; el medio publica 94 kWh netos"}
-    wltp_km: {value: 682, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609716; el medio publica 666 km homologados y 713 km con la opción Long Range Edition"}
-    power_kw: {value: 360, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 609716; el medio publica 489 CV"}
-    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 94, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609716; el medio publica 94 kWh netos"}
+    wltp_km: {value: 682, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609716; el medio publica 666 km homologados y 713 km con la opción Long Range Edition"}
+    power_kw: {value: 360, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 609716; el medio publica 489 CV"}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
   - file: "data/images/mercedes-benz/glc/frontal.jpg"

@@ -2,21 +2,21 @@
 brand: mercedes-benz
 brand_name: Mercedes-Benz
 model: GLA
-status: {value: announced, note: "artículo de 03/08/2026 con el PVP en España del GLA 250+ y el GLA 350 4Matic; primeras entregas previstas para noviembre; el GLA 200 llegará más adelante, sin precio", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/precio-mercedes-gla-2026/", retrieved: 2026-10-13, tier: T3}
+status: {value: announced, note: "artículo de 03/08/2026 con el PVP en España del GLA 250+ y el GLA 350 4Matic; primeras entregas previstas para noviembre; el GLA 200 llegará más adelante, sin precio", source_id: diariomotor-es, url: "https://www.diariomotor.com/noticia/precio-mercedes-gla-2026/", retrieved: 2026-11-01, tier: T3}
 launch: null
 segment: null
 needs_review: false
 versions:
   - name: GLA 250+
-    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613457"}
-    wltp_km: {value: 725, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613457; el medio publica hasta 654 km WLTP"}
-    power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613457; el medio publica 272 CV"}
+    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614605"}
+    wltp_km: {value: 725, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614605; el medio publica hasta 654 km WLTP"}
+    power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614605; el medio publica 272 CV"}
     price: null
   - name: GLA 350 4MATIC
-    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613458"}
-    wltp_km: {value: 681, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613458; el medio publica 640 km WLTP"}
-    power_kw: {value: 260, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2, note: "IDAE id 613458; el medio publica 354 CV"}
-    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-13, tier: T2}
+    battery_kwh: {value: 85, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614606"}
+    wltp_km: {value: 681, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614606; el medio publica 640 km WLTP"}
+    power_kw: {value: 260, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614606; el medio publica 354 CV"}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images: []
 open_questions:
