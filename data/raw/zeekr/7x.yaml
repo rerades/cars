@@ -2,16 +2,16 @@
 brand: zeekr
 brand_name: Zeekr
 model: 7X
-status: {value: on_sale, note: "la ficha publica precio al contado y financiación con día de contratación 09/10/2026", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+status: {value: on_sale, note: "la ficha publica precio al contado y financiación con día de contratación 09/11/2026", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
 launch: null
 segment: null
 needs_review: false
 versions:
   - name: Core RWD
-    battery_kwh: {value: 75, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
-    wltp_km: {value: 480, note: "columna «Autonomía (hasta)» de la tabla; coincide con el IDAE", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
-    power_kw: {value: 310, note: "publicado: 310 kW / 421 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
-    drivetrain: {value: rwd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    battery_kwh: {value: 75, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
+    wltp_km: {value: 480, note: "columna «Autonomía (hasta)» de la tabla; coincide con el IDAE", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
+    power_kw: {value: 310, note: "publicado: 310 kW / 421 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
+    drivetrain: {value: rwd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
     price:
       value: 51665
       unit: EUR
@@ -19,19 +19,19 @@ versions:
       note: "«Precio al contado 51.665,00 €»; la nota al pie dice «Precio financiando sin Programa Auto + 51.665,00 €»"
       source_id: zeekr-es
       url: "https://www.zeekr.es/zeekr-7x"
-      retrieved: 2026-10-17
+      retrieved: 2026-11-03
       tier: T1
   - name: Long Range RWD
-    battery_kwh: {value: 100, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
-    wltp_km: {value: 615, note: "la web: «615km de autonomía (WLTP)»; coincide con el IDAE", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
-    power_kw: {value: 310, note: "publicado: 310 kW / 421 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
-    drivetrain: {value: rwd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    battery_kwh: {value: 100, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
+    wltp_km: {value: 615, note: "la web: «615km de autonomía (WLTP)»; coincide con el IDAE", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
+    power_kw: {value: 310, note: "publicado: 310 kW / 421 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
+    drivetrain: {value: rwd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
     price: null
   - name: Privilege AWD
-    battery_kwh: {value: 100, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
-    wltp_km: {value: 543, note: "columna «Autonomía (hasta)» de la tabla; coincide con el IDAE", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
-    power_kw: {value: 475, note: "publicado: 475 kW / 646 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
-    drivetrain: {value: awd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-10-17, tier: T1}
+    battery_kwh: {value: 100, basis: unknown, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
+    wltp_km: {value: 543, note: "columna «Autonomía (hasta)» de la tabla; coincide con el IDAE", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
+    power_kw: {value: 475, note: "publicado: 475 kW / 646 CV", source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
+    drivetrain: {value: awd, source_id: zeekr-es, url: "https://www.zeekr.es/zeekr-7x", retrieved: 2026-11-03, tier: T1}
     price: null
 images:
   - file: data/images/zeekr/7x/frontal.jpg
