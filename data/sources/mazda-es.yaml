@@ -15,5 +15,5 @@ notes: >
   contenido legible (solo JavaScript) y las URL de gama probadas (/coches/mazda6e/, /coches/mazda-6e/) dan 404; el
   sitemap no lista el 6e ni el CX-6e. No se ha podido leer ninguna versión ni precio, así que no se usa como fuente
   de ningún valor: los datos de Mazda salen del IDAE (idae-es) y de medios (T3). Sin sala de prensa localizada.
-last_verified: 2026-10-16
+last_verified: 2026-11-03
 status: active
