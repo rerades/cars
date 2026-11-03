@@ -1,18 +1,18 @@
-# Researcher — Jaecoo 5 (BEV). Fuentes: jaecoo-es (T1), idae-es (T2). Consultado 2026-10-17.
+# Researcher — Jaecoo 5 (BEV). Fuentes: jaecoo-es (T1), idae-es (T2). Consultado 2026-11-03.
 brand: jaecoo
 brand_name: Jaecoo
 model: Jaecoo 5
-status: {value: on_sale, note: "la ficha ofrece 'También en versión 100% eléctrica' con oferta para particulares válida hasta 31/10/2026", source_id: jaecoo-es, url: "https://omodajaecoo.es/modelos/jaecoo-5", retrieved: 2026-10-17, tier: T1}
+status: {value: on_sale, note: "la ficha ofrece 'También en versión 100% eléctrica' con promoción para particulares válida del 1 al 30/11/2026", source_id: jaecoo-es, url: "https://omodajaecoo.es/modelos/jaecoo-5", retrieved: 2026-11-03, tier: T1}
 launch: null
 segment: null
 needs_review: true
 specs:
-  dc_max_kw: {value: 130, note: "carga rápida 30%-80% en 28 min", source_id: jaecoo-es, url: "https://omodajaecoo.es/modelos/jaecoo-5", retrieved: 2026-10-17, tier: T1}
+  dc_max_kw: {value: 130, note: "carga rápida 30%-80% en 28 min", source_id: jaecoo-es, url: "https://omodajaecoo.es/modelos/jaecoo-5", retrieved: 2026-11-03, tier: T1}
 versions:
   - name: JAECOO 5 EV Pure 155 kW
-    battery_kwh: {value: 61, basis: unknown, note: "IDAE id 607286 (JAECOO 5 BEV Pure); otras filas: 607287 Exclusive 61 kWh y 611924 PURE-LED 60,9 kWh, sin fecha de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
-    power_kw: {value: 155, note: "publicado: 155 kW (211 CV)", source_id: jaecoo-es, url: "https://omodajaecoo.es/modelos/jaecoo-5", retrieved: 2026-10-17, tier: T1}
-    dc_max_kw: {value: 130, source_id: jaecoo-es, url: "https://omodajaecoo.es/modelos/jaecoo-5", retrieved: 2026-10-17, tier: T1}
+    battery_kwh: {value: 61, basis: unknown, note: "IDAE id 607286 (JAECOO 5 BEV Pure); otras filas: 607287 Exclusive 61 kWh y 611924 PURE-LED 60,9 kWh, sin fecha de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 155, note: "publicado: 155 kW (211 CV)", source_id: jaecoo-es, url: "https://omodajaecoo.es/modelos/jaecoo-5", retrieved: 2026-11-03, tier: T1}
+    dc_max_kw: {value: 130, source_id: jaecoo-es, url: "https://omodajaecoo.es/modelos/jaecoo-5", retrieved: 2026-11-03, tier: T1}
     price: null
 images:
   - file: data/images/jaecoo/jaecoo-5/frontal.jpg
@@ -25,9 +25,10 @@ images:
 open_questions:
   - "launch: la web no da la fecha desde la que se puede pedir el Jaecoo 5 EV; los medios de 2025 hablan de entregas en octubre de 2025 (T3, sin confirmar)."
   - "segment: la ficha no usa ningún término de la lista de RF-11 (solo 'todoterreno')."
-  - "wltp_km: la ficha oficial da 402 km (nota al pie y características) y 602 km en la tabla de datos técnicos; se deja vacío por la contradicción T1. El IDAE homologa 402 km."
-  - "price: la ficha solo da 'Precio financiando sin Programa Auto+ 27.441,00 €' con un anticipo de 3.375 € del Auto+; no se pudo copiar entero el texto de condiciones y no hay PVP limpio, así que price: null."
+  - "wltp_km: la ficha oficial da 'Hasta 402 km de Autonomía Combinada' (releída 2026-11-03); la tabla de datos técnicos que daba 602 km no aparece en lo leído con fetch-page.ts, así que no se re-comprueba la contradicción y se deja vacío. El IDAE homologa 402 km."
+  - "price: el 2026-11-03 la ficha solo muestra condiciones de promoción de noviembre (válida del 1 al 30/11/2026, con financiación Open Bank y adelanto Auto+ de 3.375 €); no aparece ningún importe de precio ni PVP limpio en lo leído con fetch-page.ts (el 27.441 € anterior ya no sale), así que price: null."
   - "battery_kwh: el IDAE tiene tres filas sin fecha (61, 61 y 60,9 kWh); la web no publica la batería."
   - "drivetrain: la ficha no la indica en lo leído; se deja vacía."
   - "Imagen CC0 'Jaecoo J5 EV MY2025 IMG01.jpg' descartada: propuesta de borrado en Commons por infracciones de copyright de su autor."
   - "Medios hablan de 'Jaecoo E5' (35.500 €, 2025, T3) como nombre de la misma versión; la web oficial usa 'Jaecoo 5 EV'. No se usa ese precio (T3)."
+  - "images: no se ha releído la página File: de Commons en esta ejecución; retrieved de la imagen se queda en 2026-10-17."
