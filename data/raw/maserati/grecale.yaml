@@ -2,15 +2,15 @@
 brand: maserati
 brand_name: Maserati
 model: Grecale
-status: {value: on_sale, note: "hibridosyelectricos (20/12/2023): «la fase de venta ya ha comenzado»; no hay fuente reciente que confirme que se vende hoy (motor.es 30/10/2025 dice que no hay precios del modelo 2026)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/ya-sabemos-precio-primer-coche-electrico-maserati-ya-esta-disponible-en-espana_72202_102.html", retrieved: 2026-10-16, tier: T3}
+status: {value: on_sale, note: "hibridosyelectricos (20/12/2023): «la fase de venta ya ha comenzado»; no hay fuente reciente que confirme que se vende hoy (motor.es 30/10/2025 dice que no hay precios del modelo 2026)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/ya-sabemos-precio-primer-coche-electrico-maserati-ya-esta-disponible-en-espana_72202_102.html", retrieved: 2026-11-03, tier: T3}
 launch: null
-segment: {value: suv_grande, note: "hibridosyelectricos: «el Grecale Folgore podemos ubicarlo perfectamente en el segmento D-SUV»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/ya-sabemos-precio-primer-coche-electrico-maserati-ya-esta-disponible-en-espana_72202_102.html", retrieved: 2026-10-27, tier: T3}
+segment: {value: suv_grande, note: "hibridosyelectricos: «el Grecale Folgore podemos ubicarlo perfectamente en el segmento D-SUV»", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/ya-sabemos-precio-primer-coche-electrico-maserati-ya-esta-disponible-en-espana_72202_102.html", retrieved: 2026-11-03, tier: T3}
 needs_review: true
 versions:
   - name: Grecale Folgore
-    battery_kwh: {value: 105, basis: unknown, note: "IDAE id 601647 (6E1ANN1E5B). Otras homologaciones: 502 km (ids 581317, 598880) y 580 km (id 606670, 6E1A5N1E5B, 20,9 kWh/100 km; coincide con la actualización 2026 de electrive/motor1). Sin fecha en las filas ni web legible: se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    wltp_km: {value: 502, note: "IDAE id 601647; el IDAE tiene también 580 km (id 606670), cifra de la actualización 2026 según la prensa; sin fecha en el IDAE y sin web legible para decidir", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
-    power_kw: {value: 410, note: "IDAE id 601647", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-16, tier: T2}
+    battery_kwh: {value: 105, basis: unknown, note: "IDAE id 601647 (6E1ANN1E5B). Otras homologaciones: 502 km (ids 581317, 598880) y 580 km (id 606670, 6E1A5N1E5B, 20,9 kWh/100 km; coincide con la actualización 2026 de electrive/motor1). Sin fecha en las filas ni web legible: se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    wltp_km: {value: 502, note: "IDAE id 601647; el IDAE tiene también 580 km (id 606670), cifra de la actualización 2026 según la prensa; sin fecha en el IDAE y sin web legible para decidir", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
+    power_kw: {value: 410, note: "IDAE id 601647", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     price: null
 images:
   - file: data/images/maserati/grecale/frontal.jpg
