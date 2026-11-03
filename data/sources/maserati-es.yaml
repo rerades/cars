@@ -13,6 +13,7 @@ notes: >
   tanto la portada como robots.txt devolvieron HTTP 403, así que no se ha podido comprobar robots.txt, ni leer modelos,
   precios ni términos de imágenes. No se fuerza el acceso. Por eso no hay precios en data/raw/maserati/ y la URL de
   la portada (/es/es) no está verificada. Las versiones salen del IDAE (idae-es) y
-  los modelos a la venta se contrastan con medios (T3).
+  los modelos a la venta se contrastan con medios (T3). Refresco del 2026-11-03: la portada sigue devolviendo HTTP 403
+  con fetch-page.ts; se mantiene broken y last_verified no cambia.
 last_verified: 2026-10-16
 status: broken
