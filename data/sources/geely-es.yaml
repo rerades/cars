@@ -13,6 +13,7 @@ notes: >
   rechaza la conexión. Ningún medio consultado cita la URL de la web española, así que la ruta /es no está confirmada como la
   oficial; se registra por ser la que usa la marca (www.geely.com). robots.txt de www.geely.com: "User-agent: *" sin
   Disallow (solo Sitemap). Mientras no responda, los datos de Geely salen del IDAE (idae-es, T2) y de medios (T3), y los
-  precios quedan en null. Reintentar y pasar a active cuando responda.
+  precios quedan en null. Reintentar y pasar a active cuando responda. Reintento del 2026-11-04 con fetch-page.ts:
+  https://www.geely.com/es sigue devolviendo HTTP 500 (last_verified no cambia).
 last_verified: 2026-10-18
 status: broken

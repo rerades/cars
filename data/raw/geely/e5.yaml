@@ -2,25 +2,25 @@
 brand: geely
 brand_name: Geely
 model: E5
-status: {value: on_sale, note: "el artículo de lanzamiento da las tres versiones con precio; la matriculación en España consta en autonomiacocheselectricos.es (233 hasta el 25/08/2026), pero no se ha podido leer ninguna fuente de la marca", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/geely-no-es-marca-china-mas-con-e5-por-27485-starray-em-i-por-26215-llega-espana-con-100-concesionarios-7-modelos-mas-en-cartera_85998_102.html", retrieved: 2026-10-18, tier: T3}
+status: {value: on_sale, note: "el artículo de lanzamiento da las tres versiones con precio; la matriculación en España consta en autonomiacocheselectricos.es (233 hasta el 25/08/2026), pero no se ha podido leer ninguna fuente de la marca", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/geely-no-es-marca-china-mas-con-e5-por-27485-starray-em-i-por-26215-llega-espana-con-100-concesionarios-7-modelos-mas-en-cartera_85998_102.html", retrieved: 2026-11-04, tier: T3}
 launch: null
-segment: {value: suv_compacto, note: "el artículo lo presenta como «SUV compacto» de 4,6 m", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/geely-no-es-marca-china-mas-con-e5-por-27485-starray-em-i-por-26215-llega-espana-con-100-concesionarios-7-modelos-mas-en-cartera_85998_102.html", retrieved: 2026-10-18, tier: T3}
+segment: {value: suv_compacto, note: "el artículo lo presenta como «SUV compacto» de 4,6 m", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/geely-no-es-marca-china-mas-con-e5-por-27485-starray-em-i-por-26215-llega-espana-con-100-concesionarios-7-modelos-mas-en-cartera_85998_102.html", retrieved: 2026-11-04, tier: T3}
 needs_review: true
 versions:
   - name: E5 PRO
-    battery_kwh: {value: 60.2, basis: unknown, note: "IDAE id 611770", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
-    wltp_km: {value: 430, note: "IDAE id 611770", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 611770", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    battery_kwh: {value: 60.2, basis: unknown, note: "IDAE id 611770", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    wltp_km: {value: 430, note: "IDAE id 611770", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 611770", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
     price: null
   - name: E5 PRO+
-    battery_kwh: {value: 68.4, basis: unknown, note: "IDAE id 611771", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
-    wltp_km: {value: 450, note: "IDAE id 611771", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 611771", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    battery_kwh: {value: 68.4, basis: unknown, note: "IDAE id 611771", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    wltp_km: {value: 450, note: "IDAE id 611771", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 611771", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
     price: null
   - name: E5 MAX+
-    battery_kwh: {value: 68.4, basis: unknown, note: "IDAE id 611772", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
-    wltp_km: {value: 450, note: "IDAE id 611772", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
-    power_kw: {value: 160, note: "IDAE id 611772", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
+    battery_kwh: {value: 68.4, basis: unknown, note: "IDAE id 611772", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    wltp_km: {value: 450, note: "IDAE id 611772", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 611772", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
     price: null
 images:
   - file: data/images/geely/e5/frontal.jpg
@@ -31,7 +31,7 @@ images:
     license: CC0-1.0
     attribution: "JustAnotherCarDesigner"
 open_questions:
-  - "Web oficial de Geely España no legible (geely.com/es devolvió HTTP 500 el 2026-10-18): precios a null, sin tracción, carga DC/AC ni launch."
+  - "Web oficial de Geely España no legible (geely.com/es devolvió HTTP 500 el 2026-10-18 y de nuevo el 2026-11-04): precios a null, sin tracción, carga DC/AC ni launch."
   - "launch: ninguna fuente consultada da la fecha desde la que se puede pedir el E5 en España (los medios hablan de lanzamiento comercial 25-26/03/2026 y ventas en el primer semestre, sin apertura de pedidos)."
   - "Los medios dan precios de lista de 37.490 (PRO), 39.990 (PRO+) y 41.990 € (MAX+) «antes de descuentos», pero no son T1 y no se guardan."
   - "Versiones y su vigencia confirmadas solo con un artículo T3 de primavera de 2026 y el IDAE; el IDAE no dice qué se vende hoy."
