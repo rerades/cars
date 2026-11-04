@@ -16,5 +16,5 @@ notes: >
   comercial. robots.txt: "User-agent: *  Disallow: /_nuxt" (las fichas de modelo no están bloqueadas). Sitemap con 14 URL,
   sin sala de prensa, lista de precios ni configurador. Las fichas de Free y Dream dan potencia (CV), tracción y
   autonomía, pero ni versiones, ni batería, ni precio, ni fecha de venta. Gama en España: Free y Dream, ambos BEV.
-last_verified: 2026-10-18
+last_verified: 2026-11-04
 status: active

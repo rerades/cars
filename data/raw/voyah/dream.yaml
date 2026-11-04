@@ -2,16 +2,16 @@
 brand: voyah
 brand_name: Voyah
 model: Dream
-status: {value: on_sale, note: "Diariomotor: llegó a España en 2024 y lista versiones con precio; la web de la marca presenta el modelo como 100% eléctrico", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/voyah-dream", retrieved: 2026-10-18, tier: T3}
+status: {value: on_sale, note: "Diariomotor: llegó a España en 2024 y lista versiones con precio; la web de la marca presenta el modelo como 100% eléctrico", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/voyah-dream", retrieved: 2026-11-04, tier: T3}
 launch: null
-segment: {value: monovolumen, note: "la web de la marca lo describe como monovolumen de siete plazas", source_id: voyah-es, url: "https://www.voyah.es/vehiculos/voyah-dream", retrieved: 2026-10-18, tier: T1}
+segment: {value: monovolumen, note: "la web de la marca lo describe como monovolumen de siete plazas", source_id: voyah-es, url: "https://www.voyah.es/vehiculos/voyah-dream", retrieved: 2026-11-04, tier: T1}
 needs_review: true
 versions:
   - name: Dream AWD
-    battery_kwh: {value: 108.7, basis: unknown, note: "IDAE id 603449", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
-    wltp_km: {value: 482, note: "IDAE id 603449; la web de la marca también dice 482 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
-    power_kw: {value: 320, note: "IDAE id 603449; la web de la marca publica 429 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-18, tier: T2}
-    drivetrain: {value: awd, note: "la web lo presenta como 4x4", source_id: voyah-es, url: "https://www.voyah.es/vehiculos/voyah-dream", retrieved: 2026-10-18, tier: T1}
+    battery_kwh: {value: 108.7, basis: unknown, note: "IDAE id 603449", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    wltp_km: {value: 482, note: "IDAE id 603449; la web de la marca también dice 482 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    power_kw: {value: 320, note: "IDAE id 603449; la web de la marca publica 429 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    drivetrain: {value: awd, note: "la web lo presenta como 4x4", source_id: voyah-es, url: "https://www.voyah.es/vehiculos/voyah-dream", retrieved: 2026-11-04, tier: T1}
     price: null
 images:
   - file: data/images/voyah/dream/frontal.jpg
