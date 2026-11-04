@@ -15,9 +15,9 @@ urls:
   robots: https://www.mitsubishi-motors.es/robots.txt
 image_license: "" # sin términos de uso de imágenes leídos: no se publican imágenes de esta fuente
 notes: >
-  Web oficial de Mitsubishi Motors España (dominio mitsubishi-motors.es, responde; comprobado el 2026-10-19).
+  Web oficial de Mitsubishi Motors España (dominio mitsubishi-motors.es, responde; comprobado el 2026-11-04).
   robots.txt permite todo (Disallow vacío). No hay tarifa única: los precios salen de la ficha del modelo y del
   menú de modelos, con la nota «Incluye IVA, impuesto de matriculación en el caso que aplique, transporte y
   campaña comercial», es decir, no son un PVP limpio. Sin sala de prensa propiamente dicha (/empresa/noticias).
-last_verified: 2026-10-19
+last_verified: 2026-11-04
 status: active
