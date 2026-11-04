@@ -1,24 +1,24 @@
-# Researcher — Omoda 5 EV (antes Omoda E5). Fuentes: omoda-es (T1), idae-es (T2), motor-es (T3). Consultado 2026-10-17.
+# Researcher — Omoda 5 EV (antes Omoda E5). Fuentes: omoda-es (T1), idae-es (T2), motor-es (T3). Refrescado 2026-11-04.
 brand: omoda
 brand_name: Omoda
 model: Omoda 5 EV
-status: {value: on_sale, note: "la ficha oficial muestra el Omoda 5 EV con oferta vigente hasta el 31/10/2026", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
+status: {value: on_sale, note: "la ficha oficial muestra el Omoda 5 EV con promoción vigente del 1 al 30 de noviembre de 2026", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-11-04, tier: T1}
 launch: null
-segment: {value: suv_compacto, note: "motor.es: «Una longitud que le encuadra en el competido segmento C-SUV»", source_id: motor-es, url: "https://www.motor.es/omoda/5-ev/", retrieved: 2026-10-27, tier: T3}
+segment: {value: suv_compacto, note: "motor.es: «Una longitud que le encuadra en el competido segmento C-SUV»", source_id: motor-es, url: "https://www.motor.es/omoda/5-ev/", retrieved: 2026-11-04, tier: T3}
 needs_review: true
 specs:
   wltp_max_km: {value: 430, note: "autonomía combinada; urbana hasta 604 km", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
-  dc_max_kw: {value: 130, note: "30-80 % en 28 min", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
+  dc_max_kw: {value: 130, note: "30-80 % en 28 min", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-11-04, tier: T1}
 versions:
   - name: Omoda 5 EV Pure
-    battery_kwh: {value: 60.9, basis: unknown, note: "IDAE id 611920 (61 kWh en el nombre); la web no da la batería", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    battery_kwh: {value: 60.9, basis: unknown, note: "IDAE id 611920 (61 kWh en el nombre); la web no da la batería", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
     wltp_km: {value: 430, note: "autonomía combinada WLTP; coincide con IDAE id 611920", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
-    power_kw: {value: 155, note: "publicado: 211 CV", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-10-17, tier: T1}
+    power_kw: {value: 155, note: "publicado: 211 CV", source_id: omoda-es, url: "https://www.omodajaecoo.es/modelos/omoda-5", retrieved: 2026-11-04, tier: T1}
     price: null
   - name: Omoda 5 EV Premium
-    battery_kwh: {value: 60.9, basis: unknown, note: "IDAE id 611921 (61 kWh en el nombre)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
-    wltp_km: {value: 430, note: "IDAE id 611921", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
-    power_kw: {value: 155, note: "IDAE id 611921; publicado: 211 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-17, tier: T2}
+    battery_kwh: {value: 60.9, basis: unknown, note: "IDAE id 611921 (61 kWh en el nombre)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    wltp_km: {value: 430, note: "IDAE id 611921", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
+    power_kw: {value: 155, note: "IDAE id 611921; publicado: 211 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-04, tier: T2}
     price: null
 images:
   - file: data/images/omoda/omoda-5-ev/frontal.jpg
@@ -30,8 +30,9 @@ images:
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0"
 open_questions:
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España (motor.es solo dice que el E5 se renombró 5 EV tras unos meses y que llegó con el Omoda 5 de combustión)."
-  - "Precio: la web oficial no publica PVP sin oferta del EV. Solo el precio financiando 27.219,95 € (con adelanto del Programa Auto+ de 3.375 €, financiación Open Bank, bonificación CAE) y «desde 22.850 €» con descuentos; sus condiciones no se han podido copiar literales y completas, así que price: null. Prensa (T3, no válida como precio) cita PVP 34.295 € (Pure) y 37.295 € (Premium)."
-  - "Premium: la web oficial solo muestra la versión Pure; Premium sale del IDAE (homologación MY26) y de motor.es. Confirmar con T1 que se vende hoy."
+  - "Precio: la web oficial no publica PVP sin oferta del EV. Su promoción (1-30/11/2026, hasta 13.110 € de beneficios para el Premium, con financiación Open Bank y adelanto Auto+) no muestra ningún importe en el texto que lee fetch-page.ts, y no da un precio de contado; price: null. Prensa (T3, no válida como precio) cita PVP 34.295 € (Pure) y 37.295 € (Premium)."
+  - "wltp_max_km y wltp_km de Pure (web oficial): fetch-page.ts del 2026-11-04 no muestra la cifra 430 km en el texto (probablemente se pinta con scripts); se conserva el valor con su fecha anterior (2026-10-17)."
+  - "Pure: la web oficial solo nombra el Omoda 5 EV Premium en las condiciones de la promoción (2026-11-04); la versión Pure sale del IDAE. Confirmar con T1 que se vende hoy."
   - "Homologaciones anteriores del Omoda E5 Comfort/Premium 150 kW (204 CV, 61,1 kWh, IDAE ids 598679/598680) son de la denominación anterior; no se incluyen como versiones."
   - "Tracción no publicada en la web ni en IDAE: drivetrain omitida. Potencia: motor.es cita 150 kW/204 CV en el texto y 155 kW/211 CV en tablas; se usa la cifra de la web oficial y del IDAE (155 kW)."
-  - "Imágenes: la foto de Commons es de un Omoda E5 (IAA 2025), mismo modelo antes de rebautizarse 5 EV."
+  - "Imágenes: la foto de Commons es de un Omoda E5 (IAA 2025), mismo modelo antes de rebautizarse 5 EV; no se ha releído su página en este refresco."
