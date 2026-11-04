@@ -11,10 +11,10 @@ urls:
   sitemap: https://www.dongfeng-auto.es/sitemap.xml
 image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
 notes: >
-  Verificado (2026-10-18): dongfeng-auto.es responde, se presenta como Dongfeng (España), con domicilio en Madrid y
+  Verificado (2026-11-04; antes 2026-10-18): dongfeng-auto.es responde, se presenta como Dongfeng (España), con domicilio en Madrid y
   financiación Open Bank (distribuidor exclusivo: Grupo Salvador Caetano, según la prensa del motor). robots.txt:
   "User-agent: *  Disallow:" (todo permitido). Gama: Box y Vigo (BEV) y Mage (PHEV, no BEV). Sin sala de prensa. Los
   precios al contado de las fichas no coinciden con los que publica la web del concesionario Caetano (caetano.es/dongfeng:
-  Box desde 27.266 €, Vigo desde 31.990 €), así que no se guardan precios (ver open_questions de los modelos).
-last_verified: 2026-10-18
+  Box desde 27.266 €, Vigo desde 31.990 €), así que solo se guarda el precio al contado de la oferta de la ficha, como financed (ver open_questions de los modelos).
+last_verified: 2026-11-04
 status: active
