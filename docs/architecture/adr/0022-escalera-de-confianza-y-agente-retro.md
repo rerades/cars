@@ -3,7 +3,10 @@
 - **Estado:** aceptada (2026-10-30). Enmienda [ADR-0011](0011-publicacion-de-los-agentes.md) (rutas
   que se fusionan solas con el peldaño, fusiones a mano leídas por el paso de fusión, las PR del
   retro nunca se fusionan solas) y [ADR-0013](0013-commit-del-estado-de-la-factoria.md) (la PR de
-  estado admite líneas añadidas a `ops/trust/*.jsonl`).
+  estado admite líneas añadidas a `ops/trust/*.jsonl`). Enmienda propuesta por
+  [ADR-0024](0024-evaluacion-de-prompts-del-researcher.md) (2026-11-05): el retro propone cambios a
+  los prompts de los agentes con dataset en `factory/datasets/` (Reviewer y Researcher), y por cada
+  `review:changes` del Researcher un `case.yaml` borrador sin `expected`.
 - **Fecha:** 2026-10-29
 
 ## Contexto
