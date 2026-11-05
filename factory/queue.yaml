@@ -2921,13 +2921,6 @@
     coincide, cambia solo price.url y price.retrieved; si el importe es otro, sigue las reglas de
     precio de .claude/agents/researcher.md y data-model.md. Si no hay ninguna, deja el precio como
     está y anótalo en open_questions con la fecha. No toques otros campos. Bitácora."
-- id: precio-url-legible-peugeot-cupra-renault
-  agent: researcher
-  task: "Igual que precio-url-legible-skoda, con las mismas reglas, para estos ficheros, cuyo precio
-    no aparece en el texto que sirve su price.url (medido el 2026-10-27):
-    data/raw/peugeot/e-208.yaml, e-3008.yaml, e-308.yaml, e-308-sw.yaml, e-408.yaml y e-5008.yaml;
-    data/raw/cupra/born.yaml, raval.yaml y tavascan.yaml; y la versión «techno 220 CV gran
-    autonomía» de data/raw/renault/scenic-e-tech-electrico.yaml. Bitácora."
 - id: adr-nombre-de-version-literal
   agent: architect
   task: "Pregunta abierta de la enmienda «Versión y unidad» de ADR-0020 (aceptada el 2026-10-27):
@@ -2951,17 +2944,6 @@
     criterio común en data-model.md (lo escribe el Arquitecto). Tacha la alternativa C en la sección 8
     diciendo qué se decidió, añade los CA que hagan falta y una fila en el historial de cada PRD. No
     toques data/, el código ni las ADR. Bitácora."
-- id: data-model-segmento-editorial
-  agent: architect
-  task: "ADR-0021 (segmento editorial) está aceptada desde el 2026-10-27; su punto 6 pide cambiar
-    data-model.md, secciones 2, 3, 6 y 8. Léela entera con data-model.md, ADR-0001, ADR-0008 y
-    ADR-0010. Haz esos cambios (tier E solo en segment, source_id editorial, note obligatoria, el
-    fichero data/sources/editorial.yaml que crea una persona) y escribe, junto a la tabla de
-    equivalencias del segmento, el criterio común que la note de cada caso debe citar (decidido por
-    el responsable): qué cuenta como cada segmento cuando ninguna fuente lo dice, con medidas o
-    rasgos comprobables, no con opiniones. Responde también la pregunta 5 de ADR-0021 (si el aviso de
-    antigüedad de ADR-0010 ignora los valores E) en la propia ADR. No toques data/, el código ni los
-    PRD. Bitácora."
 - id: precio-url-legible-peugeot-2
   agent: researcher
   task: "Repite precio-url-legible-peugeot-cupra-renault solo para Peugeot (la anterior se cortó por
@@ -3548,3 +3530,103 @@
     pueda, como ADR-0020, juez solo donde no), su coste por experimento frente a budgets.yaml, y cómo
     lo usa el retro. Pon en el estado de ADR-0016 y ADR-0022 la enmienda que propone. No toques
     factory/, .claude/, data/ ni los PRD. Bitácora."
+- id: refresco-2026-11-deepal-2
+  agent: researcher
+  task: "Refresco mensual de data/raw/deepal/ (ADR-0010, punto 6), repetición del de la PR #905: relee
+    en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y
+    verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado,
+    con los puntos 7 y 8 de ADR-0010. Las fechas, con la regla «Una fecha solo cambia con una
+    lectura que llegue a la PR» de .claude/agents/researcher.md, y los precios con sus reglas de
+    precio, incluida «La prueba de un precio es la salida de fetch-page.ts». Lee la revisión de la
+    PR #905 (gh pr view 905 --comments) y no repitas sus hallazgos: en deepal-s05.yaml, la status.note no puede seguir citando una oferta ya vencida, y cada valor cita la url que de verdad se leyó (el drivetrain de 4WD Max sale del configurador, no de la promoción). Quita de
+    open_questions lo que resuelvas. No toques needs_review. Bitácora."
+- id: refresco-2026-11-dongfeng-2
+  agent: researcher
+  task: "Refresco mensual de data/raw/dongfeng/ (ADR-0010, punto 6), repetición del de la PR #907: relee
+    en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y
+    verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado,
+    con los puntos 7 y 8 de ADR-0010. Las fechas, con la regla «Una fecha solo cambia con una
+    lectura que llegue a la PR» de .claude/agents/researcher.md, y los precios con sus reglas de
+    precio, incluida «La prueba de un precio es la salida de fetch-page.ts». Lee la revisión de la
+    PR #907 (gh pr view 907 --comments) y no repitas sus hallazgos: en box.yaml y vigo.yaml, price_terms es el párrafo entero de condiciones de la salida de fetch-page.ts, sin cortar; y si la fuente escribe un importe con una errata (como «23,859 €»), dilo en la note. Quita de
+    open_questions lo que resuelvas. No toques needs_review. Bitácora."
+- id: specs-open-questions-2026-11-ford
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/ford/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+- id: specs-open-questions-2026-11-renault
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/renault/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+- id: specs-open-questions-2026-11-audi
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/audi/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+- id: specs-open-questions-2026-11-kia
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/kia/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+- id: specs-open-questions-2026-11-skoda
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/skoda/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+- id: specs-open-questions-2026-11-volkswagen
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/volkswagen/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+- id: specs-open-questions-2026-11-volvo
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/volvo/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+- id: specs-open-questions-2026-11-xpeng
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/xpeng/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+- id: specs-open-questions-2026-11-cupra
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/cupra/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+- id: specs-open-questions-2026-11-ds
+  agent: researcher
+  task: "Resuelve las open_questions de especificaciones y versiones de data/raw/ds/ (autonomía
+    WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue las reglas de
+    .claude/agents/researcher.md, incluida la de los datos de homologación del IDAE (node
+    factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
+    solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
+    el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
