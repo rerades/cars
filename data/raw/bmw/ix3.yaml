@@ -47,6 +47,7 @@ reviews:
     tier: T3
     version: iX3 50 xDrive
 open_questions:
+  - "Refresco 2026-11-05: fetch-page.ts no pudo leer ninguna fuente de BMW (press.bmwgroup.com: HTTP 403 en los dos comunicados y en la home; bmw.es: fetch failed en la ficha y la home). Valores, fechas y last_verified de las fuentes se quedan como estaban; reintentar."
   - "Reviews (2026-10-24): Diariomotor no tiene una prueba del iX3 actual (solo noticias, ficha y una prueba en vídeo del iX3 de 2021, generación anterior)."
   - "Segmento sin fuente: la ficha bmw.es no se pudo abrir y el comunicado no lo clasifica (el iX3 se aloja en /coches-bmw/x/, familia X)."
   - "iX3 40: el comunicado de 2026-07-20 da \"aproximadamente 63.650 €\"; falta PVP definitivo y confirmar si ya se vende (anunciado para verano de 2026)."
