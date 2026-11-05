@@ -19,5 +19,5 @@ notes: >
   eléctrico. La página electric.html da 600 km WLTP (máximo) y no da versiones ni precios. Sala de prensa de JLR
   (media.jlr.com, antes media.jaguarlandrover.com): términos de imágenes sin revisar. Range Rover no tiene datos en el
   IDAE como marca (fetch-idae "RANGE ROVER" falla; "LAND ROVER" devuelve vacío).
-last_verified: 2026-10-20
+last_verified: 2026-11-05
 status: active
