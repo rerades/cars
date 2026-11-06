@@ -12,10 +12,16 @@ specs:
   drivetrains: {value: [fwd], source_id: kia-es, url: "https://www.kia.com/es/modelos/ev5/descubrelo/", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: EV5 Air
+    battery_kwh: {value: 81, basis: unknown, note: "IDAE id 608207 (EV5 Air Long Range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 608207", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: EV5 Earth
+    battery_kwh: {value: 81, basis: unknown, note: "IDAE id 608208 (EV5 Earth Long Range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 608208", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: EV5 GT-Line
+    battery_kwh: {value: 81, basis: unknown, note: "IDAE id 608209 (EV5 GT-Line Long Range)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 608209", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: "data/images/kia/ev5/frontal.jpg"
@@ -29,4 +35,4 @@ open_questions:
   - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23 y el 2026-10-31 (el configurador solo da condiciones de oferta financiada, caducada el 26/10/2026, sin importe por versión): ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha dice 'SUV EV' sin tamaño; queda vacío."
-  - "Potencia por versión no publicada en la ficha estática."
+  - "Potencia (2026-11-06): resuelta con el IDAE (idae-es, T2): 160 kW y 81 kWh en Air, Earth y GT-Line (todas Long Range). wltp_km por versión no añadido: el IDAE da 520/520/505 km y wltp_max_km de la ficha es 530 km (T1, prevalece; la regla 8 exige coincidencia). Carga DC por versión y tracción por versión no publicadas; el IDAE no dice qué versiones se venden hoy."

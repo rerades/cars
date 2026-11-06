@@ -14,8 +14,11 @@ versions:
     power_kw: {value: 150, note: "publicado: 150 kW / 204 PS", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev3/descubrelo/", retrieved: 2026-10-31, tier: T1}
     price: null
   - name: EV3 Earth
+    power_kw: {value: 150, note: "IDAE: todas las filas EV3 Earth (ids 603411, 603412, 604216, 613706, 613707) dan 150 kW", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: EV3 GT-Line
+    battery_kwh: {value: 81, basis: unknown, note: "IDAE ids 603413, 604217, 613708 (GT-line Long Range, única variante GT-Line en el IDAE)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 150, note: "IDAE ids 603413, 604217, 613708", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: "data/images/kia/ev3/frontal.jpg"
@@ -43,4 +46,4 @@ open_questions:
   - "Precio (2026-10-31): el configurador (kia.com/es/quiero-un-kia/configurador/) solo da condiciones de una oferta financiada (Cetelem FlexiPlan, válida hasta el 26/10/2026, ya caducada) sin importe por versión en el texto leído; /modelos/ev3/precios/ sigue en 404. Sin PVP ni precio financed utilizable."
   - "launch: ninguna fuente T1 con la fecha de inicio de venta en España (solo T3 sitúa el inicio a finales de 2024)."
   - "segment: la ficha no clasifica el modelo; sin fuente, queda vacío."
-  - "Potencia, batería y autonomía por versión no publicadas en la ficha estática (solo en el configurador)."
+  - "Especificaciones por versión (2026-11-06): la ficha estática no las da por versión. Del IDAE (idae-es, T2): todas las filas EV3 dan 150 kW (añadido a Earth y GT-Line); GT-Line solo existe en Long Range (81 kWh, añadido). Air y Earth tienen Standard Range (58 kWh, 414 km) y Long Range (81 kWh, 563 km) y el fichero no distingue cuál es cada versión: batería y autonomía de Air y Earth sin asignar. No se añade wltp_km a ninguna versión porque el IDAE da 563 km (Long Range) y la ficha de Kia 773 km (T1, prevalece) y la regla 8 exige que coincidan; la capacidad IDAE (58/81 kWh) tampoco coincide con la de la ficha (63/84 kWh). Tracción y carga DC por versión no publicadas; el IDAE no dice qué versiones se venden hoy."
