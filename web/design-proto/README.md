@@ -20,6 +20,9 @@ node web/scripts/design-shot.ts <pantalla>   # docs/design/refs/<pantalla>-390.p
     :root { --color-brand-600: #0b5cad; }
   </style>
   ```
-- **Fuentes.** Solo las que ya estén en esta carpeta, con su licencia. El Diseñador no tiene red.
+- **Fuentes.** Solo las de `fonts/`, con su licencia. El Diseñador no tiene red. Archivo tiene eje de anchura:
+  declárala con `font-stretch: 62% 125%` y `font-weight: 100 900`.
+- **Página.** Si no usas un componente que ya escriba el `<html>`, escríbelo tú con `<meta charset="utf-8">`: sin él,
+  los acentos salen mal en la captura.
 - **Varias propuestas.** Un fichero por propuesta: `catalogo-a.astro`, `catalogo-b.astro`.
 - **Sin JavaScript nuevo** salvo el que ya traigan los componentes (ADR-0003).

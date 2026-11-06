@@ -3623,6 +3623,34 @@
     web/src/pages/); ese job ya trabaja en web/. Después, subir esa carpeta con actions/upload-artifact,
     nombre capturas y retention-days: 30. Un fallo de estos pasos no debe poner la CI en rojo:
     continue-on-error, igual que ADR-0006, informa y no bloquea. No cambies nada más del job. Bitácora."
+# Dirección visual (docs/design/direccion.md): tres propuestas, una PR por propuesta. Elige el responsable.
+- id: direccion-visual-a
+  agent: designer
+  task: "Propuesta A («Pantalla») de la dirección visual. Haz exactamente lo que dicen las secciones
+    «El encargo del responsable», «Lo que condiciona el diseño», «Las tres propuestas» y «Qué lleva cada
+    propuesta» de docs/design/direccion.md, solo para esta propuesta y con la fuente Manrope. Las reglas de
+    prototipos están en web/design-proto/README.md. Tiene que ser distinta de las otras dos en
+    composición. No cambies direccion.md, tokens.md ni las especificaciones de pantalla: para leer
+    la ficha, basta con las secciones «Estructura y orden de lectura» y «Cabecera» de
+    docs/design/ficha-modelo.md. En tu resumen, di qué has corregido al ver las capturas. Bitácora."
+- id: direccion-visual-b
+  agent: designer
+  task: "Propuesta B («Cifra») de la dirección visual. Haz exactamente lo que dicen las secciones
+    «El encargo del responsable», «Lo que condiciona el diseño», «Las tres propuestas» y «Qué lleva cada
+    propuesta» de docs/design/direccion.md, solo para esta propuesta y con la fuente Archivo. Las reglas de
+    prototipos están en web/design-proto/README.md. Tiene que ser distinta de las otras dos en
+    composición. No cambies direccion.md, tokens.md ni las especificaciones de pantalla: para leer
+    la ficha, basta con las secciones «Estructura y orden de lectura» y «Cabecera» de
+    docs/design/ficha-modelo.md. En tu resumen, di qué has corregido al ver las capturas. Bitácora."
+- id: direccion-visual-c
+  agent: designer
+  task: "Propuesta C («Retícula») de la dirección visual. Haz exactamente lo que dicen las secciones
+    «El encargo del responsable», «Lo que condiciona el diseño», «Las tres propuestas» y «Qué lleva cada
+    propuesta» de docs/design/direccion.md, solo para esta propuesta y con la fuente Instrument Sans. Las reglas de
+    prototipos están en web/design-proto/README.md. Tiene que ser distinta de las otras dos en
+    composición. No cambies direccion.md, tokens.md ni las especificaciones de pantalla: para leer
+    la ficha, basta con las secciones «Estructura y orden de lectura» y «Cabecera» de
+    docs/design/ficha-modelo.md. En tu resumen, di qué has corregido al ver las capturas. Bitácora."
 # Estrategia del 2026-11-06 (vision.md, «Prioridades actuales»): descubrir antes que refrescar.
 - id: modelos-nuevos-2026-11-bmw
   agent: researcher
