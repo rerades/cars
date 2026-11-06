@@ -40,4 +40,5 @@ open_questions:
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "IDAE mezcla homologaciones: se usan las filas 05.2026 (batería de 46,8 kWh, posterior al cambio de marzo de 2026 que cuenta el medio T3), no la de menor wltp_km (610512, 43 kWh, 324 km, batería sustituida)."
   - "El medio T3 indica la retirada del acabado Black Edition, que la ficha de ford.es aún menciona."
-  - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."
+  - "dc_max_kw y ac_max_kw: releída el 2026-11-06 la ficha /turismos/puma-gen-e con fetch-page.ts (kW, carga rápida): dice «Carga entre un 10 % y un 80 % en solo 23 minutos con un cargador rápido de 100 kW», pero en la misma ficha la autonomía sigue siendo «hasta 376 km» (batería antigua de 43 kWh, no los 417 km del IDAE 05.2026), así que no se sabe si los 100 kW valen para la batería de 46,8 kWh; no se escribe. ac_max_kw no publicado."
+  - "Revisión 2026-11-06: IDAE (fetch-idae.ts FORD) sigue sin cambios para las versiones; la ficha de ford.es no lista versiones ni confirma cuáles se venden hoy (needs_review se mantiene)."

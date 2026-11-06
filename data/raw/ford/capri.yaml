@@ -68,4 +68,4 @@ open_questions:
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "El medio T3 no cita la serie Collection del Capri (sí la del Explorer, como serie limitada); consta en el IDAE (05.2026). No confirmado que se venda hoy (needs_review)."
   - "El IDAE tiene también homologaciones de 01.2025 y 11.2025 para las mismas versiones, con otras cifras; se usan las filas 05.2026, que coinciden con las potencias del medio T3, y no las de menor wltp_km."
-  - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."
+  - "dc_max_kw y ac_max_kw: releída el 2026-11-06 la ficha /turismos/capri-electrico con fetch-page.ts (kW, carga rápida, Carga): solo dice «En 10 min de carga rápida» sin potencia ni versión; no publicados."
