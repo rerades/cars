@@ -3614,6 +3614,15 @@
     factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
     solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
     el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+# ADR-0024: capturas de la página real, para que el Revisor las compare con la referencia.
+- id: ci-capturas-adr-0024
+  agent: devops
+  task: "Lee ADR-0024, punto 5, y añade al job de accesibilidad de .github/workflows/ci.yml, después de
+    pnpm run test:a11y, dos pasos con if: always(). Primero, node scripts/design-shot.ts --out
+    ${{ runner.temp }}/capturas con / /coches/ /comparar/ y una ficha de modelo real (mira la ruta en
+    web/src/pages/); ese job ya trabaja en web/. Después, subir esa carpeta con actions/upload-artifact,
+    nombre capturas y retention-days: 30. Un fallo de estos pasos no debe poner la CI en rojo:
+    continue-on-error, igual que ADR-0006, informa y no bloquea. No cambies nada más del job. Bitácora."
 # Estrategia del 2026-11-06 (vision.md, «Prioridades actuales»): descubrir antes que refrescar.
 - id: modelos-nuevos-2026-11-bmw
   agent: researcher

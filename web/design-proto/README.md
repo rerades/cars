@@ -9,8 +9,8 @@ node web/scripts/design-shot.ts <pantalla>   # docs/design/refs/<pantalla>-390.p
 
 ## Reglas
 - **Datos reales.** Se leen con `loadModels()` de `src/lib/data.ts`; nunca se escriben a mano (ADR-0001). Elige
-  los que pongan a prueba el diseño: nombre largo, sin foto, sin precio. Para ver las cosas de cerca, usa pocos
-  modelos: la captura se corta a 2400 px de alto.
+  los que pongan a prueba el diseño: nombre largo, sin foto, sin precio. La captura se corta a 2400 px de alto: a 390 px
+  caben unas cuatro tarjetas, así que pon primero los casos difíciles o usa menos modelos.
 - **Componentes reales.** Se importan de `../src/components/` y se reproducen aquí solo los que cambian.
 - **Textos reales.** Las claves de `src/lib/i18n.ts`; los textos nuevos se proponen en la especificación.
 - **Tokens.** Cada prototipo puede sobrescribirlos para sí mismo, con lo que se propone una dirección sin tocar
