@@ -8,20 +8,20 @@ segment: null
 needs_review: true
 versions:
   - name: EX30 P5
-    battery_kwh: {value: 51, basis: unknown, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 341, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 200, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 51, basis: unknown, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 341, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 609754 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: EX30 P5 Long Range
-    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 480, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 200, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 480, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 609753 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: EX30 P8 AWD
-    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 451, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 315, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 69, basis: unknown, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 451, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 315, note: "IDAE id 609752 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: data/images/volvo/ex30/frontal.jpg
@@ -37,5 +37,5 @@ open_questions:
   - "Existen homologaciones EX30 Cross Country (P5 Long Range 470 km y P8 AWD 439 km, MY27) no incluidas: no se sabe si son versiones del EX30 o un modelo aparte."
   - "launch: ninguna fuente da la fecha desde la que se pide en España."
   - "segment: el comparador lo llama 'Crossover pequeño' y coches.com 'urbano premium compacto'; ninguno es un término de la lista de RF-11."
-  - "drivetrain de P5 y P5 Long Range: el nombre del IDAE no lo dice."
+  - "drivetrain de P5 y P5 Long Range: el nombre del IDAE no lo dice (releído el 2026-11-06). Carga DC: sin fuente legible (web oficial 403)."
   - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."

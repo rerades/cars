@@ -8,22 +8,22 @@ segment: null
 needs_review: true
 versions:
   - name: EX40 Single Motor RWD
-    battery_kwh: {value: 70, basis: unknown, note: "IDAE id 609745 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 492, note: "IDAE id 609745 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 175, note: "IDAE id 609745 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    drivetrain: {value: rwd, note: "el nombre homologado dice RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 70, basis: unknown, note: "IDAE id 609745 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 492, note: "IDAE id 609745 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 175, note: "IDAE id 609745 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: rwd, note: "el nombre homologado dice RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: EX40 Single Motor Extended Range RWD
-    battery_kwh: {value: 82, basis: unknown, note: "IDAE id 609746 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 590, note: "IDAE id 609746 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 185, note: "IDAE id 609746 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    drivetrain: {value: rwd, note: "el nombre homologado dice RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 82, basis: unknown, note: "IDAE id 609746 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 590, note: "IDAE id 609746 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 185, note: "IDAE id 609746 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: rwd, note: "el nombre homologado dice RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: EX40 Twin Motor eAWD
-    battery_kwh: {value: 82, basis: unknown, note: "IDAE id 609747 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 555, note: "IDAE id 609747 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 300, note: "IDAE id 609747 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    drivetrain: {value: awd, note: "el nombre homologado dice eAWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 82, basis: unknown, note: "IDAE id 609747 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 555, note: "IDAE id 609747 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 300, note: "IDAE id 609747 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: awd, note: "el nombre homologado dice eAWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: data/images/volvo/ex40/frontal.jpg
@@ -35,6 +35,7 @@ images:
     attribution: "Matti Blume, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "Web oficial volvocars.com/es devuelve 403 (reintentado el 2026-11-02): precios sin leer (price null) y versiones sin confirmar en T1."
+  - "IDAE (leído el 2026-11-06) trae también filas MY27.5 (ids 614777 P5 RWD 175 kW/492 km/70 kWh, 614778 P5 Long RWD 185 kW/590 km/82 kWh, 614779 P8 eAWD 300 kW/555 km/82 kWh) con las mismas cifras que las MY27 pero otro nombre; no se sabe cuál es el nombre comercial vigente. Los nombres de las versiones se mantienen. Carga DC: sin fuente legible (web oficial 403)."
   - "Versiones tomadas del IDAE (MY27, el año modelo más reciente). Ningún medio consultado confirma qué versiones se venden hoy en España (coches.com cita baterías de 69, 78 y 82 kWh, que no coinciden con las del MY27)."
   - "launch: ninguna fuente da la fecha desde la que se pide en España."
   - "segment: coches.com solo dice 'tamaño compacto'; no es un término de la lista de RF-11."
