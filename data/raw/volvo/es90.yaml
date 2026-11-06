@@ -8,22 +8,22 @@ segment: {value: berlina, note: "quecochemecompro: «La berlina de lujo sueca qu
 needs_review: true
 versions:
   - name: ES90 Single Motor Extended Range RWD
-    battery_kwh: {value: 92, basis: unknown, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 682, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 245, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    drivetrain: {value: rwd, note: "el nombre homologado dice RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 92, basis: unknown, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 682, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 245, note: "IDAE id 610289 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: rwd, note: "el nombre homologado dice RWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: ES90 Twin AWD
-    battery_kwh: {value: 106, basis: unknown, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 722, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 335, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 106, basis: unknown, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 722, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 335, note: "IDAE id 610290 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: ES90 Twin Performance AWD
-    battery_kwh: {value: 106, basis: unknown, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 722, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 500, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 106, basis: unknown, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 722, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 500, note: "IDAE id 610291 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: data/images/volvo/es90/frontal.jpg

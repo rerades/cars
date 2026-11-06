@@ -8,15 +8,15 @@ segment: null
 needs_review: true
 versions:
   - name: EX60 P6
-    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 625, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 275, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 625, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 275, note: "IDAE id 610287 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: EX60 P10 AWD
-    battery_kwh: {value: 95, basis: unknown, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    wltp_km: {value: 677, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    power_kw: {value: 375, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
-    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-02, tier: T2}
+    battery_kwh: {value: 95, basis: unknown, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 677, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 375, note: "IDAE id 610288 (MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: data/images/volvo/ex60/frontal.jpg
