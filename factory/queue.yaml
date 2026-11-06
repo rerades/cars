@@ -3614,6 +3614,144 @@
     factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
     solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
     el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+# Estrategia del 2026-11-06 (vision.md, «Prioridades actuales»): descubrir antes que refrescar.
+- id: modelos-nuevos-2026-11-bmw
+  agent: researcher
+  task: "Descubrimiento de modelos de BMW: busca los BEV que la marca vende hoy en España y que no
+    tienen fichero en data/raw/bmw/ (hay 1). data/candidatas.yaml estima 9, pero es una cifra de
+    terceros del 2026-09-25 y no es una fuente: la gama la dicen la web oficial y el IDAE. Crea
+    un fichero por modelo nuevo, con un máximo de 6 por ejecución, y lista en la bitácora los
+    que queden. Si un modelo no tiene ninguna fuente con sus versiones, no lo escribas y anótalo
+    en la bitácora. No toques los ficheros de los modelos que ya existen. Sigue las reglas de
+    .claude/agents/researcher.md y el esquema de docs/architecture/data-model.md (ADR-0008),
+    incluida la vía del IDAE (node factory/fetch-idae.ts) si la web no se puede leer. Imágenes
+    con node factory/fetch-image.ts, según esas mismas reglas. Bitácora."
+- id: modelos-nuevos-2026-11-byd
+  agent: researcher
+  task: "Descubrimiento de modelos de BYD: busca los BEV que la marca vende hoy en España y que no
+    tienen fichero en data/raw/byd/ (hay 1). data/candidatas.yaml estima 9, pero es una cifra de
+    terceros del 2026-09-25 y no es una fuente: la gama la dicen la web oficial y el IDAE. Crea
+    un fichero por modelo nuevo, con un máximo de 6 por ejecución, y lista en la bitácora los
+    que queden. Si un modelo no tiene ninguna fuente con sus versiones, no lo escribas y anótalo
+    en la bitácora. No toques los ficheros de los modelos que ya existen. Sigue las reglas de
+    .claude/agents/researcher.md y el esquema de docs/architecture/data-model.md (ADR-0008),
+    incluida la vía del IDAE (node factory/fetch-idae.ts) si la web no se puede leer. Imágenes
+    con node factory/fetch-image.ts, según esas mismas reglas. Bitácora."
+- id: modelos-nuevos-2026-11-mercedes-benz
+  agent: researcher
+  task: "Descubrimiento de modelos de Mercedes-Benz: busca los BEV que la marca vende hoy en España y
+    que no tienen fichero en data/raw/mercedes-benz/ (hay 6). data/candidatas.yaml estima 17,
+    pero es una cifra de terceros del 2026-09-25 y no es una fuente: la gama la dicen la web
+    oficial y el IDAE. Crea un fichero por modelo nuevo, con un máximo de 6 por ejecución, y
+    lista en la bitácora los que queden. Si un modelo no tiene ninguna fuente con sus versiones,
+    no lo escribas y anótalo en la bitácora. No toques los ficheros de los modelos que ya
+    existen. Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md (ADR-0008), incluida la vía del IDAE (node
+    factory/fetch-idae.ts) si la web no se puede leer. Imágenes con node factory/fetch-image.ts,
+    según esas mismas reglas. Bitácora."
+- id: modelos-nuevos-2026-11-opel
+  agent: researcher
+  task: "Descubrimiento de modelos de Opel: busca los BEV que la marca vende hoy en España y que no
+    tienen fichero en data/raw/opel/ (hay 3). data/candidatas.yaml estima 10, pero es una cifra
+    de terceros del 2026-09-25 y no es una fuente: la gama la dicen la web oficial y el IDAE.
+    Crea un fichero por modelo nuevo, con un máximo de 6 por ejecución, y lista en la bitácora
+    los que queden. Si un modelo no tiene ninguna fuente con sus versiones, no lo escribas y
+    anótalo en la bitácora. No toques los ficheros de los modelos que ya existen. Sigue las
+    reglas de .claude/agents/researcher.md y el esquema de docs/architecture/data-model.md
+    (ADR-0008), incluida la vía del IDAE (node factory/fetch-idae.ts) si la web no se puede
+    leer. Imágenes con node factory/fetch-image.ts, según esas mismas reglas. Bitácora."
+- id: modelos-nuevos-2026-11-citroen
+  agent: researcher
+  task: "Descubrimiento de modelos de Citroën: busca los BEV que la marca vende hoy en España y que
+    no tienen fichero en data/raw/citroen/ (hay 4). data/candidatas.yaml estima 10, pero es una
+    cifra de terceros del 2026-09-25 y no es una fuente: la gama la dicen la web oficial y el
+    IDAE. Crea un fichero por modelo nuevo, con un máximo de 6 por ejecución, y lista en la
+    bitácora los que queden. Si un modelo no tiene ninguna fuente con sus versiones, no lo
+    escribas y anótalo en la bitácora. No toques los ficheros de los modelos que ya existen.
+    Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md (ADR-0008), incluida la vía del IDAE (node
+    factory/fetch-idae.ts) si la web no se puede leer. Imágenes con node factory/fetch-image.ts,
+    según esas mismas reglas. Bitácora."
+- id: modelos-nuevos-2026-11-peugeot
+  agent: researcher
+  task: "Descubrimiento de modelos de Peugeot: busca los BEV que la marca vende hoy en España y que
+    no tienen fichero en data/raw/peugeot/ (hay 7). data/candidatas.yaml estima 11, pero es una
+    cifra de terceros del 2026-09-25 y no es una fuente: la gama la dicen la web oficial y el
+    IDAE. Crea un fichero por modelo nuevo, con un máximo de 6 por ejecución, y lista en la
+    bitácora los que queden. Si un modelo no tiene ninguna fuente con sus versiones, no lo
+    escribas y anótalo en la bitácora. No toques los ficheros de los modelos que ya existen.
+    Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md (ADR-0008), incluida la vía del IDAE (node
+    factory/fetch-idae.ts) si la web no se puede leer. Imágenes con node factory/fetch-image.ts,
+    según esas mismas reglas. Bitácora."
+- id: modelos-nuevos-2026-11-audi
+  agent: researcher
+  task: "Descubrimiento de modelos de Audi: busca los BEV que la marca vende hoy en España y que no
+    tienen fichero en data/raw/audi/ (hay 3). data/candidatas.yaml estima 7, pero es una cifra
+    de terceros del 2026-09-25 y no es una fuente: la gama la dicen la web oficial y el IDAE.
+    Crea un fichero por modelo nuevo, con un máximo de 6 por ejecución, y lista en la bitácora
+    los que queden. Si un modelo no tiene ninguna fuente con sus versiones, no lo escribas y
+    anótalo en la bitácora. No toques los ficheros de los modelos que ya existen. Sigue las
+    reglas de .claude/agents/researcher.md y el esquema de docs/architecture/data-model.md
+    (ADR-0008), incluida la vía del IDAE (node factory/fetch-idae.ts) si la web no se puede
+    leer. Imágenes con node factory/fetch-image.ts, según esas mismas reglas. Bitácora."
+- id: modelos-nuevos-2026-11-kia
+  agent: researcher
+  task: "Descubrimiento de modelos de Kia: busca los BEV que la marca vende hoy en España y que no
+    tienen fichero en data/raw/kia/ (hay 6). data/candidatas.yaml estima 9, pero es una cifra de
+    terceros del 2026-09-25 y no es una fuente: la gama la dicen la web oficial y el IDAE. Crea
+    un fichero por modelo nuevo, con un máximo de 6 por ejecución, y lista en la bitácora los
+    que queden. Si un modelo no tiene ninguna fuente con sus versiones, no lo escribas y anótalo
+    en la bitácora. No toques los ficheros de los modelos que ya existen. Sigue las reglas de
+    .claude/agents/researcher.md y el esquema de docs/architecture/data-model.md (ADR-0008),
+    incluida la vía del IDAE (node factory/fetch-idae.ts) si la web no se puede leer. Imágenes
+    con node factory/fetch-image.ts, según esas mismas reglas. Bitácora."
+- id: modelos-nuevos-2026-11-fiat
+  agent: researcher
+  task: "Descubrimiento de modelos de Fiat: busca los BEV que la marca vende hoy en España y que no
+    tienen fichero en data/raw/fiat/ (hay 3). data/candidatas.yaml estima 6, pero es una cifra
+    de terceros del 2026-09-25 y no es una fuente: la gama la dicen la web oficial y el IDAE.
+    Crea un fichero por modelo nuevo, con un máximo de 6 por ejecución, y lista en la bitácora
+    los que queden. Si un modelo no tiene ninguna fuente con sus versiones, no lo escribas y
+    anótalo en la bitácora. No toques los ficheros de los modelos que ya existen. Sigue las
+    reglas de .claude/agents/researcher.md y el esquema de docs/architecture/data-model.md
+    (ADR-0008), incluida la vía del IDAE (node factory/fetch-idae.ts) si la web no se puede
+    leer. Imágenes con node factory/fetch-image.ts, según esas mismas reglas. Bitácora."
+- id: modelos-nuevos-2026-11-porsche
+  agent: researcher
+  task: "Descubrimiento de modelos de Porsche: busca los BEV que la marca vende hoy en España y que
+    no tienen fichero en data/raw/porsche/ (hay 3). data/candidatas.yaml estima 6, pero es una
+    cifra de terceros del 2026-09-25 y no es una fuente: la gama la dicen la web oficial y el
+    IDAE. Crea un fichero por modelo nuevo, con un máximo de 6 por ejecución, y lista en la
+    bitácora los que queden. Si un modelo no tiene ninguna fuente con sus versiones, no lo
+    escribas y anótalo en la bitácora. No toques los ficheros de los modelos que ya existen.
+    Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md (ADR-0008), incluida la vía del IDAE (node
+    factory/fetch-idae.ts) si la web no se puede leer. Imágenes con node factory/fetch-image.ts,
+    según esas mismas reglas. Bitácora."
+- id: marcas-nuevas-2026-11
+  agent: researcher
+  task: "Descubrimiento de marcas: busca marcas que vendan hoy algún BEV en España y que no tengan
+    carpeta en data/raw/. Mira también las de data/candidatas.yaml sin carpeta, que al probarlas
+    no tenían modelos que publicar: pueden haber cambiado (Cadillac, Genesis, Honda, Jaguar,
+    Lucid, Denza, Rolls-Royce). Da de alta la primera que encuentres, con sus fuentes en
+    data/sources/ y hasta 6 modelos, y lista las demás en la bitácora para encolarlas. No toques
+    data/candidatas.yaml. Si un modelo ya está en otra carpeta de data/raw/ (submarcas), no lo
+    dupliques. Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md (ADR-0008), incluida la vía del IDAE (node
+    factory/fetch-idae.ts) si la web no se puede leer. Imágenes con node factory/fetch-image.ts,
+    según esas mismas reglas. Bitácora."
+- id: specs-open-questions-2026-11-volkswagen-2
+  agent: researcher
+  task: "Repetición de specs-open-questions-2026-11-volkswagen, que no pudo usar el IDAE porque probó
+    nombres que no existen: el IDAE escribe la marca como «Volkswagen Turismos» (node
+    factory/fetch-idae.ts \"Volkswagen Turismos\", comprobado el 2026-11-06: 107 versiones).
+    Resuelve las open_questions de especificaciones y versiones de data/raw/volkswagen/
+    (autonomía WLTP, batería, potencia, tracción, carga y qué versiones se venden hoy). Sigue
+    las reglas de .claude/agents/researcher.md, incluida la de los datos de homologación del
+    IDAE, y docs/architecture/data-model.md; las fechas, con la regla «Una fecha solo cambia con
+    una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja el resto
+    con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
 - id: specs-open-questions-2026-11-cupra
   agent: researcher
   task: "Resuelve las open_questions de especificaciones y versiones de data/raw/cupra/ (autonomía

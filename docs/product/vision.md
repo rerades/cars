@@ -1,7 +1,7 @@
 ---
 id: VISION
 status: draft
-updated: 2026-10-18
+updated: 2026-11-06
 ---
 
 # Visión del producto
@@ -22,6 +22,14 @@ Personas en Europa, con foco inicial en **España**, que están informándose so
 2. **Sin datos personales:** no se guardan datos personales de usuarios.
 3. **Datos estructurados primero:** todo lo que se muestra sale de una base de datos con modelo definido, no de texto suelto.
 4. **Construida por agentes:** el producto lo construye y lo mantiene una factoría de agentes autónomos. La documentación tiene que servirles como contrato.
+
+## Prioridades actuales
+Decisión del responsable (2026-11-06), con 82 modelos publicados de 26 marcas: los datos ya bastan como ejemplo y el esfuerzo pasa al desarrollo técnico.
+
+1. **UX/UI primero.** Se empieza por la identidad visual, la base común (cabecera, navegación y pie) y la portada. Sus tareas van por delante en la cola.
+2. **Descubrir antes que refrescar.** En datos, importan los modelos y las marcas nuevos. Que un precio cambie de un mes a otro no es prioritario, así que el refresco mensual deja de ser obligatorio (enmienda de ADR-0010, punto 6).
+
+Descartado: dejar el Researcher solo en mantenimiento (se perderían modelos nuevos) y mantener el reparto actual (10 de las 15 ejecuciones de una noche y poca novedad en los datos).
 
 ## Qué NO es (por ahora)
 - No hay cuentas de usuario, comentarios, foros ni contenido generado por usuarios.
