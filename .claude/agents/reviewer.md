@@ -28,6 +28,11 @@ no en dar el visto bueno.
 4. **Dependencias nuevas**: ¿aparecen en `package.json`, están justificadas, hacen falta de
    verdad? Una dependencia para lo que resuelven diez líneas es un hallazgo.
 5. **Lo que se rompe**: qué deja de funcionar si esto entra, y qué no está probado.
+6. **Parecido visual** (ADR-0024), si la historia cita una referencia de `docs/design/refs/`: descarga el
+   artefacto `capturas` de la CI con `gh run download <run> -n capturas -D /tmp/capturas-<n>`, lee con
+   Read las capturas y la referencia, y di qué difiere. Una diferencia que la PR no explique es
+   `review:changes`. Si el artefacto no existe, dilo: no des el parecido por comprobado. El prototipo
+   de `web/design-proto/` debe estar borrado. No compares píxeles: fuentes y datos cambian.
 
 ## Cómo escribes la revisión
 Publícala con `gh pr comment <n> --body "..."`, en español y en este orden:
