@@ -6,9 +6,9 @@
 | Planificador (`planner`) | Trocear PRD `ready` en épica e historias | GitHub Issues | **activo** |
 | Researcher (`researcher`) | Mantener el registro de fuentes y obtener datos de modelos, precios e imágenes | `data/` | **activo** |
 | Arquitecto (`architect`) | Proponer ADR y el modelo de datos | `docs/architecture/` | **activo** |
-| Desarrollador (`developer`) | Implementar historias | `web/` | **activo** |
+| Desarrollador (`developer`) | Implementar historias y borrar el prototipo que implementan | `web/` | **activo** |
 | DevOps (`devops`) | Mantener los workflows de GitHub Actions: qué se ejecuta, qué bloquea | `.github/workflows/` | **activo** |
-| Diseñador UX/UI (`designer`) | Especificar pantallas y componentes: estructura, estados, tokens, accesibilidad y textos | `docs/design/` | **activo** |
+| Diseñador UX/UI (`designer`) | Especificar y prototipar pantallas y componentes: estructura, estados, tokens, accesibilidad y textos (ADR-0024) | `docs/design/`, `web/design-proto/` | **activo** |
 | Revisor / QA (`reviewer`) | Verificar la DoD y los CA | comentarios en PR | **activo** |
 
 Además de su columna, **todos** pueden escribir en `docs/bitacora/`: la regla de CLAUDE.md de
