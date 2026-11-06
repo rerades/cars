@@ -101,8 +101,8 @@ Detalles:
 - **No verificado:** compatibilidad del JS de cada componente con el CSP que se decida, y si el adaptador de Starwind depende de React (dato que solo afectaría a la alternativa de reserva).
 
 **Sigue pendiente (fuera de esta ADR)**
-- Tipografía, paleta y tokens del diseño visual.
-- Iconografía.
+- Tipografía, paleta y tokens del diseño visual. Cómo se decide: [ADR-0024](0024-diseno-en-codigo-y-revision-en-imagen.md).
+- Iconografía. Cómo se decide: ADR-0024.
 
 **Resuelta (2026-09-25)**
 - **Tema oscuro: no, de momento.** No está en ningún PRD y recordar la preferencia del visitante
