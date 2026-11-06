@@ -14,6 +14,8 @@ versions:
   - name: EV4 Earth Launch Edition
     price: null
   - name: EV4 GT-Line
+    battery_kwh: {value: 81, basis: unknown, note: "IDAE id 610162 (EV4 (Hatchback 5p) Earth GT-Line Long Range, única GT-Line del hatchback)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 610162", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: EV4 Fastback GLS-Earth
     price: null
@@ -31,5 +33,5 @@ open_questions:
   - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23 y el 2026-10-31 (el configurador solo da condiciones de oferta financiada, caducada el 26/10/2026, sin importe por versión): ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha habla de 'proporciones del segmento C' pero no da una categoría de RF-11; queda vacío."
-  - "Batería, potencia y tracción por versión no publicadas en la ficha estática."
+  - "Especificaciones por versión (2026-11-06): la ficha estática no las da. Del IDAE (idae-es, T2): todas las filas EV4 dan 150 kW; el hatchback GT-Line solo existe en Long Range (81 kWh, 584 km), añadidos batería y potencia a EV4 GT-Line. Air y Earth Launch Edition tienen 58 kWh y 81 kWh según la fila, y los nombres de versión del fichero (Air, Earth Launch Edition, Fastback GLS-Earth, Fastback GT-Line) no coinciden uno a uno con los del IDAE (p. ej. «Earth GT-Line Long Range», «Business»): sin asignar. wltp_km no se añade: el IDAE da 440/425/594/584/625 km (hatchback) y 440/612 km (Fastback) y la ficha 633 km (T1, prevalece), y la regla 8 exige coincidencia con wltp_max_km. Tracción por versión no publicada. El IDAE no dice qué versiones se venden hoy."
   - "Hatchback y Fastback se publican como modelos separados en la gama de Kia España; aquí van juntos como versiones de EV4 (decisión pendiente)."

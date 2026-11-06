@@ -12,6 +12,9 @@ specs:
   drivetrains: {value: [awd], note: "\"AWD, tracción integral\"", source_id: kia-es, url: "https://www.kia.com/es/modelos/ev9/descubrelo/", retrieved: 2026-10-31, tier: T1}
 versions:
   - name: EV9 GT-Line
+    battery_kwh: {value: 100, basis: unknown, note: "IDAE ids 583072 y 583073 (EV9 AWD GT-Line 7pl / 6pl), mismos valores", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 505, note: "IDAE ids 583072 y 583073", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 283, note: "IDAE ids 583072 y 583073", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: "data/images/kia/ev9/frontal.jpg"
@@ -32,4 +35,4 @@ open_questions:
   - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23 y el 2026-10-31 (el configurador solo da condiciones de oferta financiada, caducada el 26/10/2026, sin importe por versión): ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario (63.340 €) no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha dice 'SUV de tres filas, hasta 7 asientos' sin categoría de tamaño explícita; queda vacío."
-  - "Lista completa de versiones no leída (solo consta GT-line por su 0-100 km/h)."
+  - "Versiones (2026-11-06): el IDAE (idae-es, T2) solo homologa EV9 AWD GT-Line (6 y 7 plazas: 100 kWh, 283 kW, 505 km), añadido a EV9 GT-Line. No hay más versiones en el IDAE ni la ficha las lista; carga DC por versión no publicada. El IDAE no dice qué versiones se venden hoy."

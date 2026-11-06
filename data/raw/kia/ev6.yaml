@@ -29,4 +29,4 @@ open_questions:
   - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23 y el 2026-10-31 (el configurador solo da condiciones de oferta financiada, caducada el 26/10/2026, sin importe por versión): ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha dice 'crossover' sin tamaño; queda vacío."
-  - "Potencia, carga DC en kW y correspondencia versión-batería-tracción no publicadas en la ficha estática."
+  - "Potencia, carga DC en kW y correspondencia versión-batería-tracción (2026-11-06): la ficha estática no las publica. El IDAE (idae-es, T2) tiene EV6 de la generación anterior (58/77,4 kWh) y «(MY24)» y «(FL)» (58 kWh y 77 kWh, hasta 560 km, GT 470 kW), que no coinciden con los 62,9/84,0 kWh y 582 km de la ficha (T1); sin certeza de qué homologación corresponde a la ficha actual, no se asigna ningún valor. El IDAE no dice qué versiones se venden hoy."

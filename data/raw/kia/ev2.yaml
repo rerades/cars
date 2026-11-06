@@ -15,6 +15,8 @@ versions:
   - name: EV2 Earth
     price: null
   - name: EV2 GT-Line
+    battery_kwh: {value: 61, basis: unknown, note: "IDAE ids 610154-610157 (EV2 (LR) GT-Line, única variante GT-Line en el IDAE)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 99, note: "IDAE ids 610154-610157", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: "data/images/kia/ev2/frontal.jpg"
@@ -28,4 +30,4 @@ open_questions:
   - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23: ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario (19.360 €) no se asocian a una versión ni son PVP: no se usan."
   - "Refresco 2026-10-31: la ficha aún avisa de que 'Todos los datos técnicos y especificaciones son objetivos previstos, pendientes de desarrollo y homologación', aunque dice que el EV2 'ya esta disponible oficialmente en los canales de Kia España'. Cifras sin confirmar por homologación. Configurador: solo condiciones de oferta financiada (caducada el 26/10/2026) sin importe por versión; sin precio utilizable."
   - "launch: sin fecha de inicio de venta en una fuente T1."
-  - "Potencia por versión (la ficha da 108 kW / 147 PS solo para la versión base sin nombrarla) y carga DC máxima en kW no publicadas."
+  - "Especificaciones por versión (2026-11-06): la ficha da 108 kW / 147 PS solo para la versión base sin nombrarla y no publica carga DC en kW. Del IDAE (idae-es, T2): EV2 SR (42 kWh, 108 kW, 308 km) en Light, Air, Earth, Earth Pack Tech; EV2 LR (61 kWh, 99 kW, 418 km) en Air, Earth, Earth Pack Tech, GT-Line, Black Line. GT-Line solo existe en LR: añadidos batería y potencia. Air y Earth existen en SR y LR y el fichero no distingue cuál: sin asignar. wltp_km no se añade: el IDAE da 418 km como máximo y la ficha 453 km (T1, prevalece; datos aún «previstos») y la regla 8 exige coincidencia. El IDAE no dice qué versiones se venden hoy; Light y Black Line del IDAE no están en el fichero."
