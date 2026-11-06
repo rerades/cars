@@ -1,6 +1,6 @@
 # ADR-0010 — Pipeline de ingesta: validación de todo `data/raw/` en la CI y refresco mensual por marca
 
-- **Estado:** aceptada (2026-10-06). Enmienda «Imágenes» (descarga de [ADR-0012](0012-imagenes-de-los-modelos.md)): aceptada (2026-10-07)
+- **Estado:** aceptada (2026-10-06). Enmienda «Imágenes» (descarga de [ADR-0012](0012-imagenes-de-los-modelos.md)): aceptada (2026-10-07). Enmienda «Refresco sin calendario» (punto 6): aceptada (2026-11-06)
 - **Fecha:** 2026-10-04
 - **Historial:** 2026-10-04 propuesta · 2026-10-06 aceptada · 2026-10-07 enmienda propuesta y aceptada: se
   añaden la opción 6, la subsección «Imágenes» de la Decisión, sus consecuencias y las fuentes [2] y
@@ -176,7 +176,7 @@ Detalles:
    El resumen agrupa los avisos por marca y lista las marcas **vencidas**: las que tienen algún
    aviso de antigüedad. Son nuevas comprobaciones de `evals.ts`, pero de aviso: el eval de la
    factoría no las usa para rechazar.
-6. **Refresco.** Una ejecución del Researcher por marca y mes, que relee todos los valores de la
+6. **Refresco.** *Enmienda (2026-11-06): el refresco ya no tiene calendario obligatorio. Se encola cuando haga falta, por detrás del descubrimiento de modelos y marcas ([visión](../../product/vision.md), «Prioridades actuales»). Se asume que los precios publicados envejecen: siguen con su fecha `retrieved` (punto 8) y el aviso de 45 días (punto 5) sigue activo.* Una ejecución del Researcher por marca y mes, que relee todos los valores de la
    marca en sus fuentes, actualiza `retrieved` (y el valor si ha cambiado) y verifica las fuentes
    del registro (`last_verified`, `status`). Mientras la cola se rellene a mano, las tareas de
    refresco las añade una persona a `factory/queue.yaml` a partir de la lista de marcas vencidas;

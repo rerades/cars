@@ -73,7 +73,7 @@ agents:
     network: true          # solo para investigación técnica; los datos de coches son del Researcher (ADR-0001)
 
   developer:
-    max_runs_per_day: 4
+    max_runs_per_day: 8   # 4 -> 8 on 2026-11-06: technical work first; the queue stops at the first capped agent
     max_usd_per_period: 50   # 6 -> 50 on 2026-10-08: PRD-002 stories and what follows; earlier: 3 -> 6 on 2026-09-29: stories #34, #35 and #38 queued at up to 1.50 each
     max_usd_per_run: 1.50   # la #33 levanta el proyecto entero; 1.00 se queda corto
     max_turns_per_run: 60   # 40 -> 60 on 2026-10-22: paired stories in one task (#321+#322, #373+#374, #595+#596) need more turns
