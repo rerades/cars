@@ -20,6 +20,7 @@ versions:
   - name: RS
     battery_kwh: {value: 77, basis: usable, note: "publicado: 82 kWh (77 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
     power_kw: {value: 250, note: "publicado: 250 kW (340 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe", retrieved: 2026-11-02, tier: T1}
+    drivetrain: {value: awd, note: "IDAE id 610725: «ENYAQ COUPÉ MY27 RS 250 kW (340 CV) 82kWh 4x4»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: data/images/skoda/enyaq-coupe/frontal.jpg
@@ -34,5 +35,6 @@ open_questions:
   - "Precios: la ficha solo da «desde» 33.700 / 40.100 / 43.750 € sujetos a financiación e incluyendo Plan Auto+ (y Plan CAE); no es PVP sin ayudas y no se guarda. Leída 2026-10-24 con fetch-page.ts la ficha https://www.skoda.es/modelos/enyaq-coupe-iv/enyaq-coupe: las notas 2, 3 y 4 dan un «PVP recomendado financiando» por versión (Selection 39.408,70 €, Sportline 45.393,71 €, RS 49.003,71 €, hasta 31/10/2026), guardado como financed con el texto literal. Sigue sin PVP limpio."
   - "segment: la ficha dice «SUV deportivo», que no está en la lista de RF-11; queda null."
   - "La ficha muestra también un bloque «60 150 kW (204 CV)» que no corresponde a ninguna de las tres versiones listadas; no se usa."
-  - "WLTP por versión, tracción y kW de carga DC no están en la ficha; wltp_km queda sin rellenar."
+  - "WLTP por versión (2026-11-06): la web solo da el máximo de 591 km, que en el IDAE corresponde a ENYAQ COUPÉ MY27 Selection 210 kW 82 kWh (id 610722) y Selection 220 kW 4x4 (id 610723). Esas versiones no están en este fichero, así que wltp_km por versión queda vacío: con Selection 140 kW (id 610721, 462 km), Sportline 210 kW (id 610724, 579 km) y RS 4x4 (id 610725, 575 km) el máximo (579) no coincidiría con specs.wltp_max_km (591) y el fichero sería inválido (data-model.md, regla 8)."
+  - "Tracción (2026-11-06): solo RS, awd, porque el IDAE (id 610725) dice «4x4». Selection 140 kW y Sportline 210 kW no indican tracción. Versiones que se venden hoy: la ficha no las enumera más allá de Selection, Sportline y RS; el IDAE (MY27) homologa además Selection 210 kW y 220 kW 4x4, que no se añaden sin fuente de la marca. kW de carga DC y AC no están en la ficha ni en el IDAE."
   - "launch: la ficha no da fecha de inicio de venta en España."

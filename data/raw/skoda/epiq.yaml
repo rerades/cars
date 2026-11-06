@@ -10,14 +10,20 @@ versions:
   - name: Urban
     battery_kwh: {value: 37, basis: usable, note: "publicado: 38,5 kWh (37 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
     power_kw: {value: 99, note: "publicado: 99 kW (135 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 324, note: "IDAE id 614331: «EPIQ MY27 Urban 38,5kWh 99kW (135CV) tracción delantera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 614331: «tracción delantera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: Selection
     battery_kwh: {value: 37, basis: usable, note: "publicado: 38,5 kWh (37 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
     power_kw: {value: 99, note: "publicado: 99 kW (135 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 323, note: "IDAE id 614332: «EPIQ MY27 Selection 38,5kWh 99kW (135CV) tracción delantera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 614332: «tracción delantera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: First Edition
     battery_kwh: {value: 52, basis: usable, note: "publicado: 55 kWh (52 kWh neta)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
     power_kw: {value: 155, note: "publicado: 155 kW (210 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/epiq/epiq", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 431, note: "IDAE id 610733: «EPIQ MY27 First Edition 55kWh 155kW (210CV) tracción delantera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610733: «tracción delantera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: data/images/skoda/epiq/frontal.jpg
@@ -30,6 +36,6 @@ images:
 open_questions:
   - "Refresco 2026-11-02 (ADR-0010, punto 8): leída con fetch-page.ts, la ficha solo publica las condiciones con «Oferta válida hasta el 31/10/2026», ya vencida; no hay oferta vigente ni PVP limpio, así que price: null en todas las versiones. Volver a leerla en el siguiente refresco: si la marca publica una oferta nueva, guardarla como financed con su texto literal."
   - "Precios (2026-10-24): leída con fetch-page.ts la ficha https://www.skoda.es/modelos/epiq/epiq; las notas 2, 3 y 4 dan un «PVP recomendado financiando» por versión (Urban 24.170,10 €, Selection 26.495,19 €, First Edition 33.346,69 €, hasta 31/10/2026), guardado como financed con el texto literal. Sigue sin PVP limpio. Los «desde» (18.500 / 20.800 / 27.600 €) incluyen Plan Auto+ y no se usan. La ficha se contradice: la nota 1 da capital mínimo de 19.000 € y 84 meses, las notas 2 a 4 un crédito mínimo de 17.000 € y 36 meses de permanencia; el pie de la ficha dice «©2024» y en lecturas anteriores «Oferta vigente hasta 30 de junio de 2025», frente a «Oferta válida hasta el 31/10/2026»."
-  - "Autonomía: la ficha da «hasta 439 km» y «hasta 437 km en ruta», contradictorios; no se rellena wltp_max_km ni wltp_km. El IDAE homologa Epiq MY27 (Urban 55 kWh: 437 km), sin cruzar con la ficha."
+  - "Autonomía (2026-11-06): la ficha, releída con fetch-page.ts, da «Hasta 437 km de autonomía en ruta» y «Hasta 439 km de autonomía eléctrica», contradictorios; no se rellena wltp_max_km. wltp_km por versión sale del IDAE (MY27, una sola fila por versión; sin fecha MM/AAAA, solo el código MY27). El máximo de la ficha (437 km) coincide con EPIQ MY27 Urban 55 kWh 155 kW (id 610731, 437 km, tracción delantera), versión que no está en este fichero y que la ficha no nombra; el IDAE también homologa Selection 55 kWh (id 610732, 433 km). No se añaden sin fuente de la marca."
   - "launch y pedidos abiertos: la ficha no los indica; modelo marcado needs_review."
-  - "Tracción y kW de carga DC no están en la ficha (solo «carga rápida en 24 min»)."
+  - "kW de carga DC y AC no están en la ficha (solo «carga rápida en 24 min») ni en el IDAE; quedan vacíos. La tracción (fwd) sale del IDAE, no de la ficha."
