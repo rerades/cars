@@ -5,7 +5,7 @@ status: draft        # draft | ready | in-progress | done | deprecated
 priority: P1         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: []
 epic: ""
-updated: 2026-10-28
+updated: 2026-11-05
 ---
 
 # PRD-007 — Harness de la factoría
@@ -31,7 +31,8 @@ El cuello de botella de la factoría no son los agentes, es la persona. Lo dicen
 - **Los fallos se ven tarde.** El developer solo tiene evals de `write_paths`. Las pruebas, los
   tipos y el build se comprueban por primera vez en la CI, con la PR ya abierta. Una PR roja o con
   `review:changes` espera a la persona, aunque el arreglo sea mecánico.
-- **El Researcher hace demasiadas cosas.** Su prompt ocupa 9,3 K, el triple que los demás. Es el
+- **El Researcher hace demasiadas cosas.** Su prompt ocupa 11 784 bytes (`wc -c`, medido en ADR-0023 el
+  2026-10-30; el borrador decía 9,3 K). Es el
   agente con más ejecuciones (107) y más gasto (36 USD-eq), y sus 5 `eval_failed` son de reglas
   que su prompt ya explica.
 - **Tiempo hasta la fusión de una PR de agente:** 8 h de mediana y 18 h en el p90, al ritmo de una
@@ -106,10 +107,11 @@ fase 3.
   del diff: datos (`data/`) o código y documentación (el resto). Cada rúbrica tiene sus casos en el
   dataset de ADR-0016, y un cambio de rúbrica se aprueba con `factory/eval-run.ts`, igual que un
   cambio de prompt.
-- **RF-7:** **Researcher con skills.** El prompt base del Researcher ocupa menos de 3 K y recoge las
-  reglas comunes (ADR-0001, rutas y bitácora). Cada tipo de tarea va en su propia skill y se carga
-  solo cuando la tarea la necesita: fuentes nuevas, datos de modelos, imágenes y precios. Los evals
-  de ADR-0004 no cambian.
+- **RF-7:** **Researcher con skills.** El prompt base del Researcher ocupa menos de 3 000 caracteres
+  (`String.length` del fichero entero, frontmatter incluido; decisión del responsable, 2026-10-30) y
+  recoge las reglas comunes (ADR-0001, rutas y bitácora). Cada tipo de tarea va en su propia skill y
+  se carga solo cuando la tarea la necesita: fuentes, datos de modelos, precios, imágenes y reviews.
+  Los evals de ADR-0004 no cambian. Cómo se cumple: ADR-0023.
 
 ### Fase 3 — Confianza para más autonomía
 - **RF-8:** **Verificador de datos independiente.** Para cada PR de datos, vuelve a leer una muestra
@@ -194,8 +196,9 @@ fase 3.
 - [ ] **CA-8** (→ RF-6): Dada una PR que solo toca `data/raw/`, cuando la revisa el Revisor, entonces
   usa la rúbrica de datos, y la de código si toca `web/`. Los casos de las dos rúbricas pasan en
   `eval-run.ts`.
-- [ ] **CA-9** (→ RF-7): El prompt base del Researcher ocupa menos de 3 K, y una tarea de precios no
-  carga la skill de imágenes (se ve en la traza).
+- [ ] **CA-9** (→ RF-7): El fichero `.claude/agents/researcher.md`, frontmatter incluido, tiene menos
+  de 3 000 caracteres (`String.length`), y una tarea de precios no carga la skill de imágenes (se ve
+  en la traza).
 - [ ] **CA-10** (→ RF-8): Dada una PR de datos con un precio que no aparece en su `url`, cuando pasa
   el verificador, entonces la PR recibe `merger:needs-human` con ese valor y su URL, y no se fusiona.
 - [ ] **CA-11** (→ RF-9): Dado un agente con N−1 fusiones limpias de un tipo, cuando entra la N,
@@ -290,9 +293,15 @@ fase 3.
   con JavaScript?~~ Resuelta por ADR-0020 (2026-10-26): código sin modelo, última regla de la fusión;
   hasta 10 URL por PR, precios primero; un valor que no está en el texto servido, también en páginas
   de solo JavaScript, va a una persona.
-- **OPEN-3** (→ RF-7): ¿Cargan las skills de `.claude/skills/` en `claude -p` dentro del worktree con
+- ~~**OPEN-3** (→ RF-7): ¿Cargan las skills de `.claude/skills/` en `claude -p` dentro del worktree con
   `FACTORY_AGENT`? ¿Puede una skill limitarse a un solo agente? Hay que comprobarlo antes de trocear
-  RF-7.
+  RF-7.~~ Resuelta por ADR-0023 (2026-10-30): según la documentación, las skills de proyecto cargan en
+  `-p` con `--setting-sources project` si el agente tiene la herramienta `Skill` y su permiso; una
+  skill no se limita a un agente, pero sí qué agente puede invocarla (solo el Researcher lleva `Skill`).
+  Alternativas descartadas: precargar las skills con el campo `skills` del agente (CA-9 no se
+  cumpliría nunca) y cargarlas por adelantado desde la tarea con `/nombre` (en `-p` solo carga la
+  primera). Que funcione con `--agent` dentro del worktree no está documentado: lo comprueban las
+  pruebas de ADR-0023 antes de trocear, y si fallan se revisa la ADR. Unidad del «3 K»: caracteres.
 - ~~**OPEN-4** (→ RF-10)~~ Resuelta el 2026-10-28 por el responsable: F3 (semanal con umbral 3), M1
   (Sonnet), los topes de la tabla y propuestas como texto. Ver RF-10 y CA-13. Presupuesto, topes y frecuencia del agente retro (¿semanal?). ¿Usa Opus,
   como el Arquitecto?
@@ -381,3 +390,4 @@ fase 3.
 | 2026-10-26 | Aceptada la ADR-0020: OPEN-2 resuelta. Una PR de datos sin ningún valor comprobable (403, `robots.txt`) se sigue fusionando sola y se mide con RF-1. Sin cambios en RF ni CA. | responsable + Claude |
 | 2026-10-28 | Propuestas de respuesta, sin cerrar, para OPEN-1 (N, tipo de cambio y estado de la escalera) y OPEN-4 (frecuencia, modelo y topes del retro), con los datos de octubre y tres alternativas cada una. Decide la persona al revisar la PR. Sin cambios en RF ni CA. | Claude |
 | 2026-10-28 | OPEN-1 y OPEN-4 resueltas por el responsable. RF-9: N = 5, tipo = agente + primer nivel de ruta, solo `web/` de momento, estado en `ops/trust/`. RF-10 y CA-13: el retro propone como texto y no escribe en `.claude/`; semanal con umbral de 3 señales, Sonnet, 1 USD-eq por ejecución y 6 al mes. Hace falta enmendar ADR-0011 y ADR-0013 (Arquitecto). | responsable + Claude |
+| 2026-11-05 | Aceptada la ADR-0023: RF-7 y CA-9 alineados con ella. El «3 K» pasa a 3 000 caracteres (`String.length` del fichero entero, decisión del responsable); las skills son fuentes, modelos, precios, imágenes y reviews (RF-7 no nombraba reviews, ADR-0017); el tamaño de hoy en la sección 1 pasa de 9,3 K a 11 784 bytes (medido en la ADR). OPEN-3 resuelta. Sin cambio de alcance ni de otros RF o CA. | Claude |
