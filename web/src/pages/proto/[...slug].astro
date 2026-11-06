@@ -1,0 +1,21 @@
+---
+/**
+ * Design prototypes (ADR-0024): renders web/design-proto/<slug>.astro at /proto/<slug>/.
+ * Without DESIGN_PROTO=1 it generates no pages, so nothing here reaches the published site.
+ */
+// ponytail: Tailwind scans web/, so the classes of a live prototype reach the published CSS. They are few
+// and temporary; add a separate config if a long-lived prototype ever makes it matter.
+export function getStaticPaths() {
+  if (process.env.DESIGN_PROTO !== "1") return [];
+  const protos = import.meta.glob("/design-proto/*.astro");
+  return Object.keys(protos).map((path) => ({
+    params: { slug: path.replace("/design-proto/", "").replace(".astro", "") },
+    props: { path },
+  }));
+}
+
+const protos = import.meta.glob<{ default: any }>("/design-proto/*.astro");
+const { default: Proto } = await protos[Astro.props.path as string]!();
+---
+
+<Proto />

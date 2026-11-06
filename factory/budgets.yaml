@@ -101,8 +101,8 @@ agents:
     max_usd_per_run: 2.00   # 1.00 -> 2.00 on 2026-09-27: Opus is 2x per token; the Sonnet rework already reached 0.77
     max_turns_per_run: 20
     api_key_env: DESIGNER_API_KEY
-    write_paths: [docs/design/, docs/bitacora/]   # especifica; el código lo escribe el developer
-    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(node factory/bitacora.ts:*)"]
+    write_paths: [docs/design/, web/design-proto/, docs/bitacora/]   # ADR-0024: disposable prototypes only; production code is the developer's
+    allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(node factory/bitacora.ts:*)", "Bash(node web/scripts/design-shot.ts:*)"]
     network: false
 
   reviewer:
@@ -113,5 +113,5 @@ agents:
     api_key_env: REVIEWER_API_KEY
     write_paths: [docs/bitacora/]   # comentarios en PR, y su entrada en la bitácora
     # No ejecuta pruebas: para eso está la CI. Solo lee la PR, su historia y su estado.
-    allowed_tools: [Read, Glob, Grep, "Bash(gh pr:*)", "Bash(gh issue:*)", "Bash(node factory/bitacora.ts:*)"]
+    allowed_tools: [Read, Glob, Grep, "Bash(gh pr:*)", "Bash(gh issue:*)", "Bash(gh run download:*)", "Bash(node factory/bitacora.ts:*)"]
     network: false

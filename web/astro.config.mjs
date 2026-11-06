@@ -11,6 +11,8 @@ process.env.CARS_IMAGES_DIR ||= resolve(import.meta.dirname, "../data/images");
 export default defineConfig({
   // Production domain (ADR-0009): canonical URLs are built from it.
   site: "https://siete3.com",
+  // The toolbar would show up in the design screenshots (ADR-0024).
+  devToolbar: { enabled: process.env.DESIGN_PROTO !== "1" },
   vite: {
     plugins: [tailwindcss()],
     // `data/images/` lives outside web/ (ADR-0012); components glob it through this alias.
