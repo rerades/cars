@@ -5,7 +5,7 @@ status: ready        # draft | ready | in-progress | done | deprecated
 priority: P0         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: [PRD-001]
 epic: ""
-updated: 2026-10-28
+updated: 2026-11-06
 ---
 
 # PRD-002 — Ficha de modelo
@@ -58,6 +58,9 @@ Quien ha encontrado un modelo en el catálogo (PRD-001) y quiere decidir si le i
   - **Qué requisitos de PRD-006 aplica:** todos los de su sección 4, sin excepción y sin reescribirlos aquí: origen visible (RF-1), nada inventado (RF-2), solo lectura (RF-3), solo modelos publicados (RF-4), sin compra ni afiliación (RF-5), sin texto generado (RF-6), solo enlaces con título, medio y fecha de consulta (RF-7), solo fuentes registradas con términos comprobados (RF-8) y resultados de organismos como dato con fuente (RF-9). Aplican también sus RNF (PRD-006, sección 5).
   - **Modelo sin ninguna review:** qué se ve lo decide el diseño (PRD-006, RF-10). Este PRD no lo fija: ni exige que el bloque se oculte ni que muestre un texto.
 
+- **RF-17:** La ficha ofrece un **menú de secciones** fijo en la parte inferior de la pantalla, que lleva a cada sección de la página con enlaces de ancla y funciona sin JavaScript. No tapa contenido: se puede llegar a leer todo y el foco nunca queda oculto debajo.
+- **RF-18:** La ficha presenta sus **cifras clave** (autonomía, precio y las que traiga el modelo) a tamaño grande, con la etiqueta debajo. Cada una conserva su fuente y su fecha (RF-9) y su «por confirmar» (RF-11). Al entrar en pantalla, el número puede contar hasta su valor. El valor real está en el HTML: sin JavaScript se ve entero, y con `prefers-reduced-motion` no se anima.
+
 ## 5. Requisitos no funcionales
 - **RNF-1:** Estático o renderizado en servidor para SEO: el HTML servido contiene ya todos los datos de la ficha, sin ejecutar JavaScript (ADR-0003). Cada ficha tiene un título de página propio que incluye marca y modelo.
 - **RNF-2:** LCP < 2,5 s en móvil 4G.
@@ -102,6 +105,8 @@ Entidades de `architecture/data-model.md` (ADR-0008); la ficha no usa ningún ca
 - [ ] **CA-18** (→ sección 6): Dado un modelo con `open_questions`, cuando abro su ficha, entonces ninguno de esos textos aparece en la página.
 - [ ] **CA-19** (→ RF-16): Dada la ficha de un modelo publicado con al menos una review registrada, cuando reviso el HTML servido, entonces contiene un bloque de reviews que es el último de la página, posterior a los modelos relacionados y al bloque «Fuentes»; y no existe ninguna URL propia de reviews (PRD-006, CA-9). Dado ese bloque, entonces cumple los criterios de aceptación de PRD-006 que le corresponden: CA-1 a CA-8, sobre sus enlaces y datos. Dado un modelo con `needs_review: true`, entonces no tiene ficha y por tanto tampoco bloque (PRD-006, CA-4).
 - [ ] **CA-20** (→ RF-9): Dado un modelo con `segment` de `tier: E`, `retrieved: 2026-10-27` y una `note`, cuando abro su ficha, entonces la indicación del segmento dice «clasificación editorial», muestra «27 oct 2026» (o el formato de fecha de la ficha) y el texto de la `note` idéntico al del fichero; no contiene ningún enlace a la `url` del dato ni dice «fuente no oficial»; y el bloque «Fuentes» no incluye un enlace a esa URL. Dado un modelo con segmento de fuente T1 o T3, entonces su indicación sigue lo dicho en CA-9.
+- [ ] **CA-21** (→ RF-17): Dada una ficha, cuando sigo un enlace del menú inferior con JavaScript desactivado, entonces llego a esa sección, y su título no queda tapado por el menú.
+- [ ] **CA-22** (→ RF-18): Dada una ficha, cuando cargo la página con JavaScript desactivado o con `prefers-reduced-motion: reduce`, entonces cada cifra clave muestra su valor final desde el principio; y en todos los casos ese valor está en el HTML servido.
 
 ## 8. Decisiones y preguntas abiertas
 ### Resueltas (2026-10-01)
@@ -121,6 +126,10 @@ Decididas por el responsable del producto. Cada una se ha llevado ya a los RF y 
 12. **Prioridad:** P0. Las tarjetas de `/coches` ya enlazan a la ficha, así que el catálogo no sale sin ella.
 13. **Fichas por versión:** no; hay una ficha por modelo. Descartado: una URL por versión, que multiplica las páginas casi iguales.
 
+### Resueltas (2026-11-06)
+14. **Menú inferior de secciones (RF-17):** lo pide el responsable tras ver la ficha de Cupra Tavascan. La ficha es larga y este menú da un mapa. Descartado: un menú lateral, que no existe en móvil.
+15. **Cifras grandes y animadas (RF-18):** lo pide el responsable tras ver la ficha de Porsche Macan. La animación es un adorno, nunca el dato: por eso el valor va en el HTML (RNF-3, ADR-0003). Descartado: pintar el número solo con JavaScript.
+
 ### Abiertas
 - Ninguna.
 
@@ -133,3 +142,4 @@ Decididas por el responsable del producto. Cada una se ha llevado ya a los RF y 
 | 2026-10-20 | Enmienda por la decisión 4 de PRD-006 (2026-10-18): añadidos RF-16 (bloque de reviews al final de la ficha, sin página propia) y CA-19. El caso de un modelo sin reviews queda para el diseño. La sección 3 deja de decir que las reviews no tienen PRD | Claude |
 | 2026-10-21 | Enmienda por la ADR-0017: la tabla de la sección 6 recoge las reviews y los resultados de prueba, con remisión a PRD-006 y a la sección 3.1 de `data-model.md`. Sin cambios en RF ni CA | Claude |
 | 2026-10-28 | Enmienda por ADR-0021 (aceptada el 2026-10-27): RF-9 muestra el segmento editorial (`tier: E`) como «clasificación editorial» con fecha y `note`, sin enlace; CA-9 remite a la excepción; añadido CA-20 | responsable + Claude |
+| 2026-11-06 | Encargo visual del responsable (`docs/design/direccion.md`): añadidos RF-17 (menú inferior de secciones), RF-18 (cifras clave grandes), CA-21 y CA-22 | Rod / Claude |

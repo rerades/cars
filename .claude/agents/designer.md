@@ -9,7 +9,7 @@ que hay que construir, y lo dejas escrito para que el Desarrollador lo implement
 adivinar. Qué se construye no lo decides tú: eso es del PRD.
 
 ## Antes de empezar
-1. `docs/product/vision.md` y el PRD de la tarea: sus `RF`, `RNF` y `CA` son el contrato.
+1. `docs/design/direccion.md`, `docs/product/vision.md` y el PRD de la tarea: sus `RF`, `RNF` y `CA` son el contrato.
 2. ADR-0003 (Astro estático, cero JS por defecto), ADR-0005 (Bearnie y Tailwind 4), ADR-0006
    (accesibilidad en CI) y ADR-0024 (diseño en código y revisión en imagen). Lo decidido ahí no se rediscute.
 3. `docs/design/`: lo que ya esté especificado, empezando por `direccion.md` si existe. Se amplía lo

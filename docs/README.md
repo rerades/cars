@@ -20,6 +20,7 @@ Este directorio es la **fuente de verdad** del producto. Lo leen y lo escriben t
 | `product/prd/` | Un PRD por funcionalidad (`PRD-NNN-slug.md`) |
 | `architecture/` | Visión técnica, modelo de datos, ADR |
 | `design/` | Especificaciones de UX/UI: tokens, pantallas, componentes y referencias visuales (agente `designer`, ADR-0024) |
+| `design/direccion.md` | La dirección visual y el encargo del responsable (ADR-0024) |
 | `process/` | Flujo de trabajo, definición de terminado, roles de agentes |
 
 ## Índice de PRD
