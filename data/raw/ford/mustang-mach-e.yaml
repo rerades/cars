@@ -45,5 +45,5 @@ open_questions:
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "El medio T3 cita también la versión Rally (91 kWh, 487 CV, 510 km); no hay fila IDAE 05.2026 de ella, no se escribe."
   - "El IDAE tiene también homologaciones de 01.2025 y 11.2025 con otras cifras (p. ej. 610473, 610474, 610480); se usan las filas 05.2026, que coinciden con las potencias del medio T3, y no las de menor wltp_km."
-  - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."
+  - "dc_max_kw y ac_max_kw: releída el 2026-11-06 la ficha /turismos/mustang-mach-e con fetch-page.ts (kW, carga rápida, Carga): solo dice «Carga la batería de un 10 % a un 80 % con el cargador rápido de CC» (el tiempo está en un aviso legal que no sale) sin potencia; no publicados. La ficha anuncia «Hasta 615 km», coincidente con el IDAE 610479."
   - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."

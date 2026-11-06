@@ -48,5 +48,5 @@ open_questions:
   - "Nombres de versión: el IDAE agrupa los acabados en una sola fila («Titanium/Active/Titanium X») con las mismas cifras, y ford.es (Trend, Titanium, Active, Sport, Titanium X) no da datos por acabado; no se puede asignar una versión a cada acabado. La de 160 kW se nombra por batería y potencia; Sport sí es un acabado único en la fuente."
   - "Acabado Trend, citado por la ficha de ford.es, no aparece en el IDAE; sin versión."
   - "El IDAE da 83 kWh con 71 kWh útiles; basis queda unknown."
-  - "dc_max_kw y ac_max_kw: ford.es solo da tiempo de carga CC (10-80 % en unos 29 min), no la potencia."
+  - "dc_max_kw y ac_max_kw: releída el 2026-11-06 la ficha con fetch-page.ts (kW, carga rápida, Carga): solo da tiempo de carga CC (10-80 % en aproximadamente 29 minutos) y «hasta 2,3 Kw» de fuente de alimentación móvil (no es carga); la potencia de carga no está publicada."
   - "El IDAE también tiene filas de 01.2025 con power_kw 85 y 298 km (ids 610482-610486), de homologaciones anteriores; descartadas."

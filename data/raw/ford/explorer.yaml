@@ -68,5 +68,5 @@ open_questions:
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "Collection es serie limitada según el medio T3: no se ha podido confirmar que se siga vendiendo hoy (needs_review)."
   - "El IDAE tiene también homologaciones de 01.2025 y 11.2025 para las mismas versiones (p. ej. 610433, 610434, 610428) con otras cifras; se usan las filas 05.2026, que coinciden con las potencias del medio T3, y no las de menor wltp_km."
-  - "dc_max_kw y ac_max_kw no publicados en las fuentes consultadas."
+  - "dc_max_kw y ac_max_kw: releída el 2026-11-06 la ficha /turismos/explorer-electrico con fetch-page.ts (kW, carga rápida, Carga): solo dice «Carga rápida en aprox. 10 minutos» sin potencia ni versión; no publicados."
   - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."
