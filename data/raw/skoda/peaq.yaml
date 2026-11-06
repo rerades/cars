@@ -12,10 +12,14 @@ versions:
   - name: Selection
     battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
     power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 638, note: "IDAE id 610940: «PEAQ MY27 Selection 91kWh 210kW (286CV) Tracción trasera»; coincide con las 638 km de la ficha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610940: «Tracción trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
   - name: Sportline
     battery_kwh: {value: 91, basis: unknown, note: "publicado: 91 kWh", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
     power_kw: {value: 210, note: "publicado: 210 kW (286 CV)", source_id: skoda-es, url: "https://www.skoda.es/modelos/peaq/peaq", retrieved: 2026-11-02, tier: T1}
+    wltp_km: {value: 637, note: "IDAE id 610941: «PEAQ MY27 Sportline 91kWh 210kW (286CV) Tracción trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610941: «Tracción trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
   - file: data/images/skoda/peaq/frontal.jpg
@@ -29,6 +33,7 @@ open_questions:
   - "Refresco 2026-11-02 (ADR-0010, punto 8): leída con fetch-page.ts, la ficha solo publica las condiciones con «Oferta válida hasta el 31/10/2026», ya vencida; no hay oferta vigente ni PVP limpio, así que price: null en todas las versiones. Volver a leerla en el siguiente refresco: si la marca publica una oferta nueva, guardarla como financed con su texto literal."
   - "Precios (2026-10-24): leída con fetch-page.ts la ficha https://www.skoda.es/modelos/peaq/peaq; las notas 2 y 4 dan un «PVP recomendado financiando» (Selection 47.152,50 €, Sportline 51.332,50 €, hasta 31/10/2026), guardado como financed con el texto literal. Sigue sin PVP limpio. El «precio al contado» de esas notas (48.907 € y 53.087 €) es mayor (diferencia de 1.754,50 € en ambas, igual que en otras fichas de la marca) y la ficha no explica por qué; las notas «desde» piden capital mínimo de 19.000 € frente a los 17.000 € de las notas de «PVP recomendado financiando». Los «desde» (41.900 / 46.050 €) incluyen Plan Auto+ (4.050 €) y no se usan."
   - "segment: la ficha lo describe como SUV de 5 o 7 plazas sin clase formal; queda null."
-  - "La ficha habla de «dos opciones de motor» pero solo detalla la de 210 kW; el IDAE lista también una versión de 220 kW (motor dual). No se añade sin fuente de la marca."
-  - "Tracción y kW de carga DC no están en la ficha. wltp_km por versión tampoco (el IDAE da 638 km para Selection 210 kW, sin cruzar)."
+  - "La ficha habla de «dos opciones de motor» pero solo detalla la de 210 kW; el IDAE (MY27) lista también Selection y Sportline de 220 kW «Motor dual» (ids 610942-610945, 605 km). No se añaden sin fuente de la marca (2026-11-06)."
+  - "wltp_km y tracción (2026-11-06) salen del IDAE, una fila MY27 de 210 kW «Tracción trasera» por versión (Selection 638 km, Sportline 637 km); el máximo coincide con specs.wltp_max_km (638). kW de carga DC y AC no están en la ficha ni en el IDAE; quedan vacíos."
+  - "Batería: el IDAE nombra «91kWh» y su campo de batería vale 86, frente a los 91 kWh de la ficha con basis unknown; se mantiene el valor de la marca (T1) y no se concreta bruta/neta sin fuente."
   - "launch y pedidos abiertos: la ficha no los indica; modelo marcado needs_review."
