@@ -11,6 +11,6 @@ urls:
   news: https://www.byd.com/es-es/news-list
 image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
 notes: >
-  Verificado (2026-10-05): byd.com/es-es responde; byd.com/es, byd.es y /robots.txt dan 404 o contenido vacío (robots.txt no leído). Gama BEV vista en /coches-electricos: Atto 2, Dolphin Surf, Atto 3 EVO, Seal, Dolphin, Seal U, Sealion 7, Tang. Las fichas dan "desde" con financiación (CA Auto Bank, permanencia, adelanto Plan Auto+): se guarda como price_kind financed. Solo se ha leído Atto 2 en esta pasada; el resto, pendiente.
-last_verified: 2026-10-31
+  Verificado (2026-10-05): byd.com/es-es responde; byd.com/es, byd.es y /robots.txt dan 404 o contenido vacío (robots.txt no leído). Gama BEV vista en /coches-electricos: Atto 2, Dolphin Surf, Atto 3 EVO, Seal, Dolphin, Seal U, Sealion 7, Tang. Las fichas dan "desde" con financiación (CA Auto Bank, permanencia, adelanto Plan Auto+): se guarda como price_kind financed. Solo se ha leído Atto 2 en esta pasada; el resto, pendiente. 2026-11-07: leídas las fichas de Dolphin Surf, Atto 3 EVO, Seal, Sealion 7, Dolphin y Seal U, y /promociones (todas las ofertas vigentes hasta el 30/11/2026; solo «PVPR Financiando» por un acabado y color, sin PVP ni precio al contado). Las URL de ficha son /coches-electricos/<modelo> (dolphin-surf, atto-3-evo, seal, sealion-7, dolphin, seal-u). Tang, pendiente.
+last_verified: 2026-11-07
 status: active
