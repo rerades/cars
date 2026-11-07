@@ -6,10 +6,11 @@ status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/ele
 segment: {value: urbano, note: "la web lo presenta como «el coche urbano eléctrico»", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
 needs_review: false
 specs:
-  wltp_max_km: {value: 430, note: "hasta 430 km WLTP, batería autonomía confort 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-01, tier: T1}
+  wltp_max_km: {value: 430, note: "hasta 430 km WLTP, batería autonomía confort 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
 versions:
   - name: evolution 120 CV autonomía urbana
-    battery_kwh: {value: 40, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-01, tier: T1}
+    battery_kwh: {value: 40, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
+    wltp_km: {value: 315, note: "la web da «hasta 315 km» WLTP para la batería autonomía urbana 40 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
     power_kw: {value: 90, note: "publicado: 90 kW (120 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/precios-versiones.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 28085
@@ -22,10 +23,11 @@ versions:
       retrieved: 2026-11-01
       tier: T1
   - name: evolution 150 CV autonomía confort
-    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-01, tier: T1}
-    power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/ficha-tecnica.html", retrieved: 2026-10-10, tier: T1}
-    dc_max_kw: {value: 100, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/ficha-tecnica.html", retrieved: 2026-11-01, tier: T1}
-    ac_max_kw: {value: 11, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/ficha-tecnica.html", retrieved: 2026-11-01, tier: T1}
+    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
+    wltp_km: {value: 430, note: "la web da «hasta 430 km» WLTP, versión evolution autonomía confort 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
+    power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/ficha-tecnica.html", retrieved: 2026-11-06, tier: T1}
+    dc_max_kw: {value: 100, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/ficha-tecnica.html", retrieved: 2026-11-06, tier: T1}
+    ac_max_kw: {value: 11, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/ficha-tecnica.html", retrieved: 2026-11-06, tier: T1}
     price:
       value: 22879
       unit: EUR
@@ -37,7 +39,8 @@ versions:
       retrieved: 2026-11-01
       tier: T1
   - name: techno 120 CV autonomía urbana
-    battery_kwh: {value: 40, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-01, tier: T1}
+    battery_kwh: {value: 40, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
+    wltp_km: {value: 315, note: "la web da «hasta 315 km» WLTP para la batería autonomía urbana 40 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
     power_kw: {value: 90, note: "publicado: 90 kW (120 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 21974
@@ -50,7 +53,8 @@ versions:
       retrieved: 2026-11-01
       tier: T1
   - name: iconic cinq 150 CV autonomía confort
-    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-01, tier: T1}
+    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
+    wltp_km: {value: 430, note: "la web da «hasta 430 km» WLTP para la batería autonomía confort 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
     power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 26499
@@ -63,7 +67,8 @@ versions:
       retrieved: 2026-10-10
       tier: T1
   - name: Roland-Garros 150 CV autonomía confort
-    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-01, tier: T1}
+    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
+    wltp_km: {value: 430, note: "la web da «hasta 430 km» WLTP para la batería autonomía confort 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1}
     power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r5-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 27857
@@ -97,9 +102,9 @@ reviews:
     version: iconic cinq 150 CV autonomía confort
 open_questions:
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
-  - "Autonomía WLTP por versión: la web da 430 km (52 kWh), 315 km (40 kWh) y 305 km (37 kWh), pero la ficha técnica solo detalla una versión y no se ha podido asignar con seguridad a cada acabado; solo se publica specs.wltp_max_km (430)."
   - "Sin PVP sin promociones en la lista: la web muestra «desde 20.164 €» (evolution 120 CV) con «este importe incluye promociones», pero el configurador da «PVP contado, sin promos, sin Auto+, con impuestos» 28.085 €. La versión five (37 kWh/95-110 CV) no figura en la lista de acabados de la web (la batería de 37 kWh sale «a finales de 2026»), por eso no se incluye. Los precios de las demás versiones son solo precios con promociones."
   - "Potencia: la web publica 120 CV = 90 kW y 150 CV = 110 kW; se guarda el kW publicado. Los 80 kW (110 CV) de la batería 37 kWh no se incluyen (versión aún no a la venta)."
-  - "Carga CC: la ficha da 100 kW solo para la versión evolution 150 CV; las demás no la publican."
-  - "Tracción no publicada explícitamente (no se asume fwd)."
-  - "Refresco 2026-11-01: fetch-page.ts no encuentra «26.499» (iconic cinq) en la página del R5 (sin importe junto a esa versión) ni «110 kW» en la ficha técnica; ese precio y el power_kw de evolution 150 CV se quedan con su fecha 2026-10-10."
+  - "Carga CC/CA: la ficha da CA 11 kW y CC 100 kW solo para la versión evolution 150 CV (52 kWh); las demás no la publican."
+  - "Tracción no publicada explícitamente en la web ni en el IDAE (no se asume fwd)."
+  - "Refresco 2026-11-06: fetch-page.ts no encuentra «26.499» (iconic cinq) en la página del R5; ese precio se queda con su fecha 2026-10-10. La ficha técnica (2026-11-06) sí muestra «110 (150)» para evolution 150 CV."
+  - "Versiones vendidas hoy: la web (2026-11-06) lista baterías de 52, 40 y 37 kWh; la de 37 kWh (five, 110 CV) no tiene acabado ni precio en la lista y no se incluye."

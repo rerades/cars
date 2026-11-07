@@ -9,7 +9,9 @@ specs:
   wltp_max_km: {value: 263, note: "«263 km de autonomía en la versión evolution», WLTP", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
 versions:
   - name: evolution
-    power_kw: {value: 60, note: "publicado: 60 kW (80 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
+    battery_kwh: {value: 27.5, basis: unknown, note: "IDAE: «Twingo E-Tech eléctrico EV27 60kW AC7 (semi: E2 N1 B / E3 N1 B)», id 608631; la web de la marca no publica la capacidad", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    wltp_km: {value: 263, note: "«hasta 263 km» WLTP, versión evolution", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-11-06, tier: T1}
+    power_kw: {value: 60, note: "publicado: 60 kW (80 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-11-06, tier: T1}
     price:
       value: 13413
       unit: EUR
@@ -21,7 +23,8 @@ versions:
       retrieved: 2026-10-10
       tier: T1
   - name: techno
-    power_kw: {value: 60, note: "publicado: 60 kW (80 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
+    battery_kwh: {value: 27.5, basis: unknown, note: "IDAE: «Twingo E-Tech eléctrico EV27 60kW AC7 (semi: E2 N1 B / E3 N1 B)», id 608631; la web de la marca no publica la capacidad", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
+    power_kw: {value: 60, note: "publicado: 60 kW (80 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/twingo-e-tech-electrico.html", retrieved: 2026-11-06, tier: T1}
     price:
       value: 14909
       unit: EUR
@@ -49,7 +52,8 @@ reviews:
 open_questions:
   - "reviews: motorpasion-es no tiene una prueba del Twingo E-Tech de 2026 (solo noticias de precio y la prueba del Twingo Electric de 2020, otra generación); solo hay review de diariomotor-es."
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
-  - "Autonomía WLTP solo para evolution (263 km); techno no la publica, así que solo se da specs.wltp_max_km. Batería y carga CA no publicadas (carga 15-80 % en 28 min con cargador CC de 50 kW; no es el máximo del coche)."
+  - "Autonomía WLTP de techno no publicada por la web (solo 263 km para evolution). El IDAE (fetch-idae.ts RENAULT, 2026-11-06, id 608631) da 323 km para la fila de ambos acabados, que contradice los 263 km de la marca (T1 prevalece): no se usa."
+  - "Carga CA/CC máxima y tracción no publicadas (carga 15-80 % en 28 min; el IDAE solo la sugiere en el nombre «AC7», sin campo): no se guardan. La batería de 27.5 kWh sale del IDAE (T2), no de la web."
   - "No se ha encontrado un PVP vigente sin promociones: los precios son «desde» con «este importe incluye promociones»."
   - "Refresco 2026-11-01: fetch-page.ts no encuentra «13.413» ni «14.909» en la página del Twingo (solo «este importe incluye promociones» sin importe junto a evolution y techno); los precios y su fecha (2026-10-10) se quedan como estaban."
   - "Imágenes: solo hay en Commons una foto compartida con el R4 (File:Renault Twingo Electric & 4 E-Tech Electric.jpg), que no sirve para una tarjeta de un solo modelo; no se registra. La web pondrá silueta."

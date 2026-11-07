@@ -9,6 +9,9 @@ specs:
   wltp_max_km: {value: 409, note: "hasta 409 km WLTP, versión evolution con pack confort de 52 kWh", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
 versions:
   - name: evolution 120 CV autonomía urbana
+    battery_kwh: {value: 40, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico/ficha-tecnica.html", retrieved: 2026-11-06, tier: T1}
+    dc_max_kw: {value: 80, note: "la ficha da «cargador CA 11 KW + CC 80» para la versión de 40 kWh y 90 kW (120 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico/ficha-tecnica.html", retrieved: 2026-11-06, tier: T1}
+    ac_max_kw: {value: 11, note: "la ficha da «cargador CA 11 KW + CC 80» para la versión de 40 kWh y 90 kW (120 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico/ficha-tecnica.html", retrieved: 2026-11-06, tier: T1}
     power_kw: {value: 90, note: "publicado: 90 kW (120 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 21974
@@ -22,6 +25,7 @@ versions:
       retrieved: 2026-11-01
       tier: T1
   - name: techno 150 CV autonomía confort
+    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1, note: "la web asocia «autonomía confort» con la batería de 52 kWh y 150 CV"}
     power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 26499
@@ -35,6 +39,7 @@ versions:
       retrieved: 2026-11-01
       tier: T1
   - name: iconic 150 CV autonomía confort
+    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1, note: "la web asocia «autonomía confort» con la batería de 52 kWh y 150 CV"}
     power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 28309
@@ -48,6 +53,7 @@ versions:
       retrieved: 2026-11-01
       tier: T1
   - name: techno plein sud 150 CV autonomía confort
+    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1, note: "la web asocia «autonomía confort» con la batería de 52 kWh y 150 CV"}
     power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 28128
@@ -61,6 +67,7 @@ versions:
       retrieved: 2026-11-01
       tier: T1
   - name: iconic plein sud 150 CV autonomía confort
+    battery_kwh: {value: 52, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico/motores.html", retrieved: 2026-11-06, tier: T1, note: "la web asocia «autonomía confort» con la batería de 52 kWh y 150 CV"}
     power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/r4-e-tech-electrico.html", retrieved: 2026-11-01, tier: T1}
     price:
       value: 29938
@@ -94,9 +101,8 @@ reviews:
     retrieved: 2026-11-01
     tier: T3
 open_questions:
-  - "battery_kwh_options no obtenido: la web leída solo menciona la batería de 52 kWh y la de 40 kWh solo constaba en prensa.renault.es."
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
-  - "Autonomía WLTP por versión no asignable: la web solo da «hasta 409 km» para evolution con pack confort 52 kWh. Solo se publica specs.wltp_max_km."
+  - "Autonomía WLTP por versión no asignada: la página del modelo da «hasta 409 km» (specs.wltp_max_km) y motores.html (2026-11-06) da «hasta 415 km» (52 kWh) y «hasta 310 km» (40 kWh), versión evolution. Dos páginas de renault-es discrepan (409 vs 415) y no se resuelve; el IDAE (fetch-idae.ts RENAULT, 2026-11-06) lista R4 EV40 y EV52 pero esas filas no se han volcado."
   - "Sin PVP sin promociones: la web muestra precios «desde» con «este importe incluye promociones» (evolution 21.974 €). No se ha encontrado un PVP vigente sin promociones en la web (el configurador no se pudo leer); los precios guardados son los de la web con promociones."
-  - "Batería por versión, carga CC/CA y tracción no publicadas en la web leída."
+  - "Carga CC/CA solo publicada para evolution 120 CV (ficha técnica, 2026-11-06); las versiones de 150 CV no la dan en la ficha leída. Tracción no publicada."
   - "R4 Van (furgón N1) no incluido: no es turismo y no se ha leído su ficha."
