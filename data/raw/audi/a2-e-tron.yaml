@@ -5,7 +5,7 @@ model: A2 e-tron
 status: {value: announced, note: "el medio (7/9/2026): «Los pedidos se abren este otoño» y «todavía no tiene abierto el libro de pedidos»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/audi-a2-etron-precios-espana-autonomia/", retrieved: 2026-11-07, tier: T3}
 launch: {value: "2026-12", note: "fecha prevista de primeras entregas: «las primeras entregas están previstas para diciembre de 2026»; el medio advierte que es el plazo de la comunicación europea, sin fecha concreta para España", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/audi-a2-etron-precios-espana-autonomia/", retrieved: 2026-11-07, tier: T3}
 segment: null
-needs_review: false
+needs_review: true
 versions:
   - name: A2 e-tron 125 kW
     battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614249 (A2 e-tron Black line 125 kW MY27); el medio da 52 kWh"}
