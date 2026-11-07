@@ -1,0 +1,729 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import "../src/styles/global.css";
+import "./pantalla.css";
+import SegmentSilhouette from "../src/components/SegmentSilhouette.astro";
+import SourceDate from "../src/components/SourceDate.astro";
+import SourceMark from "../src/components/SourceMark.astro";
+import VersionField from "../src/components/VersionField.astro";
+import VersionPrice from "../src/components/VersionPrice.astro";
+import { cardView } from "../src/lib/card.ts";
+import { imageRelPath, loadModels, type Sourced, type Version } from "../src/lib/data.ts";
+import { formatDecimal, formatEur, formatNumber } from "../src/lib/format.ts";
+import { t } from "../src/lib/i18n.ts";
+import { groupNotes, noteLine } from "../src/lib/notes.ts";
+import { versionFields } from "../src/lib/version-fields.ts";
+import { chunkVersions, sortVersions } from "../src/lib/versions.ts";
+
+const model = loadModels().models.find((m) => m.file === "renault/r5-e-tech-electrico.yaml")!;
+const card = cardView(model);
+const versions = sortVersions(model.versions);
+// New copy, proposed in docs/design/propuesta-a.md.
+const COPY = {
+  missing: "Por confirmar",
+  figures: "Cifras clave",
+  menu: "Secciones de la página",
+  items: [
+    { href: "#cifras", label: "Cifras" },
+    { href: "#versiones", label: "Versiones" },
+    { href: "#datos", label: "Datos" },
+    { href: "#fuentes", label: "Fuentes" },
+  ],
+};
+
+const files = import.meta.glob<{ default: ImageMetadata }>("@images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}", { eager: true });
+const image = model.images[0];
+const rel = image ? imageRelPath(image.file) : null;
+const src = rel ? Object.entries(files).find(([key]) => key.endsWith(`/${rel}`))?.[1].default : undefined;
+
+const best = <T extends Sourced<number>>(list: (T | null | undefined)[]): T | null =>
+  list.reduce<T | null>((top, d) => (d && (!top || d.value > top.value) ? d : top), null);
+const power = model.specs.power_max_kw ?? best(versions.map((v) => v.power_kw));
+const battery = best(versions.map((v) => v.battery_kwh));
+const dc = model.specs.dc_max_kw ?? best(versions.map((v) => v.dc_max_kw));
+const price = model.price_from;
+const range = model.max_range_km;
+
+const sp = model.specs;
+const specRows = [
+  { label: t("ficha.modelo.autonomia"), datum: sp.wltp_max_km as Sourced | undefined, text: sp.wltp_max_km && t("ficha.unidad.km", { n: formatNumber(sp.wltp_max_km.value) }) },
+  { label: t("ficha.modelo.potencia"), datum: sp.power_max_kw as Sourced | undefined, text: sp.power_max_kw && t("ficha.unidad.kw", { n: formatDecimal(sp.power_max_kw.value) }) },
+  { label: t("ficha.modelo.cargaCc"), datum: sp.dc_max_kw as Sourced | undefined, text: sp.dc_max_kw && t("ficha.unidad.kw", { n: formatDecimal(sp.dc_max_kw.value) }) },
+  { label: t("ficha.modelo.cargaCa"), datum: sp.ac_max_kw as Sourced | undefined, text: sp.ac_max_kw && t("ficha.unidad.kw", { n: formatDecimal(sp.ac_max_kw.value) }) },
+].filter((r) => r.datum);
+
+const fieldsOf = (v: Version) => versionFields(v);
+const fieldRows = versions.length > 0 ? fieldsOf(versions[0]!) : [];
+const financed = versions.filter((v) => v.price?.price_kind === "financed");
+const termsIndex = (v: Version) => {
+  const i = financed.indexOf(v);
+  return i < 0 ? undefined : i + 1;
+};
+const { notes, numberOf } = groupNotes([
+  card.statusLabel ? model.status : null,
+  model.segment,
+  range,
+  power,
+  battery,
+  dc,
+  ...versions.flatMap((v) => fieldsOf(v).map((f) => f.datum)),
+  ...specRows.map((r) => r.datum),
+]);
+const markOf = (s: Sourced) => ({ n: numberOf(s), unofficial: s.tier !== "T1" });
+const figures = [
+  { key: "range", value: range ? t("ficha.unidad.km", { n: formatNumber(range.value) }) : null, label: card.labels.range, datum: range },
+  { key: "power", value: power ? t("ficha.unidad.kw", { n: formatDecimal(power.value) }) : null, label: t("ficha.campo.potencia"), datum: power },
+  { key: "battery", value: battery ? t("ficha.unidad.kwh", { n: formatDecimal(battery.value) }) : null, label: t("ficha.campo.bateria"), datum: battery },
+];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t("ficha.titulo", { marca: card.brand, modelo: card.model })}</title>
+  </head>
+  <body>
+    <main>
+      <section class="hero band-dark" data-ficha-header>
+        <div class="hero-screen">
+          {
+            src ? (
+              <figure class="hero-figure">
+                <div class="photo">
+                  <Image
+                    src={src}
+                    alt={t("ficha.imagen.alt", { marca: card.brand, modelo: card.model, i: 1, n: 1 })}
+                    widths={[640, 960, 1280]}
+                    sizes="100vw"
+                    loading="eager"
+                    fetchpriority="high"
+                  />
+                </div>
+              </figure>
+            ) : (
+              <div class="silhouette">
+                <SegmentSilhouette segment={card.segment} large />
+              </div>
+            )
+          }
+          <div class="wrap hero-top">
+            <a href="/" class="wordmark">{t("sitio.nombre")}</a>
+            <nav aria-label={t("ficha.ruta.nombre")} class="crumbs">
+              <ol>
+                <li><a href="/coches">{t("ficha.ruta.coches")}</a></li>
+                <li><a href={`/marcas/${card.key.split("/")[0]}/`}>{card.brand}</a></li>
+                <li aria-current="page">{card.model}</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="hero-foot"><div class="wrap hero-text">
+            <h1 class="hero-name">
+              <span class="hero-brand">{card.brand}</span>
+              <span class="hero-model">{card.model.split(" ").map((w) => <><span class="word">{w}</span>{" "}</>)}</span>
+            </h1>
+            <div class="hero-meta">
+              <p class="hero-segment">
+                {card.hasSegment && <>{t("ficha.segmento.rotulo")}: </>}{card.segmentLabel}
+                {model.segment && <SourceMark {...markOf(model.segment)} />}
+              </p>
+              <a href={model.status.url} rel="noopener" class="hero-link">
+                {t("ficha.webMarca")}
+                <span class="sr-only"> {t("ficha.webMarcaSr", { marca: card.brand })}</span>
+              </a>
+              {card.compare && (
+                <a href={card.compare.href} class="hero-link">
+                  {card.compare.label}
+                  <span class="sr-only"> {card.compare.srLabel}</span>
+                </a>
+              )}
+              {src && image?.attribution && (
+                <p class="hero-credit">{t("ficha.imagen.atribucion", { attribution: image.attribution })}</p>
+              )}
+            </div>
+          </div></div>
+        </div>
+
+        <section id="cifras" aria-label={COPY.figures} class="wrap figures">
+          <dl class="figures-grid">
+            <div class="figure" data-figure="price">
+              <dd class="figure-value" data-missing={price ? undefined : ""}>{price ? formatEur(price.value) : COPY.missing}</dd>
+              <dt class="figure-label">{card.labels.price}{card.dealLabel && <> · {card.dealLabel}</>}</dt>
+              {price && <dd class="figure-source"><SourceDate source={price} /></dd>}
+            </div>
+            {
+              figures.map((f) => (
+                <div class="figure" data-figure={f.key}>
+                  <dd class="figure-value" data-missing={f.value ? undefined : ""}>{f.value ?? COPY.missing}</dd>
+                  <dt class="figure-label">
+                    {f.label} {f.datum && <SourceMark {...markOf(f.datum)} />}
+                  </dt>
+                </div>
+              ))
+            }
+          </dl>
+        </section>
+      </section>
+
+      <section id="versiones" aria-labelledby="versiones-titulo" class="band-white block">
+        <div class="wrap">
+          <h2 id="versiones-titulo" class="block-title">{t("ficha.versiones.titulo")}</h2>
+          <p class="block-intro">{t("ficha.versiones.entrada")}</p>
+
+          <div class="versions-table">
+            {chunkVersions(versions).map((chunk) => (
+            <table>
+              <caption class="sr-only">{t("ficha.versiones.caption", { marca: card.brand, modelo: card.model })}</caption>
+              <thead>
+                <tr>
+                  <td></td>
+                  {chunk.items.map((v) => <th scope="col">{v.name}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">{t("ficha.campo.precio")}</th>
+                  {chunk.items.map((v) => (
+                    <td><VersionPrice price={v.price} discontinued={false} termsIndex={termsIndex(v)} /></td>
+                  ))}
+                </tr>
+                {fieldRows.map((row, i) => (
+                  <tr>
+                    <th scope="row">{row.label}</th>
+                    {chunk.items.map((v) => (
+                      <td><VersionField field={fieldsOf(v)[i]!} numberOf={numberOf} /></td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            ))}
+          </div>
+
+          <ol class="versions-blocks">
+            {versions.map((v) => (
+              <li>
+                <h3 class="version-name">{v.name}</h3>
+                <dl>
+                  <div>
+                    <dt>{t("ficha.campo.precio")}</dt>
+                    <dd><VersionPrice price={v.price} discontinued={false} termsIndex={termsIndex(v)} /></dd>
+                  </div>
+                  {fieldsOf(v).map((field) => (
+                    <div>
+                      <dt>{field.label}</dt>
+                      <dd><VersionField field={field} numberOf={numberOf} /></dd>
+                    </div>
+                  ))}
+                </dl>
+              </li>
+            ))}
+          </ol>
+
+          {
+            financed.length > 0 && (
+              <div class="terms">
+                <h3 class="version-name">{t("ficha.condiciones.titulo")}</h3>
+                {financed.map((v, i) => (
+                  <div id={`condiciones-${i + 1}`} tabindex="-1" class="terms-item">
+                    <p class="terms-name">{v.name}</p>
+                    <p class="terms-text">{v.price!.price_terms}</p>
+                    <a href={v.price!.price_terms_url} rel="noopener" class="terms-link">{t("ficha.condiciones.enlace")}</a>
+                  </div>
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </section>
+
+      <section id="datos" aria-labelledby="datos-titulo" class="band-dark block">
+        <div class="wrap">
+          <h2 id="datos-titulo" class="block-title">{t("ficha.modelo.titulo")}</h2>
+          <p class="block-intro">{t("ficha.modelo.entrada")}</p>
+          <dl class="specs">
+            {specRows.map((r) => (
+              <div>
+                <dd class="spec-value">{r.text}</dd>
+                <dt class="figure-label">{r.label} <SourceMark {...markOf(r.datum!)} /></dt>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section id="fuentes" aria-labelledby="fuentes-titulo" class="band-light block block--last">
+        <div class="wrap">
+          <h2 id="fuentes-titulo" class="block-title">{t("ficha.fuentes.titulo")}</h2>
+          <p class="block-intro">{t("ficha.fuentes.entrada")}</p>
+          <ol class="sources">
+            {notes.map((note) => (
+              <li id={`fuente-${note.n}`} tabindex="-1">
+                {noteLine(note)} <a href={note.url} rel="noopener">{note.url}</a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <nav class="section-menu" aria-label={COPY.menu}>
+      <ul>
+        {
+          COPY.items.map((item, i) => (
+            <li>
+              <a href={item.href} aria-current={i === 0 ? "true" : undefined}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </body>
+</html>
+
+<style is:global>
+  /* The first screen: photo plus figures, the figures leaving room for the floating menu (RF-17). */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+  }
+
+  .hero-screen {
+    --scrim: linear-gradient(
+        to bottom,
+        rgb(var(--scrim-rgb) / 0.78) 0,
+        rgb(var(--scrim-rgb) / 0.66) 5.5rem,
+        transparent 11rem
+      );
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  /* Mobile: the photo stops above the text, so the car is not cropped down to its bonnet. */
+  .hero-figure {
+    inset: 0 0 12rem;
+    position: absolute;
+  }
+
+  /* The scrim belongs to the text block: whatever the length of the name, nothing sits under alpha 0.72. */
+  .hero-foot {
+    background: linear-gradient(to top, rgb(var(--scrim-rgb) / 1), rgb(var(--scrim-rgb) / 0.72));
+    position: relative;
+    width: 100%;
+  }
+
+  .hero-foot::before {
+    background: linear-gradient(to top, rgb(var(--scrim-rgb) / 0.72), transparent);
+    bottom: 100%;
+    content: "";
+    height: 7rem;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+  }
+
+  .hero-figure .photo {
+    inset: 0;
+    position: absolute;
+  }
+
+  .hero-top,
+  .hero-text {
+    position: relative;
+    width: 100%;
+  }
+
+  .hero-top {
+    padding-top: 0.5rem;
+  }
+
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--text-small);
+    line-height: var(--text-small--line-height);
+  }
+
+  .crumbs li {
+    align-items: center;
+    display: flex;
+    min-height: var(--spacing-touch);
+    overflow-wrap: anywhere;
+  }
+
+  .crumbs li:not(:last-child)::after {
+    content: "›" / "";
+    margin-inline: 0.5rem;
+  }
+
+  .crumbs a {
+    align-items: center;
+    display: inline-flex;
+    min-height: var(--spacing-touch);
+    text-decoration: underline;
+  }
+
+  .hero-foot {
+    margin-top: 7rem;
+  }
+
+  .hero-text {
+    padding-block: 0.5rem 1rem;
+  }
+
+  .hero-name {
+    display: block;
+    font-size: clamp(3.25rem, 7.5vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-brand {
+    display: block;
+    font-size: var(--text-body);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: var(--text-body--line-height);
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-model {
+    display: block;
+  }
+
+  .hero-meta {
+    align-items: center;
+    column-gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--text-small);
+    line-height: var(--text-small--line-height);
+    margin-top: 0.75rem;
+  }
+
+  .hero-segment {
+    flex-basis: 100%;
+  }
+
+  .hero-link {
+    align-items: center;
+    display: inline-flex;
+    font-weight: 600;
+    min-height: var(--spacing-touch);
+    text-decoration: underline;
+  }
+
+  .hero-link:hover,
+  .crumbs a:hover {
+    color: var(--color-signal);
+  }
+
+  .hero-credit {
+    color: var(--color-on-dark-muted);
+    flex-basis: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .figures {
+    padding-block: 1.25rem var(--menu-clearance);
+    width: 100%;
+  }
+
+  .figures-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .figure {
+    border-top: 1px solid var(--color-line-soft);
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.75rem;
+  }
+
+  .figure-source {
+    margin-top: 0.125rem;
+  }
+
+  .figure-source * {
+    font-size: var(--text-small);
+  }
+
+  @media (min-width: 1024px) {
+    .hero-figure {
+      inset: 0;
+    }
+
+    .hero-figure img {
+      object-position: 50% 20%;
+    }
+
+    .figures-grid {
+      gap: 2.5rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .hero-segment,
+    .hero-credit {
+      flex-basis: auto;
+    }
+
+    .hero-credit {
+      margin-left: auto;
+    }
+  }
+
+  .block {
+    padding-block: 3.5rem;
+  }
+
+  .block--last {
+    padding-bottom: calc(3.5rem + var(--menu-clearance));
+  }
+
+  .block-title {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .block-intro {
+    color: var(--color-ink-600);
+    font-size: var(--text-small);
+    line-height: var(--text-small--line-height);
+    margin-top: 0.75rem;
+  }
+
+  .versions-table {
+    display: none;
+    margin-top: 2rem;
+  }
+
+  .versions-table table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: left;
+    width: 100%;
+  }
+
+  .versions-table td:first-child {
+    width: var(--width-version-label);
+  }
+
+  .versions-table thead th {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+    padding: 0 1.5rem 1rem 0;
+    vertical-align: bottom;
+  }
+
+  .versions-table tbody th {
+    color: var(--color-ink-600);
+    font-size: var(--text-small);
+    font-weight: 500;
+    padding: 0.75rem 1rem 0.75rem 0;
+    vertical-align: top;
+  }
+
+  .versions-table tbody td {
+    overflow-wrap: anywhere;
+    padding: 0.75rem 1.5rem 0.75rem 0;
+    vertical-align: top;
+  }
+
+  .versions-table tbody tr {
+    border-top: 1px solid var(--color-line-soft);
+  }
+
+  .versions-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .version-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .versions-blocks dl {
+    margin-top: 0.75rem;
+  }
+
+  .versions-blocks dl > div {
+    border-top: 1px solid var(--color-line-soft);
+    padding-block: 0.625rem;
+  }
+
+  .versions-blocks dt {
+    color: var(--color-ink-600);
+    font-size: var(--text-small);
+    line-height: var(--text-small--line-height);
+  }
+
+  @media (min-width: 1024px) {
+    .versions-table {
+      display: block;
+    }
+
+    .versions-blocks {
+      display: none;
+    }
+  }
+
+  .terms {
+    margin-top: 2.5rem;
+  }
+
+  .terms-item {
+    margin-top: 0.75rem;
+    max-width: var(--container-prose);
+  }
+
+  .terms-name {
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
+  .terms-text {
+    font-size: var(--text-small);
+    line-height: var(--text-small--line-height);
+    margin-top: 0.25rem;
+    overflow-wrap: anywhere;
+  }
+
+  .terms-link {
+    align-items: center;
+    color: var(--color-brand-600);
+    display: inline-flex;
+    font-size: var(--text-small);
+    min-height: var(--spacing-touch);
+    text-decoration: underline;
+  }
+
+  .specs {
+    display: grid;
+    gap: 2rem 2.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 2rem;
+  }
+
+  .specs > div {
+    border-top: 1px solid var(--color-line-soft);
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.75rem;
+  }
+
+  .spec-value {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  @media (min-width: 1024px) {
+    .specs {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .sources {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--text-small);
+    gap: 0.5rem;
+    line-height: var(--text-small--line-height);
+    list-style: decimal inside;
+    margin-top: 1.5rem;
+    overflow-wrap: anywhere;
+  }
+
+  .sources a {
+    color: var(--color-brand-600);
+    text-decoration: underline;
+  }
+
+  /* The section menu: solid, so its contrast does not depend on what scrolls beneath it. */
+  .section-menu {
+    bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    left: 0.5rem;
+    pointer-events: none;
+    position: fixed;
+    right: 0.5rem;
+    z-index: 20;
+  }
+
+  .section-menu ul {
+    background: var(--color-ink-950);
+    border-radius: var(--radius-pill);
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.24), 0 8px 24px rgb(0 0 0 / 0.28);
+    display: flex;
+    gap: 0.125rem;
+    padding: 0.25rem;
+    pointer-events: auto;
+  }
+
+  .section-menu a {
+    align-items: center;
+    border-radius: var(--radius-pill);
+    color: var(--color-on-dark);
+    display: inline-flex;
+    font-size: var(--text-small);
+    font-weight: 600;
+    min-height: var(--spacing-touch);
+    padding-inline: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .section-menu a:hover {
+    text-decoration: underline;
+  }
+
+  .section-menu a[aria-current] {
+    background: var(--color-signal);
+    color: var(--color-ink-950);
+  }
+
+  .section-menu a:focus-visible {
+    outline-color: var(--color-on-dark);
+    outline-offset: -3px;
+  }
+
+  .section-menu a[aria-current]:focus-visible {
+    outline-color: var(--color-ink-950);
+  }
+
+  /* Without a photo the first screen is light, like the catalog's. */
+  .hero .silhouette {
+    --size-segment-icon-lg: 42rem;
+    color: var(--color-on-dark);
+    display: flex;
+    justify-content: center;
+    inset: 0;
+    position: absolute;
+  }
+
+  .hero .silhouette svg {
+    stroke-width: 0.45;
+  }
+</style>
