@@ -1,0 +1,38 @@
+# Researcher — Kia PV5 Passenger. Fuentes: kia-es (T1), idae-es (T2), wikimedia-commons. Consultado 2026-11-07.
+brand: kia
+brand_name: Kia
+model: PV5 Passenger
+status: {value: on_sale, note: "la ficha ofrece «Configura tu PV5 Passenger» y «Solicita tu oferta»; no dice con palabras que se entregue ya", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: {value: furgoneta, note: "la ficha lo presenta como «Furgoneta eléctrica para pasajeros»", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+needs_review: true
+specs:
+  wltp_max_km: {value: 412, note: "«Autonomía max (WLTP)» 412 km, con la batería de 71,2 kWh", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+  battery_kwh_options: {value: [51.5, 71.2], note: "FWD MR (51.5 kWh) y FWD LR (71.2 kWh); la web no dice si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+  drivetrains: {value: [fwd], note: "versiones «FWD MR» y «FWD LR»", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+versions:
+  - name: PV5 Passenger Medium Range
+    battery_kwh: {value: 51.5, basis: unknown, note: "FWD MR (51.5 kWh)", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+    wltp_km: {value: 295, note: "IDAE ids 607480, 607482 (PV5 Passenger L2H1 Medium Range Essential/Plus, 5 plazas); la ficha de Kia no da esta cifra en el texto leído", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 89.4, note: "publicado: 89.4 kW", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+    drivetrain: {value: fwd, note: "FWD MR", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+    price: null
+  - name: PV5 Passenger Long Range
+    battery_kwh: {value: 71.2, basis: unknown, note: "FWD LR (71.2kWh), sistema NCM", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+    wltp_km: {value: 412, note: "«Autonomía max (WLTP)» con la batería de 71,2 kWh", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+    power_kw: {value: 120, note: "publicado: 120 kW y 250 Nm", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+    drivetrain: {value: fwd, note: "FWD LR", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-passenger/descubrelo/", retrieved: 2026-11-07, tier: T1}
+    price: null
+images:
+  - file: "data/images/kia/pv5-passenger/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Kia_PV5_Passenger_IAA_Transportation_2024_%28DSC02603%29.jpg/1280px-Kia_PV5_Passenger_IAA_Transportation_2024_%28DSC02603%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Kia_PV5_Passenger_IAA_Transportation_2024_(DSC02603).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "MarcelX42, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio: la ficha no publica PVP y el configurador no se lee con fetch-page.ts; price: null en todas las versiones."
+  - "launch: ninguna fuente leída da la fecha de inicio de pedidos en España. status on_sale deducido de «Configura tu PV5 Passenger» / «Solicita tu oferta»; por eso needs_review: true."
+  - "Versiones: la ficha nombra solo las baterías (MR 51.5 kWh y LR 71.2 kWh) y los paquetes Essential y Plus; el IDAE añade acabado Elite y variantes de 7 plazas (295 y 397 km). No se han creado versiones por acabado ni de 7 plazas porque la ficha no las presenta con datos. Carga DC y AC no publicadas en el texto leído."
+  - "PV5 Cargo y Chasis (comerciales) no se registran: solo la variante de pasajeros."
