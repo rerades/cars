@@ -1,0 +1,42 @@
+# Researcher — Audi A2 e-tron (anunciado). Fuentes: idae-es (T2), autonomiacocheselectricos-es, motor-es (T3). Consultado 2026-11-07. Sin precio: audi.es da 403 (no hay T1 legible).
+brand: audi
+brand_name: Audi
+model: A2 e-tron
+status: {value: announced, note: "el medio (7/9/2026): «Los pedidos se abren este otoño» y «todavía no tiene abierto el libro de pedidos»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/audi-a2-etron-precios-espana-autonomia/", retrieved: 2026-11-07, tier: T3}
+launch: {value: "2026-12", note: "fecha prevista de primeras entregas: «las primeras entregas están previstas para diciembre de 2026»; el medio advierte que es el plazo de la comunicación europea, sin fecha concreta para España", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/audi-a2-etron-precios-espana-autonomia/", retrieved: 2026-11-07, tier: T3}
+segment: null
+needs_review: true
+versions:
+  - name: A2 e-tron 125 kW
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614249 (A2 e-tron Black line 125 kW MY27); el medio da 52 kWh"}
+    wltp_km: {value: 398, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614249; menor de las filas MY27 de 125 kW: 398 km (614249, 614253 Black line), 421 km (614246, 614245 Attraction)"}
+    power_kw: {value: 125, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614249"}
+    price: null
+  - name: A2 e-tron 140 kW
+    battery_kwh: {value: 58, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614250 (A2 e-tron Black line 140 kW MY27); el medio da 61 kWh"}
+    wltp_km: {value: 471, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614250; menor de las filas MY27 de 140 kW: 471 km (614250, 614254 Black line), 499 km (614247 Attraction)"}
+    power_kw: {value: 140, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614250"}
+    price: null
+  - name: A2 e-tron 170 kW
+    battery_kwh: {value: 79, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614251 (A2 e-tron Black line 170 kW MY27); el medio da 84 kWh"}
+    wltp_km: {value: 612, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614251; menor de las filas MY27 de 170 kW: 612 km (614251, 614255 Black line), 617 km (614248 Attraction). El medio da 646 km"}
+    power_kw: {value: 170, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614251"}
+    price: null
+  - name: A2 e-tron 240 kW
+    battery_kwh: {value: 79, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614252 (A2 e-tron Black line 240 kW MY27); el medio da 84 kWh"}
+    wltp_km: {value: 623, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614252 (mismo valor en la fila de launch edition, id 614256)"}
+    power_kw: {value: 240, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614252"}
+    price: null
+images:
+  - file: data/images/audi/a2-e-tron/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Audi_A2_e-tron_IMG_20261009.jpg/1280px-Audi_A2_e-tron_IMG_20261009.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Audi_A2_e-tron_IMG_20261009.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0"
+open_questions:
+  - "Precio: audi.es da HTTP 403 (protección de acceso, no se evita). Los medios T3 (autonomiacocheselectricos-es, motor-es, 2026-09) dan desde 37.760 € (125 kW), 41.460 €, 47.360 € y 56.640 € (240 kW), pero un precio no puede salir de una fuente T3 (ADR-0001); todas con price null."
+  - "Segmento: el medio lo llama «hatchback», que no es un término de RF-11 ni está en la tabla; null. El artículo de gama del mismo medio (6/11/2026) aún decía «llegada en 2027»; prevalece el artículo específico, más reciente."
+  - "launch: pedidos aún no abiertos en España según el medio; la fecha es de primeras entregas, prevista, no de inicio de pedidos."
+  - "Versiones: los nombres son por potencia (kW), sin nombre comercial confirmado por T1; el medio indica que el 240 kW solo se ofrece con acabado Black Line."
