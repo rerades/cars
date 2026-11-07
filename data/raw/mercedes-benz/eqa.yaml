@@ -1,0 +1,39 @@
+# Researcher — Mercedes-Benz EQA. Fuentes: diariomotor-es (T3, estado y segmento) e idae-es (T2, versiones). Consultado 2026-11-07. mercedes-benz.es responde HTTP 403: sin precio.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: EQA
+status: {value: on_sale, note: "«Actualmente se comercializa la primera generación»; precios de noviembre 2026 (T3)", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqa/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: {value: suv_compacto, note: "«El Mercedes EQA es un SUV completamente eléctrico, del segmento C»", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqa/", retrieved: 2026-11-07, tier: T3}
+needs_review: true
+versions:
+  - name: EQA 250+
+    battery_kwh: {value: 70.5, basis: unknown, note: "IDAE: «EQA (H243) 250+»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 648, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 140, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQA 300 4MATIC
+    battery_kwh: {value: 66.5, basis: unknown, note: "IDAE: «EQA (H243) 300 4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 532, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 168, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQA 350 4MATIC
+    battery_kwh: {value: 66.5, basis: unknown, note: "IDAE: «EQA (H243) 350 4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 532, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 215, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/mercedes-benz/eqa/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Mercedes-Benz_EQA_250_%28H243%29_front.jpg/1280px-Mercedes-Benz_EQA_250_%28H243%29_front.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_EQA_250_(H243)_front.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: "CC-BY-SA-4.0"
+    attribution: "Tokumeigakarinoaoshima, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio: mercedes-benz.es devuelve HTTP 403 (fetch-page.ts, 2026-11-07) y no hay otra fuente T1; sin precio."
+  - "Versiones: el IDAE (T2) no dice cuáles se venden hoy y la web oficial no se puede leer; confirmar la gama vigente."
+  - "launch: ninguna fuente da el inicio de venta en España."
+  - "Estado: solo una fuente T3 (diariomotor-es) dice que se comercializa; confirmar en la web oficial."

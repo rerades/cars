@@ -1,0 +1,48 @@
+# Researcher — Mercedes-Benz EQS (berlina). Fuentes: diariomotor-es (T3, estado y segmento) e idae-es (T2, versiones). Consultado 2026-11-07. mercedes-benz.es responde HTTP 403: sin precio.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: EQS
+status: {value: on_sale, note: "«Actualmente se comercializa la primera generación, que recibió una actualización en 2025» (T3)", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqs/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: {value: berlina, note: "«El Mercedes EQS es una berlina eléctrica de lujo»", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqs/", retrieved: 2026-11-07, tier: T3}
+needs_review: true
+versions:
+  - name: EQS 350
+    battery_kwh: {value: 96, basis: unknown, note: "IDAE: «EQS Berlina (V297) 350»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 650, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 215, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQS 400
+    battery_kwh: {value: 112, basis: unknown, note: "IDAE: «EQS Berlina (V297) 400»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 752, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 270, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQS 450+
+    battery_kwh: {value: 122, basis: unknown, note: "IDAE: «EQS Berlina (V297) 450+»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 824, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 300, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQS 500 4MATIC
+    battery_kwh: {value: 108.4, basis: unknown, note: "IDAE: «EQS Berlina (V297) 500 4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 703, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 330, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQS 580 4MATIC
+    battery_kwh: {value: 122, basis: unknown, note: "IDAE: «EQS Berlina (V297) 580 4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 799, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 430, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/mercedes-benz/eqs/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Mercedes-Benz_EQS_450%2B_%28V297%29_front.jpg/1280px-Mercedes-Benz_EQS_450%2B_%28V297%29_front.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_EQS_450+_(V297)_front.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: "CC-BY-SA-4.0"
+    attribution: "Tokumeigakarinoaoshima, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio: mercedes-benz.es devuelve HTTP 403 (fetch-page.ts, 2026-11-07) y no hay otra fuente T1; sin precio."
+  - "Versiones: el IDAE (T2) no dice cuáles se venden hoy (la actualización de 2025 pudo cambiar la gama) y la web oficial no se puede leer; confirmar la gama vigente."
+  - "launch: ninguna fuente da el inicio de venta en España."
