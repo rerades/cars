@@ -1,0 +1,38 @@
+# Researcher — BMW i5 (G60). Fuentes: idae-es (T2), quecochemecompro-es (T3), wikimedia-commons. Consultado 2026-11-07.
+brand: bmw
+brand_name: BMW
+model: i5
+status: {value: on_sale, note: "la página incluye el i5 en su lista de eléctricos de BMW en el mercado español; fuente T3, bmw.es no se pudo leer", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/bmw/electricos/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: i5 eDrive40
+    battery_kwh: {value: 81.2, basis: unknown, note: "IDAE id 606390 (07/2025, 71HH, Touring según el nombre de otras filas); misma fecha: id 606387 (61HG) 601 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 573, note: "IDAE id 606390 (07/2025), la de menor wltp_km entre las filas de esa fecha; id 606387 (07/2025) da 601 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 250, note: "IDAE id 606390 (07/2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: i5 xDrive40
+    battery_kwh: {value: 81.2, basis: unknown, note: "IDAE id 606391 (07/2024); misma fecha: id 606388", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 541, note: "IDAE id 606391 (07/2024), la de menor wltp_km entre las filas de esa fecha; id 606388 (07/2024) da 564 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 290, note: "IDAE id 606391 (07/2024)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: i5 M60 xDrive
+    battery_kwh: {value: 81.2, basis: unknown, note: "IDAE id 606389 (07/2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 535, note: "IDAE id 606389 (07/2025), la homologación fechada más reciente", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 442, note: "IDAE id 606389 (07/2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/bmw/i5/trasera.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/BMW_i5_eDrive40_M_Sport_%28G60%29_rear.jpg/1280px-BMW_i5_eDrive40_M_Sport_%28G60%29_rear.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BMW_i5_eDrive40_M_Sport_(G60)_rear.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Tokumeigakarinoaoshima, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:BMW_i5_eDrive40_M_Sport_(G60)_rear.jpg)"
+open_questions:
+  - "Precio: bmw.es y press.bmwgroup.com no se pueden leer (fetch failed / HTTP 403); sin PVP T1, price null en todas las versiones."
+  - "Versiones y estado: salen del IDAE (T2), que no dice qué se vende hoy, y de una lista T3. El IDAE separa Berlina y Touring en filas antiguas pero no en las de 2024-2025 (códigos HG/HH); no se han separado carrocerías. Confirmar en bmw.es."
+  - "launch: sin fecha de inicio de venta en España en ninguna fuente leída."
+  - "Segmento: ninguna fuente leída lo clasifica con el término de RF-11."
+  - "Tracción, carga DC/AC: no publicadas en las fuentes leídas."

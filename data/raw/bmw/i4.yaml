@@ -1,0 +1,42 @@
+# Researcher — BMW i4 (G26). Fuentes: idae-es (T2), quecochemecompro-es (T3), wikimedia-commons. Consultado 2026-11-07.
+brand: bmw
+brand_name: BMW
+model: i4
+status: {value: on_sale, note: "la página incluye el i4 en su lista de eléctricos de BMW en el mercado español; fuente T3, bmw.es no se pudo leer", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/bmw/electricos/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: {value: berlina, note: "la página dice: \"El BMW i4 es la primera berlina 100% eléctrica de BMW\"", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/bmw/electricos/", retrieved: 2026-11-07, tier: T3}
+needs_review: true
+versions:
+  - name: i4 eDrive35
+    battery_kwh: {value: 67, basis: unknown, note: "IDAE id 600131 (03/2024), la homologación fechada más reciente; ids sin fecha 604249 (11HD) y 606396 (51HD) dan 67,1 y 70,3 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 479, note: "IDAE id 600131 (03/2024); otras: 600132 (11/2023) 478 km, 601153 (01/2023) 483 km, y sin fecha 604249 492 km y 606396 509 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 600131 (03/2024)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: i4 eDrive40
+    battery_kwh: {value: 81.1, basis: unknown, note: "IDAE id 600134 (11/2023), la homologación fechada más reciente; ids sin fecha 604250 (21HD) y 606397 (61HD) dan 81,3 y 83,9 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 584, note: "IDAE id 600134 (11/2023); otras: 601152 (06/2021) 590 km, y sin fecha 604250 591 km y 606397 607 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 250, note: "IDAE id 600134 (11/2023)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: i4 M50
+    battery_kwh: {value: 81.1, basis: unknown, note: "IDAE id 600139 (11/2023), la homologación fechada más reciente; id sin fecha 604251 (31HD) también 81,1 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 512, note: "IDAE id 600139 (11/2023); el id sin fecha 604251 también da 512 km; las de 2021 dan 520 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 400, note: "IDAE id 600139 (11/2023)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: i4 M60 xDrive
+    battery_kwh: {value: 83.9, basis: unknown, note: "IDAE id 606398 (71HD), única fila, sin fecha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 542, note: "IDAE id 606398, única fila, sin fecha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 442, note: "IDAE id 606398", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/bmw/i4/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/BMW_G26E_i4_eDrive40_M_Sport_Tanzanite_Blue_II_Metallic_%281%29.jpg/1280px-BMW_G26E_i4_eDrive40_M_Sport_Tanzanite_Blue_II_Metallic_%281%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BMW_G26E_i4_eDrive40_M_Sport_Tanzanite_Blue_II_Metallic_(1).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Damian B Oh, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:BMW_G26E_i4_eDrive40_M_Sport_Tanzanite_Blue_II_Metallic_(1).jpg)"
+open_questions:
+  - "Precio: bmw.es y press.bmwgroup.com no se pueden leer (fetch failed / HTTP 403); sin PVP T1, price null en todas las versiones."
+  - "Versiones y estado: salen del IDAE (T2), que no dice qué se vende hoy, y de una lista T3; las filas sin fecha (códigos HD) parecen del modelo actual, pero ni el IDAE ni otra fuente lo dicen; confirmar en bmw.es versiones y cifras vigentes (eDrive35, eDrive40, M50, M60 xDrive)."
+  - "launch: sin fecha de inicio de venta en España en ninguna fuente leída."
+  - "Tracción, carga DC/AC: no publicadas en las fuentes leídas."

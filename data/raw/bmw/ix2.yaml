@@ -1,0 +1,33 @@
+# Researcher — BMW iX2 (U10). Fuentes: idae-es (T2), quecochemecompro-es (T3), wikimedia-commons. Consultado 2026-11-07.
+brand: bmw
+brand_name: BMW
+model: iX2
+status: {value: on_sale, note: "la página incluye el iX2 en su lista de eléctricos de BMW en el mercado español; fuente T3, bmw.es no se pudo leer", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/bmw/electricos/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: iX2 eDrive20
+    battery_kwh: {value: 65.2, basis: unknown, note: "IDAE id 613532 (03/2026); otra homologación: id 600162 (03/2024), 64,8 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 514, note: "IDAE id 613532 (03/2026); id 600162 (03/2024) da 478 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 613532 (03/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: iX2 xDrive30
+    battery_kwh: {value: 65, basis: unknown, note: "IDAE id 613533 (03/2026); otra homologación: id 600163 (11/2023), 64,8 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 479, note: "IDAE id 613533 (03/2026); id 600163 (11/2023) da 449 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 230, note: "IDAE id 613533 (03/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/bmw/ix2/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/BMW_U10E_iX2_eDrive20_M_Sport_M_Portimao_Blue_Metallic_%284%29.jpg/1280px-BMW_U10E_iX2_eDrive20_M_Sport_M_Portimao_Blue_Metallic_%284%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BMW_U10E_iX2_eDrive20_M_Sport_M_Portimao_Blue_Metallic_(4).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Damian B Oh, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:BMW_U10E_iX2_eDrive20_M_Sport_M_Portimao_Blue_Metallic_(4).jpg)"
+open_questions:
+  - "Precio: bmw.es y press.bmwgroup.com no se pueden leer (fetch failed / HTTP 403); sin PVP T1, price null en todas las versiones."
+  - "Versiones y estado: salen del IDAE (T2), que no dice qué se vende hoy, y de una lista T3; confirmar en bmw.es qué versiones se venden (movilidadelectrica-es dice que el iX2 se ofrece en xDrive30) y desde cuándo."
+  - "launch: sin fecha de inicio de venta en España en ninguna fuente leída."
+  - "Segmento: ninguna fuente leída lo clasifica con el término de RF-11."
+  - "Tracción, carga DC/AC: no publicadas en las fuentes leídas."
