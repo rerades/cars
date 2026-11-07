@@ -168,6 +168,7 @@ claves propias: `basis` en `battery_kwh`; `unit`, `price_kind`, `price_terms`,
   | `retrieved` | `YYYY-MM-DD` | Fecha de descarga; no futura |
   | `license` | texto | Identificador (`CC-BY-SA-4.0`) o URL de los términos. Sin él no se publica (CA-10) |
   | `attribution` | texto o `null` | Texto que exige la licencia; se muestra con enlace a `page_url` |
+  | `edits` | lista de `background` \| `plate` | **Opcional** ([ADR-0025](adr/0025-retoque-de-las-imagenes.md), propuesta). Solo si la imagen está retocada: `background`, fondo quitado; `plate`, matrícula tapada. Sin la clave, la imagen no está retocada. Con ella, `file` es PNG y la web añade «(modificada)» a la atribución. `source_url`, `page_url` y `license` siguen siendo los de la foto original |
 
   Se guarda una copia de 1280 px de ancho como máximo (en Commons, la miniatura estándar de 1280 px),
   en el formato en que llega; la web sirve variantes WebP generadas en el build. El visitante no pide
@@ -333,6 +334,8 @@ Lo que una comprobación automática tendrá que rechazar (la comprobación es t
     primeros bytes, con la extensión que corresponde (`.jpg`/`.jpeg` o `.png`), de 1280 px de
     ancho como máximo, leído de su cabecera (ADR-0010, enmienda «Imágenes», punto 11), y de 2 MB
     como máximo (ADR-0011, enmienda «Imágenes», punto 10).
+    `edits`, si está (ADR-0025), es una lista no vacía, sin repetidos, de `background` y `plate`, y
+    entonces `file` es PNG.
     **Transición** (ADR-0010, punto 14): hasta que se migren las imágenes actuales, una entrada con
     solo la forma antigua (`url`, sin `file`, `source_url` ni `page_url`) es aviso en la validación
     de todo `data/raw/` y fallo en el eval de la factoría sobre los ficheros que toca la ejecución;

@@ -87,6 +87,11 @@ da el mínimo: si es oferta, lleva la etiqueta (RF-9: «siempre con su etiqueta�
 - Si la imagen trae `attribution`, el texto va **debajo** de la imagen, no encima (el contraste sobre foto
   no es medible): `text-small`, `ink-600` sobre `surface` (7,56). La redacción es la que trae el dato, tal
   cual; plantilla si hace falta anteponer algo: «Foto: {attribution}».
+- **Imagen retocada** (la entrada tiene `edits`; RF-15, ADR-0025): es un PNG con el coche sobre fondo
+  transparente. Va en el mismo hueco 16:9, con `object-fit: contain` en lugar de `cover` para no cortar el
+  coche, sobre el fondo del hueco, que es el mismo en todas las tarjetas: hoy `surface-muted`; el definitivo
+  lo fija la dirección visual (`direccion.md`). Qué foto vale: [`fotos-modelos.md`](fotos-modelos.md). Si trae `attribution`, se añade « (modificada)» al final:
+  «Foto: {attribution} (modificada)» (CA-23).
 - `alt=""` en la imagen real: es decorativa porque el nombre del modelo ya está a su lado; evita que el
   lector lo repita.
 - **Sin imagen con licencia**, el hueco 16:9 `surface-muted` lleva el icono de silueta del segmento del
