@@ -1,0 +1,40 @@
+# Researcher — Mercedes-Benz EQS SUV. Fuentes: diariomotor-es (T3, estado) e idae-es (T2, versiones). Consultado 2026-11-07. mercedes-benz.es responde HTTP 403: sin precio.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: EQS SUV
+status: {value: on_sale, note: "«Actualmente se comercializa su primera generación desde el año 2022» (T3)", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqs-suv/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: EQS 450 4MATIC SUV
+    battery_kwh: {value: 118, basis: unknown, note: "IDAE: «EQS SUV (X296) 450 4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 681, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 265, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQS 500 4MATIC SUV
+    battery_kwh: {value: 118, basis: unknown, note: "IDAE: «EQS SUV (X296) 500 4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 681, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 330, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQS 580 4MATIC SUV
+    battery_kwh: {value: 118, basis: unknown, note: "IDAE: «EQS SUV (X296) 580 4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 681, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 400, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/mercedes-benz/eqs-suv/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Mercedes-Benz_EQS_450_4MATIC_SUV_%28X296%29_front.jpg/1280px-Mercedes-Benz_EQS_450_4MATIC_SUV_%28X296%29_front.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_EQS_450_4MATIC_SUV_(X296)_front.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: "CC-BY-SA-4.0"
+    attribution: "Tokumeigakarinoaoshima, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio: mercedes-benz.es devuelve HTTP 403 (fetch-page.ts, 2026-11-07) y no hay otra fuente T1; sin precio."
+  - "Versiones: el IDAE (T2) no dice cuáles se venden hoy y la web oficial no se puede leer; confirmar la gama vigente."
+  - "launch: ninguna fuente da el inicio de venta en España."
+  - "Segmento: diariomotor-es lo llama «SUV 100% eléctrico, del segmento F»; la tabla de data-model.md solo traduce SUV + segmento B, C, D o E, así que queda null."
