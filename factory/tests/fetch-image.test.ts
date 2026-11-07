@@ -35,11 +35,12 @@ test("Commons: pide la miniatura de 1280 px con User-Agent y guarda el fichero",
   const root = mkdtempSync(join(tmpdir(), "fetch-image-"));
   const seen: string[] = [];
   const out = await fetchImage({ brand: "acme", slug: "volta", name: "frontal", pageUrl: PAGE, root },
-    fake(png(1280), { url: "https://upload.wikimedia.org/Acme_Volta.jpg", width: 4000, thumburl: THUMB }, seen));
+    fake(png(1280), { url: "https://upload.wikimedia.org/Acme_Volta.jpg", width: 4000, thumburl: THUMB, extmetadata: {
+      LicenseShortName: { value: "CC BY-SA 4.0" }, Artist: { value: "<a href=\"//commons.wikimedia.org/wiki/User:Ana\">Ana</a>" } } }, seen));
   assert.deepEqual(out, { file: "data/images/acme/volta/frontal.png", source_url: THUMB, page_url: PAGE,
-    width: 1280, height: 720, bytes: png(1280).length });
+    width: 1280, height: 720, bytes: png(1280).length, license: "CC BY-SA 4.0", artist: "Ana" });
   assert.ok(existsSync(join(root, out.file)));
-  assert.match(seen[0], /iiurlwidth=1280&titles=File%3AAcme_Volta\.jpg siete3-factory\/1\.0 \(https:\/\/siete3\.com\)/);
+  assert.match(seen[0], /extmetadata.*iiurlwidth=1280&titles=File%3AAcme_Volta\.jpg siete3-factory\/1\.0 \(https:\/\/siete3\.com\)/);
   rmSync(root, { recursive: true, force: true });
 });
 

@@ -65,7 +65,7 @@ lo pida, y nunca para un modelo con `needs_review: true`:
   - Descárgala siempre con el script, nunca de otra forma (ADR-0010, «Imágenes»):
     `node factory/fetch-image.ts <marca> <slug-del-modelo> <nombre> <page_url> [url-del-fichero]`.
     `<nombre>` en `[a-z0-9-]` (por ejemplo `frontal`). En Commons, `page_url` es la página `File:`; en una sala de prensa, la página de términos, y añade la URL del fichero.
-  - Si sale bien, imprime una línea JSON: copia tal cual `file`, `source_url` y `page_url` a la entrada de `images`, y añade `source_id`, `retrieved` (hoy), `license` y `attribution` (o `null`) leyendo la página de licencia. No escribas `url`: es la forma antigua y la comprobación la rechaza.
+  - Si sale bien, imprime una línea JSON: copia tal cual `file`, `source_url` y `page_url` a la entrada de `images`, y añade `source_id`, `retrieved` (hoy), `license` y `attribution` (o `null`). En Commons, sácalos de `license` y `artist` de esa misma línea, que el script lee de la página `File:` (`CC BY-SA 4.0` se escribe `CC-BY-SA-4.0`); si `license` es `null` o no está en la lista de arriba, no registres la imagen. En una sala de prensa, léelos en su página de términos. No escribas `url`: es la forma antigua y la comprobación la rechaza.
   - Si falla (sale con error y no guarda nada), no escribas la entrada: anota en `open_questions` la `page_url` y la causa, y prueba otra imagen o la siguiente fuente. Sin ninguna, `images: []`.
   - Si tocas un fichero que aún tiene imágenes con `url`, migra esas entradas así antes de terminar: la página `File:` sale del nombre del fichero en la URL antigua; relee la licencia y descarga con el script.
 - **`launch`, `status` y `segment`** (data-model.md, notas de la sección 4), también con fuentes T3:
