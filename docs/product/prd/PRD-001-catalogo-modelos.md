@@ -24,6 +24,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 ## 3. Alcance
 ### Incluido
 - Listado de modelos con tarjeta resumen.
+- Todo BEV que se venda en España: turismos, cuadriciclos (como el Citroën Ami o el Fiat Topolino) y furgonetas, de pasajeros o de carga. Su segmento sale de la fuente como el de cualquier otro (RF-11).
 - Filtros y ordenación.
 - Página de listado por marca.
 - URLs estables y amigables.
@@ -129,6 +130,7 @@ Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsa
 
 ### Resueltas (2026-11-07)
 - **Fotos retocadas (RF-15, CA-22, CA-23):** el responsable del producto decide mostrar el coche recortado sobre un fondo liso y con la matrícula tapada, después de ver una prueba con cinco modelos el 2026-11-06. Motivo: 140 de los 145 modelos tienen foto de Commons, pero los fondos (aparcamientos, ferias, gente, otros coches) dan una estética poco cuidada, y la dirección visual que se busca pone el coche sobre un fondo pálido. Retoca un agente nuevo, el Retocador, con criterio escrito y un script que no toca el coche (ADR-0025). Alternativas descartadas: bancos de imágenes gratuitos (Unsplash, Pexels, Pixabay), porque sus licencias limitan las fotos con marcas reconocibles, no están entre las de RF-8 y la API de Unsplash obliga a enlazar sus imágenes, contra RNF-5; scrapear ev-database.org, que lo prohíbe por escrito; difuminar el fondo, que deja un halo y parece un filtro; y la IA generativa para quitar brillos o pintar lo que falta, porque inventa píxeles del coche (ADR-0001, regla 7).
+- **Cuadriciclos y furgonetas (alcance):** el responsable del producto decide incluir todo BEV que se venda en España, también los cuadriciclos y las furgonetas de carga, al revisar las PR de descubrimiento del Researcher (#977–#991). Motivo: quien busca un eléctrico también mira estos, y «furgoneta» ya es un segmento de RF-11. Alternativas descartadas: solo turismos M1, y turismos más cuadriciclos sin furgonetas de carga.
 
 ### Abiertas
 - ~~**¿Qué hacer con los modelos sin segmento? (RF-1, RF-2, RF-11, RF-12; PRD-002, PRD-005)**~~ Abierta y resuelta el 2026-10-26 por el responsable: **A y B ya, y C a una ADR**. **Actualización 2026-10-27/28: C se adopta** con las condiciones de ADR-0021 (ver la alternativa C tachada más abajo, RF-11, CA-20 y CA-21). A: la regla se aplica igual en todas las fichas (con T3 vale lo mismo; se reintentan las fuentes con 403). B: tabla cerrada de equivalencias en `data-model.md` (RF-11). C: la clasificación editorial de lo que siga sin segmento la estudia una ADR antes de decidirse, porque choca con ADR-0001. Además, un modelo sin segmento se publica con «por confirmar» (RF-12); se corrige `data-model.md`, que lo llamaba «no publicable». El análisis que llevó a la decisión:
@@ -167,3 +169,4 @@ Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsa
 | 2026-10-26 | Resuelta la pregunta de los modelos sin segmento: A y B (tabla cerrada de equivalencias en `data-model.md`, RF-11) y C a una ADR. Un modelo sin segmento se publica con «por confirmar» (RF-12). Sin cambios en CA | responsable + Claude |
 | 2026-10-28 | Enmienda por ADR-0021 (aceptada el 2026-10-27): RF-11 admite el segmento editorial (`tier: E`) cuando ninguna fuente lo clasifica tras la regla y la tabla; la tarjeta no lo marca; lo asigna cualquiera con permiso de fusión; criterio común en `data-model.md`. Alternativa C de la sección 8 tachada y adoptada. Añadidos CA-20 y CA-21 | responsable + Claude |
 | 2026-11-07 | Fotos retocadas: coche recortado sobre fondo liso y matrícula tapada, sin tocar el coche (ADR-0025, aceptada el 2026-11-07). Añadidos RF-15, CA-22 y CA-23 | responsable + Claude |
+| 2026-11-07 | Alcance: entran los cuadriciclos y las furgonetas, de pasajeros o de carga (sección 3). Sin cambios en RF ni en CA | responsable + Claude |
