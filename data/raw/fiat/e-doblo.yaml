@@ -1,0 +1,44 @@
+# Researcher — Fiat e-Doblò. Fuentes: idae-es (T2), movilidadelectrica-es (T3), wikimedia-commons. Consultado 2026-11-07.
+brand: fiat
+brand_name: Fiat
+model: e-Doblò
+status: {value: on_sale, note: "artículo de 2026-02-17 que lo lista entre los eléctricos de Fiat disponibles en España en 2026 y le da precio de partida; no confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Doblò Furgón L1 100 kW 50 kWh
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 336, note: "IDAE: «DOBLÒ VAN Nuevo Doblò Furgón L1 BEV Motor 100 kW Batería 50 kWh»; el artículo T3 cita 280 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Doblò Furgón L2 100 kW 50 kWh
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 331, note: "IDAE: «DOBLÒ VAN Nuevo Doblò Furgón L2 BEV Motor 100 kW Batería 50 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Doblò Doble Cabina L2 100 kW 50 kWh
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 326, note: "IDAE: «DOBLÒ VAN Nuevo Doblò Doble Cabina L2 BEV Motor 100 kW Batería 50 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Doblò Combi N1 M 100 kW 50 kWh
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 343, note: "IDAE: «E-Doblo Combi N1 M 100 kW 50 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: data/images/fiat/e-doblo/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Fiat_E-Dobl%C3%B2_1X7A1774.jpg/1280px-Fiat_E-Dobl%C3%B2_1X7A1774.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Fiat_E-Dobl%C3%B2_1X7A1774.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:Fiat E-Doblò 1X7A1774.jpg)"
+open_questions:
+  - "price: fiat.es devuelve 403; sin PVP ni precio financiado en fuente T1. El T3 cita 30.250 € para el furgón, que no vale como precio."
+  - "status y versiones: solo un artículo T3 de 2026-02-17; las versiones salen del IDAE y no se sabe cuáles se venden hoy (el IDAE lista también filas antiguas e-Doblò de 267-285 km, no incluidas)."
+  - "wltp_km: el T3 dice 280 km; el IDAE (T2) da 326-343 km según carrocería; prevalece el IDAE."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: ninguna fuente lo clasifica con un término de RF-11 (es una furgoneta/furgón comercial con variante Combi)."
+  - "El nombre de las versiones es una descripción compuesta a partir de las filas del IDAE, no el nombre comercial de la web."

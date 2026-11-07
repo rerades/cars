@@ -1,0 +1,27 @@
+# Researcher — Fiat Topolino (cuadriciclo eléctrico). Fuentes: idae-es (T2), movilidadelectrica-es (T3), wikimedia-commons. Consultado 2026-11-07.
+brand: fiat
+brand_name: Fiat
+model: Topolino
+status: {value: on_sale, note: "artículo de 2026-02-17 que lo lista entre los eléctricos de Fiat disponibles en España en 2026 («Estos son todos los coches eléctricos que tiene Fiat disponible en España este 2026»); no confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Topolino
+    battery_kwh: {value: 5.4, basis: unknown, note: "IDAE ids 602147 (Topolino) y 602148 (Toplolino Dolcevita), mismos valores; el artículo T3 cita 5,5 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 75, note: "IDAE id 602147; el artículo T3 también cita 75 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 6, note: "IDAE id 602147", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: data/images/fiat/topolino/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/2025_Fiat_Topolino_in_Verde_Vita%2C_front_right_%28Greenwich_2025%29.jpg/1280px-2025_Fiat_Topolino_in_Verde_Vita%2C_front_right_%28Greenwich_2025%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2025_Fiat_Topolino_in_Verde_Vita,_front_right_(Greenwich_2025).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Mr.choppers, CC BY-SA 4.0, via Wikimedia Commons (File:2025 Fiat Topolino in Verde Vita, front right (Greenwich 2025).jpg)"
+open_questions:
+  - "price: fiat.es devuelve 403; sin PVP ni precio financiado en fuente T1. El T3 cita 8.890 € y 9.890 € al contado, que no valen como precio."
+  - "status y versiones: solo un artículo T3 de 2026-02-17; sin confirmar hoy. Es un cuadriciclo (45 km/h), no un turismo: decidir si entra en el catálogo."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: el T3 lo llama «cuadriciclo eléctrico», que no está en la lista de RF-11."
