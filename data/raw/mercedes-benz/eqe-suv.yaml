@@ -1,0 +1,49 @@
+# Researcher — Mercedes-Benz EQE SUV. Fuentes: diariomotor-es (T3, estado y segmento) e idae-es (T2, versiones). Consultado 2026-11-07. mercedes-benz.es responde HTTP 403: sin precio.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: EQE SUV
+status: {value: on_sale, note: "«Actualmente se comercializa su primera generación desde el año 2022» (T3)", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqe-suv/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: {value: suv_grande, note: "«El Mercedes-Benz EQE SUV es un SUV 100% eléctrico, del segmento E»", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqe-suv/", retrieved: 2026-11-07, tier: T3}
+needs_review: true
+versions:
+  - name: EQE 300 SUV
+    battery_kwh: {value: 90, basis: unknown, note: "IDAE: «EQE SUV (X294) 300»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 597, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 195, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQE 350 4MATIC SUV
+    battery_kwh: {value: 90, basis: unknown, note: "IDAE: «EQE SUV (X294) 350 4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 551, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 235, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQE 350+ SUV
+    battery_kwh: {value: 96, basis: unknown, note: "IDAE: «EQE SUV (X294) 350+»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 635, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 235, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQE 500 4MATIC SUV
+    battery_kwh: {value: 96, basis: unknown, note: "IDAE: «EQE SUV (X294) 500 4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 599, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 330, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Mercedes-AMG EQE 53 4MATIC+ SUV
+    battery_kwh: {value: 90, basis: unknown, note: "IDAE: «EQE SUV (X294) Mercedes-AMG EQE 53 4MATIC+»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 441, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 460, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC+»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/mercedes-benz/eqe-suv/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/EQE-300-SUV-Front.jpg/1280px-EQE-300-SUV-Front.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:EQE-300-SUV-Front.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: "CC-BY-SA-4.0"
+    attribution: "Jan Sommer (Textures & Patterns), CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio: mercedes-benz.es devuelve HTTP 403 (fetch-page.ts, 2026-11-07) y no hay otra fuente T1; sin precio."
+  - "Versiones: el IDAE (T2) no dice cuáles se venden hoy y la web oficial no se puede leer; confirmar la gama vigente. Los nombres de versión son los del IDAE adaptados (sin el código de serie); no los confirma la marca."
+  - "launch: ninguna fuente da el inicio de venta en España."

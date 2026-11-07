@@ -1,0 +1,38 @@
+# Researcher — Mercedes-Benz EQE (berlina). Fuentes: diariomotor-es (T3, estado y segmento) e idae-es (T2, versiones). Consultado 2026-11-07. mercedes-benz.es responde HTTP 403: sin precio.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: EQE
+status: {value: on_sale, note: "precios de noviembre 2026 «desde 72.494 €» (T3)", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqe/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: {value: berlina, note: "«El Mercedes-Benz EQE es una berlina eléctrica, del segmento E»", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqe/", retrieved: 2026-11-07, tier: T3}
+needs_review: true
+versions:
+  - name: EQE 300
+    battery_kwh: {value: 90, basis: unknown, note: "IDAE: «EQE Berlina (V295) 300»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 639, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 195, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: EQE 350+
+    battery_kwh: {value: 96, basis: unknown, note: "IDAE: «EQE Berlina (V295) 350+»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 655, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 235, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Mercedes-AMG EQE 53 4MATIC+
+    battery_kwh: {value: 90, basis: unknown, note: "IDAE: «EQE Berlina (V295) Mercedes-AMG EQE 53 4MATIC+»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 475, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 460, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC+»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/mercedes-benz/eqe/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Mercedes-Benz_EQE_350%2B_AMG_Line_%28V_295%29_%E2%80%93_f_12022023.jpg/1280px-Mercedes-Benz_EQE_350%2B_AMG_Line_%28V_295%29_%E2%80%93_f_12022023.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_EQE_350+_AMG_Line_(V_295)_%E2%80%93_f_12022023.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: "CC-BY-SA-3.0-DE"
+    attribution: "M 93, CC BY-SA 3.0 de, via Wikimedia Commons"
+open_questions:
+  - "Precio: mercedes-benz.es devuelve HTTP 403 (fetch-page.ts, 2026-11-07) y no hay otra fuente T1; sin precio."
+  - "Versiones: el IDAE (T2) no dice cuáles se venden hoy y la web oficial no se puede leer; confirmar la gama vigente."
+  - "launch: ninguna fuente da el inicio de venta en España."
+  - "Estado: solo una fuente T3 (diariomotor-es) da precios vigentes; confirmar en la web oficial."
