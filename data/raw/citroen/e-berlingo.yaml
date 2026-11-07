@@ -1,0 +1,32 @@
+# Researcher — Citroën ë-Berlingo. Fuentes: motor-es (T3), idae-es (T2, solo contraste). Descubrimiento 2026-11-07. Sin precio: citroen.es no está registrada y no hay otra fuente T1.
+brand: citroen
+brand_name: Citroën
+model: ë-Berlingo
+status: {value: on_sale, note: "motor.es lista dos versiones de la gama 2026: XL Plus y XL Max, eléctrico 100 kW 50 kWh", source_id: motor-es, url: "https://www.motor.es/citroen/e-berlingo/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: {value: monovolumen, note: "el medio escribe «Es monovolumen eléctrico «Made in Spain»»", source_id: motor-es, url: "https://www.motor.es/citroen/e-berlingo/", retrieved: 2026-11-07, tier: T3}
+needs_review: true
+versions:
+  - name: XL Plus 100 kW 50 kWh
+    battery_kwh: {value: 50, basis: unknown, source_id: motor-es, url: "https://www.motor.es/citroen/e-berlingo/", retrieved: 2026-11-07, tier: T3, note: "dato del nombre de versión en motor.es: «100kW 50kWh»; el IDAE da 50 kWh para el ë-Berlingo Talla M (id 607527)"}
+    wltp_km: {value: 337, source_id: motor-es, url: "https://www.motor.es/citroen/e-berlingo/", retrieved: 2026-11-07, tier: T3, note: "motor.es: 337 kms"}
+    power_kw: {value: 100, source_id: motor-es, url: "https://www.motor.es/citroen/e-berlingo/", retrieved: 2026-11-07, tier: T3, note: "motor.es: «100kW», 136 CV"}
+    price: null
+  - name: XL Max 100 kW 50 kWh
+    battery_kwh: {value: 50, basis: unknown, source_id: motor-es, url: "https://www.motor.es/citroen/e-berlingo/", retrieved: 2026-11-07, tier: T3, note: "dato del nombre de versión en motor.es: «100kW 50kWh»"}
+    wltp_km: {value: 335, source_id: motor-es, url: "https://www.motor.es/citroen/e-berlingo/", retrieved: 2026-11-07, tier: T3, note: "motor.es: 335 kms"}
+    power_kw: {value: 100, source_id: motor-es, url: "https://www.motor.es/citroen/e-berlingo/", retrieved: 2026-11-07, tier: T3, note: "motor.es: «100kW», 136 CV"}
+    price: null
+images:
+  - file: data/images/citroen/e-berlingo/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Citro%C3%ABn_%C3%AB-Berlingo_DSC_8025.jpg/1280px-Citro%C3%ABn_%C3%AB-Berlingo_DSC_8025.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Citroën_ë-Berlingo_DSC_8025.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0"
+open_questions:
+  - "needs_review: los datos de versión son solo T3 (motor.es); las filas del IDAE (ids 607526/607527, N1, Talla M) son de la variante comercial y no casan con las versiones XL Plus/XL Max de turismo; no se ha podido contrastar con T1/T2."
+  - "Precio: citroen.es no está registrada como fuente; todas las versiones con price null. motor.es publica precios con descuento, que no valen."
+  - "launch: ninguna fuente leída da la fecha de inicio de venta de la gama actual; sin dato."
+  - "Existe también la versión Talla M (IDAE ids 607526/607527, N1) y 7 plazas; motor.es solo lista las XL en la gama 2026."

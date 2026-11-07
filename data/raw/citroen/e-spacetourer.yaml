@@ -1,0 +1,52 @@
+# Researcher — Citroën ë-SpaceTourer. Fuentes: idae-es (T2), motor-es (T3). Descubrimiento 2026-11-07. Sin precio: citroen.es no está registrada y no hay otra fuente T1.
+brand: citroen
+brand_name: Citroën
+model: ë-SpaceTourer
+status: {value: on_sale, note: "gama (2026) en motor.es: Plus M 50 kWh, Plus XL 50 kWh, Plus M 75 kWh, Plus XL 75 kWh, Max M 75 kWh y Max XL 75 kWh", source_id: motor-es, url: "https://www.motor.es/citroen/e-spacetourer/", retrieved: 2026-11-07, tier: T3}
+launch: null
+needs_review: false
+versions:
+  - name: Plus Talla M 50 kWh
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614167"}
+    wltp_km: {value: 219, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614167; el medio publica 219 km"}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614167"}
+    price: null
+  - name: Plus Talla XL 50 kWh
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614169"}
+    wltp_km: {value: 217, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614169; el medio publica 216 km"}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614169"}
+    price: null
+  - name: Plus Talla M 75 kWh
+    battery_kwh: {value: 75, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614168"}
+    wltp_km: {value: 346, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614168; el medio publica 345 km"}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614168"}
+    price: null
+  - name: Plus Talla XL 75 kWh
+    battery_kwh: {value: 75, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614170"}
+    wltp_km: {value: 341, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614170; el medio publica 341 km"}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614170"}
+    price: null
+  - name: Max Talla M 75 kWh
+    battery_kwh: {value: 75, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614171"}
+    wltp_km: {value: 346, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614171; el medio publica 346 km"}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614171"}
+    price: null
+  - name: Max Talla XL 75 kWh
+    battery_kwh: {value: 75, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614172"}
+    wltp_km: {value: 342, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614172"}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614172"}
+    price: null
+images:
+  - file: data/images/citroen/e-spacetourer/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Citro%C3%ABn_%C3%AB-Spacetourer_%282025%29_%2854854899752%29.jpg/1280px-Citro%C3%ABn_%C3%AB-Spacetourer_%282025%29_%2854854899752%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Citroën_ë-Spacetourer_(2025)_(54854899752).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC0
+    attribution: null
+open_questions:
+  - "Precio: citroen.es no está registrada como fuente; todas las versiones con price null. motor.es publica precios con descuento, que no valen."
+  - "Segmento: ninguna fuente leída lo clasifica; sin segment."
+  - "launch: ninguna fuente leída da la fecha de inicio de venta en España; sin dato."
+  - "Max Talla XL 75 kWh: la lectura de motor.es se corta antes de su autonomía; solo consta el IDAE (T2)."
+  - "Hay versiones anteriores del IDAE (Business, Feel, Shine, ids 5526xx) que motor.es no lista en la gama 2026; no se han escrito."
