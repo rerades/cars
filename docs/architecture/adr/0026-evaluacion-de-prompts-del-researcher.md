@@ -1,4 +1,4 @@
-# ADR-0024 — Evaluación de los prompts del Researcher con un dataset de PR devueltas
+# ADR-0026 — Evaluación de los prompts del Researcher con un dataset de PR devueltas
 
 - **Estado:** propuesta. Enmienda [ADR-0016](0016-evaluacion-de-prompts-con-langfuse.md) (añade un
   segundo dataset, `researcher`, con su propio evaluador) y
