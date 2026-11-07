@@ -1,0 +1,58 @@
+# Researcher — BYD Dolphin Surf. Fuentes: byd-es (T1). Consultado 2026-11-07.
+brand: byd
+brand_name: BYD
+model: Dolphin Surf
+status: {value: on_sale, note: "ficha con configurador y promoción vigente hasta el 30/11/2026 para vehículos nuevos", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Dolphin Surf Active
+    battery_kwh: {value: 30, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    wltp_km: {value: 220, note: "ciclo combinado; hasta 356 km en conducción urbana", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    power_kw: {value: 65, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    drivetrain: {value: fwd, note: "«tracción delantera»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    ac_max_kw: {value: 11, note: "«cargador integrado de 11 kW» (FAQ de carga, sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    price:
+      value: 12955
+      unit: EUR
+      price_kind: financed
+      price_terms: "(6) PVPR Financiando para BYD DOLPHIN SURF ACTIVE color Lime Green: 12.955€ . Promoción sujeta a condiciones generales vigentes. Consulta aquí las condiciones completas. (1) Oferta válida para Financiación Lineal con CA Auto Bank, SpA Sucursal en España para todos los vehículos nuevos por un plazo entre 72 meses y 116 meses en función de la campaña, y una permanencia de 36 meses. El periodo de carencia no implica la acumulación de intereses al capital. Todas las ofertas y promociones publicadas en esta página web tienen vigencia hasta el 30 de noviembre de 2026."
+      price_terms_url: "https://www.byd.com/es-es/promociones"
+      page_name: "BYD DOLPHIN SURF ACTIVE color Lime Green"
+      note: "sin precio al contado en la página"
+      source_id: byd-es
+      url: "https://www.byd.com/es-es/promociones"
+      retrieved: 2026-11-07
+      tier: T1
+  - name: Dolphin Surf Boost
+    battery_kwh: {value: 43.2, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    wltp_km: {value: 322, note: "ciclo combinado; hasta 507 km en conducción urbana", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    power_kw: {value: 65, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    drivetrain: {value: fwd, note: "«tracción delantera»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    dc_max_kw: {value: 85, note: "«En las versiones Boost y Comfort, el vehículo admite una potencia de hasta 85 kW»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    ac_max_kw: {value: 11, note: "«cargador integrado de 11 kW» (FAQ de carga, sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    price: null   # sin precio de esta versión en fuente T1
+  - name: Dolphin Surf Comfort
+    battery_kwh: {value: 43.2, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    wltp_km: {value: 310, note: "ciclo combinado; hasta 460 km en conducción urbana", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    power_kw: {value: 115, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    drivetrain: {value: fwd, note: "«tracción delantera»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    dc_max_kw: {value: 85, note: "«En las versiones Boost y Comfort, el vehículo admite una potencia de hasta 85 kW»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    ac_max_kw: {value: 11, note: "«cargador integrado de 11 kW» (FAQ de carga, sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
+    price: null   # sin precio de esta versión en fuente T1
+images:
+  - file: "data/images/byd/dolphin-surf/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/BYD_Dolphin_Surf_IAA_2025_DSC_2256.jpg/1280px-BYD_Dolphin_Surf_IAA_2025_DSC_2256.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BYD_Dolphin_Surf_IAA_2025_DSC_2256.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:BYD Dolphin Surf IAA 2025 DSC 2256.jpg)"
+open_questions:
+  - "segment: la web dice «DOLPHIN SURF (Segmento A)» y «hatchback de 5 puertas», sin ningún término de la lista de RF-11 ni de la tabla de equivalencias; sin segmento."
+  - "launch: ninguna fuente da la fecha de inicio de venta en España."
+  - "Precios: la web solo publica un «PVPR Financiando» de la Active (color Lime Green) dentro de una promoción hasta el 30/11/2026; no hay PVP sin oferta. Boost y Comfort sin precio."
+  - "Active: potencia de carga CC no publicada."
+  - "Batería: la web no indica si es útil o bruta."
+  - "IDAE (fetch-idae.ts BYD) lista además versiones «Boost 5-seater» y varias «Comfort»; la web de la marca solo presenta Active, Boost y Comfort."

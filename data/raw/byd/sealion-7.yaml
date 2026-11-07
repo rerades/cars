@@ -1,0 +1,57 @@
+# Researcher — BYD Sealion 7. Fuentes: byd-es (T1), idae-es (T2). Consultado 2026-11-07.
+brand: byd
+brand_name: BYD
+model: Sealion 7
+status: {value: on_sale, note: "ficha con configurador y promoción vigente hasta el 30/11/2026 (Sealion 7 Comfort en la lista de ofertas)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Sealion 7 Comfort
+    battery_kwh: {value: 82.5, basis: unknown, note: "IDAE SEALION 7 Comfort (id 606464)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 482, note: "IDAE id 606464", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 230, note: "publicado: 312 CV", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    dc_max_kw: {value: 150, note: "«Las versiones Comfort y Design AWD también ofrecen ... hasta 150 kW»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    ac_max_kw: {value: 11, note: "«hasta 11 kW» (sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    price:
+      value: 38475
+      unit: EUR
+      price_kind: financed
+      price_terms: "(11) PVPR Financiando para BYD SEALION 7 COMFORT color Atlantis Grey: 38.475 €. Promoción sujeta a condiciones generales vigentes. Consulta aquí las condiciones completas. (1) Oferta válida para Financiación Lineal con CA Auto Bank, SpA Sucursal en España para todos los vehículos nuevos por un plazo entre 72 meses y 116 meses en función de la campaña, y una permanencia de 36 meses. El periodo de carencia no implica la acumulación de intereses al capital. Todas las ofertas y promociones publicadas en esta página web tienen vigencia hasta el 30 de noviembre de 2026."
+      price_terms_url: "https://www.byd.com/es-es/promociones"
+      page_name: "BYD SEALION 7 COMFORT color Atlantis Grey"
+      note: "sin precio al contado en la página"
+      source_id: byd-es
+      url: "https://www.byd.com/es-es/promociones"
+      retrieved: 2026-11-07
+      tier: T1
+  - name: Sealion 7 Design AWD
+    battery_kwh: {value: 82.5, basis: unknown, note: "IDAE SEALION 7 Design AWD (id 606465)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 456, note: "IDAE id 606465", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 390, note: "IDAE id 606465", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "el nombre de la versión incluye AWD", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    dc_max_kw: {value: 150, note: "«Las versiones Comfort y Design AWD también ofrecen ... hasta 150 kW»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    ac_max_kw: {value: 11, note: "«hasta 11 kW» (sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    price: null   # sin precio en fuente T1
+  - name: Sealion 7 Excellence AWD
+    battery_kwh: {value: 91.3, basis: unknown, note: "IDAE SEALION 7 Excellence AWD (id 606466)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 502, note: "«hasta 502 km»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    power_kw: {value: 390, note: "publicado: 530 CV", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    drivetrain: {value: awd, note: "«sistema de tracción total inteligente»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    dc_max_kw: {value: 230, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    ac_max_kw: {value: 11, note: "«hasta 11 kW» (sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
+    price: null   # sin precio en fuente T1
+images:
+  - file: "data/images/byd/sealion-7/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/BYD_Sealion_07_EV_DSC_8264.jpg/1280px-BYD_Sealion_07_EV_DSC_8264.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BYD_Sealion_07_EV_DSC_8264.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons (File:BYD Sealion 07 EV DSC 8264.jpg)"
+open_questions:
+  - "segment: la web dice «SUV eléctrico premium» y «SUV familiar 100% eléctrico», sin tamaño ni letra de segmento de la tabla; sin segmento."
+  - "launch: ninguna fuente da la fecha de inicio de venta en España."
+  - "Precio: solo hay un «PVPR Financiando» de la Comfort (color Atlantis Grey) dentro de una promoción hasta el 30/11/2026; no hay PVP sin oferta. Design AWD y Excellence AWD sin precio."
+  - "Comfort: tracción no publicada. Design AWD: autonomía, potencia y batería solo del IDAE (T2)."
+  - "Batería: la web de la marca no la desglosa por versión; IDAE sin indicar si es útil o bruta."
