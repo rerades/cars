@@ -1,0 +1,53 @@
+# Researcher — Peugeot E-Traveller. Fuentes: peugeot-es (T1), idae-es (T2), wikimedia-commons. Consultado 2026-11-07.
+brand: peugeot
+brand_name: Peugeot
+model: E-Traveller
+status: {value: on_sale, note: "ofertas.peugeot.es: «Disponible en la última generación de la gama 100% eléctrica de PEUGEOT: E-208, E-2008, E-308, E-308 SW, E-3008, E-408, E-5008, E-RIFTER Y E-TRAVELLER.»", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: E-Traveller Business Eléctrico 100 Kw Batería 50 Kwh Standard
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 610028", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 219, note: "IDAE id 610028", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610028", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: E-Traveller Business Eléctrico 100 Kw Batería 50 Kwh Long
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 610030", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 217, note: "IDAE id 610030", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610030", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: E-Traveller Business Eléctrico 100 Kw Batería 75 Kwh Standard
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 610029", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 346, note: "IDAE id 610029", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610029", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: E-Traveller Business Eléctrico 100 Kw Batería 75 Kwh Long
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 610031", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 341, note: "IDAE id 610031", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610031", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: E-Traveller Business VIP Eléctrico 100 Kw Batería 75 Kwh Standard
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 610032", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 346, note: "IDAE id 610032", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610032", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: E-Traveller Business VIP Eléctrico 100 Kw Batería 75 Kwh Long
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 610033", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 342, note: "IDAE id 610033", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610033", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/peugeot/e-traveller/trasera.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Peugeot_e-Traveller_1X7A0084.jpg/1280px-Peugeot_e-Traveller_1X7A0084.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Peugeot_e-Traveller_1X7A0084.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, Wikimedia Commons"
+open_questions:
+  - "needs_review: las versiones salen del IDAE (homologaciones); el IDAE no dice cuáles se venden hoy y la web de la marca (www.peugeot.es, 403) no se ha podido leer. ofertas.peugeot.es solo cita el E-Traveller en la lista de la gama eléctrica."
+  - "Precio: ofertas.peugeot.es/particulares y /coches-electricos-hibridos (2026-11-07) no traen precio del E-Traveller; las páginas de oferta de www.peugeot.es dan 403. price: null."
+  - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
+  - "segment: ninguna fuente leída lo clasifica con un término de la lista de RF-11."
+  - "Potencia, batería y autonomía (IDAE, sin fecha de homologación en las filas): una sola fila por versión; batería con basis unknown."
