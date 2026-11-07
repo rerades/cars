@@ -13,18 +13,7 @@ versions:
     power_kw: {value: 150, note: "publicado: 204 CV", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin", retrieved: 2026-11-07, tier: T1}
     dc_max_kw: {value: 110, source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin", retrieved: 2026-11-07, tier: T1}
     ac_max_kw: {value: 11, note: "«cargador trifásico integrado de 11 kW»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin", retrieved: 2026-11-07, tier: T1}
-    price:
-      value: 21865
-      unit: EUR
-      price_kind: financed
-      price_terms: "(12) PVPR Financiando para DOLPHIN COMFORT MY25 color Cream White: 21.865€. Promoción sujeta a condiciones generales vigentes. Consulta aquí las condiciones completas. (1) Oferta válida para Financiación Lineal con CA Auto Bank, SpA Sucursal en España para todos los vehículos nuevos por un plazo entre 72 meses y 116 meses en función de la campaña, y una permanencia de 36 meses. El periodo de carencia no implica la acumulación de intereses al capital. Todas las ofertas y promociones publicadas en esta página web tienen vigencia hasta el 30 de noviembre de 2026."
-      price_terms_url: "https://www.byd.com/es-es/promociones"
-      page_name: "DOLPHIN COMFORT MY25 color Cream White"
-      note: "sin precio al contado en la página"
-      source_id: byd-es
-      url: "https://www.byd.com/es-es/promociones"
-      retrieved: 2026-11-07
-      tier: T1
+    price: null   # PVPR financiando de byd.com/es-es/promociones retirado: ver open_questions
   - name: Dolphin Design
     battery_kwh: {value: 60.4, basis: unknown, note: "Blade", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin", retrieved: 2026-11-07, tier: T1}
     wltp_km: {value: 427, note: "«ambas versiones ... (Comfort y Design) ofrecen una autonomía de hasta 427 km»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin", retrieved: 2026-11-07, tier: T1}
@@ -41,6 +30,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:BYD Dolphin IAA 2023 1X7A0634.jpg)"
 open_questions:
+  - "Precio: el «PVPR Financiando» de https://www.byd.com/es-es/promociones (2026-11-07) no se guarda. La nota (2) de la misma página incluye un adelanto de 2.250 € del Plan Auto+ en los descuentos, y no queda claro si ese PVPR lo resta; las ayudas públicas nunca se restan (researcher.md). Falta un PVP sin oferta o una nota que diga que el precio no incluye la ayuda."
   - "launch: ninguna fuente da la fecha de inicio de venta en España."
   - "Precio: solo hay un «PVPR Financiando» de la Comfort MY25 (color Cream White) dentro de una promoción hasta el 30/11/2026; no hay PVP sin oferta. Design sin precio."
   - "Tracción no publicada de forma explícita; no se registra drivetrain."
