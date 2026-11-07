@@ -3651,6 +3651,19 @@
     composición. No cambies direccion.md, tokens.md ni las especificaciones de pantalla: para leer
     la ficha, basta con las secciones «Estructura y orden de lectura» y «Cabecera» de
     docs/design/ficha-modelo.md. En tu resumen, di qué has corregido al ver las capturas. Bitácora."
+# Dirección visual elegida el 2026-11-07 (docs/design/direccion.md, «La elegida»): A con la tipografía y las versiones de B.
+- id: direccion-visual-final
+  agent: designer
+  task: "Combina la dirección visual elegida, como dice la sección «La elegida» de docs/design/direccion.md:
+    parte de los prototipos de A (web/design-proto/catalogo-a.astro, ficha-a.astro y pantalla.css), cambia
+    Manrope por Archivo con sus dos anchuras y rehaz la sección «Versiones» de la ficha como el bloque de
+    versión de B. El código de B no está en main: léelo con git show
+    origin/agent/designer/20261107-013006-9aa002:<ruta> (web/design-proto/b/Cifra.astro,
+    web/design-proto/propuesta-b.css, web/design-proto/ficha-b.astro). Las reglas de prototipos están en
+    web/design-proto/README.md. Sustituye las capturas de docs/design/refs/catalogo-a-* y ficha-a-* y
+    actualiza propuesta-a.md. Amplía docs/design/tokens.md con los tokens finales y sus contrastes
+    calculados. No cambies direccion.md ni las especificaciones de pantalla. En tu resumen, di qué has
+    corregido al ver las capturas. Bitácora."
 # Estrategia del 2026-11-06 (vision.md, «Prioridades actuales»): descubrir antes que refrescar.
 - id: modelos-nuevos-2026-11-bmw
   agent: researcher
