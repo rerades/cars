@@ -1,0 +1,256 @@
+---
+/**
+ * Proposal C, "Retícula" (docs/design/propuesta-c.md): composition leads. Cells split by hairlines,
+ * one fixed photo slot per cell, the segment silhouette as a graphic element in every cell.
+ * Static filters, no JavaScript (ADR-0003). ModelCard and CatalogFilters are reproduced here because they change.
+ */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import "../src/styles/global.css";
+import SegmentSilhouette from "../src/components/SegmentSilhouette.astro";
+import { cardView } from "../src/lib/card.ts";
+import { countLabel, sortByNovelty } from "../src/lib/catalog.ts";
+import { imageRelPath, loadModels } from "../src/lib/data.ts";
+import { filterPanelView } from "../src/lib/filter-view.ts";
+import { formatEur, formatNumber } from "../src/lib/format.ts";
+import { t } from "../src/lib/i18n.ts";
+
+// Good photo, bad photo (the interior, not the car), no photo with segment, no photo + no segment + announced.
+const KEYS = ["kia/ev3", "cupra/tavascan", "mercedes-benz/cla-shooting-brake", "smart/hashtag-2"];
+const all = sortByNovelty(loadModels().models);
+const models = KEYS.map((key) => all.find((m) => m.file === `${key}.yaml`)!);
+const view = filterPanelView(all);
+const L = view.labels;
+
+const files = import.meta.glob<{ default: ImageMetadata }>("@images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}", { eager: true });
+const srcOf = (file: string) => {
+  const rel = imageRelPath(file);
+  return rel ? Object.entries(files).find(([key]) => key.endsWith(`/${rel}`))?.[1].default : undefined;
+};
+
+const cells = models.map((m) => {
+  const card = cardView(m);
+  return {
+    card,
+    src: card.image ? srcOf(card.image.file) : undefined,
+    price: m.price_from ? formatEur(m.price_from.value) : null,
+    range: m.max_range_km ? t("ficha.unidad.km", { n: formatNumber(m.max_range_km.value) }) : null,
+  };
+});
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t("pagina.coches.titulo")}</title>
+    <style is:global>
+      @font-face {
+        font-family: "Instrument Sans";
+        src: url("./fonts/instrument-sans.woff2") format("woff2");
+        font-weight: 400 700;
+        font-stretch: 75% 100%;
+        font-display: swap;
+      }
+      :root {
+        --font-sans: "Instrument Sans", system-ui, sans-serif;
+        --color-surface-muted: #f4f4f1;
+        --color-ink-900: #0f0f0e;
+        --color-ink-600: #5c5c57;
+        --color-line: #77776f;
+        --color-line-soft: #d4d4ce;
+        --color-brand-600: #c2340a;
+        --color-brand-800: #8f2406;
+        --color-soon-bg: #0f0f0e;
+        --radius-card: 0;
+        --text-display: clamp(3rem, 1.5rem + 7.2vw, 7rem);
+        --text-cell-title: clamp(1.75rem, 1.5rem + 0.8vw, 2.25rem);
+        --text-figure: 1.5rem;
+        --tracking-tight: -0.035em;
+      }
+      :focus-visible { outline-color: var(--color-brand-600); }
+
+      .r-page { max-width: 80rem; margin-inline: auto; padding-inline: 1rem; }
+      .r-site { display: flex; align-items: center; min-height: var(--spacing-touch); font-size: var(--text-body); font-weight: 600; letter-spacing: -0.01em; }
+      .r-head { padding-block: 1.5rem 2rem; border-top: 1px solid var(--color-ink-900); }
+      .r-head h1 { font-size: var(--text-display); line-height: 0.96; font-weight: 500; letter-spacing: var(--tracking-tight); overflow-wrap: anywhere; }
+      .r-intro { margin-top: 1.5rem; max-width: 34rem; font-size: var(--text-body); line-height: 1.5rem; }
+      .r-count { margin-top: 0.5rem; color: var(--color-ink-600); font-size: var(--text-body); }
+
+      .r-layout { border-top: 1px solid var(--color-ink-900); }
+      .r-filter-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: var(--spacing-touch); padding-inline: 0; font-size: var(--text-body); font-weight: 600; border-bottom: 1px solid var(--color-line-soft); }
+      .r-filters { display: none; }
+
+      .r-cells { display: grid; grid-template-columns: minmax(0, 1fr); }
+      .r-cell { position: relative; display: flex; flex-direction: column; gap: 1rem; padding-block: 1.25rem; border-bottom: 1px solid var(--color-line-soft); }
+      .r-cell:hover .r-arrow { color: var(--color-brand-600); transform: translateX(0.25rem); }
+      .r-cell:has(.r-link:focus-visible) { outline: 3px solid var(--color-brand-600); outline-offset: -3px; }
+      .r-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+      .r-brand { font-size: var(--text-small); line-height: 1.25rem; color: var(--color-ink-600); overflow-wrap: anywhere; }
+      .r-cell h3 { font-size: var(--text-cell-title); line-height: 1.1; font-weight: 500; letter-spacing: -0.025em; overflow-wrap: anywhere; }
+      .r-link { color: var(--color-ink-900); }
+      .r-link::after { content: ""; position: absolute; inset: 0; }
+      .r-link:focus-visible { outline: none; }
+      .r-arrow { flex: none; font-size: 1.5rem; line-height: 1.75rem; transition: transform 150ms; }
+      @media (prefers-reduced-motion: reduce) { .r-arrow { transition: none; } }
+
+      .r-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+      .c-slot { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; overflow: hidden; background: var(--color-surface-muted); color: var(--color-ink-900); }
+      .c-slot img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; }
+      .c-slot svg { width: auto !important; height: 112% !important; stroke-width: 0.6; }
+      .c-figures { display: flex; flex-direction: column; gap: 0.75rem; }
+      .c-figures dd { display: block; }
+      .c-figure { font-size: var(--text-figure); line-height: 1.75rem; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+      .c-figure[data-missing] { font-size: var(--text-body); line-height: 1.75rem; font-weight: 400; letter-spacing: 0; color: var(--color-ink-600); }
+      .r-label { font-size: var(--text-small); line-height: 1.25rem; color: var(--color-ink-600); }
+      .c-deal { display: inline-block; margin-top: 0.25rem; padding: 0.125rem 0.5rem; background: var(--color-deal-bg); color: var(--color-deal-fg); font-size: var(--text-badge); font-weight: 600; line-height: 1.25rem; }
+      .r-soon { align-self: flex-start; padding: 0.125rem 0.5rem; background: var(--color-soon-bg); color: var(--color-soon-fg); font-size: var(--text-badge); font-weight: 600; line-height: 1.25rem; }
+
+      .r-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 1rem; }
+      .r-segment { display: flex; align-items: center; gap: 0.5rem; font-size: var(--text-small); line-height: 1.25rem; }
+      .r-segment svg { flex: none; width: 1.75rem !important; height: 1.75rem !important; stroke-width: 1.5; color: var(--color-ink-900); }
+      .r-segment[data-missing] { color: var(--color-ink-600); }
+      .r-action { position: relative; z-index: 1; display: inline-flex; align-items: center; min-height: var(--spacing-touch); font-size: var(--text-small); color: var(--color-ink-900); text-decoration: underline; text-underline-offset: 0.2em; }
+      .r-action:hover { color: var(--color-brand-600); }
+      .r-credit { position: relative; z-index: 1; font-size: var(--text-small); line-height: 1.25rem; color: var(--color-ink-600); overflow-wrap: anywhere; }
+      .r-credit a { display: inline-flex; align-items: center; min-height: var(--spacing-touch); color: inherit; text-decoration: underline; text-underline-offset: 0.2em; }
+      .r-credit a:hover { color: var(--color-brand-600); }
+
+      @media (min-width: 1024px) {
+        .r-page { padding-inline: 2rem; }
+        .r-head { display: grid; grid-template-columns: 3fr 9fr; column-gap: 2rem; padding-block: 2rem 3rem; }
+        .r-head h1 { grid-column: 1 / -1; }
+        .r-intro { grid-column: 2; margin-top: 2rem; }
+        .r-count { grid-column: 2; }
+        .r-layout { display: grid; grid-template-columns: 3fr 9fr; }
+        .r-filter-toggle { display: none; }
+        .r-filters { display: flex; flex-direction: column; padding: 1.5rem 2rem 2rem 0; border-right: 1px solid var(--color-line-soft); }
+        .r-filters h2 { font-size: var(--text-small); color: var(--color-ink-600); font-weight: 400; }
+        .r-fieldset { padding-block: 1rem; border-bottom: 1px solid var(--color-line-soft); }
+        .r-fieldset:last-child { border-bottom: 0; }
+        .r-fieldset legend, .r-fieldset summary { font-size: var(--text-body); font-weight: 600; line-height: 1.5rem; }
+        .r-fieldset summary { display: flex; align-items: center; justify-content: space-between; min-height: var(--spacing-touch); cursor: pointer; list-style: none; }
+        .r-fieldset summary::-webkit-details-marker { display: none; }
+        .r-option { display: flex; align-items: center; gap: 0.5rem; min-height: var(--spacing-touch); font-size: var(--text-small); }
+        .r-option input { flex: none; width: 1.25rem; height: 1.25rem; accent-color: var(--color-ink-900); }
+        .r-option svg { flex: none; width: 1.75rem !important; height: 1.75rem !important; stroke-width: 1.5; }
+        .r-option small { margin-left: auto; font-size: var(--text-small); color: var(--color-ink-600); }
+        .r-range { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+        .r-range label { font-size: var(--text-small); color: var(--color-ink-600); }
+        .r-range input, .r-select { display: block; width: 100%; min-height: var(--spacing-touch); margin-top: 0.25rem; padding-inline: 0.5rem; border: 1px solid var(--color-line); background: var(--color-surface); font-size: var(--text-body); color: var(--color-ink-900); }
+        .r-select { margin-top: 0.5rem; }
+        .r-cells { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; height: 100%; }
+        .r-cell { padding: 1.5rem 2rem 1rem; min-height: 30rem; gap: 1.5rem; }
+        .r-cell:nth-child(odd) { border-right: 1px solid var(--color-line-soft); }
+        .r-body { grid-template-columns: 3fr 2fr; margin-top: auto; gap: 1.5rem; }
+        .c-figure { font-size: 1.75rem; line-height: 2rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="r-page">
+      <p class="r-site">{t("sitio.nombre")}</p>
+      <header class="r-head">
+        <h1>{t("pagina.coches.titulo")}</h1>
+        <p class="r-intro">{t("pagina.coches.entrada")}</p>
+        <p class="r-count">{countLabel(all.length)}</p>
+      </header>
+
+      <main class="r-layout">
+        <button type="button" class="r-filter-toggle">
+          <span>{L.open.replace("{n}", "0")}</span>
+          <span aria-hidden="true">+</span>
+        </button>
+
+        <aside class="r-filters" aria-labelledby="filtros">
+          <h2 id="filtros">{view.title}</h2>
+          <details class="r-fieldset">
+            <summary>{L.brand} <span aria-hidden="true">+</span></summary>
+          </details>
+          <fieldset class="r-fieldset">
+            <legend>{L.segment}</legend>
+            {view.segments.map((o) => (
+              <label class="r-option">
+                <input type="checkbox" name="segmento" value={o.value} />
+                <SegmentSilhouette segment={o.value} />
+                <span>{o.label}</span>
+                <small>{o.count}</small>
+              </label>
+            ))}
+          </fieldset>
+          <fieldset class="r-fieldset">
+            <legend>{L.price}</legend>
+            <div class="r-range">
+              <label>{L.priceFrom}<input type="text" inputmode="numeric" /></label>
+              <label>{L.priceTo}<input type="text" inputmode="numeric" /></label>
+            </div>
+          </fieldset>
+          <fieldset class="r-fieldset">
+            <legend>{L.range}</legend>
+            <select class="r-select" aria-label={L.range}>
+              <option>{L.anyRange}</option>
+              {view.ranges.map((r) => <option>{r.label}</option>)}
+            </select>
+          </fieldset>
+          <fieldset class="r-fieldset">
+            <legend>{L.status}</legend>
+            <label class="r-option"><input type="radio" name="estado" checked /><span>{L.all}</span></label>
+            {view.statuses.map((o) => (
+              <label class="r-option"><input type="radio" name="estado" /><span>{o.label}</span></label>
+            ))}
+          </fieldset>
+        </aside>
+
+        <section aria-labelledby="resultados">
+          <h2 id="resultados" class="sr-only">{t("resultados.titulo")}</h2>
+          <ul class="r-cells">
+            {cells.map(({ card, src, price, range }, i) => (
+              <li class="r-cell">
+                <div class="r-title">
+                  <div>
+                    <p class="r-brand">{card.brand}</p>
+                    <h3><a class="r-link" href={`/marcas/${card.key}/`}>{card.model}</a></h3>
+                  </div>
+                  <span class="r-arrow" aria-hidden="true">→</span>
+                </div>
+                {card.statusLabel && <p class="r-soon" data-status={card.statusKind}>{card.statusLabel}</p>}
+                <div class="r-body">
+                  <div class="c-slot" data-slot={src ? "image" : "silhouette"}>
+                    {src ? (
+                      <Image src={src} alt="" width={640} height={427} widths={[320, 640]} sizes="(min-width: 1024px) 18rem, 45vw" loading={i < 2 ? "eager" : "lazy"} />
+                    ) : (
+                      <SegmentSilhouette segment={card.segment} />
+                    )}
+                  </div>
+                  <dl class="c-figures">
+                    <div>
+                      <dd class="c-figure" data-missing={price ? undefined : ""}>{price ?? t("ficha.porConfirmar")}</dd>
+                      <dt class="r-label">{card.labels.price}</dt>
+                      {card.dealLabel && <dd class="c-deal">{card.dealLabel}</dd>}
+                    </div>
+                    <div>
+                      <dd class="c-figure" data-missing={range ? undefined : ""}>{range ?? t("ficha.porConfirmar")}</dd>
+                      <dt class="r-label">{card.labels.range}</dt>
+                    </div>
+                  </dl>
+                </div>
+                <div class="r-foot">
+                  <p class="r-segment" data-missing={card.hasSegment ? undefined : ""}>
+                    <SegmentSilhouette segment={card.segment} />
+                    <span>{card.segmentLabel}</span>
+                  </p>
+                  {card.compare && (
+                    <a class="r-action" href={card.compare.href}>{card.compare.label}<span class="sr-only"> {card.compare.srLabel}</span></a>
+                  )}
+                </div>
+                {src && card.image?.attribution && (
+                  <p class="r-credit"><a href={card.image.pageUrl}>{t("ficha.imagen.atribucion", { attribution: card.image.attribution })}</a></p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
