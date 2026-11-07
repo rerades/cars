@@ -98,3 +98,17 @@ jobs:
       # With a cache hit the download is skipped; --with-deps still installs the system libraries.
       - run: npx playwright install --with-deps chromium
       - run: pnpm run test:a11y
+      # ADR-0024, point 5: screenshots of the real pages for the Reviewer. They inform, they do not
+      # block (continue-on-error), same as the rest of this job (ADR-0006).
+      - name: Capture pages
+        if: always()
+        continue-on-error: true
+        run: node scripts/design-shot.ts --out ${{ runner.temp }}/capturas / /coches/ /comparar/ /marcas/polestar/polestar-2/
+      - name: Upload captures
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: capturas
+          path: ${{ runner.temp }}/capturas
+          retention-days: 30
