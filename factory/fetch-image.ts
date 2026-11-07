@@ -3,8 +3,9 @@
  * Run by the Researcher: node factory/fetch-image.ts <brand> <slug> <name> <page_url> [file_url]
  *   - Wikimedia Commons: page_url is the File: page; the script asks the API for the 1280 px thumbnail.
  *   - Press room: page_url is the terms page and file_url the image itself.
- * On success it prints one JSON line (file, source_url, page_url, width, height, bytes).
- * On failure it prints the cause, exits 1 and leaves no file. It reads no license and writes no YAML.
+ * On success it prints one JSON line (file, source_url, page_url, width, height, bytes). On Commons it
+ * also prints the license and artist the File: page declares, so the read shows up in the trace.
+ * On failure it prints the cause, exits 1 and leaves no file. It writes no YAML.
  * The write guard hook does not see what this process writes: the path checks below are the only barrier.
  */
 import { mkdirSync, renameSync, rmSync, writeFileSync } from "node:fs";
@@ -57,17 +58,19 @@ async function get(url: string, fetchImpl: typeof fetch): Promise<Response> {
   return res;
 }
 
-/** The thumbnail of a Commons File: page at MAX_WIDTH, or the original if it is narrower. */
-async function commonsUrl(pageUrl: string, fetchImpl: typeof fetch): Promise<string> {
+/** The thumbnail of a Commons File: page at MAX_WIDTH (or the original if narrower), with its license and artist. */
+async function commonsFile(pageUrl: string, fetchImpl: typeof fetch): Promise<{ url: string; license: string | null; artist: string | null }> {
   const title = decodeURIComponent(new URL(pageUrl).pathname.replace(/^\/wiki\//, ""));
   const api = "https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo"
-    + `&iiprop=url|mime|size&iiurlwidth=${MAX_WIDTH}&titles=${encodeURIComponent(title)}`;
+    + `&iiprop=url|mime|size|extmetadata&iiextmetadatafilter=LicenseShortName|Artist&iiurlwidth=${MAX_WIDTH}&titles=${encodeURIComponent(title)}`;
   const data: any = await (await get(api, fetchImpl)).json();
   const info = Object.values<any>(data?.query?.pages ?? {})[0]?.imageinfo?.[0];
   if (!info?.url) throw new Error(`Commons has no file for ${title}`);
   const url = new URL(info.width <= MAX_WIDTH ? info.url : info.thumburl ?? info.url);
   for (const k of [...url.searchParams.keys()]) if (k.startsWith("utm_")) url.searchParams.delete(k); // tracking only
-  return url.toString();
+  const meta = info.extmetadata ?? {};
+  const text = (v?: string) => v?.replace(/<[^>]+>/g, "").trim() || null; // Artist comes as HTML
+  return { url: url.toString(), license: text(meta.LicenseShortName?.value), artist: text(meta.Artist?.value) };
 }
 
 export interface FetchArgs {
@@ -86,7 +89,8 @@ export async function fetchImage(a: FetchArgs, fetchImpl: typeof fetch = fetch) 
   if (new URL(a.pageUrl).protocol !== "https:") throw new Error("page_url must be https");
   const commons = new URL(a.pageUrl).hostname === "commons.wikimedia.org";
   if (!commons && !a.fileUrl) throw new Error("outside Commons, pass the file URL too");
-  const sourceUrl = commons ? await commonsUrl(a.pageUrl, fetchImpl) : a.fileUrl!;
+  const found = commons ? await commonsFile(a.pageUrl, fetchImpl) : null;
+  const sourceUrl = found?.url ?? a.fileUrl!;
   if (new URL(sourceUrl).protocol !== "https:") throw new Error("file URL must be https");
 
   const buf = Buffer.from(await (await get(sourceUrl, fetchImpl)).arrayBuffer());
@@ -105,7 +109,8 @@ export async function fetchImage(a: FetchArgs, fetchImpl: typeof fetch = fetch) 
   } finally {
     rmSync(tmp, { force: true });
   }
-  return { file, source_url: sourceUrl, page_url: a.pageUrl, width: info.width, height: info.height, bytes: buf.length };
+  return { file, source_url: sourceUrl, page_url: a.pageUrl, width: info.width, height: info.height, bytes: buf.length,
+    ...(found && { license: found.license, artist: found.artist }) };
 }
 
 if (import.meta.main) {
