@@ -1,0 +1,47 @@
+# Researcher — Audi e-tron GT. Fuentes: idae-es (T2), autonomiacocheselectricos-es (T3). Consultado 2026-11-07. Sin precio: audi.es da 403 (no hay T1 legible).
+brand: audi
+brand_name: Audi
+model: e-tron GT
+status: {value: on_sale, note: "el medio (6/11/2026) lo incluye entre los siete eléctricos de la gama de Audi en España, con versiones quattro, S, RS y RS performance", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: null
+needs_review: false
+specs:
+  dc_max_kw: {value: 320, note: "el medio: «Toda la gama monta batería de 105 kWh y carga a un máximo de 320 kW»", source_id: autonomiacocheselectricos-es, url: "https://autonomiacocheselectricos.es/articulos/gama-electrica-audi-espana-que-modelo-elegir/", retrieved: 2026-11-07, tier: T3}
+versions:
+  - name: e-tron GT quattro
+    battery_kwh: {value: 105, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611538 (e-tron GT quattro MY27; mismo valor en MY26, id 606934)"}
+    wltp_km: {value: 601, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611538; el medio da 622 km"}
+    power_kw: {value: 370, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611538; el medio da 370 kW en marcha y hasta 430 kW con control de salida"}
+    drivetrain: {value: awd, note: "el nombre dice «quattro»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: S e-tron GT
+    battery_kwh: {value: 105, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611543 (S e-tron GT MY27; mismo valor en MY26, id 611544)"}
+    wltp_km: {value: 604, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611543; el medio da 609 km"}
+    power_kw: {value: 435, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611543"}
+    price: null
+  - name: RS e-tron GT
+    battery_kwh: {value: 105, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611539 (RS e-tron GT MY27; mismo valor en MY26, id 611541)"}
+    wltp_km: {value: 593, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611539; el medio da 598 km"}
+    power_kw: {value: 570, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611539"}
+    price: null
+  - name: RS e-tron GT performance
+    battery_kwh: {value: 105, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611540 (RS e-tron GT performance MY27; mismo valor en MY26, id 611542)"}
+    wltp_km: {value: 583, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611540; el medio da 592 km"}
+    power_kw: {value: 620, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 611540"}
+    price: null
+images:
+  - file: data/images/audi/e-tron-gt/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Audi_e-tron_GT_DSC_7343.jpg/1280px-Audi_e-tron_GT_DSC_7343.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Audi_e-tron_GT_DSC_7343.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0"
+open_questions:
+  - "Precio: audi.es da HTTP 403 a la lectura automática (protección de acceso, no se evita) y no hay otra fuente T1; todas las versiones con price null."
+  - "launch: ninguna fuente leída da la fecha desde la que se puede pedir la gama actual en España; null."
+  - "segment: el medio lo llama «Gran turismo», que no es un término de RF-11 ni está en la tabla; null."
+  - "Las autonomías del medio (622, 609, 598, 592 km) son mayores que las del IDAE; se usa el IDAE (T2). El IDAE no publica tracción: solo la de la versión quattro sale del nombre; en S, RS y RS performance no se ha leído de ninguna fuente."
+  - "El IDAE tiene también filas MY25 con 97 kWh (e-tron GT Launch edition, S, RS, RS performance), de una batería anterior; no se usan."
+  - "Versiones y estado (2026-11-07): sin T1 legible que confirme qué versiones se venden hoy; el estado sale de un medio T3."
