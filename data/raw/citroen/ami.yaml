@@ -1,0 +1,47 @@
+# Researcher — Citroën Ami. Fuentes: idae-es (T2), motor-es (T3). Descubrimiento 2026-11-07. Sin precio: citroen.es no está registrada y no hay otra fuente T1.
+brand: citroen
+brand_name: Citroën
+model: Ami
+status: {value: on_sale, note: "gama (2026) en motor.es: AMI, Dark Side, Outdoor, Rip Curl Sunrise, Rip Curl Sunset y Buggy", source_id: motor-es, url: "https://www.motor.es/citroen/ami/", retrieved: 2026-11-07, tier: T3}
+launch: null
+needs_review: false
+versions:
+  - name: Ami
+    battery_kwh: {value: 5.4, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 613846"}
+    wltp_km: {value: 75, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 613846"}
+    power_kw: {value: 6, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 613846"}
+    price: null
+  - name: Outdoor
+    battery_kwh: {value: 5.4, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614458"}
+    wltp_km: {value: 75, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614458"}
+    power_kw: {value: 6, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 614458"}
+    price: null
+  - name: Rip Curl Sunrise
+    battery_kwh: {value: 5.4, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 613847"}
+    wltp_km: {value: 75, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 613847"}
+    power_kw: {value: 6, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 613847"}
+    price: null
+  - name: Rip Curl Sunset
+    battery_kwh: {value: 5.4, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 613848"}
+    wltp_km: {value: 75, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 613848"}
+    power_kw: {value: 6, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 613848"}
+    price: null
+  - name: Buggy
+    battery_kwh: {value: 5.4, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 579719"}
+    wltp_km: {value: 75, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 579719"}
+    power_kw: {value: 6, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 579719"}
+    price: null
+images:
+  - file: data/images/citroen/ami/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Citro%C3%ABn_Ami%2C_Par%C3%ADs%2C_Francia%2C_2022-10-30%2C_DD_03.jpg/1280px-Citro%C3%ABn_Ami%2C_Par%C3%ADs%2C_Francia%2C_2022-10-30%2C_DD_03.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Citroën_Ami,_París,_Francia,_2022-10-30,_DD_03.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Diego Delso, CC BY-SA 4.0"
+open_questions:
+  - "Precio: citroen.es no está registrada como fuente; todas las versiones con price null. motor.es publica precios con descuento, que no valen."
+  - "El Ami es un cuadriciclo ligero, no un turismo; las cifras del IDAE (75 km, 6 kW) son las mismas para todas sus filas. Decidir si entra en el catálogo."
+  - "Segmento: ninguna fuente leída lo clasifica; sin segment."
+  - "launch: ninguna fuente leída da la fecha de inicio de venta en España; sin dato."
+  - "Versión Dark Side (motor.es, 2025): sin fila en el IDAE; no se ha escrito."
