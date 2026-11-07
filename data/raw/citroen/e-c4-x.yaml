@@ -1,0 +1,47 @@
+# Researcher — Citroën ë-C4 X. Fuentes: idae-es (T2), motor-es (T3). Descubrimiento 2026-11-07. Sin precio: citroen.es no está registrada (responde 403 según los ficheros hermanos) y no hay otra fuente T1.
+brand: citroen
+brand_name: Citroën
+model: ë-C4 X
+status: {value: on_sale, note: "gama (2027) en motor.es: You 100 kW, Plus 100 kW, Plus 115 kW, Business Ed 115 kW, Max 115 kW y Prime 115 kW", source_id: motor-es, url: "https://www.motor.es/citroen/e-c4-x/", retrieved: 2026-11-07, tier: T3}
+launch: null
+needs_review: false
+versions:
+  - name: You 100 kW
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 582992 («You»); id 604179 («YOU», 50 kWh) también"}
+    wltp_km: {value: 357, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 582992; menor de 2 homologaciones sin fecha: 357 km (id 582992) y 360 km (id 604179). El medio publica 352 km"}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 582992; id 604179 también 100 kW"}
+    price: null
+  - name: Plus 100 kW
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604173"}
+    wltp_km: {value: 352, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604173; menor de 2 homologaciones sin fecha: 352 km (id 604173) y 357 km (id 582995). El medio publica 360 km"}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604173; id 582995 también 100 kW"}
+    price: null
+  - name: Plus 115 kW
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604177"}
+    wltp_km: {value: 427, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604177, que coincide con los 427 km del medio; la homologación id 582997 da 420 km"}
+    power_kw: {value: 115, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604177; id 582997 también 115 kW"}
+    price: null
+  - name: Business Edition 115 kW
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604176; la versión figura como «Business Ed» en motor.es"}
+    wltp_km: {value: 427, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604176, única homologación; el medio publica 425 km"}
+    power_kw: {value: 115, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604176"}
+    price: null
+  - name: Max 115 kW
+    battery_kwh: {value: 54, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604178"}
+    wltp_km: {value: 424, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604178, que coincide con los 424 km del medio; la homologación id 583002 da 420 km"}
+    power_kw: {value: 115, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 604178; id 583002 también 115 kW"}
+    price: null
+images:
+  - file: data/images/citroen/e-c4-x/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Citro%C3%ABn_e-C4_X_1X7A7016.jpg/1280px-Citro%C3%ABn_e-C4_X_1X7A7016.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Citroën_e-C4_X_1X7A7016.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0"
+open_questions:
+  - "Precio: citroen.es no está registrada como fuente y los ficheros hermanos anotan que responde 403; todas las versiones con price null. motor.es (T3) publica precios con descuento, que no valen."
+  - "Segmento: ninguna fuente leída lo clasifica; sin segment."
+  - "launch: ninguna fuente leída da la fecha de inicio de venta en España; sin dato."
+  - "Versión Prime 115 kW (motor.es, gama 2027): el IDAE no tiene una fila con ese nombre y la lectura de motor.es no trae sus datos; no se ha escrito."
+  - "Autonomía You/Plus 100 kW: el medio da 352 y 360 km, el IDAE 357/360 y 352; los nombres de fila del IDAE y del medio no casan con claridad. Prevalece el IDAE (T2), con la regla de menor wltp_km al no haber fecha."
