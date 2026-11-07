@@ -1,0 +1,152 @@
+/* Proposal A, "Pantalla" (docs/design/propuesta-a.md). Tokens and common photo treatment of both prototypes. */
+@font-face {
+  font-family: "Manrope";
+  src: url("./fonts/manrope.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+:root {
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --color-ink-950: #0b1217;
+  --color-ink-900: #0b1217;
+  --color-ink-600: #4a5660;
+  --color-surface-muted: #eef1ee;
+  --color-line-soft: #cdd4d0;
+  --color-brand-600: #0a5c6e;
+  --color-brand-800: #07414e;
+  --color-on-dark: #ffffff;
+  --color-on-dark-muted: #b9c4ca;
+  --color-signal: #c6f24e;
+  --color-soon-bg: #c6f24e;
+  --color-soon-fg: #0b1217;
+  --scrim-rgb: 11 18 23;
+  --text-display: clamp(3.25rem, 9.5vw, 7.5rem);
+  --text-screen: clamp(2.75rem, 6.2vw, 5rem);
+  --text-figure: clamp(2.25rem, 5vw, 4rem);
+  --menu-clearance: 6rem;
+  --radius-pill: 999px;
+}
+
+html {
+  scroll-behavior: auto;
+  /* RF-17: neither an anchor target nor a focused element ends up under the floating menu. */
+  scroll-padding-bottom: var(--menu-clearance);
+  scroll-padding-top: 1rem;
+}
+
+body {
+  background: var(--color-ink-950);
+  font-family: var(--font-sans);
+}
+
+/* A dark band is a scope of tokens: components keep their classes and read the dark values. */
+.band-dark {
+  --color-ink-900: var(--color-on-dark);
+  --color-ink-600: var(--color-on-dark-muted);
+  --color-brand-600: var(--color-on-dark);
+  --color-brand-800: var(--color-signal);
+  --color-line-soft: #33404a;
+  background: var(--color-ink-950);
+  color: var(--color-on-dark);
+}
+
+.band-light {
+  background: var(--color-surface-muted);
+  color: var(--color-ink-900);
+}
+
+.band-white {
+  background: var(--color-surface);
+  color: var(--color-ink-900);
+}
+
+.wrap {
+  margin-inline: auto;
+  max-width: var(--container-page);
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .wrap {
+    padding-inline: 2.5rem;
+  }
+}
+
+.wordmark {
+  align-items: center;
+  display: inline-flex;
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  min-height: var(--spacing-touch);
+}
+
+/* The common treatment that evens out the photos: desaturated, dimmed, the same tone over all of them. */
+.photo {
+  background: var(--color-ink-950);
+  overflow: hidden;
+  position: absolute;
+}
+
+.photo img {
+  display: block;
+  filter: saturate(0.72) contrast(1.06) brightness(0.86);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Cold tone, then a vignette that swallows the street or the fair around the car. */
+.photo::before,
+.photo::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.photo::before {
+  background: #1d4a5c;
+  mix-blend-mode: color;
+  opacity: 0.32;
+}
+
+.photo::after {
+  background:
+    radial-gradient(ellipse 72% 78% at 50% 52%, transparent 45%, rgb(var(--scrim-rgb) / 0.62) 100%),
+    var(--scrim, none);
+}
+
+/* Names break between words, never at the hyphen of "E-Tech"; a word too long still fits. */
+.word {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.figure-value {
+  font-size: var(--text-figure);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+/* "Por confirmar" takes the place of the number at a smaller size: same cell, same label, no hole. */
+.figure-value[data-missing] {
+  color: var(--color-on-dark-muted);
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: calc(var(--text-figure) * 1.05);
+}
+
+.band-light .figure-value[data-missing] {
+  color: var(--color-ink-600);
+}
+
+.figure-label {
+  color: var(--color-ink-600);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+  margin-top: 0.375rem;
+}
