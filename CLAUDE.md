@@ -69,6 +69,8 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
   `factory/datasets/reviewer/`). Falta confirmar los casos y crear `.secrets/anthropic-evals.env`.
 - Hecho también: el verificador de datos de ADR-0020 (`factory/verify-data.ts`), última regla de
   `run.ts --merge` para las PR de `data/raw/`.
-- Hecho también: cómo se trabaja el diseño visual (ADR-0024). Falta elegir la dirección visual (la elige una persona).
+- Hecho también: cómo se trabaja el diseño visual (ADR-0024) y la dirección visual elegida (2026-11-07: A «Pantalla»
+  con la tipografía y las versiones de B, `docs/design/direccion.md`). Falta que el Diseñador las combine
+  (`direccion-visual-final`, en la cola) y que el Desarrollador lo lleve a `web/src/`.
 - Pendiente: la migración de las imágenes a
   `data/images/` (en la cola, Researcher).

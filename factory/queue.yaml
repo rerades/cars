@@ -3818,3 +3818,14 @@
     factory/fetch-idae.ts), y docs/architecture/data-model.md; las fechas, con la regla «Una fecha
     solo cambia con una lectura que llegue a la PR». Quita de open_questions lo que resuelvas y deja
     el resto con lo que hayas leído. No cambies precios, imágenes, segment ni needs_review. Bitácora."
+# Precio «financiando» del BYD Atto 2 (revisión de #977, 2026-11-07).
+- id: precio-byd-atto-2
+  agent: researcher
+  task: "Revisa el precio de data/raw/byd/atto-2.yaml con las reglas de precio de
+    .claude/agents/researcher.md y docs/architecture/data-model.md. Hoy guarda un price_kind: financed
+    de https://www.byd.com/es-es/promociones/atto-2-promocion, cuya misma página publica un «Precio
+    Recomendado Contado». Lee esa página con fetch-page.ts y decide con esas reglas qué precio vale.
+    Lo específico de BYD: en #977 la nota (2) de https://www.byd.com/es-es/promociones cuenta en los
+    descuentos un adelanto de 2.250 € del Plan Auto+, y las ayudas públicas nunca se restan; si no
+    puedes confirmar que un precio no la resta, no lo guardes y anótalo en open_questions. Cada
+    price_terms, literal y seguido en la página, sin juntar notas. No toques otros modelos. Bitácora."
