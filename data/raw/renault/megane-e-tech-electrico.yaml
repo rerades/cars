@@ -6,12 +6,13 @@ status: {value: on_sale, source_id: renault-es, url: "https://www.renault.es/ele
 segment: {value: berlina, note: "la web lo titula «La berlina eléctrica»", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-10-10, tier: T1}
 needs_review: false
 specs:
-  wltp_max_km: {value: 500, note: "«autonomía ampliada hasta 500 km», WLTP, versión techno", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
-  dc_max_kw: {value: 165, note: "«La potencia máxima en pico es de 165 kW»", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
+  wltp_max_km: {value: 500, note: "«autonomía ampliada hasta 500 km», WLTP, versión techno", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-06, tier: T1}
+  dc_max_kw: {value: 165, note: "«La potencia máxima en pico es de 165 kW»", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-06, tier: T1}
 versions:
   - name: techno 220 CV autonomía confort
-    battery_kwh: {value: 67, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
-    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
+    battery_kwh: {value: 67, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-06, tier: T1}
+    wltp_km: {value: 500, note: "«hasta 500 km» WLTP «en versión techno»", source_id: renault-es, url: "https://www.renault.es/electricos/megane/motores.html", retrieved: 2026-11-06, tier: T1}
+    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-06, tier: T1}
     price:
       value: 28666
       unit: EUR
@@ -24,8 +25,8 @@ versions:
       retrieved: 2026-10-10
       tier: T1
   - name: esprit Alpine 220 CV autonomía confort
-    battery_kwh: {value: 67, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
-    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-01, tier: T1}
+    battery_kwh: {value: 67, basis: unknown, source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-06, tier: T1}
+    power_kw: {value: 160, note: "publicado: 160 kW (220 CV)", source_id: renault-es, url: "https://www.renault.es/electricos/megane.html", retrieved: 2026-11-06, tier: T1}
     price:
       value: 31366
       unit: EUR
@@ -48,8 +49,8 @@ images:
 open_questions:
   - "reviews: las pruebas de diariomotor-es y motorpasion-es son del Mégane de 2022 (40 o 60 kWh); la ficha es la versión renovada de 67 kWh y 220 CV. No se enlazan."
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
-  - "Autonomía WLTP por versión: solo consta 500 km para techno; esprit Alpine no se ha leído, así que solo se publica specs.wltp_max_km."
+  - "Autonomía WLTP de esprit Alpine: la web (2026-11-06) solo da 500 km «en versión techno»; para esprit Alpine (llantas de 20'') no la publica, no se asigna."
   - "No se ha encontrado un PVP vigente sin promociones: los precios son «desde» con «este importe incluye promociones»."
   - "Imágenes: no se ha buscado en Commons para este modelo (límite de la ejecución); la web pondrá silueta."
-  - "Carga CA y tracción no publicadas en la web leída."
+  - "Carga CA y tracción: motores.html (2026-11-06) cita un cargador de 22 kW «opcional» (no se guarda como ac_max_kw: no es de serie ni se sabe a qué versión aplica); tracción no publicada."
   - "Refresco 2026-11-01: fetch-page.ts no encuentra «28.666» (techno) en la página del Megane ni la palabra «berlina» (segment); ese precio y el segment se quedan con su fecha 2026-10-10."
