@@ -47,9 +47,9 @@ reviews:
     retrieved: 2026-11-01
     tier: T3
 open_questions:
-  - "Versión techno renombrada de «techno 220 CV gran autonomía» a «techno 220 CV autonomía confort» porque scenic.html (2026-11-06) la titula así; su precio sigue null."
+  - "Versión techno renombrada de «techno 220 CV gran autonomía» a «techno 220 CV autonomía confort» porque scenic.html (2026-11-06) la titula así; su precio sigue null. La versión de 67 kWh que la web anunciaba para el otoño de 2026 ya se publica en motores.html (2026-11-06) como batería de autonomía confort, con 467 km WLTP: por eso entra como versión a la venta."
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Sin PVP sin promociones: la web muestra «desde 37.666 €» (esprit Alpine) con «este importe incluye promociones». No se ha encontrado un PVP vigente sin promociones."
-  - "techno 220 CV gran autonomía: el 2026-11-01 fetch-page.ts sigue sin encontrar «35.326» en la página (solo aparece «techno 160 kW (220 CV) autonomía confort», sin precio); precio a null."
+  - "techno 220 CV autonomía confort: el 2026-11-01 fetch-page.ts sigue sin encontrar «35.326» en la página (solo aparece «techno 160 kW (220 CV) autonomía confort», sin precio); precio a null."
   - "Carga CC/CA máxima y tracción no publicadas en la web leída (motores.html solo cita un punto de 150 kW como ejemplo de recarga; ficha-tecnica.html da 404)."
   - "Basis de batería: la web no dice si 67 y 89 kWh son útiles o brutos (basis: unknown)."
