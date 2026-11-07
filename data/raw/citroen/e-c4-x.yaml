@@ -4,7 +4,7 @@ brand_name: Citroën
 model: ë-C4 X
 status: {value: on_sale, note: "gama (2027) en motor.es: You 100 kW, Plus 100 kW, Plus 115 kW, Business Ed 115 kW, Max 115 kW y Prime 115 kW", source_id: motor-es, url: "https://www.motor.es/citroen/e-c4-x/", retrieved: 2026-11-07, tier: T3}
 launch: null
-needs_review: false
+needs_review: true
 versions:
   - name: You 100 kW
     battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2, note: "IDAE id 582992 («You»); id 604179 («YOU», 50 kWh) también"}
