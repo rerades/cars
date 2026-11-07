@@ -5,7 +5,7 @@ status: ready
 priority: P0
 depends_on: []
 epic: "#32"
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 
 # PRD-001 — Catálogo de modelos
@@ -54,6 +54,7 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - **RF-12:** Un modelo sin segmento, autonomía o tracción se muestra igual, con "por confirmar" en el campo que falta. Si el visitante filtra por ese campo, el modelo no aparece, porque no se puede afirmar que cumpla el filtro.
 - **RF-13:** Un modelo marcado `needs_review: true` no se publica: no tiene tarjeta, no cuenta en los contadores ni aparece en ninguna página pregenerada hasta que una persona lo revise y quite la marca (ADR-0001, regla 3).
 - **RF-14:** `/coches` enlaza a los rankings de PRD-005 con un enlace de texto, visible sin JavaScript. Es la entrada a los rankings desde la portada (portada → `/coches` → ranking).
+- **RF-15:** La imagen de RF-8 se muestra **retocada**: el coche recortado sobre un fondo liso, el mismo en todas las tarjetas, sin personas, stands ni otros coches alrededor, y con la matrícula tapada. El coche no se modifica: ni su forma, ni su color, ni sus reflejos. Lo que no se puede arreglar sin tocar el coche (pegatinas, rotulación, un coche cortado o tapado) hace que la foto se rechace y se busque otra. Si la licencia lo exige, la atribución dice que la foto está modificada. Qué foto vale y cómo se retoca lo fijan [`fotos-modelos.md`](../../design/fotos-modelos.md) y ADR-0025.
 
 ## 5. Requisitos no funcionales
 - **RNF-1:** Renderizado en servidor o estático para SEO.
@@ -91,6 +92,8 @@ Quien se informa sobre coches eléctricos necesita ver en un solo sitio **qué m
 - [ ] **CA-19** (→ RF-14): Dado el HTML construido de `/coches`, cuando lo leo sin ejecutar JavaScript, entonces contiene un enlace a cada ranking publicado de PRD-005, y cada uno lleva a una página que existe en el build.
 - [ ] **CA-20** (→ RF-11): Dado un modelo con `segment` de `tier: E` y valor `suv_compacto`, cuando abro `/coches`, entonces su tarjeta muestra «SUV compacto» igual que la de un modelo con segmento de fuente, sin marca ni etiqueta de clasificación editorial; con el filtro de segmento «SUV compacto» aparece, y figura en `/segmentos/suv-compacto`.
 - [ ] **CA-21** (→ RF-11): Dado un `segment` con `tier: E`, cuando el validador de datos lo comprueba, entonces solo es válido si el campo es `segment`, tiene `note` y su fecha; y dada una ejecución de un agente que añada, cambie o borre un `segment` de `tier: E`, entonces el eval la rechaza. Dado un modelo con un `E` y una fuente T1–T3 que lo clasifica según la regla y la tabla, cuando el Researcher lo refresca, entonces el valor pasa a ser el de la fuente.
+- [ ] **CA-22** (→ RF-15): Dada una imagen retocada, cuando se compara con la foto original reducida al mismo tamaño, entonces todos los píxeles del coche son iguales salvo los de la matrícula tapada, y fuera del coche no queda nada de la foto original.
+- [ ] **CA-23** (→ RF-15): Dada una imagen retocada de una foto con licencia que exige atribución, cuando abro `/coches`, entonces el texto de la atribución de su tarjeta dice que la foto está modificada.
 - [ ] **CA-7** (→ RNF-5): Al cargar cualquier página del catálogo no se crea ninguna cookie ni se escribe nada en localStorage.
 
 ## 8. Decisiones y preguntas abiertas
@@ -123,6 +126,9 @@ Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsa
 
 ### Resueltas (2026-10-13)
 - **Entrada a los rankings (RF-14, CA-19):** `/coches` enlaza a los rankings de PRD-005, decidido por el responsable del producto al pasar PRD-005 a `ready`. Alternativa descartada: enlazarlos desde la portada, que cambiaría PRD-004.
+
+### Resueltas (2026-11-07)
+- **Fotos retocadas (RF-15, CA-22, CA-23):** el responsable del producto decide mostrar el coche recortado sobre un fondo liso y con la matrícula tapada, después de ver una prueba con cinco modelos el 2026-11-06. Motivo: 140 de los 145 modelos tienen foto de Commons, pero los fondos (aparcamientos, ferias, gente, otros coches) dan una estética poco cuidada, y la dirección visual que se busca pone el coche sobre un fondo pálido. Retoca un agente nuevo, el Retocador, con criterio escrito y un script que no toca el coche (ADR-0025). Alternativas descartadas: bancos de imágenes gratuitos (Unsplash, Pexels, Pixabay), porque sus licencias limitan las fotos con marcas reconocibles, no están entre las de RF-8 y la API de Unsplash obliga a enlazar sus imágenes, contra RNF-5; scrapear ev-database.org, que lo prohíbe por escrito; difuminar el fondo, que deja un halo y parece un filtro; y la IA generativa para quitar brillos o pintar lo que falta, porque inventa píxeles del coche (ADR-0001, regla 7).
 
 ### Abiertas
 - ~~**¿Qué hacer con los modelos sin segmento? (RF-1, RF-2, RF-11, RF-12; PRD-002, PRD-005)**~~ Abierta y resuelta el 2026-10-26 por el responsable: **A y B ya, y C a una ADR**. **Actualización 2026-10-27/28: C se adopta** con las condiciones de ADR-0021 (ver la alternativa C tachada más abajo, RF-11, CA-20 y CA-21). A: la regla se aplica igual en todas las fichas (con T3 vale lo mismo; se reintentan las fuentes con 403). B: tabla cerrada de equivalencias en `data-model.md` (RF-11). C: la clasificación editorial de lo que siga sin segmento la estudia una ADR antes de decidirse, porque choca con ADR-0001. Además, un modelo sin segmento se publica con «por confirmar» (RF-12); se corrige `data-model.md`, que lo llamaba «no publicable». El análisis que llevó a la decisión:
@@ -160,3 +166,4 @@ Preguntas abiertas de ADR-0008 que tocaban el alcance, decididas por el responsa
 | 2026-10-26 | Nueva pregunta abierta: 104 de 145 fichas sin segmento y tres alternativas (sección 8). No cambia RF, CA ni la regla | Claude |
 | 2026-10-26 | Resuelta la pregunta de los modelos sin segmento: A y B (tabla cerrada de equivalencias en `data-model.md`, RF-11) y C a una ADR. Un modelo sin segmento se publica con «por confirmar» (RF-12). Sin cambios en CA | responsable + Claude |
 | 2026-10-28 | Enmienda por ADR-0021 (aceptada el 2026-10-27): RF-11 admite el segmento editorial (`tier: E`) cuando ninguna fuente lo clasifica tras la regla y la tabla; la tarjeta no lo marca; lo asigna cualquiera con permiso de fusión; criterio común en `data-model.md`. Alternativa C de la sección 8 tachada y adoptada. Añadidos CA-20 y CA-21 | responsable + Claude |
+| 2026-11-07 | Fotos retocadas: coche recortado sobre fondo liso y matrícula tapada, sin tocar el coche (ADR-0025, aceptada el 2026-11-07). Añadidos RF-15, CA-22 y CA-23 | responsable + Claude |
