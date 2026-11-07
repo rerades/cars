@@ -1,0 +1,332 @@
+---
+/**
+ * Proposal B, "Cifra": model page (docs/design/propuesta-b.md, PRD-002 RF-17, RF-18). Figures first, in
+ * blocks; the photo is one more block. Versions are rows with the same figure pattern. No JS: the
+ * current item of the bottom menu comes from :target.
+ */
+import "../src/styles/global.css";
+import "./propuesta-b.css";
+import ModelFigure from "../src/components/ModelFigure.astro";
+import SegmentSilhouette from "../src/components/SegmentSilhouette.astro";
+import SourceDate from "../src/components/SourceDate.astro";
+import SourceMark from "../src/components/SourceMark.astro";
+import VersionField from "../src/components/VersionField.astro";
+import Cifra from "./b/Cifra.astro";
+import { cardView } from "../src/lib/card.ts";
+import { loadModels, type Sourced } from "../src/lib/data.ts";
+import { formatDecimal, formatEur, formatNumber } from "../src/lib/format.ts";
+import { t } from "../src/lib/i18n.ts";
+import { groupNotes, noteLine } from "../src/lib/notes.ts";
+import { versionFields } from "../src/lib/version-fields.ts";
+import { sortVersions } from "../src/lib/versions.ts";
+
+// Real model that tests the design: bad photo, offer price, versions with gaps.
+const model = loadModels().models.find((m) => m.file === "cupra/raval.yaml")!;
+const card = cardView(model);
+const versions = sortVersions(model.versions);
+const financed = versions.filter((v) => v.price?.price_kind === "financed");
+const specs = model.specs;
+
+// Highest figure among the versions, else the model-wide spec. The same datum gives value and source.
+const top = (pick: (v: (typeof versions)[number]) => Sourced<number> | null | undefined) =>
+  versions.map(pick).filter((d) => d != null).sort((a, b) => b!.value - a!.value)[0] ?? null;
+const power = top((v) => v.power_kw) ?? specs.power_max_kw ?? null;
+const dc = top((v) => v.dc_max_kw) ?? specs.dc_max_kw ?? null;
+const range = model.max_range_km;
+const price = model.price_from;
+
+const modelRows = [
+  specs.dc_max_kw && { key: "dc", label: t("ficha.modelo.cargaCc"), text: t("ficha.unidad.kw", { n: formatDecimal(specs.dc_max_kw.value) }), datum: specs.dc_max_kw },
+].filter((r) => !!r) as { key: string; label: string; text: string; datum: Sourced }[];
+
+const { notes, numberOf } = groupNotes([
+  ...(model.segment ? [model.segment] : []),
+  ...(range ? [range] : []),
+  ...(power ? [power] : []),
+  ...(dc ? [dc] : []),
+  ...versions.flatMap((v) => versionFields(v).map((f) => f.datum)),
+  ...modelRows.map((r) => r.datum),
+]);
+const markOf = (s: Sourced) => ({ n: numberOf(s), unofficial: s.tier !== "T1" });
+const heading = t("ficha.titulo", { marca: card.brand, modelo: card.model });
+const main = model.images[0];
+
+const sections = [
+  { id: "cifras", label: "Cifras" },
+  { id: "versiones", label: t("ficha.versiones.titulo") },
+  { id: "datos", label: "Datos" },
+  { id: "fuentes", label: t("ficha.fuentes.titulo") },
+];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t("pagina.tituloDocumento", { titulo: heading, sitio: t("sitio.nombre") })}</title>
+    <style is:global>
+      html { scroll-padding-bottom: 6rem; }
+      body { padding-bottom: 6rem; }
+      .ruta { display: flex; flex-wrap: wrap; align-items: center; font-size: var(--text-small); color: var(--color-ink-600); }
+      .ruta li:not(:last-child)::after { content: "›" / ""; margin-inline: 0.5rem; }
+      .ruta li { display: flex; align-items: center; }
+
+      .marca-modelo { font-size: var(--text-small); }
+      .cabecera-ficha { display: grid; gap: 0.75rem; padding-block: 0.25rem 1.25rem; }
+      .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.5rem; }
+      .meta dl, .meta dd { display: inline; }
+      .meta dt { display: inline; color: var(--color-ink-600); margin-right: 0.375rem; }
+
+      .bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+      .bento dl { display: contents; }
+      .bento__ancho { grid-column: 1 / -1; }
+      .bento__foto { grid-column: 1 / -1; min-width: 0; }
+      .bento__foto figure { gap: 0.25rem; }
+      .bento__foto .aspect-video { border-radius: var(--radius-block); }
+      .bento__precio-detalle { display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+
+      .apartado { margin-top: 3rem; scroll-margin-top: 1rem; }
+      .apartado__titulo { font-size: clamp(2rem, 4.4vw, 3.5rem); }
+      .apartado__entrada { margin-top: 0.5rem; max-width: var(--container-prose); font-size: var(--text-small); color: var(--color-ink-600); }
+
+      .versiones { display: flex; flex-direction: column; margin-top: 1.25rem; border-top: 2px solid var(--color-ink-900); }
+      .version { display: grid; gap: 1.25rem; padding-block: 1.25rem; border-bottom: 1px solid var(--color-line-soft); }
+      .version__nombre { font-size: 1.25rem; }
+      .version__principales { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+      /* Secondary fields are a plain label/value list: only the two main figures compete for attention. */
+      .version__resto { display: flex; flex-direction: column; }
+      .version__resto .cifra { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 1rem; padding-block: 0.375rem; border-top: 1px solid var(--color-line-soft); }
+      .version__resto .cifra:first-child { border-top: 0; padding-top: 0; }
+      .version__resto .cifra dt { order: 1; line-height: 1.5rem; }
+      .version__resto .cifra dd { order: 2; }
+
+      .datos { display: grid; gap: 1.5rem; margin-top: 1.25rem; }
+      .fuentes { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; font-size: var(--text-small); line-height: var(--text-small--line-height); }
+      .condiciones { margin-top: 2rem; max-width: var(--container-prose); font-size: var(--text-small); line-height: var(--text-small--line-height); }
+      .condiciones h3 { font-size: var(--text-group); font-weight: 600; margin-bottom: 0.5rem; }
+
+      /* Bottom menu (RF-17): floating pill, anchors only. Without JS it marks the section reached by :target. */
+      .menu {
+        position: fixed;
+        z-index: 20;
+        left: 50%;
+        bottom: 1rem;
+        transform: translateX(-50%);
+        max-width: calc(100vw - 1.5rem);
+        overflow-x: auto;
+        border-radius: 9999px;
+        background: var(--color-ink-900);
+        padding: 0.25rem;
+        scrollbar-width: none;
+      }
+      .menu ul { display: flex; gap: 0.125rem; }
+      .menu a {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--spacing-touch);
+        padding-inline: 0.875rem;
+        border-radius: 9999px;
+        color: var(--color-surface);
+        font-size: var(--text-small);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .menu a:hover { text-decoration: underline; }
+      .menu a:focus-visible { outline-color: var(--color-volt); outline-offset: -3px; }
+      body:not(:has(.apartado:target)) .menu a[href="#cifras"],
+      body:has(#versiones:target) .menu a[href="#versiones"],
+      body:has(#datos:target) .menu a[href="#datos"],
+      body:has(#fuentes:target) .menu a[href="#fuentes"] { background: var(--color-volt); color: var(--color-ink-900); }
+
+      @media (min-width: 1024px) {
+        .cabecera-ficha { padding-block: 0.5rem 2rem; gap: 1rem; }
+        .bento { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem; }
+        .bento__autonomia { grid-column: span 7; }
+        .bento__precio { grid-column: span 5; }
+        .bento__foto { grid-column: span 6; }
+        .bento__dato { grid-column: span 3; display: flex; align-items: flex-end; }
+        .apartado { margin-top: 4.5rem; }
+        .version { grid-template-columns: 3fr 5fr 4fr; column-gap: 2rem; align-items: start; }
+        .datos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .menu { bottom: 1.5rem; }
+        .menu a { padding-inline: 1.25rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="pagina">
+      <nav aria-label={t("ficha.ruta.nombre")}>
+        <ol class="ruta">
+          <li><a class="enlace" href="/coches">{t("ficha.ruta.coches")}</a></li>
+          <li><a class="enlace" href={`/marcas/${model.brand}/`}>{card.brand}</a></li>
+          <li aria-current="page">{card.model}</li>
+        </ol>
+      </nav>
+
+      <div id="cifras" class="apartado" style="margin-top: 0">
+        <header class="cabecera-ficha">
+          <h1 class="nombre nombre--xl">{heading}</h1>
+          <div class="meta">
+            <dl>
+              {card.statusLabel && (
+                <>
+                  <dt class="sr-only">{t("ficha.estado.rotulo")}</dt>
+                  <dd><span class="etiqueta etiqueta--soon">{card.statusLabel}</span></dd>
+                </>
+              )}
+              <dt>{t("ficha.segmento.rotulo")}</dt>
+              <dd>
+                {card.segmentLabel}
+                {model.segment && <SourceMark {...markOf(model.segment)} />}
+              </dd>
+            </dl>
+            <a class="enlace" href={model.status.url} rel="noopener">
+              {t("ficha.webMarca")}<span class="sr-only"> {t("ficha.webMarcaSr", { marca: card.brand })}</span>
+            </a>
+            {card.compare && (
+              <a class="enlace" href={card.compare.href}>
+                {card.compare.label}<span class="sr-only"> {card.compare.srLabel}</span>
+              </a>
+            )}
+          </div>
+          {model.segment?.note && <p class="text-small text-ink-600">{model.segment.note}</p>}
+        </header>
+
+        <div class="bento">
+          <dl>
+            <div class="bloque bloque--volt bento__ancho bento__autonomia">
+              <Cifra size="xl" label={card.labels.range} text={range ? t("ficha.unidad.km", { n: formatNumber(range.value) }) : null}>
+                {range && <span slot="marca"> <SourceMark {...markOf(range)} /></span>}
+              </Cifra>
+            </div>
+            <div class="bloque bento__ancho bento__precio">
+              <Cifra size="l" label={card.labels.price} text={price ? formatEur(price.value) : null}>
+                {price && (
+                  <div slot="detalle" class="bento__precio-detalle">
+                    {price.price_kind === "financed" && (
+                      <p><span class="etiqueta etiqueta--deal">{card.dealLabel}</span></p>
+                    )}
+                    <SourceDate source={price} />
+                    {financed.length > 0 && (
+                      <a class="enlace enlace--pie" href="#condiciones-1">{t("ficha.precio.verCondiciones")}</a>
+                    )}
+                  </div>
+                )}
+              </Cifra>
+            </div>
+          </dl>
+          <div class="bento__foto">
+            {main ? (
+              <ModelFigure
+                image={main}
+                alt={t("ficha.imagen.alt", { marca: card.brand, modelo: card.model, i: 1, n: model.images.length })}
+                caption={main.attribution ? t("ficha.imagen.atribucion", { attribution: main.attribution }) : null}
+                main
+              />
+            ) : (
+              <div class="foto foto--vacia"><SegmentSilhouette segment={card.segment} large /></div>
+            )}
+          </div>
+          <dl>
+            <div class="bloque bento__dato">
+              <Cifra size="m" label={t("ficha.modelo.potencia")} text={power ? t("ficha.unidad.kw", { n: formatDecimal(power.value) }) : null}>
+                {power && <span slot="marca"> <SourceMark {...markOf(power)} /></span>}
+              </Cifra>
+            </div>
+            <div class="bloque bento__dato">
+              <Cifra size="m" label={t("ficha.modelo.cargaCc")} text={dc ? t("ficha.unidad.kw", { n: formatDecimal(dc.value) }) : null}>
+                {dc && <span slot="marca"> <SourceMark {...markOf(dc)} /></span>}
+              </Cifra>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <section id="versiones" class="apartado" aria-labelledby="versiones-titulo">
+        <h2 id="versiones-titulo" class="nombre apartado__titulo">{t("ficha.versiones.titulo")}</h2>
+        <p class="apartado__entrada">{t("ficha.versiones.entrada")}</p>
+        <ol class="versiones">
+          {
+            versions.map((v) => {
+              const fields = versionFields(v);
+              const wltp = fields.find((f) => f.key === "wltp_km")!;
+              const rest = fields.filter((f) => f.key !== "wltp_km");
+              return (
+                <li class="version">
+                  <h3 class="nombre version__nombre">{v.name}</h3>
+                  <dl class="version__principales">
+                    <Cifra size="m" label={wltp.label} text={wltp.text}>
+                      {wltp.datum && <span slot="marca"> <SourceMark {...markOf(wltp.datum)} /></span>}
+                    </Cifra>
+                    <Cifra size="m" label={t("ficha.campo.precio")} text={v.price ? formatEur(v.price.value) : null}>
+                      {v.price && (
+                        <div slot="detalle" class="bento__precio-detalle">
+                          {v.price.price_kind === "financed" && (
+                            <p><span class="etiqueta etiqueta--deal">{t("ficha.precio.oferta")}</span></p>
+                          )}
+                          <SourceDate source={v.price} />
+                          {v.price.note && <p class="text-small text-ink-600">{v.price.note}</p>}
+                        </div>
+                      )}
+                    </Cifra>
+                  </dl>
+                  <dl class="version__resto">
+                    {rest.map((f) => (
+                      <div class="cifra">
+                        <dt>{f.label}</dt>
+                        <dd><VersionField field={f} numberOf={numberOf} /></dd>
+                      </div>
+                    ))}
+                  </dl>
+                </li>
+              );
+            })
+          }
+        </ol>
+        {financed.length > 0 && (
+          <div class="condiciones">
+            <h3>{t("ficha.condiciones.titulo")}</h3>
+            {financed.map((v, i) => (
+              <div id={`condiciones-${i + 1}`} tabindex="-1">
+                <p style="font-weight: 600">{v.name}</p>
+                <p class="text-ink-600">{v.price!.price_terms}</p>
+                <a class="enlace enlace--pie" href={v.price!.price_terms_url} rel="noopener">{t("ficha.condiciones.enlace")}</a>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section id="datos" class="apartado" aria-labelledby="datos-titulo">
+        <h2 id="datos-titulo" class="nombre apartado__titulo">{t("ficha.modelo.titulo")}</h2>
+        <p class="apartado__entrada">{t("ficha.modelo.entrada")}</p>
+        <dl class="datos">
+          {modelRows.map((r) => (
+            <Cifra size="m" label={r.label} text={r.text}>
+              <span slot="marca"> <SourceMark {...markOf(r.datum)} /></span>
+            </Cifra>
+          ))}
+        </dl>
+      </section>
+
+      <section id="fuentes" class="apartado" aria-labelledby="fuentes-titulo">
+        <h2 id="fuentes-titulo" class="nombre apartado__titulo">{t("ficha.fuentes.titulo")}</h2>
+        <p class="apartado__entrada">{t("ficha.fuentes.entrada")}</p>
+        <ol class="fuentes">
+          {notes.map((note) => (
+            <li id={`fuente-${note.n}`} tabindex="-1">
+              {noteLine(note)}<br />
+              <a class="underline" href={note.url} rel="noopener">{note.url}</a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </main>
+
+    <nav class="menu" aria-label="Secciones de la ficha">
+      <ul>
+        {sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}
+      </ul>
+    </nav>
+  </body>
+</html>
