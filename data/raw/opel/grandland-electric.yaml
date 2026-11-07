@@ -1,0 +1,59 @@
+# Researcher — Opel Grandland Electric. Fuentes: opel-es (T1, ofertas), idae-es (T2), wikimedia-commons. Consultado 2026-11-07.
+brand: opel
+brand_name: Opel
+model: Grandland Electric
+status: {value: on_sale, note: "ofertas.opel.es/ofertas lista «Grandland» con «Disponible en Híbrido, Híbrido Enchufable o Eléctrico». No dice que versiones eléctricas se venden hoy.", source_id: opel-es, url: "https://ofertas.opel.es/ofertas", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Grandland Edition 73 kWh
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 604386", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 523, note: "IDAE id 604386 «Nuevo Grandland (MY25.0) Edition Electric 73kWh 213 CV (156kW)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 156, note: "IDAE id 604386", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Grandland GS 73 kWh
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 604387", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 523, note: "IDAE id 604387 «Nuevo Grandland (MY25.0) GS Electric 73kWh 213 CV (156kW)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 156, note: "IDAE id 604387", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Grandland GS 82 kWh
+    battery_kwh: {value: 82, basis: unknown, note: "IDAE id 604388", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 585, note: "IDAE id 604388 «Nuevo Grandland (MY25.0) GS Electric 82kWh 213 CV (156kW)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 156, note: "IDAE id 604388", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Grandland Edition Long Range 97 kWh
+    battery_kwh: {value: 97, basis: unknown, note: "IDAE id 607916", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 694, note: "IDAE id 607916 «Nuevo Grandland (MY25.0) Edition Electric Long Range 97 KWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 170, note: "IDAE id 607916", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Grandland GS Long Range 97 kWh
+    battery_kwh: {value: 97, basis: unknown, note: "IDAE id 607917", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 694, note: "IDAE id 607917 «Nuevo Grandland (MY25.0) GS Electric Long Range 97 KWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 170, note: "IDAE id 607917", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Grandland AWD GS
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 607915", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 489, note: "IDAE id 607915 «Nuevo Grandland (MY25.0) AWD GS Electric 73kWh 325 CV (239kW)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 239, note: "IDAE id 607915", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "«AWD» en el nombre de la homologación IDAE id 607915", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Grandland AWD Ultimate
+    battery_kwh: {value: 73, basis: unknown, note: "IDAE id 607914", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 489, note: "IDAE id 607914 «Nuevo Grandland (MY25.0) AWD Ultimate Electric 73kWh 325 CV (239kW)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 239, note: "IDAE id 607914", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    drivetrain: {value: awd, note: "«AWD» en el nombre de la homologación IDAE id 607914", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: data/images/opel/grandland-electric/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Opel_Grandland_Electric_Sindelfingen_2025_DSC_9106.jpg/1280px-Opel_Grandland_Electric_Sindelfingen_2025_DSC_9106.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Opel_Grandland_Electric_Sindelfingen_2025_DSC_9106.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:Opel Grandland Electric Sindelfingen 2025 DSC 9106.jpg)"
+open_questions:
+  - "Web de Opel (www.opel.es) devuelve 403 a la lectura automática: versiones, launch y segment sin fuente T1 legible. Versiones salidas del IDAE (MY25.0); el IDAE no dice cuáles se venden hoy ni los nombres comerciales exactos."
+  - "El IDAE tiene también una fila «Nuevo Grandland (MY25.0) GS Electric 73kWh 325 CV (239kW)» sin «AWD» en el nombre (id 607454); no se escribe como versión aparte."
+  - "Precio: sin PVP ni precio financiado de la versión eléctrica en página T1 legible (ofertas.opel.es no distingue versión)."
+  - "launch y segment: sin fuente leída. Carga DC/AC: no publicados en las fuentes accesibles. Tracción de las versiones no AWD: no publicada."
