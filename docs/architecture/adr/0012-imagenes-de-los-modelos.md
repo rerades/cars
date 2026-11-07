@@ -1,7 +1,8 @@
 # ADR-0012 — Dónde se sirven las imágenes de los modelos
 
 - **Estado:** aceptada (2026-10-05). El «cómo» de la descarga y la migración está en la enmienda
-  «Imágenes» de [ADR-0010](0010-pipeline-de-ingesta.md) (aceptada el 2026-10-07)
+  «Imágenes» de [ADR-0010](0010-pipeline-de-ingesta.md) (aceptada el 2026-10-07). Enmienda aceptada de [ADR-0025](0025-retoque-de-las-imagenes.md) (2026-11-07):
+  el punto 6 admite además el retoque (fondo transparente y matrícula tapada), que sí crea material adaptado
 - **Fecha:** 2026-10-02
 
 ## Contexto

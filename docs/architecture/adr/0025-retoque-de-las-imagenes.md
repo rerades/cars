@@ -1,6 +1,6 @@
 # ADR-0025 — Retoque de las imágenes de los modelos
 
-- **Estado:** propuesta (2026-11-07). Enmienda [ADR-0012](0012-imagenes-de-los-modelos.md), punto 6 (además de
+- **Estado:** aceptada (2026-11-07). Enmienda [ADR-0012](0012-imagenes-de-los-modelos.md), punto 6 (además de
   las modificaciones técnicas, se admite el retoque de esta ADR), y amplía la forma de `images` de
   [`data-model.md`](../data-model.md).
 - **Fecha:** 2026-11-07
