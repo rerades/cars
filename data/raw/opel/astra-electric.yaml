@@ -1,0 +1,39 @@
+# Researcher — Opel Astra Electric. Fuentes: opel-es (T1, ofertas), idae-es (T2), wikimedia-commons. Consultado 2026-11-07.
+brand: opel
+brand_name: Opel
+model: Astra Electric
+status: {value: on_sale, note: "ofertas.opel.es/ofertas lista «Nuevo Astra» con «Disponible en Híbrido, Híbrido Enchufable, Diesel o Eléctrico». No dice que versiones eléctricas se venden hoy.", source_id: opel-es, url: "https://ofertas.opel.es/ofertas", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Astra Edition
+    wltp_km: {value: 454, note: "IDAE id 614400 «Nuevo Astra 5P Edition Electric 54kWh 156 CV (115kW)»; sin fecha de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 614400", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Astra GS
+    wltp_km: {value: 454, note: "IDAE id 614404 «Nuevo Astra 5P GS Electric 54kWh 156 CV (115kW)»; sin fecha de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 614404", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Astra Sports Tourer Edition
+    wltp_km: {value: 445, note: "IDAE id 614407 «Nuevo Astra ST Edition Electric 54kWh 156 CV (115kW)»; sin fecha de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 614407", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Astra Sports Tourer GS
+    wltp_km: {value: 445, note: "IDAE id 614411 «Nuevo Astra ST GS Electric 54kWh 156 CV (115kW)»; sin fecha de homologación", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 115, note: "IDAE id 614411", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: data/images/opel/astra-electric/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Opel_Astra_L_Electric_Auto_Zuerich_2023_1X7A1005.jpg/1280px-Opel_Astra_L_Electric_Auto_Zuerich_2023_1X7A1005.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Opel_Astra_L_Electric_Auto_Zuerich_2023_1X7A1005.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:Opel Astra L Electric Auto Zuerich 2023 1X7A1005.jpg)"
+open_questions:
+  - "Web de Opel (www.opel.es) devuelve 403 a la lectura automática: versiones, launch y segment sin fuente T1 legible. Versiones salidas del IDAE (nombres «Nuevo Astra»); el IDAE no dice cuáles se venden hoy."
+  - "Batería: el IDAE da 58 kWh en el campo pero el nombre dice 54 kWh; contradicción dentro de la misma fuente, no se guarda battery_kwh."
+  - "El IDAE también tiene filas «Astra 5P/ST» sin «Nuevo» con 54 kWh y 419/413 km (homologaciones anteriores, MY24); no se usan."
+  - "Precio: sin PVP ni precio financiado de la versión eléctrica en página T1 legible (ofertas.opel.es no distingue versión)."
+  - "launch y segment: sin fuente leída. Tracción, carga DC/AC: no publicados en las fuentes accesibles."
