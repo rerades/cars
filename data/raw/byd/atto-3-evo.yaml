@@ -1,0 +1,45 @@
+# Researcher — BYD Atto 3 EVO. Fuentes: byd-es (T1), idae-es (T2). Consultado 2026-11-07.
+brand: byd
+brand_name: BYD
+model: Atto 3 EVO
+status: {value: on_sale, note: "ficha con configurador y oferta Black Friday vigente hasta el 30/11/2026", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/atto-3-evo", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Atto 3 EVO Design
+    battery_kwh: {value: 74.8, basis: unknown, note: "IDAE ATTO 3 EVO Design (id 608976)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 510, note: "IDAE id 608976", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 230, note: "IDAE id 608976", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price:
+      value: 28888
+      unit: EUR
+      price_kind: financed
+      price_terms: "(8) PVPR Financiando para BYD ATTO 3 EVO DESIGN color Iris Blue : 28.888 € . Promoción sujeta a condiciones generales vigentes. Consulta aquí las condiciones completas. (1) Oferta válida para Financiación Lineal con CA Auto Bank, SpA Sucursal en España para todos los vehículos nuevos por un plazo entre 72 meses y 116 meses en función de la campaña, y una permanencia de 36 meses. El periodo de carencia no implica la acumulación de intereses al capital. Todas las ofertas y promociones publicadas en esta página web tienen vigencia hasta el 30 de noviembre de 2026."
+      price_terms_url: "https://www.byd.com/es-es/promociones"
+      page_name: "BYD ATTO 3 EVO DESIGN color Iris Blue"
+      note: "sin precio al contado en la página"
+      source_id: byd-es
+      url: "https://www.byd.com/es-es/promociones"
+      retrieved: 2026-11-07
+      tier: T1
+  - name: Atto 3 EVO Excellence
+    battery_kwh: {value: 74.8, basis: unknown, note: "IDAE ATTO 3 EVO Excellence (id 608977)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 470, note: "IDAE id 608977", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 330, note: "IDAE id 608977", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null   # sin precio de esta versión en fuente T1
+images:
+  - file: "data/images/byd/atto-3-evo/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/BYD_Atto_3_Evo_IMG_7851.jpg/1280px-BYD_Atto_3_Evo_IMG_7851.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BYD_Atto_3_Evo_IMG_7851.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons (File:BYD Atto 3 Evo IMG 7851.jpg)"
+open_questions:
+  - "segment: la web lo llama «SUV mediano eléctrico», sin tamaño de la tabla; sin segmento."
+  - "launch: ninguna fuente da la fecha de inicio de venta en España."
+  - "Versiones, autonomía, potencia y batería: la ficha de byd.com no las desglosa por acabado (solo «hasta 710 km de autonomía (WLTP)», que no coincide con el IDAE y no se registra); salen del IDAE (T2). Que Design y Excellence se vendan hoy no lo confirma el IDAE; la web solo nombra Design en la promoción."
+  - "Precio: solo hay un «PVPR Financiando» de la Design (color Iris Blue) dentro de una promoción hasta el 30/11/2026; no hay PVP sin oferta. Excellence sin precio."
+  - "Tracción y potencias de carga no publicadas en la ficha."
+  - "IDAE también lista «BYD ATTO 3 Comfort/Design» (batería 60,5 kWh, 420 km), el Atto 3 anterior; no se incluye."

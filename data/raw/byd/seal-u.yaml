@@ -1,0 +1,35 @@
+# Researcher — BYD Seal U. Fuentes: byd-es (T1), idae-es (T2). Consultado 2026-11-07.
+brand: byd
+brand_name: BYD
+model: Seal U
+status: {value: on_sale, note: "ficha con configurador y promoción vigente hasta el 30/11/2026 (Seal U en la lista de ofertas)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal-u", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: null
+needs_review: false
+specs:
+  dc_max_kw: {value: 140, note: "«carga rápida de 140 kW CC»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal-u", retrieved: 2026-11-07, tier: T1}
+versions:
+  - name: Seal U Comfort
+    battery_kwh: {value: 71.8, basis: unknown, note: "IDAE SEAL U Comfort (id 606458)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 420, note: "IDAE id 606458", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 606458", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null   # la promoción da un «PVPR Financiando» de SEAL U sin versión
+  - name: Seal U Design
+    battery_kwh: {value: 87, basis: unknown, note: "IDAE SEAL U Design (id 606459); la web: «Hasta 87.0 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 500, note: "IDAE id 606459", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 606459", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null   # la promoción da un «PVPR Financiando» de SEAL U sin versión
+images:
+  - file: "data/images/byd/seal-u/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/BYD_Seal_U_IAA_2023_1X7A0045.jpg/1280px-BYD_Seal_U_IAA_2023_1X7A0045.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BYD_Seal_U_IAA_2023_1X7A0045.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:BYD Seal U IAA 2023 1X7A0045.jpg)"
+open_questions:
+  - "segment: la web dice «El SUV familiar eléctrico», sin letra de segmento ni tamaño de la tabla; sin segmento."
+  - "launch: ninguna fuente da la fecha de inicio de venta en España."
+  - "Versiones y cifras: la ficha de byd.com no las desglosa (solo «Hasta 87.0 kWh» y 140 kW CC); salen del IDAE (T2). Que Comfort y Design se vendan hoy no lo confirma ninguna fuente; la promoción solo nombra «SEAL U» (31.161 € financiando, color Snow White) sin versión, por lo que no se registra precio."
+  - "Tracción y potencia de carga CA no publicadas."
+  - "Batería: IDAE sin indicar si es útil o bruta."

@@ -1,0 +1,45 @@
+# Researcher — BYD Seal. Fuentes: byd-es (T1), idae-es (T2). Consultado 2026-11-07.
+brand: byd
+brand_name: BYD
+model: Seal
+status: {value: on_sale, note: "ficha con configurador y promoción vigente hasta el 30/11/2026 (Seal Comfort en la lista de ofertas)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: {value: berlina, note: "«La berlina eléctrica deportiva»; «esta berlina deportiva»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+needs_review: false
+versions:
+  - name: Seal Comfort
+    battery_kwh: {value: 61.4, basis: unknown, note: "IDAE SEAL Comfort (id 606455)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 460, note: "«Hasta 460 km de autonomía combinada»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    power_kw: {value: 170, note: "publicado: 231 CV", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    drivetrain: {value: rwd, note: "«Tracción Trasera»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    ac_max_kw: {value: 11, note: "«cargador de a bordo de 11 kW» (sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    price: null   # la promoción de Seal Comfort solo da cuotas y entrada, sin PVPR
+  - name: Seal Design
+    battery_kwh: {value: 82.5, basis: unknown, note: "IDAE SEAL Design (id 606454)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 570, note: "«Hasta 570 km en ciclo combinado»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    power_kw: {value: 230, note: "publicado: 313 CV", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    drivetrain: {value: rwd, note: "«Tracción Trasera»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    dc_max_kw: {value: 150, note: "«Las versiones Design y Excellence AWD admiten potencias de hasta 150 kW»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    ac_max_kw: {value: 11, note: "«cargador de a bordo de 11 kW» (sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    price: null   # sin precio en fuente T1
+  - name: Seal Excellence AWD
+    battery_kwh: {value: 82.5, basis: unknown, note: "IDAE SEAL Excellence AWD (id 606456)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 520, note: "«Hasta 520 km en ciclo combinado»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    power_kw: {value: 390, note: "publicado: 530 CV", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    drivetrain: {value: awd, note: "«tracción a las cuatro ruedas (AWD)»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    dc_max_kw: {value: 150, note: "«Las versiones Design y Excellence AWD admiten potencias de hasta 150 kW»", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    ac_max_kw: {value: 11, note: "«cargador de a bordo de 11 kW» (sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/seal", retrieved: 2026-11-07, tier: T1}
+    price: null   # sin precio en fuente T1
+images:
+  - file: "data/images/byd/seal/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/BYD_Seal_IAA_2023_1X7A0371.jpg/1280px-BYD_Seal_IAA_2023_1X7A0371.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BYD_Seal_IAA_2023_1X7A0371.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:BYD Seal IAA 2023 1X7A0371.jpg)"
+open_questions:
+  - "launch: ninguna fuente da la fecha de inicio de venta en España."
+  - "Precios: la promoción de Seal Comfort (color Indigo grey) solo da entrada, cuotas y última cuota, sin PVPR; no hay PVP. Sin precio en ninguna versión."
+  - "Comfort: potencia de carga CC no publicada."
+  - "Batería: IDAE sin indicar si es útil o bruta; la web de la marca no la desglosa por versión."
