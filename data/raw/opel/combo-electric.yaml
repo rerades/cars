@@ -1,0 +1,35 @@
+# Researcher — Opel Combo Electric. Fuentes: opel-es (T1, ofertas), idae-es (T2). Consultado 2026-11-07.
+brand: opel
+brand_name: Opel
+model: Combo Electric
+status: {value: on_sale, note: "ofertas.opel.es/ofertas lista «Combo» con «Disponible en Diesel o Eléctrico». No dice que versiones eléctricas se venden hoy.", source_id: opel-es, url: "https://ofertas.opel.es/ofertas", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Combo Electric
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 599783", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 345, note: "IDAE id 599783 «Combo Nuevo Combo Electric 100Kw & 50kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 599783", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Combo Electric GS
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 599784", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 341, note: "IDAE id 599784 «Combo Nuevo Combo Electric GS 100Kw & 50kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 599784", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Combo Electric XL
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 599785", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 338, note: "IDAE id 599785 «Combo Nuevo Combo Electric XL 100Kw & 50kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 599785", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: Combo Electric XL GS
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 599786", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 336, note: "IDAE id 599786 «Combo Nuevo Combo Electric XL GS 100Kw & 50kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 599786", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Web de Opel (www.opel.es) devuelve 403 a la lectura automática: versiones, launch y segment sin fuente T1 legible. Versiones salidas del IDAE; el IDAE no dice cuáles se venden hoy."
+  - "Imagen: no se encontró en Wikimedia Commons una foto del Opel Combo Electric (las búsquedas devuelven Citroën ë-Berlingo, Peugeot e-Rifter, Fiat E-Doblò)."
+  - "Precio: sin PVP ni precio financiado de la versión eléctrica en página T1 legible."
+  - "launch y segment: sin fuente leída. Tracción, carga DC/AC: no publicados en las fuentes accesibles."

@@ -12,5 +12,6 @@ urls:
 image_license: "" # sin licencia clara registrada: no publicar imágenes de esta web
 notes: >
   Verificado (2026-10-31, igual que el 2026-10-03): www.opel.es (home, robots.txt, fichas, ofertas) devuelve 403 a la lectura automática (protección de acceso, no se evita). Solo ofertas.opel.es responde. Allí las páginas por modelo (Corsa, Mokka, Frontera) dicen "Disponible en Gasolina, Híbrido o Eléctrico" pero el precio al contado mostrado es el de la versión térmica/híbrida (Mokka 23.700 €, Frontera 23.800 €); no hay precio de la versión eléctrica. No se guarda ningún precio de Opel. Un buscador (T3, coches.com) da precios oficiales de Corsa/Mokka/Frontera/ Astra eléctricos, pero T3 no vale como fuente de precio. Pendiente: PVP o precio financiado BEV en una página T1 legible (configurador). Sin verificar: Astra Electric, Grandland Electric, Combo/Vivaro/Movano eléctricos.
-last_verified: 2026-10-31
+  2026-11-07: ofertas.opel.es/ofertas (fetch-page.ts) lista Corsa, Frontera, Mokka, Combo, Nuevo Astra, Grandland y Combo Cargo con versión eléctrica; www.opel.es sigue en 403. Vivaro, Movano y Zafira no aparecen con nombre en el texto leído.
+last_verified: 2026-11-07
 status: active
