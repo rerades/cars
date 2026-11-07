@@ -1,0 +1,33 @@
+# Researcher — BMW iX1 (U11). Fuentes: idae-es (T2), quecochemecompro-es (T3), wikimedia-commons. Consultado 2026-11-07.
+brand: bmw
+brand_name: BMW
+model: iX1
+status: {value: on_sale, note: "la página lista el iX1 entre \"todos los eléctricos que BMW tiene actualmente en el mercado español\"; fuente T3, bmw.es no se pudo leer", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/bmw/electricos/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: iX1 eDrive20
+    battery_kwh: {value: 65.2, basis: unknown, note: "IDAE id 613530 (03/2026); otra homologación: id 600160 (11/2023), 64,8 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 514, note: "IDAE id 613530 (03/2026); id 600160 (11/2023) da 474 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 150, note: "IDAE id 613530 (03/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: iX1 xDrive30
+    battery_kwh: {value: 65, basis: unknown, note: "IDAE id 613531 (03/2026); otras homologaciones: ids 601165 (07/2021) y 600161 (07/2023)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 466, note: "IDAE id 613531 (03/2026); id 600161 (07/2023) da 439 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 230, note: "IDAE id 613531 (03/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/bmw/ix1/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/2023-04_BMW_iX1_U11_front_view.jpg/1280px-2023-04_BMW_iX1_U11_front_view.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2023-04_BMW_iX1_U11_front_view.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Wikisympathisant, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:2023-04_BMW_iX1_U11_front_view.jpg)"
+open_questions:
+  - "Precio: bmw.es y press.bmwgroup.com no se pueden leer (fetch failed / HTTP 403); sin PVP T1, price null en todas las versiones."
+  - "Versiones y estado: salen del IDAE (T2), que no dice qué se vende hoy, y de una lista T3; confirmar en bmw.es qué versiones se venden y desde cuándo."
+  - "launch: sin fecha de inicio de venta en España en ninguna fuente leída."
+  - "Segmento: ninguna fuente leída lo clasifica con el término de RF-11 (movilidadelectrica-es lo llama \"SUV\" sin tamaño)."
+  - "Tracción, carga DC/AC: no publicadas en las fuentes leídas."

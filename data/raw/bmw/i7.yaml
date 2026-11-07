@@ -1,0 +1,38 @@
+# Researcher — BMW i7 (G70). Fuentes: idae-es (T2), quecochemecompro-es (T3), wikimedia-commons. Consultado 2026-11-07.
+brand: bmw
+brand_name: BMW
+model: i7
+status: {value: on_sale, note: "la página dice: \"hasta el BMW i7 eléctrico que puedes encontrar desde 115.341 €\" dentro de \"todos los eléctricos que BMW tiene actualmente en el mercado español\"; fuente T3, bmw.es no se pudo leer", source_id: quecochemecompro-es, url: "https://www.quecochemecompro.com/bmw/electricos/", retrieved: 2026-11-07, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: i7 50 xDrive
+    battery_kwh: {value: 112.5, basis: unknown, note: "IDAE id 613527 (07/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 611, note: "IDAE id 613527 (07/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 335, note: "IDAE id 613527 (07/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: i7 60 xDrive
+    battery_kwh: {value: 112.5, basis: unknown, note: "IDAE id 613528 (07/2026); la homologación de 11/2023 (id 600152) era de 101,7 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 624, note: "IDAE id 613528 (07/2026); id 600152 (11/2023) también 624 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 400, note: "IDAE id 613528 (07/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: i7 M70 xDrive
+    battery_kwh: {value: 112.4, basis: unknown, note: "IDAE id 613529 (07/2026); ids 600150 (07/2023) y 600151 (11/2023) eran de 101,7 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 559, note: "IDAE id 613529 (07/2026); id 600151 (11/2023) también 559 km, id 600150 (07/2023) 560 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 485, note: "IDAE id 613529 (07/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/bmw/i7/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/BMW_G70_i7_xDrive60_M_Sport_Individual_Two-tone_Velvet_Orchid_Edition_%283%29.jpg/1280px-BMW_G70_i7_xDrive60_M_Sport_Individual_Two-tone_Velvet_Orchid_Edition_%283%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:BMW_G70_i7_xDrive60_M_Sport_Individual_Two-tone_Velvet_Orchid_Edition_(3).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Damian B Oh, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:BMW_G70_i7_xDrive60_M_Sport_Individual_Two-tone_Velvet_Orchid_Edition_(3).jpg)"
+open_questions:
+  - "Precio: bmw.es y press.bmwgroup.com no se pueden leer (fetch failed / HTTP 403); sin PVP T1, price null en todas las versiones."
+  - "Versiones y estado: salen del IDAE (T2), que no dice qué se vende hoy, y de una lista T3. Las homologaciones de 07/2026 (50, 60 y M70 xDrive) son las más recientes; el i7 eDrive50 (2023) no tiene fila posterior y no se ha incluido. Confirmar en bmw.es."
+  - "launch: sin fecha de inicio de venta en España en ninguna fuente leída."
+  - "Segmento: ninguna fuente leída lo clasifica con el término de RF-11."
+  - "Tracción, carga DC/AC: no publicadas en las fuentes leídas."
