@@ -1,0 +1,73 @@
+# Researcher — Peugeot E-Rifter. Fuentes: peugeot-es (T1), idae-es (T2), wikimedia-commons. Consultado 2026-11-07.
+brand: peugeot
+brand_name: Peugeot
+model: E-Rifter
+status: {value: on_sale, note: "ofertas.peugeot.es: «Disponible en la última generación de la gama 100% eléctrica de PEUGEOT: E-208, E-2008, E-308, E-308 SW, E-3008, E-408, E-5008, E-RIFTER Y E-TRAVELLER.»", source_id: peugeot-es, url: "https://ofertas.peugeot.es/coches-electricos-hibridos", retrieved: 2026-11-07, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: e-Rifter Active Business Standard 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 607514", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 332, note: "IDAE id 607514", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 607514", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: e-Rifter Allure Business Standard 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 607515", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 332, note: "IDAE id 607515", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 607515", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: e-Rifter Active Pack Standard 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 559872 (también 568224, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 559872 (también 568224, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 559872 (también 568224, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: e-Rifter Active Pack Long 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 576663", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 576663", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 576663", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: e-Rifter Allure Standard 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 576662", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 576662", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 576662", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: e-Rifter Allure Long 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 574466 (también 577710, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 574466 (también 577710, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 574466 (también 577710, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: e-Rifter Allure Pack Standard 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 559873 (también 568225, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 559873 (también 568225, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 559873 (también 568225, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: e-Rifter Allure Pack Long 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 559875", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 559875", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 559875", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: e-Rifter GT Standard 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 559874 (también 568226, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 559874 (también 568226, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 559874 (también 568226, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+  - name: e-Rifter GT Long 100 Kw
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 574306 (también 577711, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 574306 (también 577711, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 574306 (también 577711, mismos valores)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
+    price: null
+images:
+  - file: "data/images/peugeot/e-rifter/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Peugeot_e-Rifter_Leonberg_2022_1X7A0472.jpg/1280px-Peugeot_e-Rifter_Leonberg_2022_1X7A0472.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Peugeot_e-Rifter_Leonberg_2022_1X7A0472.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-07
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, Wikimedia Commons"
+open_questions:
+  - "needs_review: las versiones salen del IDAE (homologaciones); el IDAE no dice cuáles se venden hoy y la web de la marca (www.peugeot.es, 403) no se ha podido leer. ofertas.peugeot.es solo cita el E-Rifter en la lista de la gama eléctrica."
+  - "Autonomía: las filas del IDAE no traen fecha; las versiones Business (332 km) y las demás (245 km) difieren, y no hay cifra de la web de la marca para decidir cuál es la vigente. Se guarda la fila de cada versión."
+  - "Precio: ofertas.peugeot.es/particulares y /coches-electricos-hibridos (2026-11-07) no traen precio del E-Rifter; las páginas de oferta de www.peugeot.es dan 403. price: null."
+  - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."
+  - "segment: ninguna fuente leída lo clasifica con un término de la lista de RF-11."
