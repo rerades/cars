@@ -1,0 +1,389 @@
+---
+/**
+ * Proposal C, "Retícula" (docs/design/propuesta-c.md): top of the model page, versions and the
+ * bottom section menu (PRD-002, RF-17, RF-18). The DOM keeps the order of ficha-modelo.md.
+ * Figures show their final value: the count-up is added when implementing (RF-18).
+ */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import "../src/styles/global.css";
+import SegmentSilhouette from "../src/components/SegmentSilhouette.astro";
+import SourceDate from "../src/components/SourceDate.astro";
+import SourceMark from "../src/components/SourceMark.astro";
+import VersionField from "../src/components/VersionField.astro";
+import VersionPrice from "../src/components/VersionPrice.astro";
+import { cardView } from "../src/lib/card.ts";
+import { imageRelPath, loadModels, type Sourced, type Version } from "../src/lib/data.ts";
+import { formatDecimal, formatEur, formatNumber } from "../src/lib/format.ts";
+import { t } from "../src/lib/i18n.ts";
+import { groupNotes, noteLine } from "../src/lib/notes.ts";
+import { versionFields } from "../src/lib/version-fields.ts";
+import { sortVersions } from "../src/lib/versions.ts";
+
+// Long name, five versions, no range per version, drivetrain not published: all of it stresses the cells.
+const model = loadModels().models.find((m) => m.file === "renault/r5-e-tech-electrico.yaml")!;
+const card = cardView(model);
+const versions = sortVersions(model.versions);
+const fieldsOf = (v: Version) => versionFields(v);
+const fieldRows = fieldsOf(versions[0]!);
+const financed = versions.filter((v) => v.price?.price_kind === "financed");
+const termsIndex = (v: Version) => {
+  const i = financed.indexOf(v);
+  return i < 0 ? undefined : i + 1;
+};
+
+const files = import.meta.glob<{ default: ImageMetadata }>("@images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}", { eager: true });
+const mainImage = model.images[0];
+const rel = mainImage ? imageRelPath(mainImage.file) : null;
+const src = rel ? Object.entries(files).find(([key]) => key.endsWith(`/${rel}`))?.[1].default : undefined;
+
+// The largest published value among the versions, with its own source. Nothing is estimated.
+const maxOf = (pick: (v: Version) => Sourced<number> | null | undefined, fromSpecs?: Sourced<number>) => {
+  if (fromSpecs) return fromSpecs;
+  const values = versions.map(pick).filter((d): d is Sourced<number> => d != null);
+  return values.length ? values.reduce((a, b) => (b.value > a.value ? b : a)) : null;
+};
+const power = maxOf((v) => v.power_kw, model.specs.power_max_kw);
+const battery = maxOf((v) => v.battery_kwh);
+const dc = maxOf((v) => v.dc_max_kw, model.specs.dc_max_kw);
+const drivetrain = versions.map((v) => v.drivetrain).find((d) => d != null) ?? null;
+
+const headerData: Sourced[] = [];
+if (model.segment) headerData.push(model.segment);
+const fieldData = versions.flatMap((v) => fieldsOf(v).map((f) => f.datum));
+const keyData = [model.max_range_km, power, battery, dc, drivetrain].filter((d): d is Sourced<any> => d != null);
+const specData = model.specs.wltp_max_km ? [model.specs.wltp_max_km] : [];
+const { notes, numberOf } = groupNotes([...headerData, ...keyData, ...fieldData, ...specData]);
+const markOf = (s: Sourced) => ({ n: numberOf(s), unofficial: s.tier !== "T1" });
+
+const split = (text: string) => {
+  const m = /^(.*\S)\s(\S+)$/.exec(text);
+  return m ? { number: m[1]!, unit: m[2]! } : { number: text, unit: "" };
+};
+
+// New copy, proposed in propuesta-c.md: goes to i18n.ts when implementing (RNF-4).
+const COPY = {
+  menu: "Secciones de la ficha",
+  summary: "Resumen",
+  data: "Datos",
+  power: "Potencia máxima",
+  battery: "Batería máxima",
+  dc: "Carga máxima en CC",
+  drivetrain: "Tracción",
+  priceFrom: "Precio desde",
+  range: "Autonomía WLTP máxima",
+};
+const sections = [
+  { href: "#resumen", label: COPY.summary, current: true },
+  { href: "#versiones", label: t("ficha.versiones.titulo") },
+  { href: "#datos-modelo", label: COPY.data },
+  { href: "#fuentes", label: t("ficha.fuentes.titulo") },
+];
+const figures = [
+  { label: COPY.power, text: power && t("ficha.unidad.kw", { n: formatDecimal(power.value) }), datum: power },
+  { label: COPY.battery, text: battery && t("ficha.unidad.kwh", { n: formatDecimal(battery.value) }), datum: battery },
+  { label: COPY.dc, text: dc && t("ficha.unidad.kw", { n: formatDecimal(dc.value) }), datum: dc },
+  { label: COPY.drivetrain, text: null, datum: drivetrain },
+];
+const range = model.max_range_km;
+const price = model.price_from;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t("ficha.titulo", { marca: card.brand, modelo: card.model })}</title>
+    <style is:global>
+      @font-face {
+        font-family: "Instrument Sans";
+        src: url("./fonts/instrument-sans.woff2") format("woff2");
+        font-weight: 400 700;
+        font-stretch: 75% 100%;
+        font-display: swap;
+      }
+      :root {
+        --font-sans: "Instrument Sans", system-ui, sans-serif;
+        --color-surface-muted: #f4f4f1;
+        --color-ink-900: #0f0f0e;
+        --color-ink-600: #5c5c57;
+        --color-line: #77776f;
+        --color-line-soft: #d4d4ce;
+        --color-brand-600: #c2340a;
+        --color-brand-800: #8f2406;
+        --color-soon-bg: #0f0f0e;
+        --radius-card: 0;
+        --text-display: clamp(3rem, 1.5rem + 7.2vw, 7rem);
+        --text-key-figure: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+        --text-section: clamp(2rem, 1.5rem + 2vw, 3.25rem);
+        --text-section--line-height: 1.05;
+        --text-section--font-weight: 500;
+        --tracking-tight: -0.035em;
+      }
+      html { scroll-padding-block: 1rem 6rem; }
+      body { padding-bottom: 6rem; }
+      [class*="rounded-full"] { border-radius: 0; }
+
+      .r-page { max-width: 80rem; margin-inline: auto; padding-inline: 1rem; }
+      .r-site { display: flex; align-items: center; min-height: var(--spacing-touch); font-weight: 600; letter-spacing: -0.01em; }
+      .r-ruta { border-top: 1px solid var(--color-ink-900); }
+      .r-ruta ol { display: flex; flex-wrap: wrap; align-items: center; font-size: var(--text-small); }
+      .r-ruta li:not(:last-child)::after { content: "›" / ""; margin-inline: 0.5rem; color: var(--color-ink-600); }
+      .r-ruta a { display: inline-flex; align-items: center; min-height: var(--spacing-touch); color: var(--color-ink-900); text-decoration: underline; text-underline-offset: 0.2em; }
+      .r-ruta [aria-current] { color: var(--color-ink-600); }
+      .r-text-link { display: inline-flex; align-items: center; min-height: var(--spacing-touch); color: var(--color-ink-900); text-decoration: underline; text-underline-offset: 0.2em; }
+      .r-text-link:hover { color: var(--color-brand-600); }
+
+      h1.r-name { padding-block: 0.5rem 1.5rem; font-size: var(--text-display); line-height: 0.96; font-weight: 500; letter-spacing: var(--tracking-tight); overflow-wrap: anywhere; text-wrap: balance; }
+      .r-soon { display: inline-block; padding: 0.125rem 0.5rem; background: var(--color-soon-bg); color: var(--color-soon-fg); font-size: var(--text-badge); font-weight: 600; line-height: 1.25rem; }
+      .r-terms { margin-top: 2rem; max-width: 34rem; }
+      .r-terms h3 { font-size: 1.25rem; line-height: 1.5rem; font-weight: 500; letter-spacing: -0.02em; }
+      .r-terms li { padding-block: 0.75rem; border-bottom: 1px solid var(--color-line-soft); font-size: var(--text-small); line-height: 1.25rem; overflow-wrap: anywhere; }
+      .r-terms strong { display: block; font-weight: 600; }
+      h1.r-name small { display: block; margin-bottom: 0.5rem; font-size: var(--text-body); line-height: 1.5rem; font-weight: 600; letter-spacing: -0.01em; }
+
+      .r-grid { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--color-ink-900); }
+      .r-info { padding-block: 1rem; border-bottom: 1px solid var(--color-line-soft); }
+      .r-info-label { font-size: var(--text-small); line-height: 1.25rem; color: var(--color-ink-600); }
+      .r-info-value { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.25rem; font-size: 1.5rem; line-height: 1.75rem; font-weight: 500; letter-spacing: -0.02em; }
+      .r-info-value svg { flex: none; width: 3.5rem !important; height: 3.5rem !important; stroke-width: 1; }
+      .r-note { margin-top: 0.5rem; font-size: var(--text-small); line-height: 1.25rem; color: var(--color-ink-600); }
+      .r-photo { padding-block: 1rem; border-bottom: 1px solid var(--color-ink-900); }
+      .r-slot { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; overflow: hidden; background: var(--color-surface-muted); color: var(--color-ink-900); }
+      .r-slot img { width: 100%; height: 100%; object-fit: cover; }
+      .r-slot svg { width: auto !important; height: 112% !important; stroke-width: 0.6; }
+      .r-photo figcaption { margin-top: 0.5rem; font-size: var(--text-small); line-height: 1.25rem; color: var(--color-ink-600); overflow-wrap: anywhere; }
+
+      .r-figures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--color-ink-900); }
+      .r-figure { display: flex; flex-direction: column; padding: 1rem 0.75rem 1rem 0; min-width: 0; border-bottom: 1px solid var(--color-line-soft); }
+      .r-figure:nth-child(even) { padding-left: 0.75rem; padding-right: 0; border-left: 1px solid var(--color-line-soft); }
+      .r-figures > :nth-last-child(-n + 2) { border-bottom: 0; }
+      .r-number { font-size: var(--text-key-figure); line-height: 1; font-weight: 500; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+      .r-number span { font-size: 0.45em; letter-spacing: -0.01em; margin-left: 0.1em; }
+      .r-number[data-missing] { font-size: 1.25rem; line-height: 2.5rem; font-weight: 400; letter-spacing: 0; color: var(--color-ink-600); }
+      .r-figure dt { order: 2; margin-top: 0.5rem; font-size: var(--text-small); line-height: 1.25rem; color: var(--color-ink-600); }
+      .r-figure dd.r-source { order: 3; }
+      .r-deal { display: inline-block; margin-top: 0.5rem; padding: 0.125rem 0.5rem; background: var(--color-deal-bg); color: var(--color-deal-fg); font-size: var(--text-badge); font-weight: 600; line-height: 1.25rem; align-self: flex-start; order: 3; }
+
+      .r-section { padding-top: 3rem; }
+      .r-section h2 { letter-spacing: var(--tracking-tight); }
+      .r-entry { margin-top: 0.75rem; max-width: 34rem; font-size: var(--text-small); line-height: 1.25rem; color: var(--color-ink-600); }
+      .r-table-wrap { display: none; }
+      .r-blocks { margin-top: 1.5rem; border-top: 1px solid var(--color-ink-900); }
+      .r-block { padding-block: 1rem; border-bottom: 1px solid var(--color-line-soft); }
+      .r-block h3 { font-size: 1.25rem; line-height: 1.5rem; font-weight: 500; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+      .r-block dl > div { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 0.5rem; padding-block: 0.5rem; }
+      .r-block dt { font-size: var(--text-small); line-height: 1.5rem; color: var(--color-ink-600); }
+      .r-data { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: 1.5rem; border-top: 1px solid var(--color-ink-900); }
+      .r-data > div { padding-block: 1rem; border-bottom: 1px solid var(--color-line-soft); }
+      .r-data dt, .r-sources { font-size: var(--text-small); color: var(--color-ink-600); }
+      .r-sources { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-ink-900); line-height: 1.25rem; overflow-wrap: anywhere; }
+      .r-sources a { color: var(--color-ink-900); text-decoration: underline; }
+
+      /* The section bar: straight cells, a piece of the grid floating over the page (RF-17). */
+      .r-bar { position: fixed; z-index: 10; left: 50%; bottom: 1rem; transform: translateX(-50%); max-width: calc(100vw - 2rem); background: var(--color-ink-900); }
+      .r-bar ul { display: flex; overflow-x: auto; scrollbar-width: none; }
+      .r-bar li + li { border-left: 1px solid var(--color-ink-600); }
+      .r-bar a { display: flex; align-items: center; min-height: var(--spacing-touch); padding-inline: 0.75rem; font-size: var(--text-small); font-weight: 500; white-space: nowrap; color: var(--color-surface); }
+      .r-bar a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+      .r-bar a[aria-current] { background: var(--color-surface); color: var(--color-ink-900); box-shadow: inset 0 0 0 1px var(--color-ink-900); }
+      .r-bar a:focus-visible { outline: 3px solid var(--color-surface); outline-offset: -5px; }
+      .r-bar a[aria-current]:focus-visible { outline-color: var(--color-brand-600); }
+
+      @media (min-width: 1024px) {
+        .r-page { padding-inline: 2rem; }
+        h1.r-name { padding-block: 1rem 3rem; }
+        .r-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .r-info { padding: 1.5rem 2rem 1.5rem 0; border-bottom: 1px solid var(--color-ink-900); border-right: 1px solid var(--color-line-soft); }
+        .r-info + .r-info { padding-left: 2rem; }
+        .r-info-value { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+        .r-info-value svg { width: 9rem !important; height: 9rem !important; stroke-width: 0.7; margin-block: -1rem; }
+        .r-photo { padding: 1.5rem 0 1.5rem 2rem; }
+        .r-figures { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .r-figure, .r-figure:nth-child(even) { padding: 1.5rem 2rem 2rem; border-left: 1px solid var(--color-line-soft); border-bottom: 1px solid var(--color-line-soft); }
+        .r-figure:nth-child(3n + 1) { padding-left: 0; border-left: 0; }
+        .r-figures > :nth-last-child(-n + 2) { border-bottom: 1px solid var(--color-line-soft); }
+        .r-figures > :nth-last-child(-n + 3) { border-bottom: 0; }
+        .r-number[data-missing] { font-size: 1.5rem; line-height: 4.5rem; }
+        .r-section { padding-top: 5rem; }
+        .r-blocks { display: none; }
+        .r-table-wrap { display: block; margin-top: 2rem; border-top: 1px solid var(--color-ink-900); }
+        .r-table-wrap table { width: 100%; table-layout: fixed; border-collapse: collapse; text-align: left; }
+        .r-table-wrap th, .r-table-wrap td { padding: 0.75rem 1rem 0.75rem 0; vertical-align: top; overflow-wrap: anywhere; border-bottom: 1px solid var(--color-line-soft); }
+        .r-table-wrap thead th { font-size: 1.125rem; line-height: 1.5rem; font-weight: 500; letter-spacing: -0.015em; }
+        .r-table-wrap tbody th { width: var(--width-version-label); font-size: var(--text-small); line-height: 1.75rem; font-weight: 400; color: var(--color-ink-600); }
+        .r-data { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="r-page" id="resumen">
+      <p class="r-site">{t("sitio.nombre")}</p>
+      <nav class="r-ruta" aria-label={t("ficha.ruta.nombre")}>
+        <ol>
+          <li><a href="/coches">{t("ficha.ruta.coches")}</a></li>
+          <li><a href={`/marcas/${model.brand}/`}>{card.brand}</a></li>
+          <li aria-current="page">{card.model}</li>
+        </ol>
+      </nav>
+      <main>
+        <header>
+          <h1 class="r-name"><small>{card.brand}</small> {card.model.replace(/-/g, "-⁠")}</h1>
+          <div class="r-grid">
+            <div class="r-info">
+              <p class="r-info-label">{t("ficha.segmento.rotulo")}</p>
+              <p class="r-info-value">
+                <SegmentSilhouette segment={card.segment} />
+                <span>{card.segmentLabel} {model.segment && <SourceMark {...markOf(model.segment)} />}</span>
+              </p>
+              {model.segment?.note && <p class="r-note">{model.segment.note}</p>}
+            </div>
+            <div class="r-info">
+              {card.statusLabel && <p class="r-soon">{card.statusLabel}</p>}
+              <a class="r-text-link" href={model.status.url} rel="noopener">{t("ficha.webMarca")}<span class="sr-only"> {t("ficha.webMarcaSr", { marca: card.brand })}</span></a>
+              {card.compare && (
+                <p><a class="r-text-link" href={card.compare.href}>{card.compare.label}<span class="sr-only"> {card.compare.srLabel}</span></a></p>
+              )}
+            </div>
+            <figure class="r-photo">
+              <div class="r-slot" data-slot={src ? "image" : "silhouette"}>
+                {src ? (
+                  <Image src={src} alt={t("ficha.imagen.alt", { marca: card.brand, modelo: card.model, i: 1, n: model.images.length })} width={960} height={640} widths={[480, 960]} sizes="(min-width: 1024px) 26rem, 100vw" loading="eager" fetchpriority="high" />
+                ) : (
+                  <SegmentSilhouette segment={card.segment} large />
+                )}
+              </div>
+              {mainImage?.attribution && <figcaption>{t("ficha.imagen.atribucion", { attribution: mainImage.attribution })}</figcaption>}
+            </figure>
+          </div>
+          <dl class="r-figures">
+            <div class="r-figure">
+              <dt>{COPY.range}</dt>
+              {range ? (
+                <dd class="r-number">{split(t("ficha.unidad.km", { n: formatNumber(range.value) })).number}<span>{split(t("ficha.unidad.km", { n: 0 })).unit}</span></dd>
+              ) : (
+                <dd class="r-number" data-missing>{t("ficha.porConfirmar")}</dd>
+              )}
+              {range && <dd class="r-source"><SourceMark {...markOf(range)} /></dd>}
+            </div>
+            <div class="r-figure">
+              <dt>{COPY.priceFrom}</dt>
+              {price ? (
+                <dd class="r-number">{split(formatEur(price.value)).number}<span>{split(formatEur(price.value)).unit}</span></dd>
+              ) : (
+                <dd class="r-number" data-missing>{t("ficha.porConfirmar")}</dd>
+              )}
+              {card.dealLabel && <dd class="r-deal">{card.dealLabel}</dd>}
+              {price && <dd class="r-source"><SourceDate source={price} /></dd>}
+            </div>
+            {figures.map((f) => (
+              <div class="r-figure">
+                <dt>{f.label}</dt>
+                {f.text ? (
+                  <dd class="r-number">{split(f.text).number}<span>{split(f.text).unit}</span></dd>
+                ) : (
+                  <dd class="r-number" data-missing>{t("ficha.porConfirmar")}</dd>
+                )}
+                {f.text && f.datum && <dd class="r-source"><SourceMark {...markOf(f.datum)} /></dd>}
+              </div>
+            ))}
+          </dl>
+        </header>
+
+        <section id="versiones" class="r-section" aria-labelledby="versiones-titulo">
+          <h2 id="versiones-titulo" class="text-section">{t("ficha.versiones.titulo")}</h2>
+          <p class="r-entry">{t("ficha.versiones.entrada")}</p>
+          <div class="r-table-wrap">
+            <table>
+              <caption class="sr-only">{t("ficha.versiones.caption", { marca: card.brand, modelo: card.model })}</caption>
+              <thead>
+                <tr>
+                  <td></td>
+                  {versions.map((v) => <th scope="col">{v.name}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">{t("ficha.campo.precio")}</th>
+                  {versions.map((v) => <td><VersionPrice price={v.price} discontinued={false} termsIndex={termsIndex(v)} /></td>)}
+                </tr>
+                {fieldRows.map((row, i) => (
+                  <tr>
+                    <th scope="row">{row.label}</th>
+                    {versions.map((v) => <td><VersionField field={fieldsOf(v)[i]!} numberOf={numberOf} /></td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <ol class="r-blocks">
+            {versions.map((v) => (
+              <li class="r-block">
+                <h3>{v.name}</h3>
+                <dl>
+                  <div>
+                    <dt>{t("ficha.campo.precio")}</dt>
+                    <dd><VersionPrice price={v.price} discontinued={false} termsIndex={termsIndex(v)} /></dd>
+                  </div>
+                  {fieldsOf(v).map((field) => (
+                    <div>
+                      <dt>{field.label}</dt>
+                      <dd><VersionField field={field} numberOf={numberOf} /></dd>
+                    </div>
+                  ))}
+                </dl>
+              </li>
+            ))}
+          </ol>
+          {financed.length > 0 && (
+            <div class="r-terms">
+              <h3>{t("ficha.condiciones.titulo")}</h3>
+              <ul>
+                {financed.map((v, i) => (
+                  <li id={`condiciones-${i + 1}`} tabindex="-1">
+                    <strong>{v.name}</strong>
+                    {v.price!.price_terms}
+                    <br />
+                    <a class="r-text-link" href={v.price!.price_terms_url} rel="noopener">{t("ficha.condiciones.enlace")}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+
+        <section id="datos-modelo" class="r-section" aria-labelledby="datos-titulo">
+          <h2 id="datos-titulo" class="text-section">{t("ficha.modelo.titulo")}</h2>
+          <p class="r-entry">{t("ficha.modelo.entrada")}</p>
+          <dl class="r-data">
+            {model.specs.wltp_max_km && (
+              <div>
+                <dt>{t("ficha.modelo.autonomia")}</dt>
+                <dd>{t("ficha.unidad.km", { n: model.specs.wltp_max_km.value })} <SourceMark {...markOf(model.specs.wltp_max_km)} /></dd>
+                {model.specs.wltp_max_km.note && <dd class="r-note">{model.specs.wltp_max_km.note}</dd>}
+              </div>
+            )}
+          </dl>
+        </section>
+
+        <section id="fuentes" class="r-section" aria-labelledby="fuentes-titulo">
+          <h2 id="fuentes-titulo" class="text-section">{t("ficha.fuentes.titulo")}</h2>
+          <p class="r-entry">{t("ficha.fuentes.entrada")}</p>
+          <ol class="r-sources">
+            {notes.map((note) => (
+              <li id={`fuente-${note.n}`} tabindex="-1">{note.n}. {noteLine(note)} <a href={note.url} rel="noopener">{note.url}</a></li>
+            ))}
+          </ol>
+        </section>
+      </main>
+    </div>
+
+    <nav class="r-bar" aria-label={COPY.menu}>
+      <ul>
+        {sections.map((s) => (
+          <li><a href={s.href} aria-current={s.current ? "location" : undefined}>{s.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </body>
+</html>
