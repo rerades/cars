@@ -1,0 +1,152 @@
+/* Proposal B, "Cifra" (docs/design/propuesta-b.md). Shared by catalogo-b and ficha-b. Not a page: only *.astro are routes. */
+@font-face {
+  font-family: "Archivo";
+  src: url("./fonts/archivo.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+
+:root {
+  --font-sans: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-surface-muted: #f2f2ee;
+  --color-ink-900: #0f100d;
+  --color-ink-600: #55574f;
+  --color-line: #75776e;
+  --color-line-soft: #deded8;
+  /* Links and focus go ink: the only colour on the page is the volt block. */
+  --color-brand-600: #0f100d;
+  --color-brand-800: #3f4138;
+  --color-volt: #d6f54a;
+  --radius-block: 1.5rem;
+  --text-cifra-xl: clamp(7.5rem, 21vw, 18rem);
+  --text-cifra-l: clamp(5rem, 13vw, 11rem);
+  --text-cifra-m: clamp(3.5rem, 7vw, 6rem);
+  --text-cifra-s: 2rem;
+  --text-nombre-xl: clamp(2.75rem, 7.6vw, 6.5rem);
+  --text-nombre-l: clamp(1.5rem, 2.8vw, 2.25rem);
+}
+
+body {
+  font-stretch: 100%;
+  overflow-wrap: anywhere;
+}
+
+/* Two widths of one family are the identity: names very wide, figures very narrow. */
+.nombre {
+  font-stretch: 125%;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  color: var(--color-ink-900);
+}
+.nombre--xl { font-size: var(--text-nombre-xl); font-weight: 800; line-height: 0.98; }
+.nombre--l { font-size: var(--text-nombre-l); }
+
+.pagina {
+  margin-inline: auto;
+  max-width: var(--container-page);
+  padding: 1rem 1rem 2rem;
+}
+@media (min-width: 768px) { .pagina { padding-inline: 1.5rem; } }
+@media (min-width: 1024px) { .pagina { padding: 2rem 2rem 3rem; } }
+
+.bloque {
+  border-radius: var(--radius-block);
+  background: var(--color-surface-muted);
+  padding: 1.25rem;
+  min-width: 0;
+}
+@media (min-width: 1024px) { .bloque { padding: 2rem; } }
+.bloque--volt { background: var(--color-volt); }
+
+/* Figure above, small label below (RF-18). DOM: dt then dd, so the reader hears the label first. */
+.cifra { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+.cifra dt {
+  order: 2;
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+  color: var(--color-ink-600);
+}
+.cifra dd { order: 1; }
+.cifra dd.cifra__detalle { order: 3; }
+.bloque--volt .cifra dt { color: var(--color-ink-900); }
+
+.cifra__valor {
+  display: flex;
+  align-items: baseline;
+  gap: 0.06em;
+  font-stretch: 62%;
+  font-weight: 700;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -0.015em;
+  line-height: 0.82;
+  color: var(--color-ink-900);
+  white-space: nowrap;
+}
+.cifra__unidad {
+  font-size: 0.26em;
+  font-stretch: 125%;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.cifra--xl .cifra__valor { font-size: var(--text-cifra-xl); }
+.cifra--l .cifra__valor { font-size: var(--text-cifra-l); }
+.cifra--m .cifra__valor { font-size: var(--text-cifra-m); }
+.cifra--s .cifra__valor { font-size: var(--text-cifra-s); line-height: 1; }
+
+/* «Por confirmar»: two stacked lines that fill the height the number would have, so no row jumps. */
+.cifra__falta {
+  display: block;
+  font-stretch: 62%;
+  font-weight: 500;
+  line-height: 0.41;
+  color: var(--color-ink-600);
+}
+.cifra__falta span { display: block; font-size: 0.46em; line-height: 0.89; }
+.cifra__falta span:first-child::first-letter { text-transform: uppercase; }
+.cifra--xl .cifra__falta { font-size: var(--text-cifra-xl); }
+.cifra--l .cifra__falta { font-size: var(--text-cifra-l); }
+.cifra--m .cifra__falta { font-size: var(--text-cifra-m); }
+.cifra--s .cifra__falta { font-size: var(--text-cifra-s); }
+.cifra--s .cifra__falta span { font-size: 0.56em; line-height: 1; }
+
+.foto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--color-line-soft);
+  color: var(--color-ink-600);
+}
+.foto img { width: 100%; height: 100%; object-fit: cover; }
+.foto--vacia { background: var(--color-surface); color: var(--color-line); }
+
+.pie-foto {
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+  color: var(--color-ink-600);
+}
+.enlace {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--spacing-touch);
+  color: var(--color-brand-600);
+  text-decoration: underline;
+}
+.enlace:hover { color: var(--color-brand-800); }
+.enlace--pie { font-size: var(--text-small); line-height: var(--text-small--line-height); }
+
+.etiqueta {
+  display: inline-block;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--text-badge);
+  line-height: var(--text-badge--line-height);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.etiqueta--soon { background: var(--color-soon-bg); color: var(--color-soon-fg); }
+.etiqueta--deal { background: var(--color-deal-bg); color: var(--color-deal-fg); }
