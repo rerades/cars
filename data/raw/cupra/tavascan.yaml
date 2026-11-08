@@ -6,12 +6,12 @@ status: {value: on_sale, source_id: cupra-es, url: "https://www.cupra.com/es-es/
 segment: {value: suv_compacto, note: "la web lo presenta como 'SUV Coupé 100 % Eléctrico'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-05, tier: T1}
 needs_review: false
 specs:
-  dc_max_kw: {value: 135, note: "10-80 % en 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
+  dc_max_kw: {value: 135, note: "10-80 % en 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-08, tier: T1}
 versions:
   - name: Tavascan (58 kWh, 140 kW)
-    battery_kwh: {value: 58, basis: unknown, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-05, tier: T1}
-    power_kw: {value: 140, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-05, tier: T1}
-    wltp_km: {value: 441, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-05, tier: T1}
+    battery_kwh: {value: 58, basis: unknown, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-08, tier: T1}
+    power_kw: {value: 140, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-08, tier: T1}
+    wltp_km: {value: 441, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-08, tier: T1}
     drivetrain: {value: fwd, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-09-24, tier: T1}
     price:
       value: 37151.49
@@ -26,13 +26,13 @@ versions:
       retrieved: 2026-11-05
       tier: T1
   - name: Tavascan Endurance
-    power_kw: {value: 210, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-05, tier: T1}
-    wltp_km: {value: 557, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-05, tier: T1}
+    power_kw: {value: 210, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-08, tier: T1}
+    wltp_km: {value: 557, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-08, tier: T1}
     price: null
   - name: Tavascan VZ
-    power_kw: {value: 250, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-05, tier: T1}
-    wltp_km: {value: 533, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-05, tier: T1}
-    drivetrain: {value: awd, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-05, tier: T1}
+    power_kw: {value: 250, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-08, tier: T1}
+    wltp_km: {value: 533, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-08, tier: T1}
+    drivetrain: {value: awd, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/tavascan", retrieved: 2026-11-08, tier: T1}
     price: null
 images:
   - file: "data/images/cupra/tavascan/frontal.jpg"
@@ -57,6 +57,7 @@ reviews:
     version: Tavascan VZ
 open_questions:
   - "Sin PVP limpio: la web solo muestra precio con oferta (válida hasta el 30/11/2026, leída el 2026-11-05), y solo para la versión de acceso."
-  - "Batería de Endurance y VZ, y carga AC, no publicadas en la ficha."
-  - "dc_max_kw (135 kW, 29 min) y tracción de la versión de acceso: la lectura del 2026-11-05 no muestra la cifra; se conserva la del 2026-09-24."
+  - "Batería de Endurance y VZ: la web no la publica. El IDAE (T2, filas MY27, ids 610109 y 610111) da 77 kWh en el nombre y 82 en el campo de batería; al no saber cuál es la comercial ni la base, no se guarda. La WLTP (557 y 533 km) y la potencia de la web coinciden con el IDAE. Carga AC no publicada en la web ni en el IDAE."
+  - "Tracción de Tavascan (58 kWh, 140 kW): 'fwd' viene de la lectura del 2026-09-24; la del 2026-11-08 no la muestra y el IDAE no da tracción. Sin confirmar; tampoco se publica la de Endurance. VZ: 'tracción integral AWD' confirmada el 2026-11-08."
+  - "Versiones: las tres (acceso 58 kWh, Endurance, VZ) siguen en la ficha el 2026-11-08; el IDAE no dice qué se vende."
   - "launch: fecha de inicio de comercialización en España no publicada en la ficha del modelo (verificado 2026-09-28)."

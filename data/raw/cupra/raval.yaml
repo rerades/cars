@@ -6,16 +6,17 @@ status: {value: on_sale, note: "Plus, Endurance y VZ a la venta; versión base 8
 segment: {value: urbano, note: "la web lo presenta como 'un coche eléctrico 100 % urbano'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-05, tier: T1}
 needs_review: false
 specs:
-  dc_max_kw: {value: 105, note: "10-80 % en ~24 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
+  dc_max_kw: {value: 105, note: "10-80 % en ~24 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-08, tier: T1}
 versions:
   - name: Raval Plus
-    power_kw: {value: 99, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-05, tier: T1}
-    wltp_km: {value: 328, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-05, tier: T1}
+    battery_kwh: {value: 37, basis: unknown, note: "IDAE, id 611663 'RAVAL Plus 99kW (135CV) 37kWh MY26' (única fila de la versión); la web no da la batería de Plus", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 99, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-08, tier: T1}
+    wltp_km: {value: 328, note: "el IDAE da 305 km para la fila MY26 (id 611663); prevalece la web de la marca (T1)", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-08, tier: T1}
     price: null
   - name: Raval Endurance
-    battery_kwh: {value: 51.5, basis: unknown, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-05, tier: T1}
-    power_kw: {value: 155, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-05, tier: T1}
-    wltp_km: {value: 446, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-05, tier: T1}
+    battery_kwh: {value: 51.5, basis: unknown, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-08, tier: T1}
+    power_kw: {value: 155, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-08, tier: T1}
+    wltp_km: {value: 446, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-08, tier: T1}
     price:
       value: 32800.49
       unit: EUR
@@ -30,8 +31,8 @@ versions:
       tier: T1
   - name: Raval VZ
     battery_kwh: {value: 52, basis: unknown, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-09-24, tier: T1}
-    power_kw: {value: 166, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-05, tier: T1}
-    wltp_km: {value: 440, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-05, tier: T1}
+    power_kw: {value: 166, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-08, tier: T1}
+    wltp_km: {value: 440, source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-11-08, tier: T1}
     price: null
   - name: Raval (base, 85 kW)
     battery_kwh: {value: 37, basis: unknown, note: "'Batería de 37 kWh con potencia de 85kW (115 CV)', versión 'Próximamente'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/raval", retrieved: 2026-10-02, tier: T1}
@@ -46,9 +47,10 @@ images:
     license: "CC-BY-SA-4.0"
     attribution: "Bene Riobó, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
-  - "Batería resuelta (2026-10-02): los 37 kWh son de la versión base 85 kW ('Próximamente'). La web no publica la batería de Plus ni de VZ: vacío."
+  - "Batería de Plus resuelta el 2026-11-08 con el IDAE (37 kWh, T2). La web publica 37 kWh para la versión base 85 kW ('Próximamente', 2026-10-02) y no da la de Plus ni la de VZ; el IDAE da 51,5 kWh para VZ (ids 611669, 611061), que coincide con los 52 de la web. Hay filas MY26 del IDAE de Plus y VZ con WLTP menor (305 y 379 km) que la web (328 y 440): prevalece la web."
+  - "Versiones: la lectura del 2026-11-08 sigue mostrando Plus, Endurance y VZ con su autonomía y potencia, y la versión de 26.000 € como 'Nueva versión próximamente'. El IDAE no dice qué se vende; no hay cambios. Tracción y carga AC no publicadas por la web ni por el IDAE."
   - "Precio: Endurance con la oferta financiada vigente hasta el 30/11/2026 (leída el 2026-11-05); sin PVP limpio. Releer en el refresco de diciembre. Plus y VZ sin precio propio."
   - "La ficha muestra 'Desde 26.000' para la versión base 'Próximamente' (relectura del 2026-11-05: el script no devuelve sus condiciones): no se guarda."
   - "Sin PVP limpio; carga AC no publicada; sin fecha para la versión base."
-  - "Lecturas del 2026-11-05 sin la cifra: dc_max_kw (105 kW), batería de VZ (52 kWh) y potencia de la versión base (85 kW) se conservan con su fecha anterior."
+  - "Lectura del 2026-11-08 sin la cifra: batería de VZ (52 kWh) y potencia de la versión base (85 kW) se conservan con su fecha anterior."
   - "launch: fecha de inicio de comercialización en España no publicada en la ficha del modelo (verificado 2026-09-28)."
