@@ -7,21 +7,20 @@ import SegmentSilhouette from "../src/components/SegmentSilhouette.astro";
 import SourceDate from "../src/components/SourceDate.astro";
 import SourceMark from "../src/components/SourceMark.astro";
 import VersionField from "../src/components/VersionField.astro";
-import VersionPrice from "../src/components/VersionPrice.astro";
+import Cifra from "./a/Cifra.astro";
 import { cardView } from "../src/lib/card.ts";
 import { imageRelPath, loadModels, type Sourced, type Version } from "../src/lib/data.ts";
 import { formatDecimal, formatEur, formatNumber } from "../src/lib/format.ts";
 import { t } from "../src/lib/i18n.ts";
 import { groupNotes, noteLine } from "../src/lib/notes.ts";
 import { versionFields } from "../src/lib/version-fields.ts";
-import { chunkVersions, sortVersions } from "../src/lib/versions.ts";
+import { sortVersions } from "../src/lib/versions.ts";
 
 const model = loadModels().models.find((m) => m.file === "renault/r5-e-tech-electrico.yaml")!;
 const card = cardView(model);
 const versions = sortVersions(model.versions);
 // New copy, proposed in docs/design/propuesta-a.md.
 const COPY = {
-  missing: "Por confirmar",
   figures: "Cifras clave",
   menu: "Secciones de la página",
   items: [
@@ -54,7 +53,6 @@ const specRows = [
 ].filter((r) => r.datum);
 
 const fieldsOf = (v: Version) => versionFields(v);
-const fieldRows = versions.length > 0 ? fieldsOf(versions[0]!) : [];
 const financed = versions.filter((v) => v.price?.price_kind === "financed");
 const termsIndex = (v: Version) => {
   const i = financed.indexOf(v);
@@ -119,7 +117,7 @@ const figures = [
             </nav>
           </div>
           <div class="hero-foot"><div class="wrap hero-text">
-            <h1 class="hero-name">
+            <h1 class="hero-name wide">
               <span class="hero-brand">{card.brand}</span>
               <span class="hero-model">{card.model.split(" ").map((w) => <><span class="word">{w}</span>{" "}</>)}</span>
             </h1>
@@ -147,19 +145,14 @@ const figures = [
 
         <section id="cifras" aria-label={COPY.figures} class="wrap figures">
           <dl class="figures-grid">
-            <div class="figure" data-figure="price">
-              <dd class="figure-value" data-missing={price ? undefined : ""}>{price ? formatEur(price.value) : COPY.missing}</dd>
-              <dt class="figure-label">{card.labels.price}{card.dealLabel && <> · {card.dealLabel}</>}</dt>
-              {price && <dd class="figure-source"><SourceDate source={price} /></dd>}
-            </div>
+            <Cifra size="xl" class="figure" figure="price" label={card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` : card.labels.price} text={price ? formatEur(price.value) : null}>
+              {price && <span slot="detalle" class="figure-source"><SourceDate source={price} /></span>}
+            </Cifra>
             {
               figures.map((f) => (
-                <div class="figure" data-figure={f.key}>
-                  <dd class="figure-value" data-missing={f.value ? undefined : ""}>{f.value ?? COPY.missing}</dd>
-                  <dt class="figure-label">
-                    {f.label} {f.datum && <SourceMark {...markOf(f.datum)} />}
-                  </dt>
-                </div>
+                <Cifra size="xl" class="figure" figure={f.key} label={f.label} text={f.value}>
+                  {f.datum && <span slot="marca"> <SourceMark {...markOf(f.datum)} /></span>}
+                </Cifra>
               ))
             }
           </dl>
@@ -168,57 +161,46 @@ const figures = [
 
       <section id="versiones" aria-labelledby="versiones-titulo" class="band-white block">
         <div class="wrap">
-          <h2 id="versiones-titulo" class="block-title">{t("ficha.versiones.titulo")}</h2>
+          <h2 id="versiones-titulo" class="block-title wide">{t("ficha.versiones.titulo")}</h2>
           <p class="block-intro">{t("ficha.versiones.entrada")}</p>
 
-          <div class="versions-table">
-            {chunkVersions(versions).map((chunk) => (
-            <table>
-              <caption class="sr-only">{t("ficha.versiones.caption", { marca: card.brand, modelo: card.model })}</caption>
-              <thead>
-                <tr>
-                  <td></td>
-                  {chunk.items.map((v) => <th scope="col">{v.name}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">{t("ficha.campo.precio")}</th>
-                  {chunk.items.map((v) => (
-                    <td><VersionPrice price={v.price} discontinued={false} termsIndex={termsIndex(v)} /></td>
-                  ))}
-                </tr>
-                {fieldRows.map((row, i) => (
-                  <tr>
-                    <th scope="row">{row.label}</th>
-                    {chunk.items.map((v) => (
-                      <td><VersionField field={fieldsOf(v)[i]!} numberOf={numberOf} /></td>
+          {/* B's version block: name; WLTP range and price as large narrow figures; then a label/value table. */}
+          <ol class="versions">
+            {versions.map((v) => {
+              const fields = fieldsOf(v);
+              const wltp = fields.find((f) => f.key === "wltp_km")!;
+              const rest = fields.filter((f) => f.key !== "wltp_km");
+              const n = termsIndex(v);
+              return (
+                <li class="version">
+                  <h3 class="version-name wide">{v.name}</h3>
+                  <dl class="version-main">
+                    <Cifra size="m" label={wltp.label} text={wltp.text}>
+                      {wltp.datum && <span slot="marca"> <SourceMark {...markOf(wltp.datum)} /></span>}
+                    </Cifra>
+                    <Cifra size="m" label={t("ficha.campo.precio")} text={v.price ? formatEur(v.price.value) : null}>
+                      {v.price && (
+                        <div slot="detalle" class="version-price-detail">
+                          {v.price.price_kind === "financed" && (
+                            <p><span class="inline-block rounded-full bg-deal-bg px-3 py-1 text-badge text-deal-fg">{t("ficha.precio.oferta")}</span></p>
+                          )}
+                          <SourceDate source={v.price} />
+                          {n && <a href={`#condiciones-${n}`} class="terms-link">{t("ficha.precio.verCondiciones")}</a>}
+                        </div>
+                      )}
+                    </Cifra>
+                  </dl>
+                  <dl class="version-rest">
+                    {rest.map((f) => (
+                      <div>
+                        <dt>{f.label}</dt>
+                        <dd><VersionField field={f} numberOf={numberOf} /></dd>
+                      </div>
                     ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            ))}
-          </div>
-
-          <ol class="versions-blocks">
-            {versions.map((v) => (
-              <li>
-                <h3 class="version-name">{v.name}</h3>
-                <dl>
-                  <div>
-                    <dt>{t("ficha.campo.precio")}</dt>
-                    <dd><VersionPrice price={v.price} discontinued={false} termsIndex={termsIndex(v)} /></dd>
-                  </div>
-                  {fieldsOf(v).map((field) => (
-                    <div>
-                      <dt>{field.label}</dt>
-                      <dd><VersionField field={field} numberOf={numberOf} /></dd>
-                    </div>
-                  ))}
-                </dl>
-              </li>
-            ))}
+                  </dl>
+                </li>
+              );
+            })}
           </ol>
 
           {
@@ -240,14 +222,13 @@ const figures = [
 
       <section id="datos" aria-labelledby="datos-titulo" class="band-dark block">
         <div class="wrap">
-          <h2 id="datos-titulo" class="block-title">{t("ficha.modelo.titulo")}</h2>
+          <h2 id="datos-titulo" class="block-title wide">{t("ficha.modelo.titulo")}</h2>
           <p class="block-intro">{t("ficha.modelo.entrada")}</p>
           <dl class="specs">
             {specRows.map((r) => (
-              <div>
-                <dd class="spec-value">{r.text}</dd>
-                <dt class="figure-label">{r.label} <SourceMark {...markOf(r.datum!)} /></dt>
-              </div>
+              <Cifra size="m" class="spec" label={r.label} text={r.text || null}>
+                <span slot="marca"> <SourceMark {...markOf(r.datum!)} /></span>
+              </Cifra>
             ))}
           </dl>
         </div>
@@ -255,7 +236,7 @@ const figures = [
 
       <section id="fuentes" aria-labelledby="fuentes-titulo" class="band-light block block--last">
         <div class="wrap">
-          <h2 id="fuentes-titulo" class="block-title">{t("ficha.fuentes.titulo")}</h2>
+          <h2 id="fuentes-titulo" class="block-title wide">{t("ficha.fuentes.titulo")}</h2>
           <p class="block-intro">{t("ficha.fuentes.entrada")}</p>
           <ol class="sources">
             {notes.map((note) => (
@@ -379,16 +360,14 @@ const figures = [
 
   .hero-name {
     display: block;
-    font-size: clamp(3.25rem, 7.5vw, 6rem);
-    font-weight: 700;
-    letter-spacing: -0.045em;
+    font-size: var(--text-display);
     line-height: 0.98;
-    overflow-wrap: anywhere;
   }
 
   .hero-brand {
     display: block;
     font-size: var(--text-body);
+    font-stretch: 100%;
     font-weight: 600;
     letter-spacing: 0;
     line-height: var(--text-body--line-height);
@@ -450,10 +429,6 @@ const figures = [
     padding-top: 0.75rem;
   }
 
-  .figure-source {
-    margin-top: 0.125rem;
-  }
-
   .figure-source * {
     font-size: var(--text-small);
   }
@@ -491,10 +466,7 @@ const figures = [
   }
 
   .block-title {
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 1;
+    font-size: var(--text-block);
   }
 
   .block-intro {
@@ -504,87 +476,70 @@ const figures = [
     margin-top: 0.75rem;
   }
 
-  .versions-table {
-    display: none;
-    margin-top: 2rem;
-  }
-
-  .versions-table table {
-    border-collapse: collapse;
-    table-layout: fixed;
-    text-align: left;
-    width: 100%;
-  }
-
-  .versions-table td:first-child {
-    width: var(--width-version-label);
-  }
-
-  .versions-table thead th {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    overflow-wrap: anywhere;
-    padding: 0 1.5rem 1rem 0;
-    vertical-align: bottom;
-  }
-
-  .versions-table tbody th {
-    color: var(--color-ink-600);
-    font-size: var(--text-small);
-    font-weight: 500;
-    padding: 0.75rem 1rem 0.75rem 0;
-    vertical-align: top;
-  }
-
-  .versions-table tbody td {
-    overflow-wrap: anywhere;
-    padding: 0.75rem 1.5rem 0.75rem 0;
-    vertical-align: top;
-  }
-
-  .versions-table tbody tr {
-    border-top: 1px solid var(--color-line-soft);
-  }
-
-  .versions-blocks {
+  /* B's version block (direccion.md, "La elegida"): name, two large figures, then a label/value table. */
+  .versions {
+    border-top: 2px solid var(--color-ink-900);
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
     margin-top: 2rem;
+  }
+
+  .version {
+    border-bottom: 1px solid var(--color-line-soft);
+    display: grid;
+    gap: 1.25rem;
+    padding-block: 1.5rem;
   }
 
   .version-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    font-size: var(--text-version);
+    line-height: 1.05;
+  }
+
+  .version-main {
+    align-items: start;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .version-price-detail {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  /* Secondary fields are a plain label/value list: only the two main figures compete for attention. */
+  .version-rest > div {
+    border-top: 1px solid var(--color-line-soft);
+    column-gap: 1rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    padding-block: 0.5rem;
+  }
+
+  .version-rest > div:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .version-rest dt {
+    color: var(--color-ink-600);
+    font-size: var(--text-small);
+    line-height: 1.5rem;
+  }
+
+  .version-rest dd {
     overflow-wrap: anywhere;
   }
 
-  .versions-blocks dl {
-    margin-top: 0.75rem;
-  }
-
-  .versions-blocks dl > div {
-    border-top: 1px solid var(--color-line-soft);
-    padding-block: 0.625rem;
-  }
-
-  .versions-blocks dt {
-    color: var(--color-ink-600);
-    font-size: var(--text-small);
-    line-height: var(--text-small--line-height);
-  }
-
   @media (min-width: 1024px) {
-    .versions-table {
-      display: block;
-    }
-
-    .versions-blocks {
-      display: none;
+    .version {
+      align-items: start;
+      column-gap: 2rem;
+      grid-template-columns: 3fr 5fr 4fr;
+      padding-block: 2rem;
     }
   }
 
@@ -625,18 +580,9 @@ const figures = [
     margin-top: 2rem;
   }
 
-  .specs > div {
+  .specs > .spec {
     border-top: 1px solid var(--color-line-soft);
-    display: flex;
-    flex-direction: column;
-    padding-top: 0.75rem;
-  }
-
-  .spec-value {
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
+    padding-top: 0.875rem;
   }
 
   @media (min-width: 1024px) {
