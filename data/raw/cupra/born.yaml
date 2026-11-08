@@ -6,13 +6,14 @@ status: {value: on_sale, source_id: cupra-es, url: "https://www.cupra.com/es-es/
 segment: {value: compacto, note: "la web lo presenta como 'compacto 100 % eléctrico'", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-05, tier: T1}
 needs_review: false   # revisado por el responsable el 2026-10-06 (RF-13)
 specs:
-  battery_kwh_options: {value: [59, 79], source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
-  wltp_max_km: {value: 631, note: "'hasta 631 km', máximo de la gama", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-05, tier: T1}
-  dc_max_kw: {value: 183, note: "10-80 % desde 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+  battery_kwh_options: {value: [59, 79], source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-08, tier: T1}
+  wltp_max_km: {value: 631, note: "'hasta 631 km', máximo de la gama", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-08, tier: T1}
+  dc_max_kw: {value: 183, note: "10-80 % desde 29 min", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-08, tier: T1}
 versions:
   - name: Born+ (190 CV)
-    battery_kwh: {value: 59, basis: unknown, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-05, tier: T1}
-    power_kw: {value: 140, note: "publicado: 190 CV", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-05, tier: T1}
+    battery_kwh: {value: 59, basis: unknown, note: "la web no indica si es útil o bruta", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-08, tier: T1}
+    wltp_km: {value: 484, note: "IDAE, id 610104 'BORN CUPRA BORN + 140kW (190CV) 59Kw h MY27' (única fila MY27 de esta versión); la web de la marca no da la cifra por versión", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 140, note: "publicado: 190 CV", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-08, tier: T1}
     price:
       value: 37210.54
       unit: EUR
@@ -27,7 +28,8 @@ versions:
       tier: T1
   - name: Born VZ
     power_kw: {value: 240, note: "publicado: hasta 326 CV", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-05, tier: T1}
-    dc_max_kw: {value: 183, note: "dato de la ficha del modelo Born; no se atribuye por versión", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-09-24, tier: T1}
+    wltp_km: {value: 631, note: "IDAE, id 610106 'BORN CUPRA BORN VZ 240kW (326CV) 79kWh MY27'; coincide con el 'hasta 631 km' de la web", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    dc_max_kw: {value: 183, note: "dato de la ficha del modelo Born; no se atribuye por versión", source_id: cupra-es, url: "https://www.cupra.com/es-es/coches/born", retrieved: 2026-11-08, tier: T1}
     price: null   # sin PVP ni precio financiado visible
 images:
   - file: "data/images/cupra/born/frontal.jpg"
@@ -48,6 +50,7 @@ open_questions:
   - "reviews: sin prueba del Born actual en diariomotor-es (solo un análisis en vídeo de 2021, de la generación anterior)."
   - "Precio: Born+ con la oferta financiada vigente hasta el 30/11/2026 (leída el 2026-11-05); sin PVP limpio. Releer en el refresco de diciembre."
   - "Sin PVP limpio: el 'Precio al contado' de las condiciones pertenece a la misma oferta (incluye descuento de marca y concesionario), así que no es PVP oficial y no se guarda como pvp."
-  - "Batería, WLTP y potencia por versión (VZ 79 kWh) no confirmadas por versión; carga AC no publicada en la ficha."
-  - "Lectura del 2026-11-05 sin la cifra: dc_max_kw (183 kW) y battery_kwh_options (79 kWh) se conservan con su fecha anterior."
+  - "WLTP de Born+ (484 km) y VZ (631 km) resuelta el 2026-11-08 con el IDAE (T2, filas MY27). Carga AC no publicada en la ficha ni en el IDAE; tracción no publicada por la web ni por el IDAE."
+  - "Batería de Born VZ: el IDAE da 79 kWh en el nombre y 84 en el campo de batería (id 610106); la web solo cita 79 kWh para el modelo, sin ligarlo a una versión. No se guarda. Born+: la web dice 59 kWh (T1, se mantiene) y el IDAE 61 en el campo (id 610104)."
+  - "Versiones: el IDAE homologa también 'Born Endurance 170kW (231CV) 79kWh MY27' (id 610105, 627 km), que la ficha de la web no muestra; no se añade al no poder confirmar que se vende hoy. El IDAE no dice qué versiones se venden."
   - "launch: fecha de inicio de comercialización en España no publicada en la ficha del modelo (verificado 2026-09-28)."
