@@ -8,12 +8,19 @@ segment: null
 needs_review: true
 versions:
   - name: Pro
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607347 (ID.7 MY26 ID.7 Pro 210 kW (286 CV) 77 kWh); fila «Pro» de menor wltp_km (otras: MY25 id 602526, 617 km; Classic id 607350, 619 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 615, note: "IDAE id 607347", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 607347 (286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
     price: null
   - name: Pro S
-    power_kw: {value: 210, note: "IDAE id 602528 (ID.7 Pro S, MY25; publicado en volkswagen.es: 286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 86, basis: unknown, note: "IDAE id 607348 (ID.7 MY26 ID.7 Pro S 210 kW (286 CV) 86 kWh)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 702, note: "IDAE id 607348; coincide con «hasta 702 km» de la cabecera de volkswagen.es. Otras: Pro S Classic id 607351 y MY25 id 602528, 707 km (cifra del texto de la web)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 607348 (ID.7 MY26 ID.7 Pro S, 286 CV; publicado en volkswagen.es: 286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
     price: null
   - name: GTX
-    power_kw: {value: 250, note: "IDAE id 607349 (ID.7 GTX, MY26; publicado en volkswagen.es: 340 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-10-14, tier: T2}
+    battery_kwh: {value: 86, basis: unknown, note: "IDAE id 607349 (ID.7 MY26 ID.7 GTX 250 kW (340 CV) 86 kWh)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 589, note: "IDAE id 607349; menor de las filas GTX (Classic id 607352, 594 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 250, note: "IDAE id 607349 (ID.7 MY26 ID.7 GTX, 340 CV; publicado en volkswagen.es: 340 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
     price: null
 images:
   - file: "data/images/volkswagen/id7/frontal.jpg"
@@ -26,10 +33,9 @@ images:
 open_questions:
   - "needs_review: true porque volkswagen.es no dice qué versiones se pueden pedir hoy (solo muestra ofertas de financiación) ni liga cada potencia a su versión; status on_sale se apoya en esas ofertas."
   - "Precio: no se guarda. Releído 2026-10-24 con fetch-page.ts (id7.html; palabras PVP, Precio, Oferta válida, 40.200, Business): la nota legal liga 40.200 € a «ID.7 Business 210 kW (286CV)», acabado que no es ninguna versión del fichero (Pro, Pro S, GTX), e incluye literalmente «1.000€ de Plan Auto+ incluidos y plan CAES por importe de 1.000€» y «la ayuda del programa ... (Programa PLAN AUTO+) ... por importe de 4.050€»; con ayudas públicas restadas y sin versión asociada no se guarda. Sin PVP sin oferta. Antes: «desde 40.200 €» con Compra Flexible, sin asignar a un acabado. Revisado de nuevo 2026-10-23 (id7.html): solo «Desde 40.200 € sujeto a financiación o 35 cuotas de 300 €/mes + 1 cuota de 4.050 € (en el mes 12) con Compra Flexible VW», que la nota legal liga a «ID.7 Business 210 kW», un acabado que no es ninguna versión del fichero (Pro, Pro S, GTX); sin asociación clara a una versión ni letra pequeña legible, no se guarda. Tampoco hay PVP sin oferta. Revisado 2026-10-22: la nota legal da 40.200 € (ID.7 Business 210 kW) con oferta vigente hasta 31/10/2026; configurador.html (app JS) y modelos/stock.html sin precios de lista; no hay tarifa PDF."
-  - "Autonomía (707 km en el texto, «hasta 702 km» en cabecera), batería y tracción: no se guardan por incoherencia o falta de ciclo WLTP explícito; wltp_km en todas las versiones o en ninguna."
-  - "Intento 2026-11-06: fetch-idae.ts con VOLKSWAGEN, VW y Volkswagen falla («IDAE has no brand»); sin homologación IDAE legible, no se completan batería, WLTP ni tracción, y las potencias de Pro S y GTX conservan su fecha. Sin confirmar qué versiones se venden hoy."
-  - "Pro: sin potencia publicada en la ficha."
+  - "Batería, WLTP y potencia de Pro, Pro S y GTX salen del IDAE (fetch-idae.ts «Volkswagen Turismos», 2026-11-08), filas MY26 (el IDAE no da fecha, solo MY25/MY26/MY27); detalle de la elección en la note de cada valor. La web da 707 km en el texto y «hasta 702 km» en cabecera: ambas cifras existen en el IDAE para Pro S. Tracción: ninguna fuente leída la publica."
+  - "Versiones: sin confirmar cuáles se venden hoy (el IDAE no lo dice). El IDAE (MY27) registra además ID.7 Business, Style (77 y 86 kWh) y GTX 4Motion; la web liga 40.200 € a «Business 210 kW». No se añaden como versiones sin fuente que diga que se venden. ID.7 Tourer también está en el IDAE, sin fichero."
   - "segment: no aparece un término de RF-11. launch: sin fecha de pedidos."
   - "ID.7 Tourer, ID.Polo, ID.Tiguan, ID.Cross, ID.Buzz, e-Caravelle y ID.3 GTI: sin fichero, no se han leído sus fichas ni hay fuente de versiones en esta ejecución."
-  - "Refresco 2026-11-02 (fetch-page.ts, id7.html): la ficha sigue mostrando 40.200 € (ID.7 Business 210 kW) con «Oferta válida hasta el 31/10/2026», ya vencida; sin PVP limpio ni versión del fichero asociada, el precio queda null. Las potencias de Pro S y GTX salen del IDAE (retrieved 2026-10-14): fetch-idae.ts VOLKSWAGEN falla («IDAE has no brand»), no se ha podido releer y su fecha no cambia (la web sí publica 286 CV y 250 kW/340 CV)."
+  - "Refresco 2026-11-02 (fetch-page.ts, id7.html): la ficha sigue mostrando 40.200 € (ID.7 Business 210 kW) con «Oferta válida hasta el 31/10/2026», ya vencida; sin PVP limpio ni versión del fichero asociada, el precio queda null. (Las potencias del IDAE se releyeron el 2026-11-08.)"
   - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."

@@ -12,10 +12,18 @@ specs:
   drivetrains: {value: [rwd, awd], note: "trasera o 4Motion", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id4.html", retrieved: 2026-11-02, tier: T1}
 versions:
   - name: Pro
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607910 (ID.4 MY26 ID.4 Pro 210 kW (286 CV) 77 kWh); fila que coincide con los 560 km de volkswagen.es", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 560, note: "IDAE id 607910; coincide con «Hasta 560km» de volkswagen.es. Otras homologaciones: MY27 id 609976 (79 kWh, 568 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 607910 (286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
     price: null
   - name: Pro Black
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607338 (ID.4 MY26 ID.4 Pro Black 210 kW (286 CV) 77 kWh); fila sin 4Motion de menor wltp_km (el IDAE no da fecha, solo MY26/MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 552, note: "IDAE id 607338. Otras: MY27 id 609979 (79 kWh, 556 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 607338 (286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
     price: null
   - name: GTX
+    battery_kwh: {value: 79, basis: unknown, note: "IDAE id 607337 (ID.4 MY26 ID.4 GTX Classic 250 kW (340 CV) 79 kWh); fila de menor wltp_km dentro de los 77-79 kWh de volkswagen.es. Otras: MY27 id 609978 (77 kWh, 530 km); MY25 id 602520 (82 kWh, 515 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 520, note: "IDAE id 607337", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
     price: null
 images:
   - file: "data/images/volkswagen/id4/frontal.jpg"
@@ -28,7 +36,9 @@ images:
 open_questions:
   - "needs_review: true porque volkswagen.es no dice qué versiones se pueden pedir hoy (solo muestra ofertas de financiación) ni liga cada potencia a su versión; status on_sale se apoya en esas ofertas."
   - "Precio: no se guarda. Releído 2026-10-24 con fetch-page.ts (id4.html; palabras PVP, Precio, Oferta válida, 32.400, Pro): la nota legal da 32.400 € para «ID.4 Pro 210 kW (286V) Automático 1vel.» y dice literalmente «El precio incluye ... descuento de marca y concesionario, bonificaciones de Volkswagen Financial Services, 1.000€ de Plan Auto+ incluidos y plan CAES por importe de 1.000€» y «El precio indicado incluye la ayuda del programa ... (Programa PLAN AUTO+) ... por importe de 4.500€ sujeto a aprobación»; con ayudas públicas restadas no es pvp ni financed (y el texto se contradice: 60 meses de duración mínima vs 36 de permanencia). Además el PVP financiando que da la nota 3 es 38.386,66 € para esa misma versión, pero también con descuentos y ayudas incluidos. Sin PVP sin oferta. Antes: «desde 32.400 €» sujeto a financiación, sin PVP limpio. Revisado de nuevo 2026-10-23 (id4.html): el precio es «Desde 32.400 € sujeto a financiación o 35 cuotas de 250 €/mes + 1 cuota de 4.500 € (en el mes 12) con Compra Flexible VW» para «ID.4 Pro 210 kW», sin que la ficha ligue esa cifra con claridad a la versión «Pro» ni se pueda leer la letra pequeña completa (la lectura de la página la trunca), y el pago de 4.500 € del mes 12 depende del Plan Auto+ (ayuda pública); sin términos literales ni descartar ayudas restadas, no se guarda como financed. Tampoco hay PVP sin oferta. Revisado 2026-10-22: la nota legal de id4.html da 32.400 € para ID.4 Pro 210 kW con descuentos y financiación; configurador.html (app JS) y modelos/stock.html sin precios de lista; no hay tarifa PDF."
-  - "Datos por versión (kWh, WLTP, kW, tracción) no publicados en la ficha. Releído 2026-11-06 con fetch-page.ts (id4.html; palabras WLTP, kWh, autonomía): «Autonomía combinada Hasta 560km», «Autonomía en ciudad Hasta 701km», «De 77kWh a 79kWh», y la nota «Esta autonomía corresponde al acabado Pro equipado con el paquete deportivo opcional»; no liga batería, potencia ni tracción a cada versión (Pro, Pro Black, GTX) y no hay cifra WLTP por versión, así que no se guardan. fetch-idae.ts VOLKSWAGEN, VW y Volkswagen fallan («IDAE has no brand»): sin homologación IDAE. Tampoco se puede confirmar qué versiones se venden hoy."
+  - "Batería, WLTP y potencia por versión salen del IDAE (fetch-idae.ts «Volkswagen Turismos», 2026-11-08). volkswagen.es (releído 2026-11-06 con fetch-page.ts: «Autonomía combinada Hasta 560km», «De 77kWh a 79kWh») no los liga a cada versión. El IDAE no trae fecha (solo MY26/MY27): Pro usa la fila que coincide con los 560 km de la web; Pro Black y GTX, la de menor wltp_km sin 4Motion y dentro de 77-79 kWh. Las versiones 4Motion (Pro, Pro Black) existen en el IDAE pero no en el fichero; no se añaden."
+  - "GTX: el IDAE da 250 kW (340 CV), pero volkswagen.es dice «hasta 210 kW (286 CV)» para el modelo; discrepan T1 y T2, y no se guarda power_kw del GTX. Tracción por versión: no la publica ninguna fuente leída (el IDAE no la da)."
+  - "Versiones: sin confirmar cuáles se venden hoy (el IDAE no lo dice)."
   - "segment: la ficha dice «SUV», que no es un término de la lista de RF-11."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir. Un medio (T3) sugiere nuevos ID.4/ID.7 fabricados en España en 2027; confirmar qué se vende hoy."
   - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."
