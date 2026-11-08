@@ -25,18 +25,7 @@ versions:
     power_kw: {value: 150, note: "publicado: 204 CV", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-31, tier: T1}
     dc_max_kw: {value: 155, source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-31, tier: T1}
     ac_max_kw: {value: 11, note: "«cargador trifásico de corriente alterna (CA) de 11 kW»", source_id: byd-es, url: "https://www.byd.com/es-es/news-list/byd-amplia-gama-atto-2-con-version-comfort", retrieved: 2026-10-31, tier: T1}
-    price:
-      value: 31921
-      unit: EUR
-      price_kind: financed
-      price_terms: "* Oferta válida para Financiación Lineal BYD ATTO 2 COMFORT (Climbing Grey). Precio Recomendado Contado: 31.921,00€. Precio Recomendado Financiando (1): 24.796,00€. No incluye gastos de gestoría, ni matriculación ni transporte. Sistema de amortización francés. Sujeta a estudio y aprobación de la entidad financiera CA Auto Bank, SpA Sucursal en España. Oferta válida en Península y Baleares , solo para autónomos y particulares por un importe mínimo a financiar de 15.000€ y un plazo mínimo de 72 meses y permanencia de 36 meses, hasta el 31/10/2026. La versión visionada puede no corresponder con el vehículo ofertado."
-      price_terms_url: "https://www.byd.com/es-es/promociones/atto-2-promocion"
-      page_name: "BYD ATTO 2 COMFORT (Climbing Grey)"
-      note: "precio al contado; financiando la página da 24.796 €"
-      source_id: byd-es
-      url: "https://www.byd.com/es-es/promociones/atto-2-promocion"
-      retrieved: 2026-10-31
-      tier: T1
+    price: null   # el «Precio Recomendado Contado» de 31.921 € no se puede confirmar sin la ayuda del Plan Auto+; ver open_questions
 images:
   - file: "data/images/byd/atto-2/frontal.jpg"
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/BYD_Atto_2_DSC_8763.jpg/1280px-BYD_Atto_2_DSC_8763.jpg"
@@ -54,8 +43,7 @@ reviews:
 open_questions:
   - "reviews: diariomotor-es no tiene una prueba del Atto 2 eléctrico (solo ofertas y fichas); solo hay review de motorpasion-es."
   - "Boost: autonomía y potencia solo de motor.es (T3); carga y precio sin fuente."
-  - "Hay un 'Precio Recomendado Contado' de 31.921 € en la letra pequeña de la promoción, sin versión clara; no se registra como pvp."
-  - "Precio Comfort: la oferta financed vence el 31/10/2026 (hoy, en el refresco); la página aún la mostraba. Revisar en el siguiente refresco qué precio publica."
+  - "Precio Comfort (leído 2026-11-08 en https://www.byd.com/es-es/promociones/atto-2-promocion): la página da «Precio Recomendado Contado: 31.921,00€» y «Precio Recomendado Financiando: 24.796,00€ (Incluye adelanto Plan Auto +)», oferta hasta el 30/11/2026. Un párrafo aparte dice que el precio «Incluye impuestos calculados al tipo general, descuento promocional de concesionario y fabricante, aportación obligatoria al Plan Auto+ y el adelanto de 3.375,00€ correspondiente a la subvención estatal del Plan Auto+», sin decir a cuál de los dos importes se aplica. La nota (2) de https://www.byd.com/es-es/promociones (#977) cuenta en los descuentos un adelanto de 2.250 € del mismo plan. No se puede confirmar que el contado no reste la ayuda pública, y el financiando la incluye: no se guarda ninguno. Buscar un PVP limpio o una aclaración de BYD."
   - "Active ac_max_kw (11 kW): la ficha ya no lo muestra en el texto; la nota de prensa da 11 kW trifásica en una celda única. Sin releer; retrieved sin cambiar."
   - "Tracción no publicada de forma explícita (monomotor); no se registra drivetrain."
   - "launch: la noticia de llegada a España (2025-02) no da una fecha de inicio de venta; sin dato."
