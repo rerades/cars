@@ -3829,3 +3829,15 @@
     descuentos un adelanto de 2.250 € del Plan Auto+, y las ayudas públicas nunca se restan; si no
     puedes confirmar que un precio no la resta, no lo guardes y anótalo en open_questions. Cada
     price_terms, literal y seguido en la página, sin juntar notas. No toques otros modelos. Bitácora."
+# Especificaciones de pantalla al día con la dirección visual combinada (#1002, 2026-11-09).
+- id: specs-pantalla-direccion-final
+  agent: designer
+  task: "Pon al día las especificaciones de pantalla de docs/design/ con la dirección visual ya
+    combinada en #1002: la sección «La elegida» de docs/design/direccion.md, docs/design/propuesta-a.md,
+    docs/design/tokens.md y los prototipos de web/design-proto/ (catalogo-a, ficha-a). Lo que se sabe
+    que ha quedado viejo: filtros-catalogo.md (los filtros pasan del panel lateral a una barra
+    superior, propuesta-a.md) y ficha-modelo.md (la sección Versiones es ahora el bloque de versión
+    de B, no una tabla de columnas). Revisa también tarjeta-modelo.md, paginas-catalogo.md y
+    portada.md y cambia solo lo que contradiga la dirección elegida. No cambies el alcance: si un
+    cambio choca con un requisito de un PRD, no lo cambies y déjalo como pregunta abierta en la
+    especificación. No toques direccion.md ni los prototipos. Bitácora."
