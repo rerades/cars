@@ -1,6 +1,6 @@
 # ADR-0026 — Evaluación de los prompts del Researcher con un dataset de PR devueltas
 
-- **Estado:** propuesta. Enmienda [ADR-0016](0016-evaluacion-de-prompts-con-langfuse.md) (añade un
+- **Estado:** aceptada (2026-11-09): `fetch/` fuera de git, se empieza con 4 casos y se comparten los 40 USD/mes de `evals:` (ver «Preguntas abiertas»). Enmienda [ADR-0016](0016-evaluacion-de-prompts-con-langfuse.md) (añade un
   segundo dataset, `researcher`, con su propio evaluador) y
   [ADR-0022](0022-escalera-de-confianza-y-agente-retro.md) (el retro puede proponer cambios a
   `researcher.md` cuando su dataset exista).
@@ -115,7 +115,7 @@ Directorio `factory/datasets/researcher/pr-NNNN/`:
 - `files/`: copia de los ficheros de `data/raw/` y `data/sources/` que la tarea afecta, tal como
   estaban en `baseRefOid`. (El worktree se crea en ese commit; la copia sirve para que el caso se
   lea sin git.)
-- `fetch/`: una entrada por llamada a `fetch-page.ts`, `fetch-idae.ts` o `fetch-image.ts` de la
+- `fetch/` (**fuera de git**, en `ops/datasets/researcher/pr-NNNN/fetch/`; en `case.yaml` queda el `sha256` de cada entrada, y el caso no corre si no coincide): una entrada por llamada a `fetch-page.ts`, `fetch-idae.ts` o `fetch-image.ts` de la
   traza original: argumentos, código de salida y salida JSON literal, extraídos del `tool_result`.
   Para `fetch-page.ts` se guarda la salida **sin palabras** (texto completo de la página) si la
   traza la tiene; si solo hay la salida filtrada por palabras, se guarda esa y el caso lo dice
@@ -228,12 +228,13 @@ El juez no decide la aprobación; informa.
   terceros (ADR-0001).
 
 **Malas o a vigilar**
-- **Contenido de terceros en el repositorio.** ADR-0004 no versiona `ops/traces/` porque lleva texto
+- ~~**Contenido de terceros en el repositorio.** ADR-0004 no versiona `ops/traces/` porque lleva texto
   de webs de terceros; `fetch/` copia ese texto en `factory/datasets/researcher/`, que sí se versiona y
   es público si el repositorio lo es. Son fragmentos de páginas de marcas leídas con permiso de
   `robots.txt`, pero es un cambio de criterio respecto a ADR-0004 y hay que aceptarlo expresamente (ver
   preguntas). Alternativa si no se acepta: guardar `fetch/` fuera de git (en `ops/`) y versionar solo
-  su hash.
+  su hash.~~ Se eligió la alternativa (2026-11-09): el repositorio es público. El dataset solo se
+  reproduce en la máquina que tiene `ops/`, la misma que tiene `ops/traces/`.
 - **Depende de que existan las trazas.** Si las de #806, #808, #814 o #824 ya no están en
   `ops/traces/`, esos casos no se pueden congelar y el dataset empieza con menos de 4. No lo he
   comprobado.
@@ -255,15 +256,18 @@ El juez no decide la aprobación; informa.
   2026-11-04): conviene implementarlo ya con la regla nueva.
 
 ### Preguntas abiertas
-- ¿Se acepta versionar en `factory/datasets/researcher/*/fetch/` texto de webs de terceros, en contra
-  del criterio de ADR-0004 para `ops/traces/`, o se guarda fuera de git?
-- ¿Qué valores concretos incumplió cada una de las cuatro PR? Lo fija la persona con `gh pr view
-  <n> --comments` al escribir `expected`; no lo he podido leer.
-- ¿Basta un dataset de 4 casos para que el retro empiece a proponer sobre el Researcher, o se espera a
-  10?
-- ¿Se comparten los 40 USD/mes de `evals:` entre los dos datasets, o se sube el tope?
-- ¿Con qué modelo corre hoy el Researcher? La línea base debe usarlo; no lo he comprobado en
-  `budgets.yaml` en esta ejecución.
+Resueltas por el usuario el 2026-11-09 al aceptarla:
+- ~~¿Se versiona el texto de webs de terceros en `factory/datasets/researcher/*/fetch/`?~~ No: va a
+  `ops/datasets/researcher/`, fuera de git, y el caso guarda su hash. El repositorio es público y se
+  mantiene el criterio de ADR-0004.
+- ~~¿Basta un dataset de 4 casos?~~ Sí: el retro empieza con los 4 de #806, #808, #814 y #824 (sus
+  trazas siguen en `ops/traces/`, comprobado el 2026-11-09), y cada PR lo dice («dataset de 4 casos»).
+- ~~¿Se comparten los 40 USD/mes de `evals:`?~~ Sí; no se toca `budgets.yaml`. Si un mes hacen falta
+  las dos aprobaciones, lo decide el usuario entonces.
+- ~~¿Con qué modelo corre el Researcher?~~ Con `default_model: sonnet` de `budgets.yaml` (no tiene
+  `model` propio); la línea base usa ese.
+- Sigue abierta: qué valores concretos incumplió cada PR. Lo fija una persona al escribir cada
+  `expected` (`gh pr view <n> --comments`).
 
 **Fuentes (repositorio, consultadas el 2026-11-05)**
 - ADR-0004, ADR-0010, ADR-0016, ADR-0020 y ADR-0022 en `docs/architecture/adr/`.

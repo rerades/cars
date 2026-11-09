@@ -1,7 +1,7 @@
 # ADR-0016 — Evaluación de los prompts de los agentes con datasets y experimentos de Langfuse
 
-- **Estado:** aceptada (2026-10-18). Enmienda propuesta por
-  [ADR-0026](0026-evaluacion-de-prompts-del-researcher.md) (2026-11-05): un segundo dataset,
+- **Estado:** aceptada (2026-10-18). Enmendada por
+  [ADR-0026](0026-evaluacion-de-prompts-del-researcher.md) (aceptada el 2026-11-09): un segundo dataset,
   `researcher`, con salidas de `fetch-page.ts` congeladas y evaluador de código; «los demás agentes
   quedan fuera» deja de valer para el Researcher.
 - **Fecha:** 2026-10-18
