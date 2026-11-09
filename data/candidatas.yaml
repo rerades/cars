@@ -107,6 +107,7 @@ candidates:
   - {brand: Jaguar, web_es: "https://www.jaguar.es", press_room: unknown, bev_models: null, doubt: "no comprobado; marca en transición, sin BEV a la venta conocido", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
   - {brand: Land Rover, web_es: "https://www.landrover.es", press_room: unknown, bev_models: null, doubt: "no comprobado si hay BEV a la venta", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
   - {brand: Xiaomi, web_es: null, press_room: unknown, bev_models: null, doubt: "no comprobado que venda coches en España; sin fuente", source_id: busqueda-gama-2026, retrieved: 2026-09-26}
+  - {brand: Suzuki, web_es: "https://auto.suzuki.es", press_room: unknown, bev_models: 1, note: "web oficial de Suzuki Ibérica (www.suzuki.es es el portal Auto/Moto/Náutica); e VITARA, registrada el 2026-11-08 (#1004)", source_id: suzuki-es, retrieved: 2026-11-08}
 
 open_questions:
   - "Ninguna web_es ni sala de prensa está verificada; se hará al registrar cada marca."

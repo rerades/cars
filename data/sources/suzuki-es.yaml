@@ -1,0 +1,19 @@
+# data/sources/suzuki-es.yaml — Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: suzuki-es
+brand: Suzuki
+tier: T1
+market: ES
+kind: [prices, specs, announcements]
+urls:
+  home: https://auto.suzuki.es/
+  models: https://auto.suzuki.es/precios/evitara
+  prices: https://auto.suzuki.es/precios
+  news: https://auto.suzuki.es/actualidad/evitara-lanzamiento
+  robots: https://auto.suzuki.es/robots.txt
+image_license: "" # no se han leído términos de uso de imágenes de la web de Suzuki: no publicar imágenes de esta web
+notes: >
+  Alta provisional (2026-11-08): web oficial de Suzuki Ibérica (auto.suzuki.es; www.suzuki.es es solo el portal
+  Auto/Moto/Náutica). robots.txt: User-agent * Disallow vacío (todo permitido). La página /precios/evitara lista
+  cinco versiones del e VITARA con precio promocional que incluye 3.375 € del Programa Auto+ y descuento de marca.
+last_verified: 2026-11-08
+status: active

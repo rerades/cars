@@ -1,0 +1,50 @@
+# Researcher — Suzuki e Vitara. Fuentes: suzuki-es (T1), idae-es (T2). Consultado 2026-11-08.
+brand: suzuki
+brand_name: Suzuki
+model: e Vitara
+status: {value: on_sale, note: "la página de precios ofrece las cinco versiones con campaña vigente y 'Solicitar una oferta'; la nota de prensa de abril de 2026 dice que el lanzamiento comercial 'se está iniciando en estos días'", source_id: suzuki-es, url: "https://auto.suzuki.es/precios/evitara", retrieved: 2026-11-08, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: e VITARA S2 49 kWh
+    battery_kwh: {value: 49, basis: unknown, note: "IDAE: e VITARA S2 49KWH (id 609258)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 344, note: "IDAE: e VITARA S2 49KWH (id 609258)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 106, note: "eAxle de 106 kW (IDAE: 105,8 kW)", source_id: suzuki-es, url: "https://auto.suzuki.es/actualidad/potencia-electrica-4x4-nuevo-suzuki-e-vitara", retrieved: 2026-11-08, tier: T1}
+    price: null
+  - name: e VITARA S2 61 kWh
+    battery_kwh: {value: 61, basis: unknown, note: "IDAE: e VITARA S2 61KWH (id 609259)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 426, note: "IDAE: e VITARA S2 61KWH (id 609259)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 128, note: "eAxle de 128 kW (IDAE: 128 kW)", source_id: suzuki-es, url: "https://auto.suzuki.es/actualidad/potencia-electrica-4x4-nuevo-suzuki-e-vitara", retrieved: 2026-11-08, tier: T1}
+    price: null
+  - name: e VITARA S2 61 kWh 4x4
+    battery_kwh: {value: 61, basis: unknown, note: "IDAE: e VITARA S2 61KWH 4WD (id 609260)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 395, note: "IDAE: e VITARA S2 61KWH 4WD (id 609260)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 135, note: "135 kW combinados (128 kW delante y 48 kW detrás); el IDAE da 175,6 kW", source_id: suzuki-es, url: "https://auto.suzuki.es/actualidad/potencia-electrica-4x4-nuevo-suzuki-e-vitara", retrieved: 2026-11-08, tier: T1}
+    drivetrain: {value: awd, note: "ALLGRIP-e, dos eAxle", source_id: suzuki-es, url: "https://auto.suzuki.es/actualidad/potencia-electrica-4x4-nuevo-suzuki-e-vitara", retrieved: 2026-11-08, tier: T1}
+    price: null
+  - name: e VITARA S3 61 kWh
+    battery_kwh: {value: 61, basis: unknown, note: "IDAE: e VITARA S3 61KWH (id 609261)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 426, note: "IDAE: e VITARA S3 61KWH (id 609261)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 128, note: "eAxle de 128 kW (IDAE: 128 kW)", source_id: suzuki-es, url: "https://auto.suzuki.es/actualidad/potencia-electrica-4x4-nuevo-suzuki-e-vitara", retrieved: 2026-11-08, tier: T1}
+    price: null
+  - name: e VITARA S3 61 kWh 4x4
+    battery_kwh: {value: 61, basis: unknown, note: "IDAE: e VITARA S3 61KWH 4WD (id 609262)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    wltp_km: {value: 395, note: "IDAE: e VITARA S3 61KWH 4WD (id 609262)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
+    power_kw: {value: 135, note: "135 kW combinados (128 kW delante y 48 kW detrás); el IDAE da 175,6 kW", source_id: suzuki-es, url: "https://auto.suzuki.es/actualidad/potencia-electrica-4x4-nuevo-suzuki-e-vitara", retrieved: 2026-11-08, tier: T1}
+    drivetrain: {value: awd, note: "ALLGRIP-e, dos eAxle", source_id: suzuki-es, url: "https://auto.suzuki.es/actualidad/potencia-electrica-4x4-nuevo-suzuki-e-vitara", retrieved: 2026-11-08, tier: T1}
+    price: null
+images:
+  - file: data/images/suzuki/e-vitara/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/2025_Suzuki_e_Vitara_front_view.jpg/1280px-2025_Suzuki_e_Vitara_front_view.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2025_Suzuki_e_Vitara_front_view.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-08
+    license: CC-BY-3.0
+    attribution: "La Revue Automobile"
+open_questions:
+  - "Precio: auto.suzuki.es/precios/evitara solo publica el precio de la campaña (28.730, 33.230, 36.230, 36.030 y 39.030 €), que incluye 3.375 € del Programa Auto+ (pendiente de publicar sus bases en el BOE) y descuento de marca, y muestra aparte un 'ANTES' (35.605, 40.105, 43.105, 42.905 y 45.905 €) que la página no llama PVP. Un precio con ayuda no es PVP sin ayudas, así que price: null en todas las versiones hasta que haya un PVP limpio."
+  - "launch: ninguna fuente T1 da la fecha de apertura de pedidos. La nota de prensa de precios es del 02/03/2026 y la de la 4x4 (08/04/2026) dice que el lanzamiento comercial 'se está iniciando en estos días'."
+  - "segment: las notas de Suzuki lo llaman 'SUV' sin tamaño ni letra de segmento; no se traduce por tamaño (longitud 4.275 mm según la nota de lanzamiento)."
+  - "Potencia de las 4x4: Suzuki da 135 kW combinados y el IDAE 175,6 kW; se usa el valor T1. Las cifras de autonomía y batería salen del IDAE (T2) porque la web de Suzuki no publica WLTP ni kWh por versión en lo leído; la web no da potencia de carga DC (solo 10-80 % en 45 min)."
+  - "Las versiones 4x2 no declaran tracción en la fuente; no se escribe drivetrain."
