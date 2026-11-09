@@ -1,13 +1,21 @@
-/* Proposal A, "Pantalla" (docs/design/propuesta-a.md). Tokens and common photo treatment of both prototypes. */
+/* Chosen direction: A "Pantalla" with B's type (docs/design/direccion.md, "La elegida"; propuesta-a.md).
+   Tokens and common photo treatment of both prototypes. */
 @font-face {
-  font-family: "Manrope";
-  src: url("./fonts/manrope.woff2") format("woff2");
-  font-weight: 200 800;
+  font-family: "Archivo";
+  src: url("./fonts/archivo.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
   font-display: swap;
 }
 
 :root {
-  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-sans: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Two widths of one family are the identity: names very wide, figures very narrow. */
+  --font-stretch-wide: 125%;
+  --font-stretch-narrow: 62%;
+  --text-figure-xl: clamp(3.75rem, 8vw, 7rem);
+  --text-figure-l: clamp(3.25rem, 5.6vw, 5.25rem);
+  --text-figure-m: clamp(2.75rem, 4.4vw, 4rem);
   --color-ink-950: #0b1217;
   --color-ink-900: #0b1217;
   --color-ink-600: #4a5660;
@@ -21,9 +29,10 @@
   --color-soon-bg: #c6f24e;
   --color-soon-fg: #0b1217;
   --scrim-rgb: 11 18 23;
-  --text-display: clamp(3.25rem, 9.5vw, 7.5rem);
-  --text-screen: clamp(2.75rem, 6.2vw, 5rem);
-  --text-figure: clamp(2.25rem, 5vw, 4rem);
+  --text-display: clamp(2.75rem, 8vw, 6.5rem);
+  --text-screen: clamp(2.25rem, 5vw, 4.25rem);
+  --text-block: clamp(2rem, 4.4vw, 3.5rem);
+  --text-version: clamp(1.25rem, 2vw, 1.75rem);
   --menu-clearance: 6rem;
   --radius-pill: 999px;
 }
@@ -38,6 +47,16 @@ html {
 body {
   background: var(--color-ink-950);
   font-family: var(--font-sans);
+  font-stretch: 100%;
+}
+
+/* Names and titles: wide. */
+.wide {
+  font-stretch: var(--font-stretch-wide);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  overflow-wrap: anywhere;
 }
 
 /* A dark band is a scope of tokens: components keep their classes and read the dark values. */
@@ -77,6 +96,7 @@ body {
   align-items: center;
   display: inline-flex;
   font-size: 1.125rem;
+  font-stretch: var(--font-stretch-wide);
   font-weight: 800;
   letter-spacing: -0.02em;
   min-height: var(--spacing-touch);
@@ -124,29 +144,84 @@ body {
   max-width: 100%;
 }
 
-.figure-value {
-  font-size: var(--text-figure);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+/* Figure above, small label below (RF-18), from proposal B. DOM: dt then dd, so the reader hears the label first. */
+.cifra {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
 }
 
-/* "Por confirmar" takes the place of the number at a smaller size: same cell, same label, no hole. */
-.figure-value[data-missing] {
-  color: var(--color-on-dark-muted);
-  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: calc(var(--text-figure) * 1.05);
-}
-
-.band-light .figure-value[data-missing] {
+.cifra dt {
   color: var(--color-ink-600);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+  order: 2;
+}
+
+.cifra dd {
+  order: 1;
+}
+
+.cifra dd.cifra__detalle {
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+  order: 3;
+}
+
+.cifra__valor {
+  align-items: baseline;
+  display: flex;
+  font-stretch: var(--font-stretch-narrow);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-weight: 700;
+  gap: 0.06em;
+  letter-spacing: -0.015em;
+  line-height: 0.82;
+  white-space: nowrap;
+}
+
+/* Never below the 14 px floor of tokens.md, even on the small figures in mobile. */
+.cifra__unidad {
+  font-size: max(0.26em, var(--text-small));
+  font-stretch: var(--font-stretch-wide);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* "Por confirmar": two stacked lines that fill the height the number would have, so no row jumps. */
+.cifra__falta {
+  color: var(--color-ink-600);
+  display: block;
+  font-stretch: var(--font-stretch-narrow);
+  font-weight: 500;
+  line-height: 0.41;
+}
+
+.cifra__falta span {
+  display: block;
+  font-size: 0.46em;
+  line-height: 0.89;
+}
+
+.cifra__falta span:first-child::first-letter {
+  text-transform: uppercase;
+}
+
+.cifra--xl :is(.cifra__valor, .cifra__falta) {
+  font-size: var(--text-figure-xl);
+}
+
+.cifra--l :is(.cifra__valor, .cifra__falta) {
+  font-size: var(--text-figure-l);
+}
+
+.cifra--m :is(.cifra__valor, .cifra__falta) {
+  font-size: var(--text-figure-m);
 }
 
 .figure-label {
   color: var(--color-ink-600);
   font-size: var(--text-small);
   line-height: var(--text-small--line-height);
-  margin-top: 0.375rem;
 }

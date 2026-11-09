@@ -166,6 +166,89 @@ necesidad de contraste mínimo.
 ## Breakpoints
 Los de Tailwind: móvil por defecto; `md` = 768 px; `lg` = 1024 px. Diseño móvil primero.
 
+## Dirección visual (`direccion.md`, «La elegida»)
+
+A «Pantalla» con la tipografía y el bloque de versión de B, especificada en [`propuesta-a.md`](propuesta-a.md) y
+prototipada en `web/design-proto/pantalla.css`. **Sustituye** a las tablas de arriba en lo que cambia: el Desarrollador
+lleva estos valores al `@theme` de `global.css` cuando implemente la dirección (ADR-0024, punto 4). Hasta entonces, lo de
+arriba sigue siendo lo que hay en `web/src/`. Los tokens que no aparecen aquí (`deal-*`, `discontinued-*`, `line`,
+espaciado, anchos, tamaño táctil, foco) no cambian.
+
+### Color
+
+| Token | Valor | L | Uso |
+|---|---|---|---|
+| `--color-ink-950` | `#0b1217` | 0,0057 | Fondo de las franjas oscuras, del menú inferior y del velo de las fotos (`--scrim-rgb: 11 18 23`) |
+| `--color-ink-900` | `#0b1217` | 0,0057 | Texto principal en franjas claras; regla gruesa sobre las versiones |
+| `--color-ink-600` | `#4a5660` | 0,0895 | Texto secundario, etiquetas de cifra, «por confirmar» |
+| `--color-surface` | `#ffffff` | 1,0000 | Franja blanca |
+| `--color-surface-muted` | `#eef1ee` | 0,8727 | Franja clara, barra de filtros, pantalla sin foto |
+| `--color-line-soft` | `#cdd4d0` (en franja oscura, `#33404a`) | 0,6462 / 0,0487 | Líneas finas sobre cada cifra y entre filas. **Solo decorativo** |
+| `--color-brand-600` | `#0a5c6e` | 0,0884 | Enlaces, foco |
+| `--color-brand-800` | `#07414e` | 0,0438 | Hover de enlaces |
+| `--color-on-dark` | `#ffffff` | 1,0000 | Texto en franja oscura |
+| `--color-on-dark-muted` | `#b9c4ca` | 0,5405 | Texto secundario en franja oscura |
+| `--color-signal` | `#c6f24e` | 0,7607 | Sección activa del menú; hover de enlaces en franja oscura |
+| `--color-soon-bg` / `--color-soon-fg` | `#c6f24e` / `#0b1217` | 0,7607 / 0,0057 | Etiqueta «Próximamente» |
+
+**Franja oscura** (`.band-dark`): es un ámbito, no un tema. Reasigna `ink-900` → `on-dark`, `ink-600` → `on-dark-muted`,
+`brand-600` → `on-dark`, `brand-800` → `signal` y `line-soft` → `#33404a`; los componentes no cambian de clase.
+
+### Contraste
+
+Mismo método que «Contraste» (fórmula WCAG 2.1, a mano, cuatro decimales en L). Ningún par queda a menos de 2 de su umbral
+salvo los marcados.
+
+| Par | Ratio | Umbral | Resultado |
+|---|---|---|---|
+| `on-dark` sobre `ink-950` | 18,86 | 4,5 | Cumple |
+| `on-dark-muted` sobre `ink-950` | 10,61 | 4,5 | Cumple |
+| `ink-950` sobre `signal` (menú activo, «Próximamente») | 14,56 | 4,5 | Cumple |
+| `signal` sobre `ink-950` (hover de enlace en franja oscura) | 14,56 | 4,5 | Cumple |
+| `ink-900` sobre `surface` | 18,86 | 4,5 | Cumple |
+| `ink-900` sobre `surface-muted` | 16,57 | 4,5 | Cumple |
+| `ink-600` sobre `surface` | 7,53 | 4,5 | Cumple |
+| `ink-600` sobre `surface-muted` | 6,61 | 4,5 | Cumple |
+| `brand-600` sobre `surface` | 7,59 | 4,5 | Cumple |
+| `brand-600` sobre `surface-muted` | 6,67 | 4,5 | Cumple |
+| `brand-800` sobre `surface` | 11,19 | 4,5 | Cumple |
+| `deal-fg` sobre `deal-bg` (oferta en el bloque de versión, franja blanca) | 8,15 | 4,5 | Cumple (sin cambios) |
+| Foco en franja oscura: anillo `on-dark` sobre `ink-950` | 18,86 | 3 | Cumple |
+| Velo de texto: `on-dark` / `on-dark-muted` sobre `ink-950` al 72 % encima del píxel más claro tras `brightness(.86)` | 9,1 / 5,1 | 4,5 | Cumple; **el más justo de la tabla** |
+| `brand-600` frente a `ink-900` (enlace entre texto) | 2,49 | 3 | **No cumple** como única distinción → enlaces subrayados siempre (como arriba) |
+| `line-soft` (`#33404a`) sobre `ink-950` | 1,77 | — | No se exige: solo decora |
+
+### Tipografía
+
+**Archivo** (OFL, `web/design-proto/fonts/archivo.woff2`, 90 kB, variable en peso 100–900 y anchura 62–125 %). Se
+declara con `font-weight: 100 900` y `font-stretch: 62% 125%`, `font-display: swap`. Sustituye a la pila del sistema:
+pasa a `web/`, y el LCP se mide con `web/e2e/lcp.spec.ts` (RNF-2).
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--font-sans` | `"Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif` | Todo |
+| `--font-stretch-wide` | `125%` | Nombres de modelo y de versión, titulares, logotipo; unidad de la cifra. Peso 800 (unidad 600), `letter-spacing: -0.035em` |
+| `--font-stretch-narrow` | `62%` | Número de las cifras. Peso 700, `tabular-nums`, interlínea 0,82 |
+| `--text-display` | `clamp(2.75rem, 8vw, 6.5rem)` | `h1` del catálogo y de la ficha |
+| `--text-screen` | `clamp(2.25rem, 5vw, 4.25rem)` | Nombre del modelo en cada pantalla del catálogo |
+| `--text-block` | `clamp(2rem, 4.4vw, 3.5rem)` | `h2` de las secciones de la ficha |
+| `--text-version` | `clamp(1.25rem, 2vw, 1.75rem)` | Nombre de cada versión (`h3`) |
+| `--text-figure-xl` | `clamp(3.75rem, 8vw, 7rem)` | Cifras clave de la primera pantalla de la ficha |
+| `--text-figure-l` | `clamp(3.25rem, 5.6vw, 5.25rem)` | Las dos cifras de cada pantalla del catálogo |
+| `--text-figure-m` | `clamp(2.75rem, 4.4vw, 4rem)` | Autonomía y precio de cada versión; cifras de «Datos del modelo» |
+
+- **Unidad de la cifra**: `max(0.26em, var(--text-small))`, nunca por debajo de 14 px.
+- **«Por confirmar» en una cifra**: dos líneas a 0,46 em en la anchura estrecha, en `ink-600`, que suman la altura del
+  número (0,82 em).
+- `--text-small`, `--text-body` y `--text-badge` no cambian. El mínimo absoluto de 14 px se mantiene.
+
+### Otros
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--radius-pill` | `999px` | Menú inferior, filtros, etiquetas |
+| `--menu-clearance` | `6rem` | Espacio libre bajo el contenido y `scroll-padding-bottom`, para que nada quede bajo el menú (RF-17) |
+
 ## Pendientes (no se deciden en diseño)
 1. **Verificar las ratios con herramienta.** Están calculadas a mano (sin ejecutar nada en esta revisión);
    el Desarrollador las confirma y axe en CI (ADR-0006) las vigila. Ninguna está a menos de 0,4 de su umbral.

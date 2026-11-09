@@ -1,0 +1,41 @@
+---
+/**
+ * Key figure of the chosen direction (docs/design/propuesta-a.md, PRD-002 RF-18), taken from proposal B's
+ * Cifra: the number very narrow (62 %), the unit smaller and wide. `text` is the formatted value
+ * ("446 km", "32.800 €"), or null for «por confirmar». Lives in a subfolder so it is not a /proto/ route.
+ */
+import { t } from "../../src/lib/i18n.ts";
+
+interface Props {
+  label: string;
+  text: string | null;
+  size: "xl" | "l" | "m";
+  class?: string;
+  /** Data hook for tests and styles (`data-figure="price"`). */
+  figure?: string;
+}
+const { label, text, size, class: extra, figure } = Astro.props;
+// The unit goes smaller and wider than the number; the space (normal or no-break) separates them.
+const parts = text?.split(/[\s ]/) ?? [];
+const unit = parts.length > 1 ? parts.pop() : null;
+const number = parts.join(" ");
+---
+
+<div class:list={["cifra", `cifra--${size}`, extra]} data-figure={figure}>
+  <dt>{label}<slot name="marca" /></dt>
+  <dd>
+    {
+      text ? (
+        <span class="cifra__valor">
+          {number}
+          {unit && <span class="cifra__unidad"> {unit}</span>}
+        </span>
+      ) : (
+        <span class="cifra__falta">
+          {t("ficha.porConfirmar").split(" ").map((w) => <span>{w} </span>)}
+        </span>
+      )
+    }
+  </dd>
+  {Astro.slots.has("detalle") && <dd class="cifra__detalle"><slot name="detalle" /></dd>}
+</div>
