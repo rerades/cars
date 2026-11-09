@@ -1,6 +1,7 @@
 .secrets/
 ops/actions/
 ops/traces/
+ops/datasets/
 factory/.run.lock
 factory/STOP
 node_modules/
