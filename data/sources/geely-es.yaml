@@ -6,7 +6,6 @@ market: ES
 kind: [ prices, specs, announcements ]
 urls:
   home: https://www.geely.com/es # no verificada: devolvió HTTP 500 el 2026-10-18
-  news: https://global.geely.com/en/news/2026/geely-e5-starray-em-i-debut-five-european-countries # sala de prensa global (inglés); lanzamiento en España, Alemania, Países Bajos, Bélgica y Luxemburgo
 image_license: "" # sin términos de uso de imágenes verificados: no publicar imágenes de esta web
 notes: >
   No se pudo leer (2026-10-18): https://www.geely.com/es devolvió HTTP 500, www.geely.es no resuelve y www.geely-auto.es

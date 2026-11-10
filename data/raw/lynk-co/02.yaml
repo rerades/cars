@@ -12,7 +12,7 @@ versions:
     wltp_km: {value: 435, note: "hasta 435 km", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-11-03, tier: T1}
     power_kw: {value: 200, note: "IDAE, fila 613859 (02 MY 25 CORE); misma cifra en 613861", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     drivetrain: {value: rwd, note: "la ficha dice «Tracción trasera» para el modelo", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-11-03, tier: T1}
-    dc_max_kw: {value: 150, source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02/features", retrieved: 2026-11-03, tier: T1}
+    dc_max_kw: {value: 150, source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02/specifications", retrieved: 2026-11-09, tier: T1}
     price:
       value: 35495
       unit: EUR
@@ -27,7 +27,7 @@ versions:
     wltp_km: {value: 445, note: "hasta 445 km", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-11-03, tier: T1}
     power_kw: {value: 200, note: "IDAE, fila 613860 (02 MY 25 MORE); misma cifra en 613862 y 605976", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-03, tier: T2}
     drivetrain: {value: rwd, note: "la ficha dice «Tracción trasera» para el modelo", source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02", retrieved: 2026-11-03, tier: T1}
-    dc_max_kw: {value: 150, source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02/features", retrieved: 2026-11-03, tier: T1}
+    dc_max_kw: {value: 150, source_id: lynk-co-es, url: "https://www.lynkco.com/es-es/cars/02/specifications", retrieved: 2026-11-09, tier: T1}
     price: null   # la tarjeta dice «Desde 39.495 €» sin aclarar si es PVP; no se guarda
 images:
   - file: data/images/lynk-co/02/frontal.jpg
