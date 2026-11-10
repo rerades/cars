@@ -186,6 +186,8 @@ describe("comando", () => {
     const auth = { is_error: true, result: "Failed to authenticate: OAuth session expired and could not be refreshed" };
     assert.equal(orq.classify(1, auth, ""), "auth_failed");
     assert.equal(orq.classify(1, {}, "Claude usage limit reached"), "rate_limited");
+    const quotesLimit = "Bugbot no pudo ejecutarse (usage limit reached).\nRESULTADO: ok";
+    assert.equal(orq.classify(0, { is_error: false, result: quotesLimit }, ""), "success");
     assert.equal(orq.classify(1, { result: "Budget limit reached" }, ""), "budget_exceeded");
   });
   test("el dry-run no ejecuta y devuelve el comando", () => {

@@ -519,13 +519,14 @@ const AUTH_RETRY_MS = 2 * 60_000;
 const RATE_LIMIT_MARKERS = ["usage limit", "rate limit", "límite de uso", "try again later"];
 
 export function classify(status: number | null, payload: Record<string, unknown>, stderr: string): string {
+  // A finished run wins: its text may quote limits it saw elsewhere (a bot comment on a PR, #1025).
+  if (status === 0 && !payload.is_error && resultOk(String(payload.result ?? ""))) return "success";
   const blob = (JSON.stringify(payload) + " " + (stderr || "")).toLowerCase();
   if (AUTH_MARKERS.some((m) => blob.includes(m))) return "auth_failed";
   if (RATE_LIMIT_MARKERS.some((m) => blob.includes(m))) return "rate_limited";
   if (blob.includes("budget limit reached") || (blob.includes("budget") && blob.includes("reached"))) {
     return "budget_exceeded";
   }
-  if (status === 0 && !payload.is_error && resultOk(String(payload.result ?? ""))) return "success";
   return "failed";
 }
 
