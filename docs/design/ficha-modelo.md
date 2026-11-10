@@ -9,9 +9,17 @@ PRD-006 (ready): RF-1 a RF-10, RNF-1 a RNF-5, CA-1 a CA-9. Tokens: [`tokens.md`]
   largo»: [`paginas-catalogo.md`](paginas-catalogo.md).
 - Etiquetas de segmento y de tracción: [`filtros-catalogo.md`](filtros-catalogo.md).
 
-Página estática, **sin JavaScript** (ADR-0003, RNF-1, CA-14): todo lo que se describe aquí, incluidas la
-galería y el paso de tabla a bloques, va en el HTML servido y se resuelve con HTML y CSS. Componentes de
-Bearnie (ADR-0005): Badge para las etiquetas, Card para los bloques de versión, Table para la tabla.
+Página estática, **sin JavaScript** (ADR-0003, RNF-1, CA-14): todo lo que se describe aquí, incluidos la
+galería y el menú inferior, va en el HTML servido y se resuelve con HTML y CSS. Componentes de Bearnie (ADR-0005):
+Badge para las etiquetas.
+
+**Dirección visual** ([`direccion.md`](direccion.md), «La elegida»; [`propuesta-a.md`](propuesta-a.md)): la foto y las
+cifras clave llenan la primera pantalla (RF-18); las secciones van en **franjas** a todo el ancho que alternan oscura
+(`.band-dark`), blanca y clara; un **menú de secciones** fijo abajo (RF-17); y las versiones, en el **bloque de versión**
+de B (en escritorio, pendiente de la pregunta 10, por CA-3). Tokens: `tokens.md`, «Dirección visual», que manda sobre los valores de color y tipografía citados abajo con la
+paleta anterior. Prototipo: `web/design-proto/ficha-a.astro` (Renault 5 E-Tech), capturas
+[`refs/ficha-a-390.png`](refs/ficha-a-390.png) y [`refs/ficha-a-1280.png`](refs/ficha-a-1280.png). El prototipo no
+pinta «Más imágenes», «Otros modelos del segmento» ni «Reviews»: siguen como se especifican aquí, cada uno en su franja.
 
 ## URL y título (RF-1, RNF-1, CA-1, CA-14)
 
@@ -28,63 +36,71 @@ Orden del DOM = orden visual = orden de lectura (WCAG 1.3.2) en todas las anchur
 1. Cabecera y navegación del sitio (fuera de esta especificación).
 2. **Ruta** (RF-13): `<nav>` con los enlaces de vuelta.
 3. `<main>`:
-   1. **Cabecera de la ficha** (RF-2, RF-10, RF-14): `h1`, etiqueta de estado, segmento, enlace a la web de
-      la marca; y la **imagen principal** (RF-12).
-   2. **Versiones** (`h2`, RF-3 a RF-6, RF-8, RF-11): tabla o bloques, y debajo «Condiciones de las ofertas»
-      si alguna versión tiene precio con oferta.
+   1. **Primera pantalla** (franja oscura, RF-2, RF-10, RF-12, RF-14, RF-18): la **imagen principal** de fondo;
+      encima, la ruta; abajo, `h1`, etiqueta de estado, segmento, enlace a la web de la marca, «Comparar» y la
+      atribución; y debajo, las **cifras clave** (`id="cifras"`).
+   2. **Versiones** (`h2`, franja blanca, RF-3 a RF-6, RF-8, RF-11): un bloque por versión, y debajo
+      «Condiciones de las ofertas» si alguna versión tiene precio con oferta.
    3. **Datos del modelo** (`h2`, RF-5, RF-7): solo si hay `specs`.
    4. **Más imágenes** (`h2`, RF-12): solo si hay 2 o más imágenes con licencia.
    5. **Otros modelos del segmento** (`h2`, RF-15): solo si hay segmento y algún modelo que mostrar.
    6. **Fuentes** (`h2`, RF-9): siempre, al final de los datos de la ficha (solo «Reviews» va detrás).
    7. **Reviews** (`h2`, RF-16; PRD-006): solo si hay alguna review o resultado de prueba. Es el último
       bloque de `main`, después de «Fuentes» (CA-19).
-4. Pie del sitio.
+4. **Menú de secciones** (RF-17): `<nav>` fijo abajo, después de `main` en el DOM.
+5. Pie del sitio.
 
-Encabezados: un `h1`; `h2` para cada bloque de `main`; `h3` para el nombre de versión en los bloques, para
+En la dirección elegida la ruta va dentro de la primera pantalla (arriba, sobre la foto), pero en el DOM sigue antes
+del `h1`, como dice «Ruta». Franjas, en orden: primera pantalla oscura → Versiones blanca → Datos del modelo oscura →
+y desde ahí alternan clara, blanca y oscura en el orden de las secciones que existan; «Fuentes» va siempre en la clara.
+Dos franjas seguidas nunca son del mismo color: si falta una sección, la siguiente toma el color que le tocaba a ella.
+
+Encabezados: un `h1`; `h2` para cada bloque de `main` (las cifras clave no llevan `h2` visible: su `section` se nombra
+con `aria-label`, `ficha.cifras`); `h3` para el nombre de versión en los bloques, para
 «Condiciones de las ofertas», para el modelo en las tarjetas relacionadas (como en `paginas-catalogo.md`) y
 para las dos sublistas de «Reviews» cuando aparecen las dos.
 
 ### Wireframe
 
 ```
-Móvil (320–767 px)                     Escritorio (≥ 1024 px)
+Móvil (320–1023 px)                    Escritorio (≥ 1024 px)
 ┌──────────────────────────┐           ┌──────────────────────────────────────────────────────┐
-│ Coches › Cupra › Tavascan│           │ Coches › Cupra › Tavascan                            │
-│                          │           │ ┌────────────────────────┐  h1 Cupra Tavascan        │
-│ h1 Cupra Tavascan        │           │ │                        │  SUV compacto ¹           │
-│ [Próximamente · oct 2026]¹│          │ │     imagen principal   │  [Próximamente·oct 2026]¹ │
-│ SUV compacto ²           │           │ │          16:9          │  Ver en la web de la marca│
-│ Ver en la web de la marca│           │ └────────────────────────┘                           │
-│ ┌──────────────────────┐ │           │ Foto: Alexander Migl…                                │
-│ │  imagen principal    │ │           │                                                      │
-│ └──────────────────────┘ │           │ Versiones                                            │
-│ Foto: Alexander Migl…    │           │ Ordenadas por precio… Precios en España con IVA…     │
-│                          │           │ ┌────────────┬────────────┬────────────┬────────────┐│
-│ Versiones                │           │ │            │ Tavascan 58│ Tavascan VZ│ Endurance  ││
-│ Ordenadas por precio…    │           │ ├────────────┼────────────┼────────────┼────────────┤│
-│ ┌──────────────────────┐ │           │ │ Precio     │ 36.273 €   │ Precio por │ Precio por ││
-│ │ h3 Tavascan (58 kWh…)│ │           │ │            │ [Con ofer.]│ confirmar  │ confirmar  ││
-│ │ Precio               │ │           │ │            │ Fuente: …  │            │            ││
-│ │ 36.273 € [Precio con │ │           │ │ Autonomía  │ 441 km ³   │ 533 km ³   │ 557 km ³   ││
-│ │ oferta]              │ │           │ │ Batería    │ 58 kWh ³ … │ por confir.│ por confir.││
-│ │ Fuente: cupra.com,   │ │           │ │ …          │            │            │            ││
-│ │ 24 sep 2026          │ │           │ └────────────┴────────────┴────────────┴────────────┘│
-│ │ Ver condiciones      │ │           │ h3 Condiciones de las ofertas                        │
-│ │ Autonomía WLTP       │ │           │                                                      │
-│ │ 441 km ³             │ │           │ Datos del modelo                                     │
-│ │ …                    │ │           │ Más imágenes   ┌────┐ ┌────┐ ┌────┐                  │
-│ └──────────────────────┘ │           │ Otros modelos del segmento SUV compacto              │
-│ ┌──────────────────────┐ │           │ ┌──────┐ ┌──────┐ ┌──────┐                           │
-│ │ h3 Tavascan VZ …     │ │           │ Fuentes                                              │
-│ └──────────────────────┘ │           │ 1. cupra.com, consultado el 24 sep 2026: https://…   │
-│ h3 Condiciones…          │           │                                                      │
-│ Datos del modelo         │           │ Reviews                                              │
-│ Más imágenes             │           │ Título literal de la review (enlace)                 │
-│ Otros modelos…           │           │ Medio · dominio · consultado el 20 sep 2026          │
-│ Fuentes                  │           └──────────────────────────────────────────────────────┘
+│▓ siete3                  │ primera   │▓ siete3   Coches › Cupra › Tavascan       (foto a     │ primera
+│▓ Coches › Cupra › Tavasc.│ pantalla  │▓                                      todo el ancho, │ pantalla,
+│▓  ┌ foto a todo el ┐     │ oscura    │▓                                      con velo)      │ oscura
+│▓  └ ancho, con velo┘     │           │▓ Cupra                                               │
+│▓ h1 Cupra                │           │▓ h1 TAVASCAN (ancho, --text-display)                 │
+│▓    TAVASCAN             │           │▓ [Próximamente · oct 2026]¹  Segmento: SUV compacto² │
+│▓ [Próximamente·oct 2026]¹│           │▓ Ver en la web de la marca   Comparar   Foto: A. M…  │
+│▓ Segmento: SUV compacto² │           │▓──────────────────────────────────────────────────── │
+│▓ Ver en la web de la marca│          │▓ 36.273 €     557 km ³    250 kW ³     77 kWh ³      │ cifras
+│▓ Comparar · Foto: A. Mi… │           │▓ Desde · Fuente…  Autonomía…  Potencia…  Batería…    │ clave
+│▓ 36.273 €  │ 557 km ³    │ cifras    ├──────────────────────────────────────────────────────┤
+│▓ Desde…    │ Autonomía…  │ clave     │ h2 VERSIONES                       franja blanca     │
+│▓ 250 kW ³  │ 77 kWh ³    │ (2 × 2)   │ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ │
+├──────────────────────────┤           │ h3 Tavascan  │ 441 km ³   36.273 € │ Batería  58 kWh │
+│ h2 VERSIONES   (blanca)  │           │ (58 kWh…)    │ Autonomía  Precio   │ Potencia 140 kW │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━ │           │              │ WLTP       [Oferta] │ Tracción Trasera│
+│ h3 Tavascan (58 kWh…)    │           │              │            Fuente…  │ CC       135 kW │
+│ 441 km ³    36.273 €     │           │ ──────────────────────────────────────────────────── │
+│ Autonomía   Precio       │           │ h3 Tavascan VZ │ 533 km ³  POR      │ …               │
+│ WLTP        [Oferta]     │           │                │           CONFIRMAR│                 │
+│             Fuente…      │           │ h3 Condiciones de las ofertas                        │
+│ Batería        58 kWh ³  │           ├──────────────────────────────────────────────────────┤
+│ Potencia       140 kW ³  │           │▓ h2 DATOS DEL MODELO  (oscura, cifras --figure-m)   ▓│
+│ Tracción       Trasera ³ │           ├──────────────────────────────────────────────────────┤
+│ ──────────────────────── │           │ Más imágenes · Otros modelos… (franjas alternas)     │
+│ h3 Tavascan VZ …         │           │ h2 FUENTES (clara)                                   │
+│ h3 Condiciones…          │           │ Reviews * (franja siguiente)                         │
+├──────────────────────────┤           │                                                      │
+│▓ h2 DATOS DEL MODELO    ▓│           │      ( Cifras  Versiones  Datos  …  Fuentes )        │ menú fijo
+│ Más imágenes, Otros…     │           └──────────────────────────────────────────────────────┘
+│ h2 FUENTES (clara)       │
 │ Reviews *                │
+│ ( Cifras Versiones Dat… )│ menú fijo
 └──────────────────────────┘
 ```
+(▓ = franja oscura.)
 
 (* «Reviews» solo existe si el modelo tiene alguna review o resultado de prueba; ver «Reviews».)
 
@@ -107,7 +123,7 @@ principal con su atribución.
 
 | Elemento | Origen | Presentación | Requisito |
 |---|---|---|---|
-| Título | `brand_name`, `model` | `h1`, `--text-title`, `ink-900` | RF-2, CA-1 |
+| Título | `brand_name`, `model` | `h1` en dos líneas (marca y modelo, ver «Disposición de la primera pantalla»), `on-dark` | RF-2, CA-1 |
 | Estado `announced` con `launch` | `status`, `launch` | Badge `soon`: «Próximamente · oct 2026» (`ficha.estado.proximamenteFecha`). `launch` `YYYY-MM` o `YYYY-MM-DD` → solo mes corto y año | RF-10, CA-10 |
 | Estado `announced` sin `launch` | `status` | Badge `soon`: «Próximamente», sin fecha | RF-10, CA-10 |
 | Estado `discontinued` | `status` | Badge `discontinued`: «Descatalogado» | RF-10, CA-10 |
@@ -138,21 +154,73 @@ principal con su atribución.
 
 ### Imagen principal (RF-12, RNF-2)
 
-- `images[0]` entre las que tienen `license`. Hueco 16:9, `--radius-card`, `object-fit: cover`. Es el
-  candidato a LCP: **sin** `loading="lazy"`, con `fetchpriority="high"` y ancho y alto declarados.
+- `images[0]` entre las que tienen `license`. Ocupa **toda la primera pantalla**, a sangre (sin `--radius-card`),
+  `object-fit: cover`, con el tratamiento común de las fotos y el velo de `propuesta-a.md` («Fotos malas»; contraste
+  del texto sobre el velo en `tokens.md`, 9,1 / 5,1). Es el candidato a LCP: **sin** `loading="lazy"`, con
+  `fetchpriority="high"` y ancho y alto declarados.
 - `alt` = `ficha.imagen.alt`: «{marca} {modelo}, imagen 1 de {n}». No se describe el contenido de la foto
   porque no hay dato que lo diga (ADR-0001); el `alt` no puede inventarlo.
 - Si `attribution` no es `null`: debajo, `figcaption` con «Foto: {attribution}» (`ficha.imagen.atribucion`),
-  `text-small`, `ink-600` sobre `surface`, el texto del dato tal cual. Si es `null`, no hay pie.
-- **Sin imagen con licencia**: el mismo hueco 16:9 en `surface-muted` con la silueta del segmento, o la
-  genérica si no hay segmento, centrada, de lado `--size-segment-icon-lg` (token nuevo; el de la tarjeta, 48 px,
-  se pierde en un hueco de este tamaño). Decorativa (`aria-hidden`), sin pie, sin texto. Ninguna imagen de la
-  marca en su lugar (CA-12).
+  `text-small`, `on-dark-muted` sobre la franja oscura (10,61), el texto del dato tal cual, al final de los
+  enlaces de la cabecera. Si es `null`, no hay pie.
+- **Sin imagen con licencia**: la primera pantalla sigue siendo oscura y lleva, en lugar de la foto, la silueta del
+  segmento (o la genérica si no hay segmento) grande y de trazo fino, en `on-dark-muted`, como en el prototipo
+  (`.hero .silhouette`). Decorativa (`aria-hidden`), sin pie, sin texto. Ninguna imagen de la marca en su lugar
+  (CA-12). En el catálogo, la pantalla sin foto pasa a clara (`tarjeta-modelo.md`); aquí no, porque la ruta, el `h1`
+  y las cifras clave están pintados para la franja oscura y la siguiente franja (Versiones) ya es blanca.
 
-### Disposición de la cabecera
-- **Móvil y `md`:** todo en una columna; la imagen a todo el ancho del contenido, después del enlace a la web.
-- **`lg`:** dos columnas, texto a la izquierda (5/12) e imagen a la derecha (7/12), separadas `8`, alineadas
-  arriba. El orden del DOM (texto, luego imagen) es el visual de izquierda a derecha.
+### Disposición de la primera pantalla (RF-18)
+- **Alto**: al menos `100svh` entre foto y cifras clave, de modo que la primera pantalla sea foto y cifras; el borde
+  inferior deja `--menu-clearance` libre para que el menú no tape las cifras (RF-17).
+- **Arriba**, sobre la foto: el logotipo y la ruta (`text-small`, `on-dark`, enlaces subrayados).
+- **Abajo**, sobre la parte sólida del velo: `h1` en dos líneas, la marca en `--text-body` peso 600 y el modelo en
+  `--text-display`, anchura `--font-stretch-wide`; cada palabra del modelo es un bloque que no se parte por dentro
+  (los nombres largos bajan de línea por palabras: «R5 E-Tech / eléctrico»). Debajo, en una fila que parte línea:
+  etiqueta de estado, segmento, «Ver en la web de la marca», «Comparar» y la atribución.
+- **Móvil:** todo en una columna; la foto ocupa la parte de arriba de la pantalla y se funde con la franja.
+- **`lg`:** la foto a todo el ancho, el texto a la izquierda sobre el velo, sin columnas.
+
+## Cifras clave (RF-18, RF-9, RF-11, CA-22)
+
+`<section id="cifras" aria-label>` con `ficha.cifras` («Cifras clave»), dentro de la primera pantalla y debajo del
+texto. Un `dl` de **cifras** (la cifra de B, `web/design-proto/a/Cifra.astro`): número arriba en `--text-figure-xl` y
+`--font-stretch-narrow`, unidad más pequeña y ancha al lado, etiqueta pequeña debajo; en el DOM, `dt` antes que `dd`,
+para que el lector oiga primero la etiqueta. Separadas por una línea fina `line-soft` encima de cada una.
+
+| # | Cifra | Origen | Etiqueta | Fuente |
+|---|---|---|---|---|
+| 1 | Precio | «precio desde» del modelo (como la tarjeta, RF-9 de PRD-001) | `ficha.cifras.precio` «Desde», con « · Precio con oferta» si es `financed` | Visible debajo: «Fuente: {fuente}, {fecha}» (la regla del precio) |
+| 2 | Autonomía | la mayor `wltp_km` de las versiones, o `specs.wltp_max_km` | `ficha.cifras.autonomia` «Autonomía WLTP máxima» | Marca de nota |
+| 3 | Potencia | `specs.power_max_kw`, o la mayor `power_kw` de las versiones | `ficha.cifras.potencia` «Potencia máxima» | Marca de nota |
+| 4 | Batería | la mayor `battery_kwh` de las versiones | `ficha.cifras.bateria` «Batería mayor» | Marca de nota |
+
+- Las etiquetas dicen «máxima» y «mayor» porque la cifra es la más alta del modelo, no la de una versión (RF-5). El
+  prototipo pone «Potencia» y «Batería» a secas: **en `web/src/` van las etiquetas de esta tabla**.
+- **Sin dato**: «Por confirmar» ocupa el sitio del número, en dos líneas estrechas que suman su altura
+  (`tokens.md`), en `on-dark-muted`; sin nota de fuente (RF-11). La cifra no desaparece: el hueco dice que falta.
+- **Disposición**: móvil, dos por fila (2 × 2); `lg`, las cuatro en una fila.
+- **Animación**: este diseño no la usa. RF-18 la permite («puede contar»); si un día se añade, el valor final está
+  en el HTML servido y con `prefers-reduced-motion` no se anima (CA-22).
+- Las cifras clave **resumen**; no sustituyen a las versiones ni a «Datos del modelo», que siguen enteras.
+
+## Menú de secciones (RF-17, CA-21)
+
+- `<nav aria-label>` con `ficha.menu.nombre` («Secciones de la página»), después de `main`; `<ul>` con un enlace de
+  ancla por sección **que exista**, en el orden de la página: `ficha.menu.cifras` «Cifras», `.versiones`
+  «Versiones», `.datos` «Datos», `.imagenes` «Fotos», `.relacionados` «Similares», `.fuentes` «Fuentes», `.reviews`
+  «Reviews». Una sección que no existe no tiene entrada.
+- **Aspecto**: píldora sólida (`--radius-pill`), fondo `ink-950`, enlaces `on-dark` (18,86) en `text-small` peso 600,
+  cada uno con `--size-touch` de alto y relleno horizontal `4`; centrada abajo, a `4` del borde. Hover: texto
+  `signal` (14,56). Foco: anillo `on-dark` (18,86 sobre `ink-950`).
+- **No tapa contenido**: `body` deja `--menu-clearance` libre abajo y `html` lleva `scroll-padding-bottom` del
+  mismo valor, para que ni el último texto ni un elemento enfocado queden debajo (WCAG 2.4.7; CA-21). Los destinos
+  llevan `scroll-padding-top` de `4` para que su `h2` no quede pegado arriba.
+- **No cabe** (con siete entradas en 320–390 px): la píldora no pasa de la anchura de la pantalla menos los márgenes
+  y se desplaza en horizontal por dentro; cada enlace es enfocable, así que el teclado la recorre y el navegador la
+  desplaza hasta el enlace enfocado. Los textos no se parten ni se recortan.
+- **Sección actual**: sin JavaScript no se marca ninguna (marcar la primera a mano, como hace el prototipo, diría
+  algo falso al bajar). Marcarla al hacer scroll, con `aria-current="true"` y fondo `signal` con texto `ink-950`
+  (14,56), sería una mejora progresiva que RF-17 no pide; no se especifica.
 
 ## Versiones (RF-3 a RF-6, RF-8, RF-11)
 
@@ -167,7 +235,9 @@ sin ayudas.» (RF-3, RF-4).
 - El orden se resuelve al construir; no hay control para cambiarlo.
 
 ### Campos y formato (RF-4 a RF-6)
-Mismo orden de filas en la tabla y de líneas en los bloques:
+Mismo orden en cada bloque de versión: los campos 1 y 2 son las dos cifras grandes (en el bloque, autonomía primero
+y precio después, como en B); del 3 al 7, las filas de la tabla de dos columnas («Cada versión: el bloque de B»).
+El formato del precio (`--text-price`) y de los «por confirmar» de los campos 1 y 2 lo sustituye la cifra.
 
 | # | Rótulo (`ficha.campo.*`) | Origen | Formato | Sin dato |
 |---|---|---|---|---|
@@ -215,7 +285,7 @@ Ver condiciones de la oferta     ← solo si financed; enlace interno a sus cond
 ### Condiciones de las ofertas (RF-4, CA-4)
 
 El texto literal de `price_terms` puede ser muy largo (el de Tavascan ronda los 1.500 caracteres): dentro de una
-columna de tabla rompería la comparación. Por eso **va una sola vez, fuera de la tabla y de los bloques**,
+bloque de versión rompería su lectura. Por eso **va una sola vez, fuera de los bloques**,
 justo debajo de ellos y dentro de la sección «Versiones», siempre visible (sin `<details>`: CA-4 pide verlo).
 
 ```
@@ -249,19 +319,57 @@ h3 Condiciones de las ofertas
   ninguna anchura.
 - Un modelo con una sola versión también se muestra como tabla (una columna), por coherencia con RF-3.
 
-### Móvil y `md`: bloques apilados (< 1024 px; RF-3, RNF-3, CA-3)
+**Choque con CA-3 (pregunta abierta 10).** La dirección elegida sustituye la tabla por el bloque de B también en
+escritorio, pero CA-3 de PRD-002 dice «A 1280 px las veo como columnas de una tabla». Hasta que Producto enmiende
+CA-3, **la tabla de arriba sigue vigente en `lg`** con los colores y la tipografía de la dirección (Archivo; cabecera
+y columna de rótulos en `surface-muted`, que en la franja blanca da `ink-900` 16,57). Si se enmienda, en `lg` se usa
+el bloque de B en tres columnas (ver abajo) y esta sección y «Las dos presentaciones» se borran.
 
-- `<ol>` de bloques (Card de Bearnie), uno por versión, en el mismo orden. Móvil: una columna. `md`: dos
-  columnas; el orden se lee por filas (1-2, 3-4), que es el orden del DOM.
-- Cada bloque: `h3` con el `name` (`--text-card-title`), y un `dl` con los siete campos en el orden de la tabla;
-  `dt` (`text-small`, `ink-600`) **encima** de su `dd` (`text-body`, `ink-900`), nunca en dos columnas: a 320 px
-  el contenido útil es de 256 px (320 − 2×16 de margen − 2×16 de relleno) y una columna de rótulos lo
-  estrangularía.
-- Relleno `4`, separación entre campos `3`, entre bloques `4`. Borde `line-soft` y `--radius-card`.
+### Cada versión: el bloque de B (< 1024 px; y en `lg` si se enmienda CA-3; RF-3 a RF-6, RF-8, RNF-3, CA-3)
+
+Sustituye a los bloques apilados de la versión anterior (Card de Bearnie con `dl` de siete líneas). Prototipo:
+`ficha-a.astro`, `.versions`; captura de B: `direccion.md`, «La elegida».
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━  regla gruesa ink-900, encima de la lista
+h3 R5 E-TECH ELÉCTRICO 40 KWH          ← --text-version, ancho
+┌──────────────┬──────────────┐
+│ 312 km [1]   │ 27.440 €     │  ← cifras --text-figure-m, estrechas
+│ Autonomía    │ Precio       │  ← etiqueta (dt) debajo, text-small
+│ WLTP         │ [Precio con  │
+│              │  oferta]     │  ← Badge deal, solo si financed
+│              │ Fuente: …    │  ← fuente y fecha visibles
+│              │ Ver condic.  │
+└──────────────┴──────────────┘
+Batería            40 kWh, útil [2] ← tabla de dos columnas: dt a la izquierda
+Potencia           70 kW [3]          (ink-600), dd a la derecha (ink-900)
+Tracción           Delantera [4]
+Carga máxima en CC 80 kW [5]
+Carga máxima en CA por confirmar    ← en el sitio del valor, ink-600
+────────────────────────────  línea fina line-soft entre versiones
+h3 …
+```
+
+- `<ol>` de versiones, en el orden de RF-3, bajo una regla de 2 px `ink-900`; cada versión separada de la siguiente
+  por una línea `line-soft` (decorativa). Sin caja, sin borde redondeado, sin relleno «voltio» (`direccion.md`).
+- **1. Nombre**: `h3` con el `name`, `--text-version`, `--font-stretch-wide`, peso 800, `ink-900`.
+- **2. Cifras**: un `dl` con dos cifras una al lado de la otra (incluso a 320 px: la cifra estrecha cabe, dos por
+  fila): autonomía WLTP y precio, número arriba y etiqueta debajo (en el DOM, `dt` antes que `dd`). Debajo del
+  precio, en este orden: «Último precio publicado» (si `discontinued`), Badge «Precio con oferta», «Fuente: {fuente},
+  {fecha}» y «Ver condiciones de la oferta» (ver «El precio, en detalle»). La marca de nota de la autonomía va con su
+  etiqueta. **«Por confirmar»** ocupa el sitio del número en dos líneas estrechas que suman su altura: «Precio por
+  confirmar» en el precio, «Por confirmar» en la autonomía.
+- **3. Tabla de dos columnas**: un segundo `dl` con los campos 3 a 7, una fila por campo: `dt` a la izquierda
+  (`text-small`, `ink-600`, 7,53) y `dd` a la derecha (`text-body`, `ink-900`, 18,86, `VersionField` sin cambios:
+  valor, nota y marca de nota). Filas separadas por `line-soft`. «por confirmar» va en el sitio del valor, en
+  `ink-600`. A 320 px la columna de rótulos lleva como mucho el 45 % y los dos lados parten línea; los rótulos
+  largos («Carga máxima en CC») bajan de línea antes que estrechar el valor.
+- **Disposición**: móvil y `md`, las tres partes apiladas. `lg` (solo si se enmienda CA-3): tres columnas 3 : 5 : 4
+  (nombre, cifras, tabla), alineadas arriba.
 - Nombres largos, notas y la fuente parten línea (`overflow-wrap: anywhere`); nada se recorta con «…».
 
-### Las dos presentaciones en el HTML
-La tabla y los bloques van **los dos** en el HTML servido (no hay JS que los genere) y CSS muestra uno según la
+### Las dos presentaciones en el HTML (mientras CA-3 pida la tabla)
+La tabla y los bloques de B van **los dos** en el HTML servido (no hay JS que los genere) y CSS muestra uno según la
 anchura (`hidden` / `lg:block`, `lg:hidden`). El oculto usa `display: none`, así que no se lee ni recibe foco:
 no hay duplicados para el lector ni para el teclado. Requisitos para el Desarrollador:
 - Ningún `id` dentro de la tabla ni de los bloques (estarían repetidos); las anclas viven fuera
@@ -610,7 +718,9 @@ sublista de pruebas usa `data-reviews-pruebas` (#601). Son para las pruebas, no 
 | Campo sin dato en una versión | «por confirmar» | RF-6, CA-6 |
 | Precio con oferta | Badge, fuente, «Ver condiciones de la oferta» y el texto literal en «Condiciones de las ofertas» | RF-4, CA-4 |
 | Dato no T1 | «fuente no oficial» junto a la marca de nota y en su entrada de «Fuentes» | RF-9, CA-9 |
-| Sin imagen con licencia | Silueta en el hueco principal; sin «Más imágenes» | RF-12, CA-12 |
+| Sin imagen con licencia | Primera pantalla oscura con la silueta grande y fina; sin «Más imágenes» ni su entrada en el menú | RF-12, CA-12 |
+| Cifra clave sin dato | «Por confirmar» en el sitio del número, sin nota | RF-11, RF-18 |
+| Sección que no existe | Sin entrada en el menú; las franjas siguientes no repiten color | RF-17 |
 | 1 imagen / 2–6 / más de 6 | Solo la principal / principal + «Más imágenes» / las 6 primeras | RF-12, CA-12 |
 | Sin `specs` | No hay «Datos del modelo» | RF-7 |
 | Sin candidatos relacionados | No hay «Otros modelos del segmento» | RF-15 |
@@ -630,11 +740,19 @@ sublista de pruebas usa `data-reviews-pruebas` (#601). Son para las pruebas, no 
    precio: enlace de fuente y «Ver condiciones de la oferta» de cada versión; luego las marcas de nota de cada
    fila); en los **bloques**, versión a versión y campo a campo. Después, los enlaces «Ver las condiciones en la
    web de la marca».
+   En el bloque de B: nombre (no enfocable) → marca de nota de la autonomía → fuente del precio y «Ver condiciones
+   de la oferta» → marcas de nota de la tabla, fila a fila.
 5. «Datos del modelo»: marcas de nota.
 6. «Otros modelos del segmento»: una parada por tarjeta.
 7. «Fuentes»: el enlace de cada nota.
 8. «Reviews»: en los resultados de pruebas, el enlace del organismo de cada uno; en las reviews de medios,
    el enlace del título de cada una. Una parada por entrada, en el orden de «Orden de las entradas».
+9. Menú de secciones (RF-17): sus enlaces, de izquierda a derecha. Va al final del DOM para no interponerse antes
+   del contenido; quien lo quiera antes llega por el landmark `nav` «Secciones de la página».
+
+En la cabecera, el orden es el de la primera pantalla: ruta → marcas de nota del estado y del segmento → «Ver en la
+web de la marca» → «Comparar» → enlace de la atribución; después, la fuente del precio y las marcas de nota de las
+cifras clave.
 
 Las imágenes, los `h2` y los textos no son paradas de foco. Los destinos de ancla (`#condiciones-{n}`,
 `#fuente-{n}`) tienen `tabindex="-1"`: reciben el foco al saltar a ellos y muestran el anillo, pero no son
@@ -648,7 +766,10 @@ Recorrido de Tavascan, de arriba abajo:
    «Ver en la web de la marca (web de Cupra, sitio externo), enlace.»
 3. «Figura. Cupra Tavascan, imagen 1 de 1. Foto: Alexander Migl…»
 4. «Versiones, encabezado nivel 2.» En la tabla, cada celda se anuncia con sus encabezados: «Tavascan VZ, Precio,
-   Precio por confirmar». En los bloques: «Tavascan VZ, encabezado nivel 3», y «Precio: Precio por confirmar».
+   Precio por confirmar». En los bloques de B: «Tavascan VZ, encabezado nivel 3», «Autonomía WLTP: 533 km, Fuente
+   3, enlace», «Precio: Precio por confirmar», y la tabla como lista de pares («Batería: por confirmar»…).
+   Antes, tras la cabecera: «Cifras clave, región.» «Desde: 36.273 €. Fuente: cupra.com, 24 sep 2026.» «Autonomía WLTP
+   máxima: 557 km, Fuente 3, enlace.» … Al final: «Secciones de la página, navegación», con sus enlaces.
 5. «Condiciones de las ofertas, encabezado nivel 3.» …
 6. «Fuentes, encabezado nivel 2.» «Lista, 1 elemento.» «cupra.com, consultado el 24 sep 2026…»
 7. Si hay reviews (ejemplo ficticio de `data-model.md`): «Reviews, encabezado nivel 2.» La línea de entrada.
@@ -687,7 +808,11 @@ oferta», «Descatalogado»); nada depende del color.
 | `ficha.versiones.captionParte` | Versiones de {marca} {modelo}, ordenadas por precio (versiones {desde} a {hasta} de {total}) |
 | `ficha.versiones.vacio` | {marca} todavía no ha publicado las versiones de este modelo. |
 | `ficha.campo.precio` / `.autonomia` / `.bateria` / `.potencia` / `.traccion` / `.cargaCc` / `.cargaCa` | Precio / Autonomía WLTP / Batería / Potencia / Tracción / Carga máxima en CC / Carga máxima en CA |
-| `ficha.porConfirmar` | por confirmar |
+| `ficha.porConfirmar` | por confirmar (en las cifras, con la primera letra en mayúscula por CSS: «Por confirmar») |
+| `ficha.cifras` | Cifras clave |
+| `ficha.cifras.precio` / `.autonomia` / `.potencia` / `.bateria` | Desde / Autonomía WLTP máxima / Potencia máxima / Batería mayor |
+| `ficha.menu.nombre` | Secciones de la página |
+| `ficha.menu.cifras` / `.versiones` / `.datos` / `.imagenes` / `.relacionados` / `.fuentes` / `.reviews` | Cifras / Versiones / Datos / Fotos / Similares / Fuentes / Reviews |
 | `ficha.bateria.usable` / `.gross` / `.unknown` | {kwh} kWh, útil / {kwh} kWh, bruta / {kwh} kWh, sin especificar si es útil o bruta |
 | `ficha.unidad.km` / `.kw` / `.kwh` / `.eur` | {n} km / {n} kW / {n} kWh / {n} € |
 | `ficha.precio.oferta` | Precio con oferta |
@@ -738,6 +863,12 @@ Color: `surface`, `surface-muted`, `ink-900`, `ink-600`, `line-soft`, `brand-600
 **Nuevos** (añadidos en `tokens.md`): `--size-segment-icon-lg`, `--width-version-label`, `--width-version-col`,
 `--width-version-col-max`. **No hay colores nuevos**; los pares usados ya están calculados en `tokens.md`.
 
+**Dirección visual** (`tokens.md`, «Dirección visual»): `ink-950`, `on-dark`, `on-dark-muted`, `signal`,
+`--font-stretch-wide`, `--font-stretch-narrow`, `--text-display`, `--text-block` (`h2` de cada sección),
+`--text-version`, `--text-figure-xl` (cifras clave), `--text-figure-m` (versiones y «Datos del modelo»),
+`--radius-pill` y `--menu-clearance`. Ya no se usan aquí `--text-card-title` para las versiones ni `--radius-card`
+para la imagen principal; los `--width-version-*` siguen solo mientras viva la tabla (pregunta 10).
+
 El bloque «Reviews» **no añade tokens**: usa `--text-section`, `--text-card-title`, `--text-body`,
 `--text-small`, `--width-prose`, `--size-touch`, `line-soft` y estos pares, todos sobre `surface` y ya
 calculados en `tokens.md`: `ink-900` (17,74:1), `ink-600` (7,56:1), `brand-600` (6,67:1) y `brand-800` en
@@ -769,6 +900,18 @@ Abiertas (bloque «Reviews», 2026-10-21). El diseño de arriba funciona sin res
    avisa). ¿Debe el build dejar de publicar los de una fuente `broken`? No lo dice ningún RF.
 9. **Fecha de publicación.** Con ella se podría ordenar por novedad y mostrarla junto a la de consulta
    (ADR-0017, pregunta abierta). Hasta entonces el orden es alfabético por medio.
+
+Abiertas (dirección visual, 2026-11-10):
+10. **Versiones en escritorio.** La dirección elegida pone el bloque de B en todas las anchuras, pero CA-3 pide
+    «a 1280 px, columnas de una tabla». Aquí se mantiene la tabla en `lg` hasta que Producto decida: ¿se enmienda CA-3
+    para aceptar bloques en tres columnas a 1280 px, o se queda la tabla en escritorio? `propuesta-a.md` ya cuenta que
+    con el bloque «comparar es cosa del comparador» (PRD-003).
+11. **Batería en las cifras clave.** La mayor `battery_kwh` pierde su `basis` (útil o bruta) en la cifra. ¿Basta con
+    que la base esté en la versión, o debe ir en la etiqueta («Batería mayor, útil»)? Sin respuesta, la cifra muestra
+    solo kWh y la base sigue en el bloque de cada versión.
+12. **Entradas del menú.** RF-17 pide llevar «a cada sección»; con siete secciones el menú se desplaza por dentro en
+    móvil. ¿Se acepta, o se quiere un subconjunto (Cifras, Versiones, Datos, Fuentes, como el prototipo)? Eso
+    cambiaría RF-17.
 
 Preguntas originales:
 

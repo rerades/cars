@@ -47,7 +47,8 @@ primera letra en mayúscula por CSS.
 **Lo que se pierde.**
 - Densidad: en móvil caben unas tres pantallas por vista, y comparar de un vistazo cuesta más que en una retícula.
 - Las fotos oscurecidas no enseñan bien el color del coche, y la identidad depende de que lleguen fotos mejores.
-- Los filtros pasan del panel lateral a una barra superior: `filtros-catalogo.md` tendrá que cambiar.
+- Los filtros pasan del panel lateral a una barra superior: especificada en `filtros-catalogo.md` («Estructura: barra
+  superior», 2026-11-10).
 - En escritorio, las versiones ya no se comparan en columnas, una al lado de otra: se leen de arriba abajo. Comparar es
   cosa del comparador (PRD-003).
 - Peso: fotos a todo el ancho y Archivo variable (90 kB en `woff2`, con los dos ejes), por medir con `web/e2e/lcp.spec.ts` (RNF-2).
