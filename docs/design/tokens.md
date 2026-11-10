@@ -217,6 +217,11 @@ salvo los marcados.
 | Velo de texto: `on-dark` / `on-dark-muted` sobre `ink-950` al 72 % encima del píxel más claro tras `brightness(.86)` | 9,1 / 5,1 | 4,5 | Cumple; **el más justo de la tabla** |
 | `brand-600` frente a `ink-900` (enlace entre texto) | 2,49 | 3 | **No cumple** como única distinción → enlaces subrayados siempre (como arriba) |
 | `line-soft` (`#33404a`) sobre `ink-950` | 1,77 | — | No se exige: solo decora |
+| `line` (sin cambios, L 0,1674) sobre `surface-muted` (contorno de las píldoras de la barra de filtros) | 4,24 | 3 | Cumple (`filtros-catalogo.md`; el `line-soft` del prototipo no llega) |
+| `on-dark` sobre `ink-900` (píldora de filtro abierta) | 18,86 | 4,5 | Cumple |
+| `on-brand` (`#ffffff`) sobre `brand-600` (botón principal) | 7,59 | 4,5 | Cumple |
+
+`--width-filters` deja de usarse con la barra superior (`filtros-catalogo.md`): no hay columna de filtros.
 
 ### Tipografía
 

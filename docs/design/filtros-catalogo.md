@@ -14,36 +14,91 @@ Select, Button, Empty.
   «Explorar» y el texto de `filtros.sinJs`. Nada de formulario `GET` vacío.
 - No se guarda nada (RNF-5): el estado sale de la URL y vuelve a ella.
 
-## Estructura
+## Estructura: barra superior (dirección visual elegida)
 
-Orden del DOM y de foco: encabezado → resumen → franja «Explorar» → **filtros** → orden → resultados.
+Desde la dirección elegida ([`direccion.md`](direccion.md), «La elegida»; [`propuesta-a.md`](propuesta-a.md)) **no hay
+panel lateral**: los resultados son pantallas a todo el ancho (`tarjeta-modelo.md`) y una columna de filtros al lado
+las estrecharía. Los filtros van en una **barra superior**, una franja clara (`surface-muted`) entre la cabecera oscura
+y la primera pantalla de modelo. Prototipo: `web/design-proto/catalogo-a.astro` (solo la barra cerrada; los paneles
+abiertos no están prototipados). Capturas: [`refs/catalogo-a-390.png`](refs/catalogo-a-390.png),
+[`refs/catalogo-a-1280.png`](refs/catalogo-a-1280.png). Los colores y contrastes de esta sección son los de `tokens.md`,
+«Dirección visual»; los de las secciones de abajo que citan la paleta anterior se leen con esa tabla (los valores
+de `surface-muted` cambian: `ink-900` 16,57, `brand-600` 6,67, `line` 4,24).
+
+Orden del DOM y de foco: encabezado (franja oscura) → franja «Explorar» → **barra**: resumen → filtros → orden →
+panel abierto, si lo hay → chips → resultados.
 
 ```
-Móvil (< 768 px)                       Escritorio (≥ 1024 px)
-┌───────────────────────┐              ┌──────────────┬───────────────────────┐
-│ h1 Coches eléctricos  │              │ h1 Coches eléctricos                 │
-│ 6 modelos             │              │ 6 modelos        Ordenar: [Select ▾] │
-│ [Filtros (2)]  [Orden▾]│              ├──────────────┼───────────────────────┤
-├───────────────────────┤              │ Filtros      │ ┌────┐ ┌────┐ ┌────┐   │
-│ (panel abierto:)      │              │ Marca        │ │card│ │card│ │card│   │
-│ Marca      ▸ grupo    │              │ ☐ Cupra      │ └────┘ └────┘ └────┘   │
-│ Segmento              │              │ ☐ Polestar   │                        │
-│ Precio                │              │ Segmento…    │                        │
-│ Autonomía mínima      │              │ Precio…      │                        │
-│ Tracción              │              │ Autonomía…   │                        │
-│ Estado                │              │ Tracción     │                        │
-│ [Ver 4 modelos][Limpiar]│            │ Estado       │                        │
-├───────────────────────┤              │ [Limpiar]    │                        │
-│ resultados (1 col)    │              └──────────────┴───────────────────────┘
+Móvil (< 1024 px)                      Escritorio (≥ 1024 px)
+┌───────────────────────┐              ┌──────────────────────────────────────────────────────────────┐
+│▓ Coches eléctricos   ▓│ franja       │▓ Coches eléctricos                                          ▓│ franja
+│▓ texto de entrada    ▓│ oscura       │▓ texto de entrada                                           ▓│ oscura
+├───────────────────────┤              ├──────────────────────────────────────────────────────────────┤
+│ 6 modelos             │ barra        │ 6 modelos  (Marca⌄)(Segmento⌄)(Precio⌄)(Autonomía…⌄)(Tracción⌄)│ barra
+│ (Filtros (2)⌄)        │ surface-     │            (Estado⌄)                  (Ordenar por: Novedad⌄)│ surface-
+│ (Ordenar por: Novedad⌄)│ muted       ├──────────────────────────────────────────────────────────────┤ muted
+├───────────────────────┤              │ (panel de «Marca», si está abierto)                          │
+│ (panel abierto:)      │              │  Marca: ☐ Cupra (3)  ☐ Kia (1)  ☐ Renault (1) …              │
+│ Marca / Segmento /    │              ├──────────────────────────────────────────────────────────────┤
+│ Precio / Autonomía /  │              │ [Cupra ×] [Más de 400 km ×]  chips                           │
+│ Tracción / Estado     │              ├──────────────────────────────────────────────────────────────┤
+│ [Ver 4 modelos][Limpiar]│            │ pantallas de modelo a todo el ancho                          │
+├───────────────────────┤              └──────────────────────────────────────────────────────────────┘
+│ pantallas de modelo   │
 └───────────────────────┘
 ```
 
-La colocación en la página (contador bajo el texto de entrada, fila «Modelos» + orden) la precisa
+(En 1280 px los seis filtros y el orden caben en una fila, como en la captura; el salto de línea del dibujo es el
+caso de 1024 px, ver «Barra que no cabe».)
+
+La colocación en la página (texto de entrada, encabezado «Modelos» oculto, orden respecto a «Explorar») la precisa
 `paginas-catalogo.md`, que manda sobre este wireframe.
 
-- **Escritorio (`lg`)**: panel fijo a la izquierda, `--width-filters`, con desplazamiento propio; el orden arriba a la derecha.
-  Los filtros se aplican al momento (no hay botón «Aplicar»).
-- **Móvil / `md`**: el botón «Filtros (n)», con el nº de filtros activos, abre el panel a pantalla completa; dentro
+### La barra
+- **Franja**: `surface-muted` a todo el ancho; contenido dentro de `--width-page`, relleno vertical `3` (0,75 rem),
+  separación entre controles `2` (0,5 rem). Sin borde ni sombra: el cambio de franja (oscura → clara → oscura de la
+  primera pantalla) ya la separa.
+- **Resumen** («6 modelos», `role="status"`, ver «Resumen y avisos»): primero en la barra; `text-small`, peso 600,
+  `ink-900` (16,57). En móvil ocupa su propia línea; desde `lg`, a la izquierda de los filtros, sin partir línea.
+- **Píldoras**: cada control de la barra es una píldora (`--radius-pill`), alto mínimo `--size-touch`, relleno
+  horizontal `4`, `text-small` peso 600, fondo `surface`, texto `ink-900` (18,86). **Borde `line`** (4,83 sobre
+  `surface`, 4,24 frente a la franja `surface-muted`), no `line-soft` como en el prototipo: la píldora es un control y
+  su contorno tiene que verse (WCAG 1.4.11, «Roles de color por control» de `tokens.md`). Al final, un «⌄»
+  decorativo (`aria-hidden` o `content` con texto alternativo vacío).
+- **Estados de la píldora**: hover, borde `ink-900`; **abierta** (`aria-expanded="true"`), fondo `ink-900` y texto
+  `on-dark` (18,86) y el «⌄» girado 180°: el estado se ve por la forma, no solo por el color (WCAG 1.4.1). Foco: el
+  anillo de `tokens.md` (`brand-600`, 6,67 sobre `surface-muted`).
+- **Con filtros activos en el grupo**: «Marca (2)», con «activos» oculto solo visualmente tras el número (como
+  `filtros.abrir`): se lee «Marca (2 activos)». Sin filtros activos, solo «Marca».
+- **Textos largos**: las píldoras no parten línea (`white-space: nowrap`); la que no cabe baja de línea entera.
+  Ninguna se recorta con «…».
+
+### Escritorio (`lg`, ≥ 1024 px)
+- Una píldora por grupo de filtro, en el orden de «Controles»: Marca, Segmento, Precio, Autonomía mínima (WLTP),
+  Tracción, Estado. El grupo Segmento no se pinta si ningún modelo tiene segmento (ver la tabla de «Controles»). El
+  orden, a la derecha (`margin-left: auto`).
+- Cada píldora es un **botón de disclosure** (`aria-expanded`, `aria-controls` a su panel). Abre el panel de su
+  grupo **en el flujo**, debajo de la fila de píldoras y a todo el ancho de la barra, empujando los resultados hacia
+  abajo: no es una capa encima de las pantallas (WCAG 2.4.3, 2.4.7, por lo mismo que el panel móvil).
+- **Un panel abierto cada vez**: abrir otro cierra el anterior. Se cierra pulsando su píldora otra vez, con `Esc` (el
+  foco vuelve a su píldora) o abriendo otra. Pulsar fuera no lo cierra: no hay nada que tape.
+- **Foco al abrir**: pasa al título del panel (el nombre del grupo, `tabindex="-1"`), como en el panel móvil. Desde
+  ahí, `Tab` recorre los controles del grupo y después sigue por los chips y los resultados (orden del DOM). Para
+  volver a la fila de píldoras: `Esc` o `Shift+Tab`.
+- **Panel**: fondo `surface-muted` (sigue la franja), separado de la fila por una línea `line-soft` decorativa,
+  relleno vertical `4`. Dentro, el `<fieldset>` del grupo tal como dice «Controles»; las casillas y radios se colocan
+  en filas que parten línea (no en una columna estrecha), cada una con su zona táctil. El de Precio lleva los dos
+  campos y, debajo, el mensaje de error de rango. El de Tracción, su ayuda.
+- Los filtros se aplican al momento (no hay botón «Aplicar»). «Limpiar filtros» va al final de la fila de chips,
+  como un chip más con texto y sin «×», solo si hay filtros activos (ver «Estado vacío»).
+- **Barra que no cabe** (de 1024 a unos 1200 px, o con zoom de texto al 200 %): la fila parte línea; el resumen se
+  queda a la izquierda, las píldoras siguen en su orden y el orden sigue el último, a la derecha de su línea. Nunca
+  scroll horizontal (WCAG 1.4.10).
+
+### Móvil y `md` (< 1024 px)
+- La barra lleva el resumen en una línea y, debajo, dos píldoras: «Filtros (n)» y el orden. Como en la captura de
+  390 px, cada una puede ocupar su propia línea si el orden no cabe al lado.
+- **«Filtros (n)»**, con el nº de filtros activos, abre el panel a pantalla completa con todos los grupos; dentro
   el botón principal «Ver {n} modelos» lo cierra y «Limpiar filtros» queda a su lado. Los resultados se actualizan
   mientras se elige. El panel es un `<details>`-like/disclosure con `aria-expanded`; al abrirlo el foco pasa a su título
   y al cerrarlo vuelve al botón «Filtros». Con `Esc` se cierra. Sin trampa de foco: es un panel en el flujo, no un modal.
@@ -57,8 +112,14 @@ La colocación en la página (contador bajo el texto de entrada, fila «Modelos�
     nombre empieza por el texto visible, así que el control por voz («pulsa Filtros») funciona. Sin filtros
     activos se ve y se lee «Filtros», sin paréntesis.
 - El orden (RF-3) es un `<select>` nativo: en móvil abre el selector del sistema. Lleva `<label>` **visible**
-  «Ordenar por» (`orden.etiqueta`) asociado con `for`; el «Ordenar:» del wireframe es ese mismo texto
-  (WCAG 3.3.2, 2.5.3).
+  «Ordenar por» (`orden.etiqueta`) asociado con `for` (WCAG 3.3.2, 2.5.3). En la barra se pinta como una píldora más
+  («Ordenar por: Novedad ⌄»): la píldora es un contenedor con la `<label>` y el `<select>` sin apariencia propia
+  (`appearance: none`), con el «⌄» decorativo. El prototipo lo dibuja como un `<button>`: es solo la imagen; en
+  `web/src/` sigue siendo el `<select>` con su `<label>`, y toda la píldora es su zona pulsable.
+
+### Sin JavaScript
+La barra existe igual (es la franja que separa cabecera y resultados), pero solo con el resumen («6 modelos») y el
+texto `filtros.sinJs`, en `text-small`, `ink-900`. Ni píldoras ni orden: un control que no hace nada falla RNF-3.
 
 ## Controles (RF-2, RF-3, RF-7, RF-11, RF-12)
 
@@ -129,7 +190,8 @@ del resumen. Colores: fondo `surface`, texto `ink-900` (17,74), borde `line` (4,
 último, al anterior; si no queda ninguno, al encabezado `h2` «Modelos» (`tabindex="-1"`).
 
 ## Estado vacío (RF-6, CA-6)
-Se produce solo en el navegador (ADR-0006). Sustituye a la rejilla; el panel de filtros **sigue** visible.
+Se produce solo en el navegador (ADR-0006). Sustituye a las pantallas de modelo; la barra de filtros **sigue**
+visible encima. Va en una franja `surface` (blanca), con el título en `--text-block` ancho, como los `h2` de la ficha.
 ```
 ┌──────────────────────────────┐
 │ h2  Ningún modelo cumple los │
@@ -140,14 +202,14 @@ Se produce solo en el navegador (ADR-0006). Sustituye a la rejilla; el panel de 
 └──────────────────────────────┘
 ```
 El resumen `role="status"` lo anuncia («Ningún modelo»). Limpiar: quita todos los filtros y el orden vuelve al de por defecto, la URL vuelve a `/coches`,
-y el foco pasa al encabezado de resultados (el botón desaparece; sin esto el foco se pierde, WCAG 2.4.3). También limpia «Limpiar filtros» del panel.
-Botón principal: `on-brand` sobre `brand-600` (6,67); hover `brand-800` (9,33).
+y el foco pasa al encabezado de resultados (el botón desaparece; sin esto el foco se pierde, WCAG 2.4.3). También limpia «Limpiar filtros» del panel móvil o de la fila de chips.
+Botón principal: `on-brand` sobre `brand-600` (7,59 sobre la paleta de la dirección); hover `brand-800` (11,19).
 
 **Sin filtros activos, «Limpiar filtros» no se pinta** (ni en el panel ni en el estado vacío, que nunca se da sin
 filtros). Se descarta el botón deshabilitado: WCAG 1.4.3 no le exige contraste, así que sería un texto gris
 difícil de leer, y un `disabled` tampoco recibe foco, con lo que no explica por qué no hace nada.
-**Foco tras «Limpiar filtros» del panel** (WCAG 2.4.3): el botón desaparece, así que el foco pasa al título del
-panel («Filtros», `tabindex="-1"`) en móvil y en escritorio.
+**Foco tras «Limpiar filtros»** (WCAG 2.4.3): el botón desaparece, así que el foco pasa, en móvil, al título del
+panel («Filtros», `tabindex="-1"`); en escritorio, al `h2` «Modelos» (`tabindex="-1"`), como al quitar el último chip.
 
 ## Estados y errores
 | Situación | Comportamiento |
@@ -171,12 +233,14 @@ parámetro los fija el Desarrollador; se pide que sean legibles en español. Esa
 2. Navegación del sitio.
 3. Franja «Explorar» (enlaces, `brand-600` sobre `surface`, 6,67, **subrayados**: frente a texto `ink-900` solo dan
    2,66, menos de 3, así que el color solo no basta, WCAG 1.4.1). Cada enlace con alto mínimo `--size-touch`.
-4. Móvil: botón «Filtros» → (si abierto) grupos en el orden Marca, Segmento, Precio, Autonomía, Tracción, Estado → «Ver n modelos» → «Limpiar filtros». Escritorio: los mismos grupos y «Limpiar filtros».
-5. Select de orden.
-6. Chips de filtros activos (de izquierda a derecha).
-7. Tarjetas, una parada cada una (el enlace del nombre).
-Los cambios de resultados **no** mueven el foco, salvo tras «Limpiar filtros» (a `h2` de resultados) y tras cerrar el panel móvil (al botón «Filtros»).
-Teclado: Espacio marca casillas y radios; flechas cambian entre radios; Esc cierra el panel móvil.
+4. Barra, móvil: píldora «Filtros» → select de orden → (si abierto) grupos en el orden Marca, Segmento, Precio,
+   Autonomía, Tracción, Estado → «Ver n modelos» → «Limpiar filtros». Escritorio: las seis píldoras de grupo → select
+   de orden → (si hay uno abierto) los controles de ese grupo.
+5. Chips de filtros activos (de izquierda a derecha) y, en escritorio, «Limpiar filtros».
+6. Pantallas de modelo, una parada cada una (el enlace del nombre) más sus enlaces de pie (`tarjeta-modelo.md`).
+Los cambios de resultados **no** mueven el foco, salvo tras «Limpiar filtros» y tras cerrar un panel (a su píldora).
+Teclado: Espacio marca casillas y radios; flechas cambian entre radios; Esc cierra el panel abierto, en móvil y en
+escritorio.
 Foco visible en todos los controles: anillo de `tokens.md` (`--size-focus-ring`, `brand-600`), 6,67 sobre
 `surface` y 6,06 sobre `surface-muted` (WCAG 2.4.7, 1.4.11). En casillas y radios el anillo rodea la fila entera
 de la etiqueta, que es la zona pulsable. Cambiar un filtro no cambia de contexto (no recarga, no mueve el foco):
@@ -187,6 +251,7 @@ cumple WCAG 3.2.2 aunque los resultados se actualicen al momento, porque el camb
 |---|---|
 | `filtros.titulo` | Filtros |
 | `filtros.abrir` | Filtros ({n}) — con «activos» oculto solo visualmente tras {n}: se lee «Filtros (2 activos)»; con 0, «Filtros» |
+| `filtros.grupoConteo` | {grupo} ({n}) — píldora de grupo en escritorio, con «activos» oculto solo visualmente tras {n}: se lee «Marca (2 activos)»; con 0, «{grupo}» |
 | `filtros.opcionConteo` | {valor} ({n}) — con «modelos» oculto solo visualmente tras {n}: se lee «Cupra (3 modelos)» |
 | `chip.quitar` / `chip.lista` | Quitar filtro: {valor} / Filtros activos |
 | `saltar.resultados` | Saltar a los resultados |
@@ -226,6 +291,8 @@ cumple WCAG 3.2.2 aunque los resultados se actualicen al momento, porque el camb
 | Foco visible | 2.4.7 | Cumple con el anillo de `tokens.md`; en casillas, la fila entera |
 | Foco tras quitar chip o «Limpiar filtros» del panel | 2.4.3 | **Corregido**: destino definido, el foco ya no se pierde |
 | Panel móvil «a pantalla completa» | 2.4.3, 2.4.7 | **Corregido**: en el flujo, no capa fija que tape resultados enfocables |
+| Barra superior (2026-11-10): paneles de escritorio | 2.4.3, 2.4.7, 4.1.2 | En el flujo, uno cada vez, `aria-expanded`/`aria-controls`, `Esc` devuelve el foco a la píldora |
+| Barra superior: contorno de las píldoras | 1.4.11 | Borde `line` (4,24 frente a `surface-muted`); el `line-soft` del prototipo no llega a 3 |
 | Nombre del botón «Filtros (n)» y contadores de opciones | 4.1.2, 2.5.3, 1.3.1 | **Corregido**: «Filtros (2 activos)», «Cupra (3 modelos)» |
 | Etiqueta del orden | 3.3.2 | **Corregido**: `<label>` visible «Ordenar por» |
 | Botón «Limpiar filtros» sin filtros | 1.4.3, 2.4.3 | **Corregido**: no se pinta (antes «deshabilitado/oculto») |

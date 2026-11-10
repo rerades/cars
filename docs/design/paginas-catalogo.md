@@ -6,7 +6,7 @@ colocación de los bloques, estado vacío, orden de lectura y de foco, y el paso
 Lo que va dentro de cada bloque ya está especificado y no se repite aquí:
 
 - La tarjeta y la rejilla de tarjetas: [`tarjeta-modelo.md`](tarjeta-modelo.md).
-- El panel de filtros, el orden, los chips, el estado vacío de `/coches`, la URL con query string y la
+- La barra de filtros (antes, panel), el orden, los chips, el estado vacío de `/coches`, la URL con query string y la
   regla de base sin JavaScript: [`filtros-catalogo.md`](filtros-catalogo.md).
 
 ## Tipos de página
@@ -40,7 +40,8 @@ Orden del DOM = orden visual = orden de lectura (WCAG 1.3.2, RNF-3), el mismo qu
    2. **Texto de entrada** — un párrafo (`<p>`), justo debajo del `h1`.
    3. **Contador** — «{n} modelos» (`resumen.n`).
    4. **Franja «Explorar»** — `<nav>` con su `h2` (ver «Franja Explorar»).
-   5. Solo en `/coches` y con JS: **panel de filtros** (`filtros-catalogo.md`).
+   5. Solo en `/coches`: **barra de filtros** (`filtros-catalogo.md`, «Estructura: barra superior»), que en
+      `/coches` lleva también el contador del punto 3; sin JS, solo el contador y `filtros.sinJs`.
    6. **Resultados** — `<section>` con `h2` «Modelos», el selector de orden y los chips (solo `/coches` con JS),
       y la lista de tarjetas (`tarjeta-modelo.md`), o el estado vacío en su lugar.
 4. Pie del sitio (fuera de esta especificación).
@@ -217,8 +218,9 @@ Móvil (< 768 px)                 Escritorio (≥ 1024 px)
 └─────────────────────────┘
 ```
 
-Una sola columna de contenido; la rejilla de tarjetas ocupa todo el ancho (1 / 2 / 3 columnas según
-`tarjeta-modelo.md`, «Rejilla»).
+Una sola columna de contenido. Con la dirección visual, la lista no es una rejilla de 1 / 2 / 3 columnas sino una
+pantalla a todo el ancho por modelo (`tarjeta-modelo.md`, «Dirección visual»); la cabecera va en franja oscura y el
+contador, en una franja clara entre «Explorar» y la lista, sin controles (aquí no hay filtros).
 
 ### `/coches`
 
@@ -240,18 +242,23 @@ Móvil (< 768 px)                 Escritorio (≥ 1024 px)
 └─────────────────────────┘
 ```
 
-- Cabecera (`h1`, entrada, contador) y franja «Explorar» a todo el ancho; debajo, en `lg`, dos columnas: filtros
-  (`--width-filters`) y resultados (el resto), separadas `8`. La rejilla de resultados cabe en 3 columnas a
-  1024 px con el panel al lado; si no cabe, baja a 2 (`tarjeta-modelo.md` fija el máximo, no el mínimo).
-- La fila de resultados lleva el `h2` «Modelos» a la izquierda y el selector de orden a la derecha; en DOM, el `h2`
-  antes que el selector, igual que se ve. Debajo, los chips; debajo, la lista.
-- **Esto precisa el wireframe de `filtros-catalogo.md`**: el contador va bajo el texto de entrada (antes de
-  «Explorar», como dice su orden del DOM) y no en la fila del selector de orden. Así el orden visual coincide con
-  el del DOM en todas las anchuras.
-- En móvil y `md`, una sola columna: botón «Filtros (n)» tras «Explorar»; el `h2` «Modelos» y el selector de orden
-  arriba de los resultados, uno debajo del otro.
-- **Sin JS**: no hay columna de filtros ni selector ni chips; la página queda como una pregenerada, con el texto
-  `filtros.sinJs` debajo del contador (`filtros-catalogo.md`).
+**Dirección visual (2026-11-10)**: el wireframe de arriba y los dos primeros puntos de abajo son anteriores a ella y
+ya no valen en `/coches`. Desde [`direccion.md`](direccion.md), «La elegida» (prototipo `catalogo-a.astro`):
+- Cabecera (`h1` en `--text-display` ancho, texto de entrada) en franja oscura; después, «Explorar»; después, la
+  **barra de filtros** en franja clara (`filtros-catalogo.md`, «Estructura: barra superior»), que lleva el
+  **contador** (el resumen `role="status"`), las píldoras de filtro y el orden. En `/coches` el contador deja de ir
+  bajo el texto de entrada: va en la barra, que es donde cambia. El orden visual sigue siendo el del DOM.
+- Debajo de la barra, los chips; después, la sección de resultados con su `h2` «Modelos» **oculto solo
+  visualmente** (sigue siendo destino de «Saltar a los resultados» y nombre de la lista) y la lista de pantallas a
+  todo el ancho (`tarjeta-modelo.md`, «Dirección visual»), sin columna de filtros ni rejilla.
+- **Sin JS**: la barra solo lleva el contador y `filtros.sinJs` (`filtros-catalogo.md`, «Sin JavaScript»).
+
+Lo anterior, que queda sustituido en `/coches`:
+- ~~Cabecera (`h1`, entrada, contador) y franja «Explorar» a todo el ancho; debajo, en `lg`, dos columnas: filtros
+  (`--width-filters`) y resultados.~~
+- ~~La fila de resultados lleva el `h2` «Modelos» a la izquierda y el selector de orden a la derecha.~~
+- En móvil y `md`: «Filtros (n)» y el orden van en la barra, tras el contador (antes, tras «Explorar» y sobre los
+  resultados).
 
 ## Estados
 

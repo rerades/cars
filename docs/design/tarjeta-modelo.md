@@ -5,7 +5,45 @@ PRD-001: RF-1, RF-7, RF-8, RF-9, RF-11, RF-12; CA-1, CA-8, CA-9, CA-10, CA-11, C
 (ADR-0005), sin JS: la tarjeta es HTML estático (RF-10, CA-12c). Se usa en `/coches`, en `/marcas/{marca}`
 y en las demás páginas de RF-10. La ficha (PRD-002) no se especifica aquí.
 
+## Dirección visual: la tarjeta es una pantalla (2026-11-10)
+
+La dirección elegida ([`direccion.md`](direccion.md), «La elegida»; [`propuesta-a.md`](propuesta-a.md); prototipo
+`web/design-proto/catalogo-a.astro`, capturas [`refs/catalogo-a-390.png`](refs/catalogo-a-390.png) y
+[`refs/catalogo-a-1280.png`](refs/catalogo-a-1280.png)) cambia **cómo se ve** la tarjeta, no qué lleva: los campos,
+sus formatos, sus «por confirmar», las etiquetas y la accesibilidad de abajo siguen vigentes. Lo que cambia, y manda
+sobre el wireframe y los tamaños de abajo:
+
+- **Una pantalla a todo el ancho por modelo**, no una tarjeta en retícula: la lista es de una columna en todas las
+  anchuras (sin Card de Bearnie, sin borde ni `--radius-card`). Escritorio: alto mínimo 31,5 rem.
+- **Con foto**: franja oscura (`.band-dark`). La foto, con el tratamiento común de `propuesta-a.md`, ocupa la parte de
+  arriba en móvil y el 70 % de la franja en `lg`, alternando lado (impares a la derecha, pares a la izquierda), y se
+  funde con la franja por el velo; el texto va en la parte sólida (contraste en `tokens.md`, velo: 9,1 / 5,1). La
+  imagen deja de ser 16:9: `object-fit: cover` en el hueco de la franja.
+- **Sin foto**: franja clara (`surface-muted`) con la silueta del segmento grande y de trazo fino (ADR-0012), detrás
+  del texto y decorativa. Sustituye al hueco 16:9 con el icono de 48 px de «Imagen».
+- **Nombre**: el modelo en `--text-screen`, `--font-stretch-wide`, peso 800; cada palabra es un bloque que no se parte
+  por dentro, de modo que «R5 E-Tech eléctrico» baja de línea por palabras y nunca desborda a 320 px. La marca, encima,
+  en `--text-body` peso 600, **dentro del mismo `h3 > a`** que el modelo, como pide «Estructura y jerarquía» (el
+  prototipo la pone fuera del enlace y en un `h2`: en `web/src/` va como dice esta especificación).
+- **Orden visual y del DOM**: marca y modelo (enlace) → segmento → etiqueta de estado → las dos cifras → pie con
+  «Comparar» y la atribución de la foto. El segmento sube junto al nombre y la atribución baja al pie porque las
+  cifras tienen que quedar justo debajo del nombre (`direccion.md`).
+- **Precio y autonomía como cifras** (la cifra de B, `a/Cifra.astro`): número en `--text-figure-l` y
+  `--font-stretch-narrow`, etiqueta pequeña debajo («Desde» / «Autonomía WLTP», en el DOM `dt` antes que `dd`), dos
+  por fila también a 390 px, con una línea fina `line-soft` encima. «Precio con oferta» va en la etiqueta del precio
+  («Desde · Precio con oferta»), en texto. **«Precio por confirmar» / «Autonomía por confirmar»** ocupan el sitio del
+  número en dos líneas estrechas de `ink-600` (`on-dark-muted` en franja oscura) que suman su altura: la fila no
+  salta. Sustituyen a «Desde 31.223 €» y «Hasta 557 km WLTP» en una línea, con los mismos datos.
+- **Etiqueta «Próximamente»**: `soon-bg` `#c6f24e` con `soon-fg` `#0b1217` (14,56), `--radius-pill`.
+- **Enlace de toda la pantalla**: el `::after` del enlace del nombre cubre la pantalla; «Comparar» y la atribución
+  quedan por encima (`z-index`) y siguen siendo enlaces propios. Foco: anillo de 3 px dentro de la pantalla
+  (`outline-offset: -6px`), `brand-600` en franja clara y `on-dark` en la oscura (18,86).
+- **LCP**: solo la primera pantalla carga la foto sin `loading="lazy"` (en móvil, la segunda ya no está a la vista).
+
 ## Estructura y jerarquía (RF-1)
+
+(Wireframe y tamaños anteriores a la dirección visual: valen el orden de los campos, el enlace y la lectura; el aspecto
+lo da la sección de arriba.)
 
 ```
 ┌──────────────────────────────┐
