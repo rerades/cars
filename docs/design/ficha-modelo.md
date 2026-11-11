@@ -16,7 +16,7 @@ Badge para las etiquetas.
 **Dirección visual** ([`direccion.md`](direccion.md), «La elegida»; [`propuesta-a.md`](propuesta-a.md)): la foto y las
 cifras clave llenan la primera pantalla (RF-18); las secciones van en **franjas** a todo el ancho que alternan oscura
 (`.band-dark`), blanca y clara; un **menú de secciones** fijo abajo (RF-17); y las versiones, en el **bloque de versión**
-de B (en escritorio, pendiente de la pregunta 10, por CA-3). Tokens: `tokens.md`, «Dirección visual», que manda sobre los valores de color y tipografía citados abajo con la
+de B en todas las anchuras (pregunta 10, resuelta el 2026-11-11: CA-3 enmendado). Tokens: `tokens.md`, «Dirección visual», que manda sobre los valores de color y tipografía citados abajo con la
 paleta anterior. Prototipo: `web/design-proto/ficha-a.astro` (Renault 5 E-Tech), capturas
 [`refs/ficha-a-390.png`](refs/ficha-a-390.png) y [`refs/ficha-a-1280.png`](refs/ficha-a-1280.png). El prototipo no
 pinta «Más imágenes», «Otros modelos del segmento» ni «Reviews»: siguen como se especifican aquí, cada uno en su franja.
@@ -319,9 +319,11 @@ h3 Condiciones de las ofertas
   ninguna anchura.
 - Un modelo con una sola versión también se muestra como tabla (una columna), por coherencia con RF-3.
 
-**Choque con CA-3 (pregunta abierta 10).** La dirección elegida sustituye la tabla por el bloque de B también en
-escritorio, pero CA-3 de PRD-002 dice «A 1280 px las veo como columnas de una tabla». Hasta que Producto enmiende
-CA-3, **la tabla de arriba sigue vigente en `lg`** con los colores y la tipografía de la dirección (Archivo; cabecera
+**Pregunta 10, resuelta el 2026-11-11: CA-3 enmendado (PRD-002, decisión 16).** En `lg` se usa el bloque de B en tres
+columnas y **la tabla de esta sección ya no se construye**, igual que «Las dos presentaciones»: se quitarán de esta
+especificación al ponerla al día. Texto anterior: la dirección elegida sustituye la tabla por el bloque de B también en
+escritorio, pero CA-3 de PRD-002 decía «A 1280 px las veo como columnas de una tabla». Hasta que Producto enmendara
+CA-3, **la tabla de arriba seguía vigente en `lg`** con los colores y la tipografía de la dirección (Archivo; cabecera
 y columna de rótulos en `surface-muted`, que en la franja blanca da `ink-900` 16,57). Si se enmienda, en `lg` se usa
 el bloque de B en tres columnas (ver abajo) y esta sección y «Las dos presentaciones» se borran.
 
