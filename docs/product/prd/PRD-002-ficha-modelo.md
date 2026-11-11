@@ -5,7 +5,7 @@ status: ready        # draft | ready | in-progress | done | deprecated
 priority: P0         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: [PRD-001]
 epic: ""
-updated: 2026-11-06
+updated: 2026-11-11
 ---
 
 # PRD-002 — Ficha de modelo
@@ -39,7 +39,7 @@ Quien ha encontrado un modelo en el catálogo (PRD-001) y quiere decidir si le i
 ## 4. Requisitos funcionales
 - **RF-1:** Cada modelo del catálogo tiene una página propia con una URL estable y única, a la que enlaza su tarjeta del catálogo (PRD-001, RF-1). La URL es `/marcas/{marca}/{modelo}/`, con la carpeta y el nombre del fichero de `data/raw/` (`data/raw/polestar/polestar-2.yaml` → `/marcas/polestar/polestar-2/`).
 - **RF-2:** La cabecera de la ficha muestra la marca (`brand_name`), el modelo (`model`), el segmento (`segment`, con la etiqueta española de PRD-001, RF-11) y el estado. Sin segmento, muestra «Segmento por confirmar» (PRD-001, RF-12).
-- **RF-3:** La ficha lista **todas las versiones** del modelo (`versions[]`), cada una con su nombre (`name`). Un mismo nombre de versión aparece una sola vez. Las versiones se ordenan por precio, de menor a mayor; las que no tienen precio van al final, en el orden del fichero. En pantallas anchas se presentan en una **tabla comparativa**, con una columna por versión; en móvil, un **bloque por versión**, apilados en el mismo orden y sin scroll horizontal (RNF-3).
+- **RF-3:** La ficha lista **todas las versiones** del modelo (`versions[]`), cada una con su nombre (`name`). Un mismo nombre de versión aparece una sola vez. Las versiones se ordenan por precio, de menor a mayor; las que no tienen precio van al final, en el orden del fichero. Se presentan como un **bloque por versión** (nombre, cifras de autonomía y precio, y sus campos), apilados en ese orden y sin scroll horizontal (RNF-3); en pantallas anchas, cada bloque reparte esas partes en columnas. Sin tabla comparativa (decisión 16).
 - **RF-4:** Cada versión muestra su precio (`price`) en euros, con IVA y sin ayudas. Si el precio es `financed`, lleva la etiqueta «Precio con oferta» y **el texto literal de sus condiciones** (`price_terms`), junto con un enlace a `price_terms_url` (PRD-001, RF-9). Si la versión no tiene precio (`price: null`), muestra «Precio por confirmar». En un modelo `discontinued`, el precio lleva la nota «Último precio publicado».
 - **RF-5:** Cada versión muestra su autonomía WLTP (`wltp_km`) en km. Si ninguna versión trae autonomía, la ficha muestra la del modelo entero (`specs.wltp_max_km`) rotulada como dato del modelo, no de una versión.
 - **RF-6:** Cada versión muestra, cuando existan, estos campos del esquema: capacidad de batería (`battery_kwh`) **con su base** (`basis`: útil, bruta o «sin especificar»), potencia (`power_kw`), tracción (`drivetrain`, con etiqueta española), potencia máxima de carga en corriente continua (`dc_max_kw`) y en corriente alterna (`ac_max_kw`). Los campos sin dato se muestran como «por confirmar», no se ocultan ni se rellenan con una estimación (ADR-0001, regla 7).
@@ -87,7 +87,7 @@ Entidades de `architecture/data-model.md` (ADR-0008); la ficha no usa ningún ca
 ## 7. Criterios de aceptación
 - [ ] **CA-1** (→ RF-1): Dado un modelo del catálogo, cuando sigo el enlace de su tarjeta, entonces llego a una página que muestra su marca y su modelo; y dados dos modelos distintos, entonces sus URL son distintas.
 - [ ] **CA-2** (→ RF-2): Dado un modelo con segmento `suv_compacto`, cuando abro su ficha, entonces la cabecera muestra la marca, el modelo, «SUV compacto» y su estado. Dado un modelo sin segmento, entonces la cabecera muestra «Segmento por confirmar».
-- [ ] **CA-3** (→ RF-3): Dado un modelo con tres versiones, una de ellas sin precio, cuando abro su ficha, entonces veo las tres, cada una con su nombre, ninguna repetida, ordenadas de menor a mayor precio y con la que no tiene precio al final. A 1280 px las veo como columnas de una tabla; a 320 px, como bloques apilados en el mismo orden y sin scroll horizontal.
+- [ ] **CA-3** (→ RF-3): Dado un modelo con tres versiones, una de ellas sin precio, cuando abro su ficha, entonces veo las tres, cada una con su nombre, ninguna repetida, ordenadas de menor a mayor precio y con la que no tiene precio al final. A 1280 px y a 320 px las veo como bloques, uno por versión, en ese orden y sin scroll horizontal.
 - [ ] **CA-4** (→ RF-4): Dada una versión con precio `pvp`, cuando abro la ficha, entonces veo su precio en euros sin etiqueta «Precio con oferta». Dada una con precio `financed`, entonces veo la etiqueta, el texto literal de `price_terms` y un enlace a `price_terms_url`. Dada una con `price: null`, entonces veo «Precio por confirmar». Dado un modelo `discontinued` con precio, entonces el precio lleva «Último precio publicado».
 - [ ] **CA-5** (→ RF-5): Dado un modelo cuyas versiones traen `wltp_km`, cuando abro la ficha, entonces cada versión muestra su autonomía en km. Dado un modelo cuyas versiones no la traen pero con `specs.wltp_max_km`, entonces veo esa cifra rotulada como del modelo.
 - [ ] **CA-6** (→ RF-6): Dada una versión con `battery_kwh` de `basis: gross`, cuando abro la ficha, entonces la capacidad aparece indicada como bruta. Dada una versión sin `dc_max_kw`, entonces ese campo muestra «por confirmar» y no un valor.
@@ -130,6 +130,9 @@ Decididas por el responsable del producto. Cada una se ha llevado ya a los RF y 
 14. **Menú inferior de secciones (RF-17):** lo pide el responsable tras ver la ficha de Cupra Tavascan. La ficha es larga y este menú da un mapa. Descartado: un menú lateral, que no existe en móvil.
 15. **Cifras grandes y animadas (RF-18):** lo pide el responsable tras ver la ficha de Porsche Macan. La animación es un adorno, nunca el dato: por eso el valor va en el HTML (RNF-3, ADR-0003). Descartado: pintar el número solo con JavaScript.
 
+### Resueltas (2026-11-11)
+16. **Versiones sin tabla (RF-3, CA-3; enmienda la decisión 2):** el bloque de versión de la dirección visual elegida (`docs/design/direccion.md`, «La elegida») se usa en todas las anchuras, también en escritorio, donde reparte nombre, cifras y campos en tres columnas. Lo decide el responsable al cerrar la pregunta 10 de `docs/design/ficha-modelo.md`. Descartado: mantener la tabla comparativa en escritorio, que obliga a servir dos presentaciones en el HTML y rompe la dirección elegida.
+
 ### Abiertas
 - Ninguna.
 
@@ -143,3 +146,4 @@ Decididas por el responsable del producto. Cada una se ha llevado ya a los RF y 
 | 2026-10-21 | Enmienda por la ADR-0017: la tabla de la sección 6 recoge las reviews y los resultados de prueba, con remisión a PRD-006 y a la sección 3.1 de `data-model.md`. Sin cambios en RF ni CA | Claude |
 | 2026-10-28 | Enmienda por ADR-0021 (aceptada el 2026-10-27): RF-9 muestra el segmento editorial (`tier: E`) como «clasificación editorial» con fecha y `note`, sin enlace; CA-9 remite a la excepción; añadido CA-20 | responsable + Claude |
 | 2026-11-06 | Encargo visual del responsable (`docs/design/direccion.md`): añadidos RF-17 (menú inferior de secciones), RF-18 (cifras clave grandes), CA-21 y CA-22 | Rod / Claude |
+| 2026-11-11 | Decisión 16: las versiones se ven como bloques en todas las anchuras, sin tabla comparativa. Ajustados RF-3 y CA-3 | Rod / Claude |

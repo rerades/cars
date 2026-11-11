@@ -3841,3 +3841,79 @@
     portada.md y cambia solo lo que contradiga la dirección elegida. No cambies el alcance: si un
     cambio choca con un requisito de un PRD, no lo cambies y déjalo como pregunta abierta en la
     especificación. No toques direccion.md ni los prototipos. Bitácora."
+# Versiones sin tabla en la ficha (PRD-002, decisión 16, 2026-11-11).
+- id: ficha-versiones-sin-tabla
+  agent: designer
+  task: "PRD-002 enmienda RF-3 y CA-3 (decisión 16, 2026-11-11): las versiones de la ficha se ven
+    como el bloque de versión de B en todas las anchuras, y en lg en tres columnas. Pon al día
+    docs/design/ficha-modelo.md con esa decisión: borra la sección «Pantallas anchas: tabla
+    comparativa», «Las dos presentaciones en el HTML» y el párrafo de la pregunta 10, quita «solo si
+    se enmienda CA-3» del bloque de B y cambia lo que aún hable de la tabla (orden de las notas,
+    recorrido del teclado y del lector, tokens --width-version-*, pregunta 10 de «Preguntas
+    abiertas», que pasa a resuelta). Si un token deja de usarse en toda la web, dilo en
+    docs/design/tokens.md. No cambies el alcance ni otras secciones. Bitácora."
+# Llevar la dirección visual a web/src/ (ADR-0024, punto 4; 2026-11-11).
+- id: epica-direccion-visual
+  agent: planner
+  task: "Crea la épica y las historias para llevar a web/src/ la dirección visual elegida
+    (docs/design/direccion.md, «La elegida»; ADR-0024, punto 4). Los requisitos están en los PRD:
+    PRD-001 (tarjeta, filtros y páginas del catálogo), PRD-002 (ficha, con RF-3 y CA-3 enmendados
+    por su decisión 16, RF-17, RF-18, CA-21 y CA-22) y PRD-004 (portada). El diseño, en
+    docs/design/tokens.md («Dirección visual»), propuesta-a.md, tarjeta-modelo.md,
+    filtros-catalogo.md, paginas-catalogo.md, ficha-modelo.md y portada.md, y los prototipos de
+    web/design-proto/ (catalogo-a, ficha-a, pantalla.css, fonts). Primera historia, la base común
+    de la que dependen las demás: tokens, tipografía Archivo servida desde el propio sitio y
+    franjas. Después, una historia por pantalla o componente, en orden de dependencia y citando en
+    cada una la sección de diseño que sigue. Mira gh issue list --state all antes: no dupliques
+    historias abiertas de esos PRD. Si una sección de diseño tiene una pregunta abierta que
+    bloquea una historia, no la crees y dilo en tu resumen."
+# Furgonetas y cuadriciclos, que entran en el catálogo desde el 2026-11-07 (PRD-001, sección 3).
+- id: furgonetas-fiat
+  agent: researcher
+  task: "Fiat: Scudo eléctrico, e-Ducato, Qubo L y E-Ulysse, que el descubrimiento del 2026-11-07
+    dejó sin escribir porque ninguna fuente confirmaba que se vendan hoy en España. Desde el
+    2026-11-07 entran también las furgonetas de carga (PRD-001, sección 3). Añádelos a
+    data/raw/fiat/ si una fuente confirma que se venden hoy en España; si no, anótalo en la
+    bitácora. Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md, incluida la vía del IDAE (node factory/fetch-idae.ts) si la
+    web no se puede leer, y segment según RF-11 de PRD-001. Imágenes con node
+    factory/fetch-image.ts, según esas mismas reglas. No toques otros modelos. Bitácora."
+- id: furgonetas-renault
+  agent: researcher
+  task: "Renault: furgonetas eléctricas que se vendan hoy en España y no estén en data/raw/renault/
+    (por ejemplo Kangoo, Trafic y Master E-Tech), de pasajeros o de carga, que entran en el
+    catálogo desde el 2026-11-07 (PRD-001, sección 3). Hasta 6 modelos. Sigue las reglas de
+    .claude/agents/researcher.md y el esquema de docs/architecture/data-model.md, incluida la vía
+    del IDAE (node factory/fetch-idae.ts), y segment según RF-11 de PRD-001. Imágenes con node
+    factory/fetch-image.ts, según esas mismas reglas. No toques los modelos que ya existen.
+    Bitácora."
+- id: furgonetas-volkswagen
+  agent: researcher
+  task: "Volkswagen: ID. Buzz (pasajeros y Cargo) y las demás furgonetas eléctricas de Volkswagen
+    Vehículos Comerciales que se vendan hoy en España y no estén en data/raw/volkswagen/, que entran
+    en el catálogo desde el 2026-11-07 (PRD-001, sección 3). En el IDAE la marca puede tener otro
+    nombre que «Volkswagen Turismos»: prueba los que dé fetch-idae.ts y di en la bitácora cuál vale.
+    Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md, y segment según RF-11 de PRD-001. Imágenes con node
+    factory/fetch-image.ts, según esas mismas reglas. No toques los modelos que ya existen.
+    Bitácora."
+- id: furgonetas-mercedes-benz
+  agent: researcher
+  task: "Mercedes-Benz: furgonetas eléctricas que se vendan hoy en España y no estén en
+    data/raw/mercedes-benz/ (por ejemplo eCitan, EQT, eVito, EQV y eSprinter), de pasajeros o de
+    carga, que entran en el catálogo desde el 2026-11-07 (PRD-001, sección 3). Hasta 6 modelos.
+    Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md, incluida la vía del IDAE (node factory/fetch-idae.ts), y
+    segment según RF-11 de PRD-001. Imágenes con node factory/fetch-image.ts, según esas mismas
+    reglas. No toques los modelos que ya existen. Bitácora."
+- id: furgonetas-stellantis-carga
+  agent: researcher
+  task: "Peugeot, Citroën, Opel y Toyota: furgonetas eléctricas de carga o de pasajeros que se
+    vendan hoy en España y no estén en sus carpetas de data/raw/ (por ejemplo e-Partner, e-Expert,
+    e-Boxer, ë-Jumpy, ë-Jumper, Vivaro, Movano, Proace), que entran en el catálogo desde el
+    2026-11-07 (PRD-001, sección 3). Hasta 6 modelos en total, empezando por las marcas con menos
+    furgonetas, y lista las que queden en la bitácora para encolarlas. Si una ya está en otra
+    carpeta, no la dupliques. Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md, incluida la vía del IDAE (node factory/fetch-idae.ts), y
+    segment según RF-11 de PRD-001. Imágenes con node factory/fetch-image.ts, según esas mismas
+    reglas. No toques los modelos que ya existen. Bitácora."
