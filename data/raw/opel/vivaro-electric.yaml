@@ -1,0 +1,35 @@
+# Researcher — Opel Vivaro Electric. Fuentes: opel-es (T1, ofertas), idae-es (T2). Consultado 2026-11-12.
+brand: opel
+brand_name: Opel
+model: Vivaro Electric
+status: {value: on_sale, note: "ofertas.opel.es/ofertas lista «Vivaro» con «Diesel o eléctrico» y «IVA no incl.». No dice qué versiones eléctricas se venden hoy.", source_id: opel-es, url: "https://ofertas.opel.es/ofertas", retrieved: 2026-11-12, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Vivaro Electric Furgón M 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 598584 «Vivaro Nuevo Vivaro Furgón-M -Electric Motor 100 kW + Batería 50 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 223, note: "IDAE id 598584", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598584", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Vivaro Electric Furgón M 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 598583 «Vivaro Nuevo Vivaro Furgón-M -Electric Motor 100 kW + Batería 75 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 352, note: "IDAE id 598583", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598583", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Vivaro Electric Furgón L 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 598585 «Vivaro Nuevo Vivaro Furgón-L -Electric Motor 100 kW + Batería 50 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 221, note: "IDAE id 598585", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598585", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Vivaro Electric Furgón L 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 598582 «Vivaro Nuevo Vivaro Furgón-L -Electric Motor 100 kW + Batería 75 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 348, note: "IDAE id 598582", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598582", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Web de Opel (www.opel.es) devuelve 403 a la lectura automática: versiones, launch y segment sin fuente T1 legible. Versiones salidas del IDAE (filas «Nuevo Vivaro» de furgón; faltan Combi y Doble Cabina); el IDAE no dice cuáles se venden hoy."
+  - "Precio: ofertas.opel.es muestra «IVA no incl.» sin versión eléctrica ni importe en la lectura; price null."
+  - "launch y segment: sin fuente leída que los dé con un término de RF-11."
+  - "Imagen: sin foto del Opel Vivaro Electric en Wikimedia Commons (la búsqueda solo devolvió un Vivaro sin identificar como eléctrico)."

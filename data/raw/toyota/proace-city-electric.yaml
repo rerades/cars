@@ -1,0 +1,41 @@
+# Researcher — Toyota Proace City Electric. Fuentes: toyota-es (T1, listado), idae-es (T2), wikimedia-commons. Consultado 2026-11-12.
+brand: toyota
+brand_name: Toyota
+model: Proace City Electric
+status: {value: on_sale, note: "toyota.es/coches lista «Proace City» como «Electric/Diésel». No dice qué versiones eléctricas se venden hoy.", source_id: toyota-es, url: "https://www.toyota.es/coches", retrieved: 2026-11-12, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Proace City Electric Van GX L1
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608227 «PROACE CITY VAN EV Van GX L1 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 336, note: "IDAE id 608227", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608227", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Proace City Electric Van GX L2
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608233 «PROACE CITY VAN EV Van GX L2 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 331, note: "IDAE id 608233", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608233", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Proace City Electric Van VX L1
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608231 «PROACE CITY VAN EV Van VX L1 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 336, note: "IDAE id 608231", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608231", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Proace City Electric Van VX L2
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608237 «PROACE CITY VAN EV Van VX L2 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 331, note: "IDAE id 608237", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608237", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images:
+  - file: data/images/toyota/proace-city-electric/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Toyota_ProAce_City_Electric_1X7A0258.jpg/1280px-Toyota_ProAce_City_Electric_1X7A0258.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Toyota_ProAce_City_Electric_1X7A0258.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-12
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl"
+open_questions:
+  - "Versiones salidas del IDAE (filas MY26 de furgón; hay además acabados GX PLUS, versiones de 3 plazas y las variantes Combi/Verso, que no se han añadido). El IDAE no dice cuáles se venden hoy."
+  - "Precio: toyota.es/coches/precios no da PVP por versión ni aparece en la lectura; price null."
+  - "launch y segment: sin fuente leída; es una furgoneta pero ninguna fuente leída la clasifica con un término de RF-11."
