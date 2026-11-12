@@ -302,32 +302,7 @@ h3 Condiciones de las ofertas
 - El destino del ancla lleva `tabindex="-1"` para que el foco llegue al pulsar «Ver condiciones de la oferta».
 - Si ninguna versión es `financed`, el bloque no existe.
 
-### Pantallas anchas: tabla comparativa (`lg`, ≥ 1024 px; RF-3, CA-3)
-
-- `<table>` con `<caption>` oculta visualmente: `ficha.versiones.caption` «Versiones de {marca} {modelo},
-  ordenadas por precio».
-- Primera fila: celda vacía (`<td>`) y una `<th scope="col">` por versión con su `name`. Primera columna:
-  `<th scope="row">` con los rótulos de la tabla de campos. Una columna por versión, una fila por campo.
-- Columna de rótulos de ancho `--width-version-label`; columnas de versión de al menos `--width-version-col`
-  y como mucho `--width-version-col-max`, para que con 1 o 2 versiones la tabla no se estire hasta el borde.
-- Celdas alineadas arriba y a la izquierda (también los números: el rótulo de unidad va en la cifra).
-- Fila de encabezado y columna de rótulos en `surface-muted` con `ink-900`; celdas en `surface`. Separación
-  entre filas con `line-soft` (decorativa: rótulos y orden ya dan la estructura). Relleno de celda `3`.
-- **Más de 5 versiones** (hoy ninguna: el máximo son 4, Raval): la tabla se parte en tablas consecutivas de
-  hasta 5 columnas, en el mismo orden, cada una repitiendo la columna de rótulos y con caption
-  `ficha.versiones.captionParte` «… (versiones {desde} a {hasta} de {total})». Así no hay scroll horizontal a
-  ninguna anchura.
-- Un modelo con una sola versión también se muestra como tabla (una columna), por coherencia con RF-3.
-
-**Pregunta 10, resuelta el 2026-11-11: CA-3 enmendado (PRD-002, decisión 16).** En `lg` se usa el bloque de B en tres
-columnas y **la tabla de esta sección ya no se construye**, igual que «Las dos presentaciones»: se quitarán de esta
-especificación al ponerla al día. Texto anterior: la dirección elegida sustituye la tabla por el bloque de B también en
-escritorio, pero CA-3 de PRD-002 decía «A 1280 px las veo como columnas de una tabla». Hasta que Producto enmendara
-CA-3, **la tabla de arriba seguía vigente en `lg`** con los colores y la tipografía de la dirección (Archivo; cabecera
-y columna de rótulos en `surface-muted`, que en la franja blanca da `ink-900` 16,57). Si se enmienda, en `lg` se usa
-el bloque de B en tres columnas (ver abajo) y esta sección y «Las dos presentaciones» se borran.
-
-### Cada versión: el bloque de B (< 1024 px; y en `lg` si se enmienda CA-3; RF-3 a RF-6, RF-8, RNF-3, CA-3)
+### Cada versión: el bloque de B (todas las anchuras; RF-3 a RF-6, RF-8, RNF-3, CA-3; PRD-002, decisión 16)
 
 Sustituye a los bloques apilados de la versión anterior (Card de Bearnie con `dl` de siete líneas). Prototipo:
 `ficha-a.astro`, `.versions`; captura de B: `direccion.md`, «La elegida».
@@ -366,21 +341,13 @@ h3 …
   valor, nota y marca de nota). Filas separadas por `line-soft`. «por confirmar» va en el sitio del valor, en
   `ink-600`. A 320 px la columna de rótulos lleva como mucho el 45 % y los dos lados parten línea; los rótulos
   largos («Carga máxima en CC») bajan de línea antes que estrechar el valor.
-- **Disposición**: móvil y `md`, las tres partes apiladas. `lg` (solo si se enmienda CA-3): tres columnas 3 : 5 : 4
-  (nombre, cifras, tabla), alineadas arriba.
+- **Disposición**: móvil y `md`, las tres partes apiladas. `lg`: tres columnas 3 : 5 : 4 (nombre, cifras, tabla),
+  alineadas arriba. Es la única presentación de las versiones: no hay tabla comparativa a ninguna anchura y el HTML
+  lleva cada versión una sola vez (CA-3: a 1280 px y a 320 px, bloques en el orden de RF-3, sin scroll horizontal).
 - Nombres largos, notas y la fuente parten línea (`overflow-wrap: anywhere`); nada se recorta con «…».
 
-### Las dos presentaciones en el HTML (mientras CA-3 pida la tabla)
-La tabla y los bloques de B van **los dos** en el HTML servido (no hay JS que los genere) y CSS muestra uno según la
-anchura (`hidden` / `lg:block`, `lg:hidden`). El oculto usa `display: none`, así que no se lee ni recibe foco:
-no hay duplicados para el lector ni para el teclado. Requisitos para el Desarrollador:
-- Ningún `id` dentro de la tabla ni de los bloques (estarían repetidos); las anclas viven fuera
-  (`#condiciones-{n}`, `#fuente-{n}`).
-- Los dos se generan de la misma lista ordenada y con la misma numeración de notas.
-- El test de CA-3 mira las dos: a 1280 px, la tabla visible; a 320 px, los bloques, sin scroll horizontal.
-
 ### Sin versiones (RF-11, CA-11)
-Si `versions: []`, en lugar de tabla y bloques: un párrafo `text-body`, `ink-900`, `ficha.versiones.vacio`:
+Si `versions: []`, en lugar de los bloques: un párrafo `text-body`, `ink-900`, `ficha.versiones.vacio`:
 «{marca} todavía no ha publicado las versiones de este modelo.» Sin caja ni icono (Empty de Bearnie, sin
 acción). La sección y su `h2` se mantienen: el visitante ve que el apartado existe y por qué está vacío. Se omite
 `ficha.versiones.entrada` (no hay nada que ordenar). Si hay `specs`, «Datos del modelo» sigue debajo con lo que
@@ -456,8 +423,8 @@ lleva su fuente visible (ver «El precio»). Las imágenes llevan su atribución
   comparten llevan el mismo número (en Tavascan, casi todo es una sola nota).
 - Números por orden de primera aparición en este recorrido fijo: cabecera (estado, `launch`, segmento) →
   versiones en su orden y, dentro de cada una, los campos en el orden de la tabla de campos → «Datos del modelo»
-  en su orden. El recorrido es el de los bloques; la tabla usa los mismos números (en ella pueden no aparecer en
-  orden creciente de izquierda a derecha, y es aceptable: el número identifica la fuente, no la posición).
+  en su orden. Es el mismo recorrido que el de los bloques de versión, así que en ellos los números aparecen en orden
+  creciente la primera vez que salen.
 
 ### Bloque «Fuentes»
 Último bloque de los datos de la ficha; solo «Reviews», si existe, va detrás (RF-16). Sus notas cubren solo
@@ -738,12 +705,10 @@ sublista de pruebas usa `data-reviews-pruebas` (#601). Son para las pruebas, no 
 1. Enlace de salto y navegación del sitio (fuera de esta especificación).
 2. Ruta: «Coches», «{marca}».
 3. Cabecera: marcas de nota del estado/`launch` y del segmento; «Ver en la web de la marca».
-4. Versiones (solo la presentación visible): en la **tabla**, fila a fila y de izquierda a derecha (fila de
-   precio: enlace de fuente y «Ver condiciones de la oferta» de cada versión; luego las marcas de nota de cada
-   fila); en los **bloques**, versión a versión y campo a campo. Después, los enlaces «Ver las condiciones en la
-   web de la marca».
-   En el bloque de B: nombre (no enfocable) → marca de nota de la autonomía → fuente del precio y «Ver condiciones
-   de la oferta» → marcas de nota de la tabla, fila a fila.
+4. Versiones, bloque a bloque en el orden de RF-3 y el mismo en todas las anchuras (en `lg` las tres columnas se
+   recorren de izquierda a derecha, que es el orden del DOM): nombre (no enfocable) → marca de nota de la autonomía →
+   fuente del precio y «Ver condiciones de la oferta» → marcas de nota de la tabla de dos columnas, fila a fila.
+   Después, los enlaces «Ver las condiciones en la web de la marca».
 5. «Datos del modelo»: marcas de nota.
 6. «Otros modelos del segmento»: una parada por tarjeta.
 7. «Fuentes»: el enlace de cada nota.
@@ -767,9 +732,9 @@ Recorrido de Tavascan, de arriba abajo:
 2. «Cupra Tavascan, encabezado nivel 1.» «Segmento: SUV compacto, Fuente 1, enlace.» La nota del segmento.
    «Ver en la web de la marca (web de Cupra, sitio externo), enlace.»
 3. «Figura. Cupra Tavascan, imagen 1 de 1. Foto: Alexander Migl…»
-4. «Versiones, encabezado nivel 2.» En la tabla, cada celda se anuncia con sus encabezados: «Tavascan VZ, Precio,
-   Precio por confirmar». En los bloques de B: «Tavascan VZ, encabezado nivel 3», «Autonomía WLTP: 533 km, Fuente
-   3, enlace», «Precio: Precio por confirmar», y la tabla como lista de pares («Batería: por confirmar»…).
+4. «Versiones, encabezado nivel 2.» Cada bloque, igual en todas las anchuras: «Tavascan VZ, encabezado nivel 3»,
+   «Autonomía WLTP: 533 km, Fuente 3, enlace», «Precio: Precio por confirmar», y la tabla de dos columnas como lista
+   de pares («Batería: por confirmar»…).
    Antes, tras la cabecera: «Cifras clave, región.» «Desde: 36.273 €. Fuente: cupra.com, 24 sep 2026.» «Autonomía WLTP
    máxima: 557 km, Fuente 3, enlace.» … Al final: «Secciones de la página, navegación», con sus enlaces.
 5. «Condiciones de las ofertas, encabezado nivel 3.» …
@@ -806,8 +771,6 @@ oferta», «Descatalogado»); nada depende del color.
 | `ficha.imagen.atribucion` | Foto: {atribucion} |
 | `ficha.versiones.titulo` | Versiones |
 | `ficha.versiones.entrada` | Ordenadas por precio, de menor a mayor. Precios en España con IVA y sin ayudas. |
-| `ficha.versiones.caption` | Versiones de {marca} {modelo}, ordenadas por precio |
-| `ficha.versiones.captionParte` | Versiones de {marca} {modelo}, ordenadas por precio (versiones {desde} a {hasta} de {total}) |
 | `ficha.versiones.vacio` | {marca} todavía no ha publicado las versiones de este modelo. |
 | `ficha.campo.precio` / `.autonomia` / `.bateria` / `.potencia` / `.traccion` / `.cargaCc` / `.cargaCa` | Precio / Autonomía WLTP / Batería / Potencia / Tracción / Carga máxima en CC / Carga máxima en CA |
 | `ficha.porConfirmar` | por confirmar (en las cifras, con la primera letra en mayúscula por CSS: «Por confirmar») |
@@ -862,14 +825,16 @@ Color: `surface`, `surface-muted`, `ink-900`, `ink-600`, `line-soft`, `brand-600
 `--text-body`, `--text-small`, `--text-badge`. Medidas: `--width-page`, `--width-prose`, `--size-touch`,
 `--radius-card`.
 
-**Nuevos** (añadidos en `tokens.md`): `--size-segment-icon-lg`, `--width-version-label`, `--width-version-col`,
-`--width-version-col-max`. **No hay colores nuevos**; los pares usados ya están calculados en `tokens.md`.
+**Nuevos** (añadidos en `tokens.md`): `--size-segment-icon-lg`. **No hay colores nuevos**; los pares usados ya están
+calculados en `tokens.md`.
 
 **Dirección visual** (`tokens.md`, «Dirección visual»): `ink-950`, `on-dark`, `on-dark-muted`, `signal`,
 `--font-stretch-wide`, `--font-stretch-narrow`, `--text-display`, `--text-block` (`h2` de cada sección),
 `--text-version`, `--text-figure-xl` (cifras clave), `--text-figure-m` (versiones y «Datos del modelo»),
 `--radius-pill` y `--menu-clearance`. Ya no se usan aquí `--text-card-title` para las versiones ni `--radius-card`
-para la imagen principal; los `--width-version-*` siguen solo mientras viva la tabla (pregunta 10).
+para la imagen principal, ni ningún `--width-version-*`: eran de la tabla comparativa, que ya no existe (pregunta 10,
+resuelta). `--width-version-label` y `--width-version-col` dejan de usarse en toda la web; `--width-version-col-max`
+lo sigue usando el comparador (`tokens.md`).
 
 El bloque «Reviews» **no añade tokens**: usa `--text-section`, `--text-card-title`, `--text-body`,
 `--text-small`, `--width-prose`, `--size-touch`, `line-soft` y estos pares, todos sobre `surface` y ya
@@ -903,11 +868,13 @@ Abiertas (bloque «Reviews», 2026-10-21). El diseño de arriba funciona sin res
 9. **Fecha de publicación.** Con ella se podría ordenar por novedad y mostrarla junto a la de consulta
    (ADR-0017, pregunta abierta). Hasta entonces el orden es alfabético por medio.
 
+Respondida el 2026-11-11 (PRD-002, decisión 16, que enmienda RF-3 y CA-3):
+10. ~~Versiones en escritorio~~: el bloque de B en todas las anchuras, en `lg` en tres columnas; la tabla comparativa
+    desaparece y comparar es cosa del comparador (PRD-003). Pregunta original: la dirección elegida pone el bloque de B
+    en todas las anchuras, pero CA-3 pedía «a 1280 px, columnas de una tabla»; ¿se enmienda CA-3 o se queda la tabla en
+    escritorio?
+
 Abiertas (dirección visual, 2026-11-10):
-10. **Versiones en escritorio.** La dirección elegida pone el bloque de B en todas las anchuras, pero CA-3 pide
-    «a 1280 px, columnas de una tabla». Aquí se mantiene la tabla en `lg` hasta que Producto decida: ¿se enmienda CA-3
-    para aceptar bloques en tres columnas a 1280 px, o se queda la tabla en escritorio? `propuesta-a.md` ya cuenta que
-    con el bloque «comparar es cosa del comparador» (PRD-003).
 11. **Batería en las cifras clave.** La mayor `battery_kwh` pierde su `basis` (útil o bruta) en la cifra. ¿Basta con
     que la base esté en la versión, o debe ir en la etiqueta («Batería mayor, útil»)? Sin respuesta, la cifra muestra
     solo kWh y la base sigue en el bloque de cada versión.
