@@ -1,0 +1,35 @@
+# Researcher — Toyota Proace Max Electric. Fuentes: toyota-es (T1, listado), idae-es (T2). Consultado 2026-11-12.
+brand: toyota
+brand_name: Toyota
+model: Proace Max Electric
+status: {value: on_sale, note: "toyota.es/coches lista «Proace Max» como «Electric/Diésel». No dice qué versiones eléctricas se venden hoy.", source_id: toyota-es, url: "https://www.toyota.es/coches", retrieved: 2026-11-12, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Proace Max Electric L3H2 VX 3,5 t
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 613513 «PROACE MAX EV L3H2 VX 110 kWh 200 kW 3,5H (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 375, note: "IDAE id 613513", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 613513", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Proace Max Electric L3H2 VX 4,25 t
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 613514 «PROACE MAX EV L3H2 VX 110 kWh 200 kW 4,25T (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 420, note: "IDAE id 613514", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 613514", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Proace Max Electric L3H1 chasis cabina 3,5 t
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 613515 «PROACE MAX EV L3H1 CHASIS CAB. 110 kWh 200 kW 3,5H (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 375, note: "IDAE id 613515", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 613515", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Proace Max Electric L4H1 chasis cabina 3,5 t
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 613516 «PROACE MAX EV L4H1 CHASIS CAB. 110 kWh 200 kW 3,5H (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 375, note: "IDAE id 613516", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 613516", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Versiones salidas del IDAE (filas MY26). El IDAE no dice cuáles se venden hoy."
+  - "Precio: toyota.es/coches/precios no da PVP por versión; price null."
+  - "launch y segment: sin fuente leída que los dé con un término de RF-11."
+  - "Imagen: no se ha localizado en Wikimedia Commons una foto del Toyota Proace Max Electric."

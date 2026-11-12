@@ -1,0 +1,40 @@
+# Researcher — Opel Movano Electric. Fuentes: opel-es (T1, ofertas), idae-es (T2). Consultado 2026-11-12.
+brand: opel
+brand_name: Opel
+model: Movano Electric
+status: {value: on_sale, note: "ofertas.opel.es/ofertas lista «Movano» con «Diesel o eléctrico» y «IVA no incl.». No dice qué versiones eléctricas se venden hoy.", source_id: opel-es, url: "https://ofertas.opel.es/ofertas", retrieved: 2026-11-12, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Movano Electric Furgón 3.5T Heavy L3 H2
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 599744 «Movano Nuevo Movano Electric Furgón 3.5T Heavy L3 H2 Electric 200 kW Batería 110 kWh»; el id 604270 da 409 km: sin fecha de homologación, menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 378, note: "IDAE id 599744; el id 604270 da 409 km: las filas no traen fecha y la web no se puede leer, se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 599744", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Movano Electric Furgón 3.5T Heavy L3 H3
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 599745 «Movano Nuevo Movano Electric Furgón 3.5T Heavy L3 H3 Electric 200 kW Batería 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 358, note: "IDAE id 599745; el id 604271 da 409 km: filas sin fecha, se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 599745", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Movano Electric Furgón 3.5T Heavy L4 H3
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 599747 «Movano Nuevo Movano Electric Furgón 3.5T Heavy L4 H3 Electric 200 kW Batería 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 356, note: "IDAE id 599747; el id 604273 da 409 km: filas sin fecha, se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 599747", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Movano Electric Furgón 4.25T Heavy L3 H3
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 599746 «Movano Nuevo Movano Electric Furgón 4.25T Heavy L3 H3 Electric 200 kW Batería 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 409, note: "IDAE id 599746; el id 604272 da también 409 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 599746", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Movano Electric Furgón 4.25T Heavy L4 H3
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 599748 «Movano Nuevo Movano Electric Furgón 4.25T Heavy L4 H3 Electric 200 kW Batería 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 406, note: "IDAE id 599748; el id 604274 da 409 km: filas sin fecha, se usa la de menor wltp_km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 599748", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Web de Opel (www.opel.es) devuelve 403 a la lectura automática: versiones, launch y segment sin fuente T1 legible. Versiones salidas del IDAE (furgón «Nuevo Movano»; faltan chasis cabina y caja); el IDAE no dice cuáles se venden hoy. El Movano-e anterior (37/75 kWh) no se incluye."
+  - "Precio: ofertas.opel.es muestra «IVA no incl.» sin versión eléctrica ni importe en la lectura; price null."
+  - "launch y segment: sin fuente leída que los dé con un término de RF-11."
+  - "Imagen: no buscada con éxito en Wikimedia Commons para el Movano Electric."
