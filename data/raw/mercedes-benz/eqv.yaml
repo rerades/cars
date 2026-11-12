@@ -1,0 +1,37 @@
+# Researcher — Mercedes-Benz EQV. Fuentes: diariomotor-es (T3) e idae-es (T2). Consultado 2026-11-12. Sin precio: mercedes-benz.es da HTTP 403 y no hay otra fuente T1.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: EQV
+status: {value: on_sale, note: "Diariomotor lista precios del EQV «en noviembre 2026» con «Pedir oferta»; no es fuente T1", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqv/", retrieved: 2026-11-12, tier: T3}
+launch: null
+segment: {value: monovolumen, note: "«El Mercedes EQV es un monovolumen grande 100% eléctrico, del segmento E»", source_id: diariomotor-es, url: "https://www.diariomotor.com/coche/mercedes-eqv/", retrieved: 2026-11-12, tier: T3}
+needs_review: true
+versions:
+  - name: EQV 250 Largo
+    battery_kwh: {value: 60, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604330 (12.2024)"}
+    wltp_km: {value: 247, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604330 (12.2024)"}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604330 (12.2024)"}
+    price: null
+  - name: EQV 250 Extralargo
+    battery_kwh: {value: 60, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604331 (12.2024)"}
+    wltp_km: {value: 244, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604331 (12.2024)"}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604331 (12.2024)"}
+    price: null
+  - name: EQV 300 Largo
+    battery_kwh: {value: 90, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604329 (12.2024)"}
+    wltp_km: {value: 365, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604329 (12.2024)"}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604329 (12.2024)"}
+    price: null
+images:
+  - file: data/images/mercedes-benz/eqv/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Mercedes-Benz_EQV_300_%28W447%2C_2022%29_%2854522400494%29.jpg/1280px-Mercedes-Benz_EQV_300_%28W447%2C_2022%29_%2854522400494%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_EQV_300_(W447,_2022)_(54522400494).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-12
+    license: CC-BY-2.0
+    attribution: "Charles from Port Chester, New York"
+open_questions:
+  - "Precio: mercedes-benz.es devuelve HTTP 403 a fetch-page.ts (2026-11-12) y no hay otra fuente T1; todas las versiones con price null."
+  - "Versiones vigentes sin confirmar: Diariomotor (T3) lista EQV 250 y 300 en carrocería corta y larga con baterías de 66 y 100 kWh, mientras el IDAE tiene filas (12.2024) de 60 y 90 kWh y otras «Nuevo EQV» sin fecha (65 y 90 kWh); se han escrito las tres filas fechadas (12.2024), sin la 300 Extralargo. De ahí needs_review."
+  - "Estado: el medio muestra precios de noviembre de 2026 pero ninguna fuente T1 confirma que se pueda pedir hoy."
+  - "launch: sin fecha de inicio de venta dada por ninguna fuente; null."
