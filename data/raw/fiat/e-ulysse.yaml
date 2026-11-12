@@ -1,0 +1,33 @@
+# Researcher — Fiat e-Ulysse. Fuentes: idae-es (T2), movilidadelectrica-es (T3), wikimedia-commons. Consultado 2026-11-12.
+brand: fiat
+brand_name: Fiat
+model: e-Ulysse
+status: {value: on_sale, note: "artículo de 2026-02-17 que lo lista entre los eléctricos de Fiat disponibles en España en 2026; no confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-12, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: e-Ulysse 50 kWh
+    battery_kwh: {value: 50, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 230, note: "IDAE id 578433: «E-Ulysse MY23 E-Ulysse Talla M 100 kW (136cv) Batería 50kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: e-Ulysse 75 kWh
+    battery_kwh: {value: 75, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 310, note: "IDAE id 578436: «E-Ulysse MY23 E-Ulysse Talla L 100 kW (136cv) Batería 75kWh». Las filas solo traen «MY23»; se toma la de menor wltp_km (otras filas de 75 kWh: 310-330 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images:
+  - file: data/images/fiat/e-ulysse/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Fiat_E-Ulysse_Automesse_Ludwigsburg_2022_1X7A5994.jpg/1280px-Fiat_E-Ulysse_Automesse_Ludwigsburg_2022_1X7A5994.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Fiat_E-Ulysse_Automesse_Ludwigsburg_2022_1X7A5994.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-12
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:Fiat E-Ulysse Automesse Ludwigsburg 2022 1X7A5994.jpg)"
+open_questions:
+  - "price: fiat.es devuelve 403 a fetch-page.ts; sin PVP ni precio financiado en fuente T1."
+  - "status: solo un artículo T3 de 2026-02-17; no se confirma que se venda hoy ni qué versiones (el IDAE solo tiene filas MY23 y no lo dice)."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: el artículo T3 llama «furgoneta» al E-Ulysse (un vehículo de pasajeros de tres filas); no se traduce por parecido y queda null para que lo decida una persona."
+  - "Versiones: nombres compuestos a partir de la batería del IDAE (50 y 75 kWh, tallas M y L); no se desglosan acabados (Lounge) ni tallas."

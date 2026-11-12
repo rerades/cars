@@ -1,0 +1,26 @@
+# Researcher — Fiat e-Scudo. Fuentes: idae-es (T2), movilidadelectrica-es (T3). Consultado 2026-11-12.
+brand: fiat
+brand_name: Fiat
+model: Scudo eléctrico
+status: {value: on_sale, note: "artículo de 2026-02-17 que lo lista entre los eléctricos de Fiat disponibles en España en 2026 y le da precio de partida; no confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-12, tier: T3}
+launch: null
+segment: {value: furgoneta, note: "«La e-Scudo, la furgoneta eléctrica de Fiat»", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-12, tier: T3}
+needs_review: true
+versions:
+  - name: e-Scudo 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "el artículo T3 da dos baterías: 50 y 75 kWh", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 221, note: "IDAE id 599433: «Scudo Nuevo Scudo Furgón-Electric L3 Motor 100 kW + Batería 50 kWh». Las filas no traen fecha; se toma la de menor wltp_km (otras filas de 50 kWh: 223, 231 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: e-Scudo 75 kWh
+    battery_kwh: {value: 75, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 329, note: "IDAE id 599442: «Scudo Scudo Combi L2 BEV 100 kW 75 kWh». Las filas no traen fecha; se toma la de menor wltp_km (otras filas de 75 kWh: 329-352 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "price: fiat.es devuelve 403 a fetch-page.ts; sin PVP ni precio financiado en fuente T1. El T3 cita 41.500 € (50 kWh) y 46.500 € (75 kWh), que no valen como precio."
+  - "status: solo un artículo T3 de 2026-02-17; no se confirma que se venda hoy ni qué versiones (el IDAE no lo dice)."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "Versiones: nombre compuesto a partir de la batería (50 y 75 kWh, la del artículo T3); el IDAE lista furgón, combi y doble cabina en L2 y L3 y no se desglosan."
+  - "images: sin foto de e-Scudo eléctrica con licencia verificada en Commons; las halladas son del Scudo (no se confirma que sean eléctricas)."
