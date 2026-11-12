@@ -1,0 +1,38 @@
+# Researcher — Fiat Qubo L eléctrico. Fuentes: idae-es (T2), motor-es (T3), wikimedia-commons. Consultado 2026-11-12.
+brand: fiat
+brand_name: Fiat
+model: Qubo L
+status: {value: on_sale, note: "motor.es: «El nuevo FIAT Qubo L eléctrico ya tiene precios en España»; no confirmado hoy en fiat.es (403) ni con fecha de pedidos", source_id: motor-es, url: "https://www.motor.es/noticias/fiat-qubo-l-electrico-venta-espana-2026115248.html", retrieved: 2026-11-12, tier: T3}
+launch: null
+segment: {value: monovolumen, note: "motor.es: «El nuevo monovolumen de FIAT, sucesor del Doblò»", source_id: motor-es, url: "https://www.motor.es/noticias/fiat-qubo-l-electrico-venta-espana-2026115248.html", retrieved: 2026-11-12, tier: T3}
+needs_review: true
+versions:
+  - name: Qubo L eléctrico Pop
+    battery_kwh: {value: 50.8, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 340, note: "IDAE id 611274: «Qubo L Qubo L eléctrico 100 kW (136cv) Talla M POP»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Qubo L eléctrico Icon
+    battery_kwh: {value: 50.8, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 340, note: "IDAE id 611276: «Qubo L Qubo L eléctrico 100 kW (136cv) Talla M ICON»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: Qubo L eléctrico La Prima
+    battery_kwh: {value: 50.8, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 340, note: "IDAE id 611278: «Qubo L Qubo L eléctrico 100 kW (136cv) Talla M La Prima»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images:
+  - file: data/images/fiat/qubo-l/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Fiat_Qubo_L_Leonberg_2026_IMG_8726.jpg/1280px-Fiat_Qubo_L_Leonberg_2026_IMG_8726.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Fiat_Qubo_L_Leonberg_2026_IMG_8726.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-12
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:Fiat Qubo L Leonberg 2026 IMG 8726.jpg)"
+open_questions:
+  - "price: fiat.es devuelve 403 a fetch-page.ts; sin PVP ni precio financiado en fuente T1. Los medios citan cifras distintas (36.811 €, 37.550-41.550 €), que no valen como precio."
+  - "status: solo artículos T3 (motor.es) sin fecha de apertura de pedidos legible; no se confirma que se venda hoy."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "Versiones: motor.es dice que la eléctrica solo se ofrece en Talla M (4,40 m, cinco plazas) con Pop, Icon y La Prima; el IDAE lista también Talla L (340 km), no incluida. Nombres compuestos a partir de esas fuentes."
+  - "images: la foto de Commons es del Qubo L en general; no se confirma que sea la versión eléctrica."

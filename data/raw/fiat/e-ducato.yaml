@@ -1,0 +1,28 @@
+# Researcher — Fiat e-Ducato. Fuentes: idae-es (T2), movilidadelectrica-es (T3), wikimedia-commons. Consultado 2026-11-12.
+brand: fiat
+brand_name: Fiat
+model: e-Ducato
+status: {value: on_sale, note: "artículo de 2026-02-17 que lo lista entre los eléctricos de Fiat disponibles en España en 2026 y le da precio de partida; no confirmado hoy en fiat.es (403)", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-12, tier: T3}
+launch: null
+segment: {value: furgoneta, note: "«Probamos las E-Dobló, E-Scudo y E-Ducato, las furgonetas eléctricas de Fiat Professional»", source_id: movilidadelectrica-es, url: "https://movilidadelectrica.com/coches-electricos-fiat/", retrieved: 2026-11-12, tier: T3}
+needs_review: true
+versions:
+  - name: e-Ducato 110 kWh
+    battery_kwh: {value: 110, basis: unknown, note: "el artículo T3: «actualizado recientemente con una batería de 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 356, note: "IDAE id 606266: «E-DUCATO Furgón 3.5T Maxi L4H3 BEV 200 kW 110 kWh». Las filas no traen fecha; se toma la de menor wltp_km (otras filas de 110 kWh: 358-424 km). El artículo T3 cita 420 km", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 200, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images:
+  - file: data/images/fiat/e-ducato/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Fiat_e-Ducato_1X7A0350.jpg/1280px-Fiat_e-Ducato_1X7A0350.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Fiat_e-Ducato_1X7A0350.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-12
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons (File:Fiat e-Ducato 1X7A0350.jpg)"
+open_questions:
+  - "price: fiat.es devuelve 403 a fetch-page.ts; sin PVP ni precio financiado en fuente T1. El T3 cita 53.200 € desde el configurador, que no vale como precio."
+  - "status: solo un artículo T3 de 2026-02-17; no se confirma que se venda hoy."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "Versiones: una sola, por la batería de 110 kWh del artículo T3; el IDAE lista además filas antiguas de 47 y 79 kWh (no incluidas) y varias carrocerías (L2-L4, H2-H3, chasis, combi), sin desglosar."
+  - "wltp_km: el T3 dice 420 km; el IDAE (T2) da 356-424 km según carrocería y peso; prevalece el IDAE."
