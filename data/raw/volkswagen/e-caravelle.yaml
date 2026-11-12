@@ -1,0 +1,24 @@
+# Researcher — Volkswagen e-Caravelle. Fuentes: volkswagen-comerciales-es (T1), idae-es (T2). Consultado 2026-11-12.
+brand: volkswagen
+brand_name: Volkswagen
+model: e-Caravelle
+status: {value: on_sale, note: "volkswagen-comerciales.es lo lista como «Nuevo e-Caravelle 100% eléctrico»; no dice expresamente que se pueda pedir ni desde cuándo", source_id: volkswagen-comerciales-es, url: "https://www.volkswagen-comerciales.es/es/modelos.html", retrieved: 2026-11-12, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  wltp_max_km: {value: 344, note: "«Con hasta 344 km de autonomía» (ficha de Caravelle)", source_id: volkswagen-comerciales-es, url: "https://www.volkswagen-comerciales.es/es/modelos/caravelle.html", retrieved: 2026-11-12, tier: T1}
+versions:
+  - name: e-Caravelle 160 kW
+    battery_kwh: {value: 70, basis: unknown, note: "IDAE ids 612043-612046 (e-Caravelle 70 kWh 160 kW, batalla corta/larga y Premium)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 160, note: "IDAE ids 612043-612046", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "needs_review: true: la web no dice qué versiones eléctricas se pueden pedir hoy; la única oferta de la ficha es de un Caravelle eHybrid."
+  - "WLTP: la ficha dice «hasta 344 km» y el IDAE da 345 km (id 612043, batalla corta) a 341, 338 y 335 km en las otras filas; no coinciden, así que no se guarda wltp_km por versión y la cifra de la ficha va en specs."
+  - "Versiones: se agrupan las cuatro filas del IDAE (batalla corta/larga, normal y Premium) en una porque comparten batería y potencia; la web no las desglosa."
+  - "Imagen: sin foto de Commons que consten como e-Caravelle (la del IAA 2024 se titula solo «Caravelle»); silueta."
+  - "Precio: ninguno para el eléctrico en la web."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: la ficha no lo clasifica con un término de la lista de RF-11."

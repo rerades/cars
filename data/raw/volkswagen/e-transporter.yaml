@@ -1,0 +1,28 @@
+# Researcher — Volkswagen e-Transporter. Fuentes: volkswagen-comerciales-es (T1), idae-es (T2). Consultado 2026-11-12.
+brand: volkswagen
+brand_name: Volkswagen
+model: e-Transporter
+status: {value: on_sale, note: "volkswagen-comerciales.es lo lista como «e-Transporter 100% eléctrico» en su gama; no dice expresamente que se pueda pedir ni desde cuándo", source_id: volkswagen-comerciales-es, url: "https://www.volkswagen-comerciales.es/es/modelos.html", retrieved: 2026-11-12, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Furgón Batalla Corta 70 kWh
+    battery_kwh: {value: 70, basis: unknown, note: "IDAE id 611854 (e-Transporter Furgón Batalla Corta 70 kWh)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 371, note: "IDAE id 611854; coincide con «hasta 371 km de autonomía» de la ficha de volkswagen-comerciales.es", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 611854", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images:
+  - file: "data/images/volkswagen/e-transporter/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/VW_e-Transporter%2C_IAA_2024%2C_Hanover_%28P1200119%29.jpg/1280px-VW_e-Transporter%2C_IAA_2024%2C_Hanover_%28P1200119%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:VW_e-Transporter,_IAA_2024,_Hanover_(P1200119).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-12
+    license: "CC-BY-SA-4.0"
+    attribution: "Matti Blume, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "needs_review: true: la web no dice qué versiones eléctricas se pueden pedir hoy; las ofertas de la ficha son de un Transporter diésel."
+  - "Versiones: el IDAE tiene además e-Transporter 64 kWh batalla corta/larga (ids 611855, 611852), Furgón 4MOTION 70 kWh (611853) y Furgón Batalla Larga 70 kWh (611851); no se añaden sin fuente que diga que se venden."
+  - "Precio: la ficha (transporter.html, leída con fetch-page.ts el 2026-11-12) solo muestra una oferta de un Transporter diésel; sin precio para el eléctrico."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: la ficha no lo clasifica con un término de la lista de RF-11."
