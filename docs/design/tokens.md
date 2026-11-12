@@ -122,11 +122,11 @@ nombre de diseño es este.
 | `--width-prose` | `40rem` | Ancho máximo del texto de entrada, para que la línea se lea bien |
 | `--width-filters` | `16rem` | Columna del panel de filtros en `lg` (el valor que ya fijaba `filtros-catalogo.md`) |
 | `--width-explore-label` | `8rem` | Columna del título de cada grupo de «Explorar» desde `md` |
-| `--width-version-label` | `11rem` | Columna de rótulos de la tabla de versiones de la ficha en `lg` (`ficha-modelo.md`, RF-3 de PRD-002) |
-| `--width-version-col` | `9rem` | Ancho mínimo de cada columna de versión en esa tabla: 11 + 5 × 9 = 56 rem (896 px) caben en los 960 px útiles de 1024 px sin scroll |
+| `--width-version-label` | `11rem` | **Sin uso desde el 2026-11-11**: era la columna de rótulos de la tabla de versiones de la ficha en `lg`, que PRD-002 (decisión 16) sustituye por el bloque de versión en todas las anchuras (`ficha-modelo.md`). Ninguna otra especificación lo cita; se puede quitar de `global.css` al retirar la tabla |
+| `--width-version-col` | `9rem` | **Sin uso desde el 2026-11-11**, por lo mismo: era el ancho mínimo de cada columna de versión de esa tabla. Se puede quitar con el anterior |
 | `--width-ranking` | `48rem` | Ancho máximo de la lista de puestos de un ranking (`rankings.md`, PRD-005 RF-7) |
 | `--width-rank-number` | `3rem` | Columna del número de puesto (y de «empate») en cada puesto del ranking; a 320 px deja 228 px de contenido |
-| `--width-version-col-max` | `20rem` | Ancho máximo de cada columna de versión, para que con 1 o 2 versiones la tabla no se estire. También en el comparador (`comparador.md`, PRD-003): ancho máximo de cada columna de la tabla y del `<select>` de versión |
+| `--width-version-col-max` | `20rem` | Ancho máximo de cada columna de versión en el comparador (`comparador.md`, PRD-003): de cada columna de la tabla y del `<select>` de versión, para que con 1 o 2 versiones la tabla no se estire. La ficha ya no lo usa (PRD-002, decisión 16) |
 
 Márgenes laterales de página: paso `4` en móvil, `6` en `md`, `8` en `lg`. Entre bloques de página: `8`.
 
