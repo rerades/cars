@@ -35,7 +35,7 @@ agents:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
     max_usd_per_period: 53   # 50 -> 53 on 2026-10-28: six price and page_name tasks queued with 8.43 left, from the unassigned 15; 40 -> 50 on 2026-10-21: six tasks queued for one night (prices, images, reviews) at up to 1.50 each, with 8.06 left; from the unassigned 25. 7 -> 40 on 2026-10-08: brand data, per-brand image migration and the monthly refresh (ADR-0010); earlier: 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
     max_usd_per_run: 1.50   # 1.00 -> 1.50 on 2026-09-29: Mercedes-Benz (8 models) was cut at 1.02
-    max_turns_per_run: 25
+    max_turns_per_run: 40   # 25 -> 40 on 2026-11-12: furgonetas-renault was cut at 26 turns and 0.81 USD
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
     write_paths: [data/, docs/bitacora/]
     allowed_tools: [WebSearch, WebFetch, "Bash(node factory/bitacora.ts:*)", "Bash(node factory/fetch-image.ts:*)", "Bash(node factory/fetch-idae.ts:*)", "Bash(node factory/fetch-page.ts:*)"]   # en -p no hay quien apruebe permisos: sin esto se deniegan. fetch-image: ADR-0010, «Imágenes»; fetch-idae: fuente idae-es; fetch-page: texto literal (price_terms), 2026-10-23
@@ -54,8 +54,8 @@ agents:
   planner:
     max_runs_per_day: 2   # 1 -> 2 on 2026-10-13: two planner tasks in one night (PRD-002 review, PRD-003 breakdown) must not stall the queue
     max_usd_per_period: 8   # 1 -> 8 on 2026-10-08: breaking down the next PRDs
-    max_usd_per_run: 0.60   # 0.30 cortó el troceo de PRD-001 al final, con las historias ya abiertas
-    max_turns_per_run: 25   # 15 cortó la revisión de la épica #32 (10 historias) antes del resumen
+    max_usd_per_run: 1.50   # 0.60 -> 1.50 on 2026-11-12: epica-direccion-visual (three PRDs, seven design files) was cut at 0.61; 0.30 cortó el troceo de PRD-001 al final
+    max_turns_per_run: 50   # 25 -> 50 on 2026-11-12, same run (45 turns); 15 cortó la revisión de la épica #32 (10 historias) antes del resumen
     api_key_env: PLANNER_API_KEY
     write_paths: [docs/bitacora/]   # issues, y su entrada en la bitácora
     allowed_tools: [Read, Glob, Grep, "Bash(gh issue:*)", "Bash(node factory/bitacora.ts:*)"]
