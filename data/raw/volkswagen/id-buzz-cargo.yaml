@@ -1,0 +1,43 @@
+# Researcher — Volkswagen ID. Buzz Cargo. Fuentes: volkswagen-comerciales-es (T1), idae-es (T2). Consultado 2026-11-12.
+brand: volkswagen
+brand_name: Volkswagen
+model: ID. Buzz Cargo
+status: {value: on_sale, note: "la ficha ofrece configurador y una oferta de financiación para pedidos hasta el 30.11.2026", source_id: volkswagen-comerciales-es, url: "https://www.volkswagen-comerciales.es/es/modelos/id-buzz-cargo.html", retrieved: 2026-11-12, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Cargo 140 kW (190 CV)
+    power_kw: {value: 140, note: "publicado: 140 kW (190CV) en la oferta de la ficha", source_id: volkswagen-comerciales-es, url: "https://www.volkswagen-comerciales.es/es/modelos/id-buzz-cargo.html", retrieved: 2026-11-12, tier: T1}
+    price:
+      value: 42310.07
+      unit: EUR
+      price_kind: financed
+      price_terms: "Oferta para un ID. Buzz Cargo 58 kWh 140 kW (190CV) con un PVP recomendado financiado en Península y Baleares de 41.705,07 € con IVA (transporte, descuentos e impuestos incluidos) para profesionales, autónomos o Pymes. Precio financiando de 33.467,00 € sin IVA. Precio al contado sin IVA 34.967,00 € (42.310,07 € IVA incluido). Duración 48 meses y 120.000 km por leasing a través de Volkswagen Bank GmbH S.E. Sistema de amortización francés. Sujeto a aprobación financiera. TIN: 7,99%. TAE: 9,71%. Primera pago: 8.250,14 € sin IVA (9.982,67 € IVA incluido) compuesto por Entrada: 7.448,20 € sin IVA (9.012,32 € con IVA) + Comisión de apertura: 2,99% (801,94 € sin IVA y 970,35 € con IVA). 47 cuotas de 390,00 € sin IVA (471,90 € IVA incluido), y una última cuota de 15.299,76 € sin IVA (18.512,71 € IVA incluido). Cuotas post pagables. Importe de los intereses: 7.199,02 € sin IVA (8.710,81 € IVA incluido). Coste Total Crédito: 8.000,96 € sin IVA (9.681,16 € IVA incluido). Oferta no acumulable válida para pedidos en el mes y matriculaciones antes del 30.11.2026. Para la formalización del leasing es necesario abonar la fianza de 471,90 € (IVA no aplicable) a devolver finalizado el contrato. Oferta dirigida a profesionales y autónomos que no actúen con un propósito ajeno a su actividad comercial, empresarial, oficio o profesión, en el sentido de la vigente normativa sobre consumidores y usuarios y Pymes. El vehículo visualizado puede no corresponder con el ofertado. Consulte condiciones en www.volkswagen.es."
+      price_terms_url: "https://www.volkswagen-comerciales.es/es/modelos/id-buzz-cargo.html"
+      page_name: "ID. Buzz Cargo 58 kWh 140 kW (190CV)"
+      note: "precio al contado con IVA (34.967,00 € sin IVA); financiando: 41.705,07 € con IVA"
+      source_id: volkswagen-comerciales-es
+      url: "https://www.volkswagen-comerciales.es/es/modelos/id-buzz-cargo.html"
+      retrieved: 2026-11-12
+      tier: T1
+  - name: Cargo 210 kW (286 CV)
+    battery_kwh: {value: 79, basis: unknown, note: "IDAE id 612023 (ID. Buzz Cargo 210 kW (286 CV))", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 448, note: "IDAE id 612023; coincide con «Autonomía hasta 448 km» de la ficha de volkswagen-comerciales.es", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 612023", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images:
+  - file: "data/images/volkswagen/id-buzz-cargo/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Volkswagen_ID._Buzz_Cargo_1X7A7087.jpg/1280px-Volkswagen_ID._Buzz_Cargo_1X7A7087.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID._Buzz_Cargo_1X7A7087.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-12
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Cargo 140 kW (190 CV): la oferta de la ficha dice 58 kWh, pero el IDAE tiene Cargo 140 kW con 86 kWh y 352 km (id 611846) y Cargo 125 kW con 59 kWh y 325 km (id 612022); no coincide con ninguna, así que no se guardan batería ni WLTP de esa versión."
+  - "Versiones: el IDAE no dice cuáles se venden hoy; Cargo 210 kW se añade porque su 448 km coincide con la cifra de la ficha. Quedan sin añadir Cargo 125 kW y Cargo 4MOTION 250 kW (id 612024, la ficha menciona la variante 4MOTION), Fresh Van y Origin."
+  - "Precio: solo la oferta financiada de Cargo 140 kW (válida hasta el 30.11.2026, leída con fetch-page.ts el 2026-11-12); sin PVP limpio. Releer o poner null cuando venza."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: la ficha no lo clasifica con un término de la lista de RF-11."
+  - "Tracción: ni el IDAE ni la ficha la publican como campo."

@@ -1,0 +1,49 @@
+# Researcher — Volkswagen ID. Buzz (pasajeros). Fuentes: volkswagen-comerciales-es (T1), idae-es (T2). Consultado 2026-11-12.
+brand: volkswagen
+brand_name: Volkswagen
+model: ID. Buzz
+status: {value: on_sale, note: "la ficha ofrece configurador y una oferta de financiación para pedidos hasta el 30.11.2026", source_id: volkswagen-comerciales-es, url: "https://www.volkswagen-comerciales.es/es/modelos/id-buzz.html", retrieved: 2026-11-12, tier: T1}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: e-Motion 210 kW (286 CV)
+    power_kw: {value: 210, note: "publicado: 210kW (286CV) en la oferta de la ficha", source_id: volkswagen-comerciales-es, url: "https://www.volkswagen-comerciales.es/es/modelos/id-buzz.html", retrieved: 2026-11-12, tier: T1}
+    price:
+      value: 49140.52
+      unit: EUR
+      price_kind: financed
+      price_terms: "Oferta ID. BUZZ e‑Motion 7 pl. 210kW (286CV) Aut 1 vel. 79 kWh. PVP recomendado financiando en PyB 47.325,52 € (IVA, transporte, impuesto de matriculación, descuento de marca y concesionario incluidos). Oferta de financiación válida para particulares, autónomos y empresas que financien un crédito mínimo de 17.000 € con una permanencia mínima de 36 meses a través de Volkswagen Bank GmbH S.E. (según condiciones contractuales). Ejemplo: 47 cuotas de 360,00 € y 1 cuota en el plazo 12 de 4.050€. La financiación incluye esta cuota irregular en previsión de recibir la ayuda del Plan Auto +. La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 4 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 26.365,10 € (calculada con 10.000 km anuales). Entrada: 8.795,90 €. TIN: 7,99%. TAE: 9,49%. Importe total del crédito: 37.329,62 €. Comisión de apertura al contado: 2,99% (1.172,63 €). Importe de los intereses: 10.005,48 €. Coste total del crédito: 11.178,12 €. Importe total adeudado: 47.335,10 €. Precio total a plazos: 56.131,00 €. Precio al contado: 49.140,52 €. Sistema de amortización francés. Oferta válida hasta el 30.11.2026. Volkswagen Financial Services es una marca comercializada por Volkswagen Bank GmbH S.E.. Consumo de combustible combinado WLTP (l/100km): 200 Wh/km, emisiones CO2 (g/km): WLTP: 0 g/km."
+      price_terms_url: "https://www.volkswagen-comerciales.es/es/modelos/id-buzz.html"
+      page_name: "ID. BUZZ e‑Motion 7 pl. 210kW (286CV) Aut 1 vel. 79 kWh"
+      note: "precio al contado; financiando: 47.325,52 €"
+      source_id: volkswagen-comerciales-es
+      url: "https://www.volkswagen-comerciales.es/es/modelos/id-buzz.html"
+      retrieved: 2026-11-12
+      tier: T1
+  - name: Pro Batalla larga 210 kW (286 CV)
+    battery_kwh: {value: 86, basis: unknown, note: "IDAE id 612025 (ID. Buzz Pro Batalla larga 210 kW (286 CV)); las filas del IDAE no traen fecha", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 467, note: "IDAE id 612025; la ficha de volkswagen-comerciales.es dice «Hasta 467 km de autonomía 100% eléctrica»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 612025", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+  - name: GTX 4MOTION 250 kW (340 CV)
+    battery_kwh: {value: 86, basis: unknown, note: "IDAE id 611847 (ID. Buzz GTX 4MOTION 250 kW (340 CV)); otra fila, id 611848 (Batalla larga), tiene los mismos valores", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    wltp_km: {value: 416, note: "IDAE id 611847", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    power_kw: {value: 250, note: "IDAE id 611847", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
+    price: null
+images:
+  - file: "data/images/volkswagen/id-buzz/lateral.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Volkswagen_ID._Buzz_1X7A6263.jpg/1280px-Volkswagen_ID._Buzz_1X7A6263.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID._Buzz_1X7A6263.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-12
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Versiones: el IDAE (fetch-idae.ts «Volkswagen Vehículos Comerciales») no dice cuáles se venden hoy. Se guardan e-Motion (oferta de la ficha), Pro Batalla larga (467 km, cifra de la ficha) y GTX (la ficha lo lista); otras filas del IDAE (1st Edition, Pro 150 kW, Origin, e-Motion 86 kWh) no se añaden sin fuente que diga que se venden."
+  - "e-Motion 210 kW: la oferta de la ficha dice 79 kWh, pero el IDAE solo tiene e-Motion 210 kW con 86 kWh (ids 611844 y 612026); no se guarda batería ni WLTP para esta versión. La ficha cita también «hasta 443 km» (e-Motion) y «hasta 469 km» (Pro 7 plazas), que no coinciden con ninguna fila del IDAE."
+  - "Precio: solo la oferta financiada de e-Motion (válida hasta el 30.11.2026, leída con fetch-page.ts el 2026-11-12). Sin PVP limpio ni precio de las otras versiones; releer o poner null cuando venza."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: volkswagen-comerciales.es no lo clasifica con un término de la lista de RF-11."
+  - "Tracción: ni el IDAE ni la ficha la publican como campo; el nombre 4MOTION de GTX no se traduce a awd sin fuente."
+  - "Reviews: no se añaden (no pedidas en esta tarea)."

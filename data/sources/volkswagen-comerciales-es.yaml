@@ -1,0 +1,20 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: volkswagen-comerciales-es
+brand: Volkswagen Vehículos Comerciales
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://www.volkswagen-comerciales.es/es.html
+  models: https://www.volkswagen-comerciales.es/es/modelos.html
+  id-buzz: https://www.volkswagen-comerciales.es/es/modelos/id-buzz.html
+  id-buzz-cargo: https://www.volkswagen-comerciales.es/es/modelos/id-buzz-cargo.html
+  caravelle: https://www.volkswagen-comerciales.es/es/modelos/caravelle.html
+  transporter: https://www.volkswagen-comerciales.es/es/modelos/transporter.html
+image_license: "" # sin términos escritos de uso de imágenes revisados: no publicar imágenes de esta web
+notes: >
+  Web oficial en España de Volkswagen Vehículos Comerciales (volkswagen.es redirige aquí las fichas ID. Buzz y e-Caravelle).
+  robots.txt (leído 2026-11-12) no bloquea /es/modelos. /es/modelos.html lista ID. Buzz, e-Caravelle, ID. Buzz Cargo y e-Transporter.
+  En el IDAE (idae-es) la marca se llama «Volkswagen Vehículos Comerciales» (fetch-idae.ts).
+last_verified: 2026-11-12
+status: active
