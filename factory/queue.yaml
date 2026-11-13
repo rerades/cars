@@ -3986,8 +3986,8 @@
 # Fotos retiradas en la revisión del 2026-11-13 por matrícula legible (ADR-0025).
 - id: fotos-ecitan-townstar-furgon
   agent: researcher
-  task: "data/raw/mercedes-benz/ecitan.yaml y data/raw/nissan/townstar-furgon-ev.yaml tienen
-    images: [] porque su foto de Commons llevaba la matrícula legible sin retocar. Busca una foto
+  task: "data/raw/mercedes-benz/ecitan.yaml, data/raw/mercedes-benz/evito.yaml y
+    data/raw/nissan/townstar-furgon-ev.yaml tienen images: [] porque su foto de Commons llevaba la matrícula legible sin retocar. Busca una foto
     de cada uno sin matrícula legible, o pasa una por el retoque de ADR-0025. Sigue las reglas de
     imágenes de .claude/agents/researcher.md y docs/architecture/data-model.md, con node
     factory/fetch-image.ts. No toques nada más de esos ficheros que images y la pregunta abierta
