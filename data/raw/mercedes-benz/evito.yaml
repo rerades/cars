@@ -22,15 +22,9 @@ versions:
     wltp_km: {value: 370, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604326 (12.2024)"}
     power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604326 (12.2024)"}
     price: null
-images:
-  - file: data/images/mercedes-benz/evito/frontal.jpg
-    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/DSC06151_Mercedes-Benz_eVito%2C_Wien_Kanal%2C_Front_Right%2C_2023-10.jpg/1280px-DSC06151_Mercedes-Benz_eVito%2C_Wien_Kanal%2C_Front_Right%2C_2023-10.jpg"
-    page_url: "https://commons.wikimedia.org/wiki/File:DSC06151_Mercedes-Benz_eVito,_Wien_Kanal,_Front_Right,_2023-10.jpg"
-    source_id: wikimedia-commons
-    retrieved: 2026-11-12
-    license: CC-BY-4.0
-    attribution: "Aciarium"
+images: []
 open_questions:
+  - "Imagen: retirada en la revisión (2026-11-13); la foto de Commons (DSC06151) lleva matrícula austriaca legible sin retoque (ADR-0025). Falta una foto sin matrícula o retocada."
   - "Precio: mercedes-benz.es devuelve HTTP 403 a fetch-page.ts (2026-11-12) y no hay otra fuente T1; todas las versiones con price null. Highmotor (T3) da de 67.673 € a 85.557 € para 12 versiones, no se guarda."
   - "Versiones vigentes sin confirmar: Highmotor lista 12; el IDAE tiene filas fechadas (12.2024) y otras sin fecha («Nuevo eVito», 65 kWh). Se han escrito tres filas fechadas del IDAE (furgón 112 Larga, Tourer 126 y 129 Larga) como muestra, sin las demás (Extralarga, 119, 129 furgón). De ahí needs_review."
   - "Estado: ninguna fuente T1 confirma que se pueda pedir hoy; las T3 no tienen fecha clara."
