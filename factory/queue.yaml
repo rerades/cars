@@ -3976,3 +3976,19 @@
     docs/architecture/data-model.md, incluida la vía del IDAE (node factory/fetch-idae.ts), y
     segment según RF-11 de PRD-001. Imágenes con node factory/fetch-image.ts, según esas mismas
     reglas. No toques los modelos que ya existen. Bitácora."
+# Épica #1032: la base visual (#1033) ya está en main; sigue el componente Cifra.
+- id: historia-1034-cifra
+  agent: developer
+  task: "Historia #1034 (épica #1032, PRD-001 y PRD-002): el componente Cifra. Lee la issue entera
+    (gh issue view 1034 --comments) y haz exactamente lo que dice, sobre la base visual de la #1033
+    que ya está en main. No cambies ninguna otra pantalla. La PR dice «Closes #1034» y enumera los
+    CA cubiertos."
+# Más furgonetas (PRD-001, sección 3).
+- id: furgonetas-toyota-carga
+  agent: researcher
+  task: "Toyota: furgonetas eléctricas de carga que se vendan hoy en España y no estén en
+    data/raw/toyota/ (por ejemplo Proace Electric, Proace City Electric y Proace Max). Hasta 6
+    modelos. Sigue las reglas de .claude/agents/researcher.md y el esquema de
+    docs/architecture/data-model.md, incluida la vía del IDAE (node factory/fetch-idae.ts), y
+    segment según RF-11 de PRD-001. Imágenes con node factory/fetch-image.ts, según esas mismas
+    reglas. No toques los modelos que ya existen. Bitácora."
