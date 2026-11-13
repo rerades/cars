@@ -1,0 +1,35 @@
+# Researcher — Renault Kangoo E-Tech eléctrico (turismo/combi). Fuentes: renault-es (T1), idae-es (T2). Consultado 2026-11-13.
+brand: renault
+brand_name: Renault
+model: Kangoo E-Tech eléctrico
+status: {value: on_sale, note: "la página muestra precio desde y «ver el stock disponible»", source_id: renault-es, url: "https://www.renault.es/turismos/kangoo-electrico.html", retrieved: 2026-11-13, tier: T1}
+needs_review: false
+versions:
+  - name: equilibre L1 11AC
+    battery_kwh: {value: 45, basis: unknown, note: "IDAE: «NUEVO KANGOO COMBI E-TECH 100% eléctrico KV2 REG25 L1 equilibre 11kW (semi: KX1E2JA 19B)»; filas sin fecha de homologación, se usa la que coincide con la versión de la web", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 314, note: "IDAE, misma fila (las variantes 22 kW DC80 de la misma versión dan 311)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 90, note: "IDAE, misma fila", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price:
+      value: 30003
+      unit: EUR
+      page_name: "KANGOO E-TECH ELÉCTRICO L1 equilibre 11AC"
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/turismos/kangoo-electrico.html"
+      source_id: renault-es
+      url: "https://www.renault.es/turismos/kangoo-electrico.html"
+      retrieved: 2026-11-13
+      tier: T1
+  - name: techno L1 11AC
+    battery_kwh: {value: 45, basis: unknown, note: "IDAE: «NUEVO KANGOO COMBI E-TECH 100% eléctrico KV2 REG25 L1 techno 11kW (semi: KX1E3JA 19B)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 314, note: "IDAE, misma fila", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 90, note: "IDAE, misma fila", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España."
+  - "segment sin fuente: ninguna fuente registrada lo clasifica con un término de RF-11 ni con la tabla (la web solo dice «eléctrico», 5 plazas, 4,49 m); queda null."
+  - "Imagen: la foto de Commons encontrada (Kangoo III) es del furgón, no de este combi; no se registra. images: []."
+  - "techno L1 11AC: la página no muestra su precio en la lectura; price null."
+  - "El precio de equilibre es «desde 30.003 €» con «este importe incluye promociones»: no hay PVP limpio. Hay también motorizaciones de 22 kW AC y 22 kW AC + 80 kW DC, y carrocería L2, sin precio legible."
+  - "Tracción y carga CC/CA por versión no publicadas en la lectura de la web."

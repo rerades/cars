@@ -1,0 +1,30 @@
+# Researcher — Renault Master Furgón E-Tech eléctrico. Fuentes: renault-empresas-es (T1), idae-es (T2). Consultado 2026-11-13.
+brand: renault
+brand_name: Renault
+model: Master Furgón E-Tech eléctrico
+status: {value: on_sale, note: "la página muestra precio desde, «ver el stock disponible» y «pide tu oferta»", source_id: renault-empresas-es, url: "https://empresas.renault.es/gama-master/master-furgon-electrico.html", retrieved: 2026-11-13, tier: T1}
+needs_review: false
+versions:
+  - name: furgón T L2H2 3500 autonomía urbana
+    battery_kwh: {value: 40, basis: unknown, note: "IDAE: «Master E-Tech -M6E Furgón T L2H2 3500 E-Tech eléctrico autonomía urbana (semi: TFG 1 223 23)»; la fila con opción PCU06/PCV08 trae los mismos valores", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 206, note: "IDAE, misma fila", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 96, note: "IDAE, misma fila", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price:
+      value: 27332
+      unit: EUR
+      page_name: "MASTER FURGÓN E-TECH ELÉCTRICO furgón T L2H2 3500 E-Tech eléctrico autonomía urbana"
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://empresas.renault.es/gama-master/master-furgon-electrico.html"
+      source_id: renault-empresas-es
+      url: "https://empresas.renault.es/gama-master/master-furgon-electrico.html"
+      retrieved: 2026-11-13
+      tier: T1
+images: []
+open_questions:
+  - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España."
+  - "segment sin fuente: ninguna fuente registrada clasifica el modelo con un término de RF-11; queda null."
+  - "Imagen: la búsqueda en Commons no encontró ninguna foto del Master E-Tech (solo del Master diésel anterior); images: []."
+  - "Versión «gran autonomía» (IDAE: 87 kWh, 105 kW, 466 km, L2H2 3500) no incluida: la web no la muestra con nombre ni precio en la lectura. Tampoco las L3H2 ni 3800/4000 kg."
+  - "Datos del IDAE de la versión urbana: dos filas con valores idénticos (una con opción PCU06/PCV08), sin fecha de homologación."
+  - "El único precio es «desde 27.332 €» con «este importe incluye promociones»: no hay PVP limpio."

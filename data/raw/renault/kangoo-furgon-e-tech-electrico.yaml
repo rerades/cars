@@ -1,0 +1,34 @@
+# Researcher — Renault Kangoo Furgón E-Tech eléctrico. Fuente: renault-empresas-es (T1). Consultado 2026-11-13.
+brand: renault
+brand_name: Renault
+model: Kangoo Furgón E-Tech eléctrico
+status: {value: on_sale, note: "la página ofrece «ver el stock disponible» y precio desde", source_id: renault-empresas-es, url: "https://empresas.renault.es/comerciales/kangoo-furgon-electrico.html", retrieved: 2026-11-13, tier: T1}
+needs_review: false
+versions:
+  - name: L1 2 plazas Advance ev45 11AC
+    power_kw: {value: 115, note: "publicado: 155 CV (115 kW)", source_id: renault-empresas-es, url: "https://empresas.renault.es/comerciales/kangoo-furgon-electrico.html", retrieved: 2026-11-13, tier: T1}
+    price:
+      value: 16032
+      unit: EUR
+      page_name: "KANGOO FURGÓN E-TECH ELÉCTRICO L1 2 plazas Advance ev45 11AC"
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://empresas.renault.es/comerciales/kangoo-furgon-electrico.html"
+      source_id: renault-empresas-es
+      url: "https://empresas.renault.es/comerciales/kangoo-furgon-electrico.html"
+      retrieved: 2026-11-13
+      tier: T1
+images:
+  - file: data/images/renault/kangoo-furgon-e-tech-electrico/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Renault_Kangoo_III_Rapid_E-Tech_1X7A6132.jpg/1280px-Renault_Kangoo_III_Rapid_E-Tech_1X7A6132.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Renault_Kangoo_III_Rapid_E-Tech_1X7A6132.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España (prensa.renault.es no se puede usar, ver data/sources/renault-press.yaml)."
+  - "segment sin fuente: la web habla de «furgonetas eléctricas» como categoría pero no clasifica el modelo con un término de RF-11 para este modelo; queda null."
+  - "wltp_km no guardada: la web da «354 km de autonomía en versión L1, pendiente de homologación», que no es una cifra homologada. El IDAE trae filas de un Kangoo Furgón E-Tech de 45 kWh/90 kW con 300-314 km, que no coinciden con los 115 kW de la web (generación distinta); no se usan."
+  - "Solo se incluye la versión que muestra la página (L1 2 plazas Advance ev45 11AC); las demás versiones (L2, doble cabina, start, 22 kW) no tienen precio ni ficha legibles."
+  - "El único precio es «desde 16.032 €» con «este importe incluye promociones»: no hay PVP limpio."
