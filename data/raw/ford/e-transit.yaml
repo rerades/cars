@@ -1,0 +1,44 @@
+# Researcher — Ford E-Transit. Fuentes: ford-es (T1), idae-es (T2), wikimedia-commons. Consultado 2026-11-13.
+brand: ford
+brand_name: Ford
+model: E-Transit
+status: {value: on_sale, note: "ford.es muestra la ficha con promoción de financiación (180 €/mes) y «Pruébalo ya»; no dice expresamente que se pueda pedir", source_id: ford-es, url: "https://www.ford.es/furgonetas-pick-up/e-transit", retrieved: 2026-11-13, tier: T1}
+launch: null
+segment: {value: furgoneta, note: "ford.es: «Furgoneta eléctrica Ford E-Transit» y «Furgoneta E-Transit»", source_id: ford-es, url: "https://www.ford.es/furgonetas-pick-up/e-transit", retrieved: 2026-11-13, tier: T1}
+needs_review: true
+versions:
+  - name: Van 75 kWh 135 kW
+    battery_kwh: {value: 75.7, basis: unknown, note: "IDAE id 610368 (11.2025): «75kWh (68kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 277, note: "IDAE id 610368 (11.2025, Van batalla larga N1); las demás filas de 75 kWh y 135 kW dan lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 135, note: "IDAE id 610368: 135 kW (184 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Van 75 kWh 198 kW
+    battery_kwh: {value: 75.7, basis: unknown, note: "IDAE id 610370 (11.2025): «75kWh (68kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 277, note: "IDAE id 610370 (11.2025, Van batalla larga N1)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 198, note: "IDAE id 610370: 198 kW (269 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Van 116 kWh 135 kW
+    battery_kwh: {value: 89, basis: unknown, note: "IDAE id 610364 (11.2025): «116 kWh (89kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 360, note: "IDAE id 610364 (11.2025, Van batalla larga N1)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 135, note: "IDAE id 610364: 135 kW (184 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Van 116 kWh 198 kW
+    battery_kwh: {value: 89, basis: unknown, note: "IDAE id 610366 (11.2025): «116 kWh (89kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 360, note: "IDAE id 610366 (11.2025, Van batalla larga N1)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 198, note: "IDAE id 610366: 198 kW (269 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images:
+  - file: data/images/ford/e-transit/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Ford_E-Transit_1X7A1522.jpg/1280px-Ford_E-Transit_1X7A1522.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Ford_E-Transit_1X7A1522.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "needs_review: true porque ford.es no dice expresamente que se pueda pedir y las versiones salen del IDAE (T2), que no dice cuáles se venden hoy."
+  - "Precio: leída /furgonetas-pick-up/e-transit con fetch-page.ts el 2026-11-13: solo cuota (180 €/mes, entrada 13.390 €, cuota final 23.888 €, 49 meses), sin PVP ni precio total. Sin precio."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "Autonomía y carga: ford.es da «hasta 317 km» (estándar, 115 kW CC) y «hasta 402 km» (mejorada, 180 kW CC); el IDAE da 277 y 360 km. No se guardan specs ni dc_max_kw porque la página no liga esas cifras a una versión concreta."
+  - "drivetrain: el IDAE no lo indica en el nombre de las versiones; sin dato."
+  - "Versiones: el IDAE incluye también batalla media y extralarga, doble cabina (386 km con 116 kWh) y chasis; no se han añadido."
