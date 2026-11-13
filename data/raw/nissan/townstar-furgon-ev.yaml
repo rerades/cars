@@ -13,17 +13,10 @@ versions:
     battery_kwh: {value: 45, basis: unknown, note: "IDAE, p. ej. ids 572783, 582915 (TOWNSTAR Furgón 45kWh)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
     power_kw: {value: 90, note: "IDAE, p. ej. ids 572783, 582915 (90 kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
     price: null
-images:
-  - file: "data/images/nissan/townstar-furgon-ev/trasera.jpg"
-    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Nissan_Townstar_EV_1X7A7200.jpg/1280px-Nissan_Townstar_EV_1X7A7200.jpg"
-    page_url: "https://commons.wikimedia.org/wiki/File:Nissan_Townstar_EV_1X7A7200.jpg"
-    source_id: wikimedia-commons
-    retrieved: 2026-11-13
-    license: CC-BY-SA-4.0
-    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+images: []
 open_questions:
   - "Precio: los importes de la página (19.830 €, 20.540 €, 20.935 €, 21.805 €) son «PFF al contado» sin IVA que incluyen la ayuda Plan Auto+ de 7.500 €; no son PVP sin ayudas ni se pueden separar. price: null."
   - "segment: la página dice «Furgón» y «GAMA DE VEHÍCULOS COMERCIALES», no el término «furgoneta» para este modelo; null."
   - "launch: ninguna fuente leída da la fecha de inicio de venta en España."
   - "wltp_km por versión: el IDAE da 188–288 km según fila (sin fecha) y no coincide con el «hasta 301 km» de la web; solo se guarda la cifra de la web en specs. Versiones por longitud (L1/L2), puertas y acabado no se desglosan."
-  - "Imagen: la foto de Commons es de la parte trasera de un Townstar EV furgón; matrícula alemana visible (sin retoque)."
+  - "Imagen: retirada en la revisión (2026-11-13); la foto de Commons (1X7A7200) lleva matrícula alemana legible sin retoque (ADR-0025). Falta una foto sin matrícula o retocada."
