@@ -1,0 +1,26 @@
+# Researcher — Nissan Townstar Combi EV. Fuentes: nissan-es (T1), idae-es (T2). Consultado 2026-11-13.
+brand: nissan
+brand_name: Nissan
+model: Townstar Combi EV
+status: {value: on_sale, note: "la página de Townstar Combi muestra la versión eléctrica con precio de oferta vigente hasta 30/11/2026 y la etiqueta «Gasolina y 100% Eléctrica»", source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/townstar-combi.html", retrieved: 2026-11-13, tier: T1}
+launch: null
+segment: null
+needs_review: false
+specs:
+  wltp_max_km: {value: 285, note: "«amplia autonomía de hasta 285 km»", source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/townstar-combi.html", retrieved: 2026-11-13, tier: T1}
+versions:
+  - name: Townstar Combi 5 plazas
+    battery_kwh: {value: 45, basis: unknown, note: "IDAE ids 607028 a 607033 (TOWNSTAR Combi 5P 45kWh)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 90, note: "IDAE ids 607028 a 607033", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Townstar Combi 7 plazas
+    battery_kwh: {value: 45, basis: unknown, note: "IDAE ids 607034 a 607038 (TOWNSTAR Combi 7p 45kWh L2)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 90, note: "IDAE ids 607034 a 607038", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Precio: la página da 26.390 € y 28.275 € «Precio al contado» de versiones eléctricas, pero incluyen la ayuda Plan Auto+ de 6.000 € y no se puede separar; no es PVP sin ayudas. price: null."
+  - "segment: la página llama al modelo «Combi», no con un término de RF-11 ni de la tabla; null."
+  - "launch: ninguna fuente leída da la fecha de inicio de venta en España."
+  - "wltp_km por versión: el IDAE da 256–280 km (sin fecha), por debajo del «hasta 285 km» de la web; solo se guarda la cifra de la web en specs."
+  - "Imagen: las fotos de Commons de Townstar EV no indican si son Combi o Furgón; no se registra ninguna."
