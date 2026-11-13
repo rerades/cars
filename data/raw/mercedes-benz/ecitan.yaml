@@ -1,0 +1,25 @@
+# Researcher — Mercedes-Benz eCitan. Fuentes: motor-es (T3), idae-es (T2). Consultado 2026-11-13. La web oficial devuelve HTTP 403 a fetch-page.ts.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: eCitan
+status: {value: on_sale, note: "motor.es (T3) lista el eCitan Tourer Pro con precio y «Stock limitado»; no lo confirma ninguna fuente T1. Producción anunciada hasta mediados de 2026 (Diariomotor, 2026-11-13); no consta que el cese ya se haya producido ni que se siga vendiendo", source_id: motor-es, url: "https://www.motor.es/mercedes/citan/", retrieved: 2026-11-13, tier: T3}
+launch: null
+segment: {value: furgoneta, note: "motor.es: «es la furgoneta más pequeña (y barata) comercializada por la compañía alemana en nuestro mercado»; se ofrece en versión Furgón y Tourer", source_id: motor-es, url: "https://www.motor.es/mercedes/citan/", retrieved: 2026-11-13, tier: T3}
+needs_review: true
+versions:
+  - name: eCitan Tourer Pro
+    battery_kwh: {value: 45, basis: unknown, note: "IDAE: eCitan (12.2024) eCitan Tourer PRO; otra fila sin fecha con los mismos valores", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 280, note: "IDAE: eCitan (12.2024) eCitan Tourer PRO", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 90, note: "IDAE: eCitan (12.2024) eCitan Tourer PRO", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: eCitan Tourer Pro Largo
+    price: null
+images: []
+open_questions:
+  - "Venta hoy sin confirmar: mercedes-benz.es (T1) devuelve HTTP 403 a fetch-page.ts (2026-11-13) en la home y en /vans/es/citan/ecitan. motor.es (T3) lo lista a la venta con «Stock limitado». Diariomotor (https://www.diariomotor.com/noticia/fin-produccion-mercedes-citan-clase-t/) y HighMotor (https://www.highmotor.com/mercedes-benz-dispone-retirar-catalogo-furgonetas-electricas-eqt-ecitan.html) dicen que Mercedes dejará de fabricar eCitan y EQT a mediados de 2026 / desde el segundo trimestre de 2026 (HighMotor: «supuestamente», no confirmado oficialmente). Ninguna lee un comunicado oficial; un T1 debe confirmar si se sigue vendiendo (¿stock?) o pasa a discontinued."
+  - "launch: ninguna fuente leída da la fecha de inicio de venta del eCitan en España (IDAE sitúa la homologación en 12.2024)."
+  - "Precio: ninguna fuente T1 leída; motor.es (T3) muestra «Desde 42.549 €» (Tourer Pro) y «Desde 45.394 €» (Tourer Pro Largo), no válidos como precio."
+  - "eCitan Tourer Pro Largo: sin datos. motor.es da 280 km y 122 CV, pero el IDAE da 261 km para «eCitan Tourer Largo» (12.2024) y no tiene fila «Tourer PRO Largo»; no se guardan."
+  - "Versiones eCitan Furgón (Furgón, PRO, Largo, PRO Largo; IDAE: 90 kW, 45 kWh, 274-284 km): motor.es dice que existe la versión Furgón, pero su lista de precios solo trae el Tourer; no se sabe cuáles se venden hoy y no se incluyen."
+  - "Segmento: fuente T3 que lo llama «furgoneta»; sin confirmación T1."
+  - "Imagen: retirada en la revisión (2026-11-13); la única foto de Commons (IMG 1034) lleva matrícula alemana legible sin retoque (ADR-0025). Falta una foto sin matrícula o retocada."
