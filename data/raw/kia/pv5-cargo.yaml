@@ -1,0 +1,35 @@
+# Researcher — Kia PV5 Cargo. Fuentes: kia-es (T1), idae-es (T2), wikimedia-commons. Consultado 2026-11-13.
+brand: kia
+brand_name: Kia
+model: PV5 Cargo
+status: {value: on_sale, note: "la ficha ofrece «Configura tu PV5 Cargo» y «Solicita tu oferta»; no dice con palabras que se entregue ya", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-cargo/descubrelo/", retrieved: 2026-11-13, tier: T1}
+launch: null
+segment: {value: furgoneta, note: "la ficha dice «hace que su furgoneta luzca un aspecto profesional» y «FURGONETA INTERNACIONAL DEL AÑO 2026»", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-cargo/descubrelo/", retrieved: 2026-11-13, tier: T1}
+needs_review: true
+specs:
+  wltp_max_km: {value: 416, note: "«La autonomía puede alcanzar los 416 km (WLTP)»", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-cargo/descubrelo/", retrieved: 2026-11-13, tier: T1}
+  battery_kwh_options: {value: [51.5, 71.2], note: "«Baterías de 51,5–71,2 kWh»; la web no dice si es capacidad útil o bruta", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-cargo/descubrelo/", retrieved: 2026-11-13, tier: T1}
+versions:
+  - name: PV5 Cargo Medium Range
+    battery_kwh: {value: 51, basis: unknown, note: "IDAE id 613718 y 607475 (PV5 Cargo L2H1 Medium Range Essential)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 297, note: "IDAE ids 607475, 607477, 613718, 613720 (PV5 Cargo L2H1 Medium Range Essential/Plus)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 89, note: "IDAE ids 607475, 607477, 613718, 613720", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: PV5 Cargo Long Range
+    battery_kwh: {value: 71, basis: unknown, note: "IDAE ids 607476, 607478, 607479, 613719, 613721, 613722 (PV5 Cargo L2H1 Long Range Essential/Plus/Elite)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 416, note: "«La autonomía puede alcanzar los 416 km (WLTP)»; coincide con IDAE ids 607476, 607478, 607479", source_id: kia-es, url: "https://www.kia.com/es/pbv/vehiculos/pv5-cargo/descubrelo/", retrieved: 2026-11-13, tier: T1}
+    power_kw: {value: 120, note: "IDAE ids 607476, 607478, 607479, 613719, 613721, 613722", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images:
+  - file: "data/images/kia/pv5-cargo/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Kia_PV5_%28SW1%29_Cargo_%E2%80%93_Seoul_Mobility_Show_2025_%2807%29.jpg/1280px-Kia_PV5_%28SW1%29_Cargo_%E2%80%93_Seoul_Mobility_Show_2025_%2807%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Kia_PV5_(SW1)_Cargo_%E2%80%93_Seoul_Mobility_Show_2025_(07).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "Treeinkr, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio: la ficha no publica PVP y el configurador no se lee con fetch-page.ts; price: null en todas las versiones."
+  - "launch: ninguna fuente leída da la fecha de inicio de pedidos en España. status on_sale deducido de «Configura tu PV5 Cargo» / «Solicita tu oferta»; por eso needs_review: true."
+  - "Versiones: se agrupan por batería (Medium/Long Range). El IDAE añade acabados Essential, Plus y Elite; la ficha no los presenta con datos. Variantes Largo/Tech Alto de la ficha (4.495/4.695 mm) sin cifras por versión. Carga DC y AC no publicadas en el texto leído. PV5 Chasis no se registra."
+  - "Batería: la web da el rango 51,5–71,2 kWh; las versiones usan la cifra del IDAE (51 y 71) con basis unknown."

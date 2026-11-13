@@ -9,11 +9,15 @@ urls:
   models: https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/leaf
   ariya: https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya
   micra: https://micra.nissan.es/
+  townstar_van: https://www.nissan.es/vehiculos/nuevos-vehiculos/townstar-van.html
+  townstar_combi: https://www.nissan.es/vehiculos/nuevos-vehiculos/townstar-combi.html
+  interstar: https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar.html
+  interstar_motores: https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar/motores.html
   robots: https://www.nissan.es/robots.txt
 image_license: "" # no se han leído términos de uso de imágenes; no se publican imágenes de esta fuente
 notes: >
   Web oficial de Nissan España. Las fichas de modelo solo muestran precio financiado (con oferta, TAE y condiciones en
   la nota al pie), no un PVP limpio; Micra solo muestra cuota mensual. robots.txt no restringe /cf/ ni micra.nissan.es
   (comprobado el 2026-10-13). Las ofertas citadas vencen el 30/11/2026 (releído el 2026-11-01).
-last_verified: 2026-11-01
+last_verified: 2026-11-13
 status: active

@@ -1,0 +1,36 @@
+# Researcher — Nissan Interstar-e. Fuentes: nissan-es (T1), idae-es (T2), wikimedia-commons. Consultado 2026-11-13.
+brand: nissan
+brand_name: Nissan
+model: Interstar-e
+status: {value: on_sale, note: "la página de Interstar describe la versión eléctrica con autonomía y baterías; no dice con palabras desde cuándo se pide ni entrega", source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar/motores.html", retrieved: 2026-11-13, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  wltp_max_km: {value: 460, note: "«autonomía de hasta 460 km»", source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar/motores.html", retrieved: 2026-11-13, tier: T1}
+  ac_max_kw: {value: 22, note: "«recarga con CA de 22 kW»", source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar/motores.html", retrieved: 2026-11-13, tier: T1}
+  battery_kwh_options: {value: [40, 87], note: "«una batería de 87kWh [...] o una batería más económica de 40kWh»", source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar/motores.html", retrieved: 2026-11-13, tier: T1}
+versions:
+  - name: Interstar-e 40 kWh
+    battery_kwh: {value: 40, basis: unknown, source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar/motores.html", retrieved: 2026-11-13, tier: T1}
+    wltp_km: {value: 200, note: "«de hasta 200 km»", source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar/motores.html", retrieved: 2026-11-13, tier: T1}
+    power_kw: {value: 96, note: "IDAE ids 613311 a 613352 (Interstar Furgón 40kWh)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Interstar-e 87 kWh
+    battery_kwh: {value: 87, basis: unknown, source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar/motores.html", retrieved: 2026-11-13, tier: T1}
+    wltp_km: {value: 460, note: "«de hasta 460 km»", source_id: nissan-es, url: "https://www.nissan.es/vehiculos/nuevos-vehiculos/interstar/motores.html", retrieved: 2026-11-13, tier: T1}
+    power_kw: {value: 105, note: "IDAE ids 613313 a 613337 (Interstar 87kWh)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images:
+  - file: "data/images/nissan/interstar-e/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Nissan_Interstar-e_AMA_Marbach_2025_DSC_8651.jpg/1280px-Nissan_Interstar-e_AMA_Marbach_2025_DSC_8651.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Nissan_Interstar-e_AMA_Marbach_2025_DSC_8651.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "Precio: la página de Interstar solo muestra la oferta de leasing de un furgón diésel (29.435 € sin IVA); ningún precio eléctrico. price: null."
+  - "segment: la página dice «furgón eléctrico», no «furgoneta»; null."
+  - "launch y estado: ninguna fuente leída da la fecha de pedidos en España ni confirma versiones vigentes; needs_review: true."
+  - "wltp_km por versión: el IDAE da 172–477 km según carrocería, longitud y peso (3,5 t/4,0 t); se guardan las cifras «hasta» de la web. Carga DC: la web cita un cargador de 130 kW y una tabla comparativa de 150 kW no leída; no se registra dc_max_kw."
