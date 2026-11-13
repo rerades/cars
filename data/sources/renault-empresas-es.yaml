@@ -1,0 +1,14 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: renault-empresas-es
+brand: Renault
+tier: T1
+market: ES
+kind: [ prices, specs, announcements ]
+urls:
+  home: https://empresas.renault.es/
+  models: https://empresas.renault.es/comerciales/kangoo-furgon-electrico.html
+image_license: "" # sin términos de uso de imágenes leídos: no publicar imágenes de esta web
+notes: >
+  Web oficial de Renault España para profesionales y vehículos comerciales (subdominio de renault.es, mismo operador que renault-es). Alta 2026-11-13 para las furgonetas eléctricas (Kangoo Furgón, Trafic, Master E-Tech), que no están en www.renault.es/electricos.
+last_verified: 2026-11-13
+status: active

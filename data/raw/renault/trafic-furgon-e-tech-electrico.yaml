@@ -1,0 +1,33 @@
+# Researcher — Renault Trafic Furgón E-Tech eléctrico. Fuente: renault-empresas-es (T1). Consultado 2026-11-13.
+brand: renault
+brand_name: Renault
+model: Trafic Furgón E-Tech eléctrico
+status: {value: on_sale, note: "la página muestra precio desde y configurador («configúralo», «pide tu oferta»)", source_id: renault-empresas-es, url: "https://empresas.renault.es/gama-trafic-furgon/trafic-furgon-e-tech.html", retrieved: 2026-11-13, tier: T1}
+needs_review: false
+versions:
+  - name: furgón L1H1 advance gran autonomía LG
+    price:
+      value: 31652
+      unit: EUR
+      page_name: "NUEVO TRAFIC FURGÓN E-TECH furgón L1H1 advance gran autonomía LG"
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://empresas.renault.es/gama-trafic-furgon/trafic-furgon-e-tech.html"
+      source_id: renault-empresas-es
+      url: "https://empresas.renault.es/gama-trafic-furgon/trafic-furgon-e-tech.html"
+      retrieved: 2026-11-13
+      tier: T1
+images:
+  - file: data/images/renault/trafic-furgon-e-tech-electrico/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Renault_Trafic_E-Tech_IAA_Transportation_2026_%28DSC2149%29.jpg/1280px-Renault_Trafic_E-Tech_IAA_Transportation_2026_%28DSC2149%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Renault_Trafic_E-Tech_IAA_Transportation_2026_(DSC2149).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "MarcelX42, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España."
+  - "segment sin fuente: ninguna fuente registrada clasifica el modelo con un término de RF-11; queda null."
+  - "wltp_km, batería y potencia no guardadas: la web da «autonomía de hasta 470 km» con una llamada ¹ cuyo texto no sale en la lectura (no se sabe si es WLTP), y no publica batería ni potencia por versión. Las filas del IDAE (NUEVO TRAFIC E-TECH T2E, 52 kWh, 51 kW, 326 km) no se corresponden con la versión «gran autonomía» de la web."
+  - "El único precio es «desde 31.652 €» con «este importe incluye promociones»: no hay PVP limpio. La web indica además que la versión L1 está pendiente de homologación en otra página (e-tech-electrico.html)."
+  - "Solo se incluye la versión que muestra la página; el resto de versiones y acabados no son legibles sin configurador."

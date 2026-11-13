@@ -1,0 +1,28 @@
+# Researcher — Renault Grand Kangoo E-Tech eléctrico. Fuente: renault-es (T1). Consultado 2026-11-13.
+brand: renault
+brand_name: Renault
+model: Grand Kangoo E-Tech eléctrico
+status: {value: on_sale, note: "la web muestra precio desde, «pide tu oferta» y «configúralo»", source_id: renault-es, url: "https://www.renault.es/electricos/grand-kangoo/precios-versiones.html", retrieved: 2026-11-13, tier: T1}
+needs_review: false
+versions:
+  - name: equilibre
+    price:
+      value: 32764
+      unit: EUR
+      page_name: "GRAND KANGOO E-TECH ELÉCTRICO equilibre"
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://www.renault.es/electricos/grand-kangoo/precios-versiones.html"
+      source_id: renault-es
+      url: "https://www.renault.es/electricos/grand-kangoo/precios-versiones.html"
+      retrieved: 2026-11-13
+      tier: T1
+  - name: techno
+    price: null
+images: []
+open_questions:
+  - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España."
+  - "segment sin fuente: la web da 5 o 7 plazas y 4,91 m pero no lo clasifica con un término de RF-11; queda null."
+  - "Imagen: no se buscó foto en Commons en esta ejecución; images: []."
+  - "Potencia y carga no guardadas por ambigüedad: la página muestra «90kW (121 CV)» y «si/80 kW DC» para «Grand Kangoo evolution 22AC + 80DC» (motorización «E-Tech 45 22 kW AC 80 DC») mientras la versión seleccionada es equilibre, y dice «cargador AC: no». Autonomía WLTP y batería no aparecen; el IDAE no trae filas del Grand Kangoo."
+  - "techno: la lista dice «2 versiones disponibles» (equilibre y techno) pero solo muestra precio de equilibre («desde 32.764 €», «este importe incluye promociones»: no hay PVP limpio)."
