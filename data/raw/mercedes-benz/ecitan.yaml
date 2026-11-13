@@ -14,14 +14,7 @@ versions:
     price: null
   - name: eCitan Tourer Pro Largo
     price: null
-images:
-  - file: data/images/mercedes-benz/ecitan/delantera.jpg
-    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Mercedes-Benz_eCitan_IMG_1034.jpg/1280px-Mercedes-Benz_eCitan_IMG_1034.jpg"
-    page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_eCitan_IMG_1034.jpg"
-    source_id: wikimedia-commons
-    retrieved: 2026-11-13
-    license: CC-BY-SA-4.0
-    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
+images: []
 open_questions:
   - "Venta hoy sin confirmar: mercedes-benz.es (T1) devuelve HTTP 403 a fetch-page.ts (2026-11-13) en la home y en /vans/es/citan/ecitan. motor.es (T3) lo lista a la venta con «Stock limitado». Diariomotor (https://www.diariomotor.com/noticia/fin-produccion-mercedes-citan-clase-t/) y HighMotor (https://www.highmotor.com/mercedes-benz-dispone-retirar-catalogo-furgonetas-electricas-eqt-ecitan.html) dicen que Mercedes dejará de fabricar eCitan y EQT a mediados de 2026 / desde el segundo trimestre de 2026 (HighMotor: «supuestamente», no confirmado oficialmente). Ninguna lee un comunicado oficial; un T1 debe confirmar si se sigue vendiendo (¿stock?) o pasa a discontinued."
   - "launch: ninguna fuente leída da la fecha de inicio de venta del eCitan en España (IDAE sitúa la homologación en 12.2024)."
@@ -29,4 +22,4 @@ open_questions:
   - "eCitan Tourer Pro Largo: sin datos. motor.es da 280 km y 122 CV, pero el IDAE da 261 km para «eCitan Tourer Largo» (12.2024) y no tiene fila «Tourer PRO Largo»; no se guardan."
   - "Versiones eCitan Furgón (Furgón, PRO, Largo, PRO Largo; IDAE: 90 kW, 45 kWh, 274-284 km): motor.es dice que existe la versión Furgón, pero su lista de precios solo trae el Tourer; no se sabe cuáles se venden hoy y no se incluyen."
   - "Segmento: fuente T3 que lo llama «furgoneta»; sin confirmación T1."
-  - "Imagen: la foto de Commons (IMG 1034) es de un eCitan con matrícula alemana visible y sin retoque; probablemente un Furgón. No hay en Commons una foto del Tourer. Revisar si requiere retoque de matrícula (ADR-0025)."
+  - "Imagen: retirada en la revisión (2026-11-13); la única foto de Commons (IMG 1034) lleva matrícula alemana legible sin retoque (ADR-0025). Falta una foto sin matrícula o retocada."
