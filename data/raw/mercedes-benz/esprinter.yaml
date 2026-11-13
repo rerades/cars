@@ -1,0 +1,32 @@
+# Researcher — Mercedes-Benz eSprinter. Fuentes: highmotor-es, hibridosyelectricos-es (T3) e idae-es (T2). Consultado 2026-11-12. Sin precio: mercedes-benz.es da HTTP 403 y no hay otra fuente T1.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: eSprinter
+status: {value: on_sale, note: "Highmotor lista 36 versiones del eSprinter «de 54.484 € a 74.121 €» con «precios recomendados por el fabricante»; sin fecha ni fuente T1", source_id: highmotor-es, url: "https://www.highmotor.com/fichas-tecnicas/mercedes-benz/esprinter", retrieved: 2026-11-12, tier: T3}
+launch: null
+segment: {value: furgoneta, note: "«Mercedes-Benz ha iniciado en Dusseldorf la producción en serie de su furgoneta eléctrica eSprinter» (noticia de la primera generación; mismo modelo)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/t/mercedes-benz-esprinter", retrieved: 2026-11-12, tier: T3}
+needs_review: true
+versions:
+  - name: eSprinter 314 Furgón PRO Medio (56kWh)
+    battery_kwh: {value: 56, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604333 (12.2024)"}
+    wltp_km: {value: 218, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604333 (12.2024)"}
+    power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604333 (12.2024)"}
+    price: null
+  - name: eSprinter 320 Furgón PRO Medio (81kWh)
+    battery_kwh: {value: 81, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604340 (12.2024)"}
+    wltp_km: {value: 310, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604340 (12.2024)"}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604340 (12.2024)"}
+    price: null
+  - name: eSprinter 420 Furgón PRO Largo (113kWh)
+    battery_kwh: {value: 113, basis: unknown, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604373 (12.2024)"}
+    wltp_km: {value: 437, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604373 (12.2024)"}
+    power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604373 (12.2024)"}
+    price: null
+images: []
+open_questions:
+  - "Precio: mercedes-benz.es devuelve HTTP 403 a fetch-page.ts (2026-11-12) y no hay otra fuente T1; todas las versiones con price null."
+  - "Versiones: Highmotor lista 36 y el IDAE más de 100 filas (furgón, chasis cabina, BASE/PRO/SELECT, medio/largo, 314/320/414/420, 56/81/113 kWh). Solo se han escrito tres representativas (una por batería, homologación 12.2024); el resto sin escribir. De ahí needs_review."
+  - "Estado: ninguna fuente T1 confirma que se pueda pedir hoy; las T3 no tienen fecha clara. launch: sin fecha, null."
+  - "Segmento: la noticia citada es de la primera generación; no hay una fuente T3 reciente que clasifique la actual con el término «furgoneta»."
+  - "Imagen: la búsqueda en Commons «Mercedes-Benz eSprinter» no devuelve ninguna foto identificada como eSprinter eléctrica (solo Sprinter genéricos); images []."
+  - "EQT no se ha escrito: su ficha en motor.es dice «no se encuentra a la venta en España». eCitan no se ha escrito en esta ejecución: la ficha de motor.es (https://www.motor.es/mercedes/citan/) lo lista a la venta (eCitan Tourer Pro, desde 42.549 €), y el cese de producción que se mencionaba no se ha leído; queda para una tarea aparte."
