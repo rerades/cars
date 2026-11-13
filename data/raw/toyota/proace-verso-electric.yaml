@@ -1,0 +1,62 @@
+# Researcher — Toyota Proace Verso Electric. Fuentes: toyota-es (T1, listado), idae-es (T2), wikimedia-commons. Consultado 2026-11-13.
+brand: toyota
+brand_name: Toyota
+model: Proace Verso Electric
+status: {value: on_sale, note: "toyota.es/coches lista «Proace Verso» como «Electric/Diésel». No dice qué versiones eléctricas se venden hoy.", source_id: toyota-es, url: "https://www.toyota.es/coches", retrieved: 2026-11-13, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Proace Verso Electric Combi GX L1 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608160 «PROACE VERSO EV Combi GX L1 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 223, note: "IDAE id 608160", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608160", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace Verso Electric Combi GX L1 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608161 «PROACE VERSO EV Combi GX L1 75 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 352, note: "IDAE id 608161", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608161", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace Verso Electric Family Active L1 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608164 «PROACE VERSO EV Family Active L1 75 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 344, note: "IDAE id 608164", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608164", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace Verso Electric Family Active L2 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608165 «PROACE VERSO EV Family Active L2 75 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 340, note: "IDAE id 608165", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608165", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace Verso Electric Family Advance L1 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608166 «PROACE VERSO EV Family Advance L1 75 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 342, note: "IDAE id 608166", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608166", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace Verso Electric Family Advance L2 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608167 «PROACE VERSO EV Family Advance L2 75 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 339, note: "IDAE id 608167", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608167", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace Verso Electric Shuttle VX L2 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608163 «PROACE VERSO EV Shuttle VX L2 75 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 339, note: "IDAE id 608163", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608163", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace Verso Electric VIP Luxury L1 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 608168 «PROACE VERSO EV Vip Luxury L1 75 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 336, note: "IDAE id 608168", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608168", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images:
+  - file: data/images/toyota/proace-verso-electric/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/2024_Toyota_Proace_Verso_Electric_Lang_Executive_Family_Plus.jpg/1280px-2024_Toyota_Proace_Verso_Electric_Lang_Executive_Family_Plus.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2024_Toyota_Proace_Verso_Electric_Lang_Executive_Family_Plus.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "Ssu"
+open_questions:
+  - "Versiones salidas del IDAE (filas MY26 de la gama Verso; no se incluyen Camper ni Gruau TPMR Taxi, que son transformaciones). El IDAE no dice cuáles se venden hoy; los nombres de versión salen de sus filas, no de toyota.es."
+  - "Precio: toyota.es/coches/precios no da PVP por versión; price null."
+  - "launch y segment: toyota.es/coches/proace-verso no trae un término de RF-11 ni fecha de venta; null."
+  - "Imagen: la foto es de un Proace Verso Electric transformado por Lang (Executive Family Plus); no hay otra categorizada como eléctrica."
