@@ -1,0 +1,46 @@
+# Researcher — Citroën ë-Jumpy. Fuentes: motor-es (T3, estado), idae-es (T2, versiones). Consultado 2026-11-13.
+brand: citroen
+brand_name: Citroën
+model: ë-Jumpy
+status: {value: on_sale, note: "motor.es/citroen/ lista «Citroën ë-Jumpy» con precio «Desde» entre los eléctricos de la marca; no dice que se pueda pedir hoy con esas palabras", source_id: motor-es, url: "https://www.motor.es/citroen/", retrieved: 2026-11-13, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: ë-Jumpy Talla XS 100 kW 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 562039 «ë-Jumpy Talla XS Eléctrico 100 kW 50 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 196, note: "IDAE id 562039", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 562039", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: ë-Jumpy Talla M 100 kW 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 562040 «ë-Jumpy Talla M Eléctrico 100 kW 50 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 196, note: "IDAE id 562040", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 562040", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: ë-Jumpy Talla M 100 kW 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 562041 «ë-Jumpy Talla M Eléctrico 100 kW 75 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 285, note: "IDAE id 562041", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 562041", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: ë-Jumpy Talla XL 100 kW 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 602109 «ë-Jumpy Talla XL Eléctrico 100 kW 50 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 196, note: "IDAE id 602109", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 602109", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: ë-Jumpy Talla XL 100 kW 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 562042 «ë-Jumpy Talla XL Eléctrico 100 kW 75 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 285, note: "IDAE id 562042", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 562042", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images:
+  - file: data/images/citroen/e-jumpy/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Citro%C3%ABn_%C3%AB-Jumpy_DSC_7957.jpg/1280px-Citro%C3%ABn_%C3%AB-Jumpy_DSC_7957.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Citroën_ë-Jumpy_DSC_7957.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0"
+open_questions:
+  - "needs_review: www.citroen.es devuelve 403 y citroen.es no está registrada como fuente; el estado sale solo de un listado de motor.es (T3) y las versiones, del IDAE (homologaciones sin fecha), que no dice cuáles se venden hoy. El IDAE tiene también filas ë-Jumpy Combi (ids 562036-562038, 614166), que no se han incluido."
+  - "Precio: sin fuente T1 legible; motor.es publica precios con descuento, que no valen. price null."
+  - "launch y segment: ninguna fuente leída los da con un término válido (motor.es solo agrupa el modelo bajo «Furgonetas y Comerciales»)."

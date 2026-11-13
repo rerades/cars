@@ -1,0 +1,41 @@
+# Researcher — Peugeot e-Partner. Fuentes: motor-es (T3, estado), idae-es (T2, versiones). Consultado 2026-11-13.
+brand: peugeot
+brand_name: Peugeot
+model: e-Partner
+status: {value: on_sale, note: "motor.es/peugeot/ lista «Peugeot e-Partner» con precio «Desde» entre los eléctricos de la marca; no dice que se pueda pedir hoy con esas palabras", source_id: motor-es, url: "https://www.motor.es/peugeot/", retrieved: 2026-11-13, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: e-Partner Furgón M Carga Incrementada 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608862 «e-PARTNER Furgón M Carga Incrementada Eléctrico 100 kW 50 kWh Automática»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 336, note: "IDAE id 608862", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608862", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: e-Partner Standard 800 kg
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 576659 «Nuevo Partner e-Partner Standard 800Kg eléctrico 100 Kw (136 Cv)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 576659", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 576659", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: e-Partner Long 800 kg
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 576660 «Nuevo Partner e-Partner Long 800Kg eléctrico 100 Kw (136 Cv)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 576660", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 576660", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: e-Partner Doble Cabina 800 kg
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 576661 «Nuevo Partner e-Partner Doble Cabina 800Kg eléctrico 100 Kw (136 Cv)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 245, note: "IDAE id 576661", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 576661", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images:
+  - file: data/images/peugeot/e-partner/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Peugeot_e-Partner_Auto_Zuerich_2023_1X7A1428.jpg/1280px-Peugeot_e-Partner_Auto_Zuerich_2023_1X7A1428.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Peugeot_e-Partner_Auto_Zuerich_2023_1X7A1428.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander-93, CC BY-SA 4.0"
+open_questions:
+  - "needs_review: www.peugeot.es devuelve 403 y ofertas.peugeot.es no lista el e-Partner; el estado sale solo de un listado de motor.es (T3) y las versiones, del IDAE (la de 336 km es la más reciente por id; las de 245 km, de otra homologación sin fecha), que no dice cuáles se venden hoy. Hay más filas e-Partner en el IDAE (Premium, Pro) sin incluir."
+  - "Precio: sin fuente T1 legible; motor.es publica precios con descuento, que no valen. price null."
+  - "launch y segment: ninguna fuente leída los da con un término válido."

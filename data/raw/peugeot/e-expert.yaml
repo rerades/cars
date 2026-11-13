@@ -1,0 +1,41 @@
+# Researcher — Peugeot e-Expert. Fuentes: motor-es (T3, estado), idae-es (T2, versiones). Consultado 2026-11-13.
+brand: peugeot
+brand_name: Peugeot
+model: e-Expert
+status: {value: on_sale, note: "motor.es/peugeot/ lista «Peugeot e-Expert» con precio «Desde» entre los eléctricos de la marca; no dice que se pueda pedir hoy con esas palabras", source_id: motor-es, url: "https://www.motor.es/peugeot/", retrieved: 2026-11-13, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: e-Expert Furgón 50 kWh Standard
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 574696 «Expert e-Expert Furgón Eléctrico 100 Kw Batería 50 Kwh Standard»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 196, note: "IDAE id 574696", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 574696", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: e-Expert Furgón 50 kWh Long
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 574698 «Expert e-Expert Furgón Eléctrico 100 Kw Batería 50 Kwh Long»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 196, note: "IDAE id 574698", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 574698", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: e-Expert Furgón 75 kWh Standard
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 574697 «Expert e-Expert Furgón Eléctrico 100 Kw Batería 75 Kwh Standard»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 285, note: "IDAE id 574697", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 574697", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: e-Expert Furgón 75 kWh Long
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 574699 «Expert e-Expert Furgón Eléctrico 100 Kw Batería 75 Kwh Long»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 285, note: "IDAE id 574699", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 574699", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images:
+  - file: data/images/peugeot/e-expert/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Peugeot_e-Expert_1X7A0428.jpg/1280px-Peugeot_e-Expert_1X7A0428.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Peugeot_e-Expert_1X7A0428.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0"
+open_questions:
+  - "needs_review: www.peugeot.es devuelve 403 y ofertas.peugeot.es no lista el e-Expert; el estado sale solo de un listado de motor.es (T3) y las versiones, del IDAE (filas de furgón sin fecha de homologación), que no dice cuáles se venden hoy. Sin incluir: filas Combi (ids 610024-610027, más recientes), Doble Cabina, Plataforma Cabina y acabados Pro/Premium."
+  - "Precio: sin fuente T1 legible; motor.es publica precios con descuento, que no valen. price null."
+  - "launch y segment: ninguna fuente leída los da con un término válido."
