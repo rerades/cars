@@ -3983,12 +3983,12 @@
     (gh issue view 1034 --comments) y haz exactamente lo que dice, sobre la base visual de la #1033
     que ya está en main. No cambies ninguna otra pantalla. La PR dice «Closes #1034» y enumera los
     CA cubiertos."
-# Más furgonetas (PRD-001, sección 3).
-- id: furgonetas-toyota-carga
+# Fotos retiradas en la revisión del 2026-11-13 por matrícula legible (ADR-0025).
+- id: fotos-ecitan-townstar-furgon
   agent: researcher
-  task: "Toyota: furgonetas eléctricas de carga que se vendan hoy en España y no estén en
-    data/raw/toyota/ (por ejemplo Proace Electric, Proace City Electric y Proace Max). Hasta 6
-    modelos. Sigue las reglas de .claude/agents/researcher.md y el esquema de
-    docs/architecture/data-model.md, incluida la vía del IDAE (node factory/fetch-idae.ts), y
-    segment según RF-11 de PRD-001. Imágenes con node factory/fetch-image.ts, según esas mismas
-    reglas. No toques los modelos que ya existen. Bitácora."
+  task: "data/raw/mercedes-benz/ecitan.yaml y data/raw/nissan/townstar-furgon-ev.yaml tienen
+    images: [] porque su foto de Commons llevaba la matrícula legible sin retocar. Busca una foto
+    de cada uno sin matrícula legible, o pasa una por el retoque de ADR-0025. Sigue las reglas de
+    imágenes de .claude/agents/researcher.md y docs/architecture/data-model.md, con node
+    factory/fetch-image.ts. No toques nada más de esos ficheros que images y la pregunta abierta
+    de la imagen. Bitácora."
