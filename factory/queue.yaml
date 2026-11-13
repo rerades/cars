@@ -3992,3 +3992,37 @@
     imágenes de .claude/agents/researcher.md y docs/architecture/data-model.md, con node
     factory/fetch-image.ts. No toques nada más de esos ficheros que images y la pregunta abierta
     de la imagen. Bitácora."
+# Modelos sin foto (25 el 2026-11-13; tres ya están en fotos-ecitan-townstar-furgon).
+- id: fotos-sin-imagen-1
+  agent: researcher
+  task: "Estos modelos tienen images: [] en data/raw/: citroen/e-berlingo-van, fiat/qubo-l, fiat/scudo-electrico, ford/e-transit-courier,
+    peugeot/e-408 y smart/hashtag-2. Busca una foto de cada uno que
+    cumpla las reglas de imágenes de .claude/agents/researcher.md, docs/architecture/data-model.md
+    y ADR-0025 (sin matrícula legible salvo retoque, el modelo correcto y por fuera), con node
+    factory/fetch-image.ts. Si no hay ninguna válida, deja images: [] y dilo en open_questions. No
+    toques nada más de esos ficheros que images y la pregunta abierta de la imagen. Bitácora."
+- id: fotos-sin-imagen-2
+  agent: researcher
+  task: "Estos modelos tienen images: [] en data/raw/: opel/combo-cargo-electric, opel/combo-electric, opel/movano-electric,
+    opel/vivaro-electric y opel/zafira-electric. Busca una foto de cada uno que
+    cumpla las reglas de imágenes de .claude/agents/researcher.md, docs/architecture/data-model.md
+    y ADR-0025 (sin matrícula legible salvo retoque, el modelo correcto y por fuera), con node
+    factory/fetch-image.ts. Si no hay ninguna válida, deja images: [] y dilo en open_questions. No
+    toques nada más de esos ficheros que images y la pregunta abierta de la imagen. Bitácora."
+- id: fotos-sin-imagen-3
+  agent: researcher
+  task: "Estos modelos tienen images: [] en data/raw/: renault/grand-kangoo-e-tech-electrico, renault/kangoo-e-tech-electrico,
+    renault/master-furgon-e-tech-electrico, toyota/proace-electric, toyota/proace-max-electric y
+    volkswagen/e-caravelle. Busca una foto de cada uno que
+    cumpla las reglas de imágenes de .claude/agents/researcher.md, docs/architecture/data-model.md
+    y ADR-0025 (sin matrícula legible salvo retoque, el modelo correcto y por fuera), con node
+    factory/fetch-image.ts. Si no hay ninguna válida, deja images: [] y dilo en open_questions. No
+    toques nada más de esos ficheros que images y la pregunta abierta de la imagen. Bitácora."
+- id: fotos-sin-imagen-4
+  agent: researcher
+  task: "Estos modelos tienen images: [] en data/raw/: mercedes-benz/cla-shooting-brake, mercedes-benz/gla, mercedes-benz/esprinter,
+    nissan/townstar-combi-ev y range-rover/range-rover-electric. Busca una foto de cada uno que
+    cumpla las reglas de imágenes de .claude/agents/researcher.md, docs/architecture/data-model.md
+    y ADR-0025 (sin matrícula legible salvo retoque, el modelo correcto y por fuera), con node
+    factory/fetch-image.ts. Si no hay ninguna válida, deja images: [] y dilo en open_questions. No
+    toques nada más de esos ficheros que images y la pregunta abierta de la imagen. Bitácora."
