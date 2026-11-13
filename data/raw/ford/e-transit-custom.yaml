@@ -1,0 +1,50 @@
+# Researcher — Ford E-Transit Custom. Fuentes: ford-es (T1), idae-es (T2), wikimedia-commons. Consultado 2026-11-13.
+brand: ford
+brand_name: Ford
+model: E-Transit Custom
+status: {value: on_sale, note: "ford.es muestra la ficha con promoción de financiación (155 €/mes) y «Pide tu prueba»; no dice expresamente que se pueda pedir", source_id: ford-es, url: "https://www.ford.es/furgonetas-pick-up/nueva-e-transit-custom", retrieved: 2026-11-13, tier: T1}
+launch: null
+segment: {value: furgoneta, note: "ford.es: «Una furgoneta eléctrica Ford E-Transit Custom azul recorriendo una calle de una ciudad»", source_id: ford-es, url: "https://www.ford.es/furgonetas-pick-up/nueva-e-transit-custom", retrieved: 2026-11-13, tier: T1}
+needs_review: true
+specs:
+  dc_max_kw: {value: 125, note: "ficha en ford.es: cargadores públicos de 125 kW CC, 10-80 % en unos 29 min (datos de la serie 320 L1H)", source_id: ford-es, url: "https://www.ford.es/furgonetas-pick-up/nueva-e-transit-custom", retrieved: 2026-11-13, tier: T1}
+versions:
+  - name: Van 100 kW RWD
+    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610415 (12.2025): «83kWh (71kWh útil)»; también consta la 610406 (11.2025, 322 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 362, note: "IDAE id 610415 (12.2025, Van N1 L1 Trend); la L2 (610421) da lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610415: 100 kW (136 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610415: «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Van 160 kW RWD
+    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610416 (12.2025): «83kWh (71kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 343, note: "IDAE id 610416 (12.2025, Van N1 L1 Trend); la L2 (610422) da lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 160, note: "IDAE id 610416: 160 kW (218 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610416: «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Van 210 kW RWD
+    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610417 (12.2025): «83kWh (71kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 344, note: "IDAE id 610417 (12.2025, Van N1 L1 Sport); la L2 (610423) da lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 610417: 210 kW (286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610417: «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Kombi 100 kW RWD
+    battery_kwh: {value: 83, basis: unknown, note: "IDAE id 610392 (12.2025): «83kWh (71kWh útil)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 336, note: "IDAE id 610392 (12.2025, Kombi M1 L1 Trend/Limited); la L2 (610396) da lo mismo", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610392: 100 kW (136 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    drivetrain: {value: rwd, note: "IDAE id 610392: «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images:
+  - file: data/images/ford/e-transit-custom/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Ford_E-Transit_Custom_%282023%29_DSC_9255.jpg/1280px-Ford_E-Transit_Custom_%282023%29_DSC_9255.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Ford_E-Transit_Custom_(2023)_DSC_9255.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+open_questions:
+  - "needs_review: true porque ford.es no dice expresamente que se pueda pedir y las versiones salen del IDAE (T2), que no dice cuáles se venden hoy."
+  - "Precio: leída /furgonetas-pick-up/nueva-e-transit-custom con fetch-page.ts el 2026-11-13: solo cuota (155 €/mes, entrada 9.550 €, cuota final 19.868 €, 49 meses, con la ayuda del Programa Auto+ prevista), sin PVP ni precio total. Sin precio."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "Autonomía: ford.es dice «hasta 373 km»; el IDAE da 362 km como máximo (12.2025). No se guarda specs.wltp_max_km para no contradecir las versiones."
+  - "Versiones: el IDAE lista además AWD (100/160/210 kW, 311-335 km), Mixta, MultiCab, Doble Cabina y Kombi de 160 kW; no se han añadido todas."
+  - "Imagen: la foto de Commons es de la E-Transit Custom (2023), no necesariamente de la versión actual."

@@ -1,0 +1,31 @@
+# Researcher — Ford E-Transit Courier. Fuentes: ford-es (T1), idae-es (T2). Consultado 2026-11-13.
+brand: ford
+brand_name: Ford
+model: E-Transit Courier
+status: {value: on_sale, note: "ford.es muestra la ficha con promoción de financiación (150 €/mes); no dice expresamente que se pueda pedir", source_id: ford-es, url: "https://www.ford.es/furgonetas-pick-up/e-transit-courier", retrieved: 2026-11-13, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  dc_max_kw: {value: 100, note: "ficha en ford.es: carga rápida CC de 100 kW, 10-80 % en unos 23 min", source_id: ford-es, url: "https://www.ford.es/furgonetas-pick-up/e-transit-courier", retrieved: 2026-11-13, tier: T1}
+versions:
+  - name: Van Trend
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 610569 (11.2025): «útil 54kWh»; idéntica a la 610568 (06.2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 293, note: "IDAE id 610569 (11.2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610569", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610569: «FWD»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Kombi Trend
+    battery_kwh: {value: 54, basis: unknown, note: "IDAE id 610567 (11.2025): «útil 54kWh»; idéntica a la 610566 (06.2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 293, note: "IDAE id 610567 (11.2025)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 610567", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    drivetrain: {value: fwd, note: "IDAE id 610567: «FWD»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "needs_review: true porque ford.es no dice expresamente que se pueda pedir, las versiones salen del IDAE (T2) y la ficha de ford.es contradice al IDAE en batería y autonomía."
+  - "Batería y autonomía: ford.es dice «batería de 43 kWh» y «hasta 325 km»; el IDAE da 54 kWh útiles y 293 km (06.2025 y 11.2025). Prevalece T1 en rango de nivel, pero la ficha no liga la cifra a una versión; se guarda el IDAE y se deja a revisión."
+  - "Precio: leída /furgonetas-pick-up/e-transit-courier con fetch-page.ts el 2026-11-13: solo cuota (150 €/mes, entrada 1.525 €, cuota final 16.667 €, 49 meses), sin PVP ni precio total. Sin precio."
+  - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
+  - "segment: la ficha de ford.es no usa el término «furgoneta» para este modelo; sin término literal de RF-11: null."
+  - "Imagen: en Commons solo hay fotos de la Transit Courier de 2.ª generación (p. ej. File:Ford Transit Courier (2nd generation) 1X7A2516.jpg) sin confirmar que sea la eléctrica; no se registra imagen."
