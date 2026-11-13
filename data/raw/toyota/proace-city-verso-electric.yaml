@@ -1,0 +1,61 @@
+# Researcher — Toyota Proace City Verso Electric. Fuentes: toyota-es (T1, listado), idae-es (T2), wikimedia-commons. Consultado 2026-11-13.
+brand: toyota
+brand_name: Toyota
+model: Proace City Verso Electric
+status: {value: on_sale, note: "toyota.es/coches lista «Proace City Verso» como «Electric/Diésel». No dice qué versiones eléctricas se venden hoy.", source_id: toyota-es, url: "https://www.toyota.es/coches", retrieved: 2026-11-13, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Proace City Verso Electric Combi GX L1 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608242 «PROACE CITY VERSO EV Combi GX L1 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 339, note: "IDAE id 608242", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608242", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace City Verso Electric Combi GX L2 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608244 «PROACE CITY VERSO EV Combi GX L2 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 333, note: "IDAE id 608244", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608244", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace City Verso Electric Combi VX L1 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608243 «PROACE CITY VERSO EV Combi VX L1 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 342, note: "IDAE id 608243", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608243", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace City Verso Electric Combi VX L2 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608245 «PROACE CITY VERSO EV Combi VX L2 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 335, note: "IDAE id 608245", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608245", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace City Verso Electric Combi VX L2 50 kWh 7 plazas
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608246 «PROACE CITY VERSO EV Combi VX L2 50 kWh 7 plazas (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 332, note: "IDAE id 608246", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608246", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace City Verso Electric Family Active L1 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608247 «PROACE CITY VERSO EV Family Active L1 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 338, note: "IDAE id 608247", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608247", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace City Verso Electric Family Active L2 50 kWh 7 plazas
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608249 «PROACE CITY VERSO EV Family Active L2 50 kWh 7 plazas (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 331, note: "IDAE id 608249", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608249", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Proace City Verso Electric Family Advance L1 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 608248 «PROACE CITY VERSO EV Family Advance L1 50 kWh (MY26)»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 335, note: "IDAE id 608248", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 608248", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images:
+  - file: data/images/toyota/proace-city-verso-electric/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Toyota_Proace_City_Verso_L2_Electric_Executive_%E2%80%93_f_20102024.jpg/1280px-Toyota_Proace_City_Verso_L2_Electric_Executive_%E2%80%93_f_20102024.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Toyota_Proace_City_Verso_L2_Electric_Executive_–_f_20102024.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-13
+    license: CC-BY-SA-3.0-DE
+    attribution: "© M 93"
+open_questions:
+  - "Versiones salidas del IDAE (filas MY26 de la gama Verso). El IDAE no dice cuáles se venden hoy; los nombres de versión salen de sus filas, no de toyota.es."
+  - "Precio: toyota.es/coches/precios no da PVP por versión; price null."
+  - "launch y segment: toyota.es/coches/proace-city-verso no trae un término de RF-11 ni fecha de venta; null."

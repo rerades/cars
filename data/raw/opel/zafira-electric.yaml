@@ -1,0 +1,46 @@
+# Researcher — Opel Zafira Electric. Fuentes: motor-es (T3, estado y segmento), idae-es (T2, versiones). Consultado 2026-11-13.
+brand: opel
+brand_name: Opel
+model: Zafira Electric
+status: {value: on_sale, note: "artículo de motor.es: «ha iniciado su andadura comercial en el mercado español» y «El configurador y el libro de pedidos han sido abiertos»; sin fecha legible, no confirma que se venda hoy", source_id: motor-es, url: "https://www.motor.es/noticias/precio-opel-zafira-electric-2024100176.html", retrieved: 2026-11-13, tier: T3}
+launch: null
+segment: {value: monovolumen, note: "«El renovado monovolumen eléctrico grande de Opel»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-opel-zafira-electric-2024100176.html", retrieved: 2026-11-13, tier: T3}
+needs_review: true
+versions:
+  - name: Zafira Electric 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 598595 «Zafira Nuevo Zafira Electric Motor 100 kW + 50 kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 220, note: "IDAE id 598595", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598595", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Zafira Electric 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 598597 «Zafira Nuevo Zafira Electric Motor 100 kW + 75 kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 371, note: "IDAE id 598597", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598597", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Zafira Electric GS 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 598593 «Zafira Nuevo Zafira Electric GS Motor 100 kW + 75 kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 346, note: "IDAE id 598593", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598593", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Zafira Electric XL 50 kWh
+    battery_kwh: {value: 50, basis: unknown, note: "IDAE id 598596 «Zafira Nuevo Zafira Electric XL Motor 100 kW + 50 kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 218, note: "IDAE id 598596", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598596", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Zafira Electric XL 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 598598 «Zafira Nuevo Zafira Electric XL Motor 100 kW + 75 kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 313, note: "IDAE id 598598", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598598", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+  - name: Zafira Electric XL GS 75 kWh
+    battery_kwh: {value: 75, basis: unknown, note: "IDAE id 598594 «Zafira Nuevo Zafira Electric XL GS Motor 100 kW + 75 kWh Batería»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    wltp_km: {value: 343, note: "IDAE id 598594", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    power_kw: {value: 100, note: "IDAE id 598594", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Estado: ninguna fuente T1 legible (www.opel.es devuelve 403 a fetch-page.ts; ofertas.opel.es/ofertas y /particulares no muestran texto con «Zafira»). Solo un artículo T3 sin fecha legible dice que se vende; hay que confirmar con T1 que se vende hoy y qué versiones."
+  - "Versiones: las del IDAE sin fecha de homologación; los nombres de versión («50 kWh», «XL», «GS») salen de las filas del IDAE y no de la web de Opel."
+  - "Precio: ninguna página T1 legible; price null."
+  - "launch: motor.es no da fecha de apertura de pedidos legible; null."
+  - "Imagen: en Commons solo constan fotos del Zafira Life (Facelift) sin confirmar que sean la versión eléctrica; no se registra ninguna."
