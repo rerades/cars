@@ -24,7 +24,7 @@ images: []
 open_questions:
   - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España."
   - "segment sin fuente: ninguna fuente registrada clasifica el modelo con un término de RF-11; queda null."
-  - "Imagen: la búsqueda en Commons no encontró ninguna foto del Master E-Tech (solo del Master diésel anterior); images: []."
+  - "Imagen: la única foto de Commons del Master E-Tech furgón (https://commons.wikimedia.org/wiki/File:Renault_Pro+,_IAA_2024,_Hanover_(P1200061).jpg) tiene la puerta lateral abierta y gente delante (causas pegado y cortado); el resto son Master Citybus/Shuttle (autobuses). No se registra ninguna. images: []."
   - "Versión «gran autonomía» (IDAE: 87 kWh, 105 kW, 466 km, L2H2 3500) no incluida: la web no la muestra con nombre ni precio en la lectura. Tampoco las L3H2 ni 3800/4000 kg."
   - "Datos del IDAE de la versión urbana: dos filas con valores idénticos (una con opción PCU06/PCV08), sin fecha de homologación."
   - "El único precio es «desde 27.332 €» con «este importe incluye promociones»: no hay PVP limpio."

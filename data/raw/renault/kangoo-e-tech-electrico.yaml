@@ -29,7 +29,7 @@ images: []
 open_questions:
   - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España."
   - "segment sin fuente: ninguna fuente registrada lo clasifica con un término de RF-11 ni con la tabla (la web solo dice «eléctrico», 5 plazas, 4,49 m); queda null."
-  - "Imagen: la foto de Commons encontrada (Kangoo III) es del furgón, no de este combi; no se registra. images: []."
+  - "Imagen: Commons «Renault Kangoo III E-Tech DSC 7209» (Kangoo III E-Tech combi, tres cuartos delantero, sin puertas abiertas). Tiene matrícula alemana legible: debe pasar por el Retocador (plate, background). Retirada en la revisión humana (2026-11-14): una foto con matrícula legible no entra sin retocar; images []. Candidata para el retoque de ADR-0025."
   - "techno L1 11AC: la página no muestra su precio en la lectura; price null."
   - "El precio de equilibre es «desde 30.003 €» con «este importe incluye promociones»: no hay PVP limpio. Hay también motorizaciones de 22 kW AC y 22 kW AC + 80 kW DC, y carrocería L2, sin precio legible."
   - "Tracción y carga CC/CA por versión no publicadas en la lectura de la web."
