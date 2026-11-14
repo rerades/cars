@@ -22,4 +22,4 @@ open_questions:
   - "needs_review: www.citroen.es devuelve 403; el estado sale solo de un listado de motor.es (T3) y las versiones, del IDAE (filas sin fecha, 245 km WLTP). Existe otra homologación comercial más reciente (ids 607526/607527, «ë-Berlingo Talla M N1», 334-335 km) que ya cita el fichero e-berlingo.yaml; no se sabe si es la de esta furgoneta, y no se ha tocado."
   - "Precio: sin fuente T1 legible; motor.es publica precios con descuento, que no valen. price null."
   - "launch y segment: ninguna fuente leída los da con un término válido."
-  - "Imagen: sin foto de la ë-Berlingo Van identificable en Wikimedia Commons (las encontradas son del turismo)."
+  - "Imagen: sin foto de la ë-Berlingo Van identificable en Wikimedia Commons (las encontradas son del turismo). 2026-11-14: la única de la furgoneta, File:E-Lieferwagen Citroën e-Berlingo (Oldenburg, 2024).jpg, se descarta (causa `pegado`, más matrícula legible y otra furgoneta delante): rotulación completa de una lechería; images []."

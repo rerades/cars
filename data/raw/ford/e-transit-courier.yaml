@@ -21,11 +21,18 @@ versions:
     power_kw: {value: 100, note: "IDAE id 610567", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
     drivetrain: {value: fwd, note: "IDAE id 610567: «FWD»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/ford/e-transit-courier/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/2024_Ford_Transit_Courier_Limited_-_Cactus_Grey_-_03-02-2024%2C_Front_Left.jpg/1280px-2024_Ford_Transit_Courier_Limited_-_Cactus_Grey_-_03-02-2024%2C_Front_Left.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2024_Ford_Transit_Courier_Limited_-_Cactus_Grey_-_03-02-2024,_Front_Left.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-14
+    license: CC-BY-SA-4.0
+    attribution: "DieselFordMondeo, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "needs_review: true porque ford.es no dice expresamente que se pueda pedir, las versiones salen del IDAE (T2) y la ficha de ford.es contradice al IDAE en batería y autonomía."
   - "Batería y autonomía: ford.es dice «batería de 43 kWh» y «hasta 325 km»; el IDAE da 54 kWh útiles y 293 km (06.2025 y 11.2025). Prevalece T1 en rango de nivel, pero la ficha no liga la cifra a una versión; se guarda el IDAE y se deja a revisión."
   - "Precio: leída /furgonetas-pick-up/e-transit-courier con fetch-page.ts el 2026-11-13: solo cuota (150 €/mes, entrada 1.525 €, cuota final 16.667 €, 49 meses), sin PVP ni precio total. Sin precio."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: la ficha de ford.es no usa el término «furgoneta» para este modelo; sin término literal de RF-11: null."
-  - "Imagen: en Commons solo hay fotos de la Transit Courier de 2.ª generación (p. ej. File:Ford Transit Courier (2nd generation) 1X7A2516.jpg) sin confirmar que sea la eléctrica; no se registra imagen."
+  - "Imagen: en Commons solo hay fotos de la Transit Courier de 2.ª generación (p. ej. File:Ford Transit Courier (2nd generation) 1X7A2516.jpg) sin confirmar que sea la eléctrica; no se registra imagen. Actualización 2026-11-14: se registra File:2024 Ford Transit Courier Limited - Cactus Grey - 03-02-2024, Front Left.jpg (Transit Courier de 2.ª generación, tres cuartos delantero, matrícula británica de exposición sin identificación legible); su carrocería es la de la E-Transit Courier, pero Commons no dice que sea la eléctrica. Otras furgonetas asoman detrás, para el Retocador."
