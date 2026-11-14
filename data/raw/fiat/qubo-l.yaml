@@ -22,17 +22,10 @@ versions:
     wltp_km: {value: 340, note: "IDAE id 611278: «Qubo L Qubo L eléctrico 100 kW (136cv) Talla M La Prima»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
     power_kw: {value: 100, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
     price: null
-images:
-  - file: data/images/fiat/qubo-l/frontal.jpg
-    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Fiat_Qubo_L_Leonberg_2026_IMG_8606.jpg/1280px-Fiat_Qubo_L_Leonberg_2026_IMG_8606.jpg"
-    page_url: "https://commons.wikimedia.org/wiki/File:Fiat_Qubo_L_Leonberg_2026_IMG_8606.jpg"
-    source_id: wikimedia-commons
-    retrieved: 2026-11-14
-    license: CC-BY-SA-4.0
-    attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
+images: []
 open_questions:
   - "price: fiat.es devuelve 403 a fetch-page.ts; sin PVP ni precio financiado en fuente T1. Los medios citan cifras distintas (36.811 €, 37.550-41.550 €), que no valen como precio."
   - "status: solo artículos T3 (motor.es) sin fecha de apertura de pedidos legible; no se confirma que se venda hoy."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "Versiones: motor.es dice que la eléctrica solo se ofrece en Talla M (4,40 m, cinco plazas) con Pop, Icon y La Prima; el IDAE lista también Talla L (340 km), no incluida. Nombres compuestos a partir de esas fuentes."
-  - "images: la única foto encontrada en Commons (File:Fiat Qubo L Leonberg 2026 IMG 8726.jpg) es del salpicadero, no del exterior; se quitó en la revisión de la #1048 y queda la silueta. Actualización 2026-11-14: se registra File:Fiat Qubo L Leonberg 2026 IMG 8606.jpg (Leonberger Autoschau 2026), tres cuartos delantero, coche entero; el cartel «gute-mobile.de» del concesionario va en el soporte de la matrícula, no es una matrícula, y el coche es negro (el criterio prefiere otro color); Commons no dice que sea la versión eléctrica. Descartada File:Fiat Qubo L Leonberg 2026 IMG 8608.jpg (vista trasera)."
+  - "images: la única foto encontrada en Commons (File:Fiat Qubo L Leonberg 2026 IMG 8726.jpg) es del salpicadero, no del exterior; se quitó en la revisión de la #1048 y queda la silueta. Actualización 2026-11-14: se registra File:Fiat Qubo L Leonberg 2026 IMG 8606.jpg (Leonberger Autoschau 2026), tres cuartos delantero, coche entero; el cartel «gute-mobile.de» del concesionario va en el soporte de la matrícula, no es una matrícula, y el coche es negro (el criterio prefiere otro color); Commons no dice que sea la versión eléctrica. Descartada File:Fiat Qubo L Leonberg 2026 IMG 8608.jpg (vista trasera). Rechazada en la revisión humana (2026-11-14): nada en la foto ni en Commons confirma que sea la eléctrica; images []."
