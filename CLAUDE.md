@@ -72,5 +72,7 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
 - Hecho también: cómo se trabaja el diseño visual (ADR-0024) y la dirección visual elegida (2026-11-07: A «Pantalla»
   con la tipografía y las versiones de B, `docs/design/direccion.md`). Falta que el Diseñador las combine
   (`direccion-visual-final`, en la cola) y que el Desarrollador lo lleve a `web/src/`.
+- Hecho también: el script de retoque de ADR-0025 (`node factory/retouch-image.ts <imagen>`, solo en macOS).
+  Falta el agente Retocador, su presupuesto y su eval (paso 2) y el piloto.
 - Pendiente: la migración de las imágenes a
   `data/images/` (en la cola, Researcher).
