@@ -23,6 +23,6 @@ versions:
       tier: T1
 images: []
 open_questions:
-  - "Imagen (2026-10-15): búsquedas en Commons «Peugeot E-408» y «Peugeot E-408 electric 2025»; solo hay fotos del 408 térmico/híbrido (T9 China, 408 II, 408 Hybrid 225), ninguna del eléctrico. Sin foto válida: images []."
+  - "Imagen (2026-10-15): búsquedas en Commons «Peugeot E-408» y «Peugeot E-408 electric 2025»; solo hay fotos del 408 térmico/híbrido (T9 China, 408 II, 408 Hybrid 225), ninguna del eléctrico. Sin foto válida: images []. Actualización 2026-11-14: se registra File:2023 Peugeot 408.jpg (categoría Peugeot 408 crossover, tres cuartos delantero, matrícula sin texto); es el 408 europeo, de carrocería igual a la del E-408, pero Commons no dice que sea la versión eléctrica. Un coche azul asoma detrás, para el Retocador. Rechazada en la revisión humana (2026-11-14): Commons no la identifica como eléctrica, igual que las descartadas el 2026-10-15; images []."
   - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27) y ninguna fuente T3 registrada leída clasifica el E-408 con un término de la lista (electrive habla de 'crossover coupé' y km77, no registrada, de segmento C): sigue null. launch: sin fuente."
   - "Precio (2026-10-31): oferta releída, sin cambios, de ofertas.peugeot.es/coches-electricos-hibridos para el E-408 Allure Plus Eléctrico 210 (157kW), precio al contado 41.760 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (157 kW) solo en el nombre de la oferta, no se guarda como dato."

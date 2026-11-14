@@ -39,9 +39,16 @@ versions:
     dc_max_kw: {value: 65, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-11-02, tier: T1}
     ac_max_kw: {value: 11, source_id: smart-es, url: "https://es.smart.com/es/models/hashtag-two/specifications/", retrieved: 2026-11-02, tier: T1}
     price: null
-images: []
+images:
+  - file: data/images/smart/hashtag-2/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Smart_2_-_01.jpg/1280px-Smart_2_-_01.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Smart_2_-_01.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-14
+    license: CC-BY-SA-4.0
+    attribution: "Y.Leclercq, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "Precio (2026-10-24, con fetch-page.ts): es.smart.com/es/customizer/, /latest-offers/, /stock-search/, /campaign/mainland/ y /models/hashtag-one/ devuelven solo el cascarón sin precios (JavaScript; sin párrafos con PVP, Precio, Oferta válida ni €). La nota de prensa media.smart.com/es-ES/273208-smart-acepta-pedidos-del-nuevo-smart-2/ (12/10/2026) dice «precio de acceso en España de 19.990 €, sujeto a las condiciones locales de cada región» y lista Pure 19.990 €, Pure+ 20.990 €, Premium 24.490 €, Couture Edition 25.690 €; añade «Los precios no incluyen los gastos de envío ni de matriculación», no dice que sea PVP con IVA ni sin ayudas, y el coche sigue en homologación; no se guarda (price: null). Una persona debe decidir si vale."
   - "launch: sin fecha de pedidos ni de entregas en la web oficial; solo reservas."
   - "segment: la web no usa un término de la lista de RF-11 para el #2; null."
-  - "Imagen (2026-10-22): la búsqueda en Commons («smart #2») solo devuelve el smart fortwo/forfour y conceptos antiguos, ninguna foto del #2; images []."
+  - "Imagen (2026-11-14): File:Smart 2 - 01.jpg (Mondial de l'Automobile de Paris 2026, categoría Smart Hashtag 2), tres cuartos delantero, coche entero y sin rotulación; hay visitantes al fondo y una matrícula de exposición sin texto, para el Retocador. Descartada File:Smart 2 001.jpg (coche camuflado con vinilo y rótulos, y una persona delante)."
