@@ -1,0 +1,2 @@
+$ W=/tmp/pr1053 && rm -rf $W && git worktree add -q $W FETCH_HEAD -b fix/pr1053-ecitan ... && cd /tmp/pr1053 && ln -s /Users/rerades/_DEV/cars/node_modules node_modules && node factory/validate-data.ts 2>&1 | tail -3; rm node_modules; git -c user.name=rerades commit -qam "fix(data): drop the unsourced eCitan withdrawal claim" && git push -q origin HEAD:agent/researcher/20261112-021505-14ffae
+Result before the symlink: "Node.js v26.5.0 ... code: 'ERR_MODULE_NOT_FOUND'"

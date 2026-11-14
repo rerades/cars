@@ -1,0 +1,33 @@
+{
+  "run_id": "8a88d23b-3474-41df-a3c0-d7ba3122788d-18",
+  "verdicts": [
+    {
+      "action": "patch",
+      "name": "researcher-blocked-source-fallback",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    },
+    {
+      "action": "patch",
+      "name": "researcher-blocked-source-fallback",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    },
+    {
+      "action": "patch",
+      "name": "fix-agent-pr-in-worktree",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    },
+    {
+      "action": "patch",
+      "name": "factory-queue-refill",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "run_id": "84f55f81-1325-4606-9a1d-73d780c9e055-1",
+  "verdicts": [
+    {
+      "action": "create",
+      "name": "close-factory-alert-issues",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    }
+  ]
+}

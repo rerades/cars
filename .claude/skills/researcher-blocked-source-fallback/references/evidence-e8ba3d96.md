@@ -1,0 +1,1 @@
+price: fiat.es devuelve 403 a fetch-page.ts; sin PVP ni precio financiado en fuente T1. Los medios citan cifras distintas (36.811 €, 37.550-41.550 €), que no valen como precio.

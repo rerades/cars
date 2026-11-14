@@ -4026,3 +4026,11 @@
     y ADR-0025 (sin matrícula legible salvo retoque, el modelo correcto y por fuera), con node
     factory/fetch-image.ts. Si no hay ninguna válida, deja images: [] y dilo en open_questions. No
     toques nada más de esos ficheros que images y la pregunta abierta de la imagen. Bitácora."
+# Épica #1032: Cifra (#1034) ya está en main; sigue la tarjeta, que se lleva el CA-15.
+- id: historia-1035-tarjeta
+  agent: developer
+  task: "Historia #1035 (épica #1032, PRD-001): la tarjeta de modelo como pantalla a todo el ancho,
+    con foto tratada o silueta. Lee la issue entera (gh issue view 1035 --comments) y haz exactamente
+    lo que dice, con la base visual (#1033) y el componente Cifra (#1034, web/src/components/Cifra.astro)
+    que ya están en main. Incluye el CA-15, que viene de la #1034: prueba sobre /coches. La PR dice
+    «Closes #1035» y enumera los CA cubiertos."

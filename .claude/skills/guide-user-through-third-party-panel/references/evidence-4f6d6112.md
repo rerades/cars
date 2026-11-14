@@ -1,0 +1,1 @@
+"vale hazlo tu todo, pasame los valores reales del DNS (no los supongas) para yo introducirlos en el registrador" ... "veo que tengo render en suthorized github apps pero no en installed github apps. Creo que el problema viene porque tenog una cuneta de organizaci´çon de github que es area73 pero el usuario que tiene instalad la app cars es rerades"
