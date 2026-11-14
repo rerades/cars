@@ -1,1 +1,0 @@
-status: solo un artículo T3 de 2026-02-17; no se confirma que se venda hoy.

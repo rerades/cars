@@ -1,1 +1,0 @@
-git grep -n -iE "cesó|cese|electrive|matr" origin/agent/researcher/20261112-021505-14ffae -- data/raw/mercedes-benz/eqv.yaml ... → esprinter.yaml:32 "eCitan no se ha escrito en esta ejecución: la ficha de motor.es ... lo lista a la venta ... y el cese de producción que se mencionaba no se ha leído; queda para una tarea aparte."

@@ -1,1 +1,0 @@
-for p in 1065 1075 1081; do gh pr checks $p --watch --interval 15 >/dev/null 2>&1; echo "$p: $(gh pr checks $p 2>&1 | grep -E 'Passed|Failed')" ; done → "1065: \n1075: \n1081:" ; then statusCheckRollup → "1065\ntest:SUCCESS web:SUCCESS changes:SUCCESS a11y:SUCCESS"

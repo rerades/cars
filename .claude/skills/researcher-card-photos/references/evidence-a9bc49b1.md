@@ -1,1 +1,0 @@
-La «frontal» del Qubo L es una foto del salpicadero, que no sirve para la tarjeta. ... images: la única foto encontrada en Commons (File:Fiat Qubo L Leonberg 2026 IMG 8726.jpg) es del salpicadero, no del exterior; se quitó en la revisión de la #1048 y queda la silueta. Falta una foto exterior con licencia.
