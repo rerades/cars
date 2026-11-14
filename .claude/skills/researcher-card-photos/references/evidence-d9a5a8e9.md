@@ -1,0 +1,1 @@
+Quitada la foto con matrícula legible sin retoque (ADR-0025), según el hallazgo del Revisor; el modelo queda con `images: []` y la pregunta abierta lo anota. Aprobado por el usuario.

@@ -1,0 +1,2 @@
+  - "eCitan y EQT no se han escrito: Motor.es (https://www.motor.es/noticias/mercedes-clase-t-citan-cese-produccion-[REDACTED:pii:credit_card].html) y electrive.com informan de que Mercedes-Benz Vans los retira y cesa su producción a mediados de 2026, y la ficha del EQT en motor.es dice «no se encuentra a la venta en España»."
+- **2026-11-12 02:17** · 📝 Nota — Researcher: añadidos Mercedes-Benz EQV, eVito y eSprinter ... eCitan y EQT descartados: Mercedes cesó su producción a mediados de 2026. (ADR-0001, PRD-001)

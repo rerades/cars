@@ -1,0 +1,26 @@
+{
+  "run_id": "84f55f81-1325-4606-9a1d-73d780c9e055-27",
+  "verdicts": [
+    {
+      "action": "patch",
+      "name": "factory-queue-refill",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    },
+    {
+      "action": "create",
+      "name": "fix-agent-pr-in-worktree",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    },
+    {
+      "action": "create",
+      "name": "researcher-status-claims",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    }
+  ]
+}

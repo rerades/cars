@@ -1,0 +1,1 @@
+"Imagen: retirada en la revisión (2026-11-13); la foto de Commons (DSC06151) lleva matrícula austriaca legible sin retoque (ADR-0025). Falta una foto sin matrícula o retocada."
