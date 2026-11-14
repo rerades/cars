@@ -30,6 +30,6 @@ versions:
 images: []
 open_questions:
   - "Web de Opel (www.opel.es) devuelve 403 a la lectura automática: versiones, launch y segment sin fuente T1 legible. Versiones salidas del IDAE; el IDAE no dice cuáles se venden hoy."
-  - "Imagen: no se encontró en Wikimedia Commons una foto del Opel Combo Electric (las búsquedas devuelven Citroën ë-Berlingo, Peugeot e-Rifter, Fiat E-Doblò)."
+  - "Imagen (2026-11-14): en Commons hay fotos del Opel Combo-e (CC BY-SA 4.0, Alexander Migl), pero ninguna válida: File:Opel_Combo-e_XL_Automesse_Ludwigsburg_2023_1X7A0054.jpg es trasera y con rotulación de concesionario («Voll elektrisch», «weller Automobile»), causa `angulo` y `pegado`; File:Opel_Combo-e_Auto_Zuerich_2021_IMG_0054.jpg es un Combo-e Life con el coche tocando el borde izquierdo y mal expuesto, causa `cortado` y `calidad`. Sin imagen."
   - "Precio: sin PVP ni precio financiado de la versión eléctrica en página T1 legible."
   - "launch y segment: sin fuente leída. Tracción, carga DC/AC: no publicados en las fuentes accesibles."

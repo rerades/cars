@@ -25,6 +25,6 @@ versions:
 images: []
 open_questions:
   - "Web de Opel (www.opel.es) devuelve 403 a la lectura automática: versiones, launch y segment sin fuente T1 legible. Versiones salidas del IDAE; el IDAE no dice cuáles se venden hoy."
-  - "Imagen: sin foto en Wikimedia Commons localizada para el Opel Combo Cargo Electric."
+  - "Imagen (2026-11-14): sin foto válida en Commons para el Combo Cargo Electric; las del Combo-e disponibles (File:Opel_Combo-e_XL_Automesse_Ludwigsburg_2023_1X7A0054.jpg, trasera con rotulación de concesionario) no cumplen `angulo` ni `pegado`. Sin imagen."
   - "Precio: sin PVP ni precio financiado en página T1 legible (ofertas.opel.es muestra «IVA no incl.» sin versión eléctrica)."
   - "launch y segment: sin fuente leída. Es una versión comercial; no se traduce a segmento sin fuente."
