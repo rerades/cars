@@ -74,12 +74,23 @@ agents:
 
   developer:
     max_runs_per_day: 8   # 4 -> 8 on 2026-11-06: technical work first; the queue stops at the first capped agent
-    max_usd_per_period: 50   # 6 -> 50 on 2026-10-08: PRD-002 stories and what follows; earlier: 3 -> 6 on 2026-09-29: stories #34, #35 and #38 queued at up to 1.50 each
+    max_usd_per_period: 43   # 50 -> 43 on 2026-11-14: 7 to the new retoucher (ADR-0025), 0.82 spent this month; 6 -> 50 on 2026-10-08: PRD-002 stories and what follows; earlier: 3 -> 6 on 2026-09-29: stories #34, #35 and #38 queued at up to 1.50 each
     max_usd_per_run: 1.50   # la #33 levanta el proyecto entero; 1.00 se queda corto
     max_turns_per_run: 60   # 40 -> 60 on 2026-10-22: paired stories in one task (#321+#322, #373+#374, #595+#596) need more turns
     api_key_env: DEVELOPER_API_KEY
     write_paths: [web/, docs/bitacora/]   # la web entera en web/; la factoría es de la raíz y no se toca
     allowed_tools: [Read, Glob, Grep, Write, Edit, "Bash(pnpm:*)", "Bash(node:*)", "Bash(git:*)", "Bash(gh issue view:*)"]   # developer.md reads its story with gh issue view
+    network: false
+
+  retoucher:
+    max_runs_per_day: 2
+    max_usd_per_period: 7   # ADR-0025, point 7: taken from developer on 2026-11-14; to be set from the pilot's real cost
+    max_usd_per_run: 1.50   # a pilot of five photos: one script run and one sheet read per photo
+    max_turns_per_run: 40
+    api_key_env: RETOUCHER_API_KEY
+    write_paths: [data/images/, data/raw/, ops/retouch/, docs/bitacora/]
+    # No network (ADR-0025, point 1). The script writes the pixels; git checkout and rm undo a rejected retouch.
+    allowed_tools: [Read, Glob, Grep, Edit, "Bash(node factory/retouch-image.ts:*)", "Bash(git checkout -- data/images/:*)", "Bash(rm data/images/:*)", "Bash(node factory/bitacora.ts:*)"]
     network: false
 
   devops:

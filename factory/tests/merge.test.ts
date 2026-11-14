@@ -32,6 +32,7 @@ test("cualquier otra cosa espera a una persona", () => {
   const cases: [Partial<AgentPr>, boolean, Set<string>?][] = [
     [{}, true],
     [{ headRefName: "docs/x" }, false],
+    [{ headRefName: "agent/retoucher/20261115-013007-abcdef" }, false], // ADR-0025, point 6
     [{ labels: [] }, false],
     [{ labels: [{ name: "review:ok" }, { name: "review:needs-human" }] }, false],
     [{ labels: [{ name: "review:ok" }, { name: "merger:needs-human" }] }, false],

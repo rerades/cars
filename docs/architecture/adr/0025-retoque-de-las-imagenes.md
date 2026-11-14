@@ -4,6 +4,8 @@
   las modificaciones técnicas, se admite el retoque de esta ADR), y amplía la forma de `images` de
   [`data-model.md`](../data-model.md).
   Paso 1 del punto 8 hecho el 2026-11-14: `factory/retouch-image.ts`, `factory/retouch-vision.swift` y su prueba.
+  Paso 2 hecho el mismo día: `.claude/agents/retoucher.md`, `retoucher` en `budgets.yaml`, el eval `retouchOnly`
+  y `edits` en el eval de `data/raw/`, y la regla de `merge.ts` que deja sus PR a una persona.
 - **Fecha:** 2026-11-07
 
 ## Contexto

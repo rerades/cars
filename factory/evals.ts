@@ -138,7 +138,9 @@ const MODEL = ["brand", "brand_name", "model", "status", "launch", "segment", "n
 const MODEL_REQUIRED = ["brand", "brand_name", "model", "status", "needs_review", "versions", "images"];
 const VERSION = ["name", "battery_kwh", "wltp_km", "power_kw", "drivetrain", "dc_max_kw", "ac_max_kw", "price"];
 const SPECS = ["wltp_max_km", "power_max_kw", "dc_max_kw", "ac_max_kw", "battery_kwh_options", "drivetrains"];
-const IMAGE = ["file", "source_url", "page_url", "source_id", "retrieved", "license", "attribution"];
+const IMAGE = ["file", "source_url", "page_url", "source_id", "retrieved", "license", "attribution", "edits"];
+/** ADR-0025, point 4: what the retouch did to an image. */
+const EDITS = ["background", "plate"];
 /** ADR-0010, point 14: the pre-ADR-0012 key, accepted only until the migration; it fails here, in the factory eval. */
 const OLD_IMAGE_KEY = "url";
 /** Marks the old-shape failure, which validateData turns into a warning (ADR-0010, point 14.1). */
@@ -266,6 +268,13 @@ const rawShape: Check = (ctx) => {
           if (problem) fail(`${at}.file: ${problem}`);
         }
       }
+      if ("edits" in img) {
+        const e = img.edits;
+        if (!Array.isArray(e) || !e.length || new Set(e).size !== e.length || e.some((x) => !EDITS.includes(x))) {
+          fail(`${at}.edits: must be a non-empty list, without repeats, of ${EDITS.join(" and ")}`);
+        }
+        if (img.file && !String(img.file).endsWith(".png")) fail(`${at}.file: a retouched image (edits) is a PNG`);
+      }
       if (img.source_id && !ids.has(img.source_id)) fail(`${at}: source_id ${img.source_id} is not in the registry`);
       if (img.retrieved && !isDay(img.retrieved, ctx.today)) fail(`${at}.retrieved: must be a past date`);
     });
@@ -346,8 +355,30 @@ export function offerEnd(terms: unknown): string | undefined {
   return m ? `${m[3]}-${m[2].padStart(2, "0")}-${m[1].padStart(2, "0")}` : undefined;
 }
 
+/**
+ * ADR-0025, point 7: in data/raw/ the Retoucher changes only the file and edits of an image, and
+ * open_questions. Compared with the YAML at HEAD, the base the run started from.
+ */
+const retouchOnly: Check = (ctx) =>
+  ctx.files.filter((f) => f.startsWith("data/raw/") && /\.ya?ml$/.test(f)).flatMap((file) => {
+    const now = readYaml(ctx, file);
+    if (now.error) return [now.error];
+    let before: any;
+    try {
+      before = parse(execFileSync("git", ["show", `HEAD:${file}`], { cwd: ctx.dir, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }));
+    } catch {
+      return [`${file}: the Retoucher does not create data/raw/ files`];
+    }
+    const strip = (d: any) => JSON.stringify({
+      ...d, open_questions: undefined,
+      images: Array.isArray(d?.images) ? d.images.map((i: any) => ({ ...i, file: undefined, edits: undefined })) : d?.images,
+    });
+    return strip(before) === strip(now.data) ? [] : [`${file}: the Retoucher may change only images[].file, images[].edits and open_questions`];
+  });
+
 const CHECKS: Record<string, Check[]> = {
   researcher: [registry, rawData, rawShape],
+  retoucher: [rawData, retouchOnly],
 };
 
 export function runEvals(agent: string, dir: string, files: string[], paths: string[], today: string): EvalResult {

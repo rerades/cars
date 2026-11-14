@@ -10,6 +10,7 @@
 | DevOps (`devops`) | Mantener los workflows de GitHub Actions: qué se ejecuta, qué bloquea | `.github/workflows/` | **activo** |
 | Diseñador UX/UI (`designer`) | Especificar y prototipar pantallas y componentes: estructura, estados, tokens, accesibilidad y textos (ADR-0024) | `docs/design/`, `web/design-proto/` | **activo** |
 | Revisor / QA (`reviewer`) | Verificar la DoD y los CA | comentarios en PR | **activo** |
+| Retocador (`retoucher`) | Juzgar las fotos de los modelos y retocar las que valen con `factory/retouch-image.ts` (ADR-0025); sus PR no se fusionan solas | `data/images/`, `data/raw/` (solo `file`, `edits` y `open_questions`), `ops/retouch/` | **piloto pendiente** |
 
 Además de su columna, **todos** pueden escribir en `docs/bitacora/`: la regla de CLAUDE.md de
 registrar lo hecho en el mismo commit también les toca a ellos. No escriben las entradas a mano, las
