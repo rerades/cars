@@ -18,7 +18,7 @@ open_questions:
   - "needs_review: true: la web no dice qué versiones eléctricas se pueden pedir hoy; la única oferta de la ficha es de un Caravelle eHybrid."
   - "WLTP: la ficha dice «hasta 344 km» y el IDAE da 345 km (id 612043, batalla corta) a 341, 338 y 335 km en las otras filas; no coinciden, así que no se guarda wltp_km por versión y la cifra de la ficha va en specs."
   - "Versiones: se agrupan las cuatro filas del IDAE (batalla corta/larga, normal y Premium) en una porque comparten batería y potencia; la web no las desglosa."
-  - "Imagen: sin foto de Commons que consten como e-Caravelle (la del IAA 2024 se titula solo «Caravelle»); silueta."
+  - "Imagen: las fotos de Commons del e-Caravelle (IAA 2024, P1200118 y P1200126) tienen puertas abiertas o son traseras (causas pegado y angulo); no se registra ninguna. images: []."
   - "Precio: ninguno para el eléctrico en la web."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: la ficha no lo clasifica con un término de la lista de RF-11."

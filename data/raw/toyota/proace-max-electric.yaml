@@ -27,9 +27,16 @@ versions:
     wltp_km: {value: 375, note: "IDAE id 613516", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
     power_kw: {value: 200, note: "IDAE id 613516", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/toyota/proace-max-electric/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/2024_Toyota_Proace_Max_Electric_-_front.jpg/1280px-2024_Toyota_Proace_Max_Electric_-_front.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:2024_Toyota_Proace_Max_Electric_-_front.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-14
+    license: CC0
+    attribution: null
 open_questions:
   - "Versiones salidas del IDAE (filas MY26). El IDAE no dice cuáles se venden hoy."
   - "Precio: toyota.es/coches/precios no da PVP por versión; price null."
   - "launch y segment: sin fuente leída que los dé con un término de RF-11."
-  - "Imagen: no se ha localizado en Wikimedia Commons una foto del Toyota Proace Max Electric."
+  - "Imagen: Commons «2024 Toyota Proace Max Electric - front» (Poznań Motor Show 2024, tres cuartos delantero, sin matrícula visible). Hay una persona al fondo junto al retrovisor y rotulación de feria en el lateral del furgón: el Retocador decide si vale."

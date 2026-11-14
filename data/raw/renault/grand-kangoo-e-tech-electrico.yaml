@@ -23,6 +23,6 @@ images: []
 open_questions:
   - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España."
   - "segment sin fuente: la web da 5 o 7 plazas y 4,91 m pero no lo clasifica con un término de RF-11; queda null."
-  - "Imagen: no se buscó foto en Commons en esta ejecución; images: []."
+  - "Imagen: las fotos de Commons del Grand Kangoo III E-Tech (IAA 2023, p. ej. https://commons.wikimedia.org/wiki/File:Renault_Grand_Kangoo_III_E-Tech_IAA_2023_1X7A0714.jpg) son traseras y con bicicletas en el techo (causas angulo y pegado); no se registra ninguna. images: []."
   - "Potencia y carga no guardadas por ambigüedad: la página muestra «90kW (121 CV)» y «si/80 kW DC» para «Grand Kangoo evolution 22AC + 80DC» (motorización «E-Tech 45 22 kW AC 80 DC») mientras la versión seleccionada es equilibre, y dice «cargador AC: no». Autonomía WLTP y batería no aparecen; el IDAE no trae filas del Grand Kangoo."
   - "techno: la lista dice «2 versiones disponibles» (equilibre y techno) pero solo muestra precio de equilibre («desde 32.764 €», «este importe incluye promociones»: no hay PVP limpio)."

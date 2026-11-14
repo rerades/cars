@@ -25,11 +25,18 @@ versions:
     wltp_km: {value: 314, note: "IDAE, misma fila", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
     power_kw: {value: 90, note: "IDAE, misma fila", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
     price: null
-images: []
+images:
+  - file: data/images/renault/kangoo-e-tech-electrico/frontal.jpg
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Renault_Kangoo_III_E-Tech_DSC_7209.jpg/1280px-Renault_Kangoo_III_E-Tech_DSC_7209.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Renault_Kangoo_III_E-Tech_DSC_7209.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-14
+    license: CC-BY-SA-4.0
+    attribution: "Alexander Migl"
 open_questions:
   - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España."
   - "segment sin fuente: ninguna fuente registrada lo clasifica con un término de RF-11 ni con la tabla (la web solo dice «eléctrico», 5 plazas, 4,49 m); queda null."
-  - "Imagen: la foto de Commons encontrada (Kangoo III) es del furgón, no de este combi; no se registra. images: []."
+  - "Imagen: Commons «Renault Kangoo III E-Tech DSC 7209» (Kangoo III E-Tech combi, tres cuartos delantero, sin puertas abiertas). Tiene matrícula alemana legible: debe pasar por el Retocador (plate, background)."
   - "techno L1 11AC: la página no muestra su precio en la lectura; price null."
   - "El precio de equilibre es «desde 30.003 €» con «este importe incluye promociones»: no hay PVP limpio. Hay también motorizaciones de 22 kW AC y 22 kW AC + 80 kW DC, y carrocería L2, sin precio legible."
   - "Tracción y carga CC/CA por versión no publicadas en la lectura de la web."
