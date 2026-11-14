@@ -23,4 +23,4 @@ open_questions:
   - "segment: la página llama al modelo «Combi», no con un término de RF-11 ni de la tabla; null."
   - "launch: ninguna fuente leída da la fecha de inicio de venta en España."
   - "wltp_km por versión: el IDAE da 256–280 km (sin fecha), por debajo del «hasta 285 km» de la web; solo se guarda la cifra de la web en specs."
-  - "Imagen: las fotos de Commons de Townstar EV no indican si son Combi o Furgón; no se registra ninguna."
+  - "Imagen (2026-11-14): Commons solo tiene Townstar EV en la categoría «Nissan Townstar EV», sin distinguir Combi. Descartadas por modelo (son Furgón, sin ventanillas laterales traseras): https://commons.wikimedia.org/wiki/File:Nissan_Townstar_EV_1X7A7200.jpg (además trasera, matrícula legible) y https://commons.wikimedia.org/wiki/File:Nissan_Townstar_EV_Automesse_Ludwigsburg_2023_1X7A0060.jpg (además pegatina de precio en el parabrisas). Sin foto válida: images []."
