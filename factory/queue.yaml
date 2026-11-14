@@ -4034,3 +4034,11 @@
     lo que dice, con la base visual (#1033) y el componente Cifra (#1034, web/src/components/Cifra.astro)
     que ya están en main. Incluye el CA-15, que viene de la #1034: prueba sobre /coches. La PR dice
     «Closes #1035» y enumera los CA cubiertos."
+# ADR-0025, paso 3: piloto del Retocador con los cinco modelos de la prueba del 2026-11-06.
+- id: retoque-piloto
+  agent: retoucher
+  task: "Piloto de ADR-0025 (paso 3). Juzga y retoca la foto de estos cinco modelos, siguiendo
+    .claude/agents/retoucher.md y docs/design/fotos-modelos.md: alfa-romeo/junior-elettrica,
+    mobilize/duo, abarth/500e, ford/e-tourneo-custom y renault/r4-e-tech-electrico (la imagen que cita
+    images de cada YAML de data/raw/). En el resumen, la tabla de cada foto y si el script tapó bien
+    la matrícula donde la había. Bitácora."
