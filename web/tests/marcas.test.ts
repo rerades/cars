@@ -117,7 +117,7 @@ describe("/marcas/{marca} built pages", () => {
   });
 
   test("order: Novedad, the announced model with a launch date before one without", () => {
-    const names = cards(page("acme")).map((li) => /<h3[\s\S]*?>([^<]+)<\/a>/.exec(li)![1].trim());
+    const names = cards(page("acme")).map((li) => /data-name="([^"]+)"/.exec(li)![1]);
     assert.deepEqual(names, ["Soon", "Volta"]);
   });
 });

@@ -130,8 +130,8 @@ describe("/coches built page: order", () => {
   });
 
   test("CA-9: a model without price keeps 'Precio por confirmar' on its card", () => {
-    const zzz = [...html.matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]).find((s) => s.includes(">Zzz</a>"));
-    assert.match(zzz ?? "", /Precio por confirmar/);
+    const zzz = [...html.matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]).find((s) => s.includes(`data-name="Zzz"`));
+    assert.match((zzz ?? "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " "), /Precio desde por confirmar/);
     assert.match(zzz ?? "", /data-price(?=[\s>])/, "empty data-price: the sort puts it last");
     assert.doesNotMatch(zzz ?? "", /data-price="/);
   });

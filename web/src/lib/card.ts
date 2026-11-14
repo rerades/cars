@@ -21,6 +21,9 @@ export interface CardView {
   dealLabel: string | null;
   rangeLabel: string;
   hasRange: boolean;
+  /** The figures of the card as a screen (Cifra): "31.223 €", "557 km"; null is «por confirmar». */
+  priceText: string | null;
+  rangeText: string | null;
   segmentLabel: string;
   hasSegment: boolean;
   labels: { price: string; range: string; segment: string };
@@ -71,6 +74,8 @@ export function cardView(m: ModelRecord): CardView {
       ? t("tarjeta.precio", { precio: formatEur(price.value) })
       : t("tarjeta.precioPendiente"),
     dealLabel: price?.price_kind === "financed" ? t("tarjeta.oferta") : null,
+    priceText: price ? formatEur(price.value) : null,
+    rangeText: m.max_range_km ? t("ficha.unidad.km", { n: formatNumber(m.max_range_km.value) }) : null,
     hasRange: m.max_range_km !== null,
     rangeLabel: m.max_range_km
       ? t("tarjeta.autonomia", { km: formatNumber(m.max_range_km.value) })
