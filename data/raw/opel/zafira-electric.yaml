@@ -43,4 +43,4 @@ open_questions:
   - "Versiones: las del IDAE sin fecha de homologación; los nombres de versión («50 kWh», «XL», «GS») salen de las filas del IDAE y no de la web de Opel."
   - "Precio: ninguna página T1 legible; price null."
   - "launch: motor.es no da fecha de apertura de pedidos legible; null."
-  - "Imagen: en Commons solo constan fotos del Zafira Life (Facelift) sin confirmar que sean la versión eléctrica; no se registra ninguna."
+  - "Imagen (2026-11-14): en Commons la búsqueda de «Zafira Electric» y «Zafira-e» no devuelve un Zafira eléctrico identificado; solo fotos del Zafira Life (Facelift) sin confirmar que sean la versión eléctrica (causa `modelo`). Sin imagen."
