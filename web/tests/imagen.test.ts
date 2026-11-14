@@ -41,7 +41,7 @@ describe("model card image or silhouette (built HTML)", () => {
   const card = (name: string) => {
     const li = [...html.slice(html.indexOf('id="resultados"')).matchAll(/<li\b[\s\S]*?<\/li>/g)]
       .map((m) => m[0])
-      .find((s) => s.includes(`>${name}</a>`));
+      .find((s) => s.includes(`data-name="${name}"`));
     assert.ok(li, `no card for ${name}`);
     return li;
   };
@@ -87,14 +87,21 @@ describe("model card image or silhouette (built HTML)", () => {
     for (const c of cards) assert.match(c, /<img\b|<svg\b/);
     assert.match(card("WithImage"), /<img\b/);
     assert.doesNotMatch(card("WithImage"), /<svg\b/);
+    // tarjeta-modelo.md, "la tarjeta es una pantalla": a photo makes a dark band, a silhouette a light one.
+    assert.match(/<li\b[^>]*>/.exec(card("WithImage"))![0], /\bband-dark\b/);
+    for (const c of cards.filter((c) => !/<img\b/.test(c))) assert.match(/<li\b[^>]*>/.exec(c)![0], /\bband-light\b/);
+    // LCP: only the first screen loads its photo eagerly.
+    const imgs = cards.flatMap((c) => c.match(/<img\b[^>]*>/g) ?? []);
+    assert.ok(imgs.slice(1).every((i) => /loading="lazy"/.test(i)), "every photo after the first is lazy");
   });
 
   test("RF-8: the image is a local WebP with width and height, empty alt, attribution below linked to page_url", () => {
     const c = card("WithImage");
     const img = /<img\b[^>]*>/.exec(c)![0];
     assert.match(img, /src="\/_astro\/[^"]+\.webp"/);
-    assert.match(img, /width="640"/);
-    assert.match(img, /height="360"/);
+    // Intrinsic size from the file (no layout shift); object-fit fills the screen's photo slot.
+    assert.match(img, /width="\d+"/);
+    assert.match(img, /height="\d+"/);
     assert.match(img, /\salt(="")?[\s>]/); // `alt` and `alt=""` are the same empty text
     assert.ok(c.indexOf("<img") < c.indexOf("Foto: A. Author"), "attribution goes below the image");
     assert.match(c, /<a href="https:\/\/commons\.wikimedia\.org\/wiki\/File:Acme_Volta\.png"[^>]*>Foto: A\. Author, CC BY-SA 4\.0<\/a>/);

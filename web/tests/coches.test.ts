@@ -113,7 +113,7 @@ describe("/coches built page", () => {
   let html: string;
   /** The `<li>` of the card whose model is `name`. */
   const card = (name: string) => {
-    const li = [...resultsOf(html).matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]).find((s) => s.includes(`>${name}</a>`));
+    const li = [...resultsOf(html).matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]).find((s) => s.includes(`data-name="${name}"`));
     assert.ok(li, `no card for ${name}`);
     return li;
   };
@@ -146,18 +146,20 @@ describe("/coches built page", () => {
     const t = text(card("Volta"));
     assert.match(t, /Acme/);
     assert.match(t, /Volta/);
-    assert.match(t, /Desde 39\.990\s€/);
-    assert.match(t, /Hasta 520 km WLTP/);
+    // Figures (Cifra): the label, then the value (dt before dd).
+    assert.match(t, /Precio desde 39\.990\s€/);
+    assert.match(t, /Autonomía WLTP máxima 520\skm/);
     assert.match(t, /SUV compacto/);
     // No YAML has an image yet (ADR-0010): the silhouette fills the slot (imagen.test.ts has the image case).
     assert.doesNotMatch(html, /<img\b|<picture\b|<video\b|background-image/i);
     assert.match(card("Volta"), /<svg\b[^>]*data-silhouette="suv_compacto"/);
   });
 
-  test("CA-1: a card with missing data still renders with 'por confirmar'", () => {
+  test("CA-1, PRD-001 CA-15: a card with missing data still renders with 'por confirmar'", () => {
     const t = text(card("Soon"));
-    assert.match(t, /Precio por confirmar/);
-    assert.match(t, /Autonomía por confirmar/);
+    // «Por confirmar» goes where the number goes, under the figure's label (tarjeta-modelo.md, Cifra).
+    assert.match(t, /Precio desde por confirmar/);
+    assert.match(t, /Autonomía WLTP máxima por confirmar/);
     assert.match(t, /Segmento por confirmar/);
   });
 
@@ -168,8 +170,7 @@ describe("/coches built page", () => {
   });
 
   test("CA-11 (first part): a financed price carries the 'Precio con oferta' label", () => {
-    assert.match(text(card("Deal")), /Desde 24\.990\s€/);
-    assert.match(text(card("Deal")), /Precio con oferta/);
+    assert.match(text(card("Deal")), /Precio desde · Precio con oferta 24\.990\s€/);
     // The cheapest Volta version is a PVP, so no label; and no label on a missing price.
     assert.doesNotMatch(text(card("Volta")), /Precio con oferta/);
     assert.doesNotMatch(text(card("Soon")), /Precio con oferta/);

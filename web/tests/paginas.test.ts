@@ -91,7 +91,7 @@ const intro = (html: string) => text(/<p[^>]*data-intro[^>]*>([\s\S]*?)<\/p>/.ex
 const docTitle = (html: string) => /<title>([^<]*)<\/title>/.exec(html)![1];
 const resultsOf = (html: string) => html.slice(html.indexOf('id="resultados"'));
 const cardNames = (html: string) =>
-  [...resultsOf(html).matchAll(/<h3[\s\S]*?>([^<]+)<\/a>/g)].map((m) => m[1].trim()).sort();
+  [...resultsOf(html).matchAll(/data-name="([^"]+)"/g)].map((m) => m[1]).sort();
 
 function build(root: string, models: Record<string, Spec>): string {
   const data = join(root, "data");

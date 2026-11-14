@@ -59,7 +59,7 @@ describe("built pages", () => {
   const page = (p: string) => readFileSync(join(out(), p, "index.html"), "utf8");
   const cards = (html: string) => [...html.slice(html.indexOf('id="resultados"')).matchAll(/<li\b[\s\S]*?<\/li>/g)].map((m) => m[0]);
   const cardOf = (html: string, name: string) => {
-    const li = cards(html).find((s) => s.includes(`>${name}</a>`));
+    const li = cards(html).find((s) => s.includes(`data-name="${name}"`));
     assert.ok(li, `no card for ${name}`);
     return li;
   };
@@ -89,7 +89,7 @@ describe("built pages", () => {
     const links = compareLinks(volta);
     assert.equal(links.length, 1);
     assert.match(links[0], /href="\/comparar\/\?v=acme\/Volta"/);
-    assert.match(links[0], /^<a[^>]*>\s*Comparar\s*<span class="sr-only"> Acme Volta con otros coches<\/span>\s*<\/a>$/);
+    assert.match(links[0], /^<a[^>]*>\s*Comparar\s*<span class="sr-only"[^>]*> Acme Volta con otros coches<\/span>\s*<\/a>$/);
     // Same link target as before, first in DOM order, still stretched over the card.
     const all = [...volta.matchAll(/<a\b[^>]*href="([^"]*)"/g)].map((m) => m[1]);
     assert.deepEqual(all, ["/marcas/acme/Volta/", "/comparar/?v=acme/Volta"]);
