@@ -1,1 +1,0 @@
-gh pr comment 1048 --body "Human review: the Qubo L photo showed the dashboard, not the exterior, so it is removed (silhouette until an exterior photo is found; noted in open_questions). Approved to merge." ... gh pr checks 1048 --watch --interval 15 2>&1 | tail -4

@@ -1,1 +1,0 @@
-{"action": "create", "reason": "In session c49d4723 every agent PR conflicted as soon as another was merged because all appended to the same monthly logbook file and the shared source registry. The structural fix (one file per entry/source, #163/#164) plus union-merge for pre-existing branches is the reusable technique.", "evidence": "references/evidence-4c122430.md"}

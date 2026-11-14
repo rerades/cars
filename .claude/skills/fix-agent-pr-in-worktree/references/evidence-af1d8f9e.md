@@ -1,1 +1,0 @@
-Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'yaml' imported from /private/tmp/fix1065/factory/orchestrator.ts — then: ln -s /Users/rerades/_DEV/cars/node_modules node_modules && node factory/bitacora.ts add --tipo nota ... ; rm node_modules; git add -A && git commit -qm "fix(data): drop the photo with a readable licence plate"

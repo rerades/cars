@@ -1,1 +1,0 @@
-La ejecución cortada del Planificador sí creó la épica #1032 y las historias #1033 a #1045: epica-direccion-visual-2 pasa a completarla (falta, por ejemplo, la historia 14, y la lista de la épica) en lugar de repetirla.

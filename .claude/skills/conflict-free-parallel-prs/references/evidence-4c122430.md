@@ -1,1 +1,0 @@
-"Vale estoy observando que todas las PR se quedan bloqueadas porque en cunato mergeo una las otras se quedan con conflictos , por el ficheor de bitácora y quiero solucionar esto de fomra eficaz para que no pase , es decir deberían de pode hacer rebase las ramas y no entrar en conflicto"
