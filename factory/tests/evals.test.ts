@@ -160,6 +160,11 @@ describe("evals del researcher", () => {
     assert.match(images(image(""), { [FILE]: "<html>" }).join(), /not a JPEG or PNG/);
     assert.match(images(image("").replace(FILE, "data/images/acme/otro/frontal.png")).join(), /must be data\/images\/acme\/volta\//);
     assert.match(images(image("").replace(", attribution: null", "")).join(), /attribution: missing/);
+    // ADR-0025, point 4
+    assert.deepEqual(images(image(", edits: [background, plate]")), []);
+    for (const bad of ["[]", "[background, background]", "[blur]"]) assert.match(images(image(`, edits: ${bad}`)).join(), /edits: must be/);
+    const jpg = FILE.replace(".png", ".jpg");
+    assert.match(images(image(", edits: [background]").replace(FILE, jpg), { [jpg]: png(1280) }).join(), /retouched image \(edits\) is a PNG/);
   });
   test("escribir fuera de write_paths", () => {
     assert.deepEqual(evalFiles({ "src/x.ts": "" }).failed, ['write_paths: src/x.ts is outside ["data/"]']);
@@ -221,6 +226,29 @@ describe("reviews y resultados de pruebas (ADR-0017)", () => {
     assert.match(run(result().replace(', url: "https://www.pruebas.example/acme-volta"', "")).join(), /test_results\[0\]: missing url/);
     assert.match(run(result(", summary: x")).join(), /test_results\[0\]\.summary: unknown key/);
   });
+});
+
+test("el Retocador solo cambia file y edits de una imagen y open_questions (ADR-0025, punto 7)", () => {
+  const dir = mkdtempSync(join(tmpdir(), "evals-retouch-"));
+  const git = (...args: string[]) => execFileSync("git", ["-c", "user.name=t", "-c", "user.email=t@t", ...args], { cwd: dir, encoding: "utf8" });
+  const yaml = (file: string, extra = "") => `model: Volta\nimages:\n  - {file: ${file}, license: CC0${extra}}\nopen_questions: []\n`;
+  const write = (body: string) => writeFileSync(join(dir, VOLTA), body);
+  const check = () => runEvals("retoucher", dir, [VOLTA], ["data/"], TODAY).failed.filter((f) => /Retoucher/.test(f));
+  git("init", "-q", "-b", "base");
+  mkdirSync(join(dir, "data/raw/acme"), { recursive: true });
+  write(yaml("a.jpg"));
+  git("add", "-A");
+  git("commit", "-q", "-m", "base");
+  try {
+    write(yaml("a.png", ", edits: [background]").replace("[]", "[\"recorte\"]"));
+    assert.deepEqual(check(), []);
+    write(yaml("a.png", ", edits: [background]").replace("CC0", "CC-BY-4.0"));
+    assert.match(check().join(), /may change only/);
+    write(yaml("a.jpg").replace("Volta", "Volta 2"));
+    assert.match(check().join(), /may change only/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test("changedFiles ve modificados y nuevos", () => {

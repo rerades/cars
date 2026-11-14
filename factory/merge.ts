@@ -56,6 +56,8 @@ export function agentMergeBlocker(
 ): string | null {
   if (stopped) return "interruptor de parada activo";
   if (!AGENT_BRANCH.test(pr.headRefName)) return "la rama no es agent/<agente>/<run_id>";
+  // ADR-0025, point 6: a person accepts a retouch by looking at the before/after sheet.
+  if (pr.headRefName.startsWith("agent/retoucher/")) return "es del Retocador: la acepta una persona viendo la hoja antes y después";
   const labels = new Set(pr.labels.map((l) => l.name));
   const human = NEEDS_HUMAN.find((l) => labels.has(l));
   if (human) return `tiene ${human}`;
