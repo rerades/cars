@@ -3,6 +3,7 @@
 - **Estado:** aceptada (2026-11-07). Enmienda [ADR-0012](0012-imagenes-de-los-modelos.md), punto 6 (además de
   las modificaciones técnicas, se admite el retoque de esta ADR), y amplía la forma de `images` de
   [`data-model.md`](../data-model.md).
+  Paso 1 del punto 8 hecho el 2026-11-14: `factory/retouch-image.ts`, `factory/retouch-vision.swift` y su prueba.
 - **Fecha:** 2026-11-07
 
 ## Contexto
