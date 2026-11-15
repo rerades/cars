@@ -1,0 +1,1 @@
+node factory/bitacora.ts add --tipo decision --texto "PRD-001 CA-15 («Autonomía por confirmar» en /coches) pasa de la historia #1034 (Cifra) a la #1035 (tarjeta): la #1034 no podía tocar ninguna pantalla y la tarjeta es la primera que usa Cifra.

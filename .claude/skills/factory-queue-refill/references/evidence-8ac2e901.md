@@ -1,0 +1,1 @@
+{"type":"user","message":{"role":"user","content":"podemos meter mas tareas en la cola?"}} — assistant then ran: node -e '... const fs=require("fs"),path=require("path"),Y=require("yaml"); ... console.log("sin imagen",noimg.length,noimg.join(" "));' ... ; grep -nE "max_runs_per_day|max_usd_per_period|^  [a-z]+:$" factory/budgets.yaml

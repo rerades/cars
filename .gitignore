@@ -9,6 +9,5 @@ ops/*.log
 ops/worktrees/
 
 # Local Claude Code state (autoharness), never committed
-.claude/autoharness/
-.claude/skills/
+**/.claude/autoharness/
 factory/retouch-vision

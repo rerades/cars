@@ -1,0 +1,1 @@
+Con cover el coche queda cortado (en el piloto, PR #1106, al

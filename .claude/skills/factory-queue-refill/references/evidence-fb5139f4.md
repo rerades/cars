@@ -1,0 +1,1 @@
+node -e 'require("yaml").parse(require("fs").readFileSync("factory/queue.yaml","utf8"))' && node factory/bitacora.ts add --tipo nota --texto "Encoladas fotos-sin-imagen-1 a 4: 22 modelos sin foto, repartidos en tandas de 5 o 6 ..." && pnpm test 2>&1 | grep -E "^ℹ (pass|fail)" — output: ℹ pass 159 / ℹ fail 0
