@@ -65,8 +65,8 @@ agents:
     model: claude-opus-5-5   # kept after the #80 trial (2026-10-06): every run finished, ~0.89 USD per finished task
     max_runs_per_day: 2
     max_usd_per_period: 24   # 18 -> 24 on 2026-10-29: 17.81 spent, two nights left at up to 2 runs x 1.50, from the unassigned 9; 15 -> 18 on 2026-10-28: two queued tasks (segment data model, trust ladder ADR) were waiting for November, from the unassigned 15; 6 -> 15 on 2026-10-08 (Opus); earlier: 3 -> 8 on 2026-09-27: room for ~10 Opus runs to compare against Sonnet (#80); 8 -> 6 on 2026-09-29, 2 to researcher
-    max_usd_per_run: 1.50   # 0.75 -> 1.50 on 2026-09-27: Opus is 2x per token; a cut run would skew the trial
-    max_turns_per_run: 20
+    max_usd_per_run: 2.50   # 1.50 -> 2.50 on 2026-11-15: the price-source study reads several brand sites; 0.75 -> 1.50 on 2026-09-27: Opus is 2x per token
+    max_turns_per_run: 40   # 20 -> 40 on 2026-11-15, same study; past ADR runs took 15-22 turns
     api_key_env: ARCHITECT_API_KEY
     write_paths: [docs/architecture/, docs/bitacora/]
     allowed_tools: [Read, Glob, Grep, Write, Edit, WebSearch, WebFetch, "Bash(node factory/bitacora.ts:*)"]
