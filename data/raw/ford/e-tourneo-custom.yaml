@@ -32,7 +32,8 @@ versions:
     drivetrain: {value: awd, note: "IDAE id 610318: «Tracción AWD»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
-  - file: data/images/ford/e-tourneo-custom/exterior.jpg
+  - file: data/images/ford/e-tourneo-custom/exterior.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Ford_E-Tourneo_Custom_%282023%29_Auto_Zuerich_2023_1X7A1173.jpg/1280px-Ford_E-Tourneo_Custom_%282023%29_Auto_Zuerich_2023_1X7A1173.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Ford_E-Tourneo_Custom_(2023)_Auto_Zuerich_2023_1X7A1173.jpg"
     source_id: wikimedia-commons

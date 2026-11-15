@@ -31,6 +31,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "AVMOTO, CC BY-SA 4.0"
 open_questions:
+  - "Imagen (2026-11-15): rechazada, causa `pegado`: puerta de ala de gaviota abierta, atril informativo delante del coche y personas tapando parte; además la foto es de feria con otros Duo detrás. Buscar una con las puertas cerradas y nada delante."
   - "Precios (2026-11-04): fetch-page.ts sobre www.mobilize.es/modelos/mobilize-duo.html redirige a la portada y no devuelve párrafos (contenido solo por JavaScript); prensa.mobilize.es redirige a prensa.renaultgroup.es, que no es fuente registrada. Ninguna fuente T1 leída da PVP. motor.es (T3) sigue citando 9.798 / 11.798 / 12.798 € de mayo de 2025, que no se guardan por ser T3."
   - "launch: no se ha podido leer ninguna fuente que dé la fecha desde la que se puede pedir el Duo en España (la nota de prensa de apertura de pedidos en el Salón de Barcelona no se pudo abrir)."
   - "status: confirmar que Duo 45 Neo, 80 Evo y 80 Pro se venden hoy; la única confirmación es un artículo de mayo de 2025."

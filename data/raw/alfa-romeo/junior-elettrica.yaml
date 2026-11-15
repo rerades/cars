@@ -35,6 +35,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-15): rechazada, causa `angulo`: la foto es un tres cuartos trasero (matrícula trasera visible); además hay personas y otros coches pegados al coche. Buscar un tres cuartos delantero."
   - "La web alfaromeo.es devuelve 403 (portada y robots.txt; reintentado el 2026-11-03): sin precios, launch, segmento oficial ni términos de imágenes."
   - "Precio null en todas las versiones: el único precio legible es de prensa (hibridosyelectricos-es, T3: 36.225 € Elettrica, 39.787 € Speciale, 41.865 € Intensa, 46.092 € Veloce), no vale como PVP."
   - "launch null: ninguna fuente da la fecha desde la que se puede pedir en España (motor16, 2024-06-11, solo dice que las primeras unidades llegan en septiembre)."
