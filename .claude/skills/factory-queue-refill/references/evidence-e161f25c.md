@@ -1,0 +1,6 @@
+git switch -q -c chore/queue-1035 && cat >> factory/queue.yaml <<'EOF'
+...
+pnpm test 2>&1 | tail -2 && pnpm run typecheck 2>&1 | tail -1 && git add -A && git commit -qm "chore(factory): queue story #1035, the model card
+...
+ .claude/autoharness/requests                       |  1 +
+ .claude/skills/close-factory-alert-issues/SKILL.md | 11 +++++

@@ -1,0 +1,1 @@
+"cola: 0 pendientes" in the run.ts --status output, followed by the reply: "**Cola vacía:** no quedan tareas pendientes, así que esta noche los agentes no harán nada si no metemos más." and then "¿...o por rellenar la cola?"

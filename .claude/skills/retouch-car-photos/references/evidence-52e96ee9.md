@@ -1,0 +1,1 @@
+5. **Si la rechazas después de retocar:** `rm` del PNG, `git checkout -- <file original>`. El YAML se queda como estaba y la hoja también, para que la persona vea por qué la rechazaste.

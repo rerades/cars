@@ -1,0 +1,1 @@
+Quité la de la Kangoo porque la matrícula se lee («S RN 227E»). Se queda la de la Proace Max: la placa es de exposición y el rótulo «Electric» de Toyota confirma la versión. Quité las del Qubo L, la Transit Courier (una «Limited» de gasolina, con la parrilla abierta) y el 408, porque nada confirma que sean la versión eléctrica.

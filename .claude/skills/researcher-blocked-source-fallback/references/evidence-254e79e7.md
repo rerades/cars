@@ -1,0 +1,1 @@
+Prices are coming back null, most likely because the sites are JavaScript-rendered or returning 403s, so I won't guess at them. ... 164 de 214 modelos sin precio, pero las tareas de precios anteriores tropezaron con webs que devuelven 403 o solo dan cuotas.
