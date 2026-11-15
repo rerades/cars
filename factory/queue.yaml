@@ -4085,3 +4085,43 @@
     están en main. Corrige de paso el título del test «the full sequence is…» de
     web/tests/ficha-primera-pantalla.test.ts para que diga la secuencia que comprueba. No toques el
     catálogo ni la portada. La PR dice «Closes #1040» y enumera los CA cubiertos."
+# 2026-11-15 (b): prices are the biggest data gap (164 of 214 models without one); two more model-page
+# stories in parallel with #1040 (the user accepts rebasing them); the planner checks the epic.
+- id: estudio-fuentes-de-precio
+  agent: architect
+  task: "164 de los 214 modelos de data/raw/ no tienen ningún precio. Las causas están en el
+    open_questions de cada YAML: la web de la marca da 403 (tesla, audi, alfa-romeo, abarth), solo
+    publica cuotas o precios con el Plan Auto+ restado (skoda, nissan) o pinta el precio con JavaScript
+    (kia, mobilize). Primero cuenta los modelos sin precio por causa con grep sobre open_questions.
+    Después estudia qué otra fuente podría dar el PVP en España sin ayudas con las reglas de ADR-0001
+    (jerarquía y regla 1, precio solo T1) y de docs/architecture/data-model.md («Precio»): listas
+    de tarifas en PDF de la marca, la sala de prensa de la marca, la base de datos del IDAE
+    (data/sources/idae-es.yaml) u otras. Prueba cada una con 2 o 3 marcas de las bloqueadas
+    (WebFetch) y anota qué da y con qué fecha. Escribe el resultado como ADR propuesta en
+    docs/architecture/adr/ con el número libre siguiente, alternativas y cuántos modelos ganaría cada
+    una. Si alguna exige cambiar ADR-0001, propón la enmienda en la misma ADR y no toques ADR-0001. No
+    toques data/. Bitácora."
+- id: historia-1042-bloque-de-version
+  agent: developer
+  task: "Historia #1042 (épica #1032, PRD-002): bloque de versión de la ficha (nombre, autonomía y
+    precio, tabla de campos). Lee la issue entera (gh issue view 1042 --comments) y haz exactamente lo
+    que dice, sobre la ficha de la #1039 y el componente Cifra de la #1034, que ya están en main. Pon el
+    bloque en un componente propio en web/src/components/ y en [modelo].astro cambia solo la sección de
+    versiones, porque las historias #1040 y #1044 tocan esa página en paralelo. No toques el catálogo
+    ni la portada. La PR dice «Closes #1042» y enumera los CA cubiertos."
+- id: historia-1044-datos-del-modelo
+  agent: developer
+  task: "Historia #1044 (épica #1032, PRD-002): franja «Datos del modelo» de la ficha. Lee la issue
+    entera (gh issue view 1044 --comments) y haz exactamente lo que dice, sobre la ficha de la #1039 y
+    el componente Cifra de la #1034, que ya están en main. Pon la franja en un componente propio en
+    web/src/components/ y en [modelo].astro cambia solo esa sección, porque las historias #1040 y #1042
+    tocan esa página en paralelo. No toques el catálogo ni la portada. La PR dice «Closes #1044» y
+    enumera los CA cubiertos."
+- id: revision-epica-1032
+  agent: planner
+  task: "Revisa si las historias abiertas de la épica #1032 (gh issue view 1032 y cada historia
+    abierta con --comments) siguen cubriendo PRD-001, PRD-002 y PRD-004 y los ficheros de docs/design/
+    que cita la épica, ahora que #1033 a #1036 y #1039 están cerradas y en main. Comprueba también que cada historia abierta dice en
+    «Depende de» solo historias que existen. Si falta algo, añádelo como comentario en la historia que
+    toque, o crea una historia nueva con el mismo formato si no cabe en ninguna. Deja en la épica un
+    comentario con el resultado. No reescribas el texto de las historias que existen. Bitácora."
