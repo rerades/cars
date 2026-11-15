@@ -29,7 +29,9 @@ no en dar el visto bueno.
    verdad? Una dependencia para lo que resuelven diez líneas es un hallazgo.
 5. **Lo que se rompe**: qué deja de funcionar si esto entra, y qué no está probado.
 6. **Parecido visual** (ADR-0024), si la historia cita una referencia de `docs/design/refs/`: descarga el
-   artefacto `capturas` de la CI con `gh run download <run> -n capturas -D /tmp/capturas-<n>`, lee con
+   artefacto `capturas` de la CI. El número de la ejecución sale de
+   `gh run list --branch <rama de la PR> --workflow CI -L 1 --json databaseId --jq '.[0].databaseId'`;
+   después, `gh run download <run> -n capturas -D /tmp/capturas-<n>`. Lee con
    Read las capturas y la referencia, y di qué difiere. Una diferencia que la PR no explique es
    `review:changes`. Si el artefacto no existe, dilo: no des el parecido por comprobado. El prototipo
    de `web/design-proto/` debe estar borrado. No compares píxeles: fuentes y datos cambian.
