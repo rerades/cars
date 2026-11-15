@@ -124,5 +124,5 @@ agents:
     api_key_env: REVIEWER_API_KEY
     write_paths: [docs/bitacora/]   # comentarios en PR, y su entrada en la bitácora
     # No ejecuta pruebas: para eso está la CI. Solo lee la PR, su historia y su estado.
-    allowed_tools: [Read, Glob, Grep, "Bash(gh pr:*)", "Bash(gh issue:*)", "Bash(gh run download:*)", "Bash(node factory/bitacora.ts:*)"]
+    allowed_tools: [Read, Glob, Grep, "Bash(gh pr:*)", "Bash(gh issue:*)", "Bash(gh run list:*)", "Bash(gh run download:*)", "Bash(node factory/bitacora.ts:*)"]   # run list finds the CI run whose capturas artifact to download (ADR-0024, point 5)
     network: false
