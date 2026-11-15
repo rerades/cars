@@ -4049,3 +4049,39 @@
     visual (#1033) y la tarjeta (#1035) que ya están en main; reutiliza el tratamiento de la foto de
     ModelCard.astro en vez de copiarlo. No toques las páginas del catálogo (#1036). La PR dice
     «Closes #1039» y enumera los CA cubiertos."
+# 2026-11-15: #1036 and #1039 are in main. The cutout photos of ADR-0025 have no treatment in the
+# «Pantalla» direction yet (the Retoucher pilot, PR #1106, waits for it); the developer goes on with the
+# epic #1032, one story per area so the PRs do not conflict.
+- id: fotos-retocadas-en-pantalla
+  agent: designer
+  task: "PRD-001 RF-15 y CA-23, ADR-0025: la dirección «Pantalla» (docs/design/propuesta-a.md, «Fotos
+    malas»; ficha-modelo.md, primera pantalla) pone la foto a sangre con object-fit: cover y velo, y no dice
+    qué pasa con una foto retocada (la entrada de images tiene edits): un PNG con el coche recortado sobre
+    transparente y una sombra de apoyo. Con cover el coche queda cortado (en el piloto, PR #1106, al
+    Renault 4 le faltan el techo y el morro en la ficha). Especifica en docs/design/tarjeta-modelo.md y
+    docs/design/ficha-modelo.md cómo se ven en la tarjeta como pantalla y en la primera pantalla de la
+    ficha: encaje (el coche entero, sin cortar), fondo de la franja y del hueco, posición del coche frente
+    al nombre y las cifras, velo si hace falta, y el crédito «Foto: {attribution} (modificada)» de CA-23.
+    Sustituye el párrafo «Imagen retocada» de tarjeta-modelo.md, que habla de la tarjeta anterior. Para
+    probarlo usa los dos PNG del piloto que hay en web/design-proto/retocadas/ (importados con ?url o
+    import.meta.glob, como ficha-a.astro con @images) en un prototipo de web/design-proto/ con capturas de node web/scripts/design-shot.ts. No cambies el alcance. Bitácora."
+- id: historia-1037-barra-filtros
+  agent: developer
+  task: "Historia #1037 (épica #1032, PRD-001): barra superior de filtros y orden con contador. Lee la
+    issue entera (gh issue view 1037 --comments) y haz exactamente lo que dice, sobre las páginas del
+    catálogo de la #1036 (web/src/components/CatalogPage.astro), que ya están en main. No toques la ficha
+    ni la portada. La PR dice «Closes #1037» y enumera los CA cubiertos."
+- id: historia-1038-portada
+  agent: developer
+  task: "Historia #1038 (épica #1032, PRD-004): portada con la base visual, cabecera en franja oscura y
+    «Explorar». Lee la issue entera (gh issue view 1038 --comments) y haz exactamente lo que dice;
+    reutiliza la cabecera y «Explorar» de las páginas del catálogo (#1036, en main) en vez de copiarlas.
+    No toques CatalogPage.astro ni la ficha. La PR dice «Closes #1038» y enumera los CA cubiertos."
+- id: historia-1040-cifras-clave
+  agent: developer
+  task: "Historia #1040 (épica #1032, PRD-002): cifras clave de la primera pantalla de la ficha. Lee la
+    issue entera (gh issue view 1040 --comments) y haz exactamente lo que dice, sobre la primera pantalla
+    de la #1039 (web/src/pages/marcas/[marca]/[modelo].astro) y el componente Cifra de la #1034, que ya
+    están en main. Corrige de paso el título del test «the full sequence is…» de
+    web/tests/ficha-primera-pantalla.test.ts para que diga la secuencia que comprueba. No toques el
+    catálogo ni la portada. La PR dice «Closes #1040» y enumera los CA cubiertos."
