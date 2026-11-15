@@ -14,6 +14,11 @@ import VersionField from "../../../components/VersionField.astro";
 import SourceMark from "../../../components/SourceMark.astro";
 import { versionFields } from "../../../lib/version-fields.ts";
 import { groupNotes, noteLine } from "../../../lib/notes.ts";
+import type { ImageMetadata } from "astro";
+import ScreenPhoto from "../../../components/ScreenPhoto.astro";
+import { assignBands, bandClass } from "../../../lib/bands.ts";
+import { publishableResults } from "../../../lib/test-results.ts";
+import { imageRelPath } from "../../../lib/data.ts";
 
 /**
  * Model page (PRD-002, docs/design/ficha-modelo.md). This story: URL, title and header (RF-1, RF-2,
@@ -98,6 +103,25 @@ const heading = t("ficha.titulo", { marca: card.brand, modelo: card.model });
 const site = t("sitio.nombre");
 const documentTitle = site ? t("pagina.tituloDocumento", { titulo: heading, sitio: site }) : heading;
 const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
+
+// First screen photo (RF-12): the same file lookup as ModelFigure. A file that is not there falls back to the silhouette.
+const imageFiles = import.meta.glob<{ default: ImageMetadata }>("@images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}", { eager: true });
+const mainRel = mainImage ? imageRelPath(mainImage.file) : null;
+const mainSrc = mainRel ? Object.entries(imageFiles).find(([key]) => key.endsWith(`/${mainRel}`))?.[1].default : undefined;
+
+// Band colours (ficha-modelo.md): the first screen is dark; the rest follow assignBands over the sections that exist.
+const hasReviews = reviews.some((r) => r.outlet !== null) || publishableResults(testResults).length > 0;
+const sectionIds = [
+  "versiones",
+  ...(modelRows.length > 0 ? ["datos"] : []),
+  ...(rest.length > 0 ? ["imagenes"] : []),
+  ...(card.hasSegment && related.length > 0 ? ["relacionados"] : []),
+  ...(notes.length > 0 ? ["fuentes"] : []),
+  ...(hasReviews ? ["reviews"] : []),
+];
+const bandColors = assignBands(sectionIds);
+const band = (id: string) => bandClass(bandColors[sectionIds.indexOf(id)]!);
+const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
 ---
 
 <html lang="es">
@@ -108,7 +132,10 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
     <link rel="canonical" href={canonical} />
   </head>
   <body>
-    <main class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8">
+    <main>
+      <header data-ficha-header class="band-dark hero">
+      <div class="hero-screen">
+      <div class={`${inner} hero-top`}>
       <nav aria-label={t("ficha.ruta.nombre")} data-ficha-ruta>
         <ol class="flex flex-wrap items-center text-small">
           <li class="flex items-center after:mx-2 after:text-ink-600 after:[content:'›'/'']">
@@ -128,9 +155,12 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
           <li aria-current="page" class="text-ink-600 [overflow-wrap:anywhere]">{card.model}</li>
         </ol>
       </nav>
-      <header data-ficha-header class="flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:items-start lg:gap-8">
-        <div class="lg:col-span-5">
-          <h1 class="text-title text-ink-900 [overflow-wrap:anywhere]">{heading}</h1>
+      </div>
+      <div class="hero-foot"><div class={`${inner} hero-text`}>
+          <h1 class="hero-name">
+            <span class="hero-brand">{card.brand}</span>{" "}
+            <span class="hero-model" data-name={card.model}>{card.model.split(" ").map((w) => <><span class="hero-word">{w}</span>{" "}</>)}</span>
+          </h1>
           <dl class="mt-3 flex flex-col gap-2">
             {
               card.statusLabel && (
@@ -181,24 +211,34 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
               </p>
             )
           }
-        </div>
-        <div class="lg:col-span-7" data-main-image>
-          {
-            mainImage ? (
-              <ModelFigure image={mainImage} alt={altOf(1)} caption={captionOf(mainImage)} main />
-            ) : (
-              <div
-                class="flex aspect-video items-center justify-center overflow-hidden rounded-card bg-surface-muted text-line"
-                data-slot="silhouette"
-              >
-                <SegmentSilhouette segment={card.segment} large />
-              </div>
-            )
-          }
-        </div>
+      </div></div>
+      {/* The photo (or the silhouette) comes after the text in the DOM and is painted behind it; the caption is the
+          last item of the first screen. The figure adds no box of its own (display: contents). */}
+      {
+        mainSrc && mainImage ? (
+          <figure class="hero-figure" data-main-image>
+            <ScreenPhoto
+              src={mainSrc}
+              alt={altOf(1)}
+              widths={[640, 960, 1280]}
+              sizes="100vw"
+              width={1280}
+              height={720}
+              loading="eager"
+              fetchpriority="high"
+            />
+            {captionOf(mainImage) && <figcaption class={`${inner} hero-credit`}>{captionOf(mainImage)}</figcaption>}
+          </figure>
+        ) : (
+          <div class="hero-silhouette" data-slot="silhouette" data-main-image>
+            <SegmentSilhouette segment={card.segment} large />
+          </div>
+        )
+      }
+      </div>
       </header>
 
-      <section aria-labelledby="versiones-titulo" class="mt-8" data-ficha-versiones>
+      <section aria-labelledby="versiones-titulo" class:list={["band-section", band("versiones")]} data-ficha-versiones>
         <h2 id="versiones-titulo" class="text-section text-ink-900">{t("ficha.versiones.titulo")}</h2>
         {
           versions.length === 0 ? (
@@ -326,7 +366,7 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
 
       {
         modelRows.length > 0 && (
-          <section aria-labelledby="datos-modelo" class="mt-10" data-ficha-modelo>
+          <section aria-labelledby="datos-modelo" class:list={["band-section", band("datos")]} data-ficha-modelo>
             <h2 id="datos-modelo" class="text-section text-ink-900">{t("ficha.modelo.titulo")}</h2>
             <p class="mt-1 text-small text-ink-600">{t("ficha.modelo.entrada")}</p>
             <dl class="mt-4 grid max-w-prose grid-cols-1 gap-4 md:grid-cols-2">
@@ -346,7 +386,7 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
 
       {
         rest.length > 0 && (
-          <section aria-labelledby="mas-imagenes" class="mt-8" data-more-images>
+          <section aria-labelledby="mas-imagenes" class:list={["band-section", band("imagenes")]} data-more-images>
             <h2 id="mas-imagenes" class="text-section text-ink-900">{t("ficha.imagenes.titulo")}</h2>
             <ul class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
               {rest.map((img, i) => (
@@ -361,7 +401,7 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
 
       {
         card.hasSegment && related.length > 0 && (
-          <section aria-labelledby="relacionados" class="mt-12" data-related>
+          <section aria-labelledby="relacionados" class:list={["band-section", band("relacionados")]} data-related>
             <h2 id="relacionados" class="text-section text-ink-900 [overflow-wrap:anywhere]">
               {t("ficha.relacionados.titulo", { segmento: card.segmentLabel })}
             </h2>
@@ -376,7 +416,7 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
 
       {
         notes.length > 0 && (
-          <section aria-labelledby="fuentes" class="mt-12" data-fuentes>
+          <section aria-labelledby="fuentes" class:list={["band-section", band("fuentes")]} data-fuentes>
             <h2 id="fuentes" class="text-section text-ink-900">{t("ficha.fuentes.titulo")}</h2>
             <p class="mt-1 text-small text-ink-600">{t("ficha.fuentes.entrada")}</p>
             <ol class="mt-4 flex flex-col gap-3">
@@ -392,7 +432,110 @@ const canonical = new URL(`/marcas/${card.key}/`, Astro.site).href;
         )
       }
 
-      <ReviewsBlock reviews={reviews} testResults={testResults} brand={card.brand} model={card.model} versionNames={versions.map((v) => v.name)} />
+      {
+        hasReviews && (
+          <div class:list={["band-section", band("reviews")]} data-band="reviews">
+            <ReviewsBlock reviews={reviews} testResults={testResults} brand={card.brand} model={card.model} versionNames={versions.map((v) => v.name)} />
+          </div>
+        )
+      }
     </main>
   </body>
 </html>
+
+<style is:global>
+  /* Full-width bands whose content keeps the page width and gutters (max-w-page, px-4/6/8). */
+  .band-section {
+    --gutter: 1rem;
+    padding-block: 3.5rem;
+    padding-inline: max(var(--gutter), calc((100% - var(--container-page)) / 2 + var(--gutter)));
+  }
+  @media (min-width: 768px) {
+    .band-section { --gutter: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .band-section { --gutter: 2rem; }
+  }
+
+  /* First screen: dark band, photo or silhouette behind the text, the text on the solid part of the scrim. */
+  .hero-screen {
+    --scrim-rgb: 11 18 23; /* ink-950, the dark band */
+    --scrim:
+      linear-gradient(to bottom, rgb(var(--scrim-rgb) / 0.78) 0, transparent 9rem),
+      linear-gradient(to bottom, transparent 30%, rgb(var(--scrim-rgb) / 0.72) 64%, rgb(var(--scrim-rgb) / 1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    isolation: isolate;
+    min-height: calc(100svh - var(--menu-clearance));
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-top,
+  .hero-foot,
+  .hero-credit {
+    position: relative;
+    width: 100%;
+    z-index: 1; /* above the photo, which comes later in the DOM */
+  }
+  .hero-top {
+    padding-top: 0.5rem;
+  }
+  .hero-foot {
+    padding-top: 7rem;
+  }
+  .hero-figure {
+    display: contents;
+  }
+  .hero-credit {
+    color: var(--color-on-dark-muted);
+    font-size: var(--text-small);
+    line-height: var(--text-small--line-height);
+    overflow-wrap: anywhere;
+    padding-bottom: 1rem;
+  }
+  .hero-name {
+    font-size: var(--text-display);
+    font-stretch: var(--font-stretch-wide);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+  }
+  .hero-brand {
+    display: block;
+    font-size: var(--text-body);
+    font-stretch: 100%;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: var(--text-body--line-height);
+    margin-bottom: 0.25rem;
+  }
+  .hero-model {
+    display: block;
+  }
+  /* Names break between words, never inside one; a word too long still fits. */
+  .hero-word {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  .hero-silhouette {
+    --size-segment-icon-lg: 24rem;
+    align-items: center;
+    color: var(--color-on-dark-muted);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+  }
+  .hero-silhouette svg {
+    stroke-width: 0.3;
+  }
+  @media (min-width: 1024px) {
+    .hero-silhouette {
+      --size-segment-icon-lg: 42rem;
+    }
+  }
+</style>

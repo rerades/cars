@@ -1,9 +1,9 @@
 ---
-import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { CardView } from "../lib/card.ts";
 import { imageRelPath } from "../lib/data.ts";
 import Cifra from "./Cifra.astro";
+import ScreenPhoto from "./ScreenPhoto.astro";
 import SegmentSilhouette from "./SegmentSilhouette.astro";
 
 /**
@@ -44,7 +44,7 @@ const priceLabel = card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` 
     {
       src ? (
         <div class="photo" data-slot="image">
-          <Image
+          <ScreenPhoto
             src={src}
             alt=""
             widths={[640, 960, 1280]}
@@ -125,37 +125,13 @@ const priceLabel = card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` 
     outline: none;
   }
 
-  /* The common treatment of propuesta-a.md: desaturated, dimmed, a cold tone and a vignette. */
+  /* The box of the photo; the common treatment (filter, tone, vignette, scrim) is in ScreenPhoto. */
   .photo {
     background: var(--color-ink-950);
     height: 19rem;
     inset: 0 0 auto;
     overflow: hidden;
     position: absolute;
-  }
-  .photo :global(img) {
-    display: block;
-    filter: saturate(0.72) contrast(1.06) brightness(0.86);
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
-  }
-  .photo::before,
-  .photo::after {
-    content: "";
-    inset: 0;
-    pointer-events: none;
-    position: absolute;
-  }
-  .photo::before {
-    background: #1d4a5c;
-    mix-blend-mode: color;
-    opacity: 0.32;
-  }
-  .photo::after {
-    background:
-      radial-gradient(ellipse 72% 78% at 50% 52%, transparent 45%, rgb(var(--scrim-rgb) / 0.62) 100%),
-      var(--scrim);
   }
 
   /* No photo: the segment outline, large and thin, behind the text. Decorative (aria-hidden in the SVG). */
