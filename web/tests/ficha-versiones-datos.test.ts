@@ -89,7 +89,7 @@ describe("technical fields of each version (RF-5, RF-6, CA-5, CA-6)", () => {
     for (const r of rangeOf(blocks(html))) assert.match(r, /^Autonomía WLTP por confirmar$/);
     assert.doesNotMatch(text(versions(html)), /557/);
     const model = /<section[^>]*data-ficha-modelo[\s\S]*?<\/section>/.exec(html)![0];
-    assert.match(text(model), /Autonomía WLTP máxima del modelo 557 km/);
+    assert.match(text(model), /Autonomía WLTP máxima del modelo (?:\[\d+\] )?557 km/);
   });
 
   test("CA-5: with some version range, specs.wltp_max_km does not fill the others", () => {
