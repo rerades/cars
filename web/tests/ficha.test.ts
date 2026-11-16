@@ -114,42 +114,29 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
   });
 
   const section = (html: string) => /<section[^>]*data-ficha-versiones[\s\S]*?<\/section>/.exec(html)![0];
-  const headerNames = (html: string) =>
-    [...html.matchAll(/<th[^>]*scope="col"[^>]*>([\s\S]*?)<\/th>/g)].map((m) => text(m[1]));
-  const blockNames = (html: string) => [...html.matchAll(/<li[^>]*>\s*<h3[^>]*>([\s\S]*?)<\/h3>/g)].map((m) => text(m[1]));
+  const blockNames = (html: string) => [...html.matchAll(/<li[^>]*data-version[^>]*>\s*<h3[^>]*>([\s\S]*?)<\/h3>/g)].map((m) => text(m[1]));
 
-  test("CA-3: versions ordered by price, no-price last, in table and in blocks from the same list", () => {
+  test("CA-3: one block per version, ordered by price, no-price last, none repeated", () => {
     const html = section(page("acme", "Volta"));
-    const expected = ["Volta 60", "Volta 80 AWD", "Volta GT"];
-    assert.deepEqual(headerNames(html), expected);
-    assert.deepEqual(blockNames(html), expected);
+    assert.deepEqual(blockNames(html), ["Volta 60", "Volta 80 AWD", "Volta GT"]);
     assert.match(html, /<h2[^>]*>Versiones<\/h2>/);
     assert.match(html, /aria-labelledby="versiones-titulo"/);
     assert.match(text(html), /Ordenadas por precio, de menor a mayor/);
-    assert.match(html, /<caption[^>]*>Versiones de Acme Volta, ordenadas por precio<\/caption>/);
-    assert.equal((html.match(/<table\b/g) ?? []).length, 1);
-    const [table, blocks] = [/<table[\s\S]*<\/table>/.exec(html)![0], /<ol[\s\S]*<\/ol>/.exec(html)![0]];
-    assert.doesNotMatch(table, /\sid=/);
-    assert.doesNotMatch(blocks, /\sid=/);
+    assert.doesNotMatch(/<ol[\s\S]*<\/ol>/.exec(html)![0], /\sid=/);
   });
 
-  test("CA-3: the order comes from the price, not the file; ties keep the file order", () => {
-    const html = section(page("acme", "Shuffled"));
-    assert.deepEqual(headerNames(html), SHUFFLED_ORDER);
-    assert.deepEqual(blockNames(html), SHUFFLED_ORDER);
+  test("CA-3: the order comes from the price, not the file; ties keep the file order; all of them are shown", () => {
+    assert.deepEqual(blockNames(section(page("acme", "Shuffled"))), SHUFFLED_ORDER);
   });
 
-  test("CA-3: more than 5 versions split into tables of at most 5 columns, with part captions", () => {
-    const html = section(page("acme", "Shuffled"));
-    assert.equal((html.match(/<table\b/g) ?? []).length, 2);
-    assert.match(html, /versiones 1 a 5 de 6/);
-    assert.match(html, /versiones 6 a 6 de 6/);
-  });
-
-  test("CA-3: both presentations are in the HTML and switched by CSS only", () => {
+  test("CA-3: blocks at every width: no comparison table, no breakpoint hiding the list, lg 3:5:4 columns", () => {
     const html = section(page("acme", "Volta"));
-    assert.match(html, /<div[^>]*class="[^"]*\bhidden\b[^"]*\blg:flex\b[^"]*"[^>]*data-versiones-tabla/);
-    assert.match(html, /<ol[^>]*class="[^"]*\blg:hidden\b[^"]*"[^>]*data-versiones-bloques/);
+    assert.doesNotMatch(html, /data-versiones-tabla|\blg:flex\b/);
+    assert.match(html, /<ol[^>]*class="(?![^"]*\bhidden\b)[^"]*"[^>]*data-versiones-bloques/);
+    assert.doesNotMatch(/<ol[^>]*data-versiones-bloques/.exec(html)![0], /hidden/);
+    assert.match(html, /lg:grid-cols-\[3fr_5fr_4fr\]/);
+    // The only tables left are the per-version field tables (two columns), one per block.
+    assert.equal((html.match(/<table\b/g) ?? []).length, 3);
   });
 
   test("CA-11: versions: [] keeps the section and h2, shows the empty text and omits the intro", () => {
@@ -157,7 +144,7 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
     assert.match(html, /<h2[^>]*>Versiones<\/h2>/);
     assert.match(text(html), /Acme todavía no ha publicado las versiones de este modelo\./);
     assert.doesNotMatch(html, /Ordenadas por precio/);
-    assert.doesNotMatch(html, /<table|<ol/);
+    assert.doesNotMatch(html, /<table|<ol|data-version\b/);
   });
 
   test("CA-13: breadcrumb before the h1; Coches and brand links point to pages in the build", () => {

@@ -1,0 +1,82 @@
+---
+import type { Version } from "../lib/data.ts";
+import { formatEur } from "../lib/format.ts";
+import { t } from "../lib/i18n.ts";
+import type { NoteSource } from "../lib/notes.ts";
+import { versionFields } from "../lib/version-fields.ts";
+import Cifra from "./Cifra.astro";
+import SourceDate from "./SourceDate.astro";
+import SourceMark from "./SourceMark.astro";
+import VersionField from "./VersionField.astro";
+
+/**
+ * One version of the model page (PRD-002 RF-3..RF-8, docs/design/propuesta-a.md, «Versiones»):
+ * the name, then range and price as figures side by side, then a two-column table of the other
+ * fields. Stacked below `lg`; from `lg`, three columns 3:5:4. The same block serves every width.
+ * `termsIndex` is the 1-based position among the financed versions: the target is #condiciones-{n}.
+ * No ids here: the offer terms live once in the page.
+ */
+interface Props {
+  version: Version;
+  discontinued: boolean;
+  termsIndex?: number;
+  numberOf: (s: NoteSource) => number;
+}
+const { version, discontinued, termsIndex, numberOf } = Astro.props;
+const { price } = version;
+const fields = versionFields(version);
+const range = fields.find((f) => f.key === "wltp_km")!;
+const rows = fields.filter((f) => f.key !== "wltp_km");
+---
+
+<li class="border-t border-line-soft py-6 first:border-t-0 lg:grid lg:grid-cols-[3fr_5fr_4fr] lg:gap-8" data-version>
+  <h3 class="text-card-title text-ink-900 [overflow-wrap:anywhere]">{version.name}</h3>
+
+  <dl class="mt-4 grid grid-cols-2 items-start gap-4 lg:mt-0 [overflow-wrap:anywhere]">
+    <Cifra label={t("ficha.campo.autonomia")} text={range.text} size="l" figure="range">
+      {range.datum && <SourceMark slot="marca" n={numberOf(range.datum)} unofficial={range.datum.tier !== "T1"} />}
+      {range.datum?.note && <span slot="detalle" data-field-note="wltp_km">{range.datum.note}</span>}
+    </Cifra>
+    <Cifra label={t("ficha.campo.precio")} text={price ? formatEur(price.value) : null} size="l" figure="price">
+      {
+        price && (
+          <div slot="detalle" class="flex flex-col gap-1" data-price={price.price_kind}>
+            {discontinued && <p>{t("ficha.precio.ultimo")}</p>}
+            {price.price_kind === "financed" && (
+              <p>
+                <span class="inline-block rounded-full bg-deal-bg px-3 py-1 text-badge text-deal-fg">
+                  {t("ficha.precio.oferta")}
+                </span>
+              </p>
+            )}
+            <SourceDate source={price} />
+            {price.note && <p>{price.note}</p>}
+            {price.price_kind === "financed" && termsIndex && (
+              <a
+                href={`#condiciones-${termsIndex}`}
+                class="inline-flex min-h-touch items-center text-brand-600 underline hover:text-brand-800"
+                >{t("ficha.precio.verCondiciones")}</a
+              >
+            )}
+          </div>
+        )
+      }
+    </Cifra>
+  </dl>
+
+  <table class="mt-4 w-full table-fixed border-collapse text-left lg:mt-0">
+    <caption class="sr-only">{t("ficha.versiones.datos", { version: version.name })}</caption>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr class="border-t border-line-soft first:border-t-0">
+            <th scope="row" class="w-2/5 py-2 pr-3 align-top text-small font-normal text-ink-600">{row.label}</th>
+            <td class="py-2 align-top [overflow-wrap:anywhere]">
+              <VersionField field={row} numberOf={numberOf} />
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</li>

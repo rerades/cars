@@ -64,9 +64,9 @@ describe("price of each version on the model page (RF-4, CA-4, CA-9)", () => {
   let out: string;
   const page = (m: string) => readFileSync(join(out, "marcas", "acme", m, "index.html"), "utf8");
   const versions = (html: string) => /<section[^>]*data-ficha-versiones[\s\S]*?<\/section>/.exec(html)![0];
-  const table = (html: string) => /<table[\s\S]*?<\/table>/.exec(versions(html))![0];
   const blocks = (html: string) => /<ol[^>]*data-versiones-bloques[\s\S]*?<\/ol>/.exec(versions(html))![0];
-  const prices = (html: string) => [...html.matchAll(/<(?:div)[^>]*data-price="[^"]*"[\s\S]*?<\/div>|<p[^>]*data-price="none"[\s\S]*?<\/p>/g)].map((m) => m[0]);
+  // The price figure of every version block, in order: <div class="cifra" data-figure="price"> up to the end of the <dl>.
+  const prices = (html: string) => [...html.matchAll(/<div[^>]*data-figure="price"[\s\S]*?<\/dl>/g)].map((m) => m[0]);
 
   before(() => {
     root = mkdtempSync(join(tmpdir(), "cars-ficha-precio-"));
@@ -90,9 +90,9 @@ describe("price of each version on the model page (RF-4, CA-4, CA-9)", () => {
 
   test("CA-4 pvp: «36.273 €» with source domain (linked to price.url) and date; no badge, no terms link", () => {
     const html = page("Plain");
-    for (const part of [table(html), blocks(html)]) {
+    for (const part of [blocks(html)]) {
       const t = text(part);
-      assert.match(t, /36\.273 €/);
+      assert.match(t, /36\.273\s€/);
       assert.match(t, /Fuente: acme\.example, 24 sep 2026/);
       assert.match(part, /<a[^>]*href="https:\/\/www\.acme\.example\/es\/precios"[^>]*>acme\.example<\/a>/);
       assert.doesNotMatch(t, /Precio con oferta|Ver condiciones|Último precio publicado/);
@@ -104,7 +104,7 @@ describe("price of each version on the model page (RF-4, CA-4, CA-9)", () => {
   test("CA-4 financed: badge, source, link to #condiciones-n and the literal terms once, always visible", () => {
     const html = page("Deals");
     const v = versions(html);
-    for (const part of [table(html), blocks(html)]) {
+    for (const part of [blocks(html)]) {
       assert.equal((part.match(/Precio con oferta/g) ?? []).length, 2);
       assert.deepEqual([...part.matchAll(/href="(#condiciones-\d)"/g)].map((m) => m[1]), ["#condiciones-1", "#condiciones-2"]);
       assert.match(text(part), /Ver condiciones de la oferta/);
@@ -121,34 +121,32 @@ describe("price of each version on the model page (RF-4, CA-4, CA-9)", () => {
     assert.doesNotMatch(cond, /<details/);
     // The terms block is outside the table and the blocks.
     assert.ok(v.indexOf("data-condiciones") > v.indexOf("</ol>"));
-    assert.doesNotMatch(table(html) + blocks(html), /id="condiciones|Oferta financiada/);
+    assert.doesNotMatch(blocks(html), /id="condiciones|Oferta financiada/);
   });
 
   test("CA-4 null: «Precio por confirmar», no source, no badge, no «Último precio publicado»", () => {
-    const html = page("Volta");
-    const gt = prices(blocks(html)).at(-1)!;
+    const gt = prices(blocks(page("Volta"))).at(-1)!;
     assert.match(text(gt), /^Precio por confirmar$/);
+    assert.match(gt, /data-missing/);
     assert.doesNotMatch(gt, /<a\b|Fuente/);
-    const old = page("Old");
-    const oldNone = prices(blocks(old)).at(-1)!;
+    const oldNone = prices(blocks(page("Old"))).at(-1)!;
     assert.match(text(oldNone), /^Precio por confirmar$/);
   });
 
   test("CA-4 discontinued: «Último precio publicado» on versions with price only, in text", () => {
     const old = page("Old");
     const [first] = prices(blocks(old));
-    assert.match(text(first), /^Último precio publicado 20\.000 € /);
+    assert.match(text(first!), /^Precio 20\.000 € Último precio publicado /);
     assert.equal((text(blocks(old)).match(/Último precio publicado/g) ?? []).length, 1);
-    assert.equal((text(table(old)).match(/Último precio publicado/g) ?? []).length, 1);
     assert.doesNotMatch(text(blocks(page("Plain"))), /Último precio publicado/);
   });
 
-  test("CA-4: prices are in the table's price row and the blocks' dl, in the same order", () => {
+  test("CA-4: the price is a figure labelled «Precio» in each block, in the order of the blocks", () => {
     const html = page("Volta");
-    assert.match(table(html), /<th scope="row"[^>]*>\s*Precio\s*<\/th>/);
-    const amount = (s: string) => [...text(s).matchAll(/\d{2}\.\d{3} €/g)].map((m) => m[0]);
-    assert.deepEqual(amount(table(html)), ["39.990 €", "47.500 €"]);
-    assert.deepEqual(amount(blocks(html)), ["39.990 €", "47.500 €"]);
+    assert.match(blocks(html), /<dt>Precio<\/dt>/);
+    const amount = (s: string) => [...text(s).matchAll(/\d{2}\.\d{3} €/g)].map((m) => m[0]);
+    assert.deepEqual(amount(blocks(html)), ["39.990 €", "47.500 €"]);
+    assert.equal(prices(blocks(html)).length, 3);
   });
 
   test("CA-9 (price): T1 prices show no «fuente no oficial»; a T3 price is not published", () => {

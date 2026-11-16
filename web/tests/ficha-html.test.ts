@@ -118,7 +118,7 @@ describe("model pages: served HTML (PRD-002 CA-14, CA-15, CA-18)", () => {
   test("CA-15: the model page source has no access to cookies or storage either", () => {
     const sources = [
       "src/pages/marcas/[marca]/[modelo].astro",
-      "src/components/VersionPrice.astro",
+      "src/components/VersionBlock.astro",
       "src/components/VersionField.astro",
       "src/components/SourceMark.astro",
       "src/components/ModelFigure.astro",
