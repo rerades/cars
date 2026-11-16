@@ -31,7 +31,7 @@ describe("band colours (assignBands)", () => {
     }
   });
 
-  test("the full sequence is white, dark, light, white, dark, light; a missing section hands its colour to the next", () => {
+  test("the full sequence is white, dark, light, white, light, white; a missing section hands its colour to the next", () => {
     assert.deepEqual(assignBands(["versiones", "datos", "imagenes", "relacionados", "fuentes", "reviews"]), ["white", "dark", "light", "white", "light", "white"]);
     assert.deepEqual(assignBands(["versiones", "datos", "fuentes"]).slice(0, 2), ["white", "dark"]);
     assert.deepEqual(assignBands(["versiones", "imagenes", "fuentes"]).slice(0, 2), ["white", "dark"]);
