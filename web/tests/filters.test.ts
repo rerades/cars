@@ -184,6 +184,38 @@ describe("/coches filter panel in the built page", () => {
     }
   });
 
+  test("top bar: counter as the live region, then the pills, the order, the panel, the chips and the results", () => {
+    assert.doesNotMatch(html, /<aside|lg:grid-cols-\[18rem/, "no side panel");
+    assert.equal([...html.matchAll(/data-count/g)].length, 1);
+    assert.match(html, /<p[^>]*data-count[^>]*>/);
+    assert.match(html, /<p[^>]*role="status"[^>]*data-count|<p[^>]*data-count[^>]*role="status"/);
+    const at = (s: string) => html.indexOf(s);
+    const order = [at("data-count"), at("data-group-toggle"), at('id="orden"'), at("data-panel"), at("data-chips"), at('<h2 id="resultados"')];
+    assert.ok(order.every((i, k) => i > 0 && (k === 0 || i > order[k - 1]!)), `DOM order ${order}`);
+    assert.ok(at("data-bar") < at("data-count") && at("data-bar") > at("data-explore"));
+  });
+
+  test("top bar: one disclosure pill per group, with aria-expanded and aria-controls to its panel", () => {
+    const keys = ["marca", "segmento", "precio", "autonomia", "traccion", "estado"];
+    const pills = [...html.matchAll(/<button\b[^>]*data-group-toggle="([^"]+)"[^>]*>/g)];
+    assert.deepEqual(pills.map((m) => m[1]), keys);
+    for (const [tag, key] of pills) {
+      assert.match(tag!, /aria-expanded="false"/);
+      assert.match(tag!, new RegExp(`aria-controls="panel-${key}"`));
+      assert.match(html, new RegExp(`<fieldset[^>]*id="panel-${key}"`));
+    }
+    assert.match(html, /data-filters-toggle[^>]*aria-expanded="false"[^>]*aria-controls="filtros-cuerpo"|aria-controls="filtros-cuerpo"[^>]*data-filters-toggle/);
+    assert.match(html, /<div[^>]*id="filtros-cuerpo"[^>]*\shidden/);
+  });
+
+  test("keyboard: Esc closes the panel and the focus goes back to its pill; the pill count has a hidden 'activos'", () => {
+    assert.match(js, /Escape/);
+    assert.match(js, /\.focus\(\)/);
+    assert.match(js, /activos/);
+    assert.match(html, /<h2[^>]*id="filtros"[^>]*tabindex="-1"/);
+    assert.match(html, /<legend[^>]*tabindex="-1"/);
+  });
+
   test("CA-6: the empty state has a message and a button to clear the filters, hidden until needed", () => {
     assert.match(html, /<div[^>]*data-empty[^>]*\shidden[\s\S]*Ningún modelo cumple los filtros[\s\S]*Limpiar filtros/);
     assert.match(html, /<button[^>]*data-empty-clear/);
