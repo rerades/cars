@@ -217,6 +217,8 @@ salvo los marcados.
 | Velo de texto: `on-dark` / `on-dark-muted` sobre `ink-950` al 72 % encima del píxel más claro tras `brightness(.86)` | 9,1 / 5,1 | 4,5 | Cumple; **el más justo de la tabla** |
 | `brand-600` frente a `ink-900` (enlace entre texto) | 2,49 | 3 | **No cumple** como única distinción → enlaces subrayados siempre (como arriba) |
 | `line-soft` (`#33404a`) sobre `ink-950` | 1,77 | — | No se exige: solo decora |
+| Imagen retocada: texto `on-dark` / `on-dark-muted` sobre `ink-950` liso (el coche nunca queda debajo del texto, sin velo) | 18,86 / 10,61 | 4,5 | Cumple |
+| `cutout-floor` sobre `ink-950` (centro de la elipse, `#1c2327`) | 1,18 | — | No se exige: solo decora |
 | `line` (sin cambios, L 0,1674) sobre `surface-muted` (contorno de las píldoras de la barra de filtros) | 4,24 | 3 | Cumple (`filtros-catalogo.md`; el `line-soft` del prototipo no llega) |
 | `on-dark` sobre `ink-900` (píldora de filtro abierta) | 18,86 | 4,5 | Cumple |
 | `on-brand` (`#ffffff`) sobre `brand-600` (botón principal) | 7,59 | 4,5 | Cumple |
@@ -253,6 +255,8 @@ pasa a `web/`, y el LCP se mide con `web/e2e/lcp.spec.ts` (RNF-2).
 |---|---|---|
 | `--radius-pill` | `999px` | Menú inferior, filtros, etiquetas |
 | `--menu-clearance` | `6rem` | Espacio libre bajo el contenido y `scroll-padding-bottom`, para que nada quede bajo el menú (RF-17) |
+| `--color-cutout-floor` | `rgb(255 255 255 / 0.07)` | «Suelo» de la imagen retocada (ADR-0025): elipse `radial-gradient(ellipse 60% 22% at 50% 88%, var(--color-cutout-floor), transparent 70%)` en el hueco del coche, para que la sombra de apoyo del PNG y los coches oscuros se lean sobre `ink-950`. Sobre `ink-950` da `#1c2327` en el centro (L 0,0158; 1,18 frente a `ink-950`). **Solo decorativo**: no hay texto encima (`tarjeta-modelo.md` y `ficha-modelo.md`, «Imagen retocada») |
+| `--size-cutout-mobile` | `12rem` | Alto mínimo del hueco del coche recortado en móvil, en la pantalla del catálogo y en la primera pantalla de la ficha |
 
 ## Pendientes (no se deciden en diseño)
 1. **Verificar las ratios con herramienta.** Están calculadas a mano (sin ejecutar nada en esta revisión);

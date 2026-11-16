@@ -18,7 +18,8 @@ sobre el wireframe y los tamaños de abajo:
 - **Con foto**: franja oscura (`.band-dark`). La foto, con el tratamiento común de `propuesta-a.md`, ocupa la parte de
   arriba en móvil y el 70 % de la franja en `lg`, alternando lado (impares a la derecha, pares a la izquierda), y se
   funde con la franja por el velo; el texto va en la parte sólida (contraste en `tokens.md`, velo: 9,1 / 5,1). La
-  imagen deja de ser 16:9: `object-fit: cover` en el hueco de la franja.
+  imagen deja de ser 16:9: `object-fit: cover` en el hueco de la franja. **Si la foto está retocada** (lleva
+  `edits`), no: va entera, sin velo y sin tocar el texto (ver «Imagen retocada», abajo).
 - **Sin foto**: franja clara (`surface-muted`) con la silueta del segmento grande y de trazo fino (ADR-0012), detrás
   del texto y decorativa. Sustituye al hueco 16:9 con el icono de 48 px de «Imagen».
 - **Nombre**: el modelo en `--text-screen`, `--font-stretch-wide`, peso 800; cada palabra es un bloque que no se parte
@@ -125,11 +126,7 @@ da el mínimo: si es oferta, lleva la etiqueta (RF-9: «siempre con su etiqueta�
 - Si la imagen trae `attribution`, el texto va **debajo** de la imagen, no encima (el contraste sobre foto
   no es medible): `text-small`, `ink-600` sobre `surface` (7,56). La redacción es la que trae el dato, tal
   cual; plantilla si hace falta anteponer algo: «Foto: {attribution}».
-- **Imagen retocada** (la entrada tiene `edits`; RF-15, ADR-0025): es un PNG con el coche sobre fondo
-  transparente. Va en el mismo hueco 16:9, con `object-fit: contain` en lugar de `cover` para no cortar el
-  coche, sobre el fondo del hueco, que es el mismo en todas las tarjetas: hoy `surface-muted`; el definitivo
-  lo fija la dirección visual (`direccion.md`). Qué foto vale: [`fotos-modelos.md`](fotos-modelos.md). Si trae `attribution`, se añade « (modificada)» al final:
-  «Foto: {attribution} (modificada)» (CA-23).
+- **Imagen retocada**: ver la sección siguiente. Qué foto vale: [`fotos-modelos.md`](fotos-modelos.md).
 - `alt=""` en la imagen real: es decorativa porque el nombre del modelo ya está a su lado; evita que el
   lector lo repita.
 - **Sin imagen con licencia**, el hueco 16:9 `surface-muted` lleva el icono de silueta del segmento del
@@ -138,6 +135,63 @@ da el mínimo: si es oferta, lleva la etiqueta (RF-9: «siempre con su etiqueta�
   [`siluetas-segmento.md`](siluetas-segmento.md); el tamaño, en `tokens.md` («Silueta de segmento»). El icono es decorativo (`aria-hidden`),
   sin atribución ni texto dentro del hueco.
 - Ancho y alto del hueco declarados igual que los de una imagen real, para no mover el resto de la tarjeta.
+
+### Imagen retocada (RF-15, CA-23, ADR-0025) — 2026-11-16
+
+Sustituye al párrafo anterior, escrito para la tarjeta en retícula. Una entrada de `images` con `edits` es un PNG con
+el coche recortado sobre transparente y una sombra de apoyo debajo. Con `object-fit: cover` y el hueco de la foto
+normal se corta (en el piloto, #1106, el Renault 4 pierde techo y morro). Prototipo `web/design-proto/retocadas.astro`,
+capturas [`refs/retocadas-390.png`](refs/retocadas-390.png) y [`refs/retocadas-1280.png`](refs/retocadas-1280.png)
+(las dos pantallas de abajo; la de arriba es la ficha).
+
+```
+Móvil (390)                     Escritorio (≥ 1024), pantalla impar          par: espejo
+┌──────────────────────────┐    ┌────────────────────────────────────────┐
+│▓  ┌────────────────────┐ │    │▓ Renault         ┊  ┌───────────────┐ ▓│
+│▓  │  coche entero,     │ │    │▓ RENAULT 4       ┊  │ coche entero, │ ▓│
+│▓  │  contain, abajo    │ │    │▓ E-TECH          ┊  │ contain,      │ ▓│
+│▓  └──── (suelo) ───────┘ │    │▓ eléctrico       ┊  │ abajo         │ ▓│
+│▓ Renault                 │    │▓ Urbano          ┊  └──── suelo ────┘ ▓│
+│▓ RENAULT 4 E-TECH …      │    │▓ 21.974 €  409 km┊                    ▓│
+│▓ cifras · pie            │    │▓ Comparar  Foto: … (modificada)        ▓│
+└──────────────────────────┘    └────────────────────────────────────────┘
+                                 texto ≤ 44 %     hueco: del 50 % al borde − 2,5 rem
+```
+
+- **Franja**: siempre la oscura (`.band-dark`), como la pantalla con foto. El fondo del hueco **es el de la franja**,
+  `ink-950`: el hueco no se distingue de ella y el coche parece estar en la pantalla, no en un recuadro. Nada de
+  `surface-muted` (la franja clara queda para «sin foto»).
+- **Encaje**: `object-fit: contain`, `object-position: 50% 100%` (centrado y apoyado abajo, para que la sombra quede
+  en el suelo del hueco). El coche se ve **entero**, nunca cortado, sea turismo apaisado (R4, 1,72 : 1) o furgoneta
+  más alta (E-Tourneo Custom, 1,42 : 1). No se escala por encima del tamaño del PNG (`widths` hasta 1280).
+- **Suelo**: el hueco lleva de fondo la elipse de `--color-cutout-floor` (`tokens.md`), que hace legible la sombra
+  de apoyo y separa un coche negro del fondo (comprobado con el E-Tourneo negro). Decorativa.
+- **Tratamiento**: el mismo filtro de color de las fotos (`saturate(0.72) contrast(1.06) brightness(0.86)`), para
+  que no desentone con las pantallas con foto. **Sin** el tono frío con `mix-blend-mode` y **sin** viñeta ni velo:
+  no hay calle que tapar y el coche nunca queda bajo el texto.
+- **Posición frente al nombre y las cifras**:
+  - **Móvil**: el hueco ocupa la parte de arriba de la pantalla, `inset: 1.5rem 1.25rem auto` y alto
+    `--size-cutout-mobile` (12 rem); el texto (marca, nombre, segmento, estado, cifras, pie) empieza 1 rem por
+    debajo (`padding-top` 14,5 rem en lugar de los 12,5 de la pantalla con foto). Texto y coche no se solapan
+    nunca, sea cual sea el largo del nombre: el texto crece hacia abajo.
+  - **`lg`**: el hueco ocupa la mitad opuesta al texto, `inset: 2.5rem 2.5rem 2.5rem 50%` en las impares (coche a la
+    derecha) y `2.5rem 50% 2.5rem 2.5rem` en las pares, alternando como las fotos. El texto sigue en su columna de
+    44 % como mucho: entre los dos queda al menos un 6 % libre. El alto de la pantalla (31,5 rem mínimo) no cambia.
+- **Velo**: ninguno. El contraste del texto es el de la franja lisa: `on-dark` 18,86 y `on-dark-muted` 10,61 sobre
+  `ink-950` (`tokens.md`), mejor que el 9,1 / 5,1 del velo.
+- **Crédito (CA-23)**: en el pie, en el sitio de la atribución, «Foto: {attribution} (modificada)» con la clave
+  nueva `tarjeta.fotoModificada` (copy abajo), enlazado a `page_url` como la atribución normal (ADR-0012), `ink-600`
+  de la franja oscura (`on-dark-muted`, 10,61), subrayado, por encima del `::after` del enlace de la pantalla. «(modificada)»
+  va siempre que la entrada tenga `edits`, y **nunca se separa** de la atribución: si parte línea, parte con ella
+  (`overflow-wrap: anywhere` de la atribución, comprobado a 390 px: «(modificada)» baja a la segunda línea). Si
+  `attribution` es `null`, no hay pie de foto (igual que con una foto normal).
+- **Lector de pantalla**: `alt=""`, igual que la foto normal. «(modificada)» se lee como parte del enlace del crédito.
+- **LCP**: como la foto normal; solo la primera pantalla sin `loading="lazy"`. El PNG pesa más que un JPG: el
+  Desarrollador debe servirlo por `astro:assets` (WebP o AVIF con alfa) y no el PNG tal cual (RNF-2).
+- **Dato ausente**: sin `edits` → foto normal (arriba). Sin imagen → silueta en franja clara. Con `edits` y sin
+  `attribution` → coche recortado sin pie de foto.
+
+Copy nuevo (RNF-4): `tarjeta.fotoModificada` «Foto: {atribucion} (modificada)».
 
 ## Lector de pantalla
 El encabezado y el enlace se leen «Cupra Tavascan» (la marca va dentro, ver «Estructura»), y el resto de la

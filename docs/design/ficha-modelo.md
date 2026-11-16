@@ -168,6 +168,56 @@ principal con su atribución.
   (`.hero .silhouette`). Decorativa (`aria-hidden`), sin pie, sin texto. Ninguna imagen de la marca en su lugar
   (CA-12). En el catálogo, la pantalla sin foto pasa a clara (`tarjeta-modelo.md`); aquí no, porque la ruta, el `h1`
   y las cifras clave están pintados para la franja oscura y la siguiente franja (Versiones) ya es blanca.
+- **Imagen retocada** (`images[0]` con `edits`): no va a sangre ni con `cover`; ver la sección siguiente.
+
+### Imagen retocada en la primera pantalla (RF-15, CA-23, ADR-0025) — 2026-11-16
+
+El PNG con el coche recortado sobre transparente y su sombra de apoyo. A sangre y con `cover` pierde techo y morro
+(piloto, #1106, Renault 4). Prototipo `web/design-proto/retocadas.astro`, la primera pantalla de las capturas
+[`refs/retocadas-390.png`](refs/retocadas-390.png) y [`refs/retocadas-1280.png`](refs/retocadas-1280.png). Las reglas
+de encaje, fondo, suelo y tratamiento son las de [`tarjeta-modelo.md`](tarjeta-modelo.md), «Imagen retocada»; aquí,
+solo lo que cambia en la ficha.
+
+```
+Móvil (390)                        Escritorio (≥ 1024)
+┌──────────────────────────┐       ┌──────────────────────────────────────────────┐
+│▓ siete3                  │       │▓ siete3                                      ▓│
+│▓ Coches › Renault › R4…  │       │▓ Coches › Renault › Renault 4 E-Tech…        ▓│
+│▓ ┌──────────────────────┐ │       │▓                      ┊ ┌──────────────────┐ ▓│
+│▓ │ coche entero (flex 1,│ │       │▓ Renault              ┊ │  coche entero,   │ ▓│
+│▓ │ mín. 12 rem), abajo  │ │       │▓ RENAULT 4            ┊ │  contain, abajo  │ ▓│
+│▓ └────── suelo ─────────┘ │       │▓ E-TECH eléctrico     ┊ │                  │ ▓│
+│▓ Renault                 │       │▓ Segmento · enlaces   ┊ └───── suelo ─────┘ ▓│
+│▓ RENAULT 4 E-TECH …      │       │▓ Foto: … (modificada) ┊                      ▓│
+│▓ Segmento · enlaces      │       │▓──────────────────────────────────────────────▓│
+│▓ Foto: … (modificada)    │       │▓ 21.974 €   409 km    110 kW    52 kWh        ▓│
+│▓ cifras 2 × 2            │       └──────────────────────────────────────────────┘
+└──────────────────────────┘        texto: mitad izquierda · coche: mitad derecha
+```
+
+- **Fondo**: el de la franja, `ink-950`, sin foto detrás; el hueco lleva el suelo de `--color-cutout-floor`.
+- **Sin velo**: ni el de arriba (ruta) ni el de abajo (`h1`): el coche no pasa por debajo de ningún texto. Contraste
+  de la franja lisa: `on-dark` 18,86, `on-dark-muted` 10,61.
+- **Móvil**: el hueco va **en el flujo**, entre la ruta y el `h1` (en el DOM, el `figure` se queda donde está la
+  imagen principal; el orden visual lo da `order` o la rejilla, sin cambiar el orden de lectura de «Estructura»):
+  ocupa el alto que sobra de la primera pantalla (`flex: 1`), con mínimo `--size-cutout-mobile` (12 rem), y
+  1,25 rem de margen a los lados. Un nombre largo empuja al coche hacia arriba y lo encoge hasta ese mínimo; si
+  aún no cabe, la primera pantalla crece (`min-height: 100svh`, no `height`). Nunca se solapan.
+- **`lg`**: texto en la mitad izquierda (cada hijo de `.hero-text` con `max-width: calc(50vw - 4rem)`), abajo, sobre
+  las cifras; el coche en la mitad derecha, `inset: 6.5rem 2.5rem 1rem 50%` dentro de la zona de foto (de debajo de
+  la ruta hasta encima de las cifras), apoyado abajo. Las cifras clave siguen a todo el ancho, debajo de los dos.
+  El `h1` sigue en `--text-display`: a 1280 px «Renault 4 / E-Tech / eléctrico» cabe en su mitad en tres líneas,
+  por palabras (captura). La fila de segmento, enlaces y crédito parte en líneas dentro de la mitad.
+- **Crédito (CA-23)**: `figcaption` «Foto: {attribution} (modificada)» (`ficha.imagen.atribucionModificada`), en el
+  mismo sitio y estilo que la atribución normal (`text-small`, `on-dark-muted`, 10,61), en su propia línea al final
+  de la fila de enlaces (en `lg` también, porque la fila está en media pantalla). «(modificada)» no se separa de la
+  atribución. Si `attribution` es `null`, sin pie.
+- **`alt`**: el mismo `ficha.imagen.alt` («{marca} {modelo}, imagen 1 de {n}»); no dice «modificada», eso lo dice el
+  crédito visible.
+- **LCP**: igual que la foto normal (`fetchpriority="high"`, sin `lazy`, ancho y alto declarados) y servido por
+  `astro:assets` en un formato con alfa (WebP o AVIF), no el PNG original (RNF-2). `sizes`: `(min-width: 1024px) 50vw, 100vw`.
+
+Copy nuevo (RNF-4): `ficha.imagen.atribucionModificada` «Foto: {attribution} (modificada)».
 
 ### Disposición de la primera pantalla (RF-18)
 - **Alto**: al menos `100svh` entre foto y cifras clave, de modo que la primera pantalla sea foto y cifras; el borde

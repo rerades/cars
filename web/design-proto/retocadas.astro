@@ -1,0 +1,432 @@
+---
+// Retouched images (ADR-0025, PRD-001 RF-15, CA-23) in the "Pantalla" direction: the car cut out on
+// transparency is fitted whole (contain) on the dark band, never under the text, so it needs no scrim.
+// Spec: docs/design/tarjeta-modelo.md and docs/design/ficha-modelo.md, "Imagen retocada".
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import "../src/styles/global.css";
+import "./pantalla.css";
+import Cifra from "./a/Cifra.astro";
+import { cardView } from "../src/lib/card.ts";
+import { loadModels, normalize } from "../src/lib/data.ts";
+import { parse } from "yaml";
+import fordYaml from "../../data/raw/ford/e-tourneo-custom.yaml?raw";
+import { formatDecimal, formatEur, formatNumber } from "../src/lib/format.ts";
+import { t } from "../src/lib/i18n.ts";
+
+// The two PNG of the pilot (PR #1106), not yet in data/images/: matched to their model by hand here.
+const pngs = import.meta.glob<{ default: ImageMetadata }>("./retocadas/*.png", { eager: true });
+const png = (name: string) => Object.entries(pngs).find(([k]) => k.endsWith(name))![1].default;
+const CASES = [
+  { file: "renault/r4-e-tech-electrico.yaml", src: png("renault-r4-frontal.png") },
+  { file: "ford/e-tourneo-custom.yaml", src: png("ford-e-tourneo-custom-exterior.png") },
+];
+// The Ford is needs_review, so loadModels() skips it; read here only to try a tall van shape (never published).
+const ford = normalize(parse(fordYaml), "ford/e-tourneo-custom.yaml");
+const models = [...loadModels().models, ford];
+const picked = CASES.map((c) => ({ ...c, model: models.find((m) => m.file === c.file)! }));
+// Proposed copy (RNF-4): tarjeta.fotoModificada / ficha.imagen.atribucionModificada.
+const credit = (a: string) => `Foto: ${a} (modificada)`;
+
+const screens = picked.map(({ model, src }) => ({
+  card: cardView(model),
+  src,
+  attribution: model.images[0]?.attribution,
+  pageUrl: model.images[0]?.page_url,
+  price: model.price_from ? formatEur(model.price_from.value) : null,
+  range: model.max_range_km ? t("ficha.unidad.km", { n: formatNumber(model.max_range_km.value) }) : null,
+}));
+
+const hero = picked[0];
+const hcard = cardView(hero.model);
+const hp = hero.model.price_from;
+const hr = hero.model.max_range_km;
+const best = (xs: ({ value: number } | null | undefined)[]) =>
+  xs.reduce<{ value: number } | null>((top, d) => (d && (!top || d.value > top.value) ? d : top), null);
+const power = hero.model.specs.power_max_kw ?? best(hero.model.versions.map((v) => v.power_kw));
+const battery = best(hero.model.versions.map((v) => v.battery_kwh));
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Imagen retocada</title>
+  </head>
+  <body>
+    <main>
+      <section class="hero band-dark">
+        <div class="hero-screen">
+          <figure class="cutout cutout--hero">
+            <Image src={hero.src} alt={t("ficha.imagen.alt", { marca: hcard.brand, modelo: hcard.model, i: 1, n: 1 })} widths={[640, 960, 1280]} sizes="(min-width: 1024px) 50vw, 100vw" loading="eager" fetchpriority="high" />
+          </figure>
+          <div class="wrap hero-top">
+            <a href="/" class="wordmark">{t("sitio.nombre")}</a>
+            <nav aria-label={t("ficha.ruta.nombre")} class="crumbs">
+              <ol>
+                <li><a href="/coches">{t("ficha.ruta.coches")}</a></li>
+                <li><a href="/marcas/renault/">{hcard.brand}</a></li>
+                <li aria-current="page">{hcard.model}</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="wrap hero-text">
+            <h1 class="hero-name wide">
+              <span class="hero-brand">{hcard.brand}</span>
+              <span class="hero-model">{hcard.model.split(" ").map((w) => <><span class="word">{w}</span>{" "}</>)}</span>
+            </h1>
+            <div class="hero-meta">
+              <p class="hero-segment">{hcard.hasSegment && <>{t("ficha.segmento.rotulo")}: </>}{hcard.segmentLabel}</p>
+              <a href={hero.model.status.url} class="hero-link">{t("ficha.webMarca")}</a>
+              {hcard.compare && <a href={hcard.compare.href} class="hero-link">{hcard.compare.label}</a>}
+              {hero.model.images[0]?.attribution && <p class="hero-credit">{credit(hero.model.images[0].attribution)}</p>}
+            </div>
+          </div>
+        </div>
+        <section aria-label="Cifras clave" class="wrap figures">
+          <dl class="figures-grid">
+            <Cifra size="xl" label={hcard.dealLabel ? `${hcard.labels.price} · ${hcard.dealLabel}` : hcard.labels.price} text={hp ? formatEur(hp.value) : null} />
+            <Cifra size="xl" label={hcard.labels.range} text={hr ? t("ficha.unidad.km", { n: formatNumber(hr.value) }) : null} />
+            <Cifra size="xl" label={t("ficha.campo.potencia")} text={power ? t("ficha.unidad.kw", { n: formatDecimal(power.value) }) : null} />
+            <Cifra size="xl" label={t("ficha.campo.bateria")} text={battery ? t("ficha.unidad.kwh", { n: formatDecimal(battery.value) }) : null} />
+          </dl>
+        </section>
+      </section>
+
+      <ul class="screens">
+        {
+          screens.map(({ card, src, attribution, pageUrl, price, range }) => (
+            <li class="screen screen--cutout band-dark">
+              <div class="cutout cutout--screen">
+                <Image src={src} alt="" widths={[640, 960, 1280]} sizes="(min-width: 1024px) 50vw, 100vw" />
+              </div>
+              <div class="wrap screen-inner">
+                <div class="screen-text">
+                  <p class="screen-brand">{card.brand}</p>
+                  <h2 class="screen-name wide">
+                    <a href={`/marcas/${card.key}/`} class="screen-link">{card.model.split(" ").map((w) => <><span class="word">{w}</span>{" "}</>)}</a>
+                  </h2>
+                  <p class:list={["screen-segment", !card.hasSegment && "is-missing"]}>{card.segmentLabel}</p>
+                  {card.statusLabel && (
+                    <p class="screen-status"><span class="inline-block rounded-full bg-soon-bg px-3 py-1 text-badge text-soon-fg">{card.statusLabel}</span></p>
+                  )}
+                  <dl class="screen-figures">
+                    <Cifra size="l" label={card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` : card.labels.price} text={price} />
+                    <Cifra size="l" label={card.labels.range} text={range} />
+                  </dl>
+                  <p class="screen-foot">
+                    {card.compare && <a href={card.compare.href} class="foot-link foot-link--compare">{card.compare.label}</a>}
+                    {attribution && <a href={pageUrl} class="foot-link foot-link--credit">{credit(attribution)}</a>}
+                  </p>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  /* The cut-out car: whole (contain), on the band's own ink-950, with the common colour treatment of the
+     photos but no vignette and no scrim: the box never reaches the text. A faint floor lets the support
+     shadow of the PNG read on the dark band. */
+  :root {
+    --color-cutout-floor: rgb(255 255 255 / 0.07);
+    --size-cutout-mobile: 12rem;
+  }
+
+  .cutout {
+    background: radial-gradient(ellipse 60% 22% at 50% 88%, var(--color-cutout-floor), transparent 70%);
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .cutout img {
+    display: block;
+    filter: saturate(0.72) contrast(1.06) brightness(0.86);
+    height: 100%;
+    object-fit: contain;
+    object-position: 50% 100%;
+    width: 100%;
+  }
+
+  /* ---- Catalogue screen ---- */
+  .screens {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Mobile: the car box is the top 12 rem, the text starts 1 rem below it. */
+  .cutout--screen {
+    height: 12rem;
+    inset: 1.5rem 1.25rem auto;
+  }
+
+  .screen-inner {
+    position: relative;
+    width: 100%;
+  }
+
+  .screen--cutout .screen-text {
+    padding-block: 14.5rem 0.5rem;
+  }
+
+  .screen-brand {
+    font-size: var(--text-body);
+    font-weight: 600;
+  }
+
+  .screen-name {
+    font-size: var(--text-screen);
+    margin-top: 0.125rem;
+  }
+
+  .screen-link {
+    color: inherit;
+  }
+
+  .screen-link::after {
+    content: "";
+    inset: 0;
+    position: absolute;
+  }
+
+  .screen-segment {
+    font-size: var(--text-small);
+    margin-top: 0.5rem;
+  }
+
+  .screen-status {
+    margin-top: 0.75rem;
+  }
+
+  .screen-figures {
+    column-gap: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1rem;
+  }
+
+  .screen-figures > div {
+    border-top: 1px solid var(--color-line-soft);
+    padding-top: 0.875rem;
+  }
+
+  .screen-foot {
+    column-gap: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+
+  .foot-link {
+    align-items: center;
+    display: inline-flex;
+    font-size: var(--text-small);
+    min-height: var(--spacing-touch);
+    position: relative;
+    text-decoration: underline;
+    z-index: 1;
+  }
+
+  .foot-link--compare {
+    color: var(--color-brand-600);
+    font-weight: 700;
+  }
+
+  .foot-link--credit {
+    color: var(--color-ink-600);
+    overflow-wrap: anywhere;
+  }
+
+  @media (min-width: 1024px) {
+    .screen {
+      min-height: 31.5rem;
+    }
+
+    /* The car takes the half opposite the text, inset from the band edges; sides alternate like the photos. */
+    .cutout--screen {
+      height: auto;
+      inset: 2.5rem 2.5rem 2.5rem 50%;
+    }
+
+    .screen:nth-child(even) .cutout--screen {
+      inset: 2.5rem 50% 2.5rem 2.5rem;
+    }
+
+    .screen:nth-child(even) .screen-text {
+      margin-left: auto;
+    }
+
+    .screen--cutout .screen-text {
+      max-width: 44%;
+      padding-block: 2rem 0.75rem;
+    }
+  }
+
+  /* ---- First screen of the ficha ---- */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+  }
+
+  .hero-screen {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Mobile: the car sits in the flow, between the route and the name, so a long name pushes it, never
+     covers it. */
+  .cutout--hero {
+    flex: 1;
+    margin-inline: 1.25rem;
+    min-height: 12rem;
+    position: relative;
+  }
+
+  .cutout--hero img {
+    inset: 0;
+    position: absolute;
+  }
+
+  .hero-top {
+    order: -1;
+    padding-top: 0.5rem;
+    width: 100%;
+  }
+
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--text-small);
+  }
+
+  .crumbs li {
+    align-items: center;
+    display: flex;
+    min-height: var(--spacing-touch);
+  }
+
+  .crumbs li:not(:last-child)::after {
+    content: "›" / "";
+    margin-inline: 0.5rem;
+  }
+
+  .crumbs a {
+    text-decoration: underline;
+  }
+
+  .hero-text {
+    padding-block: 1rem;
+    width: 100%;
+  }
+
+  .hero-name {
+    display: block;
+    font-size: var(--text-display);
+    line-height: 0.98;
+  }
+
+  .hero-brand {
+    display: block;
+    font-size: var(--text-body);
+    font-stretch: 100%;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: var(--text-body--line-height);
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-model {
+    display: block;
+  }
+
+  .hero-meta {
+    align-items: center;
+    column-gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--text-small);
+    margin-top: 0.75rem;
+  }
+
+  .hero-segment,
+  .hero-credit {
+    flex-basis: 100%;
+  }
+
+  .hero-credit {
+    color: var(--color-on-dark-muted);
+    overflow-wrap: anywhere;
+  }
+
+  .hero-link {
+    align-items: center;
+    display: inline-flex;
+    font-weight: 600;
+    min-height: var(--spacing-touch);
+    text-decoration: underline;
+  }
+
+  .figures {
+    padding-block: 1.25rem var(--menu-clearance);
+    width: 100%;
+  }
+
+  .figures-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .figures-grid > div {
+    border-top: 1px solid var(--color-line-soft);
+    padding-top: 0.75rem;
+  }
+
+  @media (min-width: 1024px) {
+    /* Desktop: text in the left half, at the bottom; the car in the right half, from below the route
+       down to the figures. */
+    .hero-screen {
+      justify-content: flex-end;
+    }
+
+    .cutout--hero {
+      inset: 6.5rem 2.5rem 1rem 50%;
+      margin: 0;
+      min-height: 0;
+      position: absolute;
+    }
+
+    .hero-top {
+      margin-bottom: auto;
+    }
+
+    .hero-text > * {
+      max-width: calc(50vw - 4rem);
+    }
+
+    .hero-segment,
+    .hero-credit {
+      flex-basis: 100%;
+    }
+
+    .figures-grid {
+      gap: 2.5rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>
