@@ -181,9 +181,22 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
     assert.match(text(block), /La marca publica estos datos para el modelo entero, no para cada versión\./);
     assert.match(text(block), /Capacidades de batería 58 kWh · 77 kWh/);
     assert.match(text(block), /Tracciones Delantera · Total/);
-    assert.match(text(block), /Potencia máxima del modelo 250 kW/);
-    assert.match(text(block), /Carga máxima en CC 135 kW \[\d+\] 10-80 % en 29 min/);
-    assert.match(text(block), /Carga máxima en CA 11 kW/);
+    assert.match(text(block), /Potencia máxima del modelo \[\d+\] 250 kW/);
+    assert.match(text(block), /Carga máxima en CC \[\d+\] 135 kW 10-80 % en 29 min/);
+    assert.match(text(block), /Carga máxima en CA \[\d+\] 11 kW/);
+  });
+
+  test("RF-7: dark band; single values are key figures (Cifra, size m), lists are not", () => {
+    const block = modelBlock(page("beta", "Specs"))!;
+    assert.match(/<section[^>]*>/.exec(block)![0], /band-dark/);
+    for (const k of ["wltp_max_km", "power_max_kw", "dc_max_kw", "ac_max_kw"]) {
+      if (new RegExp(`data-figure="${k}"`).test(block)) {
+        assert.match(block, new RegExp(`class="[^"]*cifra--m[^"]*"[^>]*data-figure="${k}"`));
+      }
+    }
+    assert.match(block, /data-figure="power_max_kw"/);
+    assert.doesNotMatch(/data-spec="battery_kwh_options"[\s\S]*?<\/div>/.exec(block)![0], /cifra/);
+    assert.match(block, /data-spec="drivetrains"/);
   });
 
   test("RF-7: a model without specs has no «Datos del modelo» block or h2", () => {
@@ -194,8 +207,8 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
 
   test("RF-7: only the rows that specs carries", () => {
     const block = text(modelBlock(page("acme", "Volta"))!);
-    assert.match(block, /Autonomía WLTP máxima del modelo 520 km (?:<[^>]*>|\s|\[\d+\])*hasta 520 km/);
-    assert.match(block, /Carga máxima en CC 150 kW/);
+    assert.match(block, /Autonomía WLTP máxima del modelo \[\d+\] 520 km hasta 520 km/);
+    assert.match(block, /Carga máxima en CC \[\d+\] 150 kW/);
     assert.doesNotMatch(block, /Potencia|Carga máxima en CA|batería|Tracciones/);
   });
 

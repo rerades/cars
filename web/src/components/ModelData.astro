@@ -1,0 +1,59 @@
+---
+import Cifra from "./Cifra.astro";
+import SourceMark from "./SourceMark.astro";
+import { t } from "../lib/i18n.ts";
+
+/**
+ * «Datos del modelo» band (PRD-002 RF-5, RF-7; docs/design/ficha-modelo.md). Dark band: the single-value
+ * specs (range, power, charging) are key figures (`Cifra`, size m); the lists (battery capacities,
+ * drivetrains) are not figures and stay as plain label/value pairs. Titles come from i18n (RNF-4).
+ */
+export interface ModelDataRow {
+  key: string;
+  label: string;
+  text: string;
+  note?: string;
+  mark: { n: number; unofficial: boolean };
+}
+interface Props {
+  rows: ModelDataRow[];
+  /** Band class chosen by the page (`band-dark` per the design). */
+  band: string;
+}
+const { rows, band } = Astro.props;
+const FIGURES = ["wltp_max_km", "power_max_kw", "dc_max_kw", "ac_max_kw"];
+const figures = rows.filter((r) => FIGURES.includes(r.key));
+const lists = rows.filter((r) => !FIGURES.includes(r.key));
+---
+
+{
+  rows.length > 0 && (
+    <section aria-labelledby="datos-modelo" class:list={["band-section", band]} data-ficha-modelo>
+      <h2 id="datos-modelo" class="text-section text-ink-900">{t("ficha.modelo.titulo")}</h2>
+      <p class="mt-1 text-small text-ink-600">{t("ficha.modelo.entrada")}</p>
+      {figures.length > 0 && (
+        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4" data-model-figures>
+          {figures.map((row) => (
+            <Cifra size="m" label={row.label} text={row.text} figure={row.key}>
+              <span slot="marca"> <SourceMark {...row.mark} /></span>
+              {row.note && <span slot="detalle">{row.note}</span>}
+            </Cifra>
+          ))}
+        </dl>
+      )}
+      {lists.length > 0 && (
+        <dl class="mt-8 grid max-w-prose grid-cols-1 gap-4 md:grid-cols-2" data-model-lists>
+          {lists.map((row) => (
+            <div data-spec={row.key}>
+              <dt class="text-small text-ink-600">{row.label}</dt>
+              <dd class="text-body text-ink-900">
+                {row.text} <SourceMark {...row.mark} />
+              </dd>
+              {row.note && <dd class="text-small text-ink-600">{row.note}</dd>}
+            </div>
+          ))}
+        </dl>
+      )}
+    </section>
+  )
+}

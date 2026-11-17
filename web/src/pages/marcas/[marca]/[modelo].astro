@@ -12,6 +12,7 @@ import { loadModels, type ModelImage, type Price,type Review, type Sourced, type
 import { t, type MessageKey } from "../../../lib/i18n.ts";
 import { sortVersions } from "../../../lib/versions.ts";
 import { relatedModels } from "../../../lib/related.ts";
+import ModelData from "../../../components/ModelData.astro";
 import ModelCard from "../../../components/ModelCard.astro";
 import VersionBlock from "../../../components/VersionBlock.astro";
 import SourceMark from "../../../components/SourceMark.astro";
@@ -322,25 +323,7 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
       </section>
 
 
-      {
-        modelRows.length > 0 && (
-          <section aria-labelledby="datos-modelo" class:list={["band-section", band("datos")]} data-ficha-modelo>
-            <h2 id="datos-modelo" class="text-section text-ink-900">{t("ficha.modelo.titulo")}</h2>
-            <p class="mt-1 text-small text-ink-600">{t("ficha.modelo.entrada")}</p>
-            <dl class="mt-4 grid max-w-prose grid-cols-1 gap-4 md:grid-cols-2">
-              {modelRows.map((row) => (
-                <div data-spec={row.key}>
-                  <dt class="text-small text-ink-600">{row.label}</dt>
-                  <dd class="text-body text-ink-900">
-                    {row.text} <SourceMark {...markOf(row.datum)} />
-                  </dd>
-                  {row.note && <dd class="text-small text-ink-600">{row.note}</dd>}
-                </div>
-              ))}
-            </dl>
-          </section>
-        )
-      }
+      {modelRows.length > 0 && <ModelData rows={modelRows.map((r) => ({ ...r, mark: markOf(r.datum) }))} band={band("datos")} />}
 
       {
         rest.length > 0 && (

@@ -81,8 +81,8 @@ describe("model pages: served HTML (PRD-002 CA-14, CA-15, CA-18)", () => {
     assert.match(t, /39\.990\s?€/);
     assert.match(t, /47\.500\s?€/);
     assert.match(t, /Precio por confirmar/); // Volta GT: null price
-    assert.match(t, /Autonomía WLTP máxima del modelo 520 km/); // model-level specs
-    assert.match(t, /Carga máxima en CC 150 kW/);
+    assert.match(t, /Autonomía WLTP máxima del modelo (?:\[\d+\] )?520 km/); // model-level specs
+    assert.match(t, /Carga máxima en CC (?:\[\d+\] )?150 kW/);
     const fuentes = /<section[^>]*data-fuentes[\s\S]*?<\/section>/.exec(html)![0];
     assert.match(fuentes, /acme\.example/);
     assert.ok([...fuentes.matchAll(/<li\b/g)].length >= 1);
