@@ -1,6 +1,6 @@
 # ADR-0027 — Fuentes alternativas del precio cuando la web de la marca no da el PVP
 
-- **Estado:** propuesta
+- **Estado:** aceptada (2026-11-17). La pregunta 1 pasa a Producto: estudiará en PRD-001 RF-9 los precios de medios como T3 (opción 5).
 - **Fecha:** 2026-11-16
 
 ## Contexto
@@ -130,8 +130,8 @@ Detalles:
   número de modelos con precio.
 
 **Preguntas abiertas:**
-1. ¿Acepta Producto que tres de cada cuatro modelos queden «Precio por confirmar», o pide la enmienda
-   de la opción 5? Lo decide Producto en PRD-001 (RF-9) y después una ADR que enmiende ADR-0001.
+1. ~~¿Acepta Producto que tres de cada cuatro modelos queden «Precio por confirmar», o pide la enmienda
+   de la opción 5? Lo decide Producto en PRD-001 (RF-9) y después una ADR que enmiende ADR-0001.~~ → 2026-11-17: se acepta la ADR tal cual y Producto valora la opción 5 en PRD-001 RF-9, como pregunta abierta con recomendación. Si la acepta una persona, el Arquitecto enmienda ADR-0001.
 2. ¿Saben `fetch-page.ts` y el verificador de ADR-0020 leer el texto de un PDF? Si no, ¿se añade?
    Es una decisión de herramientas aparte.
 3. ¿Se usa un navegador sin cabeza para las 18 páginas de solo JavaScript (causa C)? ADR-0020 ya
