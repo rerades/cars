@@ -4125,3 +4125,98 @@
     «Depende de» solo historias que existen. Si falta algo, añádelo como comentario en la historia que
     toque, o crea una historia nueva con el mismo formato si no cabe en ninguna. Deja en la épica un
     comentario con el resultado. No reescribas el texto de las historias que existen. Bitácora."
+# 2026-11-17: #1121, #1123, #1127, #1129, #1117 and #1106 merged; ADR-0027 accepted with a Product study of
+# press prices (option 5). Remaining model-page stories, the #1119 review fix, the comparator and rankings in
+# the «Pantalla» direction (designer budget 20 -> 35), and ADR-0025 step 4 by brand.
+- id: historia-1037-revision
+  agent: developer
+  task: "Historia #1037 (épica #1032, PRD-001): segunda vuelta de la PR #1119, que el Revisor dejó en
+    review:changes. Parte de su trabajo: git merge --no-edit agent/developer/20261116-011507-91af85 (la
+    rama está en local) y resuelve los conflictos con main, quedándote con lo de las dos ramas. Después
+    corrige lo que pidió la revisión de la PR #1119: la
+    prueba «keyboard: Esc closes…» de web/tests/filters.test.ts solo busca texto en el JS. Sustitúyela por
+    una prueba de comportamiento en web/e2e/ con Playwright, como web/e2e/versiones.spec.ts: Esc cierra el
+    panel, aria-expanded vuelve a false y el foco vuelve al botón que lo abrió. La PR dice «Closes #1037» y
+    enumera los CA cubiertos."
+- id: historia-1041-animacion-cifras
+  agent: developer
+  task: "Historia #1041 (épica #1032, PRD-002): animación de las cifras clave de la ficha. Lee la issue
+    entera (gh issue view 1041 --comments) y haz exactamente lo que dice, sobre las cifras clave de la
+    #1040, que ya están en main. Toca solo las cifras clave de [modelo].astro y su script, porque #1043,
+    #1061 y #1045 tocan esa página en paralelo. La PR dice «Closes #1041» y enumera los CA cubiertos."
+- id: historia-1043-menu-secciones
+  agent: developer
+  task: "Historia #1043 (épica #1032, PRD-002): menú inferior de secciones de la ficha. Lee la issue
+    entera (gh issue view 1043 --comments) y haz exactamente lo que dice. Pon el menú en un componente
+    propio en web/src/components/ y en [modelo].astro cambia solo lo necesario para montarlo, porque #1041,
+    #1061 y #1045 tocan esa página en paralelo. La PR dice «Closes #1043» y enumera los CA cubiertos."
+- id: historia-1061-fuentes-y-reviews
+  agent: developer
+  task: "Historia #1061 (épica #1032, PRD-002): franjas «Fuentes» y «Reviews» de la ficha. Lee la issue
+    entera (gh issue view 1061 --comments) y haz exactamente lo que dice. Pon cada franja en un componente
+    propio en web/src/components/ y en [modelo].astro cambia solo esas secciones, porque #1041, #1043 y
+    #1045 tocan esa página en paralelo. Si no cabe en una PR, haz «Fuentes» y dilo en la PR. La PR dice
+    «Closes #1061» (o «Part of #1061» si la partes) y enumera los CA cubiertos."
+- id: historia-1045-imagenes-y-segmento
+  agent: developer
+  task: "Historia #1045 (épica #1032, PRD-002): franjas «Más imágenes» y «Otros modelos del segmento» de
+    la ficha. Lee la issue entera (gh issue view 1045 --comments) y haz exactamente lo que dice. Pon cada
+    franja en un componente propio en web/src/components/ y en [modelo].astro cambia solo esas secciones,
+    porque #1041, #1043 y #1061 tocan esa página en paralelo. Si no cabe en una PR, haz «Más imágenes» y
+    dilo en la PR. La PR dice «Closes #1045» (o «Part of #1045» si la partes) y enumera los CA cubiertos."
+- id: pruebas-ca9-ficha
+  agent: developer
+  task: "Huecos de pruebas que señaló el Revisor en las PR #1127 y #1129, ya fusionadas. (1) En
+    web/tests/ficha-versiones-datos.test.ts, un caso con un dato T3 y otro T1 dentro de un bloque de
+    versión y otro en «Datos del modelo»: «fuente no oficial» sale con T3 y no con T1 (CA-9 de PRD-002).
+    (2) En web/tests/ficha.test.ts, la prueba «RF-7: dark band…» tiene un if antes de la aserción de cada
+    cifra y no falla si una desaparece: quita el if y exige las cuatro con un modelo que las traiga todas.
+    Solo pruebas, salvo que una prueba nueva destape un fallo: entonces arréglalo y dilo en la PR."
+- id: historia-fotos-retocadas-web
+  agent: planner
+  task: "La PR #1117 (fusionada) especificó en docs/design/tarjeta-modelo.md y docs/design/ficha-modelo.md
+    cómo se ve una foto retocada (ADR-0025, PRD-001 RF-15 y CA-23): encaje contain abajo, suelo con
+    --color-cutout-floor, crédito «(modificada)» con sus claves de i18n, y PNG servidos como WebP o AVIF
+    con astro:assets para conservar la transparencia (RNF-2). La revisión de la épica #1032 dejó RF-15
+    fuera de la épica, y no hay historia que lo lleve a web/src/. Crea esa historia en la épica #1032 con
+    el mismo formato que las demás, citando las dos secciones de diseño, docs/design/refs/retocadas-*.png
+    como referencia, y que hay que borrar web/design-proto/retocadas.astro al terminar (ADR-0024). Deja
+    un comentario en la épica. Bitácora."
+- id: precio-de-medios-prd
+  agent: product
+  task: "ADR-0027 (aceptada el 2026-11-17) deja 164 de los 214 modelos sin precio y la opción 5, precios
+    de medios, como única vía que mueve ese número. El usuario pide que Producto la valore. Lee ADR-0027
+    (pregunta abierta 1 y opción 5), ADR-0001 y PRD-001 RF-9. Propón en PRD-001 cómo sería: si un precio
+    de medio (T3) puede salir en la web, cómo se distingue del PVP de la marca (la web ya marca los datos
+    T3 como «fuente no oficial»), qué pasa en rankings (ADR-0015) y comparador (ADR-0014) y qué hacer si
+    dos medios discrepan. Déjalo como pregunta abierta con tu recomendación, no como requisito aceptado:
+    decide una persona, y si lo acepta, el Arquitecto enmienda ADR-0001. No toques ADR ni data/. Bitácora."
+- id: comparador-pantalla
+  agent: designer
+  task: "docs/design/comparador.md es anterior a la dirección visual elegida (docs/design/direccion.md: A
+    «Pantalla» con la tipografía y las versiones de B; tokens en docs/design/tokens.md, «Dirección
+    visual»). Pásalo a esa dirección: franjas, tipografía, el componente Cifra y cómo se ven las fotos
+    (también las retocadas, ver tarjeta-modelo.md) en las columnas, a 320 px y a 1280 px. Sigue ADR-0024:
+    prototipo en web/design-proto/ con los datos de prueba y capturas con node web/scripts/design-shot.ts
+    en docs/design/refs/. No cambies el alcance de PRD-003 ni los textos que ya están en i18n. Bitácora."
+- id: rankings-pantalla
+  agent: designer
+  task: "docs/design/rankings.md es anterior a la dirección visual elegida (docs/design/direccion.md: A
+    «Pantalla» con la tipografía y las versiones de B; tokens en docs/design/tokens.md, «Dirección
+    visual»). Pásalo a esa dirección: franjas, tipografía, la tarjeta como pantalla y el componente Cifra
+    para el valor del ranking, a 320 px y a 1280 px, y cómo encaja el grupo «Rankings» en la franja
+    «Explorar». Sigue ADR-0024: prototipo en web/design-proto/ con capturas con node
+    web/scripts/design-shot.ts en docs/design/refs/. No cambies el alcance de ADR-0015 ni de su PRD.
+    Bitácora."
+- id: retoque-peugeot
+  agent: retoucher
+  task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/peugeot/, siguiendo
+    .claude/agents/retoucher.md y docs/design/fotos-modelos.md, como en el piloto (PR #1106). Salta las
+    imágenes que ya tienen edits o que un open_questions ya rechazó. En el resumen, la tabla de cada foto y
+    si el script tapó bien la matrícula donde la había. Bitácora."
+- id: retoque-mercedes-benz
+  agent: retoucher
+  task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/mercedes-benz/, siguiendo
+    .claude/agents/retoucher.md y docs/design/fotos-modelos.md, como en el piloto (PR #1106). Salta las
+    imágenes que ya tienen edits o que un open_questions ya rechazó. En el resumen, la tabla de cada foto y
+    si el script tapó bien la matrícula donde la había. Bitácora."

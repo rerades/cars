@@ -33,7 +33,7 @@ agents:
   # suma asignada: 197 USD de los 200 del tope global (3 sin asignar): ningún agente puede agotarlo solo
   researcher:
     max_runs_per_day: 10   # 12 marcas en cola a ~0,24 USD cada una: el tope mensual no se mueve
-    max_usd_per_period: 53   # 50 -> 53 on 2026-10-28: six price and page_name tasks queued with 8.43 left, from the unassigned 15; 40 -> 50 on 2026-10-21: six tasks queued for one night (prices, images, reviews) at up to 1.50 each, with 8.06 left; from the unassigned 25. 7 -> 40 on 2026-10-08: brand data, per-brand image migration and the monthly refresh (ADR-0010); earlier: 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
+    max_usd_per_period: 38   # 53 -> 38 on 2026-11-17: 15 to the designer, 31.05 spent, UX first (2026-11-06); 50 -> 53 on 2026-10-28: six price and page_name tasks queued with 8.43 left, from the unassigned 15; 40 -> 50 on 2026-10-21: six tasks queued for one night (prices, images, reviews) at up to 1.50 each, with 8.06 left; from the unassigned 25. 7 -> 40 on 2026-10-08: brand data, per-brand image migration and the monthly refresh (ADR-0010); earlier: 2026-09-26: 1 USD al designer y 1 al architect; 2026-09-27: otro al designer, y 2 al reviewer; 5 -> 7 on 2026-09-29, taken from architect
     max_usd_per_run: 1.50   # 1.00 -> 1.50 on 2026-09-29: Mercedes-Benz (8 models) was cut at 1.02
     max_turns_per_run: 40   # 25 -> 40 on 2026-11-12: furgonetas-renault was cut at 26 turns and 0.81 USD
     api_key_env: RESEARCHER_API_KEY   # solo en fase 2 (workspace propio en Anthropic Console)
@@ -108,7 +108,7 @@ agents:
   designer:
     model: claude-opus-5-5   # kept after the #80 trial (2026-10-06): every run finished, ~0.89 USD per finished task
     max_runs_per_day: 3   # 2 -> 3 on 2026-11-06: one run per visual direction in the same night
-    max_usd_per_period: 20   # 7 -> 20 on 2026-10-08 (Opus); earlier: 2 -> 7 on 2026-09-27: room for ~5 Opus runs to compare against Sonnet (#80)
+    max_usd_per_period: 35   # 20 -> 35 on 2026-11-17: 14.20 spent, comparator and rankings in the «Pantalla» direction queued; taken from researcher (UX first). 7 -> 20 on 2026-10-08 (Opus); earlier: 2 -> 7 on 2026-09-27: room for ~5 Opus runs to compare against Sonnet (#80)
     max_usd_per_run: 3.00   # 2.00 -> 3.00 on 2026-11-06: two prototypes with screenshots; one alone cost 0.96. 1.00 -> 2.00 on 2026-09-27: Opus is 2x per token
     max_turns_per_run: 60   # 20 -> 60 on 2026-11-06: the one-prototype trial reported 45 turns
     api_key_env: DESIGNER_API_KEY
