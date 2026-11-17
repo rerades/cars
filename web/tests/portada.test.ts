@@ -103,6 +103,12 @@ describe("home page with models", () => {
     assert.match(home, /<p[^>]*data-count[^>]*>\s*3 modelos en el catálogo\s*<\/p>/);
     assert.equal(titleOf(home), t("pagina.portada.tituloDocumento"));
     assert.match(home, /<html lang="es">/);
+    // Header in the dark band, like the catalog pages (h1, intro and counter inside it).
+    const header = /<header class="band-dark">[\s\S]*?<\/header>/.exec(home)?.[0] ?? "";
+    assert.match(header, /<h1\b/);
+    assert.match(header, /data-intro/);
+    assert.match(header, /data-count/);
+    assert.match(coches, /<header class="band-dark">/);
   });
 
   test("CA-2: counter is 3 (sale, announced, discontinued; needs_review left out) and equals the cards of /coches", () => {
