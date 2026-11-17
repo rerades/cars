@@ -36,6 +36,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-15): rechazada, causa `pegado`: rotulación de concesionario («Emil Frey Auto Palazzo») en el lateral y en la matrícula; el retoque no puede quitarla sin tocar la carrocería. Buscar un coche sin rotular."
   - "abarth.es devuelve 403 (home y robots.txt): sin precios T1; price: null en todas las versiones."
   - "Versiones y estado salen de un artículo de motor.es de 2023-05-19; no se ha podido confirmar que se sigan vendiendo hoy en España: needs_review."
   - "launch: ninguna fuente da la fecha desde la que se puede pedir (el artículo no la indica)."

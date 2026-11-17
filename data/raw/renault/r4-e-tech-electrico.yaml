@@ -81,7 +81,8 @@ versions:
       retrieved: 2026-11-01
       tier: T1
 images:
-  - file: data/images/renault/r4-e-tech-electrico/frontal.jpg
+  - file: data/images/renault/r4-e-tech-electrico/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Renault-4-E-Tech-electric-2025-rouge-carmin-01-byRundvald.jpg/1280px-Renault-4-E-Tech-electric-2025-rouge-carmin-01-byRundvald.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Renault-4-E-Tech-electric-2025-rouge-carmin-01-byRundvald.jpg"
     source_id: wikimedia-commons
