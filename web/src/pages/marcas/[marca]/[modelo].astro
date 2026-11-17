@@ -4,7 +4,11 @@ import { cardView, type CardView } from "../../../lib/card.ts";
 import ModelFigure from "../../../components/ModelFigure.astro";
 import SegmentSilhouette from "../../../components/SegmentSilhouette.astro";
 import ReviewsBlock from "../../../components/ReviewsBlock.astro";
-import { loadModels, type ModelImage, type Review, type Sourced, type TestResult, type Specs, type Version } from "../../../lib/data.ts";
+import Cifra from "../../../components/Cifra.astro";
+import SourceDate from "../../../components/SourceDate.astro";
+import { batteryFigure, powerFigure } from "../../../lib/key-figures.ts";
+import { formatDecimal, formatEur, formatNumber } from "../../../lib/format.ts";
+import { loadModels, type ModelImage, type Price,type Review, type Sourced, type TestResult, type Specs, type Version } from "../../../lib/data.ts";
 import { t, type MessageKey } from "../../../lib/i18n.ts";
 import { chunkVersions, sortVersions } from "../../../lib/versions.ts";
 import { relatedModels } from "../../../lib/related.ts";
@@ -29,11 +33,13 @@ export function getStaticPaths() {
   return models.map((model) => {
     const [marca, file] = model.file.replace(/\.yaml$/, "").split("/");
     const related = relatedModels(model, models).map((m) => cardView(m));
-    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, status: model.status, launch: model.launch, segment: model.segment, images: model.images, specs: model.specs, related, reviews: model.reviews, testResults: model.test_results } };
+    return { params: { marca, modelo: file }, props: { card: cardView(model), versions: sortVersions(model.versions), brandSlug: marca, brandUrl: model.status.url, status: model.status, launch: model.launch, segment: model.segment, images: model.images, specs: model.specs, related, reviews: model.reviews, testResults: model.test_results, priceFrom: model.price_from, maxRange: model.max_range_km } };
   });
 }
 
-const { card, versions, brandSlug, brandUrl, status, launch, segment, images, specs, related, reviews, testResults } = Astro.props as {
+const { card, versions, brandSlug, brandUrl, status, launch, segment, images, specs, related, reviews, testResults, priceFrom, maxRange } = Astro.props as {
+  priceFrom: Price | null;
+  maxRange: Sourced<number> | null;
   reviews: Review[];
   testResults: TestResult[];
   card: CardView;
@@ -90,8 +96,15 @@ const headerData: Sourced[] = [];
 if (card.statusLabel) headerData.push(status);
 if (card.statusKind === "soon" && launch) headerData.push(launch);
 if (segment) headerData.push(segment);
+// Key figures of the first screen (RF-18): their data join the walk right after the header. The price shows
+// its own source next to the figure, so it is not a note.
+const powerDatum = powerFigure(versions, specs);
+const batteryDatum = batteryFigure(versions);
 const { notes, numberOf } = groupNotes([
   ...headerData,
+  maxRange,
+  powerDatum,
+  batteryDatum,
   ...versions.flatMap((v) => fieldsOf(v).map((f) => f.datum)),
   ...modelRows.map((r) => r.datum),
 ]);
@@ -99,6 +112,11 @@ const markOf = (s: Sourced) => ({ n: numberOf(s), unofficial: s.tier !== "T1" })
 const statusMark = card.statusLabel ? markOf(status) : null;
 const launchMark = card.statusKind === "soon" && launch ? markOf(launch) : null;
 const segmentMark = segment ? markOf(segment) : null;
+const keyFigures = [
+  { id: "range", label: t("ficha.cifras.autonomia"), datum: maxRange, text: maxRange ? t("ficha.unidad.km", { n: formatNumber(maxRange.value) }) : null },
+  { id: "power", label: t("ficha.cifras.potencia"), datum: powerDatum, text: powerDatum ? t("ficha.unidad.kw", { n: formatDecimal(powerDatum.value) }) : null },
+  { id: "battery", label: t("ficha.cifras.bateria"), datum: batteryDatum, text: batteryDatum ? t("ficha.unidad.kwh", { n: formatDecimal(batteryDatum.value) }) : null },
+];
 const heading = t("ficha.titulo", { marca: card.brand, modelo: card.model });
 const site = t("sitio.nombre");
 const documentTitle = site ? t("pagina.tituloDocumento", { titulo: heading, sitio: site }) : heading;
@@ -211,7 +229,26 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
               </p>
             )
           }
-      </div></div>
+      </div>
+      <section id="cifras" aria-label={t("ficha.cifras")} data-cifras class={`${inner} hero-cifras`}>
+        <dl class="grid grid-cols-2 gap-x-6 gap-y-6 lg:grid-cols-4">
+          <Cifra
+            size="xl"
+            class="border-t border-line-soft pt-3"
+            figure="price"
+            label={priceFrom?.price_kind === "financed" ? t("ficha.cifras.precioOferta") : t("ficha.cifras.precio")}
+            text={priceFrom ? formatEur(priceFrom.value) : null}
+          >
+            {priceFrom && <SourceDate slot="detalle" source={priceFrom} />}
+          </Cifra>
+          {keyFigures.map((f) => (
+            <Cifra size="xl" class="border-t border-line-soft pt-3" figure={f.id} label={f.label} text={f.text}>
+              {f.datum && <SourceMark slot="marca" {...markOf(f.datum)} />}
+            </Cifra>
+          ))}
+        </dl>
+      </section>
+      </div>
       {/* The photo (or the silhouette) comes after the text in the DOM and is painted behind it; the caption is the
           last item of the first screen. The figure adds no box of its own (display: contents). */}
       {
@@ -483,6 +520,10 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
   }
   .hero-foot {
     padding-top: 7rem;
+  }
+  .hero-cifras {
+    margin-top: 2rem;
+    padding-bottom: 1.5rem;
   }
   .hero-figure {
     display: contents;
