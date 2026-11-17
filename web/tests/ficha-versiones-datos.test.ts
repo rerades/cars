@@ -30,11 +30,16 @@ describe("technical fields of each version (RF-5, RF-6, CA-5, CA-6)", () => {
   let out: string;
   const page = (m: string) => readFileSync(join(out, "marcas", "acme", m, "index.html"), "utf8");
   const versions = (html: string) => /<section[^>]*data-ficha-versiones[\s\S]*?<\/section>/.exec(html)![0];
-  const table = (html: string) => /<table[\s\S]*?<\/table>/.exec(versions(html))![0];
   const blocks = (html: string) => /<ol[^>]*data-versiones-bloques[\s\S]*?<\/ol>/.exec(versions(html))![0];
-  const rowOf = (tbl: string, label: string) =>
-    new RegExp(`<tr[^>]*>\\s*<th scope="row"[^>]*>\\s*${label}\\s*</th>[\\s\\S]*?</tr>`).exec(tbl)![0];
-  const cells = (row: string) => [...row.matchAll(/<td[\s\S]*?<\/td>/g)].map((m) => text(m[0]));
+  // The text of a table row (th scope=row) in each block, in block order.
+  const rowOf = (blocksHtml: string, label: string) =>
+    blocksHtml.split(/<li /).slice(1).map((li) => {
+      const m = new RegExp(`<tr[^>]*>\\s*<th scope="row"[^>]*>\\s*${label}\\s*</th>([\\s\\S]*?)</tr>`).exec(li);
+      return m ? text(m[1]!) : null;
+    });
+  // The range figure of each block: from its cifra up to the price cifra.
+  const rangeOf = (blocksHtml: string) =>
+    blocksHtml.split(/<li /).slice(1).map((li) => text(/<div[^>]*data-figure="range"[\s\S]*?(?=<div[^>]*data-figure="price")/.exec(li)![0]));
 
   before(() => {
     root = mkdtempSync(join(tmpdir(), "cars-ficha-datos-"));
@@ -63,63 +68,58 @@ describe("technical fields of each version (RF-5, RF-6, CA-5, CA-6)", () => {
     assert.equal(formatDecimal(58), "58");
   });
 
-  test("rows come after the price, in the order of «Campos y formato», in table and blocks", () => {
-    const html = page("Volta");
-    const labels = [...table(html).matchAll(/<th scope="row"[^>]*>\s*([^<]*?)\s*<\/th>/g)].map((m) => m[1]);
-    assert.deepEqual(labels, ["Precio", "Autonomía WLTP", "Batería", "Potencia", "Tracción", "Carga máxima en CC", "Carga máxima en CA"]);
-    const dts = [...blocks(html).matchAll(/<dt[^>]*>([^<]*)<\/dt>/g)].map((m) => m[1]);
-    assert.deepEqual(dts.slice(0, 7), labels);
-    assert.equal(dts.length, 21); // 3 versions x 7 fields
+  test("each block: range and price figures, then the table rows in the order of «Campos y formato»", () => {
+    const html = blocks(page("Volta"));
+    const dts = [...html.matchAll(/<dt[^>]*>([^<]*)/g)].map((m) => m[1]);
+    assert.deepEqual(dts.slice(0, 2), ["Autonomía WLTP", "Precio"]);
+    const labels = [...html.split(/<li /)[1]!.matchAll(/<th scope="row"[^>]*>\s*([^<]*?)\s*<\/th>/g)].map((m) => m[1]);
+    assert.deepEqual(labels, ["Batería", "Potencia", "Tracción", "Carga máxima en CC", "Carga máxima en CA"]);
+    assert.equal((html.match(/<table\b/g) ?? []).length, 3);
   });
 
   test("CA-5: each version shows its range in km", () => {
-    const row = cells(rowOf(table(page("Volta")), "Autonomía WLTP"));
-    assert.match(row[0]!, /^470 km \[2\]$/); // [1] is the segment/model-data source; the fields' source is [2]
-    assert.match(row[1]!, /^520 km /);
-    assert.match(row[2]!, /^490 km /);
+    const r = rangeOf(blocks(page("Volta")));
+    assert.match(r[0]!, /470 km/);
+    assert.match(r[1]!, /520 km/);
+    assert.match(r[2]!, /490 km/);
   });
 
   test("CA-5: no version range -> «por confirmar» in each version, the figure only as model data", () => {
     const html = page("NoRange");
-    const row = cells(rowOf(table(html), "Autonomía WLTP"));
-    assert.deepEqual(row, ["por confirmar", "por confirmar"]);
+    for (const r of rangeOf(blocks(html))) assert.match(r, /^Autonomía WLTP por confirmar$/);
     assert.doesNotMatch(text(versions(html)), /557/);
     const model = /<section[^>]*data-ficha-modelo[\s\S]*?<\/section>/.exec(html)![0];
     assert.match(text(model), /Autonomía WLTP máxima del modelo 557 km/);
   });
 
   test("CA-5: with some version range, specs.wltp_max_km does not fill the others", () => {
-    const row = cells(rowOf(table(page("OneRange")), "Autonomía WLTP"));
-    assert.match(row[0]!, /^441 km/);
-    assert.equal(row[1], "por confirmar");
+    const r = rangeOf(blocks(page("OneRange")));
+    assert.match(r[0]!, /441 km/);
+    assert.match(r[1]!, /por confirmar/);
   });
 
   test("CA-6: battery basis is shown (útil, bruta, sin especificar) and decimals are kept", () => {
-    const volta = cells(rowOf(table(page("Volta")), "Batería"));
+    const volta = rowOf(blocks(page("Volta")), "Batería");
     assert.match(volta[0]!, /^60 kWh, útil/);
     assert.match(volta[1]!, /^80 kWh, bruta/);
     assert.equal(volta[2], "por confirmar");
-    const nr = cells(rowOf(table(page("NoRange")), "Batería"));
+    const nr = rowOf(blocks(page("NoRange")), "Batería");
     assert.match(nr[0]!, /^77,5 kWh, sin especificar si es útil o bruta/);
   });
 
   test("CA-6: a version without dc_max_kw says «por confirmar», not a value", () => {
-    const row = cells(rowOf(table(page("Volta")), "Carga máxima en CC"));
+    const row = rowOf(blocks(page("Volta")), "Carga máxima en CC");
     assert.equal(row[0], "por confirmar"); // Volta 60
     assert.match(row[1]!, /^150 kW/);
     assert.equal(row[2], "por confirmar");
     // AC: nobody has it; the row is still there.
-    assert.deepEqual(cells(rowOf(table(page("Volta")), "Carga máxima en CA")), ["por confirmar", "por confirmar", "por confirmar"]);
+    assert.deepEqual(rowOf(blocks(page("Volta")), "Carga máxima en CA"), ["por confirmar", "por confirmar", "por confirmar"]);
   });
 
-  test("power with note, drivetrain label in Spanish", () => {
-    const html = page("Volta");
-    const power = cells(rowOf(table(html), "Potencia"));
-    assert.match(power[1]!, /^220 kW \[2\] publicado: 299 CV/);
-    const drive = cells(rowOf(table(html), "Tracción"));
-    assert.match(drive[0]!, /^Trasera/);
-    assert.match(drive[1]!, /^Total/);
-    assert.equal(drive[2]!.startsWith("Total"), true);
+  test("CA-8: a note sits next to its datum, identical; drivetrain label in Spanish", () => {
+    const html = blocks(page("Volta"));
+    assert.match(rowOf(html, "Potencia")[1]!, /^220 kW \[2\] publicado: 299 CV/);
+    assert.deepEqual(rowOf(html, "Tracción").map((x) => x!.split(" ")[0]), ["Trasera", "Total", "Total"]);
   });
 
   test("«por confirmar» carries no mark; valued fields carry a mark to «Fuentes»", () => {

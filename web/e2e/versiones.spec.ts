@@ -8,9 +8,8 @@ import { buildSite } from "./build-site.ts";
 import { acme, sourced } from "../tests/fixtures.ts";
 
 /**
- * PRD-002 CA-3 in a real browser: at 1280 px the comparison table is visible and the blocks are
- * not; at 320 px the blocks are visible, the table is not and the page has no horizontal scroll
- * (WCAG 1.4.10). Test data built to a temp dir, served by a tiny static server.
+ * PRD-002 CA-3 in a real browser: at 1280 px and at 320 px the version blocks are visible, one per version,
+ * and the page has no horizontal scroll (WCAG 1.4.10). Test data built to a temp dir, served by a tiny static server.
  */
 
 const MIME: Record<string, string> = { ".html": "text/html; charset=utf-8", ".css": "text/css" };
@@ -57,30 +56,24 @@ test.describe("model page versions (CA-3, CA-11)", () => {
 
   const expected = ["Volta 60", "Volta 80 AWD", "Volta GT"];
 
-  test("1280 px: the table is visible, in order, and the blocks are hidden", async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto(`${site}/marcas/acme/Volta/`);
-    await expect(page.locator("[data-versiones-tabla] table")).toBeVisible();
-    await expect(page.locator("[data-versiones-bloques]")).toBeHidden();
-    await expect(page.locator("[data-versiones-tabla] th[scope=col]")).toHaveText(expected);
-  });
+  for (const width of [1280, 320]) {
+    test(`${width} px: one block per version, in order, no table of versions, no horizontal scroll`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 800 });
+      await page.goto(`${site}/marcas/acme/Volta/`);
+      await expect(page.locator("[data-versiones-bloques]")).toBeVisible();
+      await expect(page.locator("[data-versiones-bloques] > li > h3")).toHaveText(expected);
+      await expect(page.locator("[data-versiones-tabla]")).toHaveCount(0);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      expect(overflow).toBeLessThanOrEqual(0);
+    });
+  }
 
-  test("320 px: the blocks are visible, in order, the table is hidden and nothing scrolls sideways", async ({ page }) => {
-    await page.setViewportSize({ width: 320, height: 640 });
-    await page.goto(`${site}/marcas/acme/Volta/`);
-    await expect(page.locator("[data-versiones-bloques]")).toBeVisible();
-    await expect(page.locator("[data-versiones-tabla]")).toBeHidden();
-    await expect(page.locator("[data-versiones-bloques] h3")).toHaveText(expected);
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-    expect(overflow).toBeLessThanOrEqual(0);
-  });
-
-  test("CA-11: announced model with versions: [] shows the section and the empty text, no table or blocks", async ({ page }) => {
+  test("CA-11: announced model with versions: [] shows the section and the empty text, no blocks", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(`${site}/marcas/acme/Soon/`);
     await expect(page.getByRole("heading", { level: 2, name: "Versiones" })).toBeVisible();
     await expect(page.getByText("Acme todavía no ha publicado las versiones de este modelo.")).toBeVisible();
-    await expect(page.locator("table, [data-versiones-bloques]")).toHaveCount(0);
+    await expect(page.locator("[data-versiones-bloques]")).toHaveCount(0);
   });
 
   test("no cookies or web storage", async ({ page }) => {

@@ -106,7 +106,8 @@ export const es = {
   "ficha.versiones.caption": "Versiones de {marca} {modelo}, ordenadas por precio",
   "ficha.versiones.captionParte":
     "Versiones de {marca} {modelo}, ordenadas por precio (versiones {desde} a {hasta} de {total})",
-  "ficha.versiones.vacio": "{marca} todavía no ha publicado las versiones de este modelo.",
+  "ficha.versiones.datos": "Datos técnicos de {version}",
+  "ficha.versiones.vacio":"{marca} todavía no ha publicado las versiones de este modelo.",
   "ficha.ruta.nombre": "Ruta de navegación",
   "ficha.ruta.coches": "Coches",
   "ficha.webMarca": "Ver en la web de la marca",
