@@ -87,7 +87,8 @@ describe("model page images (built HTML)", () => {
     assert.match(sec, /md:grid-cols-2/);
     assert.match(sec, /lg:grid-cols-3/);
     assert.doesNotMatch(sec, /<a\b|tabindex|<button/);
-    assert.doesNotMatch(html, /<script\b/i);
+    // Only the key figures' count-up script (#1041) is allowed.
+    assert.doesNotMatch(html.replace(/<script\b[^>]*>(?=(?:(?!<\/script>)[\s\S])*data-cifras)[\s\S]*?<\/script>/g, ""), /<script\b/i);
   });
 
   test("CA-12: attribution sits under the image; no figcaption when attribution is null", () => {

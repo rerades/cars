@@ -1,0 +1,61 @@
+---
+/**
+ * Progressive enhancement for the key figures of the model page (PRD-002 RF-18, CA-22, CA-15).
+ * Renders nothing: the served HTML already has every final value. When JavaScript runs and the visitor
+ * has not asked for reduced motion, the number of each figure inside `[data-cifras]` counts up to that
+ * value as it enters the screen. Nothing is stored (no cookies, no localStorage).
+ */
+---
+
+<script>
+  import { frameText, parseEsNumber } from "../lib/count-up.ts";
+
+  const DURATION_MS = 900;
+
+  function start() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!("IntersectionObserver" in window)) return;
+
+    const targets: { node: Text; final: string }[] = [];
+    document.querySelectorAll("[data-cifras] .cifra__valor").forEach((el) => {
+      // The number is the first text node of the value; the unit lives in its own span.
+      const node = Array.from(el.childNodes).find((n) => n.nodeType === Node.TEXT_NODE && n.textContent?.trim()) as Text | undefined;
+      const final = node?.data.trim();
+      if (!node || !final || !parseEsNumber(final)) return;
+      targets.push({ node, final });
+    });
+    if (!targets.length) return;
+
+    const byElement = new Map<Element, { node: Text; final: string }>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          observer.unobserve(entry.target);
+          const t = byElement.get(entry.target);
+          if (t) run(t.node, t.final);
+        }
+      },
+      { threshold: 0.4 },
+    );
+    for (const t of targets) {
+      const host = t.node.parentElement!;
+      byElement.set(host, t);
+      observer.observe(host);
+    }
+  }
+
+  function run(node: Text, final: string) {
+    const padding = node.data.match(/^\s*/)?.[0] ?? "";
+    const trailing = node.data.match(/\s*$/)?.[0] ?? "";
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - t0;
+      node.data = padding + frameText(final, elapsed, DURATION_MS) + trailing;
+      if (elapsed < DURATION_MS) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  start();
+</script>
