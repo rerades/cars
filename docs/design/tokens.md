@@ -256,6 +256,10 @@ pasa a `web/`, y el LCP se mide con `web/e2e/lcp.spec.ts` (RNF-2).
 | `--radius-pill` | `999px` | Menú inferior, filtros, etiquetas |
 | `--menu-clearance` | `6rem` | Espacio libre bajo el contenido y `scroll-padding-bottom`, para que nada quede bajo el menú (RF-17) |
 | `--color-cutout-floor` | `rgb(255 255 255 / 0.07)` | «Suelo» de la imagen retocada (ADR-0025): elipse `radial-gradient(ellipse 60% 22% at 50% 88%, var(--color-cutout-floor), transparent 70%)` en el hueco del coche, para que la sombra de apoyo del PNG y los coches oscuros se lean sobre `ink-950`. Sobre `ink-950` da `#1c2327` en el centro (L 0,0158; 1,18 frente a `ink-950`). **Solo decorativo**: no hay texto encima (`tarjeta-modelo.md` y `ficha-modelo.md`, «Imagen retocada») |
+| `--text-rank-number` | `clamp(2.75rem, 4.4vw, 4rem)`, anchura estrecha, 700, interlínea 0,82 | Número de puesto de los rankings (sustituye a `1.5rem / 2rem`; `rankings.md`, «Dirección visual») |
+| `--width-rank-number` | `3rem`; `6rem` desde `lg` | Columna del número de puesto |
+| `--width-rank-figure` | `22rem` | Columna de la cifra del ranking desde `lg`, para que todas las cifras queden alineadas |
+| `--width-ranking` | — | **Deja de usarse**: la lista de puestos ocupa `--width-page` |
 | `--size-cutout-mobile` | `12rem` | Alto mínimo del hueco del coche recortado en móvil, en la pantalla del catálogo y en la primera pantalla de la ficha |
 
 ## Pendientes (no se deciden en diseño)
