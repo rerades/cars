@@ -38,9 +38,8 @@ describe("count-up helpers", () => {
 });
 
 describe("count-up script", () => {
-  test("CA-22: it does nothing with prefers-reduced-motion: reduce, and only runs as an enhancement", () => {
-    assert.match(component, /prefers-reduced-motion: reduce/);
-    assert.match(component, /matches\) return/);
+  // The behaviour with and without reduced motion is checked in a real browser: e2e/ficha-cifras.spec.ts.
+  test("CA-22: it only runs as an enhancement", () => {
     // The component renders no markup: the values come from the served HTML (`Cifra`), never from the script.
     assert.doesNotMatch(component.replace(/<script>[\s\S]*<\/script>/, ""), /<(div|span|dd|dt)/);
   });
