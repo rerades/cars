@@ -1,0 +1,71 @@
+---
+/**
+ * Bottom section menu of the model page (PRD-002 RF-17, CA-21; docs/design/ficha-modelo.md, «Menú de secciones»).
+ * Plain anchors, no JavaScript. The page passes the sections that exist, in page order; texts come from props.
+ */
+export interface Props {
+  label: string;
+  items: { href: string; label: string }[];
+}
+const { label, items } = Astro.props;
+---
+
+<nav aria-label={label} data-section-menu class="section-menu">
+  <ul>
+    {items.map((item) => (
+      <li><a href={item.href}>{item.label}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<style is:global>
+  /* Nothing hides under the menu: free space under the content, and room above/below anchor targets. */
+  html {
+    scroll-padding-bottom: var(--menu-clearance);
+    scroll-padding-top: 1rem;
+  }
+  body {
+    padding-bottom: var(--menu-clearance);
+  }
+  .section-menu {
+    bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    z-index: 50;
+  }
+  .section-menu ul {
+    background: var(--color-ink-950);
+    border-radius: var(--radius-pill);
+    display: flex;
+    margin-inline: 1rem;
+    max-width: calc(100% - 2rem);
+    overflow-x: auto;
+    pointer-events: auto;
+  }
+  .section-menu li {
+    flex: none;
+  }
+  .section-menu a {
+    align-items: center;
+    color: var(--color-on-dark);
+    display: inline-flex;
+    font-size: var(--text-small);
+    font-weight: 600;
+    line-height: var(--text-small--line-height);
+    min-height: 2.75rem;
+    padding-inline: 1rem;
+    white-space: nowrap;
+  }
+  .section-menu a:hover {
+    color: var(--color-signal);
+  }
+  .section-menu a:focus-visible {
+    border-radius: var(--radius-pill);
+    outline: 2px solid var(--color-on-dark);
+    outline-offset: -2px;
+  }
+</style>
