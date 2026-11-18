@@ -54,6 +54,19 @@ describe("technical fields of each version (RF-5, RF-6, CA-5, CA-6)", () => {
       { name: "OR A", wltp_km: sourced(441), price: null },
       { name: "OR B", price: null },
     ], { wltp_max_km: sourced(441) })); // data-model rule 8: equals the maximum of the versions
+    // CA-9: one T3 and one T1 datum in a version block, and the same in «Datos del modelo».
+    writeModel(data, "Tiers", base("Tiers", [
+      {
+        name: "T A",
+        power_kw: sourced(200, { tier: "T3", url: "https://unofficial.example/power" }),
+        drivetrain: sourced("awd", { url: "https://www.acme.example/es/drive" }),
+        price: null,
+      },
+      { name: "T B", power_kw: sourced(150, { url: "https://www.acme.example/es/power-b" }), price: null },
+    ], {
+      dc_max_kw: sourced(150, { tier: "T3", url: "https://unofficial.example/dc" }),
+      ac_max_kw: sourced(11, { url: "https://www.acme.example/es/ac" }),
+    }));
     out = join(root, "out");
     execFileSync(join(WEB, "node_modules/.bin/astro"), ["build", "--outDir", out], {
       cwd: WEB,
@@ -120,6 +133,28 @@ describe("technical fields of each version (RF-5, RF-6, CA-5, CA-6)", () => {
     const html = blocks(page("Volta"));
     assert.match(rowOf(html, "Potencia")[1]!, /^220 kW \[2\] publicado: 299 CV/);
     assert.deepEqual(rowOf(html, "Tracción").map((x) => x!.split(" ")[0]), ["Trasera", "Total", "Total"]);
+  });
+
+  test("CA-9: «fuente no oficial» goes with a T3 datum, not a T1 one, in versions and in model data", () => {
+    const html = page("Tiers");
+    const unofficial = (s: string) => (s.match(/data-unofficial/g) ?? []).length;
+    const marks = (s: string) => (s.match(/data-source-mark=/g) ?? []).length;
+    // Version A: a T3 power and a T1 drivetrain -> two marks, one «no oficial», next to the power.
+    const [a, b] = blocks(html).split(/<li /).slice(1);
+    assert.equal(marks(a!), 2);
+    assert.equal(unofficial(a!), 1);
+    assert.match(rowOf(blocks(html), "Potencia")[0]!, /fuente no oficial/);
+    assert.doesNotMatch(rowOf(blocks(html), "Tracción")[0]!, /no oficial/);
+    // Version B: only a T1 datum -> a mark, no «no oficial».
+    assert.equal(marks(b!), 1);
+    assert.equal(unofficial(b!), 0);
+    assert.doesNotMatch(rowOf(blocks(html), "Potencia")[1]!, /no oficial/);
+    // Model data: T3 dc_max_kw says it, T1 ac_max_kw does not.
+    const model = /<section[^>]*data-ficha-modelo[\s\S]*?<\/section>/.exec(html)![0];
+    assert.equal(marks(model), 2);
+    assert.equal(unofficial(model), 1);
+    assert.match(text(model), /Carga máxima en CC \[\d+\] fuente no oficial 150 kW/);
+    assert.doesNotMatch(text(model), /Carga máxima en CA \[\d+\] fuente no oficial/);
   });
 
   test("«por confirmar» carries no mark; valued fields carry a mark to «Fuentes»", () => {
