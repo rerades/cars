@@ -23,6 +23,7 @@ import SourceMark from "../../../components/SourceMark.astro";
 import { versionFields } from "../../../lib/version-fields.ts";
 import { groupNotes, noteLine } from "../../../lib/notes.ts";
 import type { ImageMetadata } from "astro";
+import SectionMenu from "../../../components/SectionMenu.astro";
 import ScreenPhoto from "../../../components/ScreenPhoto.astro";
 import { assignBands, bandClass } from "../../../lib/bands.ts";
 import { publishableResults } from "../../../lib/test-results.ts";
@@ -142,6 +143,16 @@ const sectionIds = [
 ];
 const bandColors = assignBands(sectionIds);
 const band = (id: string) => bandClass(bandColors[sectionIds.indexOf(id)]!);
+// Section menu (RF-17): one anchor per section that exists, in page order, to the id of its heading.
+const menuItems = [
+  { href: "#cifras", label: t("ficha.menu.cifras") },
+  { href: "#versiones-titulo", label: t("ficha.menu.versiones") },
+  ...(sectionIds.includes("datos") ? [{ href: "#datos-modelo", label: t("ficha.menu.datos") }] : []),
+  ...(sectionIds.includes("imagenes") ? [{ href: "#mas-imagenes", label: t("ficha.menu.imagenes") }] : []),
+  ...(sectionIds.includes("relacionados") ? [{ href: "#relacionados", label: t("ficha.menu.relacionados") }] : []),
+  ...(sectionIds.includes("fuentes") ? [{ href: "#fuentes", label: t("ficha.menu.fuentes") }] : []),
+  ...(sectionIds.includes("reviews") ? [{ href: "#reviews", label: t("ficha.menu.reviews") }] : []),
+];
 const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
 ---
 
@@ -339,6 +350,7 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
 
       {hasReviews && <ReviewsStrip reviews={reviews} testResults={testResults} brand={card.brand} model={card.model} versionNames={versions.map((v) => v.name)} band={band("reviews")} />}
     </main>
+    <SectionMenu label={t("ficha.menu.nombre")} items={menuItems} />
   </body>
 </html>
 

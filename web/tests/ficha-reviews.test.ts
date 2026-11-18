@@ -205,8 +205,10 @@ describe("«Reviews» block on the model page (PRD-006 RF-10, CA-9; PRD-002 RF-1
       readdirSync(dir).flatMap((n) => (statSync(join(dir, n)).isDirectory() ? walk(join(dir, n)).concat(join(dir, n)) : [join(dir, n)]));
     const paths = walk(out).map((p) => p.slice(out.length));
     assert.deepEqual(paths.filter((p) => /review/i.test(p)), []);
-    const html = page("Volta");
+    // The section menu (RF-17, ficha-modelo.md) links to the in-page block; nothing else does, and no page exists.
+    const html = page("Volta").replace(/<nav[^>]*data-section-menu[\s\S]*?<\/nav>/, "");
     assert.doesNotMatch(html, /href="[^"]*(#reviews|\/reviews)/);
+    assert.doesNotMatch(page("Volta"), /href="[^"#]*\/reviews/);
     assert.doesNotMatch(html, /Ver todas/);
   });
 });
