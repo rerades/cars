@@ -4220,3 +4220,16 @@
     .claude/agents/retoucher.md y docs/design/fotos-modelos.md, como en el piloto (PR #1106). Salta las
     imágenes que ya tienen edits o que un open_questions ya rechazó. En el resumen, la tabla de cada foto y
     si el script tapó bien la matrícula donde la había. Bitácora."
+# Page frame of 1440 px, decided on 2026-11-18 (docs/design/tokens.md, «Marco de página»).
+- id: marco-pagina-1440
+  agent: developer
+  task: "Lleva a web/src/ el marco de página de docs/design/tokens.md, sección «Marco de página» (decisión del
+    2026-11-18): toda la web dentro de un contenedor de ancho máximo --width-frame (90rem, 1440 px), centrado,
+    con --color-backdrop de fondo a los lados. Añade los dos tokens al @theme de web/src/styles/global.css y
+    cumple todas las reglas de esa sección: franjas, fotos y velo hasta el borde del marco y no del navegador;
+    nada medido en vw que se salga del marco (el 50vw del texto de la primera pantalla de la ficha y los que
+    encuentres); el menú inferior fijo centrado y limitado al marco; los sizes de las imágenes acotados a
+    1440 px. Por debajo de 1440 px la página no debe cambiar. Pruebas: una de Playwright con viewport de
+    1920 px que compruebe que el marco mide 1440 px, está centrado y que ni las franjas ni el menú inferior se
+    salen de él, en la portada, el catálogo y una ficha; y que a 1280 px el marco ocupa todo el ancho.
+    Bitácora."
