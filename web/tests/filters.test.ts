@@ -208,9 +208,8 @@ describe("/coches filter panel in the built page", () => {
     assert.match(html, /<div[^>]*id="filtros-cuerpo"[^>]*\shidden/);
   });
 
-  test("keyboard: Esc closes the panel and the focus goes back to its pill; the pill count has a hidden 'activos'", () => {
-    assert.match(js, /Escape/);
-    assert.match(js, /\.focus\(\)/);
+  // Esc / focus behaviour is covered in a real browser by web/e2e/filtros.spec.ts.
+  test("keyboard: the pill count has a hidden 'activos' and focus targets exist", () => {
     assert.match(js, /activos/);
     assert.match(html, /<h2[^>]*id="filtros"[^>]*tabindex="-1"/);
     assert.match(html, /<legend[^>]*tabindex="-1"/);
