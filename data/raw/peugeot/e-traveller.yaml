@@ -46,6 +46,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-18): rechazada, causa `angulo`: es una foto trasera (tres cuartos trasero). Buscar tres cuartos delantero o lateral."
   - "needs_review: las versiones salen del IDAE (homologaciones); el IDAE no dice cuáles se venden hoy y la web de la marca (www.peugeot.es, 403) no se ha podido leer. ofertas.peugeot.es solo cita el E-Traveller en la lista de la gama eléctrica."
   - "Precio: ofertas.peugeot.es/particulares y /coches-electricos-hibridos (2026-11-07) no traen precio del E-Traveller; las páginas de oferta de www.peugeot.es dan 403. price: null."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."

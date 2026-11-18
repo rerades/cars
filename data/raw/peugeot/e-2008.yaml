@@ -37,6 +37,7 @@ reviews:
     retrieved: 2026-10-31
     tier: T3
 open_questions:
+  - "Imagen (2026-11-18): rechazada, causa `angulo`: es una foto trasera (tres cuartos trasero). Buscar tres cuartos delantero o lateral."
   - "reviews: la toma de contacto de diariomotor-es (peugeot-e-2008-prueba-video) es del e-2008 de 50 kWh y 136 CV, anterior a los 115 kW de la ficha; no se enlaza."
   - "segment: www.peugeot.es sigue devolviendo 403 (2026-10-27); el segmento sale de una fuente T3 (hibridosyelectricos-es, B-SUV). El título de buscador de la web de la marca ('SUV Compacto') no se ha leído y no se usa."
   - "launch: no se ha encontrado fecha de inicio de venta en España en una fuente registrada."

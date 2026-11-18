@@ -30,5 +30,6 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-18): rechazada, causa `angulo`: es una foto trasera (tres cuartos trasero), con un poste de carga delante. Buscar tres cuartos delantero o lateral."
   - "segment: sale de una fuente T3 (motor-es, D-SUV); www.peugeot.es sigue devolviendo 403 (2026-10-27). launch: sin fuente."
   - "Precio (2026-10-31): oferta releída, sin cambios, de ofertas.peugeot.es/coches-electricos-hibridos para el E-5008 Style Eléctrico 210 (157 kW), precio al contado 43.740 €, válida hasta el 31/10/2026; sin PVP sin oferta. La oferta no da batería, potencia ni carga por versión; potencia (157 kW) solo en el nombre de la oferta, no se guarda como dato."

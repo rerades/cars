@@ -66,6 +66,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-18): rechazada, causa `matricula`: la placa delantera lleva «e-RIFTER» y la web del concesionario, legible tras el retoque; el script no la detectó (plates: 0) y no la tapó. Buscar una foto sin placa con texto."
   - "needs_review: las versiones salen del IDAE (homologaciones); el IDAE no dice cuáles se venden hoy y la web de la marca (www.peugeot.es, 403) no se ha podido leer. ofertas.peugeot.es solo cita el E-Rifter en la lista de la gama eléctrica."
   - "Autonomía: las filas del IDAE no traen fecha; las versiones Business (332 km) y las demás (245 km) difieren, y no hay cifra de la web de la marca para decidir cuál es la vigente. Se guarda la fila de cada versión."
   - "Precio: ofertas.peugeot.es/particulares y /coches-electricos-hibridos (2026-11-07) no traen precio del E-Rifter; las páginas de oferta de www.peugeot.es dan 403. price: null."

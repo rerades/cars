@@ -22,7 +22,8 @@ versions:
       retrieved: 2026-10-31
       tier: T1
 images:
-  - file: "data/images/peugeot/e-208/frontal.jpg"
+  - file: "data/images/peugeot/e-208/frontal.png"
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Peugeot_e-208_facelift_1X7A2502.jpg/1280px-Peugeot_e-208_facelift_1X7A2502.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Peugeot_e-208_facelift_1X7A2502.jpg"
     source_id: wikimedia-commons
