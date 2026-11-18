@@ -76,6 +76,7 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
       bare("beta", "Beta", "Specs", {
         versions: [bareVersion("Specs A"), bareVersion("Specs B")],
         specs: {
+          wltp_max_km: sourced(450),
           battery_kwh_options: sourced([58, 77]),
           drivetrains: sourced(["fwd", "awd"]),
           dc_max_kw: sourced(135, { note: "10-80 % en 29 min" }),
@@ -190,11 +191,9 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
     const block = modelBlock(page("beta", "Specs"))!;
     assert.match(/<section[^>]*>/.exec(block)![0], /band-dark/);
     for (const k of ["wltp_max_km", "power_max_kw", "dc_max_kw", "ac_max_kw"]) {
-      if (new RegExp(`data-figure="${k}"`).test(block)) {
-        assert.match(block, new RegExp(`class="[^"]*cifra--m[^"]*"[^>]*data-figure="${k}"`));
-      }
+      // No guard: the Specs model carries all four, so a missing figure fails.
+      assert.match(block, new RegExp(`class="[^"]*cifra--m[^"]*"[^>]*data-figure="${k}"`));
     }
-    assert.match(block, /data-figure="power_max_kw"/);
     assert.doesNotMatch(/data-spec="battery_kwh_options"[\s\S]*?<\/div>/.exec(block)![0], /cifra/);
     assert.match(block, /data-spec="drivetrains"/);
   });
