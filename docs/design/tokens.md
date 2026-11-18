@@ -258,6 +258,31 @@ pasa a `web/`, y el LCP se mide con `web/e2e/lcp.spec.ts` (RNF-2).
 | `--color-cutout-floor` | `rgb(255 255 255 / 0.07)` | «Suelo» de la imagen retocada (ADR-0025): elipse `radial-gradient(ellipse 60% 22% at 50% 88%, var(--color-cutout-floor), transparent 70%)` en el hueco del coche, para que la sombra de apoyo del PNG y los coches oscuros se lean sobre `ink-950`. Sobre `ink-950` da `#1c2327` en el centro (L 0,0158; 1,18 frente a `ink-950`). **Solo decorativo**: no hay texto encima (`tarjeta-modelo.md` y `ficha-modelo.md`, «Imagen retocada») |
 | `--size-cutout-mobile` | `12rem` | Alto mínimo del hueco del coche recortado en móvil, en la pantalla del catálogo y en la primera pantalla de la ficha |
 
+### Marco de página (decisión del 2026-11-18)
+
+La web deja de ocupar todo el ancho del navegador. Todo el contenido va dentro de un **marco** de ancho máximo
+`--width-frame` (1440 px), centrado; a partir de ese ancho, a los dos lados queda el fondo `--color-backdrop`, un gris
+neutro. Por debajo de 1440 px no cambia nada: el marco ocupa todo el ancho y el fondo no se ve.
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--width-frame` | `90rem` (1440 px) | Ancho máximo del marco que contiene toda la página (cabecera, franjas, menú inferior y pie) |
+| `--color-backdrop` | `#d9d9d9` | Fondo de `body` fuera del marco. **Solo decorativo**: no lleva texto ni controles |
+
+Reglas:
+
+- **«Todo el ancho» pasa a ser «todo el marco».** Las franjas (blanca, clara y oscura), las fotos de primera pantalla
+  y el velo de las fotos llegan hasta los bordes del marco, no del navegador. `--width-page` (80 rem) sigue siendo el
+  ancho del contenido dentro del marco, con los mismos márgenes laterales.
+- **Nada se sale del marco.** Lo que hoy se mide con `vw` (anchos como el `50vw` del texto de la primera pantalla de la
+  ficha) tiene que medirse contra el marco: unidades de contenedor (`cqi`) con el marco como contenedor, o
+  `min(…vw, …)` con el valor a 1440 px. Los tamaños de letra con `clamp(…vw…)` ya llegan a su máximo antes de 1440 px y
+  no cambian.
+- **El menú inferior fijo** (`position: fixed`) se centra y se limita al marco, igual que el resto.
+- Los atributos `sizes` de las imágenes que dicen `100vw` o `NNvw` se acotan al marco (p. ej.
+  `(min-width: 1440px) 1440px, 100vw`), para no pedir imágenes más grandes de lo que se pintan.
+- Sin sombra ni borde en el marco: el cambio de fondo basta.
+
 ## Pendientes (no se deciden en diseño)
 1. **Verificar las ratios con herramienta.** Están calculadas a mano (sin ejecutar nada en esta revisión);
    el Desarrollador las confirma y axe en CI (ADR-0006) las vigila. Ninguna está a menos de 0,4 de su umbral.
