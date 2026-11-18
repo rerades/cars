@@ -1,0 +1,36 @@
+---
+import ModelFigure from "./ModelFigure.astro";
+import { t } from "../lib/i18n.ts";
+import type { ModelImage } from "../lib/data.ts";
+
+/**
+ * «Más imágenes» band (PRD-002 RF-12, docs/design/ficha-modelo.md): images 2 to 6 as a list of figures,
+ * 1/2/3 columns, no JavaScript. Alt and caption texts arrive composed by the page (RNF-4).
+ */
+export interface MoreImagesItem {
+  image: ModelImage;
+  alt: string;
+  caption: string | null;
+}
+interface Props {
+  items: MoreImagesItem[];
+  /** Band class chosen by the page. */
+  band: string;
+}
+const { items, band } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <section aria-labelledby="mas-imagenes" class:list={["band-section", band]} data-more-images>
+      <h2 id="mas-imagenes" class="text-section text-ink-900">{t("ficha.imagenes.titulo")}</h2>
+      <ul class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+        {items.map((item) => (
+          <li>
+            <ModelFigure image={item.image} alt={item.alt} caption={item.caption} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

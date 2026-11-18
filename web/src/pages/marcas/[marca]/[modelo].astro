@@ -15,7 +15,8 @@ import { t, type MessageKey } from "../../../lib/i18n.ts";
 import { sortVersions } from "../../../lib/versions.ts";
 import { relatedModels } from "../../../lib/related.ts";
 import ModelData from "../../../components/ModelData.astro";
-import ModelCard from "../../../components/ModelCard.astro";
+import MoreImages from "../../../components/MoreImages.astro";
+import SegmentRelated from "../../../components/SegmentRelated.astro";
 import VersionBlock from "../../../components/VersionBlock.astro";
 import SourceMark from "../../../components/SourceMark.astro";
 import { versionFields } from "../../../lib/version-fields.ts";
@@ -328,35 +329,9 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
 
       {modelRows.length > 0 && <ModelData rows={modelRows.map((r) => ({ ...r, mark: markOf(r.datum) }))} band={band("datos")} />}
 
-      {
-        rest.length > 0 && (
-          <section aria-labelledby="mas-imagenes" class:list={["band-section", band("imagenes")]} data-more-images>
-            <h2 id="mas-imagenes" class="text-section text-ink-900">{t("ficha.imagenes.titulo")}</h2>
-            <ul class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-              {rest.map((img, i) => (
-                <li>
-                  <ModelFigure image={img} alt={altOf(i + 2)} caption={captionOf(img)} />
-                </li>
-              ))}
-            </ul>
-          </section>
-        )
-      }
+      <MoreImages items={rest.map((image, i) => ({ image, alt: altOf(i + 2), caption: captionOf(image) }))} band={band("imagenes")} />
 
-      {
-        card.hasSegment && related.length > 0 && (
-          <section aria-labelledby="relacionados" class:list={["band-section", band("relacionados")]} data-related>
-            <h2 id="relacionados" class="text-section text-ink-900 [overflow-wrap:anywhere]">
-              {t("ficha.relacionados.titulo", { segmento: card.segmentLabel })}
-            </h2>
-            <ul class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-              {related.map((r) => (
-                <ModelCard card={r} href={`/marcas/${r.key}/`} />
-              ))}
-            </ul>
-          </section>
-        )
-      }
+      <SegmentRelated related={related} hasSegment={card.hasSegment} segmentLabel={card.segmentLabel} band={band("relacionados")} />
 
       {notes.length > 0 && <SourcesBlock notes={notes} band={band("fuentes")} />}
 

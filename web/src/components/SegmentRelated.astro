@@ -1,0 +1,33 @@
+---
+import ModelCard from "./ModelCard.astro";
+import { t } from "../lib/i18n.ts";
+import type { CardView } from "../lib/card.ts";
+
+/**
+ * «Otros modelos del segmento» band (PRD-002 RF-15, docs/design/ficha-modelo.md): up to 3 catalog cards.
+ * Renders nothing without a segment or without candidates.
+ */
+interface Props {
+  related: CardView[];
+  hasSegment: boolean;
+  segmentLabel: string;
+  /** Band class chosen by the page. */
+  band: string;
+}
+const { related, hasSegment, segmentLabel, band } = Astro.props;
+---
+
+{
+  hasSegment && related.length > 0 && (
+    <section aria-labelledby="relacionados" class:list={["band-section", band]} data-related>
+      <h2 id="relacionados" class="text-section text-ink-900 [overflow-wrap:anywhere]">
+        {t("ficha.relacionados.titulo", { segmento: segmentLabel })}
+      </h2>
+      <ul class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+        {related.map((r) => (
+          <ModelCard card={r} href={`/marcas/${r.key}/`} />
+        ))}
+      </ul>
+    </section>
+  )
+}
