@@ -36,7 +36,8 @@ versions:
     drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC+»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
     price: null
 images:
-  - file: "data/images/mercedes-benz/eqe-suv/frontal.jpg"
+  - file: "data/images/mercedes-benz/eqe-suv/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/EQE-300-SUV-Front.jpg/1280px-EQE-300-SUV-Front.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:EQE-300-SUV-Front.jpg"
     source_id: wikimedia-commons

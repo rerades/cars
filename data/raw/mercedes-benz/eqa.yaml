@@ -25,7 +25,8 @@ versions:
     drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
     price: null
 images:
-  - file: "data/images/mercedes-benz/eqa/frontal.jpg"
+  - file: "data/images/mercedes-benz/eqa/frontal.png"
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Mercedes-Benz_EQA_250_%28H243%29_front.jpg/1280px-Mercedes-Benz_EQA_250_%28H243%29_front.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_EQA_250_(H243)_front.jpg"
     source_id: wikimedia-commons

@@ -26,7 +26,8 @@ versions:
     drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
     price: null
 images:
-  - file: "data/images/mercedes-benz/eqs-suv/frontal.jpg"
+  - file: "data/images/mercedes-benz/eqs-suv/frontal.png"
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Mercedes-Benz_EQS_450_4MATIC_SUV_%28X296%29_front.jpg/1280px-Mercedes-Benz_EQS_450_4MATIC_SUV_%28X296%29_front.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_EQS_450_4MATIC_SUV_(X296)_front.jpg"
     source_id: wikimedia-commons
