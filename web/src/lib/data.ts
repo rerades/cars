@@ -9,7 +9,8 @@ import { parse } from "yaml";
  * never renders a value without source (ADR-0001) and never breaks on one.
  */
 
-export type Tier = "T1" | "T2" | "T3";
+/** `E` (editorial classification, ADR-0021) is only valid in `segment`; readSourced drops it anywhere else. */
+export type Tier = "T1" | "T2" | "T3" | "E";
 export type Status = "on_sale" | "announced" | "discontinued";
 export type Segment =
   | "urbano"
@@ -229,9 +230,20 @@ function hasSource(v: Record<string, unknown>): boolean {
     isStr(v.url) &&
     typeof v.retrieved === "string" &&
     /^\d{4}-\d{2}-\d{2}$/.test(v.retrieved) &&
-    isOneOf(["T1", "T2", "T3"])(v.tier) &&
+    isOneOf(["T1", "T2", "T3", "E"])(v.tier) &&
     (v.note === undefined || v.note === null || typeof v.note === "string")
   );
+}
+
+/** ADR-0021: `tier: E` only in `segment`, with `source_id: editorial` and a non-empty note; `editorial` only with `E`. */
+function editorialProblem(v: Record<string, unknown>, where: string): string | null {
+  const editorial = v.tier === "E";
+  if (!editorial && v.source_id !== "editorial") return null;
+  if (!editorial) return "source_id editorial needs tier E";
+  if (where !== "segment") return "tier E is only valid in segment";
+  if (v.source_id !== "editorial") return "tier E needs source_id editorial";
+  if (!isStr(v.note)) return "tier E needs a note";
+  return null;
 }
 
 /**
@@ -252,7 +264,7 @@ function readSourced<T, S extends Sourced<T> = Sourced<T>>(
       ? "needs value, source_id, url, retrieved (YYYY-MM-DD) and tier"
       : !check(v.value)
         ? "invalid value"
-        : (extra?.(v) ?? null);
+        : (editorialProblem(v, where) ?? extra?.(v) ?? null);
   if (reason) {
     warnings.push(`${where}: dropped, ${reason}`);
     return null;

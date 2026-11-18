@@ -3,7 +3,9 @@ import "../../../styles/global.css";
 import { cardView, type CardView } from "../../../lib/card.ts";
 import ModelFigure from "../../../components/ModelFigure.astro";
 import SegmentSilhouette from "../../../components/SegmentSilhouette.astro";
-import ReviewsBlock from "../../../components/ReviewsBlock.astro";
+import ReviewsStrip from "../../../components/ReviewsStrip.astro";
+import SourcesBlock from "../../../components/SourcesBlock.astro";
+import SegmentSource from "../../../components/SegmentSource.astro";
 import Cifra from "../../../components/Cifra.astro";
 import SourceDate from "../../../components/SourceDate.astro";
 import { batteryFigure, powerFigure } from "../../../lib/key-figures.ts";
@@ -93,7 +95,8 @@ const modelRows = rows;
 const headerData: Sourced[] = [];
 if (card.statusLabel) headerData.push(status);
 if (card.statusKind === "soon" && launch) headerData.push(launch);
-if (segment) headerData.push(segment);
+// An editorial segment (tier E, ADR-0021) has no note: its url is a PR, not a source for the visitor (CA-20).
+if (segment && segment.tier !== "E") headerData.push(segment);
 // Key figures of the first screen (RF-18): their data join the walk right after the header. The price shows
 // its own source next to the figure, so it is not a note.
 const powerDatum = powerFigure(versions, specs);
@@ -109,7 +112,7 @@ const { notes, numberOf } = groupNotes([
 const markOf = (s: Sourced) => ({ n: numberOf(s), unofficial: s.tier !== "T1" });
 const statusMark = card.statusLabel ? markOf(status) : null;
 const launchMark = card.statusKind === "soon" && launch ? markOf(launch) : null;
-const segmentMark = segment ? markOf(segment) : null;
+const segmentMark = segment && segment.tier !== "E" ? markOf(segment) : null;
 const keyFigures = [
   { id: "range", label: t("ficha.cifras.autonomia"), datum: maxRange, text: maxRange ? t("ficha.unidad.km", { n: formatNumber(maxRange.value) }) : null },
   { id: "power", label: t("ficha.cifras.potencia"), datum: powerDatum, text: powerDatum ? t("ficha.unidad.kw", { n: formatDecimal(powerDatum.value) }) : null },
@@ -204,7 +207,7 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
               <dt class:list={["text-body text-ink-600", !card.hasSegment && "sr-only"]}>{t("ficha.segmento.rotulo")}</dt>
               <dd class:list={["text-body", card.hasSegment ? "text-ink-900" : "text-ink-600"]} data-field="segment">
                 {card.segmentLabel}
-                {segmentMark && <SourceMark {...segmentMark} />}
+                {segment && <SegmentSource segment={segment} n={segmentMark?.n} />}
                 {segment?.note && <p class="text-small text-ink-600" data-note="segment">{segment.note}</p>}
               </dd>
             </div>
@@ -355,31 +358,9 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
         )
       }
 
-      {
-        notes.length > 0 && (
-          <section aria-labelledby="fuentes" class:list={["band-section", band("fuentes")]} data-fuentes>
-            <h2 id="fuentes" class="text-section text-ink-900">{t("ficha.fuentes.titulo")}</h2>
-            <p class="mt-1 text-small text-ink-600">{t("ficha.fuentes.entrada")}</p>
-            <ol class="mt-4 flex flex-col gap-3">
-              {notes.map((note) => (
-                <li id={`fuente-${note.n}`} tabindex="-1" class="text-small text-ink-900 [overflow-wrap:anywhere]" data-fuente={note.n}>
-                  {noteLine(note)}
-                  <br />
-                  <a href={note.url} rel="noopener" class="text-brand-600 underline hover:text-brand-800">{note.url}</a>
-                </li>
-              ))}
-            </ol>
-          </section>
-        )
-      }
+      {notes.length > 0 && <SourcesBlock notes={notes} band={band("fuentes")} />}
 
-      {
-        hasReviews && (
-          <div class:list={["band-section", band("reviews")]} data-band="reviews">
-            <ReviewsBlock reviews={reviews} testResults={testResults} brand={card.brand} model={card.model} versionNames={versions.map((v) => v.name)} />
-          </div>
-        )
-      }
+      {hasReviews && <ReviewsStrip reviews={reviews} testResults={testResults} brand={card.brand} model={card.model} versionNames={versions.map((v) => v.name)} band={band("reviews")} />}
     </main>
   </body>
 </html>

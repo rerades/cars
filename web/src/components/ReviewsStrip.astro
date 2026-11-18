@@ -1,0 +1,23 @@
+---
+import type { Review, TestResult } from "../lib/data.ts";
+import ReviewsBlock from "./ReviewsBlock.astro";
+
+/**
+ * «Reviews» strip: the last band of `main` (PRD-002 RF-16, CA-19). Wraps ReviewsBlock in its band; the page
+ * decides whether it exists (`hasReviews`) so the band is not painted empty.
+ */
+interface Props {
+  reviews: Review[];
+  testResults: TestResult[];
+  brand: string;
+  model: string;
+  versionNames: string[];
+  /** Band class (bg and text colours) assigned by the page. */
+  band: string;
+}
+const { band, ...block } = Astro.props as Props;
+---
+
+<div class:list={["band-section", band]} data-band="reviews">
+  <ReviewsBlock {...block} />
+</div>
