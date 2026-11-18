@@ -240,8 +240,12 @@ test("el Retocador solo cambia file y edits de una imagen y open_questions (ADR-
   git("add", "-A");
   git("commit", "-q", "-m", "base");
   try {
+    writeFileSync(join(dir, "a.png"), "");
     write(yaml("a.png", ", edits: [background]").replace("[]", "[\"recorte\"]"));
     assert.deepEqual(check(), []);
+    // Rejected after retouching without restoring the original: the YAML points at a deleted file.
+    write(yaml("a.jpg").replace("[]", "[\"recorte\"]"));
+    assert.match(check().join(), /a\.jpg does not exist/);
     write(yaml("a.png", ", edits: [background]").replace("CC0", "CC-BY-4.0"));
     assert.match(check().join(), /may change only/);
     write(yaml("a.jpg").replace("Volta", "Volta 2"));
