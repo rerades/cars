@@ -7,6 +7,7 @@ import ReviewsStrip from "../../../components/ReviewsStrip.astro";
 import SourcesBlock from "../../../components/SourcesBlock.astro";
 import SegmentSource from "../../../components/SegmentSource.astro";
 import Cifra from "../../../components/Cifra.astro";
+import CifrasCountUp from "../../../components/CifrasCountUp.astro";
 import SourceDate from "../../../components/SourceDate.astro";
 import { batteryFigure, powerFigure } from "../../../lib/key-figures.ts";
 import { formatDecimal, formatEur, formatNumber } from "../../../lib/format.ts";
@@ -250,6 +251,7 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
           ))}
         </dl>
       </section>
+      <CifrasCountUp />
       </div>
       {/* The photo (or the silhouette) comes after the text in the DOM and is painted behind it; the caption is the
           last item of the first screen. The figure adds no box of its own (display: contents). */}

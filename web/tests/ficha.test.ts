@@ -213,7 +213,8 @@ describe("/marcas/{marca}/{modelo} model page (fixtures)", () => {
 
   test("RNF-1/RNF-5: no JavaScript, no cookies or storage", () => {
     const html = page("acme", "Volta");
-    assert.doesNotMatch(html, /<script\b|localStorage|document\.cookie/i);
+    // Only the key figures' count-up script (#1041) is allowed.
+    assert.doesNotMatch(html.replace(/<script\b[^>]*>(?=(?:(?!<\/script>)[\s\S])*data-cifras)[\s\S]*?<\/script>/g, ""), /<script\b|localStorage|document\.cookie/i);
   });
 });
 

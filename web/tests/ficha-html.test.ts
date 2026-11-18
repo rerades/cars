@@ -12,6 +12,8 @@ import { acme, sourced } from "./fixtures.ts";
  * CA-14 (RNF-1), CA-15 (RNF-5) and CA-18 (section 6), plus the "only pregenerated pages" check of #40.
  */
 const WEB = join(import.meta.dirname, "..");
+/** The key figures' count-up script (#1041): the only script a model page may carry. */
+const COUNT_UP_SCRIPT = /<script\b[^>]*>(?=(?:(?!<\/script>)[\s\S])*data-cifras)[\s\S]*?<\/script>/g;
 const text = (s: string) => s.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 
 const QUESTION_VOLTA = "Volta GT: potencia y batería no publicadas en la ficha."; // from the Acme example
@@ -86,14 +88,15 @@ describe("model pages: served HTML (PRD-002 CA-14, CA-15, CA-18)", () => {
     const fuentes = /<section[^>]*data-fuentes[\s\S]*?<\/section>/.exec(html)![0];
     assert.match(fuentes, /acme\.example/);
     assert.ok([...fuentes.matchAll(/<li\b/g)].length >= 1);
-    assert.doesNotMatch(html, /<script\b/i); // nothing paints data on the client
+    // Nothing paints data on the client; only the key figures' count-up script (#1041) is allowed.
+    assert.doesNotMatch(html.replace(COUNT_UP_SCRIPT, ""), /<script\b/i);
   });
 
   test("CA-14: an announced model without versions still serves its title and sources, no script", () => {
     const html = page("acme/Soon");
     assert.match(text(html), /Acme todavía no ha publicado las versiones de este modelo\./);
     assert.match(/data-fuentes[\s\S]*?<\/section>/.exec(html)![0], /acme\.example/);
-    assert.doesNotMatch(html, /<script\b/i);
+    assert.doesNotMatch(html.replace(COUNT_UP_SCRIPT, ""), /<script\b/i);
   });
 
   test("CA-14: every title includes brand and model and is different from every other page's", () => {
@@ -111,7 +114,7 @@ describe("model pages: served HTML (PRD-002 CA-14, CA-15, CA-18)", () => {
 
   test("CA-15: no model page has a script, nor any trace of cookies or web storage", () => {
     for (const k of modelDirs()) {
-      assert.doesNotMatch(page(k), /<script\b|localStorage|sessionStorage|document\.cookie|set-cookie|indexedDB/i, k);
+      assert.doesNotMatch(page(k).replace(COUNT_UP_SCRIPT, ""), /<script\b|localStorage|sessionStorage|document\.cookie|set-cookie|indexedDB/i, k);
     }
   });
 
