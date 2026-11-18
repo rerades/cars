@@ -49,3 +49,4 @@ open_questions:
   - "Las baterías del IDAE (58 y 85 kWh) no indican si son útiles o brutas (basis unknown)."
   - "Tracción de CLA 200 y CLA 250+ no confirmada en ninguna fuente leída; solo se registra la del 350 4MATIC."
   - "launch: el artículo de 14/05/2025 publica el PVP en España, pero no la fecha de inicio de venta; sin dato (data-model.md, sección 4)."
+  - "Imagen (2026-11-18): rechazada, causa `cortado`: el CLA aparece pequeño y trasero, detrás de una valla y con otro coche al lado (también causas `angulo` y `calidad`, la parte útil mide unos 200 px). Falta un tres cuartos delantero del CLA eléctrico sin obstáculos."

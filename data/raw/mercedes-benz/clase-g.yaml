@@ -13,7 +13,8 @@ versions:
     power_kw: {value: 432, note: "publicado: 432 kW (587 CV)", source_id: mercedes-benz-es, url: "https://www.mercedes-benz.es/passengercars/models/suv/g-class-electric/overview.html", retrieved: 2026-10-13, tier: T1}
     price: null
 images:
-  - file: data/images/mercedes-benz/clase-g/frontal.jpg
+  - file: data/images/mercedes-benz/clase-g/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Mercedes-Benz_G_580_with_EQ_Technology_DSC_8256.jpg/1280px-Mercedes-Benz_G_580_with_EQ_Technology_DSC_8256.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_G_580_with_EQ_Technology_DSC_8256.jpg"
     source_id: wikimedia-commons

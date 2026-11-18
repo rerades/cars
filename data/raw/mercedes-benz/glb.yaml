@@ -19,7 +19,8 @@ versions:
     drivetrain: {value: awd, note: "el nombre del IDAE incluye «4MATIC»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
-  - file: "data/images/mercedes-benz/glb/frontal.jpg"
+  - file: "data/images/mercedes-benz/glb/frontal.png"
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Mercedes-Benz_GLB_250%2B_mit_EQ-Technologie_AMG_Line_%28X_244%29_%E2%80%93_f_18042026.jpg/1280px-Mercedes-Benz_GLB_250%2B_mit_EQ-Technologie_AMG_Line_%28X_244%29_%E2%80%93_f_18042026.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_GLB_250+_mit_EQ-Technologie_AMG_Line_(X_244)_–_f_18042026.jpg"
     source_id: wikimedia-commons

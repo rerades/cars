@@ -23,7 +23,8 @@ versions:
     power_kw: {value: 150, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2, note: "IDAE id 604326 (12.2024)"}
     price: null
 images:
-  - file: data/images/mercedes-benz/evito/frontal.jpg
+  - file: data/images/mercedes-benz/evito/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Mercedes-Benz_eVito_Tourer_Pro_129_Lang_%28V_447%2C_2._Facelift%29_%E2%80%93_f_04012025.jpg/1280px-Mercedes-Benz_eVito_Tourer_Pro_129_Lang_%28V_447%2C_2._Facelift%29_%E2%80%93_f_04012025.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_eVito_Tourer_Pro_129_Lang_(V_447,_2._Facelift)_–_f_04012025.jpg"
     source_id: wikimedia-commons
