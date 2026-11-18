@@ -4233,3 +4233,34 @@
     1920 px que compruebe que el marco mide 1440 px, está centrado y que ni las franjas ni el menú inferior se
     salen de él, en la portada, el catálogo y una ficha; y que a 1280 px el marco ocupa todo el ancho.
     Bitácora."
+# Retouched image on the card and the model page (story #1149, epic #1032). After marco-pagina-1440.
+- id: historia-1149-imagen-retocada
+  agent: developer
+  task: "Historia #1149 (épica #1032, PRD-001 RF-15, CA-23): imagen retocada en la tarjeta y en la primera
+    pantalla de la ficha. Lee la issue con gh issue view 1149 y sigue sus criterios y las secciones de diseño que
+    cita (docs/design/tarjeta-modelo.md y docs/design/ficha-modelo.md, «Imagen retocada»). Respeta el marco de
+    página de docs/design/tokens.md, «Marco de página»: los sizes de la ficha se acotan a 1440 px. Al terminar,
+    borra web/design-proto/retocadas.astro. Bitácora."
+# ADR-0025, step 4: more brands, two a night (retoucher max_runs_per_day).
+- id: retoque-citroen
+  agent: retoucher
+  task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/citroen/, siguiendo
+    .claude/agents/retoucher.md y docs/design/fotos-modelos.md, como en el piloto (PR #1106). Salta las
+    imágenes que ya tienen edits o que un open_questions ya rechazó. Si rechazas una foto después de
+    retocarla, restaura el original como dice el paso 5 de retoucher.md: el YAML no puede apuntar a un fichero
+    borrado. En el resumen, la tabla de cada foto y si el script tapó bien la matrícula donde la había. Bitácora."
+- id: retoque-kia
+  agent: retoucher
+  task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/kia/, siguiendo
+    .claude/agents/retoucher.md y docs/design/fotos-modelos.md, como en el piloto (PR #1106). Salta las
+    imágenes que ya tienen edits o que un open_questions ya rechazó. Si rechazas una foto después de
+    retocarla, restaura el original como dice el paso 5 de retoucher.md: el YAML no puede apuntar a un fichero
+    borrado. En el resumen, la tabla de cada foto y si el script tapó bien la matrícula donde la había. Bitácora."
+# Discovery before refresh (2026-11-06): models missing from brands already in data/raw/.
+- id: descubrir-byd-mg
+  agent: researcher
+  task: "BYD y MG: modelos 100 % eléctricos que se venden hoy en España y que no están en data/raw/byd/ ni en
+    data/raw/mg/ (turismos o furgonetas; los híbridos enchufables no entran). Hasta 6 modelos entre las dos
+    marcas. Sigue las reglas de .claude/agents/researcher.md y el esquema de docs/architecture/data-model.md,
+    con el segmento según RF-11 de PRD-001. Imágenes con el script de descarga, con las mismas reglas. No toques
+    los modelos que ya existen. Bitácora."
