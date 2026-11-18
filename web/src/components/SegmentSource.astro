@@ -1,0 +1,27 @@
+---
+import type { Sourced } from "../lib/data.ts";
+import { sourceView } from "../lib/format.ts";
+import { t } from "../lib/i18n.ts";
+import SourceMark from "./SourceMark.astro";
+
+/**
+ * Source indication of the segment (PRD-002 RF-9, CA-20). Editorial classification (tier E, ADR-0021): the text
+ * «clasificación editorial, {date}», with no link and no «fuente no oficial»: the stored url is a PR, not a source.
+ * Any other tier: the usual note mark.
+ */
+interface Props {
+  segment: Sourced;
+  /** Note number of the datum; unused for tier E. */
+  n?: number;
+}
+const { segment, n } = Astro.props as Props;
+const editorial = segment.tier === "E";
+---
+
+{
+  editorial ? (
+    <span class="text-small text-ink-600" data-editorial>{t("ficha.segmento.editorial", { fecha: sourceView(segment).date })}</span>
+  ) : n !== undefined ? (
+    <SourceMark n={n} unofficial={segment.tier !== "T1"} />
+  ) : null
+}

@@ -1,0 +1,34 @@
+---
+import { t } from "../lib/i18n.ts";
+import { noteLine, type SourceNote } from "../lib/notes.ts";
+
+/**
+ * «Fuentes» block of the model page (PRD-002 RF-9, CA-9; docs/design/ficha-modelo.md, «Bloque «Fuentes»»).
+ * One `li#fuente-{n}` per note, with the source name, the date and the full url. Does not render without notes.
+ * The editorial segment (tier E, ADR-0021) never gets a note: its url is not a source for the visitor (CA-20).
+ */
+interface Props {
+  notes: SourceNote[];
+  /** Band class (bg and text colours) assigned by the page. */
+  band: string;
+}
+const { notes, band } = Astro.props as Props;
+---
+
+{
+  notes.length > 0 && (
+    <section aria-labelledby="fuentes" class:list={["band-section", band]} data-fuentes>
+      <h2 id="fuentes" class="text-section text-ink-900">{t("ficha.fuentes.titulo")}</h2>
+      <p class="mt-1 text-small text-ink-600">{t("ficha.fuentes.entrada")}</p>
+      <ol class="mt-4 flex flex-col gap-3">
+        {notes.map((note) => (
+          <li id={`fuente-${note.n}`} tabindex="-1" class="text-small text-ink-900 [overflow-wrap:anywhere]" data-fuente={note.n}>
+            {noteLine(note)}
+            <br />
+            <a href={note.url} rel="noopener" class="text-brand-600 underline hover:text-brand-800">{note.url}</a>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}

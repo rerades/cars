@@ -101,6 +101,7 @@ export const es = {
   "ficha.titulo": "{marca} {modelo}",
   "ficha.estado.rotulo": "Estado",
   "ficha.segmento.rotulo": "Segmento",
+  "ficha.segmento.editorial": "clasificación editorial, {fecha}",
   "ficha.versiones.titulo": "Versiones",
   "ficha.versiones.entrada": "Ordenadas por precio, de menor a mayor. Precios en España con IVA y sin ayudas.",
   "ficha.versiones.caption": "Versiones de {marca} {modelo}, ordenadas por precio",
