@@ -62,13 +62,7 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
       <div class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8">
         <h1 class="text-display font-bold leading-[0.98] [font-stretch:var(--font-stretch-wide)] [overflow-wrap:anywhere]">{title}</h1>
         <p class="mt-4 max-w-prose text-body text-ink-600" data-intro>{intro}</p>
-        <p
-          class="mt-3 text-body text-ink-600"
-          data-count
-          role={filters ? "status" : undefined}
-          aria-live={filters ? "polite" : undefined}
-        >{count}</p>
-        {filters && <p class="mt-2 max-w-prose text-body text-ink-600" data-no-js>{t("filtros.sinJs")}</p>}
+        {!filters && <p class="mt-3 text-body text-ink-600" data-count>{count}</p>}
       </div>
     </header>
     <main>
@@ -76,34 +70,33 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
         <ExploreStrip groups={explore} showAll={currentHref !== "/coches/"} />
       </div>
 
-      <div
-        class:list={[
-          filters
-            ? "mx-auto max-w-page px-4 md:px-6 lg:grid lg:grid-cols-[18rem_1fr] lg:gap-8 lg:px-8"
-            : "pb-[var(--menu-clearance)]",
-        ]}
-      >
-        {filters && <CatalogFilters view={filters.view} />}
-        <section aria-labelledby="resultados">
-          <div class:list={["flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-end", !filters && "mx-auto max-w-page px-4 md:px-6 lg:px-8"]}>
-            <h2 id="resultados" tabindex="-1" class="sr-only">{t("resultados.titulo")}</h2>
-            {
-              filters && (
-                <div data-sort-row hidden class="flex flex-col gap-1 lg:flex-row lg:items-center lg:gap-2">
-                  <label for="orden" class="text-body">{filters.view.labels.sort}</label>
-                  <select
-                    id="orden"
-                    name="orden"
-                    data-sort
-                    class="min-h-11 w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900 lg:w-auto"
-                  >
-                    {filters.view.sorts.map((o) => <option value={o.value}>{o.label}</option>)}
-                  </select>
-                </div>
-              )
-            }
+      {
+        filters && (
+          <div class="band-light" data-bar>
+            <div class="mx-auto flex max-w-page flex-wrap items-center gap-2 px-4 py-3 md:px-6 lg:px-8">
+              <p
+                class="w-full text-small font-semibold text-ink-900 lg:w-auto lg:pr-2"
+                data-count
+                role="status"
+                aria-live="polite"
+              >{count}</p>
+              <p class="text-small text-ink-900" data-no-js>{t("filtros.sinJs")}</p>
+              <CatalogFilters view={filters.view} />
+            </div>
           </div>
-          {filters && <div data-chips hidden class="mt-2 flex flex-wrap gap-2" role="group" aria-label={filters.view.labels.active}></div>}
+        )
+      }
+      {
+        filters && (
+          <div class="mx-auto max-w-page px-4 md:px-6 lg:px-8">
+            <div data-chips hidden class="mt-3 flex flex-wrap gap-2" role="group" aria-label={filters.view.labels.active}></div>
+          </div>
+        )
+      }
+
+      <div class:list={[!filters && "pb-[var(--menu-clearance)]", filters && "mx-auto max-w-page px-4 md:px-6 lg:px-8"]}>
+        <section aria-labelledby="resultados">
+          <h2 id="resultados" tabindex="-1" class="sr-only">{t("resultados.titulo")}</h2>
           {
             cards.length > 0 ? (
               <ul
