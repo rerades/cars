@@ -373,7 +373,14 @@ const retouchOnly: Check = (ctx) =>
       ...d, open_questions: undefined,
       images: Array.isArray(d?.images) ? d.images.map((i: any) => ({ ...i, file: undefined, edits: undefined })) : d?.images,
     });
-    return strip(before) === strip(now.data) ? [] : [`${file}: the Retoucher may change only images[].file, images[].edits and open_questions`];
+    const out = strip(before) === strip(now.data) ? [] : [`${file}: the Retoucher may change only images[].file, images[].edits and open_questions`];
+    // The script deletes the original; a rejection after retouching must restore it (retoucher.md, step 5).
+    for (const img of Array.isArray(now.data?.images) ? now.data.images : []) {
+      if (img?.file && !existsSync(join(ctx.dir, String(img.file)))) {
+        out.push(`${file}: ${img.file} does not exist; the Retoucher restores a rejected original with git checkout -- <file>`);
+      }
+    }
+    return out;
   });
 
 const CHECKS: Record<string, Check[]> = {
