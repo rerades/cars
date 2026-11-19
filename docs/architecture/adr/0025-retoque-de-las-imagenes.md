@@ -101,13 +101,14 @@ apoyo y tapa la matrícula, sin tocar ningún otro píxel del coche.**
    - **Comprueba** que, dentro de la máscara y fuera de la matrícula, cada píxel es igual al de la foto
      original reducida, antes de codificar. Si no, falla y no escribe nada.
    - Si el PNG pasa de 2 MB (ADR-0011), reduce el ancho hasta que cabe.
-   - Escribe `<nombre>.png` junto al original, que borra, y una hoja «antes y después» en
+   - Escribe `<nombre>.png` junto al original, que conserva (antes lo borraba; cambiado el 2026-11-19
+     porque dos ejecuciones rechazaron la foto y no lo restauraron), y una hoja «antes y después» en
      `ops/retouch/<run_id>/` para la PR.
    - Imprime una línea JSON con `file`, `edits`, las dimensiones y el resultado de la comprobación, como
      `fetch-image.ts`.
 3. **El agente**, después del script, mira el PNG y lo rechaza si ve una máscara mala: trozos de fondo
    pegados, partes del coche que faltan (retrovisores, antena, ruedas), un cartel o una persona pegados al
-   coche, o una matrícula legible. Si lo rechaza, restaura el original con `git checkout` y lo anota como en
+   coche, o una matrícula legible. Si lo acepta, borra el original; si lo rechaza, borra el PNG y lo anota como en
    el punto 1.
 4. **Esquema.** Cada entrada de `images` admite una clave nueva, `edits`: lista de `background` y `plate`.
    Si no está, la imagen no está retocada, así que las 140 entradas actuales siguen siendo válidas. Una

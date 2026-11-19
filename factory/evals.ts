@@ -374,10 +374,10 @@ const retouchOnly: Check = (ctx) =>
       images: Array.isArray(d?.images) ? d.images.map((i: any) => ({ ...i, file: undefined, edits: undefined })) : d?.images,
     });
     const out = strip(before) === strip(now.data) ? [] : [`${file}: the Retoucher may change only images[].file, images[].edits and open_questions`];
-    // The script deletes the original; a rejection after retouching must restore it (retoucher.md, step 5).
+    // The YAML must not name a missing file, e.g. a deleted original or a removed PNG (retoucher.md, steps 4 and 5).
     for (const img of Array.isArray(now.data?.images) ? now.data.images : []) {
       if (img?.file && !existsSync(join(ctx.dir, String(img.file)))) {
-        out.push(`${file}: ${img.file} does not exist; the Retoucher restores a rejected original with git checkout -- <file>`);
+        out.push(`${file}: ${img.file} does not exist; the Retoucher keeps the original until it accepts the PNG`);
       }
     }
     return out;

@@ -7,7 +7,7 @@
  *      or if the car touches an edge of the photo (it is cut off).
  *   2. Crops to the car with a margin and covers plates: text with a digit in the lower half of the car.
  *   3. Checks that every pixel inside the mask and outside the plates equals the original. Else it fails.
- *   4. Writes <name>.png next to the original, deletes the original, and writes a before/after sheet to
+ *   4. Writes <name>.png next to the original, which it keeps, and writes a before/after sheet to
  *      ops/retouch/<run_id>/ for the PR. At most 1280 px wide and 2 MB (ADR-0011).
  * On success it prints one JSON line (file, edits, width, height, bytes, check, sheet). On failure it prints
  * the cause, exits 1 and writes nothing. It writes no YAML: the agent adds `edits` to the image entry.
@@ -195,7 +195,7 @@ export async function retouch(rel: string, runId: string): Promise<Record<string
     await sheet(file, png, sheetFile);
     writeFileSync(`${target}.tmp`, png); // same directory, so the rename is atomic
     renameSync(`${target}.tmp`, target);
-    if (target !== file) rmSync(file);
+    // The original stays: the agent deletes it only when it accepts the PNG (retoucher.md, steps 4 and 5).
     const edits: Edit[] = plates.length ? ["background", "plate"] : ["background"];
     return {
       file: target.slice(ROOT.length + 1), edits, width, height, bytes: png.length,
