@@ -138,10 +138,13 @@ describe("/coches built page: order", () => {
 
   // The browser reorders with sortModels over readSortable, already covered by "the data attributes of
   // the cards read back to the same order". Only the list.append() wiring in CatalogFilters is untested.
-  test("the order selector sits in the results row, after the h2 'Modelos', hidden without JS", () => {
+  test("the order selector sits in the top bar, before the results, hidden without JS", () => {
     const h2 = html.indexOf('<h2 id="resultados"');
-    assert.ok(h2 > html.indexOf("data-filters-root"), "the results come after the filter panel");
-    assert.ok(html.indexOf('id="orden"') > h2, "the selector follows the h2, outside the filter panel");
-    assert.match(html, /<div[^>]*data-sort-row[^>]*hidden/);
+    const order = html.indexOf('id="orden"');
+    assert.ok(order > html.indexOf("data-count"), "the order follows the counter");
+    assert.ok(order > html.indexOf("data-group-toggle"), "the order follows the filter pills");
+    assert.ok(order < html.indexOf("data-panel"), "the order comes before the open panel");
+    assert.ok(order < h2, "the bar comes before the results");
+    assert.match(html, /<div[^>]*data-filters-root[^>]*\shidden[^>]*>[\s\S]*data-sort-row/);
   });
 });

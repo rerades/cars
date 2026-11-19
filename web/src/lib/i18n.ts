@@ -224,6 +224,8 @@ export const es = {
   "filtros.chipAutonomia": "Autonomía ≥ {km} km",
   "filtros.chipDesde": "Desde {precio} €",
   "filtros.chipHasta": "Hasta {precio} €",
+  "filtros.grupoConteo": "{grupo} ({n})",
+  "filtros.activosSufijo": "activos",
   "vacio.titulo": "Ningún modelo cumple los filtros",
   "vacio.texto": "Prueba a ampliar el precio o a quitar algún filtro.",
   "estado.todos": "Todos",
