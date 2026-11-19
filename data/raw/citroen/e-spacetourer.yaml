@@ -45,6 +45,7 @@ images:
     license: CC0
     attribution: null
 open_questions:
+  - "Imagen (2026-11-19): rechazada, causa `angulo`: es una vista trasera en marcha, con un poste delante y otro coche al lado; buscar un tres cuartos delantero."
   - "Precio: citroen.es no está registrada como fuente; todas las versiones con price null. motor.es publica precios con descuento, que no valen."
   - "Segmento: ninguna fuente leída lo clasifica; sin segment."
   - "launch: ninguna fuente leída da la fecha de inicio de venta en España; sin dato."
