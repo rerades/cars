@@ -28,7 +28,8 @@ versions:
     power_kw: {value: 83, source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2, note: "IDAE id 614463"}
     price: null
 images:
-  - file: data/images/citroen/e-c3-aircross/frontal.jpg
+  - file: data/images/citroen/e-c3-aircross/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Citro%C3%ABn_%C3%AB-C3_Aircross_113_Extended-Range_Max_%28III%29_%E2%80%93_f_15022026.jpg/1280px-Citro%C3%ABn_%C3%AB-C3_Aircross_113_Extended-Range_Max_%28III%29_%E2%80%93_f_15022026.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Citroën_ë-C3_Aircross_113_Extended-Range_Max_(III)_–_f_15022026.jpg"
     source_id: wikimedia-commons

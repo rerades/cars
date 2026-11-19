@@ -44,4 +44,5 @@ open_questions:
   - "El Ami es un cuadriciclo ligero, no un turismo; las cifras del IDAE (75 km, 6 kW) son las mismas para todas sus filas. Decidir si entra en el catálogo."
   - "Segmento: ninguna fuente leída lo clasifica; sin segment."
   - "launch: ninguna fuente leída da la fecha de inicio de venta en España; sin dato."
+  - "Imagen (2026-11-19): rechazada, causa `matricula`: el script no tapó la matrícula francesa FV 340-VR y sigue legible tras el retoque; buscar otra foto con la matrícula ilegible o ausente."
   - "Versión Dark Side (motor.es, 2025): sin fila en el IDAE; no se ha escrito."
