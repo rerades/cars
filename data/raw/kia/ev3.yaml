@@ -21,7 +21,8 @@ versions:
     power_kw: {value: 150, note: "IDAE ids 603413, 604217, 613708", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
-  - file: "data/images/kia/ev3/frontal.jpg"
+  - file: "data/images/kia/ev3/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Kia_EV3_GT-Line_Automesse_Ludwigsburg_2024_IMG_1674.jpg/1280px-Kia_EV3_GT-Line_Automesse_Ludwigsburg_2024_IMG_1674.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Kia_EV3_GT-Line_Automesse_Ludwigsburg_2024_IMG_1674.jpg"
     source_id: wikimedia-commons

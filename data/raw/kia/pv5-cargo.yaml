@@ -29,6 +29,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Treeinkr, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-19): rechazada, causa `pegado`: puerta lateral corredera abierta, cartel pegado a la puerta y cordones de feria delante del coche."
   - "Precio: la ficha no publica PVP y el configurador no se lee con fetch-page.ts; price: null en todas las versiones."
   - "launch: ninguna fuente leída da la fecha de inicio de pedidos en España. status on_sale deducido de «Configura tu PV5 Cargo» / «Solicita tu oferta»; por eso needs_review: true."
   - "Versiones: se agrupan por batería (Medium/Long Range). El IDAE añade acabados Essential, Plus y Elite; la ficha no los presenta con datos. Variantes Largo/Tech Alto de la ficha (4.495/4.695 mm) sin cifras por versión. Carga DC y AC no publicadas en el texto leído. PV5 Chasis no se registra."

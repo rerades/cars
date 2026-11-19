@@ -17,7 +17,8 @@ versions:
     power_kw: {value: 283, note: "IDAE ids 583072 y 583073", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
-  - file: "data/images/kia/ev9/frontal.jpg"
+  - file: "data/images/kia/ev9/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Kia_EV9_1X7A2472.jpg/1280px-Kia_EV9_1X7A2472.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Kia_EV9_1X7A2472.jpg"
     source_id: wikimedia-commons
