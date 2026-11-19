@@ -1,4 +1,4 @@
-import type { ModelRecord } from "./data.ts";
+import type { ModelImage, ModelRecord } from "./data.ts";
 import { isComparable } from "./compare.ts";
 import { formatEur, formatNumber } from "./format.ts";
 import { t, type MessageKey } from "./i18n.ts";
@@ -30,7 +30,15 @@ export interface CardView {
   /** `segment.value`, or null: picks the silhouette when there is no image (RF-8, CA-17). */
   segment: string | null;
   /** First image with license (RF-8); null gives the silhouette. */
-  image: { file: string; attribution: string | null; pageUrl: string } | null;
+  image: {
+    file: string;
+    attribution: string | null;
+    pageUrl: string;
+    /** The image has `edits`: a car cut out on transparency (RF-15, ADR-0025). */
+    edited: boolean;
+    /** The credit line: "Foto: {attribution} (modificada)" when edited, the attribution as is otherwise; null without attribution. */
+    credit: string | null;
+  } | null;
   /**
    * RF-6, RF-11: the "Comparar" action, null unless the model is comparable (`isComparable`).
    * Short form `?v={brand}/{model}`: the default version is chosen by the comparator, not frozen here.
@@ -47,6 +55,21 @@ export function formatLaunch(launch: string): string | null {
   const date = new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, 1));
   if (Number.isNaN(date.getTime())) return null;
   return monthYear.format(date).replace(".", "").replace(/ de /, " ");
+}
+
+function imageView(img: ModelImage): NonNullable<CardView["image"]> {
+  const edited = img.edits.length > 0;
+  return {
+    file: img.file,
+    attribution: img.attribution,
+    pageUrl: img.page_url,
+    edited,
+    credit: img.attribution
+      ? edited
+        ? t("tarjeta.fotoModificada", { atribucion: img.attribution })
+        : img.attribution
+      : null,
+  };
 }
 
 export function cardView(m: ModelRecord): CardView {
@@ -86,7 +109,7 @@ export function cardView(m: ModelRecord): CardView {
       : t("tarjeta.segmentoPendiente"),
     segment: m.segment?.value ?? null,
     image: m.images[0]
-      ? { file: m.images[0].file, attribution: m.images[0].attribution, pageUrl: m.images[0].page_url }
+      ? imageView(m.images[0])
       : null,
     compare: isComparable(m)
       ? {

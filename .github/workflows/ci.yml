@@ -99,11 +99,12 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: pnpm run test:a11y
       # ADR-0024, point 5: screenshots of the real pages for the Reviewer. They inform, they do not
-      # block (continue-on-error), same as the rest of this job (ADR-0006).
+      # block (continue-on-error), same as the rest of this job (ADR-0006). Citroën and the Renault 4
+      # page show retouched photos (story #1149).
       - name: Capture pages
         if: always()
         continue-on-error: true
-        run: node scripts/design-shot.ts --out ${{ runner.temp }}/capturas / /coches/ /comparar/ /marcas/polestar/polestar-2/
+        run: node scripts/design-shot.ts --out ${{ runner.temp }}/capturas / /coches/ /comparar/ /marcas/polestar/polestar-2/ /marcas/citroen/ /marcas/renault/r4-e-tech-electrico/
       - name: Upload captures
         if: always()
         continue-on-error: true

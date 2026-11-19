@@ -150,8 +150,14 @@ test("images keep file, page_url, license and attribution", () => {
   const raw = acme();
   raw.images = [image()];
   const m = normImg(raw);
-  assert.deepEqual(m.images, [image()]);
+  assert.deepEqual(m.images, [{ ...image(), edits: [] }]);
   assert.deepEqual(m.warnings, []);
+});
+
+test("an image keeps its edits (ADR-0025); without them the list is empty", () => {
+  const raw = acme();
+  raw.images = [image({ edits: ["background"] }), image()];
+  assert.deepEqual(normImg(raw).images.map((i) => i.edits), [["background"], []]);
 });
 
 test("an image without attribution gets attribution null", () => {

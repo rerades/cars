@@ -24,6 +24,7 @@ import { versionFields } from "../../../lib/version-fields.ts";
 import { groupNotes, noteLine } from "../../../lib/notes.ts";
 import type { ImageMetadata } from "astro";
 import SectionMenu from "../../../components/SectionMenu.astro";
+import CutoutPhoto from "../../../components/CutoutPhoto.astro";
 import ScreenPhoto from "../../../components/ScreenPhoto.astro";
 import { assignBands, bandClass } from "../../../lib/bands.ts";
 import { publishableResults } from "../../../lib/test-results.ts";
@@ -74,6 +75,12 @@ const altOf = (i: number) => t("ficha.imagen.alt", { marca: card.brand, modelo: 
 const captionOf = (img: ModelImage) =>
   img.attribution ? t("ficha.imagen.atribucion", { attribution: img.attribution }) : null;
 const [mainImage, ...rest] = images.slice(0, 6);
+// RF-15, ADR-0025: an image with `edits` is a car cut out on transparency; it has its own fit and credit.
+const isCutout = (img: ModelImage | undefined) => !!img && img.edits.length > 0;
+const heroCredit = (img: ModelImage) =>
+  img.attribution
+    ? t(isCutout(img) ? "ficha.imagen.atribucionModificada" : "ficha.imagen.atribucion", { attribution: img.attribution })
+    : null;
 
 // "Datos del modelo" (RF-7): only the rows `specs` carries, in the order of the design table.
 const sep = ` ${t("ficha.lista.separador")} `;
@@ -141,6 +148,7 @@ const sectionIds = [
   ...(notes.length > 0 ? ["fuentes"] : []),
   ...(hasReviews ? ["reviews"] : []),
 ];
+const cutout = !!mainSrc && isCutout(mainImage);
 const bandColors = assignBands(sectionIds);
 const band = (id: string) => bandClass(bandColors[sectionIds.indexOf(id)]!);
 // Section menu (RF-17): one anchor per section that exists, in page order, to the id of its heading.
@@ -166,7 +174,7 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
   <body>
     <main>
       <header data-ficha-header class="band-dark hero">
-      <div class="hero-screen">
+      <div class:list={["hero-screen", cutout && "hero-screen--cutout"]}>
       <div class={`${inner} hero-top`}>
       <nav aria-label={t("ficha.ruta.nombre")} data-ficha-ruta>
         <ol class="flex flex-wrap items-center text-small">
@@ -243,6 +251,11 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
               </p>
             )
           }
+          {
+            cutout && mainImage && heroCredit(mainImage) && (
+              <p class="hero-credit-line" data-credit>{heroCredit(mainImage)}</p>
+            )
+          }
       </div>
       <section id="cifras" aria-label={t("ficha.cifras")} data-cifras class={`${inner} hero-cifras`}>
         <dl class="grid grid-cols-2 gap-x-6 gap-y-6 lg:grid-cols-4">
@@ -267,7 +280,18 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
       {/* The photo (or the silhouette) comes after the text in the DOM and is painted behind it; the caption is the
           last item of the first screen. The figure adds no box of its own (display: contents). */}
       {
-        mainSrc && mainImage ? (
+        cutout && mainSrc && mainImage ? (
+          <figure class="hero-cutout" data-main-image>
+            <CutoutPhoto
+              src={mainSrc}
+              alt={altOf(1)}
+              widths={[640, 960, 1280]}
+              sizes="(min-width: 1440px) 720px, (min-width: 1024px) 50vw, 100vw"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </figure>
+        ) : mainSrc && mainImage ? (
           <figure class="hero-figure" data-main-image>
             <ScreenPhoto
               src={mainSrc}
@@ -434,6 +458,31 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
     max-width: 100%;
     overflow-wrap: anywhere;
   }
+  /* Retouched main image (ficha-modelo.md): no scrim, the car whole and never under the text. Mobile: the box is
+     in the flow between the route and the name (visual order only; the DOM keeps the reading order), taking the
+     height that is left, at least --size-cutout-mobile. */
+  .hero-screen--cutout .hero-top { order: 0; }
+  .hero-cutout {
+    flex: 1;
+    margin: 0 1.25rem;
+    min-height: var(--size-cutout-mobile);
+    order: 1;
+    position: relative;
+  }
+  .hero-cutout .cutout-photo {
+    inset: 0;
+    position: absolute;
+  }
+  .hero-screen--cutout .hero-foot {
+    order: 2;
+    padding-top: 1rem;
+  }
+  .hero-credit-line {
+    color: var(--color-on-dark-muted);
+    font-size: var(--text-small);
+    line-height: var(--text-small--line-height);
+    overflow-wrap: anywhere;
+  }
   .hero-silhouette {
     --size-segment-icon-lg: 24rem;
     align-items: center;
@@ -451,6 +500,20 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
   @media (min-width: 1024px) {
     .hero-silhouette {
       --size-segment-icon-lg: 42rem;
+    }
+    /* lg: text in the left half (capped to the page frame), the car in the right half from below the route to
+       above the key figures, resting on the bottom. */
+    .hero-cutout {
+      inset: 6.5rem 2.5rem 12rem 50%;
+      margin: 0;
+      min-height: 0;
+      position: absolute;
+    }
+    .hero-screen--cutout .hero-text > * {
+      max-width: calc(min(50vw, 45rem) - 4rem);
+    }
+    .hero-screen--cutout .hero-foot {
+      padding-top: 7rem;
     }
   }
 </style>
