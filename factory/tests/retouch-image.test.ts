@@ -2,7 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import sharp from "sharp";
-import { carMismatches, compose, encode, pickInstance, plateBoxes, type Box } from "../retouch-image.ts";
+import { carMismatches, compose, encode, inPlate, pickInstance, plateBoxes, type Box } from "../retouch-image.ts";
 
 const W = 100, H = 60;
 /** A mask with a filled rectangle (inclusive bounds). */
@@ -27,7 +27,11 @@ test("plateBoxes solo tapa texto con cifras en la mitad inferior del coche", () 
   const mask = rect(CAR);
   const plate = { text: "S RN 227E", x: 40, y: 40, w: 20, h: 4 };
   const boxes = plateBoxes([plate, { text: "smart", x: 40, y: 40, w: 20, h: 4 }, { ...plate, y: 12 }, { ...plate, x: 2 }], mask, W, H, CAR);
-  assert.deepEqual(boxes, [{ x0: 39, y0: 39, x1: 61, y1: 45 }]);
+  assert.deepEqual(boxes, [{ x0: 40, y0: 40, x1: 60, y1: 44 }], "the text box, not padded");
+  const quad = [[40, 40], [60, 42], [60, 46], [40, 44]];
+  const [tilted] = plateBoxes([{ ...plate, quad }], mask, W, H, CAR);
+  assert.deepEqual(tilted, { x0: 40, y0: 40, x1: 60, y1: 46, quad }, "the tilted outline when Vision gives it");
+  assert.ok(inPlate(tilted, 50, 43) && !inPlate(tilted, 41, 45) && !inPlate(tilted, 59, 40), "inside the quad only");
 });
 
 test("compose copia el coche tal cual, tapa la matrícula y deja el fondo transparente", () => {
@@ -36,11 +40,31 @@ test("compose copia el coche tal cual, tapa la matrícula y deja el fondo transp
   assert.deepEqual(carMismatches(out, rgb, mask, W, plates), { checked: 60 * 40 - 20 * 5, mismatched: 0 });
   const at = (x: number, y: number) => [...out.data.subarray(((y - out.top) * out.width + x - out.left) * 4, ((y - out.top) * out.width + x - out.left) * 4 + 4)];
   assert.equal(at(CAR.x0 - 1, CAR.y0)[3], 0, "outside the car and the shadow: transparent");
-  assert.deepEqual(at(40, 40), at(59, 44), "the plate is one plain color");
-  assert.notDeepEqual(at(40, 40).slice(0, 3), [...rgb.subarray((40 * W + 40) * 3, (40 * W + 40) * 3 + 3)]);
+  // Blurred: the plate pixels change and their spread shrinks, so the characters cannot be read.
+  const spread = (v: (x: number, y: number) => number) => {
+    const vs: number[] = [];
+    for (let y = 40; y <= 44; y++) for (let x = 40; x <= 59; x++) vs.push(v(x, y));
+    return Math.max(...vs) - Math.min(...vs);
+  };
+  assert.notDeepEqual(at(50, 42).slice(0, 3), [...rgb.subarray((42 * W + 50) * 3, (42 * W + 50) * 3 + 3)]);
+  assert.ok(spread((x, y) => at(x, y)[0]) < spread((x, y) => rgb[(y * W + x) * 3]) / 2);
   assert.ok(at(50, CAR.y1 + 1)[3] > 0, "a shadow under the car");
   out.data[((15 - out.top) * out.width + 30 - out.left) * 4] ^= 1; // one car pixel changed
   assert.equal(carMismatches(out, rgb, mask, W, plates).mismatched, 1);
+});
+
+test("el desenfoque de una matrícula inclinada no sale de su contorno ni lee fuera de él", () => {
+  const rgb = photo(), mask = rect(CAR);
+  const plates = plateBoxes([{ text: "S RN 227E", x: 40, y: 40, w: 20, h: 4, quad: [[40, 40], [60, 42], [60, 46], [40, 44]] }], mask, W, H, CAR);
+  const out = compose(rgb, mask, W, H, CAR, plates);
+  // Every pixel of the car outside the quad, including the corners of its box, is the original.
+  assert.equal(carMismatches(out, rgb, mask, W, plates).mismatched, 0);
+  assert.ok(!inPlate(plates[0], 59, 40));
+  // A white pixel just outside the quad does not leak into the blur.
+  rgb.fill(255, (40 * W + 59) * 3, (40 * W + 59) * 3 + 3);
+  const again = compose(rgb, mask, W, H, CAR, plates);
+  const i = ((43 - again.top) * again.width + 55 - again.left) * 4;
+  assert.deepEqual([...again.data.subarray(i, i + 3)], [...out.data.subarray(i, i + 3)]);
 });
 
 test("encode no pasa de 1280 px de ancho", async () => {
