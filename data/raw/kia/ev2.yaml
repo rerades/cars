@@ -27,6 +27,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-19): rechazada, causa `angulo`: es una vista trasera del EV2; hace falta un tres cuartos delantero."
   - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23: ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario (19.360 €) no se asocian a una versión ni son PVP: no se usan."
   - "Refresco 2026-10-31: la ficha aún avisa de que 'Todos los datos técnicos y especificaciones son objetivos previstos, pendientes de desarrollo y homologación', aunque dice que el EV2 'ya esta disponible oficialmente en los canales de Kia España'. Cifras sin confirmar por homologación. Configurador: solo condiciones de oferta financiada (caducada el 26/10/2026) sin importe por versión; sin precio utilizable."
   - "launch: sin fecha de inicio de venta en una fuente T1."

@@ -32,6 +32,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "MarcelX42, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-19): rechazada, causa `modelo`: es el prototipo de feria (IAA 2024, sin retrovisores ni morro de serie), con la puerta lateral abierta (`pegado`) y cordones delante."
   - "Precio: la ficha no publica PVP y el configurador no se lee con fetch-page.ts; price: null en todas las versiones."
   - "launch: ninguna fuente leída da la fecha de inicio de pedidos en España. status on_sale deducido de «Configura tu PV5 Passenger» / «Solicita tu oferta»; por eso needs_review: true."
   - "Versiones: la ficha nombra solo las baterías (MR 51.5 kWh y LR 71.2 kWh) y los paquetes Essential y Plus; el IDAE añade acabado Elite y variantes de 7 plazas (295 y 397 km). No se han creado versiones por acabado ni de 7 plazas porque la ficha no las presenta con datos. Carga DC y AC no publicadas en el texto leído."

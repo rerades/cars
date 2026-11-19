@@ -22,7 +22,8 @@ versions:
   - name: EV4 Fastback GT-Line
     price: null
 images:
-  - file: "data/images/kia/ev4/frontal.jpg"
+  - file: "data/images/kia/ev4/frontal.png"
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Kia_EV4_GT-Line_Automesse_Ludwigsburg_2025_DSC_2534.jpg/1280px-Kia_EV4_GT-Line_Automesse_Ludwigsburg_2025_DSC_2534.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Kia_EV4_GT-Line_Automesse_Ludwigsburg_2025_DSC_2534.jpg"
     source_id: wikimedia-commons

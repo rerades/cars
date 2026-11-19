@@ -32,6 +32,7 @@ images:
     license: CC0-1.0
     attribution: null
 open_questions:
+  - "Imagen (2026-11-19): rechazada, causa `angulo`: vista trasera tres cuartos del EV5 en una calle, con matrícula china y coches y peatones alrededor; hace falta un tres cuartos delantero."
   - "Precio (PVP sin ayudas): no publicado en la ficha; configurador interactivo no legible. Mirado el 2026-10-23 y el 2026-10-31 (el configurador solo da condiciones de oferta financiada, caducada el 26/10/2026, sin importe por versión): ficha /descubrelo/ sin precio, sin lista de tarifas ni PDF. Los 'Desde' de concesionario no se asocian a una versión ni son PVP: no se usan."
   - "launch: sin fecha de inicio de venta en España en fuente T1."
   - "segment: la ficha dice 'SUV EV' sin tamaño; queda vacío."
