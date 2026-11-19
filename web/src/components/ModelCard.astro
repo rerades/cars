@@ -3,6 +3,7 @@ import type { ImageMetadata } from "astro";
 import type { CardView } from "../lib/card.ts";
 import { imageRelPath } from "../lib/data.ts";
 import Cifra from "./Cifra.astro";
+import CutoutPhoto from "./CutoutPhoto.astro";
 import ScreenPhoto from "./ScreenPhoto.astro";
 import SegmentSilhouette from "./SegmentSilhouette.astro";
 
@@ -42,7 +43,17 @@ const priceLabel = card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` 
 >
   <div class="screen-box">
     {
-      src ? (
+      src && card.image?.edited ? (
+        <div class="cutout" data-slot="image">
+          <CutoutPhoto
+            src={src}
+            alt=""
+            widths={[640, 960, 1280]}
+            sizes="(min-width: 1440px) 720px, (min-width: 1024px) 50vw, 100vw"
+            loading={eager ? "eager" : "lazy"}
+          />
+        </div>
+      ) : src ? (
         <div class="photo" data-slot="image">
           <ScreenPhoto
             src={src}
@@ -92,7 +103,7 @@ const priceLabel = card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` 
               <a href={card.compare.href} class="enlace-comparar relative z-10 inline-flex min-h-touch items-center text-small font-bold text-brand-600 underline hover:text-brand-800">{card.compare.label}<span class="sr-only"> {card.compare.srLabel}</span></a>
             )}
             {src && card.image?.attribution && (
-              <a href={card.image.pageUrl} class="relative z-10 inline-flex min-h-touch items-center text-small text-ink-600 underline [overflow-wrap:anywhere] hover:text-brand-800">{card.image.attribution}</a>
+              <a href={card.image.pageUrl} class="relative z-10 inline-flex min-h-touch items-center text-small text-ink-600 underline [overflow-wrap:anywhere] hover:text-brand-800">{card.image.credit}</a>
             )}
           </p>
         )
@@ -132,6 +143,19 @@ const priceLabel = card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` 
     inset: 0 0 auto;
     overflow: hidden;
     position: absolute;
+  }
+
+  /* Retouched image (tarjeta-modelo.md): the car whole in the top 12 rem on mobile, the text 1 rem below it. */
+  .cutout {
+    height: var(--size-cutout-mobile);
+    inset: 1.5rem 1.25rem auto;
+    position: absolute;
+  }
+  .cutout :global(.cutout-photo) {
+    height: 100%;
+  }
+  .screen:has(.cutout) .screen-text {
+    padding-top: 14.5rem;
   }
 
   /* No photo: the segment outline, large and thin, behind the text. Decorative (aria-hidden in the SVG). */
@@ -249,6 +273,17 @@ const priceLabel = card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` 
     }
     .screen:nth-child(even) .photo {
       inset: 0 30% 0 0;
+    }
+    /* The car takes the half opposite the text; sides alternate like the photos. */
+    .cutout {
+      height: auto;
+      inset: 2.5rem 2.5rem 2.5rem 50%;
+    }
+    .screen:nth-child(even) .cutout {
+      inset: 2.5rem 50% 2.5rem 2.5rem;
+    }
+    .screen:has(.cutout) .screen-text {
+      padding-top: 2rem;
     }
     .screen:nth-child(even) .screen-text {
       margin-left: auto;

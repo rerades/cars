@@ -93,6 +93,9 @@
   /* Ranking list (tokens.md): max width of the list and the place-number column. */
   --width-ranking: 48rem;
   --width-rank-number: 3rem;
+  /* Retouched image (ADR-0025, tokens.md): the floor under the cut-out car and its minimum height on mobile. */
+  --color-cutout-floor: rgb(255 255 255 / 0.07);
+  --size-cutout-mobile: 12rem;
 }
 
 @layer base {

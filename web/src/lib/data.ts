@@ -83,6 +83,8 @@ export interface ModelImage {
   retrieved: string;
   license: string;
   attribution: string | null;
+  /** Edits made to the photo (ADR-0025), e.g. ["background"]; empty for an unretouched photo. */
+  edits: string[];
 }
 
 /**
@@ -381,6 +383,7 @@ function readImages(raw: unknown, warnings: string[], imagesDir: string): ModelI
         retrieved: img.retrieved,
         license: img.license,
         attribution: isStr(img.attribution) ? img.attribution : null,
+        edits: Array.isArray(img.edits) ? img.edits.filter(isStr) : [],
       });
     }
   });
