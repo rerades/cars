@@ -28,6 +28,133 @@ difieren, no marca mejor ni peor, no ordena columnas por ningún dato, no calcul
 no guarda la selección (ni cookies, ni `localStorage`, ni `sessionStorage`: RF-10, RNF-4, CA-12). Ningún
 estilo de celda depende de su valor.
 
+## Dirección visual (2026-11-18)
+
+Pasa el comparador a la dirección elegida ([`direccion.md`](direccion.md), «La elegida»: A «Pantalla» con la
+tipografía y el bloque de versión de B; tokens en [`tokens.md`](tokens.md), «Dirección visual»). **Sustituye** a lo
+que dicen sobre aspecto (colores de fondo, tamaños de letra, radios) las secciones de abajo; la estructura, el orden
+del DOM, el foco, el lector de pantalla, los estados y el copy no cambian. Prototipo
+`web/design-proto/comparador-a.astro` (datos reales: Renault 5 con precio con oferta, Polestar 3 con una sola versión
+de nombre muy largo, Mercedes-Benz GLA «Próximamente» con datos de fuente no oficial; aviso de 1 versión ignorada).
+Capturas: [`refs/comparador-a-390.png`](refs/comparador-a-390.png) (la página dibujada a **320 px** dentro de la
+captura de 390, con márgenes grises, para comprobar RNF-1 y CA-17 a 320) y
+[`refs/comparador-a-1280.png`](refs/comparador-a-1280.png).
+
+```
+320 px                                  1280 px
+▓ siete3                                ▓ siete3
+▓ COMPARAR COCHES (wide, display)       ▓ COMPARAR COCHES
+▓ entrada · [Aviso: …]                  ▓ entrada · [Aviso: …] (≤ prosa)
+░ COCHES COMPARADOS (wide, block)       ░ COCHES COMPARADOS
+░ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━          ░ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+░ 1  Marca Modelo                       ░ 1  Marca Modelo        Versión [select ▾]  (Quitar)
+░    Versión [select ▾]                 ░ 2  …
+░    (Quitar)                           ░ Ya comparas 3 coches…
+□ COMPARACIÓN                           □ COMPARACIÓN
+□ ▓Renault ▓Polestar▓Merce-▓  ← thead   □ ▓Renault           ▓Polestar         ▓Mercedes-Benz  ▓
+□ ▓R5 E-T… ▓P. 3    ▓GLA   ▓   oscuro   □ ▓RENAULT 5 E-TECH  ▓POLESTAR 3       ▓GLA            ▓
+□ Precio                                □ Precio
+□ 21.974 │ Precio │ Precio              □ 21.974 €          │ Precio por confir.│ …
+□ €      │ por c. │ por c.              □ Autonomía WLTP
+□ Autonomía WLTP                        □ 315 km            │ por confirmar     │ 725 km
+□ 315 km │ por c. │ 725 km              □ Batería …  (texto normal)
+░ FUENTES                               ░ FUENTES
+```
+(▓ franja oscura, ░ clara, □ blanca.)
+
+### Franjas (direccion.md; RNF-1)
+Cuatro franjas a todo el ancho, en el orden de los bloques de `main` (el DOM no cambia):
+
+| Franja | Bloque | Por qué |
+|---|---|---|
+| Oscura (`.band-dark`) | Logotipo, `h1`, entrada y avisos (URL, sin JavaScript, cargando, error) | Es la «pantalla» de entrada de la página, como la cabecera de la ficha. Sin foto (ver «Fotos») |
+| Clara (`.band-light`) | «Coches comparados» | Los controles, separados de los datos |
+| Blanca (`.band-white`) | «Comparación» y «Condiciones de las ofertas» | Los datos, sobre el fondo de más contraste |
+| Clara (`.band-light`) | «Fuentes» | Igual que el bloque «Fuentes» de la ficha |
+
+Relleno vertical de cada franja: `2.5rem` en móvil y `3.5rem` desde `lg`; márgenes laterales `1rem` en móvil (para que
+a 320 px queden 288 px útiles, como ya decía «Anchura») y `2.5rem` desde `md`. Con menos de 2 versiones no hay franja
+blanca ni la última clara: la página acaba en «Coches comparados».
+
+### Tipografía (direccion.md: Archivo ancha para nombres y titulares, estrecha para cifras)
+- `h1` «Comparar coches»: `--text-display`, `--font-stretch-wide`, peso 800, `letter-spacing: -0.035em`, interlínea 1.
+  La entrada (`comparador.entrada`) va en `--text-body`, `ink-600` de la franja oscura (`on-dark-muted`).
+- `h2` («Coches comparados», «Comparación», «Fuentes»): `--text-block`, mismo estilo ancho. `h3` «Condiciones de las
+  ofertas»: `--text-version`, ancha. Encima de «Condiciones…», regla de 2 px `ink-900`, como encima de las versiones de
+  la ficha.
+- **Avisos** (URL, sin JavaScript, error): dentro de la franja oscura, caja con borde 1 px `ink-600` de la franja
+  (`on-dark-muted`), `--radius-card`, relleno `4`, ancho máximo `--container-prose`, texto `on-dark`. Sustituye al
+  fondo `surface-muted` del Alert: sobre la franja oscura no hace falta otra caja de color. «Aviso:» sigue en peso 600.
+- **Coches comparados**: regla de 2 px `ink-900` encima de la lista; `<li>` separados por `line-soft`. El número de
+  cada columna se dibuja con `::before` (`content: counter(…) / ""`, oculto al lector: la `<ol>` ya lo dice) en
+  la cifra estrecha, peso 700, `2.75rem` en móvil y `3.25rem` desde `md`. Marca y modelo en `--text-body` peso 700.
+  `<select>`, «Quitar» y «Añadir» con `--radius-pill` (como las píldoras de filtros); `<select>` y «Quitar» con fondo
+  `surface` y borde `line`; «Añadir» `brand-600` / `on-brand`. Alto `--spacing-touch`. Móvil: número a la izquierda y
+  lo demás apilado a su derecha; desde `md`, una fila (número, marca y modelo, «Versión» + `<select>` de hasta
+  `--width-version-col-max`, «Quitar»).
+
+### La tabla
+- **Fila de cabecera = franja oscura** (`.band-dark` en el `<thead>`): marca en `text-small` 600 `on-dark-muted`;
+  modelo como enlace a la ficha, en `--text-body` peso 800 en móvil y en `--text-version` **ancha** desde `md`
+  (a 320 px una columna mide unos 80 px de texto y la anchura de 125 % partiría cada nombre letra a letra); nombre de
+  la versión en `text-small` 600 `on-dark`; «Próximamente…» con `soon-bg`/`soon-fg` (lima sobre la franja oscura),
+  `--radius-control` como ya decía «Filas y formato». En el `<thead>` se activa `hyphens: auto` (la página es
+  `lang="es"`): «Próximamente» se parte «Próxima-mente» con guion en vez de cortarse sin él (visto en la captura de 320).
+  Hover del enlace: `signal` (es el `brand-800` de la franja oscura). Foco: el anillo es `on-dark` (`brand-600` de la
+  franja).
+- **Filas de rótulo**: ya **sin** fondo `surface-muted`: `text-small` peso 600 en `ink-600`, con una línea `line-soft`
+  encima (sin cajas, direccion.md); los valores, justo debajo. Separación vertical entre columnas `line-soft`, como
+  antes. La primera fila de rótulo, sin línea (la cabecera oscura ya separa).
+- **Precio y Autonomía WLTP en cifra** (el bloque de versión de B: «autonomía WLTP y precio en cifra grande y
+  estrecha»): número en `--font-stretch-narrow`, peso 700, `tabular-nums`, interlínea 0,82, a `--text-figure-s` (token
+  nuevo); unidad («€», «km») a `max(0.26em, --text-small)` y ancha, como `Cifra`. Número y unidad en una caja flexible
+  con salto: la unidad va al lado y **solo baja** si la columna no la deja caber (a 320 px pasa con «21.974 €»; «315 km»
+  cabe). Es la tipografía de `Cifra` **sin** su `dt`/`dd`: el rótulo de la celda es la fila de rótulo (`headers`), así
+  que no se repite. El Desarrollador puede sacar de `Cifra.astro` una pieza solo-valor o reutilizar sus clases
+  `cifra__valor` y `cifra__unidad` en las celdas que monta el script (sin `<dl>` dentro de `<td>`).
+- **«Precio por confirmar» y «por confirmar» en esas dos filas**: el texto de siempre (`ficha.precio.porConfirmar`,
+  `ficha.porConfirmar`), en la anchura estrecha, peso 700, `ink-600`, a `max(0.46em, --text-small)` del tamaño de la
+  cifra: nunca por debajo de 14 px. Parte línea con naturalidad; la fila crece si hace falta (en una tabla todas las
+  celdas de la fila miden lo mismo, así que no hay saltos entre columnas).
+- **Resto de filas** (Batería, Potencia, Tracción, Carga en CC y en CA): texto normal (`--text-body`), «por
+  confirmar» en `ink-600`, como la tabla etiqueta-valor del bloque de versión de la ficha. Solo dos filas en cifra,
+  para que no compitan siete números grandes.
+- Etiqueta «Precio con oferta», fuente del precio, «Ver condiciones de la oferta», marcas de nota, «fuente no
+  oficial» y `note`: sin cambios, debajo del valor, en `text-small`.
+- Nada de esto depende del valor (RF-13, CA-15): todas las celdas de una fila llevan el mismo estilo.
+
+### Fotos: el comparador no lleva (PRD-003, sección 6; ADR-0014)
+La sección 6 de PRD-003 dice qué campos muestra el comparador y no incluye `images`; ADR-0014 lo repite: el JSON de
+`/comparar/datos/` no publica `images`. Por eso **no hay foto ni silueta** en las columnas ni en la franja de entrada,
+ni normal, ni retocada (ADR-0025), a 320 ni a 1280 px. La «pantalla» del comparador es la franja oscura con el título
+ancho y la cabecera oscura de la tabla. Poner fotos sería un cambio de alcance: queda como pregunta para Producto
+(abajo) y no se especifica aquí.
+
+### Tokens y contraste de esta sección
+Token nuevo: `--text-figure-s` = `clamp(2rem, 3.2vw, 3rem)` (32 px en móvil, 48 px en 1280), en `tokens.md`. El
+resto ya existe. Pares nuevos frente a la tabla de «Tokens que usa» (valores de «Dirección visual» de `tokens.md`):
+
+| Par | Uso | Ratio | Umbral |
+|---|---|---|---|
+| `on-dark` / `ink-950` | `h1`, modelo y versión en la cabecera, texto del aviso, anillo de foco en lo oscuro | 18,86 | 4,5 (3 el anillo) |
+| `on-dark-muted` / `ink-950` | Entrada, marca en la cabecera, borde del aviso | 10,61 | 4,5 (3 el borde) |
+| `signal` / `ink-950` | Hover del enlace de la cabecera | 14,56 | 4,5 |
+| `soon-fg` / `soon-bg` | «Próximamente» | 14,56 | 4,5 |
+| `ink-900` / `surface-muted` | «Coches comparados», texto de máximo | 16,57 | 4,5 |
+| `ink-900` / `surface` | Valores, `<select>`, «Quitar» | 18,86 | 4,5 |
+| `line` / `surface-muted` | Borde de `<select>` y «Quitar» sobre la franja clara | 4,24 | 3 |
+| `ink-600` / `surface` | Rótulos de fila, «por confirmar», notas, fuente del precio | 7,53 | 4,5 |
+| `ink-600` / `surface-muted` | Entradas de «Fuentes» | 6,61 | 4,5 |
+| `brand-600` / `surface` y `surface-muted` | Enlaces de celdas y de «Fuentes» | 7,59 / 6,67 | 4,5 |
+| `on-brand` / `brand-600` | «Añadir» | 7,59 | 4,5 |
+| `deal-fg` / `deal-bg` | «Precio con oferta» | 8,15 | 4,5 |
+
+Los enlaces siguen subrayados siempre (`brand-600` frente a `ink-900` da 2,49).
+
+### Lo que se ha corregido al ver las capturas
+- La unidad («€», «km») bajaba de línea incluso a 1280 px: número y unidad pasan a una caja flexible con salto.
+- «Próximamente» se partía sin guion a 320 px: `hyphens: auto` en la cabecera.
+
 ## URL, título e indexación (RF-10, RF-14, CA-11, CA-16)
 
 ### Forma de la URL
@@ -252,7 +379,8 @@ de rótulo a todo el ancho seguida de una fila con un valor por versión.
 - `table-layout: fixed`, columnas de **igual ancho** (1/2 o 1/3), sin preferencia visual por ninguna (RF-13).
   Ancho de la tabla: el del contenido, con un máximo de `{n} × --width-version-col-max` (2 columnas: 40 rem;
   3: 60 rem), alineada a la izquierda.
-- Fila de rótulo de campo: `surface-muted`, `text-small` peso 600, `ink-900` (16,12). Fila de valores y
+- Fila de rótulo de campo: ~~`surface-muted`, `text-small` peso 600, `ink-900` (16,12)~~ (sustituido: ver
+  «Dirección visual», «La tabla»). Fila de valores y
   cabecera de columnas: `surface`. Separación entre filas `line-soft` (decorativa); separación vertical entre
   columnas `line-soft`. Celdas alineadas arriba y a la izquierda. Relleno de celda: `2` en móvil, `3` desde `md`.
 - Ninguna celda, fila ni columna cambia de color, peso o borde según su valor (RF-13, CA-15).

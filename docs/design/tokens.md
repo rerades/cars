@@ -243,6 +243,7 @@ pasa a `web/`, y el LCP se mide con `web/e2e/lcp.spec.ts` (RNF-2).
 | `--text-figure-xl` | `clamp(3.75rem, 8vw, 7rem)` | Cifras clave de la primera pantalla de la ficha |
 | `--text-figure-l` | `clamp(3.25rem, 5.6vw, 5.25rem)` | Las dos cifras de cada pantalla del catálogo |
 | `--text-figure-m` | `clamp(2.75rem, 4.4vw, 4rem)` | Autonomía y precio de cada versión; cifras de «Datos del modelo» |
+| `--text-figure-s` | `clamp(2rem, 3.2vw, 3rem)` | Precio y autonomía WLTP en las celdas del comparador (`comparador.md`, «Dirección visual»): caben en una columna de unos 80 px a 320 px. Su «por confirmar» va a `max(0.46em, --text-small)` |
 
 - **Unidad de la cifra**: `max(0.26em, var(--text-small))`, nunca por debajo de 14 px.
 - **«Por confirmar» en una cifra**: dos líneas a 0,46 em en la anchura estrecha, en `ink-600`, que suman la altura del
