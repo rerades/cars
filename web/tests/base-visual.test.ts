@@ -51,6 +51,8 @@ test("@theme carries the tokens of Dirección visual with their values", () => {
     "--text-figure-m": "clamp(2.75rem, 4.4vw, 4rem)",
     "--radius-pill": "999px",
     "--menu-clearance": "6rem",
+    "--width-frame": "90rem",
+    "--color-backdrop": "#d9d9d9",
   };
   for (const [name, value] of Object.entries(expected)) assert.equal(token(name, theme), value, name);
 });

@@ -18,6 +18,162 @@ HTML servido. Solo los filtros usan JavaScript (RF-8, RF-9) y sin él no se mues
 Esta especificación **no decide** cómo llegan los datos de las versiones al navegador ni cómo se filtra: solo
 qué se ve antes y después de filtrar.
 
+## Dirección visual (2026-11-18)
+
+Pasa la página a la dirección elegida ([`direccion.md`](direccion.md), «La elegida»; [`propuesta-a.md`](propuesta-a.md);
+tokens en [`tokens.md`](tokens.md), «Dirección visual»). **No cambia el alcance**: mismos elementos, mismo orden del DOM,
+mismos textos, mismas reglas de empate, filtros, estados y foco que las secciones de abajo. Cambia **cómo se ven**. Donde
+una sección de abajo diga otra cosa de presentación (tamaños, `--width-ranking`, `--text-price`, «sin tarjeta ni caja»,
+wireframe), manda esta.
+
+Prototipos (ADR-0024): `web/design-proto/ranking-a.astro` (ranking de precio con datos reales: ofertas, empate en el 5,
+«Segmento por confirmar», versiones de nombre largo) y `web/design-proto/explorar-a.astro` (cabecera de `/coches` y franja
+«Explorar» con el grupo «Rankings»).
+
+| | Móvil (390) | Escritorio (1280) |
+|---|---|---|
+| Ranking | [captura](refs/ranking-a-390.png) | [captura](refs/ranking-a-1280.png) |
+| «Explorar» en `/coches` | [captura](refs/explorar-a-390.png) | [captura](refs/explorar-a-1280.png) |
+
+Las capturas de ranking se cortan a 2400 px: la franja blanca final (nota de RF-15 y «Condiciones de las ofertas») queda
+fuera de la imagen; su forma se describe abajo.
+
+### Franjas (RF-1, RF-3, RF-13, RNF-3)
+
+```
+┌─ franja oscura ─────────────┐  logotipo · ruta · h1 · entrada · línea de orden · alcance
+├─ franja clara ──────────────┤  filtros (solo con JS) o ranking.filtros.sinJs
+├─ franja oscura ─────────────┤  h2 «Puestos» + resumen · la <ol> de puestos (la «pantalla»)
+├─ franja blanca ─────────────┤  nota de RF-15 · «Condiciones de las ofertas» (solo precio)
+└─────────────────────────────┘
+```
+
+- Alternan oscuro, claro, oscuro y blanco, como el catálogo (`paginas-catalogo.md`, «Dirección visual»). Las franjas
+  oscuras son el ámbito `.band-dark` de `tokens.md`: los componentes no cambian de clase.
+- Todas a todo el ancho; el contenido, en `.wrap` (`--width-page`, márgenes `1.25rem` en móvil y `2.5rem` desde `md`).
+  **`--width-ranking` deja de usarse**: la lista ocupa el ancho de página, porque cada puesto es una fila de pantalla con
+  la cifra en su propia columna, no una línea de lectura.
+- La franja clara de los filtros existe también sin JS (lleva `ranking.filtros.sinJs`). En el vacío de página
+  (ningún puesto) no hay filtros, como hoy: la franja clara no se pinta y la oscura de «Puestos» lleva el Empty.
+
+### Cabecera (RF-1, RF-13)
+
+- Ruta en `text-small`, «Coches» enlace `on-dark` subrayado (44 px de alto), el título en `on-dark-muted`.
+- `h1` **ancho** (`.wide`: `--font-stretch-wide`, 800) a **`--text-screen`**, no a `--text-display`: los títulos de ranking
+  son frases de hasta 52 caracteres («… con la carga más rápida en continua») y a `--text-display` una palabra como
+  «eléctricos» no cabe en 280 px a 320 de ancho. Ancho máximo `18ch`; parte entre palabras (`.word`) y, si una palabra no
+  cabe, con `overflow-wrap: anywhere`. Nunca se reduce más ni se recorta (CA-17).
+- Entrada en `text-body`, `on-dark-muted`; línea de orden en `text-body`, peso 700, `on-dark`; alcance en `text-small`,
+  `on-dark-muted`. Las tres a `--width-prose`.
+
+### Filtros (RF-8, RF-9, RNF-1)
+
+Los dos `<select>` nativos, con su etiqueta visible a la izquierda (`text-small`, 600). El select, con la forma de las
+píldoras de la barra del catálogo: fondo `surface`, borde `line` (4,24 sobre `surface-muted`), `--radius-pill`, alto
+`--size-touch`.
+- **Móvil:** uno debajo de otro; etiqueta de ancho fijo (`5.5rem`) y select hasta el borde: a 320 px quedan 280 − 88 − 12
+  = 180 px de select, donde caben «De 30.000 a 45.000 €» y «SUV compacto».
+- **`md`+:** en una fila, select de al menos `14rem`.
+- Sin chips, sin «Aplicar», sin panel: lo de «Filtros» de abajo sigue igual.
+
+### El puesto como pantalla (RF-3, RF-2, RF-7, CA-2, CA-3)
+
+Cada `<li>` es una fila de la franja oscura, separada por una línea fina `line-soft` (decorativa). **Todos los puestos
+iguales**: mismo tamaño, color y fondo del 1 al 10 (RF-2, CA-2). Sin alternar fondos entre puestos, sin podio.
+
+```
+Móvil (320–1023 px)                      Escritorio (≥ 1024 px)
+──────────────────────────────           ───────────────────────────────────────────────────────────────
+5      Renault                           5        Renault                                21.974 €
+empate Renault 4 E‑Tech                  empate   Renault 4 E‑Tech eléctrico             Precio
+       eléctrico                                  evolution 120 CV autonomía urbana      [Precio con oferta]
+       evolution 120 CV autonomía…                Urbano                                 Fuente: renault.es, 1 nov 2026
+       Urbano                                                                            Ver condiciones de la oferta
+       ───────────────────               ───────────────────────────────────────────────────────────────
+       21.974 €
+       Precio
+       [Precio con oferta]
+       Fuente: renault.es, 1 nov 2026
+       Ver condiciones de la oferta
+──────────────────────────────
+```
+
+- **Rejilla.** Móvil: `--width-rank-number` (3 rem) | contenido, separación `0.75rem`. Desde `lg`: `--width-rank-number`
+  (6 rem) | contenido | `--width-rank-figure` (22 rem), separación `2rem`, filas `auto 1fr`. La cifra ocupa las dos filas
+  de la tercera columna, así **todas las cifras quedan alineadas** en vertical y se comparan de un vistazo. Relleno
+  vertical `1.5rem` (móvil) y `1.75rem` (`lg`).
+- **Número de puesto** (dentro del `h3`, con `ranking.puesto.sr` oculto, como abajo): cifra **estrecha**
+  (`--font-stretch-narrow`, 700, `tabular-nums`, interlínea 0,82) a `--text-rank-number`, en `ink-600` (en la franja,
+  `on-dark-muted`): se ve, pero no compite con el valor. «empate» debajo, `text-small`, peso 400.
+- **Marca y modelo** (el enlace del `h3`): la marca en `text-body`, 600, en su línea; el modelo **ancho** (`.wide`) a
+  `--text-version`. Los dos en `ink-900` (`on-dark`) y **subrayados palabra a palabra** (el subrayado va en cada `.word`,
+  no en los espacios entre ellas: con el subrayado en el enlace, en Archivo ancha salían guiones bajos sueltos entre
+  palabras). En la franja oscura el subrayado es lo que distingue el enlace del texto (WCAG 1.4.1); hover `brand-800`
+  (`signal`, 14,56).
+- **Versión** `text-body` y **segmento** `text-small` debajo; «Segmento por confirmar» en `ink-600`.
+- **Valor: componente Cifra** (`web/design-proto/a/Cifra.astro`, el de la ficha), tamaño **`l`** (`--text-figure-l`),
+  dentro de un `<dl>` propio. En móvil va debajo del segmento, con una línea fina encima (como las cifras de la pantalla
+  del catálogo); en `lg`, en la tercera columna, sin línea.
+  - `dt` (etiqueta, debajo del número en pantalla, **antes** en el DOM): `ficha.campo.precio` / `.autonomia` /
+    `.bateria` / `.potencia` / `.cargaCc` («Precio», «Autonomía WLTP», «Batería», «Potencia», «Carga máxima en CC»).
+  - `dd`: número estrecho y unidad pequeña y ancha («21.974 €», «628 km», «77,5 kWh», «150 kW»). La Cifra separa la unidad
+    por el último espacio, así que el texto que recibe es solo número y unidad.
+  - **Base de la batería** (RF-3, decisión 9): va en la etiqueta, pegada al número: «Batería · útil», «Batería · bruta»,
+    «Batería · sin especificar si es útil o bruta». El lector la oye antes de la cifra («Batería · útil, 77,5 kWh») y
+    nunca se separa de ella. Sustituye a «misma línea y mismo tamaño» de «La cifra»: el `dd` de la Cifra solo admite
+    número y unidad.
+  - `dd.cifra__detalle` (debajo de la etiqueta, `text-small`, `ink-600`): por este orden, el Badge `deal` «Precio con
+    oferta» (solo `financed`), «Fuente: {dominio}, {fecha}» (+ «· fuente no oficial» si T2), la `note` y «Ver condiciones
+    de la oferta» (44 px de alto). El dominio es el enlace, subrayado, con su zona de 24 px.
+  - Una cifra de ranking nunca es «por confirmar»: sin cifra no hay puesto (RF-6). El estado `cifra__falta` de la Cifra no
+    se usa aquí.
+- **Sin foto ni silueta** (decisión 4, se mantiene). En esta dirección la imagen manda en el catálogo y en la ficha; en
+  el ranking manda la cifra. Además, una pantalla con buena foto junto a otra con silueta haría que dos puestos no se
+  vieran igual (CA-2), y diez fotos pesan (RNF-2). La «pantalla» la hacen la franja oscura, el nombre ancho y la cifra
+  enorme.
+- **A 320 px** (CA-17): 320 − 2 × 20 = 280 px; 48 de número + 12 = 220 px de contenido. La cifra más ancha posible,
+  «150.000 €» a 52 px estrecha, mide unos 175 px; el modelo ancho parte entre palabras. Sin scroll horizontal.
+
+### Lista y resumen
+
+- `h2` «Puestos» **ancho**, a `--text-block`, con el resumen (`text-body`, `on-dark-muted`) a su derecha en la misma
+  línea base, que baja de línea si no cabe. El resumen sigue siendo la única región viva.
+- Vacío de página y vacío filtrado: dentro de la franja oscura, en lugar de la `<ol>`, con los textos y el enlace o el
+  Button de «Estados». El Button principal en franja oscura usa los colores reasignados: fondo `on-dark`, texto
+  `ink-950` (18,86).
+
+### Franja blanca final (RF-15, RF-5)
+
+Nota de RF-15 (`text-small`, `ink-600`, 7,53) y, en el ranking de precio con ofertas, «Condiciones de las ofertas» con su
+`h2` ancho a `--text-block` y las entradas de `RankingTerms` sin cambios (`brand-600` sobre `surface`, 7,59).
+
+### Foco
+
+Anillo de `tokens.md`; en la franja oscura, `on-dark` (18,86 sobre `ink-950`). Orden sin cambios («Orden de foco»).
+
+### Lo que cambia para el Desarrollador
+
+- `RankingPlace.astro`: la rejilla de tres columnas en `lg`, el número estrecho, marca y modelo como arriba, y la cifra con
+  la Cifra que se lleve a `web/src/components/` desde la ficha (la misma, no una copia). `PlaceView` necesita el valor
+  **sin la base** y la base aparte (hoy `figure` llega como «58 kWh, útil»); el prototipo lo parte por la coma solo para
+  enseñarlo.
+- La `<template>` del filtro clona el mismo marcado: la Cifra tiene que poder rellenarse con `textContent` (número y
+  unidad en sus dos `span`).
+- `[ranking].astro`: las cuatro franjas, `h1` a `--text-screen`, quitar `max-w-(--width-ranking)`.
+
+## Grupo «Rankings» en la franja «Explorar» (PRD-001 RF-14, CA-19)
+
+Ver [captura 390](refs/explorar-a-390.png) y [captura 1280](refs/explorar-a-1280.png). En la dirección elegida, «Explorar»
+es una **franja blanca** entre la cabecera oscura y la barra de filtros clara de `/coches`, con su `h2` ancho a
+`--text-block`. Cada grupo es una fila separada por una línea fina `line-soft`; el `h3` en `text-small`, 700, mayúsculas
+por CSS (`text-transform`, el texto sigue siendo «Rankings») y espaciado `0.04em`; los enlaces en `text-body`, `brand-600`
+(7,59 sobre `surface`), subrayados, 44 px de alto, separados `1.25rem`.
+- **«Rankings» es el quinto grupo, el último**, con el mismo estilo exacto que los otros cuatro: ni color, ni icono, ni
+  caja propia. Sus cinco enlaces, en el orden de RF-1.
+- **Móvil:** `h3` encima y enlaces en línea que parten línea. **`md`+:** `h3` en la columna `--width-explore-label`
+  (8 rem) y los enlaces a la derecha, una fila por grupo.
+- A 390 px «Carga más rápida en continua» cabe en una línea; si no cupiera, el enlace parte (`overflow-wrap: anywhere`).
+
 ## Los cinco rankings: URL, título y entrada (RF-1, RF-13, CA-1, CA-12)
 
 URL bajo `/rankings/`, con un nombre legible en español y sin parámetros, como las de tramo de
@@ -89,6 +245,8 @@ JS); `h3` por puesto. Sin bloque «Fuentes» al final: cada cifra lleva su fuent
 
 ### Wireframe
 
+(Anterior a la dirección visual: vale el orden, no la forma. La forma, en «Dirección visual».)
+
 ```
 Móvil (320–767 px)                     Escritorio (≥ 1024 px)
 ┌──────────────────────────┐           ┌──────────────────────────────────────────────────────┐
@@ -133,7 +291,8 @@ presentación y el lector la anuncia como «lista, 10 elementos» (RNF-3).
 - `<ol aria-labelledby>` con el `h2` «Puestos». `list-style: none` y `role="list"` explícito (Safari quita la
   semántica de lista cuando no hay viñeta). Cada `<li>` lleva `value="{puesto}"`, así que la numeración nativa
   coincide con la visible también en los empates (1, 2, 2, 4).
-- Ancho máximo de la lista `--width-ranking` (nuevo, 48 rem): es una lista de lectura, no una rejilla; a todo
+- (Sustituido por «Dirección visual»: ancho de página, rejilla de tres columnas en `lg`, número estrecho y Cifra.)
+  ~~Ancho máximo de la lista `--width-ranking` (nuevo, 48 rem)~~: es una lista de lectura, no una rejilla; a todo
   `--width-page` las líneas quedarían demasiado separadas del número.
 - Cada puesto, dos columnas en todas las anchuras: número (`--width-rank-number`, nuevo, 3 rem) y contenido
   (el resto), separadas `3`. Separación entre puestos con borde inferior `line-soft` (decorativo) y relleno
@@ -410,6 +569,13 @@ Reutilizadas sin cambios: `pagina.tituloDocumento`, `pagina.saltar`, `ficha.unid
 `vacio.pagina.enlace`, `fecha.*`. Si dos claves dan el mismo texto, el Desarrollador puede usar una sola.
 
 ## Tokens que usa
+
+**Con la dirección visual (2026-11-18):** además de los de `tokens.md`, «Dirección visual» (`ink-950`, `on-dark`,
+`on-dark-muted`, `surface-muted`, `signal`, `--font-stretch-wide`, `--font-stretch-narrow`, `--text-screen`,
+`--text-block`, `--text-version`, `--text-figure-l`, `--radius-pill`), cambian tres: `--text-rank-number` pasa a
+`clamp(2.75rem, 4.4vw, 4rem)` en anchura estrecha; `--width-rank-number` pasa a 6 rem desde `lg`; nuevo
+`--width-rank-figure` (22 rem). `--width-ranking` y `--text-price` dejan de usarse aquí. Pares nuevos: ninguno sin
+calcular; los de la página están en «Dirección visual» y en `tokens.md`. Lo de abajo es la versión anterior.
 
 Color: `surface`, `ink-900`, `ink-600`, `line`, `line-soft`, `brand-600`, `brand-800`, `on-brand`, `deal-*`.
 Tipografía: `--text-title`, `--text-section`, `--text-card-title`, `--text-price`, `--text-body`, `--text-small`,

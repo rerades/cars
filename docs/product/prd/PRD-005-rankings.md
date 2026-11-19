@@ -5,7 +5,7 @@ status: ready        # draft | ready | in-progress | done | deprecated
 priority: P2         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: [PRD-001, PRD-002]
 epic: ""
-updated: 2026-10-13
+updated: 2026-11-19
 ---
 
 # PRD-005 — Rankings
@@ -125,7 +125,7 @@ Decididas por el responsable del producto:
 6. **Estado (RF-11):** solo modelos a la venta. Los anunciados quedan fuera porque su precio es previsto, y los descatalogados porque ya no se venden. Alternativa descartada: incluirlos con su etiqueta.
 7. **Páginas e indexación (RF-8, RF-13):** una página pregenerada e indexable por ranking, sin filtros; los filtros se resuelven en el navegador con query string y canonical a la página sin filtros, como `/coches`. No se usa `noindex` en las URL con filtros: son el mismo fichero estático que la página sin filtros, y la quitaría también del índice.
 8. **Entrada (sección 2):** un enlace desde `/coches` (PRD-001, RF-14). La portada no cambia. Alternativa descartada: enlazar desde la portada, que cambiaría PRD-004.
-9. **Batería (sección 6):** todas las bases juntas y cada puesto muestra la suya. Alternativas descartadas: separar rankings por base o dejar fuera las que no son útiles.
+9. **Batería (sección 6):** todas las bases juntas y cada puesto muestra la suya. Alternativas descartadas: separar rankings por base o dejar fuera las que no son útiles. «Junto a la cifra» se cumple con la base en la etiqueta de la cifra («Batería · útil»), como la dibuja `docs/design/rankings.md` (PR #1156, aceptado el 2026-11-19); no hace falta la misma línea de PRD-002, RF-6.
 10. **Fuentes y prioridad (RF-4):** (a) una cifra solo T3 no da puesto. (b) P2, después de catálogo, ficha, portada y comparador.
 11. **Empates y exclusión (RF-7, RF-15):** puesto compartido con orden alfabético de marca, modelo y `name`; la página dice cuántas versiones se han quedado fuera por falta de dato.
 
@@ -138,3 +138,4 @@ Decididas por el responsable del producto:
 | 2026-10-13 | Borrador inicial: RF-1 a RF-14, RNF-1 a RNF-6, CA-1 a CA-17; 11 preguntas abiertas | Claude |
 | 2026-10-13 | Resueltas las 11 preguntas abiertas. Ajustados RF-1, RF-3, RF-4, RF-6 a RF-9, RF-11, RF-13, RNF-1, la sección 6 y CA-3, CA-4, CA-7 a CA-12 y CA-17; añadidos RF-15 y CA-18. Pasa a `ready` | Rod / Claude |
 | 2026-10-17 | CA-18 decía «fuente oficial»; pasa a «fuente verificable (T1 o T2)», como RF-4 y el diseño (pregunta 4 de la épica #368). RNF-2 se mide con una prueba de navegador común a todos los PRD (tarea `rnf-2-lcp`); el ranking con filtros se añade cuando exista la página | Rod / Claude |
+| 2026-11-19 | Decisión 9: la base de la batería puede ir en la etiqueta de la cifra (diseño de rankings, PR #1156) | Rod / Claude |

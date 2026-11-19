@@ -1,13 +1,14 @@
 /**
  * Retouches one model photo (ADR-0025): the car cut out on a transparent background, a soft ground shadow
- * under it and the license plate covered with a plain rectangle. No other pixel of the car changes.
+ * under it and the license plate text blurred inside its own outline. No other pixel of the car changes.
  * Run by the Retoucher: node factory/retouch-image.ts data/images/<brand>/<slug>/<name>.<jpg|png>
  *   1. Apple Vision (retouch-vision.swift, compiled on first use; macOS 14 or later) finds the foreground
  *      instances and the text. The largest, most centered instance is the car. It fails if there is none
  *      or if the car touches an edge of the photo (it is cut off).
- *   2. Crops to the car with a margin and covers plates: text with a digit in the lower half of the car.
+ *   2. Crops to the car with a margin and blurs plates: text with a digit in the lower half of the car,
+ *      inside the tilted outline Vision gives for that text.
  *   3. Checks that every pixel inside the mask and outside the plates equals the original. Else it fails.
- *   4. Writes <name>.png next to the original, deletes the original, and writes a before/after sheet to
+ *   4. Writes <name>.png next to the original, which it keeps, and writes a before/after sheet to
  *      ops/retouch/<run_id>/ for the PR. At most 1280 px wide and 2 MB (ADR-0011).
  * On success it prints one JSON line (file, edits, width, height, bytes, check, sheet). On failure it prints
  * the cause, exits 1 and writes nothing. It writes no YAML: the agent adds `edits` to the image entry.
@@ -27,7 +28,9 @@ const PATH = /^data\/images\/[a-z0-9-]+\/[a-z0-9-]+\/[a-z0-9-]+\.(jpg|jpeg|png)$
 const SHADOW_ALPHA = 90; // of 255, at the center of the shadow
 
 export interface Box { x0: number; y0: number; x1: number; y1: number } // inclusive pixel bounds
-export interface Text { text: string; x: number; y: number; w: number; h: number }
+export interface Text { text: string; x: number; y: number; w: number; h: number; quad?: number[][] }
+/** A plate: the bounding box of the text and, when Vision gives it, its tilted outline (four corners). */
+export interface Plate extends Box { quad?: number[][] }
 export type Edit = "background" | "plate";
 
 /** Bounding box of the pixels above half opacity, or null if there are none. */
@@ -65,44 +68,94 @@ export function pickInstance(masks: Uint8Array[], width: number, height: number)
   return { index, box };
 }
 
-/** Plates: text with a digit and 4+ letters or digits, centered on the car, in its lower half. Padded. */
-export function plateBoxes(texts: Text[], mask: Uint8Array, width: number, height: number, car: Box): Box[] {
-  const out: Box[] = [];
+/**
+ * Plates: text with a digit and 4+ letters or digits, centered on the car, in its lower half. The region is
+ * the text outline (quad), not padded: the characters lie on the plate, so the blur never leaves it.
+ */
+export function plateBoxes(texts: Text[], mask: Uint8Array, width: number, height: number, car: Box): Plate[] {
+  const out: Plate[] = [];
   for (const t of texts) {
     const chars = t.text.replace(/[^\p{L}\p{N}]/gu, "");
     if (chars.length < 4 || !/\p{N}/u.test(chars)) continue;
     const cx = Math.round(t.x + t.w / 2), cy = Math.round(t.y + t.h / 2);
     if (cx < 0 || cy < 0 || cx >= width || cy >= height) continue;
     if (cy < (car.y0 + car.y1) / 2 || mask[cy * width + cx] < 128) continue;
-    const pad = t.h * 0.25;
+    const quad = t.quad?.length === 4 ? t.quad : undefined;
+    const xs = quad ? quad.map((p) => p[0]) : [t.x, t.x + t.w], ys = quad ? quad.map((p) => p[1]) : [t.y, t.y + t.h];
     out.push({
-      x0: Math.max(0, Math.floor(t.x - pad)), y0: Math.max(0, Math.floor(t.y - pad)),
-      x1: Math.min(width - 1, Math.ceil(t.x + t.w + pad)), y1: Math.min(height - 1, Math.ceil(t.y + t.h + pad)),
+      x0: Math.max(0, Math.floor(Math.min(...xs))), y0: Math.max(0, Math.floor(Math.min(...ys))),
+      x1: Math.min(width - 1, Math.ceil(Math.max(...xs))), y1: Math.min(height - 1, Math.ceil(Math.max(...ys))),
+      ...(quad && { quad }),
     });
   }
   return out;
 }
 
-const inBoxes = (boxes: Box[], x: number, y: number) => boxes.some((b) => x >= b.x0 && x <= b.x1 && y >= b.y0 && y <= b.y1);
+/** Inside the plate: its quad when there is one (convex, either winding), else its box. */
+export function inPlate(p: Plate, x: number, y: number): boolean {
+  if (x < p.x0 || x > p.x1 || y < p.y0 || y > p.y1) return false;
+  if (!p.quad) return true;
+  let sign = 0;
+  for (let i = 0; i < 4; i++) {
+    const [ax, ay] = p.quad[i], [bx, by] = p.quad[(i + 1) % 4];
+    const cross = (bx - ax) * (y + 0.5 - ay) - (by - ay) * (x + 0.5 - ax);
+    if (cross === 0) continue;
+    if (sign && Math.sign(cross) !== sign) return false;
+    sign = Math.sign(cross);
+  }
+  return true;
+}
+
+/**
+ * The plate blurred with its own pixels only: a pixel outside the outline is neither changed nor read, so the
+ * plate frame and the bumper stay as they are and the characters dissolve. Three box-blur passes per axis,
+ * about a Gaussian; radius a third of the box height. Returns the plate box as RGB, row by row.
+ */
+export function blurPlate(rgb: Buffer, width: number, p: Plate): Buffer {
+  const bw = p.x1 - p.x0 + 1, bh = p.y1 - p.y0 + 1, r = Math.max(1, Math.round(bh / 3));
+  const w = new Float64Array(bw * bh); // 1 inside the outline
+  let cur = new Float64Array(bw * bh * 4); // r, g, b premultiplied by w, then w
+  for (let y = 0; y < bh; y++) for (let x = 0; x < bw; x++) {
+    const i = y * bw + x;
+    w[i] = inPlate(p, p.x0 + x, p.y0 + y) ? 1 : 0;
+    for (let c = 0; c < 3; c++) cur[i * 4 + c] = w[i] * rgb[((p.y0 + y) * width + p.x0 + x) * 3 + c];
+    cur[i * 4 + 3] = w[i];
+  }
+  const pass = (src: Float64Array, horizontal: boolean) => {
+    const dst = new Float64Array(src.length), n = horizontal ? bw : bh, lines = horizontal ? bh : bw;
+    for (let l = 0; l < lines; l++) {
+      const at = (k: number) => (horizontal ? l * bw + k : k * bw + l) * 4;
+      for (let k = 0; k < n; k++) for (let c = 0; c < 4; c++) {
+        let s = 0;
+        for (let d = Math.max(0, k - r); d <= Math.min(n - 1, k + r); d++) s += src[at(d) + c];
+        dst[at(k) + c] = s;
+      }
+    }
+    return dst;
+  };
+  for (let i = 0; i < 3; i++) cur = pass(pass(cur, true), false);
+  const out = Buffer.alloc(bw * bh * 3);
+  for (let i = 0; i < bw * bh; i++) for (let c = 0; c < 3; c++) {
+    const src = rgb[((p.y0 + Math.floor(i / bw)) * width + p.x0 + (i % bw)) * 3 + c];
+    out[i * 3 + c] = w[i] && cur[i * 4 + 3] ? Math.round(cur[i * 4 + c] / cur[i * 4 + 3]) : src;
+  }
+  return out;
+}
+
+const inPlates = (plates: Plate[], x: number, y: number) => plates.some((p) => inPlate(p, x, y));
 
 export interface Composed { data: Buffer; width: number; height: number; left: number; top: number }
 
 /**
- * RGBA canvas: the car with the mask as alpha over a soft elliptical shadow, plates filled with their mean
- * color. `rgb` is the original, 3 channels. The canvas is the car box plus a margin; outside the photo it
+ * RGBA canvas: the car with the mask as alpha over a soft elliptical shadow, plates blurred (blurPlate). `rgb` is the original, 3 channels. The canvas is the car box plus a margin; outside the photo it
  * is transparent. Car pixels are copied, never computed, except at the soft mask edge (blended with shadow).
  */
-export function compose(rgb: Buffer, mask: Uint8Array, width: number, height: number, car: Box, plates: Box[]): Composed {
+export function compose(rgb: Buffer, mask: Uint8Array, width: number, height: number, car: Box, plates: Plate[]): Composed {
   const bw = car.x1 - car.x0 + 1, bh = car.y1 - car.y0 + 1;
   const margin = Math.round(0.04 * Math.max(bw, bh));
   const left = car.x0 - margin, top = car.y0 - margin;
   const cw = bw + 2 * margin, ch = bh + 2 * margin;
-  const fills = plates.map((b) => {
-    const sum = [0, 0, 0];
-    let n = 0;
-    for (let y = b.y0; y <= b.y1; y++) for (let x = b.x0; x <= b.x1; x++, n++) for (let c = 0; c < 3; c++) sum[c] += rgb[(y * width + x) * 3 + c];
-    return sum.map((s) => Math.round(s / n));
-  });
+  const blurred = plates.map((p) => blurPlate(rgb, width, p));
   const sx = (car.x0 + car.x1) / 2, sy = car.y1 - bh * 0.02, rx = bw * 0.48, ry = Math.max(4, bh * 0.06);
   const data = Buffer.alloc(cw * ch * 4);
   for (let j = 0; j < ch; j++) {
@@ -113,8 +166,9 @@ export function compose(rgb: Buffer, mask: Uint8Array, width: number, height: nu
       const inside = x >= 0 && y >= 0 && x < width && y < height;
       const a = inside ? mask[y * width + x] : 0;
       if (a === 0) { data[o + 3] = Math.round(shadow); continue; }
-      const p = plates.findIndex((b) => x >= b.x0 && x <= b.x1 && y >= b.y0 && y <= b.y1);
-      const src = p >= 0 ? fills[p] : [rgb[(y * width + x) * 3], rgb[(y * width + x) * 3 + 1], rgb[(y * width + x) * 3 + 2]];
+      const p = plates.findIndex((b) => inPlate(b, x, y));
+      const s = p >= 0 ? ((y - plates[p].y0) * (plates[p].x1 - plates[p].x0 + 1) + x - plates[p].x0) * 3 : (y * width + x) * 3;
+      const buf = p >= 0 ? blurred[p] : rgb, src = [buf[s], buf[s + 1], buf[s + 2]];
       // "over": car (alpha a) on black shadow (alpha s). Straight alpha out.
       const fa = a / 255, fs = shadow / 255, outA = fa + fs * (1 - fa);
       for (let c = 0; c < 3; c++) data[o + c] = Math.round((src[c] * fa) / outA);
@@ -125,13 +179,13 @@ export function compose(rgb: Buffer, mask: Uint8Array, width: number, height: nu
 }
 
 /** Pixels inside the mask (fully opaque) and outside the plates that differ from the original. 0 = pass. */
-export function carMismatches(out: Composed, rgb: Buffer, mask: Uint8Array, width: number, plates: Box[]): { checked: number; mismatched: number } {
+export function carMismatches(out: Composed, rgb: Buffer, mask: Uint8Array, width: number, plates: Plate[]): { checked: number; mismatched: number } {
   let checked = 0, mismatched = 0;
   for (let j = 0; j < out.height; j++) {
     for (let i = 0; i < out.width; i++) {
       const x = out.left + i, y = out.top + j;
       if (x < 0 || y < 0 || x >= width || y * width + x >= mask.length) continue;
-      if (mask[y * width + x] !== 255 || inBoxes(plates, x, y)) continue;
+      if (mask[y * width + x] !== 255 || inPlates(plates, x, y)) continue;
       checked++;
       const o = (j * out.width + i) * 4, s = (y * width + x) * 3;
       if (out.data[o] !== rgb[s] || out.data[o + 1] !== rgb[s + 1] || out.data[o + 2] !== rgb[s + 2] || out.data[o + 3] !== 255) mismatched++;
@@ -195,7 +249,7 @@ export async function retouch(rel: string, runId: string): Promise<Record<string
     await sheet(file, png, sheetFile);
     writeFileSync(`${target}.tmp`, png); // same directory, so the rename is atomic
     renameSync(`${target}.tmp`, target);
-    if (target !== file) rmSync(file);
+    // The original stays: the agent deletes it only when it accepts the PNG (retoucher.md, steps 4 and 5).
     const edits: Edit[] = plates.length ? ["background", "plate"] : ["background"];
     return {
       file: target.slice(ROOT.length + 1), edits, width, height, bytes: png.length,

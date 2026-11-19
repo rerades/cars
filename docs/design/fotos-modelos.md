@@ -47,7 +47,8 @@ Lo hace `factory/retouch-image.ts` (ADR-0025). El agente no edita píxeles.
 
 - **Se quita el fondo:** el coche queda sobre transparente. El color del fondo lo pone la tarjeta.
 - **Se añade una sombra de apoyo** semitransparente bajo las ruedas, para que el coche no flote.
-- **Se tapa la matrícula** con un rectángulo liso.
+- **Se tapa la matrícula** desenfocando su texto dentro de su contorno inclinado (ADR-0025, enmienda del
+  2026-11-19); antes, con un rectángulo liso.
 - **No se toca nada más del coche:** ni color, ni brillo, ni reflejos, ni ruido. Lo que se ve a través de
   los cristales también se queda: es parte de la foto del coche.
 

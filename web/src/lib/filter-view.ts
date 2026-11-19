@@ -95,6 +95,8 @@ export function filterPanelView(models: ModelRecord[]): FilterPanelView {
       show: t("filtros.verModelos", { n: "{n}" }),
       open: t("filtros.abrir", { n: "{n}" }),
       remove: t("filtros.quitar", { filtro: "{filtro}" }),
+      group: t("filtros.grupoConteo", { grupo: "{grupo}", n: "{n}" }),
+      activeWord: t("filtros.activosSufijo"),
       chipFrom: t("filtros.chipDesde", { precio: "{precio}" }),
       chipTo: t("filtros.chipHasta", { precio: "{precio}" }),
     },

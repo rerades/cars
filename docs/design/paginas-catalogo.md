@@ -176,7 +176,9 @@ Todos los coches                                 ← enlace a /coches (no aparec
 **«Rankings»** (`explorar.rankings`) después de «Autonomía», con un enlace de texto a cada uno de los cinco
 rankings en el orden de PRD-005 RF-1 (`explorar.ranking.*`). Es HTML estático, visible sin JS, con el mismo
 estilo y zona táctil que el resto de la franja. URL, textos y razones: [`rankings.md`](rankings.md), «Entrada
-desde `/coches`». Las demás páginas del catálogo no lo llevan (Pregunta 4 de `rankings.md`).
+desde `/coches`». Las demás páginas del catálogo no lo llevan (Pregunta 4 de `rankings.md`). Su forma en la
+dirección visual (franja blanca, filas con línea fina, `h3` en mayúsculas por CSS): `rankings.md`, «Grupo «Rankings» en
+la franja «Explorar»» (prototipo `explorar-a.astro`).
 
 Disposición:
 - **Móvil (< 768 px):** grupos uno debajo de otro; en cada uno, el `h3` encima y los enlaces en línea, que

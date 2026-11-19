@@ -2,10 +2,12 @@
 import type { FilterPanelView } from "../lib/filter-view.ts";
 
 /**
- * Filter panel of /coches (docs/design/filtros-catalogo.md). Progressive enhancement: the markup
- * is `hidden` and the script below shows it, so without JavaScript the page is the full list
- * (RNF-1) and no control that does nothing is offered (RNF-3). Filtering happens in the browser
- * over the data attributes of the cards; the state lives in the query string (RF-5).
+ * Filter controls of the top bar of /coches (docs/design/filtros-catalogo.md, "Estructura: barra
+ * superior"): group pills (desktop) or one "Filtros (n)" button (mobile), the order pill and the panel
+ * with the controls. The page puts them inside the light bar, after the counter. Progressive
+ * enhancement: the markup is `hidden` and the script below shows it, so without JavaScript the page is
+ * the full list (RNF-1) and no control that does nothing is offered (RNF-3). Filtering happens in the
+ * browser over the data attributes of the cards; the state lives in the query string (RF-5).
  * Every text arrives in `view` (RNF-4).
  */
 interface Props {
@@ -16,104 +18,161 @@ const L = view.labels;
 const box = "h-6 w-6 shrink-0 accent-brand-600";
 const legend = "text-section";
 const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900";
+const pill =
+  "group inline-flex min-h-touch items-center gap-2 whitespace-nowrap rounded-pill border border-line bg-surface px-4 text-small font-semibold text-ink-900 hover:border-ink-900 aria-expanded:bg-ink-900 aria-expanded:text-on-dark";
+const chevron = "text-small leading-none transition-transform group-aria-expanded:rotate-180";
+const row = "flex flex-col gap-1 lg:flex-row lg:flex-wrap lg:gap-x-6";
+const fieldset = "mb-4 min-w-0 border-0 p-0";
+const option = "flex min-h-11 items-start gap-2 text-body";
+// Same order as the panel and the pills (filtros-catalogo.md, "Controles"); no segments, no group.
+const groups = [
+  { key: "marca", label: L.brand },
+  ...(view.segments.length > 0 ? [{ key: "segmento", label: L.segment }] : []),
+  { key: "precio", label: L.price },
+  { key: "autonomia", label: L.range },
+  { key: "traccion", label: L.drivetrain },
+  { key: "estado", label: L.status },
+];
 ---
 
-<div data-filters-root data-messages={JSON.stringify(view.messages)} hidden class="lg:sticky lg:top-4 lg:self-start">
-  <h2 id="filtros" tabindex="-1" class="sr-only lg:not-sr-only text-section">{view.title}</h2>
+<div data-filters-root data-messages={JSON.stringify(view.messages)} hidden class="[&:not([hidden])]:contents">
   <button
     type="button"
     data-filters-toggle
     aria-expanded="false"
     aria-controls="filtros-cuerpo"
-    class="mt-2 min-h-11 rounded-card border border-line bg-surface px-4 text-body text-ink-900 lg:hidden"
-    >{L.open.replace("{n}", "0")}</button
+    class={`${pill} lg:hidden`}
   >
-  <form id="filtros-cuerpo" data-filters-form class="mt-4 hidden flex-col gap-6 lg:flex">
-    <fieldset class="flex flex-col gap-2">
-      <legend class={legend}>{L.brand}</legend>
-      {
-        view.brands.map((o) => (
-          <label class="flex min-h-11 items-start gap-2 text-body">
-            <input type="checkbox" name="marca" value={o.value} data-chip={o.chip} class={box} />
-            <span class="[overflow-wrap:anywhere]">{o.label} ({o.count})</span>
-          </label>
-        ))
-      }
-    </fieldset>
-    {
-      view.segments.length > 0 && (
-        <fieldset class="flex flex-col gap-2">
-          <legend class={legend}>{L.segment}</legend>
-          {view.segments.map((o) => (
-            <label class="flex min-h-11 items-start gap-2 text-body">
-              <input type="checkbox" name="segmento" value={o.value} data-chip={o.chip} class={box} />
-              <span>{o.label} ({o.count})</span>
-            </label>
-          ))}
-        </fieldset>
-      )
-    }
-    <fieldset class="flex flex-col gap-2">
-      <legend class={legend}>{L.price}</legend>
-      <label class="flex flex-col gap-1 text-body">
-        {L.priceFrom}
-        <input type="text" inputmode="numeric" name="precio_min" autocomplete="off" aria-describedby="filtros-error-rango" class={field} />
-      </label>
-      <label class="flex flex-col gap-1 text-body">
-        {L.priceTo}
-        <input type="text" inputmode="numeric" name="precio_max" autocomplete="off" aria-describedby="filtros-error-rango" class={field} />
-      </label>
-      <p id="filtros-error-rango" data-range-error hidden class="text-small text-ink-900">{L.rangeError}</p>
-    </fieldset>
-    <fieldset class="flex flex-col gap-2">
-      <legend class={legend}>{L.range}</legend>
-      <select name="autonomia" aria-label={L.range} class={field}>
-        <option value="">{L.anyRange}</option>
-        {view.ranges.map((r) => <option value={r.value} data-chip={r.chip}>{r.label}</option>)}
-      </select>
-    </fieldset>
-    <fieldset class="flex flex-col gap-2">
-      <legend class={legend}>{L.drivetrain}</legend>
-      <p class="text-small text-ink-600">{L.drivetrainHelp}</p>
-      {
-        view.drivetrains.map((o) => (
-          <label class="flex min-h-11 items-start gap-2 text-body">
-            <input type="checkbox" name="traccion" value={o.value} data-chip={o.chip} class={box} />
-            <span>{o.label}</span>
-          </label>
-        ))
-      }
-    </fieldset>
-    <fieldset class="flex flex-col gap-2">
-      <legend class={legend}>{L.status}</legend>
-      <label class="flex min-h-11 items-start gap-2 text-body">
-        <input type="radio" name="estado" value="todos" checked class={box} />
-        <span>{L.all}</span>
-      </label>
-      {
-        view.statuses.map((o) => (
-          <label class="flex min-h-11 items-start gap-2 text-body">
-            <input type="radio" name="estado" value={o.value} data-chip={o.chip} class={box} />
-            <span>{o.label}</span>
-          </label>
-        ))
-      }
-    </fieldset>
-    <div class="flex flex-wrap gap-2">
+    <span data-label>{view.title}</span>
+    <span aria-hidden="true" class={chevron}>⌄</span>
+  </button>
+  {
+    groups.map((g) => (
       <button
         type="button"
-        data-filters-close
-        class="min-h-11 rounded-card bg-brand-600 px-4 text-body text-on-brand hover:bg-brand-800 lg:hidden"
-      ></button>
-      <button
-        type="button"
-        data-filters-clear
-        hidden
-        class="min-h-11 rounded-card border border-line bg-surface px-4 text-body text-ink-900"
-        >{L.clear}</button
+        data-group-toggle={g.key}
+        data-group-label={g.label}
+        aria-expanded="false"
+        aria-controls={`panel-${g.key}`}
+        class={`${pill} max-lg:hidden`}
       >
-    </div>
-  </form>
+        <span data-label>{g.label}</span>
+        <span aria-hidden="true" class={chevron}>⌄</span>
+      </button>
+    ))
+  }
+  <div data-sort-row class="relative inline-flex min-h-touch items-center gap-2 rounded-pill border border-line bg-surface px-4 text-small font-semibold text-ink-900 hover:border-ink-900 lg:ml-auto">
+    <label for="orden">{L.sort}</label>
+    <select
+      id="orden"
+      name="orden"
+      data-sort
+      class="min-h-touch cursor-pointer appearance-none bg-transparent pr-6 text-small font-semibold text-ink-900"
+    >
+      {view.sorts.map((o) => <option value={o.value}>{o.label}</option>)}
+    </select>
+    <span aria-hidden="true" class="pointer-events-none absolute right-4 text-small leading-none">⌄</span>
+  </div>
+
+  <div id="filtros-cuerpo" data-panel hidden class="basis-full border-t border-line-soft py-4 max-lg:min-h-screen">
+    <h2 id="filtros" tabindex="-1" class="mb-4 text-section lg:hidden">{view.title}</h2>
+    <form data-filters-form>
+      <fieldset id="panel-marca" data-group="marca" class={fieldset}>
+        <legend class={legend} tabindex="-1">{L.brand}</legend>
+        <div class={row}>
+          {
+            view.brands.map((o) => (
+              <label class={option}>
+                <input type="checkbox" name="marca" value={o.value} data-chip={o.chip} class={box} />
+                <span class="[overflow-wrap:anywhere]">{o.label} ({o.count})</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+      {
+        view.segments.length > 0 && (
+          <fieldset id="panel-segmento" data-group="segmento" class={fieldset}>
+            <legend class={legend} tabindex="-1">{L.segment}</legend>
+            <div class={row}>
+              {view.segments.map((o) => (
+                <label class={option}>
+                  <input type="checkbox" name="segmento" value={o.value} data-chip={o.chip} class={box} />
+                  <span>{o.label} ({o.count})</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        )
+      }
+      <fieldset id="panel-precio" data-group="precio" class={fieldset}>
+        <legend class={legend} tabindex="-1">{L.price}</legend>
+        <div class={`${row} lg:max-w-xl`}>
+          <label class="flex flex-col gap-1 text-body lg:flex-1">
+            {L.priceFrom}
+            <input type="text" inputmode="numeric" name="precio_min" autocomplete="off" aria-describedby="filtros-error-rango" class={field} />
+          </label>
+          <label class="flex flex-col gap-1 text-body lg:flex-1">
+            {L.priceTo}
+            <input type="text" inputmode="numeric" name="precio_max" autocomplete="off" aria-describedby="filtros-error-rango" class={field} />
+          </label>
+        </div>
+        <p id="filtros-error-rango" data-range-error hidden class="mt-2 text-small text-ink-900">{L.rangeError}</p>
+      </fieldset>
+      <fieldset id="panel-autonomia" data-group="autonomia" class={fieldset}>
+        <legend class={legend} tabindex="-1">{L.range}</legend>
+        <select name="autonomia" aria-label={L.range} class={`${field} lg:max-w-xs`}>
+          <option value="">{L.anyRange}</option>
+          {view.ranges.map((r) => <option value={r.value} data-chip={r.chip}>{r.label}</option>)}
+        </select>
+      </fieldset>
+      <fieldset id="panel-traccion" data-group="traccion" class={fieldset}>
+        <legend class={legend} tabindex="-1">{L.drivetrain}</legend>
+        <p class="text-small text-ink-900">{L.drivetrainHelp}</p>
+        <div class={row}>
+          {
+            view.drivetrains.map((o) => (
+              <label class={option}>
+                <input type="checkbox" name="traccion" value={o.value} data-chip={o.chip} class={box} />
+                <span>{o.label}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+      <fieldset id="panel-estado" data-group="estado" class={fieldset}>
+        <legend class={legend} tabindex="-1">{L.status}</legend>
+        <div class={row}>
+          <label class={option}>
+            <input type="radio" name="estado" value="todos" checked class={box} />
+            <span>{L.all}</span>
+          </label>
+          {
+            view.statuses.map((o) => (
+              <label class={option}>
+                <input type="radio" name="estado" value={o.value} data-chip={o.chip} class={box} />
+                <span>{o.label}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+      <div class="flex flex-wrap gap-2 lg:hidden">
+        <button
+          type="button"
+          data-filters-close
+          class="min-h-11 rounded-card bg-brand-600 px-4 text-body text-on-brand hover:bg-brand-800"
+        ></button>
+        <button
+          type="button"
+          data-filters-clear
+          hidden
+          class="min-h-11 rounded-card border border-line bg-surface px-4 text-body text-ink-900"
+          >{L.clear}</button
+        >
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>
@@ -139,7 +198,10 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
     const fill = (tpl: string | undefined, vars: Record<string, string | number>) =>
       (tpl ?? "").replace(/\{(\w+)\}/g, (_, k: string) => String(vars[k] ?? ""));
     const form = root.querySelector<HTMLFormElement>("[data-filters-form]")!;
+    const panel = root.querySelector<HTMLElement>("[data-panel]")!;
     const toggle = root.querySelector<HTMLButtonElement>("[data-filters-toggle]")!;
+    const pills = [...root.querySelectorAll<HTMLButtonElement>("[data-group-toggle]")];
+    const groups = [...root.querySelectorAll<HTMLElement>("[data-group]")];
     const closeBtn = root.querySelector<HTMLButtonElement>("[data-filters-close]")!;
     const clearBtn = root.querySelector<HTMLButtonElement>("[data-filters-clear]")!;
     const title = root.querySelector<HTMLElement>("#filtros")!;
@@ -154,18 +216,20 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
       facts: readFacts((n) => el.getAttribute(n)),
       ...readSortable((n) => el.getAttribute(n)),
     }));
-    // The order selector lives in the results row (paginas-catalogo.md), outside this panel.
-    const sortRow = document.querySelector<HTMLElement>("[data-sort-row]");
     const sortSelect = document.querySelector<HTMLSelectElement>("[data-sort]")!;
     const inputs = (name: string) => [...form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`)];
     const select = form.elements.namedItem("autonomia") as HTMLSelectElement;
     const priceMin = form.elements.namedItem("precio_min") as HTMLInputElement;
     const priceMax = form.elements.namedItem("precio_max") as HTMLInputElement;
+    const wide = matchMedia("(min-width: 1024px)");
 
     root.hidden = false;
-    if (sortRow) sortRow.hidden = false;
     document.querySelector<HTMLElement>("[data-no-js]")?.setAttribute("hidden", "");
     if (chips) chips.hidden = false;
+
+    // Panel state: on desktop one group at a time; on mobile the whole panel (filtros-catalogo.md).
+    let openGroup: string | null = null;
+    let mobileOpen = false;
 
     /** Filters as the controls show them: the query string is built from them and parsed back. */
     function readForm(): Filters {
@@ -196,13 +260,38 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
       sortSelect.value = f.sort;
     }
 
+    /** "Marca (2 activos)": the word is visually hidden, so the pill reads "Marca (2)" (filtros-catalogo.md). */
+    function setCountLabel(button: HTMLElement, tpl: string, n: number, base: string) {
+      const target = button.querySelector<HTMLElement>("[data-label]")!;
+      if (n === 0) {
+        target.textContent = base;
+        return;
+      }
+      const [before = "", after = ""] = tpl.split("{n}");
+      const word = document.createElement("span");
+      word.className = "sr-only";
+      word.textContent = ` ${msg.activeWord ?? ""}`;
+      target.replaceChildren(document.createTextNode(`${before}${n}`), word, document.createTextNode(after));
+    }
+
+    function groupCounts(f: Filters): Record<string, number> {
+      return {
+        marca: f.brands.length,
+        segmento: f.segments.length,
+        precio: Number(f.priceMin !== null) + Number(f.priceMax !== null),
+        autonomia: Number(f.minRangeKm !== null),
+        traccion: f.drivetrains.length,
+        estado: Number(f.status !== null),
+      };
+    }
+
     function renderChips(f: Filters) {
       if (!chips) return;
       chips.replaceChildren();
       const add = (label: string, undo: () => void) => {
         const b = document.createElement("button");
         b.type = "button";
-        b.className = "min-h-11 rounded-full border border-line bg-surface px-4 text-body text-ink-900";
+        b.className = "min-h-touch rounded-pill border border-line bg-surface px-4 text-small text-ink-900";
         b.textContent = `${label} ×`;
         b.setAttribute("aria-label", fill(msg.remove, { filtro: label }));
         b.addEventListener("click", () => {
@@ -221,6 +310,16 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
       }
       if (f.priceMin !== null) add(fill(msg.chipFrom, { precio: f.priceMin }), () => (priceMin.value = ""));
       if (f.priceMax !== null) add(fill(msg.chipTo, { precio: f.priceMax }), () => (priceMax.value = ""));
+      // Desktop: "Limpiar filtros" ends the chip row, as one more chip without "×" (mobile has it in the panel).
+      if (activeCount(f) > 0) {
+        const clear = document.createElement("button");
+        clear.type = "button";
+        clear.dataset.chipsClear = "";
+        clear.className = "min-h-touch rounded-pill px-4 text-small text-ink-900 underline max-lg:hidden";
+        clear.textContent = clearBtn.textContent;
+        clear.addEventListener("click", clearAll);
+        chips.append(clear);
+      }
     }
 
     function update(updateUrl = true) {
@@ -237,7 +336,12 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
       if (list) list.hidden = n === 0;
       if (empty) empty.hidden = n !== 0;
       const active = activeCount(f);
-      toggle.textContent = fill(msg.open, { n: active });
+      setCountLabel(toggle, msg.open ?? "", active, title.textContent ?? "");
+      const counts = groupCounts(f);
+      for (const p of pills) {
+        const base = p.dataset.groupLabel ?? "";
+        setCountLabel(p, fill(msg.group, { grupo: base, n: "{n}" }), counts[p.dataset.groupToggle!] ?? 0, base);
+      }
       closeBtn.textContent = fill(msg.show, { n });
       clearBtn.hidden = active === 0;
       const bad = hasRangeError(f);
@@ -251,17 +355,31 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
       if (updateUrl) history.replaceState(null, "", location.pathname + toSearch(f));
     }
 
+    function renderPanel() {
+      const desktop = wide.matches;
+      panel.hidden = desktop ? openGroup === null : !mobileOpen;
+      for (const g of groups) g.hidden = desktop && g.dataset.group !== openGroup;
+      toggle.setAttribute("aria-expanded", String(!desktop && mobileOpen));
+      for (const p of pills) p.setAttribute("aria-expanded", String(desktop && p.dataset.groupToggle === openGroup));
+    }
+
+    /** Closes whatever is open and returns the focus to its button. */
+    function closePanel() {
+      const pill = pills.find((p) => p.dataset.groupToggle === openGroup);
+      const wasMobile = mobileOpen;
+      openGroup = null;
+      mobileOpen = false;
+      renderPanel();
+      if (wide.matches) pill?.focus();
+      else if (wasMobile) toggle.focus();
+    }
+
     function clearAll() {
       writeForm(NO_FILTERS);
       update();
-      heading?.focus();
-    }
-
-    function setOpen(open: boolean) {
-      toggle.setAttribute("aria-expanded", String(open));
-      form.classList.toggle("hidden", !open);
-      if (open) title.focus();
-      else toggle.focus();
+      // The clear button disappears: focus goes to the panel title on mobile, to "Modelos" on desktop.
+      if (!wide.matches && mobileOpen) title.focus();
+      else heading?.focus();
     }
 
     form.addEventListener("input", () => update());
@@ -269,13 +387,34 @@ const field = "min-h-11 w-full rounded-card border border-line bg-surface px-3 t
     sortSelect.addEventListener("change", () => update());
     clearBtn.addEventListener("click", clearAll);
     document.querySelector("[data-empty-clear]")?.addEventListener("click", clearAll);
-    toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
-    closeBtn.addEventListener("click", () => setOpen(false));
+    toggle.addEventListener("click", () => {
+      if (mobileOpen) return closePanel();
+      mobileOpen = true;
+      renderPanel();
+      title.focus();
+    });
+    for (const p of pills) {
+      p.addEventListener("click", () => {
+        const name = p.dataset.groupToggle!;
+        if (openGroup === name) return closePanel();
+        openGroup = name;
+        renderPanel();
+        groups.find((g) => g.dataset.group === name)?.querySelector<HTMLElement>("legend")?.focus();
+      });
+    }
+    closeBtn.addEventListener("click", closePanel);
     root.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") setOpen(false);
+      if (e.key === "Escape" && (openGroup !== null || mobileOpen)) closePanel();
+    });
+    // Crossing the breakpoint (rotation, zoom) starts from a closed panel: the two layouts do not share state.
+    wide.addEventListener("change", () => {
+      openGroup = null;
+      mobileOpen = false;
+      renderPanel();
     });
 
     writeForm(parseFilters(location.search));
+    renderPanel();
     update(false);
   }
 </script>

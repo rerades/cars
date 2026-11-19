@@ -4241,21 +4241,6 @@
     cita (docs/design/tarjeta-modelo.md y docs/design/ficha-modelo.md, «Imagen retocada»). Respeta el marco de
     página de docs/design/tokens.md, «Marco de página»: los sizes de la ficha se acotan a 1440 px. Al terminar,
     borra web/design-proto/retocadas.astro. Bitácora."
-# ADR-0025, step 4: more brands, two a night (retoucher max_runs_per_day).
-- id: retoque-citroen
-  agent: retoucher
-  task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/citroen/, siguiendo
-    .claude/agents/retoucher.md y docs/design/fotos-modelos.md, como en el piloto (PR #1106). Salta las
-    imágenes que ya tienen edits o que un open_questions ya rechazó. Si rechazas una foto después de
-    retocarla, restaura el original como dice el paso 5 de retoucher.md: el YAML no puede apuntar a un fichero
-    borrado. En el resumen, la tabla de cada foto y si el script tapó bien la matrícula donde la había. Bitácora."
-- id: retoque-kia
-  agent: retoucher
-  task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/kia/, siguiendo
-    .claude/agents/retoucher.md y docs/design/fotos-modelos.md, como en el piloto (PR #1106). Salta las
-    imágenes que ya tienen edits o que un open_questions ya rechazó. Si rechazas una foto después de
-    retocarla, restaura el original como dice el paso 5 de retoucher.md: el YAML no puede apuntar a un fichero
-    borrado. En el resumen, la tabla de cada foto y si el script tapó bien la matrícula donde la había. Bitácora."
 # Discovery before refresh (2026-11-06): models missing from brands already in data/raw/.
 - id: descubrir-byd-mg
   agent: researcher
@@ -4264,3 +4249,30 @@
     marcas. Sigue las reglas de .claude/agents/researcher.md y el esquema de docs/architecture/data-model.md,
     con el segmento según RF-11 de PRD-001. Imágenes con el script de descarga, con las mismas reglas. No toques
     los modelos que ya existen. Bitácora."
+# ADR-0025, step 4: more brands, two a night (retoucher max_runs_per_day). Citroën and Kia were rescued in #1177 and #1178.
+- id: retoque-hyundai
+  agent: retoucher
+  task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/hyundai/, siguiendo
+    .claude/agents/retoucher.md y docs/design/fotos-modelos.md, como en el piloto (PR #1106). Salta las
+    imágenes que ya tienen edits o que un open_questions ya rechazó. Al aceptar o rechazar, sigue los pasos 4 y 5
+    de retoucher.md: el YAML no puede apuntar a un fichero que no existe. En el resumen, la tabla de cada foto y si
+    el script tapó bien la matrícula donde la había. Bitácora."
+- id: retoque-volkswagen
+  agent: retoucher
+  task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/volkswagen/, siguiendo
+    .claude/agents/retoucher.md y docs/design/fotos-modelos.md, como en el piloto (PR #1106). Salta las
+    imágenes que ya tienen edits o que un open_questions ya rechazó. Al aceptar o rechazar, sigue los pasos 4 y 5
+    de retoucher.md: el YAML no puede apuntar a un fichero que no existe. En el resumen, la tabla de cada foto y si
+    el script tapó bien la matrícula donde la había. Bitácora."
+# Press prices (PRD-001, section 8, open question from 2026-11-18): measure before deciding. Accepted on 2026-11-19.
+- id: precio-de-medios-muestra
+  agent: researcher
+  task: "Medición, sin escribir nada en data/: PRD-001, sección 8, pregunta «¿Puede la web mostrar un precio de
+    medio (T3)…?», pide saber cuántos modelos sin precio T1 tendrían un precio de prensa con la regla propuesta
+    (al menos dos medios distintos con la misma cifra para la misma versión, sin descuentos ni promociones). Toma
+    una muestra de 10 modelos de data/raw/ cuyas versiones tienen todas price: null, de marcas distintas. Para
+    cada versión que mires, anota los medios leídos, la cifra de cada uno, su fecha y si coinciden. Mira los
+    términos de uso de cada medio (ADR-0001, regla 6) y descarta los que excluyan el uso de su información. Sigue
+    las reglas de lectura de .claude/agents/researcher.md (la cifra, de la salida de fetch-page.ts). El resultado,
+    en una entrada de bitácora de tipo nota con la tabla por modelo y el recuento final (cuántos de los 10
+    tendrían precio de prensa), y en tu resumen. No toques data/."

@@ -81,6 +81,12 @@ Condicionan la decisión:
   toca», y queda registrada en el YAML. El script las localiza con el reconocimiento de texto de Vision
   (`VNRecognizeTextRequest`) dentro de la mitad inferior del coche. **No está probado:** se prueba en el
   piloto. Si el agente ve una matrícula legible que el script no ha tapado, rechaza la foto.
+- **Enmienda del 2026-11-19: desenfocar el texto dentro de su contorno (elegida), en vez del rectángulo liso.**
+  El rectángulo, con su margen, se salía de la matrícula del Kia EV9 (PR #1178) y tapaba el marco y el
+  parachoques. Ahora el script desenfoca solo el cuadrilátero inclinado que Vision da para el texto
+  (`boundingBox(for:)`), sin margen y leyendo solo píxeles de dentro: los caracteres se disuelven y el
+  contorno de la placa, su marco y el coche quedan intactos. Descartado: buscar el rectángulo de la placa con
+  `VNDetectRectanglesRequest`, que en el EV9 no la encontró. Texto anterior: «Taparlas con un rectángulo liso».
 
 ## Decisión
 **Un agente nuevo, el Retocador, juzga cada foto con el criterio escrito de `docs/design/fotos-modelos.md`
@@ -97,17 +103,18 @@ apoyo y tapa la matrícula, sin tocar ningún otro píxel del coche.**
      coche toca un borde de la foto (está cortado).
    - Recorta al coche con un margen, guarda un PNG RGBA de 1280 px de ancho como máximo, con el coche
      opaco, el fondo transparente y una sombra de apoyo semitransparente debajo.
-   - Busca la matrícula y la tapa con un rectángulo liso.
+   - Busca la matrícula y desenfoca su texto dentro de su contorno (enmienda del punto 4, 2026-11-19).
    - **Comprueba** que, dentro de la máscara y fuera de la matrícula, cada píxel es igual al de la foto
      original reducida, antes de codificar. Si no, falla y no escribe nada.
    - Si el PNG pasa de 2 MB (ADR-0011), reduce el ancho hasta que cabe.
-   - Escribe `<nombre>.png` junto al original, que borra, y una hoja «antes y después» en
+   - Escribe `<nombre>.png` junto al original, que conserva (antes lo borraba; cambiado el 2026-11-19
+     porque dos ejecuciones rechazaron la foto y no lo restauraron), y una hoja «antes y después» en
      `ops/retouch/<run_id>/` para la PR.
    - Imprime una línea JSON con `file`, `edits`, las dimensiones y el resultado de la comprobación, como
      `fetch-image.ts`.
 3. **El agente**, después del script, mira el PNG y lo rechaza si ve una máscara mala: trozos de fondo
    pegados, partes del coche que faltan (retrovisores, antena, ruedas), un cartel o una persona pegados al
-   coche, o una matrícula legible. Si lo rechaza, restaura el original con `git checkout` y lo anota como en
+   coche, o una matrícula legible. Si lo acepta, borra el original; si lo rechaza, borra el PNG y lo anota como en
    el punto 1.
 4. **Esquema.** Cada entrada de `images` admite una clave nueva, `edits`: lista de `background` y `plate`.
    Si no está, la imagen no está retocada, así que las 140 entradas actuales siguen siendo válidas. Una

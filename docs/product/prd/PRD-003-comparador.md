@@ -5,7 +5,7 @@ status: ready        # draft | ready | in-progress | done | deprecated
 priority: P1         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: [PRD-001, PRD-002]
 epic: ""
-updated: 2026-10-13
+updated: 2026-11-19
 ---
 
 # PRD-003 — Comparador
@@ -118,6 +118,9 @@ Entidades y campos de `architecture/data-model.md` (ADR-0008); el comparador no 
 ### Resueltas (2026-10-13, Rod)
 - **Modelos sin versiones (RF-11):** no se pueden comparar. Sus tarjetas y fichas no llevan «Comparar» y no aparecen al añadir. Lo propuso el diseño (`docs/design/comparador.md`, pregunta 2).
 
+### Resueltas (2026-11-19, Rod)
+- **Sin fotos en el comparador:** las columnas no llevan imagen del modelo; la tabla se queda con los campos de la sección 6. Lo planteó el diseño al pasar `docs/design/comparador.md` a la dirección visual (PR #1154). Descartado añadir la foto en la cabecera de cada columna: obligaría a cambiar este PRD y ADR-0014 y no ayuda a comparar cifras.
+
 ### Abiertas
 - Ninguna.
 
@@ -127,3 +130,4 @@ Entidades y campos de `architecture/data-model.md` (ADR-0008); el comparador no 
 | 2026-10-10 | Borrador inicial: RF-1 a RF-12, RNF-1 a RNF-5, CA-1 a CA-17; 9 preguntas abiertas | Claude |
 | 2026-10-10 | Resueltas las 9 preguntas: versiones, máximo 3, selección solo en la URL, `/comparar` sin indexar y con JavaScript, sin descatalogados. RF-8 y RF-14, RNF-6 y CA-19 nuevos. Pasa a `ready` | Claude |
 | 2026-10-13 | RF-11: los modelos sin versiones no se pueden comparar | Rod / Claude |
+| 2026-11-19 | Sección 8: el comparador no lleva fotos (pregunta del diseño, PR #1154) | Rod / Claude |
