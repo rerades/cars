@@ -31,6 +31,8 @@
   --color-deal-fg: #78350f;
   --color-discontinued-bg: #e5e7eb;
   --color-discontinued-fg: #374151;
+  /* Fills the sides of the page frame above --width-frame. Decorative only: no text or controls on it. */
+  --color-backdrop: #d9d9d9;
 
   --font-sans: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   /* Two widths of one family are the identity: names very wide, figures very narrow. */
@@ -72,6 +74,8 @@
 
   --container-page: 80rem;
   --container-prose: 40rem;
+  /* Max width of the page frame that holds the whole site (1440 px). */
+  --width-frame: 90rem;
 
   --width-explore-label: 8rem;
   --spacing-touch: 2.75rem;
@@ -96,7 +100,16 @@
 }
 
 @layer base {
+  /* Page frame (tokens.md, "Marco de página"): the body is the frame, centred, at most --width-frame wide;
+     the backdrop shows on both sides above that width. Below it nothing changes. */
+  html {
+    background: var(--color-backdrop);
+  }
   body {
+    margin-inline: auto;
+    max-width: var(--width-frame);
+    min-height: 100dvh;
+    position: relative;
     background: var(--color-surface);
     color: var(--color-ink-900);
     font-family: var(--font-sans);
