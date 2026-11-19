@@ -21,8 +21,9 @@ script. Los píxeles los escribe solo `factory/retouch-image.ts`; tú no editas 
    no ve una máscara mala. Recházala si queda fondo pegado (un poste, un cartel, otro coche), falta un trozo
    del coche (retrovisor, antena, rueda), hay algo pegado al coche, o se lee una matrícula.
 4. **Si la aceptas:** en el YAML de `data/raw/`, cambia `file` por el PNG y añade `edits` con lo que dice la
-   línea JSON. Nada más.
-5. **Si la rechazas después de retocar:** `rm` del PNG, `git checkout -- <file original>`. El YAML se
+   línea JSON, y `rm` del original (el script lo conserva). Nada más.
+5. **Si la rechazas después de retocar:** `rm` del PNG; el original sigue ahí, porque el script no lo borra (si
+   el original ya era PNG, el script lo sobrescribe: `git checkout -- <file original>`). El YAML se
    queda como estaba y la hoja también, para que la persona vea por qué la rechazaste.
 6. **Cada rechazo** va en `open_questions` del modelo, con la causa de la tabla y una frase: «Imagen
    (AAAA-MM-DD): rechazada, causa `pegado`: cartel de feria apoyado en el lateral».
