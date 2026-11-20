@@ -13,7 +13,8 @@ versions:
     power_kw: {value: 125, note: "IDAE id 609272 (ID.3 Neo Life 125 kW, 170 CV, MY27); volkswagen.es no liga la potencia a la versión", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
     price: null
 images:
-  - file: "data/images/volkswagen/id3-neo/frontal.jpg"
+  - file: "data/images/volkswagen/id3-neo/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Volkswagen_ID.3_Neo_IMG_7255.jpg/1280px-Volkswagen_ID.3_Neo_IMG_7255.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID.3_Neo_IMG_7255.jpg"
     source_id: wikimedia-commons

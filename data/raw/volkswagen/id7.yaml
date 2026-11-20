@@ -23,7 +23,8 @@ versions:
     power_kw: {value: 250, note: "IDAE id 607349 (ID.7 MY26 ID.7 GTX, 340 CV; publicado en volkswagen.es: 340 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-08, tier: T2}
     price: null
 images:
-  - file: "data/images/volkswagen/id7/frontal.jpg"
+  - file: "data/images/volkswagen/id7/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Volkswagen_ID.7_1X7A1779.jpg/1280px-Volkswagen_ID.7_1X7A1779.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID.7_1X7A1779.jpg"
     source_id: wikimedia-commons
