@@ -261,7 +261,27 @@ pasa a `web/`, y el LCP se mide con `web/e2e/lcp.spec.ts` (RNF-2).
 | `--width-rank-number` | `3rem`; `6rem` desde `lg` | Columna del número de puesto |
 | `--width-rank-figure` | `22rem` | Columna de la cifra del ranking desde `lg`, para que todas las cifras queden alineadas |
 | `--width-ranking` | — | **Deja de usarse**: la lista de puestos ocupa `--width-page` |
-| `--size-cutout-mobile` | `12rem` | Alto mínimo del hueco del coche recortado en móvil, en la pantalla del catálogo y en la primera pantalla de la ficha |
+| `--size-cutout-mobile` | `12rem` | Alto mínimo del hueco del coche recortado en móvil, en la pantalla del catálogo y en la primera pantalla de la ficha; también el de la silueta en la primera pantalla de la ficha |
+
+### Silueta en la dirección visual (2026-11-20)
+
+Sustituyen, en la pantalla del catálogo y en la primera pantalla de la ficha, a `--size-segment-icon-lg` (que el código
+redefinía a 24/42 rem) y al color `ink-950` / `on-dark-muted` de la silueta. Reglas de uso: [`siluetas-segmento.md`](siluetas-segmento.md),
+«En la dirección visual». `--size-segment-icon` (48 px) no cambia.
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--color-silhouette` | `#a3ada7` (L 0,4046); en `.band-dark`, `#45525b` (L 0,0806) | Trazo de la silueta en pantalla. **Solo decorativo, nunca texto** |
+| `--size-silhouette-stroke` | `2px`, con `vector-effect: non-scaling-stroke` | Grosor del trazo a cualquier tamaño |
+| `--size-silhouette-card` | `15rem` | Lado del SVG en la pantalla del catálogo, móvil; `min(…, 100%)` |
+| `--size-silhouette-card-lg` | `28rem` | Ídem desde `lg` |
+| `--size-silhouette-hero` | `18rem` | Lado del SVG en la primera pantalla de la ficha, móvil; `min(…, 100%)` |
+| `--size-silhouette-hero-lg` | `34rem` | Ídem desde `lg` |
+
+| Par | Ratio | Umbral | Resultado |
+|---|---|---|---|
+| `silhouette` (`#a3ada7`) sobre `surface-muted` | 2,03 | — | No se exige (decorativa, `aria-hidden`; el segmento va en texto). Por debajo de todo texto a propósito |
+| `silhouette` en franja oscura (`#45525b`) sobre `ink-950` | 2,34 | — | Ídem |
 
 ### Marco de página (decisión del 2026-11-18)
 
@@ -294,5 +314,5 @@ Reglas:
 2. **Modo de colores forzados** (Windows): las etiquetas pierden su fondo y el borde de tarjeta pasa a
    `CanvasText`; se espera que siga legible porque todo se dice con texto, pero hay que probarlo en un
    navegador real, no se puede comprobar en papel.
-3. **Silueta de segmento**: su dibujo sigue pendiente de una tarea aparte; es decorativa y no tiene requisito
-   de contraste.
+3. **Silueta de segmento**: dibujada en `siluetas-segmento.md`; en la dirección visual, su tamaño y color van en
+   «Silueta en la dirección visual». Es decorativa y no tiene requisito de contraste.
