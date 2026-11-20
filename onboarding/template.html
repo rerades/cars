@@ -237,7 +237,7 @@ footer { padding-block: 32px; color: var(--muted); font-size: 13px }
     <div class="wrap">
       <div class="head">
         <p class="eyebrow">Agentes</p>
-        <h2>Ocho agentes, cada uno con su carpeta</h2>
+        <h2><span id="agent-count">Los</span> agentes, cada uno con su carpeta</h2>
         <p class="note">Ninguno puede escribir fuera de sus rutas: los hooks de <code>.claude/hooks/</code> lo bloquean. Se pasan el trabajo a través de documentos, issues y PR, nunca directamente.</p>
       </div>
       <div class="diagram" id="handoff"></div>
@@ -306,7 +306,7 @@ footer { padding-block: 32px; color: var(--muted); font-size: 13px }
 <script>
 const D = /*__DATA__*/null;
 
-const NAMES = { product: "Producto", planner: "Planificador", designer: "Diseñador", architect: "Arquitecto", developer: "Desarrollador", researcher: "Researcher", devops: "DevOps", reviewer: "Revisor" };
+const NAMES = { product: "Producto", planner: "Planificador", designer: "Diseñador", architect: "Arquitecto", developer: "Desarrollador", researcher: "Researcher", devops: "DevOps", reviewer: "Revisor", retoucher: "Retocador" };
 const name = (a) => NAMES[a] ?? a;
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const nf = new Intl.NumberFormat("es-ES");
@@ -341,7 +341,8 @@ function archSvg() {
   s += box({ x: 255, y: 10, w: 270, h: 56, t: "Responsable (persona)", s: "escribe la cola · decide lo dudoso", cls: "hi" });
   s += row(122, 60, 170, 20, [["Visión y PRD", `${D.prds.length} PRD de producto`], ["ADR", `${D.adrs.length} decisiones técnicas`], ["Diseño", "pantallas y componentes"], ["Bitácora", "qué se hizo y por qué"]]);
   s += row(254, 60, 132, 20, [["queue.yaml", `${D.queue.total} tareas`], ["budgets.yaml", "límites y gasto"], ["hooks", "frenan escrituras"], ["evals.ts", "comprueba salidas"], ["run.ts", "el orquestador", "hi"]]);
-  D.agents.forEach((a, i) => { s += box({ x: 20 + (i % 4) * 190, y: 384 + Math.floor(i / 4) * 38, w: 170, h: 30, t: name(a.name), s: shortModel(a.model), cls: "ag" }); });
+  const step = D.agents.length > 8 ? 25 : 38; // three rows only fit the band when tighter
+  D.agents.forEach((a, i) => { s += box({ x: 20 + (i % 4) * 190, y: 384 + Math.floor(i / 4) * step, w: 170, h: step - 8, t: name(a.name), s: shortModel(a.model), cls: "ag" }); });
   s += row(518, 60, 170, 20, [["Ramas agent/*", "una por ejecución"], ["Pull requests", "se abren solas"], ["CI", D.ci.join(" ")], ["Etiquetas review:*", "las pone el Revisor"]]);
   s += row(650, 60, 230, 25, [["data/", `${D.data.models} fichas · ${D.data.brands} marcas`], ["web/ · Astro", `estático, ${D.pages.length} rutas`], ["siete3.com", "static site de Render", "out"]]);
   s += box({ x: 790, y: 254, w: 190, h: 60, t: "launchd (Mac)", s: orch ? `${orch.times.length} disparos, ${orch.times[0]}–${orch.times.at(-1)}` : "", cls: "ext" });
@@ -359,15 +360,16 @@ function handoffSvg() {
   const X = [20, 230, 440, 650, 840], W = 150, H = 58;
   const N = {
     product: [0, 150, "PRD"], planner: [1, 50, "épica e historias"], designer: [1, 150, "especificación"], architect: [1, 250, "ADR"],
-    sources: [1, 350, "webs de las marcas", "Fuentes oficiales", "ext"], developer: [2, 100, "código de web/"], devops: [2, 250, "workflows de la CI"],
-    researcher: [2, 350, "YAML con fuente"], reviewer: [3, 200, "etiqueta review:*"],
+    sources: [1, 350, "webs de las marcas", "Fuentes oficiales", "ext"], developer: [2, 50, "código de web/"], devops: [2, 150, "workflows de la CI"],
+    researcher: [2, 250, "YAML con fuente"], retoucher: [2, 350, "fotos de data/images/"], reviewer: [3, 200, "etiqueta review:*"],
     auto: [4, 140, "datos y bitácora", "Fusión automática", "out"], human: [4, 270, "todo lo demás", "Responsable", "hi"],
   };
   const pos = (k) => ({ x: X[N[k][0]], y: N[k][1], w: N[k][0] === 4 ? 140 : W });
-  const edges = [["product", "planner"], ["product", "designer"], ["product", "architect"], ["planner", "developer"], ["designer", "developer"], ["architect", "developer"], ["architect", "devops"], ["sources", "researcher"], ["developer", "reviewer"], ["devops", "reviewer"], ["researcher", "reviewer"], ["reviewer", "auto"], ["reviewer", "human"]];
+  const edges = [["product", "planner"], ["product", "designer"], ["product", "architect"], ["planner", "developer"], ["designer", "developer"], ["architect", "developer"], ["architect", "devops"], ["sources", "researcher"], ["developer", "reviewer"], ["devops", "reviewer"], ["researcher", "reviewer"], ["reviewer", "auto"], ["reviewer", "human"], ["retoucher", "human"]];
   let s = `<svg viewBox="0 0 1000 420" role="img" aria-label="Cómo se pasan el trabajo los agentes">${marker}`;
   ["DEFINIR", "TROCEAR, DISEÑAR, DECIDIR", "CONSTRUIR", "REVISAR", "PUBLICAR"].forEach((l, i) => { s += `<text class="head-l" x="${X[i]}" y="20">${l}</text>`; });
   for (const [a, b] of edges) { const p = pos(a), q = pos(b); s += curve(p.x + p.w, p.y + H / 2, q.x, q.y + H / 2); }
+  s += line(X[2] + W / 2, 250 + H + 2, X[2] + W / 2, 350 - 2); // the Researcher hands its photos to the Retoucher
   for (const k of Object.keys(N)) { const [, , sub, title, cls] = N[k]; const p = pos(k); s += box({ ...p, h: H, t: title ?? name(k), s: sub, cls: cls ?? "ag" }); }
   s += `<text class="el" x="806" y="${150 + 4}" text-anchor="end">review:ok</text><text class="el" x="806" y="${300 + 12}" text-anchor="end">needs-human</text>`;
   return s + "</svg>";
@@ -422,6 +424,7 @@ function render() {
 
   document.getElementById("arch").innerHTML = archSvg();
   document.getElementById("handoff").innerHTML = handoffSvg();
+  document.getElementById("agent-count").textContent = D.agents.length;
   document.getElementById("agent-cards").innerHTML = D.agents.map((a) => {
     const mine = monthRuns.filter((r) => r.agent === a.name).reduce((s, r) => s + r.cost, 0);
     const w = a.budget ? Math.min(100, (100 * mine) / a.budget) : 0;
