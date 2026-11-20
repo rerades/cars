@@ -23,7 +23,8 @@ versions:
       retrieved: 2026-10-31
       tier: T1
 images:
-  - file: data/images/hyundai/ioniq-9/frontal.jpg
+  - file: data/images/hyundai/ioniq-9/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Hyundai_Ioniq_9_Auto_Zuerich_2025_DSC_2978.jpg/1280px-Hyundai_Ioniq_9_Auto_Zuerich_2025_DSC_2978.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Hyundai_Ioniq_9_Auto_Zuerich_2025_DSC_2978.jpg"
     source_id: wikimedia-commons
