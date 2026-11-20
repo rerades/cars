@@ -4308,6 +4308,16 @@
     cambia respecto a una foto normal. Prototipo y capturas con ADR-0024 (puedes usar data/images/citroen/e-c4/
     frontal.png). No cambies el alcance. Bitácora."
 # ADR-0025, step 4: retouch, two brands a night (retoucher max_runs_per_day). These block the queue once tonight's two have run, so later refills go above this block.
+# 2026-11-21: first story of each zone of epic #1188; #1190 and #1192 wait for #1189 and #1191. Above the retoucher block so its daily cap does not stop the night.
+- id: historia-1189-comparador-cabecera
+  agent: developer
+  task: "Historia #1189 (épica #1188): comparador, cabecera en franja oscura y lista «Coches comparados» (PRD-003, docs/design/comparador.md). Lee la issue con gh issue view 1189 y sigue sus criterios, el diseño que cita (sección «Dirección visual (2026-11-18)») y el orden de la épica (gh issue view 1188). Borra un prototipo de web/design-proto/ solo si la issue lo pide; los ficheros compartidos (a/Cifra.astro, pantalla.css, fonts/) no se borran. Bitácora."
+- id: historia-1191-rankings-cabecera
+  agent: developer
+  task: "Historia #1191 (épica #1188): rankings, franjas, cabecera y filtros (PRD-005, docs/design/rankings.md). Lee la issue con gh issue view 1191 y sigue sus criterios, el diseño que cita (sección «Dirección visual (2026-11-18)») y el orden de la épica (gh issue view 1188). Borra un prototipo de web/design-proto/ solo si la issue lo pide; los ficheros compartidos (a/Cifra.astro, pantalla.css, fonts/) no se borran. Bitácora."
+- id: historia-1193-explorar-rankings
+  agent: developer
+  task: "Historia #1193 (épica #1188): franja «Explorar» como franja blanca con el grupo «Rankings» como quinto grupo (PRD-001 RF-14, CA-19; PRD-005 decisión 9). Lee la issue con gh issue view 1193 y sigue sus criterios, el diseño que cita (sección «Dirección visual (2026-11-18)») y el orden de la épica (gh issue view 1188). Borra un prototipo de web/design-proto/ solo si la issue lo pide; los ficheros compartidos (a/Cifra.astro, pantalla.css, fonts/) no se borran. Bitácora."
 - id: retoque-bmw
   agent: retoucher
   task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/bmw/, siguiendo
