@@ -5,7 +5,7 @@ status: draft        # draft | ready | in-progress | done | deprecated
 priority: P1         # P0 imprescindible · P1 importante · P2 deseable
 depends_on: []
 epic: ""
-updated: 2026-11-05
+updated: 2026-11-21
 ---
 
 # PRD-007 — Harness de la factoría
@@ -134,8 +134,9 @@ fase 3.
   `docs/bitacora/` o en una issue): no escribe en `.claude/` (ADR-0002, RNF-3). Una persona lo
   aplica, con el resultado de `factory/eval-run.ts` (ADR-0016). Corre como mucho una vez por semana
   y solo si desde la pasada anterior hay al menos 3 señales (fallo, `review:changes` o defecto
-  escapado), contadas por código sin modelo. Usa Sonnet, con topes de 1 USD-eq por ejecución y 6 al
-  mes en `budgets.yaml`. Mientras solo el Revisor tenga dataset de evals, solo propone cambios a
+  escapado), contadas por código sin modelo. Usa Opus, con topes de 1,50 USD-eq por ejecución y 10 al
+  mes en `budgets.yaml` (M2 de OPEN-4, decisión del responsable el 2026-11-21: su juicio decide qué
+  cambia en los prompts). Mientras solo el Revisor tenga dataset de evals, solo propone cambios a
   su prompt. Cada defecto escapado se convierte en un caso del
   dataset.
 
@@ -391,3 +392,4 @@ fase 3.
 | 2026-10-28 | Propuestas de respuesta, sin cerrar, para OPEN-1 (N, tipo de cambio y estado de la escalera) y OPEN-4 (frecuencia, modelo y topes del retro), con los datos de octubre y tres alternativas cada una. Decide la persona al revisar la PR. Sin cambios en RF ni CA. | Claude |
 | 2026-10-28 | OPEN-1 y OPEN-4 resueltas por el responsable. RF-9: N = 5, tipo = agente + primer nivel de ruta, solo `web/` de momento, estado en `ops/trust/`. RF-10 y CA-13: el retro propone como texto y no escribe en `.claude/`; semanal con umbral de 3 señales, Sonnet, 1 USD-eq por ejecución y 6 al mes. Hace falta enmendar ADR-0011 y ADR-0013 (Arquitecto). | responsable + Claude |
 | 2026-11-05 | Aceptada la ADR-0023: RF-7 y CA-9 alineados con ella. El «3 K» pasa a 3 000 caracteres (`String.length` del fichero entero, decisión del responsable); las skills son fuentes, modelos, precios, imágenes y reviews (RF-7 no nombraba reviews, ADR-0017); el tamaño de hoy en la sección 1 pasa de 9,3 K a 11 784 bytes (medido en la ADR). OPEN-3 resuelta. Sin cambio de alcance ni de otros RF o CA. | Claude |
+| 2026-11-21 | RF-10: el retro pasa de Sonnet a Opus (M2 de OPEN-4), con 1,50 USD-eq por ejecución y 10 al mes, antes de su primera ejecución. Decisión del responsable: su juicio decide qué cambia en los prompts de los demás agentes, y la diferencia es de unos 4 USD-eq al mes. Sin cambio de alcance ni de otros RF o CA. | Claude |

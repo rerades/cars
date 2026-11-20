@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copiar a ~/Library/LaunchAgents/com.darkfactory.retro.plist, ajustar RUTA y cargar:
+     launchctl load ~/Library/LaunchAgents/com.darkfactory.retro.plist
+     El retro de la semana (ADR-0022), la noche del domingo al lunes: run.ts --retro cuenta las
+     señales sin modelo y solo lanza el agente con 3 o más. Tres intentos por si la cola tiene
+     factory/.run.lock: un intento bloqueado no deja fila, y en cuanto uno corre, los demás salen
+     porque ya hay una fila del retro de menos de 7 días. Weekday 1 es el lunes.
+     PATH como en el del orquestador. -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.darkfactory.retro</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/node</string>
+    <string>/Users/USUARIO/_DEV/cars/factory/run.ts</string>
+    <string>--retro</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict><key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string></dict>
+  <key>WorkingDirectory</key><string>/Users/USUARIO/_DEV/cars</string>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>2</integer><key>Minute</key><integer>45</integer></dict>
+    <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>3</integer><key>Minute</key><integer>45</integer></dict>
+    <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>4</integer><key>Minute</key><integer>45</integer></dict>
+  </array>
+  <key>StandardOutPath</key><string>/Users/USUARIO/_DEV/cars/ops/launchd.out.log</string>
+  <key>StandardErrorPath</key><string>/Users/USUARIO/_DEV/cars/ops/launchd.err.log</string>
+</dict>
+</plist>
