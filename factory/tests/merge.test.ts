@@ -33,6 +33,7 @@ test("cualquier otra cosa espera a una persona", () => {
     [{}, true],
     [{ headRefName: "docs/x" }, false],
     [{ headRefName: "agent/retoucher/20261115-013007-abcdef" }, false], // ADR-0025, point 6
+    [{ headRefName: "agent/retro/20261123-024505-abcdef", files: [{ path: "docs/bitacora/retro/2026-11-23.md", changeType: "ADDED" }] }, false], // ADR-0022
     [{ labels: [] }, false],
     [{ labels: [{ name: "review:ok" }, { name: "review:needs-human" }] }, false],
     [{ labels: [{ name: "review:ok" }, { name: "merger:needs-human" }] }, false],

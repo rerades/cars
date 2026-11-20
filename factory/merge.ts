@@ -58,6 +58,8 @@ export function agentMergeBlocker(
   if (!AGENT_BRANCH.test(pr.headRefName)) return "la rama no es agent/<agente>/<run_id>";
   // ADR-0025, point 6: a person accepts a retouch by looking at the before/after sheet.
   if (pr.headRefName.startsWith("agent/retoucher/")) return "es del Retocador: la acepta una persona viendo la hoja antes y después";
+  // ADR-0022, "Agente retro": a person applies what it proposes, in a PR of their own.
+  if (pr.headRefName.startsWith("agent/retro/")) return "retro proposals are applied by a person";
   const labels = new Set(pr.labels.map((l) => l.name));
   const human = NEEDS_HUMAN.find((l) => labels.has(l));
   if (human) return `tiene ${human}`;

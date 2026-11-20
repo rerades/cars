@@ -10,6 +10,7 @@
  *   node factory/run.ts --task <id>                         # esa tarea pendiente de la cola
  *   node factory/run.ts --trace <run_id>                    # pasos de una ejecución
  *   node factory/run.ts --merge [--dry-run]                 # fusiona las PR de agente que cumplen ADR-0011
+ *   node factory/run.ts --retro [--dry-run]                 # el retro de la semana, si hay 3 señales (ADR-0022)
  */
 import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -17,13 +18,14 @@ import { parseArgs } from "node:util";
 import { evalsConfig, readSummaries, spentInMonth } from "./eval-run.ts";
 import { exportRun } from "./langfuse.ts";
 import { mergePass, waitingPrs } from "./merge.ts";
+import { datasetAgents, labeledPrs, MIN_SIGNALS, readTrust, RETRO, retroBlocker, retroSignals, retroSince, retroTask } from "./retro.ts";
 import {
   appendLedger, checkCanRun, LOCK, commitState, execute, formatTrace, loadConfig, mergeStatePr, nowInTz, pruneMergedBranches, queueState, readAllLedger,
   readLedger, readQueue, REPO, runsToday, spentInPeriod, STATE_BRANCH, syncState, TRACE_DIR,
   type Config,
 } from "./orchestrator.ts";
 
-const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [--task <id>] [--merge-state] [--merge] [--trace <run_id>] [agente] [tarea]
+const USAGE = `uso: node factory/run.ts [--dry-run] [--ignore-window] [--status] [--next] [--task <id>] [--merge-state] [--merge] [--retro] [--trace <run_id>] [agente] [tarea]
 
 Orquestador de la factoría
 
@@ -36,6 +38,7 @@ Orquestador de la factoría
   --task <id>      lanza esa tarea de factory/queue.yaml, si está pendiente
   --merge-state    fusiona la PR de estado si cumple la regla de ADR-0013
   --merge          fusiona las PR de agente que cumplen ADR-0011 y avisa de las demás
+  --retro          lanza el retro si desde el último hay ${MIN_SIGNALS} señales o más (ADR-0022)
   --trace <run_id> muestra los pasos de una ejecución (ops/traces/)`;
 
 function cmdStatus(cfg: Config): number {
@@ -185,6 +188,43 @@ function cmdNext(cfg: Config, ignoreWindow: boolean, dryRun: boolean, id?: strin
   return code;
 }
 
+/**
+ * Weekly retro (ADR-0022): the code decides whether it runs; with fewer than MIN_SIGNALS it only
+ * prints the count and leaves no row (decision of 2026-10-30). The usual guards of runTask apply.
+ */
+function cmdRetro(cfg: Config, ignoreWindow: boolean, dryRun: boolean): number {
+  const blocked = syncState();
+  if (blocked) {
+    console.error(`[bloqueado] ${blocked}`);
+    return 3;
+  }
+  const rows = readAllLedger();
+  const now = new Date();
+  const skip = retroBlocker(rows, now, existsSync(join(REPO, cfg.global?.stop_file || "factory/STOP")));
+  if (skip) {
+    console.log(`retro: no se lanza (${skip})`);
+    return 0;
+  }
+  const since = retroSince(rows, now);
+  let prs;
+  try {
+    prs = labeledPrs(since);
+  } catch (e) {
+    // Without gh the review:changes cannot be counted: better no retro than a retro short of signals.
+    console.error(`[bloqueado] no se pudieron leer las PR con gh: ${(e as Error).message.split("\n")[0]}`);
+    return 3;
+  }
+  const signals = retroSignals(rows, prs, readTrust(), since);
+  const count = (k: string) => signals.filter((s) => s.kind === k).length;
+  console.log(`retro: ${signals.length} señales desde ${since.toISOString()} (fallos ${count("fallo")}, ` +
+    `review:changes ${count("review:changes")}, defectos escapados ${count("defecto escapado")})`);
+  if (signals.length < MIN_SIGNALS) {
+    console.log(`retro: no se lanza, hacen falta ${MIN_SIGNALS}`);
+    return 0;
+  }
+  return runTask(cfg, RETRO, retroTask(signals, datasetAgents(), since, nowInTz(cfg).day), ignoreWindow, dryRun);
+}
+
 function cmdTrace(runId: string): number {
   const path = join(TRACE_DIR, `${runId}.jsonl`);
   if (!existsSync(path)) {
@@ -209,6 +249,7 @@ function main(argv: string[]): number | Promise<number> {
         task: { type: "string" },
         "merge-state": { type: "boolean" },
         merge: { type: "boolean" },
+        retro: { type: "boolean" },
         trace: { type: "string" },
         help: { type: "boolean", short: "h" },
       },
@@ -229,6 +270,7 @@ function main(argv: string[]): number | Promise<number> {
   if (values.status) return cmdStatus(cfg);
   if (values["merge-state"]) return cmdMergeState(cfg);
   if (values.merge) return cmdMerge(cfg, !!values["dry-run"]);
+  if (values.retro) return cmdRetro(cfg, !!values["ignore-window"], !!values["dry-run"]);
   if (values.next || values.task) return cmdNext(cfg, !!values["ignore-window"], !!values["dry-run"], values.task);
   if (!agent || !task || positionals.length > 2) {
     console.error(`${USAGE}\nerror: hacen falta <agente> y "<tarea>"`);

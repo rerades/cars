@@ -53,6 +53,19 @@ sin git; lo usan las pruebas.
 
 Códigos de salida: `0` correcto · `1` la ejecución falló · `3` bloqueado por una guarda.
 
+## Retro semanal (ADR-0022)
+
+```bash
+node factory/run.ts --retro --dry-run   # cuenta las señales y muestra la tarea que lanzaría
+node factory/run.ts --retro             # lanza el agente retro si hay 3 señales o más
+```
+
+Código sin modelo (`factory/retro.ts`): cuenta, desde el último retro que salió bien, las ejecuciones
+fallidas de `ops/runs/`, las etiquetas `review:changes` de las PR `agent/*` (con `gh`) y los
+defectos escapados de `ops/trust/`. Con menos de 3 solo imprime el recuento y no deja fila. No corre
+con `factory/STOP` ni si ya hay una fila del retro de esa semana. El agente deja su propuesta en
+`docs/bitacora/retro/AAAA-MM-DD.md`, y `run.ts --merge` nunca fusiona sus PR: aplica los cambios una persona.
+
 ## Langfuse (opcional)
 
 Si existe `.secrets/langfuse.env`, cada ejecución se manda también a Langfuse Cloud: la traza
@@ -184,3 +197,5 @@ pnpm run typecheck   # tsc --noEmit
 `~/Library/LaunchAgents/`, ajustar rutas y cargar con `launchctl load`.
 `com.darkfactory.reviewer.plist.example` se instala igual y lanza el Revisor a las 06:30, fuera
 de la cola: revisa las PR que abrió la noche.
+`com.darkfactory.retro.plist.example` lanza `run.ts --retro` la noche del domingo al lunes (02:45,
+03:45 y 04:45: un intento que choca con una ejecución en curso no cuenta).

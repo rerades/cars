@@ -8,6 +8,14 @@
   los prompts de los agentes con dataset en `factory/datasets/` (Reviewer y Researcher), y por cada
   `review:changes` del Researcher un `case.yaml` borrador sin `expected`.
 - **Fecha:** 2026-10-29
+- **Implementación:** el agente retro, el 2026-11-21 (`factory/retro.ts`, `run.ts --retro`,
+  `.claude/agents/retro.md`, el eval `retroOnly` y la regla de `merge.ts`). Tres ajustes: «menos de
+  7 días» se mide con 12 h de margen, porque launchd lo lanza cada semana a la misma hora y la fila
+  anterior empezó unos segundos después; el LaunchAgent lo intenta tres veces el lunes (02:45, 03:45
+  y 04:45) por si hay una ejecución en curso; y `global.max_runs_per_day` pasa de 15 a 16 para que
+  el retro no quite su turno al Revisor de las 06:30. Los 6 USD-eq al mes salen de los 3 sin asignar
+  y de 3 del Arquitecto. La escalera de confianza sigue pendiente, así que aún no hay defectos
+  escapados que contar.
 
 ## Contexto
 PRD-007 tiene resueltas OPEN-1 y OPEN-4 desde el 2026-10-28. Quedan para el Arquitecto la forma del

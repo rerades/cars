@@ -383,9 +383,20 @@ const retouchOnly: Check = (ctx) =>
     return out;
   });
 
+/** ADR-0022, "Qué entrega": one docs/bitacora/retro/YYYY-MM-DD.md, besides its log entry. */
+const retroOnly: Check = (ctx) => {
+  const own = ctx.files.filter((f) => /^docs\/bitacora\/retro\/\d{4}-\d{2}-\d{2}\.md$/.test(f));
+  const other = ctx.files.filter((f) => !own.includes(f) && !/^docs\/bitacora\/\d{4}-\d{2}\/[^/]+\.md$/.test(f));
+  return [
+    ...(own.length === 1 ? [] : [`the retro leaves exactly one docs/bitacora/retro/YYYY-MM-DD.md (found ${own.length})`]),
+    ...other.map((f) => `${f}: the retro writes only its retro file and its log entry`),
+  ];
+};
+
 const CHECKS: Record<string, Check[]> = {
   researcher: [registry, rawData, rawShape],
   retoucher: [rawData, retouchOnly],
+  retro: [retroOnly],
 };
 
 export function runEvals(agent: string, dir: string, files: string[], paths: string[], today: string): EvalResult {
