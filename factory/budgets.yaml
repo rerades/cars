@@ -64,7 +64,7 @@ agents:
   architect:
     model: claude-opus-5-5   # kept after the #80 trial (2026-10-06): every run finished, ~0.89 USD per finished task
     max_runs_per_day: 2
-    max_usd_per_period: 21   # 24 -> 21 on 2026-11-21: 3 to the new retro (ADR-0022), 2.55 spent this month; 18 -> 24 on 2026-10-29: 17.81 spent, two nights left at up to 2 runs x 1.50, from the unassigned 9; 15 -> 18 on 2026-10-28: two queued tasks (segment data model, trust ladder ADR) were waiting for November, from the unassigned 15; 6 -> 15 on 2026-10-08 (Opus); earlier: 3 -> 8 on 2026-09-27: room for ~10 Opus runs to compare against Sonnet (#80); 8 -> 6 on 2026-09-29, 2 to researcher
+    max_usd_per_period: 17   # 24 -> 17 on 2026-11-21: 7 to the new retro (ADR-0022), 2.55 spent this month; 18 -> 24 on 2026-10-29: 17.81 spent, two nights left at up to 2 runs x 1.50, from the unassigned 9; 15 -> 18 on 2026-10-28: two queued tasks (segment data model, trust ladder ADR) were waiting for November, from the unassigned 15; 6 -> 15 on 2026-10-08 (Opus); earlier: 3 -> 8 on 2026-09-27: room for ~10 Opus runs to compare against Sonnet (#80); 8 -> 6 on 2026-09-29, 2 to researcher
     max_usd_per_run: 2.50   # 1.50 -> 2.50 on 2026-11-15: the price-source study reads several brand sites; 0.75 -> 1.50 on 2026-09-27: Opus is 2x per token
     max_turns_per_run: 40   # 20 -> 40 on 2026-11-15, same study; past ADR runs took 15-22 turns
     api_key_env: ARCHITECT_API_KEY
@@ -128,10 +128,11 @@ agents:
     network: false
 
   retro:
-    # ADR-0022 and PRD-007 RF-10 (OPEN-4: Sonnet, these caps). Launched by run.ts --retro, never from the queue.
+    # ADR-0022 and PRD-007 RF-10 (OPEN-4, M2: Opus and these caps). Launched by run.ts --retro, never from the queue.
+    model: claude-opus-5-5   # 2026-11-21, before its first run: its judgement decides what changes in the other prompts
     max_runs_per_day: 1
-    max_usd_per_period: 6   # 3 unassigned + 3 from architect on 2026-11-21
-    max_usd_per_run: 1.00
+    max_usd_per_period: 10   # 3 unassigned + 7 from architect on 2026-11-21
+    max_usd_per_run: 1.50   # PRD-007 OPEN-4: an Opus pass is ~1.2-1.5
     max_turns_per_run: 30
     api_key_env: RETRO_API_KEY
     write_paths: [docs/bitacora/]   # its docs/bitacora/retro/YYYY-MM-DD.md and its log entry

@@ -13,8 +13,8 @@
   7 días» se mide con 12 h de margen, porque launchd lo lanza cada semana a la misma hora y la fila
   anterior empezó unos segundos después; el LaunchAgent lo intenta tres veces el lunes (02:45, 03:45
   y 04:45) por si hay una ejecución en curso; y `global.max_runs_per_day` pasa de 15 a 16 para que
-  el retro no quite su turno al Revisor de las 06:30. Los 6 USD-eq al mes salen de los 3 sin asignar
-  y de 3 del Arquitecto. La escalera de confianza sigue pendiente, así que aún no hay defectos
+  el retro no quite su turno al Revisor de las 06:30. Usa Opus (PRD-007 RF-10, cambiado el mismo día), con
+  10 USD-eq al mes: los 3 sin asignar y 7 del Arquitecto. La escalera de confianza sigue pendiente, así que aún no hay defectos
   escapados que contar.
 
 ## Contexto
