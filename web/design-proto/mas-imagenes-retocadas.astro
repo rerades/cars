@@ -1,0 +1,85 @@
+---
+// «Más imágenes» with retouched images (docs/design/ficha-modelo.md, «Imagen retocada en Más imágenes»; RF-12, CA-12,
+// CA-23, ADR-0025). No published model has a retouched image beyond images[0] yet, so this page puts real image
+// entries of three published models side by side: two cut-outs (ë-C4, low; EV9, tall SUV) and one normal
+// photo (R5), in each of the three bands «Más imágenes» can get (bands.ts).
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import "../src/styles/global.css";
+import CutoutPhoto from "../src/components/CutoutPhoto.astro";
+import { imageRelPath, loadModels, type ModelImage } from "../src/lib/data.ts";
+import { t } from "../src/lib/i18n.ts";
+
+const models = loadModels().models;
+const pick = (file: string) => {
+  const m = models.find((x) => x.file === file)!;
+  return { brand: m.brand, model: m.model, image: m.images[0]! as ModelImage };
+};
+const entries = [
+  pick("citroen/e-c4.yaml"),
+  pick("kia/ev9.yaml"),
+  pick("renault/r5-e-tech-electrico.yaml"),
+];
+
+const files = import.meta.glob<{ default: ImageMetadata }>("@images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}", { eager: true });
+const srcOf = (img: ModelImage) => {
+  const rel = imageRelPath(img.file);
+  return rel ? Object.entries(files).find(([key]) => key.endsWith(`/${rel}`))?.[1].default : undefined;
+};
+const isCutout = (img: ModelImage) => img.edits.length > 0;
+const captionOf = (img: ModelImage) =>
+  img.attribution
+    ? t(isCutout(img) ? "ficha.imagen.atribucionModificada" : "ficha.imagen.atribucion", { attribution: img.attribution })
+    : null;
+const items = entries.map((e, i) => ({
+  ...e,
+  src: srcOf(e.image),
+  alt: t("ficha.imagen.alt", { marca: e.brand, modelo: e.model, i: i + 2, n: entries.length + 1 }),
+  caption: captionOf(e.image),
+}));
+const bands = ["band-white", "band-dark", "band-light"];
+const sizes = "(min-width: 1440px) 475px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proto · Más imágenes con imagen retocada</title>
+    <style is:global>
+      body { margin: 0; }
+      .proto-band { padding: 2.5rem 1.25rem; }
+      @media (min-width: 768px) { .proto-band { padding: 3rem 2rem; } }
+      /* The change: the box of a retouched image is ink-950 in every band, padded, with the cut-out floor. */
+      .more-cutout { background: var(--color-ink-950); padding: 0.75rem 0.75rem 0.25rem; }
+      .more-cutout .cutout-photo { height: 100%; }
+      .proto-label { font-size: 0.75rem; opacity: 0.7; margin: 0 0 0.5rem; }
+    </style>
+  </head>
+  <body>
+    {bands.map((band) => (
+      <section aria-labelledby={`mas-imagenes-${band}`} class:list={["proto-band", band]}>
+        <p class="proto-label">{band}</p>
+        <h2 id={`mas-imagenes-${band}`} class="text-section text-ink-900">{t("ficha.imagenes.titulo")}</h2>
+        <ul class="mt-4 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          {items.map((item) => item.src && (
+            <li>
+              <figure class="m-0 flex flex-col gap-2">
+                {isCutout(item.image) ? (
+                  <div class="more-cutout aspect-video overflow-hidden rounded-card">
+                    <CutoutPhoto src={item.src} alt={item.alt} widths={[320, 640, 960]} sizes={sizes} />
+                  </div>
+                ) : (
+                  <div class="aspect-video overflow-hidden rounded-card bg-surface-muted">
+                    <Image src={item.src} alt={item.alt} width={640} height={360} widths={[320, 640, 960]} sizes={sizes} loading="lazy" class="h-full w-full object-cover" />
+                  </div>
+                )}
+                {item.caption && <figcaption class="text-small text-ink-600 [overflow-wrap:anywhere]">{item.caption}</figcaption>}
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </body>
+</html>
