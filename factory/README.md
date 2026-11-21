@@ -138,7 +138,25 @@ pasaría del tope del experimento o del mes, y deja el experimento marcado como 
 partida) y `review.md`. Las salidas de `fetch-*.ts` de la traza van a `ops/datasets/researcher/`, fuera
 de git porque son texto de terceros. Los comandos compuestos (`| grep`, `&&`) no se pueden reproducir y
 quedan en `skipped_calls`. Una persona fija `rules` y `expected` y pone `confirmed: true`; hasta
-entonces el retro no propone cambios al Researcher. El modo `researcher` de `eval-run.ts` está pendiente.
+entonces el retro no propone cambios al Researcher.
+
+`expected` va por fichero y por ruta de valor con fuente, con el nombre que le da `sourcedByPath` de
+`verify-data.ts` (las versiones, por su `name`). Solo los campos de las reglas del caso:
+
+```yaml
+expected:
+  data/raw/cupra/born.yaml:
+    "versions[Born VZ].power_kw": {date: kept}            # no se leyó: fecha y valor se quedan
+    "versions[Born+ (190 CV)].price": {value: 36795.59, price_kind: financed, date: fresh}
+```
+
+`node factory/eval-run.ts researcher --model sonnet [--cases pr-0806]` ejecuta los casos confirmados en un
+worktree en su `baseRefOid`, con el prompt de hoy, sin `WebSearch` ni `WebFetch` y con
+`factory/fetch-replay.ts` respondiendo desde lo congelado: una URL que el original no leyó sigue sin
+poderse leer. Puntúa por código (`schema`, `dates` y `dates_unread`, `price_proof`, `price_found`,
+`price_kind`, `cash_amount`, `price_terms_literal`, `page_name_literal`, `expired_offer`,
+`value_match`) y `--compare` aplica la regla de aprobación de ADR-0026. Mismos topes, lock y horario que
+los del Revisor. Aún sin juez de `open_questions` ni envío a Langfuse.
 
 ## Qué comprueba antes de lanzar
 

@@ -55,7 +55,7 @@ const isSourced = (v: unknown): v is Node => isObj(v) && "value" in v && typeof 
 
 /** Every Sourced of a YAML by a stable path; list entries are keyed by name (versions) or by content. */
 type Anchor = { names: string[]; pageNames: [string, string][] };
-function sourcedByPath(doc: unknown): Map<string, { node: Node; field: string; version?: string; anchor?: Anchor }> {
+export function sourcedByPath(doc: unknown): Map<string, { node: Node; field: string; version?: string; anchor?: Anchor }> {
   const out = new Map<string, { node: Node; field: string; version?: string; anchor?: Anchor }>();
   const versions = (isObj(doc) && Array.isArray(doc.versions) ? doc.versions : []).map((v) => (isObj(v) ? v : {}));
   const anchor: Anchor = {
