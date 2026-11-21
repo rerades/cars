@@ -7,7 +7,7 @@ import { after, describe, test } from "node:test";
 import { proposedLabel, reviewedSha, storyNumber } from "../dataset-case.ts";
 import { caseProblem, type Case } from "../dataset-sync.ts";
 import {
-  budgetBlocker, codeScores, compare, judgeScores, totals, writesOutside, type CaseResult, type EvalsConfig, type Summary,
+  budgetBlocker, codeScores, compare, meanSummary, judgeScores, totals, writesOutside, type CaseResult, type EvalsConfig, type Summary,
 } from "../eval-run.ts";
 import { fakeGh, isForbidden, readLog } from "../fake-gh.ts";
 import { toOtlp } from "../langfuse.ts";
@@ -134,6 +134,19 @@ describe("presupuesto y aprobación", () => {
     assert.equal(compare(base, summary([result({}), result({})])).approved, true);
     assert.match(compare(base, summary([result({}, 0.4), result({}, 0.4)])).reasons.join(), /coste/);
     assert.match(compare(base, summary([result({}), result({})], "2026-12-01T03:00:00+01:00")).reasons.join(), /30 días/);
+  });
+
+  test("la media de 3 ejecuciones: un false_ok en una sola ya tumba la candidata; invented se compara en media", () => {
+    const clean = summary([result({}), result({})]);
+    const oneBad = summary([result({ false_ok: 1, label_match: 0 }), result({})]);
+    const mean = meanSummary([clean, clean, oneBad]);
+    assert.equal(mean.totals.false_ok, 0.3333);
+    assert.match(compare(meanSummary([clean, clean, clean]), mean).reasons.join(), /false_ok/);
+    const inv = (n: number) => summary([result({ invented: n > 0 ? 1 : 0 }), result({ invented: n > 1 ? 1 : 0 })]);
+    // base 0,0,0 invented; candidate 2,0,0 → mean 0.67, within +1
+    assert.equal(compare(meanSummary([inv(0), inv(0), inv(0)]), meanSummary([inv(2), inv(0), inv(0)])).approved, true);
+    assert.equal(meanSummary([clean, summary([result({})], "2026-10-01T03:00:00+02:00")]).started, "2026-10-01T03:00:00+02:00");
+    assert.throws(() => meanSummary([clean, { ...clean, prompt_sha: "otro" }]), /prompt_sha/);
   });
 });
 

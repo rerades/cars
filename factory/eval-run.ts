@@ -3,7 +3,7 @@
  * scores each case and records the experiment (ADR-0016, decisions 3 to 6).
  *
  *   node factory/eval-run.ts reviewer --model <model> [--cases pr-0464,pr-0472] [--dry-run]
- *   node factory/eval-run.ts --compare <baseline.json> <candidate.json>
+ *   node factory/eval-run.ts --compare <b1.json,b2.json,b3.json> <c1.json,c2.json,c3.json>   (reviewer: 3 runs per side)
  *
  * Each case: a detached worktree at the PR's merge base, the orchestrator's own `claude -p`
  * command with `--model` swapped, and a fake `gh` first in PATH that serves the snapshot and
@@ -290,6 +290,24 @@ export function totals(cases: CaseResult[]): Record<string, number> {
   };
 }
 
+/** Runs needed on each side of a reviewer comparison (ADR-0016, amendment of 2026-11-21). */
+export const RUNS_PER_SIDE = 3;
+
+/**
+ * The mean of several runs of one prompt, as one Summary: two runs of the same prompt moved
+ * false_ok 2 → 0 and invented 5 → 7, as much as the effect being measured. The runs must share
+ * prompt, model, dataset, judge and rubric; `started` is the oldest, for the 30-day rule.
+ */
+export function meanSummary(runs: Summary[]): Summary {
+  const [first] = runs;
+  const keys = ["agent", "model", "prompt_sha", "dataset_sha", "judge_model", "rubric_sha"] as const;
+  for (const r of runs) for (const k of keys) if (r[k] !== first[k]) throw new Error(`las ejecuciones de un lado difieren en ${k}: ${first[k]} y ${r[k]}`);
+  const totals: Record<string, number> = {};
+  for (const k of Object.keys(first.totals)) totals[k] = Math.round((runs.reduce((t, r) => t + (r.totals[k] ?? 0), 0) / runs.length) * 1e4) / 1e4;
+  const started = runs.map((r) => r.started).sort((a, b) => Date.parse(a) - Date.parse(b))[0];
+  return { ...first, experiment: runs.map((r) => r.experiment).join("+"), started, complete: runs.every((r) => r.complete), totals };
+}
+
 /** ADR-0016 (4): every rule must hold for a candidate prompt or model to be approved. */
 export function compare(base: Summary, cand: Summary): { approved: boolean; reasons: string[] } {
   const reasons: string[] = [];
@@ -426,10 +444,14 @@ async function main(): Promise<number> {
     options: { model: { type: "string" }, cases: { type: "string" }, "dry-run": { type: "boolean" }, compare: { type: "boolean" } },
   });
   if (values.compare) {
-    const [b, c] = positionals.map((p) => JSON.parse(readFileSync(p, "utf8")) as Summary);
-    if (!b || !c) return usage();
+    // Each side is one file or a comma-separated list of runs of the same prompt.
+    const sides = positionals.map((s) => s.split(",").map((p) => JSON.parse(readFileSync(p, "utf8")) as Summary));
+    if (sides.length !== 2) return usage();
+    let b: Summary, c: Summary;
+    try { [b, c] = sides.map(meanSummary); } catch (e) { return fail((e as Error).message); }
     if (b.agent !== c.agent) return fail(`no se comparan experimentos de agentes distintos (${b.agent}, ${c.agent})`);
     if (b.agent === "researcher") {
+      if (sides.some((s) => s.length > 1)) return fail("el Researcher se compara con una ejecución por lado: sus reglas son por caso (ADR-0026)");
       // ADR-0026, decision 3: the rules of each case come from its case.yaml.
       const r = await import("./eval-researcher.ts");
       const rules = new Map(r.readResearcherCases().map((x) => [x.case_id, x.rules ?? []]));
@@ -440,10 +462,15 @@ async function main(): Promise<number> {
       return approved ? 0 : 1;
     }
     const { approved, reasons } = compare(b, c);
-    console.log(approved ? "se aprueba: cumple todas las reglas de ADR-0016" : "no se aprueba:");
+    for (const [name, runs] of [["línea base", sides[0]], ["candidata", sides[1]]] as const) {
+      if (runs.length < RUNS_PER_SIDE) reasons.push(`la ${name} tiene ${runs.length} ejecuciones; hacen falta ${RUNS_PER_SIDE} (ADR-0016, enmienda del 2026-11-21)`);
+    }
+    const ok = reasons.length === 0;
+    console.log(`medias de ${sides[0].length} y ${sides[1].length} ejecuciones`);
+    console.log(ok ? "se aprueba: cumple todas las reglas de ADR-0016" : "no se aprueba:");
     for (const r of reasons) console.log(`  - ${r}`);
     console.log("Con 20 casos, ganar por un caso es ruido: preséntalo como «no empeora», no como mejora.");
-    return approved ? 0 : 1;
+    return ok ? 0 : 1;
   }
   if (positionals[0] === "researcher" && values.model) {
     const wanted = values.cases?.split(",").map((s) => s.trim());
@@ -562,7 +589,7 @@ async function main(): Promise<number> {
 
 function usage(): number {
   console.error("uso: node factory/eval-run.ts reviewer|researcher --model <modelo> [--cases <ids>] [--dry-run]\n" +
-    "     node factory/eval-run.ts --compare <línea-base.json> <candidata.json>");
+    "     node factory/eval-run.ts --compare <base1.json,base2.json,base3.json> <cand1.json,cand2.json,cand3.json>");
   return 2;
 }
 
