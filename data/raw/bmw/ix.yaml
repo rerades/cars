@@ -23,7 +23,8 @@ versions:
     power_kw: {value: 485, note: "IDAE id 604884", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
     price: null
 images:
-  - file: "data/images/bmw/ix/frontal.jpg"
+  - file: "data/images/bmw/ix/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/BMW_I20_iX_xDrive40_Black_Sapphire_Metallic_%284%29.jpg/1280px-BMW_I20_iX_xDrive40_Black_Sapphire_Metallic_%284%29.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:BMW_I20_iX_xDrive40_Black_Sapphire_Metallic_(4).jpg"
     source_id: wikimedia-commons

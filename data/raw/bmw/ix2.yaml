@@ -18,7 +18,8 @@ versions:
     power_kw: {value: 230, note: "IDAE id 613533 (03/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
     price: null
 images:
-  - file: "data/images/bmw/ix2/frontal.jpg"
+  - file: "data/images/bmw/ix2/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/BMW_U10E_iX2_eDrive20_M_Sport_M_Portimao_Blue_Metallic_%284%29.jpg/1280px-BMW_U10E_iX2_eDrive20_M_Sport_M_Portimao_Blue_Metallic_%284%29.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:BMW_U10E_iX2_eDrive20_M_Sport_M_Portimao_Blue_Metallic_(4).jpg"
     source_id: wikimedia-commons
