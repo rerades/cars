@@ -23,7 +23,8 @@ versions:
     power_kw: {value: 485, note: "IDAE id 613529 (07/2026)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
     price: null
 images:
-  - file: "data/images/bmw/i7/frontal.jpg"
+  - file: "data/images/bmw/i7/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/BMW_G70_i7_xDrive60_M_Sport_Individual_Two-tone_Velvet_Orchid_Edition_%283%29.jpg/1280px-BMW_G70_i7_xDrive60_M_Sport_Individual_Two-tone_Velvet_Orchid_Edition_%283%29.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:BMW_G70_i7_xDrive60_M_Sport_Individual_Two-tone_Velvet_Orchid_Edition_(3).jpg"
     source_id: wikimedia-commons
