@@ -33,13 +33,17 @@ const messages: Record<string, string> = {
   dealTitle: t("comparador.condiciones.entrada", { marca: "{marca}", modelo: "{modelo}", nombre: "{nombre}" }),
 };
 for (const s of SEGMENTS) messages[`segmento.${s}`] = t(`segmento.${s}` as MessageKey);
-const field = "min-h-touch w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900";
+// Same shape as the pills of the catalog bar (rankings.md, "Filtros"): pill radius, touch height, `line` border.
+const field =
+  "min-h-touch min-w-0 flex-1 rounded-pill border border-line bg-surface px-4 text-body font-normal text-ink-900 md:min-w-56 md:flex-none";
+// Label fixed at 5.5 rem on mobile, so the two selects line up; on md+ it is as wide as its text.
+const label = "flex items-center gap-3 text-small font-semibold text-ink-900";
+const labelText = "min-w-[5.5rem] md:min-w-0";
 ---
 
 <div
   role="group"
   aria-labelledby="ranking-filtros-titulo"
-  class="mt-6"
   data-ranking-filters
   data-ranking={ranking.id}
   data-url={dataUrl}
@@ -47,14 +51,14 @@ const field = "min-h-touch w-full rounded-card border border-line bg-surface px-
 >
   <h2 id="ranking-filtros-titulo" class="sr-only">{t("ranking.filtros.titulo")}</h2>
   <noscript>
-    <p class="text-small text-ink-600">{t("ranking.filtros.sinJs")}</p>
+    <p class="py-4 text-small text-ink-900">{t("ranking.filtros.sinJs")}</p>
   </noscript>
   <template data-filters-template>
-    <div class="flex flex-col gap-4 md:flex-row md:items-end">
+    <div class="flex flex-col gap-3 py-4 md:flex-row md:flex-wrap md:gap-x-6">
       {
         segments.length > 0 && (
-          <label class="flex flex-col gap-1 text-body md:w-64">
-            {t("filtros.segmento")}
+          <label class={label}>
+            <span class={labelText}>{t("filtros.segmento")}</span>
             <select name="segmento" class={field} data-filter-segment>
               <option value="">{t("ranking.filtros.todos")}</option>
               {segments.map((o) => <option value={o.value}>{o.label}</option>)}
@@ -62,8 +66,8 @@ const field = "min-h-touch w-full rounded-card border border-line bg-surface px-
           </label>
         )
       }
-      <label class="flex flex-col gap-1 text-body md:w-64">
-        {t("filtros.precio")}
+      <label class={label}>
+        <span class={labelText}>{t("filtros.precio")}</span>
         <select name="precio" class={field} data-filter-price>
           <option value="">{t("ranking.filtros.cualquiera")}</option>
           {prices.map((o) => <option value={o.value}>{o.label}</option>)}
@@ -76,7 +80,7 @@ const field = "min-h-touch w-full rounded-card border border-line bg-surface px-
       <p class="text-body text-ink-900">{t("ranking.vacioFiltros.texto")}</p>
       <button
         type="button"
-        class="mt-3 min-h-touch rounded-card bg-brand-600 px-4 text-body text-on-brand hover:bg-brand-800"
+        class="mt-3 min-h-touch rounded-card bg-brand-600 px-4 text-body text-ink-950 hover:bg-brand-800"
         data-filters-clear
       >
         {t("ranking.filtros.quitar")}
