@@ -226,6 +226,15 @@ export function researcherScores(c: ResearcherCase, base: Map<string, any>, head
   return { scores: s, notes };
 }
 
+/** The replayed calls without their stdout; fetch-page keeps the URL it landed on. */
+export function callSummary(calls: ReplayEntry[]): NonNullable<CaseResult["calls"]> {
+  return calls.map((k) => {
+    let final_url: string | undefined;
+    if (k.tool === "fetch-page" && k.code === 0) try { final_url = JSON.parse(k.stdout).final_url; } catch { /* not JSON */ }
+    return { tool: k.tool, args: k.args, code: k.code, ...(final_url && final_url !== k.args[0] ? { final_url } : {}) };
+  });
+}
+
 export function researcherTotals(cases: CaseResult[]): Record<string, number> {
   const avg = (k: string) => {
     const xs = cases.map((r) => (r.scores as unknown as ResearcherScores)[k]).filter((x): x is number => typeof x === "number");
@@ -409,6 +418,7 @@ export async function main(model: string, wanted: string[] | undefined, dryRun: 
         agent_usd: Math.round(Number(result.total_cost_usd || 0) * 1e4) / 1e4, judge_usd: 0,
         turns: Math.trunc(Number(result.num_turns || 0)), units: 0, notes,
         comment: String(result.result ?? "").slice(-2000),
+        calls: callSummary(run.calls),
       });
       exp.totals = researcherTotals(exp.cases);
       writeFileSync(out, JSON.stringify(exp, null, 2) + "\n"); // after every case: a crash keeps what was paid for
