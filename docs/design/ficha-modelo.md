@@ -442,6 +442,35 @@ no para cada versión.» Así queda rotulado «del modelo» y separado de las ve
   existe, como en la principal.
 - Las imágenes no son enlaces ni paradas de foco.
 
+### Imagen retocada en «Más imágenes» (RF-12, CA-12, CA-23, ADR-0025) — 2026-11-20
+
+Una entrada de `images` con `edits` es el coche recortado sobre transparente; con `object-fit: cover` en el hueco
+16:9 sale cortado. Las reglas de encaje, fondo, suelo y tratamiento son las de [`tarjeta-modelo.md`](tarjeta-modelo.md),
+«Imagen retocada» (componente `CutoutPhoto`); aquí solo lo que cambia respecto a una foto normal de esta sección.
+Prototipo `web/design-proto/mas-imagenes-retocadas.astro` (ë-C4 y EV9 recortados, R5 con foto normal, en las tres
+franjas que puede tocarle a la sección), capturas [`refs/mas-imagenes-retocadas-390.png`](refs/mas-imagenes-retocadas-390.png)
+y [`refs/mas-imagenes-retocadas-1280.png`](refs/mas-imagenes-retocadas-1280.png).
+
+- **Hueco**: el mismo 16:9, con `rounded-card` y en la misma celda de la rejilla: una retocada no cambia el tamaño
+  ni la alineación de la fila.
+- **Fondo**: `ink-950` **sea cual sea la franja** (blanca, clara u oscura, `bands.ts`), no `surface-muted`. En la
+  franja oscura el hueco se funde con ella, como en la tarjeta; en las claras se ve como un recuadro oscuro, que es
+  el fondo con el que se ha pensado el tratamiento del coche y el suelo. Encima, la elipse de `--color-cutout-floor`.
+- **Encaje**: `object-fit: contain`, `object-position: 50% 100%`, con un margen interior de 0,75 rem arriba y a los
+  lados y 0,25 rem abajo, para que el techo o el retrovisor no toquen el borde (EV9, el más alto del prototipo). El
+  coche se ve entero.
+- **Tratamiento**: el filtro común (`saturate(0.72) contrast(1.06) brightness(0.86)`), sin velo ni tono.
+- **Crédito (CA-23)**: `figcaption` «Foto: {attribution} (modificada)» (`ficha.imagen.atribucionModificada`), con el
+  estilo de siempre (`text-small`, `ink-600` de la franja: 7,53 sobre `surface`, 6,61 sobre `surface-muted`, 10,61 sobre
+  la oscura, ver `tokens.md`). «(modificada)» no se separa de la atribución; si parte línea, baja con ella (captura a
+  390 px). Sin `attribution`, no hay pie.
+- **`alt`**: el mismo `ficha.imagen.alt` con su número («Citroën ë-C4, imagen 2 de 4»); no dice «modificada».
+- **Carga**: `loading="lazy"`, ancho y alto declarados y los mismos `widths` y `sizes` que la foto normal, en WebP
+  con alfa por `astro:assets`, nunca el PNG (RNF-2).
+- **Dato ausente**: sin `edits` → foto normal con `cover` (arriba). Con `edits` y sin `attribution` → coche recortado sin pie.
+
+Sin copy nuevo: `ficha.imagen.atribucionModificada` ya existe.
+
 ## Otros modelos del segmento (RF-15, CA-17)
 
 - Solo si el modelo tiene `segment` **y** hay al menos un modelo publicado del mismo segmento y de otra marca.
