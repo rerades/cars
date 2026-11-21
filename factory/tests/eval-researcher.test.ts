@@ -7,7 +7,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
 import type { FetchCall } from "../dataset-capture.ts";
-import { offlineConfig, researcherCaseProblem, researcherCompare, researcherScores, type ResearcherCase } from "../eval-researcher.ts";
+import { callSummary, offlineConfig, researcherCaseProblem, researcherCompare, researcherScores, type ResearcherCase } from "../eval-researcher.ts";
 import type { CaseResult, Summary } from "../eval-run.ts";
 import { replay, replayGuard, type ReplayEntry } from "../fetch-replay.ts";
 import { REPO } from "../orchestrator.ts";
@@ -150,4 +150,17 @@ test("en un caso el Researcher no tiene WebSearch ni WebFetch (decisión 2.3)", 
   const cfg = offlineConfig({ agents: { researcher: { allowed_tools: ["WebSearch", "WebFetch", "Bash(node factory/fetch-page.ts:*)"] } } });
   assert.deepEqual(cfg.agents!.researcher!.allowed_tools, ["Bash(node factory/fetch-page.ts:*)"]);
   assert.deepEqual(cfg.agents!.researcher!.denied_tools, ["WebSearch", "WebFetch"]);
+});
+
+test("cada caso guarda sus llamadas sin la salida; fetch-page anota a dónde le redirigió", () => {
+  const calls = [
+    { tool: "fetch-page", args: ["https://x.es/a/"], code: 0, stdout: JSON.stringify({ final_url: "https://x.es/b/", lines: ["149.900 €"] }), stderr: "" },
+    { tool: "fetch-page", args: ["https://x.es/c/"], code: 0, stdout: JSON.stringify({ final_url: "https://x.es/c/" }), stderr: "" },
+    { tool: "fetch-idae", args: ["--model", "Y"], code: 1, stdout: "", stderr: "no" },
+  ] as ReplayEntry[];
+  assert.deepEqual(callSummary(calls), [
+    { tool: "fetch-page", args: ["https://x.es/a/"], code: 0, final_url: "https://x.es/b/" },
+    { tool: "fetch-page", args: ["https://x.es/c/"], code: 0 },
+    { tool: "fetch-idae", args: ["--model", "Y"], code: 1 },
+  ]);
 });

@@ -225,6 +225,8 @@ export interface CaseResult {
   /** What the agent posted and why the judge scored it; Langfuse drops both after 30 days. */
   comment?: string;
   judge_why?: Record<string, string>;
+  /** Researcher only: the replayed reads, without their output, so a low score can be traced. */
+  calls?: { tool: string; args: string[]; code: number; final_url?: string }[];
 }
 
 export function readSummaries(dir = EVALS_DIR): Summary[] {
