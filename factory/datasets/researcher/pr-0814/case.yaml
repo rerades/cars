@@ -7,7 +7,23 @@ task: "Refresco mensual de data/raw/bmw/ (ADR-0010, punto 6): relee en sus fuent
 synthetic: false
 confirmed: false
 rules: [dates] # PROPOSED from review.md; a person confirms
-expected: null
+# DRAFT (2026-11-21), from review.md and the frozen reads; a person checks it.
+# Every fetch-page.ts read of BMW failed (robots.txt 503, timeout): nothing could be refreshed, so every
+# value keeps its date, the price included (finding 1). last_verified of bmw-es and bmw-press is scored by
+# the dates rule on its own (finding 2). WebFetch is not available in the case.
+expected:
+  data/raw/bmw/ix3.yaml:
+    launch: {date: kept}
+    specs.wltp_max_km: {date: kept}
+    specs.dc_max_kw: {date: kept}
+    "versions[iX3 50 xDrive].wltp_km": {date: kept}
+    "versions[iX3 50 xDrive].power_kw": {date: kept}
+    "versions[iX3 50 xDrive].dc_max_kw": {date: kept}
+    "versions[iX3 50 xDrive].price": {value: 69900, date: kept}
+    "versions[iX3 40].battery_kwh": {date: kept}
+    "versions[iX3 40].wltp_km": {date: kept}
+    "versions[iX3 40].power_kw": {date: kept}
+    "versions[iX3 40].dc_max_kw": {date: kept}
 files:
   - data/raw/bmw/ix3.yaml
   - data/sources/bmw-es.yaml
