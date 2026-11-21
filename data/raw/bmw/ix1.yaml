@@ -26,6 +26,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Wikisympathisant, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:2023-04_BMW_iX1_U11_front_view.jpg)"
 open_questions:
+  - "Imagen (2026-11-21): rechazada, causa `recorte`: foto oscura de frente en una sala; la máscara deja pegada la sombra negra del suelo bajo el coche y el borde izquierdo y las ruedas salen dentados. Hace falta un tres cuartos delantero bien iluminado."
   - "Precio: bmw.es y press.bmwgroup.com no se pueden leer (fetch failed / HTTP 403); sin PVP T1, price null en todas las versiones."
   - "Versiones y estado: salen del IDAE (T2), que no dice qué se vende hoy, y de una lista T3; confirmar en bmw.es qué versiones se venden y desde cuándo."
   - "launch: sin fecha de inicio de venta en España en ninguna fuente leída."

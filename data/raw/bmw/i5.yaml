@@ -31,6 +31,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Tokumeigakarinoaoshima, CC BY-SA 4.0, vía Wikimedia Commons (https://commons.wikimedia.org/wiki/File:BMW_i5_eDrive40_M_Sport_(G60)_rear.jpg)"
 open_questions:
+  - "Imagen (2026-11-21): rechazada, causa `angulo`: la foto es trasera (tres cuartos trasero en un centro comercial); se necesita un tres cuartos delantero o un lateral del i5 (G60)."
   - "Precio: bmw.es y press.bmwgroup.com no se pueden leer (fetch failed / HTTP 403); sin PVP T1, price null en todas las versiones."
   - "Versiones y estado: salen del IDAE (T2), que no dice qué se vende hoy, y de una lista T3. El IDAE separa Berlina y Touring en filas antiguas pero no en las de 2024-2025 (códigos HG/HH); no se han separado carrocerías. Confirmar en bmw.es."
   - "launch: sin fecha de inicio de venta en España en ninguna fuente leída."

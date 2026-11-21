@@ -28,7 +28,8 @@ versions:
     power_kw: {value: 442, note: "IDAE id 606398", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
     price: null
 images:
-  - file: "data/images/bmw/i4/frontal.jpg"
+  - file: "data/images/bmw/i4/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/BMW_G26E_i4_eDrive40_M_Sport_Tanzanite_Blue_II_Metallic_%281%29.jpg/1280px-BMW_G26E_i4_eDrive40_M_Sport_Tanzanite_Blue_II_Metallic_%281%29.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:BMW_G26E_i4_eDrive40_M_Sport_Tanzanite_Blue_II_Metallic_(1).jpg"
     source_id: wikimedia-commons
