@@ -29,6 +29,11 @@ evals:
   judge_model: claude-sonnet-5-5   # changing it (or the rubric) means re-running the baseline
   estimate_usd_per_case: {sonnet: 0.30, opus: 0.60, haiku: 0.05}   # until ops/evals/ has real numbers
 
+trust:
+  # ADR-0022: areas with a trust ladder. factory/, .claude/, .github/ and docs/architecture/adr/ are
+  # refused by the code (CA-12). Events only for now: without the gate of ADR-0019 a rung merges nothing.
+  areas: ["web/"]
+
 agents:
   # suma asignada: 200 USD de los 200 del tope global (0 sin asignar): ningún agente puede agotarlo solo
   researcher:
