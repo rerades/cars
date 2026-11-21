@@ -37,6 +37,20 @@ const BANNED_BASH: [RegExp, string][] = [
   [/\bgh\s+pr\s+(?:merge|review|close|ready)\b/, "aprobar, cerrar o fusionar una PR no es de un agente"],
 ];
 
+// An agent reaches the network only through factory/fetch-*.ts, which check the source registry
+// and robots.txt (ADR-0001). A `Bash(x:*)` rule matches the start of the line, so
+// `node factory/fetch-idae.ts X; for u in …; do curl` passed it (PR #824), and curl alone ran too.
+// Matched at command position (start, after a separator or a shell keyword) in the command with its
+// quoted text removed: a bitácora entry or a PR comment that mentions curl runs nothing.
+const NETWORK = /(?:^|[;&|(\n]|\bdo\b|\bthen\b|\belse\b)\s*(?:\S*\/)?(?:curl|wget|nc|ncat|socat|telnet|ssh|scp|sftp|ftp|rsync)\b/;
+
+/** The command without its quoted text, except double quotes that run something (`"$(…)"`, backticks). */
+function unquoted(command: string): string {
+  return command
+    .replace(/'[^']*'/g, "''")
+    .replace(/"(?:[^"\\$`]|\\.)*"/g, '""');
+}
+
 function deny(reason: string): never {
   process.stderr.write(`[guard_paths] bloqueado: ${reason}\n`);
   process.exit(2);
@@ -77,6 +91,9 @@ function main(agent: string): void {
   } else if (tool === "Bash") {
     const command: string = input.command ?? "";
     for (const [pattern, reason] of BANNED_BASH) if (pattern.test(command)) deny(reason);
+    if (NETWORK.test(unquoted(command))) {
+      deny("la red solo con factory/fetch-page.ts, fetch-idae.ts o fetch-image.ts (ADR-0001)");
+    }
   }
 }
 
