@@ -30,15 +30,15 @@ if (errors.length > 0) {
       </div>
     </header>
     <main>
-      <div class="mx-auto max-w-page px-4 pb-8 md:px-6 lg:px-8">
-        {
-          models.length > 0 ? (
-            <ExploreStrip groups={exploreGroups(models, "")} showAll={true} />
-          ) : (
+      {
+        models.length > 0 ? (
+          <ExploreStrip groups={exploreGroups(models, "")} showAll={true} />
+        ) : (
+          <div class="mx-auto max-w-page px-4 pb-8 md:px-6 lg:px-8">
             <p class="mt-3 text-body text-ink-900" data-empty-catalog>{t("vacio.catalogo.texto")}</p>
-          )
-        }
-      </div>
+          </div>
+        )
+      }
     </main>
   </body>
 </html>

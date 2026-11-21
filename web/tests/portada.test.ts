@@ -121,7 +121,7 @@ describe("home page with models", () => {
 
   test("CA-3: same strip as /coches plus «Todos los coches» to /coches, no aria-current, only existing pages", () => {
     const nav = navOf(home);
-    const withoutAll = squash(nav.replace(/<p\b[^>]*>\s*<a[^>]*href="\/coches\/"[\s\S]*?<\/p>/, ""));
+    const withoutAll = squash(nav.replace(/<div\b[^>]*>\s*<a[^>]*href="\/coches\/"[\s\S]*?<\/div>/, ""));
     // The home page does not change with the rankings entry (PRD-005, decision 8): /coches has one more group.
     const cochesNav = navOf(coches).replace(/<div\b(?:(?!<div\b)[\s\S])*?<h3[^>]*>Rankings<\/h3>[\s\S]*?<\/ul>\s*<\/div>/, "");
     assert.equal(withoutAll, squash(cochesNav));
