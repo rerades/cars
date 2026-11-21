@@ -1,0 +1,42 @@
+case_id: pr-0824
+pr: 824
+run_id: 20261031-040007-3f7a9e
+baseRefOid: a65721aeec48607929c4a3302a983a6d0fa6e8ac
+date: 2026-10-31
+task: "Refresco mensual de data/raw/tesla/ (ADR-0010, punto 6): relee en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No toques needs_review. Bitácora."
+synthetic: false
+confirmed: false
+rules: [dates] # PROPOSED from review.md; a person confirms
+expected: null
+files:
+  - data/raw/tesla/model-3.yaml
+  - data/raw/tesla/model-y.yaml
+  - data/sources/diariomotor-es.yaml
+  - data/sources/forococheselectricos-es.yaml
+  - data/sources/hibridosyelectricos-es.yaml
+  - data/sources/idae-es.yaml
+  - data/sources/motorpasion-es.yaml
+  - data/sources/wikimedia-commons.yaml
+fetch_partial: false
+fetch:
+  - file: 01-fetch-idae.json
+    tool: fetch-idae
+    args:
+      - TESLA
+      - --help
+    exit: 1
+    sha256: ed2c2f3304959ee834b37a63c6c56dbc319957a959cc2b912bd439acfbbf1d8a
+skipped_calls:
+  - grep -n -i -B2 -A12 "refresco\|punto 6\|^## .*caduc\|rota" docs/architecture/adr/0010-pipeline-de-ingesta.md | head -150; node factory/fetch-idae.ts TESLA | head -c 6000
+  - node factory/fetch-idae.ts TESLA | grep -A8 '"Model Y'| grep -E 'id"|name|power|wltp|battery'; for u in https://www.tesla.com/es_es/model3 ; do curl -s -o /dev/null -w "%{http_code}\n" -A "Mozilla/5.0" $u; done
+  - node factory/fetch-page.ts "https://www.hibridosyelectricos.com/coches/fabricar-7000000-coches-electricos-tesla-lanza-model-3-mas-barato-su-historia-por-35000-euros_83856_102.html" "febrero" "berlina" | head -c 2500
+  - node factory/fetch-page.ts "https://www.motorpasion.com/compra-coches/tesla-model-3-2024-precio-espana" "1 de septiembre" | head -c 1500
+  - node factory/fetch-page.ts "https://www.hibridosyelectricos.com/coches/tesla-model-mas-barato-historia-llega-espana-con-534-km-autonomia-aunque-con-algunos-peros_82812_102.html" "octubre" "Standard" | head -c 2000
+  - node factory/fetch-page.ts "https://www.hibridosyelectricos.com/coches/precio-tesla-model-launch-edition-2025-espana_78062_102.html" "marzo" "Launch" | head -c 2000
+  - node factory/fetch-page.ts "https://www.diariomotor.com/noticia/prueba-tesla-model-y-2025-video/" "Tesla Model Y" | head -c 800
+  - node factory/fetch-page.ts "https://www.tesla.com/es_es/model3" "Precio" "PVP" | head -c 800
+  - node factory/fetch-page.ts "https://www.motorpasion.com/compra-coches/tesla-model-3-2024-precio-espana" "septiembre" "configurador" | head -c 1800
+  - node factory/fetch-page.ts "https://forococheselectricos.com/noticias/tesla-model-3-novedades-configurador-espana-autonomia-precios-20261009-42365.html" "750" "660" "718" "Performance" | head -c 3500
+  - "node factory/fetch-idae.ts TESLA | grep -A8 '\"name\": \"Model Y'"
+  - node factory/fetch-page.ts "https://commons.wikimedia.org/wiki/File:Tesla_Model_3_%27Highland%27_(2024).jpg" "CC BY-SA" | head -c 600
+  - node factory/fetch-page.ts "https://commons.wikimedia.org/wiki/File:Tesla_Model_Y_Juniper_Stealth_Grey_(2).jpg" "CC BY-SA" | head -c 600

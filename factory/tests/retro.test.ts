@@ -52,12 +52,19 @@ test("cuenta fallos, review:changes y defectos escapados desde el inicio del per
   assert.match(task, /con dataset en factory\/datasets\/: reviewer\./);
 });
 
-test("los agentes con dataset salen de los directorios de factory/datasets/ (ADR-0026, punto 6)", () => {
+test("los agentes con dataset salen de los directorios de factory/datasets/ (ADR-0026, punto 6), desde su primer caso confirmado", () => {
   const dir = mkdtempSync(join(tmpdir(), "datasets-"));
   try {
-    mkdirSync(join(dir, "reviewer"));
-    mkdirSync(join(dir, "researcher"));
+    const kase = (agent: string, id: string, confirmed: boolean) => {
+      mkdirSync(join(dir, agent, id), { recursive: true });
+      writeFileSync(join(dir, agent, id, "case.yaml"), `case_id: ${id}\nconfirmed: ${confirmed}\n`);
+    };
+    kase("reviewer", "pr-0001", false);
+    kase("reviewer", "pr-0002", true);
+    kase("researcher", "pr-0003", false); // captured, not confirmed yet: no proposals for it
     writeFileSync(join(dir, "README.md"), "");
+    assert.deepEqual(datasetAgents(dir), ["reviewer"]);
+    kase("researcher", "pr-0004", true);
     assert.deepEqual(datasetAgents(dir), ["researcher", "reviewer"]);
     assert.deepEqual(datasetAgents(join(dir, "missing")), []);
   } finally {

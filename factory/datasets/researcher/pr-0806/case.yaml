@@ -1,0 +1,125 @@
+case_id: pr-0806
+pr: 806
+run_id: 20261031-010007-af6d26
+baseRefOid: b1545c4a04c17334c73e6ab1564748e7ba05a3e0
+date: 2026-10-31
+task: "Refresco mensual de data/raw/cupra/ (ADR-0010, punto 6): relee en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No toques needs_review. Bitácora."
+synthetic: false
+confirmed: false
+rules: [dates] # PROPOSED from review.md; a person confirms
+# DRAFT (2026-11-21), from review.md and the frozen reads; a person checks it and sets confirmed: true.
+# kept: numbers that no frozen read shows (finding 1 of the review, plus Born+ 140 kW and Raval VZ 52 kWh,
+# which the reads do not show either). Prices: unchanged, read, financed (reviewer: they match the legal text).
+expected:
+  data/raw/cupra/born.yaml:
+    specs.battery_kwh_options: {date: kept}   # the read shows 59, not 79
+    specs.dc_max_kw: {date: kept}
+    "versions[Born+ (190 CV)].power_kw": {date: kept}   # the page says 190 CV; 140 kW is not in the read
+    "versions[Born+ (190 CV)].price": {value: 36795.59, price_kind: financed, date: fresh}
+    "versions[Born VZ].power_kw": {date: kept}   # «326 CV»; 240 is not in the read
+    "versions[Born VZ].dc_max_kw": {date: kept}
+  data/raw/cupra/raval.yaml:
+    specs.dc_max_kw: {date: kept}
+    "versions[Raval VZ].battery_kwh": {date: kept}
+    "versions[Raval Endurance].price": {value: 32072.74, price_kind: financed, date: fresh}
+  data/raw/cupra/tavascan.yaml:
+    "versions[Tavascan (58 kWh, 140 kW)].price": {value: 37151.49, price_kind: financed, date: fresh}
+files:
+  - data/raw/cupra/born.yaml
+  - data/raw/cupra/raval.yaml
+  - data/raw/cupra/tavascan.yaml
+  - data/sources/cupra-es.yaml
+  - data/sources/cupra-press.yaml
+fetch_partial: true
+fetch:
+  - file: 01-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.cupra.com/es-es/coches/born
+      - "36.795"
+      - Born
+      - PVP
+      - Oferta válida
+    exit: 0
+    sha256: 60aeeda941f426b434a1fba06b15e2c32424d20f5c3a652e1e5e74a5881000d8
+  - file: 02-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.cupra.com/es-es/coches/raval
+      - "32.072"
+      - Raval
+      - PVP
+      - Oferta válida
+    exit: 0
+    sha256: 188ea1bdfc26fc15502722f0532799ebc5b35434f09811bb26b6ae54c4d6857e
+  - file: 03-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.cupra.com/es-es/coches/tavascan
+      - "37.151"
+      - Tavascan
+      - PVP
+      - Oferta válida
+    exit: 0
+    sha256: 764852e9d8e4123152b050398747a81f64b15b7bb9111d854fd8eeade3df9907
+  - file: 04-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.cupra.com/es-es/coches/tavascan
+      - €
+      - Desde
+      - kWh
+      - km
+      - CV
+      - kW
+    exit: 0
+    sha256: 327e707b6ad6bc4ec2d2b9a3a13d0ade2e423d0bb9345310cfc1bafa74756062
+  - file: 05-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.cupra.com/es-es/coches/born
+      - kWh
+      - km
+      - CV
+      - kW
+      - min
+      - Desde
+      - Próximamente
+    exit: 0
+    sha256: c3e805cf6c8809c470ed0a928cf0537589cdea9f74a88feb080ed41044c39fa0
+  - file: 06-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.cupra.com/es-es/coches/raval
+      - kWh
+      - km
+      - CV
+      - kW
+      - min
+      - Desde
+      - Próximamente
+    exit: 0
+    sha256: 36a91385084cad18e4d0d3b2e7d5b0c66021e9a534323bf3915bd04ace4345ef
+  - file: 07-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.cupra.com/es-es/coches/born
+      - compacto
+      - 100 %
+    exit: 0
+    sha256: 0cf2ca2e277606f9aa7f157571091d4c4bad2cf99880f4967758e97e5cc4ea97
+  - file: 08-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.seat-cupra-mediacenter.com/CUPRA-Brand
+      - CUPRA
+    exit: 0
+    sha256: 0d7e88e642c029634d2ebaf1c72acba76ce7f51484b2cf7e2cbc1e45b307e690
+  - file: 09-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.cupra.com/es-es/universo-cupra/noticias
+      - CUPRA
+    exit: 0
+    sha256: 166c27421f3db955495de1dd5b104e47452e4df3ff7a478a3d5a2c5fed0a7bac
+skipped_calls: []

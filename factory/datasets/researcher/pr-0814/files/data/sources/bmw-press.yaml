@@ -1,0 +1,14 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: bmw-press
+brand: BMW
+tier: T1
+market: ES
+kind: [ prices, specs, images, announcements ]
+urls:
+  home: https://www.press.bmwgroup.com/spain/
+  prices: https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es # ejemplo de comunicado "Precios para España"
+image_license: "" # la home no declara términos de uso de las imágenes; "Aviso legal" sin leer. No publicar imágenes de esta web
+notes: >
+  PressClub España de BMW Group (verificada 2026-10-04: responde). Los comunicados "Precios para España" dan PVP de lanzamiento; son de fecha concreta y pueden quedar desactualizados (el de iX1 xDrive30 es de 2023: no se usa). No se ha leído robots.txt ni el aviso legal.
+last_verified: 2026-10-04
+status: active
