@@ -5,8 +5,8 @@ baseRefOid: b1545c4a04c17334c73e6ab1564748e7ba05a3e0
 date: 2026-10-31
 task: "Refresco mensual de data/raw/cupra/ (ADR-0010, punto 6): relee en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No toques needs_review. Bitácora."
 synthetic: false
-confirmed: false
-rules: [dates] # PROPOSED from review.md; a person confirms
+confirmed: true
+rules: [dates]
 # DRAFT (2026-11-21), from review.md and the frozen reads; a person checks it and sets confirmed: true.
 # kept: numbers that no frozen read shows (finding 1 of the review, plus Born+ 140 kW and Raval VZ 52 kWh,
 # which the reads do not show either). Prices: unchanged, read, financed (reviewer: they match the legal text).

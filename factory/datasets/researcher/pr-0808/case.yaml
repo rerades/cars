@@ -5,19 +5,19 @@ baseRefOid: e7fce6662e946a5422b0d46bff9af04a5f655d63
 date: 2026-10-31
 task: "Refresco mensual de data/raw/polestar/ (ADR-0010, punto 6): relee en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No toques needs_review. Bitácora."
 synthetic: false
-confirmed: false
-rules: [dates, price_kind, price_proof] # PROPOSED from review.md; a person confirms
+confirmed: true
+rules: [dates, price_kind, price_proof]
 # DRAFT (2026-11-21), from review.md, the frozen reads and how the rerun left main; a person checks it.
 # P2 and P3: price null (offer expired on 30/09/2026), the same criterion for every model, as the rerun did.
 # P4: financed 49 900; its price_terms page must have been read (finding 2: price_proof).
 expected:
   data/raw/polestar/polestar-2.yaml:
-    "versions[Standard Range Single Motor (con Climate Pack)].price": {value: null, price_kind: null}
+    "versions[Standard Range Single Motor (con Climate Pack)].price": {value: null, price_kind: null}   # brand offer expired 30/09; the financing example (to 31/12) names no Climate Pack
   data/raw/polestar/polestar-3.yaml:
     specs.power_max_kw: {date: kept}   # 500 is not in the reads
     "versions[Long Range Dual Motor MY2025 km0 (Pilot Pack y Plus Pack)].price": {value: null, price_kind: null}
   data/raw/polestar/polestar-4.yaml:
-    "versions[Long Range Single Motor (Rear Motor) Coupé].price": {value: 49900, price_kind: financed, date: fresh}
+    "versions[Long Range Single Motor (Rear Motor) Coupé].price": {value: 49900, price_kind: financed, date: fresh}   # brand offer renewed to 30/12 on the redirect target /polestar-4-coupe/
 files:
   - data/raw/polestar/polestar-2.yaml
   - data/raw/polestar/polestar-3.yaml

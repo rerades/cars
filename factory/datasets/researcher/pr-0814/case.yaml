@@ -5,8 +5,8 @@ baseRefOid: e9798121201c0f79c21e95fcda4835d7ca30bd84
 date: 2026-10-31
 task: "Refresco mensual de data/raw/bmw/ (ADR-0010, punto 6): relee en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No toques needs_review. Bitácora."
 synthetic: false
-confirmed: false
-rules: [dates] # PROPOSED from review.md; a person confirms
+confirmed: true
+rules: [dates]
 # DRAFT (2026-11-21), from review.md and the frozen reads; a person checks it.
 # Every fetch-page.ts read of BMW failed (robots.txt 503, timeout): nothing could be refreshed, so every
 # value keeps its date, the price included (finding 1). last_verified of bmw-es and bmw-press is scored by
