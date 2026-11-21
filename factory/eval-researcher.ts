@@ -15,7 +15,7 @@ import { FETCH_DATASET, RESEARCHER_DATASET } from "./dataset-capture.ts";
 // functions it shares come in as `EvalDeps` instead of an import (a cycle there never settles).
 import type { CaseResult, Summary } from "./eval-run.ts";
 import type * as EvalRun from "./eval-run.ts";
-export type EvalDeps = Pick<typeof EvalRun, "budgetBlocker" | "EVALS_DIR" | "estimateCase" | "evalsConfig" | "loadApiKey" | "readSummaries" | "spentInMonth" | "writesOutside">;
+export type EvalDeps = Pick<typeof EvalRun, "apiError" | "budgetBlocker" | "EVALS_DIR" | "estimateCase" | "evalsConfig" | "loadApiKey" | "readSummaries" | "spentInMonth" | "writesOutside">;
 import { offerEnd, runEvals } from "./evals.ts";
 import { replayGuard, type ReplayEntry } from "./fetch-replay.ts";
 import { agentConfig, buildCommand, inWindow, loadConfig, LOCK, nowInTz, REPO, resultEvent, type Config } from "./orchestrator.ts";
@@ -363,7 +363,7 @@ const fail = (msg: string) => (console.error(msg), 2);
 
 /** `eval-run.ts researcher`: same caps, lock and window as the Reviewer's experiments (ADR-0016). */
 export async function main(model: string, wanted: string[] | undefined, dryRun: boolean, d: EvalDeps): Promise<number> {
-  const { budgetBlocker, EVALS_DIR, estimateCase, evalsConfig, loadApiKey, readSummaries, spentInMonth } = d;
+  const { apiError, budgetBlocker, EVALS_DIR, estimateCase, evalsConfig, loadApiKey, readSummaries, spentInMonth } = d;
   const cfg = loadConfig();
   const ev = evalsConfig(cfg);
   if (!ev) return fail("falta el bloque evals: en factory/budgets.yaml");
@@ -408,6 +408,11 @@ export async function main(model: string, wanted: string[] | undefined, dryRun: 
         break;
       }
       const run = runCase(cfg, c, model, apiKey, `${exp.experiment}/${c.case_id}`, d.writesOutside);
+      const failed = apiError(run.stdout);
+      if (failed) {
+        exp.stopped = `error de la API en ${c.case_id} (${failed}): se para sin puntuarlo`;
+        break;
+      }
       const result = resultEvent(run.stdout);
       const { scores, notes } = researcherScores(c, run.base, run.head, run.calls, run.schemaFailed);
       if (run.outside.length) notes.push(`escribió fuera de write_paths: ${run.outside.join(", ")}`);

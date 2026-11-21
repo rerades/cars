@@ -7,7 +7,7 @@ import { after, describe, test } from "node:test";
 import { proposedLabel, reviewedSha, storyNumber } from "../dataset-case.ts";
 import { caseProblem, type Case } from "../dataset-sync.ts";
 import {
-  budgetBlocker, codeScores, compare, meanSummary, judgeScores, totals, writesOutside, type CaseResult, type EvalsConfig, type Summary,
+  apiError, budgetBlocker, codeScores, compare, meanSummary, judgeScores, totals, writesOutside, type CaseResult, type EvalsConfig, type Summary,
 } from "../eval-run.ts";
 import { fakeGh, isForbidden, readLog } from "../fake-gh.ts";
 import { toOtlp } from "../langfuse.ts";
@@ -185,4 +185,13 @@ describe("traza del experimento", () => {
     assert.ok(spans.every((s) => attr(s, "langfuse.environment") === "evals" && attr(s, "langfuse.experiment.id") === "e"));
     assert.deepEqual(spans.map((s) => attr(s, "langfuse.experiment.item.expected_output") !== undefined), spans.map((s) => !s.parentSpanId));
   });
+});
+
+test("un error de la API (saldo, credenciales) para el experimento en vez de puntuar el caso", () => {
+  const billing = [
+    JSON.stringify({ type: "assistant", error: "billing_error", is_api_error_message: true, api_error_status: 400 }),
+    JSON.stringify({ type: "result", total_cost_usd: 0, terminal_reason: "api_error" }),
+  ].join("\n");
+  assert.equal(apiError(billing), "billing_error");
+  assert.equal(apiError(JSON.stringify({ type: "result", total_cost_usd: 0.1, terminal_reason: "completed" })), null);
 });
