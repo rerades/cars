@@ -24,6 +24,7 @@ versions:
       tier: T1
 images:
   - file: data/images/hyundai/ioniq-3/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/2026_Hyundai_Ioniq_3_N_Line_%28Europe%29_front_view_01.png/1280px-2026_Hyundai_Ioniq_3_N_Line_%28Europe%29_front_view_01.png"
     page_url: "https://commons.wikimedia.org/wiki/File:2026_Hyundai_Ioniq_3_N_Line_(Europe)_front_view_01.png"
     source_id: wikimedia-commons
