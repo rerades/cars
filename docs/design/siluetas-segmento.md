@@ -6,6 +6,84 @@ silueta, sin imagen») y `tokens.md` («Silueta de segmento»); aquí solo se fi
 
 Son 11: una por cada segmento de RF-11 y una genérica para el modelo sin `segment` (RF-12, CA-15).
 
+## En la dirección visual: la silueta en la pantalla (2026-11-20)
+
+La dirección elegida ([`direccion.md`](direccion.md), «La elegida») convierte la tarjeta en una pantalla
+([`tarjeta-modelo.md`](tarjeta-modelo.md)) y la ficha en una primera pantalla oscura ([`ficha-modelo.md`](ficha-modelo.md)).
+Ahí la silueta se pintaba enorme (24 rem en móvil, 42 rem en escritorio), detrás del texto y en `ink-950` sobre la
+franja clara (≈ 15:1), y pesaba más que el nombre y las cifras. Esta sección **manda sobre** «Tamaño en pantalla»,
+«Color» y «Estados» de abajo cuando la silueta ocupa una pantalla; el icono de 48 px y los dibujos de referencia
+(qué silueta va con cada segmento, trazados, suelo, ruedas) **no cambian**.
+
+Prototipo `web/design-proto/siluetas-a.astro` (primera pantalla de la ficha del Renault Master Furgón E-Tech eléctrico,
+y tres pantallas del catálogo: Grand Kangoo E-Tech eléctrico, CLA Shooting Brake y smart #2). Capturas
+[`refs/siluetas-a-390.png`](refs/siluetas-a-390.png) y [`refs/siluetas-a-1280.png`](refs/siluetas-a-1280.png).
+
+**Principio: la silueta ocupa el sitio de la foto y nunca va debajo del texto.** Se coloca en el mismo hueco que el coche
+recortado de ADR-0025 («Imagen retocada» en las dos especificaciones), se apoya en el suelo de ese hueco y se pinta con
+un trazo fino de color apagado: se lee como una imagen que acompaña, no como un titular. Así una pantalla sin foto, una con
+foto retocada y una con foto normal comparten composición (RF-8 y CA-17 de PRD-001; RF-12 y CA-12 de PRD-002).
+
+```
+Catálogo, móvil (390)            Catálogo, escritorio (≥ 1024), impar          par: espejo
+┌──────────────────────────┐     ┌──────────────────────────────────────────┐
+│░   ┌──────────────────┐  │     │░ smart          ┊                        ░│
+│░   │   ╭──╮  silueta  │  │     │░ #2             ┊      ╭────╮            ░│
+│░   │ ◯────◯  15 rem   │  │     │░ Segmento por … ┊   ╭──╯    ╰──╮  28 rem ░│
+│░   └───── suelo ──────┘  │     │░ Por     290 km ┊   ◯─────────◯          ░│
+│░ smart                   │     │░ confirmar      ┊   ─────── suelo ─────── ░│
+│░ #2 · cifras · pie       │     │░ Comparar                                ░│
+└──────────────────────────┘     └──────────────────────────────────────────┘
+ franja clara surface-muted       texto ≤ 44 %     hueco: del 50 % al borde − 2,5 rem
+
+Ficha, móvil (390)               Ficha, escritorio (≥ 1024)
+┌──────────────────────────┐     ┌──────────────────────────────────────────┐
+│▓ siete3 · ruta           │     │▓ siete3 · ruta                           ▓│
+│▓   ╭──╮                  │     │▓ Renault              ┊   ╭────╮          ▓│
+│▓ ◯────◯   18 rem, flex 1 │     │▓ MASTER FURGÓN        ┊ ╭─╯    ╰─╮ 34 rem ▓│
+│▓ ── suelo (mín. 12 rem)  │     │▓ E-TECH eléctrico     ┊ ◯────────◯        ▓│
+│▓ Renault                 │     │▓ Segmento …           ┊ ───── suelo ───── ▓│
+│▓ MASTER FURGÓN …         │     │▓ 27.332 €  206 km  96 kW  40 kWh          ▓│
+│▓ cifras clave            │     └──────────────────────────────────────────┘
+└──────────────────────────┘      franja oscura ink-950
+```
+(«suelo» es el borde de abajo del hueco: no se dibuja ninguna línea.)
+
+| Regla | Catálogo (franja clara) | Ficha, primera pantalla (franja oscura) | Por qué |
+|---|---|---|---|
+| Franja | `surface-muted` (`.band-light`), sin cambios | `ink-950` (`.band-dark`), sin cambios | `tarjeta-modelo.md` y `ficha-modelo.md` |
+| Color | `--color-silhouette` = `#a3ada7` | `--color-silhouette` en `.band-dark` = `#45525b` | Contraste ≈ 2 en las dos franjas: se ve, pero por debajo de cualquier texto (≥ 6,6). Ver «Contraste» |
+| Grosor | `--size-silhouette-stroke` = 2 px, constante | Igual | El mismo trazo que el icono de 48 px: la familia se reconoce. `vector-effect: non-scaling-stroke` en `path` y `circle` para que no engorde al crecer |
+| Lado del SVG, móvil | `--size-silhouette-card` 15 rem (el coche mide ≈ 13,75 rem) | `--size-silhouette-hero` 18 rem | La mitad que antes en el catálogo; nunca más ancho que el hueco: `min(token, 100%)` |
+| Lado del SVG, `lg` | `--size-silhouette-card-lg` 28 rem | `--size-silhouette-hero-lg` 34 rem | Cabe en su mitad de pantalla con aire a los lados |
+| Hueco, móvil | Arriba: `inset: 1.5rem 1.25rem auto`, alto 10 rem (`15 rem × 32/48`, cabe el techo más alto, la furgoneta en `y = 8`). El texto empieza en 12,5 rem, como ya hacía | Entre la ruta y el nombre, en el flujo: `flex: 1`, alto mínimo `--size-cutout-mobile` (12 rem = `18 rem × 32/48`), margen `1.5rem 1.25rem 0` | El de la imagen retocada: texto y silueta no se solapan, sea cual sea el largo del nombre |
+| Hueco, `lg` | `inset: 2.5rem 2.5rem 2.5rem 50%` en las impares y `2.5rem 50% 2.5rem 2.5rem` en las pares | `inset: 6.5rem 2.5rem 1rem 50%` dentro de la pantalla, por encima de las cifras clave | La mitad opuesta al texto, alternando como las fotos |
+| Posición en el hueco | Centrada en horizontal y **apoyada abajo**: el SVG baja `10/48` de su lado (`margin-bottom` negativo), para que el pie de las ruedas (`y = 38`) quede en el suelo del hueco | Igual | Comparten suelo con las cifras de al lado; no flota |
+| Proporción | El SVG recibe solo el ancho; el alto lo da `aspect-ratio: 1` | Igual | Con alto en `%` se deformaría el cuadrado |
+| Fondo del hueco | Ninguno: ni recuadro, ni elipse de suelo | Ninguno | El suelo de `--color-cutout-floor` es para la sombra del PNG; la silueta no la tiene |
+
+**Lo que cambia en `web/src/`** (lo hace el Desarrollador): en `ModelCard.astro`, `.silhouette` pasa de estar detrás del
+texto (`top: -6.5rem`, 24/42 rem, `ink-950`, `stroke-width` 0,3/0,22) a las reglas de arriba. En
+`marcas/[marca]/[modelo].astro`, `.hero-silhouette` deja de ser `inset: 0` centrada a 24/42 rem en `on-dark-muted` y
+pasa al hueco de `.hero-cutout` (mismo `order` y mismo `inset` en `lg`, salvo el de abajo). `SegmentSilhouette.astro`
+sigue escribiendo `width` y `height` en línea: para la pantalla, que escriba solo el ancho (o que el CSS fije
+`height: auto` y `aspect-ratio: 1`, como hace el prototipo con `!important`). Ni trazados ni elección de silueta cambian.
+
+**Estados en pantalla**
+
+| Estado | Qué se ve | Requisito |
+|---|---|---|
+| Sin foto, con segmento | Su silueta, en el hueco, apoyada abajo | RF-8, CA-17 (PRD-001); RF-12, CA-12 (PRD-002) |
+| Sin foto ni segmento | La genérica, mismo sitio y tamaño; «Segmento por confirmar» en el texto (comprobado: Grand Kangoo, Master Furgón y smart #2) | RF-12, CA-15 |
+| Nombre muy largo | No toca a la silueta: en móvil el texto crece hacia abajo; en `lg` va en su columna de 44 % (catálogo) o en la mitad izquierda (ficha) | — |
+| Pantalla del catálogo más alta que 31,5 rem (nombre de cuatro líneas en `lg`) | El hueco crece con ella y la silueta sigue apoyada abajo, a la altura de las cifras | — |
+| Pantalla estrecha (320 px) | `min(token, 100%)`: la silueta encoge con el hueco, nunca desborda | WCAG 1.4.10 |
+| Zoom / letra grande | Los lados van en `rem` y crecen; el trazo de 2 px escala con el zoom del navegador | WCAG 1.4.4 |
+| Colores forzados | `currentColor` pasa al color de texto del sistema: la silueta se ve a pleno contraste, sin reglas extra | RNF-3 |
+
+**Lector de pantalla y foco**: sin cambios. `aria-hidden="true"`, `focusable="false"`, sin texto; en el catálogo queda
+debajo del `::after` del enlace (`pointer-events: none`), así que pulsarla abre la ficha como el resto de la pantalla.
+
 ## Reglas comunes
 
 Todas comparten estas reglas, para que se lean como una familia y para que la diferencia entre dos
@@ -211,8 +289,12 @@ El modelo tiene imagen con `license` → no hay silueta: se pinta la imagen (`ta
 
 ## Contraste
 
-No necesita token nuevo. La silueta usa `--color-line` sobre `--color-surface-muted`: **≈ 4,4** (`tokens.md`).
-Al ser decorativa no se le exige mínimo, pero supera el 3:1 de WCAG 1.4.11, así que quien la vea la distingue.
+Icono de 48 px (anterior a la dirección visual): `--color-line` sobre `--color-surface-muted`, **≈ 4,4** (`tokens.md`).
+
+En pantalla (dirección visual, arriba): `--color-silhouette` `#a3ada7` (L 0,4046) sobre `surface-muted` `#eef1ee`
+**2,03**; `#45525b` (L 0,0806) sobre `ink-950` **2,34**. Por debajo del 3:1 a propósito: es decorativa
+(`aria-hidden`), no transmite nada que no diga el texto (el segmento va escrito al lado), así que WCAG 1.4.11 no se le
+aplica, y tiene que quedar por detrás de todo el texto (el más flojo, `ink-600` sobre `surface-muted`, da 6,61).
 
 ## Para el Desarrollador
 
