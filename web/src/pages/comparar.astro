@@ -27,75 +27,139 @@ const messages = {
     <link rel="canonical" href={canonical} />
   </head>
   <body>
-    <main class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8" data-messages={JSON.stringify(messages)}>
-      <h1 class="text-title [overflow-wrap:anywhere]">{title}</h1>
-      <p class="mt-2 max-w-prose text-body text-ink-600">{t("comparador.entrada")}</p>
+    <main data-messages={JSON.stringify(messages)}>
+      <!-- Dark band: logo, title, intro and every notice (URL, no JS, loading, error). No photo (PRD-003, section 8). -->
+      <section class="band-dark cmp-top">
+        <div class="cmp-wrap">
+          <a href="/" class="cmp-wordmark">{site}</a>
+          <h1 class="cmp-h1">{title}</h1>
+          <p class="cmp-intro">{t("comparador.entrada")}</p>
 
-      <div
-        class="mt-4 max-w-prose rounded-card border border-line bg-surface-muted p-4 text-body text-ink-900"
-        data-no-js
-      >
-        <p><span class="font-semibold">{t("comparador.aviso.prefijo")}</span> {t("comparador.sinJs.texto")}</p>
-        <a
-          href="/coches"
-          class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
-        >{t("comparador.sinJs.enlace")}</a>
-      </div>
-
-      <!-- Loading and error states (RNF-6); the script unhides them. Not in the page without JS. -->
-      <p role="status" class="mt-4 max-w-prose text-body text-ink-900" data-loading hidden>{messages.loading}</p>
-      <div class="mt-4 max-w-prose text-body text-ink-900" data-error hidden>
-        <p>{messages.error}</p>
-        <a
-          href="/coches"
-          class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
-        >{messages.noJsLink}</a>
-      </div>
-
-      <!-- URL notice (RF-11): paragraphs filled by the script; not a live region. -->
-      <div
-        class="mt-4 flex max-w-prose flex-col gap-2 rounded-card border border-line bg-surface-muted p-4 text-body text-ink-900"
-        data-url-notice
-        hidden
-      >
-        <p data-notice-p hidden>
-          <span class="font-semibold">{t("comparador.aviso.prefijo")}</span> <span data-notice-text></span>
-        </p>
-      </div>
-
-      <!-- «Coches comparados» (RF-8, RF-9, RF-12): the list, the empty text, «Añadir» or the maximum. -->
-      <section aria-labelledby="cmp-elegidos" class="mt-8" data-chosen hidden>
-        <h2 id="cmp-elegidos" class="text-section">{t("comparador.elegidos.titulo")}</h2>
-        <ol class="mt-4 flex flex-col" data-chosen-list></ol>
-        <p class="mt-4 max-w-prose text-body text-ink-900" data-empty-text hidden></p>
-        <form class="mt-4 flex max-w-prose flex-col gap-2 md:flex-row md:flex-wrap md:items-end" data-add-form novalidate hidden>
-          <div class="flex flex-col gap-1">
-            <label for="cmp-anadir" class="text-small font-semibold text-ink-900">{t("comparador.anadir.rotulo")}</label>
-            <select
-              id="cmp-anadir"
-              data-add-select
-              class="min-h-touch w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900"
-            >
-              <option value="">{t("comparador.anadir.elige")}</option>
-            </select>
+          <div class="cmp-notice" data-no-js>
+            <p><span class="cmp-strong">{t("comparador.aviso.prefijo")}</span> {t("comparador.sinJs.texto")}</p>
+            <a href="/coches" class="cmp-link">{t("comparador.sinJs.enlace")}</a>
           </div>
-          <button
-            type="submit"
-            class="min-h-touch self-start rounded-card bg-brand-600 px-4 text-body text-on-brand hover:bg-brand-800"
-          >{t("comparador.anadir.boton")}</button>
-          <p id="cmp-anadir-msg" class="w-full text-body text-ink-900" data-add-message hidden></p>
-        </form>
-        <p class="mt-4 max-w-prose text-body text-ink-900" data-max-text hidden>{t("comparador.maximo")}</p>
-        <a
-          href="/coches"
-          class="inline-flex min-h-touch items-center text-body text-brand-600 underline hover:text-brand-800"
-          data-empty-link
-          hidden>{t("comparador.vacio.catalogo")}</a
-        >
+
+          <!-- Loading and error states (RNF-6); the script unhides them. Not in the page without JS. -->
+          <p role="status" class="cmp-notice" data-loading hidden>{messages.loading}</p>
+          <div class="cmp-notice" data-error hidden>
+            <p>{messages.error}</p>
+            <a href="/coches" class="cmp-link">{messages.noJsLink}</a>
+          </div>
+
+          <!-- URL notice (RF-11): paragraphs filled by the script; not a live region. -->
+          <div class="cmp-notice" data-url-notice hidden>
+            <p data-notice-p hidden>
+              <span class="cmp-strong">{t("comparador.aviso.prefijo")}</span> <span data-notice-text></span>
+            </p>
+          </div>
+        </div>
       </section>
-      <ComparisonTable />
+
+      <!-- Light band: «Coches comparados» (RF-8, RF-9, RF-12): the list, the empty text, «Añadir» or the maximum. -->
+      <section aria-labelledby="cmp-elegidos" class="band-light cmp-block" data-chosen hidden>
+        <div class="cmp-wrap">
+          <h2 id="cmp-elegidos" class="cmp-h2">{t("comparador.elegidos.titulo")}</h2>
+          <ol class="cmp-chosen" data-chosen-list></ol>
+          <p class="cmp-text" data-empty-text hidden></p>
+          <form class="cmp-add" data-add-form novalidate hidden>
+            <div class="cmp-field">
+              <label for="cmp-anadir">{t("comparador.anadir.rotulo")}</label>
+              <select id="cmp-anadir" data-add-select>
+                <option value="">{t("comparador.anadir.elige")}</option>
+              </select>
+            </div>
+            <button type="submit" class="cmp-btn cmp-btn--add">{t("comparador.anadir.boton")}</button>
+            <p id="cmp-anadir-msg" class="cmp-add-msg" data-add-message hidden></p>
+          </form>
+          <p class="cmp-text" data-max-text hidden>{t("comparador.maximo")}</p>
+          <a href="/coches" class="cmp-link cmp-link--light" data-empty-link hidden>{t("comparador.vacio.catalogo")}</a>
+        </div>
+      </section>
+
+      <!-- Table and sources: restyled by the next story; only given the page margins here. -->
+      <div class="cmp-wrap cmp-rest">
+        <ComparisonTable />
+      </div>
 
       <div role="status" aria-live="polite" class="sr-only" data-status></div>
     </main>
   </body>
 </html>
+
+<style is:global>
+  .cmp-wrap { margin-inline: auto; max-width: var(--container-page); padding-inline: 1rem; }
+  @media (min-width: 768px) { .cmp-wrap { padding-inline: 2.5rem; } }
+  .cmp-rest { padding-block: 2.5rem; }
+  .cmp-top { padding-block: 0.5rem 2.5rem; }
+  .cmp-block { padding-block: 2.5rem; }
+  @media (min-width: 1024px) { .cmp-top { padding-bottom: 3.5rem; } .cmp-block, .cmp-rest { padding-block: 3.5rem; } }
+
+  .cmp-wordmark {
+    align-items: center; display: inline-flex; min-height: var(--spacing-touch);
+    font-size: 1.125rem; font-stretch: var(--font-stretch-wide); font-weight: 800; letter-spacing: -0.02em;
+  }
+  .cmp-h1, .cmp-h2 {
+    font-stretch: var(--font-stretch-wide); font-weight: 800; letter-spacing: -0.035em; line-height: 1;
+    overflow-wrap: anywhere;
+  }
+  .cmp-h1 { font-size: var(--text-display); margin-top: 1.5rem; }
+  .cmp-h2 { font-size: var(--text-block); }
+  .cmp-intro {
+    color: var(--color-ink-600); font-size: var(--text-body); line-height: var(--text-body--line-height);
+    margin-top: 0.75rem; max-width: var(--container-prose);
+  }
+
+  /* Notices sit on the dark band: a 1 px frame, no second fill. */
+  .cmp-notice {
+    border: 1px solid var(--color-ink-600); border-radius: var(--radius-card); color: var(--color-ink-900);
+    display: grid; gap: 0.5rem; margin-top: 1.5rem; max-width: var(--container-prose); padding: 1rem;
+  }
+  .cmp-notice[hidden], .cmp-add[hidden] { display: none; }
+  .cmp-strong { font-weight: 600; }
+  .cmp-link {
+    align-items: center; color: var(--color-brand-600); display: inline-flex; min-height: var(--spacing-touch);
+    text-decoration: underline;
+  }
+  .cmp-link:hover { color: var(--color-brand-800); }
+  .cmp-link[hidden] { display: none; }
+  .cmp-link--light { margin-top: 1rem; }
+  .cmp-text { margin-top: 1rem; max-width: var(--container-prose); }
+
+  /* «Coches comparados»: the column number in the narrow figure type, hidden from the reader. */
+  .cmp-chosen { border-top: 2px solid var(--color-ink-900); counter-reset: col; margin-top: 1.5rem; }
+  .cmp-chosen > li {
+    border-bottom: 1px solid var(--color-line-soft); counter-increment: col; display: grid; gap: 0.5rem 1rem;
+    grid-template-columns: 2.25rem minmax(0, 1fr); padding-block: 1rem;
+  }
+  .cmp-chosen > li::before {
+    content: counter(col) / ""; font-size: 2.75rem; font-stretch: var(--font-stretch-narrow); font-weight: 700;
+    grid-row: span 3; line-height: 0.82;
+  }
+  .cmp-chosen-name { font-size: var(--text-body); font-weight: 700; overflow-wrap: anywhere; }
+  .cmp-single { overflow-wrap: anywhere; }
+  .cmp-field { display: grid; gap: 0.25rem; }
+  .cmp-field label { font-size: var(--text-small); font-weight: 600; }
+  .cmp-field select {
+    background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-pill);
+    color: var(--color-ink-900); font: inherit; max-width: var(--width-version-col-max); min-height: var(--spacing-touch);
+    min-width: 0; padding-inline: 1rem; width: 100%;
+  }
+  .cmp-btn {
+    background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-pill);
+    color: var(--color-ink-900); font: inherit; font-weight: 600; justify-self: start; min-height: var(--spacing-touch);
+    padding-inline: 1.25rem;
+  }
+  .cmp-btn:hover { border-color: var(--color-ink-900); }
+  .cmp-btn--add { background: var(--color-brand-600); border-color: var(--color-brand-600); color: var(--color-on-brand); justify-self: start; }
+  .cmp-btn--add:hover { background: var(--color-brand-800); border-color: var(--color-brand-800); }
+  .cmp-add { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; max-width: var(--container-prose); }
+  .cmp-add-msg { width: 100%; }
+  @media (min-width: 768px) {
+    .cmp-chosen > li { align-items: center; grid-template-columns: 3rem minmax(10rem, 1fr) minmax(0, 20rem) auto; }
+    .cmp-chosen > li::before { grid-row: auto; font-size: 3.25rem; }
+    .cmp-field { align-items: center; gap: 0.75rem; grid-template-columns: auto minmax(0, 1fr); }
+    .cmp-add { align-items: end; flex-direction: row; flex-wrap: wrap; }
+    .cmp-add .cmp-field { align-items: stretch; grid-template-columns: none; }
+  }
+</style>
