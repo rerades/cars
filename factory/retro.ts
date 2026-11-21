@@ -79,10 +79,16 @@ export function retroSignals(rows: Row[], prs: LabeledPr[], trust: TrustEvent[],
   return out.sort((a, b) => time(a.at) - time(b.at));
 }
 
-/** The agents with a dataset in factory/datasets/ (ADR-0026, point 6: listed, not a constant). */
+/**
+ * The agents with a dataset in factory/datasets/ (ADR-0026, point 6: listed, not a constant). A
+ * dataset counts from its first confirmed case: until then eval-run.ts has nothing to test a change on.
+ */
 export function datasetAgents(dir = DATASETS_DIR): string[] {
   if (!existsSync(dir)) return [];
-  return readdirSync(dir, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name).sort();
+  const confirmed = (agent: string) => readdirSync(join(dir, agent), { withFileTypes: true }).some((c) =>
+    c.isDirectory() && existsSync(join(dir, agent, c.name, "case.yaml")) &&
+    /^confirmed: true\b/m.test(readFileSync(join(dir, agent, c.name, "case.yaml"), "utf8")));
+  return readdirSync(dir, { withFileTypes: true }).filter((e) => e.isDirectory() && confirmed(e.name)).map((e) => e.name).sort();
 }
 
 /** Every event of ops/trust/*.jsonl (trust.ts). */

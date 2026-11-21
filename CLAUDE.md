@@ -66,7 +66,7 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
 - Hecho también: la fusión automática de ADR-0011 (`node factory/run.ts --merge`, LaunchAgent a las
   07:30, interruptor `auto_merge` en `budgets.yaml`).
 - Hecho también: la evaluación de prompts del Revisor de ADR-0016 (`factory/eval-run.ts`, casos en
-  `factory/datasets/reviewer/`). Falta confirmar los casos y crear `.secrets/anthropic-evals.env`.
+  `factory/datasets/reviewer/`), con sus 21 casos confirmados y la clave en `.secrets/anthropic-evals.env`.
 - Hecho también: el verificador de datos de ADR-0020 (`factory/verify-data.ts`), última regla de
   `run.ts --merge` para las PR de `data/raw/`.
 - Hecho también: cómo se trabaja el diseño visual (ADR-0024) y la dirección visual elegida (2026-11-07: A «Pantalla»
@@ -76,7 +76,8 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
   y el agente Retocador (`retoucher`, sin red, sus PR no se fusionan solas). Falta el piloto (paso 3).
 - Hecho también: el agente retro de ADR-0022 (`node factory/run.ts --retro`, LaunchAgent la noche del
   domingo al lunes), y los eventos de la escalera de confianza (`factory/trust.ts`, en `run.ts --merge`).
-  La escalera aún no fusiona nada: falta la puerta de ADR-0019. El dataset del Researcher (ADR-0026) va
-  en #1205 y #1208.
+  La escalera aún no fusiona nada: falta la puerta de ADR-0019. Dataset del Researcher (ADR-0026): capturados
+  los 4 casos (`factory/dataset-capture.ts`) y hecho `eval-run.ts researcher`; falta que una persona fije
+  su `expected` y los confirme.
 - Pendiente: la migración de las imágenes a
   `data/images/` (en la cola, Researcher).
