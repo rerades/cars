@@ -553,6 +553,23 @@ describe("hook guardián", () => {
   test("bloquea acceso a secretos", () => {
     assert.equal(runHook({ tool_name: "Bash", tool_input: { command: "cat .secrets/gh_token" } }).status, 2);
   });
+  test("blocks network commands outside fetch-*.ts, also chained after an allowed one (PR #824)", () => {
+    const bash = (command: string) => runHook({ tool_name: "Bash", tool_input: { command } }).status;
+    for (const c of [
+      "curl -sL https://www.toyota.es/coches/ -o /tmp/chr.html",
+      "node factory/fetch-idae.ts TESLA | head; for u in https://www.tesla.com/es_es/model3 ; do curl -s $u; done",
+      "node factory/fetch-page.ts https://x.es a && wget https://x.es",
+      "ls; /usr/bin/curl https://x.es",
+      'echo "$(curl -s https://x.es)"',
+      "if true; then ssh host; fi",
+    ]) assert.equal(bash(c), 2, c);
+    for (const c of [
+      'node factory/fetch-page.ts "https://www.cupra.com/es-es/coches/born" "PVP" | head -c 2000',
+      'node factory/bitacora.ts add --tipo nota --texto "sin curl; con fetch-page.ts"',
+      "gh pr comment 1 --body 'no uses curl: ; curl x'",
+      "grep -rn curl factory/",
+    ]) assert.equal(bash(c), 0, c);
+  });
   test("bloquea instalar una dependencia sin declararla", () => {
     const bloqueados = [
       "npm install astro", "npm i -D vitest", "npm add tailwindcss", "npx astro add",
