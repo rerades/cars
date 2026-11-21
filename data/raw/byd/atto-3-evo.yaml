@@ -26,6 +26,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl (Alexander-93), CC BY-SA 4.0, via Wikimedia Commons (File:BYD Atto 3 Evo IMG 7851.jpg)"
 open_questions:
+  - "Imagen (2026-11-21): rechazada, causa `recorte`: la máscara pierde el retrovisor lejano (queda un muñón) y el desenfoque de la matrícula borró el logo BYD de la barra del capó."
   - "Precio: el «PVPR Financiando» de https://www.byd.com/es-es/promociones (2026-11-07) no se guarda. La nota (2) de la misma página incluye un adelanto de 2.250 € del Plan Auto+ en los descuentos, y no queda claro si ese PVPR lo resta; las ayudas públicas nunca se restan (researcher.md). Falta un PVP sin oferta o una nota que diga que el precio no incluye la ayuda."
   - "segment: la web lo llama «SUV mediano eléctrico», sin tamaño de la tabla; sin segmento."
   - "launch: ninguna fuente da la fecha de inicio de venta en España."

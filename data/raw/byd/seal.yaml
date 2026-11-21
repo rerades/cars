@@ -39,6 +39,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:BYD Seal IAA 2023 1X7A0371.jpg)"
 open_questions:
+  - "Imagen (2026-11-21): rechazada, causa `recorte`: el fondo del stand (rosa y rojo) queda pegado como halo en el techo y en la zaga, y el contorno trasero es irregular."
   - "launch: ninguna fuente da la fecha de inicio de venta en España."
   - "Precios: la promoción de Seal Comfort (color Indigo grey) solo da entrada, cuotas y última cuota, sin PVPR; no hay PVP. Sin precio en ninguna versión."
   - "Comfort: potencia de carga CC no publicada."
