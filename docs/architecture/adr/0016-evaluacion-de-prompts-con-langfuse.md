@@ -3,7 +3,8 @@
 - **Estado:** aceptada (2026-10-18). Enmendada por
   [ADR-0026](0026-evaluacion-de-prompts-del-researcher.md) (aceptada el 2026-11-09): un segundo dataset,
   `researcher`, con salidas de `fetch-page.ts` congeladas y evaluador de código; «los demás agentes
-  quedan fuera» deja de valer para el Researcher.
+  quedan fuera» deja de valer para el Researcher. Enmendada el 2026-11-21 (aprobación con la media de
+  3 ejecuciones por lado; ver «Qué se puntúa y cómo se aprueba un prompt»).
 - **Fecha:** 2026-10-18
 
 ## Contexto
@@ -243,8 +244,15 @@ estructurada en JSON; sin SDK):
 
 **Aprobación de una nueva versión del prompt** (o de un cambio de modelo del Reviewer):
 - Se ejecutan la versión actual (línea base) y la candidata con el mismo modelo, el mismo dataset
-  y el mismo juez. Si la línea base tiene más de 30 días o cambió el dataset o el juez, se repite.
-- La candidata se aprueba si **todo** se cumple:
+  y el mismo juez, **3 veces cada una**, y se comparan las medias
+  (`eval-run.ts --compare b1.json,b2.json,b3.json c1.json,c2.json,c3.json`). Si la línea base tiene más de 30
+  días (se cuenta desde su ejecución más antigua) o cambió el dataset o el juez, se repite.
+- **Enmienda del 2026-11-21: por qué 3 ejecuciones.** Dos ejecuciones del mismo prompt (4275604b) sobre el
+  mismo dataset dieron `false_ok` 2 y 0, e `invented` 5 y 7: con 21 casos el ruido entre ejecuciones es
+  tan grande como el efecto que se mide, y con una sola se aprobaba o se rechazaba por azar. Se descartó
+  la media de 2 (sigue dejando que un caso decida) y dejar la regla como estaba. La regla 1 sobre la media
+  equivale a pedir `false_ok` = 0 en las 3 ejecuciones de la candidata.
+- La candidata se aprueba si **todo** se cumple (sobre las medias):
   1. `false_ok` = 0 casos y `forbidden` = 0 casos. Sin excepciones.
   2. `label_match` no baja respecto a la línea base.
   3. `finding_recall` medio no baja más de 5 puntos y `invented` no sube en más de 1 caso.
@@ -280,6 +288,9 @@ estructurada en JSON; sin SDK):
     precio de Sonnet 5.5, ~1 USD por experimento.
   - Una aprobación (línea base + candidata con Sonnet) cuesta ~14 USD; el tope mensual da para
     unas dos o tres al mes. Son estimaciones: se corrigen con los primeros `ops/evals/`.
+  - Medido el 2026-11-21: una ejecución de 21 casos con Sonnet 5.5 cuesta ~2,3 USD, juez incluido. Con
+    3 ejecuciones por lado (enmienda del 2026-11-21), una aprobación cuesta ~14 USD, lo que se estimó
+    para una sola; el tope de 40 USD al mes da para dos aprobaciones y algo de margen.
 
 ### (6) Límites del plan Hobby
 - **Unidades por experimento:** una traza del Reviewer tiene un span raíz, una `generation` por
