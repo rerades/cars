@@ -13,7 +13,8 @@ versions:
     power_kw: {value: 100, note: "IDAE id 611854", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-12, tier: T2}
     price: null
 images:
-  - file: "data/images/volkswagen/e-transporter/frontal.jpg"
+  - file: "data/images/volkswagen/e-transporter/frontal.png"
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/VW_e-Transporter%2C_IAA_2024%2C_Hanover_%28P1200119%29.jpg/1280px-VW_e-Transporter%2C_IAA_2024%2C_Hanover_%28P1200119%29.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:VW_e-Transporter,_IAA_2024,_Hanover_(P1200119).jpg"
     source_id: wikimedia-commons

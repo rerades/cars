@@ -44,3 +44,4 @@ open_questions:
   - "Reviews: no se enlaza ninguna de diariomotor-es ni motorpasion-es porque el modelo lleva needs_review: true (PRD-006, RF-4). Consultado 2026-10-24."
   - "Refresco 2026-11-02 (fetch-page.ts, id4.html): valores de status y specs releídos y sin cambios. La ficha sigue mostrando 32.400 € con «Oferta válida hasta el 31/10/2026», ya vencida, con la misma nota legal (ayudas Plan Auto+ y CAES incluidas); sigue sin PVP limpio, el precio queda null."
   - "Imágenes: no se ha buscado ninguna en Wikimedia Commons en esta ejecución."
+  - "Imagen (2026-11-20): rechazada sin retocar, causa `pegado`: coche de la aduana neerlandesa con rotulación «Douane», franjas verdes y amarillas, escudo y luz policial en el techo; buscar un ID.4 civil."
