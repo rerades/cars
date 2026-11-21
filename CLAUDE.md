@@ -76,6 +76,7 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
   y el agente Retocador (`retoucher`, sin red, sus PR no se fusionan solas). Falta el piloto (paso 3).
 - Hecho también: el agente retro de ADR-0022 (`node factory/run.ts --retro`, LaunchAgent la noche del
   domingo al lunes). Falta la escalera de confianza de la misma ADR y el dataset del Researcher (ADR-0026): capturados
-  los 4 casos (`factory/dataset-capture.ts`), falta fijar su `expected` y el modo `researcher` de `eval-run.ts`.
+  los 4 casos (`factory/dataset-capture.ts`) y hecho `eval-run.ts researcher`; falta que una persona fije
+  su `expected` y los confirme.
 - Pendiente: la migración de las imágenes a
   `data/images/` (en la cola, Researcher).

@@ -9,7 +9,13 @@
   #814 y #824, con `rules` propuestas y `expected` sin fijar). En #824 solo 1 de sus 14 lecturas se
   pudo congelar: las otras 13 eran comandos compuestos (`fetch-idae.ts TESLA | grep`, bucles con
   `curl`), y quedan en `skipped_calls`. El retro solo cuenta un dataset desde su primer caso
-  confirmado. Las decisiones 2 y 3 (`eval-run.ts researcher`) siguen pendientes.
+  confirmado. Decisiones 2 y 3 el mismo día (`eval-run.ts researcher`, `factory/eval-researcher.ts`,
+  `factory/fetch-replay.ts`), con dos huecos: sin juez, así que `open_questions_ok` sale `null` (no
+  decide la aprobación), y sin envío a Langfuse, así que el resumen de `ops/evals/` es la única
+  fuente. El formato de `expected`, que esta ADR no fijaba, es por fichero y por la ruta de
+  `sourcedByPath` de `verify-data.ts` (`factory/README.md`). El reproductor se antepone a los
+  `fetch-*.ts` del worktree en vez de sustituirlos, porque `verify-data.ts` y `evals.ts` importan de
+  ellos.
 
 ## Contexto
 - **ADR-0016** evalúa solo al Reviewer: «Se empieza por el **Reviewer**. Los demás agentes quedan

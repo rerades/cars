@@ -310,7 +310,7 @@ export function compare(base: Summary, cand: Summary): { approved: boolean; reas
 
 const git = (...args: string[]) => execFileSync("git", ["-C", REPO, ...args], { encoding: "utf8" }).trim();
 
-function loadApiKey(path = EVAL_KEY_FILE): string | null {
+export function loadApiKey(path = EVAL_KEY_FILE): string | null {
   if (!existsSync(path)) return null;
   return parseEnv(readFileSync(path, "utf8")).ANTHROPIC_API_KEY || null;
 }
@@ -426,11 +426,27 @@ async function main(): Promise<number> {
   if (values.compare) {
     const [b, c] = positionals.map((p) => JSON.parse(readFileSync(p, "utf8")) as Summary);
     if (!b || !c) return usage();
+    if (b.agent !== c.agent) return fail(`no se comparan experimentos de agentes distintos (${b.agent}, ${c.agent})`);
+    if (b.agent === "researcher") {
+      // ADR-0026, decision 3: the rules of each case come from its case.yaml.
+      const r = await import("./eval-researcher.ts");
+      const rules = new Map(r.readResearcherCases().map((x) => [x.case_id, x.rules ?? []]));
+      const { approved, reasons } = r.researcherCompare(b, c, rules);
+      console.log(approved ? "se aprueba: cumple las reglas de ADR-0026" : "no se aprueba:");
+      for (const x of reasons) console.log(`  - ${x}`);
+      if (c.cases.length < 10) console.log(`Dataset de ${c.cases.length} casos: dilo en la PR (ADR-0026, punto 4).`);
+      return approved ? 0 : 1;
+    }
     const { approved, reasons } = compare(b, c);
     console.log(approved ? "se aprueba: cumple todas las reglas de ADR-0016" : "no se aprueba:");
     for (const r of reasons) console.log(`  - ${r}`);
     console.log("Con 20 casos, ganar por un caso es ruido: preséntalo como «no empeora», no como mejora.");
     return approved ? 0 : 1;
+  }
+  if (positionals[0] === "researcher" && values.model) {
+    const wanted = values.cases?.split(",").map((s) => s.trim());
+    return (await import("./eval-researcher.ts")).main(values.model, wanted, !!values["dry-run"],
+      { budgetBlocker, EVALS_DIR, estimateCase, evalsConfig, loadApiKey, readSummaries, spentInMonth, writesOutside });
   }
   if (positionals[0] !== "reviewer" || !values.model) return usage();
   const model = values.model;
@@ -543,7 +559,7 @@ async function main(): Promise<number> {
 }
 
 function usage(): number {
-  console.error("uso: node factory/eval-run.ts reviewer --model <modelo> [--cases <ids>] [--dry-run]\n" +
+  console.error("uso: node factory/eval-run.ts reviewer|researcher --model <modelo> [--cases <ids>] [--dry-run]\n" +
     "     node factory/eval-run.ts --compare <línea-base.json> <candidata.json>");
   return 2;
 }
