@@ -31,7 +31,8 @@ versions:
     ac_max_kw: {value: 11, note: "«hasta 11 kW» (sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/sealion-7", retrieved: 2026-11-07, tier: T1}
     price: null   # sin precio en fuente T1
 images:
-  - file: "data/images/byd/sealion-7/frontal.jpg"
+  - file: "data/images/byd/sealion-7/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/BYD_Sealion_07_EV_DSC_8264.jpg/1280px-BYD_Sealion_07_EV_DSC_8264.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:BYD_Sealion_07_EV_DSC_8264.jpg"
     source_id: wikimedia-commons

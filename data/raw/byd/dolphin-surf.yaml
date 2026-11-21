@@ -31,7 +31,8 @@ versions:
     ac_max_kw: {value: 11, note: "«cargador integrado de 11 kW» (FAQ de carga, sin distinguir versión)", source_id: byd-es, url: "https://www.byd.com/es-es/coches-electricos/dolphin-surf", retrieved: 2026-11-07, tier: T1}
     price: null   # sin precio de esta versión en fuente T1
 images:
-  - file: "data/images/byd/dolphin-surf/frontal.jpg"
+  - file: "data/images/byd/dolphin-surf/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/BYD_Dolphin_Surf_IAA_2025_DSC_2256.jpg/1280px-BYD_Dolphin_Surf_IAA_2025_DSC_2256.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:BYD_Dolphin_Surf_IAA_2025_DSC_2256.jpg"
     source_id: wikimedia-commons
