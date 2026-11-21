@@ -31,7 +31,8 @@ versions:
     drivetrain: {value: awd, source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6.html", retrieved: 2026-10-31, tier: T1}
     price: null
 images:
-  - file: data/images/hyundai/ioniq-6/frontal.jpg
+  - file: data/images/hyundai/ioniq-6/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Hyundai_Ioniq_6_1X7A7258.jpg/1280px-Hyundai_Ioniq_6_1X7A7258.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Hyundai_Ioniq_6_1X7A7258.jpg"
     source_id: wikimedia-commons

@@ -23,7 +23,8 @@ versions:
       retrieved: 2026-10-31
       tier: T1
 images:
-  - file: data/images/hyundai/inster/frontal.jpg
+  - file: data/images/hyundai/inster/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Hyundai_Inster_DSC_7945.jpg/1280px-Hyundai_Inster_DSC_7945.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Hyundai_Inster_DSC_7945.jpg"
     source_id: wikimedia-commons

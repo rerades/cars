@@ -49,6 +49,7 @@ reviews:
     retrieved: 2026-10-23
     tier: T3
 open_questions:
+  - "Imagen (2026-11-20): rechazada, causa `recorte`: la máscara deja hierba pegada a las ruedas y al paragolpes y un halo oscuro en el borde del techo; hoja en ops/retouch/20261120-010007-c95d33/hyundai-ioniq-5-frontal.jpg."
   - "reviews: diariomotor-es no tiene una prueba del Ioniq 5 (solo presentación, ofertas y la prueba de autonomía a 130 km/h); solo hay review de motorpasion-es."
   - "segment: la ficha no clasifica el modelo; sin fuente, queda vacío."
   - "launch: la ficha no da fecha de inicio de venta en España."
