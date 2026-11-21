@@ -53,6 +53,14 @@ sin git; lo usan las pruebas.
 
 Códigos de salida: `0` correcto · `1` la ejecución falló · `3` bloqueado por una guarda.
 
+## Escalera de confianza (ADR-0022)
+
+`run.ts --merge` evalúa también las PR de agente fusionadas hace entre 7 y 37 días que tocan un área de
+`trust.areas` (hoy `web/`) y escribe en `ops/trust/` un evento `clean` o `unclean` por PR y área: `unclean`
+si tuvo `review:changes`, CI en rojo, un revert o un `fix` que la cita en sus 7 días (defecto escapado) o
+commits de una persona. Cinco `clean` seguidas suben al nivel 1 y un defecto escapado lo baja.
+`--status` muestra el nivel. Aún no fusiona nada: falta la puerta de ADR-0019.
+
 ## Retro semanal (ADR-0022)
 
 ```bash

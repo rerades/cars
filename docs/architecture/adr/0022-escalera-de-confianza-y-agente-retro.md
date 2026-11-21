@@ -16,6 +16,14 @@
   el retro no quite su turno al Revisor de las 06:30. Usa Opus (PRD-007 RF-10, cambiado el mismo día), con
   10 USD-eq al mes: los 3 sin asignar y 7 del Arquitecto. La escalera de confianza sigue pendiente, así que aún no hay defectos
   escapados que contar.
+- **Implementación de la escalera, sin fusión (2026-11-21):** `factory/trust.ts`, llamado por
+  `run.ts --merge`, escribe los eventos `clean`, `unclean`, `up` y `down` en `ops/trust/`, `--status`
+  muestra el nivel y la racha, y la PR de estado admite sus filas. **La fusión con peldaño no está**:
+  necesita la puerta de ADR-0019, que no existe, así que un nivel 1 todavía no fusiona nada (decisión
+  del responsable). Tampoco está el `down` por un revert que entra más de 7 días después de su PR.
+  Un ajuste: «commits de una persona» se mide con la fecha de **autor** posterior a la apertura de la
+  PR, no con la de commit, porque un rebase de los commits del agente cambia la segunda y no la
+  primera (la primera pasada en seco marcaba 6 PR por rebases).
 
 ## Contexto
 PRD-007 tiene resueltas OPEN-1 y OPEN-4 desde el 2026-10-28. Quedan para el Arquitecto la forma del

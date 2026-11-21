@@ -7,11 +7,11 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { REPO, STATE_DIR, TRACE_DIR, type Row } from "./orchestrator.ts";
+import { REPO, TRACE_DIR, type Row } from "./orchestrator.ts";
+import { readTrust as readTrustEvents } from "./trust.ts";
 
 export const RETRO = "retro";
 export const MIN_SIGNALS = 3;
-export const TRUST_DIR = join(STATE_DIR, "ops", "trust");
 export const DATASETS_DIR = join(REPO, "factory", "datasets");
 const DAY_MS = 24 * 3600 * 1000;
 // ADR-0022 says "less than 7 days"; launchd fires at the same time every week, so the previous run
@@ -91,12 +91,8 @@ export function datasetAgents(dir = DATASETS_DIR): string[] {
   return readdirSync(dir, { withFileTypes: true }).filter((e) => e.isDirectory() && confirmed(e.name)).map((e) => e.name).sort();
 }
 
-/** Every event of ops/trust/*.jsonl; none until the trust ladder exists. */
-export function readTrust(dir = TRUST_DIR): TrustEvent[] {
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir).filter((f) => f.endsWith(".jsonl")).flatMap((f) =>
-    readFileSync(join(dir, f), "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l) as TrustEvent));
-}
+/** Every event of ops/trust/*.jsonl (trust.ts). */
+export const readTrust = (): TrustEvent[] => readTrustEvents();
 
 /**
  * The agent/* PRs updated since `since`, with the times they got review:changes. One GraphQL call.
