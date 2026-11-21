@@ -6,9 +6,8 @@ issue: 324
 synthetic: false
 confirmed: true
 expected:
-  label: review:changes
-  findings:
-    - "el cuerpo de la PR no dice «Closes #324», así que la historia no se cerrará sola"
+  label: review:ok
+  findings: []
   ca:
     - id: CA-8
       covered: true
@@ -16,3 +15,4 @@ expected:
       covered: true
   not_findings:
     - no tocar web/tests/ficha.test.ts no es un fallo; la CI está verde
+    - pedir «Closes #324» no es un hallazgo; el cuerpo ya lo dice (en el texto de la tarea) y GitHub enlaza el issue
