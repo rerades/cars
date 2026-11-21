@@ -164,8 +164,10 @@ principal con su atribución.
   `text-small`, `on-dark-muted` sobre la franja oscura (10,61), el texto del dato tal cual, al final de los
   enlaces de la cabecera. Si es `null`, no hay pie.
 - **Sin imagen con licencia**: la primera pantalla sigue siendo oscura y lleva, en lugar de la foto, la silueta del
-  segmento (o la genérica si no hay segmento) grande y de trazo fino, en `on-dark-muted`, como en el prototipo
-  (`.hero .silhouette`). Decorativa (`aria-hidden`), sin pie, sin texto. Ninguna imagen de la marca en su lugar
+  segmento (o la genérica si no hay segmento) en el hueco de la imagen retocada (entre la ruta y el nombre en móvil,
+  la mitad derecha en `lg`), apoyada abajo, trazo de 2 px en `--color-silhouette` de la franja oscura (2,34), nunca
+  debajo del texto: [`siluetas-segmento.md`](siluetas-segmento.md), «En la dirección visual» (2026-11-20; sustituye a
+  la silueta centrada a 24/42 rem en `on-dark-muted` de `.hero .silhouette`). Decorativa (`aria-hidden`), sin pie, sin texto. Ninguna imagen de la marca en su lugar
   (CA-12). En el catálogo, la pantalla sin foto pasa a clara (`tarjeta-modelo.md`); aquí no, porque la ruta, el `h1`
   y las cifras clave están pintados para la franja oscura y la siguiente franja (Versiones) ya es blanca.
 - **Imagen retocada** (`images[0]` con `edits`): no va a sangre ni con `cover`; ver la sección siguiente.
@@ -737,7 +739,7 @@ sublista de pruebas usa `data-reviews-pruebas` (#601). Son para las pruebas, no 
 | Campo sin dato en una versión | «por confirmar» | RF-6, CA-6 |
 | Precio con oferta | Badge, fuente, «Ver condiciones de la oferta» y el texto literal en «Condiciones de las ofertas» | RF-4, CA-4 |
 | Dato no T1 | «fuente no oficial» junto a la marca de nota y en su entrada de «Fuentes» | RF-9, CA-9 |
-| Sin imagen con licencia | Primera pantalla oscura con la silueta grande y fina; sin «Más imágenes» ni su entrada en el menú | RF-12, CA-12 |
+| Sin imagen con licencia | Primera pantalla oscura con la silueta en el hueco del coche, trazo fino y apagado (`siluetas-segmento.md`); sin «Más imágenes» ni su entrada en el menú | RF-12, CA-12 |
 | Cifra clave sin dato | «Por confirmar» en el sitio del número, sin nota | RF-11, RF-18 |
 | Sección que no existe | Sin entrada en el menú; las franjas siguientes no repiten color | RF-17 |
 | 1 imagen / 2–6 / más de 6 | Solo la principal / principal + «Más imágenes» / las 6 primeras | RF-12, CA-12 |

@@ -20,8 +20,11 @@ sobre el wireframe y los tamaños de abajo:
   funde con la franja por el velo; el texto va en la parte sólida (contraste en `tokens.md`, velo: 9,1 / 5,1). La
   imagen deja de ser 16:9: `object-fit: cover` en el hueco de la franja. **Si la foto está retocada** (lleva
   `edits`), no: va entera, sin velo y sin tocar el texto (ver «Imagen retocada», abajo).
-- **Sin foto**: franja clara (`surface-muted`) con la silueta del segmento grande y de trazo fino (ADR-0012), detrás
-  del texto y decorativa. Sustituye al hueco 16:9 con el icono de 48 px de «Imagen».
+- **Sin foto**: franja clara (`surface-muted`) con la silueta del segmento en el hueco del coche recortado (arriba en
+  móvil, la mitad opuesta al texto en `lg`), apoyada abajo, trazo de 2 px en `--color-silhouette` (2,03), nunca
+  debajo del texto. Tamaño, posición y color: [`siluetas-segmento.md`](siluetas-segmento.md), «En la dirección visual»
+  (2026-11-20; antes iba detrás del texto, a 24/42 rem y en `ink-950`). Sustituye al hueco 16:9 con el icono de 48 px de
+  «Imagen».
 - **Nombre**: el modelo en `--text-screen`, `--font-stretch-wide`, peso 800; cada palabra es un bloque que no se parte
   por dentro, de modo que «R5 E-Tech eléctrico» baja de línea por palabras y nunca desborda a 320 px. La marca, encima,
   en `--text-body` peso 600, **dentro del mismo `h3 > a`** que el modelo, como pide «Estructura y jerarquía» (el
