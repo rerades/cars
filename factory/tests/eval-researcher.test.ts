@@ -81,6 +81,12 @@ test("puntúa fechas con lectura, prueba del precio, valores esperados y campos 
   assert.ok(b.notes.some((n) => /power_kw.*sin lectura/.test(n)));
   assert.ok(b.notes.some((n) => /tenía que quedarse/.test(n)));
 
+  // A read whose redirect lands on the stored url proves it too (PR #808).
+  const moved = new Map([[F, doc({ price: src(39990, "2026-10-31", { unit: "EUR", price_kind: "pvp" }), wltp: src(512, "2026-10-31"), power: src(150, "2026-10-01") })]]);
+  const via = { ...calls[0], args: ["https://www.acme.es/v", ...calls[0].args.slice(1)] };
+  assert.equal(researcherScores(kase, base, moved, [via], []).scores.price_proof, 1);
+  assert.equal(researcherScores(kase, base, moved, [{ ...via, stdout: page(["Volta Pro", "PVP 39.990 €"], "https://www.acme.es/v") }], []).scores.price_proof, 0);
+
   // Without the price among the keywords there is no price_proof; a schema failure zeroes the rest.
   assert.equal(researcherScores(kase, base, good, [call([URL_, "Autonomía"], ["Volta Pro", "PVP 39.990 €", "Autonomía 512 km"])], []).scores.price_proof, 0);
   const s = researcherScores(kase, base, good, calls, ["data/raw/acme/volta.yaml: bad"]).scores;

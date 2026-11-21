@@ -130,7 +130,9 @@ export function researcherScores(c: ResearcherCase, base: Map<string, any>, head
       if (changed) {
         priceProof[1]++;
         const names = [version, typeof node.page_name === "string" ? node.page_name : ""].filter(Boolean).map((n) => n.toLowerCase());
-        const proved = calls.some((k) => k.tool === "fetch-page" && k.args[0] === node.url &&
+        // The redirect target counts, as in linesFor: PR #808 stored /polestar-4-coupe/, where /polestar-4/ lands.
+        const proved = calls.some((k) => k.tool === "fetch-page" &&
+          (k.args[0] === node.url || (k.code === 0 && JSON.parse(k.stdout).final_url === node.url)) &&
           (typeof node.value !== "number" || k.args.slice(1).some((w) => numberPattern(node.value as number).test(w))) &&
           k.args.slice(1).some((w) => names.some((n) => n.includes(w.toLowerCase()) || w.toLowerCase().includes(n))));
         if (proved) priceProof[0]++;
