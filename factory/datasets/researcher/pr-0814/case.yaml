@@ -1,0 +1,85 @@
+case_id: pr-0814
+pr: 814
+run_id: 20261031-020007-0e0ab4
+baseRefOid: e9798121201c0f79c21e95fcda4835d7ca30bd84
+date: 2026-10-31
+task: "Refresco mensual de data/raw/bmw/ (ADR-0010, punto 6): relee en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No toques needs_review. Bitácora."
+synthetic: false
+confirmed: false
+rules: [dates] # PROPOSED from review.md; a person confirms
+# DRAFT (2026-11-21), from review.md and the frozen reads; a person checks it.
+# Every fetch-page.ts read of BMW failed (robots.txt 503, timeout): nothing could be refreshed, so every
+# value keeps its date, the price included (finding 1). last_verified of bmw-es and bmw-press is scored by
+# the dates rule on its own (finding 2). WebFetch is not available in the case.
+expected:
+  data/raw/bmw/ix3.yaml:
+    launch: {date: kept}
+    specs.wltp_max_km: {date: kept}
+    specs.dc_max_kw: {date: kept}
+    "versions[iX3 50 xDrive].wltp_km": {date: kept}
+    "versions[iX3 50 xDrive].power_kw": {date: kept}
+    "versions[iX3 50 xDrive].dc_max_kw": {date: kept}
+    "versions[iX3 50 xDrive].price": {value: 69900, date: kept}
+    "versions[iX3 40].battery_kwh": {date: kept}
+    "versions[iX3 40].wltp_km": {date: kept}
+    "versions[iX3 40].power_kw": {date: kept}
+    "versions[iX3 40].dc_max_kw": {date: kept}
+files:
+  - data/raw/bmw/ix3.yaml
+  - data/sources/bmw-es.yaml
+  - data/sources/bmw-press.yaml
+fetch_partial: true
+fetch:
+  - file: 01-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.press.bmwgroup.com/spain/article/detail/T0454100ES/precios-para-espa%C3%B1a:-nuevo-bmw-ix3-50-xdrive?language=es
+      - "69.900"
+      - xDrive
+      - "805"
+      - 400 kW
+      - 345 kW
+    exit: 1
+    sha256: ce25890395bd66901e9ba4faf06b6c26ca26351ae72f180c5fe7a28e80854a47
+  - file: 02-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.press.bmwgroup.com/spain/article/detail/T0459447ES/precios-para-espa%20a-nuevo-bmw-ix3-40
+      - "63.650"
+      - "637"
+      - 300 kW
+      - "235"
+      - 82,6
+    exit: 1
+    sha256: 6777939c66ea4ad820005aedc2637d1435d5b3de99030668575b26796d54e48f
+  - file: 03-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.bmw.es/es/coches-bmw/x/ix3/bmw-ix3.html
+      - iX3
+    exit: 1
+    sha256: cbf1a14ff42a31ff90fc15a0c7dfa77674a408886594a02f1b67b60efe18fd5b
+  - file: 04-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://newsroom.bmwgroup.com/emea/es/precios-para-espana-nuevo-bmw-ix3-50-xdrive
+      - "69.900"
+    exit: 1
+    sha256: 094ab9f7817485c398270c49f9d20d74c5634b09462e3ae2066f626911903e45
+  - file: 05-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://newsroom.bmwgroup.com/emea/es/precios-para-espana-nuevo-bmw-ix3-50-xdrive
+      - "69.900"
+      - iX3 50 xDrive
+    exit: 1
+    sha256: bbaf656fb938d6eaa8da9112807999b10c7f7ad330793452fcf82224b793472c
+  - file: 06-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://newsroom.bmwgroup.com/emea/es/precios-para-espana-nuevo-bmw-ix3-40
+      - "63.650"
+      - iX3 40
+    exit: 1
+    sha256: 5fdff8c899cbdb8daa6015be7110eca342af88f0a89ca24847b87d16a755666a
+skipped_calls: []

@@ -130,6 +130,16 @@ Los topes están en el bloque `evals:` de `budgets.yaml`. El script para antes d
 pasaría del tope del experimento o del mes, y deja el experimento marcado como incompleto.
 `run.ts --status` muestra lo gastado.
 
+### Dataset del Researcher (ADR-0026)
+
+`node factory/dataset-capture.ts researcher <pr> [<pr>...]` congela una PR del Researcher devuelta con
+`review:changes` en `factory/datasets/researcher/pr-NNNN/`: `case.yaml` (tarea literal, `run_id`,
+`baseRefOid`, fecha y `sha256` de cada lectura), `files/` (los ficheros de `data/` en su commit de
+partida) y `review.md`. Las salidas de `fetch-*.ts` de la traza van a `ops/datasets/researcher/`, fuera
+de git porque son texto de terceros. Los comandos compuestos (`| grep`, `&&`) no se pueden reproducir y
+quedan en `skipped_calls`. Una persona fija `rules` y `expected` y pone `confirmed: true`; hasta
+entonces el retro no propone cambios al Researcher. El modo `researcher` de `eval-run.ts` está pendiente.
+
 ## Qué comprueba antes de lanzar
 
 1. `factory/STOP` existe → no lanza nada (interruptor de parada).
