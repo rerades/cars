@@ -28,6 +28,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons (File:BYD Seal U IAA 2023 1X7A0045.jpg)"
 open_questions:
+  - "Imagen (2026-11-21): rechazada sin retocar, causa `angulo`: es un tres cuartos trasero (matrícula «BYD SEAL U» detrás), con público y carteles del stand cerca. Buscar un tres cuartos delantero."
   - "segment: la web dice «El SUV familiar eléctrico», sin letra de segmento ni tamaño de la tabla; sin segmento."
   - "launch: ninguna fuente da la fecha de inicio de venta en España."
   - "Versiones y cifras: la ficha de byd.com no las desglosa (solo «Hasta 87.0 kWh» y 140 kW CC); salen del IDAE (T2). Que Comfort y Design se vendan hoy no lo confirma ninguna fuente; la promoción solo nombra «SEAL U» (31.161 € financiando, color Snow White) sin versión, por lo que no se registra precio."
