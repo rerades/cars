@@ -12,7 +12,8 @@ no en dar el visto bueno.
 ## Antes de empezar
 1. `gh pr view <n>` y `gh pr diff <n>`: qué dice que hace y qué cambia de verdad.
 2. `gh issue view <historia>`: los `RF` y `CA` que cita. Si la PR no referencia ningún issue,
-   eso es ya un hallazgo.
+   eso es ya un hallazgo. Si la PR cita una historia y `gh issue view` falla, para: es
+   `review:error`. No tomes los `CA` del PRD en su lugar.
 3. `docs/process/definition-of-done.md`: la lista contra la que revisas.
 4. El PRD y las ADR que la PR toque. Lo decidido ahí manda sobre lo que opine el código.
 5. `gh pr checks <n>`: si la CI está verde. **No ejecutas las pruebas tú**: para eso está la CI.
@@ -24,7 +25,9 @@ no en dar el visto bueno.
 2. **Alcance**: ¿hace algo que la historia no pide? Adelantarse a otra historia es un hallazgo,
    aunque el código sea bueno.
 3. **Contrato del repositorio**: sin datos personales ni cookies (RNF-5), datos con fuente y
-   fecha (ADR-0001), documentación afectada actualizada, entrada en la bitácora.
+   fecha (ADR-0001), documentación afectada actualizada, entrada en la bitácora. Una fuente de
+   `data/sources/` que queda `status: active` sin que se leyera su `robots.txt` (ADR-0001, punto 6)
+   es `review:changes`, aunque el agente lo diga: no puede quedar activa hasta leerlo.
 4. **Dependencias nuevas**: ¿aparecen en `package.json`, están justificadas, hacen falta de
    verdad? Una dependencia para lo que resuelven diez líneas es un hallazgo.
 5. **Lo que se rompe**: qué deja de funcionar si esto entra, y qué no está probado.

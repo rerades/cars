@@ -6,9 +6,8 @@ issue: 150
 synthetic: false
 confirmed: true
 expected:
-  label: review:changes
-  findings:
-    - "el cuerpo de la PR no dice «Closes #150» ni enumera los RF y CA cubiertos, y la tarea lo exigía"
+  label: review:ok
+  findings: []
   ca:
     - id: CA-5
       covered: true
@@ -16,3 +15,4 @@ expected:
       covered: true
   not_findings:
     - recalcular fieldsOf(version) por celda no es un fallo que bloquee
+    - pedir «Closes #150» o la lista de RF y CA no es un hallazgo; el cuerpo empieza por los dos

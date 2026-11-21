@@ -8,7 +8,7 @@
 - **Implementación:** decisión 1 el 2026-11-21 (`factory/dataset-capture.ts` y los casos de #806, #808,
   #814 y #824, con `rules` propuestas y `expected` sin fijar). En #824 solo 1 de sus 14 lecturas se
   pudo congelar: las otras 13 eran comandos compuestos (`fetch-idae.ts TESLA | grep`, bucles con
-  `curl`), y quedan en `skipped_calls`. El retro solo cuenta un dataset desde su primer caso
+  `curl`), y quedan en `skipped_calls`. Por eso #824 se queda fuera del eval, sin `expected`: reproducirlo pediría lecturas que no se congelaron (2026-11-21). El retro solo cuenta un dataset desde su primer caso
   confirmado. Decisiones 2 y 3 el mismo día (`eval-run.ts researcher`, `factory/eval-researcher.ts`,
   `factory/fetch-replay.ts`), con dos huecos: sin juez, así que `open_questions_ok` sale `null` (no
   decide la aprobación), y sin envío a Langfuse, así que el resumen de `ops/evals/` es la única
