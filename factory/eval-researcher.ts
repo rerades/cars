@@ -113,8 +113,12 @@ export function researcherScores(c: ResearcherCase, base: Map<string, any>, head
       const lines = linesFor(calls, String(node.url));
       if (node.retrieved !== old?.retrieved) {
         datesTotal++;
-        const item: Item = { file, path, field, value: node.value as number | string, url: String(node.url), kind: typeof node.value === "number" ? "number" : "terms" };
-        const read = lines && (node.value === null || node.value === undefined || check(item, lines).status !== "missing");
+        // A number must show up in the read; a list of numbers, each one. Anything else (on_sale,
+        // fwd, a segment) never reads literally, so as in ADR-0020 only the read itself is checked.
+        const shows = (v: number) => check({ file, path, field, value: v, url: String(node.url), kind: "number" } as Item, lines!).status !== "missing";
+        const v = node.value;
+        const read = lines && (typeof v === "number" ? shows(v)
+          : Array.isArray(v) && v.length && v.every((x) => typeof x === "number") ? v.every(shows) : true);
         if (read) datesOk++;
         else {
           unread++;
@@ -139,6 +143,10 @@ export function researcherScores(c: ResearcherCase, base: Map<string, any>, head
         }
       }
       if (typeof node.price_terms === "string" && typeof node.price_terms_url === "string" && old?.price_terms !== node.price_terms) {
+        // The terms are proved by a read of their own page too (PR #808: a price_terms_url nobody read).
+        priceProof[1]++;
+        if (linesFor(calls, node.price_terms_url)) priceProof[0]++;
+        else notes.push(`price_proof: ${file} ${path} price_terms_url ${node.price_terms_url} sin leer`);
         terms[1]++;
         const tl = linesFor(calls, node.price_terms_url);
         if (tl && check({ file, path, field: "price_terms", value: node.price_terms, url: node.price_terms_url, kind: "terms" }, tl).status === "found") terms[0]++;

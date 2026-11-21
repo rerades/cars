@@ -96,6 +96,18 @@ test("una oferta financed vencida en la fecha del caso puntúa 0 en expired_offe
   assert.equal(r.scores.price_terms_literal, 1);
 });
 
+test("un valor que no es un número solo pide la lectura; una lista de números, cada uno; los términos, su página", () => {
+  const status = (v: unknown, r: string) => ({ value: v, source_id: "acme-es", url: URL_, retrieved: r, tier: "T1" });
+  const mk = (r: string, terms?: string, termsUrl?: string) => ({ brand: "acme", status: status("on_sale", r), specs: { battery_kwh_options: status([59, 79], r) },
+    versions: [{ name: "Volta Pro", price: src(39990, "2026-10-01", { unit: "EUR", price_kind: "financed", price_terms: terms, price_terms_url: termsUrl }) }] });
+  const base = new Map([[F, mk("2026-10-01", "a")]]);
+  const head = new Map([[F, mk("2026-10-31", "b", "https://www.acme.es/otra")]]);
+  const r = researcherScores({ ...kase, expected: {} }, base, head, [call([URL_, "59"], ["Batería de 59 kWh"])], []);
+  assert.equal(r.scores.dates_unread, 1, r.notes.join("\n")); // on_sale passes with the read; 79 is not in it
+  assert.ok(r.notes.some((n) => /battery_kwh_options/.test(n)));
+  assert.equal(r.scores.price_proof, 0); // the new price_terms_url was never read
+});
+
 test("un caso sin confirmar, sin expected o con una lectura cambiada no corre", () => {
   const root = mkdtempSync(join(tmpdir(), "fetchroot-"));
   try {
