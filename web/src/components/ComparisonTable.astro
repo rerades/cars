@@ -37,22 +37,16 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
 </template>
 
 <template data-tpl="chosen">
-  <li
-    tabindex="-1"
-    class="flex flex-col gap-2 border-t border-line-soft py-4 first:border-t-0 md:flex-row md:flex-wrap md:items-center md:gap-4"
-  >
-    <span class="text-card-title text-ink-900 [overflow-wrap:anywhere]" data-slot="title"></span>
-    <div class="flex flex-col gap-1 md:flex-row md:items-center md:gap-2" data-slot="wrap">
-      <label class="text-small font-semibold text-ink-900" data-slot="label"></label>
-      <select
-        class="min-h-touch w-full rounded-card border border-line bg-surface px-3 text-body text-ink-900"
-        style="max-width: var(--width-version-col-max)"
-        data-slot="select"></select>
+  <li tabindex="-1">
+    <span class="cmp-chosen-name" data-slot="title"></span>
+    <div class="cmp-field" data-slot="wrap">
+      <label data-slot="label"></label>
+      <select data-slot="select"></select>
     </div>
-    <p class="text-body text-ink-900 [overflow-wrap:anywhere]" data-slot="single" hidden></p>
+    <p class="cmp-single" data-slot="single" hidden></p>
     <button
       type="button"
-      class="min-h-touch self-start rounded-card border border-line bg-surface px-4 text-body text-ink-900 hover:border-brand-600 md:ml-auto"
+      class="cmp-btn"
       data-slot="remove"
     ><span data-slot="removeText"></span><span class="sr-only" data-slot="removeSr"></span></button>
   </li>
