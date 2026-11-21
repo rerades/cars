@@ -52,6 +52,16 @@ describe("entry to the rankings from /coches (#375, PRD-001 RF-14, CA-19)", () =
     assert.ok(nav.indexOf("Rankings") < coches.indexOf('id="resultados"'));
   });
 
+  test("the strip is a white band between the dark header and the filter bar; Rankings is styled like the rest", () => {
+    assert.match(nav, /^<nav[^>]*class="band-white"/);
+    assert.ok(coches.indexOf("band-dark") < coches.indexOf('class="band-white"'));
+    assert.ok(coches.indexOf('class="band-white"') < coches.indexOf("data-bar"));
+    const groupDivs = [...nav.matchAll(/<div class="(border-t[^"]*)">\s*<h3 class="([^"]*)"/g)];
+    assert.equal(groupDivs.length, 5);
+    assert.equal(new Set(groupDivs.map((m) => m[1])).size, 1);
+    assert.equal(new Set(groupDivs.map((m) => m[2])).size, 1);
+  });
+
   test("only on /coches: the home page and the other catalog pages do not carry it", () => {
     assert.doesNotMatch(read("."), /rankings\//);
     for (const dir of ["marcas", "segmentos", "precio", "autonomia"]) {

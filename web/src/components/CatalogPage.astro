@@ -66,9 +66,7 @@ const documentTitle = site ? t("pagina.tituloDocumento", { titulo: title, sitio:
       </div>
     </header>
     <main>
-      <div class="mx-auto max-w-page px-4 pb-8 md:px-6 lg:px-8">
-        <ExploreStrip groups={explore} showAll={currentHref !== "/coches/"} />
-      </div>
+      <ExploreStrip groups={explore} showAll={currentHref !== "/coches/"} />
 
       {
         filters && (
