@@ -5,6 +5,11 @@
   [ADR-0022](0022-escalera-de-confianza-y-agente-retro.md) (el retro puede proponer cambios a
   `researcher.md` cuando su dataset exista).
 - **Fecha:** 2026-11-05
+- **Implementación:** decisión 1 el 2026-11-21 (`factory/dataset-capture.ts` y los casos de #806, #808,
+  #814 y #824, con `rules` propuestas y `expected` sin fijar). En #824 solo 1 de sus 14 lecturas se
+  pudo congelar: las otras 13 eran comandos compuestos (`fetch-idae.ts TESLA | grep`, bucles con
+  `curl`), y quedan en `skipped_calls`. El retro solo cuenta un dataset desde su primer caso
+  confirmado. Las decisiones 2 y 3 (`eval-run.ts researcher`) siguen pendientes.
 
 ## Contexto
 - **ADR-0016** evalúa solo al Reviewer: «Se empieza por el **Reviewer**. Los demás agentes quedan

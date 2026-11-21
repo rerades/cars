@@ -1,0 +1,19 @@
+# Fuente de datos (una por fichero). La mantiene el Researcher. Esquema: docs/architecture/data-model.md, sección 8.
+id: idae-es
+brand: (varias; datos de homologación)
+tier: T2
+market: ES
+kind: [ specs ]
+urls:
+  home: https://coches.idae.es/base-datos/marca-y-modelo # buscador por marca y modelo; los resultados llegan por POST
+  robots: https://coches.idae.es/robots.txt
+image_license: "" # no publica imágenes de los coches
+notes: >
+  Base de datos de vehículos del IDAE (Ministerio para la Transición Ecológica): datos WLTP de homologación de los
+  coches vendidos en España, por versión. T2 como documentación de homologación (ADR-0001). Da autonomía WLTP, potencia
+  eléctrica, capacidad de batería (sin decir si es útil o bruta: basis unknown), consumo y MTMA. No da precio ni dice
+  qué versiones siguen a la venta: mezcla homologaciones actuales y antiguas. Se lee con
+  `node factory/fetch-idae.ts <MARCA>`, porque la tabla llega por un POST con token que WebFetch no envía. robots.txt
+  lo permite todo (comprobado el 2026-10-09). Registrada a mano para Tesla, cuya web bloquea toda lectura automática.
+last_verified: 2026-10-09
+status: active

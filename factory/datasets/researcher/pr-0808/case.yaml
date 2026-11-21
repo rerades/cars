@@ -1,0 +1,91 @@
+case_id: pr-0808
+pr: 808
+run_id: 20261031-011507-d5a796
+baseRefOid: e7fce6662e946a5422b0d46bff9af04a5f655d63
+date: 2026-10-31
+task: "Refresco mensual de data/raw/polestar/ (ADR-0010, punto 6): relee en sus fuentes todos los valores de la marca, actualiza retrieved (y el valor si ha cambiado) y verifica sus fuentes de data/sources/ (last_verified, status). Fuente rota y precio caducado, con los puntos 7 y 8 de ADR-0010. Los precios, con las reglas de precio de .claude/agents/researcher.md, incluida «La prueba de un precio es la salida de fetch-page.ts». Quita de open_questions lo que resuelvas. No toques needs_review. Bitácora."
+synthetic: false
+confirmed: false
+rules: [dates, price_kind, price_proof] # PROPOSED from review.md; a person confirms
+expected: null
+files:
+  - data/raw/polestar/polestar-2.yaml
+  - data/raw/polestar/polestar-3.yaml
+  - data/raw/polestar/polestar-4.yaml
+  - data/sources/polestar-es.yaml
+  - data/sources/polestar-press.yaml
+fetch_partial: true
+fetch:
+  - file: 01-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.polestar.com/es/polestar-2/
+      - PVP
+      - Oferta
+      - descuento
+      - "659"
+      - "350"
+    exit: 0
+    sha256: a4b76ee01cc2277e789e55af2c32e47b9dd4f7381a6a45ab17df9ab987e4657b
+  - file: 02-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.polestar.com/es/polestar-3/
+      - PVP
+      - Oferta válida
+      - "647"
+      - 350 kW
+      - AWD
+    exit: 0
+    sha256: f1b60d911ed98953017b012f7c6faf0135685d78b198b21d98d625a7f8120e4f
+  - file: 03-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.polestar.com/es/polestar-4/
+      - PVP
+      - Oferta
+      - "620"
+      - 400 kW
+      - 200 kW
+      - Dual
+    exit: 0
+    sha256: 3707a7b7491e419cf093bb22d4c15c6b0879410348398526c7717e973c84c05a
+  - file: 04-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.polestar.com/es/polestar-2/
+      - "41.900"
+      - Standard
+    exit: 0
+    sha256: a3c27e40250f32c321a34e01b742c5919d7ae359559f9fb28bfb1400fafc10ca
+  - file: 05-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.polestar.com/es/polestar-3/
+      - "81.900"
+      - Long Range
+    exit: 0
+    sha256: a4cb149be3c9b9737da4b47fc77ef7b48582a5d12d4e959ef2112e45d89d8765
+  - file: 06-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.polestar.com/es/polestar-4/
+      - "49.900"
+      - Long range
+    exit: 0
+    sha256: 4d0e02ae8bcb696b015350bca90f4654d39dbb02f0bae090589a5ac23eeb267a
+  - file: 07-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://media.polestar.com/global/en/media/photos/list
+      - copyright
+    exit: 0
+    sha256: 3ad2b8e5424d6a561f3125b72881279b63e76719683ac38b928788f05d494669
+  - file: 08-fetch-page.json
+    tool: fetch-page
+    args:
+      - https://www.motorpasion.com/coches-electricos/polestar-4-2024-primer-contacto
+      - Conocemos el Polestar 4
+    exit: 0
+    sha256: 1ba2e96de87ac02f17d1b3d3de965d175a9b3fb903c70f474806a8a67209a8b2
+skipped_calls: []
