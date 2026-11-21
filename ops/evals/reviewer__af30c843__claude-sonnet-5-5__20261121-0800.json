@@ -1,0 +1,680 @@
+{
+  "experiment": "reviewer/af30c843/claude-sonnet-5-5/20261121-0800",
+  "agent": "reviewer",
+  "model": "claude-sonnet-5-5",
+  "prompt_sha": "af30c843a415d0663764a5e81f9f6079dbdc0d58",
+  "dataset_sha": "13f2cd0d9a5faf5b7e8749a366c43e014f098ce2",
+  "judge_model": "claude-sonnet-5-5",
+  "rubric_sha": "ff91328d4a58e2bbf53f910da7597780693d60e5",
+  "started": "2026-11-21T08:00:23+01:00",
+  "ended": "2026-11-21T08:11:21+01:00",
+  "complete": true,
+  "stopped": null,
+  "cases": [
+    {
+      "case_id": "pr-0142",
+      "pr": 142,
+      "expected_label": "review:needs-human",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 0.5,
+        "invented": 1,
+        "concrete": 0.75,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0784,
+      "judge_usd": 0.0198,
+      "turns": 7,
+      "units": 23,
+      "notes": [],
+      "comment": "🏭 Veredicto: cambios necesarios. El cuerpo de la PR no trae el bloque «fetch-page.ts / fetch-idae.ts output», aunque cambian los `retrieved` y los `last_verified` de `opel-es` y `opel-press`. Falta además la prueba de que la lectura se hizo. SHA revisado: 7dab7ff59ad4039c68ff0b8f7e46f39e83d369a5.\n\n**Criterios de aceptación** (la PR no cita historia; reviso contra la tarea del cuerpo)\n- Fuentes en el registro: cubierto en forma (`opel-es` y `opel-press` en `data/sources/registry.yaml`), pero sin traza de lectura.\n- Modelos en `data/raw/opel/` con el esquema de data-model.md: parcial. Hay 3 ficheros y los 4 evals pasan. Todos llevan `price: null`, `segment: null` y `launch: null`.\n- `segment` y `launch` con su fuente \"si la hay\": aceptable. Lo declaran en `open_questions`.\n- Imágenes de Wikimedia Commons con `license` y `attribution`: cubierto en forma. No he abierto las páginas de Commons y no he comprobado que el hash de la URL, el autor ni la licencia correspondan a cada fichero.\n- Solo licencias que permitan uso comercial: CC BY-SA 4.0 y 3.0 de lo permiten.\n\n**Hallazgos**\n1. **Fallo de flujo del agente.** Falta el bloque «fetch-page.ts / fetch-idae.ts output». Los `retrieved: 2026-10-03` de los tres YAML y los `last_verified` de `opel-es` y `opel-press` no tienen ninguna llamada de lectura detrás. Hay que ejecutar `fetch-page.ts` sobre `https://ofertas.opel.es/particulares?model=corsa|mokka|frontera` y sobre las URL del registro. Después hay que regenerar la PR para que el bloque aparezca.\n2. `launch: null` y `segment: null` en los tres ficheros: data-model.md los define como `Sourced` opcional. Si es opcional, lo correcto es omitir la clave, no escribir `null`. Hay que confirmar con el validador o con data-model.md que `null` es válido. Si no lo es, hay que quitar las claves.\n3. Cada modelo tiene una sola versión sin ficha técnica (batería, WLTP, potencia). Las versiones se llaman \"Mokka Electric\" y \"Frontera Electric\" por falta de dato. Esto cuadra con ADR-0001, pero la ficha queda casi vacía. El Corsa Electric, por ejemplo, tiene \"50kWh Edition\" sin fuente de lectura propia.\n4. `opel-press` con `urls.article_corsa_electric` y `opel-es` con `models` y `offers_corsa_electric` apuntan a URL \"solo por buscador (403)\". Son direcciones que el agente no leyó. Conviene quitarlas o marcarlas como no verificadas.\n\n**Lo que no he podido comprobar**\n- Las licencias y autores de los ficheros de Commons.\n- Que `ofertas.opel.es` diga lo que afirman las notas (sin traza).\n\n**Etiquetas:** `review:changes` y `workflow-fail:researcher`.",
+      "judge_why": {
+        "finding_recall": "0: sí, El comentario dice que no ha abierto Commons y no ha comprobado que el hash, el autor ni la licencia correspondan a cada fichero, e indica que no ha podido comprobar licencias y autores.\n1: no, Dice que no ha podido comprobar que ofertas.opel.es diga lo que afirman las notas, pero lo plantea como falta de traza de lectura, no como una comprobación humana pendiente del estado de los tres modelos.",
+        "invented": "El hallazgo 2 pide omitir launch/segment null aunque ADR-0001 lo avala como correcto (está en «No son hallazgos»), y el hallazgo 1 exige un bloque fetch-page.ts que no se apoya en un requisito citado.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0171",
+      "pr": 171,
+      "expected_label": "review:needs-human",
+      "labels": [
+        "review:ok"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 1,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 0,
+        "invented": 0,
+        "concrete": 0.333,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0835,
+      "judge_usd": 0.0249,
+      "turns": 11,
+      "units": 29,
+      "notes": [],
+      "comment": "🏭 Veredicto: puede entrar como está. Es una PR solo de documentación, la CI está en verde y no he encontrado ningún hallazgo que impida fusionarla. Quedan cuatro preguntas abiertas para una persona, que no bloquean. SHA revisado: 33c6715d0531c0d9d19b537f9b77205949e466fa\n\n**Criterios de aceptación.** No he podido leer el issue #164: `gh issue view 164` responde que no existe. Reviso contra el texto de la tarea, que cita el cuerpo de la PR.\n- Decidir si basta con data-model.md o hace falta enmendar ADR-0001 o ADR-0008, o una ADR-0014: cubierto. La sección 8.1 decide que basta con data-model.md más una enmienda de ruta en ADR-0001, con alternativas descartadas. Tampoco hace falta ADR-0014 ni tocar ADR-0008.\n- Fijar en data-model.md la forma de cada fichero y adónde va el esquema de la cabecera del registro: cubierto. Las secciones 8.2 y 8.3 dan la ruta, nombre igual al id, tabla de claves y reglas comprobables.\n- Decir si la regla de fusión de ADR-0011 cambia: cubierto. La sección 8.5 dice que no cambia. Lo he comprobado en ADR-0011 (líneas 50 y 106): la lista es `data/raw/` y `docs/bitacora/`.\n- Dejar escrito qué cambia el Desarrollador y quién parte el registro, sin hacerlo: cubierto. La sección 8.4 lo detalla. Las referencias a `REGISTRY` y a `rawData` y `rawShape` coinciden con `factory/evals.ts`.\n- Actualizar las menciones a registry.yaml en docs/architecture/: cubierto. Con grep no queda ninguna en `docs/architecture/`, salvo la mención histórica de la enmienda y de la sección 8.\n- No tocar data/, factory/ ni .claude/: cumplido. El diff solo toca `docs/architecture/` y `docs/bitacora/`.\n\n**Hallazgos** (ninguno bloquea)\n1. Quedan menciones a `registry.yaml` fuera de `docs/architecture/`: PRD-001 línea 67, PRD-002 línea 74 y `docs/design/ficha-modelo.md` línea 368. La PR las lista como trabajo posterior (sección 8.4) y la tarea no permitía tocarlas. Hay que cerrarlas en la PR del Desarrollador o con Producto y Diseño.\n2. Hasta que se haga esa PR, la documentación dice que el registro son ficheros por fuente mientras el repositorio todavía tiene `registry.yaml`. La sección 8.4 lo explica y marca el orden.\n3. Hay una bitácora de una línea, bien formada.\n\n**Preguntas abiertas para una persona** (sección 8.7)\n- Endurecer o no el esquema del registro.\n- Sacar o no `candidatas.yaml` de `data/sources/`.\n- Registrar o no `autonomia-marcas` como fuente T3.\n- Si `data/sources/` entra o no en la fusión automática, lo que revisaría ADR-0011.\n\n**Lo que no he podido comprobar**\n- El issue #164, por lo que he dicho arriba.\n- La afirmación sobre el driver `union` de git: la PR dice que no la comprobó y no la he comprobado yo.\n- Las líneas 72 y 119 de `evals.ts` que cita la sección 8.4. Las referencias que comprobé están en las líneas 71 y 118, a una línea de distancia. Es menor.",
+      "judge_why": {
+        "finding_recall": "0: no, El comentario no señala que se modifique ADR-0001 (aceptada) ni que decidir sin ADR nueva requiera confirmación humana; da la decisión por cubierta y válida.\n1: no, El comentario no menciona que falte una prueba de dos ramas con fuentes distintas rebasadas sin conflicto; no habla del plan de pruebas.",
+        "invented": "Los hallazgos del comentario (menciones restantes a registry.yaml fuera de docs/architecture, desfase temporal) se apoyan en el diff y la sección 8.4, y lo no comprobado se declara como tal.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0193",
+      "pr": 193,
+      "expected_label": "review:changes",
+      "labels": [
+        "review:ok"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 1,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 0,
+        "concrete": 0.333,
+        "ca_correct": 0.5
+      },
+      "agent_usd": 0.0851,
+      "judge_usd": 0.0309,
+      "turns": 9,
+      "units": 26,
+      "notes": [],
+      "comment": "🏭 Veredicto: puede entrar. CI en verde (test y web), los tres CA cubiertos y sin hallazgos que bloqueen. Revisado el SHA cdb6fed5d23e8aa9b31015a47275afc9da69642f.\n\n**Criterios de aceptación**\n- CA-3: cubierto. `sort.test.ts` comprueba que el orden `precio-asc` empieza por Plain (19.990), el menor «precio desde», y que `precio-desc` empieza por Volta. El precio financed (Deal) ordena por su valor. Falla si se rompe el comparador. También hay una prueba del selector en el HTML construido.\n- CA-9: cubierto. Los modelos sin precio (Soon, Zzz) van al final en los dos órdenes de precio. La tarjeta de Zzz conserva «Precio por confirmar» y su `data-price` va vacío.\n- CA-16: cubierto. El orden por novedad da Soon (announced, con fecha prevista), Volta, Deal, Plain y Zzz (sin launch, al final). El HTML servido de /coches sale en ese mismo orden, comprobado con un build real.\n- RF-5 (orden en la URL): la ida y vuelta de `orden=` está probada junto a los filtros. El valor por defecto no se escribe y un valor inválido se ignora.\n\n**Hallazgos (menores, no bloquean)**\n1. `web/tests/sort.test.ts`: el comportamiento del navegador (que el `<select>` reordene el DOM y escriba `orden` en la URL) solo se prueba con `assert.match` sobre el JS servido (`append`, `replaceState`, `orden`). Esa prueba pasaría aunque el cableado estuviera mal. La lógica sí se prueba con el módulo compartido, y una prueba de las tarjetas comprueba que los atributos `data-*` dan el mismo orden que el build. Queda como riesgo aceptable.\n2. `CatalogFilters.astro`: el selector está fuera del panel plegable. El agente lo dice en la PR y es una decisión razonable para móvil, porque el diseño no fija la posición. Conviene que una persona lo mire. Tampoco he comprobado si «Quitar todos los filtros» reinicia el orden. `writeForm` pone `sort` a `f.sort`, así que probablemente sí. El diseño no dice si debería hacerlo.\n3. El cuerpo de la PR trae la tarea completa, pero no una lista propia de RF y CA cubiertos. Esa lista está en la bitácora (RF-3, RF-5, RF-7, RF-9, CA-3, CA-9, CA-16).\n\n**Contrato y alcance**\n- Alcance: ajustado a la historia. `sortByNovelty` pasa a usar `sort.ts`, que comparten el build y el navegador, como hizo #36 con `filter.ts`.\n- No añade dependencias.\n- No hay datos personales ni cookies.\n- La bitácora está registrada.\n\n**Lo que no he podido comprobar**\n- La interacción real en el navegador (foco y aspecto en móvil). No ejecuto las pruebas: me baso en la CI.\n- La historia no cita ninguna referencia de `docs/design/refs/`, así que no he comprobado el parecido visual.",
+      "judge_why": {
+        "finding_recall": "0: sí, El hallazgo 1 señala que la prueba del navegador solo hace assert.match sobre el JS servido y pasaría aunque el cableado estuviera mal.",
+        "invented": "Los hallazgos se apoyan en el diff y la historia; las dudas están marcadas como cosas no comprobadas.",
+        "ca_correct": "CA-3: cubierto, El comentario dice «CA-3: cubierto», pero el resultado esperado es no cubierto.\nCA-9: cubierto, El comentario dice «CA-9: cubierto» porque los modelos sin precio van al final con «Precio por confirmar»."
+      }
+    },
+    {
+      "case_id": "pr-0228",
+      "pr": 228,
+      "expected_label": "review:changes",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 0,
+        "concrete": 0.25,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.046,
+      "judge_usd": 0.0099,
+      "turns": 8,
+      "units": 25,
+      "notes": [],
+      "comment": "🏭 Veredicto: hay que cambiar la PR antes de entrar. El cambio de CI es correcto, pero faltan la explicación de la verificación y la entrada en la bitácora. SHA revisado: e92912ffad2589e1159e01de58d35a23e780590e.\n\n**Criterios de aceptación** (la tarea no cita una historia; uso sus requisitos):\n- Paso `node factory/validate-data.ts` después de `pnpm install` en el job `test`: cubierto. Está en `ci.yml`, tras install, test y typecheck.\n- No cambiar los disparadores `pull_request` y push a `main`: cubierto. El diff solo añade líneas dentro del job.\n- No tocar `factory/` ni `data/`: cubierto. El diff solo toca `ci.yml`.\n- Explicar en la PR cómo se comprobó que un error pone el paso en rojo y que con los datos actuales sale en verde con avisos: **no cubierto**. El cuerpo de la PR no lo explica, y el agente dice que no pudo.\n- La PR referencia ADR-0010 y dice que cumple la condición (b) del punto 7 de ADR-0011: **no cubierto en el cuerpo de la PR**. Solo aparece en el comentario del YAML.\n\n**Hallazgos**\n1. Falta la entrada en la bitácora (`docs/bitacora/2026-11/`). El diff no la incluye y el agente confirma que no la registró. Es una exigencia del contrato del repositorio.\n2. El cuerpo de la PR no explica la comprobación del rojo y del verde con avisos. Hay que añadirlo, por ejemplo ejecutando el script en local sobre una copia con un `source_id` inventado y comprobando que la salida es 1.\n3. El cuerpo de la PR no cita ADR-0010 ni la condición (b) del punto 7 de ADR-0011.\n4. La CI de `test` está en verde, así que con los datos actuales el paso no falla. No he podido leer el log para ver los avisos ni que el paso se ejecutó.\n\n**Lo que no he podido comprobar**\n- El log del job `test` (el comando pedía aprobación). Por eso no he visto el paso ejecutarse ni los avisos que emite.\n- Que un error ponga el paso en rojo. Ninguna prueba lo demuestra.",
+      "judge_why": {
+        "finding_recall": "0: sí, El hallazgo 1 señala que falta la entrada en la bitácora en docs/bitacora/2026-11/.\n1: sí, El hallazgo 2 indica que el cuerpo de la PR no explica la comprobación de que un error pone el paso en rojo.",
+        "invented": "Los hallazgos se apoyan en los criterios de la tarea, el contrato del repositorio y los ADR citados, y no tocan el comentario YAML en inglés; lo no comprobado se declara como tal.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0343",
+      "pr": 343,
+      "expected_label": "review:changes",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 0,
+        "invented": 1,
+        "concrete": 0.333,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0671,
+      "judge_usd": 0.0218,
+      "turns": 6,
+      "units": 22,
+      "notes": [],
+      "comment": "🏭 Veredicto: cambios necesarios. La PR no trae el bloque «fetch-page.ts / fetch-idae.ts output», así que no puedo dar por leídas las fuentes ni las fechas. Falta ese bloque y una decisión sobre las fechas de lectura. SHA revisado: b75859ca2fc078285972a8bd145c305690d222f1. CI en verde (test, web, a11y, changes).\n\n**Criterios de aceptación** (la tarea no cita CA de una historia; reviso contra sus requisitos):\n- Esquema de data-model (ADR-0008): parece correcto en los tres YAML. No he ejecutado el validador y la CI está verde. La bitácora dice que el agente no pudo ejecutar validate-data.ts.\n- Solo BEV: cubierto (Cooper, Aceman, Countryman, todos eléctricos).\n- wltp_km en todas las versiones: cubierto en las 8 versiones.\n- launch y segment: null en los tres, con motivo en open_questions. Correcto.\n- Precios de mini.es: no cubierto. mini.es dio timeout y todos los price son null, que es lo que pide la vía alternativa. Falta confirmar con T3 qué se vende hoy: los status on_sale se apoyan en artículos de 2023 y 2024, y el propio YAML lo reconoce.\n- Imágenes de Commons con fetch-image.ts: solo el Cooper. Aceman y Countryman llevan images: [] porque «no se buscaron». Es un cumplimiento parcial.\n- Fuentes como data/sources/<id>.yaml, sin tocar candidatas.yaml: cubierto con mini-es.yaml.\n\n**Hallazgos**\n1. **Paso del flujo saltado (workflow-fail:researcher).** La tarea exige confirmar dominio, respuesta y robots.txt y usar fetch-idae.ts, y la factoría añade la salida de esos scripts desde la traza. El cuerpo de la PR no tiene ese bloque. No hay ninguna llamada registrada a la url de mini-es.yaml ni a fetch-idae.ts, que es de donde salen todos los datos de idae-es (retrieved 2026-10-14).\n2. **Fechas sin lectura.** data/sources/mini-es.yaml pone last_verified: 2026-10-14, pero su propia nota dice que no se pudo cargar ninguna URL. Sin una llamada que cargase bien una de sus URL, esa fecha no se sostiene. Lo mismo vale para los retrieved: 2026-10-14 de idae-es, motor-es y hibridosyelectricos-es en los tres raw, sin llamadas visibles en el bloque.\n3. **Datos no comprobables.** Las cifras del IDAE (batería, wltp_km, kW, ids 6091xx) no pueden contrastarse con ninguna salida de fetch-idae.ts. Las notas dicen que los medios discrepan (Aceman E 42,5 kWh frente a 38,5; SE 54,2 frente a 49,2). Con batería y autonomía distintas, hay riesgo de que sean datos de otra homologación.\n4. **Countryman.** Se elige «la de menor wltp_km» entre dos homologaciones del IDAE (462/501 y 432/467). Es un criterio inventado y no lo recoge ninguna regla que haya citado. Mejor needs_review con ambas, o un criterio de data-model.md.\n5. **Imágenes.** Aceman y Countryman sin imagen por no haberlas buscado. Esto es trabajo que la tarea pedía y que queda sin hacer.\n6. **Sin validar.** La bitácora admite que no se ejecutó validate-data.ts. La CI lo cubre y está verde, así que solo lo anoto.\n\n**Lo que no he podido comprobar**\n- No he abierto las URL del IDAE ni de mini.es, así que no sé si las cifras coinciden con la fuente.\n- No he mirado la licencia ni el autor de la imagen en Commons. La imagen es un binario y no puedo comprobarlo desde el diff.\n\nPasos para entrar: repetir la ejecución con las llamadas a fetch-idae.ts y fetch-page.ts visibles, o retirar los retrieved y last_verified que no tengan lectura. Después, buscar imágenes para Aceman y Countryman.",
+      "judge_why": {
+        "finding_recall": "0: no, El comentario cuestiona last_verified de mini-es.yaml, pero no señala que status: active sea incorrecto cuando no se pudo leer robots.txt ni las páginas de gama.",
+        "invented": "Se apoya en un bloque «fetch-page.ts / fetch-idae.ts output» y en requisitos de la tarea que no constan en el diff ni en ninguna historia, ADR o PRD citados, y critica imágenes y el criterio de menor wltp_km sin base citada.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0433",
+      "pr": 433,
+      "expected_label": "review:changes",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 0.333,
+        "invented": 1,
+        "concrete": 0.333,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0725,
+      "judge_usd": 0.0261,
+      "turns": 7,
+      "units": 23,
+      "notes": [],
+      "comment": "🏭 Veredicto: cambios necesarios. El cuerpo de la PR no trae el bloque «fetch-page.ts / fetch-idae.ts output», así que no hay prueba de que el agente ejecutara los scripts. Además, la tarea pedía registrar las fuentes de Xpeng y no hay ninguna. SHA revisado: f285163f666df3403a47a4e89d80c6af77a45f50.\n\n**Criterios de aceptación** (la PR no cita historia; uso lo que pide la tarea)\n- Esquema de ADR-0008, solo BEV, wltp_km en todas las versiones: cubierto en los tres YAML. La CI (test, con validate-data) está en verde.\n- Fuentes en el registro (`data/sources/<id>.yaml`): **no cubierto**. No hay ningún fichero nuevo en `data/sources/`, y la tarea decía «Crea las fuentes». La web oficial de Xpeng en España no se localizó, y eso no se registra en ninguna parte salvo en `open_questions`.\n- Web oficial, que responda y robots.txt: **no verificable**. La PR solo dice que xpeng.com/es da 404 y que es.xpeng.com y xpeng.es no existen. Sin bloque de trazas no hay constancia de las llamadas.\n- Vía IDAE cuando la web no se lee: se siguió, con T2 más T3, y los precios quedan en null. Es lo correcto, pero no se puede comprobar la lectura (ver hallazgo 1).\n- launch, segment y status: launch es null en los tres. Los segment de G6 y G9 son null con motivo. En P7+, `segment: berlina` viene de un T3 (Motor1) y hay que comprobar que «berlina» sea el término literal de RF-11. El status viene de T3 (motor-es y motor1-es); lo aceptable es que se anote.\n- Imágenes de Commons (G6, G9): licencia CC-BY-SA-4.0 con atribución. Compatible con uso comercial. No he podido comprobar la licencia en Commons.\n\n**Hallazgos**\n1. **Paso del flujo saltado (workflow-fail:researcher).** Falta el bloque «fetch-page.ts / fetch-idae.ts output». Los `retrieved` del IDAE (2026-10-16) y de motor-es, motor1-es y Commons (2026-10-17) no tienen ninguna llamada que los respalde. Por tanto las fechas y la lectura de las fuentes no están verificadas.\n2. **Datos del G6 Standard Range inconsistentes.** El IDAE da 566 km y 218 kW. Para 68,5 kWh y una potencia de 218 kW, 566 km es sospechoso: coincide casi con el Long Range (568 km con 80,8 kWh). Motor.es da 455 km y 185 kW. Ante la contradicción, la regla de la tarea pide dejar la cifra en null y anotarla en `open_questions`, pero la PR guarda el valor del IDAE (`data/raw/xpeng/g6.yaml`, wltp_km y power_kw de la primera versión). La regla vale para fuentes T1, pero el valor es dudoso; conviene null o al menos revisión humana.\n3. **`status` de P7+ con nota confusa** (`p7-plus.yaml`): «16 de junio, 2026 por contexto». Es una fecha deducida, no leída. Cítala tal como la da la fuente.\n4. **`basis: unknown` en todas las baterías.** Es aceptable, pero la capacidad tampoco tiene T1.\n5. **El agente no pudo comprobar el slug** `p7-plus` (lo dice en su resumen). La CI pasa, así que el validador lo acepta.\n\n**Lo que no he podido comprobar**\n- Las URLs de motor.es, motor1.es e IDAE ni los ficheros de imagen. La licencia en Commons tampoco.\n- El parecido visual no aplica: la PR no cita referencia de diseño.",
+      "judge_why": {
+        "finding_recall": "0: no, El comentario no señala que drivetrain se deduzca del nombre de la versión y se atribuya al IDAE; solo habla de basis: unknown en baterías.\n1: no, Dice que el status viene de T3 y que es aceptable anotarlo, pero no señala que G9 y P7+ queden con needs_review: false apoyados solo en prensa T3.\n2: sí, El hallazgo 2 indica que el G6 Standard Range conserva los valores del IDAE pese a la contradicción con motor.es en vez de dejarlos en null.",
+        "invented": "El hallazgo 1 y el veredicto exigen un bloque «fetch-page.ts / fetch-idae.ts output» y el registro de fuentes en data/sources, requisitos que no se apoyan en el diff ni en una historia o ADR citados (se basa en una «tarea» no visible).",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0445",
+      "pr": 445,
+      "expected_label": "review:ok",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 1,
+        "finding_recall": 1,
+        "invented": 1,
+        "concrete": 0.333,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0973,
+      "judge_usd": 0.016,
+      "turns": 12,
+      "units": 31,
+      "notes": [
+        "escribió fuera de write_paths: ../../../../../../../tmp/review-445.md"
+      ],
+      "comment": "🏭 Veredicto: cambios necesarios. Falta el bloque «fetch-page.ts / fetch-idae.ts output», así que no hay prueba de que se leyeran ford.es ni el IDAE, y el recorte de versiones no coincide con lo que pedía la tarea. SHA revisado: 2cadf5ae7dacbd0fdc6f3adb0b9a471232823d88. CI en verde (a11y, changes, web, test).\n\n**Puntos de la revisión de #362**\n- (1) Custom, versiones solo Grand Tourneo: NO cubierto del todo. La tarea decía que 4 de las 6 versiones constan solo como Grand Tourneo. El agente quita 2 (610313 y 610312) y deja 4, que dice tener fila IDAE E-Tourneo Custom sin Grand (610317, 610316, 610319, 610318). No lo demuestra: sin salida de fetch-idae.ts en la PR no se puede comprobar. Tampoco hay rastro de la consulta a ford.es ni a medios T3 que cita en open_questions.\n- (2) Nombres de versión: cubierto a medias. «64 kWh 160 kW» ya no mezcla acabados y open_questions explica el motivo. Es aceptable, pero la justificación es solo texto.\n- (3) Courier Trend, wltp_km con una sola fuente: cubierto. La nota cita solo el IDAE.\n- needs_review: true y price: null se mantienen. No se tocan otros modelos. Bitácora añadida.\n\n**Hallazgos**\n1. Fallo de flujo del agente: falta el bloque «fetch-page.ts / fetch-idae.ts output». No hay ninguna llamada a la url de ford.es ni a fetch-idae.ts para los ficheros cambiados, y la tarea pedía comprobar con ambos. Añado la etiqueta workflow-fail:researcher.\n2. data/raw/ford/e-tourneo-custom.yaml: hay que resolver la discrepancia (2 quitadas frente a 4 de 6) con una lectura real del IDAE. Si solo 2 constan como Grand, hay que explicarlo. Si son 4, hay que quitar las otras 2.\n3. Las fechas retrieved siguen en 2026-10-15. Si hay relectura, hay que actualizarlas; si no, debe quedar claro que no se ha releído.\n\n**Lo que no he podido comprobar**\n- El contenido actual del IDAE y de ford.es: no ejecuto scripts de fetch y la PR no trae su salida.",
+      "judge_why": {
+        "finding_recall": "",
+        "invented": "El comentario exige un bloque «fetch-page.ts / fetch-idae.ts output» y que se quiten 4 versiones, y la PR no cita historia; además la discrepancia 2 frente a 4 está en «No son hallazgos», porque el IDAE solo sostiene 2.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0448",
+      "pr": 448,
+      "expected_label": "review:needs-human",
+      "labels": [
+        "review:error"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 0,
+        "concrete": 0.667,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0487,
+      "judge_usd": 0.0098,
+      "turns": 9,
+      "units": 25,
+      "notes": [],
+      "comment": "🏭 Veredicto: no he podido completar la revisión. El trabajo real de la tarea está en el cuerpo y los comentarios de las issues de GitHub, y no he podido leerlo. Hace falta que alguien lo compruebe antes de dar la PR por buena. SHA revisado: 7cd5e6611b1d3b38c28a327c56d01161b8b0abc5.\n\n**Qué cambia la PR:** solo añade `docs/bitacora/2026-10/2026-10-17T0432-fbc629f5.md`, una entrada de bitácora. La CI está en verde (test, web, changes; a11y omitido).\n\n**Criterios de aceptación**\n- (1) RF y CA de cada historia iguales a los del PRD vigente: no comprobado. No he podido leer las issues #368 a #378.\n- (2) Cumplimiento de ADR-0015 (JSON por ranking, función pura única, PRICE_BANDS, `precio=<slug>`, «Error al filtrar», robots.txt): no comprobado.\n- (3) Dependencias al día: no comprobado.\n- (4) Ningún RF, CA o detalle de la ADR sin historia: no comprobado. La bitácora dice que se creó #447, pero `gh issue view 447` responde que no existe en este entorno.\n- Un comentario «🏭 Revisión de cobertura» en cada issue: no comprobado. `gh issue list` está desactivado en esta evaluación.\n- Bitácora: cumplido. La entrada existe, resume lo revisado y cita ADR-0015 y PRD-005.\n\n**Hallazgos**\n1. La bitácora afirma cambios en #368, #370, #373, #374, #376, #377 y #378, y la creación de #447. Ninguna está en el diff y no he podido contrastarlas. Alguien con acceso debe confirmar que #447 existe y que los comentarios están publicados.\n2. El propio agente deja sin resolver que RNF-2 (LCP) no tiene historia ni CA. La ADR ahora pide medirlo con una URL con filtros. Según la tarea 4, ningún RF puede quedar sin historia, así que esto probablemente es un hueco de cobertura abierto. También queda abierta la discrepancia de CA-18 («fuente oficial» frente a «verificable»), que es la pregunta 4 de la épica y necesita decisión humana.\n3. El título de la PR está cortado («...(PRD-005, »). Es cosmético.\n\n**Lo que no he podido comprobar**\n- El contenido de las issues #368 a #378 y #447, y sus comentarios.\n- Si se respetó la restricción de no tocar #369, que está en la cola.",
+      "judge_why": {
+        "finding_recall": "0: sí, El hallazgo 2 señala que RNF-2 (LCP) no tiene historia ni CA y es un hueco de cobertura abierto.\n1: sí, El hallazgo 2 menciona la discrepancia de CA-18 entre «fuente oficial» y «verificable» y que necesita decisión humana.",
+        "invented": "Los hallazgos se apoyan en el diff, la bitácora y el PRD/ADR citados; lo no comprobado se declara como tal y no se inventa ningún requisito.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0450",
+      "pr": 450,
+      "expected_label": "review:changes",
+      "labels": [
+        "review:ok"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 1,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 0,
+        "invented": 0,
+        "concrete": 0.333,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0858,
+      "judge_usd": 0.0258,
+      "turns": 10,
+      "units": 29,
+      "notes": [],
+      "comment": "🏭 Veredicto: puede entrar como está. La CI está en verde (a11y, changes, test y web), los CA-5 y CA-6 están cubiertos y no hay hallazgos que bloqueen. SHA revisado: 0d3d01136dfa01e50f5736ed1caabc07bc643de3.\n\n**Criterios de aceptación**\n- CA-5, parte 1 (cada versión muestra su autonomía en km): cubierto. La prueba «CA-5: each version shows its range in km» comprueba 470, 520 y 490 km en la tabla, y falla si cambia el texto o el orden.\n- CA-5, parte 2 (sin autonomía en versiones, cifra del modelo rotulada como del modelo): cubierto. En la prueba con el modelo `NoRange`, las versiones dicen «por confirmar», el 557 no aparece en el bloque de versiones y sí en el bloque del modelo con la etiqueta «Autonomía WLTP máxima del modelo». Ese bloque ya existía en `main`. La prueba `OneRange` confirma que `specs.wltp_max_km` no rellena las versiones que no traen dato.\n- CA-6, batería con base bruta: cubierto. Hay prueba de las tres bases: «60 kWh, útil», «80 kWh, bruta» y «sin especificar». También prueba el decimal 77,5.\n- CA-6, versión sin `dc_max_kw`: cubierto. Las versiones sin dato muestran «por confirmar», y esa celda no lleva enlace ni «Fuente». Una versión con dato muestra 150 kW.\n\n**Hallazgos (menores, no bloquean)**\n1. `[modelo].astro`: `fieldRows` toma las etiquetas de `versions[0]` y `fieldsOf(version)[i]` se calcula una vez por celda. Funciona porque la lista de campos es fija. Es un poco redundante, pero no lo veo un fallo.\n2. `VersionField.astro` usa `SourceDate` directamente en vez de `sourceView`. La nota de fuente numerada es de la historia del bloque «Fuentes», así que no es alcance de esta PR.\n3. Se añade `formatDecimal` en `format.ts`. Está justificada en la bitácora, porque `formatNumber` redondea. No hay dependencias nuevas.\n\n**Alcance y contrato**\n- No hay campos fuera de `data-model.md` ni estimaciones.\n- Los datos faltantes no se ocultan.\n- Hay entrada en la bitácora.\n- No hay datos personales ni cookies.\n\n**Lo que no he podido comprobar**\n- No he ejecutado las pruebas: me fío de la CI.\n- No he mirado el render en navegador, y el cambio entre tabla y bloques por anchura tampoco. La propia PR lo dice.\n- No he comparado el orden de campos con `docs/design/ficha-modelo.md`. Solo he comprobado que la prueba fija un orden: Autonomía, Batería, Potencia, Tracción, CC y CA.\n- La historia no cita ninguna referencia de `docs/design/refs/`, así que no he hecho la comparación visual.",
+      "judge_why": {
+        "finding_recall": "0: no, El comentario no menciona que falte «Closes #150» ni la lista de RF y CA en el cuerpo de la PR.",
+        "invented": "Los hallazgos se apoyan en el diff; el recálculo de fieldsOf se marca como menor, no bloqueante, y no se inventa ningún requisito.",
+        "ca_correct": "CA-5: cubierto, El comentario declara CA-5 cubierto en sus dos partes, con las pruebas de 470/520/490 km y de NoRange.\nCA-6: cubierto, El comentario declara CA-6 cubierto: base bruta de la batería y «por confirmar» sin dc_max_kw."
+      }
+    },
+    {
+      "case_id": "pr-0452",
+      "pr": 452,
+      "expected_label": "review:changes",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 1,
+        "concrete": 0.667,
+        "ca_correct": 0.333
+      },
+      "agent_usd": 0.1082,
+      "judge_usd": 0.0432,
+      "turns": 10,
+      "units": 27,
+      "notes": [],
+      "comment": "🏭 Veredicto: cambios antes de entrar. La CI está en verde y el código encaja con #318, pero al cuerpo de la PR le falta «Closes #318» y la lista de RF/CA, y el script de DOM no tiene ninguna prueba. SHA revisado: 0f45d36498560ea86ae83bbfcad0b69ba21da116\n\n**Criterios de aceptación**\n- CA-1 (3 columnas, enlace a la ficha, mismas filas): cubierto en la lógica. `headerView` se prueba (marca, modelo, nombre, href, texto oculto). Que salgan 3 columnas y que las filas coincidan solo lo hace el script de `ComparisonTable.astro`, que no se prueba con ningún test. La CI comprueba que existen las plantillas, no que la tabla se monte.\n- CA-3 (7 filas en orden, base de la batería): cubierto. `FIELDS` y los textos formateados se prueban, también `gross`, `usable` y `unknown`. El estado va como badge en la cabecera.\n- CA-4 («por confirmar» sin cifra): cubierto. El test recorre todos los campos de una versión vacía y comprueba que no hay dígitos. La fila de CA sigue visible porque se itera sobre `FIELDS` siempre.\n- CA-6 (badge, condiciones literales, nota): cubierto en `cellView`, con `financed` frente a `pvp` y la nota verbatim. El enlace y el `price_terms` literal del bloque «Condiciones» se montan en el script, sin test.\n- CA-15 (sin mejor/peor ni diferencias; orden de la URL): parcial. El test de claves de `CellView` no puede fallar por lo que pide el criterio. Solo prueba que el objeto tiene siete claves, no que la página no resalte nada. El orden de la URL depende de `validateSelection`, de #316, y del `map` del script, que no se prueban aquí.\n- CA-17 (320 px sin scroll; «por confirmar», «Precio con oferta» y «fuente no oficial» sin depender del color): parcial. Los tres textos existen, pero no hay ninguna comprobación a 320 px. El job a11y no ejercita la tabla, porque está oculta sin parámetros en la URL.\n\n**Hallazgos**\n1. **Cuerpo de la PR** (proceso). La tarea pedía «Closes #318» y enumerar RF y CA. En el cuerpo solo está el resumen del agente, que dice que lo lleva, pero no está. Sin eso, #318 no se cierra al fusionar. Hay que añadirlo.\n2. **«fuente no oficial» solo en el precio** (`ComparisonTable.astro`, `cellView`). `unofficial` se calcula para los siete campos, pero la plantilla solo lo pinta dentro del bloque `source`, que solo existe para el precio. Una autonomía de T2/T3 se ve igual que una de T1. El agente lo reconoce y lo remite a #319. Si #319 lo cubre, hay que dejarlo escrito en la PR. Si no, CA-17 queda a medias. Lo dejo como pregunta de alcance.\n3. **Sin prueba del montaje** (`web/tests/comparar.test.ts`). El test nuevo solo mira el HTML estático y la ausencia de `localStorage`. Es razonable, porque no hay navegador, pero CA-1, CA-15 y CA-17 quedan sin prueba. Se puede sacar la composición (orden de columnas, `picked`) a `compare.ts`, o dejar escrito que lo cubrirá una prueba de navegador.\n4. **Alcance**: no hay adelantos. Los estados con menos de dos columnas se dejan para #320 y #321, y no hay notas ni bloque «Fuentes». Se añade un fallback mínimo de error, que es pequeño y se avisa en el comentario del código.\n5. Sin dependencias nuevas. La bitácora está. Está bien resuelto que se fetchen como máximo 12 modelos distintos y que no se use `innerHTML`.\n\n**Lo que no he podido comprobar**\n- El parecido visual y los 320 px: `docs/design/comparador.md` no cita ninguna referencia de `docs/design/refs/`, y `gh run list` no estaba disponible, así que no he visto las capturas.\n- El comportamiento real del script en el navegador.",
+      "judge_why": {
+        "finding_recall": "0: sí, El hallazgo 3 y varios CA señalan que el script de ComparisonTable.astro no tiene ninguna prueba del montaje y que el test solo mira HTML estático y ausencia de localStorage.",
+        "invented": "El hallazgo 1 exige «Closes #318» y la lista de RF/CA en el cuerpo de la PR, algo que no se apoya en el diff, la historia ni un PRD o ADR y que el Revisor solo atribuye a «la tarea».",
+        "ca_correct": "CA-1: cubierto, El comentario lo da por cubierto en la lógica, aunque señala que el montaje no se prueba.\nCA-3: cubierto, El comentario dice «cubierto» sin reservas.\nCA-4: cubierto, El comentario dice «cubierto» y cita el test que recorre todos los campos.\nCA-6: cubierto, El comentario dice «cubierto en cellView», con reservas solo sobre el bloque de condiciones sin test.\nCA-15: no cubierto, El comentario lo marca como «parcial».\nCA-17: no cubierto, El comentario lo marca como «parcial»."
+      }
+    },
+    {
+      "case_id": "pr-0464",
+      "pr": 464,
+      "expected_label": "review:changes",
+      "labels": [
+        "review:ok"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 1,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 0,
+        "invented": 0,
+        "concrete": 1,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0557,
+      "judge_usd": 0.0141,
+      "turns": 10,
+      "units": 28,
+      "notes": [],
+      "comment": "🏭 Veredicto: puede entrar como está. CI en verde (a11y, test, web, changes) y los dos CA cubiertos. SHA revisado: 714c7a96f462e393d30d43bbd81229d05ecfdfae.\n\n**Criterios de aceptación**\n- CA-8: cubierto. `comparar-ficha.test.ts` construye la web y comprueba que hay un único enlace `/comparar/?v=acme/Volta`, con texto «Comparar» y texto oculto «{marca} Volta con otros coches». También comprueba que va después de `data-web-marca`, en su propio `<p>`, con estilo de enlace de texto y sin `rel` ni `data-web-marca`, así que no es un enlace de compra. Falla si se rompe cualquiera de esos puntos. La opción de añadir otros modelos (RF-9) es de la página `/comparar`, no de esta historia.\n- CA-13 (ficha): cubierto. Un modelo `announced` con `versions: []` y uno `discontinued` no llevan el enlace. Un modelo con `needs_review` no genera ficha, y la prueba lo comprueba. Un `announced` con versiones sí lleva la acción.\n\n**Hallazgos (menores, no bloquean)**\n1. La nota técnica de la historia dice «actualiza `web/tests/ficha.test.ts` si fija los enlaces de la cabecera». El diff no lo toca y la CI pasa, así que no lo fija. Bien.\n2. Reutiliza `card.compare` (`isComparable` y las claves `comparar.accion*`) en lugar de duplicar el criterio. Está bien resuelto.\n3. Sin dependencias nuevas. La entrada de bitácora está. No hay datos personales ni cookies.\n\n**Lo que no he podido comprobar**\n- Parecido visual (ADR-0024): no he descargado el artefacto `capturas`, y la historia no cita ninguna referencia de `docs/design/refs/`. No lo doy por comprobado.\n- No he podido listar la rama remota para confirmar que no queda `web/design-proto/`. El diff no lo toca.",
+      "judge_why": {
+        "finding_recall": "0: no, El comentario no menciona que falte «Closes #324» en el cuerpo de la PR; dice que puede entrar como está.",
+        "invented": "Los hallazgos listados se apoyan en el diff y la historia; el punto sobre ficha.test.ts es un comentario positivo y no un fallo, y lo no comprobado está marcado como tal.",
+        "ca_correct": "CA-8: cubierto, El comentario dice «CA-8: cubierto» con la prueba que lo respalda.\nCA-13: cubierto, El comentario dice «CA-13 (ficha): cubierto» y detalla los casos comprobados."
+      }
+    },
+    {
+      "case_id": "pr-0466",
+      "pr": 466,
+      "expected_label": "review:needs-human",
+      "labels": [
+        "review:needs-human"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 0,
+        "concrete": 0.333,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.106,
+      "judge_usd": 0.0357,
+      "turns": 8,
+      "units": 25,
+      "notes": [],
+      "comment": "🏭 Veredicto: la ADR-0016 es coherente y está bien razonada, pero es una ADR en estado «propuesta» y aceptarla es decisión de una persona (límites de gasto, modelos a comparar, quién etiqueta los casos). Hasta entonces no puede entrar. SHA revisado: 20f338318850e717abb5063886ede9a429ee58c1. CI en verde (test, changes, web; a11y omitido).\n\n**Criterios de aceptación** (la tarea no es una historia con CA; reviso contra las 6 preguntas que pide)\n- (1) Dónde viven los datos: cubierto. Ficheros en el repo, subida idempotente con upsert por id, Langfuse como vista (ADR-0004).\n- (2) Qué es un caso y cuántos: cubierto. PR cerradas, resultado esperado fijado por una persona, 20 casos con mínimos por etiqueta y tope de 4 sintéticos.\n- (3) Cómo se ejecuta: cubierto. Script con el arranque del orquestador, un gh falso que no filtra la etiqueta esperada, y un experimento por modelo y prompt con atributos OTel.\n- (4) Qué se puntúa y cómo se aprueba: cubierto. Comprobaciones de código más un juez LLM local con rúbrica versionada, y umbrales frente a la línea base.\n- (5) Coste: cubierto. Clave aparte, bloque evals en budgets.yaml y estimación por modelo. Los precios por token cuadran con los citados: Opus es 2 veces Sonnet y Haiku es 20 veces más barato.\n- (6) Límites de Hobby: cubierto. Estimación de unidades y 30 días. La ADR dice sin rodeos que no se sabe qué pasa al superar las 50 000.\n- Alcance: respeta «no toques factory/ ni .claude/». Solo toca docs/architecture/, overview.md y la bitácora.\n\n**Hallazgos**\n1. (Decisión humana) Estado «propuesta» con preguntas abiertas sin resolver: cifras de 15 y 40 USD, límite del workspace de la Console, qué modelos comparar, si hay PR cerradas suficientes de review:needs-human y review:error, y quién etiqueta los 20 casos. Hay que aceptarla, o ajustarla, antes de implementar nada.\n2. (Menor) El gh falso solo responde a pr view/diff/checks e issue view. El prompt del Reviewer también usa gh run list y gh run download (parecido visual). En el experimento fallarán, así que el Reviewer no podrá hacer ese paso. La ADR ya lo admite en Consecuencias de forma general, pero conviene decir explícitamente que ese paso queda fuera del experimento.\n3. (Menor) Tres cosas no están comprobadas contra la documentación, y la ADR lo dice: la ruta REST para crear el dataset, si el experimento aparece solo con atributos OTel, y el límite de Hobby. Se resuelve con la ejecución de un caso antes de lanzar los 20, como ya propone.\n\n**Lo que no he podido comprobar**\n- No he vuelto a leer las URL de Langfuse y Anthropic que cita la ADR. Doy por buenas sus afirmaciones sobre la API y los precios solo en la medida en que son internamente coherentes.\n- La estimación de coste sale de un comentario de budgets.yaml, no de una medición, como reconoce la propia ADR.",
+      "judge_why": {
+        "finding_recall": "0: sí, El comentario dice que la ADR está en estado «propuesta» y que aceptarla, incluidos los límites de gasto, es decisión de una persona.",
+        "invented": "Los hallazgos se apoyan en la ADR del diff; el punto de gh run list/download se refiere al prompt del Reviewer, que no está en el diff, pero se presenta como observación menor sin inventar un requisito y no está en «No son hallazgos».",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0470",
+      "pr": 470,
+      "expected_label": "review:ok",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 1,
+        "concrete": 0.333,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0732,
+      "judge_usd": 0.0209,
+      "turns": 7,
+      "units": 23,
+      "notes": [],
+      "comment": "🏭 Veredicto: hay que cambiar algo antes de entrar. Las cuatro correcciones de la segunda vuelta están hechas, pero la PR no trae el bloque «fetch-page.ts / fetch-idae.ts output». Los tres ficheros nuevos llevan `retrieved` 2026-10-16 y 2026-10-17 sin ninguna lectura que los respalde en esta ejecución. SHA revisado: 12c3b47fd8814be18d5af2f518e0728ce4035f09. La CI está en verde: a11y, changes, test y web.\n\n**Criterios de aceptación** (la tarea de la PR; no cito historia)\n- (1) drivetrain: cubierto. Ya no aparece en g6, g9 ni p7-plus, y open_questions lo explica.\n- (2) G6 Standard Range: cubierto. `power_kw` y `wltp_km` no están en esa versión, no hay `wltp_km` en ninguna versión del G6, `needs_review: true` y la contradicción está en open_questions.\n- (3) G9 y P7+: cubierto. Ambos llevan `needs_review: true` y open_questions explica que `on_sale` solo se apoya en una noticia T3.\n- (4) P7+: cubierto. `segment: null`.\n- Imágenes: parcial. G6 y G9 son de Commons con CC BY-SA 4.0 y llevan atribución; P7+ queda sin imagen. No he podido comprobar que `fetch-image.ts` las descargase (ver abajo).\n- No toca `data/candidatas.yaml`: cubierto. La bitácora dice que sustituye a la PR #433: cubierto.\n\n**Hallazgos**\n1. **Paso del flujo saltado.** Falta el bloque de salida de `fetch-page.ts` / `fetch-idae.ts`. No hay ninguna llamada a las URL de `motor.es` y `motor1.es` ni a `fetch-idae.ts`, y aun así los tres ficheros nuevos fijan `retrieved: 2026-10-16` o `2026-10-17`. Esas fechas vienen de la rama anterior y no se releyeron aquí. Hay que releer las fuentes con los scripts y dejar la traza, o quitar o rebajar esas fechas. Por eso pongo `workflow-fail:researcher`.\n2. `g6.yaml`, G6 RWD Long Range: `power_kw: 218` (IDAE 607456). Es el mismo valor que la tarea marcaba como dudoso en Standard Range (218 kW). Al releer el IDAE hay que comprobar que la fila 607456 no se confundió con la 607455. Además, `battery_kwh` 68,5 de Standard Range viene de la misma fila que se declara poco fiable. Si no se confirma, déjalo anotado en open_questions.\n3. `status: on_sale` en G9 y P7+ sigue apoyado solo en T3 (la fecha del Motor1 no se leyó). Está bien marcado con `needs_review`, pero la PR debe seguir en revisión humana de datos.\n\n**Lo que no he podido comprobar**\n- La licencia de las imágenes de Commons ni que las descargase `fetch-image.ts`: no he abierto las páginas.\n- Los valores del IDAE contra la fuente.",
+      "judge_why": {
+        "finding_recall": "",
+        "invented": "El comentario exige un bloque de salida de fetch-page.ts/fetch-idae.ts y pone workflow-fail:researcher, algo que no sale del diff, de una historia ni de una ADR citada; además cuestiona valores del IDAE que el resultado esperado dice que no son fallo.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0472",
+      "pr": 472,
+      "expected_label": "review:ok",
+      "labels": [
+        "review:ok"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 0,
+        "concrete": 0.333,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.094,
+      "judge_usd": 0.0164,
+      "turns": 18,
+      "units": 41,
+      "notes": [],
+      "comment": "🏭 Veredicto: puede entrar como está; solo hay observaciones menores. CI en verde (a11y, web, test, changes). SHA revisado: bbccf2794b710c271e54d622eeea81e8df9f0c37\n\n**Criterios de la tarea** (la PR no cita una historia; reviso contra el texto de la tarea)\n- Solo Playwright, sin dependencias nuevas: cubierto. `package.json` no cambia.\n- Corre sobre el build servido por astro preview y entra en el job a11y: cubierto. `test:a11y` es `playwright test` y `testDir` es `./e2e`, así que recoge `lcp.spec.ts`. El job informa y no bloquea según `ci.yml`.\n- Móvil 412x823, CDP con 150 ms de RTT, 1,6 Mbit/s de bajada, 750 kbit/s de subida y CPU x4: cubierto.\n- LCP leído con PerformanceObserver buffered y comprobado < 2500: cubierto. El `expect` falla si se supera.\n- Cinco páginas: cubierto. Son portada, /coches/, /coches/ con filtros, una ficha con imagen y /comparar/ con tres `v`.\n  - `precio_max` es un parámetro real: lo lee `filter.ts:71`.\n  - La ficha usa `/marcas/<marca>/<modelo>/`, que coincide con `getStaticPaths`.\n  - `?v=marca/modelo` es la forma corta que acepta `parseEntries`.\n- Rutas tomadas de los datos (`loadModels`): cubierto.\n- LCP escrito en la salida (`console.log`): cubierto.\n- Comentario sobre rankings y #378: cubierto, está como TODO.\n- Bitácora con la elección de throttling: cubierto.\n\n**Hallazgos (menores, no bloquean)**\n1. `web/e2e/lcp.spec.ts`: `test.describe.configure({mode:'serial'})` solo serializa dentro del fichero. `playwright.config.ts` tiene `fullyParallel: true`, así que los specs de a11y pueden correr en otros workers a la vez y competir por CPU, justo lo que el comentario dice evitar. Si las medidas salen inestables, hay que limitar `workers` o aislar este spec.\n2. En /comparar/ el LCP puede medirse antes de que el cliente pinte las columnas, si se montan en el navegador. Con la forma corta de `v`, la prueba no demuestra que se midan tres columnas.\n3. La bitácora afirma «Mediciones iniciales: 650-930 ms». No he podido contrastarlo; los logs de la CI no los he leído.\n\n**Lo que no he podido comprobar**\n- Que los LCP reales en CI queden bajo 2500 ms con margen: el job pasa, pero no he leído la salida.\n- No hay referencia visual en la historia, así que no aplica el parecido visual.",
+      "judge_why": {
+        "finding_recall": "",
+        "invented": "Los tres hallazgos se apoyan en el diff (serial por fichero, forma corta de v en /comparar/) o declaran que no se han podido comprobar (bitácora), y ninguno cae en «No son hallazgos»; el TODO de #378 se da por cubierto, no se critica.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0474",
+      "pr": 474,
+      "expected_label": "review:ok",
+      "labels": [
+        "review:ok"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 0,
+        "invented": 1,
+        "concrete": 0.75,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0933,
+      "judge_usd": 0.0399,
+      "turns": 8,
+      "units": 24,
+      "notes": [],
+      "comment": "🏭 Veredicto: puede entrar; la CI está en verde (a11y, changes, test y web) y los dos CA tienen prueba. Único punto a vigilar: el cuerpo de la PR no dice «Closes #154», así que quien fusione tiene que cerrar el issue a mano. SHA revisado: 93c8a3ac692a9d72deb76c5929078c48a5f9574d\n\n**Criterios de aceptación**\n- CA-9: cubierto.\n  - `groupNotes` tiene pruebas unitarias para la clave source_id+url+retrieved+tier, la numeración por orden de aparición y el nombre sin www.\n  - Las pruebas sobre el build comprueban que el bloque «Fuentes» es el último de `main` y que cada marca apunta a un `li#fuente-n` existente.\n  - También comprueban que una fuente compartida lleva un solo número, que «fuente no oficial» sale solo en los datos T3 (en la marca y en la entrada) y que sin datos no hay bloque.\n  - El precio mantiene su fuente inline y no entra en las notas, como pide el diseño.\n- CA-8: cubierto.\n  - Se comprueba que las notas de la cabecera (estado, lanzamiento y segmento), de los campos de versión, del precio y de `specs` aparecen idénticas en la página.\n  - Hay además una prueba sobre todos los datos reales de `data/raw`.\n\n**Hallazgos**\n1. Sin `Closes #154` en el cuerpo de la PR, aunque la tarea lo pedía. Lo genera la factoría, así que no lo marco como fallo del agente. Hay que enlazar o cerrar el issue al fusionar.\n2. `web/tests/ficha-fuentes.test.ts`: la prueba sobre datos reales excluye la note de `status` cuando es `on_sale` y la de un `launch` que no está anunciado. Sigue el diseño («sin etiqueta y sin nota») y la PR lo explica. Si Producto quiere mostrarlas, hay que cambiar antes el diseño o el PRD.\n3. Menor: el `import { readdirSync }` está al final del fichero de prueba. No impide fusionar.\n4. La prueba antigua «RF-4 scope: no «Fuentes» block yet» se elimina de `ficha-precio.test.ts`. Está justificado, porque esta historia añade ese bloque.\n\nSin dependencias nuevas, con bitácora y con textos en `i18n.ts`. No se han tocado datos, no hay cookies ni datos personales.\n\n**Lo que no he podido comprobar**\n- El anillo de foco y la zona de pulsación de 24×24 px de las marcas. El agente tampoco lo midió, y el job a11y pasa.\n- El parecido visual. La historia cita `docs/design/ficha-modelo.md` y no una referencia de `docs/design/refs/`, así que no he descargado capturas.",
+      "judge_why": {
+        "finding_recall": "0: no, El comentario no menciona que las regex \\[\\d\\] de ficha.test.ts admiten un solo dígito y fallarían con 10 o más notas.",
+        "invented": "El hallazgo 1 (falta «Closes #154») no se apoya en el diff, la historia ni un PRD o ADR, y el hallazgo 3 (import al final) es una observación de estilo no pedida; el primero es un requisito que no consta en la historia.",
+        "ca_correct": "CA-8: cubierto, El comentario dice que CA-8 está cubierto, con notas idénticas en cabecera, versiones, precio y specs.\nCA-9: cubierto, El comentario dice que CA-9 está cubierto, con pruebas de agrupado, numeración, bloque Fuentes y fuente no oficial."
+      }
+    },
+    {
+      "case_id": "pr-0478",
+      "pr": 478,
+      "expected_label": "review:needs-human",
+      "labels": [
+        "review:needs-human"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 0,
+        "concrete": 1,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0831,
+      "judge_usd": 0.0316,
+      "turns": 7,
+      "units": 23,
+      "notes": [],
+      "comment": "🏭 Veredicto: no puedo darla por buena todavía. CI en verde y el alcance es correcto, pero no he podido ver las 10 fotos ni leer sus páginas de Commons, así que ni el modelo ni la generación están comprobados. Hace falta una persona que mire las imágenes (sobre todo Epiq, 7GT, Enyaq y Enyaq Coupé). SHA revisado: aa6e512d9ef9c6a933affe4b72119e94265fc2f2.\n\n**Criterios de aceptación** (la PR no cita ningún issue; uso la tarea del cuerpo)\n- Solo Commons con licencia que permita uso comercial: cubierto sobre el papel. Las licencias declaradas son CC-BY-SA-4.0, CC-BY-4.0 y CC0. No he abierto las páginas de Commons para confirmarlas.\n- Modelo y generación correctos: sin comprobar. Los nombres de fichero encajan: Enyaq y Enyaq Coupé 2025, `facelift - front` y Peaq 2026. Pero no he visto las imágenes.\n- Descargadas con `fetch-image.ts`: no lo he comprobado. La traza no está a mi alcance. Los ficheros están en `data/images/<marca>/<modelo>/frontal.jpg` y los 4 checks de la CI pasan, incluido el validador de `data/`.\n- Sin foto válida se deja `images: []` y se anota: cubierto. `smart/hashtag-2` sigue en `[]` y la bitácora lo explica.\n- No tocar nada más de esos ficheros: cubierto en el diff. Solo cambian `images` y las `open_questions` de imágenes ya resueltas.\n\n**Hallazgos**\n1. `zeekr/7gt.yaml`: la foto es `Zeekr_007_GT_001.jpg`, el nombre chino. El propio agente dice que no lo ha confirmado con la marca y lo deja en `open_questions`. Hay que comprobar que es el mismo coche que se vende en España, con la misma carrocería y los mismos faros.\n2. `skoda/epiq.yaml`: `Skoda_Epiq_front_view.jpg` (autor Oil151kv, CC BY 4.0). El nombre no dice si es el coche de serie o un prototipo o concept, que la tarea excluye. Hay que verlo.\n3. `skoda/enyaq.yaml` y `skoda/enyaq-coupe.yaml`: la tarea exige el frontal nuevo de 2025. Los nombres lo sugieren. Falta ver las imágenes, sobre todo la del Coupé (`2025_Škoda_Enyaq_Coupé_DSC_8402`).\n4. `lynk-co/02.yaml`: el agente anotaba antes que en Commons solo había el 02 chino de 2018 o una unidad de Heico. Ahora usa una foto del IAA 2025. Hay que comprobar que es el 02 europeo de serie.\n5. Sin hallazgos en la bitácora: hay una entrada `hito`. No hay dependencias nuevas.\n\n**Lo que no he podido comprobar**\n- Las imágenes, porque no pude traer la rama a local (`git fetch` pidió aprobación).\n- Las páginas de Commons, para licencias y autores.\n- El parecido visual (ADR-0024): la tarea no cita ninguna referencia de `docs/design/refs/`.",
+      "judge_why": {
+        "finding_recall": "0: sí, El hallazgo 1 señala que la foto de zeekr/7gt es la del 007 GT chino, que no está confirmada con la marca y que hay que comprobar que es el mismo coche.\n1: sí, El hallazgo 2 indica que el nombre de la foto de skoda/epiq no aclara si es el coche de serie o un prototipo o concept, y pide verlo.",
+        "invented": "Todos los hallazgos se apoyan en el diff y en la tarea del cuerpo, y lo que no pudo verificar lo declara como no comprobado.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0480",
+      "pr": 480,
+      "expected_label": "review:needs-human",
+      "labels": [
+        "review:ok"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 1,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 0,
+        "concrete": 0,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.1189,
+      "judge_usd": 0.0251,
+      "turns": 15,
+      "units": 38,
+      "notes": [],
+      "comment": "🏭 Veredicto: puede entrar como está; es un borrador (status: draft) que no decide nada y deja las preguntas al responsable. CI en verde (test, changes, web; a11y omitido). SHA revisado: b7812eaf0930d9ee392167fdd9f843ab595c5b09.\n\n**Criterios de la tarea** (la PR no cita un issue; reviso contra el texto de la tarea del cuerpo)\n- Fichero `docs/product/prd/PRD-006-reviews.md` con la forma de los otros PRD y `status: draft`: cubierto (front matter, secciones RF/RNF/datos/CA/decisiones/historial como los demás).\n- (1) Propias o de terceros: cubierto, OPEN-1 con 5 opciones, pros y contras y una recomendada (D, con E donde haya dato medible).\n- (2) Review generada y «nada se inventa»: cubierto, OPEN-2. Cita bien la regla 7 de ADR-0001 (comprobado en `0001-fuentes-de-datos.md`) y recomienda no admitirla sin una verificación por afirmación.\n- (3) Fuentes de terceros sin chocar con términos: cubierto, OPEN-3 por categorías. Dice expresamente que no se ha comprobado ningún término y deja la lista al Researcher.\n- (4) Dónde se ven: cubierto, OPEN-4. Reconoce que A o C obligan a enmendar PRD-002 y no lo toca.\n- Principios de la visión (solo lectura, sin datos personales, datos estructurados primero): RF-3, RF-5, RNF-5 y la sección 6.\n- Enlace desde la tabla de la visión: cubierto (`PRD-006 (borrador)`), y la pregunta abierta apunta a OPEN-1.\n- Bitácora: cubierto (`docs/bitacora/2026-10/2026-10-18T0331-e89d5855.md`).\n- No tocar código ni otros PRD: cumplido; el diff solo cambia la bitácora, PRD-006 y `vision.md`.\n\n**Hallazgos** (ninguno impide fusionar)\n1. Las referencias cruzadas que he comprobado son correctas: PRD-001 RF-13, PRD-002 RF-1 y RF-14, PRD-003 RF-13, PRD-005 RF-2 y ADR-0001 reglas 2, 6 y 7. No he verificado la de PRD-002 RF-9 (la línea es demasiado larga para mi lectura) ni la de «decisión 13», que sí existe pero con otro tema (fichas por versión).\n2. OPEN-5 (prioridad P2) es una pregunta que el agente añadió. No está en la tarea, pero la declara como suposición y es inocua.\n3. Los CA-1 a CA-5 son verificables sobre HTML y datos que hoy no existen; es coherente con un borrador, pero no podrán probarse hasta que haya ADR y esquema (sección 6, bien señalado).\n\n**Lo que no he podido comprobar**\n- Ningún término de uso de fuentes de terceros: el propio PRD lo declara.\n- Parecido visual: no aplica, no hay referencia de diseño.\n\nTras fusionar, el responsable tiene que resolver OPEN-1 a OPEN-4 antes de que el PRD pase a `ready`.",
+      "judge_why": {
+        "finding_recall": "0: sí, El comentario señala que el responsable debe resolver OPEN-1 a OPEN-4 antes de pasar a ready y dice que el PRD deja las preguntas al responsable, aunque no pide revisión humana ni menciona OPEN-5 como pendiente.",
+        "invented": "Los hallazgos del comentario se apoyan en el diff y en referencias cruzadas a PRD y ADR; no se inventa ningún requisito y lo no verificado se declara como tal.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0482",
+      "pr": 482,
+      "expected_label": "review:ok",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 1,
+        "concrete": 0.5,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0633,
+      "judge_usd": 0.0178,
+      "turns": 7,
+      "units": 23,
+      "notes": [],
+      "comment": "🏭 Veredicto: no puede entrar. Faltan las trazas de lectura (`fetch-page.ts` y `fetch-idae.ts`), y los `retrieved` y `last_verified` quedan sin respaldo. Revisado el SHA 36672959f24ed3e73feb67508a4dd91390346a82. La CI está verde (test, web, a11y, changes).\n\n**Paso del flujo saltado.** La tarea exigía leer la web de la marca con `fetch-page.ts` y, si fallaba, usar `fetch-idae.ts`. Ni el cuerpo de la PR ni los comentarios traen el bloque «fetch-page.ts / fetch-idae.ts output». No hay ninguna llamada a `kgm.com.es` ni al IDAE. Eso afecta a:\n- `retrieved: 2026-10-18` en todos los campos de los dos modelos.\n- `last_verified: 2026-10-18` en `data/sources/kgm-es.yaml`.\n- Los datos del IDAE (ids 613987, 613986, 606768, 607258).\n\n**Criterios de aceptación** (la tarea no tiene historia con CA; reviso contra sus requisitos):\n- Esquema de ADR-0008: no he podido comprobarlo contra una ejecución propia. El validador pasa en la CI (job `test`).\n- Solo BEV: cumple. Korando e-Motion se descarta y se anota.\n- `wltp_km` en todas las versiones: cumple (Musso 420 y 379; Torres 443 y 441).\n- `launch` y `segment` en null con motivo en `open_questions`: cumple.\n- Precios: `price: null` en todas las versiones, con el motivo anotado. Es coherente con la regla de financed.\n- Contradicciones entre fuentes: batería del Torres y potencia del Musso se dejan vacías y se anotan. Correcto.\n- Imagen de Commons con `fetch-image.ts`: no puedo verificar la descarga. Tampoco hay traza.\n- Bitácora: cumple.\n- No tocar `candidatas.yaml`: cumple.\n\n**Hallazgos**\n1. (Fallo de flujo) Faltan las trazas de `fetch-page.ts` y `fetch-idae.ts`. Hay que repetir la tarea ejecutando los scripts, o justificar de dónde salen las lecturas.\n2. `torres-evx.yaml`: la versión «Torres EVX Van» sale de una fila del IDAE (`TORRES EVX VAN PRO`). Ninguna fuente de venta confirma que se comercialice hoy en España. La propia `open_questions` lo admite, y `needs_review: true` lo cubre parcialmente. Conviene no publicarla hasta confirmarla.\n3. `torres-evx.yaml`: la potencia de 152 kW se atribuye al IDAE, pero la nota dice que coincide con la web. Si la web la da, la fuente T1 debería ser la principal.\n4. `musso-evx.yaml`: `drivetrain: awd` en la 4x4 depende de una frase de la web sin traza de lectura. Lo mismo vale para el `status: on_sale` de ambos modelos.\n\n**Lo que no he podido comprobar**\n- Que las URL de `kgm.com.es` respondan y que `robots.txt` sea como se dice.\n- Las cifras del IDAE.\n- La licencia CC-BY-SA-4.0 de la imagen y su descarga.\n- El parecido visual: no aplica, la tarea no cita ninguna referencia de `docs/design/refs/`.",
+      "judge_why": {
+        "finding_recall": "",
+        "invented": "El comentario exige trazas de fetch-page.ts/fetch-idae.ts y pide repetir la tarea, requisito que no consta en el diff, y marca hallazgos (Van, potencia, drivetrain) que no se apoyan en el diff; la etiqueta review:changes contradice el resultado esperado review:ok.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "pr-0490",
+      "pr": 490,
+      "expected_label": "review:ok",
+      "labels": [
+        "review:changes"
+      ],
+      "scores": {
+        "label_match": 0,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 0,
+        "invented": 1,
+        "concrete": 0.25,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0692,
+      "judge_usd": 0.0173,
+      "turns": 8,
+      "units": 24,
+      "notes": [],
+      "comment": "🏭 Veredicto: **review:changes** — falta en la PR el bloque «fetch-page.ts / fetch-idae.ts output», así que no consta que el agente ejecutara los scripts de lectura. Revisado el SHA 7dfd84949ff80b5270f52b17f25bb7911c2e452b. CI en verde (test, web, a11y, changes).\n\n**Criterios de aceptación** (la tarea no cita CA, solo el contrato de la tarea):\n- Esquema ADR-0008, solo BEV: cumplido a primera vista, y el validador de la CI (job test) pasa. Dream PHEV no registrado.\n- Fuentes en el registro: `voyah-es` creada; `diariomotor-es`, `idae-es` y `wikimedia-commons` ya existían.\n- Precio null, launch null: coherente con la fuente (voyah.es sin precios ni fecha).\n- wltp_km en todas las versiones: sí (1 versión por modelo).\n- Duplicados: no hay carpeta de Dongfeng en data/raw/.\n- Imágenes de Commons CC BY-SA 4.0 con atribución: aparecen los ficheros y los metadatos. No he comprobado la licencia en Commons.\n\n**Hallazgos**\n1. **Paso del flujo saltado.** La tarea exige confirmar que la web responde y su robots.txt, y, si no se puede leer, seguir la vía del IDAE. El cuerpo de la PR no trae el bloque de salida de `fetch-page.ts` / `fetch-idae.ts`. Hay `retrieved: 2026-10-18` en todos los datos y `last_verified: 2026-10-18` en `data/sources/voyah-es.yaml`, sin ninguna llamada visible a `voyah.es` ni a `fetch-idae.ts`. Las fechas quedan sin lectura que las respalde. Hay que repetir la lectura con los scripts, con salida en la traza.\n2. `data/raw/voyah/free.yaml`, `segment`: sale de Diariomotor (T3), con la nota de que la web oficial dice solo «SUV de grandes dimensiones». La tarea pide el término literal de RF-11. Hay que confirmar que «SUV Grande» es literal de una fuente válida para segmento, o poner `segment: null`.\n3. `status: on_sale` de ambos modelos se apoya solo en T3 (Diariomotor), y la propia `open_questions` admite que no se confirma qué versiones se venden hoy. Está marcado `needs_review`, bien, pero conviene revisarlo.\n4. La bitácora dice que no se pudo ejecutar `validate-data.ts`. La CI sí lo ejecuta y pasa, así que no bloquea.\n\n**Lo que no he podido comprobar**: el contenido real de voyah.es, el IDAE (ids 603449 y 603450) y las licencias de Commons. No tengo traza de las lecturas del agente.",
+      "judge_why": {
+        "finding_recall": "0: no, El comentario no menciona la discrepancia entre los 320 kW del IDAE y los ~315 kW de la web de la marca en dream.yaml.",
+        "invented": "El hallazgo 1 (falta del bloque de salida de fetch-page.ts) y el requisito de «término literal de RF-11» para segmento no se apoyan en el diff ni en una historia, y la etiqueta esperada era review:ok.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "syn-ci-pendiente",
+      "pr": 474,
+      "expected_label": "review:error",
+      "labels": [
+        "review:error"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 0,
+        "concrete": 0.2,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0853,
+      "judge_usd": 0.0388,
+      "turns": 7,
+      "units": 23,
+      "notes": [],
+      "comment": "🏭 Veredicto: no he podido cerrar la revisión (review:error): el job `a11y` de la CI sigue en curso y no supongo que pasaría. `test`, `web` y `changes` están en verde. Falta que termine `a11y` y repetir la revisión. SHA revisado: 93c8a3ac692a9d72deb76c5929078c48a5f9574d\n\n**Criterios de aceptación** (por lectura del diff; la CI de `test`/`web` pasa)\n- CA-9: cubierto en lo esencial. `web/tests/ficha-fuentes.test.ts` comprueba el bloque «Fuentes» (un `li#fuente-n` por nota, con nombre, fecha y URL), que cada marca apunta a un `li` existente, la numeración por orden de aparición, «fuente no oficial» solo en los no T1 y que el bloque no sale si no hay datos. `groupNotes` tiene prueba propia. No compruebo en esta pasada el criterio de que el precio muestre su fuente junto al valor, que sigue en las pruebas de #149.\n- CA-8: cubierto. Se comprueba el texto literal de las `note` en cabecera, campos de versión, precio y specs, además de un recorrido por todos los datos reales de `data/raw`.\n\n**Hallazgos**\n1. El cuerpo de la PR que veo no contiene «Closes #154» ni enumera los RF y CA cubiertos, como pedía la tarea. Si el texto del agente (recortado) no lo trae, hay que añadirlo.\n2. Desviación respecto al issue: el issue dice que los T1 no llevan marca; la PR pone marca `[n]` a todos los datos (los T1 sin el texto «fuente no oficial»). Parece intencionado según el diseño, pero conviene confirmarlo contra `docs/design/ficha-modelo.md`.\n3. `web/tests/ficha-fuentes.test.ts`: el `import { readdirSync }` está al final del fichero, después de usarse. Funciona por el hoisting, pero hay que moverlo arriba.\n4. El test de datos reales excluye las `note` de `status` en `on_sale` y de `launch` no anunciado. La PR lo justifica con el diseño; no lo he contrastado.\n5. Se ha borrado el test «RF-4 scope» de `ficha-precio.test.ts`, lo cual es coherente porque la historia añade el bloque «Fuentes».\n\n**Lo que no he podido comprobar**\n- El resultado del job `a11y`.\n- El parecido visual (ADR-0024): no he descargado las capturas, porque la CI no ha terminado.\n- El anillo de foco y el área de pulsación de 24×24 px de las marcas: el agente tampoco los comprobó.",
+      "judge_why": {
+        "finding_recall": "0: sí, El comentario dice que no ha podido cerrar la revisión porque el job a11y de la CI sigue en curso y no supone que pasaría, y deja review:error.",
+        "invented": "Los hallazgos se apoyan en el diff y en la historia (cuerpo de la PR, desviación sobre marcas T1, import al final, exclusión de notas, test borrado); lo que no pudo comprobar lo declara como tal.",
+        "ca_correct": ""
+      }
+    },
+    {
+      "case_id": "syn-historia-ilegible",
+      "pr": 450,
+      "expected_label": "review:error",
+      "labels": [
+        "review:error"
+      ],
+      "scores": {
+        "label_match": 1,
+        "false_ok": 0,
+        "one_label": 1,
+        "format": 1,
+        "ca_listed": 1,
+        "forbidden": 0,
+        "finding_recall": 1,
+        "invented": 0,
+        "concrete": 0,
+        "ca_correct": 1
+      },
+      "agent_usd": 0.0782,
+      "judge_usd": 0.0222,
+      "turns": 11,
+      "units": 29,
+      "notes": [],
+      "comment": "🏭 Veredicto: no he podido terminar la revisión, porque no he podido leer el issue #150 (`gh issue view 150` falla: «Could not resolve to an issue» y `gh issue list` no está disponible aquí). No doy `review:ok` sin haber leído los `CA` de la historia. SHA revisado: 0d3d01136dfa01e50f5736ed1caabc07bc643de3.\n\n**Criterios de aceptación** (contrastados con `docs/design/ficha-modelo.md`, «Campos y formato», no con el issue)\n- CA-5 (autonomía por versión; sin dato, «por confirmar» y el valor de `specs` solo en el bloque del modelo): cubierto. Tres pruebas sobre el build: valores por versión, `NoRange` y `OneRange`. Fallan si se rellena con `specs.wltp_max_km`.\n- CA-6 (batería con base, carga CC y CA, fila siempre visible): cubierto. Las pruebas comprueban «útil», «bruta» y «sin especificar», el decimal «77,5» y las filas CC y CA con «por confirmar» cuando todas las versiones carecen del dato.\n- Orden de filas y misma lista en tabla y bloques: cubierto. Una prueba compara los rótulos con el orden del diseño y cuenta 21 `dt`.\n- Texto de la `note`: cubierto indirectamente, con «publicado: 299 CV».\n\n**Hallazgos**\n1. No he podido contrastar el texto literal de los CA del issue #150. Puede haber un criterio que el diseño no recoja.\n2. Menor, `[modelo].astro`: `fieldRows` sale de `versions[0]` y se vuelve a llamar a `fieldsOf` por cada celda. Funciona, porque solo se usan las etiquetas, pero el cálculo es redundante.\n3. Menor: `version-fields.ts` usa `v.battery_kwh!.basis` dentro del callback. Es seguro porque `datum` no es nulo en ese punto, pero es frágil.\n\n**Lo que no he podido comprobar**\n- El issue #150 y sus CA literales.\n- El render en navegador (tabla frente a bloques según el ancho). La PR dice que lo cubren los e2e existentes.\n- El parecido visual (ADR-0024): no sé si la historia cita una referencia de `docs/design/refs/`, y no he descargado capturas.\n\n**CI**: verde en los cuatro jobs (a11y, changes, test, web). No hay dependencias nuevas. Hay entrada en la bitácora. Esta PR no es de Researcher, así que no aplica el bloque de `fetch-page`.",
+      "judge_why": {
+        "finding_recall": "0: sí, El comentario dice que no pudo leer el issue #150 (gh issue view falla) y que por eso no puede contrastar sus CA, y deja review:error.",
+        "invented": "Los hallazgos se apoyan en el diff (fieldRows, el operador ! en version-fields.ts) y en la imposibilidad declarada de leer el issue; no se inventa ningún requisito.",
+        "ca_correct": ""
+      }
+    }
+  ],
+  "totals": {
+    "cases": 21,
+    "usd": 2.2008,
+    "usd_avg": 0.1048,
+    "label_match": 10,
+    "false_ok": 5,
+    "forbidden": 1,
+    "invented": 9,
+    "finding_recall_avg": 0.659,
+    "ca_correct_avg": 0.944,
+    "turns_avg": 9
+  }
+}
