@@ -75,6 +75,8 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
 - Hecho también: el script de retoque de ADR-0025 (`node factory/retouch-image.ts <imagen>`, solo en macOS).
   y el agente Retocador (`retoucher`, sin red, sus PR no se fusionan solas). Falta el piloto (paso 3).
 - Hecho también: el agente retro de ADR-0022 (`node factory/run.ts --retro`, LaunchAgent la noche del
-  domingo al lunes). Falta la escalera de confianza de la misma ADR y el dataset del Researcher (ADR-0026).
+  domingo al lunes), y los eventos de la escalera de confianza (`factory/trust.ts`, en `run.ts --merge`).
+  La escalera aún no fusiona nada: falta la puerta de ADR-0019. El dataset del Researcher (ADR-0026) va
+  en #1205 y #1208.
 - Pendiente: la migración de las imágenes a
   `data/images/` (en la cola, Researcher).

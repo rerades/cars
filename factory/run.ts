@@ -18,7 +18,8 @@ import { parseArgs } from "node:util";
 import { evalsConfig, readSummaries, spentInMonth } from "./eval-run.ts";
 import { exportRun } from "./langfuse.ts";
 import { mergePass, waitingPrs } from "./merge.ts";
-import { datasetAgents, labeledPrs, MIN_SIGNALS, readTrust, RETRO, retroBlocker, retroSignals, retroSince, retroTask } from "./retro.ts";
+import { readTrust, trustAreas, trustPass, trustState } from "./trust.ts";
+import { datasetAgents, labeledPrs, MIN_SIGNALS, RETRO, retroBlocker, retroSignals, retroSince, retroTask } from "./retro.ts";
 import {
   appendLedger, checkCanRun, LOCK, commitState, execute, formatTrace, loadConfig, mergeStatePr, nowInTz, pruneMergedBranches, queueState, readAllLedger,
   readLedger, readQueue, REPO, runsToday, spentInPeriod, STATE_BRANCH, syncState, TRACE_DIR,
@@ -67,6 +68,11 @@ function cmdStatus(cfg: Config): number {
     console.log(`  fallidas (no se reintentan; para repetir, encolar con un id nuevo):`);
     for (const r of failed) console.log(`    - ${r.task_id} · ${r.outcome} · ${r.run_id}`);
   }
+  const ladder = [...trustState(readTrust()).values()].filter((s) => trustAreas(cfg).includes(s.area));
+  if (ladder.length) {
+    console.log(`  escalera de confianza (ADR-0022; aún no fusiona nada, falta la puerta de ADR-0019):`);
+    for (const s of ladder) console.log(`    - ${s.agent} ${s.area}: nivel ${s.level}, ${s.streak} limpias seguidas`);
+  }
   console.log(`  estado: rama ${STATE_BRANCH} (ADR-0013)`);
   const waiting = waitingPrs();
   if (waiting.length) {
@@ -107,7 +113,10 @@ async function cmdMerge(cfg: Config, dryRun: boolean): Promise<number> {
     });
     for (const line of log) console.log(line);
     if (!log.length) console.log("ninguna PR de agente que fusionar ni que avisar");
-    if (recorded) {
+    // ADR-0022: the ladder's events; with no gate (ADR-0019) yet, a rung merges nothing.
+    const trust = trustPass(cfg, new Date(), dryRun);
+    for (const line of trust.log) console.log(line);
+    if (recorded || trust.recorded) {
       const statePr = commitState("merges");
       if (statePr) console.log(`estado: ${statePr}`);
     }
