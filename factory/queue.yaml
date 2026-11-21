@@ -4318,6 +4318,13 @@
 - id: historia-1193-explorar-rankings
   agent: developer
   task: "Historia #1193 (épica #1188): franja «Explorar» como franja blanca con el grupo «Rankings» como quinto grupo (PRD-001 RF-14, CA-19; PRD-005 decisión 9). Lee la issue con gh issue view 1193 y sigue sus criterios, el diseño que cita (sección «Dirección visual (2026-11-18)») y el orden de la épica (gh issue view 1188). Borra un prototipo de web/design-proto/ solo si la issue lo pide; los ficheros compartidos (a/Cifra.astro, pantalla.css, fonts/) no se borran. Bitácora."
+# 2026-11-22: #1189 and #1191 are in main (#1206, #1209), so the second story of each zone follows.
+- id: historia-1190-comparador-tabla
+  agent: developer
+  task: "Historia #1190 (épica #1188): comparador, tabla de comparación con Cifra y --text-figure-s (PRD-003, docs/design/comparador.md). Lee la issue con gh issue view 1190 y sigue sus criterios, el diseño que cita (sección «Dirección visual (2026-11-18)») y el orden de la épica (gh issue view 1188). Borra un prototipo de web/design-proto/ solo si la issue lo pide; los ficheros compartidos (a/Cifra.astro, pantalla.css, fonts/) no se borran. Bitácora."
+- id: historia-1192-rankings-puestos
+  agent: developer
+  task: "Historia #1192 (épica #1188): rankings, puestos como pantalla con el componente Cifra (PRD-005, docs/design/rankings.md). Lee la issue con gh issue view 1192 y sigue sus criterios, el diseño que cita (sección «Dirección visual (2026-11-18)») y el orden de la épica (gh issue view 1188). Borra un prototipo de web/design-proto/ solo si la issue lo pide; los ficheros compartidos (a/Cifra.astro, pantalla.css, fonts/) no se borran. Bitácora."
 - id: retoque-bmw
   agent: retoucher
   task: "ADR-0025, paso 4: juzga y retoca las fotos de los modelos de data/raw/bmw/, siguiendo
