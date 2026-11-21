@@ -7,7 +7,17 @@ task: "Refresco mensual de data/raw/polestar/ (ADR-0010, punto 6): relee en sus 
 synthetic: false
 confirmed: false
 rules: [dates, price_kind, price_proof] # PROPOSED from review.md; a person confirms
-expected: null
+# DRAFT (2026-11-21), from review.md, the frozen reads and how the rerun left main; a person checks it.
+# P2 and P3: price null (offer expired on 30/09/2026), the same criterion for every model, as the rerun did.
+# P4: financed 49 900; its price_terms page must have been read (finding 2: price_proof).
+expected:
+  data/raw/polestar/polestar-2.yaml:
+    "versions[Standard Range Single Motor (con Climate Pack)].price": {value: null, price_kind: null}
+  data/raw/polestar/polestar-3.yaml:
+    specs.power_max_kw: {date: kept}   # 500 is not in the reads
+    "versions[Long Range Dual Motor MY2025 km0 (Pilot Pack y Plus Pack)].price": {value: null, price_kind: null}
+  data/raw/polestar/polestar-4.yaml:
+    "versions[Long Range Single Motor (Rear Motor) Coupé].price": {value: 49900, price_kind: financed, date: fresh}
 files:
   - data/raw/polestar/polestar-2.yaml
   - data/raw/polestar/polestar-3.yaml

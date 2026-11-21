@@ -7,7 +7,23 @@ task: "Refresco mensual de data/raw/cupra/ (ADR-0010, punto 6): relee en sus fue
 synthetic: false
 confirmed: false
 rules: [dates] # PROPOSED from review.md; a person confirms
-expected: null
+# DRAFT (2026-11-21), from review.md and the frozen reads; a person checks it and sets confirmed: true.
+# kept: numbers that no frozen read shows (finding 1 of the review, plus Born+ 140 kW and Raval VZ 52 kWh,
+# which the reads do not show either). Prices: unchanged, read, financed (reviewer: they match the legal text).
+expected:
+  data/raw/cupra/born.yaml:
+    specs.battery_kwh_options: {date: kept}   # the read shows 59, not 79
+    specs.dc_max_kw: {date: kept}
+    "versions[Born+ (190 CV)].power_kw": {date: kept}   # the page says 190 CV; 140 kW is not in the read
+    "versions[Born+ (190 CV)].price": {value: 36795.59, price_kind: financed, date: fresh}
+    "versions[Born VZ].power_kw": {date: kept}   # «326 CV»; 240 is not in the read
+    "versions[Born VZ].dc_max_kw": {date: kept}
+  data/raw/cupra/raval.yaml:
+    specs.dc_max_kw: {date: kept}
+    "versions[Raval VZ].battery_kwh": {date: kept}
+    "versions[Raval Endurance].price": {value: 32072.74, price_kind: financed, date: fresh}
+  data/raw/cupra/tavascan.yaml:
+    "versions[Tavascan (58 kWh, 140 kW)].price": {value: 37151.49, price_kind: financed, date: fresh}
 files:
   - data/raw/cupra/born.yaml
   - data/raw/cupra/raval.yaml
