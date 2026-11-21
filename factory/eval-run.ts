@@ -69,6 +69,18 @@ const events = (stdout: string): Event[] =>
     }
   });
 
+/**
+ * The API error that ended a case before the agent worked (billing, auth, overload), or null.
+ * Such a case says nothing about the prompt: on 2026-11-21 a billing_error scored 19 cases as
+ * failures in one run. The experiment stops there instead of scoring it.
+ */
+export function apiError(stdout: string): string | null {
+  for (const e of events(stdout)) {
+    if (e.is_api_error_message || e.terminal_reason === "api_error") return String(e.error ?? e.terminal_reason);
+  }
+  return null;
+}
+
 /** Files the agent tried to write outside its write_paths (Write, Edit or NotebookEdit calls). */
 export function writesOutside(stdout: string, worktree: string, writePaths: string[]): string[] {
   const out: string[] = [];
@@ -475,7 +487,7 @@ async function main(): Promise<number> {
   if (positionals[0] === "researcher" && values.model) {
     const wanted = values.cases?.split(",").map((s) => s.trim());
     return (await import("./eval-researcher.ts")).main(values.model, wanted, !!values["dry-run"],
-      { budgetBlocker, EVALS_DIR, estimateCase, evalsConfig, loadApiKey, readSummaries, spentInMonth, writesOutside });
+      { apiError, budgetBlocker, EVALS_DIR, estimateCase, evalsConfig, loadApiKey, readSummaries, spentInMonth, writesOutside });
   }
   if (positionals[0] !== "reviewer" || !values.model) return usage();
   const model = values.model;
@@ -536,6 +548,11 @@ async function main(): Promise<number> {
       }
       const runId = `${exp.experiment}/${c.case_id}`;
       const run = runCase(cfg, c, model, apiKey, runId);
+      const failed = apiError(run.stdout);
+      if (failed) {
+        exp.stopped = `error de la API en ${c.case_id} (${failed}): se para sin puntuarlo`;
+        break;
+      }
       const result = resultEvent(run.stdout);
       const { labels, comment, scores } = codeScores(c, run.log, run.outside);
       const notes: string[] = [];
