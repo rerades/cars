@@ -78,6 +78,7 @@ fuera de la carpeta de cada agente; solo se activan cuando existe `FACTORY_AGENT
   domingo al lunes), y los eventos de la escalera de confianza (`factory/trust.ts`, en `run.ts --merge`).
   La escalera aún no fusiona nada: falta la puerta de ADR-0019. Dataset del Researcher (ADR-0026): capturados
   los 4 casos (`factory/dataset-capture.ts`) y hecho `eval-run.ts researcher`; confirmados 806, 808 y 814
-  (2026-11-21); el 824 queda sin `expected`. Falta su primera línea base.
+  (2026-11-21); el 824 queda fuera (13 de sus 14 lecturas no se pueden reproducir). Línea base hecha el 2026-11-21
+  (`ops/evals/researcher__*`).
 - Pendiente: la migración de las imágenes a
   `data/images/` (en la cola, Researcher).
