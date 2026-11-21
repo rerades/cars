@@ -570,6 +570,25 @@ describe("hook guardián", () => {
       "grep -rn curl factory/",
     ]) assert.equal(bash(c), 0, c);
   });
+  test("blocks node -e with network APIs and shell writes outside the worktree", () => {
+    const bash = (command: string) => runHook({ tool_name: "Bash", tool_input: { command } }).status;
+    for (const c of [
+      `node -e "fetch('https://x.es').then(r => r.text()).then(console.log)"`,
+      `node --eval "require('https').get('https://x.es')"`,
+      `node -p "import('node:net')"`,
+      "echo x > ~/.zshrc",
+      "cat data/a.yaml >> /Users/someone/other/file",
+      "echo x | tee -a ../../outside.txt",
+      "cat <<'EOF' > /etc/hosts\n1.2.3.4 x\nEOF",
+    ]) assert.equal(bash(c), 2, c);
+    for (const c of [
+      `node -e "console.log(require('yaml').parse('a: 1'))"`,
+      "pnpm test > /tmp/test.log 2>&1",
+      "node factory/validate-data.ts 2>/dev/null",
+      "cat > web/tests/_fix.mjs <<'EOF'\nif (a > /b/) x;\nEOF",
+      `gh pr comment 1 --body "a > /etc/x"`,
+    ]) assert.equal(bash(c), 0, c);
+  });
   test("bloquea instalar una dependencia sin declararla", () => {
     const bloqueados = [
       "npm install astro", "npm i -D vitest", "npm add tailwindcss", "npx astro add",

@@ -44,6 +44,20 @@ const BANNED_BASH: [RegExp, string][] = [
 // quoted text removed: a bitácora entry or a PR comment that mentions curl runs nothing.
 const NETWORK = /(?:^|[;&|(\n]|\bdo\b|\bthen\b|\belse\b)\s*(?:\S*\/)?(?:curl|wget|nc|ncat|socat|telnet|ssh|scp|sftp|ftp|rsync)\b/;
 
+// Inline code with network APIs: `Bash(node:*)` would let `node -e "fetch(…)"` skip ADR-0001.
+// ponytail: a script written to disk and then run with node is not seen; a network sandbox would.
+const NODE_EVAL_NET = /(?:^|[;&|(\n]\s*)node\s+(?:-e|--eval|-p|--print)\b[\s\S]*(?:\b(?:fetch|https?\.(?:get|request)|WebSocket|net\.connect|node:(?:https?|net|dgram))\b|['"](?:https?|net|dgram|undici)['"])/;
+
+// A shell redirection (`>`, `>>`, `tee`) to an absolute path, `~` or `..`. Writes inside the
+// worktree are caught after the run by the write_paths eval; these would land outside it.
+const REDIRECT = /(?:^|[^<>&\d])\d?>>?\|?\s*([~/][^\s;&|()<>]*|\.\.\/[^\s;&|()<>]*)|\btee\s+(?:-a\s+)?([~/][^\s;&|()<>]*|\.\.\/[^\s;&|()<>]*)/g;
+const SCRATCH = ["/dev/", "/tmp/", "/private/tmp/", "/var/folders/"];
+
+/** Heredoc bodies are text, not commands: `a > /b` inside one writes nothing. */
+function withoutHeredocs(command: string): string {
+  return command.replace(/<<-?\s*(['"]?)(\w+)\1([^\n]*\n)[\s\S]*?\n\s*\2(?=\n|$)/g, (_m, _q, tag, head) => `<<${tag}${head}`);
+}
+
 /** The command without its quoted text, except double quotes that run something (`"$(…)"`, backticks). */
 function unquoted(command: string): string {
   return command
@@ -91,8 +105,15 @@ function main(agent: string): void {
   } else if (tool === "Bash") {
     const command: string = input.command ?? "";
     for (const [pattern, reason] of BANNED_BASH) if (pattern.test(command)) deny(reason);
-    if (NETWORK.test(unquoted(command))) {
+    if (NETWORK.test(unquoted(command)) || NODE_EVAL_NET.test(command)) {
       deny("la red solo con factory/fetch-page.ts, fetch-idae.ts o fetch-image.ts (ADR-0001)");
+    }
+    for (const m of unquoted(withoutHeredocs(command)).matchAll(REDIRECT)) {
+      const target = m[1] ?? m[2];
+      if (target.startsWith("~")) deny(`${agent} intenta escribir fuera del repositorio: ${target}`);
+      const abs = real(isAbsolute(target) ? target : resolve(repo, target));
+      if (SCRATCH.some((d) => abs.startsWith(d) || target.startsWith(d)) || relativeToRepo(repo, abs) !== null) continue;
+      deny(`${agent} intenta escribir fuera del repositorio: ${target}`);
     }
   }
 }
