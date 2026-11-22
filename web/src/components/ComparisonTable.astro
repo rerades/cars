@@ -8,31 +8,36 @@ import { t } from "../lib/i18n.ts";
  * Data-dependent texts (formats, «por confirmar», labels) come from lib/compare.ts; the fixed ones
  * are written here from i18n (RNF-4).
  */
-const cell = "align-top p-2 text-left text-body text-ink-900 [overflow-wrap:anywhere] md:p-3";
 const link = "text-brand-600 underline hover:text-brand-800";
 const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
 ---
 
-<section aria-labelledby="cmp-tabla" class="mt-8" data-compare hidden>
-  <h2 id="cmp-tabla" class="text-section">{t("comparador.tabla.titulo")}</h2>
-  <p class="mt-2 max-w-prose text-small text-ink-600">{t("comparador.tabla.entrada")}</p>
-  <div class="mt-4" data-table-host></div>
-  <div class="mt-6" data-conditions hidden>
-    <h3 class="text-card-title">{t("ficha.condiciones.titulo")}</h3>
-    <div class="mt-2 flex flex-col gap-4" data-conditions-list></div>
+<!-- White band: the table and the conditions of the offers (comparador.md, «Franjas»). -->
+<section aria-labelledby="cmp-tabla" class="band-white cmp-block" data-compare hidden>
+  <div class="cmp-wrap">
+    <h2 id="cmp-tabla" class="cmp-h2">{t("comparador.tabla.titulo")}</h2>
+    <p class="cmp-lead">{t("comparador.tabla.entrada")}</p>
+    <div class="cmp-table-host" data-table-host></div>
+    <div class="cmp-terms" data-conditions hidden>
+      <h3 class="cmp-h3">{t("ficha.condiciones.titulo")}</h3>
+      <div class="cmp-terms-list" data-conditions-list></div>
+    </div>
   </div>
 </section>
 
-<section aria-labelledby="cmp-fuentes" class="mt-12" data-sources hidden>
-  <h2 id="cmp-fuentes" class="text-section text-ink-900">{t("ficha.fuentes.titulo")}</h2>
-  <p class="mt-1 text-small text-ink-600">{t("ficha.fuentes.entrada")}</p>
-  <ol class="mt-4 flex flex-col gap-3" data-sources-list></ol>
+<!-- Light band: sources, as on the model page. -->
+<section aria-labelledby="cmp-fuentes" class="band-light cmp-block" data-sources hidden>
+  <div class="cmp-wrap">
+    <h2 id="cmp-fuentes" class="cmp-h2">{t("ficha.fuentes.titulo")}</h2>
+    <p class="cmp-lead">{t("ficha.fuentes.entrada")}</p>
+    <ol class="cmp-sources" data-sources-list></ol>
+  </div>
 </section>
 
 <template data-tpl="table">
-  <table class="w-full table-fixed border-collapse bg-surface">
+  <table class="cmp-table">
     <caption class="sr-only" data-slot="caption"></caption>
-    <thead><tr data-slot="head"></tr></thead>
+    <thead class="band-dark"><tr data-slot="head"></tr></thead>
   </table>
 </template>
 
@@ -53,17 +58,14 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
 </template>
 
 <template data-tpl="column">
-  <th scope="col" class={`${cell} border-l border-line-soft first:border-l-0`}>
-    <a data-slot="link" class={`block min-h-touch ${link} text-card-title`}>
-      <span class="block text-small text-ink-600" data-slot="brand"></span>
-      <span data-slot="model"></span>
+  <th scope="col">
+    <a data-slot="link" class="cmp-head-link">
+      <span class="cmp-head-brand" data-slot="brand"></span>
+      <span class="cmp-head-model" data-slot="model"></span>
       <span class="sr-only" data-slot="sr"></span>
     </a>
-    <span class="block text-body font-semibold text-ink-900" data-slot="name"></span>
-    <span
-      class="mt-1 inline-block rounded-card bg-soon-bg px-3 py-1 text-badge text-soon-fg"
-      data-slot="badge"
-      hidden></span>
+    <span class="cmp-head-version" data-slot="name"></span>
+    <span class="cmp-badge cmp-badge--soon" data-slot="badge" hidden></span>
     <span data-slot="marks"></span>
   </th>
 </template>
@@ -78,24 +80,24 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
 </template>
 
 <template data-tpl="source">
-  <li tabindex="-1" class="text-small text-ink-900 [overflow-wrap:anywhere]">
+  <li tabindex="-1">
     <span data-slot="line"></span><br />
     <a rel="noopener" class={link} data-slot="link"></a>
   </li>
 </template>
 
 <template data-tpl="field">
-  <tbody class="border-t border-line-soft">
-    <tr><th class="bg-surface-muted p-2 text-left text-small font-semibold text-ink-900 md:p-3" data-slot="label"></th></tr>
+  <tbody>
+    <tr><th class="cmp-row-label" data-slot="label"></th></tr>
     <tr data-slot="values"></tr>
   </tbody>
 </template>
 
 <template data-tpl="cell">
-  <td class={`${cell} border-l border-line-soft first:border-l-0`}>
+  <td>
     <p data-slot="text"></p>
     <p class="mt-1" data-slot="dealRow" hidden>
-      <span class="inline-block rounded-card bg-deal-bg px-3 py-1 text-badge text-deal-fg" data-slot="deal"></span>
+      <span class="cmp-badge cmp-badge--deal" data-slot="deal"></span>
     </p>
     <p class={note} data-slot="source" hidden>
       <span data-slot="before"></span><a class={link} rel="noopener" data-slot="sourceLink"></a><span data-slot="after"></span>
@@ -112,8 +114,8 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
 
 <template data-tpl="condition">
   <div tabindex="-1">
-    <p class="text-body font-semibold text-ink-900 [overflow-wrap:anywhere]" data-slot="title"></p>
-    <p class="text-body text-ink-900 [overflow-wrap:anywhere]" data-slot="text" hidden></p>
+    <p class="cmp-terms-name" data-slot="title"></p>
+    <p class="cmp-terms-text" data-slot="text" hidden></p>
     <a
       class={`inline-flex min-h-touch items-center text-body ${link}`}
       rel="noopener"
@@ -126,6 +128,7 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
 <script>
   import {
     FIELDS,
+    FIGURE_FIELDS,
     addGroups,
     announce,
     canAdd,
@@ -139,6 +142,7 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
     noticeParagraphs,
     numberNotes,
     parseEntries,
+    splitFigure,
     validateSelection,
     versionOptions,
     withAdded,
@@ -454,9 +458,34 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
         const td = clone("cell");
         td.setAttribute("headers", `cmp-col-${i + 1} cmp-f-${field}`);
         const text = slot(td, "text");
-        text.textContent = c.text;
-        // Same style for every value: only the placeholder is muted, and it also reads as text (CA-17).
-        text.className = c.missing ? "text-ink-600" : field === "precio" ? "text-price text-ink-900" : "";
+        // Same style for every cell of a row (RF-13): the style depends on the row, never on the value.
+        // Price and range are figures (Cifra's type without dt/dd); the placeholder keeps its text and
+        // is only muted, so it reads without the colour (CA-17).
+        if (FIGURE_FIELDS.includes(field)) {
+          if (c.missing) {
+            text.className = "cmp-fig-missing";
+            text.textContent = c.text;
+          } else {
+            const { number, unit } = splitFigure(c.text);
+            const fig = document.createElement("span");
+            fig.className = "cmp-fig";
+            const value = document.createElement("span");
+            value.className = "cifra__valor";
+            value.textContent = number;
+            fig.append(value);
+            if (unit) {
+              const u = document.createElement("span");
+              u.className = "cifra__unidad";
+              u.textContent = unit;
+              fig.append(" ", u);
+            }
+            text.className = "cmp-value";
+            text.replaceChildren(fig);
+          }
+        } else {
+          text.className = c.missing ? "cmp-value cmp-value--missing" : "cmp-value";
+          text.textContent = c.text;
+        }
         if (num !== undefined) text.append(" ", makeMark(notes[num - 1]!));
         slot(td, "dealRow").hidden = c.deal === null;
         if (c.deal) slot(td, "deal").textContent = c.deal;
@@ -513,3 +542,78 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
     sources.hidden = false;
   }
 </script>
+
+<style is:global>
+  .cmp-block { padding-block: 2.5rem; }
+  @media (min-width: 1024px) { .cmp-block { padding-block: 3.5rem; } }
+  .cmp-block[hidden] { display: none; }
+  .cmp-h2, .cmp-h3 {
+    font-stretch: var(--font-stretch-wide); font-weight: 800; letter-spacing: -0.035em; overflow-wrap: anywhere;
+  }
+  .cmp-h2 { font-size: var(--text-block); line-height: 1; }
+  .cmp-h3 { font-size: var(--text-version); line-height: 1.1; }
+  .cmp-lead {
+    color: var(--color-ink-600); font-size: var(--text-small); line-height: var(--text-small--line-height);
+    margin-top: 0.75rem; max-width: var(--container-prose);
+  }
+
+  /* The table: equal columns (RF-13), hairlines, no fill that depends on the value. */
+  .cmp-table-host { margin-top: 1.5rem; }
+  .cmp-table { border-collapse: collapse; table-layout: fixed; width: 100%; }
+  .cmp-table :is(th, td) { overflow-wrap: anywhere; padding: 0.5rem; text-align: left; vertical-align: top; }
+  .cmp-table thead th + th, .cmp-table td + td { border-left: 1px solid var(--color-line-soft); }
+  .cmp-table thead th { hyphens: auto; padding-block: 0.75rem 1rem; }
+  .cmp-table td { padding-bottom: 1rem; }
+  @media (min-width: 768px) {
+    .cmp-table :is(th, td) { padding: 0.75rem 1rem; }
+    .cmp-table thead th { padding-block: 1.25rem 1.5rem; }
+  }
+
+  .cmp-head-link { display: block; min-height: var(--spacing-touch); text-decoration: underline; text-underline-offset: 0.15em; }
+  .cmp-head-link:hover { color: var(--color-brand-800); }
+  .cmp-head-brand { color: var(--color-ink-600); display: block; font-size: var(--text-small); font-weight: 600; line-height: var(--text-small--line-height); }
+  .cmp-head-model { display: block; font-size: var(--text-body); font-weight: 800; line-height: 1.15; margin-top: 0.125rem; }
+  .cmp-head-version { display: block; font-size: var(--text-small); font-weight: 600; line-height: var(--text-small--line-height); margin-top: 0.5rem; }
+  .cmp-table thead :focus-visible { outline-color: var(--color-on-dark); }
+  @media (min-width: 768px) {
+    .cmp-head-model { font-size: var(--text-version); font-stretch: var(--font-stretch-wide); letter-spacing: -0.035em; line-height: 1.05; }
+  }
+
+  /* Label rows: no fill, a hairline above (the dark header already separates the first). */
+  .cmp-row-label {
+    border-top: 1px solid var(--color-line-soft); color: var(--color-ink-600); font-size: var(--text-small);
+    font-weight: 600; line-height: var(--text-small--line-height); padding-bottom: 0 !important;
+  }
+  .cmp-table tbody:first-of-type .cmp-row-label { border-top: 0; }
+
+  /* Number and unit side by side; the unit drops below only if the column is too narrow. */
+  .cmp-fig {
+    align-items: baseline; column-gap: 0.12em; display: flex; flex-wrap: wrap; font-size: var(--text-figure-s);
+    line-height: 0.82; overflow-wrap: normal;
+  }
+  .cmp-fig .cifra__unidad { line-height: 1.2; }
+  .cmp-fig .cifra__valor { letter-spacing: -0.015em; }
+  .cmp-fig-missing {
+    color: var(--color-ink-600); display: block; font-size: max(calc(var(--text-figure-s) * 0.46), var(--text-small));
+    font-stretch: var(--font-stretch-narrow); font-weight: 700; line-height: 1.1;
+  }
+  .cmp-value { display: block; }
+  .cmp-value--missing { color: var(--color-ink-600); }
+  .cmp-table td > p:not(:first-child) { margin-top: 0.375rem; }
+
+  .cmp-badge {
+    border-radius: var(--radius-card); display: inline-block; font-size: var(--text-badge); font-weight: 600;
+    line-height: var(--text-badge--line-height); padding: 0.125rem 0.5rem;
+  }
+  .cmp-badge--soon { background: var(--color-soon-bg); color: var(--color-soon-fg); margin-top: 0.5rem; }
+  .cmp-badge--deal { background: var(--color-deal-bg); color: var(--color-deal-fg); }
+
+  .cmp-terms { border-top: 2px solid var(--color-ink-900); margin-top: 2.5rem; padding-top: 1.5rem; }
+  .cmp-terms-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; max-width: var(--container-prose); }
+  .cmp-terms-name { font-weight: 700; overflow-wrap: anywhere; }
+  .cmp-terms-text { overflow-wrap: anywhere; }
+  .cmp-sources {
+    display: flex; flex-direction: column; font-size: var(--text-small); gap: 0.75rem;
+    line-height: var(--text-small--line-height); list-style: decimal inside; margin-top: 1.5rem; overflow-wrap: anywhere;
+  }
+</style>

@@ -45,6 +45,7 @@
   --text-figure-xl: clamp(3.75rem, 8vw, 7rem);
   --text-figure-l: clamp(3.25rem, 5.6vw, 5.25rem);
   --text-figure-m: clamp(2.75rem, 4.4vw, 4rem);
+  --text-figure-s: clamp(2rem, 3.2vw, 3rem);
 
   --text-title: 1.5rem;
   --text-title--line-height: 2rem;
