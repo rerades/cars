@@ -1,13 +1,15 @@
 ---
 import { t } from "../lib/i18n.ts";
 import type { PlaceView } from "../lib/ranking-view.ts";
+import Cifra from "./Cifra.astro";
 
 /**
- * One place of a ranking (docs/design/rankings.md, "Lista de puestos"). The same markup paints the
- * list of the HTML and the `<template>` the filter script clones and fills with `textContent` and
- * attributes (never `innerHTML` with data). `place` is null for the template: every optional part
- * (tie, deal badge, note, terms link, unofficial mark) is then present and the script removes what
- * the entry does not have.
+ * One place of a ranking, a row of the dark band (docs/design/rankings.md, "El puesto como pantalla").
+ * The same markup paints the list of the HTML and the `<template>` the filter script clones and fills
+ * with `textContent` and attributes (never `innerHTML` with data). `place` is null for the template:
+ * every optional part (tie, deal badge, note, terms link, unofficial mark) is then present and the
+ * script removes what the entry does not have. The figure is the Cifra of the model page; its basis
+ * (battery) travels in its label. A ranking figure is never «por confirmar».
  */
 interface Props {
   place: PlaceView | null;
@@ -19,71 +21,77 @@ const [before = "", between = "", after = ""] = t("ranking.fuente", { fuente: "\
   /[\u0001\u0002]/,
 );
 const tpl = p === null;
+// Words are separate inline-blocks so the underline covers each word and not the spaces between them.
+const words = (s: string) => s.split(" ").filter(Boolean);
 ---
 
-<li
-  value={p?.place}
-  class="grid grid-cols-[var(--width-rank-number)_minmax(0,1fr)] gap-x-3 border-b border-line-soft py-4 [overflow-wrap:anywhere]"
-  data-place={p?.place}
->
-  <h3 class="col-span-2 grid grid-cols-subgrid items-start text-card-title text-ink-900">
-    <span class="flex flex-col text-rank-number text-ink-900" data-place-number>
+<li value={p?.place} class="rank-place" data-place={p?.place}>
+  <h3 class="rank-place__head">
+    <span class="rank-place__number" data-place-number>
       <span class="sr-only">{t("ranking.puesto.sr")} </span>
-      <span data-place-value>{p?.place}</span>
+      <span class="rank-place__digits text-rank-number" data-place-value>{p?.place}</span>
       {
         (tpl || p.tied) && (
-          <span class="text-small font-normal text-ink-600" data-tie>
+          <span class="mt-1.5 text-small font-normal" data-tie>
             {t("ranking.puesto.empate")}
           </span>
         )
       }
     </span>
-    <a href={p?.href} class="text-brand-600 underline hover:text-brand-800" data-place-link>
-      {p ? `${p.brand} ${p.model}` : ""}
+    <a href={p?.href} class="rank-place__name" data-place-link>
+      <span class="rank-place__brand" data-place-brand>{p?.brand}</span>{" "}
+      <span class="rank-place__model" data-place-model
+        >{words(p?.model ?? "").map((w) => <><span class="word">{w}</span>{" "}</>)}</span
+      >
     </a>
   </h3>
-  <p class="col-start-2 text-body text-ink-900" data-version>
-    {p?.version}
-  </p>
-  <p class="col-start-2 text-small text-ink-600" data-segment>
-    <span class="sr-only">{t("ranking.segmento.sr")} </span><span data-segment-text>{p?.segment}</span>
-  </p>
-  <p class="col-start-2 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-price text-ink-900" data-figure>
-    <span data-figure-value>{p?.figure}</span>
-    {
-      (tpl || p.deal) && (
-        <span class="inline-block rounded-full bg-deal-bg px-3 py-1 text-badge text-deal-fg" data-deal-badge>
-          {t("ficha.precio.oferta")}
-        </span>
-      )
-    }
-  </p>
-  <p class="col-start-2 text-small text-ink-600" data-source>
-    {before}<a
-      href={p?.source.url}
-      rel="noopener"
-      class="text-brand-600 underline hover:text-brand-800"
-      data-source-link>{p?.source.name}</a
-    >{between}<span data-source-date>{p?.source.date}</span>{after}{
-      (tpl || p.source.unofficial) && (
-        <> <span data-unofficial>{t("ranking.noOficial")}</span></>
-      )
-    }
-  </p>
-  {
-    (tpl || p.note) && (
-      <p class="col-start-2 text-small text-ink-600" data-note>
-        {p?.note}
-      </p>
-    )
-  }
-  {
-    (tpl || p.deal) && (
-      <a
-        href={p?.deal ? `#${p.deal.id}` : undefined}
-        class="col-start-2 inline-flex min-h-touch items-center text-small text-brand-600 underline hover:text-brand-800"
-        data-terms-ref>{t("ficha.precio.verCondiciones")}</a
-      >
-    )
-  }
+  <div class="rank-place__meta">
+    <p class="mt-2 text-body text-ink-900" data-version>
+      {p?.version}
+    </p>
+    <p class="text-small text-ink-600" data-segment>
+      <span class="sr-only">{t("ranking.segmento.sr")} </span><span data-segment-text>{p?.segment}</span>
+    </p>
+  </div>
+  <dl class="rank-place__figure">
+    <Cifra size="l" label={p?.figureLabel ?? ""} text={p?.figure ?? "0 x"} figure="ranking">
+      <div slot="detalle" class="rank-place__detail">
+        {
+          (tpl || p.deal) && (
+            <span class="inline-block rounded-full bg-deal-bg px-3 py-1 text-badge text-deal-fg" data-deal-badge>
+              {t("ficha.precio.oferta")}
+            </span>
+          )
+        }
+        <p data-source>
+          {before}<a
+            href={p?.source.url}
+            rel="noopener"
+            class="text-brand-600 underline hover:text-brand-800"
+            data-source-link>{p?.source.name}</a
+          >{between}<span data-source-date>{p?.source.date}</span>{after}{
+            (tpl || p.source.unofficial) && (
+              <> <span data-unofficial>{t("ranking.noOficial")}</span></>
+            )
+          }
+        </p>
+        {
+          (tpl || p.note) && (
+            <p data-note>
+              {p?.note}
+            </p>
+          )
+        }
+        {
+          (tpl || p.deal) && (
+            <a
+              href={p?.deal ? `#${p.deal.id}` : undefined}
+              class="inline-flex min-h-touch items-center text-small text-brand-600 underline hover:text-brand-800"
+              data-terms-ref>{t("ficha.precio.verCondiciones")}</a
+            >
+          )
+        }
+      </div>
+    </Cifra>
+  </dl>
 </li>

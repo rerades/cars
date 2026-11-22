@@ -216,7 +216,7 @@ test.describe("page without JavaScript (CA-14, RNF-1)", () => {
         const items = page.locator("[data-ranking-list] > li");
         expect(await items.count()).toBeGreaterThanOrEqual(5);
         for (const li of await items.all()) {
-          await expect(li.locator("[data-figure-value]")).not.toBeEmpty();
+          await expect(li.locator("[data-figure] .cifra__valor")).not.toBeEmpty();
           await expect(li.locator("[data-source-link]")).toHaveAttribute("href", /^https:\/\/www\.acme\.example\//);
           await expect(li.locator("[data-source-date]")).toHaveText(/\d{4}/);
         }
@@ -267,10 +267,15 @@ test.describe("built HTML (CA-2, CA-11, CA-13)", () => {
     }
     // Every figure on the autonomy page is one of the YAML values (RNF-6) and in km (one field only).
     const noTemplates = (slug: string) => html(slug).replace(/<template[\s\S]*?<\/template>/g, "");
-    const figures = [...noTemplates("mas-autonomia").matchAll(/data-figure-value[^>]*>([^<]*)</g)].map((m) => m[1]!.trim());
+    // The figure is the Cifra: `<span class="cifra__valor">number <span class="cifra__unidad">unit</span></span>`.
+    const shown = (slug: string) =>
+      [...noTemplates(slug).matchAll(/class="cifra__valor">([\s\S]*?<\/span>)<\/span>/g)].map((m) =>
+        m[1]!.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(),
+      );
+    const figures = shown("mas-autonomia");
     expect(figures.length).toBe(5);
     for (const f of figures) expect(f).toMatch(/^(700|500|450|400|300) km$/);
-    const prices = [...noTemplates("mas-baratos").matchAll(/data-figure-value[^>]*>([^<]*)</g)].map((m) => m[1]!.replace(/\s/g, " ").trim());
+    const prices = shown("mas-baratos");
     expect(prices.length).toBe(6);
     for (const p of prices) expect(p).toMatch(/^(20|30|31|32|45)[.  ]?(000|001) ?€$/);
   });
