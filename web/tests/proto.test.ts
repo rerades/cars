@@ -45,4 +45,9 @@ test("targets of design-shot: pages and prototypes", () => {
   assert.equal(fileOf("catalogo-a", 390), "catalogo-a-390.png");
   assert.equal(fileOf("/marcas/tesla/", 1280), "marcas-tesla-1280.png");
   assert.equal(fileOf("/", 390), "portada-390.png");
+  // A query string gives a stable, artifact-safe name and two queries never collide.
+  const a = fileOf("/comparar/?v=renault%2Fr5&v=mercedes-benz%2Fgla%2FGLA+250%2B", 390);
+  assert.match(a, /^comparar-[0-9a-f]{6}-390\.png$/);
+  assert.equal(a, fileOf("/comparar/?v=renault%2Fr5&v=mercedes-benz%2Fgla%2FGLA+250%2B", 390));
+  assert.notEqual(a, fileOf("/comparar/?v=renault%2Fr5", 390));
 });
