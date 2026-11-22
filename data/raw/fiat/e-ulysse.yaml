@@ -31,3 +31,4 @@ open_questions:
   - "launch: ninguna fuente da la fecha desde la que se puede pedir en España."
   - "segment: el artículo T3 llama «furgoneta» al E-Ulysse (un vehículo de pasajeros de tres filas); no se traduce por parecido y queda null para que lo decida una persona."
   - "Versiones: nombres compuestos a partir de la batería del IDAE (50 y 75 kWh, tallas M y L); no se desglosan acabados (Lounge) ni tallas."
+  - "Imagen (2026-11-22): rechazada, causa `pegado`: rotulación de concesionario «AUTOHAUS WINKLER» en el lateral. Además la furgoneta lleva el logotipo «SCUDO» (no se lee E-Ulysse; causa `modelo` probable) y es un tres cuartos trasero (`angulo`); buscar un E-Ulysse delantero sin rotulación."

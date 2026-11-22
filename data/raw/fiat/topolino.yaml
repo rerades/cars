@@ -13,7 +13,8 @@ versions:
     power_kw: {value: 6, note: "IDAE id 602147", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
     price: null
 images:
-  - file: data/images/fiat/topolino/frontal.jpg
+  - file: data/images/fiat/topolino/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/2025_Fiat_Topolino_in_Verde_Vita%2C_front_right_%28Greenwich_2025%29.jpg/1280px-2025_Fiat_Topolino_in_Verde_Vita%2C_front_right_%28Greenwich_2025%29.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:2025_Fiat_Topolino_in_Verde_Vita,_front_right_(Greenwich_2025).jpg"
     source_id: wikimedia-commons
