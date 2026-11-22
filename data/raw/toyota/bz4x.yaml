@@ -32,4 +32,5 @@ open_questions:
   - "segment: la web dice 'SUV', término que no está en la lista de RF-11; null."
   - "Versiones: la web cita los acabados Advance y Spirit (468-569 km, 224-343 CV) sin ficha por versión; los datos salen del IDAE. Discrepan las homologaciones MC26 (478 y 436 km) y MY27 (569 y 468 km); el IDAE no da su fecha y se usa MY27, que es la que coincide con la web (T1) y no se escribe specs.wltp_max_km."
   - "IDAE homologa también un bZ4X 4x2 Advance de 58 kWh (id 614148, 385 km, MC26) que la web no muestra: no incluido."
+  - "Imagen (2026-11-22): rechazada, causa `modelo`: es el bZ4X de 2023 («First-ever 2023 bZ4X» en el cartel), anterior al restyling que vende Toyota hoy (homologaciones MY27). Se pasó el script y la máscara era buena; hace falta una foto del bZ4X actual."
   - "Tracción: la web dice 4x2 y AWD-i 4x4; sin drivetrain por versión."

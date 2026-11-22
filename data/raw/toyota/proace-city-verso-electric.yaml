@@ -48,7 +48,8 @@ versions:
     power_kw: {value: 100, note: "IDAE id 608248", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
     price: null
 images:
-  - file: data/images/toyota/proace-city-verso-electric/frontal.jpg
+  - file: data/images/toyota/proace-city-verso-electric/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Toyota_Proace_City_Verso_L2_Electric_Executive_%E2%80%93_f_20102024.jpg/1280px-Toyota_Proace_City_Verso_L2_Electric_Executive_%E2%80%93_f_20102024.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Toyota_Proace_City_Verso_L2_Electric_Executive_–_f_20102024.jpg"
     source_id: wikimedia-commons

@@ -38,4 +38,5 @@ images:
 open_questions:
   - "Versiones salidas del IDAE (filas MY26 de furgón; hay además acabados GX PLUS, versiones de 3 plazas y las variantes Combi/Verso, que no se han añadido). El IDAE no dice cuáles se venden hoy."
   - "Precio: toyota.es/coches/precios no da PVP por versión ni aparece en la lectura; price null."
+  - "Imagen (2026-11-22): rechazada sin retocar, causa `pegado`: rotulación de concesionario (Emil Frey Toyota Zentrum) en el lateral, y además es una vista trasera (causa `angulo`). Hace falta un tres cuartos delantero sin rotulación."
   - "launch y segment: sin fuente leída; es una furgoneta pero ninguna fuente leída la clasifica con un término de RF-11."
