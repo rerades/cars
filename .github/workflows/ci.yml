@@ -100,11 +100,12 @@ jobs:
       - run: pnpm run test:a11y
       # ADR-0024, point 5: screenshots of the real pages for the Reviewer. They inform, they do not
       # block (continue-on-error), same as the rest of this job (ADR-0006). Citroën and the Renault 4
-      # page show retouched photos (story #1149).
+      # page show retouched photos (story #1149). The comparison with 3 versions and two rankings
+      # (offer badge, battery basis) lets the Reviewer check those pages against docs/design/refs/.
       - name: Capture pages
         if: always()
         continue-on-error: true
-        run: node scripts/design-shot.ts --out ${{ runner.temp }}/capturas / /coches/ /comparar/ /marcas/polestar/polestar-2/ /marcas/citroen/ /marcas/renault/r4-e-tech-electrico/
+        run: node scripts/design-shot.ts --out ${{ runner.temp }}/capturas / /coches/ /comparar/ /marcas/polestar/polestar-2/ /marcas/citroen/ /marcas/renault/r4-e-tech-electrico/ '/comparar/?v=renault%2Fr5-e-tech-electrico%2Fevolution%20120%20CV%20autonom%C3%ADa%20urbana&v=polestar%2Fpolestar-3%2FLong%20Range%20Dual%20Motor%20MY2025%20km0%20%28Pilot%20Pack%20y%20Plus%20Pack%29&v=mercedes-benz%2Fgla%2FGLA%20250%2B' /rankings/mas-baratos/ /rankings/mas-bateria/
       - name: Upload captures
         if: always()
         continue-on-error: true

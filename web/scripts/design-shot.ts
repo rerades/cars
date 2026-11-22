@@ -8,6 +8,7 @@
  *   node web/scripts/design-shot.ts --out <dir> ...   output dir (default docs/design/refs)
  */
 import { execFileSync, spawn } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync } from "node:fs";
 import { createServer } from "node:net";
 import { isAbsolute, join, resolve } from "node:path";
@@ -24,10 +25,15 @@ export function urlOf(target: string): string {
   return target.startsWith("/") ? target : `/proto/${target}/`;
 }
 
-/** Output file name of a target: `/marcas/tesla/` -> `marcas-tesla-390.png`, `/` -> `portada-390.png`. */
+/**
+ * Output file name of a target: `/marcas/tesla/` -> `marcas-tesla-390.png`, `/` -> `portada-390.png`.
+ * A query string (`/comparar/?v=…`) becomes a short hash, because upload-artifact rejects `?` in names.
+ */
 export function fileOf(target: string, width: number): string {
-  const slug = target.split("/").filter(Boolean).join("-") || "portada";
-  return `${slug}-${width}.png`;
+  const [path, query] = target.split("?");
+  const slug = path.split("/").filter(Boolean).join("-") || "portada";
+  const suffix = query ? `-${createHash("sha1").update(query).digest("hex").slice(0, 6)}` : "";
+  return `${slug}${suffix}-${width}.png`;
 }
 
 /** A free port, because a busy one would make `astro dev` silently move to another. */
