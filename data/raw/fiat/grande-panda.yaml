@@ -13,7 +13,8 @@ versions:
     power_kw: {value: 83, note: "publicado: 113 CV (los ids 605689 y 605690 citan 118 CV en el nombre pero 83 kW en el dato)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
-  - file: data/images/fiat/grande-panda/frontal.jpg
+  - file: data/images/fiat/grande-panda/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Fiat_Grande_Panda_E_Auto_Zuerich_2025_DSC_3318.jpg/1280px-Fiat_Grande_Panda_E_Auto_Zuerich_2025_DSC_3318.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Fiat_Grande_Panda_E_Auto_Zuerich_2025_DSC_3318.jpg"
     source_id: wikimedia-commons

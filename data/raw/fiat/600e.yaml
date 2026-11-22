@@ -13,7 +13,8 @@ versions:
     power_kw: {value: 115, note: "publicado: 156 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
-  - file: data/images/fiat/600e/frontal.jpg
+  - file: data/images/fiat/600e/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Fiat_600e_Auto_Zuerich_2023_1X7A0956.jpg/1280px-Fiat_600e_Auto_Zuerich_2023_1X7A0956.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Fiat_600e_Auto_Zuerich_2023_1X7A0956.jpg"
     source_id: wikimedia-commons
