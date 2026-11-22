@@ -124,7 +124,7 @@ nombre de diseño es este.
 | `--width-explore-label` | `8rem` | Columna del título de cada grupo de «Explorar» desde `md` |
 | `--width-version-label` | `11rem` | **Sin uso desde el 2026-11-11**: era la columna de rótulos de la tabla de versiones de la ficha en `lg`, que PRD-002 (decisión 16) sustituye por el bloque de versión en todas las anchuras (`ficha-modelo.md`). Ninguna otra especificación lo cita; se puede quitar de `global.css` al retirar la tabla |
 | `--width-version-col` | `9rem` | **Sin uso desde el 2026-11-11**, por lo mismo: era el ancho mínimo de cada columna de versión de esa tabla. Se puede quitar con el anterior |
-| `--width-ranking` | `48rem` | Ancho máximo de la lista de puestos de un ranking (`rankings.md`, PRD-005 RF-7) |
+| `--width-ranking` | `48rem` | **Sin uso desde el 2026-11-22** (#1233): la lista de puestos ocupa `--width-page` (ver «Dirección visual», abajo) y el token ya no está en `global.css` |
 | `--width-rank-number` | `3rem` | Columna del número de puesto (y de «empate») en cada puesto del ranking; a 320 px deja 228 px de contenido |
 | `--width-version-col-max` | `20rem` | Ancho máximo de cada columna de versión en el comparador (`comparador.md`, PRD-003): de cada columna de la tabla y del `<select>` de versión, para que con 1 o 2 versiones la tabla no se estire. La ficha ya no lo usa (PRD-002, decisión 16) |
 
