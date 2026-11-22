@@ -381,6 +381,19 @@ export function projectModel(
 export const FIELDS = ["precio", "autonomia", "bateria", "potencia", "traccion", "cargaCc", "cargaCa"] as const;
 export type FieldId = (typeof FIELDS)[number];
 
+/** Rows drawn as a figure (big narrow number and small wide unit); the rest are plain text. */
+export const FIGURE_FIELDS: readonly FieldId[] = ["precio", "autonomia"];
+
+/**
+ * Splits a formatted value ("21.974 €", "315 km") into number and unit, as Cifra.astro does: the unit is
+ * the last word. A value with a single word has no unit. Only reads the text it is given: no cifra is added.
+ */
+export function splitFigure(text: string): { number: string; unit: string | null } {
+  const parts = text.split(/[\s ]+/).filter(Boolean);
+  const unit = parts.length > 1 ? parts.pop()! : null;
+  return { number: parts.join(" "), unit };
+}
+
 /** Label of a row (`ficha.campo.*`, shared with the model page). */
 export function fieldLabel(field: FieldId): string {
   return t(`ficha.campo.${field}` as MessageKey);

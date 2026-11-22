@@ -77,10 +77,8 @@ const messages = {
         </div>
       </section>
 
-      <!-- Table and sources: restyled by the next story; only given the page margins here. -->
-      <div class="cmp-wrap cmp-rest">
-        <ComparisonTable />
-      </div>
+      <!-- White band (table, conditions) and light band (sources); they bring their own bands. -->
+      <ComparisonTable />
 
       <div role="status" aria-live="polite" class="sr-only" data-status></div>
     </main>
@@ -90,10 +88,9 @@ const messages = {
 <style is:global>
   .cmp-wrap { margin-inline: auto; max-width: var(--container-page); padding-inline: 1rem; }
   @media (min-width: 768px) { .cmp-wrap { padding-inline: 2.5rem; } }
-  .cmp-rest { padding-block: 2.5rem; }
   .cmp-top { padding-block: 0.5rem 2.5rem; }
   .cmp-block { padding-block: 2.5rem; }
-  @media (min-width: 1024px) { .cmp-top { padding-bottom: 3.5rem; } .cmp-block, .cmp-rest { padding-block: 3.5rem; } }
+  @media (min-width: 1024px) { .cmp-top { padding-bottom: 3.5rem; } .cmp-block { padding-block: 3.5rem; } }
 
   .cmp-wordmark {
     align-items: center; display: inline-flex; min-height: var(--spacing-touch);
