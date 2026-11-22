@@ -79,16 +79,25 @@ describe("ranking list of places (#372)", () => {
       const expected = rankPlaces(candidates(models, r), r);
       items(page(r.url)).forEach((li, i) => {
         const { version, figure } = expected[i].entry as ReturnType<typeof candidates>[number];
-        const shown = text(/data-figure-value[^>]*>([\s\S]*?)<\/span>/.exec(li)![1]).replace(/ /g, " ");
+        const cifra = /<div[^>]*data-figure="ranking"[\s\S]*?<\/dl>/.exec(li + "</dl>")![0];
+        const shown = text(/class="cifra__valor">([\s\S]*?<\/span>)<\/span>/.exec(cifra)![1]).replace(/ /g, " ");
         const n = figure.value;
         const want = {
           precio: formatEur(n),
           autonomia: `${formatNumber(n)} km`,
-          bateria: `${formatDecimal(n)} kWh, ${{ usable: "útil", gross: "bruta", unknown: "sin especificar si es útil o bruta" }[version.battery_kwh?.basis ?? "unknown"]}`,
+          bateria: `${formatDecimal(n)} kWh`,
           potencia: `${formatDecimal(n)} kW`,
           cargaCc: `${formatDecimal(n)} kW`,
         }[r.id].replace(/ /g, " ");
         assert.equal(shown, want, `${r.url} #${i + 1}`);
+        // The label is in the <dt>; the battery says its basis there, stuck to the figure (PRD-005, decision 9).
+        const label = text(/<dt>([\s\S]*?)<\/dt>/.exec(cifra)![1]);
+        const field = { precio: "Precio", autonomia: "Autonomía WLTP", bateria: "Batería", potencia: "Potencia", cargaCc: "Carga máxima en CC" }[r.id];
+        const basis = { usable: "útil", gross: "bruta", unknown: "sin especificar si es útil o bruta" }[version.battery_kwh?.basis ?? "unknown"];
+        assert.equal(label, r.id === "bateria" ? `${field} · ${basis}` : field, `${r.url} #${i + 1}`);
+        // A ranking figure is never «por confirmar» and sits in its own <dl>.
+        assert.doesNotMatch(cifra, /cifra__falta|data-missing=""/);
+        assert.match(li, /<dl class="rank-place__figure"/);
 
         const src = /<p[^>]*data-source[\s>][\s\S]*?<\/p>/.exec(li)![0];
         assert.match(src, new RegExp(`<a[^>]*href="${figure.url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));

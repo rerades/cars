@@ -59,8 +59,9 @@
   --text-price: 1.25rem;
   --text-price--line-height: 1.75rem;
   --text-price--font-weight: 700;
-  --text-rank-number: 1.5rem;
-  --text-rank-number--line-height: 2rem;
+  /* Place number of a ranking: a narrow figure, as big as --text-figure-m (tokens.md, "Dirección visual"). */
+  --text-rank-number: clamp(2.75rem, 4.4vw, 4rem);
+  --text-rank-number--line-height: 0.82;
   --text-rank-number--font-weight: 700;
   --text-group: 1rem;
   --text-group--line-height: 1.5rem;
@@ -95,9 +96,9 @@
   --width-version-col: 9rem;
   --width-version-col-max: 20rem;
   --size-segment-icon-lg: 6rem;
-  /* Ranking list (tokens.md): max width of the list and the place-number column. */
-  --width-ranking: 48rem;
+  /* Ranking list (tokens.md): the place-number column (wider from lg) and the figure column (lg and up). */
   --width-rank-number: 3rem;
+  --width-rank-figure: 22rem;
   /* Retouched image (ADR-0025, tokens.md): the floor under the cut-out car and its minimum height on mobile. */
   --color-cutout-floor: rgb(255 255 255 / 0.07);
   --size-cutout-mobile: 12rem;
@@ -211,4 +212,108 @@
   font-size: var(--text-small);
   line-height: var(--text-small--line-height);
   color: var(--color-ink-600);
+}
+
+/* One place of a ranking = one row of the dark band (RankingPlace.astro; rankings.md, "El puesto como pantalla").
+   Mobile: number | content. From lg: number | content | figure, the figure column fixed so the figures line up. */
+.rank-place {
+  display: grid;
+  grid-template-columns: var(--width-rank-number) minmax(0, 1fr);
+  column-gap: 0.75rem;
+  border-top: 1px solid var(--color-line-soft);
+  padding-block: 1.5rem;
+  overflow-wrap: anywhere;
+}
+.rank-place:first-child {
+  margin-top: 1.25rem;
+}
+.rank-place__head {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+.rank-place__meta,
+.rank-place__figure {
+  grid-column: 2;
+}
+.rank-place__figure {
+  margin: 1rem 0 0;
+  border-top: 1px solid var(--color-line-soft);
+  padding-top: 0.875rem;
+}
+.rank-place__number {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-ink-600);
+}
+.rank-place__digits {
+  font-stretch: var(--font-stretch-narrow);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-weight: 700;
+}
+/* Names break between words, never at a hyphen; the underline goes on each word, not on the spaces. */
+.rank-place__name {
+  color: var(--color-ink-900);
+  text-decoration: none;
+}
+.rank-place__name:hover {
+  color: var(--color-brand-800);
+}
+.rank-place__brand,
+.rank-place__name .word {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+.rank-place__brand {
+  display: block;
+  width: fit-content;
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: var(--text-body--line-height);
+}
+.rank-place__model {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: var(--text-version);
+  font-stretch: var(--font-stretch-wide);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+.rank-place__name .word {
+  display: inline-block;
+  max-width: 100%;
+}
+.rank-place__detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+@media (min-width: 64rem) {
+  :root {
+    --width-rank-number: 6rem;
+  }
+  .rank-place {
+    grid-template-columns: var(--width-rank-number) minmax(0, 1fr) var(--width-rank-figure);
+    grid-template-rows: auto 1fr;
+    column-gap: 2rem;
+    padding-block: 1.75rem;
+  }
+  .rank-place__head {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+  .rank-place__meta {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+  }
+  .rank-place__figure {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+  }
 }

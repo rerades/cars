@@ -90,7 +90,7 @@ const labelText = "min-w-[5.5rem] md:min-w-0";
 </div>
 
 <script>
-  import { formatEur, sourceView } from "../lib/format.ts";
+  import { sourceView } from "../lib/format.ts";
   import {
     parseRankingFilters,
     rankingById,
@@ -100,9 +100,7 @@ const labelText = "min-w-[5.5rem] md:min-w-0";
     type RankingId,
   } from "../lib/rankings.ts";
   import type { RankingJson, RankingJsonEntry } from "../lib/ranking-data.ts";
-  import type { Version } from "../lib/data.ts";
-  import { versionFields } from "../lib/version-fields.ts";
-  import { termsParagraphs } from "../lib/ranking-view.ts";
+  import { figureParts, termsParagraphs } from "../lib/ranking-view.ts";
   import { filteredState, leftOutKey, type DealEntry } from "../lib/ranking-state.ts";
 
   const root = document.querySelector<HTMLElement>("[data-ranking-filters]");
@@ -175,10 +173,19 @@ const labelText = "min-w-[5.5rem] md:min-w-0";
       return read();
     };
 
-    function figureText(entry: RankingJsonEntry): string {
-      if (def.field === "price") return formatEur(entry.figure.value);
-      const v = { [def.field]: entry.figure } as unknown as Version;
-      return versionFields(v).find((x) => x.key === def.field)?.text ?? String(entry.figure.value);
+    /** One inline-block span per word (the underline of the name goes on each word), a space after each. */
+    function setWords(el: HTMLElement, text: string) {
+      el.replaceChildren(
+        ...text
+          .split(" ")
+          .filter(Boolean)
+          .flatMap((w) => {
+            const span = document.createElement("span");
+            span.className = "word";
+            span.textContent = w;
+            return [span, document.createTextNode(" ")];
+          }),
+      );
     }
 
     function fill(entry: RankingJsonEntry, place: number, tied: boolean, deal: DealEntry | null): HTMLElement {
@@ -190,10 +197,18 @@ const labelText = "min-w-[5.5rem] md:min-w-0";
       if (!tied) $("[data-tie]").remove();
       const link = $("[data-place-link]") as HTMLAnchorElement;
       link.href = `/marcas/${entry.brand}/${entry.slug}/`;
-      link.textContent = `${entry.brand_name} ${entry.model}`;
+      $("[data-place-brand]").textContent = entry.brand_name;
+      setWords($("[data-place-model]"), entry.model);
       $("[data-version]").textContent = entry.name;
       $("[data-segment-text]").textContent = entry.segment ? msg[`segmento.${entry.segment}`]! : msg.segmentoPendiente!;
-      $("[data-figure-value]").textContent = figureText(entry);
+      // The Cifra of the model page: label (with the battery basis), number and unit in their own nodes.
+      const parts = figureParts(def, entry.figure);
+      $("[data-figure] > dt").textContent = parts.label;
+      const valor = $("[data-figure] .cifra__valor");
+      const words = parts.text.split(/[\s ]+/).filter(Boolean);
+      const unit = words.length > 1 ? words.pop()! : "";
+      valor.firstChild!.textContent = `${words.join(" ")} `;
+      $("[data-figure] .cifra__unidad").textContent = unit;
       if (def.field !== "price" || entry.figure.price_kind !== "financed") $("[data-deal-badge]").remove();
       // The link points to the entry of "Condiciones de las ofertas", rebuilt with the same id (#377).
       const ref = li.querySelector<HTMLAnchorElement>("[data-terms-ref]");

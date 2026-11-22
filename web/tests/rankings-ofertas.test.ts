@@ -100,7 +100,7 @@ describe("offer price and terms, left-out count and empty state of the rankings 
     const id = termsAnchorId("acme", "Mix", "Mix B");
     lis.forEach((li, i) => {
       if (names[i] === "Mix B") {
-        assert.match(text(/data-figure[\s>][\s\S]*?<\/p>/.exec(li)![0]), /35\.000 € Precio con oferta/);
+        assert.match(text(/data-figure="ranking"[\s\S]*?<\/dl>/.exec(li + "</dl>")![0]), /35\.000 € Precio con oferta/);
         assert.match(li, new RegExp(`<a[^>]*href="#${id}"[^>]*>Ver condiciones de la oferta</a>`));
       } else {
         assert.doesNotMatch(li, /Precio con oferta|Ver condiciones/);

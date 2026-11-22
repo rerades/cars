@@ -1,6 +1,6 @@
 import { PRICE_BANDS } from "./catalog.ts";
 import type { ModelRecord, Price } from "./data.ts";
-import { formatEur, sourceView } from "./format.ts";
+import { formatDecimal, formatEur, formatNumber, sourceView } from "./format.ts";
 import { t, type MessageKey } from "./i18n.ts";
 import {
   candidates,
@@ -11,7 +11,6 @@ import {
   type RankingDef,
   type RankingId,
 } from "./rankings.ts";
-import { versionFields } from "./version-fields.ts";
 
 /** What one place of a ranking shows (docs/design/rankings.md, "Lista de puestos"). */
 export interface PlaceView {
@@ -27,8 +26,10 @@ export interface PlaceView {
   /** Translated segment, or "Segmento por confirmar". */
   segment: string;
   hasSegment: boolean;
-  /** The figure with its unit (battery with its basis), formatted like the model page. */
+  /** The figure with its unit and nothing else ("58 kWh"), formatted like the model page. */
   figure: string;
+  /** Label of the figure: the field, and for the battery its basis stuck to it ("Batería · útil"). */
+  figureLabel: string;
   source: { name: string; date: string; url: string; unofficial: boolean };
   /** `note` of the figure, literal. */
   note: string | null;
@@ -50,16 +51,43 @@ export interface DealView {
 /** Splits `price_terms` into paragraphs like the model page does. */
 export const termsParagraphs = (text: string) => text.split(/\n\s*\n/).filter((p) => p.trim() !== "");
 
+const FIELD_LABEL: Record<RankingId, MessageKey> = {
+  precio: "ficha.campo.precio",
+  autonomia: "ficha.campo.autonomia",
+  bateria: "ficha.campo.bateria",
+  potencia: "ficha.campo.potencia",
+  cargaCc: "ficha.campo.cargaCc",
+};
+
+/**
+ * Value and label of the figure of a place, shared by the build and the filter script so both paint
+ * the same. The value never carries the battery basis: it goes in the label (PRD-005, decision 9).
+ */
+export function figureParts(
+  def: RankingDef,
+  figure: { value: number; basis?: "usable" | "gross" | "unknown" },
+): { text: string; label: string } {
+  const n = figure.value;
+  const text = ({
+    price: () => formatEur(n),
+    wltp_km: () => t("ficha.unidad.km", { n: formatNumber(n) }),
+    battery_kwh: () => t("ficha.unidad.kwh", { n: formatDecimal(n) }),
+    power_kw: () => t("ficha.unidad.kw", { n: formatDecimal(n) }),
+    dc_max_kw: () => t("ficha.unidad.kw", { n: formatDecimal(n) }),
+  } as Record<string, () => string>)[def.field]?.() ?? String(n);
+  const campo = t(FIELD_LABEL[def.id]);
+  if (def.field !== "battery_kwh") return { text, label: campo };
+  const base = t(`ranking.cifra.base.${figure.basis ?? "unknown"}` as MessageKey);
+  return { text, label: t("ranking.cifra.etiqueta", { campo, base }) };
+}
+
 /** The places (max 10) of a ranking, ready to paint. Selection and numbering come from rankings.ts. */
 export function placeViews(models: readonly ModelRecord[], ranking: RankingId | RankingDef): PlaceView[] {
   const def = typeof ranking === "string" ? rankingById(ranking) : ranking;
   const places = rankPlaces(candidates(models, def), def);
   return places.map(({ place, entry }, i) => {
     const { model, version, figure } = entry;
-    const text =
-      def.field === "price"
-        ? formatEur(figure.value)
-        : versionFields(version).find((f) => f.key === def.field)?.text ?? String(figure.value);
+    const parts = figureParts(def, figure as { value: number; basis?: "usable" | "gross" | "unknown" });
     const sameAs = (j: number) => places[j] !== undefined && places[j].place === place;
     return {
       place,
@@ -72,7 +100,8 @@ export function placeViews(models: readonly ModelRecord[], ranking: RankingId | 
         ? t(`segmento.${model.segment.value}` as MessageKey)
         : t("tarjeta.segmentoPendiente"),
       hasSegment: model.segment !== null,
-      figure: text,
+      figure: parts.text,
+      figureLabel: parts.label,
       source: { ...sourceView(figure), url: figure.url },
       note: figure.note ?? null,
       deal: dealOf(model, version.name, def, figure as Partial<Price>),

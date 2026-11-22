@@ -321,6 +321,11 @@ export const es = {
   "ranking.segmento.sr": "Segmento:",
   "ranking.fuente": "Fuente: {fuente}, {fecha}",
   "ranking.noOficial": "· fuente no oficial",
+  // Label of the figure of a place: the field and, for the battery, its basis stuck to it (PRD-005, decision 9).
+  "ranking.cifra.etiqueta": "{campo} · {base}",
+  "ranking.cifra.base.usable": "útil",
+  "ranking.cifra.base.gross": "bruta",
+  "ranking.cifra.base.unknown": "sin especificar si es útil o bruta",
   "ranking.precio.dato": "el precio",
   "ranking.autonomia.dato": "la autonomía WLTP",
   "ranking.bateria.dato": "la capacidad de batería",
