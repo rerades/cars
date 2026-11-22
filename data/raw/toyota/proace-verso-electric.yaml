@@ -59,4 +59,5 @@ open_questions:
   - "Versiones salidas del IDAE (filas MY26 de la gama Verso; no se incluyen Camper ni Gruau TPMR Taxi, que son transformaciones). El IDAE no dice cuáles se venden hoy; los nombres de versión salen de sus filas, no de toyota.es."
   - "Precio: toyota.es/coches/precios no da PVP por versión; price null."
   - "launch y segment: toyota.es/coches/proace-verso no trae un término de RF-11 ni fecha de venta; null."
+  - "Imagen (2026-11-22): rechazada sin retocar, causa `pegado`: puerta corredera abierta y gran pegatina publicitaria («Lad meg på Toyota ladenettverk») en el lateral; además es un lateral en sala."
   - "Imagen: la foto es de un Proace Verso Electric transformado por Lang (Executive Family Plus); no hay otra categorizada como eléctrica."

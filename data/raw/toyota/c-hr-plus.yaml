@@ -32,7 +32,8 @@ versions:
     drivetrain: {value: awd, note: "la ficha indica 4x4", source_id: toyota-es, url: "https://www.toyota.es/coches/toyota-c-hr-plus", retrieved: 2026-11-02, tier: T1}
     price: null
 images:
-  - file: data/images/toyota/c-hr-plus/frontal.jpg
+  - file: data/images/toyota/c-hr-plus/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Toyota_C-HR%2B_Auto_Zuerich_2025_DSC_3056.jpg/1280px-Toyota_C-HR%2B_Auto_Zuerich_2025_DSC_3056.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Toyota_C-HR%2B_Auto_Zuerich_2025_DSC_3056.jpg"
     source_id: wikimedia-commons
