@@ -1,5 +1,6 @@
 ---
 import { t } from "../lib/i18n.ts";
+import { splitFigure } from "../lib/figure.ts";
 
 /**
  * Key figure (docs/design/tokens.md, "Tipografía"; PRD-001 RF-1, RF-12; PRD-002 RF-11, RF-18).
@@ -21,10 +22,7 @@ interface Props {
   figure?: string;
 }
 const { label, text, size, class: extra, figure } = Astro.props;
-// The unit is the last word; the space between (normal or no-break) is not part of either.
-const parts = text?.split(/[\s ]+/).filter(Boolean) ?? [];
-const unit = parts.length > 1 ? parts.pop() : null;
-const number = parts.join(" ");
+const { number, unit } = splitFigure(text ?? "");
 const missing = t("ficha.porConfirmar").split(" ");
 ---
 

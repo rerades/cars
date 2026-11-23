@@ -97,6 +97,27 @@ test.describe("comparator table (story #318)", () => {
     await expect(page.locator("[data-compare] tbody tr[class*=bg-], [data-compare] [aria-label*=mejor i]")).toHaveCount(0);
   });
 
+  test("CA-15 (RF-13): every cell of a row has the same class on its value, whatever the value", async ({ page }) => {
+    await page.goto(`${site}/comparar/?${three}`);
+    const rows = page.locator("[data-compare] tbody tr:has(td)");
+    await expect(rows).toHaveCount(7);
+    for (const row of await rows.all()) {
+      // The class of the value of each cell. Only the «--missing» modifier (muted placeholder, CA-17)
+      // may differ (`cmp-value--missing`, or `cmp-fig-missing` in place of `cmp-value` in a figure row),
+      // so it is normalised away; everything else must be identical in the row.
+      const classes = await row.locator("td [data-slot=text]").evaluateAll((els) =>
+        els.map((e) =>
+          [...new Set([...e.classList].filter((c) => !c.endsWith("--missing")).map((c) => (c === "cmp-fig-missing" ? "cmp-value" : c)))]
+            .sort()
+            .join(" "),
+        ),
+      );
+      expect(classes).toHaveLength(3);
+      expect(classes[0]).not.toBe("");
+      expect(classes).toEqual([classes[0], classes[0], classes[0]]);
+    }
+  });
+
   test("CA-4: missing datum says «por confirmar» without figures; the ac row stays with all «por confirmar»", async ({ page }) => {
     await page.goto(`${site}/comparar/?${three}`);
     // Order: GT, 60, 80 AWD. dc_max: only 80 AWD has it.

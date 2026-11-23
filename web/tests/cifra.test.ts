@@ -55,6 +55,19 @@ import Cifra from "../src/components/Cifra.astro";
     assert.doesNotMatch(html, /<script\b/);
   });
 
+  // The script of RankingFilters.astro fills `.cifra__valor` through `firstChild.textContent` (number)
+  // and `.cifra__unidad` (unit): it breaks if the number stops being the first child, a text node.
+  test("`.cifra__valor` starts with the number as a text node, followed by the `.cifra__unidad` span", () => {
+    const values = [...html.matchAll(/<span class="cifra__valor">([\s\S]*?)<\/span>\s*<\/span>/g)].map((m) => m[1]!);
+    assert.equal(values.length, 3);
+    for (const inner of values) {
+      assert.match(inner, /^[^<\s][^<]*\s+<span class="cifra__unidad">[^<]+$/);
+    }
+    const filters = readFileSync(join(WEB, "src/components/RankingFilters.astro"), "utf8");
+    assert.match(filters, /\.cifra__valor"\)/);
+    assert.match(filters, /valor\.firstChild!\.textContent/);
+  });
+
   test("dt comes before dd in the DOM, and the mark goes with the label", () => {
     const first = html.slice(html.indexOf('data-figure="range"'));
     assert.ok(first.indexOf("<dt") < first.indexOf("<dd"));

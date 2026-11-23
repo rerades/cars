@@ -91,6 +91,7 @@ const labelText = "min-w-[5.5rem] md:min-w-0";
 
 <script>
   import { sourceView } from "../lib/format.ts";
+  import { splitFigure } from "../lib/figure.ts";
   import {
     parseRankingFilters,
     rankingById,
@@ -205,10 +206,10 @@ const labelText = "min-w-[5.5rem] md:min-w-0";
       const parts = figureParts(def, entry.figure);
       $("[data-figure] > dt").textContent = parts.label;
       const valor = $("[data-figure] .cifra__valor");
-      const words = parts.text.split(/[\s ]+/).filter(Boolean);
-      const unit = words.length > 1 ? words.pop()! : "";
-      valor.firstChild!.textContent = `${words.join(" ")} `;
-      $("[data-figure] .cifra__unidad").textContent = unit;
+      const { number, unit } = splitFigure(parts.text);
+      // First child of .cifra__valor is the number text node (Cifra.astro; guarded by tests/cifra.test.ts).
+      valor.firstChild!.textContent = `${number} `;
+      $("[data-figure] .cifra__unidad").textContent = unit ?? "";
       if (def.field !== "price" || entry.figure.price_kind !== "financed") $("[data-deal-badge]").remove();
       // The link points to the entry of "Condiciones de las ofertas", rebuilt with the same id (#377).
       const ref = li.querySelector<HTMLAnchorElement>("[data-terms-ref]");

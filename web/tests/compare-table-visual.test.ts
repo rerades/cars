@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { describe, test } from "node:test";
-import { FIELDS, FIGURE_FIELDS, splitFigure } from "../src/lib/compare.ts";
+import { FIELDS, FIGURE_FIELDS } from "../src/lib/compare.ts";
+import { splitFigure } from "../src/lib/figure.ts";
 import { loadModels } from "../src/lib/data.ts";
 import { cellView, defaultVersion, projectModel } from "../src/lib/compare.ts";
 
