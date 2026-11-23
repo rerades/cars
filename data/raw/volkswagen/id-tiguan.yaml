@@ -1,0 +1,45 @@
+# Researcher — Volkswagen ID. Tiguan. Fuentes: volkswagen-es (T1), idae-es (T2). Consultado 2026-11-23.
+brand: volkswagen
+brand_name: Volkswagen
+model: ID. Tiguan
+status: {value: on_sale, note: "la ficha muestra configurador y una oferta financiada vigente hasta el 30/11/2026; sin una frase que diga que ya se pueden pedir o entregar", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id-tiguan.html", retrieved: 2026-11-23, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Match
+    battery_kwh: {value: 58, basis: unknown, note: "IDAE id 614567 (ID. Tiguan Match 140 kW (190 CV) 58 kWh MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 424, note: "IDAE id 614567 (única fila Match); un artículo T3 cita 454 km, no se usa", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 140, note: "IDAE id 614567 (190 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price:
+      value: 38659.85
+      unit: EUR
+      price_kind: financed
+      price_terms: >-
+        Oferta calculada para un Volkswagen ID. Tiguan Match 140 kW (190 CV) 58 kWh con un PVP recomendado financiando en Península y Baleares 38.659,85€ (Impuestos, transporte, descuento de marca y concesionario, 1.000€ de Plan Auto+ incluidos y plan CAES por importe de 1.000€ si el cliente sustituye un vehículo de combustión). Para clientes particulares que financien un crédito mínimo de 15.001€ con una permanencia mínima de 36 meses a través de Volkswagen Bank GmbH S.E.. Ejemplo: 35 cuotas de 250€ y 1 cuota en el plazo 12 de 4.500€ en previsión de recibir la ayuda del Plan Auto+ . La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 23.374,52€ en el mes 36 (calculada con 10.000km anuales). Entrada: 8.001,04€. TIN: 7,5%. TAE: 9,17%. Importe total financiado: 26.714,94€. Comisión de apertura al contado: 2,99% (916,7€). Importe de los intereses: 5.965,7€. Coste total del crédito: 6.882,4€. Importe total adeudado: 37.541,22€. Precio total a plazos: 45.542,26€. Precio al contado: 38.659,85€. Sistema de amortización francés. El modelo visualizado puede no corresponder exactamente con el ofertado. Oferta válida hasta el 30/11/2026. Volkswagen Financial Services es una marca comercializada por Volkswagen Bank GmbH S.E. Avda. Bruselas, 34 - 28108 Alcobendas. Reg. Mercantil de Madrid. Tomo 16828, Sección 8, Folio 184, Hoja M-287573, Inscrita con el nº 1480 del Reg. Especial del Banco de España - CIF. W-0042741I.Consumo eléctrico gama ID. Tiguan Match combinado WLTP (kWh/100km): 14,9 - 16 kWh/100km, emisiones de CO2 (g/km) WLTP: 0 g/km.
+      price_terms_url: "https://www.volkswagen.es/es/modelos/id-tiguan.html"
+      note: "precio al contado del texto legal (regla del 2026-10-25); financiando: 32.700 € (cabecera, con Plan Auto+ incluido)"
+      source_id: volkswagen-es
+      url: "https://www.volkswagen.es/es/modelos/id-tiguan.html"
+      retrieved: 2026-11-23
+      tier: T1
+  - name: Life
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 614568 (ID. Tiguan Life 210 kW (286 CV) 77 kWh MY27); otras Life: 4Motion id 614569 y Launch Edition id 614570", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 604, note: "IDAE id 614568 (Life sin 4Motion)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 614568 (286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price: null
+images:
+  - file: "data/images/volkswagen/id-tiguan/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Volkswagen_ID._Tiguan_01.jpg/1280px-Volkswagen_ID._Tiguan_01.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID._Tiguan_01.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-23
+    license: "CC-BY-SA-4.0"
+    attribution: "Y.Leclercq, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "needs_review: true porque volkswagen.es no dice que se pueda pedir hoy (solo configurador y oferta); un medio T3 (motor16.com) dice «ya se puede configurar en España»."
+  - "launch: sin fecha. segment: volkswagen.es no usa un término de RF-11."
+  - "Life: sin precio T1. Tracción, carga DC y AC no leídos en T1."
+  - "Versiones: el IDAE homologa además Life 4Motion, Launch Edition, Style y Style 1st Edition; no se añaden sin fuente que diga que se venden hoy."
+  - "Match: el artículo T3 cita 454 km y el IDAE 424 km (T2, prevalece)."
+  - "Precio del Match: oferta financiada vigente hasta el 30/11/2026; sin PVP limpio."

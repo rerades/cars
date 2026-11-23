@@ -1,0 +1,44 @@
+# Researcher — Volkswagen ID. Cross. Fuentes: volkswagen-es (T1), idae-es (T2), hibridosyelectricos-es (T3). Consultado 2026-11-23.
+brand: volkswagen
+brand_name: Volkswagen
+model: ID. Cross
+status: {value: on_sale, note: "«ya se puede comprar desde poco más de 20.000 €» / «ya está a la venta en España» (artículo de hibridosyelectricos.com)", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/por-poco-mas-20000-hecho-en-espana-volkswagen-ya-vende-su-suv-electrico-mas-barato-practico_90024_102.html", retrieved: 2026-11-23, tier: T3}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Match
+    battery_kwh: {value: 37, basis: unknown, note: "IDAE id 614575 (ID. Cross Match 85 kW (116 CV) 37 kWh MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 304, note: "IDAE id 614575 (única fila Match); un artículo T3 cita 324 km, no se usa", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 85, note: "IDAE id 614575 (116 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price:
+      value: 26497.84
+      unit: EUR
+      price_kind: financed
+      price_terms: >-
+        Oferta calculada para un Volkswagen ID.Cross Match 85kW (116CV) Automático 1vel. con un PVP recomendado financiando en Península y Baleares 26.497,84€ (Impuestos, transporte, descuento de marca y concesionario, 1.000€ de Plan Auto+ incluidos y plan CAES por importe de 637€ si el cliente sustituye un vehículo de combustión). Para clientes particulares que financien un crédito mínimo de 15.000€ con una permanencia mínima de 36 meses a través de Volkswagen Bank GmbH S.E.. Ejemplo: 35 cuotas de 140€ y 1 cuota en el plazo 12 de 4.500€ en previsión de recibir la ayuda del Plan Auto+ . La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 15.470,51€ en el mes 36 (calculada con 10.000km anuales). Entrada: 5.589,13€. TIN: 7,5%. TAE: 9,21%. Importe total financiado: 20.908,72€. Comisión de apertura al contado: 2,99% (625,17€). Importe de los intereses: 3.961,79€. Coste total del crédito: 4.586,96€. Importe total adeudado: 25.495,68€. Precio total a plazos: 31.084,81€. Precio al contado: 26.497,84€. Sistema de amortización francés. El modelo visualizado puede no corresponder exactamente con el ofertado. Oferta válida hasta el 30/11/2026. Volkswagen Financial Services es una marca comercializada por Volkswagen Bank GmbH S.E. Avda. Bruselas, 34 - 28108 Alcobendas. Reg. Mercantil de Madrid. Tomo 16828, Sección 8, Folio 184, Hoja M-287573, Inscrita con el nº 1480 del Reg. Especial del Banco de España - CIF. W-0042741I.Consumo eléctrico gama ID.Cross Match combinado WLTP (kWh/100km): 13,7 - 14,7 kWh/100km, emisiones de CO2 (g/km) WLTP: 0 g/km.
+      price_terms_url: "https://www.volkswagen.es/es/modelos/id-cross.html"
+      note: "precio al contado del texto legal (regla del 2026-10-25); no incluye el «Desde 20.500 €» de la cabecera, que depende de Plan Auto+ y financiación"
+      source_id: volkswagen-es
+      url: "https://www.volkswagen.es/es/modelos/id-cross.html"
+      retrieved: 2026-11-23
+      tier: T1
+  - name: Life 155 kW
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 614500 (ID. Cross Life 155 kW (211 CV) 52 kWh MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 426, note: "IDAE id 614500 (única fila Life 155 kW)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 155, note: "IDAE id 614500 (211 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price: null
+images:
+  - file: "data/images/volkswagen/id-cross/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Volkswagen_ID._Cross_Auto_Zuerich_2026_IMG_8597.jpg/1280px-Volkswagen_ID._Cross_Auto_Zuerich_2026_IMG_8597.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID._Cross_Auto_Zuerich_2026_IMG_8597.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-23
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "launch: sin fecha de inicio de pedidos en una fuente leída. segment: volkswagen.es no usa un término de RF-11."
+  - "Life 155 kW: sin precio T1 en la ficha. Tracción, carga DC y AC no leídos en T1."
+  - "Versiones: el IDAE homologa además Match/Life/Style de 99 kW con 37 kWh y Style 155 kW con 52 kWh; no se añaden sin fuente que diga que se venden hoy."
+  - "Match: el artículo T3 cita 324 km de autonomía y el IDAE 304 km (T2, prevalece)."
+  - "Precio del Match: oferta financiada vigente hasta el 30/11/2026; sin PVP limpio."

@@ -1,0 +1,37 @@
+# Researcher — Volkswagen ID.7 Tourer. Fuentes: volkswagen-es (T1), idae-es (T2). Consultado 2026-11-23.
+brand: volkswagen
+brand_name: Volkswagen
+model: ID.7 Tourer
+status: {value: on_sale, note: "la ficha ofrece «Encuentra tu ID.7 Tourer totalmente nuevo y con entrega inmediata» (localizador de stock)", source_id: volkswagen-es, url: "https://www.volkswagen.es/es/modelos/id7-tourer.html", retrieved: 2026-11-23, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Pro
+    battery_kwh: {value: 77, basis: unknown, note: "IDAE id 607353 (ID.7 Tourer MY26 Pro 210 kW (286 CV) 77 kWh); fila Pro de menor wltp_km (otras: Pro Classic id 607356, 606 km; sin fecha, solo MY25/MY26/MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 602, note: "IDAE id 607353", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 607353 (286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price: null
+  - name: Pro S
+    battery_kwh: {value: 86, basis: unknown, note: "IDAE id 607354 (ID.7 Tourer MY26 Pro S 210 kW (286 CV) 86 kWh)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 683, note: "IDAE id 607354; coincide con «Autonomía Hasta 683 km» de la cabecera de volkswagen.es. Pro S Classic id 607357: 689 km (cifra del texto de la web)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 210, note: "IDAE id 607354 (286 CV; publicado en volkswagen.es: 286CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price: null
+  - name: GTX
+    battery_kwh: {value: 86, basis: unknown, note: "IDAE id 607355 (ID.7 Tourer MY26 GTX 250 kW (340 CV) 86 kWh)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 578, note: "IDAE id 607355; menor de las filas GTX (GTX Classic id 607358, 583 km)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 250, note: "IDAE id 607355 (340 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price: null
+images:
+  - file: "data/images/volkswagen/id7-tourer/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Volkswagen_ID.7_Tourer_IMG_4198.jpg/1280px-Volkswagen_ID.7_Tourer_IMG_4198.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID.7_Tourer_IMG_4198.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-23
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "needs_review: true: volkswagen.es no dice qué versiones se pueden pedir hoy; los acabados Pro, Pro S y GTX salen de la ficha, y las cifras del IDAE (filas MY26, sin fecha) no están ligadas a una versión por la web."
+  - "Precio: no se guarda. Releída la ficha el 2026-11-23 con fetch-page.ts: «Desde 40.400€ sujeto a financiación…» y la nota legal liga 40.400 € (precio financiando, con 1.000 € de Plan Auto+ y la ayuda de 4.050 € incluidas, oferta hasta el 30/11/2026) a «ID.7 Tourer Business 210 kW (286CV)», un acabado que no es ninguna versión del fichero; el precio al contado de esa nota es 45.853,25 €. Sin PVP limpio ni precio ligado a Pro, Pro S o GTX."
+  - "launch: sin fecha de pedidos. segment: volkswagen.es no usa un término de RF-11. Tracción, carga DC y AC no leídos en T1."
+  - "Versiones: el IDAE (MY27) homologa también Business, Style (77 y 86 kWh) y GTX 4Motion; no se añaden sin fuente que diga que se venden."
