@@ -36,7 +36,8 @@ versions:
       retrieved: 2026-10-10
       tier: T1
 images:
-  - file: "data/images/renault/twingo-e-tech-electrico/frontal.jpg"
+  - file: "data/images/renault/twingo-e-tech-electrico/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Renault_Twingo_E-Tech_IMG_6605.jpg/1280px-Renault_Twingo_E-Tech_IMG_6605.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Renault_Twingo_E-Tech_IMG_6605.jpg"
     source_id: wikimedia-commons

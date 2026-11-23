@@ -81,7 +81,8 @@ versions:
       retrieved: 2026-11-01
       tier: T1
 images:
-  - file: data/images/renault/r5-e-tech-electrico/frontal.jpg
+  - file: data/images/renault/r5-e-tech-electrico/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Renault_5_E-Tech_Electric_Auto_Zuerich_2024_DSC_6501.jpg/1280px-Renault_5_E-Tech_Electric_Auto_Zuerich_2024_DSC_6501.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Renault_5_E-Tech_Electric_Auto_Zuerich_2024_DSC_6501.jpg"
     source_id: wikimedia-commons

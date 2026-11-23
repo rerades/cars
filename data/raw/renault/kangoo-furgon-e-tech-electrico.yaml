@@ -27,6 +27,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-23): rechazada, causa `pegado`: rotulación del concesionario («FISCHER», web y QR) en el lateral; sin retocar."
   - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España (prensa.renault.es no se puede usar, ver data/sources/renault-press.yaml)."
   - "segment sin fuente: la web habla de «furgonetas eléctricas» como categoría pero no clasifica el modelo con un término de RF-11 para este modelo; queda null."
   - "wltp_km no guardada: la web da «354 km de autonomía en versión L1, pendiente de homologación», que no es una cifra homologada. El IDAE trae filas de un Kangoo Furgón E-Tech de 45 kWh/90 kW con 300-314 km, que no coinciden con los 115 kW de la web (generación distinta); no se usan."
