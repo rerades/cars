@@ -34,7 +34,8 @@ versions:
     drivetrain: {value: rwd, note: "IDAE id 610392: «Tracción Trasera»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-13, tier: T2}
     price: null
 images:
-  - file: data/images/ford/e-transit-custom/frontal.jpg
+  - file: data/images/ford/e-transit-custom/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Ford_E-Transit_Custom_%282023%29_DSC_9255.jpg/1280px-Ford_E-Transit_Custom_%282023%29_DSC_9255.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Ford_E-Transit_Custom_(2023)_DSC_9255.jpg"
     source_id: wikimedia-commons

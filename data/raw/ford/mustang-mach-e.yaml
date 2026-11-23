@@ -32,7 +32,8 @@ versions:
     drivetrain: {value: awd, note: "IDAE id 610476: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
-  - file: data/images/ford/mustang-mach-e/frontal.jpg
+  - file: data/images/ford/mustang-mach-e/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Ford_Mustang_Mach-E_Leonberg_2022_1X7A0434.jpg/1280px-Ford_Mustang_Mach-E_Leonberg_2022_1X7A0434.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Ford_Mustang_Mach-E_Leonberg_2022_1X7A0434.jpg"
     source_id: wikimedia-commons
