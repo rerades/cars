@@ -1,0 +1,23 @@
+# Researcher — Mercedes-Benz Clase C eléctrico. Fuente: motor-es (T3). Consultado 2026-11-23.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: Clase C
+status: {value: on_sale, note: "«El configurador y el libro de pedidos están abiertos»; fuente T3, mercedes-benz.es devuelve HTTP 403", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-clase-c-electrico-2026114001.html", retrieved: 2026-11-23, tier: T3}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: C 400 4MATIC
+    battery_kwh: {value: 94, basis: unknown, note: "motor.es: «batería de iones de litio de 94 kWh»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-clase-c-electrico-2026114001.html", retrieved: 2026-11-23, tier: T3}
+    wltp_km: {value: 743, note: "motor.es: «743 kilómetros según el ciclo WLTP»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-clase-c-electrico-2026114001.html", retrieved: 2026-11-23, tier: T3}
+    power_kw: {value: 360, note: "motor.es: «360 kW (489 CV)»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-clase-c-electrico-2026114001.html", retrieved: 2026-11-23, tier: T3}
+    drivetrain: {value: awd, note: "motor.es: «dos motores, uno por eje… tracción integral»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-clase-c-electrico-2026114001.html", retrieved: 2026-11-23, tier: T3}
+    dc_max_kw: {value: 330, note: "motor.es: «potencia máxima de carga CC de 330 kW»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-clase-c-electrico-2026114001.html", retrieved: 2026-11-23, tier: T3}
+    price: null
+images: []
+open_questions:
+  - "Precio: mercedes-benz.es devuelve HTTP 403 (fetch-page.ts, 2026-11-23); motor.es (T3) cita 69.800 € de PVP, que no se guarda."
+  - "launch: motor.es no da la fecha de apertura de pedidos; dice que las primeras unidades llegan a concesionarios desde septiembre de 2026."
+  - "segment: motor.es lo llama «sedán eléctrico», que no es un término de la lista de RF-11; null."
+  - "Datos técnicos solo de una fuente T3 (el IDAE no trae el modelo); confirmar con la web oficial."
+  - "Imágenes: sin página File: de Commons conocida; sin imagen."
