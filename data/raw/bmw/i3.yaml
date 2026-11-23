@@ -1,0 +1,20 @@
+# Researcher — BMW i3 (Neue Klasse). Fuentes: motor-es (T3), idae-es (T2). Consultado 2026-11-23.
+brand: bmw
+brand_name: BMW
+model: i3
+status: {value: on_sale, note: "«ya puedes comprar esta berlina eléctrica»; pedidos abiertos de la First Edition, el Base a partir de septiembre; fuente T3, bmw.es no se pudo leer", source_id: motor-es, url: "https://www.motor.es/noticias/bmw-i3-precios-espana-2026114822.html", retrieved: 2026-11-23, tier: T3}
+launch: null
+segment: {value: berlina, note: "«ya puedes comprar esta berlina eléctrica» y «una berlina propia del segmento D»", source_id: motor-es, url: "https://www.motor.es/noticias/bmw-i3-precios-espana-2026114822.html", retrieved: 2026-11-23, tier: T3}
+needs_review: true
+versions:
+  - name: i3 50 xDrive
+    battery_kwh: {value: 108.7, basis: unknown, note: "IDAE id 614843 (51JB); otra fila sin fecha, id 613544 (51BJ), da 113,4 kWh con los mismos 345 kW y 912 km; elegida la que coincide con los 108,7 kWh de motor.es", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 912, note: "IDAE id 614843; igual en id 613544", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 345, note: "IDAE id 614843; motor.es publica 469 CV", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "Precio: bmw.es y el PressClub dieron error (fetch failed / HTTP 403 con fetch-page.ts, 2026-11-23); solo hay precios T3 (motor.es: First Edition 75.340 €; otras fuentes citan 74.650 €), que no se guardan."
+  - "launch: motor.es solo dice «precios vigentes desde junio de 2026»; ninguna fuente leída da la fecha de apertura de pedidos en España."
+  - "Versiones: está anunciada una versión Base (65.900 € en Alemania según otras fuentes, desde septiembre) y el IDAE trae también «i3 40 xDrive» (sin leer); confirmar la gama vigente con bmw.es."
+  - "Imágenes: la búsqueda en Commons está bloqueada por robots.txt para fetch-page.ts y no se conoce ninguna página File: del i3; sin imagen."

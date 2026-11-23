@@ -1,0 +1,21 @@
+# Researcher — Mercedes-Benz VLE (sucesor del Clase V eléctrico). Fuente: motor-es (T3). Consultado 2026-11-23.
+brand: mercedes-benz
+brand_name: Mercedes-Benz
+model: VLE
+status: {value: on_sale, note: "«Mercedes ya acepta pedidos de su nuevo monovolumen»; fuente T3, mercedes-benz.es devuelve HTTP 403", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-vle-electrico-2026113881.html", retrieved: 2026-11-23, tier: T3}
+launch: null
+segment: {value: monovolumen, note: "motor.es: «el segmento de los monovolúmenes premium»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-vle-electrico-2026113881.html", retrieved: 2026-11-23, tier: T3}
+needs_review: true
+versions:
+  - name: VLE 300
+    battery_kwh: {value: 115, basis: unknown, note: "motor.es: «batería NMC de 115 kWh»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-vle-electrico-2026113881.html", retrieved: 2026-11-23, tier: T3}
+    wltp_km: {value: 707, note: "motor.es: «La autonomía del VLE es de 707 kilómetros según el ciclo WLTP»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-vle-electrico-2026113881.html", retrieved: 2026-11-23, tier: T3}
+    power_kw: {value: 203, note: "motor.es: «un motor de 203 kW (276 CV)»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-vle-electrico-2026113881.html", retrieved: 2026-11-23, tier: T3}
+    drivetrain: {value: fwd, note: "motor.es: la potencia «se envía al eje delantero»", source_id: motor-es, url: "https://www.motor.es/noticias/precio-mercedes-vle-electrico-2026113881.html", retrieved: 2026-11-23, tier: T3}
+    price: null
+images: []
+open_questions:
+  - "Precio: mercedes-benz.es devuelve HTTP 403 (fetch-page.ts, 2026-11-23); motor.es (T3) cita 83.768 € (VLE 300), 97.192 € y 109.963 € (ediciones Lanzamiento), que no se guardan."
+  - "launch: motor.es no da la fecha de apertura de pedidos; precios «vigentes desde abril de 2026» y primeras unidades previstas en octubre."
+  - "Versiones: otra fuente T3 (motor.es, sin leer) cita una VLE 400 4MATIC de 422 CV; confirmar la gama vigente con la web oficial."
+  - "Imágenes: sin página File: de Commons conocida; sin imagen."
