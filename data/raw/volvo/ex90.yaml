@@ -35,6 +35,7 @@ images:
     attribution: "Matti Blume, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "Web oficial volvocars.com/es devuelve 403 (reintentado el 2026-11-02): precios sin leer (price null) y versiones sin confirmar en T1."
+  - "Imagen (2026-11-24): rechazada, causa `angulo`: es una vista trasera del coche (portón y piloto), no un tres cuartos delantero; sin retocar."
   - "Versiones tomadas del IDAE (MY27, el año modelo más reciente). coches.com no detalla versiones del EX90; no se sabe cuáles se venden hoy."
   - "launch: ninguna fuente da la fecha desde la que se pide en España."
   - "segment: el comparador lo llama 'SUV' y coches.com 'el SUV eléctrico más grande de la marca'; ninguno es un término de la lista de RF-11 (suv_grande)."

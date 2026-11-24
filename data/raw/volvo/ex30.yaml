@@ -24,7 +24,8 @@ versions:
     drivetrain: {value: awd, note: "el nombre homologado dice AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
-  - file: data/images/volvo/ex30/frontal.jpg
+  - file: data/images/volvo/ex30/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/2024_Volvo_EX30_Front.jpg/1280px-2024_Volvo_EX30_Front.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:2024_Volvo_EX30_Front.jpg"
     source_id: wikimedia-commons
