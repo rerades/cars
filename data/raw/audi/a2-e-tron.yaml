@@ -36,6 +36,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0"
 open_questions:
+  - "Imagen (2026-11-24): rechazada, causa `angulo`: vista trasera de tres cuartos de un coche sobre un camión de transporte, movida y con otros coches y cinchas delante; hace falta un tres cuartos delantero o lateral, nítido y sin transporte."
   - "Precio: audi.es da HTTP 403 (protección de acceso, no se evita). Los medios T3 (autonomiacocheselectricos-es, motor-es, 2026-09) dan desde 37.760 € (125 kW), 41.460 €, 47.360 € y 56.640 € (240 kW), pero un precio no puede salir de una fuente T3 (ADR-0001); todas con price null."
   - "Segmento: el medio lo llama «hatchback», que no es un término de RF-11 ni está en la tabla; null. El artículo de gama del mismo medio (6/11/2026) aún decía «llegada en 2027»; prevalece el artículo específico, más reciente."
   - "launch: pedidos aún no abiertos en España según el medio; la fecha es de primeras entregas, prevista, no de inicio de pedidos."

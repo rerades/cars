@@ -39,6 +39,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0"
 open_questions:
+  - "Imagen (2026-11-24): rechazada, causa `cortado`: retouch-image.ts falla porque el coche toca el borde de la foto (el morro llega al borde izquierdo y hay otros coches pegados a los lados); hace falta una foto con aire alrededor del coche."
   - "Precio: audi.es da HTTP 403 a la lectura automática (protección de acceso, no se evita) y no hay otra fuente T1; todas las versiones con price null."
   - "launch: ninguna fuente leída da la fecha desde la que se puede pedir la gama actual en España; null."
   - "segment: el medio lo llama «Gran turismo», que no es un término de RF-11 ni está en la tabla; null."
