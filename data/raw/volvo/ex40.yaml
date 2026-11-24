@@ -35,6 +35,7 @@ images:
     attribution: "Matti Blume, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
   - "Web oficial volvocars.com/es devuelve 403 (reintentado el 2026-11-02): precios sin leer (price null) y versiones sin confirmar en T1."
+  - "Imagen (2026-11-24): rechazada, causa `pegado`: rotulación 'Avia Volt' en laterales y portón, cable de carga enchufado; además es una vista trasera (`angulo`); sin retocar."
   - "IDAE (leído el 2026-11-06) trae también filas MY27.5 (ids 614777 P5 RWD 175 kW/492 km/70 kWh, 614778 P5 Long RWD 185 kW/590 km/82 kWh, 614779 P8 eAWD 300 kW/555 km/82 kWh) con las mismas cifras que las MY27 pero otro nombre; no se sabe cuál es el nombre comercial vigente. Los nombres de las versiones se mantienen. Carga DC: sin fuente legible (web oficial 403)."
   - "Versiones tomadas del IDAE (MY27, el año modelo más reciente). Ningún medio consultado confirma qué versiones se venden hoy en España (coches.com cita baterías de 69, 78 y 82 kWh, que no coinciden con las del MY27)."
   - "launch: ninguna fuente da la fecha desde la que se pide en España."

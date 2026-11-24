@@ -37,3 +37,4 @@ open_questions:
   - "Web oficial volvocars.com/es devuelve 403 (reintentado el 2026-11-02): precios sin leer (price null) y versiones sin confirmar en T1."
   - "Versiones tomadas del IDAE (MY27). La única confirmación de venta es un comparador (T3) que pide confirmarlo con un concesionario; coches.com no trata el ES90."
   - "launch: ninguna fuente da la fecha desde la que se pide en España."
+  - "Imagen (2026-11-24): rechazada, causa `recorte`: tras quitar el fondo quedan restos del cable de carga enchufado y la tapa de carga abierta pegados a la aleta trasera (hoja en ops/retouch/20261124-010007-21cad2/volvo-es90-frontal.jpg)."
