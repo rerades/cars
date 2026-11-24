@@ -26,7 +26,8 @@ versions:
     drivetrain: {value: fwd, note: "IDAE id 610509: FWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
-  - file: data/images/ford/puma-gen-e/frontal.jpg
+  - file: data/images/ford/puma-gen-e/frontal.png
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Ford_Puma_Gen-E_DSC_8995.jpg/1280px-Ford_Puma_Gen-E_DSC_8995.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Ford_Puma_Gen-E_DSC_8995.jpg"
     source_id: wikimedia-commons

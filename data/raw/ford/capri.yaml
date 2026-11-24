@@ -56,7 +56,8 @@ versions:
     drivetrain: {value: awd, note: "IDAE id 610601: AWD", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-01, tier: T2}
     price: null
 images:
-  - file: data/images/ford/capri/frontal.jpg
+  - file: data/images/ford/capri/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Ford_Capri_%282024%29_Auto_Zuerich_2024_DSC_6382.jpg/1280px-Ford_Capri_%282024%29_Auto_Zuerich_2024_DSC_6382.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Ford_Capri_(2024)_Auto_Zuerich_2024_DSC_6382.jpg"
     source_id: wikimedia-commons
