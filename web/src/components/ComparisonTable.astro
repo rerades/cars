@@ -126,6 +126,7 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
 </template>
 
 <script>
+  import { splitFigure } from "../lib/figure.ts";
   import {
     FIELDS,
     FIGURE_FIELDS,
@@ -142,7 +143,6 @@ const note = "text-small text-ink-600 [overflow-wrap:anywhere]";
     noticeParagraphs,
     numberNotes,
     parseEntries,
-    splitFigure,
     validateSelection,
     versionOptions,
     withAdded,
