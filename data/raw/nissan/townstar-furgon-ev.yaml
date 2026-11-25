@@ -22,6 +22,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander-93, CC BY-SA 4.0, vía Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-25): rechazada sin retocar, causa `pegado`: pegatina de precio y ficha en el parabrisas y rótulo «Autohaus Heß vielseitig mobil» en la placa delantera."
   - "Precio: los importes de la página (19.830 €, 20.540 €, 20.935 €, 21.805 €) son «PFF al contado» sin IVA que incluyen la ayuda Plan Auto+ de 7.500 €; no son PVP sin ayudas ni se pueden separar. price: null."
   - "segment: la página dice «Furgón» y «GAMA DE VEHÍCULOS COMERCIALES», no el término «furgoneta» para este modelo; null."
   - "launch: ninguna fuente leída da la fecha de inicio de venta en España."
