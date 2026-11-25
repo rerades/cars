@@ -80,7 +80,7 @@ describe("model page first-screen silhouette", () => {
     assert.doesNotMatch(r, /inset: 0;|on-dark-muted/);
   });
   test("lg: the right half above the key figures, 34 rem", () => {
-    assert.match(page, /--size-segment-icon-lg: min\(var\(--size-silhouette-hero-lg\), 100%\);\s*inset: 6\.5rem 2\.5rem 1rem 50%;/);
+    assert.match(page, /--size-segment-icon-lg: min\(var\(--size-silhouette-hero-lg\), 100%\);\s*inset: 6\.5rem 2\.5rem 12rem 50%;/);
   });
   test("the name goes after the silhouette on mobile and keeps its half on lg", () => {
     assert.match(page, /\.hero-screen:has\(\.hero-silhouette\) \.hero-foot \{\s*order: 2;/);
