@@ -1,0 +1,32 @@
+# Researcher — Renault 4 Van E-Tech eléctrico. Fuente: renault-empresas-es (T1). Consultado 2026-11-25.
+brand: renault
+brand_name: Renault
+model: Renault 4 Van E-Tech eléctrico
+status: {value: on_sale, note: "la web de empresas ofrece configurador con precio «desde» y «pide tu oferta»; no dice explícitamente que los pedidos estén abiertos", source_id: renault-empresas-es, url: "https://empresas.renault.es/electricos/renault-4-van/configurador.html", retrieved: 2026-11-25, tier: T1}
+launch: null
+segment: null
+needs_review: true
+versions:
+  - name: Van 110 kW (150 CV) autonomía confort
+    wltp_km: {value: 415, note: "la web dice «hasta 415 km de autonomía y 150 CV» con la batería de autonomía confort", source_id: renault-empresas-es, url: "https://empresas.renault.es/electricos/renault-4-van.html", retrieved: 2026-11-25, tier: T1}
+    power_kw: {value: 110, note: "publicado: 110 kW (150 CV)", source_id: renault-empresas-es, url: "https://empresas.renault.es/electricos/renault-4-van/configurador.html", retrieved: 2026-11-25, tier: T1}
+    price:
+      value: 18466
+      unit: EUR
+      page_name: "RENAULT 4 VAN van 110 kW (150 CV) autonomía confort"
+      price_kind: financed
+      price_terms: "este importe incluye promociones"
+      price_terms_url: "https://empresas.renault.es/electricos/renault-4-van/configurador.html"
+      source_id: renault-empresas-es
+      url: "https://empresas.renault.es/electricos/renault-4-van/configurador.html"
+      retrieved: 2026-11-25
+      tier: T1
+images: []
+open_questions:
+  - "launch no obtenido: ninguna fuente registrada da la fecha de inicio de venta en España."
+  - "segment sin fuente: la web lo presenta como «Renault 4 van» en la categoría de vehículos comerciales, sin un término de RF-11; queda null."
+  - "status on_sale y needs_review: la web muestra configurador y precio pero no dice que los pedidos estén abiertos."
+  - "price: el único importe es «desde 18.466 €» con «este importe incluye promociones»; sin PVP limpio ni condiciones legibles."
+  - "battery_kwh no publicada en la web; drivetrain y carga DC no publicados como cifra (solo «carga en 30 min para pasar del 15 al 80%»)."
+  - "Solo se incluye la versión que muestra el configurador; la versión de autonomía urbana (120 CV) no aparece en la web."
+  - "images: buscado en Wikimedia Commons el 2026-11-25 («Renault 4 Van», «Renault 4 E-Tech Van»): no hay ninguna foto del Van, solo del turismo R4 y de otras furgonetas E-Tech (Kangoo, Master, Trafic). La web pondrá la silueta."
