@@ -12,7 +12,7 @@ import SegmentSilhouette from "./SegmentSilhouette.astro";
  * Static HTML, no JS. Every string arrives in `card`; the component only lays it out.
  * - With a photo (RF-8, ADR-0012): a dark band; the photo, with the common treatment of propuesta-a.md, melts
  *   into it through a scrim and the text sits on the solid part. Without one: a light band with the segment
- *   silhouette drawn large and thin behind the text (CA-17).
+ *   silhouette, thin and muted, in the photo's slot and never under the text (CA-17).
  * - The wide layout (photo on 70 %, sides alternating) follows the card's own width: the `li` is a size
  *   container, so the card works in a grid and as a full-width screen in a one-column list.
  * - The model name is the screen's link, stretched over it with a pseudo-element; "Comparar" and the photo
@@ -158,19 +158,28 @@ const priceLabel = card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` 
     padding-top: 14.5rem;
   }
 
-  /* No photo: the segment outline, large and thin, behind the text. Decorative (aria-hidden in the SVG). */
+  /* No photo: the segment outline in the photo's slot, thin and muted, standing on the slot's bottom, never under
+     the text (siluetas-segmento.md). Decorative (aria-hidden in the SVG). The slot is 10 rem (15 rem x 32/48) so the
+     tallest car fits; the text starts at 12.5 rem. */
   .silhouette {
-    --size-segment-icon-lg: 24rem;
-    color: var(--color-ink-950);
+    --size-segment-icon-lg: min(var(--size-silhouette-card), 100%);
+    align-items: flex-end;
+    color: var(--color-silhouette);
     display: flex;
+    height: calc(var(--size-silhouette-card) * 32 / 48);
+    inset: 1.5rem 1.25rem auto;
     justify-content: center;
-    left: 0;
+    pointer-events: none;
     position: absolute;
-    right: 0;
-    top: -6.5rem;
   }
   .silhouette :global(svg) {
-    stroke-width: 0.3;
+    flex: none;
+    /* The wheels end at y = 38 of 48: pull the square down 10/48 of its side so they rest on the slot's bottom. */
+    margin-bottom: calc(var(--size-segment-icon-lg) * -10 / 48);
+    stroke-width: var(--size-silhouette-stroke);
+  }
+  .silhouette :global(svg :is(path, circle)) {
+    vector-effect: non-scaling-stroke;
   }
 
   .screen-text {
@@ -259,14 +268,14 @@ const priceLabel = card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` 
       max-width: 44%;
       padding: 2rem 2.5rem 0.75rem;
     }
+    /* The half opposite the text, alternating like the photos; the slot grows with the screen. */
     .silhouette {
-      --size-segment-icon-lg: 42rem;
-      justify-content: flex-end;
-      padding-right: 3rem;
-      top: -7rem;
+      --size-segment-icon-lg: min(var(--size-silhouette-card-lg), 100%);
+      height: auto;
+      inset: 2.5rem 2.5rem 2.5rem 50%;
     }
-    .silhouette :global(svg) {
-      stroke-width: 0.22;
+    .screen:nth-child(even) .silhouette {
+      inset: 2.5rem 50% 2.5rem 2.5rem;
     }
     .screen:nth-child(even) .screen-box {
       --scrim: linear-gradient(to left, rgb(var(--scrim-rgb) / 1) 0%, rgb(var(--scrim-rgb) / 0.72) 22%, transparent 55%);
@@ -287,11 +296,6 @@ const priceLabel = card.dealLabel ? `${card.labels.price} · ${card.dealLabel}` 
     }
     .screen:nth-child(even) .screen-text {
       margin-left: auto;
-    }
-    .screen:nth-child(even) .silhouette {
-      justify-content: flex-start;
-      padding-left: 3rem;
-      padding-right: 0;
     }
   }
 </style>
