@@ -15,7 +15,7 @@ franja clara (≈ 15:1), y pesaba más que el nombre y las cifras. Esta sección
 «Color» y «Estados» de abajo cuando la silueta ocupa una pantalla; el icono de 48 px y los dibujos de referencia
 (qué silueta va con cada segmento, trazados, suelo, ruedas) **no cambian**.
 
-Prototipo `web/design-proto/siluetas-a.astro` (primera pantalla de la ficha del Renault Master Furgón E-Tech eléctrico,
+Prototipo `web/design-proto/siluetas-a.astro`, borrado al llevarlo a `web/src/` en la historia #1246 (PR #1271) (primera pantalla de la ficha del Renault Master Furgón E-Tech eléctrico,
 y tres pantallas del catálogo: Grand Kangoo E-Tech eléctrico, CLA Shooting Brake y smart #2). Capturas
 [`refs/siluetas-a-390.png`](refs/siluetas-a-390.png) y [`refs/siluetas-a-1280.png`](refs/siluetas-a-1280.png).
 
