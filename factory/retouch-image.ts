@@ -69,14 +69,21 @@ export function pickInstance(masks: Uint8Array[], width: number, height: number)
 }
 
 /**
- * Plates: text with a digit and 4+ letters or digits, centered on the car, in its lower half. The region is
- * the text outline (quad), not padded: the characters lie on the plate, so the blur never leaves it.
+ * Plates: text with a digit and 4+ letters or digits, centered on the car, in its lower half, wider than tall
+ * and not tiny next to the car. The region is the text outline (quad), not padded: the characters lie on the
+ * plate, so the blur never leaves it.
+ * The shape limits come from the 12 plates retouched by 2026-11-25 (width/height 1.6 to 3.7, height 4.9 to
+ * 13.5 % of the car's): they drop a fender badge (e-Ducato, 1.5 %) and a tall stray read on a bumper (500e,
+ * «77422», 0.8:1), issue #1242. Text with no digit, such as a dealer's name on the plate holder, is not a plate:
+ * the agent judges it on the sheet.
  */
 export function plateBoxes(texts: Text[], mask: Uint8Array, width: number, height: number, car: Box): Plate[] {
   const out: Plate[] = [];
+  const carHeight = car.y1 - car.y0 + 1;
   for (const t of texts) {
     const chars = t.text.replace(/[^\p{L}\p{N}]/gu, "");
     if (chars.length < 4 || !/\p{N}/u.test(chars)) continue;
+    if (t.w < t.h * 1.2 || t.h < carHeight * 0.03) continue;
     const cx = Math.round(t.x + t.w / 2), cy = Math.round(t.y + t.h / 2);
     if (cx < 0 || cy < 0 || cx >= width || cy >= height) continue;
     if (cy < (car.y0 + car.y1) / 2 || mask[cy * width + cx] < 128) continue;
