@@ -175,7 +175,7 @@ principal con su atribución.
 ### Imagen retocada en la primera pantalla (RF-15, CA-23, ADR-0025) — 2026-11-16
 
 El PNG con el coche recortado sobre transparente y su sombra de apoyo. A sangre y con `cover` pierde techo y morro
-(piloto, #1106, Renault 4). Prototipo `web/design-proto/retocadas.astro`, la primera pantalla de las capturas
+(piloto, #1106, Renault 4). Prototipo `web/design-proto/retocadas.astro`, borrado al llevarlo a `web/src/` en la historia #1149; la primera pantalla de las capturas
 [`refs/retocadas-390.png`](refs/retocadas-390.png) y [`refs/retocadas-1280.png`](refs/retocadas-1280.png). Las reglas
 de encaje, fondo, suelo y tratamiento son las de [`tarjeta-modelo.md`](tarjeta-modelo.md), «Imagen retocada»; aquí,
 solo lo que cambia en la ficha.

@@ -143,7 +143,7 @@ da el mínimo: si es oferta, lleva la etiqueta (RF-9: «siempre con su etiqueta�
 
 Sustituye al párrafo anterior, escrito para la tarjeta en retícula. Una entrada de `images` con `edits` es un PNG con
 el coche recortado sobre transparente y una sombra de apoyo debajo. Con `object-fit: cover` y el hueco de la foto
-normal se corta (en el piloto, #1106, el Renault 4 pierde techo y morro). Prototipo `web/design-proto/retocadas.astro`,
+normal se corta (en el piloto, #1106, el Renault 4 pierde techo y morro). Prototipo `web/design-proto/retocadas.astro` (borrado al llevarlo a `web/src/` en la historia #1149),
 capturas [`refs/retocadas-390.png`](refs/retocadas-390.png) y [`refs/retocadas-1280.png`](refs/retocadas-1280.png)
 (las dos pantallas de abajo; la de arriba es la ficha).
 
