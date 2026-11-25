@@ -15,6 +15,10 @@ Lo que ya está especificado no se repite ni se rediseña aquí:
 La portada es una puerta de entrada (PRD-004 §1): dice qué es la web y lleva al catálogo. No tiene tarjetas ni
 ningún dato de coche (RF-5, CA-5), así que no hay atribución de fuentes que diseñar.
 
+## Bloque «Próximamente» (RF-9, CA-11): pendiente de diseño
+
+Añadido a PRD-004 el 2026-11-25: las tarjetas de los modelos próximamente, entre la cabecera y «Explorar», sin bloque si no hay ninguno. Falta su especificación en la dirección visual «Pantalla» (`direccion.md`): encabezado, cómo se colocan una, dos o muchas tarjetas, orden de lectura y foco, y textos. Lo de abajo («no hay bloque de novedades ni destacados») sigue valiendo para todo lo demás.
+
 ## Lo que la portada no tiene (PRD-004 §3 y §8)
 
 Para que nadie lo añada «por completar»: no hay bloque de novedades ni destacados (decisión 2), ni fecha global de
