@@ -483,23 +483,48 @@ const inner = "mx-auto w-full max-w-page px-4 md:px-6 lg:px-8";
     line-height: var(--text-small--line-height);
     overflow-wrap: anywhere;
   }
+  /* Segment silhouette (siluetas-segmento.md, "la silueta en la pantalla"): in the same slot as the retouched car,
+     between the route and the name, thin and muted, standing on the slot's bottom; never under the text. */
+  .hero-screen:has(.hero-silhouette) .hero-top { order: 0; }
+  .hero-screen:has(.hero-silhouette) .hero-foot {
+    order: 2;
+    padding-top: 1rem;
+  }
   .hero-silhouette {
-    --size-segment-icon-lg: 24rem;
-    align-items: center;
-    color: var(--color-on-dark-muted);
+    --size-segment-icon-lg: min(var(--size-silhouette-hero), 100%);
+    align-items: flex-end;
+    color: var(--color-silhouette);
     display: flex;
-    inset: 0;
+    flex: 1;
     justify-content: center;
+    margin: 1.5rem 1.25rem 0;
+    min-height: var(--size-cutout-mobile);
+    order: 1;
     pointer-events: none;
-    position: absolute;
-    z-index: 0;
+    position: relative;
   }
   .hero-silhouette svg {
-    stroke-width: 0.3;
+    flex: none;
+    /* The wheels end at y = 38 of 48: pull the square down 10/48 of its side onto the slot's bottom. */
+    margin-bottom: calc(var(--size-segment-icon-lg) * -10 / 48);
+    stroke-width: var(--size-silhouette-stroke);
+  }
+  .hero-silhouette svg :is(path, circle) {
+    vector-effect: non-scaling-stroke;
   }
   @media (min-width: 1024px) {
     .hero-silhouette {
-      --size-segment-icon-lg: 42rem;
+      --size-segment-icon-lg: min(var(--size-silhouette-hero-lg), 100%);
+      inset: 6.5rem 2.5rem 1rem 50%;
+      margin: 0;
+      min-height: 0;
+      position: absolute;
+    }
+    .hero-screen:has(.hero-silhouette) .hero-text > * {
+      max-width: calc(min(50vw, 45rem) - 4rem);
+    }
+    .hero-screen:has(.hero-silhouette) .hero-foot {
+      padding-top: 7rem;
     }
     /* lg: text in the left half (capped to the page frame), the car in the right half from below the route to
        above the key figures, resting on the bottom. */

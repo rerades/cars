@@ -3,6 +3,8 @@
  * Segment silhouette (docs/design/siluetas-segmento.md): inline SVG, `currentColor`, decorative.
  * Takes the segment value or nothing; an unknown value falls back to the generic car, never to an
  * empty slot. No text inside, so no copy keys (RNF-4). Size comes from `--size-segment-icon`.
+ * Only the width is written inline: the viewBox is square, so the height follows from `aspect-ratio: 1`
+ * (an SVG with a width and no height would otherwise take the 150 px default, or the full height of its box).
  */
 interface Props {
   segment?: string | null;
@@ -44,8 +46,15 @@ const shape = key === "generica" ? GENERIC : SILHOUETTES[key];
   aria-hidden="true"
   focusable="false"
   data-silhouette={key}
-  style={`width: ${side}; height: ${side}`}
+  style={`width: ${side}`}
 >
   <path d={shape.d}></path>
   {shape.wheels.map((w) => <circle cx={w.cx} cy="34" r={w.r}></circle>)}
 </svg>
+
+<style>
+  svg {
+    aspect-ratio: 1;
+    height: auto;
+  }
+</style>

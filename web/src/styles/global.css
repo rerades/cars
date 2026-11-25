@@ -102,6 +102,14 @@
   /* Retouched image (ADR-0025, tokens.md): the floor under the cut-out car and its minimum height on mobile. */
   --color-cutout-floor: rgb(255 255 255 / 0.07);
   --size-cutout-mobile: 12rem;
+  /* Segment silhouette on a screen (siluetas-segmento.md, "la silueta en la pantalla"): a thin muted outline in the
+     photo's slot. Contrast about 2 on both bands, below any text. */
+  --color-silhouette: #a3ada7; /* on surface-muted */
+  --size-silhouette-stroke: 2px;
+  --size-silhouette-card: 15rem;
+  --size-silhouette-card-lg: 28rem;
+  --size-silhouette-hero: 18rem;
+  --size-silhouette-hero-lg: 34rem;
 }
 
 @layer base {
@@ -134,6 +142,7 @@
   --color-brand-600: var(--color-on-dark);
   --color-brand-800: var(--color-signal);
   --color-line-soft: #33404a;
+  --color-silhouette: #45525b; /* on ink-950 */
   background: var(--color-ink-950);
   color: var(--color-on-dark);
 }
