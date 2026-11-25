@@ -2,7 +2,7 @@
 brand: polestar
 brand_name: Polestar
 model: Polestar 5
-status: {value: on_sale, note: "pedidos abiertos en España según T3 (motor.es, electrive: ventas desde 08/09/2025); la web oficial solo muestra configurador, sin fecha de entrega ni PVP", source_id: polestar-es, url: "https://www.polestar.com/es/configure/polestar-5/", retrieved: 2026-11-25, tier: T1}
+status: {value: on_sale, note: "pedidos abiertos en España según motor.es (ventas desde 08/09/2025); la web oficial solo muestra el configurador, sin fecha de entrega ni PVP, así que ninguna fuente T1 lo confirma", source_id: motor-es, url: "https://www.motor.es/noticias/precios-polestar-5-2026-2025108582.html", retrieved: 2026-11-25, tier: T3}
 needs_review: true
 segment: null
 launch: null
@@ -17,10 +17,16 @@ versions:
     wltp_km: {value: 558, note: "datos preliminares, sujetos a certificación final", source_id: polestar-es, url: "https://www.polestar.com/es/configure/polestar-5/", retrieved: 2026-11-25, tier: T1}
     power_kw: {value: 650, note: "publicado: 884 CV", source_id: polestar-es, url: "https://www.polestar.com/es/configure/polestar-5/", retrieved: 2026-11-25, tier: T1}
     price: null
-images: []
+images:
+  - file: "data/images/polestar/polestar-5/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Polestar_5_IAA_2025_DSC_2403.jpg/1280px-Polestar_5_IAA_2025_DSC_2403.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Polestar_5_IAA_2025_DSC_2403.jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-25
+    license: "CC-BY-SA-4.0"
+    attribution: "Alexander-93, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
   - "price: el configurador oficial no muestra importe al leerlo con el script; T3 (motor.es) cita 121.900 € para la Dual Motor Launch Edition, no vale como precio."
   - "status/launch: ninguna fuente T1 confirma pedidos ni entregas en España; T3 dice pedidos abiertos desde 08/09/2025 y primeras entregas en verano de 2026 sin confirmar. Revisar."
   - "segment: la web no usa un término de RF-11 (GT de altas prestaciones, berlina)."
   - "Batería, carga AC y drivetrain no figuran en las páginas leídas; las versiones del configurador no dicen 'awd' explícitamente (doble motor)."
-  - "images: sin imagen de Commons buscada en esta ejecución."
