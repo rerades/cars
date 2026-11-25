@@ -10,7 +10,8 @@ versions:
   - name: Mokka Electric
     price: null   # el precio al contado de ofertas.opel.es (23.700 €) es de la versión térmica
 images:
-  - file: data/images/opel/mokka-electric/frontal.jpg
+  - file: data/images/opel/mokka-electric/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Opel_Mokka_Electric_Edition_%28B%2C_Facelift%29_%E2%80%93_f_12102025.jpg/1280px-Opel_Mokka_Electric_Edition_%28B%2C_Facelift%29_%E2%80%93_f_12102025.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Opel_Mokka_Electric_Edition_(B,_Facelift)_–_f_12102025.jpg"
     source_id: wikimedia-commons
