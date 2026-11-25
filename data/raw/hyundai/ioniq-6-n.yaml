@@ -1,0 +1,21 @@
+# Researcher — Hyundai IONIQ 6 N. Fuente: hyundai-es (T1). Consultado 2026-11-23.
+brand: hyundai
+brand_name: Hyundai
+model: IONIQ 6 N
+status: {value: on_sale, note: "su ficha ofrece «Configúralo», «Pruébalo» y «Oferta»; no dice con palabras que se entregue ya y no se ha visto en el listado de la home", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6-n.html", retrieved: 2026-11-23, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  wltp_max_km: {value: 487, note: "«autonomía de hasta 487 km»", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6-n.html", retrieved: 2026-11-23, tier: T1}
+  dc_max_kw: {value: 350, note: "«admite la recarga en estaciones de recarga ultrarrápida de 350 kW CC»", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6-n.html", retrieved: 2026-11-23, tier: T1}
+versions:
+  - name: IONIQ 6 N
+    battery_kwh: {value: 84, basis: unknown, note: "«batería mejorada de 84 kWh»", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq6-n.html", retrieved: 2026-11-23, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "Imagen: en Commons solo se vieron fotos del IONIQ 6 N Line (acabado del IONIQ 6), no del 6 N; images: []."
+  - "Precio: la ficha no publica PVP; price: null."
+  - "launch y status: la ficha no da fecha de inicio de venta en España ni dice que se entregue; needs_review: true. El IDAE no tiene fila del IONIQ 6 N (2026-11-23)."
+  - "segment, potencia y tracción: no publicados en el texto leído; null."

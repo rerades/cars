@@ -1,0 +1,24 @@
+# Researcher — Hyundai IONIQ 5 N. Fuentes: hyundai-es (T1), idae-es (T2). Consultado 2026-11-23.
+brand: hyundai
+brand_name: Hyundai
+model: IONIQ 5 N
+status: {value: on_sale, note: "la home de Hyundai España lo lista entre los eléctricos con «Descúbrelo Configúralo» y su ficha ofrece «Configúralo», «Pruébalo» y «Oferta»; no dice con palabras que se entregue ya", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq-5-n.html", retrieved: 2026-11-23, tier: T1}
+launch: null
+segment: null
+needs_review: true
+specs:
+  dc_max_kw: null
+versions:
+  - name: AWD N
+    battery_kwh: {value: 84, basis: unknown, note: "la ficha dice «Batería de larga autonomía de 84 kWh»", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq-5-n.html", retrieved: 2026-11-23, tier: T1}
+    wltp_km: {value: 448, note: "IDAE ids 598667 (IONIQ 5 478kW 84kWh AWD N) y 614863 (IONIQ 5 650CV 84kWh AWD N), mismos valores", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 478, note: "IDAE ids 598667 y 614863 (650CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    drivetrain: {value: awd, note: "la ficha habla de «tracción total inspirada en los deportes de motor»; el IDAE la nombra AWD N", source_id: hyundai-es, url: "https://www.hyundai.com/es/es/modelos/ioniq-5-n.html", retrieved: 2026-11-23, tier: T1}
+    price: null
+images: []
+open_questions:
+  - "Imagen (2026-11-23): rechazada File:Hyundai_IONIQ_5_N_(NE)_front.jpg (CC BY-SA 4.0): salen personas (una dentro del coche) y otro coche al lado. Sin otra imagen revisada; images: []."
+  - "Precio: la ficha no publica PVP ni importes (sin «€» en el texto leído) y el configurador no se lee con fetch-page.ts; price: null."
+  - "launch: la ficha no da fecha de inicio de venta en España. status on_sale deducido de «Configúralo» / «Oferta»; por eso needs_review: true."
+  - "segment: la ficha no dice el segmento; null."
+  - "dc_max_kw: la ficha no publica la potencia de carga en el texto leído."
