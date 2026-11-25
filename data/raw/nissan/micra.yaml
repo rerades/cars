@@ -38,6 +38,7 @@ images:
     license: "CC-BY-SA-4.0"
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-25): rechazada, causa `pegado`: la placa-marco bajo la matrícula lleva «AUTOHAUS JUTZ» y «www.JUTZ.de»; el script solo desenfoca la matrícula y el rótulo del concesionario sigue legible. Hoja en ops/retouch/20261125-014507-f7d9c4/nissan-micra-frontal.jpg."
   - "launch y segment: sin fuente registrada."
   - "Precio (revisado 2026-11-01): micra.nissan.es solo da cuota mensual (Acenta 99 €/mes, N-Connecta 119 €/mes) con entrada y última cuota, sin precio de contado ni PVP; sin tarifa PDF. Los precios de nissan.es/comprar/venta-de-coches/micra son de la tienda online (unidades de concesionario/stock) y no se usan; no se pudo leer su letra pequeña. Sin precio."
   - "La web no dice qué batería lleva cada acabado: la combinación sale del IDAE. Gama confirmada con motor.es (T3): Standard Range Acenta y N-Connecta, Long Range N-Connecta y Tekna."

@@ -30,6 +30,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Alexander Migl, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-25): rechazada, causa `pegado`: rótulo «Autohaus Heß vielseitig mobil» en la placa delantera (el script no lo tapó) y rotulación «VOLLELEKTRISCH 5 JAHRE» en la ventanilla lateral. Hoja en ops/retouch/20261125-014507-f7d9c4/nissan-interstar-e-frontal.jpg."
   - "Precio: la página de Interstar solo muestra la oferta de leasing de un furgón diésel (29.435 € sin IVA); ningún precio eléctrico. price: null."
   - "segment: la página dice «furgón eléctrico», no «furgoneta»; null."
   - "launch y estado: ninguna fuente leída da la fecha de pedidos en España ni confirma versiones vigentes; needs_review: true."

@@ -19,7 +19,8 @@ versions:
     drivetrain: {value: awd, note: "4x4 e-4ORCE", source_id: nissan-es, url: "https://www.nissan.es/cf/vehiculos/nuevos-vehiculos/ariya", retrieved: 2026-11-01, tier: T1}
     price: null
 images:
-  - file: data/images/nissan/ariya/frontal.jpg
+  - file: data/images/nissan/ariya/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/2023_Nissan_Ariya_Advance_Front.jpg/1280px-2023_Nissan_Ariya_Advance_Front.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:2023_Nissan_Ariya_Advance_Front.jpg"
     source_id: wikimedia-commons

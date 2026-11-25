@@ -59,6 +59,7 @@ reviews:
     retrieved: 2026-11-01
     tier: T3
 open_questions:
+  - "Imagen (2026-11-25): rechazada sin retocar, causa `angulo`: es una vista trasera (el nombre del fichero es frontal.jpg), y además lleva rótulo «Autohaus SCHMIDT www.nissan.de» en la placa (`pegado`). Se busca un tres cuartos delantero sin rotulación."
   - "reviews: motorpasion-es no tiene una prueba del Leaf de tercera generación (solo la noticia de presentación); solo hay review de diariomotor-es."
   - "launch: nissan.es no publica la fecha de inicio de venta en España; sin fuente T1/T2."
   - "segment: ninguna fuente registrada lo clasifica; no se asigna."
