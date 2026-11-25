@@ -24,7 +24,8 @@ versions:
     power_kw: {value: 115, note: "IDAE id 614411", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-07, tier: T2}
     price: null
 images:
-  - file: data/images/opel/astra-electric/frontal.jpg
+  - file: data/images/opel/astra-electric/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Opel_Astra_L_Electric_Auto_Zuerich_2023_1X7A1005.jpg/1280px-Opel_Astra_L_Electric_Auto_Zuerich_2023_1X7A1005.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Opel_Astra_L_Electric_Auto_Zuerich_2023_1X7A1005.jpg"
     source_id: wikimedia-commons
