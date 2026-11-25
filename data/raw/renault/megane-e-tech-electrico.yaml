@@ -39,7 +39,8 @@ versions:
       retrieved: 2026-11-01
       tier: T1
 images:
-  - file: "data/images/renault/megane-e-tech-electrico/frontal.jpg"
+  - file: "data/images/renault/megane-e-tech-electrico/frontal.png"
+    edits: [background, plate]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Renault_M%C3%A9gane_E-Tech_GIMS_2024_1X7A2161.jpg/1280px-Renault_M%C3%A9gane_E-Tech_GIMS_2024_1X7A2161.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Renault_Mégane_E-Tech_GIMS_2024_1X7A2161.jpg"
     source_id: wikimedia-commons

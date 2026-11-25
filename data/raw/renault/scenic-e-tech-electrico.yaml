@@ -47,6 +47,7 @@ reviews:
     retrieved: 2026-11-01
     tier: T3
 open_questions:
+  - "Imagen (2026-11-23): rechazada, causa `recorte`: queda pegado un trozo del coche negro de la derecha junto al capó, y la URL «www.bob-automobile.de» de la placa del concesionario (que el script no detectó como matrícula) sigue legible. Hoja en ops/retouch/20261123-023006-3aa321/renault-scenic-e-tech-electrico-frontal.jpg."
   - "Versión techno renombrada de «techno 220 CV gran autonomía» a «techno 220 CV autonomía confort» porque scenic.html (2026-11-06) la titula así; su precio sigue null. La versión de 67 kWh que la web anunciaba para el otoño de 2026 ya se publica en motores.html (2026-11-06) como batería de autonomía confort, con 467 km WLTP: por eso entra como versión a la venta."
   - "launch no obtenido: prensa.renault.es no se puede usar: sus términos excluyen el uso con fines de información (ver data/sources/renault-press.yaml)."
   - "Sin PVP sin promociones: la web muestra «desde 37.666 €» (esprit Alpine) con «este importe incluye promociones». No se ha encontrado un PVP vigente sin promociones."
