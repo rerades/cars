@@ -1,0 +1,43 @@
+# Researcher — Volkswagen ID. Polo. Fuentes: volkswagen-es (T1), idae-es (T2), hibridosyelectricos-es (T3). Consultado 2026-11-23.
+brand: volkswagen
+brand_name: Volkswagen
+model: ID. Polo
+status: {value: on_sale, note: "«El ID. Polo ya está a la venta en España» (artículo de hibridosyelectricos.com); la ficha de volkswagen.es ofrece configurador y precio", source_id: hibridosyelectricos-es, url: "https://www.hibridosyelectricos.com/coches/el-nuevo-volkswagen-id-polo-ya-se-puede-comprar-en-espana-hasta-449-km-de-autonomia-y-versiones-por-debajo-de-20-000_87139_102.html", retrieved: 2026-11-23, tier: T3}
+launch: null
+segment: null
+needs_review: false
+versions:
+  - name: Match
+    battery_kwh: {value: 37, basis: unknown, note: "IDAE id 614497 (ID. Polo Match 85 kW (116 CV) 37 kWh MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 334, note: "IDAE id 614497 (única fila Match)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 85, note: "IDAE id 614497 (116 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price:
+      value: 23665.44
+      unit: EUR
+      price_kind: financed
+      price_terms: >-
+        Oferta calculada para un Volkswagen ID. Polo Match 85kW (116CV) Automático 1vel. con un PVP recomendado financiando en Península y Baleares 23.665,44€ (Impuestos, transporte, descuento de marca y concesionario, 1.000€ de Plan Auto+ incluidos y plan CAES por importe de 395€ si el cliente sustituye un vehículo de combustión). Para clientes particulares que financien un crédito mínimo de 15.000€ con una permanencia mínima de 36 meses a través de Volkswagen Bank GmbH S.E.. Ejemplo: 35 cuotas de 120€ y 1 cuota en el plazo 12 de 4.500€ en previsión de recibir la ayuda del Plan Auto+ . La concesión o denegación de dicha ayuda no altera las condiciones del contrato ni la obligación del pago. Si lo deseas, al cabo de 3 años podrás cambiarlo por otro modelo, devolverlo o quedártelo pagando la cuota final de 14.182,46€ en el mes 36 (calculada con 10.000km anuales). Entrada: 4.410,37€. TIN: 7,5%. TAE: 9,22%. Importe total financiado: 19.255,07€. Comisión de apertura al contado: 2,99% (575,73€). Importe de los intereses: 3.627,39€. Coste total del crédito: 4.203,12€. Importe total adeudado: 23.458,19€. Precio total a plazos: 27.868,56€. Precio al contado: 23.665,44€. Sistema de amortización francés. El modelo visualizado puede no corresponder exactamente con el ofertado. Oferta válida hasta el 30/11/2026. Volkswagen Financial Services es una marca comercializada por Volkswagen Bank GmbH S.E. Avda. Bruselas, 34 - 28108 Alcobendas. Reg. Mercantil de Madrid. Tomo 16828, Sección 8, Folio 184, Hoja M-287573, Inscrita con el nº 1480 del Reg. Especial del Banco de España - CIF. W-0042741I.Consumo eléctrico gama ID. Polo Match combinado WLTP (kWh/100km): 13,3 - 13,9 kWh/100km, emisiones de CO2 (g/km) WLTP: 0 g/km.
+      price_terms_url: "https://www.volkswagen.es/es/modelos/id-polo.html"
+      note: "precio al contado del texto legal (regla del 2026-10-25); no incluye el «Desde 17.900 €» de la cabecera, que depende de Plan Auto+ y financiación"
+      source_id: volkswagen-es
+      url: "https://www.volkswagen.es/es/modelos/id-polo.html"
+      retrieved: 2026-11-23
+      tier: T1
+  - name: Life 155 kW
+    battery_kwh: {value: 52, basis: unknown, note: "IDAE id 609973 (ID. Polo Life 155 kW (211 CV) 52 kWh MY27)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    wltp_km: {value: 449, note: "IDAE id 609973; coincide con «hasta 449 km» de volkswagen.es", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    power_kw: {value: 155, note: "IDAE id 609973 (211 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
+    price: null
+images:
+  - file: "data/images/volkswagen/id-polo/frontal.jpg"
+    source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Volkswagen_ID._Polo_2026-08-19_%281%29.jpg/1280px-Volkswagen_ID._Polo_2026-08-19_%281%29.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID._Polo_2026-08-19_(1).jpg"
+    source_id: wikimedia-commons
+    retrieved: 2026-11-23
+    license: "CC-BY-SA-4.0"
+    attribution: "Brewster239, CC BY-SA 4.0, via Wikimedia Commons"
+open_questions:
+  - "launch: la fecha de inicio de pedidos en España no la da ninguna fuente leída (hibridosyelectricos.com habla de pedidos en julio, sin fecha exacta). segment: volkswagen.es no usa un término de RF-11."
+  - "Life 155 kW: sin precio (volkswagen.es solo da el del Match; el «precio de lista» de 35.070 € de un artículo T3 no es T1 y no se guarda). Tracción, carga DC y AC no leídos en T1 (el artículo T3 cita 90 kW DC con 37 kWh y 105 kW con 52 kWh; no se guarda)."
+  - "Versiones: el IDAE homologa además Life 85/99 kW (37 kWh), Style 99 kW (37 kWh), Style 155 kW y 1st Edition (52 kWh) y GTI 166 kW; no se añaden sin fuente que diga que se venden hoy."
+  - "Precio del Match: oferta financiada vigente hasta el 30/11/2026; sin PVP limpio."
