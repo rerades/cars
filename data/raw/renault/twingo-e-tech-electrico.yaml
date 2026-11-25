@@ -58,3 +58,4 @@ open_questions:
   - "No se ha encontrado un PVP vigente sin promociones: los precios son «desde» con «este importe incluye promociones»."
   - "Refresco 2026-11-01: fetch-page.ts no encuentra «13.413» ni «14.909» en la página del Twingo (solo «este importe incluye promociones» sin importe junto a evolution y techno); los precios y su fecha (2026-10-10) se quedan como estaban."
   - "Imágenes: solo hay en Commons una foto compartida con el R4 (File:Renault Twingo Electric & 4 E-Tech Electric.jpg), que no sirve para una tarjeta de un solo modelo; no se registra. La web pondrá silueta."
+  - "Imagen (2026-11-25, revisión humana de la PR #1259): aceptada aunque conserva el «FISCHER» diminuto del portamatrículas bajo la matrícula tapada. No es el caso del Kangoo, rechazado por una rotulación del concesionario que se ve en el lateral (nombre, web y QR)."
