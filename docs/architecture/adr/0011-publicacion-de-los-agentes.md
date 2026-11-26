@@ -15,6 +15,10 @@
   solas.
   Enmienda «Paso del flujo saltado» (`workflow-fail:<agente>`): aceptada (2026-10-29).
   Enmienda «Conflictos de `last_verified`» (punto 15): propuesta y aceptada (2026-11-04, #899).
+  Enmienda de [ADR-0025](0025-retoque-de-las-imagenes.md), «Fusión automática» (puntos 9 a 14), **propuesta** el
+  2026-11-26: las PR `agent/retoucher/*` dejan de esperar siempre a una persona; pueden borrar un original de
+  `data/images/` si lo sustituye un `.png` con el mismo nombre y `edits`, y añadir sus hojas en
+  `ops/retouch/<run_id>/`. El resto del punto 2 no cambia.
 - **Fecha:** 2026-09-30
 - **Historial:** 2026-09-30 propuesta · 2026-10-01 aceptada · 2026-10-12 enmienda propuesta y
   aceptada: se añade `data/images/` a la lista de rutas del punto 2 y la subsección «Imágenes» de
