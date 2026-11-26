@@ -1,0 +1,44 @@
+# Researcher — Peugeot e-Boxer. Fuentes: forococheselectricos-es (T3, estado, segmento, carga), idae-es (T2, versiones). Consultado 2026-11-26.
+brand: peugeot
+brand_name: Peugeot
+model: e-Boxer
+status: {value: on_sale, note: "«Peugeot anuncia en su página oficial una oferta de financiación desde 410 euros mensuales más IVA, para el E-Boxer Furgón L3H2 de 3,5 toneladas» (artículo del 2026-11-07, que cita a Peugeot España); no dice «ya se puede pedir» con esas palabras", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/peugeot-e-boxer-electrica-autonomia-precio-oferta-espana-20261107-42714.html", retrieved: 2026-11-26, tier: T3}
+launch: null
+segment: {value: furgoneta, note: "«una furgoneta eléctrica con 110 kWh de batería»", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/peugeot-e-boxer-electrica-autonomia-precio-oferta-espana-20261107-42714.html", retrieved: 2026-11-26, tier: T3}
+needs_review: true
+specs:
+  dc_max_kw: {value: 150, note: "«una potencia máxima de 150 kW en corriente continua»", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/peugeot-e-boxer-electrica-autonomia-precio-oferta-espana-20261107-42714.html", retrieved: 2026-11-26, tier: T3}
+  ac_max_kw: {value: 11, note: "«cargador trifásico de 11 kW en corriente alterna»", source_id: forococheselectricos-es, url: "https://forococheselectricos.com/noticias/peugeot-e-boxer-electrica-autonomia-precio-oferta-espana-20261107-42714.html", retrieved: 2026-11-26, tier: T3}
+versions:
+  - name: e-Boxer Furgón 3.5 L3 H2 110 kWh
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 604185 «e-Boxer Furgón 3.5 L3 H2 Heavy Electric 200 kW Batería 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    wltp_km: {value: 378, note: "IDAE id 604185", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 604185", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    price: null
+  - name: e-Boxer Furgón 3.5 L3 H3 110 kWh
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 604186 «e-Boxer Furgón 3.5 L3 H3 Heavy Electric 200 kW Batería 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    wltp_km: {value: 358, note: "IDAE id 604186", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 604186", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    price: null
+  - name: e-Boxer Furgón 3.5 L4 H3 110 kWh
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 604187 «e-Boxer Furgón 3.5 L4 H3 Heavy Electric 200 kW Batería 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    wltp_km: {value: 356, note: "IDAE id 604187", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 604187", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    price: null
+  - name: e-Boxer Furgón 4.25 L3 H3 110 kWh
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 604188 «e-Boxer Furgón 4.25 L3 H3 Heavy Electric 200 kW Batería 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    wltp_km: {value: 409, note: "IDAE id 604188", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 604188", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    price: null
+  - name: e-Boxer Furgón 4.25 L4 H3 110 kWh
+    battery_kwh: {value: 110, basis: unknown, note: "IDAE id 604189 «e-Boxer Furgón 4.25 L4 H3 Heavy Electric 200 kW Batería 110 kWh»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    wltp_km: {value: 406, note: "IDAE id 604189", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    power_kw: {value: 200, note: "IDAE id 604189", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-26, tier: T2}
+    price: null
+images: []
+open_questions:
+  - "needs_review: el estado sale de un artículo T3 (forococheselectricos, 2026-11-07) que cita la oferta de Peugeot España; www.peugeot.es da 403 y ofertas.peugeot.es/coches-electricos-hibridos no muestra el e-Boxer en el texto leído. El IDAE no dice qué versiones se venden hoy: solo la fuente T3 confirma que se ofrece la L3H2 de 3,5 t (coincide con la primera fila); las demás versiones no están confirmadas."
+  - "Autonomía: forococheselectricos y motor16 citan 424 km para la L3H2 de 4,25 t; el IDAE (sin fecha de homologación) trae 4,25 L3 H3 = 409 km y 4,25 L4 H3 = 406 km, y no trae la L3H2 de 4,25 t. Se guardan solo las cifras del IDAE."
+  - "Precio: sin PVP ni precio financiado T1 legible. La oferta (410 €/mes + IVA, 48 meses, «37.489,88 euros sin IVA») la cita solo la prensa (T3) y es sin IVA; ofertas.peugeot.es no la muestra. price null."
+  - "launch: ninguna fuente da la fecha de inicio de venta en España del e-Boxer de 110 kWh (motor16 y forococheselectricos, 2026-11, hablan de «llega» sin fecha)."
+  - "Imagen: busqué en Wikimedia Commons (API, «Peugeot e-Boxer») y no hay ninguna foto del e-Boxer; solo del Boxer térmico (p. ej. File:Peugeot Boxer (2024) DSC 8787.jpg), que no se registra porque no es la versión eléctrica. images: []."
