@@ -7,6 +7,10 @@ kind: [ specs ]
 urls:
   home: https://coches.idae.es/base-datos/marca-y-modelo # buscador por marca y modelo; los resultados llegan por POST
   robots: https://coches.idae.es/robots.txt
+  csv: https://coches.idae.es/guia-emisiones-consumos # enlaza el «Histórico de base de datos (CSV)», idae-historico-AAAAMM.csv
+  legal: https://www.idae.es/aviso-legal
+terms_url: https://www.idae.es/aviso-legal
+terms_checked: 2026-11-26
 image_license: "" # no publica imágenes de los coches
 notes: >
   Base de datos de vehículos del IDAE (Ministerio para la Transición Ecológica): datos WLTP de homologación de los
@@ -15,5 +19,13 @@ notes: >
   qué versiones siguen a la venta: mezcla homologaciones actuales y antiguas. Se lee con
   `node factory/fetch-idae.ts <MARCA>`, porque la tabla llega por un POST con token que WebFetch no envía. robots.txt
   lo permite todo (comprobado el 2026-10-09). Registrada a mano para Tesla, cuya web bloquea toda lectura automática.
+  Términos (2026-11-26): el aviso legal de idae.es solo permite un uso privado y personal de los contenidos salvo
+  consentimiento previo por escrito del IDAE. El responsable lo pidió por escrito el 2026-11-24 (SICER) para el CSV
+  histórico y el buscador, y la División de Movilidad y Ciudades Sostenibles del IDAE contestó el 2026-11-26: «los
+  datos públicos que ofrece IDAE, se pueden utilizar siempre que se mencione la fuente». La fuente se puede usar
+  (regla 6 de ADR-0001) con los compromisos de la petición: solo eléctricos puros; los datos tal cual, sin cambiar su
+  sentido; cada dato cita al IDAE con enlace a coches.idae.es y fecha de consulta; el CSV se descarga como mucho una
+  vez por cada publicación y el buscador se consulta poco y espaciado; no se reutilizan el diseño ni los textos de la
+  web. No contestaron a la fórmula de atribución, a si hay API ni al calendario del CSV.
 last_verified: 2026-11-26
 status: active
