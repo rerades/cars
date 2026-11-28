@@ -14,7 +14,7 @@ versions:
     price: null
 images:
   - file: data/images/fiat/e-ducato/frontal.png
-    edits: [background, plate]
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Fiat_e-Ducato_1X7A0350.jpg/1280px-Fiat_e-Ducato_1X7A0350.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Fiat_e-Ducato_1X7A0350.jpg"
     source_id: wikimedia-commons

@@ -34,6 +34,29 @@ test("plateBoxes solo tapa texto con cifras en la mitad inferior del coche", () 
   assert.ok(inPlate(tilted, 50, 43) && !inPlate(tilted, 41, 45) && !inPlate(tilted, 59, 40), "inside the quad only");
 });
 
+test("plateBoxes descarta un emblema diminuto y un texto más alto que ancho (#1242)", () => {
+  // Text boxes recorded from Apple Vision on the originals of #1235 (1280 px wide).
+  const box = (w: number, h: number, car: Box) => {
+    const m = new Uint8Array(w * h);
+    for (let y = car.y0; y <= car.y1; y++) m.fill(255, y * w + car.x0, y * w + car.x1 + 1);
+    return m;
+  };
+  const ducato: Box = { x0: 30, y0: 56, x1: 1241, y1: 749 };
+  const badge = { text: "4XEWO", x: 741.7, y: 454.6, w: 44.7, h: 10.3 };
+  assert.deepEqual(plateBoxes([badge], box(1280, 781, ducato), 1280, 781, ducato), [], "e-Ducato: a fender badge");
+  const fiat500: Box = { x0: 48, y0: 85, x1: 1231, y1: 824 };
+  const texts = [
+    { text: "77422", x: 722.9, y: 649.1, w: 41.9, h: 51.3 },
+    { text: "BRUNOLD", x: 934.9, y: 566.3, w: 201.9, h: 60.6 },
+    { text: "ww.BRUNOLD.DE", x: 1002.6, y: 614.6, w: 84.5, h: 23 },
+  ];
+  assert.deepEqual(plateBoxes(texts, box(1280, 852, fiat500), 1280, 852, fiat500), [],
+    "500e: no plate, so edits says so and the dealer sign is left for the agent to judge");
+  // A real plate in the same photo would still be found.
+  const plate = { text: "S RN 227E", x: 930, y: 570, w: 200, h: 55 };
+  assert.equal(plateBoxes([plate], box(1280, 852, fiat500), 1280, 852, fiat500).length, 1);
+});
+
 test("compose copia el coche tal cual, tapa la matrícula y deja el fondo transparente", () => {
   const rgb = photo(), mask = rect(CAR), plates = [{ x0: 40, y0: 40, x1: 59, y1: 44 }];
   const out = compose(rgb, mask, W, H, CAR, plates);
