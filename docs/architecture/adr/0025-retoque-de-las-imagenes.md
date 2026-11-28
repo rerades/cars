@@ -6,8 +6,10 @@
   Paso 1 del punto 8 hecho el 2026-11-14: `factory/retouch-image.ts`, `factory/retouch-vision.swift` y su prueba.
   Paso 2 hecho el mismo día: `.claude/agents/retoucher.md`, `retoucher` en `budgets.yaml`, el eval `retouchOnly`
   y `edits` en el eval de `data/raw/`, y la regla de `merge.ts` que deja sus PR a una persona.
-  Enmienda «Fusión automática» (puntos 9 a 14): **propuesta** el 2026-11-26. Cambia el punto 6 y enmienda
-  [ADR-0011](0011-publicacion-de-los-agentes.md), punto 2 (rutas y borrados de las PR del Retocador).
+  Enmienda «Fusión automática» (puntos 9 a 14): propuesta el 2026-11-26, **aceptada el 2026-11-28**. Cambia el
+  punto 6 y enmienda [ADR-0011](0011-publicacion-de-los-agentes.md), punto 2 (rutas y borrados de las PR del
+  Retocador). Falta el código: `retoucher_auto_merge` empieza en `false` y no se pone la fecha hasta cumplir el
+  punto 14; de sus condiciones, solo (d) está cumplida.
 - **Fecha:** 2026-11-07
 
 ## Contexto
@@ -130,8 +132,8 @@ apoyo y tapa la matrícula, sin tocar ningún otro píxel del coche.**
    - Las licencias con `ND` ya están excluidas por RF-8.
 6. **Publicación.** Las PR del Retocador no se fusionan solas: una persona las acepta viendo la hoja
    «antes y después», como el resto del trabajo visual (ADR-0024). Cambiarlo es otra decisión, con datos de
-   rechazos. *Enmienda «Fusión automática», propuesta el 2026-11-26: mientras no se acepte, este punto sigue
-   vigente.*
+   rechazos. *Enmienda «Fusión automática», aceptada el 2026-11-28: este punto sigue vigente mientras
+   `retoucher_auto_merge` sea `false` (punto 13).*
 7. **Permisos y presupuesto.** `retoucher` en `budgets.yaml`, con `network: false`, `write_paths:
    [data/images/, data/raw/, ops/retouch/, docs/bitacora/]`, y en `allowed_tools` el script y
    `git checkout -- data/images/` (no hay quien apruebe permisos en `-p`). El eval de la factoría
@@ -141,7 +143,7 @@ apoyo y tapa la matrícula, sin tocar ningún otro píxel del coche.**
 8. **Orden.** (1) Script y prueba; (2) agente, presupuesto y eval; (3) piloto con los cinco modelos de la
    prueba; (4) el resto del catálogo, por marcas, empezando por el Researcher con el criterio nuevo.
 
-### Fusión automática (enmienda del 2026-11-26, propuesta)
+### Fusión automática (enmienda del 2026-11-26, aceptada el 2026-11-28)
 
 **Una PR del Retocador se fusiona sola con las reglas de ADR-0011, `review:ok` incluida, más una regla propia de
 `merge.ts` que admite sus sustituciones `.jpg` → `.png` y sus hojas; el Revisor da `review:ok` solo después de
@@ -283,6 +285,8 @@ Opciones consideradas:
     (b) el prompt del Revisor del punto 10, aprobado según ADR-0016; (c) el criterio del rótulo en
     `fotos-modelos.md`; (d) contadas las `review:changes` de las 16 PR, y ninguna por un juicio de foto que la
     persona corrigió. Si (d) no se cumple, la enmienda se revisa antes de activarla.
+    (d) cumplida el 2026-11-28: 3 `review:changes` de 16, ninguna por un juicio de foto corregido (Consecuencias,
+    preguntas abiertas).
 
 ## Consecuencias
 - El retoque solo corre en macOS. La CI no lo ejecuta: valida lo que se ha guardado (`validate-data.ts`).
@@ -295,7 +299,7 @@ Opciones consideradas:
 - La comprobación de píxeles no ve una máscara mala ni una pegatina. Por eso hay criterio en el agente y
   revisión de una persona en la PR.
 - Pendiente de probar en el piloto: que Vision encuentre las matrículas, y cuánto cuesta revisar una foto.
-- **Enmienda «Fusión automática» (2026-11-26, propuesta):**
+- **Enmienda «Fusión automática» (propuesta el 2026-11-26, aceptada el 2026-11-28):**
   - Bueno: las retocadas llegan a la web sin esperar a una persona. Lo que decide la fusión sigue siendo código
     sin modelo, y cada borrado admitido tiene su `.png` sustituto y su YAML, comprobados en el commit revisado.
   - Malo: **la única mirada a la hoja antes de publicar pasa a ser la de un modelo.** Una máscara mala que el
@@ -311,8 +315,18 @@ Opciones consideradas:
     persona. Las causas están arregladas, pero no hay ninguna PR fusionada sola que lo demuestre.
   - Las placas de modelo desenfocadas (#1242) siguen yendo a una persona; si el script no se arregla, cada
     marca con placas de exposición parará su PR.
-  - Preguntas abiertas: cuántas `review:changes` tuvieron las 16 PR y por qué (no comprobado: `gh` pedía
-    aprobación); si se acepta la placa de modelo desenfocada de la #1264; cómo lee el Revisor la hoja sin
-    escribir fuera de sus `write_paths`; si el verificador de ADR-0020 deja pasar un diff sin valores.
+  - Preguntas abiertas:
+    1. ~~Cuántas `review:changes` tuvieron las 16 PR y por qué (no comprobado: `gh` pedía aprobación).~~ →
+       2026-11-28: tres. La #1158 y la #1159, por la CI en rojo (originales sin restaurar, ya imposible con el
+       script actual). La #1259, por el rótulo «FISCHER» del Twingo: la persona aceptó la foto como la dejó el
+       agente, así que corrigió al Revisor, no al Retocador. La #1177 y la #1178 no tienen veredicto (rescatadas
+       a mano). Ninguna corrección cambió el juicio del agente sobre una foto: la condición (d) del punto 14 se
+       cumple. El caso de la #1259 es el criterio del rótulo que Diseño tiene que escribir (condición (c)).
+    2. ~~Si se acepta la placa de modelo desenfocada de la #1264.~~ → 2026-11-28: sigue sin decidir. Mientras la
+       #1242 esté abierta, esas PR van a una persona (punto 12); si se acepta, se escribe en esta ADR.
+    3. ~~Cómo lee el Revisor la hoja sin escribir fuera de sus `write_paths`.~~ → 2026-11-28: lo decide la PR de
+       implementación del punto 10.
+    4. ~~Si el verificador de ADR-0020 deja pasar un diff sin valores.~~ → 2026-11-28: se comprueba en la PR de
+       implementación de los puntos 9 y 11, con una prueba.
 - Al aceptarla: estado de ADR-0012, línea en `overview.md`, regla 10 de `data-model.md` y `tarjeta-modelo.md`
   (en esta misma PR), y entrada `decision` en la bitácora.
