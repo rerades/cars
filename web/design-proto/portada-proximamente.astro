@@ -1,0 +1,108 @@
+---
+/**
+ * Home page with the "Próximamente" block (PRD-004 RF-9, CA-11; docs/design/portada.md).
+ * Real data, real ModelCard and ExploreStrip; only the block itself is new here.
+ * Copy that does not exist yet in i18n.ts is proposed in portada.md and written below as COPY.
+ */
+import "../src/styles/global.css";
+import ExploreStrip from "../src/components/ExploreStrip.astro";
+import ModelCard from "../src/components/ModelCard.astro";
+import { cardView } from "../src/lib/card.ts";
+import { exploreGroups, homeCountLabel } from "../src/lib/catalog.ts";
+import { loadModels, type ModelRecord } from "../src/lib/data.ts";
+import { t } from "../src/lib/i18n.ts";
+import { launchKey } from "../src/lib/sort.ts";
+
+// Proposed keys (portada.md, "Copy"); in web/src/ they go to i18n.ts.
+const COPY = {
+  titulo: "Próximamente",
+  entrada: "Modelos anunciados que aún no están a la venta en España. Primero, los que llegan antes.",
+};
+
+const { models } = loadModels(); // already without needs_review (PRD-001 RF-13)
+
+// RF-9: nearest launch first; no launch last, by brand and model. Not the "Novedad" order (newest first).
+const byLaunch = (a: ModelRecord, b: ModelRecord): number => {
+  const ka = launchKey(a.launch?.value ?? null);
+  const kb = launchKey(b.launch?.value ?? null);
+  if (ka !== kb) return ka === null ? 1 : kb === null ? -1 : ka - kb;
+  return a.brand_name.localeCompare(b.brand_name, "es", { sensitivity: "base" }) || a.model.localeCompare(b.model, "es");
+};
+const soon = models.filter((m) => m.status.value === "announced").sort(byLaunch);
+const cards = soon.map(cardView);
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t("pagina.portada.tituloDocumento")}</title>
+  </head>
+  <body>
+    <header class="band-dark">
+      <div class="mx-auto max-w-page px-4 py-8 md:px-6 lg:px-8">
+        <h1 class="text-display font-bold leading-[0.98] [font-stretch:var(--font-stretch-wide)] [overflow-wrap:anywhere]">{t("sitio.nombre")}</h1>
+        <p class="mt-4 max-w-prose text-body text-ink-600">{t("pagina.portada.entrada")}</p>
+        <p class="mt-3 text-body text-ink-600">{homeCountLabel(models.length)}</p>
+      </div>
+    </header>
+    <main>
+      {
+        cards.length > 0 && (
+          <section class="band-white" aria-labelledby="proximamente" data-soon>
+            <div class="mx-auto max-w-page px-4 pb-6 pt-8 md:px-6 lg:px-8">
+              <h2
+                id="proximamente"
+                class="text-block font-bold leading-[0.98] [font-stretch:var(--font-stretch-wide)] [overflow-wrap:anywhere]"
+              >{COPY.titulo}</h2>
+              <p class="mt-3 max-w-prose text-body text-ink-600">{COPY.entrada}</p>
+            </div>
+            <ul class="soon-list list-none p-0" aria-labelledby="proximamente">
+              {cards.map((card, i) => <ModelCard card={card} href={`/marcas/${card.key}/`} eager={i === 0} />)}
+            </ul>
+          </section>
+        )
+      }
+      <ExploreStrip groups={exploreGroups(models, "")} showAll={true} />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  /* Mobile and md: one screen under another, as in the catalog. */
+  .soon-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  /* lg: two per row; with an odd count the first (the nearest launch) takes the whole row, in the wide layout. */
+  @media (min-width: 1024px) {
+    .soon-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .soon-list > li:first-child:nth-last-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    /* Prototype only: in `astro dev` the is:global styles of catalogo-a.astro reach this page and push the
+       half-width cards into the wide layout (text at 44 %, photo at 70 %). Restore ModelCard's own narrow
+       layout; web/src/ does not need this. */
+    .soon-list > li:not(:first-child:nth-last-child(odd)) {
+      min-height: 0;
+    }
+    .soon-list > li:not(:first-child:nth-last-child(odd)) .screen-text {
+      margin-left: 0;
+      max-width: none;
+      padding-block: 12.5rem 0.5rem;
+    }
+    .soon-list > li:not(:first-child:nth-last-child(odd)) .photo {
+      height: 19rem;
+      inset: 0 0 auto;
+    }
+    .soon-list > li:not(:first-child:nth-last-child(odd)) .silhouette {
+      padding-inline: 0;
+    }
+  }
+</style>
