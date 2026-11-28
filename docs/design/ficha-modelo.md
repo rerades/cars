@@ -447,7 +447,8 @@ no para cada versión.» Así queda rotulado «del modelo» y separado de las ve
 Una entrada de `images` con `edits` es el coche recortado sobre transparente; con `object-fit: cover` en el hueco
 16:9 sale cortado. Las reglas de encaje, fondo, suelo y tratamiento son las de [`tarjeta-modelo.md`](tarjeta-modelo.md),
 «Imagen retocada» (componente `CutoutPhoto`); aquí solo lo que cambia respecto a una foto normal de esta sección.
-Prototipo `web/design-proto/mas-imagenes-retocadas.astro` (ë-C4 y EV9 recortados, R5 con foto normal, en las tres
+Prototipo `web/design-proto/mas-imagenes-retocadas.astro`, borrado al llevarlo a `web/src/` en la historia #1247
+(PR #1288) (ë-C4 y EV9 recortados, R5 con foto normal, en las tres
 franjas que puede tocarle a la sección), capturas [`refs/mas-imagenes-retocadas-390.png`](refs/mas-imagenes-retocadas-390.png)
 y [`refs/mas-imagenes-retocadas-1280.png`](refs/mas-imagenes-retocadas-1280.png).
 
