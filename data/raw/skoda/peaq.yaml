@@ -30,6 +30,7 @@ images:
     license: CC-BY-SA-4.0
     attribution: "Ssu, CC BY-SA 4.0, via Wikimedia Commons"
 open_questions:
+  - "Imagen (2026-11-26): rechazada sin retocar, causa `angulo`: es el interior del maletero con el portón abierto, no el coche entero."
   - "Refresco 2026-11-02 (ADR-0010, punto 8): leída con fetch-page.ts, la ficha solo publica las condiciones con «Oferta válida hasta el 31/10/2026», ya vencida; no hay oferta vigente ni PVP limpio, así que price: null en todas las versiones. Volver a leerla en el siguiente refresco: si la marca publica una oferta nueva, guardarla como financed con su texto literal."
   - "Precios (2026-10-24): leída con fetch-page.ts la ficha https://www.skoda.es/modelos/peaq/peaq; las notas 2 y 4 dan un «PVP recomendado financiando» (Selection 47.152,50 €, Sportline 51.332,50 €, hasta 31/10/2026), guardado como financed con el texto literal. Sigue sin PVP limpio. El «precio al contado» de esas notas (48.907 € y 53.087 €) es mayor (diferencia de 1.754,50 € en ambas, igual que en otras fichas de la marca) y la ficha no explica por qué; las notas «desde» piden capital mínimo de 19.000 € frente a los 17.000 € de las notas de «PVP recomendado financiando». Los «desde» (41.900 / 46.050 €) incluyen Plan Auto+ (4.050 €) y no se usan."
   - "segment: la ficha lo describe como SUV de 5 o 7 plazas sin clase formal; queda null."

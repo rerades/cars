@@ -23,7 +23,8 @@ versions:
     drivetrain: {value: awd, note: "IDAE id 610730: «ENYAQ MY27 RS 250 kW (340 CV) 82kWh 4x4»", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-06, tier: T2}
     price: null
 images:
-  - file: data/images/skoda/enyaq/frontal.jpg
+  - file: data/images/skoda/enyaq/frontal.png
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/2025_Skoda_Enyaq_sportline_%28facelift%29_-_front.jpg/1280px-2025_Skoda_Enyaq_sportline_%28facelift%29_-_front.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:2025_Skoda_Enyaq_sportline_(facelift)_-_front.jpg"
     source_id: wikimedia-commons
