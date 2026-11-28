@@ -29,7 +29,8 @@ versions:
     power_kw: {value: 155, note: "IDAE id 609973 (211 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
     price: null
 images:
-  - file: "data/images/volkswagen/id-polo/frontal.jpg"
+  - file: "data/images/volkswagen/id-polo/frontal.png"
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Volkswagen_ID._Polo_2026-08-19_%281%29.jpg/1280px-Volkswagen_ID._Polo_2026-08-19_%281%29.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID._Polo_2026-08-19_(1).jpg"
     source_id: wikimedia-commons

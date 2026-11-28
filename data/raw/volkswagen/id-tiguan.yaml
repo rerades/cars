@@ -29,7 +29,8 @@ versions:
     power_kw: {value: 210, note: "IDAE id 614568 (286 CV)", source_id: idae-es, url: "https://coches.idae.es/base-datos/marca-y-modelo", retrieved: 2026-11-23, tier: T2}
     price: null
 images:
-  - file: "data/images/volkswagen/id-tiguan/frontal.jpg"
+  - file: "data/images/volkswagen/id-tiguan/frontal.png"
+    edits: [background]
     source_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Volkswagen_ID._Tiguan_01.jpg/1280px-Volkswagen_ID._Tiguan_01.jpg"
     page_url: "https://commons.wikimedia.org/wiki/File:Volkswagen_ID._Tiguan_01.jpg"
     source_id: wikimedia-commons

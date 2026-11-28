@@ -35,3 +35,4 @@ open_questions:
   - "Precio: no se guarda. Releída la ficha el 2026-11-23 con fetch-page.ts: «Desde 40.400€ sujeto a financiación…» y la nota legal liga 40.400 € (precio financiando, con 1.000 € de Plan Auto+ y la ayuda de 4.050 € incluidas, oferta hasta el 30/11/2026) a «ID.7 Tourer Business 210 kW (286CV)», un acabado que no es ninguna versión del fichero; el precio al contado de esa nota es 45.853,25 €. Sin PVP limpio ni precio ligado a Pro, Pro S o GTX."
   - "launch: sin fecha de pedidos. segment: volkswagen.es no usa un término de RF-11. Tracción, carga DC y AC no leídos en T1."
   - "Versiones: el IDAE (MY27) homologa también Business, Style (77 y 86 kWh) y GTX 4Motion; no se añaden sin fuente que diga que se venden."
+  - "Imagen (2026-11-26): rechazada sin retocar, causa `angulo`: foto trasera (tres cuartos trasero, matrícula alemana legible); buscar un tres cuartos delantero."
