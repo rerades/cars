@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
@@ -38,6 +38,15 @@ describe("retouched image (built HTML)", () => {
     write("Nocredit", { images: [imageEntry({ file, edits: ["background"], attribution: null })] });
     write("Plain", { images: [imageEntry({ file, attribution: "Ann Author, CC BY-SA 4.0" })] });
     write("Silhouette", { images: [] });
+    // «Más imágenes» (story #1247): a retouched 2nd image with credit, one without credit, a normal one.
+    write("More", {
+      images: [
+        imageEntry({ file }),
+        imageEntry({ file, edits: ["background"], attribution: "Ann Author, CC BY-SA 4.0" }),
+        imageEntry({ file, edits: ["background"], attribution: null }),
+        imageEntry({ file, attribution: "Bob Plain, CC BY 4.0" }),
+      ],
+    });
 
     out = join(root, "out");
     execFileSync(join(WEB, "node_modules/.bin/astro"), ["build", "--outDir", out], {
@@ -120,6 +129,47 @@ describe("retouched image (built HTML)", () => {
     assert.doesNotMatch(c, /\(modificada\)/);
     assert.match(header(ficha("Silhouette")), /data-slot="silhouette"/);
   });
+
+  test("«Más imágenes»: retouched images in an ink-950 CutoutPhoto box, normal photo with cover, credits as designed", () => {
+    const html = ficha("More");
+    const section = /<section[^>]*data-more-images[\s\S]*?<\/section>/.exec(html)![0];
+    const items = [...section.matchAll(/<li>[\s\S]*?<\/li>/g)].map((m) => m[0]);
+    assert.equal(items.length, 3);
+    const [cut, nocredit, plain] = items as [string, string, string];
+    // CA-12 / CA-23: retouched → cut-out box, credit says «(modificada)»; alt without «modificada».
+    assert.match(cut, /data-more-cutout/);
+    assert.match(cut, /class="cutout-photo"/);
+    assert.doesNotMatch(cut, /object-cover/);
+    assert.match(cut, /<figcaption[^>]*>Foto: Ann Author, CC BY-SA 4\.0 \(modificada\)<\/figcaption>/);
+    const img = /<img\b[^>]*>/.exec(cut)![0];
+    assert.match(img, /alt="Acme More, imagen 2 de 4"/);
+    assert.doesNotMatch(img, /modificada/);
+    assert.match(img, /loading="lazy"/);
+    assert.match(img, /\bwidth="\d+"/);
+    assert.match(img, /\bheight="\d+"/);
+    assert.match(img, /sizes="\(min-width: 1440px\) 475px, \(min-width: 1024px\) 33vw, \(min-width: 768px\) 50vw, 100vw"/);
+    assert.match(img, /\.webp/);
+    assert.doesNotMatch(cut, /\.png/i);
+    // no attribution → cut-out without credit
+    assert.match(nocredit, /data-more-cutout/);
+    assert.doesNotMatch(nocredit, /figcaption/);
+    // no edits → normal photo, cover, normal credit
+    assert.doesNotMatch(plain, /data-more-cutout|cutout-photo|modificada/);
+    assert.match(plain, /object-cover/);
+    assert.match(plain, /<figcaption[^>]*>Foto: Bob Plain/);
+  });
+
+  test("«Más imágenes» box: ink-950 background, 0.75 rem padding at the top and sides, 0.25 rem at the bottom, same 16:9 cell", () => {
+    const src = read(join(WEB, "src/components/ModelFigure.astro"));
+    assert.match(src, /\.more-cutout \{[^}]*background: var\(--color-ink-950\)/);
+    assert.match(src, /\.more-cutout \{[^}]*padding: 0\.75rem 0\.75rem 0\.25rem/);
+    assert.match(src, /class="more-cutout aspect-video overflow-hidden rounded-card"/);
+    assert.equal(existsSync(join(WEB, "design-proto/mas-imagenes-retocadas.astro")), false, "prototype removed (ADR-0024)");
+    assert.ok(existsSync(join(WEB, "design-proto/a/Cifra.astro")));
+    assert.ok(existsSync(join(WEB, "design-proto/pantalla.css")));
+  });
+  // «The car is shown whole at 390 and 1280 px» is checked in a real browser by
+  // e2e/mas-imagenes-retocadas.spec.ts (measures the rendered car; fails with `cover`).
 
   test("the ficha text width is capped to the page frame, not to the whole viewport", () => {
     const src = read(join(WEB, "src/pages/marcas/[marca]/[modelo].astro"));
